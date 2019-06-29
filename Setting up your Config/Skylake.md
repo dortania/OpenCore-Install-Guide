@@ -53,7 +53,9 @@ We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenme
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
-**Block**: Removes device properties from map
+Layout=1 would be interprected as 01000000
+
+**Block**: Removes device properties from map, for us we can ignore this
 
 
 
@@ -134,6 +136,43 @@ debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopef
 
 # Platforminfo
 
+![PlatformInfo](https://i.imgur.com/dIKAlhj.png)
+
+For setting up the SMBIOS info, I use acidanthera's *[macserial](https://github.com/acidanthera/macserial)* application. I wrote a *[python script](https://github.com/corpnewt/GenSMBIOS)* that can leverage it as well (and auto-saves to the config.plist when selected). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
+
+For this Skylake example, I chose the *iMac17,1* SMBIOS.
+
+To get the SMBIOS info generated with macserial, you can run it with the `-a` argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.
+
+With our iMac17,1 example, we would run macserial like so via the terminal:
+
+`macserial -a | grep -i iMac17,1`
+
+Which would give us output similar to the following:
+
+      iMac17,1 | C02S8DY7GG7L | C02634902QXGPF7FB
+      iMac17,1 | C02T4WZSGG7L | C02703104GUGPF71M
+      iMac17,1 | C02QQAYPGG7L | C025474014NGPF7FB
+      iMac17,1 | C02SNLZ3GG7L | C02645501CDGPF7AD
+      iMac17,1 | C02QQRY8GG7L | C025474054NGPF71F
+      iMac17,1 | C02QK1ZXGG7L | C02542200GUGPF7JC
+      iMac17,1 | C02SL0YXGG7L | C026436004NGPF7JA
+      iMac17,1 | C02QW0J5GG7L | C02552130QXGPF7JA
+      iMac17,1 | C02RXDZYGG7L | C02626100GUGPF71H
+      iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
+      
+The order is `Product | Serial | Board Serial (MLB)`
+
+The `iMac17,1` part gets copied to Generic -> SystemProductName.
+
+The `Serial` part gets copied to Generic -> SystemSerialNumber.
+
+The `Board Serial` part gets copied to SMBIOS -> Board Serial Number as well as Generic -> MLB.
+
+We can create an SmUUID by running `uuidgen` in the terminal (or it's auto-generated via my GenSMBIOS script) - and that gets copied to Generic -> SystemUUID.
+
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), or your NIC MAC address, or any random MAC address (could be just 6 random bytes)
+
 **Automatic**: YES (Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections)
 
 **Generic**:
@@ -144,7 +183,6 @@ debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopef
 * ROM: <> (6 character MAC address, can be entirely random)
 * SystemProductName: Can be generated with MacSerial or use pervious from Clover's config.plist.
 * SystemSerialNumber: Can be generated with MacSerial or use pervious from Clover's config.plist.
-`ROM must either be Apple ROM (dumped from a real Mac), or your NIC MAC address, or any random MAC address (could be just 6 random bytes)` - Vit9696
 
 **DataHub**
 
@@ -160,7 +198,7 @@ debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopef
 
 **UpdateSMBIOSMode**: Create (Replace the tables with newly allocated EfiReservedMemoryType)
 
-![PlatformInfo](https://i.imgur.com/dIKAlhj.png)
+
 
 # UEFI
 
