@@ -1,1 +1,0 @@
-# Opencore-Vanilla-Desktop-Guide
