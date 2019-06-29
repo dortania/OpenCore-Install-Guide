@@ -1,19 +1,29 @@
+# Starting Point
+
+You'll want to start with either the stock config.plist that OpenCore gives you, or with just a blank canvas. In the next examples, I'll show you how I set things up from scratch; if you start from somewhere else, you may have more things checked/set than I do - but you'll want to follow along with what I do.
+
+
 # ACPI
 
-**Add:** You'll want to go through and disable all of them or rename them to the files you have under EFI/OC/ACPI/Custom (set enabled to no or delete).
+**Add:** This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and [disabling unsupported GPUs](https://github.com/khronokernel/How-to-disable-your-unsupported-GPU-for-MacOS)
+**Block**: 
 
-**Block**: We won't be doing anything here.
+**Patch**: 
 
-**Patch**: Here you'll be adding some USB and SATA patches, follow the [Vanilla guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/) for what patches your system may need.
+This section allows us to dynamically rename parts of the DSDT via OpenCore. Since we're not running a real mac, and macOS is pretty particular with how things are named, we can make non-destructive changes to keep things mac-friendly. We have three entries here:
+
+* *change XHCI to XHC* - helps avoid a conflict with built-in USB injectors
+* *change XHC1 to XHC* - helps avoid a conflict with built-in USB injectors
+* *change SAT0 to SATA* - for potential SATA compatibility
 
 **Quirk**: Settings for ACPI.
 
-* FadtEnableReset: NO (Enable reboot and shutdown on legacy hardware, not recommended unless needed)
-* NormalizeHeaders: NO (Cleanup ACPI header fields, irrelevant in 10.14)
-* RebaseRegions: NO (Attempt to heuristically relocate ACPI memory regions)
-* ResetHwSig: NO (Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with
-waking from hibernation)
-* ResetLogoStatus: NO (Workaround for systems running BGRT tables)
+* FadtEnableReset: Enable reboot and shutdown on legacy hardware, not recommended unless needed
+* NormalizeHeaders: Cleanup ACPI header fields, irrelevant in 10.14
+* RebaseRegions: Attempt to heuristically relocate ACPI memory regions
+* ResetHwSig: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with
+waking from hibernation
+* ResetLogoStatus: Workaround for systems running BGRT tables, most don't have to worry about this
 
 ![ACPI](https://i.imgur.com/sjlX3aT.png)
 
@@ -25,7 +35,13 @@ waking from hibernation)
 
 `PciRoot(0x0)/Pci(0x2,0x0)` -> `AAPL,ig-platform-id`
 
-* Applies Framebuffer patch, insert required value from Framebuffer guide [here](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271). Don't forget to add Stolemen and patch-enable.
+* 0x19120000 - this is used when the iGPU is used to drive a display
+   * 00001219 when hex-swapped
+* 0x19120001 - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
+   * 01001219 when hex-swapped
+
+
+[here](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -87,9 +103,19 @@ waking from hibernation)
 
 **Add**: 7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
 
-* boot-args: -v dart=0 debug=0x100 keepsyms=1 , etc (Boot flags)
+* boot-args:
+   * -v - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
+   * dart=0 - this is just an extra layer of protection against Vt-d issues.
+debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopefully) glean some useful info and follow the breadcrumbs to get past the issues.
+   * keepsyms=1 - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic.   That can give some more helpful insight as to what's causing the panic itself.
+   * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following (found here):
+      * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
+      * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
+
 * csr-active-config: <00000000> (Settings for SIP, recommeded to manully change this within Recovery partition with csrutil)
+
 * nvda_drv:  <> (For enabling WebDrivers)
+
 * prev-lang:kbd: <> (Needed for non-latin keyboards)
 
 **Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases
