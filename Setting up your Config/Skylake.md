@@ -116,7 +116,7 @@ Layout=1 would be interprected as 01000000
    * dart=0 - this is just an extra layer of protection against Vt-d issues.
 debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopefully) glean some useful info and follow the breadcrumbs to get past the issues.
    * keepsyms=1 - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic.   That can give some more helpful insight as to what's causing the panic itself.
-   * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following (found here):
+   * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following (found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)):
       * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
       * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
 
