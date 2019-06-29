@@ -5,7 +5,10 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 # ACPI
 
+![ACPI](https://i.imgur.com/sjlX3aT.png)
+
 **Add:** This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and [disabling unsupported GPUs](https://github.com/khronokernel/How-to-disable-your-unsupported-GPU-for-MacOS)
+
 **Block**: 
 
 **Patch**: 
@@ -25,23 +28,26 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 waking from hibernation
 * ResetLogoStatus: Workaround for systems running BGRT tables, most don't have to worry about this
 
-![ACPI](https://i.imgur.com/sjlX3aT.png)
-
 &#x200B;
 
 # DeviceProperties
 
+![DeviceProperties](https://i.imgur.com/8gujqhJ.png)
+
 **Add**: Sets device properties from a map.
 
-`PciRoot(0x0)/Pci(0x2,0x0)` -> `AAPL,ig-platform-id`
+This section is setup via Headkaze's *[Intel Framebuffer Patching Guide](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)* and applies only one actual property to begin, which is the *ig-platform-id*. The way we get the proper value for this is to look at the ig-platform-id we intend to use, then swap the pairs of hex bytes.
+
+If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like `0xDDCCBBAA`
+
+The two ig-platform-id's we use are as follows:
 
 * 0x19120000 - this is used when the iGPU is used to drive a display
    * 00001219 when hex-swapped
 * 0x19120001 - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
    * 01001219 when hex-swapped
 
-
-[here](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
+We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB.
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -49,7 +55,7 @@ waking from hibernation
 
 **Block**: Removes device properties from map
 
-![DeviceProperties](https://i.imgur.com/8gujqhJ.png)
+
 
 # Kernel
 
@@ -157,6 +163,8 @@ debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopef
 ![PlatformInfo](https://i.imgur.com/dIKAlhj.png)
 
 # UEFI
+
+![UEFI](https://i.imgur.com/acZ1PUA.png)
 
 **ConnectDrivers**: YES (Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load)
 
