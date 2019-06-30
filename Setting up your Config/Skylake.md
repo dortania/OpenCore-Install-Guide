@@ -229,4 +229,4 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 # Saving 
 
-At this point, you can do File -> Save to save the config.plist. If you have issues saving directly to the EFI, you can save it on the Desktop, then just copy it over. I'll leave the [sample config.plist here]() too
+At this point, you can do File -> Save to save the config.plist. If you have issues saving directly to the EFI, you can save it on the Desktop, then just copy it over. I'll leave the [sample config.plist here](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/config.plist) too
