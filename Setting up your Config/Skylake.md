@@ -42,10 +42,10 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* 0x19120000 - this is used when the iGPU is used to drive a display
-   * 00001219 when hex-swapped
-* 0x19120001 - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
-   * 01001219 when hex-swapped
+* `0x19120000` - this is used when the iGPU is used to drive a display
+   * `00001219` when hex-swapped
+* `0x19120001` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
+   * `01001219` when hex-swapped
 
 We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB.
 
@@ -53,7 +53,7 @@ We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenme
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
-Layout=1 would be interprected as 01000000
+Layout=1 would be interprected as `01000000`
 
 **Block**: Removes device properties from map, for us we can ignore this
 
