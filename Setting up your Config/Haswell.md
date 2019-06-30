@@ -5,7 +5,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 # ACPI
 
-![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/ACPI-Skylake.png)
+![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/ACPI-Haswell.png)
 
 **Add:** 
 
@@ -36,7 +36,7 @@ waking from hibernation
 
 # DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/DeviceProperties-Skylake.png)
+![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/DeviceProperties-Haswell.png)
 
 **Add**: Sets device properties from a map.
 
@@ -46,12 +46,20 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x19120000` - this is used when the iGPU is used to drive a display
-   * `00001219` when hex-swapped
-* `0x19120001` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
-   * `01001219` when hex-swapped
+* `0x0D220003` - this is used when the iGPU is used to drive a display
+   * `0300220D` when hex-swapped
+* `0x04120004` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
+   * `04001204` when hex-swapped
+   
+I added another screenshot as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
 
-We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB.
+For this - we follow a similar procedure as our above ig-platform-id hex swapping - but this time, we only work with the first two pairs of hex bytes. If we think of our device id as `0xAABB0000`, our swapped version would look like `0xBBAA0000`. We don't do anything with the last 2 pairs of hex bytes.
+
+The device-id fake is setup like so:
+
+* `0x04120000` - this is the device id for HD 4600 which does have support in macOS
+   * `12040000` when hex swapped
+
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -65,7 +73,7 @@ Layout=1 would be interprected as `01000000`
 
 # Kernel
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Kernel-Skylake.png)
+![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/Kernel-Haswell.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
@@ -93,7 +101,7 @@ Layout=1 would be interprected as `01000000`
 
 # Misc
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Misc-Skylake.png)
+![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/Misc-Haswell.png)
 
 **Boot**: Settings for boot screen (leave as-is unless you know what you're doing)
 * Timeout: This sets how long OpenCore will wait until it automatically boots from the default selection
@@ -113,7 +121,7 @@ Layout=1 would be interprected as `01000000`
 
 # NVRAM
 
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Skylake.png)
+![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/NVRAM-Haswell.png)
 
 **Add**: 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majogrity can ignore but )
@@ -152,34 +160,38 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 # Platforminfo
 
-![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/PlatformInfo-Skylake.png)
+![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/PlatformInfo-Haswell.png)
 
 For setting up the SMBIOS info, I use acidanthera's *[macserial](https://github.com/acidanthera/macserial)* application. I wrote a *[python script](https://github.com/corpnewt/GenSMBIOS)* that can leverage it as well (and auto-saves to the config.plist when selected). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
 
-For this Skylake example, I chose the *iMac17,1* SMBIOS.
+For this Haswell example, I chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
+
+Haswell with only iGPU - iMac14,1
+Haswell with dGPU - iMac14,2
+Haswell Refresh - iMac15,1
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.
 
-With our iMac17,1 example, we would run macserial like so via the terminal:
+With our iMac15,1 example, we would run macserial like so via the terminal:
 
-`macserial -a | grep -i iMac17,1`
+`macserial -a | grep -i iMac15,1`
 
 Which would give us output similar to the following:
 
-      iMac17,1 | C02S8DY7GG7L | C02634902QXGPF7FB
-      iMac17,1 | C02T4WZSGG7L | C02703104GUGPF71M
-      iMac17,1 | C02QQAYPGG7L | C025474014NGPF7FB
-      iMac17,1 | C02SNLZ3GG7L | C02645501CDGPF7AD
-      iMac17,1 | C02QQRY8GG7L | C025474054NGPF71F
-      iMac17,1 | C02QK1ZXGG7L | C02542200GUGPF7JC
-      iMac17,1 | C02SL0YXGG7L | C026436004NGPF7JA
-      iMac17,1 | C02QW0J5GG7L | C02552130QXGPF7JA
-      iMac17,1 | C02RXDZYGG7L | C02626100GUGPF71H
-      iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
+      iMac15,1 | C02NFZZYFY10 | C02438207QXG2Y7FB
+      iMac15,1 | C02P32YJFY10 | C02502303GUG2Y78C
+      iMac15,1 | C02P2VZ7FY10 | C02501306QXG2Y7AD
+      iMac15,1 | C02NM0EDFY10 | C02444701CDG2Y71H
+      iMac15,1 | C02NVHZCFY10 | C02451303CDG2Y7JA
+      iMac15,1 | C02QLRZ4FY10 | C02543300GUG2Y7JC
+      iMac15,1 | C02QJ0UPFY10 | C02541902GUG2Y7JA
+      iMac15,1 | C02QG0NGFY10 | C02539700J9G2Y71M
+      iMac15,1 | C02N3XYEFY10 | C02429104J9G2Y7UE
+      iMac15,1 | C02QW0M3FY10 | C02552700GUG2Y7JA
       
 The order is `Product | Serial | Board Serial (MLB)`
 
-The `iMac17,1` part gets copied to Generic -> SystemProductName.
+The `iMac15,1` part gets copied to Generic -> SystemProductName.
 
 The `Serial` part gets copied to Generic -> SystemSerialNumber.
 
@@ -203,7 +215,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 # UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/UEFI-Skylake.png)
+![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/UEFI-Haswell.png)
 
 **ConnectDrivers**: YES (Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load)
 
