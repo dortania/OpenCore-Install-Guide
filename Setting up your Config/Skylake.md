@@ -13,7 +13,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 
 **Block**
 
-This drops certain ACPI tabes from loading, for us we'll want to drop 
+This drops certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**: 
 
