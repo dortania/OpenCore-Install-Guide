@@ -93,19 +93,19 @@ Layout=1 would be interprected as `01000000`
 
 # Misc
 
-**Boot**: Settings for boot screen (leave as-is unless you know what you're doing).
-* Timeout: 5 (This sets how long OpenCore will wait until it automatically boots from the default selection).
-* ShowPicker: YES (
-* UsePicker: YES (Uses OpenCore's default GUI, set to NO if you wish to use a different GUI)
+**Boot**: Settings for boot screen (leave as-is unless you know what you're doing)
+* Timeout: This sets how long OpenCore will wait until it automatically boots from the default selection
+* ShowPicker: Needed for seeing your availble drives
+* UsePicker: Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
-* DisableWatchDog: NO (May need to be set for yes if macOS is stalling on something while booting)
+* DisableWatchDog: NO (May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting
 
 **Security**: Security is pretty self-explanatory.
 
-* RequireSignature: NO (We won't be dealing vault.plist so we can ignore)
-* RequireVault: NO (We won't be dealing vault.plist so we can ignore as well)
-* ScanPolicy: 0 (This allow you to see all drives available, please refer to OpenCore's DOC for furthur info on setting up ScanPolicy)
+* RequireSignature: We won't be dealing vault.plist so we can ignore
+* RequireVault: We won't be dealing vault.plist so we can ignore as well
+* ScanPolicy: This allow you to see all drives available, please refer to OpenCore's DOC for furthur info on setting up ScanPolicy
 
 **Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
 
@@ -113,7 +113,13 @@ Layout=1 would be interprected as `01000000`
 
 # NVRAM
 
-**Add**: 7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
+**Add**: 
+4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majogrity can ignore but )
+* UIScale: Scale of OpenCore UI(duh....)
+   * 01: 1080P
+   * 10: 2160P(Enables HIDPI)
+
+7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
 
 * boot-args:
    * -v - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
@@ -124,11 +130,9 @@ debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopef
       * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
       * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
 
-* csr-active-config: <00000000> 
+* csr-active-config: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
 
-Settings for SIP, recommeded to manully change this within Recovery partition with csrutil
-
-csr-active-config is set to e7030000 which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
+csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
 * `00000000` - SIP completely enabled
 * `30000000` - Allow unsigned kexts and writing to protected fs locations
@@ -140,9 +144,9 @@ csr-active-config is set to e7030000 which effectively disables SIP. You can cho
 
 **Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases
 
-**LegacyEnable** Allows for NVRAM to be stored on nvram.plist 
+**LegacyEnable** Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
 
-**LegacySchema** Used for assigning nvram variable
+**LegacySchema** Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
 ![NVRAM](https://i.imgur.com/MPFj3TS.png)
 
@@ -187,11 +191,11 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 **Automatic**: YES (Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections)
 
-**UpdateDataHub**: YES (Update Data Hub fields)
+**UpdateDataHub**: Update Data Hub fields when newer versions are available from OpenCore
 
-**UpdateNVRAM**: YES (Update NVRAM fields)
+**UpdateNVRAM**: Update NVRAM fields when newer versions are available from OpenCore
 
-**UpdateSMBIOS**: YES (Update SMBIOS fields)
+**UpdateSMBIOS**: Updates SMBIOS fields when newer versions are available from OpenCore
 
 **UpdateSMBIOSMode**: Create (Replace the tables with newly allocated EfiReservedMemoryType)
 
@@ -203,21 +207,22 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 **ConnectDrivers**: YES (Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load)
 
-**Drivers**: Add your .efi drivers here.
+**Drivers**: Add your .efi drivers here
+
 
 **Protocols**:
 
-* AppleBootPolicy: NO (Ensures APFS compatibility on VMs or legacy Macs)
-* ConsoleControl: NO (Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode)
-* DataHub: NO (Reinstalls Data Hub)
-* DeviceProperties: NO (Ensures full compatibility on VMs or legacy Macs)
+* AppleBootPolicy: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
+* ConsoleControl: Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode
+* DataHub: Reinstalls Data Hub
+* DeviceProperties: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 
 **Quirks**:
 
-* ExitBootServicesDelay: 0 (Switch to 5 if running ASUS Z87-Pro with FileVault2)
-* IgnoreInvalidFlexRatio: NO (Fix for when MSR_FLEX_RATIO (0x194) can't be disabled in the BIOS, required for all pre-skylake based systems)
-* IgnoreTextInGraphics: NO (Fix for UI corruption when both text and graphics outputs happen)
-* ProvideConsoleGop: YES (Enables GOP, AptioMemoryFix currently offers this but will soon be removed)
-* ReleaseUsbOwnership: NO (Releases USB controller from firmware driver)
-* RequestBootVarRouting: NO (Redirects AptioMemeoryFix from EFI_GLOBAL_VARIABLE_G to OC_VENDOR_VARIABLE_GUID. Needed for when firmware tries to delete boot entries)
-* SanitiseClearScreen: NO (Fixes High resolutions displays that display OpenCore in 1024x768)
+* ExitBootServicesDelay: Only required for very specifc use cases like setting to `5` for ASUS Z87-Pro running FileVault2
+* IgnoreInvalidFlexRatio: Fix for when MSR_FLEX_RATIO (0x194) can't be disabled in the BIOS, required for all pre-skylake based systems
+* IgnoreTextInGraphics: Fix for UI corruption when both text and graphics outputs happen
+* ProvideConsoleGop:Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
+* ReleaseUsbOwnership: Releases USB controller from firmware driver, avoid unless you know what you're doing
+* RequestBootVarRouting: Redirects AptioMemeoryFix from EFI_GLOBAL_VARIABLE_G to OC_VENDOR_VARIABLE_GUID. Needed for when firmware tries to delete boot entries
+* SanitiseClearScreen: Fixes High resolutions displays that display OpenCore in 1024x768
