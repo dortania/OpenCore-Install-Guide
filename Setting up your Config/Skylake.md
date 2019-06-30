@@ -226,3 +226,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * ReleaseUsbOwnership: Releases USB controller from firmware driver, avoid unless you know what you're doing
 * RequestBootVarRouting: Redirects AptioMemeoryFix from EFI_GLOBAL_VARIABLE_G to OC_VENDOR_VARIABLE_GUID. Needed for when firmware tries to delete boot entries
 * SanitiseClearScreen: Fixes High resolutions displays that display OpenCore in 1024x768
+
+# Saving 
+
+At this point, you can do File -> Save to save the config.plist. If you have issues saving directly to the EFI, you can save it on the Desktop, then just copy it over. I'll leave the [sample config.plist here]() too
