@@ -5,7 +5,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 # ACPI
 
-![ACPI](Configs/Skylake/Images/ACPI-Sklake.png)
+![ACPI](Opencore-Vanilla-Desktop-Guide/Configs/Skylake/Images/ACPI-Sklake.png)
 
 **Add:** 
 
