@@ -172,26 +172,33 @@ For this Skylake example, I chose the *iMac17,1* SMBIOS.
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.
 
-With our iMac17,1 example, we would run macserial like so via the terminal:
+For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Kaby Lake:
 
-`macserial -a | grep -i iMac17,1`
+* `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
+* `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for compute tasks only.
+
+To get the SMBIOS info generated with macserial, you can run it with the -a argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.
+
+With our iMac18,1 example, we would run macserial like so via the terminal:
+
+`macserial -a | grep -i iMac18,1`
 
 Which would give us output similar to the following:
 
-      iMac17,1 | C02S8DY7GG7L | C02634902QXGPF7FB
-      iMac17,1 | C02T4WZSGG7L | C02703104GUGPF71M
-      iMac17,1 | C02QQAYPGG7L | C025474014NGPF7FB
-      iMac17,1 | C02SNLZ3GG7L | C02645501CDGPF7AD
-      iMac17,1 | C02QQRY8GG7L | C025474054NGPF71F
-      iMac17,1 | C02QK1ZXGG7L | C02542200GUGPF7JC
-      iMac17,1 | C02SL0YXGG7L | C026436004NGPF7JA
-      iMac17,1 | C02QW0J5GG7L | C02552130QXGPF7JA
-      iMac17,1 | C02RXDZYGG7L | C02626100GUGPF71H
-      iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
-      
-The order is `Product | Serial | Board Serial (MLB)`
+      iMac18,1 | C02T8SZNH7JY | C02707101J9H69F1F
+      iMac18,1 | C02VXBYDH7JY | C02753100GUH69FCB
+      iMac18,1 | C02T7RY6H7JY | C02706310GUH69FA8
+      iMac18,1 | C02VD07ZH7JY | C02737301J9H69FCB
+      iMac18,1 | C02TQPYPH7JY | C02720802CDH69FAD
+      iMac18,1 | C02VXYYVH7JY | C02753207CDH69FJC
+      iMac18,1 | C02VDBZ0H7JY | C02737700QXH69FA8
+      iMac18,1 | C02VP0H6H7JY | C02746300CDH69FJA
+      iMac18,1 | C02VL0W9H7JY | C02743303CDH69F8C
+      iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
 
-The `iMac17,1` part gets copied to Generic -> SystemProductName.
+The order is Product | Serial | Board Serial (MLB)
+
+The `iMac18,1` part gets copied to Generic -> SystemProductName.
 
 The `Serial` part gets copied to Generic -> SystemSerialNumber.
 
