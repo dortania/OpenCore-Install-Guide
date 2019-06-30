@@ -120,9 +120,17 @@ debug=0x100 - this prevents a reboot on a kernel panic.  That way you can (hopef
       * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
       * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
 
-* csr-active-config: <00000000> (Settings for SIP, recommeded to manully change this within Recovery partition with csrutil)
+* csr-active-config: <00000000> 
 
-* nvda_drv:  <> (For enabling WebDrivers)
+Settings for SIP, recommeded to manully change this within Recovery partition with csrutil
+
+csr-active-config is set to e7030000 which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
+
+* `00000000` - SIP completely enabled
+* `30000000` - Allow unsigned kexts and writing to protected fs locations
+* `E7030000` - SIP completely disabled
+
+* nvda_drv:  <> (For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text))
 
 * prev-lang:kbd: <> (Needed for non-latin keyboards)
 
@@ -171,24 +179,9 @@ The `Board Serial` part gets copied to SMBIOS -> Board Serial Number as well as 
 
 We can create an SmUUID by running `uuidgen` in the terminal (or it's auto-generated via my GenSMBIOS script) - and that gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), or your NIC MAC address, or any random MAC address (could be just 6 random bytes)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes)
 
 **Automatic**: YES (Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections)
-
-**Generic**:
-
-* SpoofVendor: YES
-* SystemUUID: Can be generated with MacSerial or use pervious from Clover's config.plist.
-* MLB: Can be generated with MacSerial or use pervious from Clover's config.plist.
-* ROM: <> (6 character MAC address, can be entirely random)
-* SystemProductName: Can be generated with MacSerial or use pervious from Clover's config.plist.
-* SystemSerialNumber: Can be generated with MacSerial or use pervious from Clover's config.plist.
-
-**DataHub**
-
-**PlatformNVRAM**
-
-**SMBIOS**
 
 **UpdateDataHub**: YES (Update Data Hub fields)
 
