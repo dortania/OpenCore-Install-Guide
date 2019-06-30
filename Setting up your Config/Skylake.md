@@ -7,9 +7,13 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 ![ACPI](https://i.imgur.com/sjlX3aT.png)
 
-**Add:** This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and [disabling unsupported GPUs](https://github.com/khronokernel/How-to-disable-your-unsupported-GPU-for-MacOS)
+**Add:** 
 
-**Block**: 
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and [disabling unsupported GPUs](https://github.com/khronokernel/How-to-disable-your-unsupported-GPU-for-MacOS)
+
+**Block**
+
+This drops certain ACPI tabes from loading, for us we'll want to drop 
 
 **Patch**: 
 
@@ -22,7 +26,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 **Quirk**: Settings for ACPI.
 
 * FadtEnableReset: Enable reboot and shutdown on legacy hardware, not recommended unless needed
-* NormalizeHeaders: Cleanup ACPI header fields, irrelevant in 10.14
+* NormalizeHeaders: Cleanup ACPI header fields, irrelevant for macOS Mojave 10.14 and higher
 * RebaseRegions: Attempt to heuristically relocate ACPI memory regions
 * ResetHwSig: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with
 waking from hibernation
@@ -179,7 +183,7 @@ The `Board Serial` part gets copied to SMBIOS -> Board Serial Number as well as 
 
 We can create an SmUUID by running `uuidgen` in the terminal (or it's auto-generated via my GenSMBIOS script) - and that gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`)
 
 **Automatic**: YES (Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections)
 
