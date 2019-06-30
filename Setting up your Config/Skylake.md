@@ -65,6 +65,8 @@ Layout=1 would be interprected as `01000000`
 
 # Kernel
 
+![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Kernel-Skylake.png)
+
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons
@@ -89,9 +91,9 @@ Layout=1 would be interprected as `01000000`
 * ThirdPartyTrim: NO (Enables TRIM, not needed for AHCI or NVMe SSDs)
 * XhciPortLimit: YES (This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map)
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Kernel-Skylake.png)
-
 # Misc
+
+![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Misc-Skylake.png)
 
 **Boot**: Settings for boot screen (leave as-is unless you know what you're doing)
 * Timeout: This sets how long OpenCore will wait until it automatically boots from the default selection
@@ -109,9 +111,9 @@ Layout=1 would be interprected as `01000000`
 
 **Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Misc-Skylake.png)
-
 # NVRAM
+
+![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Skylake.png)
 
 **Add**: 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majogrity can ignore but )
@@ -147,8 +149,6 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 **LegacyEnable** Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
 
 **LegacySchema** Used for assigning NVRAM variables, used with LegacyEnable set to YES
-
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Skylake.png)
 
 # Platforminfo
 
