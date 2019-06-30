@@ -5,7 +5,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 # ACPI
 
-![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/ACPI-Skylake.png)
+![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/ACPI-IvyBridge.png)
 
 **Add:** 
 
@@ -19,6 +19,8 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 This section allows us to dynamically rename parts of the DSDT via OpenCore. Since we're not running a real mac, and macOS is pretty particular with how things are named, we can make non-destructive changes to keep things mac-friendly. We have three entries here:
 
+* *change EHC1 to EH01* - helps avoid a conflict with built-in USB injectors
+* *change EHC2 to EH02* - helps avoid a conflict with built-in USB injectors
 * *change XHCI to XHC* - helps avoid a conflict with built-in USB injectors
 * *change XHC1 to XHC* - helps avoid a conflict with built-in USB injectors
 * *change SAT0 to SATA* - for potential SATA compatibility
@@ -36,7 +38,7 @@ waking from hibernation
 
 # DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/DeviceProperties-Skylake.png)
+![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/DeviceProperties-IvyBridge.png)
 
 **Add**: Sets device properties from a map.
 
@@ -46,10 +48,8 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x19120000` - this is used when the iGPU is used to drive a display
-   * `00001219` when hex-swapped
-* `0x19120001` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
-   * `01001219` when hex-swapped
+* `0x0166000A` - this is the standard hex for the ig-plat
+   * `0A006601` when hex-swapped
 
 We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB.
 
@@ -65,7 +65,7 @@ Layout=1 would be interprected as `01000000`
 
 # Kernel
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Kernel-Skylake.png)
+![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/Kernel-IvyBridge.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
@@ -93,7 +93,7 @@ Layout=1 would be interprected as `01000000`
 
 # Misc
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Misc-Skylake.png)
+![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/Misc-IvyBridge.png)
 
 **Boot**: Settings for boot screen (leave as-is unless you know what you're doing)
 * Timeout: This sets how long OpenCore will wait until it automatically boots from the default selection
@@ -113,7 +113,7 @@ Layout=1 would be interprected as `01000000`
 
 # NVRAM
 
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Skylake.png)
+![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/NVRAM-IvyBridge.png)
 
 **Add**: 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majogrity can ignore but )
@@ -152,34 +152,34 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 # Platforminfo
 
-![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/PlatformInfo-Skylake.png)
+![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/PlatformInfo-IvyBridge.png)
 
 For setting up the SMBIOS info, I use acidanthera's *[macserial](https://github.com/acidanthera/macserial)* application. I wrote a *[python script](https://github.com/corpnewt/GenSMBIOS)* that can leverage it as well (and auto-saves to the config.plist when selected). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
 
-For this Skylake example, I chose the *iMac17,1* SMBIOS.
+For this Skylake example, I chose the *iMac13,2* SMBIOS.
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.
 
-With our iMac17,1 example, we would run macserial like so via the terminal:
+With our iMac13,2 example, we would run macserial like so via the terminal:
 
-`macserial -a | grep -i iMac17,1`
+`macserial -a | grep -i iMac13,2`
 
 Which would give us output similar to the following:
 
-      iMac17,1 | C02S8DY7GG7L | C02634902QXGPF7FB
-      iMac17,1 | C02T4WZSGG7L | C02703104GUGPF71M
-      iMac17,1 | C02QQAYPGG7L | C025474014NGPF7FB
-      iMac17,1 | C02SNLZ3GG7L | C02645501CDGPF7AD
-      iMac17,1 | C02QQRY8GG7L | C025474054NGPF71F
-      iMac17,1 | C02QK1ZXGG7L | C02542200GUGPF7JC
-      iMac17,1 | C02SL0YXGG7L | C026436004NGPF7JA
-      iMac17,1 | C02QW0J5GG7L | C02552130QXGPF7JA
-      iMac17,1 | C02RXDZYGG7L | C02626100GUGPF71H
-      iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
+      iMac13,2 | C02JX0KSDNCW | C02253902J9F2FRCB
+      iMac13,2 | C02KC3Y9DNCW | C02309401GUF2FR1M
+      iMac13,2 | C02KPYYDDNCW | C02319902J9F2FRJA
+      iMac13,2 | C02LLSYJDNCW | C02343301J9F2FR1F
+      iMac13,2 | C02JF0N3DNCW | C02238404GUF2FR1M
+      iMac13,2 | C02JT6ZFDNCW | C02250104QXF2FRFB
+      iMac13,2 | C02LT0GDDNCW | C02350130J9F2FR1H
+      iMac13,2 | C02J1069DNCW | C02227310J9F2FRAD
+      iMac13,2 | C02JN0Y4DNCW | C02245902CDF2FRFB
+      iMac13,2 | C02JWJZSDNCW | C02252100GUF2FRCB
       
 The order is `Product | Serial | Board Serial (MLB)`
 
-The `iMac17,1` part gets copied to Generic -> SystemProductName.
+The `iMac13,2` part gets copied to Generic -> SystemProductName.
 
 The `Serial` part gets copied to Generic -> SystemSerialNumber.
 
@@ -203,7 +203,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 # UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/UEFI-Skylake.png)
+![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/UEFI-IvyBridge.png)
 
 **ConnectDrivers**: YES (Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load)
 
