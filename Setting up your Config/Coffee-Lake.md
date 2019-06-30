@@ -5,7 +5,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 # ACPI
 
-![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/ACPI-Skylake.png)
+![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/ACPI-CoffeeLake.png)
 
 **Add:** 
 
@@ -36,7 +36,7 @@ waking from hibernation
 
 # DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/DeviceProperties-Skylake.png)
+![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/DeviceProperties-CoffeeLake.png)
 
 **Add**: Sets device properties from a map.
 
@@ -46,12 +46,24 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x19120000` - this is used when the iGPU is used to drive a display
-   * `00001219` when hex-swapped
-* `0x19120001` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
-   * `01001219` when hex-swapped
+* `0x3E9B0007` - this is used when the iGPU is used to drive a display
+   * `07009B3E` when hex-swapped
+* `0x3E920003` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
+   * `0300923E` when hex-swapped
+
+Worth noting that for 10.12 -> 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up.
 
 We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB.
+
+I added another screenshot as well that shows a `device-id` fake for the i3-8100's UHD 630. This has a different device id than the UHD 630 found on the 8700k, for instance (`3e918086` vs `3e928086` ).
+
+For this - we follow a similar procedure as our above ig-platform-id hex swapping - but this time, we only work with the first two pairs of hex bytes. If we think of our device id as 0xAABB0000, our swapped version would look like 0xBBAA0000. We don't do anything with the last 2 pairs of hex bytes.
+
+The device-id fake is setup like so:
+
+* `0x3e920000` - this is the device id for the UHD 630 found on an 8700k
+   * `923e0000` when hex swapped
+
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -65,7 +77,7 @@ Layout=1 would be interprected as `01000000`
 
 # Kernel
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Kernel-Skylake.png)
+![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/Kernel-CoffeeLake.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
@@ -93,7 +105,7 @@ Layout=1 would be interprected as `01000000`
 
 # Misc
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Misc-Skylake.png)
+![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/Misc-CoffeeLake.png)
 
 **Boot**: Settings for boot screen (leave as-is unless you know what you're doing)
 * Timeout: This sets how long OpenCore will wait until it automatically boots from the default selection
@@ -113,7 +125,7 @@ Layout=1 would be interprected as `01000000`
 
 # NVRAM
 
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Skylake.png)
+![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/NVRAM-CoffeeLake.png)
 
 **Add**: 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majogrity can ignore but )
@@ -152,7 +164,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 # Platforminfo
 
-![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/PlatformInfo-Skylake.png)
+![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/PlatformInfo-CoffeeLake.png)
 
 For setting up the SMBIOS info, I use acidanthera's *[macserial](https://github.com/acidanthera/macserial)* application. I wrote a *[python script](https://github.com/corpnewt/GenSMBIOS)* that can leverage it as well (and auto-saves to the config.plist when selected). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
 
@@ -203,7 +215,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 # UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/UEFI-Skylake.png)
+![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/UEFI-CoffeeLake.png)
 
 **ConnectDrivers**: YES (Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load)
 
