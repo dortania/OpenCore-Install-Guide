@@ -36,7 +36,7 @@ waking from hibernation
 
 # DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/8gujqhJ.png)
+![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/DeviceProperties-Skylake.png)
 
 **Add**: Sets device properties from a map.
 
@@ -89,7 +89,7 @@ Layout=1 would be interprected as `01000000`
 * ThirdPartyTrim: NO (Enables TRIM, not needed for AHCI or NVMe SSDs)
 * XhciPortLimit: YES (This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map)
 
-![Kernel](https://i.imgur.com/DcafUhE.png)
+![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Kernel-Skylake.png)
 
 # Misc
 
@@ -109,7 +109,7 @@ Layout=1 would be interprected as `01000000`
 
 **Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
 
-![Misc](https://i.imgur.com/6NPXq0A.png)
+![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Misc-Skylake.png)
 
 # NVRAM
 
@@ -148,11 +148,11 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 **LegacySchema** Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
-![NVRAM](https://i.imgur.com/MPFj3TS.png)
+![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Skylake.png)
 
 # Platforminfo
 
-![PlatformInfo](https://i.imgur.com/dIKAlhj.png)
+![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/PlatformInfo-Skylake.png)
 
 For setting up the SMBIOS info, I use acidanthera's *[macserial](https://github.com/acidanthera/macserial)* application. I wrote a *[python script](https://github.com/corpnewt/GenSMBIOS)* that can leverage it as well (and auto-saves to the config.plist when selected). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
 
@@ -203,7 +203,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 # UEFI
 
-![UEFI](https://i.imgur.com/acZ1PUA.png)
+![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/UEFI-Skylake.png)
 
 **ConnectDrivers**: YES (Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load)
 
