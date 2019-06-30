@@ -221,7 +221,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * ExitBootServicesDelay: Only required for very specifc use cases like setting to `5` for ASUS Z87-Pro running FileVault2
 * IgnoreInvalidFlexRatio: Fix for when MSR_FLEX_RATIO (0x194) can't be disabled in the BIOS, required for all pre-skylake based systems
-* IgnoreTextInGraphics: Fix for UI corruption when both text and graphics outputs happen
+* IgnoreTextInGraphics: Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo(no verbose screen)
 * ProvideConsoleGop:Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
 * ReleaseUsbOwnership: Releases USB controller from firmware driver, avoid unless you know what you're doing
 * RequestBootVarRouting: Redirects AptioMemeoryFix from EFI_GLOBAL_VARIABLE_G to OC_VENDOR_VARIABLE_GUID. Needed for when firmware tries to delete boot entries
