@@ -36,7 +36,7 @@ waking from hibernation
 
 # DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/DeviceProperties-Skylake.png)
+![DeviceProperties](https://raw.githubusercontent.com/khronokernel/Opencore-Vanilla-Desktop-Guide/master/Configs/Skylake/Images/DeviceProperties-Skylake.png?token=ALUZQFOFWOAXYK5DNYKNWV25DTOSA)
 
 **Add**: Sets device properties from a map.
 
@@ -65,7 +65,7 @@ Layout=1 would be interprected as `01000000`
 
 # Kernel
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Kernel-Skylake.png)
+![Kernel](https://raw.githubusercontent.com/khronokernel/Opencore-Vanilla-Desktop-Guide/master/Configs/Skylake/Images/Kernel-Skylake.png?token=ALUZQFKCWJYQ6LDDAQVMYDS5DTOSK)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
@@ -93,7 +93,7 @@ Layout=1 would be interprected as `01000000`
 
 # Misc
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/Misc-Skylake.png)
+![Misc](https://raw.githubusercontent.com/khronokernel/Opencore-Vanilla-Desktop-Guide/master/Configs/Skylake/Images/Misc-Skylake.png?token=ALUZQFNHQ7OGRAXATOODR725DTOSQ)
 
 **Boot**: Settings for boot screen (leave as-is unless you know what you're doing)
 * Timeout: This sets how long OpenCore will wait until it automatically boots from the default selection
@@ -113,7 +113,7 @@ Layout=1 would be interprected as `01000000`
 
 # NVRAM
 
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Skylake.png)
+![NVRAM](https://raw.githubusercontent.com/khronokernel/Opencore-Vanilla-Desktop-Guide/master/Configs/Skylake/Images/NVRAM-Skylake.png?token=ALUZQFPRBU6BGPYIGQDYPRC5DTOSW)
 
 **Add**: 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majogrity can ignore but )
@@ -152,7 +152,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 # Platforminfo
 
-![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/PlatformInfo-Skylake.png)
+![PlatformInfo](https://raw.githubusercontent.com/khronokernel/Opencore-Vanilla-Desktop-Guide/master/Configs/Skylake/Images/PlatformInfo-Skylake.png?token=ALUZQFN7SXJLTQPWSV7MGW25DTOS2)
 
 For setting up the SMBIOS info, I use acidanthera's *[macserial](https://github.com/acidanthera/macserial)* application. I wrote a *[python script](https://github.com/corpnewt/GenSMBIOS)* that can leverage it as well (and auto-saves to the config.plist when selected). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
 
@@ -203,7 +203,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 # UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/UEFI-Skylake.png)
+![UEFI](https://raw.githubusercontent.com/khronokernel/Opencore-Vanilla-Desktop-Guide/master/Configs/Skylake/Images/UEFI-Skylake.png?token=ALUZQFJR5YR6QFLFYOUW4AS5DTOTA)
 
 **ConnectDrivers**: YES (Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load)
 
