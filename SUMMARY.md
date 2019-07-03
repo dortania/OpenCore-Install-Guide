@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Getting Started](Getting-Started.md)
-* [Creating the USB](Creating-The-USB.md)
+* [Creating the USB](Creating-the-USB.md)
 
 Setting up your config
 
