@@ -1,15 +1,14 @@
 # Table of contents
 
-* [Getting Started](Getting-Started.md)
-* [Creating the USB](Creating-the-USB.md)
+* [Introduction](README.md)
+* [Getting Started](getting-started.md)
+* [Creating the USB](creating-the-usb.md)
 
-Setting up your config
+## Config.plist
 
-* [Ivy Bridge](Setting up your Config/Ivy-Bridge.md)
-* [Haswell](Setting up your Config/Haswell.md)
-* [Skylake](Setting up your Config/Skylake.md)
-* [Kaby Lake](Setting up your Config/Kaby-Lake.md)
-* [Coffee Lake](Setting up your Config/Coffee-Lake.md)
-
-
+* [Ivy Bridge](config.plist/ivy-bridge.md)
+* [Haswell](config.plist/haswell.md)
+* [Skylake](config.plist/skylake.md)
+* [Kaby Lake](config.plist/kaby-lake.md)
+* [Coffee Lake](config.plist/coffee-lake.md)
 
