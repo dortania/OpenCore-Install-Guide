@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Getting Started](getting-started.md)
+* [Introduction](getting-started.md)
 * [Creating the USB](creating-the-usb.md)
 
 ## Config.plist
