@@ -94,7 +94,7 @@ Layout=1 would be interprected as `01000000`
 
 ## Misc
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Kabylake/Images/Misc-Kabylake.png)
+![Misc](https://i.imgur.com/DsCDziN.png)
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
@@ -118,7 +118,7 @@ Layout=1 would be interprected as `01000000`
 
 ![NVRAM](https://i.imgur.com/uyLE6Cx.png)
 
-**Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
+**Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
 * UIScale:
   * 01: 1080P
