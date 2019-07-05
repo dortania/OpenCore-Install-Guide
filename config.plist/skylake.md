@@ -117,7 +117,7 @@ Layout=1 would be interprected as `01000000`
 
 ![NVRAM](https://i.imgur.com/uyLE6Cx.png)
 
-**Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
+**Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
 * UIScale:
   * 01: 1080P
