@@ -116,11 +116,11 @@ Layout=1 would be interprected as `01000000`
 
 ## NVRAM
 
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/NVRAM-Kabylake.png)
+![NVRAM](https://i.imgur.com/uyLE6Cx.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
-* UIScale: Scale of OpenCore UI\(duh....\)
+* UIScale:
   * 01: 1080P
   * 10: 2160P\(Enables HIDPI\)
 
