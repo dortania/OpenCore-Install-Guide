@@ -6,7 +6,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 ## ACPI
 
-![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Kabylake/Images/ACPI-Kabylake.png)
+![ACPI](https://i.imgur.com/gV01AMC.png)
 
 **Add:**
 
