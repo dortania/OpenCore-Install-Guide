@@ -38,7 +38,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/pYsaRmH.png)
+![DeviceProperties](https://i.imgur.com/op2qW8m.png)
 
 **Add**: Sets device properties from a map.
 
