@@ -127,7 +127,7 @@ Layout=1 would be interprected as `01000000`
 
 ## NVRAM
 
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/NVRAM-CoffeeLake.png)
+![NVRAM](https://i.imgur.com/uyLE6Cx.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
@@ -223,7 +223,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/UEFI-CoffeeLake.png)
+![UEFI](https://i.imgur.com/uAoUtZs.png)
 
 **ConnectDrivers**: YES \(Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load\)
 
