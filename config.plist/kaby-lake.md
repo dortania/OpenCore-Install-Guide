@@ -39,7 +39,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 ## DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Kabylake/Images/DeviceProperties-Kabylake.png)
+![DeviceProperties](https://i.imgur.com/pmnjhrp.png)
 
 **Add**: Sets device properties from a map.
 
@@ -154,7 +154,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ## Platforminfo
 
-![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Kabylake/Images/PlatformInfo-Kabylake.png)
+![PlatformInfo](https://i.imgur.com/O7UJpn7.png)
 
 For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
 
