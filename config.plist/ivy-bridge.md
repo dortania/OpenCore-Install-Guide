@@ -85,7 +85,7 @@ Layout=1 would be interprected as `01000000`
 * AppleXcpmCfgLock: NO \(Only needed when CFG-Lock can't be disabled in BIOS\)
 * AppleXcpmExtraMsrs: NO \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
 * CustomSMBIOSGuid: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
-* DisbaleIOMapper: NO \(Needed to get around VT-D if unable to disable in BIOS, can interfere with Firmware so avoid when possible\)
+* DisableIOMapper: NO \(Needed to get around VT-D if unable to disable in BIOS, can interfere with Firmware so avoid when possible\)
 * ExternalDiskIcons: YES \(External Icons Patch, for when internal drives are treated as external drives\)
 * LapicKernelPanic: NO \(Disables kernel panic on AP core lapic interrupt\)
 * PanicNoKextDump: YES \(Allows for reading kernel panics logs when kernel panics occurs\)
