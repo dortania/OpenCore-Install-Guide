@@ -6,7 +6,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 ## ACPI
 
-![ACPI](https://imgur.com/op2qW8m)
+![ACPI](https://i.imgur.com/op2qW8m.png)
 
 **Add:**
 
