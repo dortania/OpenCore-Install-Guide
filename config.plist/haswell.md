@@ -48,7 +48,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 ## DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/DeviceProperties-Haswell.png)
+![DeviceProperties](https://i.imgur.com/qa5imft.png)
 
 **Add**: Sets device properties from a map.
 
