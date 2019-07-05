@@ -24,6 +24,16 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 * _change XHC1 to XHC_ - helps avoid a conflict with built-in USB injectors
 * _change SAT0 to SATA_ - for potential SATA compatibility
 
+&#x200B;
+
+|Name|Find|Replace|
+|:-|:-|:-|
+|change XHCI to XHC|58484349|5848435f|
+|change XHC1 to XHC|58484331|5848435f|
+|change SAT0 to SATA|53415430|53415441|
+
+&#x200B;
+
 **Quirk**: Settings for ACPI.
 
 * FadtEnableReset: Enable reboot and shutdown on legacy hardware, not recommended unless needed
