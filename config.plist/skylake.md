@@ -6,7 +6,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 ## ACPI
 
-![ACPI](Configs/Skylake/Images/ACPI-Skylake.png)
+![ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Skylake/Images/ACPI-Skylake.png?raw=true)
 
 **Add:**
 
