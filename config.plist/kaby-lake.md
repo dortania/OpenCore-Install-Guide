@@ -208,7 +208,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Kabylake/Images/UEFI-Kabylake.png)
+![UEFI](https://i.imgur.com/uAoUtZs.png)
 
 **ConnectDrivers**: YES \(Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load\)
 
