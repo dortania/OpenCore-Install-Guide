@@ -8,3 +8,41 @@ If you disabled your GPU using the AddProperties method found in [Disable Unsupp
 
 Using an old GPU that's reliant on the "inject AMD" property?:
 
+# FakeID
+
+Found in device_inject.c
+
+**ATI**
+
+**IntelGFX**
+
+**LAN**
+
+* device-id
+* compatible
+* vendor-id
+
+**Nvidia**
+
+**SATA**
+
+**WIFI**
+
+**XHCI**
+
+* device-id
+* device_type
+* device_type
+*
+*
+*
+*
+
+**IMEI**
+
+# USB
+
+* device-id
+* device_type
+* device_type
+
