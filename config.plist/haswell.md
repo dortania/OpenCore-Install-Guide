@@ -230,7 +230,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 * **AppleBootPolicy**: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 * **ConsoleControl**: Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode
-* **DataHub: Reinstalls Data Hub
+* **DataHub**: Reinstalls Data Hub
 * **DeviceProperties**: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 
 **Quirks**:
