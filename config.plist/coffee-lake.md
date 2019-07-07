@@ -46,7 +46,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 ## DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/DeviceProperties-CoffeeLake.png)
+![DeviceProperties](https://i.imgur.com/EZu8VEH.png)
 
 **Add**: Sets device properties from a map.
 
@@ -65,7 +65,7 @@ Worth noting that for 10.12 -&gt; 10.13.5, you would need to fake the iGPU to th
 
 We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB.
 
-I added another screenshot as well that shows a `device-id` fake for the i3-8100's UHD 630. This has a different device id than the UHD 630 found on the 8700k, for instance \(`3e918086` vs `3e928086` \).
+I added another section as well that shows a fake `device-id` for the i3-8100's UHD 630. This has a different device id than the UHD 630 found on the 8700k, for instance \(`3e918086` vs `3e928086` \).
 
 For this - we follow a similar procedure as our above ig-platform-id hex swapping - but this time, we only work with the first two pairs of hex bytes. If we think of our device id as 0xAABB0000, our swapped version would look like 0xBBAA0000. We don't do anything with the last 2 pairs of hex bytes.
 
@@ -73,6 +73,8 @@ The device-id fake is setup like so:
 
 * `0x3e920000` - this is the device id for the UHD 630 found on an 8700k
   * `923e0000` when hex swapped
+
+Note: FakeID is only required for High Sierra, Mojave doesn't require this
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -&gt; `Layout-id`
 
