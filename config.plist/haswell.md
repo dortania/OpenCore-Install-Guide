@@ -34,16 +34,14 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 **Quirk**: Settings for ACPI.
 
-* FadtEnableReset: Enable reboot and shutdown on legacy hardware, not recommended unless needed
-* NormalizeHeaders: Cleanup ACPI header fields, irrelevant for macOS Mojave 10.14 and higher
-* RebaseRegions: Attempt to heuristically relocate ACPI memory regions
-* ResetHwSig: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with
+* **FadtEnableReset**: Enable reboot and shutdown on legacy hardware, not recommended unless needed
+* **NormalizeHeaders**: Cleanup ACPI header fields, irrelevant for macOS Mojave 10.14 and higher
+* **RebaseRegions**: Attempt to heuristically relocate ACPI memory regions
+* **ResetHwSig**: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with
 
   waking from hibernation
 
-* ResetLogoStatus: Workaround for systems running BGRT tables, most don't have to worry about this
-
-​
+* **ResetLogoStatus**: Workaround for systems running BGRT tables, most don't have to worry about this
 
 ## DeviceProperties
 
@@ -87,8 +85,8 @@ Layout=5 would be interprected as `05000000`
 
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
-* CpuidMask: When set to Zero, original CPU bit will be used
-* CpuidData: The value for the CPU spoofing, don't forget to swap hex
+* **CpuidMask**: When set to Zero, original CPU bit will be used
+* **CpuidData**: The value for the CPU spoofing, don't forget to swap hex
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
@@ -96,16 +94,16 @@ Layout=5 would be interprected as `05000000`
 
 **Quirks**:
 
-* AppleCpuPmCfgLock: NO \(Only needed when CFG-Lock can't be disabled in BIOS\)
-* AppleXcpmCfgLock: NO \(Only needed when CFG-Lock can't be disabled in BIOS\)
-* AppleXcpmExtraMsrs: NO \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
-* CustomSMBIOSGuid: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
-* DisableIOMapper: NO \(Needed to get around VT-D if unable to disable in BIOS, can interfere with Firmware so avoid when possible\)
-* ExternalDiskIcons: YES \(External Icons Patch, for when internal drives are treated as external drives\)
-* LapicKernelPanic: NO \(Disables kernel panic on AP core lapic interrupt\)
-* PanicNoKextDump: YES \(Allows for reading kernel panics logs when kernel panics occurs\)
-* ThirdPartyTrim: NO \(Enables TRIM, not needed for AHCI or NVMe SSDs\)
-* XhciPortLimit: YES \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map\)
+* **AppleCpuPmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS\)
+* **AppleXcpmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS\)
+* **AppleXcpmExtraMsrs**: NO \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
+* **CustomSMBIOSGuid**: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
+* **DisableIOMapper**: NO \(Needed to get around VT-D if unable to disable in BIOS, can interfere with Firmware so avoid when possible\)
+* **ExternalDiskIcons**: YES \(External Icons Patch, for when internal drives are treated as external drives\)
+* **LapicKernelPanic**: NO \(Disables kernel panic on AP core lapic interrupt\)
+* **PanicNoKextDump**: YES \(Allows for reading kernel panics logs when kernel panics occurs\)
+* **ThirdPartyTrim**: NO \(Enables TRIM, not needed for AHCI or NVMe SSDs\)
+* **XhciPortLimit**: YES \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map\)
 
 ## Misc
 
@@ -113,19 +111,19 @@ Layout=5 would be interprected as `05000000`
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
-* Timeout: This sets how long OpenCore will wait until it automatically boots from the default selection
-* ShowPicker: Needed for seeing your availble drives
-* UsePicker: Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
+* **Timeout**: This sets how long OpenCore will wait until it automatically boots from the default selection
+* **ShowPicker**: Needed for seeing your availble drives
+* **UsePicker**: Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
-* DisableWatchDog: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting
+* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting
 
 **Security**: Security is pretty self-explanatory.
 
-* RequireSignature: We won't be dealing vault.plist so we can ignore
-* RequireVault: We won't be dealing vault.plist so we can ignore as well
-* ScanPolicy: This allow you to see all drives available, please refer to OpenCore's DOC for furthur info on setting up ScanPolicy
+* **RequireSignature**: We won't be dealing vault.plist so we can ignore
+* **RequireVault**: We won't be dealing vault.plist so we can ignore as well
+* **ScanPolicy**: This allow you to see all drives available, please refer to OpenCore's DOC for furthur info on setting up ScanPolicy
 
 **Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
 
@@ -135,13 +133,13 @@ Layout=5 would be interprected as `05000000`
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
-* UIScale: Scale of OpenCore UI\(duh....\)
+* **UIScale**: Scale of OpenCore UI\(duh....\)
   * 01: 1080P
   * 10: 2160P\(Enables HIDPI\)
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
-* boot-args:
+* **boot-args**:
   * -v - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
   * dart=0 - this is just an extra layer of protection against Vt-d issues.
 
@@ -151,7 +149,7 @@ Layout=5 would be interprected as `05000000`
   * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
-* csr-active-config: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
+* **csr-active-config**: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
@@ -159,7 +157,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 * `30000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 * nvda\_drv: &lt;&gt; \(For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)\)
-* prev-lang:kbd: &lt;&gt; \(Needed for non-latin keyboards\)
+* **prev-lang:kbd**: &lt;&gt; \(Needed for non-latin keyboards\)
 
 **Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases
 
@@ -230,18 +228,18 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Protocols**:
 
-* AppleBootPolicy: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
-* ConsoleControl: Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode
-* DataHub: Reinstalls Data Hub
-* DeviceProperties: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
+* **AppleBootPolicy**: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
+* **ConsoleControl**: Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode
+* **DataHub: Reinstalls Data Hub
+* **DeviceProperties**: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 
 **Quirks**:
 
-* ExitBootServicesDelay: Only required for very specifc use cases like setting to `5` for ASUS Z87-Pro running FileVault2
-* IgnoreInvalidFlexRatio: Fix for when MSR\_FLEX\_RATIO \(0x194\) can't be disabled in the BIOS, required for all pre-skylake based systems
-* IgnoreTextInGraphics: Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
-* ProvideConsoleGop:Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
-* ReleaseUsbOwnership: Releases USB controller from firmware driver, avoid unless you know what you're doing
-* RequestBootVarRouting: Redirects AptioMemeoryFix from EFI\_GLOBAL\_VARIABLE\_G to OC\_VENDOR\_VARIABLE\_GUID. Needed for when firmware tries to delete boot entries
-* SanitiseClearScreen: Fixes High resolutions displays that display OpenCore in 1024x768
+* **ExitBootServicesDelay**: Only required for very specifc use cases like setting to `5` for ASUS Z87-Pro running FileVault2
+* **IgnoreInvalidFlexRatio**: Fix for when MSR\_FLEX\_RATIO \(0x194\) can't be disabled in the BIOS, required for all pre-skylake based systems
+* **IgnoreTextInGraphics**: Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
+* **ProvideConsoleGop**:Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
+* **ReleaseUsbOwnership**: Releases USB controller from firmware driver, avoid unless you know what you're doing
+* **RequestBootVarRouting**: Redirects AptioMemeoryFix from EFI\_GLOBAL\_VARIABLE\_G to OC\_VENDOR\_VARIABLE\_GUID. Needed for when firmware tries to delete boot entries
+* **SanitiseClearScreen**: Fixes High resolutions displays that display OpenCore in 1024x768
 
