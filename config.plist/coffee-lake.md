@@ -24,12 +24,11 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 * _change XHC1 to XHC_ - helps avoid a conflict with built-in USB injectors
 * _change SAT0 to SATA_ - for potential SATA compatibility
 
-|Name|Find|Replace|
-|:-|:-|:-|
-|change XHCI to XHC|58484349|5848435f|
-|change XHC1 to XHC|58484331|5848435f|
-|change SAT0 to SATA|53415430|53415441|
-
+| Name | Find | Replace |
+| :--- | :--- | :--- |
+| change XHCI to XHC | 58484349 | 5848435f |
+| change XHC1 to XHC | 58484331 | 5848435f |
+| change SAT0 to SATA | 53415430 | 53415441 |
 
 **Quirk**: Settings for ACPI.
 
@@ -150,9 +149,9 @@ Layout=5 would be interprected as `05000000`
   * -v - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
   * dart=0 - this is just an extra layer of protection against Vt-d issues.
 
-    debug=0x100 - this prevents a reboot on a kernel panic.  That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
+    debug=0x100 - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
-  * keepsyms=1 - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic.   That can give some more helpful insight as to what's causing the panic itself.
+  * keepsyms=1 - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
   * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
