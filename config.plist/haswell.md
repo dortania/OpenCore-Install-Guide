@@ -37,9 +37,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 * **FadtEnableReset**: Enable reboot and shutdown on legacy hardware, not recommended unless needed
 * **NormalizeHeaders**: Cleanup ACPI header fields, irrelevant for macOS Mojave 10.14 and higher
 * **RebaseRegions**: Attempt to heuristically relocate ACPI memory regions
-* **ResetHwSig**: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with
-
-  waking from hibernation
+* **ResetHwSig**: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with waking from hibernation
 
 * **ResetLogoStatus**: Workaround for systems running BGRT tables, most don't have to worry about this
 
