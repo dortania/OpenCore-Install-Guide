@@ -146,7 +146,7 @@ Layout=5 would be interprected as `05000000`
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
-* boot-args:
+* **boot-args**:
   * -v - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
   * dart=0 - this is just an extra layer of protection against Vt-d issues.
 
@@ -156,15 +156,15 @@ Layout=5 would be interprected as `05000000`
   * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
-* csr-active-config: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
+* **csr-active-config**: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
 * `00000000` - SIP completely enabled
 * `30000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
-* nvda\_drv: &lt;&gt; \(For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)\)
-* prev-lang:kbd: &lt;&gt; \(Needed for non-latin keyboards\)
+* **nvda\_drv**: &lt;&gt; \(For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)\)
+* **prev-lang:kbd**: &lt;&gt; \(Needed for non-latin keyboards\)
 
 **Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases
 
@@ -240,10 +240,10 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Protocols**:
 
-* AppleBootPolicy: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
-* ConsoleControl: Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode
-* DataHub: Reinstalls Data Hub
-* DeviceProperties: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
+* **AppleBootPolicy**: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
+* **ConsoleControl**: Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode
+* **DataHub**: Reinstalls Data Hub
+* **DeviceProperties**: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 
 **Quirks**:
 
