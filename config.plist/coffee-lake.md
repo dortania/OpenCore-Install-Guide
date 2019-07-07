@@ -86,7 +86,7 @@ Layout=5 would be interprected as `05000000`
 
 ## Kernel
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/CoffeeLake/Images/Kernel-CoffeeLake.png)
+![Kernel](https://i.imgur.com/PzdPNaR.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
