@@ -6,7 +6,7 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/OLC4A4F.png)
+![ACPI](https://i.imgur.com/vy2A1FO.png)
 
 **Add:**
 
@@ -39,15 +39,12 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 * **FadtEnableReset**: Enable reboot and shutdown on legacy hardware, not recommended unless needed
 * **NormalizeHeaders**: Cleanup ACPI header fields, irrelevant for macOS Mojave 10.14 and higher
 * **RebaseRegions**: Attempt to heuristically relocate ACPI memory regions
-* **ResetHwSig**: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with
-
-  waking from hibernation
-
+* **ResetHwSig**: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with waking from hibernation
 * **ResetLogoStatus**: Workaround for systems running BGRT tables, most don't have to worry about this
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/1zeSpCe.png)
+![DeviceProperties](https://i.imgur.com/Aw9t9vI.png)
 
 **Add**: Sets device properties from a map.
 
@@ -74,7 +71,7 @@ Layout=5 would be interprected as `05000000`
 
 ## Kernel
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/Kernel-IvyBridge.png)
+![Kernel](https://i.imgur.com/repNbDT.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
@@ -102,7 +99,7 @@ Layout=5 would be interprected as `05000000`
 
 ## Misc
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/Misc-IvyBridge.png)
+![Misc](https://i.imgur.com/MOPmvpP.png)
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
@@ -124,7 +121,7 @@ Layout=5 would be interprected as `05000000`
 
 ## NVRAM
 
-![NVRAM](https://i.imgur.com/chjDNqi.png)
+![NVRAM](https://i.imgur.com/6hho1wp.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
@@ -163,11 +160,11 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ## Platforminfo
 
-![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/PlatformInfo-IvyBridge.png)
+![PlatformInfo](https://i.imgur.com/5rl12dZ.png)
 
-For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. CorpNewt wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\)
 
-For this Skylake example, I chose the _iMac13,2_ SMBIOS.
+For this example, we'll chose the _iMac13,2_ SMBIOS.
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
 
@@ -198,7 +195,7 @@ The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to SMBIOS -&gt; Board Serial Number as well as Generic -&gt; MLB.
 
-We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
+We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
@@ -214,7 +211,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/UEFI-IvyBridge.png)
+![UEFI](https://i.imgur.com/EDZ1QG7.png)
 
 **ConnectDrivers**: YES \(Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load\)
 
