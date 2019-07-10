@@ -6,7 +6,7 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/gV01AMC.png)
+![ACPI](https://i.imgur.com/v5rQ3JO.png)
 
 **Add:**
 
@@ -45,7 +45,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/EZu8VEH.png)
+![DeviceProperties](https://i.imgur.com/kHKNvgl.png)
 
 **Add**: Sets device properties from a map.
 
@@ -87,7 +87,7 @@ Layout=5 would be interprected as `05000000`
 
 ## Kernel
 
-![Kernel](https://i.imgur.com/PzdPNaR.png)
+![Kernel](https://i.imgur.com/ACr6owo.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
@@ -115,7 +115,7 @@ Layout=5 would be interprected as `05000000`
 
 ## Misc
 
-![Misc](https://i.imgur.com/DsCDziN.png)
+![Misc](https://i.imgur.com/bHcodm5.png)
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
@@ -137,7 +137,7 @@ Layout=5 would be interprected as `05000000`
 
 ## NVRAM
 
-![NVRAM](https://i.imgur.com/uyLE6Cx.png)
+![NVRAM](https://i.imgur.com/5fO8h9B.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
@@ -175,9 +175,9 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ## Platforminfo
 
-![PlatformInfo](https://i.imgur.com/O7UJpn7.png)
+![PlatformInfo](https://i.imgur.com/JpLxh35.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. CorpNewt wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\)
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. 
 
 For this Skylake example, I chose the _iMac17,1_ SMBIOS.
 
@@ -233,7 +233,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://i.imgur.com/uAoUtZs.png)
+![UEFI](https://i.imgur.com/QTRgxf3.png)
 
 **ConnectDrivers**: YES \(Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load\)
 
