@@ -21,6 +21,7 @@ Guides linked or those that inspired this guide:
 * [USB Map Guide](https://usb-map.gitbook.io/project/)
 * [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
+* [GFXutil](https://github.com/acidanthera/gfxutil/releases)
 
 Gotta rep dat ~~merch~~ guides:
 
