@@ -10,7 +10,7 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271), [disabling unsupported GPUs](Disable Unsupported GPUs) and such
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](Disable Unsupported GPUs) and such
 
 **Block**
 
