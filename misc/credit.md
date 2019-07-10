@@ -11,7 +11,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [CorpNewt](https://github.com/corpnewt)
   * Heavily inspiring this guide\(if not a rip off\)
 * [Midi](https://github.com/midi1996)
-  * Corrections and recommendations for te guide
+  * Corrections and recommendations for the guide
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
 
