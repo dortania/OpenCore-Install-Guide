@@ -2,7 +2,7 @@
 
 ## Starting Point
 
-You'll want to start with either the stock config.plist that OpenCore gives you, or with just a blank canvas. In the next examples, I'll show you how I set things up from scratch; if you start from somewhere else, you may have more things checked/set than I do - but you'll want to follow along with what I do.
+You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next open up your favorite XML editior like Xcode and we can get to work
 
 ## ACPI
 
@@ -10,7 +10,7 @@ You'll want to start with either the stock config.plist that OpenCore gives you,
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and [disabling unsupported GPUs](https://github.com/khronokernel/How-to-disable-your-unsupported-GPU-for-MacOS)
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271), [disabling unsupported GPUs](Disable Unsupported GPUs) and such
 
 **Block**
 
