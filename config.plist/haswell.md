@@ -18,8 +18,10 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically rename parts of the DSDT via OpenCore. Since we're not running a real mac, and macOS is pretty particular with how things are named, we can make non-destructive changes to keep things mac-friendly. We have three entries here:
+This section allows us to dynamically rename parts of the DSDT via OpenCore. Since we're not running a real mac, and macOS is pretty particular with how things are named, we can make non-destructive changes to keep things mac-friendly. We have five entries here:
 
+* _change EHC1 to EH01_ - helps avoid a conflict with built-in USB injectors
+* _change EHC2 to EH02_ - helps avoid a conflict with built-in USB injectors
 * _change XHCI to XHC_ - helps avoid a conflict with built-in USB injectors
 * _change XHC1 to XHC_ - helps avoid a conflict with built-in USB injectors
 * _change SAT0 to SATA_ - for potential SATA compatibility
