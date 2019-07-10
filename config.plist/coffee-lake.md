@@ -177,7 +177,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/O7UJpn7.png)
 
-For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. CorpNewt wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\)
 
 For this Skylake example, I chose the _iMac17,1_ SMBIOS.
 
