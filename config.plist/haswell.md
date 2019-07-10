@@ -170,9 +170,9 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/PlatformInfo-Haswell.png)
 
-For setting up the SMBIOS info, I use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. I wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\). There's plenty of info that's left blank to allow OpenCore to fill in the blanks; this means that updating OpenCore will update the info passed, and not require you to also update your config.plist.
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. CorpNewt wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\)
 
-For this Haswell example, I chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
+For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
 
 Haswell with only iGPU - iMac14,1 Haswell with dGPU - iMac14,2 Haswell Refresh - iMac15,1
 
