@@ -6,7 +6,7 @@ OpenCore is an alternative to Clover. By design, OpenCore is versatile by being 
 
 ## Current issues with OpenCore
 
-* Order of kexts matter: Make sure to have kexts like Lilu and VoodooPS2Controller to be injected first beofre kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad and etc
+* Order of kexts matter: Make sure to have kexts like Lilu and VoodooPS2Controller to be injected first before kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad and etc
 * Z97 based systems require pure UEFI mode for booting \(also known as Windows 8/10 mode\).
 * NVMe issues if setup as a SATA device in BIOS.
 * Sometimes can't access other partitions on the drive, solution is to "bless" the drive with Startup Disk
