@@ -95,8 +95,8 @@ Layout=5 would be interprected as `05000000`
 * **CustomSMBIOSGuid**: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
 * **DisableIOMapper**: NO \(Needed to get around VT-D if unable to disable in BIOS, can interfere with Firmware so avoid when possible\)
 * **ExternalDiskIcons**: YES \(External Icons Patch, for when internal drives are treated as external drives\)
-* **LapicKernelPanic**: NO \(Disables kernel panic on AP core lapic interrupt\)
-* **PanicNoKextDump**: YES \(Allows for reading kernel panics logs when kernel panics occurs, gerneally needed for HP systems\)
+* **LapicKernelPanic**: NO \(Disables kernel panic on AP core lapic interrupt, gerneally needed for HP systems\)
+* **PanicNoKextDump**: YES \(Allows for reading kernel panics logs when kernel panics occurs\)
 * **ThirdPartyTrim**: NO \(Enables TRIM, not needed for AHCI or NVMe SSDs\)
 * **XhciPortLimit**: YES \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map\)
 
