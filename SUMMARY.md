@@ -10,5 +10,8 @@
 * [Skylake](config.plist/skylake.md)
 * [Kaby Lake](config.plist/kaby-lake.md)
 * [Coffee Lake](config.plist/coffee-lake.md)
-* [Credit](Credit.md)
+
+## Misc
+
+* [Credit](misc/credit.md)
 

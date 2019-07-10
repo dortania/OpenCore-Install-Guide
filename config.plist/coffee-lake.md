@@ -10,7 +10,7 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](Disable Unsupported GPUs) and such
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/5158d240ad8586860ce75d8e06d9badf9c3aa16c/config.plist/Disable%20Unsupported%20GPUs/README.md) and such
 
 **Block**
 
