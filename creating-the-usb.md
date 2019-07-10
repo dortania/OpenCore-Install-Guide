@@ -1,4 +1,17 @@
-# Creating the USB
+## Setting up OpenCore
+
+Requirements:
+
+* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) \(Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing we're on Version 0.0.4 even though the current official release is 0.0.3\)
+* [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
+* [AptioFixPkg](https://github.com/acidanthera/AptioFixPkg/releases)
+* [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting. Clover Configurator works just as well
+* Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool, but vit9696 has stated multiple times he does not support these tools and they even break OpenCore's specifications. Use at own risk!\)
+* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily OC comes with a tool called CleanNvram.efi that can called from the shell\)
+* USB formatted as MacOS Journaled with GUID partition map.
+* Knowledge of how a hackintosh works and what files yours requires.
+* A working Hackintosh to test on.
+* You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI.
 
 ## Creating the USB
 
