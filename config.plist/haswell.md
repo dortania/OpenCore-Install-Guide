@@ -59,7 +59,7 @@ The two ig-platform-id's we use are as follows:
 * `0x04120004` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
   * `04001204` when hex-swapped
 
-I added another screenshot as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
+I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
 
 For this - we follow a similar procedure as our above ig-platform-id hex swapping - but this time, we only work with the first two pairs of hex bytes. If we think of our device id as `0xAABB0000`, our swapped version would look like `0xBBAA0000`. We don't do anything with the last 2 pairs of hex bytes.
 
