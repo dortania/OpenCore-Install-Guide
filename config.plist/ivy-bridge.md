@@ -121,7 +121,7 @@ Layout=5 would be interprected as `05000000`
 
 ## NVRAM
 
-![NVRAM](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/NVRAM-IvyBridge.png)
+![NVRAM](https://i.imgur.com/uyLE6Cx.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
