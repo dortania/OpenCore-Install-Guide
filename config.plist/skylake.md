@@ -235,3 +235,6 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **RequestBootVarRouting**: Redirects AptioMemeoryFix from EFI\_GLOBAL\_VARIABLE\_G to OC\_VENDOR\_VARIABLE\_GUID. Needed for when firmware tries to delete boot entries
 * **SanitiseClearScreen**: Fixes High resolutions displays that display OpenCore in 1024x768
 
+# Cleaning up
+
+And now you're ready to save and place it into your EFI. For those who want a reference while editing theirs can find the sample config [here](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/OpenCore%20Sample%20Configs/Skylake/Skylake.plist)(don't forget to rename it to config.plist)
