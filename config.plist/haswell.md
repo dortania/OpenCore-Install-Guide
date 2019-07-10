@@ -95,8 +95,8 @@ Layout=5 would be interprected as `05000000`
 
 **Quirks**:
 
-* **AppleCpuPmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS\)
-* **AppleXcpmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS\)
+* **AppleCpuPmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOSClover counter part would be AppleICPUPM\)
+* **AppleXcpmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counter part would be KernelPM\)
 * **AppleXcpmExtraMsrs**: NO \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
 * **CustomSMBIOSGuid**: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
 * **DisableIOMapper**: NO \(Needed to get around VT-D if unable to disable in BIOS, can interfere with Firmware so avoid when possible\)
