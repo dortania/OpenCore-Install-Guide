@@ -47,7 +47,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 ## DeviceProperties
 
-![DeviceProperties](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/IvyBridge/Images/DeviceProperties-IvyBridge.png)
+![DeviceProperties](https://i.imgur.com/1zeSpCe.png)
 
 **Add**: Sets device properties from a map.
 
@@ -124,7 +124,7 @@ Layout=5 would be interprected as `05000000`
 
 ## NVRAM
 
-![NVRAM](https://i.imgur.com/uyLE6Cx.png)
+![NVRAM](https://i.imgur.com/chjDNqi.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
@@ -135,15 +135,16 @@ Layout=5 would be interprected as `05000000`
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
 * **boot-args**:
-  * -v - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-  * dart=0 - this is just an extra layer of protection against Vt-d issues.
+  * `-v` - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
+  * `dart=0` - this is just an extra layer of protection against Vt-d issues.
 
-    debug=0x100 - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
+  * `debug=0x100` - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
-  * keepsyms=1 - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
+  * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
+  * `shikigva=40` - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
+  * `-xcpm` - attempts to force Ivy CPUs to use XnuCPUPowerManagement
 * **csr-active-config**: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
