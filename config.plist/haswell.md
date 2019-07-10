@@ -6,7 +6,7 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/OLC4A4F.png)
+![ACPI](https://i.imgur.com/2c4EEiO.png)
 
 **Add:**
 
@@ -44,7 +44,7 @@ This section allows us to dynamically rename parts of the DSDT via OpenCore. Sin
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/qa5imft.png)
+![DeviceProperties](https://i.imgur.com/vgLIhOo.png)
 
 **Add**: Sets device properties from a map.
 
@@ -80,7 +80,7 @@ Layout=5 would be interprected as `05000000`
 
 ## Kernel
 
-![Kernel](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/Kernel-Haswell.png)
+![Kernel](https://i.imgur.com/2DkdqCv.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
 
@@ -108,7 +108,7 @@ Layout=5 would be interprected as `05000000`
 
 ## Misc
 
-![Misc](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/Misc-Haswell.png)
+![Misc](https://i.imgur.com/hotfQPP.png)
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
@@ -130,7 +130,7 @@ Layout=5 would be interprected as `05000000`
 
 ## NVRAM
 
-![NVRAM](https://i.imgur.com/uyLE6Cx.png)
+![NVRAM](https://i.imgur.com/gwsqXCG.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
@@ -141,13 +141,13 @@ Layout=5 would be interprected as `05000000`
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
 * **boot-args**:
-  * -v - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-  * dart=0 - this is just an extra layer of protection against Vt-d issues.
+  * `-v` - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
+  * `dart=0` - this is just an extra layer of protection against Vt-d issues.
 
-    debug=0x100 - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
+  * `debug=0x100` - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
-  * keepsyms=1 - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * shikigva=40 - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
+  * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
+  * `shikigva=40` - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
 * **csr-active-config**: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
@@ -168,9 +168,9 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ## Platforminfo
 
-![PlatformInfo](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/PlatformInfo-Haswell.png)
+![PlatformInfo](https://i.imgur.com/XlxjsAd.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. CorpNewt wrote a [_python script_](https://github.com/corpnewt/GenSMBIOS) that can leverage it as well \(and auto-saves to the config.plist when selected\)
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application
 
 For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
 
@@ -221,7 +221,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Configs/Haswell/Images/UEFI-Haswell.png)
+![UEFI](https://i.imgur.com/3Cx8kdu.png)
 
 **ConnectDrivers**: YES \(Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load\)
 
