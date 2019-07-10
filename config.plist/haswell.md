@@ -70,6 +70,8 @@ The device-id fake is setup like so:
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
+Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [GFXutil](https://github.com/acidanthera/gfxutil/releases)
+
 Layout=5 would be interprected as `05000000`
 
 **Block**: Removes device properties from map, for us we can ignore this
