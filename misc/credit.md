@@ -8,6 +8,8 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [icedterminal](https://github.com/icedterminal)
   * Heavy grammar correction
   * Clover removal
+* [S2F0amEgS2xvdmVy](https://github.com/khronokernel/Getting-Started-With-OpenCore/issues?q=is%3Apr+author%3AS2F0amEgS2xvdmVy)
+   * Link correction
 * [CorpNewt](https://github.com/corpnewt)
   * Heavily inspiring this guide\(if not a rip off\)
 * [Midi](https://github.com/midi1996)
