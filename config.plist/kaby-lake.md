@@ -229,5 +229,5 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 # Cleaning up
 
-And now you're ready to save and place it into your EFI. For those who want a reference while editing theirs can find the sample config [here](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/OpenCore%20Sample%20Configs/KabyLake/KabyLake.plist)(don't forget to rename it to config.plist)
+And now you're ready to save and place it into your EFI
 
