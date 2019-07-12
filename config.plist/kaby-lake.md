@@ -8,6 +8,8 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 
 ![ACPI](https://i.imgur.com/KJoHIpl.png)
 
+Image above is incorrect, please read below for more info
+
 **Add:**
 
 This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such
@@ -18,21 +20,9 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically rename parts of the DSDT via OpenCore. Since we're not running a real mac, and macOS is pretty particular with how things are named, we can make non-destructive changes to keep things mac-friendly. We have three entries here:
+This section allows us to dynamically rename parts of the DSDT via OpenCore. Since we're not running a real mac, and macOS is pretty particular with how things are named but the maojority of the time these patches are only cosmetic and can be more damadging that useful. For those who need DSDT patches for things like EHCI controllers can utilize the [SSDT-EHCx_ODD.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) or use similar Device Property patching like what's seen with Framebuffer patching
 
-* _change XHCI to XHC_ - helps avoid a conflict with built-in USB injectors
-* _change XHC1 to XHC_ - helps avoid a conflict with built-in USB injectors
-* _change SAT0 to SATA_ - for potential SATA compatibility
-
-​
-
-| Name | Find | Replace |
-| :--- | :--- | :--- |
-| change XHCI to XHC | 58484349 | 5848435f |
-| change XHC1 to XHC | 58484331 | 5848435f |
-| change SAT0 to SATA | 53415430 | 53415441 |
-
-​
+And to grab the location of such devices can use [GFXutil](https://github.com/acidanthera/gfxutil/releases)
 
 **Quirk**: Settings for ACPI.
 
@@ -87,16 +77,17 @@ Layout=5 would be interprected as `05000000`
 
 **Quirks**:
 
-* **AppleCpuPmCfgLock**: \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counter part would be AppleICPUPM\)
-* **AppleXcpmCfgLock**: \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counter part would be KernelPM\)
-* **AppleXcpmExtraMsrs**: \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
-* **CustomSMBIOSGuid**: \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
-* **DisableIOMapper**: \(Needed to get around VT-D if unable to disable in BIOS, can interfere with Firmware so avoid when possible\)
-* **ExternalDiskIcons**: \(External Icons Patch, for when internal drives are treated as external drives\)
-* **LapicKernelPanic**: \(Disables kernel panic on AP core lapic interrupt, gerneally needed for HP systems\)
-* **PanicNoKextDump**: \(Allows for reading kernel panics logs when kernel panics occurs\)
-* **ThirdPartyTrim**: \(Enables TRIM, not needed for AHCI or NVMe SSDs\)
-* **XhciPortLimit**: \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map\)
+* **AppleCpuPmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counter part would be AppleICPUPM\)
+* **AppleXcpmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counter part would be KernelPM\)
+* **AppleXcpmExtraMsrs**: NO \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
+* **CustomSMBIOSGuid**: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
+* **DisableIOMapper**: YES \(Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems\)
+* **ExternalDiskIcons**: YES \(External Icons Patch, for when internal drives are treated as external drives\)
+* **LapicKernelPanic**: NO \(Disables kernel panic on AP core lapic interrupt, gerneally needed for HP systems\)
+* **PanicNoKextDump**: YES \(Allows for reading kernel panics logs when kernel panics occurs\)
+* **ThirdPartyTrim**: NO \(Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM\)
+* **XhciPortLimit**: YES \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map\)
+
 
 ## Misc
 
@@ -105,7 +96,7 @@ Layout=5 would be interprected as `05000000`
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
 * **Timeout**: This sets how long OpenCore will wait until it automatically boots from the default selection
-* **ShowPicker**: Needed for seeing your availble drives
+* **ShowPicker**: Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
 * **UsePicker**: Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
@@ -116,7 +107,7 @@ Layout=5 would be interprected as `05000000`
 
 * **RequireSignature**: We won't be dealing vault.plist so we can ignore
 * **RequireVault**: We won't be dealing vault.plist so we can ignore as well
-* **ScanPolicy**: This allow you to see all drives available, please refer to OpenCore's DOC for furthur info on setting up ScanPolicy
+* **ScanPolicy**: `0` allows you to see all drives available, please refer to OpenCore's DOC for furthur info on setting up ScanPolicy(dedicated chapter to come)
 
 **Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
 
@@ -134,8 +125,7 @@ Layout=5 would be interprected as `05000000`
 
 * **boot-args**:
   * `-v` - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-  * `dart=0` - this is just an extra layer of protection against Vt-d issues.
-
+  * `dart=0` - this is just an extra layer of protection against Vt-d issues, keep in mind this requires SIP to be disabled
   * `debug=0x100` - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
   * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
@@ -152,7 +142,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 * **nvda\_drv**: &lt;&gt; \(For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)\)
 * **prev-lang:kbd**: &lt;&gt; \(Needed for non-latin keyboards\)
 
-**Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases
+**Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases. Note that `Add` will not overwrite values already present in NVRAM
 
 **LegacyEnable** Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
 
@@ -204,11 +194,11 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Automatic**: YES \(Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections\)
 
-**UpdateDataHub**: Update Data Hub fields when newer versions are available from OpenCore
+**UpdateDataHub**: Update Data Hub fields
 
-**UpdateNVRAM**: Update NVRAM fields when newer versions are available from OpenCore
+**UpdateNVRAM**: Update NVRAM fields
 
-**UpdateSMBIOS**: Updates SMBIOS fields when newer versions are available from OpenCore
+**UpdateSMBIOS**: Updates SMBIOS fields
 
 **UpdateSMBIOSMode**: Create \(Replace the tables with newly allocated EfiReservedMemoryType\)
 
@@ -216,14 +206,14 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ![UEFI](https://i.imgur.com/UNkZpiy.png)
 
-**ConnectDrivers**: YES \(Forces .efi drivers, change to NO for faster boot times but cerain file system drivers may not load\)
+**ConnectDrivers**: YES \(Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This is slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.\)
 
 **Drivers**: Add your .efi drivers here
 
 **Protocols**:
 
 * **AppleBootPolicy**: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
-* **ConsoleControl**: Replaces Console Control protocol with a builtin version, needed for when firmware doesn’t support text output mode
+* **ConsoleControl**: Replaces Console Control protocol with a builtin version,  set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmwares
 * **DataHub**: Reinstalls Data Hub
 * **DeviceProperties**: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 
@@ -234,8 +224,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **IgnoreTextInGraphics**: Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
 * **ProvideConsoleGop**:Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
 * **ReleaseUsbOwnership**: Releases USB controller from firmware driver, avoid unless you know what you're doing
-* **RequestBootVarRouting**: Redirects AptioMemeoryFix from EFI\_GLOBAL\_VARIABLE\_G to OC\_VENDOR\_VARIABLE\_GUID. Needed for when firmware tries to delete boot entries
-* **SanitiseClearScreen**: Fixes High resolutions displays that display OpenCore in 1024x768
+* **RequestBootVarRouting**: Redirects AptioMemeoryFix from EFI\_GLOBAL\_VARIABLE\_G to OC\_VENDOR\_VARIABLE\_GUID. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+* **SanitiseClearScreen**: Fixes High resolutions displays that display OpenCore in 1024x768, required for select AMD GPUs on Z370
 
 # Cleaning up
 
