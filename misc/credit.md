@@ -5,6 +5,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [vit9696](https://github.com/vit9696)
   * One of many developers of OpenCore
   * Corrections to the original guide
+  * Corrections to this guide...(seriously this man deserves a medal)
 * [icedterminal](https://github.com/icedterminal)
   * Heavy grammar correction
   * Clover removal
@@ -14,6 +15,8 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Heavily inspiring this guide\(if not a rip off\)
 * [Midi](https://github.com/midi1996)
   * Corrections and recommendations for the guide
+* [Andrey1970](https://www.insanelymac.com/forum/profile/1202492-andrey1970/)
+  * Corrections on EHCI
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
 
