@@ -130,7 +130,7 @@ Layout=5 would be interprected as `05000000`
   * `shikigva=40` - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
-  * ~`-xcpm` - attempts to force Ivy CPUs to use XnuCPUPowerManagement~ Required for systems running 10.11 or older  
+  * ~~`-xcpm` - attempts to force Ivy CPUs to use XnuCPUPowerManagement~~ Required for systems running 10.11 or older  
 * **csr-active-config**: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
