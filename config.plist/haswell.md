@@ -6,9 +6,9 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/2c4EEiO.png)
+![ACPI](https://i.imgur.com/ByHZn1D.png)
 
-Image above is incorrect, please read below for more info
+The above ACPI patch is only an example, please read below for more info
 
 **Add:**
 
