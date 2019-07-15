@@ -15,7 +15,7 @@ Requirements:
 
 ## Creating the USB
 
-Creating the USB is simple. All you need to do is format it as macOS Journaled with GUID partition map. There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB.
+Creating the USB is simple. All you need to do is format it as macOS Journaled with GUID partition map(HFS+ macOS Journaled). There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB.
 
 ![Formatting the USB](https://i.imgur.com/5uTJbgI.png)
 
