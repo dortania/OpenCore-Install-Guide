@@ -5,7 +5,7 @@ Requirements:
 * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) \(Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing we're on Version 0.0.4 even though the current official release is 0.0.3\)
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
 * [AptioFixPkg](https://github.com/acidanthera/AptioFixPkg/releases)
-* [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting. Clover Configurator works just as well
+* [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting(terminal command example ca be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/))
 * [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool, but vit9696 has stated multiple times he does not support these tools and they even break OpenCore's specifications. Use at own risk!\)
 * Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily OC comes with a tool called CleanNvram.efi that can called from the shell\)
 * USB formatted as MacOS Journaled with GUID partition map.
@@ -15,7 +15,7 @@ Requirements:
 
 ## Creating the USB
 
-Creating the USB is simple. All you need to do is format it as MacOS Journaled with GUID partition map. There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB.
+Creating the USB is simple. All you need to do is format it as macOS Journaled with GUID partition map. There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB.
 
 ![Formatting the USB](https://i.imgur.com/5uTJbgI.png)
 
@@ -37,5 +37,5 @@ Now you can place your necessary .efi drivers from AppleSupportPkg and AptioFixP
 
 Here's what mine looks like\(For the majority of users you can ignore TOOLS but it can be useful like of for clearing NVRAM and other such things\):
 
-![Populated EFI folder](https://i.imgur.com/ymeHycR.png)
+![Populated EFI folder](https://i.imgur.com/3BqRyI5.png)
 
