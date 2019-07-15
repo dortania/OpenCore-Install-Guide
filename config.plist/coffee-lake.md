@@ -2,7 +2,7 @@
 
 ## Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next open up your favorite XML editior like Xcode and we can get to work
+You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work
 
 ## ACPI
 
@@ -20,7 +20,7 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases you need to do nothing here. For those who need DSDT patches for things like EHCI controllers can utilize the [SSDT-EHCx_ODD.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) or use similar Device Property patching like what's seen with Framebuffer patching
+This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like EHCI controllers can utilize the [SSDT-EHCx_ODD.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) or use similar Device Property patching like what's seen with Framebuffer patching
 
 And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases)
 
@@ -29,7 +29,7 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 * **FadtEnableReset**: Enable reboot and shutdown on legacy hardware, not recommended unless needed
 * **NormalizeHeaders**: Cleanup ACPI header fields, only relevant for macOS High Sierra 10.13
 * **RebaseRegions**: Attempt to heuristically relocate ACPI memory regions, not needed unless custom DSDT is used.
-* **ResetHwSig**: Needed for hardware that fail fail to maintain hardware signature across the reboots and cause issues with waking from hibernation
+* **ResetHwSig**: Needed for hardware that fails fail to maintain hardware signature across the reboots and cause issues with waking from hibernation
 * **ResetLogoStatus**: Workaround for OEM Windows logo not drawing on systems with BGRT tables.
 
 ​
@@ -40,7 +40,7 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 
 **Add**: Sets device properties from a map.
 
-This section is setup via Headkaze's [_Intel Framebuffer Patching Guide_](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and applies only one actual property to begin, which is the _ig-platform-id_. The way we get the proper value for this is to look at the ig-platform-id we intend to use, then swap the pairs of hex bytes.
+This section is set up via Headkaze's [_Intel Framebuffer Patching Guide_](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and applies only one actual property to begin, which is the _ig-platform-id_. The way we get the proper value for this is to look at the ig-platform-id we intend to use, then swap the pairs of hex bytes.
 
 If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like `DDCCBBAA`
 
@@ -48,18 +48,18 @@ The two ig-platform-id's we use are as follows:
 
 * `0x3E9B0007` - this is used when the iGPU is used to drive a display
   * `07009B3E` when hex-swapped
-* `0x3E920003` - this is used when the iGPU is only used for compute tasks, and doesn't drive a display
+* `0x3E920003` - this is used when the iGPU is only used for compute tasks and doesn't drive a display
   * `0300923E` when hex-swapped
 
 Worth noting that for 10.12 -&gt; 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up.
 
 We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS.
 
-I added another section as well that shows a fake `device-id` for the i3-8100's UHD 630. This has a different device id than the UHD 630 found on the 8700k, for instance \(`3e918086` vs `3e928086` \).
+I added another section as well that shows a fake `device-id` for the i3-8100's UHD 630. This has a different device id than the UHD 630 found on the 8700k, for instance, \(`3e918086` vs `3e928086` \).
 
 For this - we follow a similar procedure as our above ig-platform-id hex swapping - but this time, we only work with the first two pairs of hex bytes. If we think of our device id as 0xAABB0000, our swapped version would look like 0xBBAA0000. We don't do anything with the last 2 pairs of hex bytes.
 
-The device-id fake is setup like so:
+The device-id fake is set up like so:
 
 * `0x3e920000` - this is the device id for the UHD 630 found on an 8700k
   * `923e0000` when hex swapped
@@ -72,7 +72,7 @@ Note: FakeID is only required for High Sierra, Mojave doesn't require this
 
 Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [GFXutil](https://github.com/acidanthera/gfxutil/releases)
 
-Layout=5 would be interprected as `05000000`
+Layout=5 would be interpreted as `05000000`
 
 **Block**: Removes device properties from map, for us we can ignore this
 
@@ -80,7 +80,7 @@ Layout=5 would be interprected as `05000000`
 
 ![Kernel](https://i.imgur.com/ACr6owo.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as, VirtualSMC, AppleALC, WhateverGreen, etc.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
 
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
@@ -89,20 +89,22 @@ Layout=5 would be interprected as `05000000`
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
-**Patch**: Patches kexts \(this is where you would add USB port limit patches and AMD CPU patches\).
+**Patch**: Patches kexts \(this is where you would add newer USB port limit patches and AMD CPU patches. Do note that the XhciPortLimit quirk is preferred for USB port limit patches\).
 
 **Quirks**:
 
-* **AppleCpuPmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counter part would be AppleICPUPM\)
-* **AppleXcpmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counter part would be KernelPM\)
+* **AppleCpuPmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM\)
+* **AppleXcpmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM\)
 * **AppleXcpmExtraMsrs**: NO \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
 * **CustomSMBIOSGuid**: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
 * **DisableIOMapper**: YES \(Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems\)
 * **ExternalDiskIcons**: YES \(External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.\)
-* **LapicKernelPanic**: NO \(Disables kernel panic on AP core lapic interrupt, gerneally needed for HP systems\)
+* **LapicKernelPanic**: NO \(Disables kernel panic on AP core lapic interrupt, generally needed for HP systems\)
 * **PanicNoKextDump**: YES \(Allows for reading kernel panics logs when kernel panics occurs\)
 * **ThirdPartyTrim**: NO \(Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM\)
-* **XhciPortLimit**: YES \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible. Its a temporary solution for those who have yet to create a USB map\)
+* **XhciPortLimit**: YES \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible as.)
+
+The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
 
 ## Misc
@@ -123,7 +125,7 @@ Layout=5 would be interprected as `05000000`
 
 * **RequireSignature**: We won't be dealing vault.plist so we can ignore
 * **RequireVault**: We won't be dealing vault.plist so we can ignore as well
-* **ScanPolicy**: `0` allows you to see all drives available, please refer to OpenCore's DOC for furthur info on setting up ScanPolicy(dedicated chapter to come)
+* **ScanPolicy**: `0` allows you to see all drives available, please refer to OpenCore's DOC for further info on setting up ScanPolicy(dedicated chapter to come)
 
 **Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
 
@@ -148,7 +150,7 @@ Layout=5 would be interprected as `05000000`
   * `shikigva=40` - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id.
-* **csr-active-config**: Settings for SIP, generally recommeded to manully change this within Recovery partition with `csrutil` via the recovery partition
+* **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
@@ -233,16 +235,16 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 **Protocols**:
 
 * **AppleBootPolicy**: Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
-* **ConsoleControl**: Replaces Console Control protocol with a builtin version,  set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmwares
+* **ConsoleControl**: Replaces Console Control protocol with a builtin version,  set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
 * **DataHub**: Reinstalls Data Hub
 * **DeviceProperties**: Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 
 **Quirks**:
 
-* **ExitBootServicesDelay**: Only required for very specifc use cases like setting to `5` for ASUS Z87-Pro running FileVault2
+* **ExitBootServicesDelay**: Only required for very specific use cases like setting to `5` for ASUS Z87-Pro running FileVault2
 * **IgnoreInvalidFlexRatio**: Fix for when MSR\_FLEX\_RATIO \(0x194\) can't be disabled in the BIOS, required for all pre-skylake based systems
 * **IgnoreTextInGraphics**: Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
-* **ProvideConsoleGop**:Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
+* **ProvideConsoleGop**: Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
 * **ReleaseUsbOwnership**: Releases USB controller from firmware driver, avoid unless you know what you're doing
 * **RequestBootVarRouting**: Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **SanitiseClearScreen**: Fixes High resolutions displays that display OpenCore in 1024x768, required for select AMD GPUs on Z370
