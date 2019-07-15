@@ -19,6 +19,13 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Corrections on EHCI
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
+  
+Developers of OpenCore:
+
+* [Download-Fritz](https://github.com/Download-Fritz)
+* [Goldfish64](https://github.com/Goldfish64)
+* [savvamitrofanov](https://github.com/savvamitrofanov)
+* [vit9696](https://github.com/vit9696)
 
 Guides linked or those that inspired this guide:
 
