@@ -1,5 +1,3 @@
-# Ivy Bridge
-
 ## Starting Point
 
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work
