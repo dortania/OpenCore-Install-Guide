@@ -17,6 +17,6 @@ So to make a nvram.plist you'll need 2 things in your config.plist:
 * `LegacyEnable`: set to `YES`
 * `LegacySchema`: NVRAM variables set(OpenCore compares these to the variables present in nvram.plist)
 
-Once you have those set, make sure to compile the latest version of OpenCore and you'll want to run the `LogoutHook.command`. This will create a new folder named `dumps` where you'll find a file named nvram.plist. Place this on the root of your EFI and you'll have emulated NVRAM
+Once you have those set, make sure to compile the latest version of OpenCore and you'll want to run the `LogoutHook.command` found in OpenCore[insert version number]/Utilities/LogoutHook. This will create a new folder named `dumps` where you'll find a file named nvram.plist. Place this on the root of your EFI and you'll have emulated NVRAM
 
 ![Emulated NVRAM](https://i.imgur.com/MOQh6ak.png)
