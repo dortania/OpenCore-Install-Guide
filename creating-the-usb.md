@@ -31,7 +31,7 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 To setup OpenCore’s folder structure, you’ll want to grab those files from OpenCorePkg and construct your EFI to look like the one below:
 
-![base EFI folder](https://i.imgur.com/YvRWHgI.png)
+![base EFI folder](https://i.imgur.com/tzQEfuv.png)
 
 Now you can place your necessary .efi drivers from AppleSupportPkg and AptioFixPkg into the _drivers_ folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(ie: EmuVariableUEFI)
 
