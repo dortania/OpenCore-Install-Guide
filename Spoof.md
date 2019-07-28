@@ -1,4 +1,4 @@
-So ou need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifcally that we need to specify to which exact device we want to spoof. There's 2 ways we can do this:
+So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifcally that we need to specify to which exact device we want to spoof. There's 2 ways we can do this:
 * Spoofing via DeviceProperties
 * Spoofing via SSDT
 
