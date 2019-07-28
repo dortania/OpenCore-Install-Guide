@@ -4,8 +4,24 @@ So ou need to hide your unsupported GPU? Well with OpenCore things are slightly 
 
 # DevicePropeties Method
 
-Here is quite simple, find the PCI route with [gfxutil]() and then create a new DeviceProperties section with your spoof:
+Here is quite simple, find the PCI route with [gfxutil](https://github.com/acidanthera/gfxutil/releases) and then create a new DeviceProperties section with your spoof:
+```
+/Users/(YourUsername)/Downloads/(gfxdownload folder)/gfxutil -f GFX0
+```
+And the output will result in something similar:
 
+```
+DevicePath = PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
+```
+With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI route with the following properties:
+
+|Key|Type|Value|
+|:-|:-|:-|
+|name|data|23646973706C6179|
+|IONAME|string|\#display|
+|class-code|data|FFFFFFFF|
+
+![](https://i.imgur.com/ctw6W4b.png)
 
 
 
