@@ -14,6 +14,7 @@
 ## Post Install
 
 * [Emulated NVRAM](nvram.md)
+* [GPU Spoof](Spoof.md)
 
 ## Misc
 
