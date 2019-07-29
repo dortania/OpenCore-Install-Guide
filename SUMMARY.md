@@ -16,6 +16,10 @@
 * [Emulated NVRAM](nvram.md)
 * [GPU Spoof](Spoof.md)
 
+## Extras
+
+* [AMD Kernel Patches](AMDCPU.md)
+
 ## Misc
 
 * [Credit](misc/credit.md)
