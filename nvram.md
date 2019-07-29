@@ -25,4 +25,4 @@ Open up terminal and run the following:
 
 ```sudo defaults write com.apple.loginwindow LogoutHook /Users/(your username)/LogoutHook/LogoutHook.command```
 
-And voila! You have emulated NVRAM, do keep in mind this requires macOS to support the ```X``` flag for this to work correctly which is unavailable on 10.12 and below. nvram.mojave fixes this by invoking it instead of the system one 
+And voila! You have emulated NVRAM, do keep in mind this requires macOS to support the ```-x``` flag for this to work correctly which is unavailable on 10.12 and below. nvram.mojave fixes this by invoking it instead of the system one 
