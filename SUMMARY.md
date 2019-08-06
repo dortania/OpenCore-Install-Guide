@@ -19,6 +19,7 @@
 ## Extras
 
 * [AMD Kernel Patches](AMDCPU.md)
+* [Hiding Verbose](Verbose.md)
 
 ## Misc
 
