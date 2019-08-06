@@ -12,10 +12,16 @@ So this section is for those who don't have native NVRAM, the most common hardwa
 
 # Making nvram.plist
 
-So to make a nvram.plist you'll need 2 things in your config.plist:
+So to make a nvram.plist you'll need 3 things set:
+
+Within your config.plist:
 
 * `LegacyEnable`: set to `YES`
 * `LegacySchema`: NVRAM variables set(OpenCore compares these to the variables present in nvram.plist)
+
+And within your EFI:
+
+* `FwRuntimeServices.efi` driver(this is needed for proper sleep, shutdown and other services to work correctly
 
 Now grab the 'LogoutHook.command' and place it somewhere safe like within your user directory:
 
