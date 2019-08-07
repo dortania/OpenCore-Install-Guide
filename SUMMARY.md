@@ -15,6 +15,7 @@
 
 * [Emulated NVRAM](nvram.md)
 * [GPU Spoof](Spoof.md)
+* [Security](Security.md)
 
 ## Extras
 
