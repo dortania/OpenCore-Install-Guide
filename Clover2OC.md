@@ -1,8 +1,5 @@
 # Converting common properties from Clover to Opencore's Config.plist
 
-# Disabling GPUs
-
-If you disabled your GPU using the AddProperties method found in [Disable Unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/), you may be wondering how to convert them. Well it's actually quite simple and is quite similar to framebuffer patching:
 
 # Inject AMD
 
@@ -160,3 +157,12 @@ What this does is apply ```sudo nvram nvda_drv=1``` on every boot. To get a simi
 
 ```NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> nvda_drv: <31>```
 
+# Booter
+
+* DiscardAppleS4Map
+* EnableAppleSmSlide
+* ForceExitBootServices
+* ProtectCsmRegion
+* SetupAppleMap: YES
+* SetupAppleSlide: YES
+* ShrinkMemoryMap
