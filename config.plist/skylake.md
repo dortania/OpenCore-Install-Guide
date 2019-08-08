@@ -97,8 +97,10 @@ Layout=5 would be interpreted as `05000000`
 
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
-* CpuidMask: When set to Zero, the original CPU bit will be used
-* CpuidData: The value for the CPU spoofing, don't forget to swap hex
+* CpuidMask: When set to Zero, original CPU bit will be used
+`<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+* CpuidData: The value for the CPU spoofing
+`FF FF FF FF | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
