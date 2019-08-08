@@ -31,7 +31,36 @@ For those who utilize [300 series RTC patch](https://www.hackintosh-forum.de/for
 * **ResetHwSig**: Needed for hardware that fails fail to maintain hardware signature across the reboots and cause issues with waking from hibernation
 * **ResetLogoStatus**: Workaround for OEM Windows logo not drawing on systems with BGRT tables.
 
-​
+
+## Booter
+
+![Booter](https://i.imgur.com/IRSYAtQ.png)
+
+This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
+
+**Quirks**:
+
+* **AvoidRuntimeDefrag**: YES (Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+
+* **DisableVariableWrite**: NO (Needed for when the system fails to write to NVRAM which can break the rest of the system)
+
+* **DiscardHibernateMap**: NO (Reuse original hibernate memory map, only needed for certain legacy hardware) 
+
+* **EnableSafeModeSlide**: YES (Allows for slide values to be used in Safemode)
+
+* **EnableWriteUnprotector**: YES (Removes write protection from CR0 register during their execution) 
+
+* **ForceExitBootServices**: NO (Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary) 
+
+* **ProtectCsmRegion**: NO (Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary)
+
+* **ProvideCustomSlide**: YES (If there's a conflicting slide value, this option forces macOS to
+use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+
+* **SetupVirtualMap**: YES (Fixes SetVirtualAddresses calls to virtual addresses)
+
+* **ShrinkMemoryMap**: NO (Needed for systems with large memory maps that don't fit, don't use unless necessary)
+
 
 ## DeviceProperties
 
