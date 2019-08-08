@@ -42,7 +42,7 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 
 * **AvoidRuntimeDefrag**: YES (Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 
-* **DisableVariableWrite**: YES (Needed for systems with non-functioning NVRAM)
+* **DisableVariableWrite**: NO (Needed for systems with non-functioning NVRAM like Z390 and such)
 
 * **DiscardHibernateMap**: NO (Reuse original hibernate memory map, only needed for certain legacy hardware) 
 
