@@ -38,7 +38,7 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 
 **Quirks**:
 
-* **AvoidRuntimeDefrag**: YES (Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+* **AvoidRuntimeDefrag**: YES (Fixes UEFI runtime services like date, time, NVRAM, power control, etc)
 
 * **DisableVariableWrite**: NO (Needed for systems with non-functioning NVRAM like Z390 and such)
 
@@ -53,7 +53,7 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 * **ProtectCsmRegion**: NO (Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary)
 
 * **ProvideCustomSlide**: YES (If there's a conflicting slide value, this option forces macOS to
-use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message)
 
 * **SetupVirtualMap**: YES (Fixes SetVirtualAddresses calls to virtual addresses)
 
