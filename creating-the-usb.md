@@ -13,7 +13,7 @@ Requirements:
 * You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI.
 
 **Note for legacy users**
-* If you want to use OpenCore on your system, please follow the [Legacy Install](Legacy.md) section first, after you continue following the [Base folder structure section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/creating-the-usb#base-folder-structure)
+* If you want to use OpenCore on your system, please follow the [Legacy Install](Legacy.md) section first, after you continue following the **Base folder structure** section
 ## Creating the USB
 
 Creating the USB is simple. All you need to do is format it as macOS Journaled with GUID partition map(HFS+ macOS Journaled). There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB.
