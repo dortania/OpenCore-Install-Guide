@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [Creating the USB](creating-the-usb.md)
 
+
 ## Config.plist
 
 * [Ivy Bridge](config.plist/ivy-bridge.md)
@@ -19,6 +20,7 @@
 
 ## Extras
 
+* [Legacy Install](Legacy.md)
 * [AMD Kernel Patches](AMDCPU.md)
 * [Hiding Verbose](Verbose.md)
 
