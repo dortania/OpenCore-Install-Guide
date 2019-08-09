@@ -13,7 +13,7 @@ Requirements:
 * You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI.
 
 **Note for legacy users**
-* If you want to use OpenCore on your system, please follow the [Legacay Install](Legacy.md) section first, after you may return here to make your OpenCore folder
+* If you want to use OpenCore on your system, please follow the [Legacy Install](Legacy.md) section first, after you may return here to make your OpenCore folder
 
 ## Creating the USB
 
