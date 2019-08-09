@@ -18,9 +18,9 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like EHCI controllers can utilize the [SSDT-EHCx_ODD.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) or use similar Device Property patching like what's seen with Framebuffer patching
+This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like EHCI controllers can utilize the [SSDT-EHCx_ODD.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) or use similar Device Property patching like what's seen with Framebuffer patching.
 
-And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases)
+And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
 
 **Quirk**: Settings for ACPI.
 
@@ -43,27 +43,36 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 
 **Quirks**:
 
-* **AvoidRuntimeDefrag**: YES (Fixes UEFI runtime services like date, time, NVRAM, power control, etc)
+* **AvoidRuntimeDefrag**: YES 
+   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 
-* **DisableVariableWrite**: NO (Needed for systems with non-functioning NVRAM like Z390 and such)
+* **DisableVariableWrite**: NO 
+   * Needed for systems with non-functioning NVRAM like Z390 and such
 
-* **DiscardHibernateMap**: NO (Reuse original hibernate memory map, only needed for certain legacy hardware) 
+* **DiscardHibernateMap**: NO 
+   * Reuse original hibernate memory map, only needed for certain legacy hardware 
 
-* **EnableSafeModeSlide**: YES (Allows for slide values to be used in Safemode)
+* **EnableSafeModeSlide**: YES 
+   * Allows for slide values to be used in Safemode
 
-* **EnableWriteUnprotector**: YES (Removes write protection from CR0 register during their execution) 
+* **EnableWriteUnprotector**: YES 
+   * Removes write protection from CR0 register during their execution
 
-* **ForceExitBootServices**: NO (Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary) 
+* **ForceExitBootServices**: NO 
+   * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary) 
 
-* **ProtectCsmRegion**: NO (Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary)
+* **ProtectCsmRegion**: NO 
+   * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 
-* **ProvideCustomSlide**: YES (If there's a conflicting slide value, this option forces macOS to
-use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message)
+* **ProvideCustomSlide**: YES
+   * If there's a conflicting slide value, this option forces macOS to
+use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 
-* **SetupVirtualMap**: YES (Fixes SetVirtualAddresses calls to virtual addresses)
+* **SetupVirtualMap**: YES 
+   * Fixes SetVirtualAddresses calls to virtual addresses
 
-* **ShrinkMemoryMap**: NO (Needed for systems with large memory maps that don't fit, don't use unless necessary)
-
+* **ShrinkMemoryMap**: NO 
+   * Needed for systems with large memory maps that don't fit, don't use unless necessary
 
 ## DeviceProperties
 
@@ -120,16 +129,26 @@ Layout=5 would be interpreted as `05000000`
 
 **Quirks**:
 
-* **AppleCpuPmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM\)
-* **AppleXcpmCfgLock**: NO \(Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM\)
-* **AppleXcpmExtraMsrs**: NO \(Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons\)
-* **CustomSMBIOSGuid**: NO \(Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops\)
-* **DisableIOMapper**: YES \(Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems\)
-* **ExternalDiskIcons**: YES \(External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.\)
-* **LapicKernelPanic**: NO \(Disables kernel panic on AP core lapic interrupt, generally needed for HP systems\)
-* **PanicNoKextDump**: YES \(Allows for reading kernel panics logs when kernel panics occurs\)
-* **ThirdPartyTrim**: NO \(Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM\)
-* **XhciPortLimit**: YES \(This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible as.)
+* **AppleCpuPmCfgLock**: NO 
+   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM
+* **AppleXcpmCfgLock**: NO 
+   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
+* **AppleXcpmExtraMsrs**: NO 
+   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
+* **CustomSMBIOSGuid**: NO 
+   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
+* **DisableIOMapper**: YES 
+   * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems
+* **ExternalDiskIcons**: YES 
+   * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
+* **LapicKernelPanic**: NO 
+   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems
+* **PanicNoKextDump**: YES 
+   * Allows for reading kernel panics logs when kernel panics occurs
+* **ThirdPartyTrim**: NO 
+   * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
+* **XhciPortLimit**: YES 
+   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible as.
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
@@ -141,19 +160,25 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
-* **Timeout**: This sets how long OpenCore will wait until it automatically boots from the default selection
-* **ShowPicker**: Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
-* **UsePicker**: Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
+* **Timeout**: `5`
+   * This sets how long OpenCore will wait until it automatically boots from the default selection
+* **ShowPicker**: YES
+   * Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
+* **UsePicker**: YES
+   * Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
-* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting
+* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting)
 
 **Security**: Security is pretty self-explanatory.
 
-* **RequireSignature**: We won't be dealing vault.plist so we can ignore
-* **RequireVault**: We won't be dealing vault.plist so we can ignore as well
-* **ScanPolicy**: `0` allows you to see all drives available, please refer to OpenCore's DOC for further info on setting up ScanPolicy(dedicated chapter to come)
+* **RequireSignature**: NO
+   * We won't be dealing vault.plist so we can ignore
+* **RequireVault**: NO
+   * We won't be dealing vault.plist so we can ignore as well
+* **ScanPolicy**: `0` 
+* `0` allows you to see all drives available, please refer to OpenCore's DOC for further info on setting up ScanPolicy(dedicated chapter to come)
 
 **Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
 
@@ -185,14 +210,18 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 * `00000000` - SIP completely enabled
 * `30000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
-* nvda\_drv: &lt;&gt; \(For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)\)
-* **prev-lang:kbd**: &lt;&gt; \(Needed for non-latin keyboards\)
+* **nvda\_drv**: &lt;&gt; 
+   * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)
+* **prev-lang:kbd**: &lt;&gt; 
+   * Needed for non-latin keyboards
 
 **Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases. Note that `Add` will not overwrite values already present in NVRAM
 
-**LegacyEnable** Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
+**LegacyEnable**: NO
+   * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
 
-**LegacySchema** Used for assigning NVRAM variables, used with LegacyEnable set to YES
+**LegacySchema**
+   * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
 ## Platforminfo
 
