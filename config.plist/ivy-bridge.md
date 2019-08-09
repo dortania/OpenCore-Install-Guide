@@ -141,7 +141,7 @@ Layout=5 would be interpreted as `05000000`
 * **XhciPortLimit**: YES 
    * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible as.
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such.
 
 ## Misc
 
@@ -149,9 +149,12 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 
-* **Timeout**: This sets how long OpenCore will wait until it automatically boots from the default selection
-* **ShowPicker**: Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
-* **UsePicker**: Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
+* **Timeout**: `5`
+   * This sets how long OpenCore will wait until it automatically boots from the default selection
+* **ShowPicker**: YES
+   * Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
+* **UsePicker**: YES
+   * Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
