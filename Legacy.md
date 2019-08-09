@@ -22,6 +22,7 @@ sudo Utilities/BootInstall/BootInstall.command
 This will give you a list of available disks, choose yours and you will be prompted to write a new MBR. Choose yes`[y]` and you'll be finished.
 
 ![Finished Installer](https://i.imgur.com/w3AyfVd.png)
+
 ![Base EFI](https://i.imgur.com/Lhw52gb.png)
 
 This will provide you with an EFI partition with a `boot` file, this is where we'll add our OpenCore EFI. 
