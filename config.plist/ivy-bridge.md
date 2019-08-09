@@ -297,7 +297,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **IgnoreTextInGraphics**: NO
    * Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
 * **ProvideConsoleGop**: YES
-   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, AptioMemoryFix currently offers this but will soon be removed
+   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
 * **ReleaseUsbOwnership**: NO
    * Releases USB controller from firmware driver, avoid unless you know what you're doing
 * **RequestBootVarRouting**: NO
