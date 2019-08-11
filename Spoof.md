@@ -1,6 +1,21 @@
-So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifcally that we need to specify to which exact device we want to spoof. There's 2 ways we can do this:
-* Spoofing via DeviceProperties
-* Spoofing via SSDT
+So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifcally that we need to specify to which exact device we want to spoof. There's 3 ways we can do this:
+
+* Boot Flag
+   * Disables all GPUs except the iGPU
+
+* DeviceProperties
+   * Disables GPU on per-slot basis
+
+* SSDT
+   * Disables GPU on per-slot basis
+
+
+# Boot Flag
+
+By far the simplest way, all you need to do is add the following bootflag:
+
+`-wegnoegpu`
+
 
 # DevicePropeties Method
 
