@@ -1,7 +1,7 @@
 **Work In Progress**
 
 
-So this section is for those who don't have native NVRAM, the most common hardware to not support native NVRAM are the non-Z370 300 series chipsets:
+So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are the non-Z370 300 series chipsets:
 
 * B360
 * B365
@@ -16,8 +16,10 @@ So to make a nvram.plist you'll need 3 things set:
 
 Within your config.plist:
 
+* `DisableVariableWrite`: set to `YES`
 * `LegacyEnable`: set to `YES`
 * `LegacySchema`: NVRAM variables set(OpenCore compares these to the variables present in nvram.plist)
+
 
 And within your EFI:
 
@@ -31,4 +33,4 @@ Open up terminal and run the following:
 
 ```sudo defaults write com.apple.loginwindow LogoutHook /Users/(your username)/LogoutHook/LogoutHook.command```
 
-And voila! You have emulated NVRAM, do keep in mind this requires macOS to support the ```-x``` flag for this to work correctly which is unavailable on 10.12 and below. nvram.mojave fixes this by invoking it instead of the system one 
+And voila! You have emulated NVRAM, do keep in mind this requires macOS to support the ```-x``` flag for this to work correctly which is unavailable on 10.12 and below. `nvram.mojave` fixes this by invoking it instead of the system one 
