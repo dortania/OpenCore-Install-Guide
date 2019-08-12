@@ -17,6 +17,8 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Corrections and recommendations for the guide
 * [Andrey1970](https://www.insanelymac.com/forum/profile/1202492-andrey1970/)
   * Corrections on EHCI
+* [Gengik84](https://github.com/Gengik84)
+   * `-wegnoegpu` suggestion
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
   
