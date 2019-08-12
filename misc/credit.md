@@ -19,6 +19,7 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Corrections on EHCI
 * [Gengik84](https://github.com/Gengik84)
    * `-wegnoegpu` suggestion
+   * Verbose correction
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
   
