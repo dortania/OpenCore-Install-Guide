@@ -1,7 +1,7 @@
 Wanting a more clean booting experience with macOS without all that verbose text while booting? Well you need a couple things:
 
 
-# Recommended Configuration
+# Recommended Configuration:
 
 **UEFI/Protocols**:
 * `ConsoleControl` set to True
