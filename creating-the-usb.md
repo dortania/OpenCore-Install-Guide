@@ -2,7 +2,7 @@
 
 Requirements:
 
-* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) \(Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing we're on Version 0.0.4 even though the current official release is 0.0.3\).
+* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) \(Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing we're on Version `0.5.0` even though the current official release is `0.0.4`\).
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
 * [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting(terminal command example can be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/)).
 * [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool, but vit9696 has stated multiple times he does not support these tools and they even break OpenCore's specifications. Use at own risk!\).
