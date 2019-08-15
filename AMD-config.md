@@ -105,7 +105,7 @@ Layout=5 would be interpreted as `05000000`
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
-**Patch**: Patches kexts \(this is where you would add newer USB port limit patches and AMD CPU patches. Do note that the XhciPortLimit quirk is preferred for USB port limit patches\). Please do note that `MatchOS` from Clover becomes `MatchKernel` in OpenCore, you can find pre-made patches by algrey#9303 [here](https://cdn.discordapp.com/attachments/611462337446281236/611465844945453094/patches.plist)
+**Patch**: Patches kexts \(this is where you would add newer USB port limit patches and AMD CPU patches. Do note that the XhciPortLimit quirk is preferred for USB port limit patches\). Please do note that `MatchOS` from Clover becomes `MatchKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://github.com/AlGreyy)(algrey#9303) [here](https://cdn.discordapp.com/attachments/611462337446281236/611465844945453094/patches.plist)
 
 **Quirks**:
 
