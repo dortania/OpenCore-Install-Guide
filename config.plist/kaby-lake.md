@@ -92,7 +92,7 @@ The two ig-platform-id's we use are as follows:
   * `03001259` when hex-swapped
 
 
-`PciRoot(0x0)/Pci(0x1b,0x0)` -&gt; `Layout-id`
+`PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
