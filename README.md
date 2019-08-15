@@ -12,6 +12,7 @@ And please keep in mind that this guide is more of a jumping-off point, your har
 * Order of kexts matter: Make sure to have kexts like Lilu and VoodooPS2Controller are to be injected first before kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad and etc.
 * Some systems like Z97 require pure UEFI mode for booting \(also known as Windows 8/10 mode\).
 * NVMe issues if setup as a SATA device in BIOS.
+* AptioMemoryFix has been split between OpenCore and FwRuntimeServices.efi, please use them instead.
 
 
 
