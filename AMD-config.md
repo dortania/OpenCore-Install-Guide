@@ -203,7 +203,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ![PlatformInfo](https://i.imgur.com/CrqeCea.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. 
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application. 
 
 For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with _iMac14,2_.
 
