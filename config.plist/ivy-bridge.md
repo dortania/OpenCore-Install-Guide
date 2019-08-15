@@ -217,7 +217,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/5rl12dZ.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. 
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application. 
 
 For this example, we'll choose the _iMac13,2_ SMBIOS.
 
