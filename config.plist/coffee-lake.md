@@ -107,7 +107,7 @@ The device-id fake is set up like so:
 
 Note: FakeID is only required for High Sierra, Mojave doesn't require this
 
-`PciRoot(0x0)/Pci(0x1b,0x0)` -&gt; `Layout-id`
+`PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
