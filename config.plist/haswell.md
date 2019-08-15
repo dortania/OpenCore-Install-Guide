@@ -227,7 +227,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/XlxjsAd.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application
 
 For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
 
