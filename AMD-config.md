@@ -205,13 +205,13 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. 
 
-For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with iMac14,2.
+For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with _iMac14,2_.
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
 
 With our iMacPro1,1 example, we would run macserial like so via the terminal:
 
-`macserial -a | grep -i iMac17,1`
+`macserial -a | grep -i iMacPro1,1`
 
 Which would give us output similar to the following:
 
