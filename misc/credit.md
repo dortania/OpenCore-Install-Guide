@@ -5,12 +5,12 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [vit9696](https://github.com/vit9696)
   * One of many developers of OpenCore
   * Corrections to the original guide
-  * Corrections to this guide...(seriously this man deserves a medal)
+  * Corrections to this guide...\(seriously this man deserves a medal\)
 * [icedterminal](https://github.com/icedterminal)
   * Heavy grammar correction
   * Clover removal
 * [S2F0amEgS2xvdmVy](https://github.com/S2F0amEgS2xvdmVy)
-   * Link correction
+  * Link correction
 * [CorpNewt](https://github.com/corpnewt)
   * Heavily inspiring this guide\(if not a rip off\)
 * [Midi](https://github.com/midi1996)
@@ -18,16 +18,16 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [Andrey1970](https://www.insanelymac.com/forum/profile/1202492-andrey1970/)
   * Corrections on EHCI
 * [Gengik84](https://github.com/Gengik84)
-   * `-wegnoegpu` suggestion
-   * Verbose correction
-   * Audio DevicePath location correction
+  * `-wegnoegpu` suggestion
+  * Verbose correction
+  * Audio DevicePath location correction
 * [doesprintfwork](https://github.com/doesprintfwork)
-   * Heavily inspiring the AMD section
-* [AlGrey#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
-   * AMD Kernel patches
+  * Heavily inspiring the AMD section
+* [AlGrey\#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
+  * AMD Kernel patches
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
-  
+
 Developers of OpenCore:
 
 * [Download-Fritz](https://github.com/Download-Fritz)

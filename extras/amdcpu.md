@@ -1,14 +1,16 @@
+# AMD Kernel Patches
+
 Running an AMD CPU but still want to try out OpenCore? Well something to keep in mind:
 
 * Currently the kernel patches have only been updated for Zen, you can still try out OpenCore if you're running FX series of CPUs but keep in mind they can be buggy
 
-# Applying kernel patches
+## Applying kernel patches
 
-To start, grab the [patches.plist from AMD_Vanilla](https://github.com/AMD-OSX/AMD_Vanilla) and then navigate to your config.plist. Under `Root -> Kernel -> Patch`, you'll notice that patches are implemented are slightly different so you can't copy and paste them.
+To start, grab the [patches.plist from AMD\_Vanilla](https://github.com/AMD-OSX/AMD_Vanilla) and then navigate to your config.plist. Under `Root -> Kernel -> Patch`, you'll notice that patches are implemented are slightly different so you can't copy and paste them.
 
 The main difference you'll notice is that `MatchOS` from Clover becomes `MatchKernel` in OpenCore. This becomes an issue becuase they're no longer 1-to-1, instead needing to find the darwin version associated with the OS version. Luckinly the mad man that is CorpNewt has already scrapped the web for this information which you can find in [kernel.json](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/kernels.json). These are some relavant ones:
 
-```
+```text
   {
     "os_version": "10.13",
     "build_version": "17A365",
@@ -191,3 +193,4 @@ The main difference you'll notice is that `MatchOS` from Clover becomes `MatchKe
   }
 ]
 ```
+

@@ -3,8 +3,7 @@
 * [Introduction](README.md)
 * [Creating the USB](creating-the-usb.md)
 
-
-## Config.plist
+## Intel Config.plist <a id="config.plist"></a>
 
 * [Ivy Bridge](config.plist/ivy-bridge.md)
 * [Haswell](config.plist/haswell.md)
@@ -12,17 +11,19 @@
 * [Kaby Lake](config.plist/kaby-lake.md)
 * [Coffee Lake](config.plist/coffee-lake.md)
 
+## AMD Config.plist
+
 ## Post Install
 
-* [Emulated NVRAM](nvram.md)
-* [GPU Spoof](Spoof.md)
-* [Security](Security.md)
+* [Emulated NVRAM](post-install/nvram.md)
+* [GPU Spoof](post-install/spoof.md)
+* [Security](post-install/security.md)
 
 ## Extras
 
-* [Legacy Install](Legacy.md)
-* [AMD Kernel Patches](AMDCPU.md)
-* [Hiding Verbose](Verbose.md)
+* [Legacy Install](extras/legacy.md)
+* [AMD Kernel Patches](extras/amdcpu.md)
+* [Hiding Verbose](extras/verbose.md)
 
 ## Misc
 
