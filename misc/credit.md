@@ -20,6 +20,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [Gengik84](https://github.com/Gengik84)
    * `-wegnoegpu` suggestion
    * Verbose correction
+   * Audio DevicePath location correction
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
   
