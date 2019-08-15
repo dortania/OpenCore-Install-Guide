@@ -218,7 +218,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/M46vPwX.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/macserial) application. 
+For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application. 
 
 For this Kaby Lake example, I chose the iMac18,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Kaby Lake:
 
