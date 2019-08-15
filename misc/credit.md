@@ -21,6 +21,10 @@ No good guide is made by one man, here's credit to those who've helped out:
    * `-wegnoegpu` suggestion
    * Verbose correction
    * Audio DevicePath location correction
+* [doesprintfwork](https://github.com/doesprintfwork)
+   * Heavily inspiring the AMD section
+* [AlGrey#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
+   * AMD Kernel patches
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
   
@@ -34,6 +38,7 @@ Developers of OpenCore:
 Guides linked or those that inspired this guide:
 
 * [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)
+* [Intel-AMD-Hackintosh-Guide](https://kb.hackintoshisfun.ml/vanilla/)
 * [USB Map Guide](https://usb-map.gitbook.io/project/)
 * [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
