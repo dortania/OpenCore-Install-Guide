@@ -2,6 +2,8 @@
 
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
 
+Please note that the kernel patches have only been tested on Ryzen(17h) systems, 15h and 16h systems should tread lightly.
+
 ## ACPI
 
 ![ACPI](https://i.imgur.com/Ohywvqm.png)
@@ -105,7 +107,7 @@ Layout=5 would be interpreted as `05000000`
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
-**Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MatchKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303) [here](https://cdn.discordapp.com/attachments/611462337446281236/611465844945453094/patches.plist). Do note that these patches are meant for 17h(Ryzen), 15h and 16h will require you to manually copy the patches
+**Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MatchKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303) [here](https://cdn.discordapp.com/attachments/611462337446281236/611465844945453094/patches.plist). Do note that these patches are meant for 17h(Ryzen, ThreadRipper), Bulldozer(15h) and Jaguar(16h) will require you to manually convert the clover patches from the [AMD_Vanilla ](https://github.com/AMD-OSX/AMD_Vanilla).
 
 **Quirks**:
 
