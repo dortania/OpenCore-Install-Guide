@@ -13,7 +13,7 @@
 
 ## AMD Config.plist
 
-* [AMD CPU](AMD-config.md)
+* [Zen/ThreadRipper](AMD-config.md)
 
 ## Post Install
 
