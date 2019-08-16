@@ -24,7 +24,6 @@
 ## Extras
 
 * [Legacy Install](extras/legacy.md)
-* [AMD Kernel Patches](extras/amdcpu.md)
 * [Hiding Verbose](extras/verbose.md)
 
 ## Misc
