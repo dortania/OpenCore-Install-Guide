@@ -13,6 +13,8 @@
 
 ## AMD Config.plist
 
+* [AMD CPU](AMD-config.md)
+
 ## Post Install
 
 * [Emulated NVRAM](post-install/nvram.md)
