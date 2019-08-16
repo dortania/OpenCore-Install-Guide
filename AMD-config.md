@@ -2,7 +2,7 @@
 
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
 
-Please note that the kernel patches have only been tested on Ryzen(17h) systems, 15h and 16h systems should tread lightly.
+Please note that the kernel patches have only been updated on Ryzen(17h) systems, 15h and 16h systems should tread lightly.
 
 ## ACPI
 
