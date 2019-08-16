@@ -20,3 +20,37 @@ And please keep in mind that this guide is more of a jumping-off point, your har
 
 Well, when I made the [original OpenCore guide](https://github.com/khronokernel/Getting-Started-With-OpenCore) I was quite disappointed in how the whole thing was set up. It felt clunky, confusing and quite easy to get lost in as hardware-specific changes were hard to see. So I took CorpNewt's [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/) as a base and built it up from there. Full credit to him and also seriously a great guy, definitely check him out on [Github](https://github.com/corpnewt)\(Don't worry I've talked to Corp about all this\).
 
+
+## Table of contents
+
+* OpenCore Vanilla Desktop guide
+
+   * [Introduction](README.md)
+   * [Creating the USB](creating-the-usb.md)
+
+* Intel Config.plist <a id="config.plist"></a>
+
+   * [Ivy Bridge](config.plist/ivy-bridge.md)
+   * [Haswell](config.plist/haswell.md)
+   * [Skylake](config.plist/skylake.md)
+   * [Kaby Lake](config.plist/kaby-lake.md)
+   * [Coffee Lake](config.plist/coffee-lake.md)
+
+* AMD Config.plist
+
+   * [AMD CPU](AMD-config.md)
+
+* Post Install
+
+   * [Emulated NVRAM](post-install/nvram.md)
+   * [GPU Spoof](post-install/spoof.md)
+   * [Security](post-install/security.md)
+
+* Extras
+
+   * [Legacy Install](extras/legacy.md)
+   * [Hiding Verbose](extras/verbose.md)
+
+* Misc
+
+   * [Credit](misc/credit.md)
