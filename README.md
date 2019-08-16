@@ -11,9 +11,10 @@ And please keep in mind that this guide is more of a jumping-off point, your har
 * OpenCore supports both UEFI and Legacy boot options.
 * Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, this is also referred to as "bless".
 * Order of kexts matter: Make sure to have kexts like Lilu and VoodooPS2Controller are to be injected first before kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad and etc.
+* ACPI patches and SSDTs apply to all operating systems, please adjust your SSDTs accordingly with `If (_OSI ("Darwin")) {}`.
 * Some systems like Z97 require pure UEFI mode for booting \(also known as Windows 8/10 mode\).
 * NVMe issues if setup as a SATA device in BIOS.
-* AptioMemoryFix has been split between OpenCore and FwRuntimeServices.efi, please use them instead.
+* AptioMemoryFix has been split between OpenCore and FwRuntimeServices.efi, please use that instead.
 
 ## Hey why does this guide look quite similar to CorpNewt's Vanilla Guide?
 
