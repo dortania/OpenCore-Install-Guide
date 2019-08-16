@@ -25,6 +25,8 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Heavily inspiring the AMD section
 * [AlGrey\#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
   * AMD Kernel patches
+* [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
+   * For the original AMD Vanilla Guide
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
 
@@ -42,7 +44,7 @@ Guides linked or those that inspired this guide:
 * [USB Map Guide](https://usb-map.gitbook.io/project/)
 * [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
-* [GFXutil](https://github.com/acidanthera/gfxutil/releases)
+* [gfxutil](https://github.com/acidanthera/gfxutil/releases)
 
 Gotta rep dat ~~merch~~ guides:
 
