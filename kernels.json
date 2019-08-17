@@ -1,4 +1,4 @@
-Full credit to CorpNewt for this
+Credit to CorpNewt, bpetru05 and printf doesn't work for this:
 
 [
   {
@@ -932,6 +932,11 @@ Full credit to CorpNewt for this
     "darwin_version": "17.7.0"
   },
   {
+    "os_version": "10.13.6",
+    "build_version": "17G8030",
+    "darwin_version": "17.7.0"
+  },
+  {
     "os_version": "10.14",
     "build_version": "18A391",
     "darwin_version": "18.0.0"
@@ -990,5 +995,11 @@ Full credit to CorpNewt for this
     "os_version": "10.14.6",
     "build_version": "18G84",
     "darwin_version": "18.7.0"
+  },
+  {
+    "os_version": "10.14.6",
+    "build_version": "18G87",
+    "darwin_version": "18.7.0"
   }
+  
 ]
