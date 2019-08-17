@@ -15,6 +15,8 @@ By far the simplest way, all you need to do is add the following bootflag:
 
 `-wegnoegpu`
 
+Do note that this will disable all GPUs excluding the iGPU
+
 ## DevicePropeties Method
 
 Here is quite simple, find the PCI route with [gfxutil](https://github.com/acidanthera/gfxutil/releases) and then create a new DeviceProperties section with your spoof:
