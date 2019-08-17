@@ -1,9 +1,28 @@
 # Security
 
-So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the hackintosh community. Well here we'll be talking about 2 features of OpenCore:
+So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
 
 * ScanPolicy
-* Vault
+* Vault(work in progress)
+
+## FileVault Setup
+
+To start, you'll need the following .efi drivers:
+
+* VirtualSMC.efi(To be used in conjunction with VirtualSMC.kext)
+* AppleUiSupport.efi
+* AppleGenericInput.efi (UsbKbDxe.efi may work better or worse depending on the firmware)
+* FwRuntimeServices.efi
+
+Setting in your config.plist:
+
+
+* `UIScale` set to `02` for high resolution displays
+* `ProvideConsoleGOP` to YES
+* `RequestBootVarRouting` set to YES
+* `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
+
+With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
 ## Scan Policy
 
@@ -19,7 +38,7 @@ To calculate the ScanPolicy value, you simply add up all the hexidecimal values\
 
 * restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC_SCAN\_ALLOW\_DEVICE_.
 
-  `0x00000100 (bit 8)` — OC\_SCAN\_ALLOW\_FS\_APFS
+`0x00000100 (bit 8)` — OC\_SCAN\_ALLOW\_FS\_APFS
 
 * allows scanning of APFS file system.
 
@@ -81,5 +100,19 @@ And converting this to decimal gives us `5,177,603`
 
 ## Vault
 
-**Work in progress**
+**Work in progress
+
+What is vaulting? Well vaulting is based around 2 things, vault.plist and vault.sig:
+* vault.plist: a "snapshot" of your EFI
+* vault.sig: validation of vault.plist
+
+Do note that nvram.plist won't be vaulted
+
+
+
+Setting in your config.plist:
+* `RequireSignature` set to YES
+* `RequireVault` set to YES
+
+
 
