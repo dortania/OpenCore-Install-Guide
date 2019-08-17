@@ -23,10 +23,13 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Audio DevicePath location correction
 * [doesprintfwork](https://github.com/doesprintfwork)
   * Heavily inspiring the AMD section
+  * Additions to kernel.json
 * [AlGrey\#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
   * AMD Kernel patches
 * [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
    * For the original AMD Vanilla Guide
+* [bpetru05](https://github.com/bpetru05)
+   * Additions to kernel.json
 * [InsanelyMac](https://www.insanelymac.com)
   * For finding issues and solutions to different hardware issues
 
