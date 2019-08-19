@@ -98,7 +98,7 @@ Layout=5 would be interpreted as `05000000`
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
 
-**Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons
+**Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't require this)
 
 * CpuidMask: When set to Zero, original CPU bit will be used
 `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
