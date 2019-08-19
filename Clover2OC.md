@@ -3,7 +3,39 @@
 
 # Inject AMD
 
-Using an old GPU that's reliant on the "inject AMD" property?:
+Using an old GPU that's reliant on the "inject" property?:
+
+
+InjectIntel:
+* 
+* 
+* 
+
+InjectAti:
+* deviceID
+* Connectors
+
+
+InjectNvidia:
+* DeviceID
+* Family
+
+
+FakeIntel:
+* device-id
+* vendor-id
+
+FakeAti:
+* device-id
+* ATY,DeviceID
+* @0,compatible
+* vendor-id
+* ATY,VendorID
+
+
+Info from: 
+* FixBiosDSDT
+* Ati.c
 
 # FakeID
 
