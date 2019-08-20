@@ -8,7 +8,7 @@ Using an old GPU that's reliant on the "inject" property?:
 
 InjectIntel:
 * Vendor
-* 
+* deviceID
 * 
 
 InjectAti:
