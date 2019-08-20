@@ -7,7 +7,7 @@ Using an old GPU that's reliant on the "inject" property?:
 
 
 InjectIntel:
-* 
+* Vendor
 * 
 * 
 
@@ -55,19 +55,44 @@ Found in device_inject.c
 
 **SATA**
 
+* 
 **WIFI**
+
+* name
+* compatible
 
 **XHCI**
 
 * device-id
-* device_type
-* device_type
-*
-*
-*
-*
+* device_type: UHCI
+* device_type: OHCI
+
+device_type: EHCI
+
+* device-id
+* AAPL,current-available
+* AAPL,current-extra
+* AAPL,current-available
+* AAPL,current-extra
+* AAPL,current-in-sleep
+* built-in
+
+device_type: XHCI
+
+* device-id
+* AAPL,current-available
+* AAPL,current-extra
+* AAPL,current-available
+* AAPL,current-in-sleep
+* built-in
 
 **IMEI**
+
+* device-id
+* vendor-id
+
+
+
 
 # USB
 
