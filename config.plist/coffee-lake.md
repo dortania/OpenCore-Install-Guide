@@ -106,7 +106,7 @@ Note: FakeID is only required for High Sierra, Mojave doesn't require this
 
 Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases). Please note that ADR for HDAS/HDEF is 0x001F0003 and Path = PciRoot(0x0)/Pci(0x1f,0x3), PciRoot(0x0)/Pci(0x1b,0x0) is for previous series
 
-Layout=5 would be interpreted as `05000000`
+Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`
 
 **Block**: Removes device properties from map, for us we can ignore this
 
