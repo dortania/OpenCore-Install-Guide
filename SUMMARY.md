@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [Creating the USB](creating-the-usb.md)
+* [Gathering files](kext.md)
 
 ## Intel Config.plist <a id="config.plist"></a>
 
