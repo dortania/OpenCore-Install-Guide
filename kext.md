@@ -7,9 +7,10 @@ For the majority of systems, you only need 3 .efi drivers:
 * HfsPlus.efi or [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Needed for seeing HFS volumes.
 * [FwRuntimeServices.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
-   * Replacemnet for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
+   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
    
-   For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
+   
+For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
    
 # Kexts
 
