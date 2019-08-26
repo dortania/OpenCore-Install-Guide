@@ -107,9 +107,9 @@ Do note that `layout-id` is a `Data` value meaning you will need to convert from
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
-**Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MatchKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303) [here](https://cdn.discordapp.com/attachments/611462337446281236/611465844945453094/patches.plist). 
+**Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MatchKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303) [here](https://cdn.discordapp.com/attachments/611462337446281236/615419791414525974/OC-patches-17h.plist). 
 
-Do note that these patches are meant for 17h(Ryzen, ThreadRipper), Bulldozer(15h) and Jaguar(16h) will require you to manually convert the clover patches from the [AMD_Vanilla ](https://github.com/AMD-OSX/AMD_Vanilla).
+Do note that these patches are meant for 17h(Ryzen, ThreadRipper), Bulldozer(15h) and Jaguar(16h) will require you to manually convert the clover patches from the [AMD_Vanilla ](https://github.com/AMD-OSX/AMD_Vanilla). Supported OS on these patches are macOS 10.13.6, 10.14.6 and 10.15 beta 6(Yup, that's Catalina support on AMD!)
 
 And for a list of OS and kernel versions, the mad man that is CorpNewt has scrapped the web for such info. You can find this within [kernel.json](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/kernels.json).
 
