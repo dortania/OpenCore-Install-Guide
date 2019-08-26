@@ -1000,6 +1000,10 @@ Credit to CorpNewt, bpetru05 and doesprintfwork for this:
     "os_version": "10.14.6",
     "build_version": "18G87",
     "darwin_version": "18.7.0"
+  },
+  {
+    "os_version": "10.14.6",
+    "build_version": "18G95",
+    "darwin_version": "18.7.0"
   }
-  
 ]
