@@ -22,19 +22,19 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 
 
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
-   *  This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for certain Z390 systems
+   *  This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for certain Z390 systems.
 
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
-   * Needed to setup USB power and such correctly, prefered option over renaming XHCI. This SSDT is meant for Skylake+ systems, please use [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) and [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) for older systems
+   * Needed to setup USB power and such correctly, prefered option over renaming XHCI. This SSDT is meant for Skylake+ systems, please use [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) and [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) for older systems.
 
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
-   * Needed to setup USB power correctly on pre-skylake systems
+   * Needed to setup USB power correctly on pre-skylake systems.
 
 * [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
-   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems
+   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems.
 
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-   * Sets `PluginType`, Clover altrenative would be under `Acpi -> GenerateOptions -> PluginType`
+   * Sets `PluginType`, Clover altrenative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some systems have theirs starting at `PR00` so adjust accordingly.
 
 * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
-   * Adds a SMbus device and fixes DeviceProperties injection via _DSM whcih is found in your DSDT table. Most can ignore
+   * Adds a SMbus device and fixes DeviceProperties injection via `_DSM` which is found in your DSDT table. Most can ignore.
