@@ -24,6 +24,17 @@ This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc
 
 And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
 
+* **Comment** 
+   * Name of patch
+* **Count** 
+   * How many time the patch is applied, `0` will apply to all instances
+* **Enabled** 
+   * Self explanitory, enables or disables the patch
+* **Find**
+   * The original name in ACPI
+* **Replace** 
+   * The new name in ACPI, length must match original
+
 **Quirk**: Settings for ACPI.
 
 * **FadtEnableReset**: NO
@@ -47,6 +58,8 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+* **DevirtualiseMmio**: NO
+  * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards
 * **DisableVariableWrite**: NO
   * Needed for systems with non-functioning NVRAM like Z390 and such
 * **DiscardHibernateMap**: NO
@@ -110,15 +123,26 @@ Do note that `layout-id` is a `Data` value meaning you will need to convert from
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
 
+* **BundlePath** 
+   * Name of the kext
+   * ex: `Lilu.kext`
+* **Enabled** 
+   * Self explaitroy, either enables or diables the kext
+* **Executableath** 
+   * Path to the actual executable hidden within the kext, you can see what path you kext has by right clicking and selecting `Show Package Contents`. Generally they'll be `Contents/MacOS/Kext` but some have kexts hiddin within under `Plugin` folder. Do note that Plist only kexts do not need this filled in.
+   * ex: `Contents/MacOS/Lilu`
+* **PlistPath** 
+   * Path to the `info.plist` hidden within the kext
+   * ex: `Contents/Info.plist`
+
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
-* CpuidMask: When set to Zero, original CPU bit will be used
-
-  `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
-
-* CpuidData: The value for the CPU spoofing
-
-  `FF FF FF FF | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+* **CpuidMask**: When set to Zero, original CPU bit will be used
+   * `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+   * ex: CPUID `0x0306A9` would be `A9 06 03 00 | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+* **CpuidData**: The value for the CPU spoofing
+   * `FF FF FF FF | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+   * Swap `00` for `FF` if needing to swap with a longer value
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
@@ -175,7 +199,14 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **ScanPolicy**: `0` 
 * `0` allows you to see all drives available, please refer to OpenCore's DOC for further info on setting up ScanPolicy\(dedicated chapter to come\)
 
-**Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
+**Tools** Used for running OC debugging tools like clearing NVRAM
+* **Name** 
+   * Name shown in OpenCore
+* **Enabled** 
+   * Self explanitory, enables or disables
+* **Path** 
+   * Path to file after the `Tools` folder
+   * ex: `CleanNvram.efi`
 
 ### NVRAM
 
@@ -323,8 +354,12 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
   * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
 * **RequestBootVarRouting**: NO
   * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+* **ReplaceTabWithSpace**: NO
+  * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
 * **SanitiseClearScreen**: NO
   * Fixes High resolutions displays that display OpenCore in 1024x768, required for select AMD GPUs on Z370
+* **ClearScreenOnModeSwitch**: NO
+  * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 
 ## Cleaning up
 

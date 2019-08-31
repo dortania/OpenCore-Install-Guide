@@ -24,6 +24,17 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 
 And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
 
+* **Comment** 
+   * Name of patch
+* **Count** 
+   * How many time the patch is applied, `0` will apply to all instances
+* **Enabled** 
+   * Self explanitory, enables or disables the patch
+* **Find**
+   * The original name in ACPI
+* **Replace** 
+   * The new name in ACPI, length must match original
+
 **Quirk**: Settings for ACPI.
 
 * **FadtEnableReset**: NO
@@ -47,6 +58,9 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 
 * **AvoidRuntimeDefrag**: YES 
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+   
+* **DevirtualiseMmio**: NO
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards
 
 * **DisableVariableWrite**: NO 
    * Needed for systems with non-functioning NVRAM that utilize EmuVariableUEFI from Clover
@@ -98,12 +112,26 @@ Do note that `layout-id` is a `Data` value meaning you will need to convert from
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
 
+ * **BundlePath** 
+    * Name of the kext
+    * ex: `Lilu.kext`
+ * **Enabled** 
+    * Self explaitroy, either enables or diables the kext
+ * **Executableath** 
+    * Path to the actual executable hidden within the kext, you can see what path you kext has by right clicking and selecting `Show Package Contents`. Generally they'll be `Contents/MacOS/Kext` but some have kexts hiddin within under `Plugin` folder. Do note that Plist only kexts do not need this filled in.
+    * ex: `Contents/MacOS/Lilu`
+ * **PlistPath** 
+    * Path to the `info.plist` hidden within the kext
+    * ex: `Contents/Info.plist`
+
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't require this)
 
-* CpuidMask: When set to Zero, original CPU bit will be used
-`<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
-* CpuidData: The value for the CPU spoofing
-`FF FF FF FF | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+* **CpuidMask**: When set to Zero, original CPU bit will be used
+   * `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+   * ex: CPUID `0x0306A9` would be `A9 06 03 00 | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+* **CpuidData**: The value for the CPU spoofing
+   * `FF FF FF FF | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+   * Swap `00` for `FF` if needing to swap with a longer value
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
@@ -165,7 +193,14 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **ScanPolicy**: `0` 
 * `0` allows you to see all drives available, please refer to OpenCore's DOC for further info on setting up ScanPolicy(dedicated chapter to come)
 
-**Tools** Used for running OC debugging tools like clearing NVRAM, we'll be ignoring this
+**Tools** Used for running OC debugging tools like clearing NVRAM
+* **Name** 
+   * Name shown in OpenCore
+* **Enabled** 
+   * Self explanitory, enables or disables
+* **Path** 
+   * Path to file after the `Tools` folder
+   * ex: `CleanNvram.efi`
 
 ## NVRAM
 
@@ -185,12 +220,9 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
   * `debug=0x100` - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
   * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * `npci=0x2000` - Required for when getting stuck on `PCI Start Configuration`, alternative is `npci= 0x3000`
+  * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debuging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as these properties either cannot be found or some other issue with them.
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. Unfortunately AMD systems cannot have SIP enabled
-   * `E7030000` - SIP completely disabled
-
-
-
+   * `E7030000` - SIP completely disabled.
 
 * **nvda\_drv**: &lt;&gt; 
    * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)
@@ -298,8 +330,12 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Releases USB controller from firmware driver, avoid unless you know what you're doing
 * **RequestBootVarRouting**: YES
    * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+* **ReplaceTabWithSpace**: NO
+   * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
 * **SanitiseClearScreen**: NO
    * Fixes High resolutions displays that display OpenCore in 1024x768, required for select AMD GPUs on Z370
+* **ClearScreenOnModeSwitch**: NO
+   * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 
 # Cleaning up
 
