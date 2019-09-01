@@ -50,7 +50,7 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 
 ### Booter
 
-![Booter](https://i.imgur.com/IRSYAtQ.png)
+![Booter](https://i.imgur.com/09l2TCF.png)
 
 This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
 

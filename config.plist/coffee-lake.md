@@ -50,7 +50,7 @@ For those who utilize [300 series RTC patch](https://www.hackintosh-forum.de/for
 
 ### Booter
 
-![Booter](https://i.imgur.com/IRSYAtQ.png)
+![Booter](https://i.imgur.com/09l2TCF.png)
 
 This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
 
