@@ -31,7 +31,7 @@ Recommended BIOS settings:
 
 **Note for legacy users**
 
-* If you want to use OpenCore on your system, please follow the [Legacy Install](extras/legacy.md) section first, after you continue following the **Base folder structure** section
+* If you want to use OpenCore on your system, please follow the [Legacy Install](extras/legacy.md) section first, after you can continue following the **Base folder structure** section
 
 ## Creating the USB
 
@@ -51,7 +51,7 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 To setup OpenCore’s folder structure, you’ll want to grab those files from OpenCorePkg and construct your EFI to look like the one below:
 
-![base EFI folder](https://i.imgur.com/tzQEfuv.png)
+![base EFI folder](https://i.imgur.com/1Ssvqfw.png)
 
 Now you can place your necessary .efi drivers from AppleSupportPkg into the _drivers_ folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(ie: EmuVariableUEFI\).
 
@@ -59,5 +59,5 @@ Now you can place your necessary .efi drivers from AppleSupportPkg into the _dri
 
 Here's what mine looks like\(For the majority of users you can ignore Tools but it can be useful like of for clearing NVRAM and other such things\):
 
-![Populated EFI folder](https://i.imgur.com/3BqRyI5.png)
+![Populated EFI folder](https://i.imgur.com/bJB25r3.png)
 
