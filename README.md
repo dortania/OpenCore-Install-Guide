@@ -11,6 +11,7 @@ And please keep in mind that this guide is more of a jumping-off point, your har
 
 * Much faster booting.
 * Better overall security and better support for FileVault.
+* Support holding Option for BootPicker, Command+R for Recovery and Command+P+R for NVRAM reset
 * Much better future-proofing as OpenCore doesn't rely on heavily deprecated methods for kext injection like Clover does
 * Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, including BootCamp support. This feature is also referred to as "bless" and is determined by reading NVRAM variables set by Startup Disk.
 * All future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
