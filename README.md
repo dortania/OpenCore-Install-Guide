@@ -6,11 +6,20 @@ OpenCore is an alternative to Clover. By design, OpenCore is versatile by being 
 
 And please keep in mind that this guide is more of a jumping-off point, your hardware may have different requirements so please read the guide carefully.
 
+
+### Benefits of OpenCore over Clover
+
+* Much faster booting.
+* Better overall security and better support for FileVault.
+* Much better future-proofing as OpenCore doesn't rely on heavily deprecated methods for kext injection like Clover does
+* Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, including BootCamp support. This feature is also referred to as "bless" and is determined by reading NVRAM variables set by Startup Disk.
+* All future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
+* OpenCore supports both UEFI and Legacy boot options.
+
+
 ### Things to note with OpenCore
 
-* OpenCore supports both UEFI and Legacy boot options.
-* Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, this is also referred to as "bless".
-* Order of kexts matter: Make sure to have kexts like Lilu and VoodooPS2Controller are to be injected first before kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad and etc.
+* Order of kexts matter: Make sure to have kexts like Lilu and VoodooPS2Controller are to be injected first before kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad, etc.
 * ACPI patches and SSDTs apply to all operating systems, please adjust your SSDTs accordingly with `If (_OSI ("Darwin")) {}` or use [rEFind](http://www.rodsbooks.com/refind/) in conjunction with OpenCore.
 * Some systems like Z97 require pure UEFI mode for booting \(also known as Windows 8/10 mode\).
 * NVMe issues if setup as a SATA device in BIOS.
