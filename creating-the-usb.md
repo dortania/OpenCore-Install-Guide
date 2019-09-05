@@ -8,7 +8,7 @@ Requirements:
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
 * [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting\(terminal command example can be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/)\).
 * [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool, but vit9696 has stated multiple times he does not support these tools and they even break OpenCore's specifications. Use at own risk!\).
-* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily OC comes with a tool called CleanNvram.efi that can called from the shell\).
+* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `Command+P+R` while boting to clean your NVRAM as long as you have `PollAppleHotKeys` set to True).
 * USB formatted as MacOS Journaled with GUID partition map.
 * Knowledge of how a hackintosh works and what files yours requires.
 * A working Hackintosh to test on.
