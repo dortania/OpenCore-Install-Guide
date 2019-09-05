@@ -10,7 +10,6 @@ So something that makes OpenCore truly special is how it's been built with secur
 To start, you'll need the following .efi drivers:
 
 * VirtualSMC.efi(To be used in conjunction with VirtualSMC.kext)
-* AppleUiSupport.efi
 * AppleGenericInput.efi (UsbKbDxe.efi may work better or worse depending on the firmware)
 * FwRuntimeServices.efi
 
