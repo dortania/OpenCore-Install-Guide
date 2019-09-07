@@ -13,7 +13,7 @@
 * Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
 
 # Receiving "Failed to parse real field of type 1"
-* A value is set as `rea`l when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
+* A value is set as `real` when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
 ```
 <key>HaltLevel</key>
 <real>2147483648</real>
