@@ -12,6 +12,18 @@
 
 * Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
 
+# Receiving `Failed to parse real feild of type 1`
+* A value is set as `rea`l when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
+```
+<key>HaltLevel</key>
+<real>2147483648</real>
+```
+To fix, swap `real` for `integer`:
+```
+<key>HaltLevel</key>
+<integer>2147483648</integer>
+```
+
 # Booting OpenCore reboots to BIOS
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
