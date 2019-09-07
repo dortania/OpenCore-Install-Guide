@@ -26,6 +26,7 @@
 
 * [Legacy Install](extras/legacy.md)
 * [Hiding Verbose](extras/verbose.md)
+* [Troubleshooting](extras/troubleshooting.md)
 
 ## Misc
 
