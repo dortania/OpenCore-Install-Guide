@@ -4,11 +4,11 @@
 
 Requirements:
 
-* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) \(Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing we're on Version `0.5.0` even though the current official release is `0.0.4`\). Easiest way to build is via the [`macbuild.tool`](https://github.com/acidanthera/OpenCorePkg/blob/master/macbuild.tool)
+* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) \(Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing we're on Version `0.5.1` even though the current official release is `0.5.0`\). Easiest way to build is via the [`macbuild.tool`](https://github.com/acidanthera/OpenCorePkg/blob/master/macbuild.tool)
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
 * [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting\(terminal command example can be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/)\).
 * [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool, but vit9696 has stated multiple times he does not support these tools and they even break OpenCore's specifications. Use at own risk!\).
-* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `Command+P+R` while boting to clean your NVRAM as long as you have `PollAppleHotKeys` set to True).
+* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `Command+P+R` while boting to clean your NVRAM as long as you have `PollAppleHotKeys` set to True along side either AppleGenericInput.efi or UsbKbDxe.efi).
 * USB formatted as MacOS Journaled with GUID partition map.
 * Knowledge of how a hackintosh works and what files yours requires.
 * A working Hackintosh to test on.
@@ -59,5 +59,5 @@ Now you can place your necessary .efi drivers from AppleSupportPkg into the _dri
 
 Here's what mine looks like\(For the majority of users you can ignore Tools but it can be useful like of for clearing NVRAM and other such things\):
 
-![Populated EFI folder](https://i.imgur.com/bJB25r3.png)
+![Populated EFI folder](https://i.imgur.com/HVuyghf.png)
 

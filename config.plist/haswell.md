@@ -50,7 +50,7 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 
 ### Booter
 
-![Booter](https://i.imgur.com/09l2TCF.png)
+![Booter](https://i.imgur.com/suElruh.png)
 
 This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
 
@@ -59,7 +59,9 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: NO
-  * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards. Generally useful for APTIO V firmwares(Broadwell+)
+* **DisableSingleUser**: NO
+   * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
   * Needed for systems with non-functioning NVRAM like Z390 and such
 * **DiscardHibernateMap**: NO
@@ -175,10 +177,20 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ### Misc
 
-![Misc](https://i.imgur.com/hotfQPP.png)
+![Misc](https://i.imgur.com/OROZbCk.png)
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
-
+* **HibernateMode**: None
+   * Best to avoid hibernation with hackintoshes all together
+* **HideSelf**: YES
+   * Hides the EFI partition as a boot option in OC's boot picker
+   * **PollAppleHotKeys**: YES
+   * Allows you to use Apple's hot keys during boot, needs to be used in conjunction with either AppleGenericInput.efi or UsbKbDxe.efi depending on the firmware. Popular commands:
+      * `Cmd+V`: Enables verbose
+      *  `Cmd+Opt+P+R`: Cleans NVRAM 
+      * `Cmd+R`: Boots Recovery partition
+      * `Cmd+S`: Boot in Singleuser mode
+      * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, alternative is `ESC` key
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 * **ShowPicker**: YES
@@ -192,12 +204,14 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Security**: Security is pretty self-explanatory.
 
+* **AllowNvramReset**: YES
+   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **RequireSignature**: NO
   * We won't be dealing vault.plist so we can ignore
 * **RequireVault**: NO
   * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-* `0` allows you to see all drives available, please refer to OpenCore's DOC for further info on setting up ScanPolicy\(dedicated chapter to come\)
+* `0` allows you to see all drives available, please refer to [Security](extras/secuirty.md) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** 
@@ -206,7 +220,17 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Self explanitory, enables or disables
 * **Path** 
    * Path to file after the `Tools` folder
-   * ex: `CleanNvram.efi`
+   * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
+
+**Entires**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
+* **Name**
+   * Name shown in boot picker
+* **Enabled**
+   * Self explanitory, enables or disables
+* **Path**
+   * PCI route of boot drive, can be found with the [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell) and the `map` command
+   * ex: `PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi`
+
 
 ### NVRAM
 
@@ -215,8 +239,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
 * **UIScale**:
-  * 01: 1080P
-  * 02: 2160P\(Enables HIDPI\)
+   * 01: Standard resolution
+   * 02: HIDPI (generally required for FileVault to function correctly\)
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
@@ -225,7 +249,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
   * `dart=0` - this is just an extra layer of protection against Vt-d issues, keep in mind this requires SIP to be disabled
   * `debug=0x100` - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
   * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * `shikigva=40` - this flag is specific to the iGPU.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
+  * `shikigva=40` - this flag is specific for Nvidia users.  It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id. Do note that this generally needed for systems running Nvidia GPUs
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
@@ -297,6 +321,9 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
+* **SpoofVendor**: YES
+   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+
 **UpdateDataHub**: YES
 
 * Update Data Hub fields
@@ -315,7 +342,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ### UEFI
 
-![UEFI](https://i.imgur.com/3Cx8kdu.png)
+![UEFI](https://i.imgur.com/JDsXope.png)
 
 **ConnectDrivers**: YES
 
@@ -323,23 +350,21 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Drivers**: Add your .efi drivers here
 
-**Protocols**:
+**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
-* **AppleBootPolicy**: NO
-  * Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
 * **ConsoleControl**: NO
-  * Replaces Console Control protocol with a builtin version,  set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
-* **DataHub**: NO
-  * Reinstalls Data Hub
-* **DeviceProperties**: NO
-  * Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
+   * Replaces Console Control protocol with a builtin version,  set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
+* **FirmwareVolume**: NO
+   * Fixes UI regarding Filevault, set to YES for better FileVault compatibilty
+* **HashServices**: NO
+   * Fixes incorrect cusor size when running FileVault, set to YES for better FileVault compatibilty
+* **UnicodeCollation**: NO
+   * Some older firmware have broken unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
 
 **Quirks**:
 
 * **AvoidHighAlloc**: NO
   * Workaround for when te motherboard can't properly access higher memory in UEFI Boot Services. Avoid unless necessary\(affected models: GA-Z77P-D3 \(rev. 1.1\)\)
-* **ClearScreenOnModeSwitch**: NO
-  * Needed for when fragments of previously drawn image are retained on screen, do note that ConsoleControl should be set to True
 * **ExitBootServicesDelay**: `0`
   * Only required for very specific use cases like setting to `5` for ASUS Z87-Pro running FileVault2
 * **IgnoreInvalidFlexRatio**: YES
@@ -356,8 +381,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
   * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
   * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
-* **SanitiseClearScreen**: NO
-  * Fixes High resolutions displays that display OpenCore in 1024x768, required for select AMD GPUs on Z370
+* **SanitiseClearScreen**: YES
+  * Fixes High resolutions displays that display OpenCore in 1024x768, recommened for user with 1080P+ displays
 * **ClearScreenOnModeSwitch**: NO
   * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 
