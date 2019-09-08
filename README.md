@@ -11,7 +11,7 @@ And please keep in mind that this guide is more of a jumping-off point, your har
 
 * Much faster booting.
 * Better overall security and better support for FileVault.
-* Support holding `Option` for BootPicker, `Command+R` for Recovery and `Command+P+R` for NVRAM reset
+* Support holding `Option` for BootPicker, `Command+R` for Recovery and `Command+Option+P+R` for NVRAM reset
 * Much better future-proofing as OpenCore doesn't rely on heavily deprecated methods for kext injection like Clover does
 * Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, including BootCamp support. This feature is also referred to as "bless" and is determined by reading NVRAM variables set by Startup Disk.
 * All future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
@@ -37,6 +37,7 @@ Well, when I made the [original OpenCore guide](https://github.com/khronokernel/
 
    * [Introduction](README.md)
    * [Creating the USB](creating-the-usb.md)
+   * [Gathering files](kext.md)
 
 * Intel Config.plist <a id="config.plist"></a>
 
@@ -48,7 +49,7 @@ Well, when I made the [original OpenCore guide](https://github.com/khronokernel/
 
 * AMD Config.plist
 
-   * [AMD CPU](AMD-config.md)
+   * [Zen/ThreadRipper](AMD-config.md)
 
 * Post Install
 
@@ -60,6 +61,7 @@ Well, when I made the [original OpenCore guide](https://github.com/khronokernel/
 
    * [Legacy Install](extras/legacy.md)
    * [Hiding Verbose](extras/verbose.md)
+   * [Troubleshooting](extras/troubleshooting.md)
 
 * Misc
 

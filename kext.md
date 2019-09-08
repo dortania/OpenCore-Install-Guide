@@ -1,14 +1,21 @@
 # .efi drivers
 
-For the majority of systems, you only need 3 .efi drivers:
+For the majority of systems, you only need 3 .efi drivers to get up and running:
 
 * [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Needed for seeing APFS volumes.
-* HfsPlus.efi or [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
+* [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) or HfsPlus.efi
    * Needed for seeing HFS volumes.
 * [FwRuntimeServices.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
    
+For extra functionality with OpenCore:
+
+* [AppleGenericInput.efi](https://github.com/acidanthera/AppleSupportPkg)
+   * Used for Apple Hot keys and FileVault support, some firmwares may not register all the keys while booting so this can be substituted with [UsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg). 
+
+* [VirtualSmc.efi](https://github.com/acidanthera/VirtualSMC/releases)
+   * Used for proper FileVault support, cannot be used with FakeSMC
    
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
    
