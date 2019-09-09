@@ -43,7 +43,7 @@ Developers of OpenCore:
 Guides linked or those that inspired this guide:
 
 * [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)
-* [Intel-AMD-Hackintosh-Guide](https://kb.hackintoshisfun.ml/vanilla/)
+* [All-in-one Vanilla AMD Hackintosh Guide](https://kb.hackintoshisfun.ml/vanilla/)
 * [USB Map Guide](https://usb-map.gitbook.io/project/)
 * [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
