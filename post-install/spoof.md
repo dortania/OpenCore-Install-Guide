@@ -36,7 +36,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | name | data | 23646973706C6179 |
-| IONAME | string | \#display |
+| IOName | string | \#display |
 | class-code | data | FFFFFFFF |
 
 ![](https://i.imgur.com/ctw6W4b.png)
