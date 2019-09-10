@@ -39,7 +39,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 | IOName | string | \#display |
 | class-code | data | FFFFFFFF |
 
-![](https://i.imgur.com/ctw6W4b.png)
+![](blob:https://imgur.com/a80e7617-64d9-4d3c-b83a-0145639fe7f8)
 
 ## SSDT Method
 
