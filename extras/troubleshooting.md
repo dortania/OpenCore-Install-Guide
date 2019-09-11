@@ -1,4 +1,14 @@
-# iMessage and Siri Broken?
+# Stuck on EndRandomSeed
+
+* `ProvideConsoleGop` is likely missing, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
+
+# Still waiting on root device
+
+* Gernally seen as a USB error, couple ways to fix:
+   * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
+   * Other issue can be that certain firmwares won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`
+
+# iMessage and Siri Broken
 
 * En0 device not setup as `Built-in`, couple ways to fix:
    * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ex: ethernet@0). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`
