@@ -21,6 +21,7 @@
 # Incorrect resolution with OpenCore
 
 * Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
+* Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
 # Receiving "Failed to parse real field of type 1"
 * A value is set as `real` when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
