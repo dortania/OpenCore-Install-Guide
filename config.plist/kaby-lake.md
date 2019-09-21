@@ -230,7 +230,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 * **UIScale**:
    * 01: Standard resolution
-   * 02: HIDPI (generally required for FileVault to function correctly\)
+   * 02: HiDPI (generally required for FileVault to function correctly on smaller displays\)
 
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)

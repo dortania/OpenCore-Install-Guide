@@ -50,45 +50,32 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 
 ## Booter
 
-![Booter](https://i.imgur.com/09l2TCF.png)
+![Booter](https://i.imgur.com/suElruh.png)
 
 This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
 
 **Quirks**:
 
-* **AvoidRuntimeDefrag**: YES 
+* **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-   
 * **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards
-
-* **DisableVariableWrite**: NO 
-   * Needed for systems with non-functioning NVRAM that utilize EmuVariableUEFI from Clover
-
-* **DiscardHibernateMap**: NO 
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards. Generally useful for APTIO V firmwares(Broadwell+)
+* **DisableSingleUser**: NO
+   * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
+* **DisableVariableWrite**: NO
+   * Needed for systems with non-functioning NVRAM like Z390 and such
+* **DiscardHibernateMap**: NO
    * Reuse original hibernate memory map, only needed for certain legacy hardware 
-
-* **EnableSafeModeSlide**: YES 
+* **EnableSafeModeSlide**: YES
    * Allows for slide values to be used in Safemode
-
-* **EnableWriteUnprotector**: YES 
+* **EnableWriteUnprotector**: YES
    * Removes write protection from CR0 register during their execution
-
-* **ForceExitBootServices**: NO 
-   * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary) 
-
-* **ProtectCsmRegion**: NO 
+* **ForceExitBootServices**: NO
+   * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary\) 
+* **ProtectCsmRegion**: NO
    * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
-
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to
-use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
-
-* **SetupVirtualMap**: YES 
-   * Fixes SetVirtualAddresses calls to virtual addresses
-
-* **ShrinkMemoryMap**: NO 
-   * Needed for systems with large memory maps that don't fit, don't use unless necessary
 
 ## DeviceProperties
 
@@ -172,7 +159,17 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 ![Misc](https://i.imgur.com/4ORf7HB.png)
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
-
+* **HibernateMode**: None
+   * Best to avoid hibernation with hackintoshes all together
+* **HideSelf**: YES
+   * Hides the EFI partition as a boot option in OC's boot picker
+* **PollAppleHotKeys**: YES
+   * Allows you to use Apple's hot keys during boot, needs to be used in conjunction with either AppleGenericInput.efi or UsbKbDxe.efi depending on the firmware. Popular commands:
+      * `Cmd+V`: Enables verbose
+      *  `Cmd+Opt+P+R`: Cleans NVRAM 
+      * `Cmd+R`: Boots Recovery partition
+      * `Cmd+S`: Boot in Singleuser mode
+      * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, alternative is `ESC` key
 * **Timeout**: `5`
    * This sets how long OpenCore will wait until it automatically boots from the default selection
 * **ShowPicker**: YES
@@ -182,25 +179,36 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
-* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting)
+* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting\)
 
 **Security**: Security is pretty self-explanatory.
 
+* **AllowNvramReset**: YES
+   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **RequireSignature**: NO
    * We won't be dealing vault.plist so we can ignore
 * **RequireVault**: NO
    * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-* `0` allows you to see all drives available, please refer to OpenCore's DOC for further info on setting up ScanPolicy(dedicated chapter to come)
+   * `0` allows you to see all drives available, please refer to [Security](extras/secuirty.md) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
-* **Name** 
+* **Name** *
    * Name shown in OpenCore
-* **Enabled** 
+* **Enabled** *
    * Self explanitory, enables or disables
-* **Path** 
+* **Path** *
    * Path to file after the `Tools` folder
-   * ex: `CleanNvram.efi`
+   * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
+
+**Entires**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
+* **Name**
+   * Name shown in boot picker
+* **Enabled**
+   * Self explanitory, enables or disables
+* **Path**
+   * PCI route of boot drive, can be found with the [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell) and the `map` command
+   * ex: `PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi`
 
 ## NVRAM
 
@@ -209,8 +217,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
 * **UIScale**:
-  * 01: 1080P
-  * 02: 2160P\(Enables HIDPI\)
+  * 01: Standard resolution
+  * 02: HiDPI (generally required for FileVault to function correctly on smaller displays\)
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
@@ -296,23 +304,23 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://i.imgur.com/vpkgqQm.png)
+![UEFI](https://i.imgur.com/UiGGDWK.png)
 
 **ConnectDrivers**: YES 
    * Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
 
 **Drivers**: Add your .efi drivers here
 
-**Protocols**:
+**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
-* **AppleBootPolicy**: NO
-   * Ensures APFS compatibility on VMs or legacy Macs, not needed since we're running bare-metal
-* **ConsoleControl**: NO
+* **ConsoleControl**: YES
    * Replaces Console Control protocol with a builtin version,  set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
-* **DataHub**: NO
-   * Reinstalls Data Hub
-* **DeviceProperties**: NO
-   * Ensures full compatibility on VMs or legacy Macs, not needed since we're running bare-metal
+* **FirmwareVolume**: NO
+   * Fixes UI regarding Filevault, set to YES for better FileVault compatibilty
+* **HashServices**: NO
+   * Fixes incorrect cusor size when running FileVault, set to YES for better FileVault compatibilty
+* **UnicodeCollation**: NO
+   * Some older firmware have broken unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
 
 **Quirks**:
 
@@ -333,7 +341,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **ReplaceTabWithSpace**: NO
    * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
 * **SanitiseClearScreen**: NO
-   * Fixes High resolutions displays that display OpenCore in 1024x768, required for select AMD GPUs on Z370
+   * Fixes High resolutions displays that display OpenCore in 1024x768, recommened for user with 1080P+ displays
 * **ClearScreenOnModeSwitch**: NO
    * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 

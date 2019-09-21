@@ -240,7 +240,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 * **UIScale**:
    * 01: Standard resolution
-   * 02: HIDPI (generally required for FileVault to function correctly\)
+   * 02: HiDPI (generally required for FileVault to function correctly on smaller displays\)
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
@@ -375,8 +375,6 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
 * **ReleaseUsbOwnership**: NO
   * Releases USB controller from firmware driver, avoid unless you know what you're doing
-* **ReplaceTabWithSpace**: NO
-  * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
 * **RequestBootVarRouting**: NO
   * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
