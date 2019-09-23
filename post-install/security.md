@@ -15,11 +15,16 @@ To start, you'll need the following .efi drivers:
 
 Setting in your config.plist:
 
+* NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+   * `UIScale` set to `02` for high resolution small displays
 
-* `UIScale` set to `02` for high resolution displays
-* `ProvideConsoleGOP` to YES
-* `RequestBootVarRouting` set to YES
-* `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
+* UEFI -> Protocols
+   * `FirmwareVolume` set to YES
+   * `HashServices` set to YES for Haswell and older, this is needed for systems withbroken SHA-1 hashing
+* UEFI -> Quirks
+   * `ProvideConsoleGOP` to YES
+   * `RequestBootVarRouting` set to YES
+   * `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
 
 With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 

@@ -9,14 +9,15 @@ And please keep in mind that this guide is more of a jumping-off point, your har
 
 ### Benefits of OpenCore over Clover
 
-* Much faster booting.
+* Faster booting on average
 * Better overall security and better support for FileVault.
 * `boot.efi` hotkey support `Option` for BootPicker, `Command+R` for Recovery and `Command+Option+P+R` for NVRAM reset
-* Much better future-proofing as OpenCore doesn't rely on heavily deprecated methods for kext injection like Clover does
+* Much better future-proofing as OpenCore doesn't rely on heavily deprecated methods for kext injection like Clover does.(Ripping macOS open for injecting kexts into S/L/E vs prelinking the kernel similar to real macs). 
 * Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, including BootCamp support. This feature is also referred to as "bless" and is determined by reading NVRAM variables set by Startup Disk.
 * All future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
 * OpenCore supports both UEFI and Legacy boot options.
 
+Fun fact: Clover breaks SIP to inject kexts so there is no security: [Kext Injection](https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l626)
 
 ### Things to note with OpenCore
 
