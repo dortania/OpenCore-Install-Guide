@@ -110,6 +110,8 @@ Do note that `layout-id` is a `Data` value meaning you will need to convert from
 
 **Block**: Removes device properties from map, for us we can ignore this
 
+Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifcally Little Endians that modern CPUs use for ordering bytes
+
 ### Kernel
 
 ![Kernel](https://i.imgur.com/repNbDT.png)

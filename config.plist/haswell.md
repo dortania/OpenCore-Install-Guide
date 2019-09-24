@@ -117,6 +117,8 @@ Keep in mind that some motherboards have different device locations, you can fin
 
 Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`
 
+Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifcally Little Endians that modern CPUs use for ordering bytes
+
 **Block**: Removes device properties from map, for us we can ignore this
 
 ### Kernel
