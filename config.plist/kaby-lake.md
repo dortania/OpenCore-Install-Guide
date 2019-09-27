@@ -108,6 +108,8 @@ Keep in mind that some motherboards have different device locations, you can fin
 
 Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`
 
+Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifcally Little Endians that modern CPUs use for ordering bytes. The more you know!
+
 **Block**: Removes device properties from map, for us we can ignore this
 
 Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifcally Little Endians that modern CPUs use for ordering bytes
@@ -157,7 +159,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 * **ExternalDiskIcons**: YES 
   * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **LapicKernelPanic**: NO 
-  * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems
+  * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
   * Allows for reading kernel panics logs when kernel panics occurs
 * **ThirdPartyTrim**: NO 
@@ -366,7 +368,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **ProvideConsoleGop**: YES
   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
 * **ReleaseUsbOwnership**: NO
-  * Releases USB controller from firmware driver, avoid unless you know what you're doing
+  * Releases USB controller from firmware driver, avoid unless you know what you're doing. Clover equivalent is `FixOwnership`
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
