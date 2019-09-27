@@ -1,31 +1,29 @@
 # Introduction
 
-### What is OpenCore?
+### About
 
-OpenCore is an alternative to Clover. By design, OpenCore is versatile by being more modular and open as it aims to resolve the constraints and issues that Clover brings. It is not only for Hackintoshes as it can be used for other purposes that require an emulated EFI. Please remember we’re still in very early infancy so there will be issues. This specific guide will be omitting Vault.plist and Vault.sig as there's still quite a bit of development happening there. OpenCore should be considered in Alpha stage at this time. If you have a working, stable system you should not migrate unless you prefer "bleeding edge" development, want to contribute, and don't mind recovering your system should it fail to boot.
+OpenCore is an open source bootloader, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.
 
-And please keep in mind that this guide is more of a jumping-off point, your hardware may have different requirements so please read the guide carefully.
+Please remember that OpenCore is still new and currently in alpha. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don't want to migrate if you have a stable system currently. Certain aspects of OpenCore such as FileVault support are still under active development and will not be covered in this guide.
 
+Lastly, this guide is only meant to be a starting point in your journey. Read it carefully and bear in mind that your hardware may have different requirements.
 
-### Benefits of OpenCore over Clover
+### Advantages of OpenCore
 
-* Faster booting on average
-* Better overall security and better support for FileVault.
-* `boot.efi` hotkey support `Option` for BootPicker, `Command+R` for Recovery and `Command+Option+P+R` for NVRAM reset
-* Much better future-proofing as OpenCore doesn't rely on heavily deprecated methods for kext injection like Clover does.(Ripping macOS open for injecting kexts into S/L/E vs prelinking the kernel similar to real macs). 
-* Automatic drive/partition boot is handled by StartUp Disk just like a real Mac, including BootCamp support. This feature is also referred to as "bless" and is determined by reading NVRAM variables set by Startup Disk.
-* All future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
-* OpenCore supports both UEFI and Legacy boot options.
+* On average, OpenCore systems boot faster than those using Clover.
+* OpenCore offers better  overall security and better support for FileVault.
+* OpenCore supports boot hotkey support via `boot.efi` - hold `Option` at startup to choose a boot device, `Command+R` to enter Recovery or `Command+Option+P+R` to reset NVRAM.
+* OpenCore is designed with the future in mind, and uses modern methods to inject kernel extensions without breaking System Integrity Protection.
+* BootCamp and boot device selection are supported by reading NVRAM variables.
+* Development for essential projects such [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is tied to OpenCore, with the eventual goal of being absorbed into OpenCore itself.
+* UEFI and Legacy boot modes are supported.
 
-Fun fact: Clover breaks SIP to inject kexts so there is no security: [Kext Injection](https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l626)
+### OpenCore Tips
 
-### Things to note with OpenCore
-
-* Order of kexts matter: Make sure to have kexts like Lilu and VoodooPS2Controller are to be injected first before kexts that require them like WhateverGreen, VirtualSMC, keyboard/Mouse/Trackpad, etc.
-* ACPI patches and SSDTs apply to all operating systems, please adjust your SSDTs accordingly with `If (_OSI ("Darwin")) {}` or use [rEFind](http://www.rodsbooks.com/refind/) in conjunction with OpenCore.
-* Some systems like Z97 require pure UEFI mode for booting \(also known as Windows 8/10 mode\).
-* NVMe issues if setup as a SATA device in BIOS.
-* AptioMemoryFix has been split between OpenCore and FwRuntimeServices.efi, please use that instead.
+* Kernel extensions are loaded in the order specified in your config file, so you must load an extension's dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.
+* ACPI patches and SSDTs are applied to all operating systems. Adjust your SSDTs with `If (_OSI ("Darwin")) {}` or use [rEFind](http://rodsbooks.com/refind/) in conjunction with OpenCore.
+* Some systems require pure UEFI mode to boot. (This setting is commonly called "Windows 8/10 Mode" by motherboard manufacturers.)
+* Issues can occur if NVMe devices are set up as SATA devices in the BIOS.
 
 ## Hey why does this guide look quite similar to CorpNewt's Vanilla Guide?
 
