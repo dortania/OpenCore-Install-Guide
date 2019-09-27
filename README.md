@@ -4,18 +4,18 @@
 
 OpenCore is an open source bootloader, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.
 
-Please remember that OpenCore is still new and currently in alpha. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don't want to migrate if you have a stable system currently. Certain aspects of OpenCore such as FileVault support are still under active development and will not be covered in this guide.
+Please remember that OpenCore is still new and currently in beta. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don't want to migrate if you have a stable system currently. Certain aspects of OpenCore such as Vault support are still under active development and will not be covered in this guide. [Official release planned for October]()
 
 Lastly, this guide is only meant to be a starting point in your journey. Read it carefully and bear in mind that your hardware may have different requirements.
 
 ### Advantages of OpenCore
 
 * On average, OpenCore systems boot faster than those using Clover.
-* OpenCore offers better  overall security and better support for FileVault.
-* OpenCore supports boot hotkey support via `boot.efi` - hold `Option` at startup to choose a boot device, `Command+R` to enter Recovery or `Command+Option+P+R` to reset NVRAM.
+* OpenCore offers better overall security and better support for FileVault.
+* OpenCore supports boot hotkey support via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Command+R` to enter Recovery or `Command+Option+P+R` to reset NVRAM.
 * OpenCore is designed with the future in mind, and uses modern methods to inject kernel extensions without breaking System Integrity Protection.
-* BootCamp and boot device selection are supported by reading NVRAM variables.
-* Development for essential projects such [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is tied to OpenCore, with the eventual goal of being absorbed into OpenCore itself.
+* BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
+* Furture development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
 * UEFI and Legacy boot modes are supported.
 
 ### OpenCore Tips

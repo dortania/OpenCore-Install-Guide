@@ -30,8 +30,9 @@ No good guide is made by one man, here's credit to those who've helped out:
    * For the original AMD Vanilla Guide
 * [bpetru05](https://github.com/bpetru05)
    * Additions to kernel.json
-* [InsanelyMac](https://www.insanelymac.com)
-  * For finding issues and solutions to different hardware issues
+* [jonpalmisc](https://github.com/jonpalmisc)
+   * Much needed proof reading
+
 
 Developers of OpenCore:
 
@@ -52,7 +53,7 @@ Guides linked or those that inspired this guide:
 Gotta rep dat ~~merch~~ guides:
 
 * [Getting Started With OpenCore](https://github.com/khronokernel/Getting-Started-With-OpenCore)\(The guide that started it all\)
-* [Catalina GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/)
+* [GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/)
 * [Disable Unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/)
 * [Anti-Hackintosh Buyers Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/)
 
