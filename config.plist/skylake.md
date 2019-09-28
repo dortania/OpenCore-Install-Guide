@@ -209,13 +209,13 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * `0` allows you to see all drives available, please refer to [Security](extras/secuirty.md) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
-* **Name** *
-* Name shown in OpenCore
-* **Enabled** *
-* Self explanitory, enables or disables
-* **Path** *
-* Path to file after the `Tools` folder
-* ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
+* **Name** 
+   * Name shown in OpenCore
+* **Enabled** 
+   * Self explanitory, enables or disables
+* **Path** 
+   * Path to file after the `Tools` folder
+   * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
 **Entires**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
 * **Name**
