@@ -8,7 +8,7 @@ Kernel patches:
 
 Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) so they may not always be the most up-to-date, check the #opencore_support channel's pins for the newest releases
 
-
+** Extra Importamt Note**: Current kernel payches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
 ## ACPI
 
 ![ACPI](https://i.imgur.com/Ohywvqm.png)
@@ -129,7 +129,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
-**Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MatchKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303):
+**Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MinKernel` and `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303):
 
 Kernel patches:
 * [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/615419791414525974/OC-patches-17h.plist)(10.13, 10.14, and 10.15 beta 6)
