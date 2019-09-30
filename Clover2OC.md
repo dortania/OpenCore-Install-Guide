@@ -9,7 +9,6 @@ Using an old GPU that's reliant on the "inject" property?:
 InjectIntel:
 * Vendor
 * deviceID
-* 
 
 InjectAti:
 * deviceID
@@ -177,6 +176,17 @@ device_type: XHCI
 
 # Devices
 
+**USB**:
+* FixOwnership: `UEFI -> Qurik -> ReleaseUsbOwnership`
+
+**Audio**:
+* Inject:
+* AFGLowPowerState:
+
+**Add Properties**: No equivalent, need to specify with a PCIRoot path
+
+**Properties**: `DeviceProperties -> Add`
+
 # Disable Drivers
 
 # Gui
@@ -185,10 +195,34 @@ device_type: XHCI
 
 # Kernel and Kext Patches
 
+**KernelPm**: 
+
+**AppleIntelCPUPM**:
+
+**DellSMBIOSPatch**:
+
+**KextsToPatch**:
+
+**KernelToPatch**:
+
 # Rt Variables
+
+**MLB**: 
+`PlatformInfo -> Generic -> MLB`
+
+**BooterConfig**: `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`
+* 0x28: `01`
+* 0x2A: `02`
+
+**CsrActiveConfig**: `NVRAM -> Add -> csr-active-config`
+* 0x0: `00000000`
+* 0x3: `03000000`
+* 0x67: `67000000`
+* 0x3E7: `E7030000`
 
 # SMBIOS
 
+ `PlatformInfo -> Generic`
 
 
 
@@ -196,30 +230,9 @@ device_type: XHCI
 
 # System Parameters
 
-**Custom UUID**: 
-
-**Backlight Level**:
-
-**Inject Kext**:
-
-**No Caches**:
-
-**Inject SystemID**:
-
-**ExposeSysVaraibles**:
-
 **NvidiaWeb**: 
 
 What this does is apply ```sudo nvram nvda_drv=1``` on every boot. To get a similar effect you can find it under the following path:
 
 ```NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> nvda_drv: <31>```
 
-# Booter
-
-* DiscardAppleS4Map
-* EnableAppleSmSlide
-* ForceExitBootServices
-* ProtectCsmRegion
-* SetupAppleMap: YES
-* SetupAppleSlide: YES
-* ShrinkMemoryMap

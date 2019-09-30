@@ -226,8 +226,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
 * **UIScale**:
-  * 01: Standard resolution
-  * 02: HiDPI (generally required for FileVault to function correctly on smaller displays\)
+  * 01: Standard resolution(Clover equivalent is `0x28`)
+  * 02: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 

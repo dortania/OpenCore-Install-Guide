@@ -1,12 +1,18 @@
 # Stuck on EndRandomSeed
+Couple problems:
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
 
-* `ProvideConsoleGop` is likely missing, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
+Other possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power managment, obviously much safer to turn off CFG-Lock). When this happens, there's a couple fixes:
+
+* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall. Clover equivalent is `KernelPm`
+* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment. Clover equivalent is `AppleIntelCPUPM`
+
 
 # Still waiting on root device
 
 * Gernally seen as a USB error, couple ways to fix:
    * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
-   * Other issue can be that certain firmwares won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`
+   * Other issue can be that certain firmwares won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
 
 # iMessage and Siri Broken
 
