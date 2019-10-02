@@ -8,7 +8,7 @@ Kernel patches:
 
 Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) so they may not always be the most up-to-date, check the #opencore_support channel's pins for the newest releases
 
-** Extra Importamt Note**: Current kernel payches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
+**Extra Importamt Note**: Current kernel patches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
 ## ACPI
 
 ![ACPI](https://i.imgur.com/Ohywvqm.png)
