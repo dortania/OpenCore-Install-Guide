@@ -322,7 +322,7 @@ The `iMac18,1` part gets copied to Generic -&gt; SystemProductName.
 
 The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
-The `Board Serial` part gets copied to SMBIOS -&gt; Board Serial Number as well as Generic -&gt; MLB.
+The `Board Serial` part gets copied to Generic -&gt; MLB.
 
 We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
 
