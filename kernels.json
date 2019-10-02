@@ -937,6 +937,11 @@ Credit to CorpNewt, bpetru05 and doesprintfwork for this:
     "darwin_version": "17.7.0"
   },
   {
+    "os_version": "10.13.6",
+    "build_version": "17G8037",
+    "darwin_version": "17.7.0"
+  },
+  {
     "os_version": "10.14",
     "build_version": "18A391",
     "darwin_version": "18.0.0"
@@ -1004,6 +1009,11 @@ Credit to CorpNewt, bpetru05 and doesprintfwork for this:
   {
     "os_version": "10.14.6",
     "build_version": "18G95",
+    "darwin_version": "18.7.0"
+  },
+  {
+    "os_version": "10.14.6",
+    "build_version": "18G103",
     "darwin_version": "18.7.0"
   }
 ]
