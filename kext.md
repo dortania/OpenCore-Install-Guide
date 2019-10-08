@@ -12,7 +12,7 @@ For the majority of systems, you only need 3 .efi drivers to get up and running:
 For extra functionality with OpenCore:
 
 * [UsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg)
-* Used for Apple Hot keys and FileVault support when OpenCore's built-in drivers do not work with your firmware. Recommended to test without it first.
+   * Used for Apple Hot keys and FileVault support when OpenCore's built-in drivers do not work with your firmware. Recommended to test without it first.
 
 * [VirtualSmc.efi](https://github.com/acidanthera/VirtualSMC/releases)
    * Used for proper FileVault support, cannot be used with FakeSMC
@@ -31,7 +31,7 @@ Must haves:
 
 Graphics:
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
-* Used for graphics patching, all GPUs benifit from this kext.
+   * Used for graphics patching, all GPUs benifit from this kext.
 
 Audio:
 * [AppleALC](https://github.com/vit9696/AppleALC/releases)
@@ -39,7 +39,7 @@ Audio:
 
 Ethernet:
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
-   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [I211-AT SmallTree kext](https://cdn.discordapp.com/attachments/390417931659378688/556912824228773888/SmallTree-Intel-211-AT-PCIe-GBE.kext.zip) SmallTree](https://cdn.discordapp.com/attachments/390417931659378688/556912824228773888/SmallTree-Intel-211-AT-PCIe-GBE.kext.zip)
+   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [I211-AT SmallTree kext](https://cdn.discordapp.com/attachments/390417931659378688/556912824228773888/SmallTree-Intel-211-AT-PCIe-GBE.kext.zip)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
    * Required for Atheros and Killer NICs
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
@@ -53,10 +53,16 @@ AMD CPU Specific kexts:
 * [NullCPUPowerManagment](https://github.com/corpnewt/NullCPUPowerManagement)
    * AMD CPUs cannot use Intel's power managment so we need to nullify it
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
-   * USB fix for AMD systems
+   * USB fix for AMD FX systems
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
-   * Audio for FX systems and Mic+Audio support for Ryzen system, do not mix with AppleALC
+   * Audio for FX systems and frontpanel Mic+Audio support for Ryzen system, do not mix with AppleALC
 
+Extra's: 
+* [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
+   * Useful starting with Catalina to disable the AppleMCEReporter kext which might cause kernel panics on some systems using the following SMBIOSes:
+      * MacPro6,1
+      * MacPro7,1
+      * iMacPro1,1
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
