@@ -3,10 +3,10 @@
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/615419791414525974/OC-patches-17h.plist)(10.13, 10.14, and 10.15 beta 6)
-* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/615670204676178022/OC-patches-15_16h.plist)(10.13, 10.14, and 10.15 beta 6)
+* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209139/OC-patches-17h.plist)(10.13, 10.14, and 10.15 )
+* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209138/OC-patches-15_16h.plist)(10.13, 10.14, and 10.15)
 
-Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) so they may not always be the most up-to-date, check the #opencore_support channel's pins for the newest releases
+Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.0. Users of 0.5.1 will need to wait for updated patches.
 
 **Extra Importamt Note**: Current kernel patches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
 ## ACPI

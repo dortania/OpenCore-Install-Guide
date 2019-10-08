@@ -8,7 +8,7 @@ Requirements:
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
 * [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting\(terminal command example can be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/)\).
 * [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool, but vit9696 has stated multiple times he does not support these tools and they even break OpenCore's specifications. Use at own risk!\).
-* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `Command+P+R` while boting to clean your NVRAM as long as you have `PollAppleHotKeys` set to True along side either AppleGenericInput.efi or UsbKbDxe.efi).
+* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `Command+P+R` while boting to clean your NVRAM as long as you have `PollAppleHotKeys` set to True. Some firmwares require UsbKbDxe.efi for USB functionality).
 * USB formatted as MacOS Journaled with GUID partition map.
 * Knowledge of how a hackintosh works and what files yours requires.
 * A working Hackintosh to test on.
@@ -53,11 +53,11 @@ To setup OpenCore’s folder structure, you’ll want to grab those files from O
 
 ![base EFI folder](https://i.imgur.com/1Ssvqfw.png)
 
-Now you can place your necessary .efi drivers from AppleSupportPkg into the _drivers_ folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(ie: EmuVariableUEFI\).
+Now you can place your necessary .efi drivers from AppleSupportPkg into the _drivers_ folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEF, AptioMemoryFix, OsxAptioFixDrv, etc\).
 
 * Please do also note that AptioMemoryFix.efi has now been split between OpenCore itself and FwRuntimeServices.efi
 
-Here's what mine looks like\(For the majority of users you can ignore Tools but it can be useful like of for clearing NVRAM and other such things\):
+Here's what mine looks like\(For the majority of users you can ignore Tools but it can be useful like for Shell.efi and other such tools\):
 
 ![Populated EFI folder](https://i.imgur.com/HVuyghf.png)
 
