@@ -28,6 +28,7 @@ No good guide is made by one man, here's credit to those who've helped out:
   * AMD Kernel patches
 * [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
    * For the original AMD Vanilla Guide
+   * Corrections to AMD portion of the guide
 * [bpetru05](https://github.com/bpetru05)
    * Additions to kernel.json
 * [jonpalmisc](https://github.com/jonpalmisc)
