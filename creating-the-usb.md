@@ -21,6 +21,9 @@ Recommended BIOS settings:
   * CFG Lock\(MSR 0xE2 write protection\)
   * VT-d\(can be enabled if you set DisableIoMapper to YES\)
   * CSM
+  * Thunderbolt
+  * Intel SGX
+  * Intel Platform Trust
 * Enable
   * VT-x
   * Above 4G decoding
