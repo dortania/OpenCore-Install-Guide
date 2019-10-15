@@ -42,7 +42,8 @@ For us we just want the following:
 * `0x00000002` — DEBUG_WARN in DEBUG, NOOPT, RELEASE.
 * `0x00000040` — DEBUG_INFO in DEBUG, NOOPT.
 * `0x80000000` — DEBUG_ERROR in DEBUG, NOOPT, RELEASE.
-Just like with `Target`, we use a HEX calculator then convert to decimal resultin in:
+
+Just like with `Target`, we use a HEX calculator then convert to decimal:
 
 `0x80000042` Converted to decimal `Misc` -> `Debug` -> `DisplayLevel` -> `2147483714`
 
