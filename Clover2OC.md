@@ -1,4 +1,6 @@
-# Converting common properties from Clover to Opencore's Config.plist
+# Converting common properties from Clover to Opencore
+
+## **Work in Progress**
 
 
 # Inject AMD
@@ -183,9 +185,11 @@ device_type: XHCI
 * Inject:
 * AFGLowPowerState:
 
-**Add Properties**: No equivalent, need to specify with a PCIRoot path
+**Add Properties**: 
+* No equivalent, need to specify with a PCIRoot path
 
-**Properties**: `DeviceProperties -> Add`
+**Properties**:
+* `DeviceProperties -> Add`
 
 # Disable Drivers
 
@@ -193,28 +197,42 @@ device_type: XHCI
 
 # Graphics
 
+**RadeonDeInit**:
+* [Radeon-Denit-SSDT](extras/Radeon-Deinit-SSDT)
+
 # Kernel and Kext Patches
 
 **KernelPm**: 
+* `AppleXcpmCfgLock`
 
 **AppleIntelCPUPM**:
+* `AppleCpuPmCfgLock`
 
 **DellSMBIOSPatch**:
+* `CustomSMBIOSGuid -> YES`
+* `UpdateSMBIOSMode -> Custom`
 
 **KextsToPatch**:
+* `Kernel -> Patch`
 
 **KernelToPatch**:
+* `Kernel -> Patch`
 
 # Rt Variables
 
 **MLB**: 
-`PlatformInfo -> Generic -> MLB`
+* `PlatformInfo -> Generic -> MLB`
 
-**BooterConfig**: `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`
+**BooterConfig**: 
+
+`NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`
+
 * 0x28: `01`
 * 0x2A: `02`
 
-**CsrActiveConfig**: `NVRAM -> Add -> csr-active-config`
+**CsrActiveConfig**:
+`NVRAM -> Add -> csr-active-config`
+
 * 0x0: `00000000`
 * 0x3: `03000000`
 * 0x67: `67000000`
@@ -223,10 +241,6 @@ device_type: XHCI
 # SMBIOS
 
  `PlatformInfo -> Generic`
-
-
-
-
 
 # System Parameters
 

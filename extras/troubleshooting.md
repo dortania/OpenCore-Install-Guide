@@ -5,7 +5,7 @@ Couple problems:
 Other possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power managment, obviously much safer to turn off CFG-Lock). When this happens, there's a couple fixes:
 
 * Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall. Clover equivalent is `KernelPm`
-* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment. Clover equivalent is `AppleIntelCPUPM`
+* Enable `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment. Clover equivalent is `AppleIntelCPUPM`
 
 
 # Still waiting on root device
