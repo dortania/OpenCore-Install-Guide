@@ -6,7 +6,7 @@ Kernel patches:
 * [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/632308960753352708/OC-patches-17h_converted.plist) (10.13, 10.14, and 10.15)
 * [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/632308958559862784/OC-patches-15_16h_converted.plist) (10.13, 10.14, and 10.15)
 
-Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.0. Users of 0.5.1 will need to wait for updated patches.
+Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.2
 
 **Extra Importamt Note**: Current kernel patches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
 ## ACPI
