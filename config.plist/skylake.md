@@ -4,6 +4,8 @@
 
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
 
+Do note that images will not always be the most up-to date so please read the text below them.
+
 ### ACPI
 
 ![ACPI](https://i.imgur.com/ByHZn1D.png)
@@ -52,7 +54,11 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 
 ![Booter](https://i.imgur.com/suElruh.png)
 
-This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
+This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi
+
+**MmioWhitelist**:
+
+This section is allowing devices to be passthrough to macOS that are generally ignored, most users can ignore this section.
 
 **Quirks**:
 
@@ -75,9 +81,7 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 * **ProtectCsmRegion**: NO
   * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProvideCustomSlide**: YES
-  * If there's a conflicting slide value, this option forces macOS to
-
-    use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+  * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
 * **ShrinkMemoryMap**: NO
@@ -143,12 +147,12 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
 
-**Patch**: Patches kexts \(this is where you would add newer USB port limit patches and AMD CPU patches. Do note that the XhciPortLimit quirk is preferred for USB port limit patches\).
+**Patch**: Patches both the kernel and kexts \(this is where you would add AMD CPU patches\).
 
 **Quirks**:
 
 * **AppleCpuPmCfgLock**: NO 
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM
+  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM
 * **AppleXcpmCfgLock**: NO 
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
 * **AppleXcpmExtraMsrs**: NO 
@@ -166,7 +170,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 * **ThirdPartyTrim**: NO 
   * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible as.
+  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible.
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
@@ -180,7 +184,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
 * **PollAppleHotKeys**: YES
-   * Allows you to use Apple's hot keys during boot, needs to be used in conjunction with either AppleGenericInput.efi or UsbKbDxe.efi depending on the firmware. Popular commands:
+   * Allows you to use Apple's hot keys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
       *  `Cmd+Opt+P+R`: Cleans NVRAM 
       * `Cmd+R`: Boots Recovery partition
@@ -195,7 +199,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
-* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting\)
+* **DisableWatchDog**: YES \(May need to be set for YES if OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 
 **Security**: Security is pretty self-explanatory.
 
@@ -256,9 +260,12 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 * **nvda\_drv**: &lt;&gt; 
   * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)
 * **prev-lang:kbd**: &lt;&gt; 
-  * Needed for non-latin keyboards
+  * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it:
+        * Russian: `eu-RU:252`
+        * American: `en-US:0`
+        * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
-**Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases. Note that `Add` will not overwrite values already present in NVRAM
+**Block**: Forcibly rewrites NVRAM variables, do note that `Add` will not overwrite values already present in NVRAM so values like `boot-args` should be left.
 
 **LegacyEnable**: NO
 
@@ -305,7 +312,7 @@ The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
+We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) -and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
@@ -340,6 +347,25 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
 
 **Drivers**: Add your .efi drivers here
+
+**Input**: Related to boot.efi keyboard passthrough used for for FileVault and Hotkey support
+
+* **KeyForgetThreshold**: `5`
+   * The delay between each key input when holding a key down, for best results use `5` milliseconds
+* **KeyMergeThreshold**: `2`
+   * The lengh of time that a key will be registered before resetting, for best results use `2` milliseconds
+* **KeySupport**: `YES`
+   * Enables OpenCore's built in key support, do not use with UsbKbDxe.efi
+* **KeySupportMode**: `Auto`
+   * Keyboard translation for OpenCore
+* **KeySwap**: `NO`
+   * Swaps `Option` and `Cmd` key
+* **PointerSupport**: `
+   * Used for fixing broken pointer support, commonlu used for Z87 Asus boards
+* **PointerSupportMode**:
+   * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
+* **TimerResolution**: `50000`
+   * Set architecture timer resolution, Asus boards use `60000` for the interface
 
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
@@ -379,3 +405,9 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 And now you're ready to save and place it into your EFI
 
+And now you're ready to save and place it into your EFI.
+
+For those having booting issues, please make sure to read the [Troubleshooting section](troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+
+* [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
+* [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)

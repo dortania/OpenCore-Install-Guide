@@ -40,6 +40,12 @@ To fix, swap `real` for `integer`:
 <key>HaltLevel</key>
 <integer>2147483648</integer>
 ```
+# No on-board audio
+* Verify that your PCIRoot is correct for your audio controller, this can be verified with [gfxutil](https://github.com/acidanthera/gfxutil/releases) though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer(Common 2 are HDEF and HDAS)
+```
+path/to/gfxutil -f HDEF
+```
+
 
 # Booting OpenCore reboots to BIOS
 

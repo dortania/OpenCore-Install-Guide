@@ -3,8 +3,8 @@
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209139/OC-patches-17h.plist) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209138/OC-patches-15_16h.plist) (10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/632308960753352708/OC-patches-17h_converted.plist) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/632308958559862784/OC-patches-15_16h_converted.plist) (10.13, 10.14, and 10.15)
 
 Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.0. Users of 0.5.1 will need to wait for updated patches.
 
@@ -57,7 +57,11 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 
 ![Booter](https://i.imgur.com/suElruh.png)
 
-This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
+This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi
+
+**MmioWhitelist**:
+
+This section is allowing devices to be passthrough to macOS that are generally ignored, most users can ignore this section.
 
 **Quirks**:
 
@@ -80,7 +84,11 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 * **ProtectCsmRegion**: NO
    * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProvideCustomSlide**: YES
-   * If there's a conflicting slide value, this option forces macOS to
+   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+* **SetupVirtualMap**: YES
+   * Fixes SetVirtualAddresses calls to virtual addresses
+* **ShrinkMemoryMap**: NO
+   * Needed for systems with large memory maps that don't fit, don't use unless necessary
 
 ## DeviceProperties
 
@@ -132,15 +140,15 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 **Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MinKernel` and `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303):
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209139/OC-patches-17h.plist)(10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209138/OC-patches-15_16h.plist)(10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/632308960753352708/OC-patches-17h_converted.plist) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/632308958559862784/OC-patches-15_16h_converted.plist) (10.13, 10.14, and 10.15)
 
 Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) so they may not always be the most up-to-date, check the [#opencore_support](https://discordapp.com/channels/249992304503291905/611462337446281236) channel's pins for the newest releases.
 
 **Quirks**:
 
 * **AppleCpuPmCfgLock**: NO 
-   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM
+   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM
 * **AppleXcpmCfgLock**: NO 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
 * **AppleXcpmExtraMsrs**: NO 
@@ -160,8 +168,6 @@ Do note that these patches are pulled from the [AMD OS X discord](https://discor
 * **XhciPortLimit**: YES 
    * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD is in the works.
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning.
-
 
 ## Misc
 
@@ -173,7 +179,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
 * **PollAppleHotKeys**: YES
-   * Allows you to use Apple's hot keys during boot, needs to be used in conjunction with either AppleGenericInput.efi or UsbKbDxe.efi depending on the firmware. Popular commands:
+   * Allows you to use Apple's hot keys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
       *  `Cmd+Opt+P+R`: Cleans NVRAM 
       * `Cmd+R`: Boots Recovery partition
@@ -188,7 +194,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
-* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting\)
+* **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 
 **Security**: Security is pretty self-explanatory.
 
@@ -243,9 +249,13 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **nvda\_drv**: &lt;&gt; 
    * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)
 * **prev-lang:kbd**: &lt;&gt; 
-   * Needed for non-latin keyboards
+   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it:
+   * Russian: `eu-RU:252`
+   * American: `en-US:0`
+   * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
-**Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases. Note that `Add` will not overwrite values already present in NVRAM
+**Block**: Forcibly rewrites NVRAM variables, do note that `Add` will not overwrite values already present in NVRAM so values like `boot-args` should be left.
+
 
 **LegacyEnable**: NO
    * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
@@ -291,7 +301,7 @@ The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
+We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
@@ -318,6 +328,25 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
 
 **Drivers**: Add your .efi drivers here
+
+**Input**: Related to boot.efi keyboard passthrough used for for FileVault and Hotkey support
+
+* **KeyForgetThreshold**: `5`
+   * The delay between each key input when holding a key down, for best results use `5` milliseconds
+* **KeyMergeThreshold**: `2`
+   * The lengh of time that a key will be registered before resetting, for best results use `2` milliseconds
+* **KeySupport**: `YES`
+   * Enables OpenCore's built in key support, do not use with UsbKbDxe.efi
+* **KeySupportMode**: `Auto`
+   * Keyboard translation for OpenCore
+* **KeySwap**: `NO`
+   * Swaps `Option` and `Cmd` key
+* **PointerSupport**: `
+   * Used for fixing broken pointer support, commonlu used for Z87 Asus boards
+* **PointerSupportMode**:
+   * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
+* **TimerResolution**: `50000`
+   * Set architecture timer resolution, Asus boards use `60000` for the interface
 
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
@@ -355,4 +384,9 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 # Cleaning up
 
-And now you're ready to save and place it into your EFI
+And now you're ready to save and place it into your EFI.
+
+For those having booting issues, please make sure to read the [Troubleshooting section](troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+
+* [AMD OS X Discord](https://discord.gg/2QYd7ZT)
+* [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
