@@ -20,7 +20,7 @@ The above ACPI patch is only an example, please read below for more info
 
 This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
 
-* [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/extra-files/SSDT-EC-AMD.aml)
+* [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsll)
    * Corrects your EC devices, needed for all Catalina users who have 
 
 For those having troubles understanding the SSDTs regarding EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled).
@@ -73,8 +73,8 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards. Generally useful for APTIO V firmwares(Broadwell+)
+* **DevirtualiseMmio**: YES
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values and generally useful for most firmwares
 * **DisableSingleUser**: NO
    * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO

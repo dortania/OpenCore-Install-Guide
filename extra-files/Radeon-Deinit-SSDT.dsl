@@ -4,6 +4,8 @@ DefinitionBlock ("", "SSDT", 2, "Apple", "Radeon", 0x00001000)
 
     Scope (\_SB.PCI0.GFX0.PEGP)
     {
+      If (_OSI ("Darwin")){
+            
         OperationRegion (PCIB, PCI_Config, Zero, 0x0100)
         Field (PCIB, AnyAcc, NoLock, Preserve)
         {
@@ -52,5 +54,6 @@ DefinitionBlock ("", "SSDT", 2, "Apple", "Radeon", 0x00001000)
             Store (One, GENA)
             Store (Zero, MUMD)
         }
+       }
     }
 }

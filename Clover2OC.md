@@ -2,110 +2,6 @@
 
 ## **Work in Progress**
 
-
-# Inject AMD
-
-Using an old GPU that's reliant on the "inject" property?:
-
-
-InjectIntel:
-* Vendor
-* deviceID
-
-InjectAti:
-* deviceID
-* Connectors
-
-
-InjectNvidia:
-* DeviceID
-* Family
-
-
-FakeIntel:
-* device-id
-* vendor-id
-
-FakeAti:
-* device-id
-* ATY,DeviceID
-* @0,compatible
-* vendor-id
-* ATY,VendorID
-
-
-Info from: 
-* FixBiosDSDT
-* Ati.c
-
-# FakeID
-
-Found in device_inject.c
-
-**ATI**
-
-**IntelGFX**
-
-**LAN**
-
-* device-id
-* compatible
-* vendor-id
-
-**Nvidia**
-
-**SATA**
-
-* 
-**WIFI**
-
-* name
-* compatible
-
-**XHCI**
-
-* device-id
-* device_type: UHCI
-* device_type: OHCI
-
-device_type: EHCI
-
-* device-id
-* AAPL,current-available
-* AAPL,current-extra
-* AAPL,current-available
-* AAPL,current-extra
-* AAPL,current-in-sleep
-* built-in
-
-device_type: XHCI
-
-* device-id
-* AAPL,current-available
-* AAPL,current-extra
-* AAPL,current-available
-* AAPL,current-in-sleep
-* built-in
-
-**IMEI**
-
-* device-id
-* vendor-id
-
-
-
-
-# USB
-
-* device-id
-* device_type
-* device_type
-
-
-
-
-
-
 # Acpi
 
 **Fixes**:
@@ -135,6 +31,7 @@ device_type: XHCI
 * **FixHDA**:
 
 * **FixHPET**:
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
 
 * **FixSATA**:
 
@@ -170,6 +67,10 @@ device_type: XHCI
 
 * **AddHDMI**:
 
+**SSDT**:
+* **PluginType**:
+* [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
+* Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this
 # Boot
 
 # Boot Graphics
@@ -182,7 +83,7 @@ device_type: XHCI
 * FixOwnership: `UEFI -> Qurik -> ReleaseUsbOwnership`
 
 **Audio**:
-* Inject:
+* Inject: `DeviceProperties -> Add -> PCIRoot... -> layout-id`
 * AFGLowPowerState:
 
 **Add Properties**: 
@@ -191,11 +92,81 @@ device_type: XHCI
 **Properties**:
 * `DeviceProperties -> Add`
 
+**FakeID**
+
+* **USB**
+   * `device-id`
+   * `device_type`
+   * `device_type`
+* **IMEI**
+   * `device-id`
+   * `vendor-id`
+
+* **XHCI**
+
+   * `device-id`
+   * `device_type: UHCI`
+   * `device_type: OHCI`
+
+device_type: EHCI
+
+   * `device-id`
+   * `AAPL,current-available`
+   * `AAPL,current-extra`
+   * `AAPL,current-available`
+   * `AAPL,current-extra`
+   * `AAPL,current-in-sleep`
+   * `built-in`
+
+device_type: XHCI
+
+   * `device-id`
+   * `AAPL,current-available`
+   * `AAPL,current-extra`
+   * `AAPL,current-available`
+   * `AAPL,current-in-sleep`
+   * `built-in`
+
+* **WIFI**
+
+   * `name`
+   * `compatible`
+   
+* **LAN**
+
+   * `device-id`
+   * `compatible`
+   * `vendor-id`
+
 # Disable Drivers
 
 # Gui
 
 # Graphics
+
+**InjectIntel**:
+* `Vendor`
+* `deviceID`
+
+**InjectAti**:
+* `deviceID`
+* `Connectors`
+
+**InjectNvidia**:
+* `DeviceID`
+* `Family`
+
+
+**FakeIntel**:
+* `device-id`
+* `vendor-id`
+
+FakeAti:
+* `device-id`
+* `ATY,DeviceID`
+* `@0,compatible`
+* `vendor-id`
+* `ATY,VendorID`
 
 **RadeonDeInit**:
 * [Radeon-Denit-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/extra-files/Radeon-Deinit-SSDT.dsl)
@@ -220,6 +191,8 @@ device_type: XHCI
 * `Kernel -> Patch`
 
 # Rt Variables
+**ROM**:
+* No direct translation as you need to provide your hadware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
 
 **MLB**: 
 * `PlatformInfo -> Generic -> MLB`
@@ -241,7 +214,14 @@ device_type: XHCI
 
 # SMBIOS
 
- `PlatformInfo -> Generic`
+**Product Name**:
+* `PlatformInfo -> Generic -> SystemProductName`
+**Serial Number**:
+* `PlatformInfo -> Generic -> SystemSerialNumber`
+**Board Serial Number**:
+* `PlatformInfo -> Generic -> MLB`
+**SmUUID**:
+* `PlatformInfo -> Generic -> SystemUUID`
 
 # System Parameters
 

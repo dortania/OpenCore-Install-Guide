@@ -72,8 +72,8 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: NO
-  * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards. Generally useful for APTIO V firmwares(Broadwell+)
+* **DevirtualiseMmio**: YES
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values and generally useful for most firmwares
 * **DisableSingleUser**: NO
   * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -118,7 +118,7 @@ We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenme
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
-Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases). Please note that ADR for HDAS/HDEF is 0x001F0003 and Path = PciRoot(0x0)/Pci(0x1f,0x3), PciRoot(0x0)/Pci(0x1b,0x0) is generally for haswell and earlier. You can find your audio path with the following(Do note not all audio controllers are called HDEF, sometimes being known as HDAS and such):
+Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases). Please note that ADR for HDAS/HDEF is 0x001F0003 and Path = PciRoot(0x0)/Pci(0x1f,0x3), PciRoot(0x0)/Pci(0x1b,0x0) is generally for haswell and earlier. You can find your audio path with the following(Do note not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):
 ```
 path/to/gfxutil -f HDEF
 ```

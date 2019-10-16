@@ -74,8 +74,8 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards. Generally useful for APTIO V firmwares(Broadwell+)
+* **DevirtualiseMmio**: YES
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values and generally useful for most firmwares
 * **DisableSingleUser**: NO
    * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
