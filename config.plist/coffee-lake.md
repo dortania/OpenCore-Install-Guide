@@ -2,7 +2,9 @@
 
 ### Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
+You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
+
+Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist
 
 Do note that images will not always be the most up-to date so please read the text below them.
 
@@ -14,7 +16,18 @@ The above ACPI patch is only an example, please read below for more info
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
+
+For us we'll need a couple SSDTs to bring back functionality that Clover provided:
+* [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
+   * Allows for native CPU power managment, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly.
+* [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
+* Fixes USB power and correct your EC devices, needed for all Catalina users. 
+* [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
+*  This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 which prevent systems from booting macOS. Aternative is [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) for when AWAC SSDT doesn't work(**Z370 users do not apply**)
+   
+
+For those having troubles understanding the SSDTs regarding plugin type and EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that ompiled SSDTs have a .aml extension(Assembled).
 
 **Block**
 
@@ -22,9 +35,7 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc.\) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers can utilize the [SSDT-EC-USBX.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) or use similar Device Property patching like what's seen with Framebuffer patching And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
-
-For those who utilize [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2) can use the [SSDT-AWAC.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl).
+This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc.\) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. 
 
 * **Comment** 
    * Name of patch
@@ -135,7 +146,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/ACr6owo.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts)f or what kexts we recommend.
 
 * **BundlePath** 
    * Name of the kext

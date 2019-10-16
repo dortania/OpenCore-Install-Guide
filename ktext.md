@@ -1,4 +1,4 @@
-# .efi drivers
+# Firmware Drivers
 
 For the majority of systems, you only need 3 .efi drivers to get up and running:
 
@@ -85,7 +85,7 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
    * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems.
 
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-   * Sets `PluginType`, Clover altrenative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some systems have theirs starting at `PR00` so adjust accordingly.
+   * Sets `PluginType`, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly.
 
 * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
    * Adds a SMbus device and fixes DeviceProperties injection via `_DSM` which is found in your DSDT table. Most can ignore.

@@ -2,7 +2,9 @@
 
 ### Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
+You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
+
+Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist
 
 Do note that images will not always be the most up-to date so please read the text below them.
 
@@ -16,15 +18,35 @@ The above ACPI patch is only an example, please read below for more info.
 
 This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
 
+For us we'll need a couple SSDTs to bring back functionality that Clover provided:
+* [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
+   * Corrects your EC devices, needed for all Catalina users. 
+* [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
+   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems.
+* [CPU-PM](Cpu0Ist)
+* Needed for proper CPU power managment, you will need to run Pike's ssdtPRGen.sh script to generate this file.
+
+For those having troubles understanding the SSDTs regarding plugin type and EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that ompiled SSDTs have a .aml extension(Assembled).
+
 **Block**
 
-This drops certain ACPI tabes from loading, for us we can ignore this.
+This drops certain ACPI tabes from loading, for use we need to block both CpuPm and Cpu0Ist:
+
+CpuPm:
+* OemTableId: `437075506d000000`
+* TableLength: `0`
+* TableSignature: `53534454`
+* Enabled: `YES`
+
+Cpu0Ist:
+* OemTableId: `4370753049737400`
+* TableLength: `0`
+* TableSignature: `53534454`
+* Enabled: `YES`
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc.\) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like EHCI controllers can utilize the [SSDT-EHCx\_ODD.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl) or use similar Device Property patching like what's seen with Framebuffer patching.
-
-And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
+This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc.\) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. 
 
 * **Comment** 
    * Name of patch
@@ -120,7 +142,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/repNbDT.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts)f or what kexts we recommend.
 
 * **BundlePath** 
    * Name of the kext

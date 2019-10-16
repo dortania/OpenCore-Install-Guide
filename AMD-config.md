@@ -1,6 +1,8 @@
 ## Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
+You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
+
+Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist
 
 Kernel patches:
 * [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/632308960753352708/OC-patches-17h_converted.plist) (10.13, 10.14, and 10.15)
@@ -8,7 +10,6 @@ Kernel patches:
 
 Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.2
 
-**Extra Importamt Note**: Current kernel patches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
 ## ACPI
 
 ![ACPI](https://i.imgur.com/Ohywvqm.png)
@@ -112,7 +113,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/ehG6Da6.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts)f or what kexts we recommend.
 
  * **BundlePath** 
     * Name of the kext
