@@ -21,6 +21,7 @@
 * [Emulated NVRAM](post-install/nvram.md)
 * [GPU Spoof](post-install/spoof.md)
 * [Security](post-install/security.md)
+* [Fixing CFG Lock](post-install/msr-lock.md)
 
 ## Extras
 
