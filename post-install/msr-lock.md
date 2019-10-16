@@ -37,7 +37,7 @@ path/to/ifrextract path/to/Setup.bin path/to/Setup.txt
 
 5. Run the Modified GRUB Shell and paste the following where `0x5A4` is replaced with your value:
 ```
-setup_var 0x123 0x00
+setup_var 0x5A4 0x00
 ```
 Do note that variable offsets are unique not just to each motherboard but even to its firmware version. Never ever try to use an offset without checking.
 
