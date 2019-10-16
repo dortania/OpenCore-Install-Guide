@@ -21,7 +21,9 @@ Now the fun part!
 
 
 1. Open your firmware with UEFITool and then find `CFG Lock` as a unicode string. If nothing pops up then your firmware doesn't support `CFG Lock`, otherwise continue on. 
+
 ![](https://i.imgur.com/ziN50wL.png)
+
 
 2. You'll find that this string in found within a Setup folder, right click and export as `Setup.bin`
 
@@ -30,6 +32,7 @@ Now the fun part!
 path/to/ifrextract path/to/Setup.bin path/to/Setup.txt
 ```
 4. Open the text file and search for `CFG Lock, VarStoreInfo (VarOffset/VarName):` and note the offset right after it(ie: `0x5A4`)
+
 ![](https://i.imgur.com/Vp8dqI5.png)
 
 5. Run the Modified GRUB Shell and paste the following where `0x5A4` is replaced with your value:
