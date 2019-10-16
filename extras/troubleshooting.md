@@ -1,12 +1,16 @@
+# Converting Clover config to OpenCore
+
+* While still a work in progress, see [Clover2OC](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Clover2OC.md) for more info.
+
 # Stuck on EndRandomSeed
 Couple problems:
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
 
 Other possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power managment, obviously much safer to turn off CFG-Lock). When this happens, there's a couple fixes:
 
-* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall. Clover equivalent is `KernelPm`
-* Enable `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment. Clover equivalent is `AppleIntelCPUPM`
-
+* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall though can be unstable. Clover equivalent is `KernelPm`
+* Enable `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment which can be unstable. Clover equivalent is `AppleIntelCPUPM`
+* [Patch your MSR E2](post-install/msr-lock.md)(Recommeneded solution)
 
 # Still waiting on root device
 
@@ -45,6 +49,13 @@ To fix, swap `real` for `integer`:
 ```
 path/to/gfxutil -f HDEF
 ```
+
+# Stuck after selection macOS parttion on OpenCore
+
+* CFG-Lock not off couple solutions:
+   * Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall though can be unstable. Clover equivalent is `KernelPm`
+   * Enable `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment which can be unstable. Clover equivalent is `AppleIntelCPUPM`
+   * [Patch your MSR E2](post-install/msr-lock.md)(Recommeneded solution)
 
 
 # Booting OpenCore reboots to BIOS
