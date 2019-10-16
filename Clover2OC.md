@@ -198,7 +198,8 @@ device_type: XHCI
 # Graphics
 
 **RadeonDeInit**:
-* [Radeon-Denit-SSDT](extras/Radeon-Deinit-SSDT)
+* [Radeon-Denit-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/extra-files/Radeon-Deinit-SSDT.dsl)
+   * Do note that this is meant for gfx0, adjust for your system
 
 # Kernel and Kext Patches
 
