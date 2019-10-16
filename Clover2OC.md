@@ -15,6 +15,7 @@
 * **FixDarwin**:
 
 * **FixSBUS**:
+   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
 * **FixLAN**:
 
@@ -25,7 +26,7 @@
 * **FixAirport**:
 
 * **AddMCHC**:
-
+   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 * **FixIDE**:
 
 * **FixHDA**:
@@ -216,10 +217,13 @@ FakeAti:
 
 **Product Name**:
 * `PlatformInfo -> Generic -> SystemProductName`
+
 **Serial Number**:
 * `PlatformInfo -> Generic -> SystemSerialNumber`
+
 **Board Serial Number**:
 * `PlatformInfo -> Generic -> MLB`
+
 **SmUUID**:
 * `PlatformInfo -> Generic -> SystemUUID`
 

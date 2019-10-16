@@ -130,7 +130,7 @@ We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenme
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
-Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases) You can find your audio path with the following(Do note not all audio controllers are called HDEF, sometimes being known as HDAS and such):
+Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases) You can find your audio path with the following(Do note not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):
 ```
 path/to/gfxutil -f HDEF
 ```
