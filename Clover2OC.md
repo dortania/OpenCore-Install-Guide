@@ -69,7 +69,7 @@
 
 **Audio**:
 * Inject: `DeviceProperties -> Add -> PCIRoot... -> layout-id`
-* AFGLowPowerState: `DeviceProperties -> Add -> PCIRoot... -> AFGLowPowerState -> <04000000>`
+* AFGLowPowerState: `DeviceProperties -> Add -> PCIRoot... -> AFGLowPowerState -> <01000000>`
 
 **Add Properties**: 
 * No equivalent, need to specify with a PCIRoot path
