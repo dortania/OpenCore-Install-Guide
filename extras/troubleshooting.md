@@ -1,6 +1,6 @@
 # Converting Clover config to OpenCore
 
-* While still a work in progress, see [Clover2OC](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Clover2OC.md) for more info.
+* While still a work in progress, see [Clover2OC](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Clover2OC.md) for more info. This section is useful for laptop users as well since commonly used properties have been translated over.
 
 # Stuck on EndRandomSeed
 Couple problems:

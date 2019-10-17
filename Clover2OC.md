@@ -6,73 +6,56 @@
 
 **Fixes**:
 
-* **AddDTGP**:
-
-* **FixIPIC**:
-
-* **FixUSB**:
-
-* **FixDarwin**:
-
 * **FixSBUS**:
    * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
-* **FixLAN**:
-
 * **FixShutdown**:
+   * Add `If(arg=5){}` to all `method _PTS` in your DSDTs and SSDTs
 
 * **FixDisplay**:
-
-* **FixAirport**:
+   * Manual framebuffer patching, WhaterGreen does most of the work already
 
 * **AddMCHC**:
    * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
-* **FixIDE**:
 
 * **FixHDA**:
-
+   * Handled by AppleALC
 * **FixHPET**:
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
 
 * **FixSATA**:
-
-* **FakeLPC**:
-
-* **FixFirewire**:
-
-* **FixDarwin7**:
+   * `Kernel -> Quriks -> ExternalDiskIcons -> YES`
 
 * **FixADP1**:
-
-* **FixRegions**:
+   * Renames device AC0 to ADP1, see [Rename-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
 
 * **FixRTC**:
 
-* **DeleteUnused**:
-
-* **FixMutex**:
-
 * **FixTMR**:
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
 
 * **AddPNLF**:
-
+   * See Rehabman's [SSDT-PNLF](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl)
 * **AddIMEI**:
-
-* **FixS3D**:
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
 * **FixIntelGfx**:
-
-* **FixACST**:
-
-* **FixWAK**:
+   * WhateverGreen handles this
 
 * **AddHDMI**:
+   * WhateverGreen handles this
 
 **SSDT**:
 * **PluginType**:
    * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
    * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this
 # Boot
+
+**Boot Argument**
+* `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+
+**NeverHibernate**: 
+* `Misc -> Boot -> HibernateMode -> None`
 
 # Boot Graphics
 
@@ -82,10 +65,11 @@
 
 **USB**:
 * FixOwnership: `UEFI -> Qurik -> ReleaseUsbOwnership`
+* ClockID: `DeviceProperties -> Add -> PCIRoot... -> AAPL,clock-id`
 
 **Audio**:
 * Inject: `DeviceProperties -> Add -> PCIRoot... -> layout-id`
-* AFGLowPowerState:
+* AFGLowPowerState: `DeviceProperties -> Add -> PCIRoot... -> AFGLowPowerState -> <04000000>`
 
 **Add Properties**: 
 * No equivalent, need to specify with a PCIRoot path
@@ -162,7 +146,7 @@ device_type: XHCI
 * `device-id`
 * `vendor-id`
 
-FakeAti:
+**FakeAti**:
 * `device-id`
 * `ATY,DeviceID`
 * `@0,compatible`
@@ -170,20 +154,20 @@ FakeAti:
 * `ATY,VendorID`
 
 **RadeonDeInit**:
-* [Radeon-Denit-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/extra-files/Radeon-Deinit-SSDT.dsl)
+* [Radeon-Denit-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
    * Do note that this is meant for gfx0, adjust for your system
 
 # Kernel and Kext Patches
 
 **KernelPm**: 
-* `AppleXcpmCfgLock`
+* `Kernel -> Quirks -> AppleXcpmCfgLock -> YES`
 
 **AppleIntelCPUPM**:
-* `AppleCpuPmCfgLock`
+* `Kernel -> Quirks -> AppleCpuPmCfgLock -> YES`
 
 **DellSMBIOSPatch**:
-* `CustomSMBIOSGuid -> YES`
-* `UpdateSMBIOSMode -> Custom`
+* `Kernel -> Quirks -> CustomSMBIOSGuid -> YES`
+* `PlatformInfo -> UpdateSMBIOSMode -> Custom`
 
 **KextsToPatch**:
 * `Kernel -> Patch`
@@ -191,7 +175,14 @@ FakeAti:
 **KernelToPatch**:
 * `Kernel -> Patch`
 
+**Kernel LAPIC**:
+* `Kernel -> Quirks -> LapicKernelPanic -> YES`
+
+**KernelXCPM**
+* `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
+
 # Rt Variables
+
 **ROM**:
 * No direct translation as you need to provide your hadware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
 
@@ -232,6 +223,5 @@ FakeAti:
 **NvidiaWeb**: 
 
 What this does is apply ```sudo nvram nvda_drv=1``` on every boot. To get a similar effect you can find it under the following path:
-
-```NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> nvda_drv: <31>```
+* `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> nvda_drv: <31>`
 
