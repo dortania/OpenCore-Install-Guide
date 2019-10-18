@@ -10,7 +10,9 @@
    * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
 * **FixShutdown**:
-   * Add `If(arg=5){}` to all `method _PTS` in your DSDTs and SSDTs
+   * [FixShutdown-USB-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/FixShutdown-USB-SSDT.dsl)
+   * [__PTS to ZPTS Patch](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/FixShutdown-Patch.plist)
+   * This will not harm Windows or Linux installs as this is just adding missing methods that should've been there to start with. *Blame the firmware writers*
 
 * **FixDisplay**:
    * Manual framebuffer patching, WhaterGreen does most of the work already
