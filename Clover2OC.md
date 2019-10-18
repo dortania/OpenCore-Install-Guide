@@ -32,7 +32,7 @@
    * Renames device AC0 to ADP1, see [Rename-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
 
 * **FixRTC**:
-
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
 * **FixTMR**:
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
 
@@ -72,6 +72,7 @@
 **Audio**:
 * Inject: `DeviceProperties -> Add -> PCIRoot... -> layout-id`
 * AFGLowPowerState: `DeviceProperties -> Add -> PCIRoot... -> AFGLowPowerState -> <01000000>`
+* ResetHDA: [CodecCommander](https://bitbucket.org/RehabMan/os-x-eapd-codec-commander/downloads/)
 
 **Add Properties**: 
 * No equivalent, need to specify with a PCIRoot path
@@ -186,7 +187,7 @@ device_type: XHCI
 # Rt Variables
 
 **ROM**:
-* No direct translation as you need to provide your hadware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
+* No direct translation for `UseMacAddr0` as you need to provide your hadware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
 
 **MLB**: 
 * `PlatformInfo -> Generic -> MLB`
