@@ -10,7 +10,7 @@ Other possible problem is that some users either forget or cannot disable CFG-Lo
 
 * Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall though can be unstable. Clover equivalent is `KernelPm`
 * Enable `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment which can be unstable. Clover equivalent is `AppleIntelCPUPM`
-* [Patch your MSR E2](post-install/msr-lock.md)(Recommeneded solution)
+* [Patch your MSR E2](post-install/msr-lock.md) (Recommended solution)
 
 # Still waiting on root device
 
