@@ -6,6 +6,9 @@
 
 **Fixes**:
 
+* **FixIPIC**:
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
+
 * **FixSBUS**:
    * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
@@ -24,7 +27,6 @@
    * Handled by AppleALC
 * **FixHPET**:
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
-
 * **FixSATA**:
    * `Kernel -> Quriks -> ExternalDiskIcons -> YES`
 
@@ -70,6 +72,11 @@
 * ClockID: `DeviceProperties -> Add -> PCIRoot... -> AAPL,clock-id`
 
 **Audio**:
+
+For the following, you will need to know your PCIRoot for your audio controller and its name(commonly known as HDEF but also HDAS, HDAU and such), this can be found with [gfxutil](https://github.com/acidanthera/gfxutil/releases):
+```
+path/to/gfxutil -f HDEF
+```
 * Inject: `DeviceProperties -> Add -> PCIRoot... -> layout-id`
 * AFGLowPowerState: `DeviceProperties -> Add -> PCIRoot... -> AFGLowPowerState -> <01000000>`
 * ResetHDA: [CodecCommander](https://bitbucket.org/RehabMan/os-x-eapd-codec-commander/downloads/)
@@ -80,8 +87,8 @@
 **Properties**:
 * `DeviceProperties -> Add`
 
-**FakeID**
-
+**FakeID**:
+For the following, you will need to know your PCIRoot for your device and apply their properties with `DeviceProperties -> Add`, PCIRoot can be found with [gfxutil](https://github.com/acidanthera/gfxutil/releases)
 * **USB**
    * `device-id`
    * `device_type`
@@ -181,13 +188,14 @@ device_type: XHCI
 **Kernel LAPIC**:
 * `Kernel -> Quirks -> LapicKernelPanic -> YES`
 
-**KernelXCPM**
+**KernelXCPM**:
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
 
 # Rt Variables
 
 **ROM**:
 * No direct translation for `UseMacAddr0` as you need to provide your hadware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
+* Also verify your En0 is still built-in when running OpenCore, this can break iMessage and icloud when there's no `built-in` property.
 
 **MLB**: 
 * `PlatformInfo -> Generic -> MLB`
