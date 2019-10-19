@@ -253,7 +253,7 @@ Do note that these patches are pulled from the [AMD OS X discord](https://discor
   * `debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
   * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debuging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as these properties either cannot be found or some other issue with them.
+  * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debuging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. Unfortunately AMD systems cannot have SIP enabled
    * `E7030000` - SIP completely disabled.
 
