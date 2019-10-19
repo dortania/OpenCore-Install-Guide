@@ -190,6 +190,8 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
   * Allows for reading kernel panics logs when kernel panics occurs
+* **PowerTimeoutKernelPanic**: YES
+  * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
 * **ThirdPartyTrim**: NO 
   * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
