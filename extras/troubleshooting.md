@@ -8,12 +8,10 @@ Couple problems:
 
 Other possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power managment, obviously much safer to turn off CFG-Lock). When this happens, there's a couple fixes:
 
-* Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall though can be unstable. Clover equivalent is `KernelPm`
-* Enable `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment which can be unstable. Clover equivalent is `AppleIntelCPUPM`
 * [Fixing CFG Lock](post-install/msr-lock.md) 
-   * Recommended solution
+* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
 
-# Still waiting on root device
+Other other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt's also got a fix: [SSDTTime](https://github.com/corpnewt/SSDTTime)'s FixHPET option
 
 * Gernally seen as a USB error, couple ways to fix:
    * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)

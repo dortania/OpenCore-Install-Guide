@@ -10,7 +10,7 @@ Do note that images will not always be the most up-to date so please read the te
 
 ### ACPI
 
-![ACPI](https://i.imgur.com/ByHZn1D.png)
+![ACPI](https://i.imgur.com/IkLFucw.png)
 
 The above ACPI patch is only an example, please read below for more info
 
@@ -245,7 +245,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ### NVRAM
 
-![NVRAM](https://i.imgur.com/wWQIh0w.png)
+![NVRAM](https://i.imgur.com/HM4FTH6.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
@@ -373,7 +373,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
    * Swaps `Option` and `Cmd` key
-* **PointerSupport**: `
+* **PointerSupport**: `NO`
    * Used for fixing broken pointer support, commonlu used for Z87 Asus boards
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
@@ -391,6 +391,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **UnicodeCollation**: NO
    * Some older firmware have broken unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
 
+
 **Quirks**:
 
 * **AvoidHighAlloc**: NO
@@ -405,7 +406,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
 * **ReleaseUsbOwnership**: NO
   * Releases USB controller from firmware driver, avoid unless you know what you're doing. Clover equivalent is `FixOwnership`
-* **RequestBootVarRouting**: NO
+* **RequestBootVarRouting**: YES
   * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
   * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed

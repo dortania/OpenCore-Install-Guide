@@ -10,7 +10,7 @@ Do note that images will not always be the most up-to date so please read the te
 
 ### ACPI
 
-![ACPI](https://i.imgur.com/ByHZn1D.png)
+![ACPI](https://i.imgur.com/IkLFucw.png)
 
 The above ACPI patch is only an example, please read below for more info
 
@@ -245,7 +245,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ### NVRAM
 
-![NVRAM](https://i.imgur.com/ezsuskN.png)
+![NVRAM](https://i.imgur.com/HM4FTH6.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
@@ -356,7 +356,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ### UEFI
 
-![UEFI](https://i.imgur.com/UiGGDWK.png)
+![UEFI](https://i.imgur.com/l1ayKSf.png)
 
 **ConnectDrivers**: YES
 
@@ -376,7 +376,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
    * Swaps `Option` and `Cmd` key
-* **PointerSupport**: `
+* **PointerSupport**: `NO`
    * Used for fixing broken pointer support, commonlu used for Z87 Asus boards
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
@@ -393,6 +393,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Fixes incorrect cusor size when running FileVault, set to YES for better FileVault compatibilty
 * **UnicodeCollation**: NO
    * Some older firmware have broken unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
+
 
 **Quirks**:
 

@@ -10,7 +10,7 @@ Do note that images will not always be the most up-to date so please read the te
 
 ### ACPI
 
-![ACPI](https://i.imgur.com/ByHZn1D.png)
+![ACPI](https://i.imgur.com/2T0ubhy.png)
 
 The above ACPI patch is only an example, please read below for more info
 
@@ -74,8 +74,8 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: YES
-   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values and generally useful for most firmwares
+* **DevirtualiseMmio**: NO
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values and generally useful for newer firmwares
 * **DisableSingleUser**: NO
    * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -198,7 +198,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ### Misc
 
-![Misc](https://i.imgur.com/OROZbCk.png)
+![Misc](https://i.imgur.com/qU1SYNs.png)
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 * **HibernateMode**: None
@@ -255,7 +255,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ### NVRAM
 
-![NVRAM](https://i.imgur.com/gwsqXCG.png)
+![NVRAM](https://i.imgur.com/HM4FTH6.png)
 
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majogrity can ignore but \)
 
@@ -386,7 +386,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
    * Swaps `Option` and `Cmd` key
-* **PointerSupport**: `
+* **PointerSupport**: `NO`
    * Used for fixing broken pointer support, commonlu used for Z87 Asus boards
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
