@@ -12,7 +12,6 @@ Do note that images will not always be the most up-to date so please read the te
 
 ![ACPI](https://i.imgur.com/QFsl9R1.png)
 
-The above ACPI patch is only an example, please read below for more info.
 
 **Add:**
 

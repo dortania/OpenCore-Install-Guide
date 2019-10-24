@@ -12,9 +12,8 @@ Do note that these patches are pulled from the [AMD OS X discord](https://discor
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/Ohywvqm.png)
+![ACPI](https://i.imgur.com/zqNt4dV.png)
 
-The above ACPI patch is only an example, please read below for more info
 
 **Add:**
 

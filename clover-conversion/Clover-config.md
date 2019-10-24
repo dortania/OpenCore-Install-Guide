@@ -1,8 +1,92 @@
 # Converting common properties from Clover to Opencore
 
-## **Work in Progress**
+So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
+
+# Kexts and Firmware drivers
+
+Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different. 
+
+Supported ones:
+
+* ApfsDriverLoader.efi
+* FwRuntimeServices.efi
+* HFSPlus.efi
+* VBoxHfs.efi
+* EnhancedFatDxe.efi
+* UsbKbDxe.efi
+* UsbMouseDxe.efi
+* VirtualSmc.efi
+* XhciDxe.efi
+* AudioDxe.efi
+* BootChimeDxe.efi
+* NvmExpressDxe.efi
+* Ps2MouseDxe
+* PartitionDxe
+* VBoxExt2
+* VBoxExt4
+* NTFS.efi
+* VBoxIso9600
+* GrubUDF
+* GrubNTFS
+* GrubISO9660
+* GrubEXFAT
+
+Drivers provided/merged into Opencore and so are no longer needed:
+
+* DataHubDxe.efi
+* EnglishDxe.efi
+* AppleGenericInput.efi
+* AppleUiSupport.efi
+* AppleImageCodec.efi
+* AppleUITheme.efi
+* AppleKeyMapAggregator.efi
+* AppleEvent.efi
+* AptioInputFix.efi
+* EmuVariableUEFI.efi
+* AptioMemoryFix.efi
+* FirmwareVolume.efi
+* HashServiceFix.efi
+
+
+Explictely unsupported drivers:
+
+* osxaptiofixdrv.efi
+* osxaptiofix2drv.efi
+* osxaptiofix2drv-free2000.efi
+* osxaptiofix3drv.efi
+* OsxFatBinaryDrv.efi
+* OsxLowMemFixDrv.efi
+* SMCHelper.efi
+
+
+# AptioMemoryFix
+
+Well before we actually get started on converting the Clover config, we must first talk about converting from AptioMemoryFix. The main thing to note is that it's inside of OpenCore with FwRuntimeServices being an extension, this means that AptioMemoryFix and that there's also a lot more settings to choose from. Please see the hardware specific sections of the OpenCore guide to know what booter settings your system may require(HEDT like X99 and X299 should look to the closest CPU like Skylake-X should refer to Skylake guide and **read the comments** as they mention specifics for your system).
 
 # Acpi
+
+**ACPI Renames**:
+
+So with the transition from Clover to OpenCore we should start removing unneeded patches you may have carried along for some time:
+* EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Broadwell and newer users do not need this.
+   * change EHC1 to EH01
+   * change EHC2 to EH02
+* XHCI Patches: Just not needed anymore
+   * change XHCI to XHC
+   * change XHC1 to XHC
+* SATA patches: Purely cosmetic in macOS now
+   * change SAT0 to SATA
+* IMEI Patches: Handled by WhateverGreen
+   * change HECI to IMEI
+   * change MEI to IMEI
+* GFX patches: Handled by WhateverGreen
+   * change GFX0 to IGPU
+* EC Patches: Desktops should be powering off their ECs and making a fake one, [SSDTTime](https://github.com/corpnewt/SSDTTime) can do this for you
+   * change EC0 to EC
+   * change H_EC to EC
+   * change ECDV to EC
+      
+
 
 **Fixes**:
 
@@ -190,6 +274,26 @@ device_type: XHCI
 
 **KernelXCPM**:
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
+
+**USB Port Limit Patches**:
+* `Kernel -> Quirks -> XhciPortLimit -> YES`
+
+**External Icons Patch**:
+* `kernel -> Quirks -> ExternalDiskIcons -> YES`
+* Used for when you interneal disk are seen as external on macOS
+
+**AppleRTC**
+* This has been turned into a kext patch, this is needed anytime you have either BIOS reset or safe mode issues.
+* Under `Kernel -> patch`:
+
+|Enabled|String|YES|
+|:-|:-|:-|
+|Count|Number|1|
+|Identifier|String|com.apple.driver.AppleRTC|
+|Limit|Nuber|0|
+|Find|Data|75330fb7|
+|Replace|Data|eb330fb7|
+
 
 # Rt Variables
 

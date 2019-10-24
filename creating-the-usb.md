@@ -25,6 +25,7 @@ Recommended BIOS settings:
   * Intel Platform Trust
   * CFG Lock\(MSR 0xE2 write protection\)
      * If this can't be turned off in the BIOS(or even found) please concider patching it out. See [Fixing CFG Lock](post-install/msr-lock.md) for more info.
+     * AMD CPU sers don't need to worry about.
 * Enable
   * VT-x
   * Above 4G decoding

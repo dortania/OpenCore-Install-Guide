@@ -60,3 +60,13 @@ Gotta rep dat ~~merch~~ guides:
 
 And for those who have either recommendations or issues with this guide can find the Github for this site [here](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide)
 
+Sources:
+
+* KALSR slide:
+   * [Vit9696's Explainer](https://www.insanelymac.com/forum/topic/331381-aptiomemoryfix/?do=findComment&comment=2564269)
+   * [Apianti's explainer](https://www.reddit.com/r/hackintosh/comments/cfjyla/i_unleashed_a_plague_upon_you_guys_and_i_am_sorry/)
+   * [KASLR Explainer](https://lwn.net/Articles/569635/)
+   * [More KASLR Explainer](https://www.blackhat.com/docs/us-16/materials/us-16-Jang-Breaking-Kernel-Address-Space-Layout-Randomization-KASLR-With-Intel-TSX.pdf)
+
+* Cleaning RC scripts:
+   * [Clover Emulated NVRAM Uninstaller](https://www.tonymacx86.com/resources/clover-emulated-nvram-uninstaller.368/)

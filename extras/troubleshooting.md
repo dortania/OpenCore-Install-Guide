@@ -1,6 +1,6 @@
 # Converting Clover config to OpenCore
 
-* While still a work in progress, see [Clover2OC](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/Clover2OC.md) for more info. This section is useful for laptop users as well since commonly used properties have been translated over.
+* While still a work in progress, see [Clover2OC](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion) for more info. This section is useful for laptop users as well since commonly used properties have been translated over.
 
 # Stuck on EndRandomSeed
 Couple problems:
@@ -49,13 +49,30 @@ To fix, swap `real` for `integer`:
 path/to/gfxutil -f HDEF
 ```
 
-# Stuck after selection macOS parttion on OpenCore
+# Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off couple solutions:
-   * Enable `AppleXcpmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU itself and likely the cause of the stall though can be unstable. Clover equivalent is `KernelPm`
-   * Enable `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within AppleIntelCPUPowerManagment which can be unstable. Clover equivalent is `AppleIntelCPUPM`
-   * [Patch your MSR E2](post-install/msr-lock.md)(Recommeneded solution)
+   * [Patch your MSR E2](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock)(Recommeneded solution)
+   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
 
+
+# BIOS reset or sent into Safemode after reboot/shutdown?
+
+Issue with AppleRTC, quite a simple fix:
+
+* Under `Kernel -> patch`:
+
+|Enabled|String|YES|
+|:-|:-|:-|
+|Count|Number|1|
+|Identifier|String|com.apple.driver.AppleRTC|
+|Limit|Nuber|0|
+|Find|Data|75330fb7|
+|Replace|Data|eb330fb7|
+
+# "Couldn't allocate runtime area" errors?
+
+See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix)
 
 # Booting OpenCore reboots to BIOS
 
