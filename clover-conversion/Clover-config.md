@@ -123,6 +123,17 @@ For the following, you will need to know your PCIRoot for your device and apply 
 * **IMEI**
    * `device-id`
    * `vendor-id`
+   
+* **WIFI**
+
+   * `name`
+   * `compatible`
+   
+* **LAN**
+
+   * `device-id`
+   * `compatible`
+   * `vendor-id`
 
 * **XHCI**
 
@@ -148,17 +159,6 @@ device_type: XHCI
    * `AAPL,current-available`
    * `AAPL,current-in-sleep`
    * `built-in`
-
-* **WIFI**
-
-   * `name`
-   * `compatible`
-   
-* **LAN**
-
-   * `device-id`
-   * `compatible`
-   * `vendor-id`
 
 # Disable Drivers
 
