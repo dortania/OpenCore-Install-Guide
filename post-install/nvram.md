@@ -8,6 +8,7 @@ So this section is for those who don't have native NVRAM, the most common hardwa
 * H370
 * Q370
 * Z390
+* Some X99 and X299 (verify if you have working NVRAM below)
 
 ## Cleaning out the Clover gunk
 
@@ -31,7 +32,6 @@ If folders are empty then delete them as well:
 
 ## Verifying if you have working NVRAM
 
-This is mostly for X99 and X299 users who may or may not have working NVRAM.
 To start open terminal and run the following one line at a time:
 ```
 sudo -s
@@ -43,11 +43,11 @@ Now reboot and run this:
 ```
 nvram -p | grep -i myvar
 ```
-If nothing returns then you may continue forward
+If nothing returns then your NVRAM is not working. If a line containing `myvar test` returns, your NVRAM is working.
 
-## Making nvram.plist
+## Enabling emulated NVRAM (with a nvram.plist)
 
-So to make a nvram.plist you'll need 3 things set:
+To enable emulated NVRAM, you'll need 3 things set:
 
 Within your config.plist:
 
@@ -60,7 +60,7 @@ And within your EFI:
 
 * `FwRuntimeServices.efi` driver\(this is needed for proper sleep, shutdown and other services to work correctly
 
-Now grab the 'LogoutHook.command' and place it somewhere safe like within your user directory:
+Now grab the 'LogoutHook.command' and 'nvram.mojave' and place them somewhere safe (e.g. within your user directory, as shown below):
 
 `/Users/(your username)/LogoutHook/LogoutHook.command`
 
