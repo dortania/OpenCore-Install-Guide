@@ -60,7 +60,7 @@ And within your EFI:
 
 * `FwRuntimeServices.efi` driver\(this is needed for proper sleep, shutdown and other services to work correctly
 
-Now grab the 'LogoutHook.command' and 'nvram.mojave' and place them somewhere safe (e.g. within your user directory, as shown below):
+Now grab the 'LogoutHook.command' and place it somewhere safe (e.g. within your user directory, as shown below):
 
 `/Users/(your username)/LogoutHook/LogoutHook.command`
 
@@ -68,5 +68,7 @@ Open up terminal and run the following:
 
 `sudo defaults write com.apple.loginwindow LogoutHook /Users/(your username)/LogoutHook/LogoutHook.command`
 
-And voila! You have emulated NVRAM, do keep in mind this requires macOS to support the `-x` flag for this to work correctly which is unavailable on 10.12 and below. `nvram.mojave` fixes this by invoking it instead of the system one
+And voila! You have emulated NVRAM!
+
+Do keep in mind this requires the `nvram` command to support the `-x` flag for this to work correctly which is unavailable on MacOS 10.12 and below. If you are installing MacOS 10.12 or earlier, you need to copy `nvram.mojave` into the same folder as `LogoutHook.command`, which fixes this by invoking it instead of the system `nvram` command.
 
