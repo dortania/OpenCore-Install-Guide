@@ -20,7 +20,7 @@ Do note that these patches are pulled from the [AMD OS X discord](https://discor
 This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
 
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
-   * Corrects your EC devices, needed for all Catalina users who have 
+   * Corrects your EC devices, needed for all Catalina users. **You will not go far without this**
 
 For those having troubles understanding the SSDTs regarding EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled).
 
