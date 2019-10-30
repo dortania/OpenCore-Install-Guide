@@ -24,6 +24,15 @@ This is where you'll add SSDT patches for your system, these are most useful for
 
 For those having troubles understanding the SSDTs regarding EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled).
 
+> How do I get a copy of my DSDT?
+
+* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> SaveAs `SystemSDDT`
+   * Do note that all ACPI patches will be applied to the DSDT
+* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Windows and Linux
+   * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
+* F4 in Clover Boot menu
+   * DSDT can be found in `EFI/CLOVER/ACPI/origin`
+
 **Block**
 
 This drops certain ACPI tabes from loading, for us we can ignore this
@@ -168,7 +177,7 @@ Do note that these patches are pulled from the [AMD OS X discord](https://discor
 * **ExternalDiskIcons**: YES 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **LapicKernelPanic**: NO 
-* Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
+   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
    * Allows for reading kernel panics logs when kernel panics occurs
 * **PowerTimeoutKernelPanic**: YES
@@ -188,7 +197,7 @@ Do note that these patches are pulled from the [AMD OS X discord](https://discor
    * Best to avoid hibernation with hackintoshes all together
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **PollAppleHotKeys**: YES
+* **PollAppleHotKeys**: NO
    * Allows you to use Apple's hot keys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
       *  `Cmd+Opt+P+R`: Cleans NVRAM 
@@ -279,7 +288,8 @@ Do note that these patches are pulled from the [AMD OS X discord](https://discor
 
 For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application. 
 
-For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with _iMac14,2_.
+For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with _iMac14,2_. 
+* MacPro7,1 is exclusive to macOS 10.15 Catalina
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
 
@@ -345,7 +355,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
 * **KeyMergeThreshold**: `2`
    * The lengh of time that a key will be registered before resetting, for best results use `2` milliseconds
-* **KeySupport**: `YES`
+* **KeySupport**: `NO`
    * Enables OpenCore's built in key support, do not use with UsbKbDxe.efi
 * **KeySupportMode**: `Auto`
    * Keyboard translation for OpenCore

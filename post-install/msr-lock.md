@@ -2,7 +2,7 @@
 
 So you've installed macOS but you're using those pesky `CFG-Lock` patches that we want to get rid of, well to do this is fairly simple. You'll need the following:
 
-In your Tools folder and config.plist
+Inside your EFI/OC/Tools folder and config.plist:
 * [VerifyMsrE2](https://github.com/acidanthera/AppleSupportPkg)
 * [Modifed GRUB Shell](https://github.com/datasone/grub-mod-setup_var/releases)
 
@@ -17,6 +17,14 @@ And don't forget to disable the following from your config.plist:
 And the final part, grabbing your BIOS from the vendors website.
 
 Now the fun part!
+
+# Checking if CFG-Lock can be turned off
+
+Boot OpenCore and select the `VerifyMsrE2` option in the picker. This tool will tell you whether your BIOS supports CFG-Lock and if it can be unlocked.
+
+
+# Turning off CFG-Lock manually
+
 
 
 
@@ -43,3 +51,4 @@ Do note that variable offsets are unique not just to each motherboard but even t
 
 And you're done! Now you'll have correct CPU power management
 
+**Note**: Everytime you reset your BIOS you will need to flip this bit again, make sure to write it down with the BIOS version so you know which 

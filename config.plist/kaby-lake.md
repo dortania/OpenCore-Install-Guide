@@ -25,6 +25,15 @@ For us we'll need a couple SSDTs to bring back functionality that Clover provide
 
 For those having troubles understanding the SSDTs regarding plugin type and EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that ompiled SSDTs have a .aml extension(Assembled).
 
+> How do I get a copy of my DSDT?
+
+* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> SaveAs `SystemSDDT`
+   * Do note that all ACPI patches will be applied to the DSDT
+* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Windows and Linux
+   * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
+* F4 in Clover Boot menu
+   * DSDT can be found in `EFI/CLOVER/ACPI/origin`
+
 **Block**
 
 This drops certain ACPI tabes from loading, for us we can ignore this
@@ -195,7 +204,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Best to avoid hibernation with hackintoshes all together
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **PollAppleHotKeys**: YES
+* **PollAppleHotKeys**: NO
    * Allows you to use Apple's hot keys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
       *  `Cmd+Opt+P+R`: Cleans NVRAM 
@@ -369,7 +378,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
 * **KeyMergeThreshold**: `2`
    * The lengh of time that a key will be registered before resetting, for best results use `2` milliseconds
-* **KeySupport**: `YES`
+* **KeySupport**: `NO`
    * Enables OpenCore's built in key support, do not use with UsbKbDxe.efi
 * **KeySupportMode**: `Auto`
    * Keyboard translation for OpenCore

@@ -15,7 +15,7 @@ For extra functionality with OpenCore:
    * Used for Apple Hot keys and FileVault support when OpenCore's built-in drivers do not work with your firmware. Recommended to test without it first.
 
 * [VirtualSmc.efi](https://github.com/acidanthera/VirtualSMC/releases)
-   * Used for proper FileVault support, cannot be used with FakeSMC
+   * Only used for proper FileVault support, cannot be used with FakeSMC.
    
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
    
@@ -59,7 +59,7 @@ AMD CPU Specific kexts:
 
 Extra's: 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-   * Useful starting with Catalina to disable the AppleMCEReporter kext which might cause kernel panics on some systems using the following SMBIOSes:
+   * Useful starting with Catalina to disable the AppleMCEReporter kext which might cause kernel panics on AMD CPU and dual socket systems:
       * MacPro6,1
       * MacPro7,1
       * iMacPro1,1
@@ -69,6 +69,8 @@ Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/maste
 # SSDTs
 
 So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well we'll be going over a couple to see whether you need them. Do note you'll need to compile these SSDTs with [MaciASL](https://github.com/acidanthera/MaciASL/releases) and please read them before compiling. Some require you to adjust them for your specific system(ie: EC0 to H_EC for SSDT-EC-USBX)
+
+If you're unsure which you need, the specific ones for each platform are mentioned in the ACPI section of the guide.
 
 
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
