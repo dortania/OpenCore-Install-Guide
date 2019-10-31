@@ -415,7 +415,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **ProvideConsoleGop**: YES
   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
 * **ReleaseUsbOwnership**: NO
-  * Releases USB controller from firmware driver, avoid unless you know what you're doing. Clover equivalent is `FixOwnership`
+   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO

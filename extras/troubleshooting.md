@@ -2,6 +2,12 @@
 
 * While still a work in progress, see [Clover2OC](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion) for more info. This section is useful for laptop users as well since commonly used properties have been translated over.
 
+# Stuck on "no vault provided!"
+
+Turn the following off under `Misc -> Security`:
+* `RequireSignature`
+* `RequireVault`
+
 # Stuck on EndRandomSeed
 Couple problems:
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
@@ -54,7 +60,8 @@ path/to/gfxutil -f HDEF
 * CFG-Lock not off couple solutions:
    * [Patch your MSR E2](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock)(Recommeneded solution)
    * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
-
+* PollAppleHotKeys driver is incompatible:
+   * Disable `PollAppleHotKeys` and `KeySupport`
 
 # BIOS reset or sent into Safemode after reboot/shutdown?
 
