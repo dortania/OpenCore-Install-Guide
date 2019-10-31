@@ -136,8 +136,8 @@ And for users who are having issues finding their slide value can also type `$sl
 
 Well fret not, for there is a simple solution. After running `memmap` in the shell, run either:
 
-For clover: `memmap > memmap.txt`
+For clover: `memmap -> memmap.txt`
 
-For OpenCore: `memmap -> memmap.txt`
+For OpenCore: `memmap > memmap.txt`
 
-This will add a `memmap.txt` file to the root of your EFI for OpenCore users (Clover users need to specify location), you can then proceed to drop it into the r/hackintosh discord and type `$slide [insert link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
+This will add a `memmap.txt` file to the root of your EFI for OpenCore users (You may need to specify the drive location), you can then proceed to drop it into the r/hackintosh discord and type `$slide [insert link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.

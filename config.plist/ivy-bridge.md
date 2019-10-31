@@ -25,7 +25,7 @@ For us we'll need a couple SSDTs to bring back functionality that Clover provide
 * [CPU-PM](Cpu0Ist)
 * Needed for proper CPU power managment, you will need to run Pike's ssdtPRGen.sh script to generate this file.
 
-For those having troubles understanding the SSDTs regarding plugin type and EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that ompiled SSDTs have a .aml extension(Assembled).
+For those having troubles understanding the SSDTs regarding plugin type and EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder
 
 > How do I get a copy of my DSDT?
 

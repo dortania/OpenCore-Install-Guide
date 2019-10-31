@@ -10,6 +10,8 @@ Kernel patches:
 
 Do note that these patches are pulled from the AMD OS X and that they're made for OpenCore 0.5.2 specifically.
 
+**And read this guide more than once before setting up Opencore and make sure you have it setup correctly**
+
 ## ACPI
 
 ![ACPI](https://i.imgur.com/zqNt4dV.png)
@@ -22,7 +24,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
    * Corrects your EC devices, needed for all Catalina users. **You will not go far without this**
 
-For those having troubles understanding the SSDTs regarding EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled).
+For those having troubles understanding the SSDTs regarding EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder.
 
 > How do I get a copy of my DSDT?
 
@@ -122,6 +124,8 @@ path/to/gfxutil -f HDEF
 ```
 
 Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`
+
+The `PciRoot(0x0)/Pci(0x2,0x0)` is only for intel iGPUs, remove this section entirely.
 
 **Block**: Removes device properties from map, for us we can ignore this
 
