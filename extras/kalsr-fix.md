@@ -12,16 +12,21 @@ Where this becomes an issue is when you introduce devices with either small memo
 
 Well as I mentioned earlier, this is for users who don't have enough space for the kernel or moves to a place that is too small. You'll generally experience an error similar to this when booting:
 
+```
 Error allocating 0x1197b pages at 0x0000000017a80000 alloc type 2
 Couldn't allocate runtime area
+```
 
 With some variantion:
-
+```
 Only 244/256 silde values are usable!
+```
 
 Or even crashes while running macOS:
 
+```
 panic(cpu 6 caller 0xffffff801fc057ba): a freed zone element has been modified in zone kalloc.4096: expected 0x3f00116dbe8a46f6 but found 0x3f00116d00000000
+```
 
 The best part about these errors is that they can be random, also the reason why power cycling your PC 20 times also can fix the issue but only temporarily.
 
@@ -36,7 +41,7 @@ The real fix to this is quite simple actually, the process is both the same for 
    * Clover Shell(most users already have this included, usually called shell64.efi or some variation)
 * OpenCore users:
    * [FwRuntimeServices](https://github.com/acidanthera/AppleSupportPkg/releases)
-   * [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)(Don't forget to enable this under `Root->Misc->Tools->Item 0`)
+   * [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)(Don't forget to enable this under `Root->Misc->Tools`)
    * Config.plist settings:
       * AvoidRuntimeDefrag:Fixes UEFI runtime services like date, time, NVRAM, etc
       * DevirtualiseMmio:Reduces stolen memory footprint so we're given more options for slide values
