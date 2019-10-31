@@ -5,10 +5,10 @@ You'll want to start with the sample.plist that OpenCorePkg provides you and ren
 Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/632308960753352708/OC-patches-17h_converted.plist) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/632308958559862784/OC-patches-15_16h_converted.plist) (10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
-Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.2
+Do note that these patches are pulled from the AMD OS X and that they're made for OpenCore 0.5.2 specifically.
 
 ## ACPI
 
@@ -28,10 +28,12 @@ For those having troubles understanding the SSDTs regarding EC can use CoprNewt'
 
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> SaveAs `SystemSDDT`
    * Do note that all ACPI patches will be applied to the DSDT
-* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Windows and Linux
+* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Linux
    * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
+
+IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
 
 **Block**
 
@@ -157,10 +159,8 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 **Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MinKernel` and `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303):
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/632308960753352708/OC-patches-17h_converted.plist) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/632308958559862784/OC-patches-15_16h_converted.plist) (10.13, 10.14, and 10.15)
-
-Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) so they may not always be the most up-to-date, check the [#opencore_support](https://discordapp.com/channels/249992304503291905/611462337446281236) channel's pins for the newest releases.
+* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
 **Quirks**:
 

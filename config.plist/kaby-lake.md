@@ -29,10 +29,12 @@ For those having troubles understanding the SSDTs regarding plugin type and EC c
 
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> SaveAs `SystemSDDT`
    * Do note that all ACPI patches will be applied to the DSDT
-* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Windows and Linux
+* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Linux
    * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
+
+IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
 
 **Block**
 
