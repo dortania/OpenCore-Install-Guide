@@ -28,7 +28,7 @@ For those having troubles understanding the SSDTs regarding EC can use CoprNewt'
 
 > How do I get a copy of my DSDT for running SSDTTime?
 
-* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> SaveAs `SystemSDDT`
+* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> Save as `System DSDT`, make sure the file format is ACPI Machine Language Binary
    * Do note that all ACPI patches will be applied to the DSDT
 * [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Linux
    * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
