@@ -14,24 +14,26 @@
 
 ## AMD Config.plist
 
-* [Zen/ThreadRipper](AMD-config.md)
+* [Zen/ThreadRipper](AMD/AMD-config.md)
 
 ## Post Install
 
 * [Emulated NVRAM](post-install/nvram.md)
-* [GPU Spoof](post-install/spoof.md)
-* [Security](post-install/security.md)
-* [Fixing CFG Lock](post-install/msr-lock.md)
+* [Disabling GPU](post-install/spoof.md)
+* [Security and FileVault](post-install/security.md)
+
+## Troubleshooting
+
+* [Fixing Resolution and Verbose](extras/verbose.md)
+* [OpenCore Debugging](extras/debug.md)
+* [Miscellaneous issues](extras/troubleshooting.md)
 
 ## Extras
 
 * [Legacy Install](extras/legacy.md)
-* [Hiding Verbose](extras/verbose.md)
 * [Fixing KALSR slide values](extras/kalsr-fix.md)
-* [Troubleshooting](extras/troubleshooting.md)
-* [OpenCore Debugging](extras/debug.md)
+* [Fixing CFG Lock](post-install/msr-lock.md)
 
 ## Misc
-
 * [Credit](misc/credit.md)
 

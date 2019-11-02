@@ -26,7 +26,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 
 For those having troubles understanding the SSDTs regarding EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder.
 
-> How do I get a copy of my DSDT?
+> How do I get a copy of my DSDT for running SSDTTime?
 
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> SaveAs `SystemSDDT`
    * Do note that all ACPI patches will be applied to the DSDT
@@ -34,6 +34,8 @@ For those having troubles understanding the SSDTs regarding EC can use CoprNewt'
    * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
+* [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
+   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker
 
 IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
 
@@ -176,8 +178,8 @@ Kernel patches:
    * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO 
    * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
-* **DisableIOMapper**: YES 
-   * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems
+* **DisableIOMapper**: NO 
+   * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems varies so recommened to disable SVM(SecureVirtualMachine) in BIOS
 * **ExternalDiskIcons**: YES 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **LapicKernelPanic**: NO 

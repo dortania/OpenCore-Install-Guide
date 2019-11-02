@@ -8,6 +8,8 @@ Users of ProperTree will also get the benifit of running the Snapshot function w
 
 Do note that images will not always be the most up-to date so please read the text below them.
 
+**And read this guide more than once before setting up Opencore and make sure you have it setup correctly**
+
 ### ACPI
 
 ![ACPI](https://i.imgur.com/QFsl9R1.png)
@@ -35,6 +37,8 @@ For those having troubles understanding the SSDTs regarding plugin type and EC c
    * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
+* [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
+   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker
 
 IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
 

@@ -81,6 +81,23 @@ Issue with AppleRTC, quite a simple fix:
 
 See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix)
 
+# Can't run `acpidump.efi`
+
+Call upon OpenCore shell:
+
+```
+shell> fs0: //replace with proper drive
+
+fs0:\> dir //to verify this is the right directory
+
+   Directory of fs0:\
+     01/01/01 3:30p   EFI
+     
+fs0:\> cd EFI\OC\Tools //note that its with forward slashes
+
+fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
+```
+
 # Booting OpenCore reboots to BIOS
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
