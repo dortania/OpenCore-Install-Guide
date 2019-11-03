@@ -35,7 +35,7 @@ For those having troubles understanding the SSDTs regarding EC can use CoprNewt'
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
 * [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
-   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker
+* Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml
 
 IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
 

@@ -130,11 +130,7 @@ Now save and add this to both your keytext (kext) folder and config.plist then r
 
 ![I need photo of IOReg, ass hasn't messaged back even after I setup his hack for him]()
 
-<<<<<<< HEAD
 Look at that, all the ports have been added! Now we can start to slowly remove unwanted ports.
 
 
-
-=======
 Look at that, all the ports have been added! Now we can start to slowly remove unwanted ports. It's as simple as just removing the ports you don't want from the plist.
->>>>>>> 2ca20069536adb3096f4e158676b8965909aa452

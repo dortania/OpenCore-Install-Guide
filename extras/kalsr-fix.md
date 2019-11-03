@@ -128,7 +128,7 @@ And just to make it a bit clearer on the formula:
 
 Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`).If this value still gives you errors then you many proceed to the second largest `Start` value and so on.
 
-Sometimes you may find that when you calculate slide that you receive `slide=-0.379150390625`, when this happens round this to `slide=0`.
+Sometimes you may find that when you calculate slide that you receive super small vales like `slide=-0.379150390625`, when this happens round this to `slide=0`.
 
 And for users who are having issues finding their slide value can also type `$slide [insert largest #Pages value]` in the #Sandbox channel on the [r/hackintosh Discord](https://discord.gg/u8V7N5C)
 
@@ -140,4 +140,4 @@ For clover: `memmap -> memmap.txt`
 
 For OpenCore: `memmap > memmap.txt`
 
-This will add a `memmap.txt` file to the root of your EFI for OpenCore users (You may need to specify the drive location), you can then proceed to drop it into the r/hackintosh discord and type `$slide [insert link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
+This will add a `memmap.txt` file to the root of your EFI for OpenCore users (You may need to specify the drive location like `fs0:`), you can then proceed to drop it into the r/hackintosh discord and type `$slide [insert link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
