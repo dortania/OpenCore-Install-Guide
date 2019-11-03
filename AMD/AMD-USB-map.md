@@ -1,4 +1,4 @@
-With OpenCore I think it's about time we finally destroy some AMD myths, like how USB is just screwed on AMD and can't be mapped. Well that is false! And I will show you the way of enlightenment.
+With OpenCore I think it's about time we finally destroy some AMD myths, like how USB is just screwed on AMD and can't be mapped. Well that is false! And I will show you the path of enlightenment.
 
 So why would I want to use this? Well couple reasons:
 * Add missing USB ports that macOS didn't automatically add
@@ -98,12 +98,12 @@ So what kind of data do we shove into this plist? Well there's a cuple sections 
 
 UsbConnector types that we care about:
 ```
-0: Type A connector // USB 2.0
-3: USB 3 Standard-A connector
+0: USB 2.0 Type A connector
+3: USB 3.0 Type A connector
 8: Type C connector - USB 2.0-only
 9: Type C connector - USB 2.0 and USB 3.0 with Switch
 10: Type C connector - USB 2.0 and USB 3.0 without Switch
-255: Proprietary connector // For Internal USB ports like bluetooth
+255: Proprietary connector - For Internal USB ports like bluetooth
 ```
 Now lets take this section:
 
@@ -130,3 +130,6 @@ Now save and add this to both your keytext folder and config.plist then reboot!
 ![I need photo of IOReg, ass hasn't messaged back even after I setup his hack for him]()
 
 Look at that, all the ports have been added! Now we can start to slowly remove unwanted ports.
+
+
+
