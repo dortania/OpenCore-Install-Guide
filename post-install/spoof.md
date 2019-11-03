@@ -72,3 +72,8 @@ DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
 
 What this SSDT does special compared to Rehabman's SSDT is that this adds the `If (_OSI ("Darwin")){}` block so that this SSDT wouldn't be applied when booting other operating systems
 
+# Fixing Windows
+
+So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:
+
+![Credit to CorpNewt for image](https://i.imgur.com/TG3jGBC.png)
