@@ -13,7 +13,7 @@ See Corp's [USB map guide for now](https://usb-map.gitbook.io/project/terms-of-e
 # Getting started
 
 So what you'll need to get started:
-* Running macOS(this can be done in windows/linux though you'll ne)
+* Running macOS (this can be done in windows/linux though you'll need macOS to actually use the port map)
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases)
 * [ProperTree](https://github.com/corpnewt/ProperTree) or some other plist editor
 * [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/raw/master/IORegistryExplorer_v2.1.zip)
@@ -24,7 +24,7 @@ So what you'll need to get started:
 # Gettting your DSDT
 
 Couple different ways:
-* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> SaveAs SystemSDDT
+* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> Save as `System DSDT`, make sure the file format is ACPI Machine Language Binary
 * F4 in Clover
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
 * [SSDTTime](https://github.com/corpnewt/SSDTTime) for Linux
@@ -52,7 +52,7 @@ You'll find that `DSDT.bat` is on the root of your EFI, reboot and rename the fi
 
 # Creating the map
 
-So to start off, open IORegistryExplorer and find the USB controller you'd wish to map. For controllers, they come in some variantions:
+So to start off, open IORegistryExplorer and find the USB controller you'd wish to map. For controllers, they come in some variations:
 * XHC
 * XHC0
 * XHC1
@@ -61,7 +61,8 @@ So to start off, open IORegistryExplorer and find the USB controller you'd wish 
 * XHCI
 * XHCX
 * AS43
-* PTXH(Commonly associated with AMD Chipset controllers)
+* PTXH (Commonly associated with AMD Chipset controllers)
+The best way to find controllers is by searching for `XHC` and then looking at the results that come up. The parent of all the ports is the USB controller.
 
 For today's example we'll be adding missing ports for the X399 chipset which has the identifier `PTXH`
 
@@ -92,7 +93,7 @@ So what kind of data do we shove into this plist? Well there's a cuple sections 
 
 * **Model**: The SMBIOS this kext will match against
 * **IONameMatch**: The name of the controlller it'll match against
-* **port-count**: The last/largest port value
+* **port-count**: The last/largest port value that you want injected
 * **port**: The address of the USB controller
 * **UsbConnector**: The type of USB connector, which can be found on the [ACPI 6.3 spec, section 9.14](https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf)
 
@@ -125,11 +126,15 @@ For us, what matters is the `Name (_ADR, 0x12)  // _ADR: Address` as this tells 
 ![](https://i.imgur.com/9R6cab8.png)
 
 
-Now save and add this to both your keytext folder and config.plist then reboot!
+Now save and add this to both your keytext (kext) folder and config.plist then reboot!
 
 ![I need photo of IOReg, ass hasn't messaged back even after I setup his hack for him]()
 
+<<<<<<< HEAD
 Look at that, all the ports have been added! Now we can start to slowly remove unwanted ports.
 
 
 
+=======
+Look at that, all the ports have been added! Now we can start to slowly remove unwanted ports. It's as simple as just removing the ports you don't want from the plist.
+>>>>>>> 2ca20069536adb3096f4e158676b8965909aa452
