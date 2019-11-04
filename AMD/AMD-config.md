@@ -2,7 +2,7 @@
 
 You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
 
-Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist
+Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
 
 Kernel patches:
 * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
@@ -22,7 +22,7 @@ Do note that these patches are pulled from the AMD OS X and that they're made fo
 This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
 
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
-   * Corrects your EC devices, needed for all Catalina users. **You will not go far without this**
+   * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 
 For those having troubles understanding the SSDTs regarding EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder. You can compile with MaciASL by running File -> SaveAs -> ACPI Machine Language.
 
@@ -35,7 +35,7 @@ For those having troubles understanding the SSDTs regarding EC can use CoprNewt'
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
 * [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
-* Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml
+   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml. Tool provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
 
 IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
 
@@ -170,20 +170,20 @@ Kernel patches:
 
 To merge:
 * Open both files, 
-* Delete the `Patches` section from Config.plist
-* Copy the `Patches` section from OC_patches.plist
+* Delete the `Patch` section from config.plist
+* Copy the `Patch` section from patches.plist
 * Paste into where old patches were in config.plist
 
 **Quirks**:
 
 * **AppleCpuPmCfgLock**: NO 
-   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM
+   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. AMD users can ignore
 * **AppleXcpmCfgLock**: NO 
-   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
+   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. AMD users can ignore
 * **AppleXcpmExtraMsrs**: NO 
    * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO 
-   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
+   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandom with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
 * **DisableIOMapper**: NO 
    * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems varies so recommened to disable SVM(SecureVirtualMachine) in BIOS
 * **ExternalDiskIcons**: YES 

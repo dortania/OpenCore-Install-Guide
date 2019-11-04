@@ -21,14 +21,14 @@ Recommended BIOS settings:
 
 * Disable:
   * Fast Boot
-  * VT-d\(can be enabled if you set DisableIoMapper to YES\)
+  * VT-d\(can be enabled if you set DisableIoMapper to YES, AMD users will need to disable SVM in the BIOS\)
   * CSM
   * Thunderbolt
   * Intel SGX
   * Intel Platform Trust
   * CFG Lock\(MSR 0xE2 write protection\)
      * If this can't be turned off in the BIOS(or even found) please concider patching it out. See [Fixing CFG Lock](post-install/msr-lock.md) for more info.
-     * AMD CPU sers don't need to worry about.
+     * AMD CPU users don't need to worry about.
 * Enable
   * VT-x
   * Above 4G decoding
@@ -68,6 +68,11 @@ Now you can place your necessary .efi drivers from AppleSupportPkg into the _dri
 Here's what mine looks like\(For the majority of users you can ignore Tools but it can be useful like for Shell.efi and other such tools\):
 
 ![Populated EFI folder](https://i.imgur.com/HVuyghf.png)
+
+**Reminder**:
+* SSDTs and custom DSDTs go in ACPI folder
+* Kexts go in Kexts folder
+* Firmware drivers(.efi) go in Drivers folder
 
 ## Making an installer
 

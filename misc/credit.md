@@ -70,3 +70,6 @@ Sources:
 
 * Cleaning RC scripts:
    * [Clover Emulated NVRAM Uninstaller](https://www.tonymacx86.com/resources/clover-emulated-nvram-uninstaller.368/)
+   
+* ACPI Dumping:
+   * [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)

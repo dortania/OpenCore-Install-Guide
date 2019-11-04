@@ -1,6 +1,6 @@
 # Firmware Drivers
 
-For the majority of systems, you only need 3 .efi drivers to get up and running:
+These are the drivers used for OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
 
 * [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Needed for seeing APFS volumes.
@@ -17,11 +17,14 @@ For extra functionality with OpenCore:
 * [VirtualSmc.efi](https://github.com/acidanthera/VirtualSMC/releases)
    * Only used for proper FileVault support, cannot be used with FakeSMC.
    
-For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
+   For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
    
 # Kexts
 
+A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI
+
 All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
+
 
 **Must haves**:
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
@@ -68,7 +71,7 @@ Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/maste
 
 # SSDTs
 
-So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well we'll be going over a couple to see whether you need them. Do note you'll need to compile these SSDTs with [MaciASL](https://github.com/acidanthera/MaciASL/releases) and please read them before compiling. Some require you to adjust them for your specific system(ie: EC0 to H_EC for SSDT-EC-USBX)
+So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well we'll be going over a couple to see whether you need them. Do note you'll need to compile these SSDTs with [MaciASL](https://github.com/acidanthera/MaciASL/releases) and please read them before compiling. Some require you to adjust them for your specific system(ie: EC0 to H_EC for SSDT-EC-USBX). These files will go in your ACPI folder in your EFI
 
 If you're unsure which you need, the specific ones for each platform are mentioned in the ACPI section of the guide.
 
@@ -84,10 +87,10 @@ If you're unsure which you need, the specific ones for each platform are mention
    * Needed to setup USB power correctly on pre-skylake systems and required for booting macOS Catalina.
 
 * [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
-   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems.
+   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems like for Z77, Z87, Z97, X79 and X99
 
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-   * Sets `PluginType`, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly.
+   * Sets `PluginType`, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly. X99 and X299 users need to verify if the path is correct(ie: `\_PR.PR00` vs `\_PR.PC00.PR00`)
 
 * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
-   * Adds a SMbus device and fixes DeviceProperties injection via `_DSM` which is found in your DSDT table. Most can ignore.
+   * Adds an SMbus device and fixes DeviceProperties injection via `_DSM` for when adding properties via an SSDT.
