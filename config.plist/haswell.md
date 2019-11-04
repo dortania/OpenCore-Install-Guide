@@ -28,7 +28,7 @@ For us we'll need a couple SSDTs to bring back functionality that Clover provide
 * [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
    * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems.
 
-For those having troubles understanding the SSDTs regarding plugin type and EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder
+For those having troubles understanding the SSDTs regarding plugin type and EC can use CoprNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder. You can compile with MaciASL by running File -> SaveAs -> ACPI Machine Language.
 
 
 > How do I get a copy of my DSDT?
@@ -248,7 +248,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **RequireVault**: NO
   * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-* `0` allows you to see all drives available, please refer to [Security](extras/secuirty.md) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](post-install/security.md) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** 
@@ -297,11 +297,10 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 * `30000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 * **nvda\_drv**: &lt;&gt; 
-  * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text). AMD and Intel users should leave this area blank.
+  * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text). AMD and Intel GPU users should leave this area blank.
 * **prev-lang:kbd**: &lt;&gt; 
-  * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it:
-     * Russian: `eu-RU:252`
-     * American: `en-US:0`
+  * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it(**Default in Sample config is Russian**):
+     * American: `en-US:0`(`656e2d55533a30` in HEX)
      * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
 **Block**: Forcibly rewrites NVRAM variables, do note that `Add` will not overwrite values already present in NVRAM so values like `boot-args` should be left.
@@ -447,7 +446,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 And now you're ready to save and place it into your EFI.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](extras/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
