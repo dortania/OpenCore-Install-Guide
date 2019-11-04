@@ -236,7 +236,7 @@ To merge:
 * **RequireVault**: NO
    * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](post-install/security.md) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** *
@@ -417,7 +417,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 And now you're ready to save and place it into your EFI.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](extras/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/troubleshooting) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [AMD OS X Discord](https://discord.gg/2QYd7ZT)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
