@@ -18,6 +18,7 @@ So what you'll need to get started:
 * [ProperTree](https://github.com/corpnewt/ProperTree) or some other plist editor
 * [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/raw/master/IORegistryExplorer_v2.1.zip)
 * [AMD-USB-Map.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
+* `XhciPortLimit` enabled under `Kernel -> Quirks`
 * Copy of your DSDT
 
 
@@ -62,6 +63,8 @@ So to start off, open IORegistryExplorer and find the USB controller you'd wish 
 * XHCX
 * AS43
 * PTXH (Commonly associated with AMD Chipset controllers)
+
+
 The best way to find controllers is by searching for `XHC` and then looking at the results that come up. The parent of all the ports is the USB controller.
 
 For today's example we'll be adding missing ports for the X399 chipset which has the identifier `PTXH`
@@ -102,8 +105,8 @@ UsbConnector types that we care about:
 0: USB 2.0 Type A connector
 3: USB 3.0 Type A connector
 8: Type C connector - USB 2.0-only
-9: Type C connector - USB 2.0 and USB 3.0 with Switch
-10: Type C connector - USB 2.0 and USB 3.0 without Switch
+9: Type C connector - USB 2.0 and USB 3.0 with Switch, flipping the device doesn't change ACPI port
+10: Type C connector - USB 2.0 and USB 3.0 without Switch, flipping the device doesn't change ACPI port
 255: Proprietary connector - For Internal USB ports like bluetooth
 ```
 Now lets take this section:
@@ -128,9 +131,4 @@ For us, what matters is the `Name (_ADR, 0x12)  // _ADR: Address` as this tells 
 
 Now save and add this to both your keytext (kext) folder and config.plist then reboot!
 
-![I need photo of IOReg, ass hasn't messaged back even after I setup his hack for him]()
-
-Look at that, all the ports have been added! Now we can start to slowly remove unwanted ports.
-
-
-Look at that, all the ports have been added! Now we can start to slowly remove unwanted ports. It's as simple as just removing the ports you don't want from the plist.
+Now we can start to slowly remove unwanted ports, it's as simple as just removing the ports you don't want from the plist. Remember that macOS has a 15 port limit in total.
