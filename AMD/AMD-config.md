@@ -1,6 +1,6 @@
 ## Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
+You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
 
 Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
 
@@ -300,7 +300,7 @@ To merge:
 For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application. 
 
 For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with _iMac14,2_. 
-* MacPro7,1 is exclusive to macOS 10.15 Catalina
+* MacPro7,1 is exclusive to macOS 10.15 Catalina, n serials have been dumped so currently can't use this SMBIOS if you want AppStore and iCloud services.
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
 
@@ -419,5 +419,5 @@ And now you're ready to save and place it into your EFI.
 
 For those having booting issues, please make sure to read the [Troubleshooting section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/troubleshooting) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
-* [AMD OS X Discord](https://discord.gg/2QYd7ZT)
+* [AMD OS X Discord](https://discord.gg/QuUWg7)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)

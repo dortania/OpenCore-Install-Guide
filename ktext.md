@@ -32,7 +32,18 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 * [Lilu](https://github.com/vit9696/Lilu/releases)
    * A kext to patch many processes, required for AppleALC and WhateverGreen and recommended for VirtualSMC
 
+**VirualSMC Plugins**:
+* SMCProcessor.kext
+   * Used for monitoring CPU temperature, has no effect on AMD CPU based systems
+* SMCSuperIO.kext
+   * Used for monitoring fan speed, has no effect on AMD CPU based systems
+* SMCLightSensor.kext
+   * Used for the ambient light sensor on laptops, desktops can ignore
+* SMCBatteryManager.kext
+   * Used for measuring battery read outs on laptops, desktops can ignore
 **Graphics**:
+
+
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
    * Used for graphics patching, all GPUs benifit from this kext.
 

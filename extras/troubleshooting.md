@@ -26,7 +26,7 @@ Other other possible problem is IRQ conflicts, Clover has plenty of different fi
 # iMessage and Siri Broken
 
 * En0 device not setup as `Built-in`, couple ways to fix:
-   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ex: ethernet@0). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`
+   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ex: ethernet@0). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. **Recommended method**
    * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml)
 
 # Windows Startup Disk can't see APFS drives

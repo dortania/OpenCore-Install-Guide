@@ -3,12 +3,17 @@ With OpenCore I think it's about time we finally destroy some AMD myths, like ho
 So why would I want to use this? Well couple reasons:
 * Add missing USB ports that macOS didn't automatically add
 * Remove unwanted devices like intel bluetooth conflicting with broadcoms
-* Stability by removing USB port limit patches, these patches are known for data corruption
+* Stability by removing USB port limit patches
 
 # Backstory to USB on macOS
-**Work in progress**
 
-See Corp's [USB map guide for now](https://usb-map.gitbook.io/project/terms-of-endearment)
+For the best explainer, please read Corp's [USB map guide](https://usb-map.gitbook.io/project/terms-of-endearment). For the lazy here's a super quick explainer:
+
+* Apple intruduced a 15 port limit in OS X 10.11 El Capitan
+* Each USB 3.0 port contains 2 personalities, 1 USB 2.0 personality and 3.0 personality
+* So 8 USB 3.0 ports would be seen as 16 ports in macOS, thus going over the 15 port limit
+* Most USB chipset controllers contain between 24 to 30 ports, most of which being internal
+* XhciPortLimit patches this restriction out but is unstable and known for data corruption
 
 # Getting started
 
@@ -54,6 +59,7 @@ You'll find that `DSDT.bat` is on the root of your EFI, reboot and rename the fi
 # Creating the map
 
 So to start off, open IORegistryExplorer and find the USB controller you'd wish to map. For controllers, they come in some variations:
+
 * XHC
 * XHC0
 * XHC1
@@ -65,7 +71,7 @@ So to start off, open IORegistryExplorer and find the USB controller you'd wish 
 * PTXH (Commonly associated with AMD Chipset controllers)
 
 
-The best way to find controllers is by searching for `XHC` and then looking at the results that come up. The parent of all the ports is the USB controller.
+The best way to find controllers is by searching for `XHC` and then looking at the results that come up, the parent of all the ports is the USB controller. Do note that many boards have multiple controllers but the port limit is per controller.
 
 For today's example we'll be adding missing ports for the X399 chipset which has the identifier `PTXH`
 
@@ -83,7 +89,7 @@ All of our ports are here! So why in the world is macOS hiding them? Well there'
 
 Inside the `AppleUSBHostPlatformProperties.kext` you'll find the USB map for most SMBIOS, this mean that that machine's USB map is forced onto your system. 
 
-Well to kick out these ports, we gotta make a plugin kext. For us that's the [AMD-USB-Map.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
+Well to kick out these bad maps, we gotta make a plugin kext. For us that's the [AMD-USB-Map.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
 
 Now right click and press `Show Package Contents`, then navigate to `Contents/Info.plist`
 
@@ -92,9 +98,9 @@ If the port values don't show in Xcode, right click and select `Show Raw Keys/Va
 ![](https://i.imgur.com/ggsZw35.png)
 
 
-So what kind of data do we shove into this plist? Well there's a cuple sections to note:
+So what kind of data do we shove into this plist? Well there's a couple sections to note:
 
-* **Model**: The SMBIOS this kext will match against
+* **Model**: SMBIOS the kext will match against
 * **IONameMatch**: The name of the controlller it'll match against
 * **port-count**: The last/largest port value that you want injected
 * **port**: The address of the USB controller
@@ -109,6 +115,10 @@ UsbConnector types that we care about:
 10: Type C connector - USB 2.0 and USB 3.0 without Switch, flipping the device doesn't change ACPI port
 255: Proprietary connector - For Internal USB ports like bluetooth
 ```
+> How do I know which ports are 2.0 and which are 3.0?
+
+Well the easiest way is grabing a USB 2.0  and USB 3.0 device, then write down which ports are are what type. 
+
 Now lets take this section:
 
 ```
@@ -124,7 +134,7 @@ Device (PO18)
    })
 }
 ```
-For us, what matters is the `Name (_ADR, 0x12)  // _ADR: Address` as this tells us the location of the USB port. This value will be turned into our `port` value on the plist.
+For us, what matters is the `Name (_ADR, 0x12)  // _ADR: Address` as this tells us the location of the USB port. This value will be turned into our `port` value on the plist. Some DSDTs don't declare their USB address, for these situations we can see their IOReg properties.
 
 ![](https://i.imgur.com/9R6cab8.png)
 
