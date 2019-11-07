@@ -1,31 +1,38 @@
-Ways to check hardware:
+# Supported hardware
+
+**Work in progress**
+
+# Ways to check hardware
 
 * [Speccy](https://www.ccleaner.com/speccy)
 * Device Manager
 * Product support docs
 
-**CPU Compatibility**:
+# CPU Compatibility
 
 * Sierra needs SSE4,1
 * Pentiums and some Xeons need CPU ID spoof
-* AMD CPUs need kernel patches
+* AMD CPUs need [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
 
-**GPU Compatibility**:
+# GPU Compatibility
 
 * [See GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) for compatible GPUs.
+# Motherboard Compatibility
 
-**Motherboard Compatibility**:
+* All AMD and Intel boards are supported
+* Z390 and some HEDT systems will need emulated NVRAM
+* Some Z370 and Z390 boards have AWAC clocks, these are incompatible with macOS and so will need an RTC fix
 
-**SSD Compatibility**:
+# SSD Compatibility
 
-* See [Anti-Hackintosh-Buyers-Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/)]
+* See [Anti-Hackintosh-Buyers-Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/)
 
-**Audio Compatibility**:
+# Audio Compatibility
 
 * See the AppleALC wiki for supported codecs: [Supported codecs
 ](https://github.com/acidanthera/applealc/wiki/supported-codecs)
 
-**Networking**:
+# Networking
 
 See supported chipset on respective drivers:
 
@@ -34,4 +41,10 @@ See supported chipset on respective drivers:
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
 
-And see [Wireless Buyers Guide](https://khronokernel-7.gitbook.io/wireless-buyers-guide/) for supported wifi cards
+Unsupported ethernet models:
+* Realtek L8200A(Only found in Asus boards)
+* Realtek RTL8125(2.5Gbe, mostly found on higher end gaming boards)
+
+And see [Wireless Buyers Guide](https://khronokernel-7.gitbook.io/wireless-buyers-guide/) for supported wifi cards.
+
+

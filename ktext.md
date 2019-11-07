@@ -1,3 +1,12 @@
+# Gathering files
+
+This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a hackintosh before as we won't be deep diving in here. 
+
+> What's the best way to figure out if my hardware is supported?
+
+See the [supported hardware section](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/hardware.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
+
+
 # Firmware Drivers
 
 These are the drivers used for OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
@@ -17,7 +26,7 @@ For extra functionality with OpenCore:
 * [VirtualSmc.efi](https://github.com/acidanthera/VirtualSMC/releases)
    * Only used for proper FileVault support, cannot be used with FakeSMC.
    
-   For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
+For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
    
 # Kexts
 
@@ -60,7 +69,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **USB**:
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-   * Used for injecting intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well
+* Used for injecting intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well. **Has no effect on AMD**
 
 **AMD CPU Specific kexts**:
 * [NullCPUPowerManagment](https://github.com/corpnewt/NullCPUPowerManagement)

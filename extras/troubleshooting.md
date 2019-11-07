@@ -47,11 +47,15 @@ Other other possible problem is IRQ conflicts, Clover has plenty of different fi
 * A value is set as `real` when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
 ```
 <key>HaltLevel</key>
+```
+```
 <real>2147483648</real>
 ```
 To fix, swap `real` for `integer`:
 ```
 <key>HaltLevel</key>
+```
+```
 <integer>2147483648</integer>
 ```
 # No on-board audio
@@ -92,14 +96,22 @@ Call upon OpenCore shell:
 
 ```
 shell> fs0: //replace with proper drive
+```
 
+```
 fs0:\> dir //to verify this is the right directory
+```
 
+```
    Directory of fs0:\
+```
+```
      01/01/01 3:30p   EFI
-     
+```
+```     
 fs0:\> cd EFI\OC\Tools //note that its with forward slashes
-
+```
+```
 fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 ```
 
