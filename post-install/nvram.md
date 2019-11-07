@@ -70,5 +70,5 @@ Open up terminal and run the following:
 
 And voila! You have emulated NVRAM!
 
-Do keep in mind this requires the `nvram` command to support the `-x` flag for this to work correctly which is unavailable on MacOS 10.12 and below. If you are installing MacOS 10.12 or earlier, you need to copy `nvram.mojave` into the same folder as `LogoutHook.command`, which fixes this by invoking it instead of the system `nvram` command.
+Do keep in mind this requires the `nvram` command to support the `-x` flag for this to work correctly which is unavailable on macOS 10.12 and below. If you are installing macOS 10.12 or earlier, you need to copy `nvram.mojave` into the same folder as `LogoutHook.command`, which fixes this by invoking it instead of the system `nvram` command.
 

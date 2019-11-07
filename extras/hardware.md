@@ -25,12 +25,15 @@
 
 # SSD Compatibility
 
-* See [Anti-Hackintosh-Buyers-Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/)
+* No eMMC storage
+* Samsung PM981 and early 970 Evo Plus models don't work(970EvoPlus requires a firmware upgrade to work)
+* See [Anti-Hackintosh-Buyers-Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/) for more info
 
 # Audio Compatibility
 
 * See the AppleALC wiki for supported codecs: [Supported codecs
 ](https://github.com/acidanthera/applealc/wiki/supported-codecs)
+* Ryzen MIC only works on VoodooHDA and there's no MIC support on 15/16h AMD CPUs
 
 # Networking
 

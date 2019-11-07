@@ -20,6 +20,13 @@ Other possible problem is that some users either forget or cannot disable CFG-Lo
 Other other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt's also got a fix: [SSDTTime](https://github.com/corpnewt/SSDTTime)'s FixHPET option
 
 
+# Can't see macOS partitions
+
+Main things to check:
+* ScanPolicy set to `0` to show all drives
+* Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)
+* Enable `AvoidHighAlloc` if you're running a network recovery install
+
 # "Waiting for Root Device" or Prohibited Sign error
 
 * Gernally seen as a USB error, couple ways to fix:

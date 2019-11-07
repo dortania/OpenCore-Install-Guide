@@ -12,7 +12,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [S2F0amEgS2xvdmVy](https://github.com/S2F0amEgS2xvdmVy)
   * Link correction
 * [CorpNewt](https://github.com/corpnewt)
-  * Heavily inspiring this guide\(if not a rip off\)
+  * Heavily inspiring this guide\(if not a rip off\) and helping overal with questions and advice
 * [Midi](https://github.com/midi1996)
   * Corrections and recommendations for the guide
 * [Andrey1970](https://www.insanelymac.com/forum/profile/1202492-andrey1970/)

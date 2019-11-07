@@ -50,11 +50,12 @@ Well, when I made the [original OpenCore guide](https://github.com/khronokernel/
 * AMD Config.plist
 
    * [Zen/ThreadRipper](AMD-config.md)
+   * []()
 
 * Post Install
 
    * [Emulated NVRAM](post-install/nvram.md)
-   * [GPU Spoof](post-install/spoof.md)
+   * [Disabling GPU](post-install/spoof.md)
    * [Security](post-install/security.md)
 
 * Extras

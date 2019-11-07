@@ -24,9 +24,9 @@
 
 ## Troubleshooting
 
+* [General Troubleshooting](extras/troubleshooting.md)
 * [Fixing Resolution and Verbose](extras/verbose.md)
 * [OpenCore Debugging](extras/debug.md)
-* [General Troubleshooting](extras/troubleshooting.md)
 
 ## Extras
 
