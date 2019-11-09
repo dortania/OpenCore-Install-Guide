@@ -40,7 +40,7 @@
 See supported chipset on respective drivers:
 
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
-   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [I211-AT SmallTree kext](https://cdn.discordapp.com/attachments/390417931659378688/556912824228773888/SmallTree-Intel-211-AT-PCIe-GBE.kext.zip)
+   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://drive.google.com/file/d/0B5Txx3pb7pgcOG5lSEF2VzFySWM/view?usp=sharing)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
 
