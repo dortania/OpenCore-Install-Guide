@@ -69,7 +69,20 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **USB**:
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-* Used for injecting intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well. **Has no effect on AMD**
+   * Used for injecting intel USB controllers, H370, B360, H310 and X79/X99 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well(X299 may need this for HighSierra). **Has no effect on AMD**
+
+**WiFi and Bluetooth**:
+
+* [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
+   * Used for patching non-Apple broadcom cards
+
+* [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM)
+   * Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple Airport cards.
+   * To be paired with BrcmFirmwareData.kext
+      * BrcmPatchRAM3 for 10.14+
+      * BrcmPatchRAM2 for 10.11-10.14
+      * BrcmPatchRAM for 10.10 or older
+
 
 **AMD CPU Specific kexts**:
 * [NullCPUPowerManagment](https://github.com/corpnewt/NullCPUPowerManagement)
@@ -80,11 +93,15 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
    * Audio for FX systems and frontpanel Mic+Audio support for Ryzen system, do not mix with AppleALC
 
 **Extra's**: 
+
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-   * Useful starting with Catalina to disable the AppleMCEReporter kext which might cause kernel panics on AMD CPU and dual socket systems:
+   * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual socket systems:
       * MacPro6,1
       * MacPro7,1
       * iMacPro1,1
+
+* [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
+   * Needed for correcting TSC on Asus's HEDT/Server motherboards
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
@@ -113,3 +130,6 @@ If you're unsure which you need, the specific ones for each platform are mention
 
 * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
    * Adds an SMbus device and fixes DeviceProperties injection via `_DSM` for when adding properties via an SSDT.
+
+
+**Remember to verify that the ACPI path in the SSDT matches up with your DSDT, expremely important for X79, X99 and X299 users**
