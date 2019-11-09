@@ -22,7 +22,7 @@ Do note that these patches are pulled from the AMD OS X and that they're made fo
 This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
 
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
-   * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
+   * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 
 For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder. You can compile with MaciASL by running File -> SaveAs -> ACPI Machine Language.
 
@@ -297,10 +297,15 @@ To merge:
 
 ![PlatformInfo](https://i.imgur.com/CrqeCea.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application. 
+For setting up the SMBIOS info, we'll use acidanthera's [macserial](https://github.com/acidanthera/MacInfoPkg/releases) application. 
 
-For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with _iMac14,2_. 
-* MacPro7,1 is exclusive to macOS 10.15 Catalina, n serials have been dumped so currently can't use this SMBIOS if you want AppStore and iCloud services.
+For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
+
+* iMacPro1,1: AMD RX Polaris and newer
+* MacPro7,1: AMD RX Polaris and newer(Note that theres no valid serial numbers yet so iCloud, iMessage, etc will be broken. MacPro7,1 is also a Catalina exclusive)
+* MacPro6,1: AMD R5/R7/R9 and older
+* iMac14,2: Nvidia Kepler and newer
+
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
 
