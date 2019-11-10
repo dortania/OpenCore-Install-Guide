@@ -117,7 +117,7 @@ UsbConnector types that we care about:
 ```
 > How do I know which ports are 2.0 and which are 3.0?
 
-Well the easiest way is grabing a USB 2.0  and USB 3.0 device, then write down which ports are are what type. 
+Well the easiest way is grabbing a USB 2.0  and USB 3.0 device, then write down which ports are are what type from obsering IOReg. 
 
 Now lets take this section:
 
@@ -138,7 +138,28 @@ For us, what matters is the `Name (_ADR, 0x12)  // _ADR: Address` as this tells 
 
 ![](https://i.imgur.com/9R6cab8.png)
 
+**Reminder**: Don't drag and drop the kext, read the guide carefully. Rename `IONameMatch` value to the correct controller you're wanting to map and verify that the ports are named correctly to **your DSDT**. If you could drag and drop it and have it work for everyone there wouldn't be a guide ;p
 
 Now save and add this to both your keytext (kext) folder and config.plist then reboot!
 
-Now we can start to slowly remove unwanted ports, it's as simple as just removing the ports you don't want from the plist. Remember that macOS has a 15 port limit in total.
+Now we can finally start to slowly remove unwanted ports and remove the XhciPortLimit quirk once you have 15 ports total or less.
+# Port mapping on screwed up DSDTs
+
+Something you may have noticed is that your DSDT is even missing some ports, like for example:
+
+![AsRock B450 missing ports](https://i.imgur.com/xz3p0H4.png)
+
+In this IOReg, we're missing HS02, HS03, HS04, HS05, etc. When this happens, we actually need to outright remove all our ports from that controller in our DSDT. What this will let us do is allow macOS to build the ports itself instead of basing it off of the ACPI. Save this modified DSDT.aml and place it in your EFI/OC/ACPI and specify it in your config.plist -> ACPI -> Add(note that DSDT.aml must be forst to work correctly)
+
+# Fixing USB power on AMD
+
+Something that users have noticed is that certain devices tend to break on certain AMD ports due to not suppling enough or correct power. Some of these devices include:
+
+* Mics
+* DACs
+* Webcams
+* Bluetooth Dongles
+
+To fix this, we'll want to do is force USB power properties onto each USB controller by using [SSDT-USBX-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX-AMD.dsl). The 3 types of controllers most commonly found in AMD DSDTs are PTXH, XHC0 and AS43, **verify the ACPI path and that they exist in your DSDT before compiling this SSDT**. 
+
+Credit to AlGrey and ydeng for their original work and findings here: [NATIVE RYZEN USB SUPPORT](https://amd-osx.com/forum/viewtopic.php?t=4986)
