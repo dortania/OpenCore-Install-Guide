@@ -125,8 +125,11 @@ Commonly due to systems running AWAC clocks, you'll need to use either:
 # Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
 
 
-Verify your EC SSDT is enabled
+Verify your EC SSDT is enabled and correct for your system.
 
+# Kernel Panic `Cannot perform kext summary`
+
+Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in correct order(master then plugins, Lilu always being first) and that kexts with execuatbles have them and plist only kexts don't.
 
 # BIOS reset or sent into Safemode after reboot/shutdown?
 
