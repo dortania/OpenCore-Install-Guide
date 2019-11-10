@@ -148,7 +148,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/3mPKzNx.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts)f or what kexts we recommend.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts) for what kexts we recommend.
 
 * **BundlePath** 
    * Name of the kext
@@ -249,7 +249,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 *    Path to file after the `Tools` folder
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
-**Entires**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
+**Entries**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
 * **Name**
    * Name shown in boot picker
 * **Enabled**

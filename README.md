@@ -15,7 +15,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * OpenCore supports boot hotkey support via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Command+R` to enter Recovery or `Command+Option+P+R` to reset NVRAM.
 * OpenCore is designed with the future in mind, and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l663)
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
-* Furture development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
+* Future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
 * UEFI and Legacy boot modes are supported.
 
 ### OpenCore Tips

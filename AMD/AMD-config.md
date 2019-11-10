@@ -137,7 +137,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/ehG6Da6.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts)f or what kexts we recommend.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts) for what kexts we recommend.
 
  * **BundlePath** 
     * Name of the kext
@@ -247,7 +247,7 @@ To merge:
    * Path to file after the `Tools` folder
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
-**Entires**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
+**Entries**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
 * **Name**
    * Name shown in boot picker
 * **Enabled**
@@ -377,8 +377,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
    * Swaps `Option` and `Cmd` key
-* **PointerSupport**: `
-   * Used for fixing broken pointer support, commonlu used for Z87 Asus boards
+* **PointerSupport**: 
+* Used for fixing broken pointer support, commonly used for Z87 Asus boards. Leave blank
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`

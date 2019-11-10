@@ -148,7 +148,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/l1pu0cJ.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts)f or what kexts we recommend.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts) for what kexts we recommend.
 
 * **BundlePath** *
    * Name of the kext
@@ -249,7 +249,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Path to file after the `Tools` folder
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
-**Entires**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
+**Entries**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
 * **Name**
    * Name shown in boot picker
 * **Enabled**
@@ -424,8 +424,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
   * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
   * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
-  * **SanitiseClearScreen**: YES
-     * Fixes High resolutions displays that display OpenCore in 1024x768, recommened for user with 1080P+ displays
+* **SanitiseClearScreen**: YES
+   * Fixes High resolutions displays that display OpenCore in 1024x768, recommened for user with 1080P+ displays
 * **ClearScreenOnModeSwitch**: NO
   * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 

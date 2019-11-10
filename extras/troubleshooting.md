@@ -73,11 +73,60 @@ path/to/gfxutil -f HDEF
 
 # Stuck after selection macOS partition on OpenCore
 
-* CFG-Lock not off couple solutions:
+* CFG-Lock not off(Intel Users only), couple solutions:
    * [Patch your MSR E2](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock)(Recommeneded solution)
    * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
+* AMD kernel patches aren't working(AMD Users only):
+   * Either outdated or missing kernel patches
 * PollAppleHotKeys driver is incompatible:
    * Disable `PollAppleHotKeys` and `KeySupport`
+
+
+
+# Stuck on or near `[PCI Configuration Begins]`
+
+This is commonly caused by IRQ conflicts with PCI devices/lanes. Depending on how your system was configured, it's recommeneded to have the following BIOS settings:
+* CSM disabled
+* Windows8.1/10 Mode
+* Forcing PCIe 3.0 link speed
+Now try one of these boot args:
+* `npci=0x2000`
+* `npci=0x3000`
+
+# Stuck on or near `IOConsoleUsers: gIOScreenLock...`
+
+This is right before the GPU is properly initalized, verify the following:
+* GPU is UEFI capable(GTX 7XX/2013+)
+* CSM is off in the BIOS
+* Forcing PCIe 3.0 link speed
+
+# Black screen after gIO on Navi
+* Add `agdpmod=pikera` to boot args
+* switch between different display outputs
+
+# Stuck on `This version of Mac OS X is not supported: Reason Mac...`
+
+This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. Reminder of supported SMBIOS:
+
+* iMac13,x+
+* iMacPro1,1
+* MacPro6,1+
+* MacBook8,1+
+* MacBookAir5,x+
+* MacBookPro9,x+
+# 300 series Intel stalling on `apfs_module_start...`
+
+Commonly due to systems running AWAC clocks, you'll need to use either:
+* [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
+   * Forces legacy RTC clock on
+* [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
+   * Creates a fake RTC clock when legacy can't be forced
+
+# Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
+
+
+Verify your EC SSDT is enabled
+
 
 # BIOS reset or sent into Safemode after reboot/shutdown?
 
