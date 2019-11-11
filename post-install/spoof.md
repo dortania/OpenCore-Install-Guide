@@ -1,17 +1,17 @@
 # GPU Spoof
 
-So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifcally that we need to specify to which exact device we want to spoof. There's 3 ways we can do this:
+So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 
 * Boot Flag
   * Disables all GPUs except the iGPU
 * DeviceProperties
-  * Disables GPU on per-slot basis
+  * Disables GPU on a per-slot basis
 * SSDT
-  * Disables GPU on per-slot basis
+  * Disables GPU on a per-slot basis
 
 ## Boot Flag
 
-By far the simplest way, all you need to do is add the following bootflag:
+By far the simplest way, all you need to do is add the following boot-arg:
 
 `-wegnoegpu`
 
@@ -43,7 +43,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 
 ## SSDT Method
 
-There's many ways to find the path but generally the easiest way is to got into Device Manager under windows and find the PCI path.
+There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.
 
 Example of device path:
 

@@ -17,9 +17,9 @@ Error allocating 0x1197b pages at 0x0000000017a80000 alloc type 2
 Couldn't allocate runtime area
 ```
 
-With some variantion:
+With some variation:
 ```
-Only 244/256 silde values are usable!
+Only 244/256 slide values are usable!
 ```
 
 Or even crashes while running macOS:
@@ -43,29 +43,29 @@ The real fix to this is quite simple actually, the process is both the same for 
    * [FwRuntimeServices](https://github.com/acidanthera/AppleSupportPkg/releases)
    * [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)(Don't forget to enable this under `Root->Misc->Tools`)
    * Config.plist settings:
-      * AvoidRuntimeDefrag:Fixes UEFI runtime services like date, time, NVRAM, etc
-      * DevirtualiseMmio:Reduces stolen memory footprint so we're given more options for slide values
-      * DisableVariableWrite: Reroutes NVRAM to nvram.plist, needed for systems without supported NVRAM(B360, B365, H310, H370, Q370, Z390). Some C612, X79, X99, X299 systems will also need this.
-      * EnableSafeModeSlide: Allows us to use slide in safe mode, just so if you have other issues troubleshooting won't mess it up.
-      * EnableWriteUnprotector: Allows us to write to certain areas that the firmware locks, specifically the CR0 register.
-      * ProvideCustomSlide: Kinda need that slide to do any real work.
-      * SetupVirtualMap: Creates a layer between macOS and your memory map for great support and less chances of insecure write access.
-      * ShrinkMemoryMap: Fixes issues with very large memory maps that don't fit, very useful for X99 and X299 platforms and sometimes for Z390.
+    * AvoidRuntimeDefrag: Fixes UEFI runtime services like date, time, NVRAM, etc
+    * DevirtualiseMmio: Reduces stolen memory footprint so we're given more options for slide values
+    * DisableVariableWrite: Reroutes NVRAM to nvram.plist, needed for systems without supported NVRAM(B360, B365, H310, H370, Q370, Z390). Some C612, X79, X99, X299 systems will also need this.
+    * EnableSafeModeSlide: Allows us to use slide in safe mode, just so if you have other issues troubleshooting won't mess it up.
+    * EnableWriteUnprotector: Allows us to write to certain areas that the firmware locks, specifically the CR0 register.
+    * ProvideCustomSlide: Kinda need that slide to do any real work.
+    * SetupVirtualMap: Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.
+    * ShrinkMemoryMap: Fixes issues with very large memory maps that don't fit, very useful for X99 and X299 platforms and sometimes for Z390.
 
 # Resetting the Memory Map
 
-The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have less edge cases(Memory Maps are not always consistent on boots). To prep:
+The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:
 
 * Update BIOS(extremely important as early BIOS's shipped are known to have memory map issues, especially with Z390)
 * Clear CMOS
 * Enable much needed BIOS settings:
-   * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on X99, X299 so recommended to disabe for them.
+   * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on X99, X299 so recommended to disable for them.
    * `Boot Options -> Windows8.1/10 mode`: This will make sure no old legacy garbage is loaded. Fun fact, `other OS` is only designed for booting older versions of Windows and not for other OS.
-   * Disable as many unneeded devices in the BIOS(this means there's less variation in the map on each boot, so less chances of boot failure). Common settings:
+   * Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:
    * `CSM`: For legacy support, adds a bunch of garbage we don't want. This also can break the shell so you can't boot into it.
    * `Intel SGX`: Software Guard Extensions, takes up a lot of space and does nothing in macOS.
    * `Parallel Port`: macOS can't even see parallel.
-   * `Serial Port`: I'd like to know how many of you are actually debugging the kernel...
+   * `Serial Port`: I'd like to know how many of you are debugging the kernel...
    * `iGPU`: No ideal but some systems have such bloated maps that the iGPU just can't fit.
    * `Thunderbolt`: Many hacks don't have thunderbolt working, boards that don't have thunderbolt but have this option just waste more space.
    * `LED lighting`: Sorry mate, time to go.
@@ -73,12 +73,12 @@ The reason we need to reset the memory map is we want it to be more deterministi
 
 &#x200B;
 
-Now we can start the fun part, resetting the Memory Map. This is actually done each time the memory is trained, so all we need to do is trigger it so we have a clean base to start with(most important for users who ran OsxAptioFree2000.efi but still needed for everyone). There's 2 common ways:
+Now we can start the fun part, resetting the Memory Map. This is done each time the memory is trained, so all we need to do is trigger it so we have a clean base to start with(most important for users who ran OsxAptioFree2000.efi but still needed for everyone). There are 2 common ways:
 
 * Enabling XMP, let it train then disable and train again
 * Taking a stick of RAM out, let the system train, put the stick back and train again
 
-With that done, we can no finally proceed to finding a slide value
+With that done, we can no finally proceed to find a slide value
 
 # Finding the Slide value
 
@@ -104,7 +104,7 @@ Example of what you'll see:
 |BS\_Data|000000006B526000|000000006B625FFF|0000000000000100|000000000000000F|
 |Available|000000006B626000|000000006B634FFF|000000000000000F|000000000000000F|
 
-Now you may be wondering how the hell we convert this to a slide value, well it's quite simple. What we're interested in is the largest available value within the `Start` column. In this example we see that `000000006B626000` is our largest, do note that these are in HEX so if there are multiple values close to each other you may need to convert them to decimal. To the calculate slide value(macOS's built-in calculator has a programmering function by pressing  ⌘+3):
+Now you may be wondering how the hell we convert this to a slide value, well it's quite simple. What we're interested in is the largest available value within the `Start` column. In this example we see that `000000006B626000` is our largest, do note that these are in HEX so if there are multiple values close to each other you may need to convert them to decimal. To the calculate slide value(macOS's built-in calculator has a programming function by pressing ⌘+3):
 
 `000000006B626000` = `0x6B626000`
 
@@ -116,7 +116,7 @@ And to verify that this is correct:
 
 Whenever the returned value is **not** the original(`0x6B500000` vs `0x6B626000`), just add +1 to your final slide value. This is due to rounding. So for example `0x35A` converted to decimal becomes `858` and then +1 will give you `slide= 858`.
 
-> But wait just a second, this is higher than 256!
+> But wait for just a second, this is higher than 256!
 
 That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be `0000000000100000`)
 
@@ -126,11 +126,11 @@ And just to make it a bit clearer on the formula:
 
 `0x100000` \+ (Slide Value in HEX \* `0x200000`) = Your original HEX value(if not then add +1 to your slide value)
 
-Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`). If this value still gives you errors then you many proceed to the second largest `Start` value and so on.
+Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`). If this value still gives you errors then you may proceed to the second-largest `Start` value and so on.
 
 Sometimes you may find that when you calculate slide that you receive super small vales like `slide=-0.379150390625`, when this happens round this to `slide=0`.
 
-And for users who are having issues finding their slide value can also type `$slide [insert largest #Pages value]` in the #Sandbox channel on the [r/hackintosh Discord](https://discord.gg/u8V7N5C)
+And for users who are having issues finding their slide value can also type `$slide [insert largest #Pages value]` in the #Sandbox channel on the [r/Hackintosh Discord](https://discord.gg/u8V7N5C)
 
 >But this is soooooo hard
 
@@ -138,4 +138,4 @@ Well fret not, for there is a simple solution. After running `memmap` in the she
 
  `memmap > memmap.txt`
 
-This will add a `memmap.txt` file to the root of your EFI for OpenCore users (You may need to specify the drive location like `fs0:`), you can then proceed to drop it into the r/hackintosh discord and type `$slide [insert link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
+This will add a `memmap.txt` file to the root of your EFI for OpenCore users (You may need to specify the drive location like `fs0:`), you can then proceed to drop it into the r/Hackintosh discord and type `$slide [insert a link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.

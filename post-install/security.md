@@ -1,6 +1,6 @@
 # Security
 
-So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
+So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
 
 * ScanPolicy
 * Vault(work in progress)
@@ -23,7 +23,7 @@ Setting in your config.plist:
    * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of UsbKbdxe should avoid)
 * UEFI -> Protocols
    * `FirmwareVolume` set to YES
-   * `HashServices` set to YES for Haswell and older, this is needed for systems withbroken SHA-1 hashing
+   * `HashServices` set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing
 * UEFI -> Quirks
    * `ProvideConsoleGOP` to YES
    * `RequestBootVarRouting` set to YES

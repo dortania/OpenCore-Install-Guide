@@ -32,7 +32,7 @@ If folders are empty then delete them as well:
 
 ## Verifying if you have working NVRAM
 
-To start open terminal and run the following one line at a time:
+To start, open terminal and run the following one line at a time:
 ```
 sudo -s
 nvram -c

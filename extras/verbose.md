@@ -22,7 +22,7 @@ Wanting a more clean booting experience with macOS without all that verbose text
 * `ConsoleBehaviourOs`: set to Graphics
 * `ConsoleBehaviourUi`: set to Text
 
-Please refer below for other settings if these Misc/Boot values do not work for your firmware
+Please refer below for other settings if these Misc/Boot values do not work for your firmware.
 
 ## For Broadwell and newer:
 

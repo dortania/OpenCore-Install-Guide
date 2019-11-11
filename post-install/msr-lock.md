@@ -14,7 +14,7 @@ And don't forget to disable the following from your config.plist:
 * `AppleCpuPmCfgLock`
 * `AppleXcpmCfgLock`
 
-And the final part, grabbing your BIOS from the vendors website.
+And the final part, grabbing your BIOS from the vendors' website.
 
 Now the fun part!
 
@@ -28,12 +28,12 @@ Boot OpenCore and select the `VerifyMsrE2` option in the picker. This tool will 
 
 
 
-1. Open your firmware with UEFITool and then find `CFG Lock` as a unicode string. If nothing pops up then your firmware doesn't support `CFG Lock`, otherwise continue on. 
+1. Open your firmware with UEFITool and then find `CFG Lock` as a Unicode string. If nothing pops up then your firmware doesn't support `CFG Lock`, otherwise continue on. 
 
 ![](https://i.imgur.com/ziN50wL.png)
 
 
-2. You'll find that this string in found within a Setup folder, right click and export as `Setup.bin`
+2. You'll find that this string is found within a Setup folder, right-click and export as `Setup.bin`
 
 3. Open your setup file with `ifrextract` and export as a .txt file with terminal:
 ```
@@ -47,8 +47,8 @@ path/to/ifrextract path/to/Setup.bin path/to/Setup.txt
 ```
 setup_var 0x5A4 0x00
 ```
-Do note that variable offsets are unique not just to each motherboard but even to its firmware version. Never ever try to use an offset without checking.
+Do note that variable offsets are unique not just to each motherboard but even to its firmware version. **Never try to use an offset without checking.**
 
 And you're done! Now you'll have correct CPU power management
 
-**Note**: Everytime you reset your BIOS you will need to flip this bit again, make sure to write it down with the BIOS version so you know which 
+**Note**: Every time you reset your BIOS you will need to flip this bit again, make sure to write it down with the BIOS version so you know which.

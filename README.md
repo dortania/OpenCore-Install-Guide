@@ -2,18 +2,18 @@
 
 ### About
 
-OpenCore is an open source bootloader, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.
+OpenCore is an open-source bootloader, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.
 
 Please remember that OpenCore is still new and currently in beta. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don't want to migrate if you have a stable system currently. Certain aspects of OpenCore such as Vault support will not be covered in this guide.
 
-Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not a beginners guide to hackintoshing. For those starting out, please see the [r/hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/hackintosh discord](https://discord.gg/u8V7N5C) for more help.
+Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not a beginners guide to Hackintosh. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
 ### Advantages of OpenCore
 
 * On average, OpenCore systems boot faster than those using Clover.
 * OpenCore offers better overall security and better support for FileVault.
 * OpenCore supports boot hotkey support via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Command+R` to enter Recovery or `Command+Option+P+R` to reset NVRAM.
-* OpenCore is designed with the future in mind, and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l663)
+* OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l663)
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
 * Future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
 * UEFI and Legacy boot modes are supported.

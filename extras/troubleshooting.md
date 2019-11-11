@@ -12,12 +12,12 @@ Turn the following off under `Misc -> Security`:
 Couple problems:
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
 
-Other possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power managment, obviously much safer to turn off CFG-Lock). When this happens, there's a couple fixes:
+Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). When this happens, there's a couple of possible fixes:
 
 * [Fixing CFG Lock](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock) 
-* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
+* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
 
-Other other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt's also got a fix: [SSDTTime](https://github.com/corpnewt/SSDTTime)'s FixHPET option
+Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt's also got a fix: [SSDTTime](https://github.com/corpnewt/SSDTTime)'s FixHPET option
 
 
 # Can't see macOS partitions
@@ -29,16 +29,16 @@ Main things to check:
 
 # "Waiting for Root Device" or Prohibited Sign error
 
-* Gernally seen as a USB error, couple ways to fix:
-   * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
-   * Other issue can be that certain firmwares won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
+* Generally seen as a USB error, couple ways to fix:
+   * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
+   * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
 
 # iMessage and Siri Broken
 
 * En0 device not setup as `Built-in`, couple ways to fix:
    * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ex: ethernet@0). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. **Recommended method**
    * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
-   
+  
 ![](https://i.imgur.com/DtYtwCQ.png)
 
 # Windows Startup Disk can't see APFS drives
@@ -83,9 +83,9 @@ path/to/gfxutil -f HDEF
 
 
 
-# Stuck on or near `[PCI Configuration Begins]`
+# Stuck on or near `[PCI Configuration Begin]`
 
-This is commonly caused by IRQ conflicts with PCI devices/lanes. Depending on how your system was configured, it's recommeneded to have the following BIOS settings:
+This is commonly caused by IRQ conflicts with PCI devices/lanes. Depending on how your system was configured, it's recommended to have the following BIOS settings:
 * CSM disabled
 * Windows8.1/10 Mode
 * Forcing PCIe 3.0 link speed
@@ -95,7 +95,7 @@ Now try one of these boot args:
 
 # Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 
-This is right before the GPU is properly initalized, verify the following:
+This is right before the GPU is properly initialized, verify the following:
 * GPU is UEFI capable(GTX 7XX/2013+)
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
@@ -129,7 +129,7 @@ Verify your EC SSDT is enabled and correct for your system.
 
 # Kernel Panic `Cannot perform kext summary`
 
-Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in correct order(master then plugins, Lilu always being first) and that kexts with execuatbles have them and plist only kexts don't.
+Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don't.
 
 # BIOS reset or sent into Safemode after reboot/shutdown?
 
@@ -162,12 +162,12 @@ fs0:\> dir //to verify this is the right directory
 ```
 
 ```
-   Directory of fs0:\
+  Directory of fs0:\
 ```
 ```
-     01/01/01 3:30p   EFI
+   01/01/01 3:30p  EFI
 ```
-```     
+```   
 fs0:\> cd EFI\OC\Tools //note that its with forward slashes
 ```
 ```
@@ -179,3 +179,5 @@ fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
 
 ![Directory Structure from OpenCore's DOC](https://i.imgur.com/9RyBQ0L.png)
+
+

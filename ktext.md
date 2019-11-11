@@ -1,6 +1,6 @@
 # Gathering files
 
-This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a hackintosh before as we won't be deep diving in here. 
+This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here. 
 
 > What's the best way to figure out if my hardware is supported?
 
@@ -17,17 +17,17 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
    * Needed for seeing HFS volumes.
 * [FwRuntimeServices.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
-   
+  
 For extra functionality with OpenCore:
 
 * [UsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg)
-   * Used for Apple Hot keys and FileVault support when OpenCore's built-in drivers do not work with your firmware. Recommended to test without it first.
+   * Used for Apple Hotkeys and FileVault support when OpenCore's built-in drivers do not work with your firmware. Recommended testing without it first.
 
 * [VirtualSmc.efi](https://github.com/acidanthera/VirtualSMC/releases)
    * Only used for proper FileVault support, cannot be used with FakeSMC.
-   
+  
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
-   
+  
 # Kexts
 
 A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI
@@ -43,17 +43,17 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **VirualSMC Plugins**:
 * SMCProcessor.kext
-   * Used for monitoring CPU temperature, has no effect on AMD CPU based systems
+   * Used for monitoring CPU temperature, doesn't work AMD CPU based systems
 * SMCSuperIO.kext
-   * Used for monitoring fan speed, has no effect on AMD CPU based systems
+   * Used for monitoring fan speed, doesn't work AMD CPU based systems
 * SMCLightSensor.kext
    * Used for the ambient light sensor on laptops, desktops can ignore
 * SMCBatteryManager.kext
-   * Used for measuring battery read outs on laptops, desktops can ignore
+   * Used for measuring battery readouts on laptops, desktops can ignore
 
 **Graphics**:
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
-   * Used for graphics patching, all GPUs benifit from this kext.
+   * Used for graphics patching, all GPUs benefit from this kext.
 
 **Audio**:
 * [AppleALC](https://github.com/vit9696/AppleALC/releases)
@@ -69,36 +69,36 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **USB**:
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-   * Used for injecting intel USB controllers, H370, B360, H310 and X79/X99 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well(X299 may need this for HighSierra). **Has no effect on AMD**
+   * Used for injecting intel USB controllers, H370, B360, H310 and X79/X99 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well(X299 may need this for HighSierra). **Does not work on AMD CPU based systems**
 
 **WiFi and Bluetooth**:
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
-   * Used for patching non-Apple broadcom cards
+   * Used for patching non-Apple Broadcom cards
 
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM)
    * Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple Airport cards.
    * To be paired with BrcmFirmwareData.kext
-      * BrcmPatchRAM3 for 10.14+
-      * BrcmPatchRAM2 for 10.11-10.14
-      * BrcmPatchRAM for 10.10 or older
+    * BrcmPatchRAM3 for 10.14+
+    * BrcmPatchRAM2 for 10.11-10.14
+    * BrcmPatchRAM for 10.10 or older
 
 
 **AMD CPU Specific kexts**:
 * [NullCPUPowerManagment](https://github.com/corpnewt/NullCPUPowerManagement)
-   * AMD CPUs cannot use Intel's power managment so we need to nullify it
+   * AMD CPUs cannot use Intel's power management so we need to nullify it
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
    * USB fix for AMD FX systems
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
-   * Audio for FX systems and frontpanel Mic+Audio support for Ryzen system, do not mix with AppleALC
+   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC
 
 **Extra's**: 
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-   * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual socket systems:
-      * MacPro6,1
-      * MacPro7,1
-      * iMacPro1,1
+   * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems:
+    * MacPro6,1
+    * MacPro7,1
+    * iMacPro1,1
 
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
    * Needed for correcting TSC on Asus's HEDT/Server motherboards
@@ -107,13 +107,13 @@ Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/maste
 
 # SSDTs
 
-So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well we'll be going over a couple to see whether you need them. Do note you'll need to compile these SSDTs with [MaciASL](https://github.com/acidanthera/MaciASL/releases) and please read them before compiling. Some require you to adjust them for your specific system(ie: EC0 to H_EC for SSDT-EC-USBX). These files will go in your ACPI folder in your EFI
+So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well, we'll be going over a couple to see whether you need them. Do note you'll need to compile these SSDTs with [MaciASL](https://github.com/acidanthera/MaciASL/releases) and please read them before compiling. Some require you to adjust them for your specific system(ie: EC0 to H_EC for SSDT-EC-USBX). These files will go in your ACPI folder in your EFI
 
 If you're unsure which you need, the specific ones for each platform are mentioned in the ACPI section of the guide.
 
 
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
-   *  This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for most Z390 systems.
+   * This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for most Z390 systems.
 * [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
    * Alternative to [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) when not compatible with your system.
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
@@ -129,7 +129,7 @@ If you're unsure which you need, the specific ones for each platform are mention
    * Sets `PluginType`, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly. X99 and X299 users need to verify if the path is correct(ie: `\_PR.PR00` vs `\_PR.PC00.PR00`)
 
 * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
-   * Adds an SMbus device and fixes DeviceProperties injection via `_DSM` for when adding properties via an SSDT.
+   * Adds an SMBus device and fixes DeviceProperties injection via `_DSM` for when adding properties via an SSDT.
 
 
-**Remember to verify that the ACPI path in the SSDT matches up with your DSDT, expremely important for X79, X99 and X299 users**
+**Remember to verify that the ACPI path in the SSDT matches up with your DSDT, extremely important for X79, X99 and X299 users**

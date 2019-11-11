@@ -1,8 +1,8 @@
 # Debugging OpenCore
 
-Needing to figure out why you're getting issues or stalling? Well you've come to the right place.
+Needing to figure out why you're getting issues or stalling? Well, you've come to the right place.
 
-To start off, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenCore. This will provide much more info than the `RELEASE` version.
+To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenCore. This will provide much more info than the `RELEASE` version.
 
 **Target**
 Used for enabling different levels of debugging
@@ -49,3 +49,4 @@ Just like with `Target`, we use a HEX calculator then convert to decimal:
 
 **disableWatchdog**: YES
 Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
+
