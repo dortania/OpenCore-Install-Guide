@@ -1,6 +1,6 @@
 # Security
 
-So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
+So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
 
 * ScanPolicy
 * Vault(work in progress)
@@ -10,17 +10,20 @@ So something that makes OpenCore truly special is how it's been built with secur
 To start, you'll need the following .efi drivers:
 
 * VirtualSMC.efi(To be used in conjunction with VirtualSMC.kext)
-* AppleGenericInput.efi (UsbKbDxe.efi may work better or worse depending on the firmware)
 * FwRuntimeServices.efi
+   * UsbKbDxe.efi may be needed if OpenCore's builtin input doesn't work
 
 Setting in your config.plist:
 
+* Misc -> Boot 
+   * `PollAppleHotKeys` set to YES(While not needed can be helpful)
 * NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
    * `UIScale` set to `02` for high resolution small displays
-
+* UEFI -> Input
+   * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of UsbKbdxe should avoid)
 * UEFI -> Protocols
    * `FirmwareVolume` set to YES
-   * `HashServices` set to YES for Haswell and older, this is needed for systems withbroken SHA-1 hashing
+   * `HashServices` set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing
 * UEFI -> Quirks
    * `ProvideConsoleGOP` to YES
    * `RequestBootVarRouting` set to YES
@@ -104,7 +107,7 @@ And converting this to decimal gives us `5,177,603`
 
 ## Vault
 
-**Work in progress
+**Work in progress**
 
 What is vaulting? Well vaulting is based around 2 things, vault.plist and vault.sig:
 * vault.plist: a "snapshot" of your EFI

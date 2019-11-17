@@ -12,7 +12,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [S2F0amEgS2xvdmVy](https://github.com/S2F0amEgS2xvdmVy)
   * Link correction
 * [CorpNewt](https://github.com/corpnewt)
-  * Heavily inspiring this guide\(if not a rip off\)
+  * Heavily inspiring this guide\(if not a rip off\) and helping overal with questions and advice
 * [Midi](https://github.com/midi1996)
   * Corrections and recommendations for the guide
 * [Andrey1970](https://www.insanelymac.com/forum/profile/1202492-andrey1970/)
@@ -28,6 +28,7 @@ No good guide is made by one man, here's credit to those who've helped out:
   * AMD Kernel patches
 * [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
    * For the original AMD Vanilla Guide
+   * Corrections to AMD portion of the guide
 * [bpetru05](https://github.com/bpetru05)
    * Additions to kernel.json
 * [jonpalmisc](https://github.com/jonpalmisc)
@@ -59,3 +60,16 @@ Gotta rep dat ~~merch~~ guides:
 
 And for those who have either recommendations or issues with this guide can find the Github for this site [here](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide)
 
+Sources:
+
+* KALSR slide:
+   * [Vit9696's Explainer](https://www.insanelymac.com/forum/topic/331381-aptiomemoryfix/?do=findComment&comment=2564269)
+   * [Apianti's explainer](https://www.reddit.com/r/hackintosh/comments/cfjyla/i_unleashed_a_plague_upon_you_guys_and_i_am_sorry/)
+   * [KASLR Explainer](https://lwn.net/Articles/569635/)
+   * [More KASLR Explainer](https://www.blackhat.com/docs/us-16/materials/us-16-Jang-Breaking-Kernel-Address-Space-Layout-Randomization-KASLR-With-Intel-TSX.pdf)
+
+* Cleaning RC scripts:
+   * [Clover Emulated NVRAM Uninstaller](https://www.tonymacx86.com/resources/clover-emulated-nvram-uninstaller.368/)
+   
+* ACPI Dumping:
+   * [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)

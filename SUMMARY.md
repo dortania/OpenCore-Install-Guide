@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [Creating the USB](creating-the-usb.md)
-* [Gathering files](kext.md)
+* [Gathering files](ktext.md)
 
 ## Intel Config.plist <a id="config.plist"></a>
 
@@ -14,21 +14,27 @@
 
 ## AMD Config.plist
 
-* [Zen/ThreadRipper](AMD-config.md)
+* [Zen/ThreadRipper](AMD/AMD-config.md)
 
 ## Post Install
 
 * [Emulated NVRAM](post-install/nvram.md)
-* [GPU Spoof](post-install/spoof.md)
-* [Security](post-install/security.md)
+* [Disabling GPU](post-install/spoof.md)
+* [Security and FileVault](post-install/security.md)
+
+## Troubleshooting
+
+* [General Troubleshooting](extras/troubleshooting.md)
+* [Fixing Resolution and Verbose](extras/verbose.md)
+* [OpenCore Debugging](extras/debug.md)
 
 ## Extras
 
 * [Legacy Install](extras/legacy.md)
-* [Hiding Verbose](extras/verbose.md)
-* [Troubleshooting](extras/troubleshooting.md)
+* [Fixing KALSR slide values](extras/kalsr-fix.md)
+* [Fixing CFG Lock](post-install/msr-lock.md)
+* [Multiboot](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/)
 
 ## Misc
-
 * [Credit](misc/credit.md)
 

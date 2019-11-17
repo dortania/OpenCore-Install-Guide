@@ -1,23 +1,43 @@
 ## Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you and rename it to config.plist. Next, open up your favourite XML editor like Xcode and we can get to work.
+You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
+
+Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209139/OC-patches-17h.plist) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209138/OC-patches-15_16h.plist) (10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
-Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) and that they're made for OpenCore 0.5.0. Users of 0.5.1 will need to wait for updated patches.
+Do note that these patches are pulled from the AMD OS X and that they're made for OpenCore 0.5.2 specifically.
 
-**Extra Importamt Note**: Current kernel patches will only work with [041045f](https://github.com/acidanthera/OpenCorePkg/tree/cd481d011bab6dc887629fe15962cd8f3cbed775) and older. To ease users experiences, please use [OpenCorePkg 0.5.0](https://github.com/acidanthera/OpenCorePkg/releases)
+**And read this guide more than once before setting up Opencore and make sure you have it setup correctly**
+
 ## ACPI
 
-![ACPI](https://i.imgur.com/Ohywvqm.png)
+![ACPI](https://i.imgur.com/zqNt4dV.png)
 
-The above ACPI patch is only an example, please read below for more info
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
+
+* [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
+   * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
+
+For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder. You can compile with MaciASL by running File -> SaveAs -> ACPI Machine Language.
+
+> How do I get a copy of my DSDT for running SSDTTime?
+
+* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> Save as `System DSDT`, make sure the file format is ACPI Machine Language Binary
+   * Do note that all ACPI patches will be applied to the DSDT
+* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Linux
+   * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
+* F4 in Clover Boot menu
+   * DSDT can be found in `EFI/CLOVER/ACPI/origin`
+* [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
+   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml. Tool provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
+
+IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
 
 **Block**
 
@@ -57,14 +77,18 @@ And to grab the location of such devices can use [gfxutil](https://github.com/ac
 
 ![Booter](https://i.imgur.com/suElruh.png)
 
-This section is dedicated to quirks relating to FwRuntimeServices.efi, the replacement for AptioMemoryFix.efi
+This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi
+
+**MmioWhitelist**:
+
+This section is allowing devices to be passthrough to macOS that are generally ignored, most users can ignore this section.
 
 **Quirks**:
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values but may not be compatible with all boards. Generally useful for APTIO V firmwares(Broadwell+)
+   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values and generally useful for most firmwares though breaks on some AMD systems.
 * **DisableSingleUser**: NO
    * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -80,7 +104,11 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 * **ProtectCsmRegion**: NO
    * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProvideCustomSlide**: YES
-   * If there's a conflicting slide value, this option forces macOS to
+   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+* **SetupVirtualMap**: YES
+   * Fixes SetVirtualAddresses calls to virtual addresses
+* **ShrinkMemoryMap**: NO
+   * Needed for systems with large memory maps that don't fit, don't use unless necessary
 
 ## DeviceProperties
 
@@ -92,9 +120,14 @@ This section is dedicated to quirks relating to FwRuntimeServices.efi, the repla
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
-Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases)
+Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases) You can find your audio path with the following(Do note not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):
+```
+path/to/gfxutil -f HDEF
+```
 
 Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`
+
+The `PciRoot(0x0)/Pci(0x2,0x0)` is only for intel iGPUs, remove this section entirely.
 
 **Block**: Removes device properties from map, for us we can ignore this
 
@@ -104,7 +137,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/ehG6Da6.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts) for what kexts we recommend.
 
  * **BundlePath** 
     * Name of the kext
@@ -132,35 +165,39 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 **Patch**: This is where the AMD kernel patching magic happens. Please do note that `MatchOS` from Clover becomes `MinKernel` and `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303):
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209139/OC-patches-17h.plist)(10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://cdn.discordapp.com/attachments/611462337446281236/630939338133209138/OC-patches-15_16h.plist)(10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
-Do note that these patches are pulled from the [AMD OS X discord](https://discord.gg/EfCYAJW) so they may not always be the most up-to-date, check the [#opencore_support](https://discordapp.com/channels/249992304503291905/611462337446281236) channel's pins for the newest releases.
+To merge:
+* Open both files, 
+* Delete the `Patch` section from config.plist
+* Copy the `Patch` section from patches.plist
+* Paste into where old patches were in config.plist
 
 **Quirks**:
 
 * **AppleCpuPmCfgLock**: NO 
-   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleICPUPM
+   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. AMD users can ignore
 * **AppleXcpmCfgLock**: NO 
-   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
+   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. AMD users can ignore
 * **AppleXcpmExtraMsrs**: NO 
    * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO 
-   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
-* **DisableIOMapper**: YES 
-   * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems
+   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandom with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
+* **DisableIOMapper**: NO 
+   * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems varies so recommened to disable SVM(SecureVirtualMachine) in BIOS
 * **ExternalDiskIcons**: YES 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **LapicKernelPanic**: NO 
-* Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
+   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
    * Allows for reading kernel panics logs when kernel panics occurs
+* **PowerTimeoutKernelPanic**: YES
+   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
 * **ThirdPartyTrim**: NO 
    * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
-   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD is in the works.
-
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning.
+   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
 
 
 ## Misc
@@ -172,8 +209,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Best to avoid hibernation with hackintoshes all together
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **PollAppleHotKeys**: YES
-   * Allows you to use Apple's hot keys during boot, needs to be used in conjunction with either AppleGenericInput.efi or UsbKbDxe.efi depending on the firmware. Popular commands:
+* **PollAppleHotKeys**: NO
+   * Allows you to use Apple's hot keys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
       *  `Cmd+Opt+P+R`: Cleans NVRAM 
       * `Cmd+R`: Boots Recovery partition
@@ -188,7 +225,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
-* **DisableWatchDog**: NO \(May need to be set for YES if macOS is stalling on something while booting, generally avoid unless troubleshooting\)
+* **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 
 **Security**: Security is pretty self-explanatory.
 
@@ -199,7 +236,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **RequireVault**: NO
    * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](extras/secuirty.md) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** *
@@ -210,7 +247,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Path to file after the `Tools` folder
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
-**Entires**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
+**Entries**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
 * **Name**
    * Name shown in boot picker
 * **Enabled**
@@ -233,20 +270,22 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 * **boot-args**:
   * `-v` - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-  * `dart=0` - this is just an extra layer of protection against Vt-d issues
-  * `debug=0x100` - this prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
+  * `debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
   * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debuging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as these properties either cannot be found or some other issue with them.
+  * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debuging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. Unfortunately AMD systems cannot have SIP enabled
    * `E7030000` - SIP completely disabled.
 
 * **nvda\_drv**: &lt;&gt; 
-   * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text)
+   * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text). AMD and Intel GPU users should leave this area blank.
 * **prev-lang:kbd**: &lt;&gt; 
-   * Needed for non-latin keyboards
+   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it(**Default in Sample config is Russian**):
+      * American: `en-US:0`(`656e2d55533a30` in HEX)
+      * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
-**Block**: Forcibly rewrites NVRAM variables, not needed for us as `sudo nvram` is prefered but useful for those edge cases. Note that `Add` will not overwrite values already present in NVRAM
+**Block**: Forcibly rewrites NVRAM variables, do note that `Add` will not overwrite values already present in NVRAM so values like `boot-args` should be left.
+
 
 **LegacyEnable**: NO
    * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
@@ -258,9 +297,15 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ![PlatformInfo](https://i.imgur.com/CrqeCea.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application. 
+For setting up the SMBIOS info, we'll use acidanthera's [macserial](https://github.com/acidanthera/MacInfoPkg/releases) application. 
 
-For this example, we'll choose the _iMacPro1,1_ SMBIOS but those running Nvidia GPUs may find better stability with _iMac14,2_.
+For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
+
+* iMacPro1,1: AMD RX Polaris and newer
+* MacPro7,1: AMD RX Polaris and newer(Note that theres no valid serial numbers yet so iCloud, iMessage, etc will be broken. MacPro7,1 is also a Catalina exclusive)
+* MacPro6,1: AMD R5/R7/R9 and older
+* iMac14,2: Nvidia Kepler and newer
+
 
 To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
 
@@ -292,7 +337,7 @@ The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via my GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
+We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
@@ -320,6 +365,25 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Drivers**: Add your .efi drivers here
 
+**Input**: Related to boot.efi keyboard passthrough used for for FileVault and Hotkey support
+
+* **KeyForgetThreshold**: `5`
+   * The delay between each key input when holding a key down, for best results use `5` milliseconds
+* **KeyMergeThreshold**: `2`
+   * The lengh of time that a key will be registered before resetting, for best results use `2` milliseconds
+* **KeySupport**: `NO`
+   * Enables OpenCore's built in key support, do not use with UsbKbDxe.efi
+* **KeySupportMode**: `Auto`
+   * Keyboard translation for OpenCore
+* **KeySwap**: `NO`
+   * Swaps `Option` and `Cmd` key
+* **PointerSupport**: 
+* Used for fixing broken pointer support, commonly used for Z87 Asus boards. Leave blank
+* **PointerSupportMode**:
+   * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
+* **TimerResolution**: `50000`
+   * Set architecture timer resolution, Asus boards use `60000` for the interface
+
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
 * **ConsoleControl**: YES
@@ -344,7 +408,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **ProvideConsoleGop**: YES
    * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
 * **ReleaseUsbOwnership**: NO
-   * Releases USB controller from firmware driver, avoid unless you know what you're doing. Clover equivalent is `FixOwnership`
+   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
 * **RequestBootVarRouting**: YES
    * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
@@ -356,4 +420,9 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 # Cleaning up
 
-And now you're ready to save and place it into your EFI
+And now you're ready to save and place it into your EFI.
+
+For those having booting issues, please make sure to read the [Troubleshooting section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/troubleshooting) first and if your questions are still unanswered we have plenty of resources at your disposal:
+
+* [AMD OS X Discord](https://discord.gg/QuUWg7)
+* [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)

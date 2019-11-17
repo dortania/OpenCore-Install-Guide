@@ -1,17 +1,17 @@
 # GPU Spoof
 
-So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifcally that we need to specify to which exact device we want to spoof. There's 3 ways we can do this:
+So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 
 * Boot Flag
   * Disables all GPUs except the iGPU
 * DeviceProperties
-  * Disables GPU on per-slot basis
+  * Disables GPU on a per-slot basis
 * SSDT
-  * Disables GPU on per-slot basis
+  * Disables GPU on a per-slot basis
 
 ## Boot Flag
 
-By far the simplest way, all you need to do is add the following bootflag:
+By far the simplest way, all you need to do is add the following boot-arg:
 
 `-wegnoegpu`
 
@@ -22,7 +22,7 @@ Do note that this will disable all GPUs excluding the iGPU
 Here is quite simple, find the PCI route with [gfxutil](https://github.com/acidanthera/gfxutil/releases) and then create a new DeviceProperties section with your spoof:
 
 ```text
-/Users/(YourUsername)/Downloads/(gfxdownload folder)/gfxutil -f GFX0
+path/to/gfxutil -f GFX0
 ```
 
 And the output will result in something similar:
@@ -43,7 +43,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 
 ## SSDT Method
 
-There's many ways to find the path but generally the easiest way is to got into Device Manager under windows and find the PCI path.
+There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.
 
 Example of device path:
 
@@ -72,3 +72,8 @@ DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
 
 What this SSDT does special compared to Rehabman's SSDT is that this adds the `If (_OSI ("Darwin")){}` block so that this SSDT wouldn't be applied when booting other operating systems
 
+# Fixing Windows
+
+So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:
+
+![Credit to CorpNewt for image](https://i.imgur.com/TG3jGBC.png)
