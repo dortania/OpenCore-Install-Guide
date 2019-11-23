@@ -33,8 +33,7 @@ Couple different ways:
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> Save as `System DSDT`, make sure the file format is ACPI Machine Language Binary
 * F4 in Clover
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
-* [SSDTTime](https://github.com/corpnewt/SSDTTime) for Linux
-   * IOIIIO's fork of [SSDTTime](https://github.com/IOIIIO/SSDTTime) also supports windows DSDT dumping.
+* [SSDTTime](https://github.com/corpnewt/SSDTTime) for Linux and Windows
 * [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
    * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker
 
