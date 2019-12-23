@@ -57,7 +57,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **Audio**:
 * [AppleALC](https://github.com/vit9696/AppleALC/releases)
-   * Used for AppleHDA patching
+   * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h cannot use this and Ryzen/Threadripper systems won't have mic support
 
 **Ethernet**:
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
@@ -90,7 +90,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
    * USB fix for AMD FX systems
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
-   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC
+   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticably worse than AppleALC on Zen CPUs
 
 **Extra's**: 
 

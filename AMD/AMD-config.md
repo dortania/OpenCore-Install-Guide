@@ -8,8 +8,6 @@ Kernel patches:
 * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
 * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
-Do note that these patches are pulled from the AMD OS X and that they're made for OpenCore 0.5.2 specifically.
-
 **And read this guide more than once before setting up Opencore and make sure you have it setup correctly**
 
 ## ACPI
@@ -192,7 +190,7 @@ To merge:
    * Allows for reading kernel panics logs when kernel panics occurs
 * **PowerTimeoutKernelPanic**: YES
    * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
-* **ThirdPartyTrim**: NO 
+* **ThirdPartyDrives**: NO 
    * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
    * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
@@ -224,11 +222,15 @@ To merge:
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
 * **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
+* **DisplayLevel**: `75`
+   * Shows more debug information, requires debug version of OpenCore
 
 **Security**: Security is pretty self-explanatory.
 
 * **AllowNvramReset**: YES
    * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
+* **ExposeSensitiveData**: `6`
+   * Shows more debug information, requires debug version of OpenCore
 * **RequireSignature**: NO
    * We won't be dealing vault.plist so we can ignore
 * **RequireVault**: NO
@@ -407,6 +409,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
 * **ReleaseUsbOwnership**: NO
    * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
+* **RequestBootVarFallback**: YES
+   * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **RequestBootVarRouting**: YES
    * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
@@ -415,6 +419,9 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Fixes High resolutions displays that display OpenCore in 1024x768, recommened for user with 1080P+ displays
 * **ClearScreenOnModeSwitch**: NO
    * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
+* **UnblockFsConnect**: NO
+   * Some firmwares block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+
 
 # Cleaning up
 

@@ -4,7 +4,7 @@
 
 Requirements:
 
-* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) \(Recommend to build from scratch instead of using the prebuilt package as OpenCore is constantly being updated. As of writing, we're on Version `0.5.3` even though the current official release may be behind). The easiest way to build is via the [`macbuild.tool`](https://github.com/acidanthera/OpenCorePkg/blob/master/macbuild.tool), you will need Xcode's Commandline tools
+* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg), highly recommend running the debug version to show more info
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
 * [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting\(terminal command example can be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/)\).
 * [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool but is heavily outdated and the Mackie version is known for corruption. Please avoid these kinds of tools at all costs!\).
