@@ -15,7 +15,9 @@ What you'll need:
 Remove nullcpupowermanagement and add the following patch to Kernel -> Patch:
 
 Find: `D0 05 00 00 84 C0 74 46 E8`
+
 Replace: `D0 05 00 00 84 C0 EB 46 E8`
+
 Identifier: `com.apple.driver.AppleIntelCPUPowerManagement`
 
 # 2. Create an `plugin-type=1` SSDT:
