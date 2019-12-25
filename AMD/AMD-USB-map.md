@@ -148,7 +148,7 @@ Something you may have noticed is that your DSDT is even missing some ports, lik
 
 ![AsRock B450 missing ports](https://i.imgur.com/xz3p0H4.png)
 
-In this IOReg, we're missing HS02, HS03, HS04, HS05, etc. When this happens, we actually need to outright remove all our ports from that controller in our DSDT. What this will let us do is allow macOS to build the ports itself instead of basing it off of the ACPI. Save this modified DSDT.aml and place it in your EFI/OC/ACPI and specify it in your config.plist -> ACPI -> Add(note that DSDT.aml must be forst to work correctly)
+In this IOReg, we're missing HS02, HS03, HS04, HS05, etc. When this happens, we actually need to outright remove all our ports from that controller in our DSDT. What this will let us do is allow macOS to build the ports itself instead of basing it off of the ACPI. Save this modified DSDT.aml and place it in your EFI/OC/ACPI folder and specify it in your config.plist -> ACPI -> Add(note that DSDT.aml must be forst to work correctly)
 
 # Fixing USB power on AMD
 

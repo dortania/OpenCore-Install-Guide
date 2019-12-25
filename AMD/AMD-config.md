@@ -2,7 +2,7 @@
 
 You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
 
-Users of ProperTree will also get the benifit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
+Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
 
 Kernel patches:
 * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
@@ -24,7 +24,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT.
 
-For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into EFI/OC/ACPI folder. You can compile with MaciASL by running File -> SaveAs -> ACPI Machine Language.
+For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
 
 > How do I get a copy of my DSDT for running SSDTTime?
 
@@ -35,7 +35,7 @@ For those having troubles understanding the SSDTs regarding EC can use CorpNewt'
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`
 * [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
-   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml. Tool provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
+   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml. Tool is provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump).
 
 **Block**
 
@@ -45,7 +45,7 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers use SSDTs or similar Device Property patching like what's seen with Framebuffer patching.
 
-And to grab the location of such devices can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
+And to grab the location of such devices you can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
 
 * **Comment** 
    * Name of patch
@@ -86,7 +86,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `Slide=N` values and generally useful for most firmwares though breaks on some AMD systems.
+   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful for most firmwares though breaks on some AMD systems.
 * **DisableSingleUser**: NO
    * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -98,7 +98,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **EnableWriteUnprotector**: YES
    * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
-   * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary\) 
+   * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
 * **ProtectCsmRegion**: NO
    * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProvideCustomSlide**: YES
@@ -114,7 +114,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 **Add**: Sets device properties from a map.
 
-`PciRoot(0x0)/Pci(0x0,0x4)` -&gt; `Layout-id`
+`PciRoot(0x0)/Pci(0x0,0x4)` -&gt; `layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
@@ -135,15 +135,15 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/ehG6Da6.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts) for what kexts we recommend.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](../ktext.md#kexts) for what kexts we recommend.
 
  * **BundlePath** 
     * Name of the kext
     * ex: `Lilu.kext`
  * **Enabled** 
-    * Self explaitroy, either enables or diables the kext
- * **Executableath** 
-    * Path to the actual executable hidden within the kext, you can see what path you kext has by right clicking and selecting `Show Package Contents`. Generally they'll be `Contents/MacOS/Kext` but some have kexts hiddin within under `Plugin` folder. Do note that Plist only kexts do not need this filled in.
+    * Self explanatory, either enables or diables the kext
+ * **ExecutablePath** 
+    * Path to the actual executable hidden within the kext, you can see what path you kext has by right clicking and selecting `Show Package Contents`. Generally they'll be `Contents/MacOS/Kext` but some have kexts hiddin within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
     * ex: `Contents/MacOS/Lilu`
  * **PlistPath** 
     * Path to the `info.plist` hidden within the kext
@@ -245,11 +245,11 @@ These values are based of those calculated in [OpenCore debugging](https://khron
    * `0` allows you to see all drives available, please refer to [Security](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
-* **Name** *
+* **Name**
    * Name shown in OpenCore
-* **Enabled** *
+* **Enabled**
    * Self explanitory, enables or disables
-* **Path** *
+* **Path**
    * Path to file after the `Tools` folder
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 

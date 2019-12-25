@@ -114,7 +114,7 @@ And to verify that this is correct:
 
 `0x100000` \+ (`0x35A` \* `0x200000`) = `0x6B500000`
 
-Whenever the returned value is **not** the original(`0x6B500000` vs `0x6B626000`), just add +1 to your final slide value. This is due to rounding. So for example `0x35A` converted to decimal becomes `858` and then +1 will give you `slide= 858`.
+Whenever the returned value is **not** the original(`0x6B500000` vs `0x6B626000`), just add +1 to your final slide value. This is due to rounding. So for example `0x35A` converted to decimal becomes `858` and then +1 will give you `slide=858`.
 
 > But wait for just a second, this is higher than 256!
 
