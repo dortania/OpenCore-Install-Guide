@@ -12,7 +12,7 @@ What you'll need:
 1. Removing nullcpupowermanagement.kext: 
 
 
-Remove nullcpupowermanagement and add the following patch to Kernel -> Add:
+Remove nullcpupowermanagement and add the following patch to Kernel -> Patch:
 
 Find: `D0 05 00 00 84 C0 74 46 E8`
 Replace: `D0 05 00 00 84 C0 EB 46 E8`
@@ -28,7 +28,7 @@ Now edit your SSDT with MaciASL, then export it via `File` -> `SaveAs` -> `ACPI 
 
 Don't forget that compiled SSDTs have a .aml extension(Assembled)
 
-3. Creating the A GPM injector r kext
+3. Creating the AGPM injector kext
 
 Now open up AGPMInjector and run it, then add the kext to both your config.plist under kernel -> Add and into EFI/OC/Kexts.
 
