@@ -27,6 +27,10 @@ Main things to check:
 * Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)
 * Enable `AvoidHighAlloc` if you're running a network recovery install
 
+# Stuck on `OCB: OcScanForBootEntries failure - Not Found`
+
+This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
+
 # "Waiting for Root Device" or Prohibited Sign error
 
 * Generally seen as a USB error, couple ways to fix:
@@ -99,6 +103,8 @@ This is right before the GPU is properly initialized, verify the following:
 * GPU is UEFI capable(GTX 7XX/2013+)
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
+
+
 
 # Black screen after gIO on Navi
 * Add `agdpmod=pikera` to boot args
