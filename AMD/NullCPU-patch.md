@@ -20,7 +20,7 @@ Identifier: `com.apple.driver.AppleIntelCPUPowerManagement`
 
 # 2. Create an `plugin-type=1` SSDT:
 
-Now the fun begins, we'll be grabbing our [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) and converting it to our system. The specific part we're wanting to adapt is `_PR.CPU0` as not all DSDTs have theirs starting with `CPU0`, to verify yours you can open IORegistryExplorer and see what's the first device connected to AppleACPICPU. You'll also notice that `C000` will increment based off the number of threads your CPU has. This name is pulled from your DSDT.
+Now the fun begins, we'll be grabbing our [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) and converting it to our system. The specific part we're wanting to adapt is `CPU0` as not all DSDTs have theirs starting with `CPU0`, to verify yours you can open IORegistryExplorer and see what's the first device connected to AppleACPICPU. You'll also notice that `C000` will increment based off the number of threads your CPU has. This name is pulled from your DSDT.
 
 For AMD, `C000` is the most common value but `CP00`, `CPU0`, `PR00` are other common values. Please verify yours.
 
