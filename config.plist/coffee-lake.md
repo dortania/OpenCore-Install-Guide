@@ -244,7 +244,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
 * **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
-* **DisplayLevel**: `75`
+* **Target**: `75`
    * Shows more debug information, requires debug version of OpenCore
 
 **Security**: Security is pretty self-explanatory.
@@ -260,6 +260,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
   * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
    * `0` allows you to see all drives available, please refer to [Security](post-install/security-and-filevault.md) section for furthur details
+* **DisplayLevel**: `2147483714`
+    * Shows even more debug information, requires debug version of OpenCore
+
+These values are based of those calculated in [OpenCore debugging](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug)
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** 

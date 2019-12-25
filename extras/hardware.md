@@ -13,6 +13,7 @@
 * Sierra needs SSE4,1
 * Pentiums and some Xeons need CPU ID spoof
 * AMD CPUs need [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
+* 19h AMD CPUs are unsupported(3rd gen threadripper)
 
 # GPU Compatibility
 

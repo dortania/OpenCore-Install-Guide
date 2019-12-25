@@ -74,7 +74,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 **WiFi and Bluetooth**:
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
-   * Used for patching non-Apple Broadcom cards
+   * Used for patching non-Apple Broadcom cards, **will not work on intel, Killer, Realtek, etc**
 
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM)
    * Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple Airport cards.

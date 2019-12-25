@@ -8,6 +8,8 @@ Kernel patches:
 * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
 * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
+Please note that 3rd gen Threadripper(19h) is unsupported currently.
+
 **And read this guide more than once before setting up Opencore and make sure you have it setup correctly**
 
 ## ACPI
@@ -222,8 +224,12 @@ To merge:
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
 * **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
-* **DisplayLevel**: `75`
+* **Target**: `75`
    * Shows more debug information, requires debug version of OpenCore
+* **DisplayLevel**: `2147483714`
+   * Shows even more debug information, requires debug version of OpenCore
+
+These values are based of those calculated in [OpenCore debugging](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug)
 
 **Security**: Security is pretty self-explanatory.
 
