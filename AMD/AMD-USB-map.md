@@ -159,6 +159,4 @@ Something that users have noticed is that certain devices tend to break on certa
 * Webcams
 * Bluetooth Dongles
 
-To fix this, we'll want to do is force USB power properties onto each USB controller by using [SSDT-USBX-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX-AMD.dsl). The 3 types of controllers most commonly found in AMD DSDTs are PTXH, XHC0 and AS43, **verify the ACPI path and that they exist in your DSDT before compiling this SSDT**. 
-
-Credit to AlGrey and ydeng for their original work and findings here: [NATIVE RYZEN USB SUPPORT](https://amd-osx.com/forum/viewtopic.php?t=4986)
+To fix this, we'll want to do is force USB power properties onto each USB controller by using [SSDT-USBX-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX-AMD.aml). This SSDT is ready to be used as-is so I've provided a precompiled version, all that needs to be done is add it to your config.plist under ACPI->Add and to your EFI under EFI/OC/ACPI.

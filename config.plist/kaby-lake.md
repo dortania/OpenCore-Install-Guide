@@ -446,7 +446,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## Cleaning up
 
-And now you're ready to save and place it into your EFI.
+And now you're ready to save and place it into your EFI under EFI/OC.
 
 For those having booting issues, please make sure to read the [Troubleshooting section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/troubleshooting) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
