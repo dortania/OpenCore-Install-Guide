@@ -43,7 +43,7 @@ Recommended BIOS settings:
 
 ## Creating the USB
 
-Creating the USB is simple, all you need to do is format it with GUID partition map. There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB.
+Creating the USB is simple, all you need to do is format it with GUID partition map. There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB. This changes when you're making an instller, see installer section below for more info.
 
 ![Formatting the USB](https://i.imgur.com/5uTJbgI.png)
 
@@ -79,14 +79,14 @@ Here's what mine looks like\(For the majority of users you can ignore Tools but 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades. 
 
 * Users with a mac:
-   * Format the USB as HFS+/MacOS Journaled with GUID partition map
+   * Format the USB as HFS+/MacOS Journaled with GUID partition map, must be 16GB for Catalina
    * Download a copy of macOS
     * AppStore: [High Sierra](macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12), [Mojave](macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12), [Catalina](macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12)
     * [GibMacOS](https://github.com/corpnewt/gibMacOS) with the `BuildmacOSInstallApp.command`
    * Run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372)
   
 * Users without a mac:
-   * Format USB as Fat32 with GUID partition map
+   * Format USB as Fat32 with GUID partition map, must be 4GB minimum
    * Download the macOS `BaseSystem.dmg` and `BaseSystem.chunklist`
     * [gibMacOS](https://github.com/corpnewt/gibMacOS)
     * [macrecovery.py](https://github.com/acidanthera/MacInfoPkg/blob/master/macrecovery/macrecovery.py)

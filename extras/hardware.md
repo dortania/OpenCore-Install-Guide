@@ -10,7 +10,7 @@
 
 # CPU Compatibility
 
-* Sierra needs SSE4,1
+* macOS Sierra+ requires a SSE4,1 capable CPU
 * Pentiums and some Xeons need CPU ID spoof
 * AMD CPUs need [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
 * 19h AMD CPUs are unsupported(3rd gen threadripper)
@@ -20,14 +20,14 @@
 * [See GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) for compatible GPUs.
 # Motherboard Compatibility
 
-* All AMD and Intel boards are supported
+* All AMD and Intel motherboards are supported to a certain extent
 * Z390 and some HEDT systems will need emulated NVRAM
 * Some Z370 and Z390 boards have AWAC clocks, these are incompatible with macOS and so will need an RTC fix
 
 # SSD Compatibility
 
 * No eMMC storage
-* Samsung PM981 and early 970 Evo Plus models don't work(970EvoPlus requires a firmware upgrade to work)
+* Samsung PM981 and early 970 Evo Plus models don't work([970 Evo Plus requires a firmware upgrade to work](https://www.tonymacx86.com/threads/do-the-samsung-970-evo-plus-drives-work-new-firmware-available-2b2qexm7.270757/page-14#post-1960453))
 * See [Anti-Hackintosh-Buyers-Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/) for more info
 
 # Audio Compatibility
@@ -49,6 +49,6 @@ Unsupported ethernet models:
 * Realtek L8200A(Only found in Asus boards)
 * Realtek RTL8125(2.5Gbe, mostly found on higher end gaming boards)
 
-And see [Wireless Buyers Guide](https://khronokernel-7.gitbook.io/wireless-buyers-guide/) for supported wifi cards.
+And see [Wireless Buyers Guide](https://khronokernel-7.gitbook.io/wireless-buyers-guide/) for supported wifi cards. All built in motherboard wireless ccards will not work in macOS, they must be swapped.
 
 
