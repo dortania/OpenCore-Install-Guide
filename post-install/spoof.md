@@ -9,6 +9,7 @@ So you need to hide your unsupported GPU? Well with OpenCore things are slightly
 * SSDT
   * Disables GPU on a per-slot basis
 
+**CSM must be off in the BIOS for the spoofing to work correctly, especially on AMD CPU based systems**
 ## Boot Flag
 
 By far the simplest way, all you need to do is add the following boot-arg:

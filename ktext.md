@@ -61,7 +61,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **Ethernet**:
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
-   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://drive.google.com/file/d/0B5Txx3pb7pgcOG5lSEF2VzFySWM/view?usp=sharing)
+   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://drive.google.com/file/d/0B5Txx3pb7pgcOG5lSEF2VzFySWM/view?usp=sharing). AMD motherboards with intel NICs generally run I211-AT
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
    * Required for Atheros and Killer NICs
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)

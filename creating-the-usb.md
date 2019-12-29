@@ -7,7 +7,7 @@ Requirements:
 * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
 * [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting\(terminal command example can be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/)\).
-* [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \([OpenCore Configurator](https://www.insanelymac.com/forum/topic/338686-opencore-configurator/) is another tool but is heavily outdated and the Mackie version is known for corruption. Please avoid these kinds of tools at all costs!\).
+* [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \(OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. **Please avoid these kinds of tools at all costs!**\).
 * Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `Cmd+Option+P+R` while booting to clean your NVRAM as long as you have `PollAppleHotKeys` set to True. Some firmware require UsbKbDxe.efi for proper keyboard functionality with this setting on).
 * USB formatted as MacOS Journaled with GUID partition map.
 * Knowledge of how a Hackintosh works and what files yours requires(ie: Type of network controller).
@@ -36,6 +36,7 @@ Recommended BIOS settings:
  * Execute Disable Bit
  * EHCI/XHCI Hand-off
  * OS type: Windows 8.1/10
+ * Legacy RTC Device(Relevant for Z370+)
 
 **Note for legacy users**
 
