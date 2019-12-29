@@ -8,6 +8,8 @@ Turn the following off under `Misc -> Security`:
 * `RequireSignature`
 * `RequireVault`
 
+If you have already executed the commands listed in the [OpenCore Reference Manual](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) under **8.5 Security Properties**, `5. RequireVault`, you'll need to restore your `OpenCore.efi` file.
+
 # Stuck on EndRandomSeed
 Couple problems:
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
