@@ -101,9 +101,9 @@ By default, ScanPolicy is given a value of `0xF0103`\(983,299\) which is the com
 
 And lets just say for this example that you want to add OC\_SCAN\_ALLOW\_DEVICE\_USB:
 
-`0x00400000` + `0xF0103` = `0x4F0103`
+`0x00200000` + `0xF0103` = `0x2F0103`
 
-And converting this to decimal gives us `5,177,603`
+And converting this to decimal gives us `3,080,451`
 
 ## Vault
 
