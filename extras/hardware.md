@@ -1,6 +1,7 @@
 # Supported hardware
 
-**Work in progress**
+
+So this little section is for those who are wanting to know whether their hardware will work in macOS
 
 # Ways to check hardware
 
@@ -12,6 +13,7 @@
 
 * macOS Sierra+ requires a SSE4,1 capable CPU
 * Pentiums and some Xeons need CPU ID spoof
+* Celerons and mobile pentiums will not work
 * AMD CPUs need [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
 * 19h AMD CPUs are unsupported(3rd gen threadripper)
 
