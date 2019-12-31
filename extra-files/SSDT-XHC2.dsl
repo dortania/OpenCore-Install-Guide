@@ -1,4 +1,4 @@
-/*
+  /*
  * Intel ACPI Component Architecture
  * AML/ASL+ Disassembler version 20190509 (64-bit version)
  * Copyright (c) 2000 - 2019 Intel Corporation
@@ -13,7 +13,7 @@
  *     Revision         0x02
  *     Checksum         0x2B
  *     OEM ID           "hack"
- *     OEM Table ID     "_XHCX"
+ *     OEM Table ID     "_XHC2"
  *     OEM Revision     0x00000000 (0)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20190509 (538510601)

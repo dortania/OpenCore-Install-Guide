@@ -94,7 +94,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **DisableSingleUser**: NO
   * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
-  * Needed for systems with non-functioning NVRAM like Z390 and such
+  * Needed for systems with non-functioning NVRAM: B360, B365, H310, H370, Z390
 * **DiscardHibernateMap**: NO
   * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES
@@ -153,7 +153,7 @@ Keep in mind that some motherboards have different device locations, you can fin
 path/to/gfxutil -f HDEF
 ```
 
-Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`
+Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`. Audio can be left for post install.
 
 Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifcally Little Endians that modern CPUs use for ordering bytes. The more you know!
 
@@ -476,3 +476,15 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
 
+# Post install
+
+So what in the world needs to be done once everything is installed? Well here's some things:
+
+* [USB mapping](https://usb-map.gitbook.io/project/) 
+* [Setting up emulated NVRAM](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/nvram) for B360, B365, H310, H370, Z390 motherboards( Z370 and Q370 does not need this)
+* Correcting audio, reread the DeviceProperties on how
+* Moving OpenCore from the USB to your main drive
+   * Mount USB's EFI
+   * Copy EFI folder to desktop
+   * Unmount USB and mount boot drive's EFI
+   * Paste EFI onto root of the drive

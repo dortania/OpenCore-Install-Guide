@@ -126,7 +126,7 @@ Keep in mind that some motherboards have different device locations, you can fin
 path/to/gfxutil -f HDEF
 ```
 
-Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`
+Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`. Audio can be left for post install.
 
 The `PciRoot(0x0)/Pci(0x2,0x0)` is only for intel iGPUs, remove this section entirely.
 
@@ -440,3 +440,16 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * [AMD OS X Discord](https://discord.gg/QuUWg7)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
+
+
+# Post install
+
+So what in the world needs to be done once everything is installed? Well here's some things:
+
+* [USB mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md) 
+* Correcting audio, reread the DeviceProperties on how
+* Moving OpenCore from the USB to your main drive
+   * Mount USB's EFI
+   * Copy EFI folder to desktop
+   * Unmount USB and mount boot drive's EFI
+   * Paste EFI onto root of the drive
