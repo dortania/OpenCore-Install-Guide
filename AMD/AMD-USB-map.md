@@ -160,7 +160,11 @@ What you'll want to do is find a controller you want to rename, find its full AC
 
 > But how do I map a non-standard controller that shows up as PXSX?
 
-Similar idea to regular SSDT renaming execpt you need to actually find the controller. This becomes difficult as SSDs, network controllers, etc can also show up as PXSX. Check the IOACPIPlane in IOreg to find its path
+Similar idea to regular SSDT renaming execpt you need to actually find the controller. This becomes difficult as SSDs, network controllers, etc can also show up as PXSX. Check the ACPI-path in IOreg to find its path:
+
+![](https://i.imgur.com/DLa06XN.png)
+
+As we can see, `IOACPIPlane:/_SB/PC00@0/RP05@1c0004/PXSX@0` would be interpreted as `_SB.PC00.RP05.PXSX`
 
 
 # Fixing USB power on AMD
