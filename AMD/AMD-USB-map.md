@@ -150,6 +150,19 @@ Something you may have noticed is that your DSDT is even missing some ports, lik
 
 In this IOReg, we're missing HS02, HS03, HS04, HS05, etc. When this happens, we actually need to outright remove all our ports from that controller in our DSDT. What this will let us do is allow macOS to build the ports itself instead of basing it off of the ACPI. Save this modified DSDT.aml and place it in your EFI/OC/ACPI folder and specify it in your config.plist -> ACPI -> Add(note that DSDT.aml must be forst to work correctly)
 
+# Port mapping when you have multiple of the same controller
+
+This becomes a problem when we run systems with many USB controllers which all want to have the same identifier, commonly being multiple XHC0 devices or AsMedia controllers showing up as generic PXSX devices. To fix this, we'll want to make an SSDT that will rename the controller:
+
+* [SSDT-XHC2.dsl](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/SSDT-XHC2.dsl)
+
+What you'll want to do is find a controller you want to rename, find its full ACPI path and replace the one in the sample SSDT. In our sample, we're be renaming `PCI0.GP13.XHC0` to `XHC2` so change accordingly
+
+> But how do I map a non-standard controller that shows up as PXSX?
+
+Similar idea to regular SSDT renaming execpt you need to actually find the controller. This becomes difficult as SSDs, network controllers, etc can also show up as PXSX. Check the IOACPIPlane in IOreg to find its path
+
+
 # Fixing USB power on AMD
 
 Something that users have noticed is that certain devices tend to break on certain AMD ports due to not suppling enough or correct power. Some of these devices include:
