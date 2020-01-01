@@ -5,6 +5,11 @@
  */
 
 
+DefinitionBlock ("", "SSDT", 2, "ACDT", "SsdtEC", 0x00001000)
+{
+    External (_SB_.PCI0.LPCB, DeviceObj)
+    External (_SB_.PCI0.LPCB.H_EC, DeviceObj)
+
  If (_OSI ("Darwin"))
     {
         Scope (\_SB.PCI0.LPCB.H_EC)
@@ -23,9 +28,7 @@
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     Return (0x0F)
-                    /*
-                     * Insert H_EC properties/methods
-                     */
+                    
                 }
             }
         }
