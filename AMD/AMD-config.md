@@ -448,6 +448,7 @@ So what in the world needs to be done once everything is installed? Well here's 
 
 * [USB mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md) 
 * Correcting audio, reread the DeviceProperties on how
+* [Removing NullCPUPowerManagment.kext and improving GPU performance](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to desktop
