@@ -35,7 +35,7 @@ If folders are empty then delete them as well:
 To start, open terminal and run the following one line at a time:
 ```
 sudo -s
-nvram -c
+nvram -c 
 nvram myvar=test
 exit
 ```
@@ -44,6 +44,8 @@ Now reboot and run this:
 nvram -p | grep -i myvar
 ```
 If nothing returns then your NVRAM is not working. If a line containing `myvar test` returns, your NVRAM is working.
+
+Note: `nvram -c` requires SIP to be off, alternative is to wipe NVRAM at the boot menu. Reminder you'll need `Misc -> Security -> AllowNvramReset -> YES`
 
 ## Enabling emulated NVRAM (with a nvram.plist)
 

@@ -141,7 +141,9 @@ For us, what matters is the `Name (_ADR, 0x12)  // _ADR: Address` as this tells 
 
 Now save and add this to both your keytext (kext) folder and config.plist then reboot!
 
-Now we can finally start to slowly remove unwanted ports and remove the XhciPortLimit quirk once you have 15 ports total or less.
+Now we can finally start to slowly remove unwanted ports from the Info.plist and remove the `XhciPortLimit` quirk once you have 15 ports total or less per controller.
+
+
 # Port mapping on screwed up DSDTs
 
 Something you may have noticed is that your DSDT is even missing some ports, like for example:
@@ -156,7 +158,7 @@ This becomes a problem when we run systems with many USB controllers which all w
 
 * [SSDT-XHC2.dsl](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/SSDT-XHC2.dsl)
 
-What you'll want to do is find a controller you want to rename, find its full ACPI path and replace the one in the sample SSDT. In our sample, we're be renaming `PCI0.GP13.XHC0` to `XHC2` so change accordingly
+What you'll want to do is find a controller you want to rename, find its full ACPI path and replace the one in the sample SSDT. In our sample, we're be renaming `PCI0.GP13.XHC0` to `XHC2` so change accordingly. You many need to include the ports from the DSDT into the SSDT
 
 > But how do I map a non-standard controller that shows up as PXSX?
 

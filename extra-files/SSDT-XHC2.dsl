@@ -48,6 +48,8 @@ DefinitionBlock ("", "SSDT", 2, "hack", "_XHCX", 0x00000000)
                 DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                 Return (Local0)
             }
+            
+            //Insert USB devices here
         }
     }
 }
