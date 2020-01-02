@@ -136,6 +136,15 @@ And for users who are having issues finding their slide value can also type `$sl
 
 Well fret not, for there is a simple solution. After running `memmap` in the shell, run:
 
- `memmap > memmap.txt`
+```
+shell> fs0: //replace with proper drive
 
-This will add a `memmap.txt` file to the root of your EFI for OpenCore users (You may need to specify the drive location like `fs0:`), you can then proceed to drop it into the r/Hackintosh discord and type `$slide [insert a link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
+fs0:\> dir //to verify this is the right directory
+
+Directory of fs0:\
+01/01/01 3:30p   EFI
+
+fs0:\> memmap > memmap.txt
+```
+
+This will add a `memmap.txt` file to the root of your EFI for OpenCore users, you can then proceed to drop it into the r/Hackintosh discord and type `$slide [insert a link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
