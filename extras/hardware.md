@@ -20,10 +20,11 @@ So this little section is for those who are wanting to know whether their hardwa
 # GPU Compatibility
 
 * [See GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) for compatible GPUs.
+
 # Motherboard Compatibility
 
 * All AMD and Intel motherboards are supported to a certain extent
-* Z390 and some HEDT systems will need emulated NVRAM
+* 300 series non-Z370 and some HEDT systems will need emulated NVRAM
 * Some Z370 and Z390 boards have AWAC clocks, these are incompatible with macOS and so will need an RTC fix
 
 # SSD Compatibility

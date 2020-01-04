@@ -30,13 +30,25 @@ Now edit your SSDT with MaciASL, then export it via `File` -> `SaveAs` -> `ACPI 
 
 Don't forget that compiled SSDTs have a .aml extension(Assembled)
 
-# 3. Creating the AGPM injector kext
+# 3. Verifying HPET is on
+
+This is important as this is required for SSDT-PLUG to work correctly, many systems already have it enabled but some need it forced on. To verify yours, open IORegistryExproler and search for `HPET`. If nothing shows, we need to then force it on.
+
+* _OSI to XOSI rename under ACPI -> Patch
+   * Find: `D0 05 00 00 84 C0 74 46 E8`
+   * Replace: `D0 05 00 00 84 C0 EB 46 E8`
+   * Limit: `0`
+   * Count: `0`
+* [SSDT-XOSI.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-XOSI.aml)
+   * Prebuilt so no need to compile, just add to config.plist and EFI/OC/ACPI
+
+# 4. Creating the AGPM injector kext
 
 Now open up AGPMInjector and run it, then add the kext to both your config.plist under kernel -> Add and into EFI/OC/Kexts.
 
 And voila! you're done!
 
-# 4. Verifying your work
+# 5. Verifying your work
 
 Open IORegistryExplorer and search for your CPU, then verify that both X86PlatformPlugin and AGPM are connected. If so, then you have proper GPU power management and therefore slightly improved performance.
 

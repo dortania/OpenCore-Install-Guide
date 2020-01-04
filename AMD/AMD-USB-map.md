@@ -4,7 +4,6 @@ So why would I want to use this? Well couple reasons:
 * Add missing USB ports that macOS didn't automatically add
 * Remove unwanted devices like intel bluetooth conflicting with broadcoms
 * Stability by removing USB port limit patches
-
 # Backstory to USB on macOS
 
 For the best explainer, please read Corp's [USB map guide](https://usb-map.gitbook.io/project/terms-of-endearment). For the lazy here's a super quick explainer:
@@ -29,31 +28,8 @@ So what you'll need to get started:
 
 # Gettting your DSDT
 
-Couple different ways:
-* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> Save as `System DSDT`, make sure the file format is ACPI Machine Language Binary
-* F4 in Clover
-   * DSDT can be found in `EFI/CLOVER/ACPI/origin`
-* [SSDTTime](https://github.com/corpnewt/SSDTTime) for Linux and Windows
-* [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
-   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker
+Open MaciASL on the target machine and you'll be presented with your system DSDT, that simple!
 
-![](https://i.imgur.com/vHAomNm.png)
-
-For those having issues running acpidump from the OpenCore picker can call it from the shell:
-
-```
-shell> fs0: //replace with proper drive
-
-fs0:\> dir //to verify this is the right directory
-
-   Directory of fs0:\
-     01/01/01 3:30p   EFI
-     
-fs0:\> cd EFI\OC\Tools //note that its with forward slashes
-
-fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
-```
-You'll find that `DSDT.bat` is on the root of your EFI, reboot and rename the file to `DSDT.aml` and lets get cooking.
 
 # Creating the map
 

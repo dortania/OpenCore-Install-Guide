@@ -4,7 +4,7 @@ This section is for gathering miscellaneous files for booting macOS, we do expec
 
 > What's the best way to figure out if my hardware is supported?
 
-See the [supported hardware section](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/hardware.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
+See the **[supported hardware section](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/hardware.md)** for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
 
 
 # Firmware Drivers
@@ -69,7 +69,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **USB**:
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-   * Used for injecting intel USB controllers, H370, B360, H310 and X79/X99 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well(X299 may need this for HighSierra). **Does not work on AMD CPU based systems**
+   * Used for injecting intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well. **Does not work on AMD CPU based systems**
 
 **WiFi and Bluetooth**:
 
@@ -85,8 +85,8 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 
 **AMD CPU Specific kexts**:
-* [NullCPUPowerManagment](https://github.com/corpnewt/NullCPUPowerManagement)
-   * AMD CPUs cannot use Intel's power management so we need to nullify it
+* [NullCPUPowerManagment](https://cdn.discordapp.com/attachments/263757191608139779/643751774666358794/NullCPUPowerManagement.kext.zip)
+   * AMD CPUs cannot use Intel's power management so we need to nullify it. **Use this over the one provided in the kext repo**
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
    * USB fix for AMD FX systems
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)

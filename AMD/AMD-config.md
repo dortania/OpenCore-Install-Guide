@@ -23,7 +23,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
-   * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems but I recommend verifying yours with SSDTTime: [SSDT-EC-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.aml)
+   * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.aml)
 * [SSDT-USBX-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX-AMD.aml)
    * Forces power properties onto your USB controller, commonly used for fixing mics, DACs, webcams, bluetooth dongles, etc. This SSDT is optional but I've provided a pre-compiled version as each system uses the same SSDT
 
