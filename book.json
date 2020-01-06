@@ -1,6 +1,4 @@
 {
-    before_script:
-    - npm install gitbook-plugin-custom-favicon
     "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "custom-favicon"],
     "pluginsConfig": {
         "fontsettings": {
