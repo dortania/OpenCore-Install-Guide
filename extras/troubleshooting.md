@@ -50,6 +50,10 @@ Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Dri
    * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
    * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
 
+# macOS installer in Russian
+
+Default sample config is in russian, check your prev-lang:kbd value under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+
 # iMessage and Siri Broken
 
 * En0 device not setup as `Built-in`, couple ways to fix:

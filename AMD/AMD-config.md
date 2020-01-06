@@ -19,7 +19,7 @@ Please note that 3rd gen Threadripper(19h) is unsupported currently.
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/spoof) and such.
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](post-install/spoof.md) and such.
 
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
@@ -138,7 +138,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/ehG6Da6.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](../ktext.md#kexts) for what kexts we recommend.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.
 
  * **BundlePath** 
     * Name of the kext
@@ -232,7 +232,7 @@ To merge:
 * **DisplayLevel**: `2147483714`
    * Shows even more debug information, requires debug version of OpenCore
 
-These values are based of those calculated in [OpenCore debugging](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug)
+These values are based of those calculated in [OpenCore debugging](extras/debug.md)
 
 **Security**: Security is pretty self-explanatory.
 
@@ -245,7 +245,7 @@ These values are based of those calculated in [OpenCore debugging](https://khron
 * **RequireVault**: NO
    * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](post-install/security.md) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name**
