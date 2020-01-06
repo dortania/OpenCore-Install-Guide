@@ -1,7 +1,3 @@
-# Creating the USB
-
-## Setting up OpenCore
-
 Requirements:
 
 * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info
@@ -13,6 +9,7 @@ Requirements:
 * Knowledge of how a Hackintosh works and what files yours requires(ie: Type of network controller).
 * You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI.
 
+
 > Do I need macOS to setup OpenCore and install macOS?
 
 Actually no, you can go into the release tab of all your required files and grab them that way. MaciASL is only on macOS so compiling them may be more difficult if it's not handled by [SSDTTime](https://github.com/corpnewt/SSDTTime). See the [installer section](creating-the-usb.md#Making-an-installer) below for more info.
@@ -21,13 +18,13 @@ Actually no, you can go into the release tab of all your required files and grab
 
 * If you want to use OpenCore on your system, please follow the [Legacy Install](extras/legacy.md) section first, after you can continue following the **Base folder structure** section
 
-## Creating the USB
+## Setting up OpenCore's EFI enviroment
 
-Creating the USB is simple, all you need to do is format it with GUID partition map. There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB. This changes when you're making an instller, see installer section below for more info.
+Setting up OpenCore's EFI enviroment is simple, all you need to do is format it with GUID partition map regardless of operating system. There is no real size requirement for the USB as OpenCore's entire EFI will generally be less than 5MB. For those making a full macOS installer should read the whole page before starting as the installer section goes more into what drive size and formats are required.
 
 ![Formatting the USB](https://i.imgur.com/5uTJbgI.png)
 
-Next, we'll want to mount the EFI partition on the USB with mountEFI.
+Next, we'll want to mount the EFI partition on the USB with [mountEFI](https://github.com/corpnewt/MountEFI). Windows and Linux users can refer to [this post](https://noobsplanet.com/index.php?threads/how-to-mount-efi-partition-from-windows-linux-or-mac.56/)
 
 ![mountEFI](https://i.imgur.com/4l1oK8i.png)
 
@@ -45,7 +42,7 @@ Now you can place your necessary .efi drivers from AppleSupportPkg into the _dri
 
 * Please do also note that AptioMemoryFix.efi has now been split between OpenCore itself and FwRuntimeServices.efi
 
-Here's what mine looks like\(For the majority of users you can ignore Tools but it can be useful like for Shell.efi and other such tools\):
+Here's what a populated EFI looks like:
 
 ![Populated EFI folder](https://i.imgur.com/HVuyghf.png)
 
@@ -54,7 +51,8 @@ Here's what mine looks like\(For the majority of users you can ignore Tools but 
 * Kexts go in Kexts folder
 * Firmware drivers(.efi) go in the Drivers folder
 
-## Making an installer
+
+## Making the macOS Installer
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades. 
 
@@ -67,10 +65,12 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
   
 * Users without a mac:
    * Format USB as Fat32 with GUID partition map, must be 4GB minimum
+      * Disk Management in WindowsWindows
+      * Disks Utility in Linux
    * Download the macOS `BaseSystem.dmg` and `BaseSystem.chunklist`
     * [gibMacOS](https://github.com/corpnewt/gibMacOS)
-    * [macrecovery.py](https://github.com/acidanthera/MacInfoPkg/blob/master/macrecovery/macrecovery.py)
+    * [macrecovery.py](https://github.com/acidanthera/MacInfoPkg/blob/master/macrecovery/macrecovery.py), alternative to gibmacos
    * Create a folder on root of Fat32 partition called `com.apple.recovery.boot` and place the `BaseSystem.dmg` and `BaseSystem.chunklist` in there
 
 
-Note: Some users may have issues booting the USB, make sure you have an HFS driver and you can also try `AvoidHighAlloc` set to `YES`. If you continue to have issues, I recommend using Midi's [/r/Hackintosh macOS Internet Install](https://internet-install.gitbook.io/macos-internet-install/)
+Note: Some users may have issues booting the USB, make sure you have an HFS driver and you can also try `AvoidHighAlloc` set to `YES`. If you continue to have issues, I recommend using Midi's [/r/Hackintosh macOS Internet Install](https://internet-install.gitbook.io/macos-internet-install/) and replacing mentions of clover with OpenCore

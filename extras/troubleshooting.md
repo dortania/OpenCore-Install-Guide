@@ -130,6 +130,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 * MacBook8,1+
 * MacBookAir5,x+
 * MacBookPro9,x+
+
 # 300 series Intel stalling on `apfs_module_start...`
 
 Commonly due to systems running AWAC clocks, you'll need to use either:
