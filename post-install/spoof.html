@@ -501,28 +501,52 @@
 <p>There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.</p>
 <p>Example of device path:</p>
 <p><code>\_SB.PCI0.PEG0.PEGP</code></p>
-<pre><code class="lang-text">DefinitionBlock (&quot;&quot;, &quot;SSDT&quot;, 2, &quot;hack&quot;, &quot;spoof&quot;, 0)
+<pre><code class="lang-text">DefinitionBlock (&quot;&quot;, &quot;SSDT&quot;, 2, &quot;hack&quot;, &quot;spoof&quot;, 0x00000000)
 {
-    External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
+   External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode), Replace with your own ACPI path
 
-    Method(_SB.PCI0.PEG0.PEGP._DSM, 4)
-    {
-        If (_OSI (&quot;Darwin&quot;))
-        {
-            If (!Arg2) { Return (Buffer() { 0x03 } ) }
-            Return (Package()
-                {
-                    &quot;name&quot;, Buffer() { &quot;#display&quot; },
-                    &quot;IOName&quot;, &quot;#display&quot;,
-                    &quot;class-code&quot;, Buffer() { 0xFF, 0xFF, 0xFF, 0xFF },
-                    &quot;vendor-id&quot;, Buffer() { 0xFF, 0xFF, 0,  0 },
-                    &quot;device-id&quot;, Buffer() { 0xFF, 0xFF, 0, 0 },
-            })
-        }
-    }
+   Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method, Replace with your own ACPI path
+   {
+      If (LOr (LNot (Arg2), LEqual (_OSI (&quot;Darwin&quot;), Zero)))
+      {
+         Return (Buffer (One)
+         {
+            0x03                                           
+         })
+      }
+
+      Return (Package (0x0A)
+      {
+         &quot;name&quot;, 
+         Buffer (0x09)
+         {
+            &quot;#display&quot;
+         }, 
+
+         &quot;IOName&quot;, 
+         &quot;#display&quot;, 
+         &quot;class-code&quot;, 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0xFF, 0xFF                         
+         }, 
+
+         &quot;vendor-id&quot;, 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0x00, 0x00                         
+         }, 
+
+         &quot;device-id&quot;, 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0x00, 0x00                         
+         }
+      })
+   }
 }
 </code></pre>
-<p>What this SSDT does special compared to Rehabman&apos;s SSDT is that this adds the <code>If (_OSI (&quot;Darwin&quot;)){}</code> block so that this SSDT wouldn&apos;t be applied when booting other operating systems</p>
+<p>Source: CorpNewt</p>
 <h1 id="fixing-windows">Fixing Windows</h1>
 <p>So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:</p>
 <p><img src="https://i.imgur.com/TG3jGBC.png" alt="Credit to CorpNewt for image"></p>
@@ -569,7 +593,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Disabling GPU","level":"4.2","depth":1,"next":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"4.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/spoof.md","mtime":"2020-01-06T05:59:43.855Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T06:00:31.789Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Disabling GPU","level":"4.2","depth":1,"next":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"4.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/spoof.md","mtime":"2020-01-06T17:50:46.119Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T17:51:29.906Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
