@@ -441,18 +441,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="converting-clover-config-to-opencore">Converting Clover config to OpenCore</h1>
+                                <h1 id="troubleshooting-opencore">Troubleshooting OpenCore</h1>
+<h2 id="converting-clover-config-to-opencore">Converting Clover config to OpenCore</h2>
 <ul>
 <li>While still a work in progress, see <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion" target="_blank">Clover2OC</a> for more info. This section is useful for laptop users as well since commonly used properties have been translated over.</li>
 </ul>
-<h1 id="stuck-on-no-vault-provided">Stuck on &quot;no vault provided!&quot;</h1>
+<h2 id="stuck-on-no-vault-provided">Stuck on &quot;no vault provided!&quot;</h2>
 <p>Turn the following off under <code>Misc -&gt; Security</code>:</p>
 <ul>
 <li><code>RequireSignature</code></li>
 <li><code>RequireVault</code></li>
 </ul>
 <p>If you have already executed the commands listed in the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">OpenCore Reference Manual</a> under <strong>8.5 Security Properties</strong>, <code>5. RequireVault</code>, you&apos;ll need to restore your <code>OpenCore.efi</code> file.</p>
-<h1 id="stuck-on-endrandomseed">Stuck on EndRandomSeed</h1>
+<h2 id="stuck-on-endrandomseed">Stuck on EndRandomSeed</h2>
 <p>Couple problems:</p>
 <ul>
 <li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk</li>
@@ -464,24 +465,24 @@
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <p>Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt&apos;s also got a fix: <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a>&apos;s FixHPET option</p>
-<h1 id="cant-see-macos-partitions">Can&apos;t see macOS partitions</h1>
+<h2 id="cant-see-macos-partitions">Can&apos;t see macOS partitions</h2>
 <p>Main things to check:</p>
 <ul>
 <li>ScanPolicy set to <code>0</code> to show all drives</li>
 <li>Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)</li>
 <li>Enable <code>AvoidHighAlloc</code> if you&apos;re running a network recovery install</li>
 </ul>
-<h1 id="stuck-on-ocb-ocscanforbootentries-failure---not-found">Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></h1>
+<h2 id="stuck-on-ocb-ocscanforbootentries-failure---not-found">Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></h2>
 <p>This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to <code>0</code> will allow all boot options to be shown</p>
-<h1 id="stuck-on-ocabc-memory-pool-allocation-failure---not-found">Stuck on <code>OCABC: Memory pool allocation failure - Not Found</code></h1>
+<h2 id="stuck-on-ocabc-memory-pool-allocation-failure---not-found">Stuck on <code>OCABC: Memory pool allocation failure - Not Found</code></h2>
 <p>This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -&gt; Booter -&gt; Quirks is correct and verify your BIOS settings:</p>
 <ul>
 <li>Above4GDecoding is Enabled</li>
 <li>CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)</li>
 </ul>
-<h1 id="stuck-on-oc-driver-hfsplusefi-at-0-cannot-be-found">Stuck on <code>OC: Driver HfsPlus.efi at 0 cannot be found</code></h1>
+<h2 id="stuck-on-oc-driver-hfsplusefi-at-0-cannot-be-found">Stuck on <code>OC: Driver HfsPlus.efi at 0 cannot be found</code></h2>
 <p>Verify that your EFI/OC/Drivers matches up with your config.plist -&gt; UEFi -&gt; Drivers </p>
-<h1 id="waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</h1>
+<h2 id="waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</h2>
 <ul>
 <li>Generally seen as a USB error, couple ways to fix:<ul>
 <li>if you&apos;re hitting the 15 port limit, you can temporarily get around this with <code>XhciPortLimit</code> but for long term use, we recommend making a <a href="https://github.com/corpnewt/USBMap" target="_blank">USBmap</a>. CorpNewt also has a guide for this: <a href="https://usb-map.gitbook.io/project/" target="_blank">USBmap Guide</a></li>
@@ -489,9 +490,9 @@
 </ul>
 </li>
 </ul>
-<h1 id="macos-installer-in-russian">macOS installer in Russian</h1>
+<h2 id="macos-installer-in-russian">macOS installer in Russian</h2>
 <p>Default sample config is in russian, check your prev-lang:kbd value under NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82. Set to <code>656e2d55533a30</code> for American: en-US:0 and a full list can be found in <a href="https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></p>
-<h1 id="imessage-and-siri-broken">iMessage and Siri Broken</h1>
+<h2 id="imessage-and-siri-broken">iMessage and Siri Broken</h2>
 <ul>
 <li>En0 device not setup as <code>Built-in</code>, couple ways to fix:<ul>
 <li>Find PCI path for your NIC with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>(ie: <code>ethernet</code>, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of <code>built-in</code> with the value of <code>01</code> and type <code>Data</code>. Hackintool can also grab the PCIRooth path if you&apos;re having issues with gfxutil. <strong>Recommended method</strong></li>
@@ -500,27 +501,27 @@
 </li>
 </ul>
 <p><img src="https://i.imgur.com/DtYtwCQ.png" alt=""></p>
-<h1 id="windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</h1>
+<h2 id="windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</h2>
 <ul>
 <li>Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: <a href="https://github.com/corpnewt/brigadier" target="_blank">CorpNewt&apos;s brigadier</a></li>
 </ul>
-<h1 id="incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</h1>
+<h2 id="incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</h2>
 <ul>
 <li>Follow <a href="verbose.html">Hiding Verbose</a> for correct setup, set <code>UIScale</code> to <code>02</code> for HiDPI</li>
 <li>Users also have noticed that setting <code>ConsoleMode</code> to Max will sometimes fail, leaving it empty can help</li>
 </ul>
-<h1 id="receiving-failed-to-parse-real-field-of-type-1">Receiving &quot;Failed to parse real field of type 1&quot;</h1>
+<h2 id="receiving-failed-to-parse-real-field-of-type-1">Receiving &quot;Failed to parse real field of type 1&quot;</h2>
 <ul>
 <li>A value is set as <code>real</code> when it&apos;s not supposed to be, generally being that Xcode converted <code>HaltLevel</code> by accident:<pre><code>&lt;key&gt;HaltLevel&lt;/key&gt;
 </code></pre><pre><code>&lt;real&gt;2147483648&lt;/real&gt;
 </code></pre>To fix, swap <code>real</code> for <code>integer</code>:<pre><code>&lt;key&gt;HaltLevel&lt;/key&gt;
 </code></pre><pre><code>&lt;integer&gt;2147483648&lt;/integer&gt;
-</code></pre><h1 id="no-on-board-audio">No on-board audio</h1>
+</code></pre><h2 id="no-on-board-audio">No on-board audio</h2>
 </li>
 <li>Verify that your PCIRoot is correct for your audio controller, this can be verified with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer(Common 2 are HDEF and HDAS)<pre><code>path/to/gfxutil -f HDEF
 </code></pre>Then find out your </li>
 </ul>
-<h1 id="stuck-after-selection-macos-partition-on-opencore">Stuck after selection macOS partition on OpenCore</h1>
+<h2 id="stuck-after-selection-macos-partition-on-opencore">Stuck after selection macOS partition on OpenCore</h2>
 <ul>
 <li>CFG-Lock not off(Intel Users only), couple solutions:<ul>
 <li><a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock" target="_blank">Patch your MSR E2</a>(Recommeneded solution)</li>
@@ -534,7 +535,7 @@
 <li>PollAppleHotKeys driver is incompatible:</li>
 <li>Disable <code>PollAppleHotKeys</code> and <code>KeySupport</code>, then remove UsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers</li>
 </ul>
-<h1 id="stuck-on-or-near-pci-configuration-begin">Stuck on or near <code>[PCI Configuration Begin]</code></h1>
+<h2 id="stuck-on-or-near-pci-configuration-begin">Stuck on or near <code>[PCI Configuration Begin]</code></h2>
 <p>This is commonly caused by IRQ conflicts with PCI devices/lanes. Depending on how your system was configured, it&apos;s recommended to have the following BIOS settings:</p>
 <ul>
 <li>CSM disabled</li>
@@ -544,19 +545,19 @@ Now try one of these boot args:</li>
 <li><code>npci=0x2000</code></li>
 <li><code>npci=0x3000</code></li>
 </ul>
-<h1 id="stuck-on-or-near-ioconsoleusers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></h1>
+<h2 id="stuck-on-or-near-ioconsoleusers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></h2>
 <p>This is right before the GPU is properly initialized, verify the following:</p>
 <ul>
 <li>GPU is UEFI capable(GTX 7XX/2013+)</li>
 <li>CSM is off in the BIOS</li>
 <li>Forcing PCIe 3.0 link speed</li>
 </ul>
-<h1 id="black-screen-after-gio-on-navi">Black screen after gIO on Navi</h1>
+<h2 id="black-screen-after-gio-on-navi">Black screen after gIO on Navi</h2>
 <ul>
 <li>Add <code>agdpmod=pikera</code> to boot args</li>
 <li>switch between different display outputs</li>
 </ul>
-<h1 id="stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac">Stuck on <code>This version of Mac OS X is not supported: Reason Mac...</code></h1>
+<h2 id="stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac">Stuck on <code>This version of Mac OS X is not supported: Reason Mac...</code></h2>
 <p>This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in <code>PlatformInfo-&gt;Generic</code> with <code>Automatic</code> enabled. Reminder of supported SMBIOS:</p>
 <ul>
 <li>iMac13,x+</li>
@@ -566,7 +567,7 @@ Now try one of these boot args:</li>
 <li>MacBookAir5,x+</li>
 <li>MacBookPro9,x+</li>
 </ul>
-<h1 id="300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></h1>
+<h2 id="300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></h2>
 <p>Commonly due to systems running AWAC clocks, you&apos;ll need to use either:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a><ul>
@@ -578,11 +579,11 @@ Now try one of these boot args:</li>
 </ul>
 </li>
 </ul>
-<h1 id="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</h1>
+<h2 id="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</h2>
 <p>Verify your EC SSDT is enabled and correct for your system. See the <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a> post for more info</p>
-<h1 id="kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></h1>
+<h2 id="kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></h2>
 <p>Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don&apos;t.</p>
-<h1 id="bios-reset-or-sent-into-safemode-after-rebootshutdown">BIOS reset or sent into Safemode after reboot/shutdown?</h1>
+<h2 id="bios-reset-or-sent-into-safemode-after-rebootshutdown">BIOS reset or sent into Safemode after reboot/shutdown?</h2>
 <p>Issue with AppleRTC, quite a simple fix:</p>
 <ul>
 <li>Under <code>Kernel -&gt; patch</code>:</li>
@@ -623,9 +624,9 @@ Now try one of these boot args:</li>
 </tr>
 </tbody>
 </table>
-<h1 id="couldnt-allocate-runtime-area-errors">&quot;Couldn&apos;t allocate runtime area&quot; errors?</h1>
+<h2 id="couldnt-allocate-runtime-area-errors">&quot;Couldn&apos;t allocate runtime area&quot; errors?</h2>
 <p>See <a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix" target="_blank">Fixing KALSR slide values</a></p>
-<h1 id="cant-run-acpidumpefi">Can&apos;t run <code>acpidump.efi</code></h1>
+<h2 id="cant-run-acpidumpefi">Can&apos;t run <code>acpidump.efi</code></h2>
 <p>Call upon OpenCore shell:</p>
 <pre><code>shell&gt; fs0: //replace with proper drive
 </code></pre><pre><code>fs0:\&gt; dir //to verify this is the right directory
@@ -633,7 +634,7 @@ Now try one of these boot args:</li>
 </code></pre><pre><code>   01/01/01 3:30p  EFI
 </code></pre><pre><code>fs0:\&gt; cd EFI\OC\Tools //note that its with forward slashes
 </code></pre><pre><code>fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
-</code></pre><h1 id="booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</h1>
+</code></pre><h2 id="booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</h2>
 <ul>
 <li>Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)</li>
 </ul>
@@ -681,7 +682,7 @@ Now try one of these boot args:</li>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"5.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/troubleshooting.md","mtime":"2020-01-06T18:13:54.507Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T18:14:36.825Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"5.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/troubleshooting.md","mtime":"2020-01-06T18:57:41.823Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T18:58:30.084Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
