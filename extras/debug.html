@@ -1,0 +1,561 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>OpenCore Debugging · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="legacy.html" />
+    
+    
+    <link rel="prev" href="verbose.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../creating-the-usb.html">
+            
+                <a href="../creating-the-usb.html">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ktext.html">
+            
+                <a href="../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../config.plist/ivy-bridge.html">
+            
+                <a href="../config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../config.plist/haswell.html">
+            
+                <a href="../config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../config.plist/skylake.html">
+            
+                <a href="../config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../config.plist/kaby-lake.html">
+            
+                <a href="../config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../config.plist/coffee-lake.html">
+            
+                <a href="../config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../AMD/AMD-config.html">
+            
+                <a href="../AMD/AMD-config.html">
+            
+                    
+                    Zen/ThreadRipper
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../post-install/nvram.html">
+            
+                <a href="../post-install/nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../post-install/spoof.html">
+            
+                <a href="../post-install/spoof.html">
+            
+                    
+                    Disabling GPU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../post-install/security.html">
+            
+                <a href="../post-install/security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="verbose.html">
+            
+                <a href="verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="5.3" data-path="debug.html">
+            
+                <a href="debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="legacy.html">
+            
+                <a href="legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="kalsr-fix.html">
+            
+                <a href="kalsr-fix.html">
+            
+                    
+                    Fixing KALSR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../post-install/msr-lock.html">
+            
+                <a href="../post-install/msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" >
+            
+                <a target="_blank" href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/">
+            
+                    
+                    Multiboot
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../misc/credit.html">
+            
+                <a href="../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >OpenCore Debugging</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="debugging-opencore">Debugging OpenCore</h1>
+<p>Needing to figure out why you&apos;re getting issues or stalling? Well, you&apos;ve come to the right place.</p>
+<p>To start, make sure you&apos;re using either the <code>DEBUG</code> or <code>NOOPT</code> versions of OpenCore. This will provide much more info than the <code>RELEASE</code> version.</p>
+<p><strong>Target</strong>
+Used for enabling different levels of debugging</p>
+<ul>
+<li><code>0x01</code> &#x2014; Enable Logging</li>
+<li><code>0x02</code> &#x2014; Enable Onscreen debug</li>
+<li><code>0x04</code> &#x2014; Enable logging to Data Hub.</li>
+<li><code>0x08</code> &#x2014; Enable serial port logging.</li>
+<li><code>0x10</code> &#x2014; Enable UEFI variable logging.</li>
+<li><code>0x20</code> &#x2014; Enable non-volatile UEFI variable logging. </li>
+<li><code>0x40</code> &#x2014; Enable logging to file.</li>
+</ul>
+<p>To calculate the target, we can use a HEX calculator and then convert it to decimal. For us we want to have our values on stored onto a .txt file for later viewing:</p>
+<ul>
+<li><code>0x01</code> &#x2014; Enable Logging</li>
+<li><code>0x02</code> &#x2014; Enable Onscreen debug</li>
+<li><code>0x10</code> &#x2014; Enable UEFI variable logging.</li>
+<li><code>0x40</code> &#x2014; Enable logging to file.</li>
+</ul>
+<p><code>0x01</code> + <code>0x02</code> + <code>0x10</code> + <code>0x40</code> = <code>0x53</code></p>
+<p><code>0x53</code> converted to decimal becomes <code>83</code></p>
+<p>So we can set <code>Misc</code> -&gt; <code>Debug</code> -&gt; <code>Target</code> -&gt; <code>83</code></p>
+<p><strong>DisplayLevel</strong></p>
+<p>Used for setting what is logged</p>
+<ul>
+<li><code>0x00000002</code> &#x2014; DEBUG_WARN in DEBUG, NOOPT, RELEASE.</li>
+<li><code>0x00000040</code> &#x2014; DEBUG_INFO in DEBUG, NOOPT.</li>
+<li><code>0x00400000</code> &#x2014; DEBUG_VERBOSE in custom builds.</li>
+<li><code>0x80000000</code> &#x2014; DEBUG_ERROR in DEBUG, NOOPT, RELEASE.
+A full list can be found in <a href="https://github.com/tianocore/edk2/blob/UDK2018/MdePkg/Include/Library/DebugLib.h" target="_blank">DebugLib.h</a>.</li>
+</ul>
+<p>For us we just want the following:</p>
+<ul>
+<li><code>0x00000002</code> &#x2014; DEBUG_WARN in DEBUG, NOOPT, RELEASE.</li>
+<li><code>0x00000040</code> &#x2014; DEBUG_INFO in DEBUG, NOOPT.</li>
+<li><code>0x80000000</code> &#x2014; DEBUG_ERROR in DEBUG, NOOPT, RELEASE.</li>
+</ul>
+<p>Just like with <code>Target</code>, we use a HEX calculator then convert to decimal:</p>
+<p><code>0x80000042</code> Converted to decimal <code>Misc</code> -&gt; <code>Debug</code> -&gt; <code>DisplayLevel</code> -&gt; <code>2147483714</code></p>
+<p><strong>disableWatchdog</strong>: YES
+Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="verbose.html" class="navigation navigation-prev " aria-label="Previous page: Fixing Resolution and Verbose">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="legacy.html" class="navigation navigation-next " aria-label="Next page: Legacy Install">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"OpenCore Debugging","level":"5.3","depth":1,"next":{"title":"Legacy Install","level":"6.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/debug.md","mtime":"2020-01-06T02:03:14.343Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T02:03:56.918Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+

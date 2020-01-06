@@ -1,0 +1,74 @@
+/*
+.book-body {
+    background: #220036;  
+}
+
+.markdown-section {
+    color: #17154D;
+}
+*/
+
+/* .color-theme-2 #book-search-input {
+    color: #f4f4f5;
+    background-color: #252737;  
+}
+
+.color-theme-2 .search-results-item {
+    color: #bdcadb !important;
+} */
+
+@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro|Roboto&display=swap');
+
+.color-theme-2 .dropdown-menu {
+    background-color: #222225;
+}
+
+.color-theme-2 .dropdown-menu .dropdown-caret .caret-inner {
+    border-bottom: 9px solid #222225;
+}
+
+.book.color-theme-2 .book-body {
+    color: #ccc;
+    background: #151519;
+}
+
+.book.color-theme-2 .book-body .page-wrapper .page-inner section {
+    background: #151519;
+}
+
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal {
+    color: #ccc;
+}
+
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal code {
+    background: #222225;
+    border-color: #222225;
+}
+
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal table tr {
+    background-color: #222225;
+}
+
+.book.color-theme-2 .book-header h1 {
+    color: #ccc;
+}
+
+.book.color-theme-2 .book-summary {
+    background: #222225;
+}
+
+.book.font-family-1, .book.font-family-1 .book-summary {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.book.font-family-1 h1, .book.font-family-1 h2, .book.font-family-1 h3 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.markdown-section code, .markdown-section pre {
+    font-family: "SF Mono", "Anonymous Pro", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.gitbook-link {
+    display: none !important
+}

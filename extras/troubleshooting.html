@@ -1,0 +1,711 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>General Troubleshooting · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="verbose.html" />
+    
+    
+    <link rel="prev" href="../post-install/security.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../creating-the-usb.html">
+            
+                <a href="../creating-the-usb.html">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ktext.html">
+            
+                <a href="../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../config.plist/ivy-bridge.html">
+            
+                <a href="../config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../config.plist/haswell.html">
+            
+                <a href="../config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../config.plist/skylake.html">
+            
+                <a href="../config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../config.plist/kaby-lake.html">
+            
+                <a href="../config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../config.plist/coffee-lake.html">
+            
+                <a href="../config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../AMD/AMD-config.html">
+            
+                <a href="../AMD/AMD-config.html">
+            
+                    
+                    Zen/ThreadRipper
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../post-install/nvram.html">
+            
+                <a href="../post-install/nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../post-install/spoof.html">
+            
+                <a href="../post-install/spoof.html">
+            
+                    
+                    Disabling GPU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../post-install/security.html">
+            
+                <a href="../post-install/security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter active" data-level="5.1" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="verbose.html">
+            
+                <a href="verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="debug.html">
+            
+                <a href="debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="legacy.html">
+            
+                <a href="legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="kalsr-fix.html">
+            
+                <a href="kalsr-fix.html">
+            
+                    
+                    Fixing KALSR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../post-install/msr-lock.html">
+            
+                <a href="../post-install/msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" >
+            
+                <a target="_blank" href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/">
+            
+                    
+                    Multiboot
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../misc/credit.html">
+            
+                <a href="../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >General Troubleshooting</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="converting-clover-config-to-opencore">Converting Clover config to OpenCore</h1>
+<ul>
+<li>While still a work in progress, see <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion" target="_blank">Clover2OC</a> for more info. This section is useful for laptop users as well since commonly used properties have been translated over.</li>
+</ul>
+<h1 id="stuck-on-no-vault-provided">Stuck on &quot;no vault provided!&quot;</h1>
+<p>Turn the following off under <code>Misc -&gt; Security</code>:</p>
+<ul>
+<li><code>RequireSignature</code></li>
+<li><code>RequireVault</code></li>
+</ul>
+<p>If you have already executed the commands listed in the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">OpenCore Reference Manual</a> under <strong>8.5 Security Properties</strong>, <code>5. RequireVault</code>, you&apos;ll need to restore your <code>OpenCore.efi</code> file.</p>
+<h1 id="stuck-on-endrandomseed">Stuck on EndRandomSeed</h1>
+<p>Couple problems:</p>
+<ul>
+<li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk</li>
+<li>Missing <a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">kernel patches</a>(only applies for AMD CPUs)</li>
+</ul>
+<p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
+<ul>
+<li><a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
+<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
+</ul>
+<p>Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt&apos;s also got a fix: <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a>&apos;s FixHPET option</p>
+<h1 id="cant-see-macos-partitions">Can&apos;t see macOS partitions</h1>
+<p>Main things to check:</p>
+<ul>
+<li>ScanPolicy set to <code>0</code> to show all drives</li>
+<li>Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)</li>
+<li>Enable <code>AvoidHighAlloc</code> if you&apos;re running a network recovery install</li>
+</ul>
+<h1 id="stuck-on-ocb-ocscanforbootentries-failure---not-found">Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></h1>
+<p>This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to <code>0</code> will allow all boot options to be shown</p>
+<h1 id="stuck-on-ocabc-memory-pool-allocation-failure---not-found">Stuck on <code>OCABC: Memory pool allocation failure - Not Found</code></h1>
+<p>This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -&gt; Booter -&gt; Quirks is correct and verify your BIOS settings:</p>
+<ul>
+<li>Above4GDecoding is Enabled</li>
+<li>CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)</li>
+</ul>
+<h1 id="waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</h1>
+<ul>
+<li>Generally seen as a USB error, couple ways to fix:<ul>
+<li>if you&apos;re hitting the 15 port limit, you can temporarily get around this with <code>XhciPortLimit</code> but for long term use, we recommend making a <a href="https://github.com/corpnewt/USBMap" target="_blank">USBmap</a>. CorpNewt also has a guide for this: <a href="https://usb-map.gitbook.io/project/" target="_blank">USBmap Guide</a></li>
+<li>Another issue can be that certain firmware won&apos;t pass USB ownership to macOS, to fix this we can enable <code>ReleaseUsbOwnership</code>. Clover equivalent is <code>FixOwnership</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="imessage-and-siri-broken">iMessage and Siri Broken</h1>
+<ul>
+<li>En0 device not setup as <code>Built-in</code>, couple ways to fix:<ul>
+<li>Find PCI path for your NIC with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>(ie: <code>ethernet</code>, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of <code>built-in</code> with the value of <code>01</code> and type <code>Data</code>. Hackintool can also grab the PCIRooth path if you&apos;re having issues with gfxutil. <strong>Recommended method</strong></li>
+<li><a href="https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/" target="_blank">NullEthernet.kext</a> + <a href="https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml" target="_blank">SSDT-RMNE</a>. <strong>Only recommended when first solution doesn&apos;t work</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.imgur.com/DtYtwCQ.png" alt=""></p>
+<h1 id="windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</h1>
+<ul>
+<li>Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: <a href="https://github.com/corpnewt/brigadier" target="_blank">CorpNewt&apos;s brigadier</a></li>
+</ul>
+<h1 id="incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</h1>
+<ul>
+<li>Follow <a href="verbose.html">Hiding Verbose</a> for correct setup, set <code>UIScale</code> to <code>02</code> for HiDPI</li>
+<li>Users also have noticed that setting <code>ConsoleMode</code> to Max will sometimes fail, leaving it empty can help</li>
+</ul>
+<h1 id="receiving-failed-to-parse-real-field-of-type-1">Receiving &quot;Failed to parse real field of type 1&quot;</h1>
+<ul>
+<li>A value is set as <code>real</code> when it&apos;s not supposed to be, generally being that Xcode converted <code>HaltLevel</code> by accident:<pre><code>&lt;key&gt;HaltLevel&lt;/key&gt;
+</code></pre><pre><code>&lt;real&gt;2147483648&lt;/real&gt;
+</code></pre>To fix, swap <code>real</code> for <code>integer</code>:<pre><code>&lt;key&gt;HaltLevel&lt;/key&gt;
+</code></pre><pre><code>&lt;integer&gt;2147483648&lt;/integer&gt;
+</code></pre><h1 id="no-on-board-audio">No on-board audio</h1>
+</li>
+<li>Verify that your PCIRoot is correct for your audio controller, this can be verified with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer(Common 2 are HDEF and HDAS)<pre><code>path/to/gfxutil -f HDEF
+</code></pre>Then find out your </li>
+</ul>
+<h1 id="stuck-after-selection-macos-partition-on-opencore">Stuck after selection macOS partition on OpenCore</h1>
+<ul>
+<li>CFG-Lock not off(Intel Users only), couple solutions:<ul>
+<li><a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock" target="_blank">Patch your MSR E2</a>(Recommeneded solution)</li>
+<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.</li>
+</ul>
+</li>
+<li>AMD kernel patches aren&apos;t working(AMD Users only):<ul>
+<li>Either outdated or missing kernel patches</li>
+</ul>
+</li>
+<li>PollAppleHotKeys driver is incompatible:</li>
+<li>Disable <code>PollAppleHotKeys</code> and <code>KeySupport</code>, then remove UsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers</li>
+</ul>
+<h1 id="stuck-on-or-near-pci-configuration-begin">Stuck on or near <code>[PCI Configuration Begin]</code></h1>
+<p>This is commonly caused by IRQ conflicts with PCI devices/lanes. Depending on how your system was configured, it&apos;s recommended to have the following BIOS settings:</p>
+<ul>
+<li>CSM disabled</li>
+<li>Windows8.1/10 Mode</li>
+<li>Forcing PCIe 3.0 link speed
+Now try one of these boot args:</li>
+<li><code>npci=0x2000</code></li>
+<li><code>npci=0x3000</code></li>
+</ul>
+<h1 id="stuck-on-or-near-ioconsoleusers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></h1>
+<p>This is right before the GPU is properly initialized, verify the following:</p>
+<ul>
+<li>GPU is UEFI capable(GTX 7XX/2013+)</li>
+<li>CSM is off in the BIOS</li>
+<li>Forcing PCIe 3.0 link speed</li>
+</ul>
+<h1 id="black-screen-after-gio-on-navi">Black screen after gIO on Navi</h1>
+<ul>
+<li>Add <code>agdpmod=pikera</code> to boot args</li>
+<li>switch between different display outputs</li>
+</ul>
+<h1 id="stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac">Stuck on <code>This version of Mac OS X is not supported: Reason Mac...</code></h1>
+<p>This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in <code>PlatformInfo-&gt;Generic</code> with <code>Automatic</code> enabled. Reminder of supported SMBIOS:</p>
+<ul>
+<li>iMac13,x+</li>
+<li>iMacPro1,1</li>
+<li>MacPro6,1+</li>
+<li>MacBook8,1+</li>
+<li>MacBookAir5,x+</li>
+<li>MacBookPro9,x+<h1 id="300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></h1>
+</li>
+</ul>
+<p>Commonly due to systems running AWAC clocks, you&apos;ll need to use either:</p>
+<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a><ul>
+<li>Forces legacy RTC clock on</li>
+</ul>
+</li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a><ul>
+<li>Creates a fake RTC clock when legacy can&apos;t be forced</li>
+</ul>
+</li>
+</ul>
+<h1 id="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</h1>
+<p>Verify your EC SSDT is enabled and correct for your system.</p>
+<h1 id="kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></h1>
+<p>Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don&apos;t.</p>
+<h1 id="bios-reset-or-sent-into-safemode-after-rebootshutdown">BIOS reset or sent into Safemode after reboot/shutdown?</h1>
+<p>Issue with AppleRTC, quite a simple fix:</p>
+<ul>
+<li>Under <code>Kernel -&gt; patch</code>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Enabled</th>
+<th style="text-align:left">String</th>
+<th style="text-align:left">YES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Count</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Identifier</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">com.apple.driver.AppleRTC</td>
+</tr>
+<tr>
+<td style="text-align:left">Limit</td>
+<td style="text-align:left">Nuber</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">Find</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">75330fb7</td>
+</tr>
+<tr>
+<td style="text-align:left">Replace</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">eb330fb7</td>
+</tr>
+</tbody>
+</table>
+<h1 id="couldnt-allocate-runtime-area-errors">&quot;Couldn&apos;t allocate runtime area&quot; errors?</h1>
+<p>See <a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix" target="_blank">Fixing KALSR slide values</a></p>
+<h1 id="cant-run-acpidumpefi">Can&apos;t run <code>acpidump.efi</code></h1>
+<p>Call upon OpenCore shell:</p>
+<pre><code>shell&gt; fs0: //replace with proper drive
+</code></pre><pre><code>fs0:\&gt; dir //to verify this is the right directory
+</code></pre><pre><code>  Directory of fs0:\
+</code></pre><pre><code>   01/01/01 3:30p  EFI
+</code></pre><pre><code>fs0:\&gt; cd EFI\OC\Tools //note that its with forward slashes
+</code></pre><pre><code>fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
+</code></pre><h1 id="booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</h1>
+<ul>
+<li>Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)</li>
+</ul>
+<p><img src="https://i.imgur.com/9RyBQ0L.png" alt="Directory Structure from OpenCore&apos;s DOC"></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../post-install/security.html" class="navigation navigation-prev " aria-label="Previous page: Security and FileVault">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="verbose.html" class="navigation navigation-next " aria-label="Next page: Fixing Resolution and Verbose">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"5.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/troubleshooting.md","mtime":"2020-01-06T02:03:14.343Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T02:03:56.918Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+

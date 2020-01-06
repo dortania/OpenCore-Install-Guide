@@ -1,0 +1,575 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Emulated NVRAM · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="spoof.html" />
+    
+    
+    <link rel="prev" href="../AMD/AMD-config.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../creating-the-usb.html">
+            
+                <a href="../creating-the-usb.html">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ktext.html">
+            
+                <a href="../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../config.plist/ivy-bridge.html">
+            
+                <a href="../config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../config.plist/haswell.html">
+            
+                <a href="../config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../config.plist/skylake.html">
+            
+                <a href="../config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../config.plist/kaby-lake.html">
+            
+                <a href="../config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../config.plist/coffee-lake.html">
+            
+                <a href="../config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../AMD/AMD-config.html">
+            
+                <a href="../AMD/AMD-config.html">
+            
+                    
+                    Zen/ThreadRipper
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter active" data-level="4.1" data-path="nvram.html">
+            
+                <a href="nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="spoof.html">
+            
+                <a href="spoof.html">
+            
+                    
+                    Disabling GPU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../extras/troubleshooting.html">
+            
+                <a href="../extras/troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../extras/verbose.html">
+            
+                <a href="../extras/verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../extras/debug.html">
+            
+                <a href="../extras/debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../extras/legacy.html">
+            
+                <a href="../extras/legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../extras/kalsr-fix.html">
+            
+                <a href="../extras/kalsr-fix.html">
+            
+                    
+                    Fixing KALSR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="msr-lock.html">
+            
+                <a href="msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" >
+            
+                <a target="_blank" href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/">
+            
+                    
+                    Multiboot
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../misc/credit.html">
+            
+                <a href="../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Emulated NVRAM</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="emulated-nvram">Emulated NVRAM</h1>
+<p>So this section is for those who don&apos;t have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are the non-Z370 300 series chipsets:</p>
+<ul>
+<li>B360</li>
+<li>B365</li>
+<li>H310</li>
+<li>H370</li>
+<li>Q370</li>
+<li>Z390</li>
+<li>Some X99 and X299 (verify if you have working NVRAM below)</li>
+</ul>
+<h2 id="cleaning-out-the-clover-gunk">Cleaning out the Clover gunk</h2>
+<p>So some may not have noticed but Clover may have installed RC scripts into macOS for proper NVRAM emulation. This is an issue as it conflicts with OpenCore&apos;s method of emulation. </p>
+<p>Files to delete:</p>
+<ul>
+<li><code>/Volumes/EFI/EFI/CLOVER/drivers64UEFI/EmuVariableUefi-64.efi</code></li>
+<li><code>/Volumes/EFI/nvram.plist</code></li>
+<li><code>/etc/rc.clover.lib</code></li>
+<li><code>/etc/rc.boot.d/10.save_and_rotate_boot_log.local</code></li>
+<li><code>/etc/rc.boot.d/20.mount_ESP.local</code></li>
+<li><code>/etc/rc.boot.d/70.disable_sleep_proxy_client.local.disabled</code></li>
+<li><code>/etc/rc.shutdown.d/80.save_nvram_plist.local&#x200B;</code></li>
+</ul>
+<p>If folders are empty then delete them as well:</p>
+<ul>
+<li><code>/etc/rc.boot.d</code></li>
+<li><code>/etc/rc.shutdown.d&#x200B;</code></li>
+</ul>
+<h2 id="verifying-if-you-have-working-nvram">Verifying if you have working NVRAM</h2>
+<p>To start, open terminal and run the following one line at a time:</p>
+<pre><code>sudo -s
+nvram -c 
+nvram myvar=test
+exit
+</code></pre><p>Now reboot and run this:</p>
+<pre><code>nvram -p | grep -i myvar
+</code></pre><p>If nothing returns then your NVRAM is not working. If a line containing <code>myvar test</code> returns, your NVRAM is working.</p>
+<p>Note: <code>nvram -c</code> requires SIP to be off, alternative is to wipe NVRAM at the boot menu. Reminder you&apos;ll need <code>Misc -&gt; Security -&gt; AllowNvramReset -&gt; YES</code></p>
+<h2 id="enabling-emulated-nvram-with-a-nvramplist">Enabling emulated NVRAM (with a nvram.plist)</h2>
+<p>To enable emulated NVRAM, you&apos;ll need 3 things set:</p>
+<p>Within your config.plist:</p>
+<ul>
+<li><code>DisableVariableWrite</code>: set to <code>YES</code></li>
+<li><code>LegacyEnable</code>: set to <code>YES</code></li>
+<li><code>LegacySchema</code>: NVRAM variables set(OpenCore compares these to the variables present in nvram.plist)</li>
+<li><code>ExposeSensitiveData</code>: set to <code>0x3</code></li>
+</ul>
+<p>And within your EFI:</p>
+<ul>
+<li><code>FwRuntimeServices.efi</code> driver(this is needed for proper sleep, shutdown and other services to work correctly</li>
+</ul>
+<p>Now grab the &apos;LogoutHook.command&apos; and place it somewhere safe (e.g. within your user directory, as shown below):</p>
+<p><code>/Users/(your username)/LogoutHook/LogoutHook.command</code></p>
+<p>Open up terminal and run the following:</p>
+<p><code>sudo defaults write com.apple.loginwindow LogoutHook /Users/(your username)/LogoutHook/LogoutHook.command</code></p>
+<p>And voila! You have emulated NVRAM!</p>
+<p>Do keep in mind this requires the <code>nvram</code> command to support the <code>-x</code> flag for this to work correctly which is unavailable on macOS 10.12 and below. If you are installing macOS 10.12 or earlier, you need to copy <code>nvram.mojave</code> into the same folder as <code>LogoutHook.command</code>, which fixes this by invoking it instead of the system <code>nvram</code> command.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../AMD/AMD-config.html" class="navigation navigation-prev " aria-label="Previous page: Zen/ThreadRipper">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="spoof.html" class="navigation navigation-next " aria-label="Next page: Disabling GPU">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Emulated NVRAM","level":"4.1","depth":1,"next":{"title":"Disabling GPU","level":"4.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"previous":{"title":"Zen/ThreadRipper","level":"3.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/nvram.md","mtime":"2020-01-06T02:03:14.343Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T02:03:56.918Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+

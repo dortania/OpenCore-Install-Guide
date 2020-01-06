@@ -1,0 +1,642 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Security and FileVault · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../extras/troubleshooting.html" />
+    
+    
+    <link rel="prev" href="spoof.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../creating-the-usb.html">
+            
+                <a href="../creating-the-usb.html">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ktext.html">
+            
+                <a href="../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../config.plist/ivy-bridge.html">
+            
+                <a href="../config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../config.plist/haswell.html">
+            
+                <a href="../config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../config.plist/skylake.html">
+            
+                <a href="../config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../config.plist/kaby-lake.html">
+            
+                <a href="../config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../config.plist/coffee-lake.html">
+            
+                <a href="../config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../AMD/AMD-config.html">
+            
+                <a href="../AMD/AMD-config.html">
+            
+                    
+                    Zen/ThreadRipper
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="nvram.html">
+            
+                <a href="nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="spoof.html">
+            
+                <a href="spoof.html">
+            
+                    
+                    Disabling GPU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="4.3" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../extras/troubleshooting.html">
+            
+                <a href="../extras/troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../extras/verbose.html">
+            
+                <a href="../extras/verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../extras/debug.html">
+            
+                <a href="../extras/debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../extras/legacy.html">
+            
+                <a href="../extras/legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../extras/kalsr-fix.html">
+            
+                <a href="../extras/kalsr-fix.html">
+            
+                    
+                    Fixing KALSR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="msr-lock.html">
+            
+                <a href="msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" >
+            
+                <a target="_blank" href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/">
+            
+                    
+                    Multiboot
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../misc/credit.html">
+            
+                <a href="../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Security and FileVault</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="security">Security</h1>
+<p>So something that makes OpenCore truly special is how it&apos;s been built with security in mind which is quite rare especially in the Hackintosh community. Well here we&apos;ll be going through setting up FileVault and talking about 2 features of OpenCore:</p>
+<ul>
+<li>ScanPolicy</li>
+<li>Vault(work in progress)</li>
+</ul>
+<p><strong>Reminder</strong>: Keep a backup of your EFI and macOS data in case you have issues getting into macOS after enabling FileVault.</p>
+<h2 id="filevault-setup">FileVault Setup</h2>
+<p>To start, you&apos;ll need the following .efi drivers:</p>
+<ul>
+<li>VirtualSMC.efi(To be used in conjunction with VirtualSMC.kext)</li>
+<li>FwRuntimeServices.efi<ul>
+<li>UsbKbDxe.efi may be needed if OpenCore&apos;s builtin input doesn&apos;t work</li>
+</ul>
+</li>
+</ul>
+<p>Setting in your config.plist:</p>
+<ul>
+<li>Misc -&gt; Boot <ul>
+<li><code>PollAppleHotKeys</code> set to YES(While not needed can be helpful)</li>
+</ul>
+</li>
+<li>NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14<ul>
+<li><code>UIScale</code> set to <code>02</code> for high resolution small displays</li>
+</ul>
+</li>
+<li>UEFI -&gt; Input<ul>
+<li><code>KeySupport</code> set to YES(Only when using OpenCore&apos;s built-in input, users of UsbKbDxe should avoid)</li>
+</ul>
+</li>
+<li>UEFI -&gt; Protocols<ul>
+<li><code>FirmwareVolume</code> set to YES</li>
+<li><code>HashServices</code> set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing</li>
+</ul>
+</li>
+<li>UEFI -&gt; Quirks<ul>
+<li><code>ProvideConsoleGOP</code> to YES</li>
+<li><code>RequestBootVarRouting</code> set to YES</li>
+<li><code>ExitBootServicesDelay</code> set to <code>5</code> if you recieve <code>Still waiting for root device</code> on Aptio IV firmwares(Haswell and older)</li>
+</ul>
+</li>
+</ul>
+<p>With all this, reboot testing the keyboard still works in the picker and you can proceed to enable FileVault like on a normal mac under <code>System Preferences -&gt; Security &amp; Privacy -&gt; FileVault</code></p>
+<h2 id="scan-policy">Scan Policy</h2>
+<p>What this quirk allows to prevent scanning and booting from untrusted sources. Setting to <code>0</code> will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.</p>
+<p>To calculate the ScanPolicy value, you simply add up all the hexidecimal values(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with <code>&#x2318;+3</code>). Once it&apos;s all added up, you would add this hexidecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)</p>
+<p><code>0x00000001 (bit 0)</code> &#x2014; OC_SCAN_FILE_SYSTEM_LOCK</p>
+<ul>
+<li>restricts scanning to only known file systems defined as a part of this policy. File system drivers may not be aware of this policy, and to avoid mounting of undesired file systems it is best not to load its driver. This bit does not affect dmg mounting, which may have any file system. Known file systems are prefixed with OC<em>SCAN_ALLOW_FS</em>.</li>
+</ul>
+<p><code>0x00000002 (bit 1)</code> &#x2014; OC_SCAN_DEVICE_LOCK</p>
+<ul>
+<li>restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC<em>SCAN_ALLOW_DEVICE</em>.</li>
+</ul>
+<p><code>0x00000100 (bit 8)</code> &#x2014; OC_SCAN_ALLOW_FS_APFS</p>
+<ul>
+<li>allows scanning of APFS file system.</li>
+</ul>
+<p><code>0x00000200 (bit 9)</code> &#x2014; OC_SCAN_ALLOW_FS_HFS</p>
+<ul>
+<li>allows scanning of HFS file system.</li>
+</ul>
+<p><code>0x00000400 (bit 10)</code> &#x2014; OC_SCAN_ALLOW_FS_ESP</p>
+<ul>
+<li>allows scanning of EFI System Partition file system.</li>
+</ul>
+<p><code>0x00010000 (bit 16)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_SATA</p>
+<ul>
+<li>allow scanning SATA devices.</li>
+</ul>
+<p><code>0x00020000 (bit 17)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_SASEX</p>
+<ul>
+<li>allow scanning SAS and Mac NVMe devices.</li>
+</ul>
+<p><code>0x00040000 (bit 18)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_SCSI</p>
+<ul>
+<li>allow scanning SCSI devices.</li>
+</ul>
+<p><code>0x00080000 (bit 19)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_NVME</p>
+<ul>
+<li>allow scanning NVMe devices.</li>
+</ul>
+<p><code>0x00100000 (bit 20)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_ATAPI</p>
+<ul>
+<li>allow scanning CD/DVD devices.</li>
+</ul>
+<p><code>0x00200000 (bit 21)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_USB</p>
+<ul>
+<li>allow scanning USB devices.</li>
+</ul>
+<p><code>0x00400000 (bit 22)</code> - OC_SCAN_ALLOW_DEVICE_FIREWIRE</p>
+<ul>
+<li>allow scanning FireWire devices. </li>
+</ul>
+<p><code>0x00800000 (bit 23)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_SDCARD</p>
+<ul>
+<li>allow scanning card reader devices.</li>
+</ul>
+<p>By default, ScanPolicy is given a value of <code>0xF0103</code>(983,299) which is the combination of the following:</p>
+<ul>
+<li>OC_SCAN_FILE_SYSTEM_LOCK </li>
+<li>OC_SCAN_DEVICE_LOCK</li>
+<li>OC_SCAN_ALLOW_FS_APFS</li>
+<li>OC_SCAN_ALLOW_DEVICE_SATA </li>
+<li>OC_SCAN_ALLOW_DEVICE_SASEX </li>
+<li>OC_SCAN_ALLOW_DEVICE_SCSI </li>
+<li>OC_SCAN_ALLOW_DEVICE_NVME</li>
+</ul>
+<p>And lets just say for this example that you want to add OC_SCAN_ALLOW_DEVICE_USB:</p>
+<p><code>0x00200000</code> + <code>0xF0103</code> = <code>0x2F0103</code></p>
+<p>And converting this to decimal gives us <code>3,080,451</code></p>
+<h2 id="vault">Vault</h2>
+<p><strong>Work in progress</strong></p>
+<p>What is vaulting? Well vaulting is based around 2 things, vault.plist and vault.sig:</p>
+<ul>
+<li>vault.plist: a &quot;snapshot&quot; of your EFI</li>
+<li>vault.sig: validation of vault.plist</li>
+</ul>
+<p>Do note that nvram.plist won&apos;t be vaulted</p>
+<p>Setting in your config.plist:</p>
+<ul>
+<li><code>RequireSignature</code> set to YES</li>
+<li><code>RequireVault</code> set to YES</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="spoof.html" class="navigation navigation-prev " aria-label="Previous page: Disabling GPU">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../extras/troubleshooting.html" class="navigation navigation-next " aria-label="Next page: General Troubleshooting">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"4.3","depth":1,"next":{"title":"General Troubleshooting","level":"5.1","depth":1,"path":"extras/troubleshooting.md","ref":"extras/troubleshooting.md","articles":[]},"previous":{"title":"Disabling GPU","level":"4.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-01-06T02:03:14.343Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T02:03:56.918Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+
