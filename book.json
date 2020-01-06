@@ -5,7 +5,7 @@
             "theme":  "night",
             "family": "sans"
         },
-        "favicon": "Opencore-Vanilla-Desktop-Guide/Icons/favicon.ico"
+        "favicon": "favicon.ico"
     },
     "links": {
         "sharing": {
