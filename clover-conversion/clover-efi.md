@@ -1,8 +1,8 @@
-# Kexts and Firmware drivers
+# Clover firmware driver conversion
 
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different. 
 
-Supported ones:
+**Supported ones:**
 
 * ApfsDriverLoader.efi
 * FwRuntimeServices.efi
@@ -27,7 +27,7 @@ Supported ones:
 * GrubISO9660.efi
 * GrubEXFAT.efi
 
-Drivers provided/merged into Opencore and so are no longer needed:
+**Drivers provided/merged into Opencore and so are no longer needed:**
 
 * DataHubDxe.efi
 * EnglishDxe.efi
@@ -44,7 +44,7 @@ Drivers provided/merged into Opencore and so are no longer needed:
 * HashServiceFix.efi
 
 
-Explictely unsupported drivers:
+**Explictely unsupported drivers:**
 
 * osxaptiofixdrv.efi
 * osxaptiofix2drv.efi
