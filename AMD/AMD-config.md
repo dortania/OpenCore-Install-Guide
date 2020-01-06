@@ -198,7 +198,7 @@ To merge:
 * **ThirdPartyDrives**: NO 
    * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
-   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
+   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](/AMD/AMD-USB-map.md)
 
 
 ## Misc
@@ -436,7 +436,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/troubleshooting) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](/extras/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [AMD OS X Discord](https://discord.gg/QuUWg7)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
@@ -449,7 +449,7 @@ So what in the world needs to be done once everything is installed? Well here's 
 * [USB mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md) 
 * Correcting audio, reread the DeviceProperties on how
 * [Removing NullCPUPowerManagment.kext and improving GPU performance](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)
-* [Enabling FileVault and other security features](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security)
+* [Enabling FileVault and other security features](/post-install/security.md)
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to desktop
