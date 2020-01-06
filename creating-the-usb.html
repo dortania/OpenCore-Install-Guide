@@ -441,9 +441,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="creating-the-usb">Creating the USB</h1>
-<h2 id="setting-up-opencore">Setting up OpenCore</h2>
-<p>Requirements:</p>
+                                <p>Requirements:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a>, highly recommend running the debug version to show more info</li>
 <li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AppleSupportPkg</a></li>
@@ -462,10 +460,10 @@
 <ul>
 <li>If you want to use OpenCore on your system, please follow the <a href="extras/legacy.html">Legacy Install</a> section first, after you can continue following the <strong>Base folder structure</strong> section</li>
 </ul>
-<h2 id="creating-the-usb">Creating the USB</h2>
-<p>Creating the USB is simple, all you need to do is format it with GUID partition map. There is no real size requirement for the USB as OpenCore&apos;s entire EFI will generally be less than 5MB. This changes when you&apos;re making an instller, see installer section below for more info.</p>
+<h2 id="setting-up-opencores-efi-enviroment">Setting up OpenCore&apos;s EFI enviroment</h2>
+<p>Setting up OpenCore&apos;s EFI enviroment is simple, all you need to do is format it with GUID partition map regardless of operating system. There is no real size requirement for the USB as OpenCore&apos;s entire EFI will generally be less than 5MB. For those making a full macOS installer should read the whole page before starting as the installer section goes more into what drive size and formats are required.</p>
 <p><img src="https://i.imgur.com/5uTJbgI.png" alt="Formatting the USB"></p>
-<p>Next, we&apos;ll want to mount the EFI partition on the USB with mountEFI.</p>
+<p>Next, we&apos;ll want to mount the EFI partition on the USB with <a href="https://github.com/corpnewt/MountEFI" target="_blank">mountEFI</a>. Windows and Linux users can refer to <a href="https://noobsplanet.com/index.php?threads/how-to-mount-efi-partition-from-windows-linux-or-mac.56/" target="_blank">this post</a></p>
 <p><img src="https://i.imgur.com/4l1oK8i.png" alt="mountEFI"></p>
 <p>You&apos;ll notice that once we open the EFI partition, it&apos;s empty. This is where the fun begins.</p>
 <p><img src="https://i.imgur.com/EDeZB3u.png" alt="Empty EFI partition"></p>
@@ -476,7 +474,7 @@
 <ul>
 <li>Please do also note that AptioMemoryFix.efi has now been split between OpenCore itself and FwRuntimeServices.efi</li>
 </ul>
-<p>Here&apos;s what mine looks like(For the majority of users you can ignore Tools but it can be useful like for Shell.efi and other such tools):</p>
+<p>Here&apos;s what a populated EFI looks like:</p>
 <p><img src="https://i.imgur.com/HVuyghf.png" alt="Populated EFI folder"></p>
 <p><strong>Reminder</strong>:</p>
 <ul>
@@ -484,7 +482,7 @@
 <li>Kexts go in Kexts folder</li>
 <li>Firmware drivers(.efi) go in the Drivers folder</li>
 </ul>
-<h2 id="making-an-installer">Making an installer</h2>
+<h2 id="making-the-macos-installer">Making the macOS Installer</h2>
 <p>While you don&apos;t need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades. </p>
 <ul>
 <li><p>Users with a mac:</p>
@@ -500,17 +498,21 @@
 </li>
 <li><p>Users without a mac:</p>
 <ul>
-<li>Format USB as Fat32 with GUID partition map, must be 4GB minimum</li>
+<li>Format USB as Fat32 with GUID partition map, must be 4GB minimum<ul>
+<li>Disk Management in WindowsWindows</li>
+<li>Disks Utility in Linux</li>
+</ul>
+</li>
 <li>Download the macOS <code>BaseSystem.dmg</code> and <code>BaseSystem.chunklist</code><ul>
 <li><a href="https://github.com/corpnewt/gibMacOS" target="_blank">gibMacOS</a></li>
-<li><a href="https://github.com/acidanthera/MacInfoPkg/blob/master/macrecovery/macrecovery.py" target="_blank">macrecovery.py</a></li>
+<li><a href="https://github.com/acidanthera/MacInfoPkg/blob/master/macrecovery/macrecovery.py" target="_blank">macrecovery.py</a>, alternative to gibmacos</li>
 </ul>
 </li>
 <li>Create a folder on root of Fat32 partition called <code>com.apple.recovery.boot</code> and place the <code>BaseSystem.dmg</code> and <code>BaseSystem.chunklist</code> in there</li>
 </ul>
 </li>
 </ul>
-<p>Note: Some users may have issues booting the USB, make sure you have an HFS driver and you can also try <code>AvoidHighAlloc</code> set to <code>YES</code>. If you continue to have issues, I recommend using Midi&apos;s <a href="https://internet-install.gitbook.io/macos-internet-install/" target="_blank">/r/Hackintosh macOS Internet Install</a></p>
+<p>Note: Some users may have issues booting the USB, make sure you have an HFS driver and you can also try <code>AvoidHighAlloc</code> set to <code>YES</code>. If you continue to have issues, I recommend using Midi&apos;s <a href="https://internet-install.gitbook.io/macos-internet-install/" target="_blank">/r/Hackintosh macOS Internet Install</a> and replacing mentions of clover with OpenCore</p>
 
                                 
                                 </section>
@@ -554,7 +556,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"creating-the-usb.md","mtime":"2020-01-06T02:05:47.015Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T02:06:28.248Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"fontsettings":{"theme":"night","family":"sans","size":2},"search-plus":{},"addcssjs":{"css":[],"js":[]},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"creating-the-usb.md","mtime":"2020-01-06T03:48:40.144Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-06T03:49:25.069Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
