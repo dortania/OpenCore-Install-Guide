@@ -19,7 +19,7 @@ Please note that 3rd gen Threadripper(19h) is unsupported currently.
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](post-install/spoof.md) and such.
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such.
 
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
@@ -232,7 +232,7 @@ To merge:
 * **DisplayLevel**: `2147483714`
    * Shows even more debug information, requires debug version of OpenCore
 
-These values are based of those calculated in [OpenCore debugging](extras/debug.md)
+These values are based of those calculated in [OpenCore debugging](/extras/debug.md)
 
 **Security**: Security is pretty self-explanatory.
 
@@ -245,7 +245,7 @@ These values are based of those calculated in [OpenCore debugging](extras/debug.
 * **RequireVault**: NO
    * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](post-install/security.md) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name**
