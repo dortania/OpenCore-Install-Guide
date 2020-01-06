@@ -28,7 +28,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 
 ### Recommended BIOS settings
 
-Disable:
+**Disable:**
 * Fast Boot
 * VT-d\(can be enabled if you set DisableIoMapper to YES, AMD users will need to disable SVM in the BIOS\)
 * CSM
@@ -38,7 +38,9 @@ Disable:
 * CFG Lock\(MSR 0xE2 write protection\)
    * If this can't be turned off in the BIOS(or even found) please consider patching it out. See [Fixing CFG Lock](post-install/msr-lock.md) for more info.
     * AMD CPU users don't need to worry about.
-Enable
+
+
+**Enable:**
 * VT-x
 * Above 4G decoding
 * Hyper-Threading
