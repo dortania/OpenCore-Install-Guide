@@ -19,7 +19,7 @@ Please note that 3rd gen Threadripper(19h) is unsupported currently.
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/spoof) and such.
 
 * [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
@@ -46,7 +46,7 @@ This drops certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers use SSDTs or similar Device Property patching like what's seen with Framebuffer patching.
+This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. Most PCs do not ACPI patches, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers, use SSDTs or similar Device Property patching like what's seen with Framebuffer patching. 
 
 And to grab the location of such devices you can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
 

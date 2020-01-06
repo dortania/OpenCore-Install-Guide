@@ -53,6 +53,8 @@ Example of device path:
 ```text
 DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
 {
+    External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
+    
     Method(_SB.PCI0.PEG0.PEGP._DSM, 4)
     {
         If (_OSI ("Darwin"))

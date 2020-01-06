@@ -17,27 +17,6 @@ Requirements:
 
 Actually no, you can go into the release tab of all your required files and grab them that way. MaciASL is only on macOS so compiling them may be more difficult if it's not handled by [SSDTTime](https://github.com/corpnewt/SSDTTime). See the [installer section](creating-the-usb.md#Making-an-installer) below for more info.
 
-Recommended BIOS settings:
-
-* Disable:
- * Fast Boot
- * VT-d\(can be enabled if you set DisableIoMapper to YES, AMD users will need to disable SVM in the BIOS\)
- * CSM
- * Thunderbolt
- * Intel SGX
- * Intel Platform Trust
- * CFG Lock\(MSR 0xE2 write protection\)
-    * If this can't be turned off in the BIOS(or even found) please consider patching it out. See [Fixing CFG Lock](post-install/msr-lock.md) for more info.
-    * AMD CPU users don't need to worry about.
-* Enable
- * VT-x
- * Above 4G decoding
- * Hyper-Threading
- * Execute Disable Bit
- * EHCI/XHCI Hand-off
- * OS type: Windows 8.1/10
- * Legacy RTC Device(Relevant for Z370+)
-
 **Note for legacy users**
 
 * If you want to use OpenCore on your system, please follow the [Legacy Install](extras/legacy.md) section first, after you can continue following the **Base folder structure** section

@@ -15,7 +15,7 @@ Couple problems:
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
 * Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs)
 
-Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). When this happens, there's a couple of possible fixes:
+Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only.** When this happens, there's a couple of possible fixes:
 
 * [Fixing CFG Lock](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock) 
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
@@ -34,6 +34,12 @@ Main things to check:
 
 This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
 
+# Stuck on `OCABC: Memory pool allocation failure - Not Found`
+
+This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -> Booter -> Quirks is correct and verify your BIOS settings:
+* Above4GDecoding is Enabled
+* CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
+
 # "Waiting for Root Device" or Prohibited Sign error
 
 * Generally seen as a USB error, couple ways to fix:
@@ -43,7 +49,7 @@ This is due to OpenCore being unable to find any drives with the current ScanPol
 # iMessage and Siri Broken
 
 * En0 device not setup as `Built-in`, couple ways to fix:
-   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ex: ethernet@0). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. **Recommended method**
+   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
    * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
   
 ![](https://i.imgur.com/DtYtwCQ.png)
@@ -77,6 +83,7 @@ To fix, swap `real` for `integer`:
 ```
 path/to/gfxutil -f HDEF
 ```
+Then find out your 
 
 # Stuck after selection macOS partition on OpenCore
 
@@ -86,7 +93,7 @@ path/to/gfxutil -f HDEF
 * AMD kernel patches aren't working(AMD Users only):
    * Either outdated or missing kernel patches
 * PollAppleHotKeys driver is incompatible:
-   * Disable `PollAppleHotKeys` and `KeySupport`
+* Disable `PollAppleHotKeys` and `KeySupport`, then remove UsbKbDxe from your config.plist -> UEFI -> Drivers
 
 
 

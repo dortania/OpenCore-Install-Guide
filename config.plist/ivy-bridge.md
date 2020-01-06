@@ -1,6 +1,4 @@
-# Ivy Bridge
-
-### Starting Point
+## Starting Point
 
 You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
 
@@ -11,14 +9,14 @@ Do note that images will not always be the most up-to date so please read the te
 
 **And read this guide more than once before setting up Opencore and make sure you have it setup correctly**
 
-### ACPI
+## ACPI
 
 ![ACPI](https://i.imgur.com/QFsl9R1.png)
 
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/) and such.
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/spoof) and such.
 
 For us we'll need a couple SSDTs to bring back functionality that Clover provided:
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
@@ -59,7 +57,7 @@ Cpu0Ist:
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc.\) via OpenCore. macOS usually does not care much about ACPI, so in the majority of the cases, you need to do nothing here. 
+This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. Most PCs do not ACPI patches, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers, use SSDTs or similar Device Property patching like what's seen with Framebuffer patching. 
 
 * **Comment** 
    * Name of patch
@@ -85,7 +83,7 @@ This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc
 * **ResetLogoStatus**: NO
   * Workaround for OEM Windows logo not drawing on systems with BGRT tables.
 
-### Booter
+## Booter
 
 ![Booter](https://i.imgur.com/suElruh.png)
 
@@ -122,7 +120,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **ShrinkMemoryMap**: NO
   * Needed for systems with large memory maps that don't fit, don't use unless necessary
 
-### DeviceProperties
+## DeviceProperties
 
 ![DeviceProperties](https://i.imgur.com/Aw9t9vI.png)
 
@@ -154,7 +152,7 @@ Do note that `layout-id` is a `Data` value meaning you will need to convert from
 
 Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifcally Little Endians that modern CPUs use for ordering bytes. The more you know!
 
-### Kernel
+## Kernel
 
 ![Kernel](https://i.imgur.com/repNbDT.png)
 
@@ -212,7 +210,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such.
 
-### Misc
+## Misc
 
 ![Misc](https://i.imgur.com/OROZbCk.png)
 
@@ -278,7 +276,7 @@ These values are based of those calculated in [OpenCore debugging](https://khron
    * ex: `PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi`
 
 
-### NVRAM
+## NVRAM
 
 ![NVRAM](https://i.imgur.com/HM4FTH6.png)
 
@@ -323,7 +321,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
-### Platforminfo
+## Platforminfo
 
 ![PlatformInfo](https://i.imgur.com/5rl12dZ.png)
 
@@ -387,7 +385,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
-### UEFI
+## UEFI
 
 ![UEFI](https://i.imgur.com/JDsXope.png)
 
