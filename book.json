@@ -5,7 +5,7 @@
             "theme":  "night",
             "family": "sans"
         },
-        "favicon": "favicon.ico"
+        "favicon": "/favicon.ico"
     },
     "links": {
         "sharing": {
