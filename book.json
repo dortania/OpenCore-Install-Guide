@@ -1,0 +1,31 @@
+ {
+    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs"],
+    "pluginsConfig": {
+        "fontsettings": {
+            "theme":  "night",
+            "family": "sans"
+        }
+    },
+    "links": {
+        "sharing": {
+            "google": false,
+            "facebook": false,
+            "twitter": false,
+            "weibo": false,
+            "all": false
+        }
+    },
+    "pdf": {
+        "pageNumbers": false,
+        "fontSize": 12,
+        "paperSize": "a4",
+        "margin": {
+            "right": 62,
+            "left": 62,
+            "top": 36,
+            "bottom": 36
+        },
+        "headerTemplate": null,
+        "footerTemplate": null
+    }
+}

@@ -482,6 +482,7 @@ So what in the world needs to be done once everything is installed? Well here's 
 * [USB mapping](https://usb-map.gitbook.io/project/) 
 * [Setting up emulated NVRAM](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/nvram) for B360, B365, H310, H370, Z390 motherboards( Z370 and Q370 does not need this)
 * Correcting audio, reread the DeviceProperties on how
+* [Enabling FileVault and other security features](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security)
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to desktop

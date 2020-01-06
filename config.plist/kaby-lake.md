@@ -458,6 +458,7 @@ So what in the world needs to be done once everything is installed? Well here's 
 
 * [USB mapping](https://usb-map.gitbook.io/project/) 
 * Correcting audio, reread the DeviceProperties on how
+* [Enabling FileVault and other security features](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security)
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to desktop

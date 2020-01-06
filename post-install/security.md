@@ -5,6 +5,8 @@ So something that makes OpenCore truly special is how it's been built with secur
 * ScanPolicy
 * Vault(work in progress)
 
+**Reminder**: Keep a backup of your EFI and macOS data in case you have issues getting into macOS after enabling FileVault.
+
 ## FileVault Setup
 
 To start, you'll need the following .efi drivers:
@@ -20,7 +22,7 @@ Setting in your config.plist:
 * NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
    * `UIScale` set to `02` for high resolution small displays
 * UEFI -> Input
-   * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of UsbKbdxe should avoid)
+   * `KeySupport` set to YES(Only when using OpenCore's built-in input, users of UsbKbDxe should avoid)
 * UEFI -> Protocols
    * `FirmwareVolume` set to YES
    * `HashServices` set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing
@@ -29,7 +31,7 @@ Setting in your config.plist:
    * `RequestBootVarRouting` set to YES
    * `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
 
-With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
+With all this, reboot testing the keyboard still works in the picker and you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
 ## Scan Policy
 
