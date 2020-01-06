@@ -40,6 +40,10 @@ This is due to either incorrect BIOS settings and/or incorrect Booter values. Ma
 * Above4GDecoding is Enabled
 * CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
 
+# Stuck on `OC: Driver HfsPlus.efi at 0 cannot be found`
+
+Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Drivers 
+
 # "Waiting for Root Device" or Prohibited Sign error
 
 * Generally seen as a USB error, couple ways to fix:
@@ -142,7 +146,7 @@ Commonly due to systems running AWAC clocks, you'll need to use either:
 # Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
 
 
-Verify your EC SSDT is enabled and correct for your system.
+Verify your EC SSDT is enabled and correct for your system. See the [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/) post for more info
 
 # Kernel Panic `Cannot perform kext summary`
 

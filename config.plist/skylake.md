@@ -144,7 +144,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ![Kernel](https://i.imgur.com/l1pu0cJ.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Please see the [Kext section](ktext#kexts) for what kexts we recommend.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.
 
 * **BundlePath**
    * Name of the kext

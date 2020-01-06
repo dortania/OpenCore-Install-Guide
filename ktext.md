@@ -13,8 +13,8 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
 
 * [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Needed for seeing APFS volumes.
-* [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) or HfsPlus.efi
-   * Needed for seeing HFS volumes.
+* [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) **or** [HfsPlus.efi](https://cdn.discordapp.com/attachments/606452360495104000/633621011887292416/HFSPlus.efi)
+   * Needed for seeing HFS volumes. **Do not mix HFS drivers**
 * [FwRuntimeServices.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
   
@@ -88,7 +88,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 * [NullCPUPowerManagment](https://cdn.discordapp.com/attachments/263757191608139779/643751774666358794/NullCPUPowerManagement.kext.zip)
    * AMD CPUs cannot use Intel's power management so we need to nullify it. **Use this over the one provided in the kext repo**
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
-   * USB fix for AMD FX systems
+   * USB fix for AMD FX systems, no effect on Ryzen
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
    * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticably worse than AppleALC on Zen CPUs
 

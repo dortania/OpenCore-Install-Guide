@@ -13,14 +13,14 @@ To start, you'll need the following .efi drivers:
 
 * VirtualSMC.efi(To be used in conjunction with VirtualSMC.kext)
 * FwRuntimeServices.efi
-   * UsbKbDxe.efi may be needed if OpenCore's builtin input doesn't work
+   * UsbKbDxe.efi may be needed if OpenCore's built-in input doesn't work
 
 Setting in your config.plist:
 
 * Misc -> Boot 
    * `PollAppleHotKeys` set to YES(While not needed can be helpful)
 * NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
-   * `UIScale` set to `02` for high resolution small displays
+   * `UIScale` set to `02` for high resolution, small displays
 * UEFI -> Input
    * `KeySupport` set to YES(Only when using OpenCore's built-in input, users of UsbKbDxe should avoid)
 * UEFI -> Protocols

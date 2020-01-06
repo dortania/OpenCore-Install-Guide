@@ -38,7 +38,7 @@ To setup OpenCore’s folder structure, you’ll want to grab those files from O
 
 ![base EFI folder](https://i.imgur.com/1Ssvqfw.png)
 
-Now you can place your necessary .efi drivers from AppleSupportPkg into the _drivers_ folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEF, AptioMemoryFix, OsxAptioFixDrv, etc\).
+Now you can place your necessary .efi drivers from AppleSupportPkg into the _drivers_ folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc\). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for supported drivers.
 
 * Please do also note that AptioMemoryFix.efi has now been split between OpenCore itself and FwRuntimeServices.efi
 
