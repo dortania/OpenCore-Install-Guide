@@ -1,11 +1,12 @@
 {
-    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "custom-favicon"],
+    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus"],
     "pluginsConfig": {
         "fontsettings": {
             "theme":  "night",
             "family": "sans"
         },
-        "favicon": "favicon.ico"
+        "favicon": "/icons/favicon.ico",
+        "appleTouchIconPrecomposed152": "/icons/appleTouchIconPrecomposed152.png"
     },
     "links": {
         "sharing": {

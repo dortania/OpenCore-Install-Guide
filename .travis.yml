@@ -2,7 +2,7 @@ language: node_js
 node_js: node
 before_script:
 - npm install -g gitbook-cli
-- npm install gitbook-plugin-custom-favicon
+- npm install gitbook-plugin-favicon-plus
 script: 
 - gitbook install
 - gitbook build
