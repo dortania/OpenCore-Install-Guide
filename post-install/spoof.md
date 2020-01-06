@@ -53,9 +53,9 @@ Example of device path:
 ```text
 DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
 {
-   External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode), Replace with your own ACPI path
+   External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
 
-   Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method, Replace with your own ACPI path
+   Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
    {
       If (LOr (LNot (Arg2), LEqual (_OSI ("Darwin"), Zero)))
       {
@@ -96,6 +96,9 @@ DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
    }
 }
 ```
+A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl)
+You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
+
 Source: CorpNewt
 
 # Fixing Windows

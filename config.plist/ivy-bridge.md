@@ -1,3 +1,5 @@
+# Ivy Bridge
+
 ## Starting Point
 
 You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.

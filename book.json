@@ -1,9 +1,10 @@
  {
-    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs"],
+    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "custom-favicon"],
     "pluginsConfig": {
         "fontsettings": {
             "theme":  "night",
             "family": "sans"
+            "favicon": "Icons/favicon.ico"
         }
     },
     "links": {

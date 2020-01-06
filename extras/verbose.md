@@ -1,4 +1,4 @@
-# Hiding Verbose
+# Fixing Resolution and Hiding Verbose  
 
 Wanting a more clean booting experience with macOS without all that verbose text while booting? Well you need a couple things:
 
@@ -19,6 +19,7 @@ Wanting a more clean booting experience with macOS without all that verbose text
 
 **`Misc -> Boot`**:
 
+* `Resolution`: set to your monitor's resolution
 * `ConsoleBehaviourOs`: set to Graphics
 * `ConsoleBehaviourUi`: set to Text
 * `ConsoleMode` set to Max
