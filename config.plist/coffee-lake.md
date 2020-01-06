@@ -17,7 +17,7 @@ Do note that images will not always be the most up-to date so please read the te
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/spoof) and such.
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such.
 
 For us we'll need a couple SSDTs to bring back functionality that Clover provided:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
@@ -258,11 +258,11 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **RequireVault**: NO
   * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](post-install/security-and-filevault.md) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for furthur details
 * **DisplayLevel**: `2147483714`
     * Shows even more debug information, requires debug version of OpenCore
 
-These values are based of those calculated in [OpenCore debugging](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug)
+These values are based of those calculated in [OpenCore debugging](/extras/debug.md)
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** 
@@ -303,7 +303,7 @@ These values are based of those calculated in [OpenCore debugging](https://khron
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id. Do note that this generally needed for systems running Nvidia GPUs
 
-Note: Some Z390 users may need to calculate a slide value to get around "Couldn't Allocate Runtime" errors. See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix) for more info.
+Note: Some Z390 users may need to calculate a slide value to get around "Couldn't Allocate Runtime" errors. See [Fixing KALSR slide values](/extras/kalsr-fix.md) for more info.
 
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
 
@@ -470,7 +470,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/troubleshooting) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](/extras/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
@@ -480,9 +480,9 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 So what in the world needs to be done once everything is installed? Well here's some things:
 
 * [USB mapping](https://usb-map.gitbook.io/project/) 
-* [Setting up emulated NVRAM](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/nvram) for B360, B365, H310, H370, Z390 motherboards( Z370 and Q370 does not need this)
+* [Setting up emulated NVRAM](/post-install/nvram.md) for B360, B365, H310, H370, Z390 motherboards( Z370 and Q370 does not need this)
 * Correcting audio, reread the DeviceProperties on how
-* [Enabling FileVault and other security features](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security)
+* [Enabling FileVault and other security features](/post-install/security.md)
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to desktop

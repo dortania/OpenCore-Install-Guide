@@ -16,7 +16,7 @@ Do note that images will not always be the most up-to date so please read the te
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/spoof) and such.
+This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such.
 
 For us we'll need a couple SSDTs to bring back functionality that Clover provided:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
@@ -229,7 +229,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **DisplayLevel**: `2147483714`
     * Shows even more debug information, requires debug version of OpenCore
 
-These values are based of those calculated in [OpenCore debugging](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/debug)
+These values are based of those calculated in [OpenCore debugging](/extras/debug.md)
          
 
 **Security**: Security is pretty self-explanatory.
@@ -243,7 +243,7 @@ These values are based of those calculated in [OpenCore debugging](https://khron
 * **RequireVault**: NO
   * We won't be dealing vault.plist so we can ignore as well
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for furthur details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** 
@@ -440,9 +440,9 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## Cleaning up
 
-And now you're ready to save and place it into your EFI.
+And now you're ready to save and place it into your EFI under EFI/OC.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/troubleshooting/troubleshooting) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](/extras/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
@@ -453,7 +453,7 @@ So what in the world needs to be done once everything is installed? Well here's 
 
 * [USB mapping](https://usb-map.gitbook.io/project/) 
 * Correcting audio, reread the DeviceProperties on how
-* [Enabling FileVault and other security features](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/security)
+* [Enabling FileVault and other security features](/post-install/security.md)
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to desktop
