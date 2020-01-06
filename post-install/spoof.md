@@ -51,29 +51,52 @@ Example of device path:
 `\_SB.PCI0.PEG0.PEGP`
 
 ```text
-DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
+DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
 {
-    External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
-    
-    Method(_SB.PCI0.PEG0.PEGP._DSM, 4)
-    {
-        If (_OSI ("Darwin"))
-        {
-            If (!Arg2) { Return (Buffer() { 0x03 } ) }
-            Return (Package()
-                {
-                    "name", Buffer() { "#display" },
-                    "IOName", "#display",
-                    "class-code", Buffer() { 0xFF, 0xFF, 0xFF, 0xFF },
-                    "vendor-id", Buffer() { 0xFF, 0xFF, 0,  0 },
-                    "device-id", Buffer() { 0xFF, 0xFF, 0, 0 },
-            })
-        }
-    }
+   External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode), Replace with your own ACPI path
+
+   Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method, Replace with your own ACPI path
+   {
+      If (LOr (LNot (Arg2), LEqual (_OSI ("Darwin"), Zero)))
+      {
+         Return (Buffer (One)
+         {
+            0x03                                           
+         })
+      }
+
+      Return (Package (0x0A)
+      {
+         "name", 
+         Buffer (0x09)
+         {
+            "#display"
+         }, 
+
+         "IOName", 
+         "#display", 
+         "class-code", 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0xFF, 0xFF                         
+         }, 
+
+         "vendor-id", 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0x00, 0x00                         
+         }, 
+
+         "device-id", 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0x00, 0x00                         
+         }
+      })
+   }
 }
 ```
-
-What this SSDT does special compared to Rehabman's SSDT is that this adds the `If (_OSI ("Darwin")){}` block so that this SSDT wouldn't be applied when booting other operating systems
+Source: CorpNewt
 
 # Fixing Windows
 
