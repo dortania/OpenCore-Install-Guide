@@ -1,8 +1,4 @@
 # Introduction
-
-* [Dark mode Github pages Link](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
-* [Light mode Gitbook Link](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/)
-
 ### About
 
 OpenCore is an open-source unconventional first-in-class piece of software designed to intercept kernel loading to insert a highly advanced rootkit, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.
