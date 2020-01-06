@@ -1,7 +1,7 @@
 # Introduction
 
-[Dark mode Github pages Link](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
-[Light mode Gitbook Link](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/)
+* [Dark mode Github pages Link](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
+* [Light mode Gitbook Link](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/)
 
 ### About
 
