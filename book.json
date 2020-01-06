@@ -7,7 +7,7 @@
         },
         "favicon": "/icons/favicon.ico",
         "appleTouchIconPrecomposed152": "/icons/appleTouchIconPrecomposed152.png",
-        "output": "_book",
+        "output": "_book"
     },
     "links": {
         "sharing": {
