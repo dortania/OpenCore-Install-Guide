@@ -113,6 +113,7 @@ This is commonly caused by IRQ conflicts with PCI devices/lanes. Depending on ho
 * CSM disabled
 * Windows8.1/10 Mode
 * Forcing PCIe 3.0 link speed
+
 Now try one of these boot args:
 * `npci=0x2000`
 * `npci=0x3000`
@@ -126,7 +127,7 @@ This is right before the GPU is properly initialized, verify the following:
 
 
 
-## Black screen after gIO on Navi
+## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 * Add `agdpmod=pikera` to boot args
 * switch between different display outputs
 
@@ -182,22 +183,15 @@ Call upon OpenCore shell:
 
 ```
 shell> fs0: //replace with proper drive
-```
 
-```
 fs0:\> dir //to verify this is the right directory
-```
 
-```
   Directory of fs0:\
-```
-```
+
    01/01/01 3:30p  EFI
-```
-```   
+ 
 fs0:\> cd EFI\OC\Tools //note that its with forward slashes
-```
-```
+
 fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 ```
 

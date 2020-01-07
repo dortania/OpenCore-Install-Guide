@@ -1,4 +1,4 @@
-# AMD Ryzen, Threadripper, Bulldozer and Jaguar
+# AMD
 
 ## Starting Point
 
