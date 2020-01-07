@@ -440,6 +440,9 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="introduction">Introduction</h1>
+<ul>
+<li><a href="https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/" target="_blank">GitHub Pages link with Darkmode support</a></li>
+</ul>
 <h3 id="about">About</h3>
 <p>OpenCore is an open-source unconventional first-in-class piece of software designed to intercept kernel loading to insert a highly advanced rootkit, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.</p>
 <p>Please remember that OpenCore is still new and currently in beta. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don&apos;t want to migrate if you have a stable system currently. Certain aspects of OpenCore such as Vault support will not be covered in this guide.</p>
@@ -459,7 +462,7 @@
 <ul>
 <li>Kernel extensions are loaded in the order specified in your config file, so you must load an extension&apos;s dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.</li>
 <li>ACPI patches and SSDTs are applied to all operating systems. Adjust your SSDTs with <code>If (_OSI (&quot;Darwin&quot;)) {}</code> or use <a href="http://rodsbooks.com/refind/" target="_blank">rEFind</a> in conjunction with OpenCore.</li>
-<li>Some systems require pure UEFI mode to boot. (This setting is commonly called &quot;Windows 8/10 WHQL Mode&quot; by motherboard manufacturers. See also on <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md" target="_blank">flashing a UEFI ROM onto older GPUs</a>)</li>
+<li>Some systems require pure UEFI mode to boot. (This setting is commonly called &quot;Windows 8.1/10 WHQL Mode&quot; by motherboard manufacturers. See also on <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md" target="_blank">flashing a UEFI ROM onto older GPUs</a>)</li>
 <li>Issues can occur if NVMe devices are set up as SATA devices in the BIOS.</li>
 <li>OpenCore requires a version of macOS that supports a prelinked kernel, this means any installs of OS X 10.7 Lion or newer are supported with some later versions of OS X 10.6 Snow Leopard also having support.</li>
 </ul>
@@ -487,7 +490,7 @@
 <li>Hyper-Threading</li>
 <li>Execute Disable Bit</li>
 <li>EHCI/XHCI Hand-off</li>
-<li>OS type: Windows 8.1/10</li>
+<li>OS type: Windows 8.1/10 WHQL Mode</li>
 <li>Legacy RTC Device(Relevant for Z370+)</li>
 </ul>
 <h2 id="hey-why-does-this-guide-look-quite-similar-to-corpnewts-vanilla-guide">Hey why does this guide look quite similar to CorpNewt&apos;s Vanilla Guide?</h2>
@@ -531,7 +534,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Creating the USB","level":"1.2","depth":1,"path":"creating-the-usb.md","ref":"creating-the-usb.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"README.md","mtime":"2020-01-07T02:11:41.959Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-07T02:12:28.939Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Creating the USB","level":"1.2","depth":1,"path":"creating-the-usb.md","ref":"creating-the-usb.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"README.md","mtime":"2020-01-07T17:54:55.867Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-07T17:55:42.432Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

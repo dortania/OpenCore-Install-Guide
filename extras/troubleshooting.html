@@ -540,8 +540,10 @@
 <ul>
 <li>CSM disabled</li>
 <li>Windows8.1/10 Mode</li>
-<li>Forcing PCIe 3.0 link speed
-Now try one of these boot args:</li>
+<li>Forcing PCIe 3.0 link speed</li>
+</ul>
+<p>Now try one of these boot args:</p>
+<ul>
 <li><code>npci=0x2000</code></li>
 <li><code>npci=0x3000</code></li>
 </ul>
@@ -552,7 +554,7 @@ Now try one of these boot args:</li>
 <li>CSM is off in the BIOS</li>
 <li>Forcing PCIe 3.0 link speed</li>
 </ul>
-<h2 id="black-screen-after-gio-on-navi">Black screen after gIO on Navi</h2>
+<h2 id="black-screen-after-ioconsoleusers-gioscreenlock-on-navi">Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</h2>
 <ul>
 <li>Add <code>agdpmod=pikera</code> to boot args</li>
 <li>switch between different display outputs</li>
@@ -629,11 +631,16 @@ Now try one of these boot args:</li>
 <h2 id="cant-run-acpidumpefi">Can&apos;t run <code>acpidump.efi</code></h2>
 <p>Call upon OpenCore shell:</p>
 <pre><code>shell&gt; fs0: //replace with proper drive
-</code></pre><pre><code>fs0:\&gt; dir //to verify this is the right directory
-</code></pre><pre><code>  Directory of fs0:\
-</code></pre><pre><code>   01/01/01 3:30p  EFI
-</code></pre><pre><code>fs0:\&gt; cd EFI\OC\Tools //note that its with forward slashes
-</code></pre><pre><code>fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
+
+fs0:\&gt; dir //to verify this is the right directory
+
+  Directory of fs0:\
+
+   01/01/01 3:30p  EFI
+
+fs0:\&gt; cd EFI\OC\Tools //note that its with forward slashes
+
+fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 </code></pre><h2 id="booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</h2>
 <ul>
 <li>Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)</li>
@@ -682,7 +689,7 @@ Now try one of these boot args:</li>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"5.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/troubleshooting.md","mtime":"2020-01-07T02:11:41.959Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-07T02:12:28.939Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"5.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/troubleshooting.md","mtime":"2020-01-07T17:54:55.867Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-07T17:55:42.432Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
