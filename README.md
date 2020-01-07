@@ -1,6 +1,6 @@
 # Introduction
 
-![](https://i.imgur.com/JWdL88y.png)
+
 
 ### About
 
