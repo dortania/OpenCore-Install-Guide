@@ -1,0 +1,653 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Getting started with ACPI · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="kalsr-fix.html" />
+    
+    
+    <link rel="prev" href="legacy.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../creating-the-usb.html">
+            
+                <a href="../creating-the-usb.html">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ktext.html">
+            
+                <a href="../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../config.plist/ivy-bridge.html">
+            
+                <a href="../config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../config.plist/haswell.html">
+            
+                <a href="../config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../config.plist/skylake.html">
+            
+                <a href="../config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../config.plist/kaby-lake.html">
+            
+                <a href="../config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../config.plist/coffee-lake.html">
+            
+                <a href="../config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../AMD/AMD-config.html">
+            
+                <a href="../AMD/AMD-config.html">
+            
+                    
+                    Zen/ThreadRipper
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../post-install/nvram.html">
+            
+                <a href="../post-install/nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../post-install/spoof.html">
+            
+                <a href="../post-install/spoof.html">
+            
+                    
+                    Disabling GPU
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../post-install/security.html">
+            
+                <a href="../post-install/security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="troubleshooting.html">
+            
+                <a href="troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="verbose.html">
+            
+                <a href="verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="debug.html">
+            
+                <a href="debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="legacy.html">
+            
+                <a href="legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="6.2" data-path="acpi.html">
+            
+                <a href="acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="kalsr-fix.html">
+            
+                <a href="kalsr-fix.html">
+            
+                    
+                    Fixing KALSR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../post-install/msr-lock.html">
+            
+                <a href="../post-install/msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" >
+            
+                <a target="_blank" href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/">
+            
+                    
+                    Multiboot
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../misc/credit.html">
+            
+                <a href="../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Getting started with ACPI</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="a-quick-explainer-on-acpi-and-how-to-make-ssdts">A quick explainer on ACPI and how to make SSDTs</h1>
+<p>So what are DSDTs and SSDTs? Well these are tables present in your firmware that outline hardware devices like USB controllers, CPU threads, embedded controllers, system clocks and such. A DSDT(Differentiated System Description Table) can be seen as the body holding most of the info with smaller bits of info being passed by the SSDT(Secondary System Description Table)</p>
+<blockquote>
+<p>So why do we care ablout these tables?</p>
+</blockquote>
+<p>macOS can be very picky about the devices present in the DSDT and so our job is to correct it. The main devices that need to be corrected to boot are:</p>
+<ul>
+<li>Embedded controllers(EC) <ul>
+<li>All semi-modern intel machines have an EC exposed in their DSDT, with many AMD systems also having it exposed. These controllers are not compatible with macOS so then need to be hidden from macOS and replaced with a dumby EC when running macOS catalina</li>
+</ul>
+</li>
+<li>Plugin type<ul>
+<li>This is used to enable native CPU power managemnt on Intel Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU</li>
+</ul>
+</li>
+<li>AWAC system clock.<ul>
+<li>This applies to all 300 series motherboards including Z370 boards, the specific issue is that newer baords ship with AWAC clock enabled. This is a problem because macOS cannot communicate with AWAC clocks, so this requiring us to either force on the Legacy RTC clock or if unavailble create a fake one for macOS to play with</li>
+</ul>
+</li>
+</ul>
+<h1 id="getting-a-copy-of-our-dsdt">Getting a copy of our DSDT</h1>
+<p>So to get a copy of your DSDT there&apos;s a couple options:</p>
+<ul>
+<li><p><a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a></p>
+<ul>
+<li>Open the app on the target machine and the system&apos;s DSDT will show, then File -&gt; SaveAs <code>System DSDT</code>. Make sure the file format is ACPI Machine Language Binary(.AML), this will require the machine to be running macOS</li>
+<li>Do note that all ACPI patches from clover/OpenCore will be applied to the DSDT</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a> </p>
+<ul>
+<li>Supports both Windows and Linux for DSDT dumping</li>
+</ul>
+</li>
+<li><p>F4 in Clover Boot menu</p>
+<ul>
+<li>DSDT can be found in <code>EFI/CLOVER/ACPI/origin</code>, the folder <strong>must</strong> exist before dumping</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip" target="_blank"><code>acpidump.efi</code></a></p>
+<ul>
+<li>Add this to <code>EFI/OC/Tools</code> and in your config under <code>Misc -&gt; Tools</code> with the argument: <code>-b -n DSDT -z</code> and select this option in Opencore&apos;s picker. Rename the DSDT.dat to DSDT.aml. Tool is provided by <a href="https://github.com/acpica/acpica/tree/master/source/tools/acpidump" target="_blank">acpica</a></li>
+</ul>
+</li>
+</ul>
+<p>If OpenCore is having issues running acpidump, you can call it from the shell with OpenCoreShell(reminder to add to both <code>EFI/OC/Tools</code> and in your config under <code>Misc -&gt; Tools</code> ):</p>
+<pre><code>shell&gt; fs0: //replace with proper drive
+
+fs0:\&gt; dir //to verify this is the right directory
+
+Directory of fs0:\
+
+01/01/01 3:30p  EFI
+
+fs0:\&gt; cd EFI\OC\Tools //note that its with forward slashes
+
+fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
+</code></pre><h1 id="compiling-and-decompiling-dsdts-and-ssdts">Compiling and decompiling DSDTs and SSDTs</h1>
+<h3 id="macos">macOS</h3>
+<p>So compiling DSDTs and SSDTs are quite easy with macOS, all you need is <a href="https://github.com/acidanthera/MaciASL" target="_blank">MaciASL</a>. To compile, just File -&gt; SaveAs -&gt; ACPI Machine Language Binary(.AML), decompiling is just opening the file in MaciASL.</p>
+<h3 id="windows">Windows</h3>
+<p>Compiling and decompiling on windows is fairly simple though, you will need <a href="https://acpica.org/sites/acpica/files/iasl-win-20180105.zip" target="_blank">iasl.exe</a> and Command Prompt:</p>
+<pre><code>path/to/iasl.exe path/to/DSDT.aml
+</code></pre><p><img src="https://i.imgur.com/IY7HMof.png" alt=""></p>
+<p>If compiled .aml file is provided, a decompiled .dsl file will be given and vice versa.</p>
+<h3 id="linux">Linux</h3>
+<p>Compiling and decompiling with Linux is just as simple, you will need a special copy of  <a href="http://amdosx.kellynet.nl/iasl.zip" target="_blank">iasl.exe</a> and terminal:</p>
+<pre><code>path/to/iasl.exe path/to/DSDT.aml
+</code></pre><p>If compiled .aml file is provided, a decompiled .dsl file will be given and vice versa.</p>
+<h1 id="creating-ssdts">Creating SSDTs</h1>
+<h2 id="ec-ssdt">EC SSDT</h2>
+<p>This one&apos;s fairly easy to figure out, open your decompiled DSDT and search for <code>PNP0C09</code>. This should give you a result like this:</p>
+<p><img src="https://i.imgur.com/lQ4kpb9.png" alt=""></p>
+<p>As you can see our <code>PNP0C09</code> is found within the <code>Device (EC0)</code> meaning this is the device we want to hide from macOS. Now grab our <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC.dsl</a> and uncomment the EC0 function:</p>
+<pre><code>External (_SB_.PCI0.LPCB.EC0, DeviceObj)
+
+Scope (\_SB.PCI0.LPCB.EC0)
+{
+   Method (_STA, 0, NotSerialized)  // _STA: Status
+   {
+      If (_OSI (&quot;Darwin&quot;))
+      {
+         Return (0)
+      }
+      Else
+      {
+         Return (0x0F)
+      }
+   }
+}
+</code></pre><p>But looking back at the screenshot above we notice something, our ACPI path is different: <code>PC00.LPC0</code> vs <code>PCI0.LPCB</code>. This is very important especially when you&apos;re dealing with Intel consumer vs Intel HEDT and AMD, <code>PC00.LPC0</code> is common on Intel HEDT while <code>PCI0.SBRG</code> is common on AMD. <strong>Always verify your path</strong></p>
+<blockquote>
+<p>What happens if multiple <code>PNP0C09</code> show up</p>
+</blockquote>
+<p>When this happens you need to figure out which is the main and which is not, it&apos;s fairly easy to figure out. Check each controller for the following properties:</p>
+<ul>
+<li><code>_HID</code></li>
+<li><code>_CRS</code></li>
+<li><code>_GPE</code></li>
+</ul>
+<blockquote>
+<p>Hey what about USBX? Do I need to do anything?</p>
+</blockquote>
+<p>USBX is univeral across all systems, it just creates a USBX device that forces USB power properties. This is crutial for fixing Mics, DACs, Webcams, Bluetooth Dongles and other high power draw devices. This is not manditory to boot but should be added in post install if not before. Note that USBX is only used on skylake+ systems, Broadwell and older can ignore</p>
+<p>For those who want a deeper dive into the issue: <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a></p>
+<h2 id="plug-ssdt">PLUG SSDT</h2>
+<p>CPU naming is fairly easy to figure out as well, open your decompiled DSDT and search for <code>Processor</code>. This should give you a result like this:</p>
+<p><img src="https://i.imgur.com/U3xffjU.png" alt=""></p>
+<p>As we can see, the first processor in our list is <code>PR00</code>. This is what we&apos;ll be applying the <code>plugin-type=1</code> property to. Now grab <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a> and replace the default <code>CPU0</code> with our <code>PR00</code>. Note that there are 2 mentions of CPU0 in the SSDT.</p>
+<p>There are also some edge cases with <code>Processor</code>, specifically on HEDT series like X79, X99 and X299. This edge case being that the ACPI path is much longer and not so obvious:</p>
+<p><img src="https://i.imgur.com/HzOmbx2.png" alt=""></p>
+<p>If we then search for instances of <code>CP00</code> we find that it&apos;s ACPI path is <code>SB.SCK0.CP00</code>:</p>
+<p><img src="https://i.imgur.com/CtL6Csn.png" alt=""></p>
+<p>So for this X299 board, we&apos;d change <code>\_PR.CPU0</code> with <code>\_SB.SCK0.CP00</code> and  <code>External (_PR_.CPU0, ProcessorObj)</code> with <code>External (_SB_.SCK0.CP00, ProcessorObj)</code></p>
+<h2 id="awac-ssdt">AWAC SSDT</h2>
+<p>This is required for most B360, B365, H310, H370, Z390 and even some newer BIOS revisons on Z370 like the Gigabyte Z370 Aurus Ultra fimrware version 13+. What the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a> will do is force enable the Legacy RTC device in macOS, reason we want to do this is that macOS currently does not support AWAC as a system clock. In some rare cases, there is no Legacy RTC device to force enable so we&apos;ll need to create a fake RTC device for macOS to play with using <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a></p>
+<p>To determine whether you need <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a> or <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a>, open your decompiled DSDT and search for <code>STAS</code>:</p>
+<p><img src="https://i.imgur.com/uuUF857.png" alt=""></p>
+<p>As you can see we found the <code>STAS</code> in our DSDT, this mean we&apos;re able to force enable our Legacy RTC. In this case, <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a> will be used As-Is with no modifications reqired. Just need to compile.</p>
+<p>For systems where no <code>STAS</code> shows up, you can use <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a> though you will need to check whether your DSDT uses <code>LPCB</code>, <code>LBC</code> or <code>LBC0</code>. By default it uses <code>LPCB</code></p>
+<h1 id="cleaning-up">Cleaning up</h1>
+<p>Now that we have all our SSDTs compiled, the last thing to do is add our SSDTs to bothe EFI/OC/ACPI and our config under ACPI -&gt; Add. Reminder that ProperTree users can press the hot key Cmd/Ctrl+R for automatically adding your SSDTs to the config.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="legacy.html" class="navigation navigation-prev " aria-label="Previous page: Legacy Install">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="kalsr-fix.html" class="navigation navigation-next " aria-label="Next page: Fixing KALSR slide values">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Getting started with ACPI","level":"6.2","depth":1,"next":{"title":"Fixing KALSR slide values","level":"6.3","depth":1,"path":"extras/kalsr-fix.md","ref":"extras/kalsr-fix.md","articles":[]},"previous":{"title":"Legacy Install","level":"6.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/acpi.md","mtime":"2020-01-08T04:45:21.417Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-08T04:46:08.294Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+
