@@ -5,7 +5,7 @@ So what are DSDTs and SSDTs? Well these are tables present in your firmware that
 
 > So why do we care ablout these tables?
 
-macOS can be very picky about the devices present in the DSDT and so our job is to correct it. The main devices that need to be corrected to boot are:
+macOS can be very picky about the devices present in the DSDT and so our job is to correct it. The main devices that need to be corrected for macOS to work properly:
 
 *  Embedded controllers(EC) 
    * All semi-modern intel machines have an EC exposed in their DSDT, with many AMD systems also having it exposed. These controllers are not compatible with macOS so then need to be hidden from macOS and replaced with a dumby EC when running macOS catalina
@@ -126,7 +126,7 @@ CPU naming is fairly easy to figure out as well, open your decompiled DSDT and s
 
 ![](https://i.imgur.com/U3xffjU.png)
 
-As we can see, the first processor in our list is `PR00`. This is what we'll be applying the `plugin-type=1` property to. Now grab [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) and replace the default `CPU0` with our `PR00`. Note that there are 2 mentions of CPU0 in the SSDT.
+As we can see, the first processor in our list is `PR00`. This is what we'll be applying the `plugin-type=1` property to. Now grab [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) and replace the default `CPU0` with our `PR00`. Note that there are 2 mentions of `CPU0` in the SSDT.
 
 
 There are also some edge cases with `Processor`, specifically on HEDT series like X79, X99 and X299. This edge case being that the ACPI path is much longer and not so obvious:
