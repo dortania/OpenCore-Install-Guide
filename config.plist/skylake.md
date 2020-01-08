@@ -26,18 +26,10 @@ For us we'll need a couple SSDTs to bring back functionality that Clover provide
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 
-For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. The rest of the SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
+For those having troubles understanding the SSDTs regardingplugin type and EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
 
-> How do I get a copy of my DSDT?
+For a much deeper rundown on ACPI including compiling in Windows and Linux, see the [Getting started with ACPI](/extras/acpi.md) page.
 
-* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> Save as `System DSDT`, make sure the file format is ACPI Machine Language Binary
-   * Do note that all ACPI patches will be applied to the DSDT
-* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Linux and Windows
-   * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
-* F4 in Clover Boot menu
-   * DSDT can be found in `EFI/CLOVER/ACPI/origin`
-* [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
-   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml. Tool is provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump).
 
 **Block**
 

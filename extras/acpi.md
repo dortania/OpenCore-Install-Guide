@@ -1,4 +1,4 @@
-# A quick explainer on ACPI
+# A quick explainer on ACPI and how to make SSDTs
 
 So what are DSDTs and SSDTs? Well these are tables present in your firmware that outline hardware devices like USB controllers, CPU threads, embedded controllers, system clocks and such. A DSDT(Differentiated System Description Table) can be seen as the body holding most of the info with smaller bits of info being passed by the SSDT(Secondary System Description Table)
 
@@ -8,7 +8,9 @@ So what are DSDTs and SSDTs? Well these are tables present in your firmware that
 macOS can be very picky about the devices present in the DSDT and so our job is to correct it. The main devices that need to be corrected to boot are:
 
 *  Embedded controllers(EC) 
-   * All semi-modern intel machines have an EC exposed in their DSDT, with many AMD systems also having it exposed. These controllers are not compatible with macOS so then need to be hidden from macOS and replaced with a dumby EC.
+   * All semi-modern intel machines have an EC exposed in their DSDT, with many AMD systems also having it exposed. These controllers are not compatible with macOS so then need to be hidden from macOS and replaced with a dumby EC when running macOS catalina
+* Plugin type
+   * This is used to enable native CPU power managemnt on Intel Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU
 * AWAC system clock.
    * This applies to all 300 series motherboards including Z370 boards, the specific issue is that newer baords ship with AWAC clock enabled. This is a problem because macOS cannot communicate with AWAC clocks, so this requiring us to either force on the Legacy RTC clock or if unavailble create a fake one for macOS to play with
 
@@ -52,11 +54,13 @@ fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 So compiling DSDTs and SSDTs are quite easy with macOS, all you need is [MaciASL](https://github.com/acidanthera/MaciASL). To compile, just File -> SaveAs -> ACPI Machine Language Binary(.AML), decompiling is just opening the file in MaciASL.
 
 ### Windows
-Compiling and decompiling on windows is fairly simple though, you will need [iasl.exe](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip) and cmd.exe:
+Compiling and decompiling on windows is fairly simple though, you will need [iasl.exe](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip) and Command Prompt:
 
 ```
 path/to/iasl.exe path/to/DSDT.aml
 ```
+
+![](https://i.imgur.com/IY7HMof.png)
 
 If compiled .aml file is provided, a decompiled .dsl file will be given and vice versa.
 
@@ -69,3 +73,87 @@ path/to/iasl.exe path/to/DSDT.aml
 ```
 
 If compiled .aml file is provided, a decompiled .dsl file will be given and vice versa.
+
+
+# Creating SSDTs
+
+## EC SSDT
+
+This one's fairly easy to figure out, open your decompiled DSDT and search for `PNP0C09`. This should give you a result like this:
+
+![](https://i.imgur.com/lQ4kpb9.png)
+
+
+As you can see our `PNP0C09` is found within the `Device (EC0)` meaning this is the device we want to hide from macOS. Now grab our [SSDT-EC.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) and uncomment the EC0 function:
+
+```
+External (_SB_.PCI0.LPCB.EC0, DeviceObj)
+
+Scope (\_SB.PCI0.LPCB.EC0)
+{
+   Method (_STA, 0, NotSerialized)  // _STA: Status
+   {
+      If (_OSI ("Darwin"))
+      {
+         Return (0)
+      }
+      Else
+      {
+         Return (0x0F)
+      }
+   }
+}
+```
+But looking back at the screenshot above we notice something, our ACPI path is different: `PC00.LPC0` vs `PCI0.LPCB`. This is very important especially when you're dealing with Intel consumer vs Intel HEDT and AMD, `PC00.LPC0` is common on Intel HEDT while `PCI0.SBRG` is common on AMD. **Always verify your path**
+
+> What happens if multiple `PNP0C09` show up
+
+When this happens you need to figure out which is the main and which is not, it's fairly easy to figure out. Check each controller for the following properties:
+* `_HID`
+* `_CRS`
+* `_GPE`
+
+> Hey what about USBX? Do I need to do anything?
+
+USBX is univeral across all systems, it just creates a USBX device that forces USB power properties. This is crutial for fixing Mics, DACs, Webcams, Bluetooth Dongles and other high power draw devices. This is not manditory to boot but should be added in post install if not before. Note that USBX is only used on skylake+ systems, Broadwell and older can ignore
+
+
+For those who want a deeper dive into the issue: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
+
+## PLUG SSDT
+
+CPU naming is fairly easy to figure out as well, open your decompiled DSDT and search for `Processor`. This should give you a result like this:
+
+![](https://i.imgur.com/U3xffjU.png)
+
+As we can see, the first processor in our list is `PR00`. This is what we'll be applying the `plugin-type=1` property to. Now grab [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) and replace the default `CPU0` with our `PR00`. Note that there are 2 mentions of CPU0 in the SSDT.
+
+
+There are also some edge cases with `Processor`, specifically on HEDT series like X79, X99 and X299. This edge case being that the ACPI path is much longer and not so obvious:
+
+![](https://i.imgur.com/HzOmbx2.png)
+
+If we then search for instances of `CP00` we find that it's ACPI path is `SB.SCK0.CP00`:
+
+![](https://i.imgur.com/CtL6Csn.png)
+
+
+So for this X299 board, we'd change `\_PR.CPU0` with `\_SB.SCK0.CP00` and  `External (_PR_.CPU0, ProcessorObj)` with `External (_SB_.SCK0.CP00, ProcessorObj)`
+
+## AWAC SSDT
+
+This is required for most B360, B365, H310, H370, Z390 and even some newer BIOS revisons on Z370 like the Gigabyte Z370 Aurus Ultra fimrware version 13+. What the [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) will do is force enable the Legacy RTC device in macOS, reason we want to do this is that macOS currently does not support AWAC as a system clock. In some rare cases, there is no Legacy RTC device to force enable so we'll need to create a fake RTC device for macOS to play with using [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
+
+To determine whether you need [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) or [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl), open your decompiled DSDT and search for `STAS`:
+
+![](https://i.imgur.com/uuUF857.png)
+
+
+As you can see we found the `STAS` in our DSDT, this mean we're able to force enable our Legacy RTC. In this case, [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) will be used As-Is with no modifications reqired. Just need to compile.
+
+For systems where no `STAS` shows up, you can use [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) though you will need to check whether your DSDT uses `LPCB`, `LBC` or `LBC0`. By default it uses `LPCB`
+
+
+# Cleaning up
+
+Now that we have all our SSDTs compiled, the last thing to do is add our SSDTs to bothe EFI/OC/ACPI and our config under ACPI -> Add. Reminder that ProperTree users can press the hot key Cmd/Ctrl+R for automatically adding your SSDTs to the config.

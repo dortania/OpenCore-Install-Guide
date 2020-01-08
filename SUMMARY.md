@@ -31,6 +31,7 @@
 ## Extras
 
 * [Legacy Install](extras/legacy.md)
+* [Getting started with ACPI](extras/acpi.md)
 * [Fixing KALSR slide values](extras/kalsr-fix.md)
 * [Fixing CFG Lock](post-install/msr-lock.md)
 * [Multiboot](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/)

@@ -31,16 +31,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 
 For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
 
-> How do I get a copy of my DSDT for running SSDTTime?
-
-* [MaciASL](https://github.com/acidanthera/MaciASL/releases) -> Save as `System DSDT`, make sure the file format is ACPI Machine Language Binary
-   * Do note that all ACPI patches will be applied to the DSDT
-* [SSDTTime](https://github.com/corpnewt/SSDTTime) can extract it in Linux and Windows
-   * Do note if booting through OpenCore that ACPI patches will be applied to the DSDT
-* F4 in Clover Boot menu
-   * DSDT can be found in `EFI/CLOVER/ACPI/origin`
-* [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
-   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` then select this option in Opencore's picker. Rename DSDT.dat to DSDT.aml. Tool is provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump).
+For a much deeper rundown on ACPI including compiling in Windows and Linux, see the [Getting started with ACPI](/extras/acpi.md) page.
 
 **Block**
 
