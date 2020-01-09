@@ -59,14 +59,14 @@ The reason we need to reset the memory map is we want it to be more deterministi
 * Update BIOS(extremely important as early BIOS's shipped are known to have memory map issues, especially with Z390)
 * Clear CMOS
 * Enable much needed BIOS settings:
-   * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on X99, X299 so recommended to disable for them.
+   * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on some X99, X299 so recommended to test with and without.
    * `Boot Options -> Windows8.1/10 mode`: This will make sure no old legacy garbage is loaded. Fun fact, `other OS` is only designed for booting older versions of Windows and not for other OS.
 * Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:
    * `CSM`: For legacy support, adds a bunch of garbage we don't want. This also can break the shell so you can't boot into it.
    * `Intel SGX`: Software Guard Extensions, takes up a lot of space and does nothing in macOS.
    * `Parallel Port`: macOS can't even see parallel.
    * `Serial Port`: I'd like to know how many of you are debugging the kernel...
-   * `iGPU`: No ideal but some systems have such bloated maps that the iGPU just can't fit.
+   * `iGPU`: Not ideal but some systems have such bloated maps that the iGPU just can't fit.
    * `Thunderbolt`: Many hacks don't have thunderbolt working, boards that don't have thunderbolt but have this option just waste more space.
    * `LED lighting`: Sorry mate, time to go.
    * `Legacy USB`: More Legacy Crap.
