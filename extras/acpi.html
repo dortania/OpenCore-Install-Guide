@@ -62,7 +62,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="kalsr-fix.html" />
+    <link rel="next" href="../gpu-patches.md" />
     
     
     <link rel="prev" href="legacy.html" />
@@ -350,7 +350,20 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="kalsr-fix.html">
+        <li class="chapter " data-level="6.3" data-path="../gpu-patches.md">
+            
+                <span>
+            
+                    
+                    GPU Patching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="kalsr-fix.html">
             
                 <a href="kalsr-fix.html">
             
@@ -363,7 +376,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="../post-install/msr-lock.html">
+        <li class="chapter " data-level="6.5" data-path="../post-install/msr-lock.html">
             
                 <a href="../post-install/msr-lock.html">
             
@@ -376,7 +389,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" >
+        <li class="chapter " data-level="6.6" >
             
                 <a target="_blank" href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/">
             
@@ -488,6 +501,11 @@
 <li>Supports both Windows and Linux for DSDT dumping</li>
 </ul>
 </li>
+<li><p><a href="https://acpica.org/sites/acpica/files/iasl-win-20180105.zip" target="_blank">acpidump.exe</a></p>
+<ul>
+<li>In command promt run <code>path/to/acpidump.exe -b</code>, this will dump your DSDT</li>
+</ul>
+</li>
 <li><p>F4 in Clover Boot menu</p>
 <ul>
 <li>DSDT can be found in <code>EFI/CLOVER/ACPI/origin</code>, the folder <strong>must</strong> exist before dumping</li>
@@ -520,8 +538,8 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 </code></pre><p><img src="https://i.imgur.com/IY7HMof.png" alt=""></p>
 <p>If compiled .aml file is provided, a decompiled .dsl file will be given and vice versa.</p>
 <h3 id="linux">Linux</h3>
-<p>Compiling and decompiling with Linux is just as simple, you will need a special copy of  <a href="http://amdosx.kellynet.nl/iasl.zip" target="_blank">iasl.exe</a> and terminal:</p>
-<pre><code>path/to/iasl.exe path/to/DSDT.aml
+<p>Compiling and decompiling with Linux is just as simple, you will need a special copy of  <a href="http://amdosx.kellynet.nl/iasl.zip" target="_blank">iasl</a> and terminal:</p>
+<pre><code>path/to/iasl path/to/DSDT.aml
 </code></pre><p>If compiled .aml file is provided, a decompiled .dsl file will be given and vice versa.</p>
 <h1 id="creating-ssdts">Creating SSDTs</h1>
 <h2 id="ec-ssdt">EC SSDT</h2>
@@ -608,7 +626,7 @@ Scope (\_SB.PCI0.LPCB.EC0)
                 </a>
                 
                 
-                <a href="kalsr-fix.html" class="navigation navigation-next " aria-label="Next page: Fixing KALSR slide values">
+                <a href="../gpu-patches.md" class="navigation navigation-next " aria-label="Next page: GPU Patching">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -619,7 +637,7 @@ Scope (\_SB.PCI0.LPCB.EC0)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Getting started with ACPI","level":"6.2","depth":1,"next":{"title":"Fixing KALSR slide values","level":"6.3","depth":1,"path":"extras/kalsr-fix.md","ref":"extras/kalsr-fix.md","articles":[]},"previous":{"title":"Legacy Install","level":"6.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/acpi.md","mtime":"2020-01-08T05:07:39.559Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-08T05:08:25.914Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Getting started with ACPI","level":"6.2","depth":1,"next":{"title":"GPU Patching","level":"6.3","depth":1,"path":"gpu-patches.md","ref":"gpu-patches.md","articles":[]},"previous":{"title":"Legacy Install","level":"6.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/acpi.md","mtime":"2020-01-09T16:46:53.303Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-09T16:47:37.236Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
