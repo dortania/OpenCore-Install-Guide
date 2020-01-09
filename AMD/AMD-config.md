@@ -29,9 +29,9 @@ This is where you'll add SSDT patches for your system, these are most useful for
 * [SSDT-USBX-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX-AMD.aml)
    * Forces power properties onto your USB controller, commonly used for fixing mics, DACs, webcams, bluetooth dongles, etc. This SSDT is optional but I've provided a pre-compiled version as each system uses the same SSDT
 
-For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
+For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. 
 
-For a much deeper rundown on ACPI including compiling in Windows and Linux, see the [Getting started with ACPI](/extras/acpi.md) page.
+**For a much deeper rundown on ACPI including compiling in Windows and Linux, see the [Getting started with ACPI](/extras/acpi.md) page.**
 
 **Block**
 
@@ -304,7 +304,7 @@ For setting up the SMBIOS info, we'll use acidanthera's [macserial](https://gith
 For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
 
 * iMacPro1,1: AMD RX Polaris and newer
-* MacPro7,1: AMD RX Polaris and newer(Note that theres no valid serial numbers yet so iCloud, iMessage, etc will be broken. MacPro7,1 is also a Catalina exclusive)
+* MacPro7,1: AMD RX Polaris and newer(Note that theres no valid serial numbers yet so iMessage and such will be broken. MacPro7,1 is also a Catalina exclusive)
 * MacPro6,1: AMD R5/R7/R9 and older
 * iMac14,2: Nvidia Kepler and newer
 
@@ -339,7 +339,7 @@ The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create an SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
+We can create an SmUUID by running `uuidgen` in the terminal - and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 

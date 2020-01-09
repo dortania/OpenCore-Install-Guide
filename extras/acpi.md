@@ -25,7 +25,10 @@ So to get a copy of your DSDT there's a couple options:
 
 * [SSDTTime](https://github.com/corpnewt/SSDTTime) 
    * Supports both Windows and Linux for DSDT dumping
-   
+
+* [acpidump.exe](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip)
+   * In command promt run `path/to/acpidump.exe -b`, this will dump your DSDT
+
 * F4 in Clover Boot menu
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`, the folder **must** exist before dumping
 
@@ -66,10 +69,10 @@ If compiled .aml file is provided, a decompiled .dsl file will be given and vice
 
 ### Linux
 
-Compiling and decompiling with Linux is just as simple, you will need a special copy of  [iasl.exe](http://amdosx.kellynet.nl/iasl.zip) and terminal:
+Compiling and decompiling with Linux is just as simple, you will need a special copy of  [iasl](http://amdosx.kellynet.nl/iasl.zip) and terminal:
 
 ```
-path/to/iasl.exe path/to/DSDT.aml
+path/to/iasl path/to/DSDT.aml
 ```
 
 If compiled .aml file is provided, a decompiled .dsl file will be given and vice versa.
