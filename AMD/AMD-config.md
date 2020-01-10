@@ -276,8 +276,11 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
 
   * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
   * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debuging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
-* **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. Unfortunately AMD systems cannot have SIP enabled
-   * `E7030000` - SIP completely disabled.
+* **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition.For us since we're running kernel patches it's recommended to keep SIP off though you can turn it back on after install and test yourself
+  
+  * `00000000` - SIP completely enabled
+  * `30000000` - Allow unsigned kexts and writing to protected fs locations
+  * `E7030000` - SIP completely disabled
 
 * **nvda\_drv**: &lt;&gt; 
    * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text). AMD and Intel GPU users should leave this area blank.
@@ -440,9 +443,10 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 So what in the world needs to be done once everything is installed? Well here's some things:
 
 * [USB mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md) 
-* Correcting audio, reread the DeviceProperties on how
+* [Disable OpenCore logging](/extras/debug.md)
 * [Removing NullCPUPowerManagment.kext and improving GPU performance](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)
 * [Enabling FileVault and other security features](/post-install/security.md)
+* Correcting audio, reread the DeviceProperties on how
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to desktop

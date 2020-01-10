@@ -42,9 +42,14 @@ This is due to either incorrect BIOS settings and/or incorrect Booter values. Ma
 * Above4GDecoding is Enabled
 * CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
 
-## Stuck on `OC: Driver HfsPlus.efi at 0 cannot be found`
+## Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 
 Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Drivers 
+
+## Stuck on `Buffer Too Small` 
+
+UEFI -> Quirks -> AvoidHighAlloc -> Enable 
+
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
@@ -144,11 +149,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 ## 300 series Intel stalling on `apfs_module_start...`
 
-Commonly due to systems running AWAC clocks, you'll need to use either:
-* [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
-   * Forces legacy RTC clock on
-* [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
-   * Creates a fake RTC clock when legacy can't be forced
+Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](extras/acpi.md) section
 
 ## Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
 
