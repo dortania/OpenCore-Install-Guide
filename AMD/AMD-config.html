@@ -838,9 +838,11 @@
 <li><code>npci=0x2000</code> - This disables some PCI debugging related to <code>kIOPCIConfiguratorPFM64</code>, alternative is <code>npci= 0x3000</code> which disables debuging related to <code>gIOPCITunnelledKey</code>. Required for when getting stuck on <code>PCI Start Configuration</code> as there are IRQ conflicts relating to your PCI lanes.</li>
 </ul>
 </li>
-<li><p><strong>csr-active-config</strong>: Settings for SIP, generally recommended to manually change this within Recovery partition with <code>csrutil</code> via the recovery partition. Unfortunately AMD systems cannot have SIP enabled</p>
+<li><p><strong>csr-active-config</strong>: Settings for SIP, generally recommended to manually change this within Recovery partition with <code>csrutil</code> via the recovery partition.For us since we&apos;re running kernel patches it&apos;s recommended to keep SIP off though you can turn it back on after install and test yourself</p>
 <ul>
-<li><code>E7030000</code> - SIP completely disabled.</li>
+<li><code>00000000</code> - SIP completely enabled</li>
+<li><code>30000000</code> - Allow unsigned kexts and writing to protected fs locations</li>
+<li><code>E7030000</code> - SIP completely disabled</li>
 </ul>
 </li>
 <li><p><strong>nvda_drv</strong>: &lt;&gt; </p>
@@ -1038,9 +1040,10 @@
 <p>So what in the world needs to be done once everything is installed? Well here&apos;s some things:</p>
 <ul>
 <li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md" target="_blank">USB mapping</a> </li>
-<li>Correcting audio, reread the DeviceProperties on how</li>
+<li><a href="../extras/debug.html">Disable OpenCore logging</a></li>
 <li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md" target="_blank">Removing NullCPUPowerManagment.kext and improving GPU performance</a></li>
 <li><a href="../post-install/security.html">Enabling FileVault and other security features</a></li>
+<li>Correcting audio, reread the DeviceProperties on how</li>
 <li>Moving OpenCore from the USB to your main drive<ul>
 <li>Mount USB&apos;s EFI</li>
 <li>Copy EFI folder to desktop</li>
@@ -1092,7 +1095,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Zen/ThreadRipper","level":"3.1","depth":1,"next":{"title":"Emulated NVRAM","level":"4.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-01-10T17:50:44.451Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-10T17:51:32.489Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Zen/ThreadRipper","level":"3.1","depth":1,"next":{"title":"Emulated NVRAM","level":"4.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-01-10T23:31:38.576Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-10T23:32:24.420Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

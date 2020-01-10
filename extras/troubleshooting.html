@@ -506,8 +506,10 @@
 <li>Above4GDecoding is Enabled</li>
 <li>CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)</li>
 </ul>
-<h2 id="stuck-on-oc-driver-hfsplusefi-at-0-cannot-be-found">Stuck on <code>OC: Driver HfsPlus.efi at 0 cannot be found</code></h2>
+<h2 id="stuck-on-oc-driver-xxxefi-at-0-cannot-be-found">Stuck on <code>OC: Driver XXX.efi at 0 cannot be found</code></h2>
 <p>Verify that your EFI/OC/Drivers matches up with your config.plist -&gt; UEFi -&gt; Drivers </p>
+<h2 id="stuck-on-buffer-too-small">Stuck on <code>Buffer Too Small</code></h2>
+<p>UEFI -&gt; Quirks -&gt; AvoidHighAlloc -&gt; Enable </p>
 <h2 id="waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</h2>
 <ul>
 <li>Generally seen as a USB error, couple ways to fix:<ul>
@@ -596,17 +598,7 @@
 <li>MacBookPro9,x+</li>
 </ul>
 <h2 id="300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></h2>
-<p>Commonly due to systems running AWAC clocks, you&apos;ll need to use either:</p>
-<ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a><ul>
-<li>Forces legacy RTC clock on</li>
-</ul>
-</li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a><ul>
-<li>Creates a fake RTC clock when legacy can&apos;t be forced</li>
-</ul>
-</li>
-</ul>
+<p>Commonly due to systems running AWAC clocks, pleas see the <a href="extras/acpi.md">Getting started with ACPI</a> section</p>
 <h2 id="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</h2>
 <p>Verify your EC SSDT is enabled and correct for your system. See the <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a> post for more info</p>
 <h2 id="kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></h2>
@@ -715,7 +707,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"5.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/troubleshooting.md","mtime":"2020-01-10T17:50:44.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-10T17:51:32.489Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"5.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"5.2","depth":1,"path":"extras/verbose.md","ref":"extras/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"4.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/troubleshooting.md","mtime":"2020-01-10T23:31:38.576Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-10T23:32:24.420Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
