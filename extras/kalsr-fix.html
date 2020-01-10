@@ -507,7 +507,7 @@ Couldn&apos;t allocate runtime area
 </ul>
 </li>
 </ul>
-<h1 id="resetting-the-memory-map">Resetting the Memory Map</h1>
+<h1 id="prepping-the-bios">Prepping the BIOS</h1>
 <p>The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:</p>
 <ul>
 <li>Update BIOS(extremely important as early BIOS&apos;s shipped are known to have memory map issues, especially with Z390)</li>
@@ -529,13 +529,6 @@ Couldn&apos;t allocate runtime area
 </ul>
 </li>
 </ul>
-<p>&#x200B;</p>
-<p>Now we can start the fun part, resetting the Memory Map. This is done each time the memory is trained, so all we need to do is trigger it so we have a clean base to start with(most important for users who ran OsxAptioFree2000.efi but still needed for everyone). There are 2 common ways:</p>
-<ul>
-<li>Enabling XMP, let it train then disable and train again</li>
-<li>Taking a stick of RAM out, let the system train, put the stick back and train again</li>
-</ul>
-<p>With that done, we can no finally proceed to find a slide value</p>
 <h1 id="finding-the-slide-value">Finding the Slide value</h1>
 <p>Now what you&apos;ll want to do is open the EFI shell in your boot manager of choice and run <code>memmap</code>. This will give you a list of all pages and their sizes. This is where the fun begins.</p>
 <p>Example of what you&apos;ll see:</p>
@@ -729,7 +722,7 @@ fs0:\&gt; memmap &gt; memmap.txt
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing KALSR slide values","level":"6.4","depth":1,"next":{"title":"Fixing CFG Lock","level":"6.5","depth":1,"path":"post-install/msr-lock.md","ref":"post-install/msr-lock.md","articles":[]},"previous":{"title":"GPU Patching","level":"6.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-01-09T17:05:19.351Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-09T17:06:06.013Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing KALSR slide values","level":"6.4","depth":1,"next":{"title":"Fixing CFG Lock","level":"6.5","depth":1,"path":"post-install/msr-lock.md","ref":"post-install/msr-lock.md","articles":[]},"previous":{"title":"GPU Patching","level":"6.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-01-10T17:50:44.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-10T17:51:32.489Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
