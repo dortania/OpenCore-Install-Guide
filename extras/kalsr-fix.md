@@ -52,7 +52,7 @@ The real fix to this is quite simple actually, the process is both the same for 
     * SetupVirtualMap: Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.
     * ShrinkMemoryMap: Fixes issues with very large memory maps that don't fit, very useful for X99 and X299 platforms and sometimes for Z390.
 
-# Resetting the Memory Map
+# Prepping the BIOS 
 
 The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:
 
@@ -71,14 +71,6 @@ The reason we need to reset the memory map is we want it to be more deterministi
    * `LED lighting`: Sorry mate, time to go.
    * `Legacy USB`: More Legacy Crap.
 
-&#x200B;
-
-Now we can start the fun part, resetting the Memory Map. This is done each time the memory is trained, so all we need to do is trigger it so we have a clean base to start with(most important for users who ran OsxAptioFree2000.efi but still needed for everyone). There are 2 common ways:
-
-* Enabling XMP, let it train then disable and train again
-* Taking a stick of RAM out, let the system train, put the stick back and train again
-
-With that done, we can no finally proceed to find a slide value
 
 # Finding the Slide value
 

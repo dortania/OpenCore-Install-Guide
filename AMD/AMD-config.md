@@ -220,7 +220,7 @@ To merge:
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
 * **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
-* **Target**: `75`
+* **Target**: `67`
    * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483714`
    * Shows even more debug information, requires debug version of OpenCore

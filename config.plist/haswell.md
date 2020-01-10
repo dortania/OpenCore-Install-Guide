@@ -185,7 +185,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 * **CustomSMBIOSGuid**: NO 
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIOMapper**: YES 
-  * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems
+  * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems, musch better alternative to `dart=0` as SIP can stay on in Catalina
 * **ExternalDiskIcons**: YES 
   * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **LapicKernelPanic**: NO 
@@ -227,7 +227,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 **Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
 
 * **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
-* **Target**: `75`
+* **Target**: `67`
    * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483714`
    * Shows even more debug information, requires debug version of OpenCore
