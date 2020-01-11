@@ -12,7 +12,7 @@ What you'll need:
 # 1. Removing nullcpupowermanagement.kext: 
 
 
-Remove nullcpupowermanagement and add the following patch to Kernel -> Patch:
+Remove NullCPUPowerManagement.kext and add the following patch to Kernel -> Patch:
 
 Find: `D0 05 00 00 84 C0 74 46 E8`
 
@@ -20,11 +20,10 @@ Replace: `D0 05 00 00 84 C0 EB 46 E8`
 
 Identifier: `com.apple.driver.AppleIntelCPUPowerManagement`
 
+**Do not reboot yet, you need to follow the entire guide first**
 # 2. Create an `plugin-type=1` SSDT:
 
-Now the fun begins, we'll be grabbing our [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) and converting it to our system. The specific part we're wanting to adapt is `CPU0` as not all DSDTs have theirs starting with `CPU0`, to verify yours you can open IORegistryExplorer and see what's the first device connected to AppleACPICPU. You'll also notice that `C000` will increment based off the number of threads your CPU has. This name is pulled from your DSDT.
-
-For AMD, `C000` is the most common value but `CP00`, `CPU0`, `PR00` are other common values. Please verify yours.
+Now the fun begins, we'll be grabbing our [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) and converting it to our system. The specific part we're wanting to adapt is `CPU0` as not all DSDTs have theirs starting with `CPU0`, for us AMD actually doesn't expose this at all on most boards. By default AMD uses `C000` so you'll want to edit all mentions of `CPU0` to our `C000`
 
 Now edit your SSDT with MaciASL, then export it via `File` -> `SaveAs` -> `ACPI Machine Language`. Don't forget to add this SSDT to both your config.plist under ACPI -> Add and add the file to EFI/OC/ACPI.
 
