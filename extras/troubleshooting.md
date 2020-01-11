@@ -196,6 +196,13 @@ fs0:\> cd EFI\OC\Tools //note that its with forward slashes
 fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 ```
 
+## fixing SSDTTime: `Could not locate or download iasl!`
+
+This is usually due to an outdated version of Python, try either updating Python or add iasl to the scripts folder for SSDTTime:
+* [iasl macOS version](https://bitbucket.org/RehabMan/acpica/downloads/iasl.zip)
+* [iasl Windows version](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip)
+* [iasl Linux version](http://amdosx.kellynet.nl/iasl.zip)
+
 ## Booting OpenCore reboots to BIOS
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)

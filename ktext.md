@@ -58,7 +58,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **Audio**:
 * [AppleALC](https://github.com/vit9696/AppleALC/releases)
-   * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h cannot use this and Ryzen/Threadripper systems won't have mic support
+   * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h cannot use this and Ryzen/Threadripper systems rarely have mic support
 
 **Ethernet**:
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
@@ -102,7 +102,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * iMacPro1,1
 
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
-   * Needed for correcting TSC on Asus's HEDT/Server motherboards
+   * Needed for correcting TSC on HEDT and some server motherboards, without this macOS may be extremly slow or even unbootable
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 

@@ -10,7 +10,7 @@ macOS can be very picky about the devices present in the DSDT and so our job is 
 *  Embedded controllers(EC) 
    * All semi-modern intel machines have an EC exposed in their DSDT, with many AMD systems also having it exposed. These controllers are not compatible with macOS so then need to be hidden from macOS and replaced with a dumby EC when running macOS catalina
 * Plugin type
-   * This is used to enable native CPU power managemnt on Intel Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU
+   * This is used to enable native CPU power managemnt on Intel Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU. For Intel CPUs only, for AMD see [NullCPUPowerManagement patch](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)
 * AWAC system clock.
    * This applies to all 300 series motherboards including Z370 boards, the specific issue is that newer baords ship with AWAC clock enabled. This is a problem because macOS cannot communicate with AWAC clocks, so this requiring us to either force on the Legacy RTC clock or if unavailble create a fake one for macOS to play with
 
@@ -33,9 +33,9 @@ So to get a copy of your DSDT there's a couple options:
    * DSDT can be found in `EFI/CLOVER/ACPI/origin`, the folder **must** exist before dumping
 
 * [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
-   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` with the argument: `-b -n DSDT -z` and select this option in Opencore's picker. Rename the DSDT.dat to DSDT.aml. Tool is provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
+   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` with the argument: `-b -n DSDT -z` and select this option in OpenCore's picker. Rename the DSDT.dat to DSDT.aml. Tool is provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
 
-If OpenCore is having issues running acpidump, you can call it from the shell with OpenCoreShell(reminder to add to both `EFI/OC/Tools` and in your config under `Misc -> Tools` ):
+If OpenCore is having issues running acpidump, you can call it from the shell with [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)(reminder to add to both `EFI/OC/Tools` and in your config under `Misc -> Tools` ):
 
 ```
 shell> fs0: //replace with proper drive
@@ -118,12 +118,13 @@ When this happens you need to figure out which is the main and which is not, it'
 
 > Hey what about USBX? Do I need to do anything?
 
-USBX is univeral across all systems, it just creates a USBX device that forces USB power properties. This is crutial for fixing Mics, DACs, Webcams, Bluetooth Dongles and other high power draw devices. This is not manditory to boot but should be added in post install if not before. Note that USBX is only used on skylake+ systems, Broadwell and older can ignore
+USBX is universal across all systems, it just creates a USBX device that forces USB power properties. This is crutial for fixing Mics, DACs, Webcams, Bluetooth Dongles and other high power draw devices. This is not manditory to boot but should be added in post install if not before. Note that USBX is only used on skylake+ systems, Broadwell and older can ignore
 
 
 For those who want a deeper dive into the issue: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 
 ## PLUG SSDT
+**Intel CPUs only, for AMD see [NullCPUPowerManagement patch](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)**
 
 CPU naming is fairly easy to figure out as well, open your decompiled DSDT and search for `Processor`. This should give you a result like this:
 
@@ -145,9 +146,11 @@ So for this X299 board, we'd change `\_PR.CPU0` with `\_SB.SCK0.CP00` and  `Exte
 
 ## AWAC SSDT
 
-This is required for most B360, B365, H310, H370, Z390 and even some newer BIOS revisons on Z370 like the Gigabyte Z370 Aurus Ultra fimrware version 13+. What the [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) will do is force enable the Legacy RTC device in macOS, reason we want to do this is that macOS currently does not support AWAC as a system clock. In some rare cases, there is no Legacy RTC device to force enable so we'll need to create a fake RTC device for macOS to play with using [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
+**This is required for most B360, B365, H310, H370, Z390 and even some newer BIOS revisons on Z370 like the Gigabyte Z370 Aurus Ultra fimrware version 13+ **
 
-To determine whether you need [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) or [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl), open your decompiled DSDT and search for `AWAC`. If you get a result then you have an AWAC system clock present. Next search for `STAS`:
+What the [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) will do is force enable the Legacy RTC device in macOS, reason we want to do this is that macOS currently does not support AWAC as a system clock. In some rare cases, there is no Legacy RTC device to force enable so we'll need to create a fake RTC device for macOS to play with using [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
+
+To determine whether you need [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) or [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl), open your decompiled DSDT and search for `AWAC`. If you get a result then you have an `AWAC` system clock present. Next search for `STAS`:
 
 ![](https://i.imgur.com/uuUF857.png)
 
