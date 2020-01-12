@@ -32,7 +32,7 @@ If folders are empty then delete them as well:
 
 ## Verifying if you have working NVRAM
 
-To start, open terminal and run the following one line at a time:
+To start, open the terminal and run the following one line at a time:
 ```
 sudo -s
 nvram -c 
@@ -45,7 +45,7 @@ nvram -p | grep -i myvar
 ```
 If nothing returns then your NVRAM is not working. If a line containing `myvar test` returns, your NVRAM is working.
 
-Note: `nvram -c` requires SIP to be off, alternative is to wipe NVRAM at the boot menu. Reminder you'll need `Misc -> Security -> AllowNvramReset -> YES`
+Note: `nvram -c` requires SIP to be off, an alternative is to wipe NVRAM at the boot menu. Reminder you'll need `Misc -> Security -> AllowNvramReset -> YES`
 
 ## Enabling emulated NVRAM (with a nvram.plist)
 
@@ -74,4 +74,4 @@ And voila! You have emulated NVRAM!
 
 Do keep in mind this requires the `nvram` command to support the `-x` flag for this to work correctly which is unavailable on macOS 10.12 and below. If you are installing macOS 10.12 or earlier, you need to copy `nvram.mojave` into the same folder as `LogoutHook.command`, which fixes this by invoking it instead of the system `nvram` command.
 
-Something else to note is that macOS is only able to read nvram.plist butit won't be able to write to nvram.plist unless running the shutdown process. This means running the test above won't work
+Something else to note is that macOS is only able to read nvram.plist but it won't be able to write to nvram.plist unless running the shutdown process. This means running the test above won't work

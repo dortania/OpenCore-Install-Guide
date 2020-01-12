@@ -13,31 +13,31 @@ To start, you'll need the following .efi drivers:
 
 * VirtualSMC.efi(To be used in conjunction with VirtualSMC.kext)
 * FwRuntimeServices.efi
-   * UsbKbDxe.efi may be needed if OpenCore's built-in input doesn't work
+* UsbKbDxe.efi may be needed if OpenCore's built-in input doesn't work
 
 Setting in your config.plist:
 
 * Misc -> Boot 
-   * `PollAppleHotKeys` set to YES(While not needed can be helpful)
+* `PollAppleHotKeys` set to YES(While not needed can be helpful)
 * NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
-   * `UIScale` set to `02` for high resolution, small displays
+* `UIScale` set to `02` for high resolution, small displays
 * UEFI -> Input
-   * `KeySupport` set to YES(Only when using OpenCore's built-in input, users of UsbKbDxe should avoid)
+* `KeySupport` set to YES(Only when using OpenCore's built-in input, users of UsbKbDxe should avoid)
 * UEFI -> Protocols
-   * `FirmwareVolume` set to YES
-   * `HashServices` set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing
+* `FirmwareVolume` set to YES
+* `HashServices` set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing
 * UEFI -> Quirks
-   * `ProvideConsoleGOP` to YES
-   * `RequestBootVarRouting` set to YES
-   * `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
+* `ProvideConsoleGOP` to YES
+* `RequestBootVarRouting` set to YES
+* `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
 
 With all this, reboot testing the keyboard still works in the picker and you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
 ## Scan Policy
 
-What this quirk allows to prevent scanning and booting from untrusted sources. Setting to `0` will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.
+What this quirk allows to prevent scanning and booting from untrusted sources. Setting to `0` will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibility and security.
 
-To calculate the ScanPolicy value, you simply add up all the hexidecimal values\(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with `⌘+3`\). Once it's all added up, you would add this hexidecimal value to ScanPolicy\(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it\)
+To calculate the ScanPolicy value, you simply add up all the hexadecimal values\(with a hexadecimal calculator, you can access this from the built-in macOS caluclator app with `⌘+3`\). Once it's all added up, you would add this hexadecimal value to ScanPolicy\(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it\)
 
 `0x00000001 (bit 0)` — OC\_SCAN\_FILE\_SYSTEM\_LOCK
 
@@ -45,7 +45,7 @@ To calculate the ScanPolicy value, you simply add up all the hexidecimal values\
 
 `0x00000002 (bit 1)` — OC\_SCAN\_DEVICE\_LOCK
 
-* restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC_SCAN\_ALLOW\_DEVICE_.
+* restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunnelling, so be aware that on some systems it may be possible e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC_SCAN\_ALLOW\_DEVICE_.
 
 `0x00000100 (bit 8)` — OC\_SCAN\_ALLOW\_FS\_APFS
 
@@ -101,7 +101,7 @@ By default, ScanPolicy is given a value of `0xF0103`\(983,299\) which is the com
 * OC\_SCAN\_ALLOW\_DEVICE\_SCSI 
 * OC\_SCAN\_ALLOW\_DEVICE\_NVME
 
-And lets just say for this example that you want to add OC\_SCAN\_ALLOW\_DEVICE\_USB:
+And let's just say for this example that you want to add OC\_SCAN\_ALLOW\_DEVICE\_USB:
 
 `0x00200000` + `0xF0103` = `0x2F0103`
 

@@ -12,6 +12,10 @@
 * [Kaby Lake](config.plist/kaby-lake.md)
 * [Coffee Lake](config.plist/coffee-lake.md)
 
+## Intel HEDT Config.plist
+
+* [Skylake-X](/config-HEDT/X299.md)
+
 ## AMD Config.plist
 
 * [Zen/ThreadRipper](AMD/AMD-config.md)

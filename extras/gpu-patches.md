@@ -176,7 +176,7 @@ So adding these patches are simple though a bunch of entires are required:
 * framebuffer-con1-alldata = port 2
 * framebuffer-con2-alldata = port 3
 
-So when adding the patches, port 1 will actually be on con0 as the ports start at 0. These are also all data types when entering your values.
+So when adding the patches, port 1 will actually become con0 as the ports start at 0. These are also all data types when entering your values.
 
 A finished config should look something like this:
 

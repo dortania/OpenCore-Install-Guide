@@ -47,6 +47,6 @@ Just like with `Target`, we use a HEX calculator then convert to decimal:
 
 `0x80000042` Converted to decimal `Misc` -> `Debug` -> `DisplayLevel` -> `2147483714`
 
-**disableWatchdog**: YES
+**DisableWatchdog**: YES
 Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
 

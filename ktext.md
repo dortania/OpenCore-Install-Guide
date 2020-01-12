@@ -86,8 +86,8 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 
 **AMD CPU Specific kexts**:
-* [NullCPUPowerManagment](https://cdn.discordapp.com/attachments/263757191608139779/643751774666358794/NullCPUPowerManagement.kext.zip)
-   * AMD CPUs cannot use Intel's power management so we need to nullify it. **Use this over the one provided in the kext repo**
+* [NullCPUPowerManagment](https://github.com/corpnewt/NullCPUPowerManagement)
+   * AMD CPUs cannot use Intel's power management so we need to nullify it.
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
    * USB fix for AMD FX systems, no effect on Ryzen
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)

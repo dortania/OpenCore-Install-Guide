@@ -1,5 +1,3 @@
-# AMD
-
 ## Starting Point
 
 You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
@@ -12,7 +10,7 @@ Kernel patches(save these for later, we'll go over how to use them below):
 
 Please note that 3rd gen Threadripper(19h) is unsupported currently.
 
-**And read this guide more than once before setting up Opencore and make sure you have it setup correctly**
+**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly**
 
 ## ACPI
 
@@ -27,9 +25,9 @@ This is where you'll add SSDT patches for your system, these are most useful for
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
    * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.aml)
 * [SSDT-USBX-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX-AMD.aml)
-   * Forces power properties onto your USB controller, commonly used for fixing mics, DACs, webcams, bluetooth dongles, etc. This SSDT is optional but I've provided a pre-compiled version as each system uses the same SSDT. This must be used in conjunction with SSDT-EC to work correctly
+   * Forces power properties onto your USB controller, commonly used for fixing mics, DACs, webcams, Bluetooth dongles, etc. This SSDT is optional but I've provided a pre-compiled version as each system uses the same SSDT. This must be used in conjunction with SSDT-EC to work correctly
 
-For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly setup your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. 
+For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. 
 
 **For a much deeper rundown on ACPI including compiling in Windows and Linux, see the [Getting started with ACPI](/extras/acpi.md) page.**
 
@@ -48,11 +46,11 @@ And to grab the location of such devices you can use [gfxutil](https://github.co
 * **Count** 
    * How many time the patch is applied, `0` will apply to all instances
 * **Enabled** 
-   * Self explanitory, enables or disables the patch
+   * Self-explanatory, enables or disables the patch
 * **Find**
    * The original name in ACPI
 * **Replace** 
-   * The new name in ACPI, length must match original
+   * The new name in ACPI, the length must match original
 
 **Quirk**: Settings for ACPI.
 
@@ -63,7 +61,7 @@ And to grab the location of such devices you can use [gfxutil](https://github.co
 * **RebaseRegions**: NO
    * Attempt to heuristically relocate ACPI memory regions, not needed unless custom DSDT is used.
 * **ResetHwSig**: NO
-   * Needed for hardware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation
+   * Needed for hardware that fails to maintain hardware signature across the reboots and cause issues with waking from hibernation
 * **ResetLogoStatus**: NO
    * Workaround for OEM Windows logo not drawing on systems with BGRT tables.
 
@@ -82,9 +80,9 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful for most firmwares though breaks on some AMD systems.
+   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful for most firmware though breaks on some AMD systems.
 * **DisableSingleUser**: NO
-   * Disables use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
+   * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
    * Needed for systems with non-functioning NVRAM like Z390 and such
 * **DiscardHibernateMap**: NO
@@ -96,7 +94,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **ForceExitBootServices**: NO
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
 * **ProtectCsmRegion**: NO
-   * Needed for fixing artifacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
+   * Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **SetupVirtualMap**: YES
@@ -114,36 +112,36 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
-Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases) You can find your audio path with the following(Do note not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):
+Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases) You can find your audio path with the following(Do note, not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):
 ```
 path/to/gfxutil -f HDEF
 ```
 
-Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`. Audio can be left for post install.
+Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`. Audio can be left for post-install.
 
 The `PciRoot(0x0)/Pci(0x2,0x0)` is only for intel iGPUs, remove this section entirely.
 
-**Block**: Removes device properties from map, for us we can ignore this
+**Block**: Removes device properties from the map, for us we can ignore this
 
-Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifcally Little Endians that modern CPUs use for ordering bytes. The more you know!
+Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifically Little Endians that modern CPUs use for ordering bytes. The more you know!
 
 ## Kernel
 
 ![Kernel](https://i.imgur.com/ehG6Da6.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. Reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.
 
- * **BundlePath** 
-    * Name of the kext
-    * ex: `Lilu.kext`
- * **Enabled** 
-    * Self explanatory, either enables or diables the kext
- * **ExecutablePath** 
-    * Path to the actual executable hidden within the kext, you can see what path you kext has by right clicking and selecting `Show Package Contents`. Generally they'll be `Contents/MacOS/Kext` but some have kexts hiddin within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
-    * ex: `Contents/MacOS/Lilu`
- * **PlistPath** 
-    * Path to the `info.plist` hidden within the kext
-    * ex: `Contents/Info.plist`
+* **BundlePath** 
+   * Name of the kext
+   * ex: `Lilu.kext`
+* **Enabled** 
+   * Self-explanatory, either enables or disables the kext
+* **ExecutablePath** 
+   * Path to the actual executable hidden within the kext, you can see what path you kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
+   * ex: `Contents/MacOS/Lilu`
+* **PlistPath** 
+   * Path to the `info.plist` hidden within the kext
+   * ex: `Contents/Info.plist`
 
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't require this)
 
@@ -179,19 +177,19 @@ To merge:
 * **CustomSMBIOSGuid**: NO 
    * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandom with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
 * **DisableIOMapper**: NO 
-   * Needed to get around VT-D if  either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems varies so recommened to disable SVM(SecureVirtualMachine) in BIOS
+   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems vary so recommended to disable SVM(SecureVirtualMachine) in BIOS
 * **ExternalDiskIcons**: YES 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **LapicKernelPanic**: NO 
    * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
-   * Allows for reading kernel panics logs when kernel panics occurs
+   * Allows for reading kernel panics logs when kernel panics occur
 * **PowerTimeoutKernelPanic**: YES
    * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
 * **ThirdPartyDrives**: NO 
    * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
-   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](/AMD/AMD-USB-map.md)
+* This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](/AMD/AMD-USB-map.md)
 
 
 ## Misc
@@ -200,16 +198,16 @@ To merge:
 
 **Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
 * **HibernateMode**: None
-   * Best to avoid hibernation with hackintoshes all together
+   * Best to avoid hibernation with Hackintoshes all together
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
 * **PollAppleHotKeys**: NO
-   * Allows you to use Apple's hot keys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
+   * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
-      *  `Cmd+Opt+P+R`: Cleans NVRAM 
+      * `Cmd+Opt+P+R`: Cleans NVRAM 
       * `Cmd+R`: Boots Recovery partition
-      * `Cmd+S`: Boot in Singleuser mode
-      * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, alternative is `ESC` key
+      * `Cmd+S`: Boot in Single-user mode
+      * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, an alternative is `ESC` key
 * **Timeout**: `5`
    * This sets how long OpenCore will wait until it automatically boots from the default selection
 * **ShowPicker**: YES
@@ -234,9 +232,9 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
 * **ExposeSensitiveData**: `6`
    * Shows more debug information, requires debug version of OpenCore
 * **RequireSignature**: NO
-   * We won't be dealing vault.plist so we can ignore
+   * We won't be dealing vaulting so we can ignore
 * **RequireVault**: NO
-   * We won't be dealing vault.plist so we can ignore as well
+   * We won't be dealing vaulting so we can ignore as well
 * **ScanPolicy**: `0` 
    * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for furthur details
 
@@ -244,16 +242,16 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
 * **Name**
    * Name shown in OpenCore
 * **Enabled**
-   * Self explanitory, enables or disables
+   * Self-explanatory, enables or disables
 * **Path**
    * Path to file after the `Tools` folder
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
-**Entries**: Used for specifying iregular boot paths that can't be found naturally with OpenCore
+**Entries**: Used for specifying irregular boot paths that can't be found naturally with OpenCore
 * **Name**
    * Name shown in boot picker
 * **Enabled**
-   * Self explanitory, enables or disables
+   * Self-explanatory, enables or disables
 * **Path**
    * PCI route of boot drive, can be found with the [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell) and the `map` command
    * ex: `PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi`
@@ -265,27 +263,29 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
 **Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
 * **UIScale**:
-  * 01: Standard resolution(Clover equivalent is `0x28`)
-  * 02: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
+   * 01: Standard resolution(Clover equivalent is `0x28`)
+   * 02: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
 * **boot-args**:
-  * `-v` - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar.  It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-  * `debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
+   * `-v` - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
+   * `debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
-  * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debuging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
-* **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition.For us since we're running kernel patches it's recommended to keep SIP off though you can turn it back on after install and test yourself
-  
-  * `00000000` - SIP completely enabled
-  * `30000000` - Allow unsigned kexts and writing to protected fs locations
-  * `E7030000` - SIP completely disabled
+   * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
+   * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
+* **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. For us, since we're running kernel patches it's recommended to keep SIP off though you can turn it back on after install and test yourself
+
+csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
+
+* `00000000` - SIP completely enabled
+* `30000000` - Allow unsigned kexts and writing to protected fs locations
+* `E7030000` - SIP completely disabled
 
 * **nvda\_drv**: &lt;&gt; 
    * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text). AMD and Intel GPU users should leave this area blank.
 * **prev-lang:kbd**: &lt;&gt; 
-   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it(**Default in Sample config is Russian**):
+   * Needed for non-Latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
       * American: `en-US:0`(`656e2d55533a30` in HEX)
       * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
@@ -293,10 +293,10 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
 
 
 **LegacyEnable**: NO
-   * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
+* Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
 
 **LegacySchema**
-   * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+* Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
 ## Platforminfo
 
@@ -307,7 +307,7 @@ For setting up the SMBIOS info, we'll use acidanthera's [macserial](https://gith
 For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
 
 * iMacPro1,1: AMD RX Polaris and newer
-* MacPro7,1: AMD RX Polaris and newer(Note that theres no valid serial numbers yet so iMessage and such will be broken. MacPro7,1 is also a Catalina exclusive)
+* MacPro7,1: AMD RX Polaris and newer(Note that there's no valid serial numbers yet so iMessage and such will be broken. MacPro7,1 is also a Catalina exclusive)
 * MacPro6,1: AMD R5/R7/R9 and older
 * iMac14,2: Nvidia Kepler and newer
 
@@ -321,16 +321,16 @@ With our iMacPro1,1 example, we would run macserial like so via the terminal:
 Which would give us output similar to the following:
 
 ```text
-    iMacPro1,1 | C02VVYZCHX87 | C02751200GUJG36JC
-    iMacPro1,1 | C02TK03CHX87 | C02715701GUJG361F
-    iMacPro1,1 | C02V1MY4HX87 | C02727600GUJG36CB
-    iMacPro1,1 | C02V50CRHX87 | C02731501J9JG36AD
-    iMacPro1,1 | C02VG1Y1HX87 | C02739102J9JG36FB
-    iMacPro1,1 | C02TWQY4HX87 | C027256094NJG361F
-    iMacPro1,1 | C02TV0M5HX87 | C02724301GUJG361M
-    iMacPro1,1 | C02TL2Z0HX87 | C02716310QXJG361M
-    iMacPro1,1 | C02TNGZDHX87 | C02718902QXJG36CB
-    iMacPro1,1 | C02TQEYYHX87 | C02720802GUJG36UE
+iMacPro1,1 | C02VVYZCHX87 | C02751200GUJG36JC
+iMacPro1,1 | C02TK03CHX87 | C02715701GUJG361F
+iMacPro1,1 | C02V1MY4HX87 | C02727600GUJG36CB
+iMacPro1,1 | C02V50CRHX87 | C02731501J9JG36AD
+iMacPro1,1 | C02VG1Y1HX87 | C02739102J9JG36FB
+iMacPro1,1 | C02TWQY4HX87 | C027256094NJG361F
+iMacPro1,1 | C02TV0M5HX87 | C02724301GUJG361M
+iMacPro1,1 | C02TL2Z0HX87 | C02716310QXJG361M
+iMacPro1,1 | C02TNGZDHX87 | C02718902QXJG36CB
+iMacPro1,1 | C02TQEYYHX87 | C02720802GUJG36UE
 
 ```
 
@@ -342,40 +342,40 @@ The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create an SmUUID by running `uuidgen` in the terminal - and that gets copied to Generic -&gt; SystemUUID.
+We can create a SmUUID by running `uuidgen` in the terminal - and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
 **Automatic**: YES 
-   * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+* Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
 **UpdateDataHub**: YES
-   * Update Data Hub fields
+* Update Data Hub fields
 
 **UpdateNVRAM**: YES
-   * Update NVRAM fields
+* Update NVRAM fields
 
 **UpdateSMBIOS**: YES
-   * Updates SMBIOS fields
+* Updates SMBIOS fields
 
 **UpdateSMBIOSMode**: Create 
-   * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
+* Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 ## UEFI
 
 ![UEFI](https://i.imgur.com/UiGGDWK.png)
 
 **ConnectDrivers**: YES 
-   * Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
+* Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
 
 **Drivers**: Add your .efi drivers here
 
-**Input**: Related to boot.efi keyboard passthrough used for for FileVault and Hotkey support
+**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
 * **KeyForgetThreshold**: `5`
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
 * **KeyMergeThreshold**: `2`
-   * The lengh of time that a key will be registered before resetting, for best results use `2` milliseconds
+   * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
 * **KeySupport**: `NO`
    * Enables OpenCore's built in key support, do not use with UsbKbDxe.efi
 * **KeySupportMode**: `Auto`
@@ -383,7 +383,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **KeySwap**: `NO`
    * Swaps `Option` and `Cmd` key
 * **PointerSupport**: 
-* Used for fixing broken pointer support, commonly used for Z87 Asus boards. Leave blank
+   * Used for fixing broken pointer support, commonly used for Z87 Asus boards. Leave blank
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
@@ -392,13 +392,13 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
 * **ConsoleControl**: YES
-   * Replaces Console Control protocol with a builtin version,  set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
+   * Replaces Console Control protocol with a builtin version, set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
 * **FirmwareVolume**: NO
-   * Fixes UI regarding Filevault, set to YES for better FileVault compatibilty
+   * Fixes UI regarding Filevault, set to YES for better FileVault compatibility
 * **HashServices**: NO
-   * Fixes incorrect cusor size when running FileVault, set to YES for better FileVault compatibilty
+   * Fixes incorrect cursor size when running FileVault, set to YES for better FileVault compatibility
 * **UnicodeCollation**: NO
-   * Some older firmware have broken unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
+   * Some older firmware have broken Unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
 
 **Quirks**:
 
@@ -419,13 +419,13 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **RequestBootVarRouting**: YES
    * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **ReplaceTabWithSpace**: NO
-   * Depending on firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead but majority can ignore it but do note that ConsoleControl set to True may be needed
+   * Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed
 * **SanitiseClearScreen**: NO
    * Fixes High resolutions displays that display OpenCore in 1024x768, recommened for user with 1080P+ displays
 * **ClearScreenOnModeSwitch**: NO
    * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 * **UnblockFsConnect**: NO
-   * Some firmwares block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
 
 
 # Cleaning up
@@ -438,7 +438,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 
 
-# Post install
+# Post-install
 
 So what in the world needs to be done once everything is installed? Well here's some things:
 
@@ -449,6 +449,6 @@ So what in the world needs to be done once everything is installed? Well here's 
 * Correcting audio, reread the DeviceProperties on how
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
-   * Copy EFI folder to desktop
+   * Copy EFI folder to the desktop
    * Unmount USB and mount boot drive's EFI
-   * Paste EFI onto root of the drive
+   * Paste EFI onto the root of the drive
