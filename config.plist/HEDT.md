@@ -23,7 +23,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 For us we'll need a couple SSDTs to bring back functionality that Clover provided:
 
 * [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
-   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems. This can be avoided if your BIOS supports EHCI-Handoff. This is not needed on X299
+   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems. This can be avoided if your BIOS supports EHCI-Handoff. **This is not needed on Skylake-X**
 * [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)
    * Needed for proper CPU power managment on **pre-Skylake-X**, you will need to run Pike's ssdtPRGen.sh script to generate this file.
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
