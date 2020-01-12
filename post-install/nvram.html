@@ -208,11 +208,31 @@
 
     
         
+        <li class="header">Intel HEDT Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../config-HEDT/X299.html">
+            
+                <a href="../config-HEDT/X299.html">
+            
+                    
+                    Skylake-X
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
         <li class="header">AMD Config.plist</li>
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../AMD/AMD-config.html">
+        <li class="chapter " data-level="4.1" data-path="../AMD/AMD-config.html">
             
                 <a href="../AMD/AMD-config.html">
             
@@ -232,7 +252,7 @@
         
         
     
-        <li class="chapter active" data-level="4.1" data-path="nvram.html">
+        <li class="chapter active" data-level="5.1" data-path="nvram.html">
             
                 <a href="nvram.html">
             
@@ -245,7 +265,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="spoof.html">
+        <li class="chapter " data-level="5.2" data-path="spoof.html">
             
                 <a href="spoof.html">
             
@@ -258,7 +278,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="security.html">
+        <li class="chapter " data-level="5.3" data-path="security.html">
             
                 <a href="security.html">
             
@@ -278,7 +298,7 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../extras/troubleshooting.html">
+        <li class="chapter " data-level="6.1" data-path="../extras/troubleshooting.html">
             
                 <a href="../extras/troubleshooting.html">
             
@@ -291,7 +311,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="../extras/verbose.html">
+        <li class="chapter " data-level="6.2" data-path="../extras/verbose.html">
             
                 <a href="../extras/verbose.html">
             
@@ -304,7 +324,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3" data-path="../extras/debug.html">
+        <li class="chapter " data-level="6.3" data-path="../extras/debug.html">
             
                 <a href="../extras/debug.html">
             
@@ -324,7 +344,7 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../extras/legacy.html">
+        <li class="chapter " data-level="7.1" data-path="../extras/legacy.html">
             
                 <a href="../extras/legacy.html">
             
@@ -337,7 +357,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../extras/acpi.html">
+        <li class="chapter " data-level="7.2" data-path="../extras/acpi.html">
             
                 <a href="../extras/acpi.html">
             
@@ -350,7 +370,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../extras/gpu-patches.html">
+        <li class="chapter " data-level="7.3" data-path="../extras/gpu-patches.html">
             
                 <a href="../extras/gpu-patches.html">
             
@@ -363,7 +383,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="../extras/kalsr-fix.html">
+        <li class="chapter " data-level="7.4" data-path="../extras/kalsr-fix.html">
             
                 <a href="../extras/kalsr-fix.html">
             
@@ -376,7 +396,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="msr-lock.html">
+        <li class="chapter " data-level="7.5" data-path="msr-lock.html">
             
                 <a href="msr-lock.html">
             
@@ -389,7 +409,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" >
+        <li class="chapter " data-level="7.6" >
             
                 <a target="_blank" href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/">
             
@@ -409,7 +429,7 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="../misc/credit.html">
+        <li class="chapter " data-level="8.1" data-path="../misc/credit.html">
             
                 <a href="../misc/credit.html">
             
@@ -496,7 +516,7 @@
 <li><code>/etc/rc.shutdown.d&#x200B;</code></li>
 </ul>
 <h2 id="verifying-if-you-have-working-nvram">Verifying if you have working NVRAM</h2>
-<p>To start, open terminal and run the following one line at a time:</p>
+<p>To start, open the terminal and run the following one line at a time:</p>
 <pre><code>sudo -s
 nvram -c 
 nvram myvar=test
@@ -504,7 +524,7 @@ exit
 </code></pre><p>Now reboot and run this:</p>
 <pre><code>nvram -p | grep -i myvar
 </code></pre><p>If nothing returns then your NVRAM is not working. If a line containing <code>myvar test</code> returns, your NVRAM is working.</p>
-<p>Note: <code>nvram -c</code> requires SIP to be off, alternative is to wipe NVRAM at the boot menu. Reminder you&apos;ll need <code>Misc -&gt; Security -&gt; AllowNvramReset -&gt; YES</code></p>
+<p>Note: <code>nvram -c</code> requires SIP to be off, an alternative is to wipe NVRAM at the boot menu. Reminder you&apos;ll need <code>Misc -&gt; Security -&gt; AllowNvramReset -&gt; YES</code></p>
 <h2 id="enabling-emulated-nvram-with-a-nvramplist">Enabling emulated NVRAM (with a nvram.plist)</h2>
 <p>To enable emulated NVRAM, you&apos;ll need 3 things set:</p>
 <p>Within your config.plist:</p>
@@ -524,7 +544,7 @@ exit
 <p><code>sudo defaults write com.apple.loginwindow LogoutHook /Users/(your username)/LogoutHook/LogoutHook.command</code></p>
 <p>And voila! You have emulated NVRAM!</p>
 <p>Do keep in mind this requires the <code>nvram</code> command to support the <code>-x</code> flag for this to work correctly which is unavailable on macOS 10.12 and below. If you are installing macOS 10.12 or earlier, you need to copy <code>nvram.mojave</code> into the same folder as <code>LogoutHook.command</code>, which fixes this by invoking it instead of the system <code>nvram</code> command.</p>
-<p>Something else to note is that macOS is only able to read nvram.plist butit won&apos;t be able to write to nvram.plist unless running the shutdown process. This means running the test above won&apos;t work</p>
+<p>Something else to note is that macOS is only able to read nvram.plist but it won&apos;t be able to write to nvram.plist unless running the shutdown process. This means running the test above won&apos;t work</p>
 
                                 
                                 </section>
@@ -568,7 +588,7 @@ exit
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Emulated NVRAM","level":"4.1","depth":1,"next":{"title":"Disabling GPU","level":"4.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"previous":{"title":"Zen/ThreadRipper","level":"3.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/nvram.md","mtime":"2020-01-12T00:19:10.579Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-12T00:19:53.133Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Emulated NVRAM","level":"5.1","depth":1,"next":{"title":"Disabling GPU","level":"5.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"previous":{"title":"Zen/ThreadRipper","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/nvram.md","mtime":"2020-01-12T21:28:55.597Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-12T21:29:44.617Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
