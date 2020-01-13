@@ -14,7 +14,7 @@
 
 ## Intel HEDT Config.plist
 
-* [Skylake-X](/config-HEDT/X299.md)
+* [Skylake-X](config-HEDT/X299.md)
 
 ## AMD Config.plist
 
@@ -42,5 +42,6 @@
 * [Multiboot](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/)
 
 ## Misc
+
 * [Credit](misc/credit.md)
 
