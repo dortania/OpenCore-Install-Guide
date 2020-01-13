@@ -212,9 +212,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../config-HEDT/X299.html">
+        <li class="chapter " data-level="3.1" data-path="../intel-hedt-config.plist/x299.html">
             
-                <a href="../config-HEDT/X299.html">
+                <a href="../intel-hedt-config.plist/x299.html">
             
                     
                     Skylake-X
@@ -232,9 +232,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../AMD/AMD-config.html">
+        <li class="chapter " data-level="4.1" data-path="../amd-config.plist/amd-config.html">
             
-                <a href="../AMD/AMD-config.html">
+                <a href="../amd-config.plist/amd-config.html">
             
                     
                     Zen/ThreadRipper
@@ -298,9 +298,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../extras/troubleshooting.html">
+        <li class="chapter " data-level="6.1" data-path="../troubleshooting/troubleshooting.html">
             
-                <a href="../extras/troubleshooting.html">
+                <a href="../troubleshooting/troubleshooting.html">
             
                     
                     General Troubleshooting
@@ -311,9 +311,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../extras/verbose.html">
+        <li class="chapter " data-level="6.2" data-path="../troubleshooting/verbose.html">
             
-                <a href="../extras/verbose.html">
+                <a href="../troubleshooting/verbose.html">
             
                     
                     Fixing Resolution and Verbose
@@ -324,9 +324,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../extras/debug.html">
+        <li class="chapter " data-level="6.3" data-path="../troubleshooting/debug.html">
             
-                <a href="../extras/debug.html">
+                <a href="../troubleshooting/debug.html">
             
                     
                     OpenCore Debugging
@@ -396,9 +396,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5" data-path="msr-lock.html">
+        <li class="chapter " data-level="7.5" data-path="../extras/msr-lock.html">
             
-                <a href="msr-lock.html">
+                <a href="../extras/msr-lock.html">
             
                     
                     Fixing CFG Lock
@@ -487,7 +487,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="gpu-spoof">GPU Spoof</h1>
+                                <h1 id="disabling-gpu">Disabling GPU</h1>
+<h2 id="gpu-spoof">GPU Spoof</h2>
 <p>So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:</p>
 <ul>
 <li>Boot Flag<ul>
@@ -504,11 +505,11 @@
 </li>
 </ul>
 <p><strong>CSM must be off in the BIOS for the spoofing to work correctly, especially on AMD CPU based systems</strong></p>
-<h2 id="boot-flag">Boot Flag</h2>
+<h3 id="boot-flag">Boot Flag</h3>
 <p>By far the simplest way, all you need to do is add the following boot-arg:</p>
 <p><code>-wegnoegpu</code></p>
 <p>Do note that this will disable all GPUs excluding the iGPU</p>
-<h2 id="devicepropeties-method">DevicePropeties Method</h2>
+<h3 id="devicepropeties-method">DevicePropeties Method</h3>
 <p>Here is quite simple, find the PCI route with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> and then create a new DeviceProperties section with your spoof:</p>
 <pre><code class="lang-text">path/to/gfxutil -f GFX0
 </code></pre>
@@ -543,7 +544,7 @@
 </tbody>
 </table>
 <p><img src="https://i.imgur.com/IjrDgNz.png" alt=""></p>
-<h2 id="ssdt-method">SSDT Method</h2>
+<h3 id="ssdt-method">SSDT Method</h3>
 <p>There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.</p>
 <p>Example of device path:</p>
 <p><code>\_SB.PCI0.PEG0.PEGP</code></p>
@@ -592,10 +593,9 @@
    }
 }
 </code></pre>
-<p>A copy of this SSDT can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl" target="_blank">Spoof-SSDT.dsl</a>
-You will need <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.</p>
+<p>A copy of this SSDT can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl" target="_blank">Spoof-SSDT.dsl</a> You will need <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.</p>
 <p>Source: CorpNewt</p>
-<h1 id="fixing-windows">Fixing Windows</h1>
+<h2 id="fixing-windows">Fixing Windows</h2>
 <p>So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:</p>
 <p><img src="https://i.imgur.com/TG3jGBC.png" alt="Credit to CorpNewt for image"></p>
 
@@ -641,7 +641,7 @@ You will need <a href="https://github.com/acidanthera/MaciASL/releases" target="
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Disabling GPU","level":"5.2","depth":1,"next":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/spoof.md","mtime":"2020-01-13T20:37:08.711Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T20:37:54.029Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Disabling GPU","level":"5.2","depth":1,"next":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/spoof.md","mtime":"2020-01-13T20:37:15.655Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T20:38:00.218Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

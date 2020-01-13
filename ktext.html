@@ -212,9 +212,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="config-HEDT/X299.html">
+        <li class="chapter " data-level="3.1" data-path="intel-hedt-config.plist/x299.html">
             
-                <a href="config-HEDT/X299.html">
+                <a href="intel-hedt-config.plist/x299.html">
             
                     
                     Skylake-X
@@ -232,9 +232,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="AMD/AMD-config.html">
+        <li class="chapter " data-level="4.1" data-path="amd-config.plist/amd-config.html">
             
-                <a href="AMD/AMD-config.html">
+                <a href="amd-config.plist/amd-config.html">
             
                     
                     Zen/ThreadRipper
@@ -298,9 +298,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="extras/troubleshooting.html">
+        <li class="chapter " data-level="6.1" data-path="troubleshooting/troubleshooting.html">
             
-                <a href="extras/troubleshooting.html">
+                <a href="troubleshooting/troubleshooting.html">
             
                     
                     General Troubleshooting
@@ -311,9 +311,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="extras/verbose.html">
+        <li class="chapter " data-level="6.2" data-path="troubleshooting/verbose.html">
             
-                <a href="extras/verbose.html">
+                <a href="troubleshooting/verbose.html">
             
                     
                     Fixing Resolution and Verbose
@@ -324,9 +324,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="extras/debug.html">
+        <li class="chapter " data-level="6.3" data-path="troubleshooting/debug.html">
             
-                <a href="extras/debug.html">
+                <a href="troubleshooting/debug.html">
             
                     
                     OpenCore Debugging
@@ -396,9 +396,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5" data-path="post-install/msr-lock.html">
+        <li class="chapter " data-level="7.5" data-path="extras/msr-lock.html">
             
-                <a href="post-install/msr-lock.html">
+                <a href="extras/msr-lock.html">
             
                     
                     Fixing CFG Lock
@@ -488,12 +488,13 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="gathering-files">Gathering files</h1>
-<p>This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won&apos;t be deep diving in here. </p>
+<h2 id="gathering-files">Gathering files</h2>
+<p>This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won&apos;t be deep diving in here.</p>
 <blockquote>
 <p>What&apos;s the best way to figure out if my hardware is supported?</p>
 </blockquote>
-<p>See the <strong><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/hardware.md" target="_blank">supported hardware section</a></strong> for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.</p>
-<h1 id="firmware-drivers">Firmware Drivers</h1>
+<p>See the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/hardware.md" target="_blank"><strong>supported hardware section</strong></a> for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.</p>
+<h2 id="firmware-drivers">Firmware Drivers</h2>
 <p>These are the drivers used for OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">ApfsDriverLoader.efi</a><ul>
@@ -517,7 +518,7 @@
 </li>
 </ul>
 <p>For a full list of compatible drivers, see 11.2 Properties in the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">OpenCorePkg Docs</a>. These files will go in your Drivers folder in your EFI</p>
-<h1 id="kexts">Kexts</h1>
+<h2 id="kexts">Kexts</h2>
 <p>A kext is a <strong>k</strong>ernel <strong>ext</strong>ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI</p>
 <p>All kext listed below can be found pre-compiled in the <a href="http://kexts.goldfish64.com/" target="_blank">Kext Repo</a>. Kexts here are compiled each time there&apos;s a new commit.</p>
 <p><strong>Must haves</strong>:</p>
@@ -589,13 +590,11 @@
 </ul>
 <p><strong>WiFi and Bluetooth</strong>:</p>
 <ul>
-<li><p><a href="https://github.com/acidanthera/AirportBrcmFixup" target="_blank">AirportBrcmFixup</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/AirportBrcmFixup" target="_blank">AirportBrcmFixup</a><ul>
 <li>Used for patching non-Apple Broadcom cards, <strong>will not work on intel, Killer, Realtek, etc</strong></li>
 </ul>
 </li>
-<li><p><a href="https://github.com/acidanthera/BrcmPatchRAM" target="_blank">BrcmPatchRAM</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/BrcmPatchRAM" target="_blank">BrcmPatchRAM</a><ul>
 <li>Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple Airport cards.</li>
 <li>To be paired with BrcmFirmwareData.kext<ul>
 <li>BrcmPatchRAM3 for 10.14+</li>
@@ -621,10 +620,9 @@
 </ul>
 </li>
 </ul>
-<p><strong>Extra&apos;s</strong>: </p>
+<p><strong>Extra&apos;s</strong>:</p>
 <ul>
-<li><p><a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a><ul>
 <li>Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems:<ul>
 <li>MacPro6,1</li>
 <li>MacPro7,1</li>
@@ -633,14 +631,13 @@
 </li>
 </ul>
 </li>
-<li><p><a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a></p>
-<ul>
+<li><a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a><ul>
 <li>Needed for correcting TSC on HEDT and some server motherboards, without this macOS may be extremly slow or even unbootable</li>
 </ul>
 </li>
 </ul>
 <p>Please refer to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md" target="_blank">Kexts.md</a> for a full list of supported kexts</p>
-<h1 id="ssdts">SSDTs</h1>
+<h2 id="ssdts">SSDTs</h2>
 <p>So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well, we&apos;ll be going over a couple to see whether you need them. Do note you&apos;ll need to compile these SSDTs with <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> and please read them before compiling. Some require you to adjust them for your specific system(ie: EC0 to H_EC for SSDT-EC-USBX). These files will go in your ACPI folder in your EFI</p>
 <p><strong>If you&apos;re unsure which you need, the specific ones for each platform are mentioned in the ACPI section of the guide.</strong></p>
 <ul>
@@ -652,28 +649,23 @@
 <li>Alternative to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a> when not compatible with your system.</li>
 </ul>
 </li>
-<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a><ul>
 <li>Needed to setup USB power and such correctly, prefered option over renaming XHCI and required for booting macOS Catalina. This SSDT is meant for Skylake+ systems, please use <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a> and <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl" target="_blank">SSDT-EHCx_OFF</a> for older systems. See the <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a> for more info regarding Embedded controller fix.</li>
 </ul>
 </li>
-<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a><ul>
 <li>Needed to setup USB power correctly on pre-skylake systems and required for booting macOS Catalina.</li>
 </ul>
 </li>
-<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl" target="_blank">SSDT-EHCx_OFF</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl" target="_blank">SSDT-EHCx_OFF</a><ul>
 <li>Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems like for Z77, Z87, Z97, X79 and X99</li>
 </ul>
 </li>
-<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a><ul>
 <li>Sets <code>PluginType</code>, Clover alternative would be under <code>Acpi -&gt; GenerateOptions -&gt; PluginType</code>. Do note that this SSDT is made for systems where <code>AppleACPICPU</code> attaches <code>CPU0</code>, though some ACPI tables have theirs starting at <code>PR00</code> so adjust accordingly. X99 and X299 users need to verify if the path is correct(ie: <code>\_PR.PR00</code> vs <code>\_PR.PC00.PR00</code>)</li>
 </ul>
 </li>
-<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl" target="_blank">SSDT-SBUS-MCHC</a></p>
-<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl" target="_blank">SSDT-SBUS-MCHC</a><ul>
 <li>Adds an SMBus device and fixes DeviceProperties injection via <code>_DSM</code> for when adding properties via an SSDT.</li>
 </ul>
 </li>
@@ -722,7 +714,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"creating-the-usb.md","ref":"creating-the-usb.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-01-13T20:37:08.707Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T20:37:54.029Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"creating-the-usb.md","ref":"creating-the-usb.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-01-13T20:37:15.655Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T20:38:00.218Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
