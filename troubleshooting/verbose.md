@@ -1,10 +1,11 @@
-# Fixing Resolution and Hiding Verbose  
+# Fixing Resolution and Verbose
 
 Wanting a more clean booting experience with macOS without all that verbose text while booting? Well you need a couple things:
 
 ## Recommended Configuration:
 
 **`NVRAM -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`**
+
 * Remove `-v` from your config.plist
 
 **`UEFI -> Protocols`**:
@@ -23,7 +24,7 @@ Wanting a more clean booting experience with macOS without all that verbose text
 * `ConsoleBehaviourOs`: set to Graphics
 * `ConsoleBehaviourUi`: set to Text
 * `ConsoleMode` set to Max
-   * Setting to Max can infact break the resolution, if having issues set this to blank
+  * Setting to Max can infact break the resolution, if having issues set this to blank
 
 Please refer below for other settings if these Misc/Boot values do not work for your firmware.
 
