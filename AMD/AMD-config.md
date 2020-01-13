@@ -174,12 +174,16 @@ To merge:
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. AMD users can ignore
 * **AppleXcpmExtraMsrs**: NO 
    * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
+* **AppleXcpmForceBoost**: NO
+   * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this
 * **CustomSMBIOSGuid**: NO 
    * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandom with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
 * **DisableIOMapper**: NO 
    * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems vary so recommended to disable SVM(SecureVirtualMachine) in BIOS
 * **ExternalDiskIcons**: YES 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
+* **IncreasePciBarSize**: NO
+   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this
 * **LapicKernelPanic**: NO 
    * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
@@ -202,7 +206,7 @@ To merge:
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
 * **PollAppleHotKeys**: NO
-   * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
+   * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use AppleUsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
       * `Cmd+Opt+P+R`: Cleans NVRAM 
       * `Cmd+R`: Boots Recovery partition
@@ -229,6 +233,10 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
 
 * **AllowNvramReset**: YES
    * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
+* **AllowSetDefault**: YES
+   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+* **AuthRestart**: NO:
+   * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional
 * **ExposeSensitiveData**: `6`
    * Shows more debug information, requires debug version of OpenCore
 * **RequireSignature**: NO
@@ -295,8 +303,14 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 **LegacyEnable**: NO
 * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
 
+**LegacyOverwrite**: NO
+* Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
+
 **LegacySchema**
 * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+
+**WriteFlash**: YES
+* Enables writing to flash memory for all added variables.
 
 ## Platforminfo
 
@@ -348,6 +362,10 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Automatic**: YES 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+* **SpoofVendor**: YES
+   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+* **SupportsCsm**: NO
+   * Used for when the EFI partition isn't first on the windows drive
 
 **UpdateDataHub**: YES
 * Update Data Hub fields
@@ -377,7 +395,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **KeyMergeThreshold**: `2`
    * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
 * **KeySupport**: `NO`
-   * Enables OpenCore's built in key support, do not use with UsbKbDxe.efi
+   * Enables OpenCore's built in key support, do not use with AppleUsbKbDxe.efi
 * **KeySupportMode**: `Auto`
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
@@ -391,6 +409,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
+* **AppleSmcIo**: NO
+   * Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault
 * **ConsoleControl**: YES
    * Replaces Console Control protocol with a builtin version, set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
 * **FirmwareVolume**: NO

@@ -20,11 +20,8 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
   
 For extra functionality with OpenCore:
 
-* [UsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg)
+* [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg)
    * Used for Apple Hotkeys and FileVault support when OpenCore's built-in drivers do not work with your firmware. Recommended testing without it first.
-
-* [VirtualSmc.efi](https://github.com/acidanthera/VirtualSMC/releases)
-   * Only used for proper FileVault support, cannot be used with FakeSMC.
   
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
   

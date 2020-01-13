@@ -48,8 +48,12 @@ Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Dri
 
 ## Stuck on `Buffer Too Small` 
 
-UEFI -> Quirks -> AvoidHighAlloc -> Enable 
+* UEFI -> Quirks -> AvoidHighAlloc -> Enable 
+* Enable Above4GDecoding in the BIOS
 
+## Stuck on `Plist only kext has CFBundleExecutable key`
+
+Missing or incorrect `Executable path`
 
 ## "Waiting for Root Device" or Prohibited Sign error
 

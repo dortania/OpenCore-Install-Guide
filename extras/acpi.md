@@ -93,22 +93,24 @@ As you can see our `PNP0C09` is found within the `Device (EC0)` meaning this is 
    * For Skylake+ and all AMD systems
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
    * For Haswell and older
+
+
 ```
 External (_SB_.PCI0.LPCB.EC0, DeviceObj)
 
-Scope (\_SB.PCI0.LPCB.EC0)
-{
-Method (_STA, 0, NotSerialized) // _STA: Status
-{
-If (_OSI ("Darwin"))
-{
-Return (0)
-}
-Else
-{
-Return (0x0F)
-}
-}
+   Scope (\_SB.PCI0.LPCB.EC0)
+   {   
+      Method (_STA, 0, NotSerialized) // _STA: Status
+      {
+         If (_OSI ("Darwin"))
+         {
+            Return (0)
+         }
+         Else
+      {
+      Return (0x0F)
+     }
+  }
 }
 ```
 But looking back at the screenshot above we notice something, our ACPI path is different: `PC00.LPC0` vs `PCI0.LPCB`. This is very important especially when you're dealing with Intel consumer vs Intel HEDT and AMD, `PC00.LPC0` is common on Intel HEDT while `PCI0.SBRG` is common on AMD. **Always verify your path**

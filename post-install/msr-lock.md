@@ -3,7 +3,7 @@
 So you've installed macOS but you're using those pesky `CFG-Lock` patches that we want to get rid of, well to do this is fairly simple. You'll need the following:
 
 Inside your EFI/OC/Tools folder and config.plist:
-* [VerifyMsrE2](https://github.com/acidanthera/AppleSupportPkg)
+* [VerifyMsrE2](https://github.com/acidanthera/OpenCorePkg/releases)
 * [Modifed GRUB Shell](https://github.com/datasone/grub-mod-setup_var/releases)
 
 And some apps to help us out:

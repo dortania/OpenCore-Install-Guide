@@ -53,9 +53,14 @@ To enable emulated NVRAM, you'll need 3 things set:
 
 Within your config.plist:
 
-* `DisableVariableWrite`: set to `YES`
-* `LegacyEnable`: set to `YES`
-* `LegacySchema`: NVRAM variables set\(OpenCore compares these to the variables present in nvram.plist\)
+* **Booter**: 
+   * `DisableVariableWrite`: set to `YES`
+* **Misc -> Secuirty**:
+   * `ExposeSensitiveData`: set to `0x3`
+* **NVRAM**:
+   * `LegacyEnable`: set to `YES`
+   * `LegacyOverwrite` set to `YES`
+   * `LegacySchema`: NVRAM variables set\(OpenCore compares these to the variables present in nvram.plist\)
 * `ExposeSensitiveData`: set to `0x3`
 
 And within your EFI:
