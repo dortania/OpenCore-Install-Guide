@@ -1,4 +1,4 @@
-# Coffeelake
+# Coffee Lake
 
 ## Starting Point
 
@@ -345,7 +345,7 @@ For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intenti
 
 * `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
 * `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
-   * Note: While iMac19,1 and iMac19,2 are a closer match, these SMBIOS are not compatible with versions of macOS older than 10.14.5 and not all fixes are compatible with them(ie: USBInjectAll)
+   * Note: While iMac19,1 and iMac19,2 are a closer match, these SMBIOS are not compatible with versions of macOS older than Mojave and not all fixes are compatible with them(ie: USBInjectAll)
 
 To get the SMBIOS info generated with macserial, you can run it with the -a argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
 
@@ -379,6 +379,10 @@ The `Board Serial` part gets copied to Generic -&gt; MLB.
 We can create a SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) -and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
+
+**Reminder that you want serial numbers not in use, you want to get a message back like: "We’re sorry, but this serial number isn’t valid. Please check your information and try again."**
+
+[Apple Check Coverage page](https://checkcoverage.apple.com)
 
 **Automatic**: YES
 

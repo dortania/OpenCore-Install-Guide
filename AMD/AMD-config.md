@@ -321,7 +321,7 @@ For setting up the SMBIOS info, we'll use acidanthera's [macserial](https://gith
 For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
 
 * iMacPro1,1: AMD RX Polaris and newer
-* MacPro7,1: AMD RX Polaris and newer(Note that there's no valid serial numbers yet so iMessage and such will be broken. MacPro7,1 is also a Catalina exclusive)
+* MacPro7,1: AMD RX Polaris and newer(Note that MacPro7,1 is also a Catalina exclusive)
 * MacPro6,1: AMD R5/R7/R9 and older
 * iMac14,2: Nvidia Kepler and newer
 
@@ -359,6 +359,10 @@ The `Board Serial` part gets copied to Generic -&gt; MLB.
 We can create a SmUUID by running `uuidgen` in the terminal - and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
+
+**Reminder that you want serial numbers not in use, you want to get a message back like: "We’re sorry, but this serial number isn’t valid. Please check your information and try again."**
+
+[Apple Check Coverage page](https://checkcoverage.apple.com)
 
 **Automatic**: YES 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections

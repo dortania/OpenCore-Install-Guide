@@ -1,4 +1,4 @@
-# Kabylake
+# Kaby Lake
 
 ## Starting Point
 
@@ -355,6 +355,10 @@ The `Board Serial` part gets copied to Generic -&gt; MLB.
 We can create a SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) -and that gets copied to Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
+
+**Reminder that you want serial numbers not in use, you want to get a message back like: "We’re sorry, but this serial number isn’t valid. Please check your information and try again."**
+
+[Apple Check Coverage page](https://checkcoverage.apple.com)
 
 **Automatic**: YES
 

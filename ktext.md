@@ -82,6 +82,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * BrcmPatchRAM for 10.10 or older
 
 
+
 **AMD CPU Specific kexts**:
 * [NullCPUPowerManagment](https://github.com/corpnewt/NullCPUPowerManagement)
    * AMD CPUs cannot use Intel's power management so we need to nullify it.
@@ -99,7 +100,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * iMacPro1,1
 
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
-   * Needed for correcting TSC on HEDT and some server motherboards, without this macOS may be extremly slow or even unbootable
+   * Needed for correcting TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremly slow or even unbootable
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
