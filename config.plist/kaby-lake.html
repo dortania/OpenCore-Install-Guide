@@ -692,6 +692,10 @@
 <li>Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons</li>
 </ul>
 </li>
+<li><strong>AppleXcpmForceBoost</strong>: NO<ul>
+<li>Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this</li>
+</ul>
+</li>
 <li><strong>CustomSMBIOSGuid</strong>: NO <ul>
 <li>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops</li>
 </ul>
@@ -702,6 +706,10 @@
 </li>
 <li><strong>ExternalDiskIcons</strong>: YES <ul>
 <li>External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.</li>
+</ul>
+</li>
+<li><strong>IncreasePciBarSize</strong>: NO<ul>
+<li>Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you&apos;ll generally expereince a kernel panic on IOPCIFamily if you need this</li>
 </ul>
 </li>
 <li><strong>LapicKernelPanic</strong>: NO <ul>
@@ -739,7 +747,7 @@
 </ul>
 </li>
 <li><strong>PollAppleHotKeys</strong>: NO<ul>
-<li>Allows you to use Apple&apos;s hotkeys during boot, depending on the firmware you may need to use UsbKbDxe.efi instead of OpenCore&apos;s builtin support. Do note that if you can select anything in OC&apos;s picker, disabling this option can help. Popular commands:<ul>
+<li>Allows you to use Apple&apos;s hotkeys during boot, depending on the firmware you may need to use AppleUsbKbDxe.efi instead of OpenCore&apos;s builtin support. Do note that if you can select anything in OC&apos;s picker, disabling this option can help. Popular commands:<ul>
 <li><code>Cmd+V</code>: Enables verbose</li>
 <li><code>Cmd+Opt+P+R</code>: Cleans NVRAM </li>
 <li><code>Cmd+R</code>: Boots Recovery partition</li>
@@ -779,6 +787,14 @@
 <ul>
 <li><strong>AllowNvramReset</strong>: YES<ul>
 <li>Allows for NVRAM reset both in the boot picker and when pressing <code>Cmd+Opt+P+R</code></li>
+</ul>
+</li>
+<li><strong>AllowSetDefault</strong>: YES<ul>
+<li>Allow <code>CTRL+Enter</code> and <code>CTRL+Index</code> to set default boot device in the picker</li>
+</ul>
+</li>
+<li><strong>AuthRestart</strong>: NO:<ul>
+<li>Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional</li>
 </ul>
 </li>
 <li><strong>ExposeSensitiveData</strong>: <code>6</code><ul>
@@ -876,9 +892,17 @@
 <ul>
 <li>Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM</li>
 </ul>
+<p><strong>LegacyOverwrite</strong>: NO</p>
+<ul>
+<li>Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM</li>
+</ul>
 <p><strong>LegacySchema</strong></p>
 <ul>
 <li>Used for assigning NVRAM variables, used with LegacyEnable set to YES</li>
+</ul>
+<p><strong>WriteFlash</strong>: YES</p>
+<ul>
+<li>Enables writing to flash memory for all added variables.</li>
 </ul>
 <h2 id="platforminfo">Platforminfo</h2>
 <p><img src="https://i.imgur.com/M46vPwX.png" alt="PlatformInfo"></p>
@@ -914,12 +938,18 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
 <li>Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</li>
 <li><p><strong>SpoofVendor</strong>: YES</p>
 <ul>
-<li>Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
-<strong>UpdateDataHub</strong>: YES</li>
+<li>Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case</li>
 </ul>
 </li>
-<li><p>Update Data Hub fields</p>
+<li><p><strong>SupportsCsm</strong>: NO</p>
+<ul>
+<li>Used for when the EFI partition isn&apos;t first on the windows drive</li>
+</ul>
 </li>
+</ul>
+<p><strong>UpdateDataHub</strong>: YES</p>
+<ul>
+<li>Update Data Hub fields</li>
 </ul>
 <p><strong>UpdateNVRAM</strong>: YES</p>
 <ul>
@@ -951,7 +981,7 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
 </ul>
 </li>
 <li><strong>KeySupport</strong>: <code>NO</code><ul>
-<li>Enables OpenCore&apos;s built in key support, do not use with UsbKbDxe.efi</li>
+<li>Enables OpenCore&apos;s built in key support, do not use with AppleUsbKbDxe.efi</li>
 </ul>
 </li>
 <li><strong>KeySupportMode</strong>: <code>Auto</code><ul>
@@ -977,6 +1007,10 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
 </ul>
 <p><strong>Protocols</strong>: (Most values can be ignored here as they&apos;re meant for real Macs/VMs)</p>
 <ul>
+<li><strong>AppleSmcIo</strong>: NO<ul>
+<li>Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault</li>
+</ul>
+</li>
 <li><strong>ConsoleControl</strong>: YES<ul>
 <li>Replaces Console Control protocol with a builtin version, set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware</li>
 </ul>
@@ -1109,7 +1143,7 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Kaby Lake","level":"2.4","depth":1,"next":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"previous":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/kaby-lake.md","mtime":"2020-01-12T21:28:55.593Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-12T21:29:44.617Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Kaby Lake","level":"2.4","depth":1,"next":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"previous":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/kaby-lake.md","mtime":"2020-01-13T18:26:54.355Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T18:27:43.292Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

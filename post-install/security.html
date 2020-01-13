@@ -493,41 +493,57 @@
 <li>ScanPolicy</li>
 <li>Vault(work in progress)</li>
 </ul>
-<p><strong>Reminder</strong>: Keep a backup of your EFI and macOS data in case you have issues getting into macOS after enabling FileVault.</p>
 <h2 id="filevault-setup">FileVault Setup</h2>
 <p>To start, you&apos;ll need the following .efi drivers:</p>
 <ul>
-<li>VirtualSMC.efi(To be used in conjunction with VirtualSMC.kext)</li>
-<li>FwRuntimeServices.efi</li>
-<li>UsbKbDxe.efi may be needed if OpenCore&apos;s built-in input doesn&apos;t work</li>
+<li>FwRuntimeServices.efi<ul>
+<li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AppleUsbKbDxe.efi</a> may be needed if OpenCore&apos;s built-in input doesn&apos;t work</li>
 </ul>
+</li>
+</ul>
+<p><strong>Do not use VirtualSMC.efi with OpenCore, its already baked inside</strong></p>
 <p>Setting in your config.plist:</p>
 <ul>
-<li>Misc -&gt; Boot </li>
+<li>Misc -&gt; Boot <ul>
 <li><code>PollAppleHotKeys</code> set to YES(While not needed can be helpful)</li>
-<li>NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</li>
-<li><code>UIScale</code> set to <code>02</code> for high resolution, small displays</li>
-<li>UEFI -&gt; Input</li>
-<li><code>KeySupport</code> set to YES(Only when using OpenCore&apos;s built-in input, users of UsbKbDxe should avoid)</li>
-<li>UEFI -&gt; Protocols</li>
+</ul>
+</li>
+<li>Misc -&gt; Security<ul>
+<li><code>AuthRestart</code> set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional)</li>
+</ul>
+</li>
+<li>NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14<ul>
+<li><code>UIScale</code> set to <code>02</code> for high resolution small displays</li>
+</ul>
+</li>
+<li>UEFI -&gt; Input<ul>
+<li><code>KeySupport</code> set to YES(Only when using OpenCore&apos;s builtin input, users of UsbKbdxe should avoid)</li>
+</ul>
+</li>
+<li>UEFI -&gt; Protocols<ul>
 <li><code>FirmwareVolume</code> set to YES</li>
 <li><code>HashServices</code> set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing</li>
-<li>UEFI -&gt; Quirks</li>
+<li><code>AppleSmcIo</code> set to YES(this replaces VirtualSMC.efi)</li>
+</ul>
+</li>
+<li>UEFI -&gt; Quirks<ul>
 <li><code>ProvideConsoleGOP</code> to YES</li>
 <li><code>RequestBootVarRouting</code> set to YES</li>
 <li><code>ExitBootServicesDelay</code> set to <code>5</code> if you recieve <code>Still waiting for root device</code> on Aptio IV firmwares(Haswell and older)</li>
 </ul>
-<p>With all this, reboot testing the keyboard still works in the picker and you can proceed to enable FileVault like on a normal mac under <code>System Preferences -&gt; Security &amp; Privacy -&gt; FileVault</code></p>
+</li>
+</ul>
+<p>With all this, you can proceed to enable FileVault like on a normal mac under <code>System Preferences -&gt; Security &amp; Privacy -&gt; FileVault</code></p>
 <h2 id="scan-policy">Scan Policy</h2>
-<p>What this quirk allows to prevent scanning and booting from untrusted sources. Setting to <code>0</code> will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibility and security.</p>
-<p>To calculate the ScanPolicy value, you simply add up all the hexadecimal values(with a hexadecimal calculator, you can access this from the built-in macOS caluclator app with <code>&#x2318;+3</code>). Once it&apos;s all added up, you would add this hexadecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)</p>
+<p>What this quirk allows to prevent scanning and booting from untrusted sources. Setting to <code>0</code> will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.</p>
+<p>To calculate the ScanPolicy value, you simply add up all the hexidecimal values(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with <code>&#x2318;+3</code>). Once it&apos;s all added up, you would add this hexidecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)</p>
 <p><code>0x00000001 (bit 0)</code> &#x2014; OC_SCAN_FILE_SYSTEM_LOCK</p>
 <ul>
 <li>restricts scanning to only known file systems defined as a part of this policy. File system drivers may not be aware of this policy, and to avoid mounting of undesired file systems it is best not to load its driver. This bit does not affect dmg mounting, which may have any file system. Known file systems are prefixed with OC<em>SCAN_ALLOW_FS</em>.</li>
 </ul>
 <p><code>0x00000002 (bit 1)</code> &#x2014; OC_SCAN_DEVICE_LOCK</p>
 <ul>
-<li>restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunnelling, so be aware that on some systems it may be possible e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC<em>SCAN_ALLOW_DEVICE</em>.</li>
+<li>restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC<em>SCAN_ALLOW_DEVICE</em>.</li>
 </ul>
 <p><code>0x00000100 (bit 8)</code> &#x2014; OC_SCAN_ALLOW_FS_APFS</p>
 <ul>
@@ -583,7 +599,7 @@
 <li>OC_SCAN_ALLOW_DEVICE_SCSI </li>
 <li>OC_SCAN_ALLOW_DEVICE_NVME</li>
 </ul>
-<p>And let&apos;s just say for this example that you want to add OC_SCAN_ALLOW_DEVICE_USB:</p>
+<p>And lets just say for this example that you want to add OC_SCAN_ALLOW_DEVICE_USB:</p>
 <p><code>0x00200000</code> + <code>0xF0103</code> = <code>0x2F0103</code></p>
 <p>And converting this to decimal gives us <code>3,080,451</code></p>
 <h2 id="vault">Vault</h2>
@@ -642,7 +658,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.3","depth":1,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"extras/troubleshooting.md","ref":"extras/troubleshooting.md","articles":[]},"previous":{"title":"Disabling GPU","level":"5.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-01-12T21:28:55.597Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-12T21:29:44.617Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.3","depth":1,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"extras/troubleshooting.md","ref":"extras/troubleshooting.md","articles":[]},"previous":{"title":"Disabling GPU","level":"5.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-01-13T18:26:54.355Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T18:27:43.292Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
