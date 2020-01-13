@@ -1,4 +1,6 @@
-# GPU Spoof
+# Disabling GPU
+
+## GPU Spoof
 
 So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 
@@ -10,7 +12,8 @@ So you need to hide your unsupported GPU? Well with OpenCore things are slightly
   * Disables GPU on a per-slot basis
 
 **CSM must be off in the BIOS for the spoofing to work correctly, especially on AMD CPU based systems**
-## Boot Flag
+
+### Boot Flag
 
 By far the simplest way, all you need to do is add the following boot-arg:
 
@@ -18,7 +21,7 @@ By far the simplest way, all you need to do is add the following boot-arg:
 
 Do note that this will disable all GPUs excluding the iGPU
 
-## DevicePropeties Method
+### DevicePropeties Method
 
 Here is quite simple, find the PCI route with [gfxutil](https://github.com/acidanthera/gfxutil/releases) and then create a new DeviceProperties section with your spoof:
 
@@ -42,7 +45,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 
 ![](https://i.imgur.com/IjrDgNz.png)
 
-## SSDT Method
+### SSDT Method
 
 There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.
 
@@ -96,13 +99,14 @@ DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
    }
 }
 ```
-A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl)
-You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
+
+A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.
 
 Source: CorpNewt
 
-# Fixing Windows
+## Fixing Windows
 
 So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:
 
 ![Credit to CorpNewt for image](https://i.imgur.com/TG3jGBC.png)
+

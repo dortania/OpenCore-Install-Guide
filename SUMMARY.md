@@ -14,11 +14,11 @@
 
 ## Intel HEDT Config.plist
 
-* [Skylake-X](config-HEDT/X299.md)
+* [Skylake-X](intel-hedt-config.plist/x299.md)
 
 ## AMD Config.plist
 
-* [Zen/ThreadRipper](AMD/AMD-config.md)
+* [Zen/ThreadRipper](amd-config.plist/amd-config.md)
 
 ## Post Install
 
@@ -28,9 +28,9 @@
 
 ## Troubleshooting
 
-* [General Troubleshooting](extras/troubleshooting.md)
-* [Fixing Resolution and Verbose](extras/verbose.md)
-* [OpenCore Debugging](extras/debug.md)
+* [General Troubleshooting](troubleshooting/troubleshooting.md)
+* [Fixing Resolution and Verbose](troubleshooting/verbose.md)
+* [OpenCore Debugging](troubleshooting/debug.md)
 
 ## Extras
 
@@ -38,7 +38,7 @@
 * [Getting started with ACPI](extras/acpi.md)
 * [GPU Patching](extras/gpu-patches.md)
 * [Fixing KALSR slide values](extras/kalsr-fix.md)
-* [Fixing CFG Lock](post-install/msr-lock.md)
+* [Fixing CFG Lock](extras/msr-lock.md)
 * [Multiboot](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/)
 
 ## Misc

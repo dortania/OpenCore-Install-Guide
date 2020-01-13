@@ -5,7 +5,7 @@ Wanna try OpenCore but can't boot UEFI based sources? Well don't fret, there's h
 To start, you need the following:
 
 * BootInstall.command
-* Install source(MacOS Journaled + GUID, size of USb depends on the version of macOS. 16GB recommended for catalina)
+* Install source\(MacOS Journaled + GUID, size of USb depends on the version of macOS. 16GB recommended for catalina\)
 
 ![BootInstall Location](https://i.imgur.com/D9YT3M4.png)
 
