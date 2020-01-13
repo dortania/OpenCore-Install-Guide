@@ -6,7 +6,7 @@
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <title>Skylake · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="">
+        <meta name="description" content="Last updated: January 13">
         <meta name="generator" content="GitBook 3.2.3">
         
         
@@ -488,12 +488,13 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="skylake">Skylake</h1>
-<h2 id="starting-point">Starting Point</h2>
+<h2 id="skylake">Skylake</h2>
+<h3 id="starting-point">Starting Point</h3>
 <p>You&apos;ll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> and we can get to work.</p>
 <p>Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).</p>
 <p>Do note that images will not always be the most up-to-date so please read the text below them.</p>
 <p><strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly</strong></p>
-<h2 id="acpi">ACPI</h2>
+<h3 id="acpi">ACPI</h3>
 <p><img src="https://i.imgur.com/IkLFucw.png" alt="ACPI"></p>
 <p><strong>Add:</strong></p>
 <p>This is where you&apos;ll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for <a href="https://usb-map.gitbook.io/project/" target="_blank">USB maps</a>, <a href="../post-install/spoof.html">disabling unsupported GPUs</a> and such.</p>
@@ -509,11 +510,11 @@
 </li>
 </ul>
 <p>For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt&apos;s <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a> to properly set up your SSDT. All other SSDTs can be compiled with <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a>, don&apos;t forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.</p>
-<p><strong>For a much deeper rundown on ACPI including compiling in Windows and Linux, see the <a href="../extras/acpi.html">Getting started with ACPI</a> page.</strong></p>
+<p><strong>For a much deeper rundown on ACPI including compiling in Windows and Linux, see the</strong> <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a> <strong>page.</strong></p>
 <p><strong>Block</strong></p>
 <p>This drops certain ACPI tabes from loading, for us we can ignore this</p>
 <p><strong>Patch</strong>:</p>
-<p>This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. Most PCs do not ACPI patches, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers, use SSDTs or similar Device Property patching like what&apos;s seen with Framebuffer patching. </p>
+<p>This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. Most PCs do not ACPI patches, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers, use SSDTs or similar Device Property patching like what&apos;s seen with Framebuffer patching.</p>
 <ul>
 <li><strong>Comment</strong> <ul>
 <li>Name of patch</li>
@@ -559,7 +560,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="booter">Booter</h2>
+<h3 id="booter">Booter</h3>
 <p><img src="https://i.imgur.com/suElruh.png" alt="Booter"></p>
 <p>This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi</p>
 <p><strong>MmioWhitelist</strong>:</p>
@@ -615,7 +616,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="deviceproperties">DeviceProperties</h2>
+<h3 id="deviceproperties">DeviceProperties</h3>
 <p><img src="https://i.imgur.com/N44BEKs.png" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
 <p>This section is set up via Headkaze&apos;s <a href="https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271" target="_blank"><em>Intel Framebuffer Patching Guide</em></a> and applies only one actual property to begin, which is the <em>ig-platform-id</em>. The way we get the proper value for this is to look at the ig-platform-id we intend to use, then swap the pairs of hex bytes.</p>
@@ -637,11 +638,12 @@
 <li>Applies AppleALC audio injection, you&apos;ll need to do your own research on which codec your motherboard has and match it with AppleALC&apos;s layout. <a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a>.</li>
 </ul>
 <p>Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>. Please note that ADR for HDAS/HDEF is 0x001F0003 and Path = PciRoot(0x0)/Pci(0x1f,0x3), PciRoot(0x0)/Pci(0x1b,0x0) is generally for Haswell and earlier. You can find your audio path with the following(Do note, not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):</p>
-<pre><code>path/to/gfxutil -f HDEF
-</code></pre><p>Do note that <code>layout-id</code> is a <code>Data</code> value meaning you will need to convert from <code>Number</code> to <code>HEX</code> so <code>Layout=5</code> would be interpreted as <code>&lt;05000000&gt;</code> and <code>Layout=11</code> would be <code>&lt;0B000000&gt;</code>. Audio can be left for post-install.</p>
+<pre><code class="lang-text">path/to/gfxutil -f HDEF
+</code></pre>
+<p>Do note that <code>layout-id</code> is a <code>Data</code> value meaning you will need to convert from <code>Number</code> to <code>HEX</code> so <code>Layout=5</code> would be interpreted as <code>&lt;05000000&gt;</code> and <code>Layout=11</code> would be <code>&lt;0B000000&gt;</code>. Audio can be left for post-install.</p>
 <p><strong>Block</strong>: Removes device properties from map, for us we can ignore this</p>
 <p>Fun Fact: The reason the byte order is swapped is due to <a href="https://en.wikipedia.org/wiki/Endianness" target="_blank">Endianness</a>, specifically Little Endians that modern CPUs use for ordering bytes. The more you know!</p>
-<h2 id="kernel">Kernel</h2>
+<h3 id="kernel">Kernel</h3>
 <p><img src="https://i.imgur.com/l1pu0cJ.png" alt="Kernel"></p>
 <p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.</p>
 <ul>
@@ -736,7 +738,7 @@
 </li>
 </ul>
 <p>The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such</p>
-<h2 id="misc">Misc</h2>
+<h3 id="misc">Misc</h3>
 <p><img src="https://i.imgur.com/OROZbCk.png" alt="Misc"></p>
 <p><strong>Boot</strong>: Settings for boot screen (leave as-is unless you know what you&apos;re doing)</p>
 <ul>
@@ -784,7 +786,7 @@
 </ul>
 </li>
 </ul>
-<p>These values are based of those calculated in <a href="../extras/debug.html">OpenCore debugging</a></p>
+<p>These values are based of those calculated in <a href="../troubleshooting/debug.md">OpenCore debugging</a></p>
 <p><strong>Security</strong>: Security is pretty self-explanatory.</p>
 <ul>
 <li><strong>AllowNvramReset</strong>: YES<ul>
@@ -848,7 +850,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="nvram">NVRAM</h2>
+<h3 id="nvram">NVRAM</h3>
 <p><img src="https://i.imgur.com/HM4FTH6.png" alt="NVRAM"></p>
 <p><strong>Add</strong>: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majority can ignore but )</p>
 <ul>
@@ -877,10 +879,8 @@
 <ul>
 <li><code>00000000</code> - SIP completely enabled</li>
 <li><code>30000000</code> - Allow unsigned kexts and writing to protected fs locations</li>
-<li><p><code>E7030000</code> - SIP completely disabled</p>
-</li>
-<li><p><strong>nvda_drv</strong>: &lt;&gt; </p>
-</li>
+<li><code>E7030000</code> - SIP completely disabled</li>
+<li><strong>nvda_drv</strong>: &lt;&gt;</li>
 <li>For enabling Nvidia WebDrivers, set to 31 if running a <a href="https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs" target="_blank">Maxwell or Pascal GPU</a>. This is the same as setting nvda_drv=1 but instead we translate it from <a href="https://www.browserling.com/tools/hex-to-text" target="_blank">text to hex</a>. AMD and Intel users should leave this area blank.</li>
 <li><strong>prev-lang:kbd</strong>: &lt;&gt; <ul>
 <li>Needed for non-latin keyboards in the format of <code>lang-COUNTRY:keyboard</code>, recommeneded to keep blank though you can specify it(<strong>Default in Sample config is Russian</strong>):<ul>
@@ -908,7 +908,7 @@
 <ul>
 <li>Enables writing to flash memory for all added variables.</li>
 </ul>
-<h2 id="platforminfo">Platforminfo</h2>
+<h3 id="platforminfo">Platforminfo</h3>
 <p><img src="https://i.imgur.com/RKIXoi5.png" alt="PlatformInfo"></p>
 <p>For setting up the SMBIOS info, we&apos;ll use acidanthera&apos;s <a href="https://github.com/acidanthera/MacInfoPkg/releases" target="_blank"><em>macserial</em></a> application.</p>
 <p>For this Skylake example, we&apos;ll choose the <em>iMac17,1</em> SMBIOS.</p>
@@ -935,15 +935,12 @@ iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
 <p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>)</p>
 <p><strong>Automatic</strong>: YES</p>
 <ul>
-<li><p>Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</p>
-</li>
-<li><p><strong>SpoofVendor</strong>: YES</p>
-<ul>
+<li>Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</li>
+<li><strong>SpoofVendor</strong>: YES<ul>
 <li>Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case</li>
 </ul>
 </li>
-<li><p><strong>SupportsCsm</strong>: NO</p>
-<ul>
+<li><strong>SupportsCsm</strong>: NO<ul>
 <li>Used for when the EFI partition isn&apos;t first on the windows drive</li>
 </ul>
 </li>
@@ -964,7 +961,7 @@ iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
 <ul>
 <li>Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk</li>
 </ul>
-<h2 id="uefi">UEFI</h2>
+<h3 id="uefi">UEFI</h3>
 <p><img src="https://i.imgur.com/UiGGDWK.png" alt="UEFI"></p>
 <p><strong>ConnectDrivers</strong>: YES</p>
 <ul>
@@ -1080,14 +1077,14 @@ iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
 </ul>
 </li>
 </ul>
-<h2 id="cleaning-up">Cleaning up</h2>
+<h3 id="cleaning-up">Cleaning up</h3>
 <p>And now you&apos;re ready to save and place it into your EFI under EFI/OC.</p>
-<p>For those having booting issues, please make sure to read the <a href="../extras/troubleshooting.html">Troubleshooting section</a> first and if your questions are still unanswered we have plenty of resources at your disposal:</p>
+<p>For those having booting issues, please make sure to read the <a href="../troubleshooting/troubleshooting.md">Troubleshooting section</a> first and if your questions are still unanswered we have plenty of resources at your disposal:</p>
 <ul>
 <li><a href="https://www.reddit.com/r/hackintosh/" target="_blank">r/Hackintosh Subreddit</a></li>
 <li><a href="https://discord.gg/2QYd7ZT" target="_blank">r/Hackintosh Discord</a></li>
 </ul>
-<h1 id="post-install">Post-install</h1>
+<h2 id="post-install">Post-install</h2>
 <p>So what in the world needs to be done once everything is installed? Well here are some things:</p>
 <ul>
 <li><a href="https://usb-map.gitbook.io/project/" target="_blank">USB mapping</a> </li>
@@ -1144,7 +1141,7 @@ iMac17,1 | C02R4MYRGG7L | C02603200GUGPF7JA
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Skylake","level":"2.3","depth":1,"next":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"previous":{"title":"Haswell","level":"2.2","depth":1,"path":"config.plist/haswell.md","ref":"config.plist/haswell.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/skylake.md","mtime":"2020-01-13T18:26:54.355Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T18:27:43.292Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"description":"Last updated: January 13","title":"Skylake","level":"2.3","depth":1,"next":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"previous":{"title":"Haswell","level":"2.2","depth":1,"path":"config.plist/haswell.md","ref":"config.plist/haswell.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/skylake.md","mtime":"2020-01-13T20:37:08.707Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-13T20:37:54.029Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
