@@ -55,6 +55,8 @@ Here's what a populated EFI looks like:
 * Kexts go in Kexts folder
 * Firmware drivers\(.efi\) go in the Drivers folder
 
+See [Gathering Files](ktext.md) for more info on what you need
+
 ## Making the macOS Installer
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.

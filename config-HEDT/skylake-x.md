@@ -1,6 +1,6 @@
 # Skylake-X
 
-Last edited: January 13, 2020
+Last edited: January 14, 2020
 
 ## Starting Point
 
@@ -395,7 +395,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
-   * Set architecture timer resolution, Asus boards use `60000` for the interface
+   * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
 
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 

@@ -1,6 +1,6 @@
 # Ivy Bridge
 
-Last edited: January 13, 2020
+Last edited: January 14, 2020
 
 ### Starting Point
 
@@ -94,7 +94,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: NO
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful for newer firmware
+  * Reduces Stolen Memory Footprint, expands options for `slide=N` values
 * **DisableSingleUser**: NO
   * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -430,7 +430,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **PointerSupportMode**:
   * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
-  * Set architecture timer resolution, Asus boards use `60000` for the interface
+   * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
 
 **Protocols**: \(Most values can be ignored here as they're meant for real Macs/VMs\)
 

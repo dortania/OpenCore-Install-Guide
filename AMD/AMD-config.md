@@ -1,6 +1,6 @@
 # AMD
 
-Last edited: January 13, 2020
+Last edited: January 14, 2020
 
 ## Starting Point
 
@@ -285,7 +285,8 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
    * `debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
    * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-   * `npci=0x2000` - This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
+   * `npci=0x2000` - this disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
+   * `agdpmod=pikera` - used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. For us, since we're running kernel patches it's recommended to keep SIP off though you can turn it back on after install and test yourself
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
@@ -413,7 +414,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
-   * Set architecture timer resolution, Asus boards use `60000` for the interface
+   * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
 
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 

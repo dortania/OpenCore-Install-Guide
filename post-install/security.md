@@ -28,7 +28,7 @@ Setting in your config.plist:
   * `KeySupport` set to YES\(Only when using OpenCore's builtin input, users of UsbKbdxe should avoid\)
 * UEFI -&gt; Protocols
   * `FirmwareVolume` set to YES
-  * `HashServices` set to YES for Haswell and older, this is needed for systems with broken SHA-1 hashing
+  * `HashServices` set to YES for Haswell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
   * `AppleSmcIo` set to YES\(this replaces VirtualSMC.efi\)
 * UEFI -&gt; Quirks
   * `ProvideConsoleGOP` to YES
