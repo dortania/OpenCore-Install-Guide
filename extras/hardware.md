@@ -1,5 +1,6 @@
 # Supported hardware
 
+Last edited: January 2, 2020
 
 So this little section is for those who are wanting to know whether their hardware will work in macOS
 
@@ -31,7 +32,6 @@ So this little section is for those who are wanting to know whether their hardwa
 
 * No eMMC storage
 * Samsung PM981 and early 970 Evo Plus models don't work([970 Evo Plus requires a firmware upgrade to work](https://www.tonymacx86.com/threads/do-the-samsung-970-evo-plus-drives-work-new-firmware-available-2b2qexm7.270757/page-14#post-1960453))
-* See [Anti-Hackintosh-Buyers-Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/) for more info
 
 # Audio Compatibility
 

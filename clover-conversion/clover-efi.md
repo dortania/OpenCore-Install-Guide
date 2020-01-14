@@ -1,5 +1,7 @@
 # Clover firmware driver conversion
 
+Last edited: January 13, 2020
+
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different. 
 
 **Supported ones:**
@@ -42,6 +44,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * AptioMemoryFix.efi
 * FirmwareVolume.efi
 * HashServiceFix.efi
+* VirtualSMC.efi
 
 
 **Explictely unsupported drivers:**

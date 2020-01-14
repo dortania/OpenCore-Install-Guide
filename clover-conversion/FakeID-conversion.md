@@ -1,5 +1,7 @@
 # Converting a clover fakeID to OpenCore
 
+Last edited: January 5, 2020
+
 With OpenCore, GPU FakeIDs are handled a bit differently. Specifcally that you need to have the PCIRoot path to apply the properties. Luckily FakeIDs are not required to boot, instead only needed for proper GPU acceleration so this can be done in post-install.
 
 
