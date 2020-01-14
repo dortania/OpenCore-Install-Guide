@@ -117,6 +117,8 @@ Default sample config is in russian, check your prev-lang:kbd value under NVRAM 
   ```text
   path/to/gfxutil -f HDEF
   ```
+  
+  Alternative is using `alcid=xxx` and replace `xxx` with your layout-id
 
   Then find out your 
 
@@ -127,8 +129,15 @@ Default sample config is in russian, check your prev-lang:kbd value under NVRAM 
   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
 * AMD kernel patches aren't working\(AMD Users only\):
   * Either outdated or missing kernel patches
-* PollAppleHotKeys driver is incompatible:
-* Disable `PollAppleHotKeys` and `KeySupport`, then remove UsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers
+* Incompatible keyboard driver:
+  * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove AppleUsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers
+  * If the above doesn't work, reverse: disable `KeySupport`, then add AppleUsbKbDxe to your config.plist -&gt; UEFI -&gt; Drivers
+  
+  ## Can't select anything in the picker
+  
+* Incompatible keyboard driver:
+   * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove AppleUsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers
+   * If the above doesn't work, reverse: disable `KeySupport`, then add AppleUsbKbDxe to your config.plist -&gt; UEFI -&gt; Drivers
 
 ## Stuck on or near `[PCI Configuration Begin]`
 
