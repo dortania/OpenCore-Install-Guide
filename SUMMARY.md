@@ -14,7 +14,7 @@
 
 ## Intel HEDT Config.plist
 
-* [Skylake-X](intel-HEDT/skylake-x.md)
+* [Skylake-X](config-HEDT/skylake-x.md)
 
 ## AMD Config.plist
 
