@@ -1,5 +1,7 @@
 # Converting common properties from Clover to Opencore
 
+Last edited: October 23, 2019
+
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
 # Kexts and Firmware drivers

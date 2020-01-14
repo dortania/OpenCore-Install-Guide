@@ -1,4 +1,6 @@
-# Skylake-X
+# Haswell-E
+
+Last edited: January 13, 2020
 
 ## Starting Point
 
@@ -22,8 +24,8 @@ This is where you'll add SSDT patches for your system, these are most useful for
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-   * Allows for native CPU power management on Skylake-X and newer, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly. Seeing what device has AppleACPICPU connected first in [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/raw/master/IORegistryExplorer_v2.1.zip) can also give you a hint
-* [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
+   * Allows for native CPU power management on Haswell-E and newer, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly. Seeing what device has AppleACPICPU connected first in [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/raw/master/IORegistryExplorer_v2.1.zip) can also give you a hint
+* [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 
 All SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
@@ -143,7 +145,12 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
    * Path to the `info.plist` hidden within the kext
    * ex: `Contents/Info.plist`
 
-**Emulate**: Needed for spoofing unsupported CPUs, all Skylake X CPUs are natively supported
+**Emulate**: Needed for spoofing unsupported CPUs and enabling power management on Haswell-E and Boardwell-E
+
+* **Haswell E:**
+
+   * Cpuid1Data﻿: `C3060300 00000000 00000000 00000000﻿﻿`
+   * Cpuid1Mask: `FFFFFFFF 00000000 00000000 00000000`
 
 
 **Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
@@ -156,8 +163,8 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmCfgLock**: NO 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
-* **AppleXcpmExtraMsrs**: NO 
-   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Skylake-X can ignore
+* **AppleXcpmExtraMsrs**: YES 
+   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Needs to be enabled for `Emulate` to work correctly
 * **AppleXcpmForceBoost**: NO
    * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this
 * **CustomSMBIOSGuid**: NO 

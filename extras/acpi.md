@@ -1,5 +1,7 @@
 # Getting started with ACPI
 
+Last edited: January 13, 2020
+
 ## A quick explainer on ACPI and how to make SSDTs
 
 So what are DSDTs and SSDTs? Well, these are tables present in your firmware that outline hardware devices like USB controllers, CPU threads, embedded controllers, system clocks and such. A DSDT\(Differentiated System Description Table\) can be seen as the body holding most of the info with smaller bits of info being passed by the SSDT\(Secondary System Description Table\)
@@ -121,7 +123,7 @@ When this happens you need to figure out which is the main and which is not, it'
 
 > Hey what about USBX? Do I need to do anything?
 
-USBX is universal across all systems, it just creates a USBX device that forces USB power properties. This is crucial for fixing Mics, DACs, Webcams, Bluetooth Dongles and other high power draw devices. This is not mandatory to boot but should be added in post-install if not before. Note that USBX is only used on skylake+ systems, Broadwell and older can ignore
+USBX is universal across all systems, it just creates a USBX device that forces USB power properties. This is crucial for fixing Mics, DACs, Webcams, Bluetooth Dongles and other high power draw devices. This is not mandatory to boot but should be added in post-install if not before. Note that USBX is only used on skylake+ systems, Broadwell and older can ignore.
 
 For those who want a deeper dive into the issue: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 

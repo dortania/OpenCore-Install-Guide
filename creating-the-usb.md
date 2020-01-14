@@ -1,5 +1,7 @@
 # Creating the USB
 
+Last edited: January 13, 2020
+
 Requirements:
 
 * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info

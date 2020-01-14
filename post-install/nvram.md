@@ -1,5 +1,7 @@
 # Emulated NVRAM
 
+Last edited: January 13, 2020
+
 So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are the non-Z370 300 series chipsets:
 
 * B360

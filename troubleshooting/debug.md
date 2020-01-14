@@ -1,5 +1,7 @@
 # OpenCore Debugging
 
+Last edited: January 13, 2020
+
 Needing to figure out why you're getting issues or stalling? Well, you've come to the right place.
 
 To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenCore. This will provide much more info than the `RELEASE` version.

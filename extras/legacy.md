@@ -1,5 +1,7 @@
 # Legacy Install
 
+Last editied: January 13, 2020
+
 Wanna try OpenCore but can't boot UEFI based sources? Well don't fret, there's hope for you! OpenCore supports DuetPkg which emulates a UEFI environment for legacy systems.
 
 To start, you need the following:

@@ -4,7 +4,7 @@
 * [Creating the USB](creating-the-usb.md)
 * [Gathering files](ktext.md)
 
-## Intel Config.plist <a id="config.plist"></a>
+## Intel Config.plist
 
 * [Ivy Bridge](config.plist/ivy-bridge.md)
 * [Haswell](config.plist/haswell.md)
@@ -14,7 +14,7 @@
 
 ## Intel HEDT Config.plist
 
-* [Skylake-X](intel-hedt-config.plist/x299.md)
+* [Skylake-X](intel-HEDT/skylake-x.md)
 
 ## AMD Config.plist
 
@@ -40,7 +40,6 @@
 * [GPU Patching](extras/gpu-patches.md)
 * [Fixing KALSR slide values](extras/kalsr-fix.md)
 * [Fixing CFG Lock](extras/msr-lock.md)
-* [Multiboot](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/)
 
 ## Misc
 

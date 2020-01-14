@@ -1,5 +1,7 @@
 # Security and FileVault
 
+Last edited: January 13, 2020
+
 So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
 
 * ScanPolicy

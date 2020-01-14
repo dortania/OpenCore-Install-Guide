@@ -1,4 +1,5 @@
 # Improve GPU performance and remove nullcpupowermanagement.kext
+Last edited: January 12, 2020
 
 What you'll need:
 

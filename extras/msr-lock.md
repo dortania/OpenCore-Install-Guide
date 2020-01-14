@@ -1,5 +1,7 @@
 # Fixing CFG Lock
 
+Last editied: January 13, 2020
+
 ## Disabling CFG Lock
 
 So you've installed macOS but you're using those pesky `CFG-Lock` patches that we want to get rid of, well to do this is fairly simple. You'll need the following:

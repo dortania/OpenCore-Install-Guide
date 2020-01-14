@@ -1,5 +1,7 @@
 # Fixing KALSR slide values
 
+Last editied: January 13, 2020
+
 ## Fixing KALSR slide values
 
 This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.

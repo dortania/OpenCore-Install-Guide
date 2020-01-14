@@ -1,3 +1,5 @@
+Last edited: January 12, 2020
+
 With OpenCore I think it's about time we finally destroy some AMD myths, like how USB is just screwed on AMD and can't be mapped. Well, that is false! And I will show you the path of enlightenment.
 
 So why would I want to use this? Well, a couple of reasons:

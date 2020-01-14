@@ -1,4 +1,5 @@
 # Credit
+Last edited: January 13, 2020
 
 No good guide is made by one man, here's credit to those who've helped out:
 
