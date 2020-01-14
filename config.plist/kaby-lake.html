@@ -971,8 +971,8 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
 <li>The lengh of time that a key will be registered before resetting, for best results use <code>2</code> milliseconds</li>
 </ul>
 </li>
-<li><strong>KeySupport</strong>: <code>NO</code><ul>
-<li>Enables OpenCore&apos;s built in key support, do not use with AppleUsbKbDxe.efi</li>
+<li><strong>KeySupport</strong>: <code>YES</code><ul>
+<li>Enables OpenCore&apos;s built in key support and <strong>required for boot picker selection</strong>, do not use with AppleUsbKbDxe.efi</li>
 </ul>
 </li>
 <li><strong>KeySupportMode</strong>: <code>Auto</code><ul>
@@ -1038,7 +1038,7 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
 </ul>
 </li>
 <li><strong>ProvideConsoleGop</strong>: YES<ul>
-<li>Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle</li>
+<li>Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, <strong>required for seeing once the kernel takes over</strong></li>
 </ul>
 </li>
 <li><strong>ReleaseUsbOwnership</strong>: NO<ul>
@@ -1134,7 +1134,7 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Kaby Lake","level":"2.4","depth":1,"next":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"previous":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/kaby-lake.md","mtime":"2020-01-14T05:56:49.672Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-14T05:57:32.517Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Kaby Lake","level":"2.4","depth":1,"next":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"previous":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/kaby-lake.md","mtime":"2020-01-14T06:57:20.443Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-14T06:58:02.940Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

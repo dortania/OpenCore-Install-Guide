@@ -388,8 +388,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
 * **KeyMergeThreshold**: `2`
    * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
-* **KeySupport**: `NO`
-   * Enables OpenCore's built in key support, do not use with AppleUsbKbDxe.efi
+* **KeySupport**: `YES`
+   * Enables OpenCore's built in key support and **required for boot picker selection**, do not use with AppleUsbKbDxe.efi
 * **KeySupportMode**: `Auto`
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
@@ -427,7 +427,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **IgnoreTextInGraphics**: NO
    * Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
 * **ProvideConsoleGop**: YES
-   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle
+   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, **required for seeing once the kernel takes over**
 * **ReleaseUsbOwnership**: NO
    * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
 * **RequestBootVarFallback**: YES
