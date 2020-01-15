@@ -27,7 +27,7 @@ So to get a copy of your DSDT there's a couple of options:
 * [SSDTTime](https://github.com/corpnewt/SSDTTime)
   * Supports both Windows and Linux for DSDT dumping
 * [acpidump.exe](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip)
-  * In command prompt run `path/to/acpidump.exe -b -n DSDT -z`, this will dump your DSDT
+  * In command prompt run `path/to/acpidump.exe -b -n DSDT -z`, this will dump your DSDT as a .dat file. Rename this to DSDT.aml
 * F4 in Clover Boot menu
   * DSDT can be found in `EFI/CLOVER/ACPI/origin`, the folder **must** exist before dumping
 * [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
