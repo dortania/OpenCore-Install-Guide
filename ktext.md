@@ -82,7 +82,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM)
   * Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple Airport cards.
   * To be paired with BrcmFirmwareData.kext
-    * BrcmPatchRAM3 for 10.14+
+    * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.10 or older
 
@@ -115,7 +115,7 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 **If you're unsure which you need, the specific ones for each platform are mentioned in ACPI section for your CPU's config guide and info on making these files can be found in the [Getting started with ACPI](/extras/acpi.md)**
 
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
-* This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for most Z390 systems though newer BIOS revisions are starting to push this to all 300 series boards including Z370. This forces the legacy RTC clock on as macOS can't communicate with AWAC yet
+   * This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for most Z390 systems though newer BIOS revisions are starting to push this to all 300 series boards including Z370. This forces the legacy RTC clock on as macOS can't communicate with AWAC yet
 * [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
   * Alternative to [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) when there is no RTC clock to enable, this SSDT will fake it instead
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
