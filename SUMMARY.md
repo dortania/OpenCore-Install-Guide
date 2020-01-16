@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Introduction](README.md)
+* [OpenCore Vanilla Guide](README.md)
 * [Creating the USB](creating-the-usb.md)
 * [Gathering files](ktext.md)
 

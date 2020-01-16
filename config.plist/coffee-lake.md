@@ -134,7 +134,7 @@ The device-id fake is set up like so:
 
 Note: FakeID is only required for High Sierra, Mojave doesn't require this
 
-For users with black screen issues after verbose on B360, B365, H310, H370, Z390, please see the [BusID iGPU patching](../extras/gpu-patches.md#iGPU-BusID-Patching) page
+For users with black screen issues after verbose on B360, B365, H310, H370, Z390, please see the [BusID iGPU patching](/extras/gpu-patches.md#iGPU-BusID-Patching) page
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 

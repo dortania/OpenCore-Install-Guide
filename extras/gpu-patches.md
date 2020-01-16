@@ -7,7 +7,7 @@ This little section is for those who need more than what is provided by simple f
 * Applying a fakeID for unsupported GPUs
 * iGPU BusID patching for 300 series motherboards
 
-## Converting a clover fakeID to OpenCore
+# Converting a clover fakeID to OpenCore
 
 With OpenCore, GPU FakeIDs are handled a bit differently. Specifcally that you need to have the PCIRoot path to apply the properties. Luckily FakeIDs are not required to boot, instead only needed for proper GPU acceleration so this can be done in post-install.
 
@@ -63,7 +63,7 @@ Now navigate into your config.plist under DeviceProperties -&gt; Add where you c
 
 ![](https://i.imgur.com/e7UYS75.png)
 
-## iGPU BusID Patching
+# iGPU BusID Patching
 
 This section is for users running "true" 300 series motherboards\( B360, B365, H310, H370, Z390\) who are having issues setting up their iGPU as a display out.
 
