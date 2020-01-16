@@ -475,7 +475,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="gathering-files">Gathering files</h1>
-<p>Last edited: January 14, 2020</p>
+<p>Last edited: January 15, 2020</p>
 <h2 id="gathering-files">Gathering files</h2>
 <p>This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won&apos;t be deep diving in here.</p>
 <blockquote>
@@ -501,7 +501,7 @@
 <p>For extra functionality with OpenCore:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/AppleSupportPkg" target="_blank">AppleUsbKbDxe.efi</a><ul>
-<li>Used for Apple Hotkeys and FileVault support when OpenCore&apos;s built-in drivers do not work with your firmware. <strong>Recommended testing without it first as you will not be able to choose anything in the picker if configured incorrectly</strong></li>
+<li>Used for Apple Hotkeys and FileVault support when OpenCore&apos;s built-in drivers do not work with your firmware. <strong>Do not use unless KeySupport doesn&apos;t work</strong></li>
 </ul>
 </li>
 </ul>
@@ -521,7 +521,7 @@
 </ul>
 </li>
 </ul>
-<p><strong>VirualSMC Plugins</strong>:</p>
+<p><strong>VirtualSMC Plugins</strong>:</p>
 <ul>
 <li>SMCProcessor.kext<ul>
 <li>Used for monitoring CPU temperature, doesn&apos;t work AMD CPU based systems</li>
@@ -627,26 +627,24 @@
 <p>Please refer to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md" target="_blank">Kexts.md</a> for a full list of supported kexts</p>
 <h2 id="ssdts">SSDTs</h2>
 <p>So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well, we&apos;ll be going over a couple to see whether you need them. Do note you&apos;ll need to compile these SSDTs with <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> and please read them before compiling. Some require you to adjust them for your specific system(ie: EC0 to H_EC for SSDT-EC-USBX). These files will go in your ACPI folder in your EFI</p>
-<p><strong>If you&apos;re unsure which you need, the specific ones for each platform are mentioned in ACPI section for your SMBIOS and info on making these files can be found in the <a href="extras/acpi.html">Getting started with ACPI</a></strong></p>
+<p><strong>If you&apos;re unsure which you need, the specific ones for each platform are mentioned in ACPI section for your CPU&apos;s config guide and info on making these files can be found in the <a href="extras/acpi.html">Getting started with ACPI</a></strong></p>
 <ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a><ul>
-<li>This is the <a href="https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2" target="_blank">300 series RTC patch</a>, needed for most Z390 systems though newer BIOS revisions are starting to push this to all 300 series boards including Z370</li>
-</ul>
-</li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a></li>
+<li>This is the <a href="https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2" target="_blank">300 series RTC patch</a>, needed for most Z390 systems though newer BIOS revisions are starting to push this to all 300 series boards including Z370. This forces the legacy RTC clock on as macOS can&apos;t communicate with AWAC yet</li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a><ul>
-<li>Alternative to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a> when not compatible with your system.</li>
+<li>Alternative to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a> when there is no RTC clock to enable, this SSDT will fake it instead</li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a><ul>
-<li>Needed to setup USB power and such correctly, prefered option over renaming XHCI and required for booting macOS Catalina. This SSDT is meant for Skylake+ systems, please use <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a> for older systems. See the <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a> for more info regarding Embedded controller fix.</li>
+<li>Needed to setup USB power and such correctly and required for booting macOS Catalina. This SSDT is meant for Skylake+ systems, please use <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a> for older systems. See the <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a> for more info regarding Embedded controller fix.</li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a><ul>
-<li>Needed to setup USB power correctly on pre-skylake systems and required for booting macOS Catalina.</li>
+<li>Needed to setup the embedded controller correctly on pre-skylake systems and required for booting macOS Catalina.</li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl" target="_blank">SSDT-EHCx_OFF</a><ul>
-<li>Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems like for Z77, Z87, Z97, X79 and X99, not need if EHCI-Handoff is enabled in the BIOS</li>
+<li>Used for disabling phatom ports on pre-skylake systems like for Z77, Z87, Z97, X79 and X99, not need if XHCI-Handoff is enabled in the BIOS</li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a><ul>
@@ -702,7 +700,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"creating-the-usb.md","ref":"creating-the-usb.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-01-15T18:00:50.212Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-15T18:01:35.585Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"creating-the-usb.md","ref":"creating-the-usb.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-01-16T17:21:32.875Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-16T17:22:21.844Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

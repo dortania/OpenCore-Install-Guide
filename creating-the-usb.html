@@ -475,7 +475,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="creating-the-usb">Creating the USB</h1>
-<p>Last edited: January 13, 2020</p>
+<p>Last edited: January 15, 2020</p>
 <p>Requirements:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a>, highly recommend running the debug version to show more info</li>
@@ -503,13 +503,46 @@
 <p>You&apos;ll notice that once we open the EFI partition, it&apos;s empty. This is where the fun begins.</p>
 <p><img src="https://i.imgur.com/EDeZB3u.png" alt="Empty EFI partition"></p>
 <h2 id="base-folder-structure">Base folder structure</h2>
-<p>To setup OpenCore&#x2019;s folder structure, you&#x2019;ll want to grab those files from OpenCorePkg and construct your EFI to look like the one below:</p>
-<p><img src="https://i.imgur.com/1Ssvqfw.png" alt="base EFI folder"></p>
-<p>Now you can place your necessary .efi drivers from AppleSupportPkg into the <em>drivers</em> folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md" target="_blank">Clover firmware driver conversion</a> for supported drivers.</p>
+<p>To setup OpenCore&#x2019;s folder structure, you&#x2019;ll want to grab the EFI folder found in OpenCorePkg&apos;s releases page:</p>
+<p><img src="https://i.imgur.com/PvNIR4y.png" alt="base EFI folder"></p>
+<p>Now something you&apos;ll notcie is that it comes with a bunch of files in <code>Drivers</code> and <code>Tools</code> folder, we don&apos;t want most of these:</p>
+<ul>
+<li><p>Remove from Drivers:</p>
+<ul>
+<li>AppleUsbKbDxe.efi<ul>
+<li>Used for OpenCore picker but conflicts with built-in driver, <strong>do not use unless KeySupport doesn&apos;t work</strong></li>
+</ul>
+</li>
+<li>NvmExpressDxe.efi<ul>
+<li>Used for Haswell and older when no NVMe driver is built into the firmware</li>
+</ul>
+</li>
+<li>XhciDxe.efi<ul>
+<li>Used for Sandy Bridge and older when no XHCI driver is built into the firmware</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Remove from Tools:</p>
+<ul>
+<li>CleanNvram.efi<ul>
+<li>We&apos;ll be using OpenCore&apos;s built-in function</li>
+</ul>
+</li>
+<li>VerifyMsrE2.efi<ul>
+<li>Used for <a href="extras/msr-lock.html">verifying MSR lock</a>, for install we can igore</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>A cleaned up EFI:</p>
+<p><img src="https://i.imgur.com/2INJYol.png" alt="Clean EFI"></p>
+<p>Now you can place <strong>your</strong> necessary fimrware drivers(.efi) from AppleSupportPkg into the <em>Drivers</em> folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md" target="_blank">Clover firmware driver conversion</a> for more info on supported drivers and those merged into OpenCore.</p>
 <ul>
 <li>Please do also note that AptioMemoryFix.efi has now been split between OpenCore itself and FwRuntimeServices.efi</li>
 </ul>
-<p>Here&apos;s what a populated EFI looks like:</p>
+<p>Here&apos;s what a populated EFI can look like:</p>
 <p><img src="https://i.imgur.com/HVuyghf.png" alt="Populated EFI folder"></p>
 <p><strong>Reminder</strong>:</p>
 <ul>
@@ -517,23 +550,32 @@
 <li>Kexts go in Kexts folder</li>
 <li>Firmware drivers(.efi) go in the Drivers folder</li>
 </ul>
-<p>See <a href="ktext.html">Gathering Files</a> for more info on what you need</p>
+<p>See <a href="ktext.html">Gathering Files</a> on the next page for more info on what you need</p>
 <h2 id="making-the-macos-installer">Making the macOS Installer</h2>
 <p>While you don&apos;t need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.</p>
 <ul>
-<li>Users with a mac:<ul>
+<li><strong>Users with a mac</strong>:<ul>
 <li>Format the USB as HFS+/MacOS Journaled with GUID partition map, must be 16GB for Catalina</li>
 <li>Download a copy of macOS<ul>
-<li>AppStore: <a href="macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12" target="_blank">High Sierra</a>, <a href="macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12" target="_blank">Mojave</a>, <a href="macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12" target="_blank">Catalina</a></li>
-<li><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a> with the <code>BuildmacOSInstallApp.command</code></li>
+<li>AppStore: <ul>
+<li><a href="macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12" target="_blank">High Sierra</a>, </li>
+<li><a href="macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12" target="_blank">Mojave</a>, </li>
+<li><a href="macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12" target="_blank">Catalina</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a>:<ul>
+<li>Download the full macOS installer</li>
+<li>Run <code>BuildmacOSInstallApp</code> then drag and drop the <code>macOS Downloads</code> folder </li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Run the <code>createinstallmedia</code> command provided by <a href="https://support.apple.com/en-us/HT201372" target="_blank">Apple</a></li>
 </ul>
 </li>
-<li>Users without a mac:<ul>
+<li><strong>Users without a mac</strong>:<ul>
 <li>Format USB as Fat32 with GUID partition map, must be 4GB minimum<ul>
-<li>Disk Management in WindowsWindows</li>
+<li>Disk Management in Windows</li>
 <li>Disks Utility in Linux</li>
 </ul>
 </li>
@@ -590,7 +632,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"creating-the-usb.md","mtime":"2020-01-15T18:00:50.212Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-15T18:01:35.585Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"creating-the-usb.md","mtime":"2020-01-16T17:21:32.875Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-16T17:22:21.844Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
