@@ -1,5 +1,5 @@
 # Gathering files
-Last edited: January 14, 2020
+Last edited: January 15, 2020
 ## Gathering files
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
@@ -22,7 +22,7 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
 For extra functionality with OpenCore:
 
 * [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg)
-  * Used for Apple Hotkeys and FileVault support when OpenCore's built-in drivers do not work with your firmware. **Recommended testing without it first as you will not be able to choose anything in the picker if configured incorrectly**
+  * Used for Apple Hotkeys and FileVault support when OpenCore's built-in drivers do not work with your firmware. **Do not use unless KeySupport doesn't work**
 
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
 
@@ -40,7 +40,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 * [Lilu](https://github.com/vit9696/Lilu/releases)
   * A kext to patch many processes, required for AppleALC and WhateverGreen and recommended for VirtualSMC
 
-**VirualSMC Plugins**:
+**VirtualSMC Plugins**:
 
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, doesn't work AMD CPU based systems
@@ -112,18 +112,18 @@ Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/maste
 
 So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well, we'll be going over a couple to see whether you need them. Do note you'll need to compile these SSDTs with [MaciASL](https://github.com/acidanthera/MaciASL/releases) and please read them before compiling. Some require you to adjust them for your specific system\(ie: EC0 to H\_EC for SSDT-EC-USBX\). These files will go in your ACPI folder in your EFI
 
-**If you're unsure which you need, the specific ones for each platform are mentioned in ACPI section for your SMBIOS and info on making these files can be found in the [Getting started with ACPI](/extras/acpi.md)**
+**If you're unsure which you need, the specific ones for each platform are mentioned in ACPI section for your CPU's config guide and info on making these files can be found in the [Getting started with ACPI](/extras/acpi.md)**
 
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
-  * This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for most Z390 systems though newer BIOS revisions are starting to push this to all 300 series boards including Z370
+* This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for most Z390 systems though newer BIOS revisions are starting to push this to all 300 series boards including Z370. This forces the legacy RTC clock on as macOS can't communicate with AWAC yet
 * [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
-  * Alternative to [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) when not compatible with your system.
+  * Alternative to [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) when there is no RTC clock to enable, this SSDT will fake it instead
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
-  * Needed to setup USB power and such correctly, prefered option over renaming XHCI and required for booting macOS Catalina. This SSDT is meant for Skylake+ systems, please use [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) for older systems. See the [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/) for more info regarding Embedded controller fix.
+  * Needed to setup USB power and such correctly and required for booting macOS Catalina. This SSDT is meant for Skylake+ systems, please use [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) for older systems. See the [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/) for more info regarding Embedded controller fix.
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
-  * Needed to setup USB power correctly on pre-skylake systems and required for booting macOS Catalina.
+  * Needed to setup the embedded controller correctly on pre-skylake systems and required for booting macOS Catalina.
 * [SSDT-EHCx\_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
-  * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems like for Z77, Z87, Z97, X79 and X99, not need if EHCI-Handoff is enabled in the BIOS
+  * Used for disabling phatom ports on pre-skylake systems like for Z77, Z87, Z97, X79 and X99, not need if XHCI-Handoff is enabled in the BIOS
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
   * Sets `PluginType`, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly. X99 and X299 users need to verify if the path is correct\(ie: `\_PR.PR00` vs `\_PR.PC00.PR00`\)
 * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)

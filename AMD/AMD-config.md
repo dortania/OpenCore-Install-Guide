@@ -25,11 +25,10 @@ Please note that 3rd gen Threadripper(19h) is unsupported currently.
 
 This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such.
 
-* [SSDT-EC-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.dsl)
+* [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
-   * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-AMD.aml)
-* [SSDT-USBX-AMD](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX-AMD.aml)
-   * Forces power properties onto your USB controller, commonly used for fixing mics, DACs, webcams, Bluetooth dongles, etc. This SSDT is optional but I've provided a pre-compiled version as each system uses the same SSDT. This must be used in conjunction with SSDT-EC to work correctly
+   * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD)
+ 
 
 For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. 
 

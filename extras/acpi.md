@@ -1,6 +1,6 @@
 # Getting started with ACPI
 
-Last edited: January 13, 2020
+Last edited: January 16, 2020
 
 ## A quick explainer on ACPI and how to make SSDTs
 
@@ -36,15 +36,15 @@ So to get a copy of your DSDT there's a couple of options:
 If OpenCore is having issues running acpidump, you can call it from the shell with [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)\(reminder to add to both `EFI/OC/Tools` and in your config under `Misc -> Tools` \):
 
 ```text
-shell> fs0: //replace with proper drive
+shell> fs0: // replace with proper drive
 
-fs0:\> dir //to verify this is the right directory
+fs0:\> dir // to verify this is the right directory
 
 Directory of fs0:\
 
 01/01/01 3:30p EFI
 
-fs0:\> cd EFI\OC\Tools //note that it's with forward slashes
+fs0:\> cd EFI\OC\Tools // note that it's with forward slashes
 
 fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 ```
@@ -85,7 +85,7 @@ This one's fairly easy to figure out, open your decompiled DSDT and search for `
 
 ![](https://i.imgur.com/lQ4kpb9.png)
 
-As you can see our `PNP0C09` is found within the `Device (EC0)` meaning this is the device we want to hide from macOS. Now grab our SSDT-EC and uncomment the EC0 function:
+As you can see our `PNP0C09` is found within the `Device (EC0)` meaning this is the device we want to hide from macOS(others may find ). Now grab our SSDT-EC and uncomment the EC0 function(remove the `/*` and `*/` around it):
 
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
   * For Skylake+ and all AMD systems
@@ -93,6 +93,7 @@ As you can see our `PNP0C09` is found within the `Device (EC0)` meaning this is 
   * For Haswell and older
 
 ```text
+/* <- REMOVE THIS
 External (_SB_.PCI0.LPCB.EC0, DeviceObj)
 
    Scope (\_SB.PCI0.LPCB.EC0)
@@ -109,9 +110,12 @@ External (_SB_.PCI0.LPCB.EC0, DeviceObj)
      }
   }
 }
+*/ <- REMOVE THIS
 ```
 
-But looking back at the screenshot above we notice something, our ACPI path is different: `PC00.LPC0` vs `PCI0.LPCB`. This is very important especially when you're dealing with Intel consumer vs Intel HEDT and AMD, `PC00.LPC0` is common on Intel HEDT while `PCI0.SBRG` is common on AMD. And they even come with name variation such as  `EC0`, `H_EC`, `PGEC` and `ECDV`, so there can't be a one size fits all SSDT, **always verify your path and device**
+But looking back at the screenshot above we notice something, our ACPI path is different: `PC00.LPC0` vs `PCI0.LPCB`. This is very important especially when you're dealing with Intel consumer vs Intel HEDT and AMD, `PC00.LPC0` is common on Intel HEDT while `PCI0.SBRG` is common on AMD. And they even come with name variation such as  `EC0`, `H_EC`, `PGEC` and `ECDV`, so there can't be a one size fits all SSDT, **always verify your path and device**.
+
+And make sure to scroll to the bottom as the new Fake EC function also need the correct path to replace the old EC.
 
 > What happens if multiple `PNP0C09` show up
 
@@ -123,13 +127,35 @@ When this happens you need to figure out which is the main and which is not, it'
 
 > What happens if no `PNP0C09` show up?
 
+This means your SSDT can be *almost* complied, the main thing to watch for is whether your DSDT uses `PCI0.LPCB` or not. The reason being is that we have a FakeEC at the bottom of our SSDT that needs to connect properly into our DSDT. Gernally AMD uses `SBRG` while Intel HEDT use `LPC0`, **verify which show up in your DSDT**. Once you find out, change `PCI0.LPCB` to your correct path:
+
+```text
+Scope (\_SB.PCI0.LPCB)
+{
+    Device (EC)
+    {
+        Name (_HID, "ACID0001")  // _HID: Hardware ID
+        Method (_STA, 0, NotSerialized)  // _STA: Status
+        {
+            If (_OSI ("Darwin"))
+            {
+                Return (0x0F)
+            }
+            Else
+            {
+                Return (Zero)
+            }
+        }
+    }
+}
+```
 
 
 > Hey what about USBX? Do I need to do anything?
 
 USBX is universal across all systems, it just creates a USBX device that forces USB power properties. This is crucial for fixing Mics, DACs, Webcams, Bluetooth Dongles and other high power draw devices. This is not mandatory to boot but should be added in post-install if not before. Note that USBX is only used on skylake+ systems, Broadwell and older can ignore and that USBX requires a patched EC to function correctly
 
-For those who want a deeper dive into the issue: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
+For those who want a deeper dive into the EC issue: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 
 ### PLUG SSDT
 

@@ -1,6 +1,6 @@
 # Creating the USB
 
-Last edited: January 13, 2020
+Last edited: January 15, 2020
 
 Requirements:
 
@@ -37,15 +37,35 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ## Base folder structure
 
-To setup OpenCore’s folder structure, you’ll want to grab those files from OpenCorePkg and construct your EFI to look like the one below:
+To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in OpenCorePkg's releases page:
 
-![base EFI folder](https://i.imgur.com/1Ssvqfw.png)
+![base EFI folder](https://i.imgur.com/PvNIR4y.png)
 
-Now you can place your necessary .efi drivers from AppleSupportPkg into the _drivers_ folder and kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc\). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for supported drivers.
+Now something you'll notcie is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
+
+* Remove from Drivers:
+   * AppleUsbKbDxe.efi
+      * Used for OpenCore picker but conflicts with built-in driver, **do not use unless KeySupport doesn't work**
+   * NvmExpressDxe.efi
+      * Used for Haswell and older when no NVMe driver is built into the firmware
+   * XhciDxe.efi
+      * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+
+* Remove from Tools:
+   * CleanNvram.efi
+      * We'll be using OpenCore's built-in function
+   * VerifyMsrE2.efi
+      * Used for [verifying MSR lock](/extras/msr-lock.md), for install we can igore
+
+A cleaned up EFI:
+
+![Clean EFI](https://i.imgur.com/2INJYol.png)
+
+Now you can place **your** necessary fimrware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc\). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
 * Please do also note that AptioMemoryFix.efi has now been split between OpenCore itself and FwRuntimeServices.efi
 
-Here's what a populated EFI looks like:
+Here's what a populated EFI can look like:
 
 ![Populated EFI folder](https://i.imgur.com/HVuyghf.png)
 
@@ -55,21 +75,26 @@ Here's what a populated EFI looks like:
 * Kexts go in Kexts folder
 * Firmware drivers\(.efi\) go in the Drivers folder
 
-See [Gathering Files](ktext.md) for more info on what you need
+See [Gathering Files](ktext.md) on the next page for more info on what you need
 
 ## Making the macOS Installer
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
-* Users with a mac:
+* **Users with a mac**:
   * Format the USB as HFS+/MacOS Journaled with GUID partition map, must be 16GB for Catalina
   * Download a copy of macOS
-    * AppStore: [High Sierra](macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12), [Mojave](macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12), [Catalina](macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12)
-    * [GibMacOS](https://github.com/corpnewt/gibMacOS) with the `BuildmacOSInstallApp.command`
+    * AppStore: 
+       * [High Sierra](macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12), 
+       * [Mojave](macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12), 
+       * [Catalina](macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12)
+    * [GibMacOS](https://github.com/corpnewt/gibMacOS):
+       * Download the full macOS installer
+       * Run `BuildmacOSInstallApp` then drag and drop the `macOS Downloads` folder 
   * Run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372)
-* Users without a mac:
+* **Users without a mac**:
   * Format USB as Fat32 with GUID partition map, must be 4GB minimum
-    * Disk Management in WindowsWindows
+    * Disk Management in Windows
     * Disks Utility in Linux
   * Download the macOS `BaseSystem.dmg` and `BaseSystem.chunklist`
     * [gibMacOS](https://github.com/corpnewt/gibMacOS)
