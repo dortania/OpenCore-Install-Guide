@@ -1,6 +1,6 @@
 # AMD
 
-Last edited: January 14, 2020
+Last edited: January 16, 2020
 
 ## Starting Point
 
@@ -12,7 +12,7 @@ Kernel patches(save these for later, we'll go over how to use them below):
 * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
 * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
-Please note that 3rd gen Threadripper(19h) is unsupported currently.
+Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly**
 

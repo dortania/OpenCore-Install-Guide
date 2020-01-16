@@ -1,6 +1,6 @@
 # Haswell
 
-Last edited: January 14, 2020
+Last edited: January 16, 2020
 
 ### Starting Point
 
@@ -8,7 +8,7 @@ You'll want to start with the sample.plist that OpenCorePkg provides you in the 
 
 Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist\(Cmd/Crtl + R and point to your OC folder\).
 
-Do note that images will not always be the most up-to-date so please read the text below them.
+Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly**
 
