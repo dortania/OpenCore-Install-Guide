@@ -6,6 +6,7 @@ before_script:
 script: 
 - gitbook install
 - gitbook build
+- cp images/* _book/gitbook/images
 deploy:
   local_dir: _book
   provider: pages
