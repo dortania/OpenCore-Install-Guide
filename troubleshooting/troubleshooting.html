@@ -563,15 +563,22 @@
 </code></pre>
 <pre><code class="lang-text">&lt;integer&gt;2147483648&lt;/integer&gt;
 </code></pre>
-<p><strong>No on-board audio</strong></p>
-</li>
-<li><p>Verify that your PCIRoot is correct for your audio controller, this can be verified with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer(Common 2 are HDEF and HDAS)</p>
-<pre><code class="lang-text">path/to/gfxutil -f HDEF
-</code></pre>
-<p>Alternative is using <code>alcid=xxx</code> and replace <code>xxx</code> with your layout-id</p>
-<p>Then find out your </p>
 </li>
 </ul>
+<h2 id="no-on-board-audio">No on-board audio</h2>
+<ul>
+<li>Verify that your PCIRoot is correct for your audio controller, this can be verified with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer(Common 2 are HDEF and HDAS)</li>
+</ul>
+<pre><code class="lang-text">path/to/gfxutil -f HDEF
+</code></pre>
+<p>  Then add this PCIRoot with the child <code>layout-id</code> to your config.plist under DeviceProperties -&gt; Add:</p>
+<p>  <img src="https://i.imgur.com/oV3xqta.png" alt=""></p>
+<p>Then find out your layout-id for your specific codec: <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">AppleALC&apos;s supported codec</a></p>
+<p>For this example, we&apos;ll find the layout-id for ALC1150. Looking at the supported list we&apos;re given the following:</p>
+<pre><code class="lang-text">0x100001, layout 1, 2, 3, 5, 7, 11
+</code></pre>
+<p><code>0x100001</code> refers to the codc revision, you can ignore this. For us what we care about is <code>layout 1, 2, 3, 5, 7, 11</code>, we want to test each one individually until you find a layout that works best for you. Remember that the DeviceProperty is in HEX, converting 5 to HEX becomes <code>05000000</code>  and converting 11 to HEX becomes <code>0B000000</code> .</p>
+<p>Alternative is using <code>alcid=xxx</code> in your boot-args and replace <code>xxx</code> with your layout-id</p>
 <h2 id="stuck-after-selection-macos-partition-on-opencore">Stuck after selection macOS partition on OpenCore</h2>
 <ul>
 <li>CFG-Lock not off(Intel Users only), couple solutions:<ul>
@@ -694,7 +701,7 @@ fs0:\&gt; cd EFI\OC\Tools //note that its with forward slashes
 
 fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 </code></pre>
-<h2 id="fixing-ssdttime-could-not-locate-or-download-iasl">fixing SSDTTime: <code>Could not locate or download iasl!</code></h2>
+<h2 id="fixing-ssdttime-could-not-locate-or-download-iasl">Fixing SSDTTime: <code>Could not locate or download iasl!</code></h2>
 <p>This is usually due to an outdated version of Python, try either updating Python or add iasl to the scripts folder for SSDTTime:</p>
 <ul>
 <li><a href="https://bitbucket.org/RehabMan/acpica/downloads/iasl.zip" target="_blank">iasl macOS version</a></li>
@@ -749,7 +756,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"6.2","depth":1,"path":"troubleshooting/verbose.md","ref":"troubleshooting/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-01-16T18:04:36.732Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-16T18:05:26.787Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"6.2","depth":1,"path":"troubleshooting/verbose.md","ref":"troubleshooting/verbose.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-01-16T21:03:16.435Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-16T21:04:08.056Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
