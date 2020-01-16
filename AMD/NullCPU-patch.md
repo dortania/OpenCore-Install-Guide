@@ -44,6 +44,8 @@ Don't forget that compiled SSDTs have a .aml extension(Assembled)
 
 This is important as this is required for SSDT-PLUG to work correctly, many systems already have it enabled but some need it forced on. To verify yours, open IORegistryExproler and search for `HPET`. Look to the right and try to see what properties this device has, we want it to have `_STA` = `0xF`, if not then we want to enable it.
 
+![](https://i.imgur.com/oN05nO1.png)
+
 
 * [SSDT-XOSI.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-XOSI.aml)
    * Prebuilt so no need to compile, just add to config.plist and EFI/OC/ACPI
