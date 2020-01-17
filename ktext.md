@@ -22,7 +22,7 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
 For extra functionality with OpenCore:
 
 * [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg)
-      * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on IvyBridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on IvyBridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
 
