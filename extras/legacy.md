@@ -1,6 +1,6 @@
 # Legacy Install
 
-Last editied: January 13, 2020
+Last editied: January 17, 2020
 
 Wanna try OpenCore but can't boot UEFI based sources? Well don't fret, there's hope for you! OpenCore supports DuetPkg which emulates a UEFI environment for legacy systems.
 
@@ -31,3 +31,4 @@ This will give you a list of available disks, choose yours and you will be promp
 
 This will provide you with an EFI partition with a `boot` file, this is where we'll add our OpenCore EFI.
 
+**Note**: You will need AppleUsbKbDxe.efi for picker support
