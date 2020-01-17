@@ -4,11 +4,11 @@ Last edited: January 17, 2020
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
-* [OpenCore booting issues](/troubleshooting/troubleshooting-cleanup.md#OpenCore-booting)
+* [OpenCore booting issues](/troubleshooting/troubleshooting-cleanup.md#opencore-booting)
    * This is anytime before or during the loading of the macOS kernel
-* [macOS booting issues](/troubleshooting/troubleshooting-cleanup.md#macOS-booting)
+* [macOS booting issues](/troubleshooting/troubleshooting-cleanup.md#macos-booting)
    * Anytime between the kernel loading and installing macOS
-* [macOS post-install issues](/troubleshooting/troubleshooting-cleanup.md#macOS-post-install)
+* [macOS post-install issues](/troubleshooting/troubleshooting-cleanup.md#macos-post-install)
    * Anytime after macOS is installed
 * [Other issues](/troubleshooting/troubleshooting-cleanup.md#other-issues)
    * This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc
