@@ -45,7 +45,7 @@ Now something you'll notcie is that it comes with a bunch of files in `Drivers` 
 
 * Remove from Drivers:
    * AppleUsbKbDxe.efi
-      * Used for OpenCore picker but conflicts with built-in driver, **do not use unless KeySupport doesn't work**
+      * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
    * NvmExpressDxe.efi
       * Used for Haswell and older when no NVMe driver is built into the firmware
    * XhciDxe.efi
