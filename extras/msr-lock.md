@@ -13,7 +13,7 @@ Inside your EFI/OC/Tools folder and config.plist:
 
 And some apps to help us out:
 
-* [UEFITool](https://github.com/LongSoft/UEFITool/releases/tag/t20190818)\(Make sure it's UEFITool and not UEFIExtract\)
+* [UEFITool](https://github.com/LongSoft/UEFITool/releases) \(Make sure it's UEFITool and not UEFIExtract\)
 * [Universal-IFR-Extractor](https://github.com/LongSoft/Universal-IFR-Extractor/releases)
 
 And don't forget to disable the following from your config.plist:
