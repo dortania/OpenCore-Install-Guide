@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Credit · GitBook</title>
+        <title>macOS install · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -62,8 +62,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="winblows-install.html" />
     
-    <link rel="prev" href="../extras/msr-lock.html" />
+    
+    <link rel="prev" href="opencore-efi.html" />
     
 
     </head>
@@ -105,9 +107,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../installer-guide/opencore-efi.html">
+        <li class="chapter " data-level="1.2" data-path="opencore-efi.html">
             
-                <a href="../installer-guide/opencore-efi.html">
+                <a href="opencore-efi.html">
             
                     
                     Creating the USB
@@ -119,9 +121,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="../installer-guide/mac-install.html">
+        <li class="chapter active" data-level="1.2.1" data-path="mac-install.html">
             
-                <a href="../installer-guide/mac-install.html">
+                <a href="mac-install.html">
             
                     
                     macOS install
@@ -132,9 +134,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="../installer-guide/winblows-install.html">
+        <li class="chapter " data-level="1.2.2" data-path="winblows-install.html">
             
-                <a href="../installer-guide/winblows-install.html">
+                <a href="winblows-install.html">
             
                     
                     Windows install
@@ -459,9 +461,9 @@
         
         
     
-        <li class="chapter active" data-level="8.1" data-path="credit.html">
+        <li class="chapter " data-level="8.1" data-path="../misc/credit.html">
             
-                <a href="credit.html">
+                <a href="../misc/credit.html">
             
                     
                     Credit
@@ -502,7 +504,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Credit</a>
+        <a href=".." >macOS install</a>
     </h1>
 </div>
 
@@ -517,113 +519,39 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="credit">Credit</h1>
-<p>Last edited: January 13, 2020</p>
-<p>No good guide is made by one man, here&apos;s credit to those who&apos;ve helped out:</p>
+                                <h1 id="making-the-installer-in-macos">Making the installer in macOS</h1>
+<p>While you don&apos;t need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.</p>
+<p><strong>Note for legacy users</strong></p>
 <ul>
-<li><a href="https://github.com/vit9696" target="_blank">vit9696</a><ul>
-<li>One of many developers of OpenCore</li>
-<li>Corrections to the original guide</li>
-<li>Corrections to this guide...(seriously this man deserves a medal)</li>
+<li>If you want to use OpenCore on a system without UEFI, please follow the <a href="extras/legacy.md">Legacy Install</a> section first, after you can continue following the <strong>Base folder structure</strong> section</li>
 </ul>
-</li>
-<li><a href="https://github.com/icedterminal" target="_blank">icedterminal</a><ul>
-<li>Heavy grammar correction</li>
-<li>Clover removal</li>
-</ul>
-</li>
-<li><a href="https://github.com/S2F0amEgS2xvdmVy" target="_blank">S2F0amEgS2xvdmVy</a><ul>
-<li>Link correction</li>
-</ul>
-</li>
-<li><a href="https://github.com/corpnewt" target="_blank">CorpNewt</a><ul>
-<li>Heavily inspiring this guide(if not a rip off) and helping overal with questions and advice</li>
-<li>Spoof SSDT source</li>
-</ul>
-</li>
-<li><a href="https://github.com/midi1996" target="_blank">Midi</a><ul>
-<li>Corrections and recommendations for the guide</li>
-</ul>
-</li>
-<li><a href="https://www.insanelymac.com/forum/profile/1202492-andrey1970/" target="_blank">Andrey1970</a><ul>
-<li>Corrections on EHCI</li>
-</ul>
-</li>
-<li><a href="https://github.com/Gengik84" target="_blank">Gengik84</a><ul>
-<li><code>-wegnoegpu</code> suggestion</li>
-<li>Verbose correction</li>
-<li>Audio DevicePath location correction</li>
-</ul>
-</li>
-<li><a href="https://github.com/doesprintfwork" target="_blank">doesprintfwork</a><ul>
-<li>Heavily inspiring the AMD section</li>
-<li>Additions to kernel.json</li>
-</ul>
-</li>
-<li><a href="https://amd-osx.com/forum/memberlist.php?mode=viewprofile&amp;u=10918&amp;sid=e0feb8a14a97be482d2fd68dbc268f97" target="_blank">AlGrey#9303</a><ul>
-<li>AMD Kernel patches</li>
-</ul>
-</li>
-<li><a href="https://forum.amd-osx.com/memberlist.php?mode=viewprofile&amp;u=52179&amp;sid=8efaeb1fa4989b6792f0f4836bea0c74" target="_blank">NoOne/IOIIIO</a><ul>
-<li>For the original AMD Vanilla Guide</li>
-<li>Corrections to AMD portion of the guide</li>
-</ul>
-</li>
-<li><a href="https://github.com/bpetru05" target="_blank">bpetru05</a><ul>
-<li>Additions to kernel.json</li>
-</ul>
-</li>
-<li><a href="https://github.com/jonpalmisc" target="_blank">jonpalmisc</a><ul>
-<li>Much needed proof reading</li>
-</ul>
-</li>
-</ul>
-<p>Developers of OpenCore:</p>
+<p>To start we&apos;ll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you&apos;re just making a bootable OpenCore stick and not an installer. For everyone else, here&apos;s your options for obtaining macOS directly from Apple&apos;s servers:</p>
 <ul>
-<li><a href="https://github.com/Download-Fritz" target="_blank">Download-Fritz</a></li>
-<li><a href="https://github.com/Goldfish64" target="_blank">Goldfish64</a></li>
-<li><a href="https://github.com/savvamitrofanov" target="_blank">savvamitrofanov</a></li>
-<li><a href="https://github.com/vit9696" target="_blank">vit9696</a></li>
-</ul>
-<p>Guides linked or those that inspired this guide:</p>
+<li><p>AppStore links: </p>
 <ul>
-<li><a href="https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/" target="_blank">r/Hackintosh Vanilla Desktop Guide</a></li>
-<li><a href="https://kb.hackintoshisfun.ml/vanilla/" target="_blank">All-in-one Vanilla AMD Hackintosh Guide</a></li>
-<li><a href="https://usb-map.gitbook.io/project/" target="_blank">USB Map Guide</a></li>
-<li><a href="https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271" target="_blank">Intel Framebuffer Patching</a></li>
-<li><a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a></li>
-<li><a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a></li>
+<li><a href="macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12" target="_blank">High Sierra</a>, </li>
+<li><a href="macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12" target="_blank">Mojave</a>, </li>
+<li><a href="macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12" target="_blank">Catalina</a></li>
 </ul>
-<p>Gotta rep dat <del>merch</del> guides:</p>
+</li>
+<li><p><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a>:</p>
 <ul>
-<li><a href="https://github.com/khronokernel/Getting-Started-With-OpenCore" target="_blank">Getting Started With OpenCore</a>(The guide that started it all)</li>
-<li><a href="https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/" target="_blank">GPU Buyers Guide</a></li>
-<li><a href="https://khronokernel-4.gitbook.io/disable-unsupported-gpus/" target="_blank">Disable Unsupported GPUs</a></li>
-<li><a href="https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/" target="_blank">Anti-Hackintosh Buyers Guide</a></li>
-</ul>
-<p>And for those who have either recommendations or issues with this guide can find the Github for this site <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide" target="_blank">here</a></p>
-<p>Sources:</p>
-<ul>
-<li>KALSR slide:<ul>
-<li><a href="https://www.insanelymac.com/forum/topic/331381-aptiomemoryfix/?do=findComment&amp;comment=2564269" target="_blank">Vit9696&apos;s Explainer</a></li>
-<li><a href="https://www.reddit.com/r/hackintosh/comments/cfjyla/i_unleashed_a_plague_upon_you_guys_and_i_am_sorry/" target="_blank">Apianti&apos;s explainer</a></li>
-<li><a href="https://lwn.net/Articles/569635/" target="_blank">KASLR Explainer</a></li>
-<li><a href="https://www.blackhat.com/docs/us-16/materials/us-16-Jang-Breaking-Kernel-Address-Space-Layout-Randomization-KASLR-With-Intel-TSX.pdf" target="_blank">More KASLR Explainer</a></li>
-</ul>
-</li>
-<li>Cleaning RC scripts:<ul>
-<li><a href="https://www.tonymacx86.com/resources/clover-emulated-nvram-uninstaller.368/" target="_blank">Clover Emulated NVRAM Uninstaller</a></li>
-</ul>
-</li>
-<li>ACPI Dumping:<ul>
-<li><a href="https://github.com/acpica/acpica/tree/master/source/tools/acpidump" target="_blank">acpica</a></li>
-</ul>
-</li>
-<li>iServices Guide:<ul>
-<li><a href="https://applelife.ru/threads/nastrojka-app-store-imessage-facetime-i-icloud.40790/page-219#post-727913" target="_blank">&#x41A;&#x430;&#x43A; &#x437;&#x430;&#x432;&#x435;&#x441;&#x442;&#x438; &#x441;&#x435;&#x440;&#x432;&#x438;&#x441;&#x44B; Apple - iMessage, FaceTime, iCloud</a></li>
+<li>Download the full macOS installer</li>
+<li>Run <code>BuildmacOSInstallApp</code> then drag and drop the <code>macOS Downloads</code> folder found in GibMacOS</li>
 </ul>
 </li>
 </ul>
+<p>Next we&apos;ll want to format our USB HFS+/MacOS Journaled with GUID partition map, must be 12GB for macOS Catalina.as-isecommended to name it <code>MyVolume</code> as the script below can be used as-is.</p>
+<p><img src="https://i.imgur.com/numOUnF.png" alt="Formatting the USB"></p>
+<p>Next run the <code>createinstallmedia</code> command provided by <a href="https://support.apple.com/en-us/HT201372" target="_blank">Apple</a>, note that the command is made for USB&apos;s formatted with the name <code>MyVolume</code>:</p>
+<pre><code class="lang-text">sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+</code></pre>
+<p>This will take some time so may want to grab a coffee or continue reading the guide(to be fair you really shouldn&apos;t be following this guide step by step without reading the whole thing first)</p>
+<h2 id="setting-up-opencores-efi-enviroment">Setting up OpenCore&apos;s EFI enviroment</h2>
+<p>Setting up OpenCore&apos;s EFI enviroment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is hidden from the end user, this is where our friend <a href="https://github.com/corpnewt/MountEFI" target="_blank">mountEFI</a> comes in:</p>
+<p><img src="https://i.imgur.com/4l1oK8i.png" alt="MountEFI"></p>
+<p>You&apos;ll notice that once we open the EFI partition, it&apos;s empty. This is where the fun begins.</p>
+<p><img src="https://i.imgur.com/EDeZB3u.png" alt="Empty EFI partition"></p>
 
                                 
                                 </section>
@@ -651,10 +579,14 @@
 
             
                 
-                <a href="../extras/msr-lock.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Fixing CFG Lock">
+                <a href="opencore-efi.html" class="navigation navigation-prev " aria-label="Previous page: Creating the USB">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="winblows-install.html" class="navigation navigation-next " aria-label="Next page: Windows install">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -663,7 +595,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Credit","level":"8.1","depth":1,"previous":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"misc/credit.md","mtime":"2020-01-18T23:10:41.743Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-18T23:11:27.787Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"macOS install","level":"1.2.1","depth":2,"next":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/mac-install.md","mtime":"2020-01-18T23:10:41.743Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-18T23:11:27.787Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
