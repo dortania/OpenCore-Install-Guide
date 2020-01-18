@@ -229,6 +229,7 @@ Generally seen as an issue surrounding the prelinked kernel, specifically that m
   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)\(ie: `ethernet`, GBE1, \). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
 
+If these fixes do not work, see the [Fixing iServices page](/post-install/iservices.md) for more in-depth guide.
 
 ## No on-board audio
 
