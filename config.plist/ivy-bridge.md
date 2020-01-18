@@ -338,40 +338,29 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/5rl12dZ.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application.
+For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
-For this example, we'll choose the _iMac13,2_ SMBIOS.
+For this Ivy Bridge example, we'll choose the iMac13,2 SMBIOS.
 
-To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
-
-With our iMac13,2 example, we would run macserial like so via the terminal:
-
-`macserial -a | grep -i iMac13,2`
-
-Which would give us output similar to the following:
+GenSMBIOS would give us output similar to the following:
 
 ```text
-iMac13,2 | C02JX0KSDNCW | C02253902J9F2FRCB
-iMac13,2 | C02KC3Y9DNCW | C02309401GUF2FR1M
-iMac13,2 | C02KPYYDDNCW | C02319902J9F2FRJA
-iMac13,2 | C02LLSYJDNCW | C02343301J9F2FR1F
-iMac13,2 | C02JF0N3DNCW | C02238404GUF2FR1M
-iMac13,2 | C02JT6ZFDNCW | C02250104QXF2FRFB
-iMac13,2 | C02LT0GDDNCW | C02350130J9F2FR1H
-iMac13,2 | C02J1069DNCW | C02227310J9F2FRAD
-iMac13,2 | C02JN0Y4DNCW | C02245902CDF2FRFB
-iMac13,2 | C02JWJZSDNCW | C02252100GUF2FRCB
+  #######################################################
+ #               iMac13,2 SMBIOS Info                  #
+#######################################################
+
+Type:         iMac13,2
+Serial:       C02KCYZLDNCW
+Board Serial: C02309301QXF2FRJC
+SmUUID:       A154B586-874B-4E57-A1FF-9D6E503E4580
 ```
-
-The order is `Product | Serial | Board Serial (MLB)`
-
-The `iMac13,2` part gets copied to Generic -&gt; SystemProductName.
+The `Type` part gets copied to Generic -&gt; SystemProductName.
 
 The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create a SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) - and that gets copied to Generic -&gt; SystemUUID.
+The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 

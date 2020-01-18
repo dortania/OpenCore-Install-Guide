@@ -303,46 +303,36 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/RKIXoi5.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application.
+For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
-For this Skylake example, we'll choose the iMacPro1,1 SMBIOS.
+For this Skylake-X example, we'll choose the iMacPro1,1 SMBIOS.
 
-To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
-
-With our iMacPro1,1 example, we would run macserial like so via the terminal:
-
-`macserial -a | grep -i iMacPro1,1`
-
-Which would give us output similar to the following:
+GenSMBIOS would give us output similar to the following:
 
 ```text
-iMacPro1,1 | C02S8DY7GG7L | C02634902QXGPF7FB
-iMacPro1,1 | C02T4WZSGG7L | C02703104GUGPF71M
-iMacPro1,1 | C02QQAYPGG7L | C025474014NGPF7FB
-iMacPro1,1 | C02SNLZ3GG7L | C02645501CDGPF7AD
-iMacPro1,1 | C02QQRY8GG7L | C025474054NGPF71F
-iMacPro1,1 | C02QK1ZXGG7L | C02542200GUGPF7JC
-iMacPro1,1 | C02SL0YXGG7L | C026436004NGPF7JA
-iMacPro1,1 | C02QW0J5GG7L | C02552130QXGPF7JA
-iMacPro1,1 | C02RXDZYGG7L | C02626100GUGPF71H
-iMacPro1,1 | C02R4MYRGG7L | C02603200GUGPF7JA
+  #######################################################
+ #              iMacPro1,1 SMBIOS Info                 #
+#######################################################
+
+Type:         iMacPro1,1
+Serial:       C02YX0TZHX87
+Board Serial: C029269024NJG36CB
+SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 ```
-
-The order is `Product | Serial | Board Serial (MLB)`
-
-The `iMacPro1,1` part gets copied to Generic -&gt; SystemProductName.
+The `Type` part gets copied to Generic -&gt; SystemProductName.
 
 The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create a SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) -and that gets copied to Generic -&gt; SystemUUID.
+The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
 **Reminder that you want serial numbers not in use, you want to get a message back like: "We’re sorry, but this serial number isn’t valid. Please check your information and try again."**
 
 [Apple Check Coverage page](https://checkcoverage.apple.com)
+
 
 **Automatic**: YES
 

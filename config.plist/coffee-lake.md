@@ -345,9 +345,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/JpLxh35.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application.
-
-To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
+For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
 For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Coffee Lake:
 
@@ -355,36 +353,25 @@ For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intenti
 * `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
    * Note: While iMac19,1 and iMac19,2 are a closer match, these SMBIOS are not compatible with versions of macOS older than Mojave and not all fixes are compatible with them(ie: USBInjectAll)
 
-To get the SMBIOS info generated with macserial, you can run it with the -a argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
-
-With our iMac18,1 example, we would run macserial like so via the terminal:
-
-`macserial -a | grep -i iMac18,1`
-
-Which would give us output similar to the following:
+GenSMBIOS would give us output similar to the following:
 
 ```text
-iMac18,1 | C02T8SZNH7JY | C02707101J9H69F1F
-iMac18,1 | C02VXBYDH7JY | C02753100GUH69FCB
-iMac18,1 | C02T7RY6H7JY | C02706310GUH69FA8
-iMac18,1 | C02VD07ZH7JY | C02737301J9H69FCB
-iMac18,1 | C02TQPYPH7JY | C02720802CDH69FAD
-iMac18,1 | C02VXYYVH7JY | C02753207CDH69FJC
-iMac18,1 | C02VDBZ0H7JY | C02737700QXH69FA8
-iMac18,1 | C02VP0H6H7JY | C02746300CDH69FJA
-iMac18,1 | C02VL0W9H7JY | C02743303CDH69F8C
-iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
+  #######################################################
+ #               iMac18,1 SMBIOS Info                  #
+#######################################################
+
+Type:         iMac18,1
+Serial:       C02XG0FDH7JY
+Board Serial: C02839303QXH69FJA
+SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 ```
-
-The order is Product \| Serial \| Board Serial \(MLB\)
-
-The `iMac18,1` part gets copied to Generic -&gt; SystemProductName.
+The `Type` part gets copied to Generic -&gt; SystemProductName.
 
 The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create a SmUUID by running `uuidgen` in the terminal \(or it's auto-generated via CorpNewt's GenSMBIOS script\) -and that gets copied to Generic -&gt; SystemUUID.
+The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 

@@ -332,42 +332,36 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 ![PlatformInfo](https://i.imgur.com/XlxjsAd.png)
 
-For setting up the SMBIOS info, we'll use acidanthera's [_macserial_](https://github.com/acidanthera/MacInfoPkg/releases) application
+For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
 For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
 
-Haswell with only iGPU - iMac14,1 Haswell with dGPU - iMac14,2 Haswell Refresh - iMac15,1
+Haswell with only iGPU
+* iMac14,1 
+Haswell with dGPU
+* iMac14,2 
+Haswell Refresh
+* iMac15,1
 
-To get the SMBIOS info generated with macserial, you can run it with the `-a` argument \(which generates serials and board serials for all supported platforms\). You can also parse it with grep to limit your search to one SMBIOS type.
-
-With our iMac15,1 example, we would run macserial like so via the terminal:
-
-`macserial -a | grep -i iMac15,1`
-
-Which would give us output similar to the following:
+GenSMBIOS would give us output similar to the following:
 
 ```text
-iMac15,1 | C02NFZZYFY10 | C02438207QXG2Y7FB
-iMac15,1 | C02P32YJFY10 | C02502303GUG2Y78C
-iMac15,1 | C02P2VZ7FY10 | C02501306QXG2Y7AD
-iMac15,1 | C02NM0EDFY10 | C02444701CDG2Y71H
-iMac15,1 | C02NVHZCFY10 | C02451303CDG2Y7JA
-iMac15,1 | C02QLRZ4FY10 | C02543300GUG2Y7JC
-iMac15,1 | C02QJ0UPFY10 | C02541902GUG2Y7JA
-iMac15,1 | C02QG0NGFY10 | C02539700J9G2Y71M
-iMac15,1 | C02N3XYEFY10 | C02429104J9G2Y7UE
-iMac15,1 | C02QW0M3FY10 | C02552700GUG2Y7JA
+  #######################################################
+ #               iMac15,1 SMBIOS Info                  #
+#######################################################
+
+Type:         iMac15,1
+Serial:       C02M9SYJFY10
+Board Serial: C02408101J9G2Y7A8
+SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 ```
-
-The order is `Product | Serial | Board Serial (MLB)`
-
-The `iMac15,1` part gets copied to Generic -&gt; SystemProductName.
+The `Type` part gets copied to Generic -&gt; SystemProductName.
 
 The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -&gt; MLB.
 
-We can create a SmUUID by running `uuidgen` in the terminal -and that gets copied to Generic -&gt; SystemUUID.
+The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
