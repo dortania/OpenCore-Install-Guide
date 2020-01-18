@@ -27,7 +27,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
   * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 
-For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension\(Assembled\) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.
+For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension\(Assembled\) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language. And no need to add your DSDT to Opencore as its already inside your firmware.
 
 **For a much deeper rundown on ACPI including compiling in Windows and Linux, see the** [**Getting started with ACPI**](../extras/acpi.md) **page.**
 

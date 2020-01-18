@@ -76,7 +76,7 @@ When adding this to your config, `c0:7e:bf:c3:af:ff` should be converted to `c07
 
 ## Verifying NVRAM
 
-Please refer to the [Emulated NVRAM](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/post-install/nvram.html) section of the OpenCore Guide for more info.
+Please refer to the [Emulated NVRAM](/post-install/nvram.html) section of the OpenCore Guide for more info.
 
 
 ## Clean out old attempts
@@ -133,6 +133,6 @@ An extra tip is adding a payment card to the account, some users found this also
 
 ## Customer Code error
 
-Welp mate, you've done it. you blackmailed your AppleID. The fix is simple but not pretty, **you MUST call Apple**. Otherwise, there is no proceeding besides using a new account, adding a payment card before calling can help legitimise the account so it doesn't seem as much like a bot.
+Welp mate, you've done it. You blackmailed your AppleID. The fix is simple but not pretty, **you MUST call Apple**. Otherwise, there is no proceeding besides using a new account, adding a payment card before calling can help legitimise the account so it doesn't seem as much like a bot.
 
 ![](https://i.imgur.com/ypDy99L.png)

@@ -12,7 +12,7 @@ Do note that images will not always be the most up-to-date so please read the te
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly**
 
-#### ACPI
+### ACPI
 
 ![ACPI](https://i.imgur.com/2T0ubhy.png)
 
@@ -29,7 +29,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 * [SSDT-EHCx\_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems. This can be avoided if your BIOS supports EHCI-Handoff
 
-For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension\(Assembled\) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.
+For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension\(Assembled\) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language. And no need to add your DSDT to Opencore as its already inside your firmware.
 
 **For a much deeper rundown on ACPI including compiling in Windows and Linux, see the** [**Getting started with ACPI**](../extras/acpi.md) **page.**
 

@@ -72,4 +72,5 @@ Sources:
   * [Clover Emulated NVRAM Uninstaller](https://www.tonymacx86.com/resources/clover-emulated-nvram-uninstaller.368/)
 * ACPI Dumping:
   * [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
-
+* iServices Guide:
+  * [Как завести сервисы Apple - iMessage, FaceTime, iCloud](https://applelife.ru/threads/nastrojka-app-store-imessage-facetime-i-icloud.40790/page-219#post-727913)

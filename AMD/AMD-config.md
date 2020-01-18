@@ -30,7 +30,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
    * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
  
 
-For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. 
+For those having troubles understanding the SSDTs regarding EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. And no need to add your DSDT to Opencore as its already inside your firmware.
 
 **For a much deeper rundown on ACPI including compiling in Windows and Linux, see the [Getting started with ACPI](/extras/acpi.md) page.**
 

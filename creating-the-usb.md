@@ -41,7 +41,7 @@ To setup OpenCore’s folder structure, you’ll want to grab the EFI folder fou
 
 ![base EFI folder](https://i.imgur.com/PvNIR4y.png)
 
-Now something you'll notcie is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
+Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
 * Remove from Drivers:
    * AppleUsbKbDxe.efi
