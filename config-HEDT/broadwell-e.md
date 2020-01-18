@@ -333,7 +333,7 @@ The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
 
-**Reminder that you want serial numbers not in use, you want to get a message back like: "We’re sorry, but this serial number isn’t valid. Please check your information and try again."**
+**Reminder that you want valid serial numbers but those not in use, you want to get a message back like: "Purchase Date not Validated"**
 
 [Apple Check Coverage page](https://checkcoverage.apple.com)
 
@@ -449,6 +449,7 @@ So what in the world needs to be done once everything is installed? Well here ar
 * [Testing and setting up emulated NVRAM](/post-install/nvram.md)
 * Correcting audio, reread the DeviceProperties on how
 * [Enabling FileVault and other security features](/post-install/security.md)
+* [Fixing iMessage](/post-install/iservices.md)
 * Moving OpenCore from the USB to your main drive
    * Mount USB's EFI
    * Copy EFI folder to the desktop
