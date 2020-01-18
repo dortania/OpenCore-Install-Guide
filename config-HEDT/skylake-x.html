@@ -874,28 +874,22 @@
 </ul>
 <h2 id="platforminfo">Platforminfo</h2>
 <p><img src="https://i.imgur.com/RKIXoi5.png" alt="PlatformInfo"></p>
-<p>For setting up the SMBIOS info, we&apos;ll use acidanthera&apos;s <a href="https://github.com/acidanthera/MacInfoPkg/releases" target="_blank"><em>macserial</em></a> application.</p>
-<p>For this Skylake example, we&apos;ll choose the iMacPro1,1 SMBIOS.</p>
-<p>To get the SMBIOS info generated with macserial, you can run it with the <code>-a</code> argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.</p>
-<p>With our iMacPro1,1 example, we would run macserial like so via the terminal:</p>
-<p><code>macserial -a | grep -i iMacPro1,1</code></p>
-<p>Which would give us output similar to the following:</p>
-<pre><code class="lang-text">iMacPro1,1 | C02S8DY7GG7L | C02634902QXGPF7FB
-iMacPro1,1 | C02T4WZSGG7L | C02703104GUGPF71M
-iMacPro1,1 | C02QQAYPGG7L | C025474014NGPF7FB
-iMacPro1,1 | C02SNLZ3GG7L | C02645501CDGPF7AD
-iMacPro1,1 | C02QQRY8GG7L | C025474054NGPF71F
-iMacPro1,1 | C02QK1ZXGG7L | C02542200GUGPF7JC
-iMacPro1,1 | C02SL0YXGG7L | C026436004NGPF7JA
-iMacPro1,1 | C02QW0J5GG7L | C02552130QXGPF7JA
-iMacPro1,1 | C02RXDZYGG7L | C02626100GUGPF71H
-iMacPro1,1 | C02R4MYRGG7L | C02603200GUGPF7JA
+<p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application. </p>
+<p>For this Skylake-X example, we&apos;ll choose the iMacPro1,1 SMBIOS.</p>
+<p>GenSMBIOS would give us output similar to the following:</p>
+<pre><code class="lang-text">  #######################################################
+ #              iMacPro1,1 SMBIOS Info                 #
+#######################################################
+
+Type:         iMacPro1,1
+Serial:       C02YX0TZHX87
+Board Serial: C029269024NJG36CB
+SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </code></pre>
-<p>The order is <code>Product | Serial | Board Serial (MLB)</code></p>
-<p>The <code>iMacPro1,1</code> part gets copied to Generic -&gt; SystemProductName.</p>
+<p>The <code>Type</code> part gets copied to Generic -&gt; SystemProductName.</p>
 <p>The <code>Serial</code> part gets copied to Generic -&gt; SystemSerialNumber.</p>
 <p>The <code>Board Serial</code> part gets copied to Generic -&gt; MLB.</p>
-<p>We can create a SmUUID by running <code>uuidgen</code> in the terminal (or it&apos;s auto-generated via CorpNewt&apos;s GenSMBIOS script) -and that gets copied to Generic -&gt; SystemUUID.</p>
+<p>The <code>SmUUID</code> part gets copied toto Generic -&gt; SystemUUID.</p>
 <p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>)</p>
 <p><strong>Reminder that you want serial numbers not in use, you want to get a message back like: &quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot;</strong></p>
 <p><a href="https://checkcoverage.apple.com" target="_blank">Apple Check Coverage page</a></p>
@@ -1110,7 +1104,7 @@ iMacPro1,1 | C02R4MYRGG7L | C02603200GUGPF7JA
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.1","depth":1,"next":{"title":"AMD","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-01-17T23:00:10.304Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-17T23:00:54.521Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.1","depth":1,"next":{"title":"AMD","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-01-18T02:34:35.641Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-18T02:35:19.793Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

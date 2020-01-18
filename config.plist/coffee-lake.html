@@ -918,8 +918,7 @@
 </ul>
 <h3 id="platforminfo">Platforminfo</h3>
 <p><img src="https://i.imgur.com/JpLxh35.png" alt="PlatformInfo"></p>
-<p>For setting up the SMBIOS info, we&apos;ll use acidanthera&apos;s <a href="https://github.com/acidanthera/MacInfoPkg/releases" target="_blank"><em>macserial</em></a> application.</p>
-<p>To get the SMBIOS info generated with macserial, you can run it with the <code>-a</code> argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.</p>
+<p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application. </p>
 <p>For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intentionally for compatibility&apos;s sake. There are two main SMBIOS used for Coffee Lake:</p>
 <ul>
 <li><code>iMac18,1</code> - this is used for computers utilizing the iGPU for displaying.</li>
@@ -928,26 +927,20 @@
 </ul>
 </li>
 </ul>
-<p>To get the SMBIOS info generated with macserial, you can run it with the -a argument (which generates serials and board serials for all supported platforms). You can also parse it with grep to limit your search to one SMBIOS type.</p>
-<p>With our iMac18,1 example, we would run macserial like so via the terminal:</p>
-<p><code>macserial -a | grep -i iMac18,1</code></p>
-<p>Which would give us output similar to the following:</p>
-<pre><code class="lang-text">iMac18,1 | C02T8SZNH7JY | C02707101J9H69F1F
-iMac18,1 | C02VXBYDH7JY | C02753100GUH69FCB
-iMac18,1 | C02T7RY6H7JY | C02706310GUH69FA8
-iMac18,1 | C02VD07ZH7JY | C02737301J9H69FCB
-iMac18,1 | C02TQPYPH7JY | C02720802CDH69FAD
-iMac18,1 | C02VXYYVH7JY | C02753207CDH69FJC
-iMac18,1 | C02VDBZ0H7JY | C02737700QXH69FA8
-iMac18,1 | C02VP0H6H7JY | C02746300CDH69FJA
-iMac18,1 | C02VL0W9H7JY | C02743303CDH69F8C
-iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
+<p>GenSMBIOS would give us output similar to the following:</p>
+<pre><code class="lang-text">  #######################################################
+ #               iMac18,1 SMBIOS Info                  #
+#######################################################
+
+Type:         iMac18,1
+Serial:       C02XG0FDH7JY
+Board Serial: C02839303QXH69FJA
+SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 </code></pre>
-<p>The order is Product | Serial | Board Serial (MLB)</p>
-<p>The <code>iMac18,1</code> part gets copied to Generic -&gt; SystemProductName.</p>
+<p>The <code>Type</code> part gets copied to Generic -&gt; SystemProductName.</p>
 <p>The <code>Serial</code> part gets copied to Generic -&gt; SystemSerialNumber.</p>
 <p>The <code>Board Serial</code> part gets copied to Generic -&gt; MLB.</p>
-<p>We can create a SmUUID by running <code>uuidgen</code> in the terminal (or it&apos;s auto-generated via CorpNewt&apos;s GenSMBIOS script) -and that gets copied to Generic -&gt; SystemUUID.</p>
+<p>The <code>SmUUID</code> part gets copied toto Generic -&gt; SystemUUID.</p>
 <p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>)</p>
 <p><strong>Reminder that you want serial numbers not in use, you want to get a message back like: &quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot;</strong></p>
 <p><a href="https://checkcoverage.apple.com" target="_blank">Apple Check Coverage page</a></p>
@@ -1152,7 +1145,7 @@ iMac18,1 | C02V2NYMH7JY | C02728600J9H69FAD
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Coffee Lake","level":"2.5","depth":1,"next":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/coffee-lake.md","mtime":"2020-01-17T23:00:10.304Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-17T23:00:54.521Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Coffee Lake","level":"2.5","depth":1,"next":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/coffee-lake.md","mtime":"2020-01-18T02:34:35.641Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-18T02:35:19.793Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
