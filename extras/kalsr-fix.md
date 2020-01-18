@@ -133,9 +133,9 @@ And for users who are having issues finding their slide value can also type `$sl
 Well fret not, for there is a simple solution. After running `memmap` in the shell, run:
 
 ```text
-shell> fs0: //replace with proper drive
+shell> fs0: //replace with your USB
 
-fs0:\> dir //to verify this is the right directory
+fs0:\> dir //to verify this is the right directory, if not try fs1 and so on
 
 Directory of fs0:\
 01/01/01 3:30p   EFI
@@ -143,5 +143,5 @@ Directory of fs0:\
 fs0:\> memmap > memmap.txt
 ```
 
-This will add a `memmap.txt` file to the root of your EFI for OpenCore users, you can then proceed to drop it into the r/Hackintosh discord and type `$slide [insert a link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
+This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord and type `$slide [insert a link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
 

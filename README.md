@@ -50,7 +50,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 WHQL Mode
+* OS type: Windows 8.1/10 Mode
 * Legacy RTC Device\(Relevant for Z370+\)
 
 ## Hey why does this guide look quite similar to CorpNewt's Vanilla Guide?
