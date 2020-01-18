@@ -1,7 +1,9 @@
 # Table of contents
 
 * [OpenCore Vanilla Guide](README.md)
-* [Creating the USB](creating-the-usb.md)
+* [Creating the USB](/installer-guide/opencore-efi.md)
+   * [macOS install](/installer-guide/mac-install.md)
+   * [Windows install](/installer-guide/winblows-install.md)
 * [Gathering files](ktext.md)
 
 ## Intel Config.plist

@@ -1,4 +1,4 @@
-# Making the Installer in Windows
+# Making the installer in Windows
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
@@ -18,7 +18,7 @@ This wil download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Downloads
 
 ![](https://cdn.discordapp.com/attachments/456913818467958789/668211921484382218/unknown.png)
 
-Next open `makeinstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O)
+Next open `makeinstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O).
 
 ![](https://cdn.discordapp.com/attachments/456913818467958789/668213205579071598/unknown.png)
 

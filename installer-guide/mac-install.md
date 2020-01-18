@@ -1,5 +1,5 @@
 
-# Making the Installer in macOS
+# Making the installer in macOS
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 

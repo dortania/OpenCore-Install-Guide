@@ -20,7 +20,7 @@ Depending on which OS you're on, see your specific section on making the USB, th
 
 # Setting up the EFI
 
-To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in OpenCorePkg's releases page:
+To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in OpenCorePkg's releases page(this will already be done on the `BOOT` folder for windows users):
 
 ![base EFI folder](https://i.imgur.com/PvNIR4y.png)
 
