@@ -463,7 +463,6 @@ So what in the world needs to be done once everything is installed? Well here's 
 
 * [USB mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md) 
 * [Disable OpenCore logging](/extras/debug.md)
-* [Removing NullCPUPowerManagment.kext and improving GPU performance](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)
 * [Enabling FileVault and other security features](/post-install/security.md)
 * Correcting audio, reread the DeviceProperties on how
 * Moving OpenCore from the USB to your main drive
