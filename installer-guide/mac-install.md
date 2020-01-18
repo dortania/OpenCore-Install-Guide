@@ -1,6 +1,8 @@
 
 # Making the installer in macOS
 
+Last edited: January 18, 2020
+
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
 **Note for legacy users**
@@ -40,3 +42,4 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ![Empty EFI partition](https://i.imgur.com/EDeZB3u.png)
 
+### Now with all this done, return to [Creating the USB](/installer-guide/opencore-efi.md) to finish up your work

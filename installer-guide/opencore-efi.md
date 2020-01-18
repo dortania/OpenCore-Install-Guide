@@ -1,6 +1,6 @@
 # Creating the USB
 
-Last edited: January 15, 2020
+Last edited: January 18, 2020
 
 Requirements:
 
@@ -12,7 +12,9 @@ Requirements:
 * Knowledge of how a Hackintosh works and what files yours requires\(ie: Type of network controller\).
 * You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI.
 
-Depending on which OS you're on, see your specific section on making the USB, then return here on making the USB:
+# Making the installer
+
+Depending on which OS you're on, see your specific section on making the USB, then return here on setting up Opencore:
 
 * [macOS users](/installer-guide/mac-install.md)
 * [Windows users](/installer-guide/winblows-install.md)
