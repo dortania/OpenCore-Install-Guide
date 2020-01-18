@@ -437,7 +437,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](/extras/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](/troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)

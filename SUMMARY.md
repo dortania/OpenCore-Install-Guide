@@ -31,6 +31,7 @@
 
 * [General Troubleshooting](troubleshooting/troubleshooting.md)
 * [Fixing Resolution and Verbose](troubleshooting/verbose.md)
+* [Fixing iServices](/post-install/iservices.md)
 * [OpenCore Debugging](troubleshooting/debug.md)
 
 ## Extras

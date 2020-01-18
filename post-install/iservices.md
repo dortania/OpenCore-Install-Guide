@@ -68,6 +68,8 @@ To find your actual MAC Address/ROM value, you can find in a couple places:
 * BIOS
 * System Preferences -> Network -> Ethernet -> Advanced -> MAC Address
 
+Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we'll be  using our real MAC Address but note that this is another option
+
 When adding this to your config, `c0:7e:bf:c3:af:ff` should be converted to `c07ebfc3afff` as the `Data` type cannot accept colons(`:`).
 
 ![](https://i.imgur.com/vAW6Rkz.png)
