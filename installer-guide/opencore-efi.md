@@ -58,5 +58,5 @@ Here's what a populated EFI can look like:
 * Kexts go in Kexts folder
 * Firmware drivers\(.efi\) go in the Drivers folder
 
-See [Gathering Files](ktext.md) on the next page for more info on what you need
+See [Gathering Files](/ktext.md) on the next page for more info on what you need
 
