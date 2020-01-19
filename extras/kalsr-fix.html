@@ -551,14 +551,38 @@ Couldn&apos;t allocate runtime area
 <li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">FwRuntimeServices</a></li>
 <li><a href="https://github.com/acidanthera/OpenCoreShell/releases" target="_blank">OpenCoreShell</a>(Don&apos;t forget to enable this under <code>Root-&gt;Misc-&gt;Tools</code>)</li>
 <li>Config.plist settings:<ul>
-<li>AvoidRuntimeDefrag: Fixes UEFI runtime services like date, time, NVRAM, etc</li>
-<li>DevirtualiseMmio: Reduces stolen memory footprint so we&apos;re given more options for slide values</li>
-<li>DisableVariableWrite: Reroutes NVRAM to nvram.plist, needed for systems without supported NVRAM(B360, B365, H310, H370, Q370, Z390). Some C612, X79, X99, X299 systems will also need this.</li>
-<li>EnableSafeModeSlide: Allows us to use slide in safe mode, just so if you have other issues troubleshooting won&apos;t mess it up.</li>
-<li>EnableWriteUnprotector: Allows us to write to certain areas that the firmware locks, specifically the CR0 register.</li>
-<li>ProvideCustomSlide: Kinda need that slide to do any real work.</li>
-<li>SetupVirtualMap: Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.</li>
-<li>ShrinkMemoryMap: Fixes issues with very large memory maps that don&apos;t fit, very useful for X99 and X299 platforms and sometimes for Z390.</li>
+<li>AvoidRuntimeDefrag: <code>YES</code><ul>
+<li>Fixes UEFI runtime services like date, time, NVRAM, etc</li>
+</ul>
+</li>
+<li>DevirtualiseMmio: <code>YES</code><ul>
+<li>Reduces stolen memory footprint so we&apos;re given more options for slide values</li>
+</ul>
+</li>
+<li>DisableVariableWrite: <code>YES</code><ul>
+<li>Reroutes NVRAM to nvram.plist, needed for systems without supported NVRAM(B360, B365, H310, H370, Q370, Z390). Some C612, X79, X99, X299 systems will also need this.</li>
+</ul>
+</li>
+<li>EnableSafeModeSlide: <code>YES</code><ul>
+<li>Allows us to use slide in safe mode, just so if you have other issues troubleshooting won&apos;t mess it up.</li>
+</ul>
+</li>
+<li>EnableWriteUnprotector: <code>YES</code><ul>
+<li>Allows us to write to certain areas that the firmware locks, specifically the CR0 register.</li>
+</ul>
+</li>
+<li>ProvideCustomSlide: <code>YES</code><ul>
+<li>Kinda need that slide to do any real work.</li>
+</ul>
+</li>
+<li>SetupVirtualMap: <code>YES</code><ul>
+<li>Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.</li>
+</ul>
+</li>
+<li>ShrinkMemoryMap: <code>YES</code><ul>
+<li>Fixes issues with very large memory maps that don&apos;t fit, very useful for X99 and X299 platforms and sometimes for Z390.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -780,7 +804,7 @@ fs0:\&gt; memmap &gt; memmap.txt
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing KALSR slide values","level":"7.4","depth":1,"next":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"previous":{"title":"GPU Patching","level":"7.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-01-18T23:29:16.265Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-18T23:30:02.366Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing KALSR slide values","level":"7.4","depth":1,"next":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"previous":{"title":"GPU Patching","level":"7.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-01-19T20:28:35.331Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-19T20:29:17.810Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
