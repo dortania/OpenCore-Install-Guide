@@ -144,17 +144,17 @@ List of connector types:
 
 1. Plug display into HDMI port
 2. Set Port 1 to the HDMI connector type:
-3. 01xx0900 **00080000** C7030000
-4. Disable ports 2 and 3 with busid=00:
+* 01xx0900 **00080000** C7030000
+3. Disable ports 2 and 3 with busid=00:
 
 * 02**00**0A00 00040000 C7030000
 * 03**00**0800 00040000 C7030000
 
 1. Walk through busids for Port 1 if the previous didn't work\(yup you gotta do a shit ton of reboots\). The maximum busid on most platforms is 0x06
-2. 01**01**0900 00080000 C7030000
-3. 01**02**0900 00080000 C7030000
-4. 01**03**0900 00080000 C7030000
-5. etc
+* 01**01**0900 00080000 C7030000
+* 01**02**0900 00080000 C7030000
+* 01**03**0900 00080000 C7030000
+* etc
 
 If you still get no output, set port 1's busid to 00 and start going through busids for port 2 and so on
 
@@ -179,3 +179,4 @@ A finished config should look something like this:
 
 ![](https://i.imgur.com/69DyuEM.png)
 
+Source for iGPU BusID patching: [CorpNewt's Brain](https://github.com/corpnewt)

@@ -48,14 +48,22 @@ The real fix to this is quite simple actually, the process is both the same for 
   * [FwRuntimeServices](https://github.com/acidanthera/AppleSupportPkg/releases)
   * [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)\(Don't forget to enable this under `Root->Misc->Tools`\)
   * Config.plist settings:
-    * AvoidRuntimeDefrag: Fixes UEFI runtime services like date, time, NVRAM, etc
-    * DevirtualiseMmio: Reduces stolen memory footprint so we're given more options for slide values
-    * DisableVariableWrite: Reroutes NVRAM to nvram.plist, needed for systems without supported NVRAM\(B360, B365, H310, H370, Q370, Z390\). Some C612, X79, X99, X299 systems will also need this.
-    * EnableSafeModeSlide: Allows us to use slide in safe mode, just so if you have other issues troubleshooting won't mess it up.
-    * EnableWriteUnprotector: Allows us to write to certain areas that the firmware locks, specifically the CR0 register.
-    * ProvideCustomSlide: Kinda need that slide to do any real work.
-    * SetupVirtualMap: Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.
-    * ShrinkMemoryMap: Fixes issues with very large memory maps that don't fit, very useful for X99 and X299 platforms and sometimes for Z390.
+    * AvoidRuntimeDefrag: `YES`
+       * Fixes UEFI runtime services like date, time, NVRAM, etc
+    * DevirtualiseMmio: `YES`
+       * Reduces stolen memory footprint so we're given more options for slide values
+    * DisableVariableWrite: `YES`
+       * Reroutes NVRAM to nvram.plist, needed for systems without supported NVRAM\(B360, B365, H310, H370, Q370, Z390\). Some C612, X79, X99, X299 systems will also need this.
+    * EnableSafeModeSlide: `YES`
+       * Allows us to use slide in safe mode, just so if you have other issues troubleshooting won't mess it up.
+    * EnableWriteUnprotector: `YES`
+       * Allows us to write to certain areas that the firmware locks, specifically the CR0 register.
+    * ProvideCustomSlide: `YES`
+       * Kinda need that slide to do any real work.
+    * SetupVirtualMap: `YES`
+       * Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.
+    * ShrinkMemoryMap: `YES`
+       * Fixes issues with very large memory maps that don't fit, very useful for X99 and X299 platforms and sometimes for Z390.
 
 ## Prepping the BIOS
 

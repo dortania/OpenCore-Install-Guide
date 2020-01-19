@@ -15,7 +15,7 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
   * Needed for seeing APFS volumes.
 * [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) **or** [HfsPlus.efi](https://cdn.discordapp.com/attachments/606452360495104000/633621011887292416/HFSPlus.efi)
   * Needed for seeing HFS volumes. **Do not mix HFS drivers**
-* [FwRuntimeServices.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
+* [FwRuntimeServices.efi](https://github.com/acidanthera/OpenCorePkgs/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
 
 For extra functionality with OpenCore:
@@ -35,7 +35,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware. Does not support FileVault in OpenCore
+  * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware. No support FileVault on OpenCore
 * [Lilu](https://github.com/vit9696/Lilu/releases)
   * A kext to patch many processes, required for AppleALC and WhateverGreen and recommended for VirtualSMC
 
