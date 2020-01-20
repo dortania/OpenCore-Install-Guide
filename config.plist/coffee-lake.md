@@ -28,6 +28,8 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
   * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/)
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
   * This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check yourself which is needed search for `AWAC` and if this shows up then search for `STAS` in your DSDT. If nothing returns from the `STAS` search then you'll need the RTC0 patch  
+* [SSDT-NVRAM](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-NVRAM.dsl)
+   * So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and can be compiled as is. 
 
 For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to properly set up your SSDT. All other SSDTs can be compiled with [MaciASL](https://github.com/acidanthera/MaciASL/releases), don't forget that compiled SSDTs have a .aml extension\(Assembled\) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language. And no need to add your DSDT to Opencore as its already inside your firmware.
 
@@ -84,7 +86,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **DisableSingleUser**: NO
   * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
-  * Needed for systems with non-functioning NVRAM: B360, B365, H310, H370, Z390
+  * Needed for systems with non-functioning NVRAM, thanks to SSDT-NVRAM we no longer need this option
 * **DiscardHibernateMap**: NO
   * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES
@@ -485,7 +487,6 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 So what in the world needs to be done once everything is installed? Well here are some things:
 
 * [USB mapping](https://usb-map.gitbook.io/project/) 
-* [Setting up emulated NVRAM](../post-install/nvram.md) for B360, B365, H310, H370, Z390 motherboards\( Z370 and Q370 does not need this\)
 * Correcting audio, reread the DeviceProperties on how
 * [Enabling FileVault and other security features](../post-install/security.md)
 * [Fixing iMessage](/post-install/iservices.md)

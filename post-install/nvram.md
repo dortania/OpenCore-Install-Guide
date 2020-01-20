@@ -2,15 +2,10 @@
 
 Last edited: January 13, 2020
 
-So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are the non-Z370 300 series chipsets:
+So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS areX99 and some X299 series chipsets:
 
-* B360
-* B365
-* H310
-* H370
-* Q370
-* Z390
-* Some X99 and X299 \(verify if you have working NVRAM below\)
+* X99 
+* X299
 
 ## Cleaning out the Clover gunk
 
@@ -37,8 +32,8 @@ To start, open the terminal and run the following one line at a time:
 
 ```text
 sudo -s
-nvram -c 
-nvram myvar=test
+sudo nvram -c 
+sudo nvram myvar=test
 exit
 ```
 
