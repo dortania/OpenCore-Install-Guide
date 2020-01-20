@@ -544,6 +544,10 @@
 <li>This is the <a href="https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2" target="_blank">300 series RTC patch</a>, required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a> for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check yourself which is needed search for <code>AWAC</code> and if this shows up then search for <code>STAS</code> in your DSDT. If nothing returns from the <code>STAS</code> search then you&apos;ll need the RTC0 patch  </li>
 </ul>
 </li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-NVRAM.dsl" target="_blank">SSDT-NVRAM</a><ul>
+<li>So true 300 series motherboards(non-Z370) don&apos;t declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and can be compiled as is. </li>
+</ul>
+</li>
 </ul>
 <p>For those having troubles understanding the SSDTs regarding plugin type and EC can use CorpNewt&apos;s <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a> to properly set up your SSDT. All other SSDTs can be compiled with <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a>, don&apos;t forget that compiled SSDTs have a .aml extension(Assembled) and will go into the EFI/OC/ACPI folder. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language. And no need to add your DSDT to Opencore as its already inside your firmware.</p>
 <p><strong>For a much deeper rundown on ACPI including compiling in Windows and Linux, see the</strong> <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a> <strong>page.</strong></p>
@@ -616,7 +620,7 @@
 </ul>
 </li>
 <li><strong>DisableVariableWrite</strong>: NO<ul>
-<li>Needed for systems with non-functioning NVRAM: B360, B365, H310, H370, Z390</li>
+<li>Needed for systems with non-functioning NVRAM, thanks to SSDT-NVRAM we no longer need this option</li>
 </ul>
 </li>
 <li><strong>DiscardHibernateMap</strong>: NO<ul>
@@ -1136,7 +1140,6 @@ SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 <p>So what in the world needs to be done once everything is installed? Well here are some things:</p>
 <ul>
 <li><a href="https://usb-map.gitbook.io/project/" target="_blank">USB mapping</a> </li>
-<li><a href="../post-install/nvram.html">Setting up emulated NVRAM</a> for B360, B365, H310, H370, Z390 motherboards( Z370 and Q370 does not need this)</li>
 <li>Correcting audio, reread the DeviceProperties on how</li>
 <li><a href="../post-install/security.html">Enabling FileVault and other security features</a></li>
 <li><a href="../post-install/iservices.html">Fixing iMessage</a></li>
@@ -1191,7 +1194,7 @@ SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Coffee Lake","level":"2.5","depth":1,"next":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/coffee-lake.md","mtime":"2020-01-20T05:02:54.885Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-20T05:03:38.187Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Coffee Lake","level":"2.5","depth":1,"next":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/coffee-lake.md","mtime":"2020-01-20T13:17:06.269Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-20T13:17:51.872Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
