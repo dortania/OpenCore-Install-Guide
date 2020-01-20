@@ -35,7 +35,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware. No support FileVault on OpenCore
+  * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
 * [Lilu](https://github.com/vit9696/Lilu/releases)
   * A kext to patch many processes, required for AppleALC and WhateverGreen and recommended for VirtualSMC
 
