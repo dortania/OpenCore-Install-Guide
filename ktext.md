@@ -127,6 +127,8 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
   * Sets `PluginType`, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly. HEDT users need to verify if the path is correct\(ie: `\_PR.PR00` vs `\_SB.SCK0.PR00`\)
 * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
   * Adds an SMBus device and fixes DeviceProperties injection via `_DSM` for when adding properties via an SSDT.
+* [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl)
+  * So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and can be compiled as is, so a pre-made can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
 
 **Remember to verify that the ACPI path in the SSDT matches up with your DSDT, extremely important for X79, X99 and X299 users**
 
