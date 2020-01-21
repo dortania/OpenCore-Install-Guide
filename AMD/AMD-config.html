@@ -520,7 +520,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="amd">AMD</h1>
-<p>Last edited: January 16, 2020</p>
+<p>Last edited: January 21, 2020</p>
 <h2 id="starting-point">Starting Point</h2>
 <p>You&apos;ll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> and we can get to work.</p>
 <p>Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).</p>
@@ -538,6 +538,7 @@
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a><ul>
 <li>Corrects your EC devices, <strong>needed for all Catalina users</strong>. To setup you&apos;ll need to find out the name of your <code>PNP0C09</code> device in your DSDT, this being either <code>EC0</code>, <code>H_EC</code>, <code>PGEC</code> and <code>ECDV</code>. You can read more about Embedded Controller issues in Catalina here: <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a>. If no <code>PNP0C09</code> device shows up then there is no need for this SSDT. </li>
+<li>This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.</li>
 <li>I&apos;ve also provided a precompiled version for users with EC0, this is the most common device on AMD systems: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml" target="_blank">SSDT-EC-USBX-AMD.aml</a></li>
 </ul>
 </li>
@@ -653,16 +654,8 @@
 <h2 id="deviceproperties">DeviceProperties</h2>
 <p><img src="https://i.imgur.com/ThtAO95.png" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
-<p><code>PciRoot(0x0)/Pci(0x0,0x4)</code> -&gt; <code>layout-id</code></p>
-<ul>
-<li>Applies AppleALC audio injection, you&apos;ll need to do your own research on which codec your motherboard has and match it with AppleALC&apos;s layout. <a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a>.</li>
-</ul>
-<p>Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> You can find your audio path with the following(Do note, not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):</p>
-<pre><code>path/to/gfxutil -f HDEF
-</code></pre><p>Do note that <code>layout-id</code> is a <code>Data</code> value meaning you will need to convert from <code>Number</code> to <code>HEX</code> so <code>Layout=5</code> would be interpreted as <code>&lt;05000000&gt;</code> and <code>Layout=11</code> would be <code>&lt;0B000000&gt;</code>. Audio can be left for post-install.</p>
-<p>The <code>PciRoot(0x0)/Pci(0x2,0x0)</code> is only for intel iGPUs, remove this section entirely.</p>
-<p><strong>Block</strong>: Removes device properties from the map, for us we can ignore this</p>
-<p>Fun Fact: The reason the byte order is swapped is due to <a href="https://en.wikipedia.org/wiki/Endianness" target="_blank">Endianness</a>, specifically Little Endians that modern CPUs use for ordering bytes. The more you know!</p>
+<p>By default, the sample.plist has this section set for iGPU and audio. We have no iGPU so PCIRoot <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> can be removed, and for audio we&apos;ll be setting that up in the boot-args section. So we can also remove <code>PciRoot(0x0)/Pci(0x1b,0x0)</code></p>
+<p>TL;DR, delete the PCIRoot&apos;s here as we won&apos;t be using this section.</p>
 <h2 id="kernel">Kernel</h2>
 <p><img src="https://i.imgur.com/ehG6Da6.png" alt="Kernel"></p>
 <p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.</p>
@@ -899,7 +892,8 @@
 <li><p><code>keepsyms=1</code> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</p>
 </li>
 <li><code>npci=0x2000</code> - this disables some PCI debugging related to <code>kIOPCIConfiguratorPFM64</code>, alternative is <code>npci= 0x3000</code> which disables debugging related to <code>gIOPCITunnelledKey</code>. Required for when getting stuck on <code>PCI Start Configuration</code> as there are IRQ conflicts relating to your PCI lanes.</li>
-<li><code>agdpmod=pikera</code> - used for disabling boardID on Navi GPUs(RX 5000 series), without this you&apos;ll get a black screen</li>
+<li><code>agdpmod=pikera</code> - used for disabling boardID on Navi GPUs(RX 5000 series), without this you&apos;ll get a black screen. <strong>Don&apos;t use if you don&apos;t have Navi</strong></li>
+<li><code>alcid=1</code> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system.</li>
 </ul>
 </li>
 <li><strong>csr-active-config</strong>: Settings for SIP, generally recommended to manually change this within Recovery partition with <code>csrutil</code> via the recovery partition. For us, since we&apos;re running kernel patches it&apos;s recommended to keep SIP off though you can turn it back on after install and test yourself</li>
@@ -1179,7 +1173,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"AMD","level":"4.1","depth":1,"next":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-01-21T19:30:49.908Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-21T19:31:41.784Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"AMD","level":"4.1","depth":1,"next":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-01-21T23:47:31.845Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-21T23:48:20.210Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
