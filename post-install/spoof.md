@@ -1,6 +1,6 @@
 # Disabling GPU
 
-Last edited: January 13, 2020
+Last edited: January 21, 2020
 
 ## GPU Spoof
 
@@ -55,52 +55,52 @@ Example of device path:
 
 `\_SB.PCI0.PEG0.PEGP`
 
-```text
-DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
-{
-   External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
 
-   Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-   {
-      If (LOr (LNot (Arg2), LEqual (_OSI ("Darwin"), Zero)))
-      {
-         Return (Buffer (One)
-         {
-            0x03                                           
-         })
-      }
+    DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
+    {
+       External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
+    
+       Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+       {
+          If (LOr (LNot (Arg2), LEqual (_OSI ("Darwin"), Zero)))
+          {
+             Return (Buffer (One)
+             {
+                0x03                                           
+             })
+          }
+    
+          Return (Package (0x0A)
+          {
+             "name", 
+             Buffer (0x09)
+             {
+                "#display"
+             }, 
+    
+             "IOName", 
+             "#display", 
+             "class-code", 
+             Buffer (0x04)
+             {
+                0xFF, 0xFF, 0xFF, 0xFF                         
+             }, 
 
-      Return (Package (0x0A)
-      {
-         "name", 
-         Buffer (0x09)
-         {
-            "#display"
-         }, 
+             "vendor-id", 
+             Buffer (0x04)
+             {
+                0xFF, 0xFF, 0x00, 0x00                         
+             }, 
+    
+             "device-id", 
+             Buffer (0x04)
+             {
+                0xFF, 0xFF, 0x00, 0x00                         
+             }
+          })
+       }
+    }
 
-         "IOName", 
-         "#display", 
-         "class-code", 
-         Buffer (0x04)
-         {
-            0xFF, 0xFF, 0xFF, 0xFF                         
-         }, 
-
-         "vendor-id", 
-         Buffer (0x04)
-         {
-            0xFF, 0xFF, 0x00, 0x00                         
-         }, 
-
-         "device-id", 
-         Buffer (0x04)
-         {
-            0xFF, 0xFF, 0x00, 0x00                         
-         }
-      })
-   }
-}
-```
 
 A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.
 

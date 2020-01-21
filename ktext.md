@@ -1,5 +1,5 @@
 # Gathering files
-Last edited: January 17, 2020
+Last edited: January 21, 2020
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -109,26 +109,5 @@ Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/maste
 
 ## SSDTs
 
-So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. Well, we'll be going over a couple to see whether you need them. Do note you'll need to compile these SSDTs yourself and please read them before compiling. Some require you to adjust them for your specific system\(ie: EC0 to H\_EC for SSDT-EC-USBX\). These files will go in your ACPI folder in your EFI
-
-**If you're unsure which you need or how to compile, the specific ones for each platform are mentioned in ACPI section for your CPU's config guide and info on making these files can be found in the [Getting started with ACPI](/extras/acpi.md)**
-
-* [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
-   * This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), needed for most Z390 systems though newer BIOS revisions are starting to push this to all 300 series boards including Z370. This forces the legacy RTC clock on as macOS can't communicate with AWAC yet
-* [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
-  * Alternative to [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) when there is no RTC clock to enable, this SSDT will fake it instead
-* [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
-  * Needed to setup USB power and such correctly and required for booting macOS Catalina. This SSDT is meant for Skylake+ systems, please use [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) for older systems. See the [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/) for more info regarding Embedded controller fix.
-* [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
-  * Needed to setup the embedded controller correctly on pre-skylake systems and required for booting macOS Catalina.
-* [SSDT-EHCx\_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
-  * Used for disabling phatom ports on pre-skylake systems like for Z77, Z87, Z97, X79 and X99, not need if XHCI-Handoff is enabled in the BIOS
-* [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-  * Sets `PluginType`, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`. Do note that this SSDT is made for systems where `AppleACPICPU` attaches `CPU0`, though some ACPI tables have theirs starting at `PR00` so adjust accordingly. HEDT users need to verify if the path is correct\(ie: `\_PR.PR00` vs `\_SB.SCK0.PR00`\)
-* [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
-  * Adds an SMBus device and fixes DeviceProperties injection via `_DSM` for when adding properties via an SSDT.
-* [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl)
-  * So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and can be compiled as is, so a pre-made can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
-
-**Remember to verify that the ACPI path in the SSDT matches up with your DSDT, extremely important for X79, X99 and X299 users**
+So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in **your specific ACPI section of the config.plist**, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now. [Getting started with ACPI](/extras/acpi.md) has an extended section on SSDTs for those who prefer doing things the old fasioned way.
 

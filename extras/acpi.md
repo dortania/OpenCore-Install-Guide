@@ -1,6 +1,6 @@
 # Getting started with ACPI
 
-Last edited: January 16, 2020
+Last edited: January 21, 2020
 
 ## A quick explainer on ACPI and how to make SSDTs
 
@@ -13,19 +13,74 @@ macOS can be very picky about the devices present in the DSDT and so our job is 
 * Embedded controllers\(EC\) 
   * All semi-modern intel machines have an EC exposed in their DSDT, with many AMD systems also having it exposed. These controllers are not compatible with macOS so then need to be hidden from macOS and replaced with a dummy EC when running macOS Catalina
 * Plugin type
-  * This is used to enable native CPU power management on Intel Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU. For Intel CPUs only, for AMD see [NullCPUPowerManagement patch](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)
+  * This is used to enable native CPU power management on **Intel** Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU. Not meant for AMD
 * AWAC system clock.
   * This applies to all 300 series motherboards including Z370 boards, the specific issue is that newer boards ship with AWAC clock enabled. This is a problem because macOS cannot communicate with AWAC clocks, so this requires us to either force on the Legacy RTC clock or if unavailable create a fake one for macOS to play with
+* PMC SSDT
+  * True 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support, prebuilt can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
+
+# SSDTs: The easy way
+
+So here we'll be using a super simple tool made by CorpNewt: [SSDTTime](https://github.com/corpnewt/SSDTTime)
+
+What this tool does is dumps your DSDT from your firmware, and then creates SSDTs based off your DSDT. 
+
+So what **can't** SSDTTime do?:
+
+* **Skylake-X(X299) SSDTs**: The ACPI is odd on this platform so manual work is required
+* **AWAC and RTC0 SSDTs**: 300 series intel boards will also need to figure his out(Z390 systems are most common for requiring this but some gigabyte Z370 do as well)
+* **PMC SSDT**: For fixing 300 series intel NVRAM, a prebuilt can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
+* **USBX SSDT**: This is included on sample SSDTs but SSDTTime only makes the SSDT-EC part, Skylake and newer users can grab a prebuilt here: [SSDT-USBX.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX.aml)
+
+for users who don't have all the options avaible to them in SSDTTime, you can follow the "SSDTs: The long way" section. You can still use SSDTTime for SSDTs it support for you.
+
+## Running SSDTTime
+
+Run the `SSDTTime.bat` file as Admin on the target machine and you should see something like this:
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/669260286007705623/unknown.png)
+
+What are all these options?:
+
+* `1. FixHPET    - Patch out IRQ Conflicts`
+   * IRQ patching, mainly needed for X79, X99 and laptop users
+* `2. FakeEC     - OS-aware Fake EC`
+   * This is the SSDT-EC, required for Catalina users
+* `3. PluginType - Sets plugin-type = 1 on CPU0/PR00`
+   * This is the SSDT-PLUG, for Intel only
+* `4. Dump DSDT  - Automatically dump the system DSDT`
+   * Dumps your DSDT from your firmware
+
+
+What we want to do is select option `4. Dump DSDT` first, then select the appropriate option(s) for your system. 
+
+> What about USBX?
+
+For Skylake+ and AMD, you can grab a prebuilt file here: [SSDT-USBX.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX.aml). This file is plug and play and requires no device configuration, **do not use on Haswell and older**.
+
+## Adding to OpenCore
+
+Don't forget that SSDTs need to be added to Opencore, eminder that .aml is complied, .dsl is code. **Add only the .aml file**:
+* EFI/OC/ACPI
+* config.plist -> ACPI -> Add
+
+Reminder that Cmd/Crtl+R with ProperTree pointed at your OC folder will add all your SSDTs, kexts and .efi drivers to the config for you. Do not add your DSDT to OpenCore, its already in your firmware
+
+
+# SSDTs: The long way
+SSDTTime doesn't support your platform or wanting to really learn the process of making SSDTs? Well you've come to the right place!
+
 
 ## Getting a copy of our DSDT
 
-So to get a copy of your DSDT there's a couple of options:
+So to start, we'll need to get a copy of your DSDT from your firmware. There's a couple of options:
 
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases)
-  * Open the app on the target machine and the system's DSDT will show, then File -&gt; SaveAs `System DSDT`. Make sure the file format is ACPI Machine Language Binary\(.AML\), this will require the machine to be running macOS
+  * Open the app on the target machine(must already be running macOS) and the system's DSDT will show, then File -&gt; SaveAs `System DSDT`. Make sure the file format is ACPI Machine Language Binary\(.AML\), this will require the machine to be running macOS
   * Do note that all ACPI patches from clover/OpenCore will be applied to the DSDT
 * [SSDTTime](https://github.com/corpnewt/SSDTTime)
   * Supports both Windows and Linux for DSDT dumping
+  * Option 4 to dump
 * [acpidump.exe](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip)
   * In command prompt run `path/to/acpidump.exe -b -n DSDT -z`, this will dump your DSDT as a .dat file. Rename this to DSDT.aml
 * F4 in Clover Boot menu
@@ -113,9 +168,9 @@ External (_SB_.PCI0.LPCB.EC0, DeviceObj)
 */ <- REMOVE THIS
 ```
 
-But looking back at the screenshot above we notice something, our ACPI path is different: `PC00.LPC0` vs `PCI0.LPCB`. This is very important especially when you're dealing with Intel consumer vs Intel HEDT and AMD, `PC00.LPC0` is common on Intel HEDT while `PCI0.SBRG` is common on AMD. And they even come with name variation such as  `EC0`, `H_EC`, `PGEC` and `ECDV`, so there can't be a one size fits all SSDT, **always verify your path and device**.
+But looking back at the screenshot above we notice something, our ACPI path is different: `PC00.LPC0` vs `PCI0.LPCB`. This is very important especially when you're dealing with Intel consumer vs Intel HEDT and AMD, `PC00.LPC0` is common on Intel HEDT while `PCI0.SBRG` is common on AMD. And they even come with name variation such as  `EC0`, `H_EC`, `PGEC` and `ECDV`, so there can't be a one size fits all SSDT, **always verify your path and device**. 
 
-And make sure to scroll to the bottom as the new Fake EC function also need the correct path to replace the old EC.
+And make sure to scroll to the bottom as the new Fake EC function also need the correct path to replace the old EC. **Do not rename the EC device itself**, this is our fake EC we're using for macOS to play with. Just change the path!
 
 > What happens if multiple `PNP0C09` show up
 
@@ -159,7 +214,7 @@ For those who want a deeper dive into the EC issue: [What's new in macOS Catalin
 
 ### PLUG SSDT
 
-**Intel CPUs only, for AMD see** [**NullCPUPowerManagement patch**](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/NullCPU-patch.md)
+**Intel CPUs only**
 
 CPU naming is fairly easy to figure out as well, open your decompiled DSDT and search for `Processor`. This should give you a result like this:
 
