@@ -86,7 +86,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **DisableSingleUser**: NO
   * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
-  * Needed for systems with non-functioning NVRAM, thanks to SSDT-NVRAM we no longer need this option
+  * Needed for systems with non-functioning NVRAM, thanks to SSDT-PMC we no longer need this option
 * **DiscardHibernateMap**: NO
   * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES

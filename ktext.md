@@ -15,12 +15,12 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
   * Needed for seeing APFS volumes.
 * [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) **or** [HfsPlus.efi](https://cdn.discordapp.com/attachments/606452360495104000/633621011887292416/HFSPlus.efi)
   * Needed for seeing HFS volumes. **Do not mix HFS drivers**
-* [FwRuntimeServices.efi](https://github.com/acidanthera/OpenCorePkgs/releases)
+* [FwRuntimeServices.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
 
 For extra functionality with OpenCore:
 
-* [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg)
+* [AppleUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on IvyBridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
