@@ -1,6 +1,6 @@
 # AMD
 
-Last edited: January 16, 2020
+Last edited: January 21, 2020
 
 ## Starting Point
 
@@ -27,6 +27,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
 
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
    * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
+   * This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.
    * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
  
 
@@ -111,22 +112,9 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 **Add**: Sets device properties from a map.
 
-`PciRoot(0x0)/Pci(0x0,0x4)` -&gt; `layout-id`
+By default, the sample.plist has this section set for iGPU and audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x1b,0x0)` can be removed, and for audio we'll be setting that up in the boot-args section. So we can also remove `PciRoot(0x0)/Pci(0x1b,0x0)`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-
-Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases) You can find your audio path with the following(Do note, not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such):
-```
-path/to/gfxutil -f HDEF
-```
-
-Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`. Audio can be left for post-install.
-
-The `PciRoot(0x0)/Pci(0x2,0x0)` is only for intel iGPUs, remove this section entirely.
-
-**Block**: Removes device properties from the map, for us we can ignore this
-
-Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifically Little Endians that modern CPUs use for ordering bytes. The more you know!
+TL;DR, delete the PCIRoot's here as we won't be using this section.
 
 ## Kernel
 
@@ -285,7 +273,8 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
 
    * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
    * `npci=0x2000` - this disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
-   * `agdpmod=pikera` - used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen
+   * `agdpmod=pikera` - used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**
+   * `alcid=1` - used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. For us, since we're running kernel patches it's recommended to keep SIP off though you can turn it back on after install and test yourself
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:

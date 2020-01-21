@@ -133,17 +133,11 @@ The two ig-platform-id's we use are as follows:
 
 We also add 2 more properties, framebuffer-patch-enable and framebuffer-stolenmem. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS.
 
-`PciRoot(0x0)/Pci(0x1b,0x0)` -&gt; `Layout-id`
+`PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
-Keep in mind that some motherboards have different device locations, you can find yours by either examining the device tree in IOReg or using [gfxutil](https://github.com/acidanthera/gfxutil/releases) You can find your audio path with the following\(Do note, not all audio controllers are called HDEF, sometimes being known as HDAS, AZAL, HDAU and such\):
-
-```text
-path/to/gfxutil -f HDEF
-```
-
-Do note that `layout-id` is a `Data` value meaning you will need to convert from `Number` to `HEX` so `Layout=5` would be interpreted as `<05000000>` and `Layout=11` would be `<0B000000>`. Audio can be left for post-install.
+For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present
 
 **Block**: Removes device properties from the map, for us we can ignore this
 
@@ -302,6 +296,7 @@ These values are based of those calculated in [OpenCore debugging](../troublesho
   * `shikigva=40` - this flag is specific for Nvidia users. It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
     * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
     * 32 - ReplaceBoardID - replaces board-id used by AppleGVA with a different board-id\(iMac14,2\). Do note that this generally needed for systems running Nvidia GPUs
+   * `alcid=1` - used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
 
 csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
