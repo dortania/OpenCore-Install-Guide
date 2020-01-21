@@ -520,7 +520,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="disabling-gpu">Disabling GPU</h1>
-<p>Last edited: January 13, 2020</p>
+<p>Last edited: January 21, 2020</p>
 <h2 id="gpu-spoof">GPU Spoof</h2>
 <p>So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:</p>
 <ul>
@@ -581,7 +581,7 @@
 <p>There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.</p>
 <p>Example of device path:</p>
 <p><code>\_SB.PCI0.PEG0.PEGP</code></p>
-<pre><code class="lang-text">DefinitionBlock (&quot;&quot;, &quot;SSDT&quot;, 2, &quot;hack&quot;, &quot;spoof&quot;, 0x00000000)
+<pre><code>DefinitionBlock (&quot;&quot;, &quot;SSDT&quot;, 2, &quot;hack&quot;, &quot;spoof&quot;, 0x00000000)
 {
    External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
 
@@ -625,8 +625,7 @@
       })
    }
 }
-</code></pre>
-<p>A copy of this SSDT can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl" target="_blank">Spoof-SSDT.dsl</a> You will need <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.</p>
+</code></pre><p>A copy of this SSDT can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl" target="_blank">Spoof-SSDT.dsl</a> You will need <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.</p>
 <p>Source: CorpNewt</p>
 <h2 id="fixing-windows">Fixing Windows</h2>
 <p>So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:</p>
@@ -674,7 +673,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Disabling GPU","level":"5.2","depth":1,"next":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/spoof.md","mtime":"2020-01-21T02:48:22.319Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-21T02:49:06.481Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Disabling GPU","level":"5.2","depth":1,"next":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/spoof.md","mtime":"2020-01-21T19:30:49.912Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-21T19:31:41.784Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
