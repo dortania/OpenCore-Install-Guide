@@ -12,7 +12,7 @@ So something that makes OpenCore truly special is how it's been built with secur
 To start, you'll need the following .efi drivers:
 
 * FwRuntimeServices.efi
-  * [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg/releases) may be needed if OpenCore's built-in input doesn't work
+  * [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg/releases) for DuetPkg users(systesm without UEFI support)
 
 **Do not use VirtualSMC.efi with OpenCore, its already baked inside**
 

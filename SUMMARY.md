@@ -32,17 +32,17 @@
 ## Troubleshooting
 
 * [General Troubleshooting](troubleshooting/troubleshooting.md)
-* [Fixing Resolution and Verbose](troubleshooting/verbose.md)
-* [Fixing iServices](/post-install/iservices.md)
 * [OpenCore Debugging](troubleshooting/debug.md)
 
 ## Extras
 
 * [Legacy Install](extras/legacy.md)
-* [Getting started with ACPI](extras/acpi.md)
 * [GPU Patching](extras/gpu-patches.md)
+* [Getting started with ACPI](extras/acpi.md)
+* [Fixing Resolution and Verbose](troubleshooting/verbose.md)
 * [Fixing KALSR slide values](extras/kalsr-fix.md)
 * [Fixing CFG Lock](extras/msr-lock.md)
+* [Fixing iServices](/post-install/iservices.md)
 
 ## Misc
 

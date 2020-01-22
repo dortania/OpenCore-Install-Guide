@@ -4,13 +4,13 @@ Last edited: January 17, 2020
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
-* [OpenCore booting issues](/troubleshooting/troubleshooting-cleanup.md#opencore-booting)
+* [OpenCore booting issues](/troubleshooting/troubleshooting.md#opencore-booting)
    * This is anytime before or during the loading of the macOS kernel
-* [macOS booting issues](/troubleshooting/troubleshooting-cleanup.md#macos-booting)
+* [macOS booting issues](/troubleshooting/troubleshootingmd#macos-booting)
    * Anytime between the kernel loading and installing macOS
-* [macOS post-install issues](/troubleshooting/troubleshooting-cleanup.md#macos-post-install)
+* [macOS post-install issues](/troubleshooting/troubleshooting.md#macos-post-install)
    * Anytime after macOS is installed
-* [Other issues](/troubleshooting/troubleshooting-cleanup.md#other-issues)
+* [Other issues](/troubleshooting/troubleshooting.md#other-issues)
    * This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc
 
 While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion) for more info
@@ -220,6 +220,8 @@ Generally seen as an issue surrounding the prelinked kernel, specifically that m
 * Broken iMessage and Siri 
 * No on-board audio
 * BIOS reset or sent into Safemode after reboot/shutdown?
+* macOS GPU acceleration missing on AMD X570
+* DRM Broken
 
 
 
@@ -275,13 +277,20 @@ Verify the following:
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
 
+## DRM Broken
+
+With Haswell and newer iGPUs, DRM is outright broken on them with macOS Catalina. This includes iTunes Movies, Apple TV+, Amazon Prime and Netflix, the only fix is getting a supported dGPU preferably Polaris or newer that supports HEVC. 
+
+More other GPUs, try different shiki boot args:
+
+* [WhateverGreen's DRM Chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 
 
 # Other issues
 
 * Can't run `acpidump.efi`
-* `Python is not installed or not found` error
 * Fixing SSDTTime: `Could not locate or download iasl!`
+* Fix Python: `Python is not installed or not found on PATH`
 * Windows Startup Disk can't see APFS drives
 * Incorrect resolution with OpenCore
 
@@ -303,12 +312,6 @@ fs0:\> cd EFI\OC\Tools //note that its with forward slashes
 fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 ```
 
-## `Python is not installed or not found` error
-
-Install Python and make sure you select `Add Python X.X to PATH`
-* [Windows link](https://www.python.org/downloads/windows/)
-
-
 ## Fixing SSDTTime: `Could not locate or download iasl!`
 
 This is usually due to an outdated version of Python, try either updating Python or add iasl to the scripts folder for SSDTTime:
@@ -316,6 +319,19 @@ This is usually due to an outdated version of Python, try either updating Python
 * [iasl macOS version](https://bitbucket.org/RehabMan/acpica/downloads/iasl.zip)
 * [iasl Windows version](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip)
 * [iasl Linux version](http://amdosx.kellynet.nl/iasl.zip)
+
+## Fix Python: `Python is not installed or not found on PATH`
+
+East fix, download and install the latest python:
+
+* [macOS link](https://www.python.org/downloads/macos)
+* [Windows link](https://www.python.org/downloads/windows/)
+* [Linux link](https://www.python.org/downloads/source/)
+
+Make sure `Add Python to PATH`
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/668209828958830613/unknown.png)
+
 
 ## Windows Startup Disk can't see APFS drives
 
