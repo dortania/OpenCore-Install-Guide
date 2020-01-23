@@ -118,3 +118,4 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 
 [Getting started with ACPI](/extras/acpi.md) has an extended section on SSDTs for those who prefer doing things the old fasioned way.
 
+# Now head to your specific CPU section to setup your config.plist
