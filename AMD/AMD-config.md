@@ -157,6 +157,8 @@ To merge:
 * Copy the `Patch` section from patches.plist
 * Paste into where old patches were in config.plist
 
+![](/extra-files/patches.gif)
+
 **Quirks**:
 
 * **AppleCpuPmCfgLock**: NO 

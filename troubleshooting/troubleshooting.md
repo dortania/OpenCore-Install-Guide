@@ -322,7 +322,7 @@ This is usually due to an outdated version of Python, try either updating Python
 
 ## Fix Python: `Python is not installed or not found on PATH`
 
-East fix, download and install the latest python:
+Easy fix, download and install the latest python:
 
 * [macOS link](https://www.python.org/downloads/macos)
 * [Windows link](https://www.python.org/downloads/windows/)
