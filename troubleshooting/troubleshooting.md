@@ -343,38 +343,3 @@ Make sure `Add Python to PATH`
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
 
-# Ignore, this is GitBook CLI debugging
-
-**NECESSARY KEXTS**
-
-| Kext                | Mandatory                                       | Description                                                  |
-| :--- | :--- | :--- |
-| Lilu                | ✅                                               | An open source kernel extension bringing a platform for arbitrary kext, library, and program patching throughout the system for macOS. |
-| VirtualSMC          | ✅ Better with Lilu                              | Advanced Apple SMC emulator in the kernel.                   |
-| WhateverGreen       | ✅ Requires Lilu                                 | Various patches necessary for certain ATI/AMD/Intel/Nvidia GPUs |
-| USBInjectAll        | ✅ (may get deprecated soon™️)                    | Kext to inject all USB ports for the installed Intel EHCI/XHCI chipset automatically. |
-| VoodooPS2Controller | ✅ for laptops and desktops with PS2 peripherals | Enables PS/2 Support on macOS.                               |
-
-**NETWORK KEXT**
-
-| Wired Network Kext   | Devices to use with                                          |
-| :--- | :--- |
-| AppleIntele1000      | Old Intel Cards (IntelMausi should be better)                |
-| HoRNDIS              | Android RNDIS Tethering. [Pre-compiled kext only](https://github.com/midi1996/JBOG/blob/master/Extra/HoRNDIS.kext.zip?raw=true) and [official website](https://joshuawise.com/horndis) to get the latest release whenever possible. |
-| IntelMausi           | For most Intel NICs                                          |
-| AtherosE2200Ethernet | For some Atheros/QualcommAtheros/Killer\(some\) NICs         |
-| BCM5722D             | For Broadcom BCM5722 NetXtreme and NetLink family            |
-| BCM57xx              | _\(other than 5722\)_ get FakePCIID zip folder, and use FakePCIID + FakePCIID\_BCM57XX\_as\_BCM57765 |
-| RealtekRTL8100       | For 10/100 Realtek Cards \(Realtek FE\)                      |
-| RealtekRTL8111       | For Gigabit Realtek Cards \(Realtek GbE\)                    |
-| SmallTreeIntel211    | for some Intel ethernet chipsets, [link for the binary](https://cdn.discordapp.com/attachments/390417931659378688/556912824228773888/SmallTree-Intel-211-AT-PCIe-GBE.kext.zip). |
-
-| Wireless Kext       | Devices to use with                                          |
-| :--- | :--- |
-| ----                | USB Wifi Users: **NO \[won't work while the install, look for the driver after the install** |
-| AirPortBrcmFixUp    | For Broadcom chipsets: BCM4360, BCM4352, BCM4350 (found in DW1830, DW1560, DW1820A -- not recommended card --, Apple BRCM94360CS2/2CS/CD) |
-| ProbookAtheros.kext | for Atheros based chips _\(AR5B95/195/97/197, based on AR9280/AR9285 SoC\)_:<br/>           * go to [HP Probook 4x30 DSDT Patch](https://github.com/RehabMan/HP-ProBook-4x30s-DSDT-Patch/archive/master.zip)<br/>           * extract the zip<br/>           * explore to `kexts`<br/>           * get `ProbookAtheros.kext`<br />**The kext will not work on Catalina/Mojave anymore, AppleAtheros40 kext has been deprecated in 10.14+ and will need special workaround that will not work in a recovery environment.** |
-| ----                | Intel: _NOPE_ - Change it                                    |
-| ----                | QComAtheros: _NOPE_ - Change it                              |
-| ATH9KFixUp          | for Atheros based on _AR95XX-AR94XX_: ATH9KFixUp with proper boot argument options seen in the original github [repo](https://github.com/chunnann/ATH9KFixup) or rehabman's [fork](https://github.com/RehabMan/ATH9KFixup) \(DO NOT install it in /S/L/E, just use Clover's folder).<br />**The kext will not work on Catalina/Mojave anymore, AppleAtheros40 kext has been deprecated in 10.14+ and will need special workaround that will not work in a recovery environment.** |
-
