@@ -840,125 +840,6 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li>Follow <a href="verbose.html">Hiding Verbose</a> for correct setup, set <code>UIScale</code> to <code>02</code> for HiDPI</li>
 <li>Users also have noticed that setting <code>ConsoleMode</code> to Max will sometimes fail, leaving it empty can help</li>
 </ul>
-<h1 id="ignore-this-is-gitbook-cli-debugging">Ignore, this is GitBook CLI debugging</h1>
-<p><strong>NECESSARY KEXTS</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Kext</th>
-<th style="text-align:left">Mandatory</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Lilu</td>
-<td style="text-align:left">&#x2705;</td>
-<td style="text-align:left">An open source kernel extension bringing a platform for arbitrary kext, library, and program patching throughout the system for macOS.</td>
-</tr>
-<tr>
-<td style="text-align:left">VirtualSMC</td>
-<td style="text-align:left">&#x2705; Better with Lilu</td>
-<td style="text-align:left">Advanced Apple SMC emulator in the kernel.</td>
-</tr>
-<tr>
-<td style="text-align:left">WhateverGreen</td>
-<td style="text-align:left">&#x2705; Requires Lilu</td>
-<td style="text-align:left">Various patches necessary for certain ATI/AMD/Intel/Nvidia GPUs</td>
-</tr>
-<tr>
-<td style="text-align:left">USBInjectAll</td>
-<td style="text-align:left">&#x2705; (may get deprecated soon&#x2122;&#xFE0F;)</td>
-<td style="text-align:left">Kext to inject all USB ports for the installed Intel EHCI/XHCI chipset automatically.</td>
-</tr>
-<tr>
-<td style="text-align:left">VoodooPS2Controller</td>
-<td style="text-align:left">&#x2705; for laptops and desktops with PS2 peripherals</td>
-<td style="text-align:left">Enables PS/2 Support on macOS.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>NETWORK KEXT</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Wired Network Kext</th>
-<th style="text-align:left">Devices to use with</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">AppleIntele1000</td>
-<td style="text-align:left">Old Intel Cards (IntelMausi should be better)</td>
-</tr>
-<tr>
-<td style="text-align:left">HoRNDIS</td>
-<td style="text-align:left">Android RNDIS Tethering. <a href="https://github.com/midi1996/JBOG/blob/master/Extra/HoRNDIS.kext.zip?raw=true" target="_blank">Pre-compiled kext only</a> and <a href="https://joshuawise.com/horndis" target="_blank">official website</a> to get the latest release whenever possible.</td>
-</tr>
-<tr>
-<td style="text-align:left">IntelMausi</td>
-<td style="text-align:left">For most Intel NICs</td>
-</tr>
-<tr>
-<td style="text-align:left">AtherosE2200Ethernet</td>
-<td style="text-align:left">For some Atheros/QualcommAtheros/Killer(some) NICs</td>
-</tr>
-<tr>
-<td style="text-align:left">BCM5722D</td>
-<td style="text-align:left">For Broadcom BCM5722 NetXtreme and NetLink family</td>
-</tr>
-<tr>
-<td style="text-align:left">BCM57xx</td>
-<td style="text-align:left"><em>(other than 5722)</em> get FakePCIID zip folder, and use FakePCIID + FakePCIID_BCM57XX_as_BCM57765</td>
-</tr>
-<tr>
-<td style="text-align:left">RealtekRTL8100</td>
-<td style="text-align:left">For 10/100 Realtek Cards (Realtek FE)</td>
-</tr>
-<tr>
-<td style="text-align:left">RealtekRTL8111</td>
-<td style="text-align:left">For Gigabit Realtek Cards (Realtek GbE)</td>
-</tr>
-<tr>
-<td style="text-align:left">SmallTreeIntel211</td>
-<td style="text-align:left">for some Intel ethernet chipsets, <a href="https://cdn.discordapp.com/attachments/390417931659378688/556912824228773888/SmallTree-Intel-211-AT-PCIe-GBE.kext.zip" target="_blank">link for the binary</a>.</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Wireless Kext</th>
-<th style="text-align:left">Devices to use with</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">----</td>
-<td style="text-align:left">USB Wifi Users: <strong>NO [won&apos;t work while the install, look for the driver after the install</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">AirPortBrcmFixUp</td>
-<td style="text-align:left">For Broadcom chipsets: BCM4360, BCM4352, BCM4350 (found in DW1830, DW1560, DW1820A -- not recommended card --, Apple BRCM94360CS2/2CS/CD)</td>
-</tr>
-<tr>
-<td style="text-align:left">ProbookAtheros.kext</td>
-<td style="text-align:left">for Atheros based chips <em>(AR5B95/195/97/197, based on AR9280/AR9285 SoC)</em>:<br>           <em> go to <a href="https://github.com/RehabMan/HP-ProBook-4x30s-DSDT-Patch/archive/master.zip" target="_blank">HP Probook 4x30 DSDT Patch</a><br>           </em> extract the zip<br>           <em> explore to <code>kexts</code><br>           </em> get <code>ProbookAtheros.kext</code><br><strong>The kext will not work on Catalina/Mojave anymore, AppleAtheros40 kext has been deprecated in 10.14+ and will need special workaround that will not work in a recovery environment.</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">----</td>
-<td style="text-align:left">Intel: <em>NOPE</em> - Change it</td>
-</tr>
-<tr>
-<td style="text-align:left">----</td>
-<td style="text-align:left">QComAtheros: <em>NOPE</em> - Change it</td>
-</tr>
-<tr>
-<td style="text-align:left">ATH9KFixUp</td>
-<td style="text-align:left">for Atheros based on <em>AR95XX-AR94XX</em>: ATH9KFixUp with proper boot argument options seen in the original github <a href="https://github.com/chunnann/ATH9KFixup" target="_blank">repo</a> or rehabman&apos;s <a href="https://github.com/RehabMan/ATH9KFixup" target="_blank">fork</a> (DO NOT install it in /S/L/E, just use Clover&apos;s folder).<br><strong>The kext will not work on Catalina/Mojave anymore, AppleAtheros40 kext has been deprecated in 10.14+ and will need special workaround that will not work in a recovery environment.</strong></td>
-</tr>
-</tbody>
-</table>
 
                                 
                                 </section>
@@ -1002,7 +883,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-01-23T22:38:48.740Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-23T22:39:31.350Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-01-23T22:54:56.571Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-23T22:55:40.071Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
