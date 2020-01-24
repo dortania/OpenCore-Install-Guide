@@ -1,6 +1,6 @@
 # Getting started with ACPI
 
-Last edited: January 21, 2020
+Last edited: January 23, 2020
 
 ## A quick explainer on ACPI and how to make SSDTs
 
@@ -17,7 +17,7 @@ macOS can be very picky about the devices present in the DSDT and so our job is 
 * AWAC system clock.
   * This applies to all 300 series motherboards including Z370 boards, the specific issue is that newer boards ship with AWAC clock enabled. This is a problem because macOS cannot communicate with AWAC clocks, so this requires us to either force on the Legacy RTC clock or if unavailable create a fake one for macOS to play with
 * PMC SSDT
-  * True 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support, prebuilt can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
+  * True 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and uses the scope `PCI0.LPCB`, this is the most common scope so a pre-made can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml) or continue reading and make your own.
 
 # SSDTs: The easy way
 
@@ -29,7 +29,7 @@ So what **can't** SSDTTime do?:
 
 * **Skylake-X(X299) SSDTs**: The ACPI is odd on this platform so manual work is required
 * **AWAC and RTC0 SSDTs**: 300 series intel boards will also need to figure his out(Z390 systems are most common for requiring this but some gigabyte Z370 do as well)
-* **PMC SSDT**: For fixing 300 series intel NVRAM, a prebuilt can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
+* **PMC SSDT**: For fixing 300 series intel NVRAM, a prebuilt for `PCI0.LPCB` can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
 * **USBX SSDT**: This is included on sample SSDTs but SSDTTime only makes the SSDT-EC part, Skylake and newer users can grab a prebuilt here: [SSDT-USBX.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX.aml)
 
 For users who don't have all the options avaible to them in SSDTTime, you can follow the "SSDTs: The long way" section. You can still use SSDTTime for SSDTs it support for you.
@@ -248,7 +248,33 @@ As you can see we found the `STAS` in our DSDT, this means we're able to force e
 
 For systems where no `STAS` shows up, you can use [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) though you will need to check whether your DSDT uses `LPCB`, `LBC` or `LBC0`. By default it uses `LPCB`, you can check by just searching for instances of `LPCB`, `LBC` and `LBC0`
 
+### PMC SSDT
+
+**This is required for all B360, B365, H310, H370, Z390 motherboards**
+This SSDT brings back NVRAM support and uses the scope `PCI0.LPCB` to check what scope your system has, search your DSDT for `Name (_ADR, 0x001F0000)`. This address is used for Low Pin Count devices(LPC) but the device name can vary(quite rarely in reality, almost all consumer intel boards use `LPCB`)
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/670148514197667840/Screen_Shot_2020-01-23_at_11.08.30_PM.png)
+
+
+
 ## Cleaning up
 
 Now that we have all our SSDTs compiled, the last thing to do is add our SSDTs to both EFI/OC/ACPI and our config under ACPI -&gt; Add. A reminder that ProperTree users can press the hotkey Cmd/Ctrl+R for automatically adding your SSDTs to the config. A reminder that there is no need to add your DSDT as its already inside your firmware.
 
+# Now head back to your specific CPU section to setup your config.plist
+
+## Intel Config.plist
+
+* [Ivy Bridge](/config.plist/ivy-bridge.md)
+* [Haswell](/config.plist/haswell.md)
+* [Skylake](/config.plist/skylake.md)
+* [Kaby Lake](/config.plist/kaby-lake.md)
+* [Coffee Lake](/config.plist/coffee-lake.md)
+
+## Intel HEDT Config.plist
+
+* [Skylake-X](/config-HEDT/skylake-x.md)
+
+## AMD Config.plist
+
+* [AMD](/AMD/AMD-config.md)

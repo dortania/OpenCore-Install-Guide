@@ -1,5 +1,5 @@
 # Improve GPU performance and remove nullcpupowermanagement.kext
-Last edited: January 12, 2020
+Last edited: January 23, 2020
 
 What you'll need:
 
@@ -8,6 +8,10 @@ What you'll need:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip)
 * [AGPMInjector](https://github.com/Pavo-IM/AGPMInjector/releases)
+
+## Warning
+
+The HPET patch can break Windows booting through OpenCore, **do not use this guide unless you're ok with this**
 
 
 # 1. Removing nullcpupowermanagement.kext: 

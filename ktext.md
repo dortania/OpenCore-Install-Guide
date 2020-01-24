@@ -21,7 +21,7 @@ These are the drivers used for OpenCore, for the majority of systems you only ne
 For legacy users:
 
 * [AppleUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on IvyBridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [NvmExpressDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
    * Used for Haswell and older when no NVMe driver is built into the firmware
 * [XhciDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
@@ -47,13 +47,13 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 **VirtualSMC Plugins**:
 
 * SMCProcessor.kext
-  * Used for monitoring CPU temperature, doesn't work AMD CPU based systems
+  * Used for monitoring CPU temperature, **doesn't work AMD CPU based systems**
 * SMCSuperIO.kext
-  * Used for monitoring fan speed, doesn't work AMD CPU based systems
+  * Used for monitoring fan speed, **doesn't work AMD CPU based systems**
 * SMCLightSensor.kext
-  * Used for the ambient light sensor on laptops, desktops can ignore
+  * Used for the ambient light sensor on laptops, **desktops can ignore**
 * SMCBatteryManager.kext
-  * Used for measuring battery readouts on laptops, desktops can ignore
+  * Used for measuring battery readouts on laptops, **desktops can ignore**
 
 **Graphics**:
 
@@ -63,7 +63,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 **Audio**:
 
 * [AppleALC](https://github.com/vit9696/AppleALC/releases)
-  * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h cannot use this and Ryzen/Threadripper systems rarely have mic support
+  * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
 
 **Ethernet**:
 
@@ -108,6 +108,8 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * iMacPro1,1
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
    * Needed for correcting TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremly slow or even unbootable
+* [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
+   * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
 
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
@@ -119,3 +121,19 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 [Getting started with ACPI](/extras/acpi.md) has an extended section on SSDTs for those who prefer doing things the old fasioned way.
 
 # Now head to your specific CPU section to setup your config.plist
+
+## Intel Config.plist
+
+* [Ivy Bridge](/config.plist/ivy-bridge.md)
+* [Haswell](/config.plist/haswell.md)
+* [Skylake](/config.plist/skylake.md)
+* [Kaby Lake](/config.plist/kaby-lake.md)
+* [Coffee Lake](/config.plist/coffee-lake.md)
+
+## Intel HEDT Config.plist
+
+* [Skylake-X](/config-HEDT/skylake-x.md)
+
+## AMD Config.plist
+
+* [AMD](/AMD/AMD-config.md)
