@@ -526,12 +526,12 @@
 <p>Tip: <code>iMacPro1,1 10</code> will print 10 serials, this will save you some time on generating</p>
 <p><img src="https://i.imgur.com/cVL7ETT.png" alt=""></p>
 <p>Now enter the serial into the <a href="https://checkcoverage.apple.com/" target="_blank">Apple Check Coverage page</a>, you will get 1 of 3 responses:</p>
-<p>&quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot;:
-<img src="https://i.imgur.com/dvYcpHB.png" alt=""></p>
-<p>Valid Purchase date:
-<img src="https://i.imgur.com/rh0r28T.png" alt=""></p>
-<p>Purchase Date not Validated:
-<img src="https://i.imgur.com/oSLMqWa.png" alt=""></p>
+<p><strong>&quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot;:</strong></p>
+<p><img src="https://i.imgur.com/dvYcpHB.png" alt=""></p>
+<p><strong>Valid Purchase date:</strong></p>
+<p><img src="https://i.imgur.com/rh0r28T.png" alt=""></p>
+<p><strong>Purchase Date not Validated:</strong></p>
+<p><img src="https://i.imgur.com/oSLMqWa.png" alt=""></p>
 <p>This last one is what we&apos;re after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -&gt; PlatformInfo -&gt; Add:</p>
 <ul>
 <li>Type = SystemProductName</li>
@@ -563,13 +563,16 @@ sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 <p>To find your actual MAC Address/ROM value, you can find in a couple places:</p>
 <ul>
 <li>BIOS</li>
-<li>System Preferences -&gt; Network -&gt; Ethernet -&gt; Advanced -&gt; MAC Address</li>
+<li>macOS: System Preferences -&gt; Network -&gt; Ethernet -&gt; Advanced -&gt; MAC Address</li>
+<li>Windows: Settings -&gt; Network &amp; Internet -&gt; Ethernet -&gt; Ethernet -&gt; Phyisical MAC Address</li>
 </ul>
 <p>Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we&apos;ll be  using our real MAC Address but note that this is another option</p>
 <p>When adding this to your config, <code>c0:7e:bf:c3:af:ff</code> should be converted to <code>c07ebfc3afff</code> as the <code>Data</code> type cannot accept colons(<code>:</code>).</p>
 <p><img src="https://i.imgur.com/vAW6Rkz.png" alt=""></p>
 <h2 id="verifying-nvram">Verifying NVRAM</h2>
-<p>Please refer to the <a href="nvram.html">Emulated NVRAM</a> section of the OpenCore Guide for more info.</p>
+<p>Something that many forget about iServices is that NVRAM is curtial to getting it working correcttly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.</p>
+<p>So we&apos;ll need to verify NVRAM works, regardless if &quot;it should work&quot; as some firmwares can be more of a pain than others.</p>
+<p>Please refer to the <a href="nvram.html">Emulated NVRAM</a> section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you dont.</p>
 <h2 id="clean-out-old-attempts">Clean out old attempts</h2>
 <p>This is important for those who&apos;ve tried setting up iMessage but failed, to start make sure your NVRAM has been cleared. You can enable the option in the boot picker in your config under config.plist -&gt; Misc -&gt; Security -&gt; AllowNvramReset.</p>
 <p>Next open terminal and run the following:</p>
@@ -614,7 +617,7 @@ etc ...
 <p>And a final layer of precaution is to make a new AppleID to play with, this makes sure that if you do end up blacklisting your account that it&apos;s not your main.</p>
 <p>An extra tip is adding a payment card to the account, some users found this also helped with iMessage activation.</p>
 <h2 id="customer-code-error">Customer Code error</h2>
-<p>Welp mate, you&apos;ve done it. You blackmailed your AppleID. The fix is simple but not pretty, <strong>you MUST call Apple</strong>. Otherwise, there is no proceeding besides using a new account, adding a payment card before calling can help legitimise the account so it doesn&apos;t seem as much like a bot.</p>
+<p>Welp mate, you&apos;ve done it. You blackmailed your AppleID. The fix is simple but not pretty, <strong>you MUST call Apple</strong>. Otherwise, there is no proceeding besides using a new account. Adding a payment card before calling can help legitimise the account so it doesn&apos;t seem as much like a bot.</p>
 <p><img src="https://i.imgur.com/ypDy99L.png" alt=""></p>
 
                                 
@@ -659,7 +662,7 @@ etc ...
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"7.7","depth":1,"next":{"title":"Credit","level":"8.1","depth":1,"path":"misc/credit.md","ref":"misc/credit.md","articles":[]},"previous":{"title":"Fixing CFG Lock","level":"7.6","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-01-24T07:14:08.712Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T07:14:51.794Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"7.7","depth":1,"next":{"title":"Credit","level":"8.1","depth":1,"path":"misc/credit.md","ref":"misc/credit.md","articles":[]},"previous":{"title":"Fixing CFG Lock","level":"7.6","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-01-24T19:27:15.884Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T19:28:06.353Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
