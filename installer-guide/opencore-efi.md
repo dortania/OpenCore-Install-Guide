@@ -6,7 +6,6 @@ Requirements:
 
 * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
-* [mountEFI](https://github.com/corpnewt/MountEFI) or some form of EFI mounting\(terminal command example can be found [here](https://themacadmin.com/2012/02/15/mounting-the-efi-boot-partition-on-mac-os-x/)\).
 * [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \(OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. **Please avoid these kinds of tools at all costs!**\).
 * Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `CleanNvram` in the boot picker when `AllowNvramReset` is enabled
 * Knowledge of how a Hackintosh works and what files yours requires\(ie: Type of network controller\).
