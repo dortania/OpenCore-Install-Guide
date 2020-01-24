@@ -272,7 +272,7 @@ These values are based of those calculated in [OpenCore debugging](/extras/debug
    * `debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
 
    * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-   * `npci=0x2000` - this disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes.
+   * `npci=0x2000` - this disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes. **Not needed if Above4GDecoding is enabled**
    * `agdpmod=pikera` - used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**
    * `alcid=1` - used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition. For us, since we're running kernel patches it's recommended to keep SIP off though you can turn it back on after install and test yourself
@@ -445,6 +445,18 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * [AMD OS X Discord](https://discord.gg/QuUWg7)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 
+# AMD BIOS Settings
+
+**Disable:**
+
+* Fast Boot
+* Compatibility Support Module (CSM)
+
+**Enable:**
+
+* Above 4G decoding
+* EHCI/XHCI Hand-off
+* OS type: Windows 8.1/10 UEFI Mode
 
 # Post-install
 
