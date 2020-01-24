@@ -343,3 +343,4 @@ Make sure `Add Python to PATH`
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
 
+![](./extra-files/N2o4bW4.mp4)
