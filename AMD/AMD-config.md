@@ -157,7 +157,7 @@ To merge:
 * Copy the `Patch` section from patches.plist
 * Paste into where old patches were in config.plist
 
-![](https://i.imgur.com/N2o4bW4.mp4)
+![](/extra-files/gif.gif)
 
 **Quirks**:
 
