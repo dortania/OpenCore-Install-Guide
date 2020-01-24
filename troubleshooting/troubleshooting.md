@@ -21,6 +21,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * Stuck on `no vault provided!`
 * Stuck on EndRandomSeed
 * Can't see macOS partitions
+* Black screen after picker
 * Stuck on `OCB: OcScanForBootEntries failure - Not Found`
 * Stuck on `OCABC: Memory pool allocation failure - Not Found`
 * Stuck on `OC: Driver XXX.efi at 0 cannot be found`
@@ -66,9 +67,15 @@ Main things to check:
 * Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus\(or VBoxHfs\)
 * Enable `AvoidHighAlloc` if you're running a network recovery install
 
+## Black screen after picker
+
+This is due to missing ConsoleGOP, enable it under your config:
+* `UEFI -> Quriks -> ProvideConsoleGOP`
+
 ## Stuck on `OCB: OcScanForBootEntries failure - Not Found`
 
 This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
+* `Misc -> Secuirty -> ScanPolicy -> 0`
 
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
 
@@ -83,7 +90,7 @@ Verify that your EFI/OC/Drivers matches up with your config.plist -&gt; UEFi -&g
 
 ## Stuck on `Buffer Too Small`
 
-* UEFI -&gt; Quirks -&gt; AvoidHighAlloc -&gt; Enable 
+* `UEFI -> Quirks -> AvoidHighAlloc -> Enable `
 * Enable Above4GDecoding in the BIOS
 
 ## Stuck on `Plist only kext has CFBundleExecutable key`
@@ -114,7 +121,7 @@ Missing or incorrect `Executable path`
 ## Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off\(Intel Users only\), couple solutions:
-    * [Patch your MSR E2](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock)\(Recommeneded solution\)
+    * [Patch your MSR E2](/extras/msr-lock.md)\(Recommeneded solution\)
     * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
 * AMD kernel patches aren't working\(AMD Users only\):
     * Either outdated or missing kernel patches

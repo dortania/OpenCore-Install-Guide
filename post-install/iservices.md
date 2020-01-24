@@ -12,14 +12,16 @@ Tip: `iMacPro1,1 10` will print 10 serials, this will save you some time on gene
 
 Now enter the serial into the [Apple Check Coverage page](https://checkcoverage.apple.com/), you will get 1 of 3 responses:
 
-"We’re sorry, but this serial number isn’t valid. Please check your information and try again.":
+**"We’re sorry, but this serial number isn’t valid. Please check your information and try again.":**
+
 ![](https://i.imgur.com/dvYcpHB.png)
 
+**Valid Purchase date:**
 
-Valid Purchase date:
 ![](https://i.imgur.com/rh0r28T.png)
 
-Purchase Date not Validated:
+**Purchase Date not Validated:**
+
 ![](https://i.imgur.com/oSLMqWa.png)
 
 This last one is what we're after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -> PlatformInfo -> Add:
@@ -66,7 +68,8 @@ This is a section many may have forgotten about but this is found in your config
 
 To find your actual MAC Address/ROM value, you can find in a couple places:
 * BIOS
-* System Preferences -> Network -> Ethernet -> Advanced -> MAC Address
+* macOS: System Preferences -> Network -> Ethernet -> Advanced -> MAC Address
+* Windows: Settings -> Network & Internet -> Ethernet -> Ethernet -> Phyisical MAC Address
 
 Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we'll be  using our real MAC Address but note that this is another option
 
@@ -76,7 +79,11 @@ When adding this to your config, `c0:7e:bf:c3:af:ff` should be converted to `c07
 
 ## Verifying NVRAM
 
-Please refer to the [Emulated NVRAM](/post-install/nvram.html) section of the OpenCore Guide for more info.
+Something that many forget about iServices is that NVRAM is curtial to getting it working correcttly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.
+
+So we'll need to verify NVRAM works, regardless if "it should work" as some firmwares can be more of a pain than others.
+
+Please refer to the [Emulated NVRAM](/post-install/nvram.md) section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you dont.
 
 
 ## Clean out old attempts
@@ -133,6 +140,6 @@ An extra tip is adding a payment card to the account, some users found this also
 
 ## Customer Code error
 
-Welp mate, you've done it. You blackmailed your AppleID. The fix is simple but not pretty, **you MUST call Apple**. Otherwise, there is no proceeding besides using a new account, adding a payment card before calling can help legitimise the account so it doesn't seem as much like a bot.
+Welp mate, you've done it. You blackmailed your AppleID. The fix is simple but not pretty, **you MUST call Apple**. Otherwise, there is no proceeding besides using a new account. Adding a payment card before calling can help legitimise the account so it doesn't seem as much like a bot.
 
 ![](https://i.imgur.com/ypDy99L.png)

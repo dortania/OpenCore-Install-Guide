@@ -7,6 +7,8 @@ So this section is for those who don't have native NVRAM, the most common hardwa
 * X99 
 * X299
 
+For B360, B365, H310, H370, Z390 users, make sure you have [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl) both under EFI/OC/ACPI and config.plist -> ACPI -> Add. For more info on making and compiling SSDTs, please see [**Getting started with ACPI**](../extras/acpi.md)
+
 ## Cleaning out the Clover gunk
 
 So some may not have noticed but Clover may have installed RC scripts into macOS for proper NVRAM emulation. This is an issue as it conflicts with OpenCore's method of emulation.

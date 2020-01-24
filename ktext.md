@@ -107,7 +107,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * MacPro7,1
     * iMacPro1,1
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
-   * Needed for correcting TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremly slow or even unbootable
+   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremly slow or even unbootable. On Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So instead its recommended to use [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset) to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
    * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
 
