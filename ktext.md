@@ -122,7 +122,7 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 
 # Now head to your specific CPU section to setup your config.plist
 
-## Intel Config.plist
+**Intel Config.plist**
 
 * [Ivy Bridge](/config.plist/ivy-bridge.md)
 * [Haswell](/config.plist/haswell.md)
@@ -130,10 +130,10 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 * [Kaby Lake](/config.plist/kaby-lake.md)
 * [Coffee Lake](/config.plist/coffee-lake.md)
 
-## Intel HEDT Config.plist
+**Intel HEDT Config.plist**
 
 * [Skylake-X](/config-HEDT/skylake-x.md)
 
-## AMD Config.plist
+**AMD Config.plist**
 
 * [AMD](/AMD/AMD-config.md)

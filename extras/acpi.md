@@ -263,7 +263,7 @@ Now that we have all our SSDTs compiled, the last thing to do is add our SSDTs t
 
 # Now head back to your specific CPU section to setup your config.plist
 
-## Intel Config.plist
+**Intel Config.plist**
 
 * [Ivy Bridge](/config.plist/ivy-bridge.md)
 * [Haswell](/config.plist/haswell.md)
@@ -271,10 +271,11 @@ Now that we have all our SSDTs compiled, the last thing to do is add our SSDTs t
 * [Kaby Lake](/config.plist/kaby-lake.md)
 * [Coffee Lake](/config.plist/coffee-lake.md)
 
-## Intel HEDT Config.plist
+**Intel HEDT Config.plist**
 
 * [Skylake-X](/config-HEDT/skylake-x.md)
 
-## AMD Config.plist
+**AMD Config.plist**
 
 * [AMD](/AMD/AMD-config.md)
+
