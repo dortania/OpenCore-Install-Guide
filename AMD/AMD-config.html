@@ -891,7 +891,7 @@
 </li>
 <li><p><code>keepsyms=1</code> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</p>
 </li>
-<li><code>npci=0x2000</code> - this disables some PCI debugging related to <code>kIOPCIConfiguratorPFM64</code>, alternative is <code>npci= 0x3000</code> which disables debugging related to <code>gIOPCITunnelledKey</code>. Required for when getting stuck on <code>PCI Start Configuration</code> as there are IRQ conflicts relating to your PCI lanes.</li>
+<li><code>npci=0x2000</code> - this disables some PCI debugging related to <code>kIOPCIConfiguratorPFM64</code>, alternative is <code>npci= 0x3000</code> which disables debugging related to <code>gIOPCITunnelledKey</code>. Required for when getting stuck on <code>PCI Start Configuration</code> as there are IRQ conflicts relating to your PCI lanes. <strong>Not needed if Above4GDecoding is enabled</strong></li>
 <li><code>agdpmod=pikera</code> - used for disabling boardID on Navi GPUs(RX 5000 series), without this you&apos;ll get a black screen. <strong>Don&apos;t use if you don&apos;t have Navi</strong></li>
 <li><code>alcid=1</code> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system.</li>
 </ul>
@@ -1114,6 +1114,18 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li><a href="https://discord.gg/QuUWg7" target="_blank">AMD OS X Discord</a></li>
 <li><a href="https://www.reddit.com/r/hackintosh/" target="_blank">r/Hackintosh Subreddit</a></li>
 </ul>
+<h1 id="amd-bios-settings">AMD BIOS Settings</h1>
+<p><strong>Disable:</strong></p>
+<ul>
+<li>Fast Boot</li>
+<li>Compatibility Support Module (CSM)</li>
+</ul>
+<p><strong>Enable:</strong></p>
+<ul>
+<li>Above 4G decoding</li>
+<li>EHCI/XHCI Hand-off</li>
+<li>OS type: Windows 8.1/10 UEFI Mode</li>
+</ul>
 <h1 id="post-install">Post-install</h1>
 <p>So what in the world needs to be done once everything is installed? Well here&apos;s some things:</p>
 <ul>
@@ -1173,7 +1185,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"AMD","level":"4.1","depth":1,"next":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-01-24T19:27:15.784Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T19:28:06.353Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"AMD","level":"4.1","depth":1,"next":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-01-24T22:49:51.944Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T22:50:35.877Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
