@@ -25,7 +25,7 @@ So this little section is for those who are wanting to know whether their hardwa
 # Motherboard Compatibility
 
 * All AMD and Intel motherboards are supported to a certain extent
-* 300 series non-Z370 and some HEDT systems will need emulated NVRAM
+* Some intel HEDT systems will need emulated NVRAM
 * Some Z370 and Z390 boards have AWAC clocks, these are incompatible with macOS and so will need an RTC fix
 
 # SSD Compatibility
