@@ -545,7 +545,7 @@
 <p>For legacy users:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">AppleUsbKbDxe.efi</a><ul>
-<li>Used for OpenCore picker on <strong>legacy systems running DuetPkg</strong>, <a href="https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653" target="_blank">not recommended and even harmful on IvyBridge and newer</a></li>
+<li>Used for OpenCore picker on <strong>legacy systems running DuetPkg</strong>, <a href="https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653" target="_blank">not recommended and even harmful on UEFI(Ivy Bridge and newer)</a></li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">NvmExpressDxe.efi</a><ul>
@@ -576,19 +576,19 @@
 <p><strong>VirtualSMC Plugins</strong>:</p>
 <ul>
 <li>SMCProcessor.kext<ul>
-<li>Used for monitoring CPU temperature, doesn&apos;t work AMD CPU based systems</li>
+<li>Used for monitoring CPU temperature, <strong>doesn&apos;t work AMD CPU based systems</strong></li>
 </ul>
 </li>
 <li>SMCSuperIO.kext<ul>
-<li>Used for monitoring fan speed, doesn&apos;t work AMD CPU based systems</li>
+<li>Used for monitoring fan speed, <strong>doesn&apos;t work AMD CPU based systems</strong></li>
 </ul>
 </li>
 <li>SMCLightSensor.kext<ul>
-<li>Used for the ambient light sensor on laptops, desktops can ignore</li>
+<li>Used for the ambient light sensor on laptops, <strong>desktops can ignore</strong></li>
 </ul>
 </li>
 <li>SMCBatteryManager.kext<ul>
-<li>Used for measuring battery readouts on laptops, desktops can ignore</li>
+<li>Used for measuring battery readouts on laptops, <strong>desktops can ignore</strong></li>
 </ul>
 </li>
 </ul>
@@ -602,7 +602,7 @@
 <p><strong>Audio</strong>:</p>
 <ul>
 <li><a href="https://github.com/vit9696/AppleALC/releases" target="_blank">AppleALC</a><ul>
-<li>Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h cannot use this and Ryzen/Threadripper systems rarely have mic support</li>
+<li>Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support</li>
 </ul>
 </li>
 </ul>
@@ -675,12 +675,32 @@
 <li>Needed for correcting TSC on some of Intel&apos;s HEDT and server motherboards, without this macOS may be extremly slow or even unbootable</li>
 </ul>
 </li>
+<li><a href="https://github.com/acidanthera/NVMeFix/releases" target="_blank">NVMeFix</a><ul>
+<li>Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer</li>
+</ul>
+</li>
 </ul>
 <p>Please refer to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md" target="_blank">Kexts.md</a> for a full list of supported kexts</p>
 <h2 id="ssdts">SSDTs</h2>
 <p>So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in <strong>your specific ACPI section of the config.plist</strong>, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now. </p>
 <p><a href="extras/acpi.html">Getting started with ACPI</a> has an extended section on SSDTs for those who prefer doing things the old fasioned way.</p>
 <h1 id="now-head-to-your-specific-cpu-section-to-setup-your-configplist">Now head to your specific CPU section to setup your config.plist</h1>
+<h2 id="intel-configplist">Intel Config.plist</h2>
+<ul>
+<li><a href="config.plist/ivy-bridge.html">Ivy Bridge</a></li>
+<li><a href="config.plist/haswell.html">Haswell</a></li>
+<li><a href="config.plist/skylake.html">Skylake</a></li>
+<li><a href="config.plist/kaby-lake.html">Kaby Lake</a></li>
+<li><a href="config.plist/coffee-lake.html">Coffee Lake</a></li>
+</ul>
+<h2 id="intel-hedt-configplist">Intel HEDT Config.plist</h2>
+<ul>
+<li><a href="config-HEDT/skylake-x.html">Skylake-X</a></li>
+</ul>
+<h2 id="amd-configplist">AMD Config.plist</h2>
+<ul>
+<li><a href="AMD/AMD-config.html">AMD</a></li>
+</ul>
 
                                 
                                 </section>
@@ -724,7 +744,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-01-24T05:25:40.252Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T05:26:21.502Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-01-24T06:23:59.939Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T06:24:40.794Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

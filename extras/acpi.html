@@ -520,7 +520,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="getting-started-with-acpi">Getting started with ACPI</h1>
-<p>Last edited: January 21, 2020</p>
+<p>Last edited: January 23, 2020</p>
 <h2 id="a-quick-explainer-on-acpi-and-how-to-make-ssdts">A quick explainer on ACPI and how to make SSDTs</h2>
 <p>So what are DSDTs and SSDTs? Well, these are tables present in your firmware that outline hardware devices like USB controllers, CPU threads, embedded controllers, system clocks and such. A DSDT(Differentiated System Description Table) can be seen as the body holding most of the info with smaller bits of info being passed by the SSDT(Secondary System Description Table)</p>
 <blockquote>
@@ -541,7 +541,7 @@
 </ul>
 </li>
 <li>PMC SSDT<ul>
-<li>True 300 series motherboards(non-Z370) don&apos;t declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support, prebuilt can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml" target="_blank">SSDT-PMC.aml</a></li>
+<li>True 300 series motherboards(non-Z370) don&apos;t declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and uses the scope <code>PCI0.LPCB</code>, this is the most common scope so a pre-made can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml" target="_blank">SSDT-PMC.aml</a> or continue reading and make your own.</li>
 </ul>
 </li>
 </ul>
@@ -552,7 +552,7 @@
 <ul>
 <li><strong>Skylake-X(X299) SSDTs</strong>: The ACPI is odd on this platform so manual work is required</li>
 <li><strong>AWAC and RTC0 SSDTs</strong>: 300 series intel boards will also need to figure his out(Z390 systems are most common for requiring this but some gigabyte Z370 do as well)</li>
-<li><strong>PMC SSDT</strong>: For fixing 300 series intel NVRAM, a prebuilt can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml" target="_blank">SSDT-PMC.aml</a></li>
+<li><strong>PMC SSDT</strong>: For fixing 300 series intel NVRAM, a prebuilt for <code>PCI0.LPCB</code> can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml" target="_blank">SSDT-PMC.aml</a></li>
 <li><strong>USBX SSDT</strong>: This is included on sample SSDTs but SSDTTime only makes the SSDT-EC part, Skylake and newer users can grab a prebuilt here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX.aml" target="_blank">SSDT-USBX.aml</a></li>
 </ul>
 <p>For users who don&apos;t have all the options avaible to them in SSDTTime, you can follow the &quot;SSDTs: The long way&quot; section. You can still use SSDTTime for SSDTs it support for you.</p>
@@ -736,8 +736,29 @@ External (_SB_.PCI0.LPCB.EC0, DeviceObj)
 <p><img src="https://i.imgur.com/uuUF857.png" alt=""></p>
 <p>As you can see we found the <code>STAS</code> in our DSDT, this means we&apos;re able to force enable our Legacy RTC. In this case, <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a> will be used As-Is with no modifications required. Just need to compile.</p>
 <p>For systems where no <code>STAS</code> shows up, you can use <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a> though you will need to check whether your DSDT uses <code>LPCB</code>, <code>LBC</code> or <code>LBC0</code>. By default it uses <code>LPCB</code>, you can check by just searching for instances of <code>LPCB</code>, <code>LBC</code> and <code>LBC0</code></p>
+<h3 id="pmc-ssdt">PMC SSDT</h3>
+<p><strong>This is required for all B360, B365, H310, H370, Z390 motherboards</strong>
+This SSDT brings back NVRAM support and uses the scope <code>PCI0.LPCB</code> to check what scope your system has, search your DSDT for <code>Name (_ADR, 0x001F0000)</code>. This address is used for Low Pin Count devices(LPC) but the device name can vary(quite rarely in reality, almost all consumer intel boards use <code>LPCB</code>)</p>
+<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/670148514197667840/Screen_Shot_2020-01-23_at_11.08.30_PM.png" alt=""></p>
 <h2 id="cleaning-up">Cleaning up</h2>
 <p>Now that we have all our SSDTs compiled, the last thing to do is add our SSDTs to both EFI/OC/ACPI and our config under ACPI -&gt; Add. A reminder that ProperTree users can press the hotkey Cmd/Ctrl+R for automatically adding your SSDTs to the config. A reminder that there is no need to add your DSDT as its already inside your firmware.</p>
+<h1 id="now-head-back-to-your-specific-cpu-section-to-setup-your-configplist">Now head back to your specific CPU section to setup your config.plist</h1>
+<h2 id="intel-configplist">Intel Config.plist</h2>
+<ul>
+<li><a href="../config.plist/ivy-bridge.html">Ivy Bridge</a></li>
+<li><a href="../config.plist/haswell.html">Haswell</a></li>
+<li><a href="../config.plist/skylake.html">Skylake</a></li>
+<li><a href="../config.plist/kaby-lake.html">Kaby Lake</a></li>
+<li><a href="../config.plist/coffee-lake.html">Coffee Lake</a></li>
+</ul>
+<h2 id="intel-hedt-configplist">Intel HEDT Config.plist</h2>
+<ul>
+<li><a href="../config-HEDT/skylake-x.html">Skylake-X</a></li>
+</ul>
+<h2 id="amd-configplist">AMD Config.plist</h2>
+<ul>
+<li><a href="../AMD/AMD-config.html">AMD</a></li>
+</ul>
 
                                 
                                 </section>
@@ -781,7 +802,7 @@ External (_SB_.PCI0.LPCB.EC0, DeviceObj)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Getting started with ACPI","level":"7.3","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"7.4","depth":1,"path":"troubleshooting/verbose.md","ref":"troubleshooting/verbose.md","articles":[]},"previous":{"title":"GPU Patching","level":"7.2","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/acpi.md","mtime":"2020-01-24T05:25:40.252Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T05:26:21.502Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Getting started with ACPI","level":"7.3","depth":1,"next":{"title":"Fixing Resolution and Verbose","level":"7.4","depth":1,"path":"troubleshooting/verbose.md","ref":"troubleshooting/verbose.md","articles":[]},"previous":{"title":"GPU Patching","level":"7.2","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/acpi.md","mtime":"2020-01-24T06:23:59.939Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-24T06:24:40.794Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
