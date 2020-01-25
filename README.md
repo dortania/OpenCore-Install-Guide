@@ -10,6 +10,10 @@ Please remember that OpenCore is still new and currently in beta. Unless you wan
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
+For AMD users having troubles follow the guide can see Snazzy's guide:
+
+[**Snazzy Labs Opencore Guide**](https://www.youtube.com/watch?v=l_QPLl81GrY)
+
 ### Advantages of OpenCore
 
 * On average, OpenCore systems boot faster than those using Clover.

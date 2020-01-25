@@ -351,4 +351,3 @@ Make sure `Add Python to PATH`
 
 
 
-![](https://www.youtube.com/watch?v=l_QPLl81GrY)
