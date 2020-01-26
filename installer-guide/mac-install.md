@@ -19,7 +19,7 @@ To start we'll want to grab ourselves a copy of macOS, you can skip this and hea
    * Download the full macOS installer
    * Run `BuildmacOSInstallApp` then drag and drop the `macOS Downloads` folder found in GibMacOS
 
-Next we'll want to format our USB HFS+/MacOS Journaled with GUID partition map, must be 12GB for macOS Catalina.as-isecommended to name it `MyVolume` as the script below can be used as-is.
+Next we'll want to format our USB HFS+/MacOS Journaled with GUID partition map, must be 12GB for macOS Catalina.as-is recommended to name it `MyVolume` as the script below can be used as-is.
 
 ![Formatting the USB](https://i.imgur.com/numOUnF.png)
 
@@ -32,9 +32,9 @@ sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstall
 This will take some time so may want to grab a coffee or continue reading the guide(to be fair you really shouldn't be following this guide step by step without reading the whole thing first)
 
 
-## Setting up OpenCore's EFI enviroment
+## Setting up OpenCore's EFI environment
 
-Setting up OpenCore's EFI enviroment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is hidden from the end user, this is where our friend [mountEFI](https://github.com/corpnewt/MountEFI) comes in:
+Setting up OpenCore's EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is hidden from the end user, this is where our friend [mountEFI](https://github.com/corpnewt/MountEFI) comes in:
 
 ![MountEFI](https://i.imgur.com/4l1oK8i.png)
 

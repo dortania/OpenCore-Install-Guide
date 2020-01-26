@@ -1,6 +1,6 @@
 # Creating the USB
 
-Last edited: January 18, 2020
+Last edited: January 26, 2020
 
 Requirements:
 
@@ -39,13 +39,13 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
    * CleanNvram.efi
       * We'll be using OpenCore's built-in function
    * VerifyMsrE2.efi
-      * Used for [verifying MSR lock](/extras/msr-lock.md), for install we can igore
+      * Used for [verifying MSR lock](/extras/msr-lock.md), for install we can ignore
 
 A cleaned up EFI:
 
 ![Clean EFI](https://i.imgur.com/2INJYol.png)
 
-Now you can place **your** necessary fimrware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc\). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
+Now you can place **your** necessary firmware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc\). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
 Here's what a populated EFI can look like:
 
