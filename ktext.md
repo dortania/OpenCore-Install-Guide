@@ -1,5 +1,5 @@
 # Gathering files
-Last edited: January 23, 2020
+Last edited: January 27, 2020
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -68,7 +68,7 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 **Ethernet**:
 
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
-  * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://drive.google.com/file/d/0B5Txx3pb7pgcOG5lSEF2VzFySWM/view?usp=sharing). AMD motherboards with intel NICs generally run I211-AT
+  * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SmallTreeIntel82576.kext.zip). AMD motherboards with intel NICs generally run I211-AT
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
   * Required for Atheros and Killer NICs
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
@@ -107,7 +107,9 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * MacPro7,1
     * iMacPro1,1
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
-   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremly slow or even unbootable. On Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So instead its recommended to use [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset) to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
+   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremly slow or even unbootable. Skylake-X should use TSCAdjustReset instead
+* [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset) 
+   * On Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
    * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
 

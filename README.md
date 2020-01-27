@@ -54,6 +54,6 @@ For AMD users having troubles follow the guide can see Snazzy's guide:
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 Mode
+* OS type: Windows 8.1/10 UEFI Mode
 * Legacy RTC Device\(Relevant for Z370+\)
 

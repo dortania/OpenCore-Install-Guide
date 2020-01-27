@@ -31,7 +31,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
   * For the original AMD Vanilla Guide
   * Corrections to AMD portion of the guide
-* [bpetru05](https://github.com/bpetru05)
+* [Thonkdifferent](https://github.com/thonkdifferent)
   * Additions to kernel.json
 * [jonpalmisc](https://github.com/jonpalmisc)
   * Much needed proof reading
@@ -46,7 +46,7 @@ Developers of OpenCore:
 Guides linked or those that inspired this guide:
 
 * [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)
-* [All-in-one Vanilla AMD Hackintosh Guide](https://kb.hackintoshisfun.ml/vanilla/)
+* [All-in-one Vanilla AMD Hackintosh Guide](https://kb.hackintoshisfun.ml/clover/)
 * [USB Map Guide](https://usb-map.gitbook.io/project/)
 * [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)

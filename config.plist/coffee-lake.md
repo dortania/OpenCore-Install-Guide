@@ -1,18 +1,17 @@
 # Coffee Lake
 
-Last edited: January 23, 2020
+Last edited: January 27, 2020
 
-### Starting Point
+## Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work.
+You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work. **Reminder configurators are not supported, most are out of date with the OpenCore spec and some like Mackie's will even add clover sections and corrupt plists. You are on your own if you use such tools**
 
-Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist\(Cmd/Crtl + R and point to your OC folder\).
+Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
 
-Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly**
+**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
-### ACPI
+## ACPI
 
 ![ACPI](https://i.imgur.com/IkLFucw.png)
 
@@ -66,7 +65,7 @@ This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc
 * **ResetLogoStatus**: NO
   * Workaround for OEM Windows logo not drawing on systems with BGRT tables.
 
-### Booter
+## Booter
 
 ![Booter](https://i.imgur.com/suElruh.png)
 
@@ -102,8 +101,10 @@ This section is allowing devices to be passthrough to macOS that are generally i
   * Fixes SetVirtualAddresses calls to virtual addresses
 * **ShrinkMemoryMap**: NO
   * Needed for systems with large memory maps that don't fit, don't use unless necessary
+* **SignalAppleOs**: NO
+  * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 
-### DeviceProperties
+## DeviceProperties
 
 ![DeviceProperties](https://i.imgur.com/kHKNvgl.png)
 
@@ -147,7 +148,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 **Block**: Removes device properties from the map, for us we can ignore this
 
-### Kernel
+## Kernel
 
 ![Kernel](https://i.imgur.com/ACr6owo.png)
 
@@ -211,7 +212,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
-### Misc
+## Misc
 
 ![Misc](https://i.imgur.com/OROZbCk.png)
 
@@ -240,6 +241,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 * **Target**: `67`
   * Shows more debug information, requires debug version of OpenCore
+* **DisplayLevel**: `2147483714`
+  * Shows even more debug information, requires debug version of OpenCore
+  
+These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
 
 **Security**: Security is pretty self-explanatory.
 
@@ -256,11 +261,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **RequireVault**: NO
   * We won't be dealing vaulting so we can ignore as well
 * **ScanPolicy**: `0` 
-  * `0` allows you to see all drives available, please refer to [Security](../post-install/security.md) section for furthur details
-* **DisplayLevel**: `2147483714`
-  * Shows even more debug information, requires debug version of OpenCore
+  * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for furthur details
 
-These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 
@@ -279,14 +281,16 @@ These values are based of those calculated in [OpenCore debugging](../troublesho
 * **Enabled**
   * Self-explanatory, enables or disables
 * **Path**
-  * PCI route of boot drive, can be found with the [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell) and the `map` command
+  * PCI route of boot drive, can be found with the [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases) and the `map` command
   * ex: `PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi`
 
-### NVRAM
+## NVRAM
 
 ![NVRAM](https://i.imgur.com/HM4FTH6.png)
 
-**Add**: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
+**Add**: 
+
+4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
 
 * UIScale:
   * 01: Standard resolution\(Clover equivalent is `0x28`\)
@@ -295,25 +299,25 @@ These values are based of those calculated in [OpenCore debugging](../troublesho
 7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
 
 * **boot-args**:
-  * `-v` - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-  * `debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
-  * `keepsyms=1` - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
-  * `shikigva=40` - this flag is specific for Nvidia users. It enables a few Shiki settings that do the following \(found [here](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74)\):
-    * 8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.
-    * 32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id. Do note that this generally needed for systems running Nvidia GPUs
-   * `alcid=1` - used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
+  * **-v** - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
+  * **debug=0x100` - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
+  **keepsyms=1** - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
+   * **alcid=1** - used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
 
-Note: Some Z390 users may need to calculate a slide value to get around "Couldn't Allocate Runtime" errors. See [Fixing KALSR slide values](../extras/kalsr-fix.md) for more info.
+Note: Some Z390 users may need to calculate a slide value to get around "Couldn't Allocate Runtime" errors. See [Fixing KALSR slide values](/extras/kalsr-fix.md) for more info.
 
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
 
-csr-active-config is set to `E7030000` which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
+csr-active-config is set to `00000000` which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
 * `00000000` - SIP completely enabled
 * `30000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
+
+Recommended to leave enabled for best secuirty practices
+
 * **nvda\_drv**: &lt;&gt;
-  * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. AMD and Intel GPU users should leave this area blank.
+  * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD and Intel GPU users should leave this area blank.**
 * **prev-lang:kbd**: &lt;&gt; 
   * Needed for non-Latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended keeping blank though you can specify it\(**Default in Sample config is Russian**\):
     * American: `en-US:0`\(`656e2d55533a30` in HEX\)
@@ -337,7 +341,7 @@ csr-active-config is set to `E7030000` which effectively disables SIP. You can c
 
 * Enables writing to flash memory for all added variables.
 
-### Platforminfo
+## Platforminfo
 
 ![PlatformInfo](https://i.imgur.com/JpLxh35.png)
 
@@ -349,7 +353,7 @@ For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intenti
 * `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
    * Note: While iMac19,1 and iMac19,2 are a closer match, these SMBIOS are not compatible with versions of macOS older than Mojave and not all fixes are compatible with them(ie: USBInjectAll)
 
-GenSMBIOS would give us output similar to the following:
+Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```text
   #######################################################
@@ -369,7 +373,7 @@ The `Board Serial` part gets copied to Generic -&gt; MLB.
 
 The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
 
-We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address \(could be just 6 random bytes, for this guide we'll use `11223300 0000`\)
+We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
 
 **Reminder that you want valid serial numbers but those not in use, you want to get a message back like: "Purchase Date not Validated"**
 
@@ -398,7 +402,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
-### UEFI
+## UEFI
 
 ![UEFI](https://i.imgur.com/l1ayKSf.png)
 
@@ -467,7 +471,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
 
-### Cleaning up
+## Cleaning up
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 
@@ -476,9 +480,31 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
 
-## Post-install
+# Intel BIOS settings
 
-So what in the world needs to be done once everything is installed? Well here are some things:
+**Disable:**
+
+* Fast Boot
+* VT-d\(can be enabled if you set `DisableIoMapper` to YES\)
+* CSM
+* Thunderbolt
+* Intel SGX
+* Intel Platform Trust
+* CFG Lock\(MSR 0xE2 write protection\)(**This must be on, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleCpuPmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+
+**Enable:**
+
+* VT-x
+* Above 4G decoding
+* Hyper-Threading
+* Execute Disable Bit
+* EHCI/XHCI Hand-off
+* OS type: Windows 8.1/10 UEFI Mode
+
+# Post-install
+
+So what in the world needs to be done once everything is installed? Well here's some things you can do:
+
 
 * [USB mapping](https://usb-map.gitbook.io/project/) 
 * Correcting audio, reread the DeviceProperties on how

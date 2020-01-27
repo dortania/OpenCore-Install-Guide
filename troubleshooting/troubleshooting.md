@@ -6,7 +6,7 @@ This section is for those having issues booting either OpenCore, macOS or having
 
 * [OpenCore booting issues](/troubleshooting/troubleshooting.md#opencore-booting)
    * This is anytime before or during the loading of the macOS kernel
-* [macOS booting issues](/troubleshooting/troubleshootingmd#macos-booting)
+* [macOS booting issues](/troubleshooting/troubleshooting.md#macos-booting)
    * Anytime between the kernel loading and installing macOS
 * [macOS post-install issues](/troubleshooting/troubleshooting.md#macos-post-install)
    * Anytime after macOS is installed
@@ -121,19 +121,19 @@ Missing or incorrect `Executable path`
 ## Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off\(Intel Users only\), couple solutions:
-    * [Patch your MSR E2](/extras/msr-lock.md)\(Recommeneded solution\)
+    * [Patch your MSR E2](/extras/msr-lock.md)\(Recommended solution\)
     * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
 * AMD kernel patches aren't working\(AMD Users only\):
     * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
-    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove AppleUsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers
-    * If the above doesn't work, reverse: disable `KeySupport`, then add AppleUsbKbDxe to your config.plist -&gt; UEFI -&gt; Drivers
+    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
+    * If the above doesn't work, reverse: disable `KeySupport`, then add [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
     
 ## Can't select anything in the picker
     
 * Incompatible keyboard driver:
-     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove AppleUsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers
-     * If the above doesn't work, reverse: disable `KeySupport`, then add AppleUsbKbDxe to your config.plist -&gt; UEFI -&gt; Drivers
+     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
+     * If the above doesn't work, reverse: disable `KeySupport`, then add [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
 
 ## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 
@@ -202,8 +202,6 @@ This is right before the GPU is properly initialized, verify the following:
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
 
-
-
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 
 * Add `agdpmod=pikera` to boot args
@@ -211,7 +209,7 @@ This is right before the GPU is properly initialized, verify the following:
 
 ## 300 series Intel stalling on `apfs_module_start...`
 
-Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/d6ae62c258e16382e0746e9ffd1e9755c93b08d7/extras/extras/acpi.md) section
+Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](/extras/acpi.md) section
 
 ## Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
 
@@ -221,6 +219,14 @@ Verify your EC SSDT is enabled and correct for your system. See the [What's new 
 
 Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order\(master then plugins, Lilu always being first\) and that kexts with executables have them and plist only kexts don't.
 
+## Kernel Panic `AppleIntelMCEReporter`
+
+With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) to both 
+
+## Frozen in the macOS installer after 30 seconds
+
+This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, either download a good copy from the [Kext Repo](http://kexts.goldfish64.com/) or here: [NullCPUPowerManagment.kext.zip](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/NullCPUPowerManagment.kext.zip)
+
 
 # macOS post-install
 
@@ -229,10 +235,11 @@ Generally seen as an issue surrounding the prelinked kernel, specifically that m
 * BIOS reset or sent into Safemode after reboot/shutdown?
 * macOS GPU acceleration missing on AMD X570
 * DRM Broken
+* "Memory Modules Misconfigured" on MacPro7,1
 
 
 
-## iMessage and Siri Broken
+## Broken iMessage and Siri 
 
 * En0 device not setup as `Built-in`, couple ways to fix:
   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)\(ie: `ethernet`, GBE1, \). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
@@ -292,6 +299,9 @@ More other GPUs, try different shiki boot args:
 
 * [WhateverGreen's DRM Chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 
+## "Memory Modules Misconfigured" on MacPro7,1
+
+Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and Kernel -> Add
 
 # Other issues
 
