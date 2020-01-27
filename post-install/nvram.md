@@ -49,7 +49,7 @@ If nothing returns then your NVRAM is not working. If a line containing `myvar t
 
 Note: `nvram -c` requires SIP to be off, an alternative is to wipe NVRAM at the boot menu. Reminder you'll need `Misc -> Security -> AllowNvramReset -> YES`
 
-## Enabling emulated NVRAM \(with a nvram.plist\)
+## Enabling emulated NVRAM (with a nvram.plist)
 
 To enable emulated NVRAM, you'll need 3 things set:
 
@@ -62,14 +62,14 @@ Within your config.plist:
 * **NVRAM**:
   * `LegacyEnable`: set to `YES`
   * `LegacyOverwrite` set to `YES`
-  * `LegacySchema`: NVRAM variables set\(OpenCore compares these to the variables present in nvram.plist\)
+  * `LegacySchema`: NVRAM variables set(OpenCore compares these to the variables present in nvram.plist)
 * `ExposeSensitiveData`: set to `0x3`
 
 And within your EFI:
 
-* `FwRuntimeServices.efi` driver\(this is needed for proper sleep, shutdown and other services to work correctly
+* `FwRuntimeServices.efi` driver(this is needed for proper sleep, shutdown and other services to work correctly
 
-Now grab the 'LogoutHook.command' and place it somewhere safe \(e.g. within your user directory, as shown below\):
+Now grab the 'LogoutHook.command' and place it somewhere safe (e.g. within your user directory, as shown below):
 
 `/Users/(your username)/LogoutHook/LogoutHook.command`
 

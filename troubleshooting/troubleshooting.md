@@ -50,9 +50,9 @@ If you have already executed the commands listed in the [OpenCore Reference Manu
 Couple problems:
 
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)\(only applies for AMD CPUs\)
+* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs)
 
-Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS\(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock\). **Do note this is for Intel users only.** When this happens, there's a couple of possible fixes:
+Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only.** When this happens, there's a couple of possible fixes:
 
 * [Fixing CFG Lock](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock) 
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
@@ -64,7 +64,7 @@ Another other possible problem is IRQ conflicts, Clover has plenty of different 
 Main things to check:
 
 * ScanPolicy set to `0` to show all drives
-* Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus\(or VBoxHfs\)
+* Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)
 * Enable `AvoidHighAlloc` if you're running a network recovery install
 
 ## Black screen after picker
@@ -82,7 +82,7 @@ This is due to OpenCore being unable to find any drives with the current ScanPol
 This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -&gt; Booter -&gt; Quirks is correct and verify your BIOS settings:
 
 * Above4GDecoding is Enabled
-* CSM is Disabled\(Enabling Windows8.1/10 WHQL Mode can do the same on some boards\)
+* CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
 
 ## Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 
@@ -120,10 +120,10 @@ Missing or incorrect `Executable path`
   ```
 ## Stuck after selection macOS partition on OpenCore
 
-* CFG-Lock not off\(Intel Users only\), couple solutions:
-    * [Patch your MSR E2](/extras/msr-lock.md)\(Recommended solution\)
+* CFG-Lock not off(Intel Users only), couple solutions:
+    * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
     * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
-* AMD kernel patches aren't working\(AMD Users only\):
+* AMD kernel patches aren't working(AMD Users only):
     * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
@@ -152,7 +152,7 @@ See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanil
 
 ## Booting OpenCore reboots to BIOS
 
-* Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP\(EFI system partition\)
+* Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
 
 ![Directory Structure from OpenCore&apos;s DOC](https://i.imgur.com/9RyBQ0L.png)
 
@@ -168,6 +168,10 @@ See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanil
 * 300 series Intel stalling on `apfs_module_start...`
 * Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
 * Kernel Panic `Cannot perform kext summary`
+* Kernel Panic `AppleIntelMCEReporter`
+* Frozen in the macOS installer after 30 seconds
+* 15h/16h CPU reboot after Data & Privacy screen
+* 15/16h CPU webpages crashing
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
@@ -198,7 +202,7 @@ Now try one of these boot args:
 
 This is right before the GPU is properly initialized, verify the following:
 
-* GPU is UEFI capable\(GTX 7XX/2013+\)
+* GPU is UEFI capable(GTX 7XX/2013+)
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
 
@@ -217,7 +221,7 @@ Verify your EC SSDT is enabled and correct for your system. See the [What's new 
 
 ## Kernel Panic `Cannot perform kext summary`
 
-Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order\(master then plugins, Lilu always being first\) and that kexts with executables have them and plist only kexts don't.
+Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don't.
 
 ## Kernel Panic `AppleIntelMCEReporter`
 
@@ -227,10 +231,18 @@ With macOS catalina, dual socket support is broken, and a fun fact about AMD fir
 
 This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, either download a good copy from the [Kext Repo](http://kexts.goldfish64.com/) or here: [NullCPUPowerManagment.kext.zip](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/NullCPUPowerManagment.kext.zip)
 
+## 15h/16h CPU reboot after Data & Privacy screen
+
+Follow directions here after UPDATE 2: [Fix Data and Privacy reboot](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2658085)
+
+## 15/16h CPU webpages crashing
+
+Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
+
 
 # macOS post-install
 
-* Broken iMessage and Siri 
+* [Broken iMessage and Siri](/troubleshooting/troubleshooting.md##Broken-iMessage-and-Siri)
 * No on-board audio
 * BIOS reset or sent into Safemode after reboot/shutdown?
 * macOS GPU acceleration missing on AMD X570
@@ -242,14 +254,14 @@ This is likely due to faultly or outright missing NullCPUPowerManagement, the on
 ## Broken iMessage and Siri 
 
 * En0 device not setup as `Built-in`, couple ways to fix:
-  * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)\(ie: `ethernet`, GBE1, \). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
+  * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
 
 If these fixes do not work, see the [Fixing iServices page](/post-install/iservices.md) for more in-depth guide.
 
 ## No on-board audio
 
-* Verify that your PCIRoot is correct for your audio controller, this can be verified with [gfxutil](https://github.com/acidanthera/gfxutil/releases) though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer\(Common 2 are HDEF and HDAS\)
+* Verify that your PCIRoot is correct for your audio controller, this can be verified with [gfxutil](https://github.com/acidanthera/gfxutil/releases) though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer(Common 2 are HDEF and HDAS)
 
 ```text
 path/to/gfxutil -f HDEF
@@ -287,7 +299,7 @@ Issue with AppleRTC, quite a simple fix:
 
 Verify the following:
 
-* GPU is UEFI capable\(GTX 7XX/2013+\)
+* GPU is UEFI capable(GTX 7XX/2013+)
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
 
@@ -352,7 +364,7 @@ Make sure `Add Python to PATH`
 
 ## Windows Startup Disk can't see APFS drives
 
-* Outdated Bootcamp drivers\(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1\). CorpNewt has also forked brigadier fixing these issues as well: [CorpNewt's brigadier](https://github.com/corpnewt/brigadier)
+* Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: [CorpNewt's brigadier](https://github.com/corpnewt/brigadier)
 
 ## Incorrect resolution with OpenCore
 

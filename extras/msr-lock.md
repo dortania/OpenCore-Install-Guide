@@ -13,7 +13,7 @@ Inside your EFI/OC/Tools folder and config.plist:
 
 And some apps to help us out:
 
-* [UEFITool](https://github.com/LongSoft/UEFITool/releases) \(Make sure it's UEFITool and not UEFIExtract\)
+* [UEFITool](https://github.com/LongSoft/UEFITool/releases) (Make sure it's UEFITool and not UEFIExtrac)
 * [Universal-IFR-Extractor](https://github.com/LongSoft/Universal-IFR-Extractor/releases)
 
 And don't forget to disable the following from your config.plist:
@@ -42,7 +42,7 @@ Boot OpenCore and select the `VerifyMsrE2` option in the picker. This tool will 
    path/to/ifrextract path/to/Setup.bin path/to/Setup.txt
    ```
 
-3. Open the text file and search for `CFG Lock, VarStoreInfo (VarOffset/VarName):` and note the offset right after it\(ie: `0x5A4`\)
+3. Open the text file and search for `CFG Lock, VarStoreInfo (VarOffset/VarName):` and note the offset right after it(ie: `0x5A4`)
 
 ![](https://i.imgur.com/Vp8dqI5.png)
 

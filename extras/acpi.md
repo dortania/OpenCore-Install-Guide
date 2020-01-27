@@ -4,13 +4,13 @@ Last edited: January 23, 2020
 
 ## A quick explainer on ACPI and how to make SSDTs
 
-So what are DSDTs and SSDTs? Well, these are tables present in your firmware that outline hardware devices like USB controllers, CPU threads, embedded controllers, system clocks and such. A DSDT\(Differentiated System Description Table\) can be seen as the body holding most of the info with smaller bits of info being passed by the SSDT\(Secondary System Description Table\)
+So what are DSDTs and SSDTs? Well, these are tables present in your firmware that outline hardware devices like USB controllers, CPU threads, embedded controllers, system clocks and such. A DSDT(Differentiated System Description Table) can be seen as the body holding most of the info with smaller bits of info being passed by the SSDT(Secondary System Description Table)
 
 > So why do we care about these tables?
 
 macOS can be very picky about the devices present in the DSDT and so our job is to correct it. The main devices that need to be corrected for macOS to work properly:
 
-* Embedded controllers\(EC\) 
+* Embedded controllers(EC) 
   * All semi-modern intel machines have an EC exposed in their DSDT, with many AMD systems also having it exposed. These controllers are not compatible with macOS so then need to be hidden from macOS and replaced with a dummy EC when running macOS Catalina
 * Plugin type
   * This is used to enable native CPU power management on **Intel** Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU. Not meant for AMD
@@ -78,7 +78,7 @@ SSDTTime doesn't support your platform or wanting to really learn the process of
 So to start, we'll need to get a copy of your DSDT from your firmware. There's a couple of options:
 
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases)
-  * Open the app on the target machine(must already be running macOS) and the system's DSDT will show, then File -&gt; SaveAs `System DSDT`. Make sure the file format is ACPI Machine Language Binary\(.AML\), this will require the machine to be running macOS
+  * Open the app on the target machine(must already be running macOS) and the system's DSDT will show, then File -&gt; SaveAs `System DSDT`. Make sure the file format is ACPI Machine Language Binary(.AML), this will require the machine to be running macOS
   * Do note that all ACPI patches from clover/OpenCore will be applied to the DSDT
 * [SSDTTime](https://github.com/corpnewt/SSDTTime)
   * Supports both Windows and Linux for DSDT dumping
@@ -90,7 +90,7 @@ So to start, we'll need to get a copy of your DSDT from your firmware. There's a
 * [`acpidump.efi`](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/acpidump.efi.zip)
   * Add this to `EFI/OC/Tools` and in your config under `Misc -> Tools` with the argument: `-b -n DSDT -z` and select this option in OpenCore's picker. Rename the DSDT.dat to DSDT.aml. Tool is provided by [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
 
-If OpenCore is having issues running acpidump, you can call it from the shell with [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)\(reminder to add to both `EFI/OC/Tools` and in your config under `Misc -> Tools` \):
+If OpenCore is having issues running acpidump, you can call it from the shell with [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)(reminder to add to both `EFI/OC/Tools` and in your config under `Misc -> Tools` ):
 
 ```text
 shell> fs0: // replace with proper drive

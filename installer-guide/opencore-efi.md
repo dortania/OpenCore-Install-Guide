@@ -6,9 +6,9 @@ Requirements:
 
 * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info
 * [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg/releases)
-* [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files \(OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. **Please avoid these kinds of tools at all costs!**\).
-* Cleaned NVRAM\(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `CleanNvram` in the boot picker when `AllowNvramReset` is enabled
-* Knowledge of how a Hackintosh works and what files yours requires\(ie: Type of network controller\).
+* [ProperTree](https://github.com/corpnewt/ProperTree) or Xcode to edit .plist files (OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. **Please avoid these kinds of tools at all costs!**).
+* Cleaned NVRAM(This is seriously important as you want a clean slate when working with OpenCore, luckily with OC you can press `CleanNvram` in the boot picker when `AllowNvramReset` is enabled
+* Knowledge of how a Hackintosh works and what files yours requires(ie: Type of network controller).
 * You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI.
 
 # Making the installer
@@ -45,7 +45,7 @@ A cleaned up EFI:
 
 ![Clean EFI](https://i.imgur.com/2INJYol.png)
 
-Now you can place **your** necessary firmware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!\(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc\). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
+Now you can place **your** necessary firmware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
 Here's what a populated EFI can look like:
 
@@ -55,7 +55,7 @@ Here's what a populated EFI can look like:
 
 * SSDTs and custom DSDTs go in ACPI folder
 * Kexts go in Kexts folder
-* Firmware drivers\(.efi\) go in the Drivers folder
+* Firmware drivers(.efi) go in the Drivers folder
 
 See [Gathering Files](/ktext.md) on the next page for more info on what you need
 

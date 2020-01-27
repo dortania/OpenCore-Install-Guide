@@ -5,7 +5,7 @@ Last edited: January 13, 2020
 So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
 
 * ScanPolicy
-* Vault\(work in progress\)
+* Vault(work in progress)
 
 ## FileVault Setup
 
@@ -19,21 +19,21 @@ To start, you'll need the following .efi drivers:
 Setting in your config.plist:
 
 * Misc -&gt; Boot 
-  * `PollAppleHotKeys` set to YES\(While not needed can be helpful\)
+  * `PollAppleHotKeys` set to YES(While not needed can be helpfu\)
 * Misc -&gt; Security
-  * `AuthRestart` set to YES\(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional\)
+  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional)
 * NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
 * UEFI -&gt; Input
-  * `KeySupport` set to YES\(Only when using OpenCore's builtin input, users of UsbKbdxe should avoid\)
+  * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of UsbKbdxe should avoid)
 * UEFI -&gt; Protocols
   * `FirmwareVolume` set to YES
   * `HashServices` set to YES for Haswell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
-  * `AppleSmcIo` set to YES\(this replaces VirtualSMC.efi\)
+  * `AppleSmcIo` set to YES(this replaces VirtualSMC.efi)
 * UEFI -&gt; Quirks
   * `ProvideConsoleGOP` to YES
   * `RequestBootVarRouting` set to YES
-  * `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares\(Haswell and older\)
+  * `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
 
 With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
@@ -41,7 +41,7 @@ With all this, you can proceed to enable FileVault like on a normal mac under `S
 
 What this quirk allows to prevent scanning and booting from untrusted sources. Setting to `0` will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.
 
-To calculate the ScanPolicy value, you simply add up all the hexidecimal values\(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with `⌘+3`\). Once it's all added up, you would add this hexidecimal value to ScanPolicy\(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it\)
+To calculate the ScanPolicy value, you simply add up all the hexidecimal values(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with `⌘+3`). Once it's all added up, you would add this hexidecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)
 
 `0x00000001 (bit 0)` — OC\_SCAN\_FILE\_SYSTEM\_LOCK
 
@@ -95,7 +95,7 @@ To calculate the ScanPolicy value, you simply add up all the hexidecimal values\
 
 * allow scanning card reader devices.
 
-By default, ScanPolicy is given a value of `0xF0103`\(983,299\) which is the combination of the following:
+By default, ScanPolicy is given a value of `0xF0103`(983,299) which is the combination of the following:
 
 * OC\_SCAN\_FILE\_SYSTEM\_LOCK 
 * OC\_SCAN\_DEVICE\_LOCK

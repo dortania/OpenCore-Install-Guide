@@ -4,8 +4,8 @@ Last edited: January 13, 2020
 
 This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen's autopatches:
 
-* Applying a fakeID for unsupported GPUs
-* iGPU BusID patching for 300 series motherboards
+* [Applying a fakeID for unsupported GPUs](/extras/gpu-patches.md#Converting-a-clover-fakeID-to-OpenCore)
+* [iGPU BusID patching for 300 series motherboards](/extras/gpu-patches.md#iGPU-BusID-Patching)
 
 # Converting a clover fakeID to OpenCore
 
@@ -25,7 +25,7 @@ This should give you something like this:
 PciRoot(0x20)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
 ```
 
-Note: GFX0 can be replaced with GFX1, etc if the GPU you're fakeIDing isn't the first/main GPU. And machine running with CSM enabled and Windows8.1/10 mode\(WHQL\) disabled may find that the GPU is named `display` so adjust the above command accodingly.
+Note: GFX0 can be replaced with GFX1, etc if the GPU you're fakeIDing isn't the first/main GPU. And machine running with CSM enabled and Windows8.1/10 mode(UEFI) disabled may find that the GPU is named `display` so adjust the above command accodingly.
 
 ### Apply the fakeID
 
@@ -65,13 +65,13 @@ Now navigate into your config.plist under DeviceProperties -&gt; Add where you c
 
 # iGPU BusID Patching
 
-This section is for users running "true" 300 series motherboards\( B360, B365, H310, H370, Z390\) who are having issues setting up their iGPU as a display out.
+This section is for users running "true" 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.
 
 So to get started I'll assume you've already done basic framebuffer patches in your config from the [Coffeelake portion of the guide](../config.plist/coffee-lake.md), it should look something like this:
 
 ![](https://i.imgur.com/lm7LgML.png)
 
-Now that we're prepped, we can start looking into busID patching. Checking the dumps on [Insanelymac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID\(Desktop UHD 630\):
+Now that we're prepped, we can start looking into busID patching. Checking the dumps on [Insanelymac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID(Desktop UHD 630):
 
 ```text
 ID: 3E9B0007, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00801302
@@ -115,7 +115,7 @@ busId: 0x05
 
 * 01**05**0900 00040000 C7030000
 
-Pipe Number 9 \(little endian\):
+Pipe Number 9 (little endian):
 
 * 0105**0900** 00040000 C7030000
 
@@ -137,7 +137,7 @@ List of connector types:
 * `00 04 00 00` - DisplayPort
 * `00 08 00 00` - HDMI
 * `04 00 00 00` - Digital DVI
-* `02 00 00 00` - LVDS \(for laptops\)
+* `02 00 00 00` - LVDS (for laptops)
 * `01 00 00 00` - Dummy port
 
 ### Mapping video ports
@@ -150,7 +150,7 @@ List of connector types:
 * 02**00**0A00 00040000 C7030000
 * 03**00**0800 00040000 C7030000
 
-1. Walk through busids for Port 1 if the previous didn't work\(yup you gotta do a shit ton of reboots\). The maximum busid on most platforms is 0x06
+1. Walk through busids for Port 1 if the previous didn't work(yup you gotta do a shit ton of reboots). The maximum busid on most platforms is 0x06
 * 01**01**0900 00080000 C7030000
 * 01**02**0900 00080000 C7030000
 * 01**03**0900 00080000 C7030000

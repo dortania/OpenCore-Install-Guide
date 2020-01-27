@@ -6,14 +6,14 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [vit9696](https://github.com/vit9696)
   * One of many developers of OpenCore
   * Corrections to the original guide
-  * Corrections to this guide...\(seriously this man deserves a medal\)
+  * Corrections to this guide...(seriously this man deserves a medal)
 * [icedterminal](https://github.com/icedterminal)
   * Heavy grammar correction
   * Clover removal
 * [S2F0amEgS2xvdmVy](https://github.com/S2F0amEgS2xvdmVy)
   * Link correction
 * [CorpNewt](https://github.com/corpnewt)
-  * Heavily inspiring this guide\(if not a rip off\) and helping overal with questions and advice
+  * Heavily inspiring this guide(if not a rip off) and helping overal with questions and advice
   * Spoof SSDT source
 * [Midi](https://github.com/midi1996)
   * Corrections and recommendations for the guide
@@ -26,7 +26,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [doesprintfwork](https://github.com/doesprintfwork)
   * Heavily inspiring the AMD section
   * Additions to kernel.json
-* [AlGrey\#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
+* [AlGrey#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
   * AMD Kernel patches
 * [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
   * For the original AMD Vanilla Guide
@@ -54,7 +54,7 @@ Guides linked or those that inspired this guide:
 
 Gotta rep dat ~~merch~~ guides:
 
-* [Getting Started With OpenCore](https://github.com/khronokernel/Getting-Started-With-OpenCore)\(The guide that started it all\)
+* [Getting Started With OpenCore](https://github.com/khronokernel/Getting-Started-With-OpenCore)(The guide that started it all)
 * [GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/)
 * [Disable Unsupported GPUs](https://khronokernel-4.gitbook.io/disable-unsupported-gpus/)
 * [Anti-Hackintosh Buyers Guide](https://khronokernel-5.gitbook.io/anti-hackintosh-buyers-guide/)
