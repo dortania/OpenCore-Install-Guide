@@ -527,7 +527,7 @@
 <li>This is anytime before or during the loading of the macOS kernel</li>
 </ul>
 </li>
-<li><a href="troubleshootingmd#macos-booting">macOS booting issues</a><ul>
+<li><a href="troubleshooting.html#macos-booting">macOS booting issues</a><ul>
 <li>Anytime between the kernel loading and installing macOS</li>
 </ul>
 </li>
@@ -626,7 +626,7 @@
 </li>
 <li><p>CFG-Lock not off(Intel Users only), couple solutions:</p>
 <ul>
-<li><a href="../extras/msr-lock.html">Patch your MSR E2</a>(Recommeneded solution)</li>
+<li><a href="../extras/msr-lock.html">Patch your MSR E2</a>(Recommended solution)</li>
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.</li>
 </ul>
 </li>
@@ -635,16 +635,16 @@
 </ul>
 </li>
 <li>Incompatible keyboard driver:<ul>
-<li>Disable <code>PollAppleHotKeys</code> and enable <code>KeySupport</code>, then remove AppleUsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers</li>
-<li>If the above doesn&apos;t work, reverse: disable <code>KeySupport</code>, then add AppleUsbKbDxe to your config.plist -&gt; UEFI -&gt; Drivers</li>
+<li>Disable <code>PollAppleHotKeys</code> and enable <code>KeySupport</code>, then remove <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">AppleUsbKbDxe</a> from your config.plist -&gt; UEFI -&gt; Drivers</li>
+<li>If the above doesn&apos;t work, reverse: disable <code>KeySupport</code>, then add <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">AppleUsbKbDxe</a> to your config.plist -&gt; UEFI -&gt; Drivers</li>
 </ul>
 </li>
 </ul>
 <h2 id="cant-select-anything-in-the-picker">Can&apos;t select anything in the picker</h2>
 <ul>
 <li>Incompatible keyboard driver:<ul>
-<li>Disable <code>PollAppleHotKeys</code> and enable <code>KeySupport</code>, then remove AppleUsbKbDxe from your config.plist -&gt; UEFI -&gt; Drivers</li>
-<li>If the above doesn&apos;t work, reverse: disable <code>KeySupport</code>, then add AppleUsbKbDxe to your config.plist -&gt; UEFI -&gt; Drivers</li>
+<li>Disable <code>PollAppleHotKeys</code> and enable <code>KeySupport</code>, then remove <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">AppleUsbKbDxe</a> from your config.plist -&gt; UEFI -&gt; Drivers</li>
+<li>If the above doesn&apos;t work, reverse: disable <code>KeySupport</code>, then add <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">AppleUsbKbDxe</a> to your config.plist -&gt; UEFI -&gt; Drivers</li>
 </ul>
 </li>
 </ul>
@@ -712,11 +712,15 @@
 <li>switch between different display outputs</li>
 </ul>
 <h2 id="300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></h2>
-<p>Commonly due to systems running AWAC clocks, pleas see the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/d6ae62c258e16382e0746e9ffd1e9755c93b08d7/extras/extras/acpi.md" target="_blank">Getting started with ACPI</a> section</p>
+<p>Commonly due to systems running AWAC clocks, pleas see the <a href="../extras/acpi.html">Getting started with ACPI</a> section</p>
 <h2 id="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</h2>
 <p>Verify your EC SSDT is enabled and correct for your system. See the <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a> post for more info</p>
 <h2 id="kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></h2>
 <p>Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don&apos;t.</p>
+<h2 id="kernel-panic-appleintelmcereporter">Kernel Panic <code>AppleIntelMCEReporter</code></h2>
+<p>With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add <a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a> to both </p>
+<h2 id="frozen-in-the-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</h2>
+<p>This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, either download a good copy from the <a href="http://kexts.goldfish64.com/" target="_blank">Kext Repo</a> or here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/NullCPUPowerManagment.kext.zip" target="_blank">NullCPUPowerManagment.kext.zip</a></p>
 <h1 id="macos-post-install">macOS post-install</h1>
 <ul>
 <li>Broken iMessage and Siri </li>
@@ -724,8 +728,9 @@
 <li>BIOS reset or sent into Safemode after reboot/shutdown?</li>
 <li>macOS GPU acceleration missing on AMD X570</li>
 <li>DRM Broken</li>
+<li>&quot;Memory Modules Misconfigured&quot; on MacPro7,1</li>
 </ul>
-<h2 id="imessage-and-siri-broken">iMessage and Siri Broken</h2>
+<h2 id="broken-imessage-and-siri">Broken iMessage and Siri</h2>
 <ul>
 <li>En0 device not setup as <code>Built-in</code>, couple ways to fix:<ul>
 <li>Find PCI path for your NIC with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>(ie: <code>ethernet</code>, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of <code>built-in</code> with the value of <code>01</code> and type <code>Data</code>. Hackintool can also grab the PCIRooth path if you&apos;re having issues with gfxutil. <strong>Recommended method</strong></li>
@@ -802,6 +807,8 @@
 <ul>
 <li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md" target="_blank">WhateverGreen&apos;s DRM Chart</a></li>
 </ul>
+<h2 id="memory-modules-misconfigured-on-macpro71">&quot;Memory Modules Misconfigured&quot; on MacPro7,1</h2>
+<p>Add <a href="https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/" target="_blank">MacProMemoryNotificationDisabler kext</a> to EFI/OC/Kexts and Kernel -&gt; Add</p>
 <h1 id="other-issues">Other issues</h1>
 <ul>
 <li>Can&apos;t run <code>acpidump.efi</code></li>
@@ -892,7 +899,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-01-27T16:39:04.631Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-27T16:39:47.657Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-01-27T18:06:46.184Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-27T18:07:31.251Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

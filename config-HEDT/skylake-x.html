@@ -520,12 +520,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="skylake-x">Skylake-X</h1>
-<p>Last edited: January 23, 2020</p>
+<p>Last edited: January 27, 2020</p>
 <h2 id="starting-point">Starting Point</h2>
-<p>You&apos;ll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> and we can get to work.</p>
+<p>You&apos;ll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> and we can get to work. <strong>Reminder configurators are not supported, most are out of date with the OpenCore spec and some like Mackie&apos;s will even add clover sections and corrupt plists. You are on your own if you use such tools</strong></p>
 <p>Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).</p>
-<p>Do note that images will not always be the most up-to-date so please read the text below them.</p>
-<p><strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly</strong></p>
+<p><strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing&apos;s mentioned then leave as default.</strong></p>
 <h2 id="acpi">ACPI</h2>
 <p><img src="https://i.imgur.com/IkLFucw.png" alt="ACPI"></p>
 <p><strong>Add:</strong></p>
@@ -645,6 +644,10 @@
 </li>
 <li><strong>ShrinkMemoryMap</strong>: NO<ul>
 <li>Needed for systems with large memory maps that don&apos;t fit, don&apos;t use unless necessary</li>
+</ul>
+</li>
+<li><strong>SignalAppleOs</strong>: NO<ul>
+<li>Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro&apos;s with dGPUs as booting Windows won&apos;t allow for the iGPU to be used</li>
 </ul>
 </li>
 </ul>
@@ -784,7 +787,7 @@
 </ul>
 </li>
 </ul>
-<p>These values are based of those calculated in <a href="../extras/debug.md">OpenCore debugging</a></p>
+<p>These values are based of those calculated in <a href="../troubleshooting/debug.html">OpenCore debugging</a></p>
 <p><strong>Security</strong>: Security is pretty self-explanatory.</p>
 <ul>
 <li><strong>AllowNvramReset</strong>: YES<ul>
@@ -843,14 +846,15 @@
 </ul>
 </li>
 <li><strong>Path</strong><ul>
-<li>PCI route of boot drive, can be found with the <a href="https://github.com/acidanthera/OpenCoreShell" target="_blank">OpenCoreShell</a> and the <code>map</code> command</li>
+<li>PCI route of boot drive, can be found with the <a href="https://github.com/acidanthera/OpenCoreShell/releases" target="_blank">OpenCoreShell</a> and the <code>map</code> command</li>
 <li>ex: <code>PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi</code></li>
 </ul>
 </li>
 </ul>
 <h2 id="nvram">NVRAM</h2>
 <p><img src="https://i.imgur.com/HM4FTH6.png" alt="NVRAM"></p>
-<p><strong>Add</strong>: 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majority can ignore but )</p>
+<p><strong>Add</strong>: </p>
+<p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majority can ignore but )</p>
 <ul>
 <li><strong>UIScale</strong>:<ul>
 <li>01: Standard resolution(Clover equivalent is <code>0x28</code>)</li>
@@ -861,26 +865,24 @@
 <p>7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)</p>
 <ul>
 <li><strong>boot-args</strong>:<ul>
-<li><code>-v</code> - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you&apos;re booting instead of the Apple logo and progress bar. It&apos;s invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.</li>
-<li><code>debug=0x100</code> - this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can (hopefully) glean some useful info and follow the breadcrumbs to get past the issues.</li>
-<li><code>keepsyms=1</code> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</li>
-<li><code>shikigva=40</code> - this flag is specific for Nvidia users. It enables a few Shiki settings that do the following (found <a href="https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp#L35-L74" target="_blank">here</a>):<ul>
-<li>8 - AddExecutableWhitelist - ensures that processes in the whitelist are patched.</li>
-<li>32 - ReplaceBoardID - replaces board-id used by AppleGVA by a different board-id. Do note that this generally needed for systems running Nvidia GPUs</li>
-</ul>
-</li>
-<li><code>alcid=1</code> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system.</li>
+<li><strong>-v</strong> - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you&apos;re booting instead of the Apple logo and progress bar. It&apos;s invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.</li>
+<li><strong>debug=0x100</strong> - this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can (hopefully) glean some useful info and follow the breadcrumbs to get past the issues.</li>
+<li><strong>keepsyms=1</strong> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</li>
+<li><strong>alcid=1</strong> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system.</li>
 </ul>
 </li>
 <li><strong>csr-active-config</strong>: Settings for SIP, generally recommended to manually change this within Recovery partition with <code>csrutil</code> via the recovery partition</li>
 </ul>
-<p>csr-active-config is set to <code>E7030000</code> which effectively disables SIP. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:</p>
+<p>csr-active-config is set to <code>00000000</code> which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:</p>
 <ul>
 <li><code>00000000</code> - SIP completely enabled</li>
 <li><code>30000000</code> - Allow unsigned kexts and writing to protected fs locations</li>
 <li><code>E7030000</code> - SIP completely disabled</li>
+</ul>
+<p>Recommended to leave enabled for best secuirty practices</p>
+<ul>
 <li><strong>nvda_drv</strong>: &lt;&gt; <ul>
-<li>For enabling Nvidia WebDrivers, set to 31 if running a <a href="https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs" target="_blank">Maxwell or Pascal GPU</a>. This is the same as setting nvda_drv=1 but instead we translate it from <a href="https://www.browserling.com/tools/hex-to-text" target="_blank">text to hex</a>. AMD and Intel users should leave this area blank.</li>
+<li>For enabling Nvidia WebDrivers, set to 31 if running a <a href="https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs" target="_blank">Maxwell or Pascal GPU</a>. This is the same as setting nvda_drv=1 but instead we translate it from <a href="https://www.browserling.com/tools/hex-to-text" target="_blank">text to hex</a>, Clover equivalent is <code>NvidiaWeb</code>. <strong>AMD and Intel users should leave this area blank.</strong></li>
 </ul>
 </li>
 <li><strong>prev-lang:kbd</strong>: &lt;&gt; <ul>
@@ -911,7 +913,7 @@
 <p><img src="https://i.imgur.com/RKIXoi5.png" alt="PlatformInfo"></p>
 <p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application. </p>
 <p>For this Skylake-X example, we&apos;ll choose the iMacPro1,1 SMBIOS.</p>
-<p>GenSMBIOS would give us output similar to the following:</p>
+<p>Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:</p>
 <pre><code class="lang-text">  #######################################################
  #              iMacPro1,1 SMBIOS Info                 #
 #######################################################
@@ -925,7 +927,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <p>The <code>Serial</code> part gets copied to Generic -&gt; SystemSerialNumber.</p>
 <p>The <code>Board Serial</code> part gets copied to Generic -&gt; MLB.</p>
 <p>The <code>SmUUID</code> part gets copied toto Generic -&gt; SystemUUID.</p>
-<p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>)</p>
+<p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>. After install follow the <a href="../post-install/iservices.html">Fixing iServices</a> page on how to find your real MAC Address)</p>
 <p><strong>Reminder that you want valid serial numbers but those not in use, you want to get a message back like: &quot;Purchase Date not Validated&quot;</strong></p>
 <p><a href="https://checkcoverage.apple.com" target="_blank">Apple Check Coverage page</a></p>
 <p><strong>Automatic</strong>: YES</p>
@@ -1081,8 +1083,28 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li><a href="https://www.reddit.com/r/hackintosh/" target="_blank">r/Hackintosh Subreddit</a></li>
 <li><a href="https://discord.gg/2QYd7ZT" target="_blank">r/Hackintosh Discord</a></li>
 </ul>
+<h1 id="intel-bios-settings">Intel BIOS settings</h1>
+<p><strong>Disable:</strong></p>
+<ul>
+<li>Fast Boot</li>
+<li>VT-d(can be enabled if you set <code>DisableIoMapper</code> to YES)</li>
+<li>CSM</li>
+<li>Thunderbolt</li>
+<li>Intel SGX</li>
+<li>Intel Platform Trust</li>
+<li>CFG Lock(MSR 0xE2 write protection)(<strong>This must be on, if you can&apos;t find the option then enable both <code>AppleCpuPmCfgLock</code> and <code>AppleCpuPmCfgLock</code> under Kernel -&gt; Quirks. Your hack will not boot with CFG-Lock enabled</strong>)</li>
+</ul>
+<p><strong>Enable:</strong></p>
+<ul>
+<li>VT-x</li>
+<li>Above 4G decoding</li>
+<li>Hyper-Threading</li>
+<li>Execute Disable Bit</li>
+<li>EHCI/XHCI Hand-off</li>
+<li>OS type: Windows 8.1/10 UEFI Mode</li>
+</ul>
 <h1 id="post-install">Post-install</h1>
-<p>So what in the world needs to be done once everything is installed? Well here are some things:</p>
+<p>So what in the world needs to be done once everything is installed? Well here&apos;s some things you can do:</p>
 <ul>
 <li><a href="https://usb-map.gitbook.io/project/" target="_blank">USB mapping</a> </li>
 <li><a href="../post-install/nvram.html">Testing and setting up emulated NVRAM</a></li>
@@ -1140,7 +1162,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.1","depth":1,"next":{"title":"AMD","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-01-27T16:39:04.535Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-27T16:39:47.657Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.1","depth":1,"next":{"title":"AMD","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-01-27T18:06:46.088Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-27T18:07:31.251Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

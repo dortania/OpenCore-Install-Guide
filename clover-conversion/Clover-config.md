@@ -1,6 +1,6 @@
 # Converting common properties from Clover to Opencore
 
-Last edited: October 23, 2019
+Last edited: January 27, 2020
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -13,7 +13,7 @@ See [Kexts and Firmware drivers](https://github.com/khronokernel/Opencore-Vanill
 **ACPI Renames**:
 
 So with the transition from Clover to OpenCore we should start removing unneeded patches you may have carried along for some time:
-* EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Broadwell and newer users do not need this.
+* EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not need this.
    * change EHC1 to EH01
    * change EHC2 to EH02
 * XHCI Patches: Just not needed anymore
