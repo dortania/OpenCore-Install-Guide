@@ -1,5 +1,5 @@
 # Introduction
-Last edited: January 13, 2020
+Last edited: January 26, 2020
 * [GitHub Pages link with Darkmode support](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
 
 ### About
@@ -23,7 +23,7 @@ For AMD users having troubles follow the guide can see Snazzy's guide:
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
 * Future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
 * UEFI and Legacy boot modes are supported.
-* Mask patching means macOS updates vhave ery little chance of breaking AMD systems, with [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore) supporting all versions of High Sierra, Mojave and Catalina. **All future AMD OSX developement is tied to Opencore**, so for 10.15.2+ you'll need OpenCore
+* Mask patching means macOS updates have very little chance of breaking AMD systems, with [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore) supporting all versions of High Sierra, Mojave and Catalina. **All future AMD OSX development is tied to Opencore**, so for 10.15.2+ you'll need OpenCore
 
 ### OpenCore Tips
 
