@@ -322,6 +322,7 @@ Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemo
 * Fix Python: `Python is not installed or not found on PATH`
 * Windows Startup Disk can't see APFS drives
 * Incorrect resolution with OpenCore
+* Apps crashing on AMD
 
 ## Can't run `acpidump.efi`
 
@@ -371,5 +372,21 @@ Make sure `Add Python to PATH`
 * Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
+## Apps crashing on AMD
 
+~~Easy fix, buy Intel~~
+
+So with AMD, whenever Apple calls CPU specific functions the app withh either not work or outright crash. Here are some apps and their "fixes":
+
+* Adobe Products don't always work and there is no fix for lightroom at the moment
+   * some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
+   * Do note these fixes just disable functionality, they're not real fixes
+* Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
+   * VirtualBox works fine as its Java based
+* Docker broken
+   * Docker toolbox is the only solution as its Java based, many feautures are unavailble with this
+* Xcode AppleWatch simulator is broken in Catalina
+   * Mojave works fine
+* Blender 2.8.0+ won't work
+   * 2.7.9 is last good version
 

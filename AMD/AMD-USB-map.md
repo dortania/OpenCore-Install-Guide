@@ -88,8 +88,8 @@ UsbConnector types that we care about:
 0: USB 2.0 Type-A connector
 3: USB 3.0 Type-A connector
 8: Type C connector - USB 2.0-only
-9: Type C connector - USB 2.0 and USB 3.0 with Switch, flipping the device doesn't change ACPI port
-10: Type C connector - USB 2.0 and USB 3.0 without Switch, flipping the device doesn't change ACPI port
+9: Type C connector - USB 2.0 and USB 3.0 with Switch, flipping the device **doesn't** change the ACPI port
+10: Type C connector - USB 2.0 and USB 3.0 without Switch, flipping the device **does** change the ACPI port
 255: Proprietary connector - For Internal USB ports like Bluetooth
 ```
 > How do I know which ports are 2.0 and which are 3.0?
