@@ -242,7 +242,7 @@ Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.co
 
 # macOS post-install
 
-* [Broken iMessage and Siri](/troubleshooting/troubleshooting.md##Broken-iMessage-and-Siri)
+* [Broken iMessage and Siri](/troubleshooting/troubleshooting.md#Broken-iMessage-and-Siri)
 * No on-board audio
 * BIOS reset or sent into Safemode after reboot/shutdown?
 * macOS GPU acceleration missing on AMD X570
