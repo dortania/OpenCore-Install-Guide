@@ -160,18 +160,30 @@ See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanil
 
 # macOS booting
 
+* Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 * "Waiting for Root Device" or Prohibited Sign error
 * macOS installer in Russian
-* Stuck on or near `[PCI Configuration Begin]`
 * Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 * Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 * 300 series Intel stalling on `apfs_module_start...`
 * Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
 * Kernel Panic `Cannot perform kext summary`
 * Kernel Panic `AppleIntelMCEReporter`
+* Kernel Panic `AppleIntelCPUPowerManagement`
+* Stop Sign with corrupted text(Still waiting for Root Device)
 * Frozen in the macOS installer after 30 seconds
 * 15h/16h CPU reboot after Data & Privacy screen
-* 15/16h CPU webpages crashing
+
+## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
+
+Well this general area is where a lot of PCI devices are configured, and is where most boot ing issues with AMD hacks happen. The main places to check:
+
+* **Missing EC patch**: 
+   * Make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled**
+   * If you don't have one, grab it here: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
+* **IRQ conflict**: 
+   * Make sure either Above4GDecoding is enabled in the BIOS, if not option availible then add `npci=0x2000` to boot args. **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
+   * Other BIOS settings that are important: CSM disabled, Windows8.1/10 UEFI Mode enabled
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
@@ -183,20 +195,7 @@ See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanil
 
 Default sample config is in russian, check your prev-lang:kbd value under NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
-![](https://i.imgur.com/DtYtwCQ.png)
-
-## Stuck on or near `[PCI Configuration Begin]`
-
-This is commonly caused by IRQ conflicts with PCI devices/lanes. Depending on how your system was configured, it's recommended to have the following BIOS settings:
-
-* CSM disabled
-* Windows8.1/10 Mode
-* Forcing PCIe 3.0 link speed
-
-Now try one of these boot args:
-
-* `npci=0x2000`
-* `npci=0x3000`
+You may also need to reset NVRAM in the boot picker as well
 
 ## Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 
@@ -227,6 +226,20 @@ Generally seen as an issue surrounding the prelinked kernel, specifically that m
 
 With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) to both 
 
+## Kernel Panic `AppleIntelCPUPowerManagement`
+
+This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, either download a good copy from the [Kext Repo](http://kexts.goldfish64.com/) or here: [NullCPUPowerManagment.kext.zip](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/NullCPUPowerManagment.kext.zip)
+
+## Stop Sign with corrupted text(Still waiting for Root Device)
+
+With OS X 10.11 El Capitan, Apple imposed a 15 USB port limit. To get around this we actually create a USB map to include ports we want and kick out extras we don't care about. For install, set `Kernel -> Quirks -> XhciPortLimit -> Enabled` but for post install we recommend making a map as the port limit patch isn't guaranteed to work with future versions of macOS.
+
+For 15h and 16h AMD CPUs, you may need to add the following:
+* [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
+
+If XLNCUSBFix still doesn't work, then try the following:
+* [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
+
 ## Frozen in the macOS installer after 30 seconds
 
 This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, either download a good copy from the [Kext Repo](http://kexts.goldfish64.com/) or here: [NullCPUPowerManagment.kext.zip](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/NullCPUPowerManagment.kext.zip)
@@ -235,10 +248,13 @@ This is likely due to faultly or outright missing NullCPUPowerManagement, the on
 
 Follow directions here after UPDATE 2: [Fix Data and Privacy reboot](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2658085)
 
-## 15/16h CPU webpages crashing
+## macOS frozen right before login
 
-Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
+This is a common example of screwed up TSC, for most system add [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
 
+For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
+
+![](https://cdn.discordapp.com/attachments/478720084072988672/669453323589386254/IMG_20200122_090803.jpg)
 
 # macOS post-install
 
@@ -248,14 +264,15 @@ Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.co
 * macOS GPU acceleration missing on AMD X570
 * DRM Broken
 * "Memory Modules Misconfigured" on MacPro7,1
-
-
+* Apps crashing on AMD
 
 ## Broken iMessage and Siri 
 
 * En0 device not setup as `Built-in`, couple ways to fix:
   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
+
+![](https://i.imgur.com/DtYtwCQ.png)
 
 If these fixes do not work, see the [Fixing iServices page](/post-install/iservices.md) for more in-depth guide.
 
@@ -313,7 +330,28 @@ More other GPUs, try different shiki boot args:
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
-Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and Kernel -> Add
+Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and `Kernel -> Add`
+
+## Apps crashing on AMD
+
+~~Easy fix, buy Intel~~
+
+So with AMD, whenever Apple calls CPU specific functions the app withh either not work or outright crash. Here are some apps and their "fixes":
+
+* Adobe Products don't always work and there is no fix for lightroom at the moment
+   * some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
+   * Do note these fixes just disable functionality, they're not real fixes
+* Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
+   * VirtualBox works fine as its Java based
+* Docker broken
+   * Docker toolbox is the only solution as its Java based, many feautures are unavailble with this
+* Xcode AppleWatch simulator is broken in Catalina
+   * Mojave works fine
+* Blender 2.8.0+ won't work
+   * 2.7.9 is last good version
+* 15/16h CPU webpages crashing
+   * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
+
 
 # Other issues
 
@@ -322,7 +360,6 @@ Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemo
 * Fix Python: `Python is not installed or not found on PATH`
 * Windows Startup Disk can't see APFS drives
 * Incorrect resolution with OpenCore
-* Apps crashing on AMD
 
 ## Can't run `acpidump.efi`
 
@@ -372,21 +409,5 @@ Make sure `Add Python to PATH`
 * Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
-## Apps crashing on AMD
 
-~~Easy fix, buy Intel~~
-
-So with AMD, whenever Apple calls CPU specific functions the app withh either not work or outright crash. Here are some apps and their "fixes":
-
-* Adobe Products don't always work and there is no fix for lightroom at the moment
-   * some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
-   * Do note these fixes just disable functionality, they're not real fixes
-* Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
-   * VirtualBox works fine as its Java based
-* Docker broken
-   * Docker toolbox is the only solution as its Java based, many feautures are unavailble with this
-* Xcode AppleWatch simulator is broken in Catalina
-   * Mojave works fine
-* Blender 2.8.0+ won't work
-   * 2.7.9 is last good version
-
+ 

@@ -8,9 +8,9 @@ You'll want to start with the sample.plist that OpenCorePkg provides you in the 
 
 Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
 
-Kernel patches(save these for later, we'll go over how to use them below):
-* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
+Kernel patches courtesy of [AMD OSX](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(save these for later, we'll go over how to use them below):
+* [Ryzen/Threadripper(17h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip) (10.13, 10.14, and 10.15)
 
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
@@ -147,8 +147,8 @@ TL;DR, delete the PCIRoot's here as we won't be using this section.
 **Patch**: This is where the AMD kernel patching magic happens. Please do note that `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303):
 
 Kernel patches:
-* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip) (10.13, 10.14, and 10.15)
+* [Bulldozer/Jaguar(15h/16h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip) (10.13, 10.14, and 10.15)
 
 To merge:
 * Open both files, 
