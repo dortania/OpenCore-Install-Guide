@@ -58,7 +58,7 @@ What we want to do is select option `4. Dump DSDT` first, then select the approp
 
 For Skylake+ and AMD, you can grab a prebuilt file here: [SSDT-USBX.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX.aml). This file is plug and play and requires no device configuration, **do not use on Haswell and older**.
 
-**Troubleshooting note**: See [General Troubleshooitng](/troubleshooting/troubleshooting).md if you're having issues running SSDTTime
+**Troubleshooting note**: See [General Troubleshooting](/troubleshooting/troubleshooting).md if you're having issues running SSDTTime
 
 ## Adding to OpenCore
 

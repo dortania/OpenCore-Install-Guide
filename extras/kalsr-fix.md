@@ -51,7 +51,7 @@ The real fix to this is quite simple actually, the process is both the same for 
     * AvoidRuntimeDefrag: `YES`
        * Fixes UEFI runtime services like date, time, NVRAM, etc
     * DevirtualiseMmio: `YES`
-       * Reduces stolen memory footprint so we're given more options for slide values
+       * Reduces stolen memory footprint so we're given more options for slide values, **do not use on AMD CPU based systems**
     * DisableVariableWrite: `YES`
        * Reroutes NVRAM to nvram.plist, needed for systems without supported NVRAM(B360, B365, H310, H370, Q370, Z390). Some C612, X79, X99, X299 systems will also need this.
     * EnableSafeModeSlide: `YES`
