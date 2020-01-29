@@ -220,6 +220,27 @@ device_type: XHCI
 **KernelXCPM**:
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
 
+For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OcSupportPkg/blob/b2b0fa3c060403fdf0d42d319bd0902df62959f0/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's `kernel_patcher.c` ](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transfered over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to Opencore:
+
+```
+Base: _xcpm_bootstrap
+Comment: _xcpm_bootstrap (Ivy Bridge) 10.15
+Count: 1
+Enabled: YES
+Find: 8D43C43C22
+Identifier: kernel
+Limit: 0
+Mask: FFFF00FF
+MinKernel: 19.
+MaxKernel: 19.99.99
+Replace: 8D43C63C22
+ReplaceMask: 0000FF0000
+Skip: 0
+```
+[Source](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/issues/32)
+
+For Low end Haswell+ like Celerons, please see here for recommended patches: [](https://github.com/acidanthera/bugtracker/issues/365)
+
 **USB Port Limit Patches**:
 * `Kernel -> Quirks -> XhciPortLimit -> YES`
 
