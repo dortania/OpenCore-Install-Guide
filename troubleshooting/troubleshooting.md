@@ -32,6 +32,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * Can't select anything in the picker
 * Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 * `Couldn't allocate runtime area` errors?
+* SSDTs not being added
 * Booting OpenCore reboots to BIOS
 
 
@@ -150,6 +151,28 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix)
 
+## SSDTs not being added
+
+So with Opencore, there's some extra secuirty checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:
+
+```
+* Original Table Header:
+*     Signature        "SSDT"
+*     Length           0x0000015D (349)
+*     Revision         0x02
+*     Checksum         0xCF
+*     OEM ID           "ACDT"
+*     OEM Table ID     "SsdtEC"
+*     OEM Revision     0x00001000 (4096)
+*     Compiler ID      "INTL"
+*     Compiler Version 0x20190509 (538510601)
+```
+
+The `Length` and `checksum` value is what we care about, so if our SSDT is actually 347 bytes then we want to change `Length` to `0x0000015B (347)`(the `015B` is in HEX)
+
+But how the hell do we calculate our Checksum? Well checking the [ACPI docs 5-27](https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf), we can see this:
+
+
 ## Booting OpenCore reboots to BIOS
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
@@ -179,11 +202,11 @@ See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanil
 Well this general area is where a lot of PCI devices are configured, and is where most boot ing issues with AMD hacks happen. The main places to check:
 
 * **Missing EC patch**: 
-   * Make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled**
+   * Make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
    * If you don't have one, grab it here: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
 * **IRQ conflict**: 
-   * Make sure either Above4GDecoding is enabled in the BIOS, if not option availible then add `npci=0x2000` to boot args. **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
-   * Other BIOS settings that are important: CSM disabled, Windows8.1/10 UEFI Mode enabled
+   * Make sure either Above4GDecoding is enabled in the BIOS, if no option availible then add `npci=0x2000` to boot args. **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
+   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
