@@ -16,18 +16,18 @@ macOS can be very picky about the devices present in the DSDT and so our job is 
   * This is used to enable native CPU power management on **Intel** Haswell and newer CPUs, the SSDT will connect to the first thread of the CPU. Not meant for AMD
 * AWAC system clock.
   * This applies to all 300 series motherboards including Z370 boards, the specific issue is that newer boards ship with AWAC clock enabled. This is a problem because macOS cannot communicate with AWAC clocks, so this requires us to either force on the Legacy RTC clock or if unavailable create a fake one for macOS to play with
-* PMC SSDT
+* NVRAM SSDT
   * True 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and uses the scope `PCI0.LPCB`, this is the most common scope so a pre-made can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml) or continue reading and make your own.
 
 # SSDTs: The easy way
 
 So here we'll be using a super simple tool made by CorpNewt: [SSDTTime](https://github.com/corpnewt/SSDTTime)
 
-What this tool does is dumps your DSDT from your firmware, and then creates SSDTs based off your DSDT. 
+What this tool does is dumps your DSDT from your firmware, and then creates SSDTs based off your DSDT. **This must be done on the target machine running either Windows or Linux**
 
 So what **can't** SSDTTime do?:
 
-* **Skylake-X(X299) SSDTs**: The ACPI is odd on this platform so manual work is required
+* **Skylake-X/SP/W(X299, C621, C422) SSDTs**: The ACPI is odd on these platforms so manual work is required
 * **AWAC and RTC0 SSDTs**: 300 series intel boards will also need to figure his out(Z390 systems are most common for requiring this but some gigabyte Z370 do as well)
 * **PMC SSDT**: For fixing 300 series intel NVRAM, a prebuilt for `PCI0.LPCB` can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
 * **USBX SSDT**: This is included on sample SSDTs but SSDTTime only makes the SSDT-EC part, Skylake and newer users can grab a prebuilt here: [SSDT-USBX.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX.aml)
@@ -246,7 +246,7 @@ To determine whether you need [SSDT-AWAC](https://github.com/acidanthera/OpenCor
 
 As you can see we found the `STAS` in our DSDT, this means we're able to force enable our Legacy RTC. In this case, [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) will be used As-Is with no modifications required. Just need to compile.
 
-For systems where no `STAS` shows up, you can use [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) though you will need to check whether your DSDT uses `LPCB`, `LBC` or `LBC0`. By default it uses `LPCB`, you can check by just searching for instances of `LPCB`, `LBC` and `LBC0`
+For systems where no `STAS` shows up but you do have `AWAC`, you can use [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) though you will need to check whether your DSDT uses `LPCB`, `LBC` or `LBC0`. By default it uses `LPCB`, you can check by just searching for instances of `LPCB`, `LBC` and `LBC0` in your DSDT
 
 ### PMC SSDT
 
