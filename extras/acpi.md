@@ -1,6 +1,6 @@
 # Getting started with ACPI
 
-Last edited: January 23, 2020
+Last edited: January 30, 2020
 
 ## A quick explainer on ACPI and how to make SSDTs
 
@@ -18,6 +18,11 @@ macOS can be very picky about the devices present in the DSDT and so our job is 
   * This applies to all 300 series motherboards including Z370 boards, the specific issue is that newer boards ship with AWAC clock enabled. This is a problem because macOS cannot communicate with AWAC clocks, so this requires us to either force on the Legacy RTC clock or if unavailable create a fake one for macOS to play with
 * NVRAM SSDT
   * True 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and uses the scope `PCI0.LPCB`, this is the most common scope so a pre-made can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml) or continue reading and make your own.
+
+## What SSDTs do each platform need
+
+Please see the **specific ACPI section of your config.plist**, all SSDTs needed are covered there with a breif explainer.
+
 
 # SSDTs: The easy way
 
