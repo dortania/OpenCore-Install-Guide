@@ -520,7 +520,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="general-troubleshooting">General Troubleshooting</h1>
-<p>Last edited: January 17, 2020</p>
+<p>Last edited: Febuary 1, 2020</p>
 <p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:</p>
 <ul>
 <li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a><ul>
@@ -547,8 +547,10 @@
 <li>Stuck on EndRandomSeed</li>
 <li>Can&apos;t see macOS partitions</li>
 <li>Black screen after picker</li>
+<li>Stuck on <code>OC: OcAppleGenericInput... - Success</code></li>
 <li>Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></li>
 <li>Stuck on <code>OCABC: Memory pool allocation failure - Not Found</code></li>
+<li>Stuck on <code>OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...</code></li>
 <li>Stuck on <code>OC: Driver XXX.efi at 0 cannot be found</code></li>
 <li>Stuck on <code>Buffer Too Small</code></li>
 <li>Stuck on <code>Plist only kext has CFBundleExecutable key</code></li>
@@ -591,6 +593,24 @@
 <ul>
 <li><code>UEFI -&gt; Quriks -&gt; ProvideConsoleGOP</code></li>
 </ul>
+<p>If this doesn&apos;t help, grab the <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">debug versions</a> of <code>OpenCore.efi</code> and <code>BOOTx64.efi</code> and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.</p>
+<h2 id="stuck-on-oc-ocapplegenericinput---success">Stuck on <code>OC: OcAppleGenericInput... - Success</code></h2>
+<p>So this isn&apos;t actually an error, instead OpenCore isn&apos;t showing you all the debug info. This is right before/while the kernel is being loaded so things we need to check for:</p>
+<ul>
+<li>Intel:<ul>
+<li>CFG-Lock disabled in the BIOS <strong>or</strong> <code>AppleCpuPmCfgLock</code> and <code>AppleCpuPmCfgLock</code> enabled under Kernel -&gt; Quirks</li>
+</ul>
+</li>
+<li>AMD:<ul>
+<li>Verify you have added the correct kernel patches to your config(remember, OpenCore patches use <code>MinKernel</code> and <code>MaxKernel</code> while Clover has <code>MatchOS</code>)<ul>
+<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip" target="_blank">Ryzen/Threadripper(17h)</a></li>
+<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip" target="_blank">Bulldozer/Jaguar(15h/16h)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>If this doesn&apos;t help, grab the <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">debug versions</a> of <code>OpenCore.efi</code> and <code>BOOTx64.efi</code> and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.</p>
 <h2 id="stuck-on-ocb-ocscanforbootentries-failure---not-found">Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></h2>
 <p>This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to <code>0</code> will allow all boot options to be shown</p>
 <ul>
@@ -602,6 +622,8 @@
 <li>Above4GDecoding is Enabled</li>
 <li>CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)</li>
 </ul>
+<h2 id="stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters">Stuck on <code>OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...</code></h2>
+<p>This is due to either using a Clover config with OpenCore or using a configurator such as Mackie&apos;s Clover and OpenCore configurator. You&apos;ll need to start over and make a new config or figure out all the garbage you need to remove from your config. <strong>This is why we don&apos;t support configurators, they are known for these issues</strong></p>
 <h2 id="stuck-on-oc-driver-xxxefi-at-0-cannot-be-found">Stuck on <code>OC: Driver XXX.efi at 0 cannot be found</code></h2>
 <p>Verify that your EFI/OC/Drivers matches up with your config.plist -&gt; UEFi -&gt; Drivers</p>
 <h2 id="stuck-on-buffer-too-small">Stuck on <code>Buffer Too Small</code></h2>
@@ -674,7 +696,7 @@
 *     Compiler ID      &quot;INTL&quot;
 *     Compiler Version 0x20190509 (538510601)
 </code></pre><p>The <code>Length</code> and <code>checksum</code> value is what we care about, so if our SSDT is actually 347 bytes then we want to change <code>Length</code> to <code>0x0000015B (347)</code>(the <code>015B</code> is in HEX)</p>
-<p>But how the hell do we calculate our Checksum? Well checking the <a href="https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf" target="_blank">ACPI docs 5-27</a>, we can see this:</p>
+<p>Best way to actually fix this is to grab a newer copy of iASL or Acidanthera&apos;s copy of <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">maciASL</a> and remaking the SSDT</p>
 <h2 id="booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</h2>
 <ul>
 <li>Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)</li>
@@ -853,10 +875,10 @@
 <p>Add <a href="https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/" target="_blank">MacProMemoryNotificationDisabler kext</a> to EFI/OC/Kexts and <code>Kernel -&gt; Add</code></p>
 <h2 id="apps-crashing-on-amd">Apps crashing on AMD</h2>
 <p><del>Easy fix, buy Intel</del></p>
-<p>So with AMD, whenever Apple calls CPU specific functions the app withh either not work or outright crash. Here are some apps and their &quot;fixes&quot;:</p>
+<p>So with AMD, whenever Apple calls CPU specific functions the app witll either not work or outright crash. Here are some apps and their &quot;fixes&quot;:</p>
 <ul>
 <li>Adobe Products don&apos;t always work and there is no fix for lightroom at the moment<ul>
-<li>some fixes can be found here: <a href="https://adobe.amd-osx.com/" target="_blank">Adobe Fixes</a></li>
+<li>Some fixes can be found here: <a href="https://adobe.amd-osx.com/" target="_blank">Adobe Fixes</a></li>
 <li>Do note these fixes just disable functionality, they&apos;re not real fixes</li>
 </ul>
 </li>
@@ -971,7 +993,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-01-30T23:46:09.807Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-30T23:46:56.525Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-02-01T17:49:46.600Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-01T17:50:30.827Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

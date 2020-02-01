@@ -13,10 +13,10 @@ See [Kexts and Firmware drivers](https://github.com/khronokernel/Opencore-Vanill
 **ACPI Renames**:
 
 So with the transition from Clover to OpenCore we should start removing unneeded patches you may have carried along for some time:
-* EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not need this.
+* EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
    * change EHC1 to EH01
    * change EHC2 to EH02
-* XHCI Patches: Just not needed anymore
+* XHCI Patches: Not needed anymore, recommended to make an [Injector kext](https://github.com/corpnewt/USBMap) instead
    * change XHCI to XHC
    * change XHC1 to XHC
 * SATA patches: Purely cosmetic in macOS now
@@ -26,7 +26,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * change MEI to IMEI
 * GFX patches: Handled by WhateverGreen
    * change GFX0 to IGPU
-* EC Patches: Desktops should be powering off their ECs and making a fake one, [SSDTTime](https://github.com/corpnewt/SSDTTime) can do this for you
+   * change PEG0 to GFX0
+* EC Patches: See here on best solution: [Fixing Embedded Controllers](https://khronokernel.github.io/EC-fix-guide/)
    * change EC0 to EC
    * change H_EC to EC
    * change ECDV to EC
@@ -36,7 +37,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **Fixes**:
 
 * **FixIPIC**:
-   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
 * **FixSBUS**:
    * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
@@ -55,7 +56,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * **FixHDA**:
    * Handled by AppleALC
 * **FixHPET**:
-   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 * **FixSATA**:
    * `Kernel -> Quriks -> ExternalDiskIcons -> YES`
 
@@ -63,9 +64,9 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * Renames device AC0 to ADP1, see [Rename-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
 
 * **FixRTC**:
-   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 * **FixTMR**:
-   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT
+   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
 * **AddPNLF**:
    * See Rehabman's [SSDT-PNLF](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl)
@@ -81,7 +82,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **SSDT**:
 * **PluginType**:
    * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-   * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this
+   * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this though HEDT systems will need to manually make theirs. See [Getting started with ACPI](../extras/acpi.md) for more details
 # Boot
 
 **Boot Argument**
@@ -239,7 +240,7 @@ Skip: 0
 ```
 [Source](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/issues/32)
 
-For Low end Haswell+ like Celerons, please see here for recommended patches: [](https://github.com/acidanthera/bugtracker/issues/365)
+For Low end Haswell+ like Celerons, please see here for recommended patches: [Bugtracker Issues 365](https://github.com/acidanthera/bugtracker/issues/365)
 
 **USB Port Limit Patches**:
 * `Kernel -> Quirks -> XhciPortLimit -> YES`
@@ -254,11 +255,15 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [](
 
 |Enabled|String|YES|
 |:-|:-|:-|
+|Comment|String|Disable RTC checksum update on poweroff|
 |Count|Number|1|
+|Base|String|__ZN8AppleRTC14updateChecksumEv|
 |Identifier|String|com.apple.driver.AppleRTC|
-|Limit|Nuber|0|
-|Find|Data|75330fb7|
-|Replace|Data|eb330fb7|
+|Limit|Number|0|
+|Find|Data||
+|Replace|Data|c3|
+
+Alternative would be to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup)
 
 
 # Rt Variables
