@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-Last edited: January 17, 2020
+Last edited: Febuary 1, 2020
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
@@ -22,8 +22,10 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * Stuck on EndRandomSeed
 * Can't see macOS partitions
 * Black screen after picker
+* Stuck on `OC: OcAppleGenericInput... - Success`
 * Stuck on `OCB: OcScanForBootEntries failure - Not Found`
 * Stuck on `OCABC: Memory pool allocation failure - Not Found`
+* Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`
 * Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 * Stuck on `Buffer Too Small`
 * Stuck on `Plist only kext has CFBundleExecutable key`
@@ -73,6 +75,21 @@ Main things to check:
 This is due to missing ConsoleGOP, enable it under your config:
 * `UEFI -> Quriks -> ProvideConsoleGOP`
 
+If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
+
+## Stuck on `OC: OcAppleGenericInput... - Success` 
+
+So this isn't actually an error, instead OpenCore isn't showing you all the debug info. This is right before/while the kernel is being loaded so things we need to check for:
+
+* Intel:
+   * CFG-Lock disabled in the BIOS **or** `AppleCpuPmCfgLock` and `AppleCpuPmCfgLock` enabled under Kernel -> Quirks
+* AMD:
+   * Verify you have added the correct kernel patches to your config(remember, OpenCore patches use `MinKernel` and `MaxKernel` while Clover has `MatchOS`)
+      * [Ryzen/Threadripper(17h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip)
+      * [Bulldozer/Jaguar(15h/16h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip)
+
+If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
+
 ## Stuck on `OCB: OcScanForBootEntries failure - Not Found`
 
 This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
@@ -84,6 +101,10 @@ This is due to either incorrect BIOS settings and/or incorrect Booter values. Ma
 
 * Above4GDecoding is Enabled
 * CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
+
+## Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`
+
+This is due to either using a Clover config with OpenCore or using a configurator such as Mackie's Clover and OpenCore configurator. You'll need to start over and make a new config or figure out all the garbage you need to remove from your config. **This is why we don't support configurators, they are known for these issues**
 
 ## Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 
@@ -170,8 +191,7 @@ So with Opencore, there's some extra secuirty checks added around ACPI files, sp
 
 The `Length` and `checksum` value is what we care about, so if our SSDT is actually 347 bytes then we want to change `Length` to `0x0000015B (347)`(the `015B` is in HEX)
 
-But how the hell do we calculate our Checksum? Well checking the [ACPI docs 5-27](https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf), we can see this:
-
+Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's copy of [maciASL](https://github.com/acidanthera/MaciASL/releases) and remaking the SSDT
 
 ## Booting OpenCore reboots to BIOS
 
@@ -359,10 +379,10 @@ Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemo
 
 ~~Easy fix, buy Intel~~
 
-So with AMD, whenever Apple calls CPU specific functions the app withh either not work or outright crash. Here are some apps and their "fixes":
+So with AMD, whenever Apple calls CPU specific functions the app witll either not work or outright crash. Here are some apps and their "fixes":
 
 * Adobe Products don't always work and there is no fix for lightroom at the moment
-   * some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
+   * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
    * Do note these fixes just disable functionality, they're not real fixes
 * Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
    * VirtualBox works fine as its Java based

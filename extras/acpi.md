@@ -245,7 +245,7 @@ So for this X299 board, we'd change `\_PR.CPU0` with `\_SB.SCK0.CP00` and `Exter
 
 What the [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) will do is force enable the Legacy RTC device in macOS, the reason we want to do this is that macOS currently does not support AWAC as a system clock. In some rare cases, there is no Legacy RTC device to force enable so we'll need to create a fake RTC device for macOS to play with using [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl)
 
-To determine whether you need [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) or [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl), open your decompiled DSDT and search for `Device (AWAC)`. If you get a result then you have an `AWAC` system clock present, if nothing shows then no need to continue and no need for this SSDT. Otherwise, continue with the next search for `STAS ==`:
+To determine whether you need [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) or [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl), open your decompiled DSDT and search for `Device (AWAC)`. If you get a result then you have an `AWAC` system clock present, **if nothing shows then no need to continue and no need for this SSDT**. Otherwise, continue with the next search for `STAS ==`:
 
 ![](https://i.imgur.com/uuUF857.png)
 
