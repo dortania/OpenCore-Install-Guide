@@ -1,3 +1,14 @@
+# To-do list
+
+0.5.5 Changes:
+
+* Remove NullCPUPowerManagement.kext
+* Add DummyPowerManagement
+* Replace SupportsCsm with AdviseWindows
+* Add TakeoffDelay
+* Add BuiltinTextRenderer
+
+
 0.5.4 Changes:
 
 * ~~Remove all mentions of VirtualSMC.efi~~
