@@ -5,7 +5,7 @@ Last edited: January 13, 2020
 So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
 
 * ScanPolicy
-* Vault(work in progress)
+* Vault
 
 ## FileVault Setup
 
@@ -113,17 +113,47 @@ And converting this to decimal gives us `3,080,451`
 
 ## Vault
 
-**Work in progress**
+**What is vaulting?**
 
-What is vaulting? Well vaulting is based around 2 things, vault.plist and vault.sig:
+Well vaulting is based around 2 things, vault.plist and vault.sig:
 
 * vault.plist: a "snapshot" of your EFI
 * vault.sig: validation of vault.plist
 
-Do note that nvram.plist won't be vaulted
+This can be seen as secureboot for OpenCore, so no one can modify it and get in without your permission. 
 
-Setting in your config.plist:
+The specifics of vaulting is that a 256 byte RSA-2048 signature of vault.plist will be shoved into our OpenCore.efi. This key can either be shoved into [OpenCoreVault.c](https://github.com/acidanthera/OpenCorePkg/blob/master/Platform/OpenCore/OpenCoreVault.c) before compiling or with `sign.command` if you already have OpenCore.efi compiled.
 
-* `RequireSignature` set to YES
-* `RequireVault` set to YES
+Do note that nvram.plist won't be vaulted so users with emulated NVRAM still have risk of someone adding/removing certain NVRAM variables
 
+**Settings in your config.plist**:
+
+* `Misc -> Secuirty -> RequireSignature` set to True
+* `Misc -> Secuirty -> RequireVault` set to True
+
+**Setting up vault**:
+
+Grab OpenCorePkg and open the `CreateVault` folder, inside we'll find the following:
+
+* `create_vault.sh`
+* `RsaTool`
+* `sign.command`
+
+The last one is what we care about: `sign.command`
+
+So when we run this command, it'll look for the EFI folder located beside our Utilities folder, so we want to bring either our personal EFI into the OpenCorePkg folder or bring Utilities into our EFI folder:
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/673348313814401044/Screen_Shot_2020-02-01_at_7.05.29_PM.png)
+
+Now we're ready to run `sign.command`: 
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/673348777897099274/Screen_Shot_2020-02-01_at_7.07.28_PM.png)
+
+
+**Disabling Vault after setup**:
+
+If you're doing heavy troublehooting or have the need to disable Vault, the main things to change:
+
+* Grab a new copy of OpenCore.efi
+* `Misc -> Secuirty -> RequireSignature` set to False
+* `Misc -> Secuirty -> RequireVault` set to False
