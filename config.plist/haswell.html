@@ -520,7 +520,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="haswell">Haswell</h1>
-<p>Last edited: January 27, 2020</p>
+<p>Last edited: Febuary 3, 2020</p>
 <h2 id="starting-point">Starting Point</h2>
 <p>You&apos;ll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> and we can get to work. <strong>Reminder configurators are not supported, most are out of date with the OpenCore spec and some like Mackie&apos;s will even add clover sections and corrupt plists. You are on your own if you use such tools</strong></p>
 <p>Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).</p>
@@ -751,6 +751,10 @@
 <li>Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to <code>dart=0</code> as SIP can stay on in Catalina</li>
 </ul>
 </li>
+<li><strong>DummyPowerManagement</strong>: NO<ul>
+<li>New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there&apos;s no native power management. Intel can ignore</li>
+</ul>
+</li>
 <li><strong>ExternalDiskIcons</strong>: YES <ul>
 <li>External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.</li>
 </ul>
@@ -810,6 +814,10 @@
 </li>
 <li><strong>ShowPicker</strong>: YES<ul>
 <li>Shows OpenCore&apos;s UI, needed for seeing your available drives or set to NO to follow default option</li>
+</ul>
+</li>
+<li><strong>TakeoffDelay</strong>: <code>0</code><ul>
+<li>Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support</li>
 </ul>
 </li>
 <li><strong>UsePicker</strong>: YES<ul>
@@ -991,9 +999,9 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 <li>Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case</li>
 </ul>
 </li>
-<li><p><strong>SupportsCsm</strong>: NO</p>
+<li><p><strong>AdviseWindows</strong>: NO</p>
 <ul>
-<li><p>Used for when the EFI partition isn&apos;t first on the windows drive</p>
+<li><p>Used for when the EFI partition isn&apos;t first on the windows drive, generally found on systems that upgraded from Legacy to UEFI installs</p>
 <p><strong>UpdateDataHub</strong>: YES</p>
 </li>
 </ul>
@@ -1213,7 +1221,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-02-03T04:58:34.496Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-03T04:59:22.167Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-02-03T17:29:55.136Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-03T17:30:46.013Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

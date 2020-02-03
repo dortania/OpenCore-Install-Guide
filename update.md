@@ -2,11 +2,10 @@
 
 0.5.5 Changes:
 
-* Remove NullCPUPowerManagement.kext
-* Add DummyPowerManagement
-* Replace SupportsCsm with AdviseWindows
-* Add TakeoffDelay
-* Add BuiltinTextRenderer
+* ~~Remove NullCPUPowerManagement.kext~~
+* ~~Add DummyPowerManagement~~
+* ~~Replace SupportsCsm with AdviseWindows~~
+* ~~Add TakeoffDelay~~
 
 
 0.5.4 Changes:
