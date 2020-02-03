@@ -1,6 +1,6 @@
 # Skylake
 
-Last edited: January 27, 2020
+Last edited: Febuary 3, 2020
 
 ## Starting Point
 
@@ -174,6 +174,8 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIOMapper**: YES 
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DummyPowerManagement**: NO
+  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
 * **ExternalDiskIcons**: YES 
   * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **IncreasePciBarSize**: NO
@@ -212,6 +214,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 * **ShowPicker**: YES
   * Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
+* **TakeoffDelay**: `0`
+  * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support
 * **UsePicker**: YES
   * Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
@@ -353,8 +357,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
-* **SupportsCsm**: NO
-  * Used for when the EFI partition isn't first on the windows drive
+* **AdviseWindows**: NO
+   * Used for when the EFI partition isn't first on the windows drive, generally found on systems that upgraded from Legacy to UEFI installs
 
 **UpdateDataHub**: YES
 

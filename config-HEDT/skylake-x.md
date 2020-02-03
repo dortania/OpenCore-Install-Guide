@@ -1,6 +1,6 @@
 # Skylake-X
 
-Last edited: January 27, 2020
+Last edited: Febuary 3, 2020
 
 ## Starting Point
 
@@ -150,6 +150,8 @@ TL;DR, delete the PCIRoot's here as we won't be using this section.
    * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIOMapper**: YES 
    * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DummyPowerManagement**: NO
+   * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
 * **ExternalDiskIcons**: YES 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **IncreasePciBarSize**: NO
@@ -187,6 +189,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * This sets how long OpenCore will wait until it automatically boots from the default selection
 * **ShowPicker**: YES
    * Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
+* **TakeoffDelay**: `0`
+   * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support
 * **UsePicker**: YES
    * Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
