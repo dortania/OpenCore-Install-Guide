@@ -79,8 +79,8 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: NO
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values
+* **DevirtualiseMmio**: YES
+  * Reduces Stolen Memory Footprint, expands options for `slide=N` values, very helpful with fixing Memory Allocation issues on Z390
 * **DisableSingleUser**: NO
   * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -183,9 +183,9 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 **Quirks**:
 
-* **AppleCpuPmCfgLock**: NO 
+* **AppleCpuPmCfgLock**: YES 
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
-* **AppleXcpmCfgLock**: NO 
+* **AppleXcpmCfgLock**: YES 
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmExtraMsrs**: NO 
   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons

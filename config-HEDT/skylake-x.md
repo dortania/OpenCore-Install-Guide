@@ -138,9 +138,9 @@ TL;DR, delete the PCIRoot's here as we won't be using this section.
 
 **Quirks**:
 
-* **AppleCpuPmCfgLock**: NO 
+* **AppleCpuPmCfgLock**: YES 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
-* **AppleXcpmCfgLock**: NO 
+* **AppleXcpmCfgLock**: YES 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmExtraMsrs**: NO 
    * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Skylake-X can ignore
