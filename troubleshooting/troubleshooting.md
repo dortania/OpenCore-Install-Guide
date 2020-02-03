@@ -236,9 +236,15 @@ Well this general area is where a lot of PCI devices are configured, and is wher
 
 ## macOS installer in Russian
 
-Default sample config is in russian, check your prev-lang:kbd value under NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+Default sample config is in russian because slavs rule the Hackintosh world, check your prev-lang:kbd value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
 You may also need to reset NVRAM in the boot picker as well
+
+Still didn't work? Well time for the big guns. We'll force remove that exact property and let OpenCore rebuild it:
+
+`NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/673947840791445538/Screen_Shot_2020-02-03_at_10.47.40_AM.png)
 
 ## Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 
