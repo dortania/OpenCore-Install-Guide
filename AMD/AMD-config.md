@@ -152,8 +152,8 @@ Kernel patches:
 
 To merge:
 * Open both files, 
-* Delete the `Patch` section from config.plist
-* Copy the `Patch` section from patches.plist
+* Delete the `Kernel -> Patch` section from config.plist
+* Copy the `Kernel -> Patch` section from patches.plist
 * Paste into where old patches were in config.plist
 
 ![](/extra-files/gif.gif)

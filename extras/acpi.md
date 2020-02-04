@@ -32,7 +32,7 @@ What this tool does is dumps your DSDT from your firmware, and then creates SSDT
 
 So what **can't** SSDTTime do?:
 
-* **Skylake-X/SP/W(X299, C621, C422) SSDTs**: The ACPI is odd on these platforms so manual work is required
+* **HEDT SSDTs**: The ACPI is odd on these platforms so manual work is required
 * **AWAC and RTC0 SSDTs**: 300 series intel boards will also need to figure his out(Z390 systems are most common for requiring this but some gigabyte Z370 do as well)
 * **PMC SSDT**: For fixing 300 series intel NVRAM, a prebuilt for `PCI0.LPCB` can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
 * **USBX SSDT**: This is included on sample SSDTs but SSDTTime only makes the SSDT-EC part, Skylake and newer users can grab a prebuilt here: [SSDT-USBX.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-USBX.aml)
@@ -189,7 +189,14 @@ When this happens you need to figure out which is the main and which is not, it'
 
 > What happens if no `PNP0C09` show up?
 
-This means your SSDT can be *almost* complied, the main thing to watch for is whether your DSDT uses `PCI0.LPCB` or not. The reason being is that we have a FakeEC at the bottom of our SSDT that needs to connect properly into our DSDT. Gernally AMD uses `SBRG` while Intel HEDT use `LPC0`, **verify which show up in your DSDT**. Once you find out, change `PCI0.LPCB` to your correct path:
+This means your SSDT can be *almost* complied, the main thing to watch for is whether your DSDT uses `PCI0.LPCB` or not. The reason being is that we have a FakeEC at the bottom of our SSDT that needs to connect properly into our DSDT. Gernally AMD uses `SBRG` while Intel HEDT use `LPC0`, **verify which show up in your DSDT**.
+
+You can check by just searching for `Name (_ADR, 0x001F0000)`(this only works for Intel, AMD users should assume `SBRG`). This address is used for Low Pin Count devices(LPC) but the device name can vary between `LPCB`, `LBC` or `LBC0`. Just search each one in your config and which ever shows up is the one your system uses
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/670148514197667840/Screen_Shot_2020-01-23_at_11.08.30_PM.png)
+
+
+Once you find out, change `PCI0.LPCB` to your correct path:
 
 ```text
 Scope (\_SB.PCI0.LPCB)
@@ -251,7 +258,11 @@ To determine whether you need [SSDT-AWAC](https://github.com/acidanthera/OpenCor
 
 As you can see we found the `STAS ==` in our DSDT, this means we're able to force enable our Legacy RTC. In this case, [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) will be used As-Is with no modifications required. Just need to compile.
 
-For systems where no `STAS` shows up but you do have `AWAC`, you can use [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) though you will need to check whether your DSDT uses `LPCB`, `LBC` or `LBC0`. By default it uses `LPCB`, you can check by just searching for instances of `LPCB`, `LBC` and `LBC0` in your DSDT
+For systems where no `STAS` shows up but you do have `AWAC`, you can use [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) though you will need to check whether your DSDT uses `LPCB`, `LBC` or `LBC0`. 
+
+By default it uses `LPCB`, you can check by just searching for `Name (_ADR, 0x001F0000)`. This address is used for Low Pin Count devices(LPC) but the device name can vary between `LPCB`, `LBC` or `LBC0`. Just search each one in your config and which ever shows up is the one your system uses
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/670148514197667840/Screen_Shot_2020-01-23_at_11.08.30_PM.png)
 
 ### PMC SSDT
 
