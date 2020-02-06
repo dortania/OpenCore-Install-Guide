@@ -93,7 +93,7 @@ If this doesn't help, grab the [debug versions](https://github.com/acidanthera/O
 ## Stuck on `OCB: OcScanForBootEntries failure - Not Found`
 
 This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
-* `Misc -> Secuirty -> ScanPolicy -> 0`
+* `Misc -> Security -> ScanPolicy -> 0`
 
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
 
