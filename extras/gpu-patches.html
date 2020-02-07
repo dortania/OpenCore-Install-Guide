@@ -520,72 +520,14 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="gpu-patching">GPU Patching</h1>
-<p>Last edited: January 13, 2020</p>
+<p>Last edited: Febuary 6, 2020</p>
 <p>This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen&apos;s autopatches:</p>
 <ul>
-<li><a href="gpu-patches.html#Converting-a-clover-fakeID-to-OpenCore">Applying a fakeID for unsupported GPUs</a></li>
+<li><a href="https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/spoof.html" target="_blank">Applying a fakeID for unsupported GPUs</a></li>
 <li><a href="gpu-patches.html#iGPU-BusID-Patching">iGPU BusID patching for 300 series motherboards</a></li>
 </ul>
 <h1 id="converting-a-clover-fakeid-to-opencore">Converting a clover fakeID to OpenCore</h1>
-<p>With OpenCore, GPU FakeIDs are handled a bit differently. Specifcally that you need to have the PCIRoot path to apply the properties. Luckily FakeIDs are not required to boot, instead only needed for proper GPU acceleration so this can be done in post-install.</p>
-<h3 id="finding-the-pciroot-of-your-gpu">Finding the PCIRoot of your GPU</h3>
-<p>To find the PCIRoot, you&apos;ll want to grab gfxutil and run the following in terminal:</p>
-<pre><code class="lang-text">path/to/gfxutil -f GFX0
-</code></pre>
-<p>This should give you something like this:</p>
-<pre><code class="lang-text">PciRoot(0x20)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
-</code></pre>
-<p>Note: GFX0 can be replaced with GFX1, etc if the GPU you&apos;re fakeIDing isn&apos;t the first/main GPU. And machine running with CSM enabled and Windows8.1/10 mode(UEFI) disabled may find that the GPU is named <code>display</code> so adjust the above command accodingly.</p>
-<h3 id="apply-the-fakeid">Apply the fakeID</h3>
-<p>So lets grab a clover fakeID and go through how we&apos;d convert it, for use we&apos;ll choose <code>0x67981002</code> which is the ID associated with the R9 280x and is commonly used by R9 280/380 users.</p>
-<p>Looking through clover&apos;s source code we find that fakeIDs are converted into the following properties:</p>
-<p>AMD GPUs:</p>
-<pre><code class="lang-text">device-id
-ATY,DeviceID
-@0,compatible
-vendor-id
-ATY,VendorID
-</code></pre>
-<p>To convert them, we&apos;ll need to do byte swap. This is due to Endianness:</p>
-<ul>
-<li>DeviceID: 67 98 -&gt; 98 67</li>
-<li>VendorID: 1002 -&gt; 02 10</li>
-</ul>
-<p>Now we can apply the properties:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Key</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">device-id</td>
-<td style="text-align:left">Data</td>
-<td style="text-align:left">98670000</td>
-</tr>
-<tr>
-<td style="text-align:left">ATY,DeviceID</td>
-<td style="text-align:left">Data</td>
-<td style="text-align:left">9867</td>
-</tr>
-<tr>
-<td style="text-align:left">vendor-id</td>
-<td style="text-align:left">Data</td>
-<td style="text-align:left">02100000</td>
-</tr>
-<tr>
-<td style="text-align:left">ATY,VendorID</td>
-<td style="text-align:left">Data</td>
-<td style="text-align:left">0210</td>
-</tr>
-</tbody>
-</table>
-<p>You may notice we excluded <code>@0,compatible</code>, the reasoning for this is thatit actually interferes with WhateverGreen and macOS&apos;s ability to properly setup the GPU. See <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md" target="_blank">here</a> for more info.</p>
-<p>Now navigate into your config.plist under DeviceProperties -&gt; Add where you can apply these properties:</p>
-<p><img src="https://i.imgur.com/e7UYS75.png" alt=""></p>
+<p>Guide moved here: <a href="https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/spoof.html" target="_blank">Renaming GPUs</a></p>
 <h1 id="igpu-busid-patching">iGPU BusID Patching</h1>
 <p>This section is for users running &quot;true&quot; 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.</p>
 <p>So to get started I&apos;ll assume you&apos;ve already done basic framebuffer patches in your config from the <a href="../config.plist/coffee-lake.html">Coffeelake portion of the guide</a>, it should look something like this:</p>
@@ -730,7 +672,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"GPU Patching","level":"7.2","depth":1,"next":{"title":"Getting started with ACPI","level":"7.3","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-02-07T03:42:04.630Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-07T03:42:55.870Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"GPU Patching","level":"7.2","depth":1,"next":{"title":"Getting started with ACPI","level":"7.3","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-02-07T06:38:43.124Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-07T06:39:29.190Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1,6 +1,6 @@
 # Converting common properties from Clover to Opencore
 
-Last edited: January 27, 2020
+Last edited: Febuary 6, 2020
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -192,6 +192,8 @@ device_type: XHCI
 * `@0,compatible`
 * `vendor-id`
 * `ATY,VendorID`
+
+Note: See here on making an SSDT for GPU Spoofing: [Renaming GPUs](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 
 **RadeonDeInit**:
 * [Radeon-Denit-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
