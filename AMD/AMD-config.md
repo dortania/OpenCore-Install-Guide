@@ -112,9 +112,9 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 **Add**: Sets device properties from a map.
 
-By default, the sample.plist has this section set for iGPU and audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x1b,0x0)` can be removed, and for audio we'll be setting that up in the boot-args section. So we can also remove `PciRoot(0x0)/Pci(0x1b,0x0)`
+By default, the Sample.plist has this section set for iGPU and audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x1b,0x0)` can be removed from both the `Add` and the `Block` sections. For audio we'll be setting the layout in the boot-args section.
 
-TL;DR, delete the PCIRoot's here as we won't be using this section.
+TL;DR, delete all the PCIRoot's here as we won't be using this section.
 
 ## Kernel
 
