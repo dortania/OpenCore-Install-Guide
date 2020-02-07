@@ -29,6 +29,7 @@ This is where you'll add SSDT patches for your system, these are most useful for
    * This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.
    * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
  
+Note that you should not add your generated `DSDT.aml` here. It is already in your firmware. So remove the entry for it in your `config.plist`.
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension\(Assembled\) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
