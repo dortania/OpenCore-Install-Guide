@@ -14,7 +14,7 @@
 * ~~Add info for FileVault, AppleSmcIo~~
    * ~~Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi~~
 * ~~Add AuthRestart info~~
-   * ~~Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional~~
+   * ~~Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional~~
 * ~~AllowSetDefault~~
    * Allow CTRL+Enter and CTRL+Index to set default boot device in the picker
 * ~~Add SupportsCsm info for Windows~~

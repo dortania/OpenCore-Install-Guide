@@ -212,7 +212,7 @@ These values are based of those calculated in [OpenCore debugging](/troubleshoot
 * **AllowSetDefault**: YES
    * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO:
-   * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional
+   * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional
 * **ExposeSensitiveData**: `6`
    * Shows more debug information, requires debug version of OpenCore
 * **RequireSignature**: NO
@@ -267,7 +267,7 @@ csr-active-config is set to `00000000` which enables System Integrity Protection
 * `30000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 
-Recommended to leave enabled for best secuirty practices
+Recommended to leave enabled for best security practices
 
 * **nvda\_drv**: &lt;&gt; 
    * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD and Intel users should leave this area blank.**
