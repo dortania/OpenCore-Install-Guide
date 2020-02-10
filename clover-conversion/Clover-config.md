@@ -193,11 +193,11 @@ device_type: XHCI
 * `vendor-id`
 * `ATY,VendorID`
 
-Note: See here on making an SSDT for GPU Spoofing: [Renaming GPUs](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
+**Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seem to fail when trying to spoof a GPU: [Renaming GPUs](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 
 **RadeonDeInit**:
 * [Radeon-Denit-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
-   * Do note that this is meant for gfx0, adjust for your system
+   * Do note that this is meant for GFX0, adjust for your system
 
 # Kernel and Kext Patches
 
