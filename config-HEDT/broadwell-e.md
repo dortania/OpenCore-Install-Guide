@@ -442,7 +442,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Thunderbolt
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock\(MSR 0xE2 write protection\)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleCpuPmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+* CFG Lock\(MSR 0xE2 write protection\)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
 
 **Enable:**
 
