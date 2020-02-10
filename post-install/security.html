@@ -542,7 +542,7 @@
 </ul>
 </li>
 <li>Misc -&gt; Security<ul>
-<li><code>AuthRestart</code> set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional)</li>
+<li><code>AuthRestart</code> set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional)</li>
 </ul>
 </li>
 <li>NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14<ul>
@@ -647,8 +647,8 @@
 <p>Do note that nvram.plist won&apos;t be vaulted so users with emulated NVRAM still have risk of someone adding/removing certain NVRAM variables</p>
 <p><strong>Settings in your config.plist</strong>:</p>
 <ul>
-<li><code>Misc -&gt; Secuirty -&gt; RequireSignature</code> set to True</li>
-<li><code>Misc -&gt; Secuirty -&gt; RequireVault</code> set to True</li>
+<li><code>Misc -&gt; Security -&gt; RequireSignature</code> set to True</li>
+<li><code>Misc -&gt; Security -&gt; RequireVault</code> set to True</li>
 </ul>
 <p><strong>Setting up vault</strong>:</p>
 <p>Grab OpenCorePkg and open the <code>CreateVault</code> folder, inside we&apos;ll find the following:</p>
@@ -666,8 +666,8 @@
 <p>If you&apos;re doing heavy troublehooting or have the need to disable Vault, the main things to change:</p>
 <ul>
 <li>Grab a new copy of OpenCore.efi</li>
-<li><code>Misc -&gt; Secuirty -&gt; RequireSignature</code> set to False</li>
-<li><code>Misc -&gt; Secuirty -&gt; RequireVault</code> set to False</li>
+<li><code>Misc -&gt; Security -&gt; RequireSignature</code> set to False</li>
+<li><code>Misc -&gt; Security -&gt; RequireVault</code> set to False</li>
 </ul>
 
                                 
@@ -712,7 +712,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.3","depth":1,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"previous":{"title":"Disabling GPU","level":"5.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-02-10T01:42:44.868Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-10T01:43:31.421Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.3","depth":1,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"previous":{"title":"Disabling GPU","level":"5.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-02-10T17:43:51.037Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-10T17:44:34.618Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
