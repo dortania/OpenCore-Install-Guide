@@ -21,7 +21,7 @@ Setting in your config.plist:
 * Misc -&gt; Boot 
   * `PollAppleHotKeys` set to YES(While not needed can be helpfu\)
 * Misc -&gt; Security
-  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a secuirty risk so optional)
+  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional)
 * NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
 * UEFI -&gt; Input
@@ -128,8 +128,8 @@ Do note that nvram.plist won't be vaulted so users with emulated NVRAM still hav
 
 **Settings in your config.plist**:
 
-* `Misc -> Secuirty -> RequireSignature` set to True
-* `Misc -> Secuirty -> RequireVault` set to True
+* `Misc -> Security -> RequireSignature` set to True
+* `Misc -> Security -> RequireVault` set to True
 
 **Setting up vault**:
 
@@ -155,5 +155,5 @@ Now we're ready to run `sign.command`:
 If you're doing heavy troublehooting or have the need to disable Vault, the main things to change:
 
 * Grab a new copy of OpenCore.efi
-* `Misc -> Secuirty -> RequireSignature` set to False
-* `Misc -> Secuirty -> RequireVault` set to False
+* `Misc -> Security -> RequireSignature` set to False
+* `Misc -> Security -> RequireVault` set to False

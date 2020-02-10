@@ -174,7 +174,7 @@ See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanil
 
 ## SSDTs not being added
 
-So with Opencore, there's some extra secuirty checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:
+So with Opencore, there's some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:
 
 ```
 * Original Table Header:
