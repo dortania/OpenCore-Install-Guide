@@ -76,7 +76,7 @@ Main things to check:
 ## Black screen after picker
 
 This is due to missing ConsoleGOP, enable it under your config:
-* `UEFI -> Quriks -> ProvideConsoleGOP`
+* `UEFI -> Quirks -> ProvideConsoleGOP`
 
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 
@@ -280,7 +280,7 @@ With macOS catalina, dual socket support is broken, and a fun fact about AMD fir
 
 ## Kernel Panic `AppleIntelCPUPowerManagement`
 
-This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quriks`
+This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quirks`
 
 ## Stop Sign with corrupted text(Still waiting for Root Device)
 
