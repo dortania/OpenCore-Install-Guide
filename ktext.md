@@ -1,5 +1,5 @@
 # Gathering files
-Last edited: January 30, 2020
+Last edited: Febuary 11, 2020
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -89,6 +89,8 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.10 or older
+    
+The order in `Kernel -> Add` should be: BrcmBluetoothInjector -> BrcmFirmwareData -> BrcmPatchRAM3
 
 **AMD CPU Specific kexts**:
 

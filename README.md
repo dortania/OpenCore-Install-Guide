@@ -1,5 +1,5 @@
 # Introduction
-Last edited: January 26, 2020
+Last edited: Febuary 11, 2020
 * [GitHub Pages link with Darkmode support](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
 
 ### About
@@ -10,9 +10,7 @@ Please remember that OpenCore is still new and currently in beta. Unless you wan
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
-For AMD users having troubles follow the guide can see Snazzy's guide:
-
-[**Snazzy Labs Opencore Guide**](https://www.youtube.com/watch?v=l_QPLl81GrY)
+**This guide supports 0.5.5**, newer versions will require you to read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf). Guide will be updated soon after each [OpenCore release](https://github.com/acidanthera/OpenCorePkg/releases)
 
 ### Advantages of OpenCore
 

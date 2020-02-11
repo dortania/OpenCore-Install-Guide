@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-Last edited: Febuary 1, 2020
+Last edited: Febuary 11, 2020
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
@@ -15,6 +15,7 @@ This section is for those having issues booting either OpenCore, macOS or having
 
 While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion) for more info
 
+**And if your issue is not covered, please read the offical OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**
 
 # OpenCore booting
 
@@ -41,12 +42,12 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 ## Stuck on `no vault provided!`
 
-Turn the following off under `Misc -> Security`:
+Turn the following off in your config.plist under `Misc -> Security`:
 
 * `RequireSignature`
 * `RequireVault`
 
-If you have already executed the commands listed in the [OpenCore Reference Manual](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) under **8.5 Security Properties**, `5. RequireVault`, you'll need to restore your `OpenCore.efi` file.
+If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
 ## Stuck on EndRandomSeed
 
@@ -356,13 +357,16 @@ Issue with AppleRTC, quite a simple fix:
 
 * Under `Kernel -> patch`:
 
-| Enabled | String | YES |
+| Key | Type | Value |
 | :--- | :--- | :--- |
-| Count | Number | 1 |
-| Identifier | String | com.apple.driver.AppleRTC |
-| Limit | Nuber | 0 |
-| Find | Data | 75330fb7 |
-| Replace | Data | eb330fb7 |
+|Comment|String|Disable RTC checksum update on poweroff|
+| Enabled | String | YES |
+|Count|Number|1|
+|Base|String|__ZN8AppleRTC14updateChecksumEv|
+|Identifier|String|com.apple.driver.AppleRTC|
+|Limit|Number|0|
+|Find|Data||
+|Replace|Data|c3|
 
 ## macOS GPU acceleration missing on AMD X570
 
@@ -382,7 +386,7 @@ More other GPUs, try different shiki boot args:
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
-Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and `Kernel -> Add`
+Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and `Kernel -> Add`. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.
 
 ## Apps crashing on AMD
 
@@ -395,6 +399,7 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
    * Do note these fixes just disable functionality, they're not real fixes
 * Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
    * VirtualBox works fine as its Java based
+   * VMware 10 and older can work as well
 * Docker broken
    * Docker toolbox is the only solution as its Java based, many feautures are unavailble with this
 * Xcode AppleWatch simulator is broken in Catalina
