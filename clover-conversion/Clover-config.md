@@ -1,6 +1,6 @@
 # Converting common properties from Clover to Opencore
 
-Last edited: Febuary 6, 2020
+Last edited: Febuary 11, 2020
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -255,9 +255,10 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 * This has been turned into a kext patch, this is needed anytime you have either BIOS reset or safe mode issues.
 * Under `Kernel -> patch`:
 
-|Enabled|String|YES|
-|:-|:-|:-|
+| Key | Type | Value |
+| :--- | :--- | :--- |
 |Comment|String|Disable RTC checksum update on poweroff|
+| Enabled | String | YES |
 |Count|Number|1|
 |Base|String|__ZN8AppleRTC14updateChecksumEv|
 |Identifier|String|com.apple.driver.AppleRTC|
@@ -265,7 +266,7 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 |Find|Data||
 |Replace|Data|c3|
 
-Alternative would be to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup)
+Alternative would be to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup) to create a fake RTC device for macOS to play with
 
 
 # Rt Variables

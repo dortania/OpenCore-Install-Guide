@@ -520,7 +520,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="general-troubleshooting">General Troubleshooting</h1>
-<p>Last edited: Febuary 1, 2020</p>
+<p>Last edited: Febuary 11, 2020</p>
 <p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:</p>
 <ul>
 <li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a><ul>
@@ -541,6 +541,7 @@
 </li>
 </ul>
 <p>While still a work in progress, laptop users wanting to convert an existing Clover install can see the  <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion" target="_blank">Clover to OpenCore conversion</a> for more info</p>
+<p><strong>And if your issue is not covered, please read the offical OpenCore documentation: <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a></strong></p>
 <h1 id="opencore-booting">OpenCore booting</h1>
 <ul>
 <li>Stuck on <code>no vault provided!</code></li>
@@ -563,12 +564,12 @@
 <li>Booting OpenCore reboots to BIOS</li>
 </ul>
 <h2 id="stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></h2>
-<p>Turn the following off under <code>Misc -&gt; Security</code>:</p>
+<p>Turn the following off in your config.plist under <code>Misc -&gt; Security</code>:</p>
 <ul>
 <li><code>RequireSignature</code></li>
 <li><code>RequireVault</code></li>
 </ul>
-<p>If you have already executed the commands listed in the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">OpenCore Reference Manual</a> under <strong>8.5 Security Properties</strong>, <code>5. RequireVault</code>, you&apos;ll need to restore your <code>OpenCore.efi</code> file.</p>
+<p>If you have already executed the <code>sign.command</code> you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a></p>
 <h2 id="stuck-on-endrandomseed">Stuck on EndRandomSeed</h2>
 <p>Couple problems:</p>
 <ul>
@@ -829,16 +830,31 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Enabled</th>
-<th style="text-align:left">String</th>
-<th style="text-align:left">YES</th>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align:left">Comment</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">Disable RTC checksum update on poweroff</td>
+</tr>
+<tr>
+<td style="text-align:left">Enabled</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">YES</td>
+</tr>
+<tr>
 <td style="text-align:left">Count</td>
 <td style="text-align:left">Number</td>
 <td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Base</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">__ZN8AppleRTC14updateChecksumEv</td>
 </tr>
 <tr>
 <td style="text-align:left">Identifier</td>
@@ -847,18 +863,18 @@
 </tr>
 <tr>
 <td style="text-align:left">Limit</td>
-<td style="text-align:left">Nuber</td>
+<td style="text-align:left">Number</td>
 <td style="text-align:left">0</td>
 </tr>
 <tr>
 <td style="text-align:left">Find</td>
 <td style="text-align:left">Data</td>
-<td style="text-align:left">75330fb7</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">Replace</td>
 <td style="text-align:left">Data</td>
-<td style="text-align:left">eb330fb7</td>
+<td style="text-align:left">c3</td>
 </tr>
 </tbody>
 </table>
@@ -876,7 +892,7 @@
 <li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md" target="_blank">WhateverGreen&apos;s DRM Chart</a></li>
 </ul>
 <h2 id="memory-modules-misconfigured-on-macpro71">&quot;Memory Modules Misconfigured&quot; on MacPro7,1</h2>
-<p>Add <a href="https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/" target="_blank">MacProMemoryNotificationDisabler kext</a> to EFI/OC/Kexts and <code>Kernel -&gt; Add</code></p>
+<p>Add <a href="https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/" target="_blank">MacProMemoryNotificationDisabler kext</a> to EFI/OC/Kexts and <code>Kernel -&gt; Add</code>. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.</p>
 <h2 id="apps-crashing-on-amd">Apps crashing on AMD</h2>
 <p><del>Easy fix, buy Intel</del></p>
 <p>So with AMD, whenever Apple calls CPU specific functions the app witll either not work or outright crash. Here are some apps and their &quot;fixes&quot;:</p>
@@ -888,6 +904,7 @@
 </li>
 <li>Virtual Machine running off of AppleHV&apos;s framework will not work(ie: Parallels 15, Vmware)<ul>
 <li>VirtualBox works fine as its Java based</li>
+<li>VMware 10 and older can work as well</li>
 </ul>
 </li>
 <li>Docker broken<ul>
@@ -997,7 +1014,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-02-11T05:07:39.228Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-11T05:08:25.738Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-02-11T21:19:39.692Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-11T21:20:27.695Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
