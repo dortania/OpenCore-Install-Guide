@@ -398,10 +398,10 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
    * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
    * Do note these fixes just disable functionality, they're not real fixes
 * Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
-   * VirtualBox works fine as its Java based
+   * VirtualBox works fine as it doesn't use AppleHV
    * VMware 10 and older can work as well
 * Docker broken
-   * Docker toolbox is the only solution as its Java based, many feautures are unavailble with this
+   * Docker toolbox is the only solution as it doesn't use AppleHV, many feautures are unavailble with this version
 * Xcode AppleWatch simulator is broken in Catalina
    * Mojave works fine
 * Blender 2.8.0+ won't work
