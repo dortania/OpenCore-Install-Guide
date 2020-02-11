@@ -318,6 +318,7 @@ For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. 
 * DRM Broken
 * "Memory Modules Misconfigured" on MacPro7,1
 * Apps crashing on AMD
+* No temperature/fan sensor output
 
 ## Broken iMessage and Siri 
 
@@ -401,7 +402,7 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
    * VirtualBox works fine as it doesn't use AppleHV
    * VMware 10 and older can work as well
 * Docker broken
-   * Docker toolbox is the only solution as it doesn't use AppleHV, many feautures are unavailble with this version
+   * Docker toolbox is the only solution as it's based off of VirtualBox, many feautures are unavailble with this version
 * Xcode AppleWatch simulator is broken in Catalina
    * Mojave works fine
 * Blender 2.8.0+ won't work
@@ -466,5 +467,15 @@ Make sure `Add Python to PATH`
 * Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
+## No temperature/fan sensor output
 
- 
+So couple things:
+
+* iStat Menus doesn't yet support MacPro7,1 readouts
+* VirtualSMC's sensors do not support AMD
+
+For iStat, you'll have to wait for an update. For AMD users, you can use: [FakeSMC3_with_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases)
+
+**Note for AMD**:
+* FileVault support requires more work with FakeSMC
+* Make sure no other SMC kexts are present, specifically those from [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
