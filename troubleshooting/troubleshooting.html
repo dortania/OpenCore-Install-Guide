@@ -797,6 +797,7 @@
 <li>DRM Broken</li>
 <li>&quot;Memory Modules Misconfigured&quot; on MacPro7,1</li>
 <li>Apps crashing on AMD</li>
+<li>No temperature/fan sensor output</li>
 </ul>
 <h2 id="broken-imessage-and-siri">Broken iMessage and Siri</h2>
 <ul>
@@ -908,7 +909,7 @@
 </ul>
 </li>
 <li>Docker broken<ul>
-<li>Docker toolbox is the only solution as it doesn&apos;t use AppleHV, many feautures are unavailble with this version</li>
+<li>Docker toolbox is the only solution as it&apos;s based off of VirtualBox, many feautures are unavailble with this version</li>
 </ul>
 </li>
 <li>Xcode AppleWatch simulator is broken in Catalina<ul>
@@ -971,6 +972,18 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li>Follow <a href="verbose.html">Hiding Verbose</a> for correct setup, set <code>UIScale</code> to <code>02</code> for HiDPI</li>
 <li>Users also have noticed that setting <code>ConsoleMode</code> to Max will sometimes fail, leaving it empty can help</li>
 </ul>
+<h2 id="no-temperaturefan-sensor-output">No temperature/fan sensor output</h2>
+<p>So couple things:</p>
+<ul>
+<li>iStat Menus doesn&apos;t yet support MacPro7,1 readouts</li>
+<li>VirtualSMC&apos;s sensors do not support AMD</li>
+</ul>
+<p>For iStat, you&apos;ll have to wait for an update. For AMD users, you can use: <a href="https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases" target="_blank">FakeSMC3_with_plugins</a></p>
+<p><strong>Note for AMD</strong>:</p>
+<ul>
+<li>FileVault support requires more work with FakeSMC</li>
+<li>Make sure no other SMC kexts are present, specifically those from <a href="https://github.com/acidanthera/VirtualSMC/releases" target="_blank">VirtualSMC</a></li>
+</ul>
 
                                 
                                 </section>
@@ -1014,7 +1027,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-02-11T21:35:17.697Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-11T21:36:04.816Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-02-11T23:01:42.024Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-11T23:02:28.951Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
