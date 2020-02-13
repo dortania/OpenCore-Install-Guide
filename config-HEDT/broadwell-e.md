@@ -222,7 +222,7 @@ These values are based of those calculated in [OpenCore debugging](/troubleshoot
 * **RequireVault**: NO
    * We won't be dealing vaulting so we can ignore as well
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for furthur details
+   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details
 
 **Tools** Used for running OC debugging tools like clearing NVRAM
 * **Name** 
