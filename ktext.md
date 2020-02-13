@@ -69,9 +69,9 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SmallTreeIntel82576.kext.zip). AMD motherboards with intel NICs generally run I211-AT
-* [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
+* [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
-* [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
+* [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * Required for Realtek NICs
 
 **USB**:
@@ -81,9 +81,9 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
 
 **WiFi and Bluetooth**:
 
-* [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
+* [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * Used for patching non-Apple Broadcom cards, **will not work on intel, Killer, Realtek, etc**
-* [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM)
+* [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple Airport cards.
   * To be paired with BrcmFirmwareData.kext
     * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)

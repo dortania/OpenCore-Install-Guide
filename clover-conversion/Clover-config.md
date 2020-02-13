@@ -98,7 +98,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 # Devices
 
 **USB**:
-* FixOwnership: `UEFI -> Qurik -> ReleaseUsbOwnership`
+* FixOwnership: `UEFI -> Quirk -> ReleaseUsbOwnership`
 * ClockID: `DeviceProperties -> Add -> PCIRoot... -> AAPL,clock-id`
 
 **Audio**:
