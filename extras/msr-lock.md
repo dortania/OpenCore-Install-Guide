@@ -2,6 +2,8 @@
 
 Last editied: January 13, 2020
 
+Do note that this is only recommended for users who have already installed macOS, for users who are ibnstalling for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
+
 ## Disabling CFG Lock
 
 So you've installed macOS but you're using those pesky `CFG-Lock` patches that we want to get rid of, well to do this is fairly simple. You'll need the following:
@@ -16,7 +18,7 @@ And some apps to help us out:
 * [UEFITool](https://github.com/LongSoft/UEFITool/releases) (Make sure it's UEFITool and not UEFIExtrac)
 * [Universal-IFR-Extractor](https://github.com/LongSoft/Universal-IFR-Extractor/releases)
 
-And don't forget to disable the following from your config.plist:
+And don't forget to disable the following from your config.plist under `Kernel -> Quirks`:
 
 * `AppleCpuPmCfgLock`
 * `AppleXcpmCfgLock`
