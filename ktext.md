@@ -1,5 +1,6 @@
 # Gathering files
-Last edited: Febuary 11, 2020
+
+Last edited: Febuary 13, 2020
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -23,9 +24,9 @@ For legacy users:
 * [AppleUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [NvmExpressDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-   * Used for Haswell and older when no NVMe driver is built into the firmware
+   * Used for Haswell and older when no NVMe driver is built into the firmware, not needed if you're not using an NVMe drive
 * [XhciDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-   * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+   * Used for Sandy Bridge and older when no XHCI driver is built into the firmware, not needed if you're not using a USB 3.0 expansion card
 
 
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
@@ -34,7 +35,7 @@ For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg D
 
 A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI
 
-All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
+All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
 
 **Must haves**:
 
@@ -90,7 +91,10 @@ All kext listed below can be found pre-compiled in the [Kext Repo](http://kexts.
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.10 or older
     
-The order in `Kernel -> Add` should be: BrcmBluetoothInjector -> BrcmFirmwareData -> BrcmPatchRAM3
+The order in `Kernel -> Add` should be: 
+1. BrcmBluetoothInjector 
+2. BrcmFirmwareData 
+3. BrcmPatchRAM3
 
 **AMD CPU Specific kexts**:
 

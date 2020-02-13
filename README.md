@@ -1,12 +1,12 @@
 # Introduction
-Last edited: Febuary 11, 2020
+Last edited: Febuary 13, 2020
 * [GitHub Pages link with Darkmode support](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
 
 ### About
 
 OpenCore is an open-source unconventional first-in-class piece of software designed to intercept kernel loading to insert a highly advanced rootkit, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.
 
-Please remember that OpenCore is still new and currently in beta. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don't want to migrate if you have a stable system currently. Certain aspects of OpenCore such as Vault support will not be covered in this guide.
+Please remember that OpenCore is still new and currently in beta. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don't want to migrate if you have a stable system currently.
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
@@ -14,8 +14,8 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 
 ### Advantages of OpenCore
 
-* On average, OpenCore systems boot faster than those using Clover.
-* OpenCore offers better overall security with better support for FileVault and no need to disable SIP.
+* On average, OpenCore systems boot faster than those using Clover as less auto-patching is done
+* OpenCore offers better overall security with better support for FileVault, no need to disable SIP and even secure boot support via [Vaulting](/post-install/security.md#Vault)
 * OpenCore supports boot hotkey support via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Command+R` to enter Recovery or `Command+Option+P+R` to reset NVRAM.
 * OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l663)
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
@@ -27,7 +27,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 
 * Kernel extensions are loaded in the order specified in your config file, so you must load an extension's dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.
 * ACPI patches and SSDTs are applied to all operating systems. Adjust your SSDTs with `If (_OSI ("Darwin")) {}` or use [rEFind](http://rodsbooks.com/refind/) in conjunction with OpenCore.
-* Some systems require pure UEFI mode to boot. \(This setting is commonly called "Windows 8.1/10 WHQL Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)\)
+* Some systems require pure UEFI mode to boot. \(This setting is commonly called "Windows 8.1/10 UEFI Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)\)
 * Issues can occur if NVMe devices are set up as SATA devices in the BIOS.
 * OpenCore requires a version of macOS that supports a prelinked kernel, this means any installs of OS X 10.7 Lion or newer are supported with some later versions of OS X 10.6 Snow Leopard also having support.
 
@@ -36,7 +36,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 **Disable:**
 
 * Fast Boot
-* VT-d\(can be enabled if you set DisableIoMapper to YES, AMD users will need to disable SVM in the BIOS\)
+* VT-d(can be enabled if you set DisableIoMapper to YES)
 * CSM
 * Thunderbolt
 * Intel SGX

@@ -1,13 +1,16 @@
 # Security and FileVault
 
-Last edited: January 13, 2020
+Last edited: Febuary 13, 2020
 
-So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through setting up FileVault and talking about 2 features of OpenCore:
+So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through and setting up some of OpenCore's great secuirty features:
 
-* ScanPolicy
-* Vault
+* [FileVault](/post-install/security.md#FileVault)
+* [Vault](/post-install/security.md#Vault)
+* [ScanPolicy](/post-install/security.md#ScanPolicy)
 
-## FileVault Setup
+## FileVault
+
+FileVault is macOS's builtin drive encyption, and with OpenCore support for it has been drastcally improved compared to the legacy Clover drivers.
 
 To start, you'll need the following .efi drivers:
 
@@ -37,7 +40,55 @@ Setting in your config.plist:
 
 With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
-## Scan Policy
+## Vault
+
+**What is vaulting?**
+
+Well vaulting is based around 2 things, vault.plist and vault.sig:
+
+* vault.plist: a "snapshot" of your EFI
+* vault.sig: validation of vault.plist
+
+This can be seen as secure boot for OpenCore, so no one can modify it and get in without your permission. 
+
+The specifics of vaulting is that a 256 byte RSA-2048 signature of vault.plist will be shoved into our OpenCore.efi. This key can either be shoved into [OpenCoreVault.c](https://github.com/acidanthera/OpenCorePkg/blob/master/Platform/OpenCore/OpenCoreVault.c) before compiling or with `sign.command` if you already have OpenCore.efi compiled.
+
+Do note that nvram.plist won't be vaulted so users with emulated NVRAM still have risk of someone adding/removing certain NVRAM variables
+
+**Settings in your config.plist**:
+
+* `Misc -> Security -> RequireSignature` set to True
+* `Misc -> Security -> RequireVault` set to True
+
+**Setting up vault**:
+
+Grab OpenCorePkg and open the `CreateVault` folder, inside we'll find the following:
+
+* `create_vault.sh`
+* `RsaTool`
+* `sign.command`
+
+The last one is what we care about: `sign.command`
+
+So when we run this command, it'll look for the EFI folder located beside our Utilities folder, so we want to bring either our personal EFI into the OpenCorePkg folder or bring Utilities into our EFI folder:
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/673348313814401044/Screen_Shot_2020-02-01_at_7.05.29_PM.png)
+
+Now we're ready to run `sign.command`: 
+
+![](https://cdn.discordapp.com/attachments/456913818467958789/673348777897099274/Screen_Shot_2020-02-01_at_7.07.28_PM.png)
+
+
+**Disabling Vault after setup**:
+
+If you're doing heavy troublehooting or have the need to disable Vault, the main things to change:
+
+* Grab a new copy of OpenCore.efi
+* `Misc -> Security -> RequireSignature` set to False
+* `Misc -> Security -> RequireVault` set to False
+
+
+## ScanPolicy
 
 What this quirk allows to prevent scanning and booting from untrusted sources. Setting to `0` will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.
 
@@ -110,50 +161,3 @@ And lets just say for this example that you want to add OC\_SCAN\_ALLOW\_DEVICE\
 `0x00200000` + `0xF0103` = `0x2F0103`
 
 And converting this to decimal gives us `3,080,451`
-
-## Vault
-
-**What is vaulting?**
-
-Well vaulting is based around 2 things, vault.plist and vault.sig:
-
-* vault.plist: a "snapshot" of your EFI
-* vault.sig: validation of vault.plist
-
-This can be seen as secureboot for OpenCore, so no one can modify it and get in without your permission. 
-
-The specifics of vaulting is that a 256 byte RSA-2048 signature of vault.plist will be shoved into our OpenCore.efi. This key can either be shoved into [OpenCoreVault.c](https://github.com/acidanthera/OpenCorePkg/blob/master/Platform/OpenCore/OpenCoreVault.c) before compiling or with `sign.command` if you already have OpenCore.efi compiled.
-
-Do note that nvram.plist won't be vaulted so users with emulated NVRAM still have risk of someone adding/removing certain NVRAM variables
-
-**Settings in your config.plist**:
-
-* `Misc -> Security -> RequireSignature` set to True
-* `Misc -> Security -> RequireVault` set to True
-
-**Setting up vault**:
-
-Grab OpenCorePkg and open the `CreateVault` folder, inside we'll find the following:
-
-* `create_vault.sh`
-* `RsaTool`
-* `sign.command`
-
-The last one is what we care about: `sign.command`
-
-So when we run this command, it'll look for the EFI folder located beside our Utilities folder, so we want to bring either our personal EFI into the OpenCorePkg folder or bring Utilities into our EFI folder:
-
-![](https://cdn.discordapp.com/attachments/456913818467958789/673348313814401044/Screen_Shot_2020-02-01_at_7.05.29_PM.png)
-
-Now we're ready to run `sign.command`: 
-
-![](https://cdn.discordapp.com/attachments/456913818467958789/673348777897099274/Screen_Shot_2020-02-01_at_7.07.28_PM.png)
-
-
-**Disabling Vault after setup**:
-
-If you're doing heavy troublehooting or have the need to disable Vault, the main things to change:
-
-* Grab a new copy of OpenCore.efi
-* `Misc -> Security -> RequireSignature` set to False
-* `Misc -> Security -> RequireVault` set to False

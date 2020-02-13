@@ -1,6 +1,6 @@
-# Clover firmware driver conversion
+# Clover Firmware driver conversion
 
-Last edited: January 13, 2020
+Last edited: Febuary 13, 2020
 
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different. 
 
@@ -11,9 +11,8 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * HFSPlus.efi
 * VBoxHfs.efi
 * EnhancedFatDxe.efi
-* UsbKbDxe.efi
+* AppleUsbKbDxe.efi
 * UsbMouseDxe.efi
-* VirtualSmc.efi
 * XhciDxe.efi
 * AudioDxe.efi
 * BootChimeDxe.efi
@@ -56,6 +55,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * OsxFatBinaryDrv.efi
 * OsxLowMemFixDrv.efi
 * SMCHelper.efi
+* UsbKbDxe.efi(replaced with AppleUsbKbDxe.efi)
 
 
 # AptioMemoryFix
