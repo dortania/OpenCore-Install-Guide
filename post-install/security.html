@@ -520,13 +520,15 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="security-and-filevault">Security and FileVault</h1>
-<p>Last edited: January 13, 2020</p>
-<p>So something that makes OpenCore truly special is how it&apos;s been built with security in mind which is quite rare especially in the Hackintosh community. Well here we&apos;ll be going through setting up FileVault and talking about 2 features of OpenCore:</p>
+<p>Last edited: Febuary 13, 2020</p>
+<p>So something that makes OpenCore truly special is how it&apos;s been built with security in mind which is quite rare especially in the Hackintosh community. Well here we&apos;ll be going through and setting up some of OpenCore&apos;s great secuirty features:</p>
 <ul>
-<li>ScanPolicy</li>
-<li>Vault</li>
+<li><a href="security.html#FileVault">FileVault</a></li>
+<li><a href="security.html#Vault">Vault</a></li>
+<li><a href="security.html#ScanPolicy">ScanPolicy</a></li>
 </ul>
-<h2 id="filevault-setup">FileVault Setup</h2>
+<h2 id="filevault">FileVault</h2>
+<p>FileVault is macOS&apos;s builtin drive encyption, and with OpenCore support for it has been drastcally improved compared to the legacy Clover drivers.</p>
 <p>To start, you&apos;ll need the following .efi drivers:</p>
 <ul>
 <li>FwRuntimeServices.efi<ul>
@@ -567,7 +569,41 @@
 </li>
 </ul>
 <p>With all this, you can proceed to enable FileVault like on a normal mac under <code>System Preferences -&gt; Security &amp; Privacy -&gt; FileVault</code></p>
-<h2 id="scan-policy">Scan Policy</h2>
+<h2 id="vault">Vault</h2>
+<p><strong>What is vaulting?</strong></p>
+<p>Well vaulting is based around 2 things, vault.plist and vault.sig:</p>
+<ul>
+<li>vault.plist: a &quot;snapshot&quot; of your EFI</li>
+<li>vault.sig: validation of vault.plist</li>
+</ul>
+<p>This can be seen as secure boot for OpenCore, so no one can modify it and get in without your permission. </p>
+<p>The specifics of vaulting is that a 256 byte RSA-2048 signature of vault.plist will be shoved into our OpenCore.efi. This key can either be shoved into <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Platform/OpenCore/OpenCoreVault.c" target="_blank">OpenCoreVault.c</a> before compiling or with <code>sign.command</code> if you already have OpenCore.efi compiled.</p>
+<p>Do note that nvram.plist won&apos;t be vaulted so users with emulated NVRAM still have risk of someone adding/removing certain NVRAM variables</p>
+<p><strong>Settings in your config.plist</strong>:</p>
+<ul>
+<li><code>Misc -&gt; Security -&gt; RequireSignature</code> set to True</li>
+<li><code>Misc -&gt; Security -&gt; RequireVault</code> set to True</li>
+</ul>
+<p><strong>Setting up vault</strong>:</p>
+<p>Grab OpenCorePkg and open the <code>CreateVault</code> folder, inside we&apos;ll find the following:</p>
+<ul>
+<li><code>create_vault.sh</code></li>
+<li><code>RsaTool</code></li>
+<li><code>sign.command</code></li>
+</ul>
+<p>The last one is what we care about: <code>sign.command</code></p>
+<p>So when we run this command, it&apos;ll look for the EFI folder located beside our Utilities folder, so we want to bring either our personal EFI into the OpenCorePkg folder or bring Utilities into our EFI folder:</p>
+<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/673348313814401044/Screen_Shot_2020-02-01_at_7.05.29_PM.png" alt=""></p>
+<p>Now we&apos;re ready to run <code>sign.command</code>: </p>
+<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/673348777897099274/Screen_Shot_2020-02-01_at_7.07.28_PM.png" alt=""></p>
+<p><strong>Disabling Vault after setup</strong>:</p>
+<p>If you&apos;re doing heavy troublehooting or have the need to disable Vault, the main things to change:</p>
+<ul>
+<li>Grab a new copy of OpenCore.efi</li>
+<li><code>Misc -&gt; Security -&gt; RequireSignature</code> set to False</li>
+<li><code>Misc -&gt; Security -&gt; RequireVault</code> set to False</li>
+</ul>
+<h2 id="scanpolicy">ScanPolicy</h2>
 <p>What this quirk allows to prevent scanning and booting from untrusted sources. Setting to <code>0</code> will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.</p>
 <p>To calculate the ScanPolicy value, you simply add up all the hexidecimal values(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with <code>&#x2318;+3</code>). Once it&apos;s all added up, you would add this hexidecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)</p>
 <p><code>0x00000001 (bit 0)</code> &#x2014; OC_SCAN_FILE_SYSTEM_LOCK</p>
@@ -635,40 +671,6 @@
 <p>And lets just say for this example that you want to add OC_SCAN_ALLOW_DEVICE_USB:</p>
 <p><code>0x00200000</code> + <code>0xF0103</code> = <code>0x2F0103</code></p>
 <p>And converting this to decimal gives us <code>3,080,451</code></p>
-<h2 id="vault">Vault</h2>
-<p><strong>What is vaulting?</strong></p>
-<p>Well vaulting is based around 2 things, vault.plist and vault.sig:</p>
-<ul>
-<li>vault.plist: a &quot;snapshot&quot; of your EFI</li>
-<li>vault.sig: validation of vault.plist</li>
-</ul>
-<p>This can be seen as secureboot for OpenCore, so no one can modify it and get in without your permission. </p>
-<p>The specifics of vaulting is that a 256 byte RSA-2048 signature of vault.plist will be shoved into our OpenCore.efi. This key can either be shoved into <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Platform/OpenCore/OpenCoreVault.c" target="_blank">OpenCoreVault.c</a> before compiling or with <code>sign.command</code> if you already have OpenCore.efi compiled.</p>
-<p>Do note that nvram.plist won&apos;t be vaulted so users with emulated NVRAM still have risk of someone adding/removing certain NVRAM variables</p>
-<p><strong>Settings in your config.plist</strong>:</p>
-<ul>
-<li><code>Misc -&gt; Security -&gt; RequireSignature</code> set to True</li>
-<li><code>Misc -&gt; Security -&gt; RequireVault</code> set to True</li>
-</ul>
-<p><strong>Setting up vault</strong>:</p>
-<p>Grab OpenCorePkg and open the <code>CreateVault</code> folder, inside we&apos;ll find the following:</p>
-<ul>
-<li><code>create_vault.sh</code></li>
-<li><code>RsaTool</code></li>
-<li><code>sign.command</code></li>
-</ul>
-<p>The last one is what we care about: <code>sign.command</code></p>
-<p>So when we run this command, it&apos;ll look for the EFI folder located beside our Utilities folder, so we want to bring either our personal EFI into the OpenCorePkg folder or bring Utilities into our EFI folder:</p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/673348313814401044/Screen_Shot_2020-02-01_at_7.05.29_PM.png" alt=""></p>
-<p>Now we&apos;re ready to run <code>sign.command</code>: </p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/673348777897099274/Screen_Shot_2020-02-01_at_7.07.28_PM.png" alt=""></p>
-<p><strong>Disabling Vault after setup</strong>:</p>
-<p>If you&apos;re doing heavy troublehooting or have the need to disable Vault, the main things to change:</p>
-<ul>
-<li>Grab a new copy of OpenCore.efi</li>
-<li><code>Misc -&gt; Security -&gt; RequireSignature</code> set to False</li>
-<li><code>Misc -&gt; Security -&gt; RequireVault</code> set to False</li>
-</ul>
 
                                 
                                 </section>
@@ -712,7 +714,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.3","depth":1,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"previous":{"title":"Disabling GPU","level":"5.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-02-13T16:59:57.579Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-13T17:00:43.247Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.3","depth":1,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"previous":{"title":"Disabling GPU","level":"5.2","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-02-13T20:50:51.024Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-13T20:51:36.246Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

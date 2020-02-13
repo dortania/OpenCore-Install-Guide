@@ -1,6 +1,6 @@
 # Converting common properties from Clover to Opencore
 
-Last edited: Febuary 11, 2020
+Last edited: Febuary 13, 2020
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
