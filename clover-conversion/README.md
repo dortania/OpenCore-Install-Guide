@@ -7,7 +7,7 @@ So you see the new fancy Opencore bootloader and just dying to try it out, well 
 To get started, we have some resouces that will aid you:
 
 * [Config.plist conversion](/clover-conversion/Clover-config.md)
-* [Firmware driver conversion(.efi)](/clover-conversion/clover.efi.md)
+* [Firmware driver conversion(.efi)](/clover-conversion/clover-efi.md)
 
 # Cleaning the Clover Junk in macOS
 
