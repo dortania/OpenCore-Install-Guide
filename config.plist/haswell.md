@@ -98,7 +98,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
   * Fixes SetVirtualAddresses calls to virtual addresses
 * **ShrinkMemoryMap**: NO
   * Needed for systems with large memory maps that don't fit, don't use unless necessary
-* **SignalAppleOs**: NO
+* **SignalAppleOS**: NO
   * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 
 ## DeviceProperties
