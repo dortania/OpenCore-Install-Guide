@@ -520,21 +520,21 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="gathering-files">Gathering files</h1>
-<p>Last edited: Febuary 13, 2020</p>
+<p>Last edited: Febuary 14, 2020</p>
 <p>This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won&apos;t be deep diving in here.</p>
 <blockquote>
 <p>What&apos;s the best way to figure out if my hardware is supported?</p>
 </blockquote>
 <p>See the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/hardware.md" target="_blank"><strong>supported hardware section</strong></a> for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.</p>
 <h2 id="firmware-drivers">Firmware Drivers</h2>
-<p>These are the drivers used for OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:</p>
+<p>These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">ApfsDriverLoader.efi</a><ul>
-<li>Needed for seeing APFS volumes.</li>
+<li>Needed for seeing APFS volumes(ie. macOS)</li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">VboxHfs.efi</a> <strong>or</strong> <a href="https://cdn.discordapp.com/attachments/606452360495104000/633621011887292416/HFSPlus.efi" target="_blank">HfsPlus.efi</a><ul>
-<li>Needed for seeing HFS volumes. <strong>Do not mix HFS drivers</strong></li>
+<li>Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). <strong>Do not mix HFS drivers</strong></li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">FwRuntimeServices.efi</a><ul>
@@ -585,17 +585,19 @@
 </li>
 <li>SMCLightSensor.kext<ul>
 <li>Used for the ambient light sensor on laptops, <strong>desktops can ignore</strong></li>
+<li>Do not use if you don&apos;t have an ambient light sensor, can cause issues otherwise</li>
 </ul>
 </li>
 <li>SMCBatteryManager.kext<ul>
 <li>Used for measuring battery readouts on laptops, <strong>desktops can ignore</strong></li>
+<li>Do not use until battery has been poperly patched, can cause issues otherwise</li>
 </ul>
 </li>
 </ul>
 <p><strong>Graphics</strong>:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/WhateverGreen/releases" target="_blank">WhateverGreen</a><ul>
-<li>Used for graphics patching, all GPUs benefit from this kext.</li>
+<li>Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.</li>
 </ul>
 </li>
 </ul>
@@ -609,7 +611,7 @@
 <p><strong>Ethernet</strong>:</p>
 <ul>
 <li><a href="https://github.com/Mieze/IntelMausiEthernet" target="_blank">IntelMausiEthernet</a><ul>
-<li>Required for Intel NICs, newer chipsets are based off of I211-AT will need the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SmallTreeIntel82576.kext.zip" target="_blank">SmallTreeIntel82576 kext</a>. AMD motherboards with intel NICs generally run I211-AT</li>
+<li>Required for Intel NICs, chipsets that are based off of I211-AT will need the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SmallTreeIntel82576.kext.zip" target="_blank">SmallTreeIntel82576 kext</a>. AMD motherboards with intel NICs generally run I211-AT</li>
 </ul>
 </li>
 <li><a href="https://github.com/Mieze/AtherosE2200Ethernet/releases" target="_blank">AtherosE2200Ethernet</a><ul>
@@ -624,7 +626,7 @@
 <p><strong>USB</strong>:</p>
 <ul>
 <li><a href="https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/" target="_blank">USBInjectAll</a><ul>
-<li>Used for injecting intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need <a href="https://github.com/RehabMan/OS-X-USB-Inject-All" target="_blank">XHCI-unsupported</a> as well. <strong>Does not work on AMD CPU based systems</strong></li>
+<li>Used for injecting Intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need <a href="https://github.com/RehabMan/OS-X-USB-Inject-All" target="_blank">XHCI-unsupported</a> as well. <strong>Does not work on AMD CPU based systems</strong></li>
 </ul>
 </li>
 </ul>
@@ -669,7 +671,8 @@
 <p><strong>Extra&apos;s</strong>:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a><ul>
-<li>Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems:<ul>
+<li>Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems</li>
+<li>Affected SMBIOS:<ul>
 <li>MacPro6,1</li>
 <li>MacPro7,1</li>
 <li>iMacPro1,1</li>
@@ -694,7 +697,7 @@
 <h2 id="ssdts">SSDTs</h2>
 <p>So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in <strong>your specific ACPI section of the config.plist</strong>, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now. </p>
 <p><a href="extras/acpi.html">Getting started with ACPI</a> has an extended section on SSDTs including compiling them on different platforms.</p>
-<p>A quick TL;DR of needed SSDTs(This is source code, you will have to compile them:</p>
+<p>A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):</p>
 <p><strong>Ivy Bridge:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a></li>
@@ -801,7 +804,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-02-14T06:12:07.735Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-14T06:12:53.456Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-02-14T19:21:56.843Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-14T19:22:44.676Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
