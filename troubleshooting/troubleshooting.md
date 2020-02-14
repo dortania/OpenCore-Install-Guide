@@ -144,6 +144,7 @@ Missing or incorrect `Executable path`
   ```text
   <integer>2147483648</integer>
   ```
+  
 ## Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off(Intel Users only), couple solutions:

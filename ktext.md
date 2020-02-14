@@ -1,6 +1,6 @@
 # Gathering files
 
-Last edited: Febuary 13, 2020
+Last edited: Febuary 14, 2020
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -10,12 +10,12 @@ See the [**supported hardware section**](https://github.com/khronokernel/Opencor
 
 ## Firmware Drivers
 
-These are the drivers used for OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
+These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
 
 * [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
-  * Needed for seeing APFS volumes.
+   * Needed for seeing APFS volumes(ie. macOS)
 * [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) **or** [HfsPlus.efi](https://cdn.discordapp.com/attachments/606452360495104000/633621011887292416/HFSPlus.efi)
-  * Needed for seeing HFS volumes. **Do not mix HFS drivers**
+   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix HFS drivers**
 * [FwRuntimeServices.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
 
@@ -53,13 +53,15 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
   * Used for monitoring fan speed, **doesn't work AMD CPU based systems**
 * SMCLightSensor.kext
   * Used for the ambient light sensor on laptops, **desktops can ignore**
+  * Do not use if you don't have an ambient light sensor, can cause issues otherwise
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops, **desktops can ignore**
+  * Do not use until battery has been poperly patched, can cause issues otherwise
 
 **Graphics**:
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
-  * Used for graphics patching, all GPUs benefit from this kext.
+  * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
 
 **Audio**:
 
@@ -69,7 +71,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 **Ethernet**:
 
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
-  * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SmallTreeIntel82576.kext.zip). AMD motherboards with intel NICs generally run I211-AT
+  * Required for Intel NICs, chipsets that are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SmallTreeIntel82576.kext.zip). AMD motherboards with intel NICs generally run I211-AT
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
@@ -78,7 +80,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 **USB**:
 
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-  * Used for injecting intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well. **Does not work on AMD CPU based systems**
+  * Used for injecting Intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well. **Does not work on AMD CPU based systems**
 
 **WiFi and Bluetooth**:
 
@@ -92,6 +94,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
     * BrcmPatchRAM for 10.10 or older
     
 The order in `Kernel -> Add` should be: 
+
 1. BrcmBluetoothInjector 
 2. BrcmFirmwareData 
 3. BrcmPatchRAM3
@@ -108,7 +111,8 @@ The order in `Kernel -> Add` should be:
 **Extra's**:
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-  * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems:
+  * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
+  * Affected SMBIOS:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
@@ -128,7 +132,7 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 
 [Getting started with ACPI](/extras/acpi.md) has an extended section on SSDTs including compiling them on different platforms.
 
-A quick TL;DR of needed SSDTs(This is source code, you will have to compile them:
+A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
 
 **Ivy Bridge:**
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
