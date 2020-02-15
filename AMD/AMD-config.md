@@ -400,8 +400,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
    * Swaps `Option` and `Cmd` key
-* **PointerSupport**: 
-   * Used for fixing broken pointer support, commonly used for Z87 Asus boards. Leave blank
+* **PointerSupport**: `NO`
+   * Used for fixing broken pointer support, commonly used for Z87 Asus boards
 * **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
