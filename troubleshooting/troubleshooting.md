@@ -419,6 +419,8 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
 * Fix Python: `Python is not installed or not found on PATH`
 * Windows Startup Disk can't see APFS drives
 * Incorrect resolution with OpenCore
+* No temperature/fan sensor output
+* Can't find Windows/Bootcamp drive in picker
 
 ## Can't run `acpidump.efi`
 
@@ -480,3 +482,12 @@ For iStat, you'll have to wait for an update. For AMD users, you can use: [FakeS
 **Note for AMD**:
 * FileVault support requires more work with FakeSMC
 * Make sure no other SMC kexts are present, specifically those from [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
+
+## Can't find Windows/Bootcamp drive in picker
+
+So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you'll have to find other means to make an installer(Google's your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you'll need to format the drive you want to install onto with DiskUtility. See the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) on best practices
+
+Now to get onto troubleshooting:
+* Make sure `Misc -> Secuirty -> ScanPolicy` is set to `0` to show all drives
+* Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
+* Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
