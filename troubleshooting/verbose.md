@@ -1,6 +1,6 @@
 # Fixing Resolution and Verbose
 
-Last edited: January 13, 2020
+Last edited: Febuary 18, 2020
 
 Wanting a more clean booting experience with macOS without all that verbose text while booting? Well you need a couple things:
 
@@ -19,14 +19,15 @@ Wanting a more clean booting experience with macOS without all that verbose text
 * `ProvideConsoleGop` set to True
 * `IgnoreTextInGraphics`: set to True
 * `SanitiseClearScreen`: set to True
+   * Use on Higher resolution displays like 2K and 4K, lower resolutions should leave this disabled
 
 **`Misc -> Boot`**:
 
 * `Resolution`: set to your monitor's resolution
 * `ConsoleBehaviourOs`: set to Graphics
 * `ConsoleBehaviourUi`: set to Text
-* `ConsoleMode` set to Max
-  * Setting to Max can infact break the resolution, if having issues set this to blank
+* `ConsoleMode` set to [Blank]
+  * Setting to Max can help fix the resolution, do note that Max should not be used when `SanitiseClearScreen` is enabled
 
 Please refer below for other settings if these Misc/Boot values do not work for your firmware.
 

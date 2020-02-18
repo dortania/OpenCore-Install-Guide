@@ -1,6 +1,6 @@
 # Converting common properties from Clover to Opencore
 
-Last edited: Febuary 13, 2020
+Last edited: Febuary 18, 2020
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -16,23 +16,42 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
    * change EHC1 to EH01
    * change EHC2 to EH02
-* XHCI Patches: Not needed anymore, recommended to make an [Injector kext](https://github.com/corpnewt/USBMap) instead
+* XHCI Patches: Not needed anymore, recommended to make an [Injector kext](https://github.com/corpnewt/USBMap) instead to kick out the built-in injectors
    * change XHCI to XHC
    * change XHC1 to XHC
 * SATA patches: Purely cosmetic in macOS now
    * change SAT0 to SATA
+   * change SAT1 to SATA
 * IMEI Patches: Handled by WhateverGreen
    * change HECI to IMEI
+   * change HEC1 to IMEI
    * change MEI to IMEI
+   * change IDER to MEID
 * GFX patches: Handled by WhateverGreen
    * change GFX0 to IGPU
    * change PEG0 to GFX0
-* EC Patches: See here on best solution: [Fixing Embedded Controllers](https://khronokernel.github.io/EC-fix-guide/)
+   * change PEGP to GFX0
+   * change SL01 to PEGP
+* EC Patches: See here on best solution: [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)
    * change EC0 to EC
    * change H_EC to EC
    * change ECDV to EC
-      
-
+   * change PGEC to EC
+* Audio renames: Handled by AppleALC
+   * change HDAS to HDEF
+   * change CAVS to HDEF
+* Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)
+   * change STAS to [Blank]
+* NVMe patches: NVMeFix.kext fixes power management
+   * change PXSX to ANS1
+   * change PXSX to ANS2
+* Other purely consmetic patches:
+   * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)
+   * change PC00 to PCIO
+   * change FPU to MATH
+   * change TMR to TIMR
+   * change PIC to IPIC
+   * change GBE1 to ETH0
 
 **Fixes**:
 
@@ -69,7 +88,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
 * **AddPNLF**:
-   * See Rehabman's [SSDT-PNLF](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl)
+   * See [SSDT-PNLF](https://khronokernel.github.io/Getting-Started-With-ACPI/Laptops/backlight.html)
+
 * **AddIMEI**:
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
@@ -82,16 +102,27 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **SSDT**:
 * **PluginType**:
    * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-   * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this though HEDT systems will need to manually make theirs. See [Getting started with ACPI](../extras/acpi.md) for more details
+   * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this though HEDT systems will need to manually make theirs. 
+   * See [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
 # Boot
 
-**Boot Argument**
+**Boot Argument**:
 * `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
 
 **NeverHibernate**: 
 * `Misc -> Boot -> HibernateMode -> None`
 
+**Default Boot Volume**:
+* `Misc -> Security -> AllowSetDefault -> True`
+   * Press Ctrl+Enter in the picker to set default device
+* Alternative is StartupDisk in macOS's System Preferences, just like on real Macs
+
 # Boot Graphics
+
+**UIScale**
+* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`
+   * 1 -> `01`
+   * 2 -> `02`
 
 # Cpu
 
@@ -165,35 +196,41 @@ device_type: XHCI
 
 # Disable Drivers
 
+Just don't add your drivers to `UEFI -> Drivers`
+
 # Gui
 
 # Graphics
 
 **InjectIntel**:
-* `Vendor`
-* `deviceID`
+* `DeviceProperties -> Add -> PCIRoot... -> Vendor`
+* `DeviceProperties -> Add -> PCIRoot... -> deviceID`
 
 **InjectAti**:
-* `deviceID`
-* `Connectors`
+* `DeviceProperties -> Add -> PCIRoot... -> deviceID`
+* `DeviceProperties -> Add -> PCIRoot... -> Connectors`
 
 **InjectNvidia**:
-* `DeviceID`
-* `Family`
+* `DeviceProperties -> Add -> PCIRoot... -> DeviceID`
+* `DeviceProperties -> Add -> PCIRoot... -> Family`
 
 
 **FakeIntel**:
-* `device-id`
-* `vendor-id`
+* `DeviceProperties -> Add -> PCIRoot... -> device-id`
+* `DeviceProperties -> Add -> PCIRoot... -> vendor-id`
 
 **FakeAti**:
-* `device-id`
-* `ATY,DeviceID`
-* `@0,compatible`
-* `vendor-id`
-* `ATY,VendorID`
+* `DeviceProperties -> Add -> PCIRoot... -> device-id`
+* `DeviceProperties -> Add -> PCIRoot... -> ATY,DeviceID`
+* `DeviceProperties -> Add -> PCIRoot... -> @0,compatible`
+* `DeviceProperties -> Add -> PCIRoot... -> vendor-id`
+* `DeviceProperties -> Add -> PCIRoot... -> ATY,VendorID`
 
-**Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seem to fail when trying to spoof a GPU: [Renaming GPUs](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
+**Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seems to fail sometimes when trying to spoof a GPU: [Renaming GPUs](https://khronokernel.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
+For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/Sample.dsl) in the WhateverGreen docs
+
+**Custom EDID**
+   * [WhateverGreen's EDID docs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#edid)
 
 **RadeonDeInit**:
 * [Radeon-Denit-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
@@ -216,6 +253,10 @@ device_type: XHCI
 
 **KernelToPatch**:
 * `Kernel -> Patch`
+
+**ForceKextsToLoad**:
+* Not a great solution but injecting the kext "works"
+* See here for more info: [Add ForceKextsToLoad feature to OpenCore #681](https://github.com/acidanthera/bugtracker/issues/681)
 
 **Kernel LAPIC**:
 * `Kernel -> Quirks -> LapicKernelPanic -> YES`
@@ -268,6 +309,12 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 
 Alternative would be to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup) to create a fake RTC device for macOS to play with
 
+**FakeCPUID**:
+* `Kernel -> Emulate`:
+   * `CpuidMask`: `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+      * ex(`0x0306A9`): `A9060300 00000000 00000000 00000000`
+   * `CpuidData`(Swap `00` for `FF` if needing to swap with a longer value)
+      * ex: `FFFFFFFF 00000000 00000000 00000000`
 
 # Rt Variables
 

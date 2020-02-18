@@ -1,6 +1,6 @@
 # Fixing KALSR slide values
 
-Last editied: January 13, 2020
+Last editied: Febuary 18, 2020
 
 ## Fixing KALSR slide values
 
@@ -45,7 +45,7 @@ The real fix to this is quite simple actually, the process is both the same for 
   * [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg/releases)(Don't mix Aptio fixes together or use OsxAptioFixDrvX, only AptioMemoryFix is supported in this guide)
   * Clover Shell(most users already have this included, usually called shell64.efi or some variation)
 * OpenCore users:
-  * [FwRuntimeServices](https://github.com/acidanthera/AppleSupportPkg/releases)
+  * [FwRuntimeServices](https://github.com/acidanthera/OpenCorePkg/releases)
   * [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)(Don't forget to enable this under `Root->Misc->Tools`)
   * Config.plist settings:
     * AvoidRuntimeDefrag: `YES`
