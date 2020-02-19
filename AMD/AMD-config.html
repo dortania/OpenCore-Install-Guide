@@ -520,58 +520,62 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="amd">AMD</h1>
-<p>Last edited: Febuary 11, 2020</p>
+<p>Last edited: Febuary 18, 2020</p>
 <h2 id="starting-point">Starting Point</h2>
-<p>You&apos;ll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> and we can get to work. <strong>Reminder configurators are not supported, most are out of date with the OpenCore spec and some like Mackie&apos;s will even add clover sections and corrupt plists. You are on your own if you use such tools</strong></p>
-<p>Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).</p>
-<p>Kernel patches courtesy of <a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">AMD OSX</a>(save these for later, we&apos;ll go over how to use them below):</p>
+<p>So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won&apos;t be left in the cold. This also means if you have issues, review your config settings to make sure they&apos;re correct. Main things to note with OpenCore:</p>
 <ul>
-<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip" target="_blank">Ryzen/Threadripper(17h)</a> (10.13, 10.14, and 10.15)</li>
-<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip" target="_blank">Bulldozer/Jaguar(15h/16h)</a> (10.13, 10.14, and 10.15)</li>
+<li><strong>All properties must be defined</strong>, there are no default OpenCore will fall back on so <strong>do not delete sections unless told explicitly so</strong>. If the guide doesn&apos;t mention the option, leave it at default.</li>
+<li><strong>The Sample.plist cannot be used As-Is</strong>, you must configure it to your system</li>
+<li><strong>DO NOT USE CONFIGURATORS</strong>, these rarely respect OpenCore&apos;s configuration and even some like Mackie&apos;s will add Clover properties and corrupt plists!</li>
 </ul>
-<p><strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing&apos;s mentioned then leave as default.</strong></p>
+<p>Now with all that, we&apos;ll need some things to get started:</p>
+<ul>
+<li><a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a>: For editing our config, this editor has some super useful tools for OpenCore</li>
+<li><a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a>: For generating our SMBIOS</li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">Sample.plist</a>: This is found under the Docs folder of the release download</li>
+<li><a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">AMD Kernel Patches</a>: Needed for booting macOS on AMD hardware(save these for later, we&apos;ll go over how to use them below)<ul>
+<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip" target="_blank">Ryzen/Threadripper(17h)</a> (Supports 10.13, 10.14, and 10.15)</li>
+<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip" target="_blank">Bulldozer/Jaguar(15h/16h)</a> (Supports 10.13, 10.14, and 10.15)</li>
+</ul>
+</li>
+</ul>
+<p>Now with those downloaded, we can get to really get started:</p>
+<ul>
+<li>Grab the <strong>Sample.plist</strong> and rename to <strong>config.plist</strong></li>
+<li>Open your new config.plist in ProperTree<ul>
+<li>macOS: <code>ProperTree.command</code></li>
+<li>Windows: <code>ProperTree.bat</code></li>
+</ul>
+</li>
+<li>Run the Clean Snapshot function(<strong>Cmd/Ctrl + Shift + R</strong> and point it at your EFI/OC folder), <ul>
+<li>This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config</li>
+<li>Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you&apos;re troubleshooting</li>
+</ul>
+</li>
+</ul>
+<p>And now you&apos;re ready to configure it!</p>
+<p><strong>And read this guide more than once before setting up OpenCore</strong> and make sure you have it set up correctly. <strong>Do note that images will not always be the most up-to-date</strong> so please read the text below them, if nothing&apos;s mentioned then leave as default.</p>
 <h2 id="acpi">ACPI</h2>
 <p><img src="https://i.imgur.com/zqNt4dV.png" alt="ACPI"></p>
 <p><strong>Add:</strong></p>
-<p>This is where you&apos;ll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for <a href="https://usb-map.gitbook.io/project/" target="_blank">USB maps</a>, <a href="../post-install/spoof.html">disabling unsupported GPUs</a> and such. And with most systems like ours, <strong>even required to boot</strong>. Guide on making them found here: <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
+<p>This is where you&apos;ll add SSDTs for your system, these are very important to <strong>booting macOS</strong> and have many uses like <a href="https://usb-map.gitbook.io/project/" target="_blank">USB maps</a>, <a href="../post-install/spoof.html">disabling unsupported GPUs</a> and such. And with our system, <strong>its even required to boot</strong>. Guide on making them found here: <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
 <ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a><ul>
-<li>Corrects your EC devices, <strong>needed for all Catalina users</strong>. To setup you&apos;ll need to find out the name of your <code>PNP0C09</code> device in your DSDT, this being either <code>EC0</code>, <code>H_EC</code>, <code>PGEC</code> and <code>ECDV</code>. You can read more about Embedded Controller issues in Catalina here: <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a>. If no <code>PNP0C09</code> device shows up then there is no need for this SSDT. </li>
-<li>This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.</li>
-<li>I&apos;ve also provided a precompiled version for users with EC0, this is the most common device on AMD systems: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml" target="_blank">SSDT-EC-USBX-AMD.aml</a></li>
+<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></p>
+<ul>
+<li>Hides the Embedded controller and creates a fake one for macOS, <strong>needed for all Catalina users</strong> and recommeneded for other versions of macOS</li>
+<li>This SSDT also has a second function, USBX. This is used for forcing USB power properties and requires SSDT-EC so this just jumbles them together.</li>
+<li>I&apos;ve also provided a precompiled version for users with <code>EC0</code>, this is the most common device on AMD systems: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml" target="_blank">SSDT-EC-USBX-AMD.aml</a></li>
 </ul>
+<p>Note that you <strong>should not</strong> add your generated <code>DSDT.aml</code> here, it is already in your firmware. So if present, remove the entry for it in your <code>config.plist</code> and under EFI/ACPI.</p>
 </li>
 </ul>
-<p>Note that you should not add your generated <code>DSDT.aml</code> here. It is already in your firmware. So remove the entry for it in your <code>config.plist</code>.</p>
 <p>For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a> <strong>page.</strong> Compiled SSDTs have a <strong>.aml</strong> extension(Assembled) and will go into the <code>EFI/OC/ACPI</code> folder and <strong>must</strong> be specified in your config under <code>ACPI -&gt; Add</code> as well.</p>
 <p><strong>Block</strong></p>
-<p>This drops certain ACPI tabes from loading, for us we can ignore this</p>
+<p>This blocks certain ACPI tabes from loading, for us we can ignore this</p>
 <p><strong>Patch</strong>:</p>
-<p>This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. Most PCs do not ACPI patches, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers, use SSDTs or similar Device Property patching like what&apos;s seen with Framebuffer patching. </p>
-<p>And to grab the location of such devices you can use <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>.</p>
-<ul>
-<li><strong>Comment</strong> <ul>
-<li>Name of patch</li>
-</ul>
-</li>
-<li><strong>Count</strong> <ul>
-<li>How many time the patch is applied, <code>0</code> will apply to all instances</li>
-</ul>
-</li>
-<li><strong>Enabled</strong> <ul>
-<li>Self-explanatory, enables or disables the patch</li>
-</ul>
-</li>
-<li><strong>Find</strong><ul>
-<li>The original name in ACPI</li>
-</ul>
-</li>
-<li><strong>Replace</strong> <ul>
-<li>The new name in ACPI, the length must match original</li>
-</ul>
-</li>
-</ul>
-<p><strong>Quirk</strong>: Settings for ACPI.</p>
+<p>This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore</p>
+<p><strong>Quirk</strong>: </p>
+<p>Settings relating to ACPI, leave everything here as default.</p>
 <ul>
 <li><strong>FadtEnableReset</strong>: NO<ul>
 <li>Enable reboot and shutdown on legacy hardware, not recommended unless needed</li>
@@ -598,8 +602,9 @@
 <p><img src="https://i.imgur.com/suElruh.png" alt="Booter"></p>
 <p>This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi</p>
 <p><strong>MmioWhitelist</strong>:</p>
-<p>This section is allowing devices to be passthrough to macOS that are generally ignored, most users can ignore this section.</p>
+<p>This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.</p>
 <p><strong>Quirks</strong>:</p>
+<p>Settings relating to boot.efi patching and firmware fixes, default will work for us</p>
 <ul>
 <li><strong>AvoidRuntimeDefrag</strong>: YES<ul>
 <li>Fixes UEFI runtime services like date, time, NVRAM, power control, etc</li>
@@ -614,7 +619,7 @@
 </ul>
 </li>
 <li><strong>DisableVariableWrite</strong>: NO<ul>
-<li>Needed for systems with non-functioning NVRAM like Z390 and such</li>
+<li>Needed for systems with non-functioning NVRAM</li>
 </ul>
 </li>
 <li><strong>DiscardHibernateMap</strong>: NO<ul>
@@ -657,11 +662,11 @@
 <h2 id="deviceproperties">DeviceProperties</h2>
 <p><img src="https://i.imgur.com/ThtAO95.png" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
-<p>By default, the Sample.plist has this section set for iGPU and audio. We have no iGPU so PCIRoot <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> can be removed from both the <code>Add</code> and the <code>Block</code> sections. For audio we&apos;ll be setting the layout in the boot-args section.</p>
-<p>TL;DR, delete all the PCIRoot&apos;s here as we won&apos;t be using this section.</p>
+<p>By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot <code>PciRoot(0x0)/Pci(0x2,0x0)</code> can be removed from <code>Add</code> section. For audio we&apos;ll be setting the layout in the boot-args section, so removal of <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> is also recommended from both <code>Add</code> and <code>Block</code> sections</p>
+<p>TL;DR, delete all the PciRoot&apos;s here as we won&apos;t be using this section.</p>
 <h2 id="kernel">Kernel</h2>
 <p><img src="https://i.imgur.com/ehG6Da6.png" alt="Kernel"></p>
-<p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.</p>
+<p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run <strong>Cmd/Ctrl + Shift + R</strong> to add all their kexts in the correct order without manually typing each kext out.</p>
 <ul>
 <li><strong>BundlePath</strong> <ul>
 <li>Name of the kext</li>
@@ -673,7 +678,7 @@
 </ul>
 </li>
 <li><strong>ExecutablePath</strong> <ul>
-<li>Path to the actual executable hidden within the kext, you can see what path you kext has by right-clicking and selecting <code>Show Package Contents</code>. Generally, they&apos;ll be <code>Contents/MacOS/Kext</code> but some have kexts hidden within under <code>Plugin</code> folder. Do note that plist only kexts do not need this filled in.</li>
+<li>Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting <code>Show Package Contents</code>. Generally, they&apos;ll be <code>Contents/MacOS/Kext</code> but some have kexts hidden within under <code>Plugin</code> folder. Do note that plist only kexts do not need this filled in.</li>
 <li>ex: <code>Contents/MacOS/Lilu</code></li>
 </ul>
 </li>
@@ -685,18 +690,10 @@
 </ul>
 <p><strong>Emulate</strong>: Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don&apos;t require this)</p>
 <ul>
-<li><strong>CpuidMask</strong>: When set to Zero, original CPU bit will be used<ul>
-<li><code>&lt;Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes&gt; | 00 00 00 00 | 00 00 00 00 | 00 00 00 00</code></li>
-<li>ex: CPUID <code>0x0306A9</code> would be <code>A9 06 03 00 | 00 00 00 00 | 00 00 00 00 | 00 00 00 00</code></li>
+<li><strong>CpuidMask</strong>: Leave this blank</li>
+<li><strong>CpuidData</strong>: Leave this blank</li>
 </ul>
-</li>
-<li><strong>CpuidData</strong>: The value for the CPU spoofing<ul>
-<li><code>FF FF FF FF | 00 00 00 00 | 00 00 00 00 | 00 00 00 00</code></li>
-<li>Swap <code>00</code> for <code>FF</code> if needing to swap with a longer value</li>
-</ul>
-</li>
-</ul>
-<p><strong>Block</strong>: Blocks kexts from loading. Sometimes needed for disabling Apple&apos;s trackpad driver for some laptops.</p>
+<p><strong>Block</strong>: Blocks kexts from loading. Not relevant for us</p>
 <p><strong>Patch</strong>: This is where the AMD kernel patching magic happens. Please do note that <code>KernelToPatch</code> and <code>MatchOS</code> from Clover becomes <code>Kernel</code> and <code>MinKernel</code>/ <code>MaxKernel</code> in OpenCore, you can find pre-made patches by <a href="https://amd-osx.com/forum/memberlist.php?mode=viewprofile&amp;u=10918&amp;sid=e0feb8a14a97be482d2fd68dbc268f97" target="_blank">AlGrey</a>(algrey#9303):</p>
 <p>Kernel patches:</p>
 <ul>
@@ -711,7 +708,8 @@
 <li>Paste into where old patches were in config.plist</li>
 </ul>
 <p><img src="../extra-files/gif.gif" alt=""></p>
-<p><strong>Quirks</strong>:</p>
+<p><strong>Quirks</strong>:
+Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerManagement</code>, <code>PanicNoKextDump</code>, <code>PowerTimeoutKernelPanic</code> and <code>XhciPortLimit</code>. Everything else should be left as default</p>
 <ul>
 <li><strong>AppleCpuPmCfgLock</strong>: NO <ul>
 <li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. AMD users can ignore</li>
@@ -733,15 +731,15 @@
 <li>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandom with <code>PlatformInfo -&gt; UpdateSMBIOSMode -&gt; Custom</code></li>
 </ul>
 </li>
-<li><strong>DisableIOMapper</strong>: NO <ul>
-<li>Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems vary so recommended to disable SVM(SecureVirtualMachine) in BIOS</li>
+<li><strong>DisableIoMapper</strong>: NO <ul>
+<li>AMD doesn&apos;t have DMAR or VT-D support so irrelevant</li>
 </ul>
 </li>
 <li><strong>DummyPowerManagement</strong>: YES<ul>
 <li>New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there&apos;s no native power management. Intel can ignore</li>
 </ul>
 </li>
-<li><strong>ExternalDiskIcons</strong>: YES <ul>
+<li><strong>ExternalDiskIcons</strong>: NO <ul>
 <li>External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.</li>
 </ul>
 </li>
@@ -765,12 +763,14 @@
 <li>Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM</li>
 </ul>
 </li>
-<li><strong>XhciPortLimit</strong>: YES </li>
+<li><strong>XhciPortLimit</strong>: YES <ul>
 <li>This is actually the 15 port limit patch, don&apos;t rely on it as it&apos;s not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md" target="_blank">AMD USB Mapping</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="misc">Misc</h2>
 <p><img src="https://i.imgur.com/4ORf7HB.png" alt="Misc"></p>
-<p><strong>Boot</strong>: Settings for boot screen (leave as-is unless you know what you&apos;re doing)</p>
+<p><strong>Boot</strong>: Settings for boot screen (Leave everything as default)</p>
 <ul>
 <li><strong>HibernateMode</strong>: None<ul>
 <li>Best to avoid hibernation with Hackintoshes all together</li>
@@ -808,7 +808,7 @@
 </ul>
 </li>
 </ul>
-<p><strong>Debug</strong>: Debug has special use cases, leave as-is unless you know what you&apos;re doing.</p>
+<p><strong>Debug</strong>: Helpful for debuggin OpenCore boot issues(We&apos;ll be chnging everything <em>but</em> <code>DisplayDelay</code>)</p>
 <ul>
 <li><strong>DisableWatchDog</strong>: YES (Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues)</li>
 <li><strong>Target</strong>: <code>67</code><ul>
@@ -821,7 +821,8 @@
 </li>
 </ul>
 <p>These values are based of those calculated in <a href="../troubleshooting/debug.html">OpenCore debugging</a></p>
-<p><strong>Security</strong>: Security is pretty self-explanatory.</p>
+<p><strong>Security</strong>: Security is pretty self-explanatory, <strong>do not skip</strong></p>
+<p>We&apos;ll be changing <code>AllowNvramReset</code>, <code>AllowSetDefault</code>, <code>RequireSignature</code>, <code>RequireVault</code> and <code>ScanPolicy</code></p>
 <ul>
 <li><strong>AllowNvramReset</strong>: YES<ul>
 <li>Allows for NVRAM reset both in the boot picker and when pressing <code>Cmd+Opt+P+R</code></li>
@@ -840,19 +841,19 @@
 </ul>
 </li>
 <li><strong>RequireSignature</strong>: NO<ul>
-<li>We won&apos;t be dealing vaulting so we can ignore</li>
+<li>We won&apos;t be dealing vaulting so we can ignore, <strong>won&apos;t boot with this enabled</strong></li>
 </ul>
 </li>
 <li><strong>RequireVault</strong>: NO<ul>
-<li>We won&apos;t be dealing vaulting so we can ignore as well</li>
+<li>We won&apos;t be dealing vaulting so we can ignore as well, <strong>won&apos;t boot with this enabled</strong></li>
 </ul>
 </li>
 <li><strong>ScanPolicy</strong>: <code>0</code> <ul>
-<li><code>0</code> allows you to see all drives available, please refer to <a href="../post-install/security.html">Security</a> section for further details</li>
+<li><code>0</code> allows you to see all drives available, please refer to <a href="../post-install/security.html">Security</a> section for further details. <strong>Will not boot USBs with this set to default</strong></li>
 </ul>
 </li>
 </ul>
-<p><strong>Tools</strong> Used for running OC debugging tools like clearing NVRAM</p>
+<p><strong>Tools</strong> Used for running OC debugging tools like the shell, ProperTree&apos;s snapshot function will add these for you. For us, we won&apos;t be using any tools</p>
 <ul>
 <li><strong>Name</strong><ul>
 <li>Name shown in OpenCore</li>
@@ -887,7 +888,7 @@
 <h2 id="nvram">NVRAM</h2>
 <p><img src="https://i.imgur.com/rRU63NJ.png" alt="NVRAM"></p>
 <p><strong>Add</strong>: </p>
-<p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, majority can ignore but )</p>
+<p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)</p>
 <ul>
 <li><strong>UIScale</strong>:<ul>
 <li>01: Standard resolution(Clover equivalent is <code>0x28</code>)</li>
@@ -900,7 +901,7 @@
 <li><p><strong>boot-args</strong>:</p>
 <ul>
 <li><strong>-v</strong> - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you&apos;re booting instead of the Apple logo and progress bar. It&apos;s invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.</li>
-<li><p><strong>debug=0x100</strong> - this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can (hopefully) glean some useful info and follow the breadcrumbs to get past the issues.</p>
+<li><p><strong>debug=0x100</strong> - this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can <em>hopefully</em> glean some useful info and follow the breadcrumbs to get past the issues.</p>
 </li>
 <li><p><strong>keepsyms=1</strong> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</p>
 </li>
@@ -934,7 +935,7 @@
 </ul>
 </li>
 </ul>
-<p><strong>Block</strong>: Forcibly rewrites NVRAM variables, do note that <code>Add</code> will not overwrite values already present in NVRAM so values like <code>boot-args</code> should be left.</p>
+<p><strong>Block</strong>: Forcibly rewrites NVRAM variables, do note that <code>Add</code> <strong>will not overwrite</strong> values already present in NVRAM so values like <code>boot-args</code> should be left alone.</p>
 <p><strong>LegacyEnable</strong>: NO</p>
 <ul>
 <li>Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM</li>
@@ -977,11 +978,14 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <p>The <code>Board Serial</code> part gets copied to Generic -&gt; MLB.</p>
 <p>The <code>SmUUID</code> part gets copied toto Generic -&gt; SystemUUID.</p>
 <p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>. After install follow the <a href="../post-install/iservices.html">Fixing iServices</a> page on how to find your real MAC Address)</p>
-<p><strong>Reminder that you want valid serial numbers but those not in use, you want to get a message back like: &quot;Purchase Date not Validated&quot;</strong></p>
+<p><strong>Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: &quot;Invalid Serial&quot; or &quot;Purchase Date not Validated&quot;</strong></p>
 <p><a href="https://checkcoverage.apple.com" target="_blank">Apple Check Coverage page</a></p>
 <p><strong>Automatic</strong>: YES </p>
 <ul>
-<li>Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</li>
+<li>Generates Platforminfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</li>
+</ul>
+<p><strong>Generic</strong>:</p>
+<ul>
 <li><strong>SpoofVendor</strong>: YES<ul>
 <li>Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case</li>
 </ul>
@@ -1014,7 +1018,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li>Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.</li>
 </ul>
 <p><strong>Drivers</strong>: Add your .efi drivers here</p>
-<p><strong>Input</strong>: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support</p>
+<p><strong>Input</strong>: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, everything should be left as default</p>
 <ul>
 <li><strong>KeyForgetThreshold</strong>: <code>5</code><ul>
 <li>The delay between each key input when holding a key down, for best results use <code>5</code> milliseconds</li>
@@ -1040,7 +1044,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li>Used for fixing broken pointer support, commonly used for Z87 Asus boards</li>
 </ul>
 </li>
-<li><strong>PointerSupportMode</strong>:<ul>
+<li><strong>PointerSupportMode</strong>: [Blank]<ul>
 <li>Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank</li>
 </ul>
 </li>
@@ -1049,7 +1053,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </ul>
 </li>
 </ul>
-<p><strong>Protocols</strong>: (Most values can be ignored here as they&apos;re meant for real Macs/VMs)</p>
+<p><strong>Protocols</strong>: (Most values can be ignored here as they&apos;re meant for real Macs/VMs, <strong>the one we care about is <code>ConsoleControl</code></strong>)</p>
 <ul>
 <li><strong>AppleSmcIo</strong>: NO<ul>
 <li>Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault</li>
@@ -1073,6 +1077,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </li>
 </ul>
 <p><strong>Quirks</strong>:</p>
+<p>Settings relating to UEFI, main ones we need to change: <code>ProvideConsoleGop</code>, and <code>RequestBootVarFallback</code></p>
 <ul>
 <li><strong>AvoidHighAlloc</strong>: NO<ul>
 <li>Workaround for when te motherboard can&apos;t properly access higher memory in UEFI Boot Services. Avoid unless necessary(affected models: GA-Z77P-D3 (rev. 1.1))</li>
@@ -1132,7 +1137,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </ul>
 <p><strong>Sanity check</strong>:</p>
 <p>So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:</p>
-<p><a href="https://opencore.slowgeek.com" target="_blank">Sanity Checker</a></p>
+<p><a href="https://opencore.slowgeek.com" target="_blank"><strong>Sanity Checker</strong></a></p>
 <h1 id="amd-bios-settings">AMD BIOS Settings</h1>
 <p><strong>Disable:</strong></p>
 <ul>
@@ -1204,7 +1209,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"AMD","level":"4.1","depth":1,"next":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-02-18T19:25:27.732Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-18T19:26:14.610Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"AMD","level":"4.1","depth":1,"next":{"title":"Emulated NVRAM","level":"5.1","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.1","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"favicon":"","appleTouchIconPrecomposed152":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/AMD-config.md","mtime":"2020-02-19T01:29:16.472Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-19T01:30:04.306Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
