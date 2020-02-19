@@ -1,19 +1,37 @@
 # AMD
 
-Last edited: Febuary 11, 2020
+Last edited: Febuary 18, 2020
 
 ## Starting Point
 
-You'll want to start with the sample.plist that OpenCorePkg provides you in the DOCS folder and rename it to config.plist. Next, open up your favourite XML editor like [ProperTree](https://github.com/corpnewt/ProperTree) and we can get to work. **Reminder configurators are not supported, most are out of date with the OpenCore spec and some like Mackie's will even add clover sections and corrupt plists. You are on your own if you use such tools**
+So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
 
-Users of ProperTree will also get the benefit of running the Snapshot function which will add all the Firmware drivers, kexts and SSDTs into your config.plist(Cmd/Crtl + R and point to your OC folder).
+* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
+* **The Sample.plist cannot be used As-Is**, you must configure it to your system
+* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
 
-Kernel patches courtesy of [AMD OSX](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(save these for later, we'll go over how to use them below):
-* [Ryzen/Threadripper(17h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip) (10.13, 10.14, and 10.15)
+Now with all that, we'll need some things to get started:
 
+* [ProperTree](https://github.com/corpnewt/ProperTree): For editing our config, this editor has some super useful tools for OpenCore
+* [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS): For generating our SMBIOS
+* [Sample.plist](https://github.com/acidanthera/OpenCorePkg/releases): This is found under the Docs folder of the release download
+* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore): Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
+   * [Ryzen/Threadripper(17h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip) (Supports 10.13, 10.14, and 10.15)
+   * [Bulldozer/Jaguar(15h/16h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip) (Supports 10.13, 10.14, and 10.15)
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+Now with those downloaded, we can get to really get started:
+
+* Grab the **Sample.plist** and rename to **config.plist**
+* Open your new config.plist in ProperTree
+   * macOS: `ProperTree.command`
+   * Windows: `ProperTree.bat`
+* Run the Clean Snapshot function(**Cmd/Ctrl + Shift + R** and point it at your EFI/OC folder), 
+   * This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config
+   * Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you're troubleshooting
+
+And now you're ready to configure it!
+
+**And read this guide more than once before setting up OpenCore** and make sure you have it set up correctly. **Do note that images will not always be the most up-to-date** so please read the text below them, if nothing's mentioned then leave as default.
 
 ## ACPI
 
@@ -22,39 +40,28 @@ Kernel patches courtesy of [AMD OSX](https://github.com/AMD-OSX/AMD_Vanilla/tree
 
 **Add:**
 
-This is where you'll add SSDT patches for your system, these are most useful for laptops and OEM desktops but also common for [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with most systems like ours, **even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
-   * Corrects your EC devices, **needed for all Catalina users**. To setup you'll need to find out the name of your `PNP0C09` device in your DSDT, this being either `EC0`, `H_EC`, `PGEC` and `ECDV`. You can read more about Embedded Controller issues in Catalina here: [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/). If no `PNP0C09` device shows up then there is no need for this SSDT. 
-   * This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.
-   * I've also provided a precompiled version for users with EC0, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
+   * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommeneded for other versions of macOS
+   * This SSDT also has a second function, USBX. This is used for forcing USB power properties and requires SSDT-EC so this just jumbles them together.
+   * I've also provided a precompiled version for users with `EC0`, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
  
-Note that you should not add your generated `DSDT.aml` here. It is already in your firmware. So remove the entry for it in your `config.plist`.
+ Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/ACPI.
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension\(Assembled\) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
 **Block**
 
-This drops certain ACPI tabes from loading, for us we can ignore this
+This blocks certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. Most PCs do not ACPI patches, so in the majority of the cases, you need to do nothing here. For those who need DSDT patches for things like XHC controllers, use SSDTs or similar Device Property patching like what's seen with Framebuffer patching. 
+This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
 
-And to grab the location of such devices you can use [gfxutil](https://github.com/acidanthera/gfxutil/releases).
+**Quirk**: 
 
-* **Comment** 
-   * Name of patch
-* **Count** 
-   * How many time the patch is applied, `0` will apply to all instances
-* **Enabled** 
-   * Self-explanatory, enables or disables the patch
-* **Find**
-   * The original name in ACPI
-* **Replace** 
-   * The new name in ACPI, the length must match original
-
-**Quirk**: Settings for ACPI.
+Settings relating to ACPI, leave everything here as default.
 
 * **FadtEnableReset**: NO
    * Enable reboot and shutdown on legacy hardware, not recommended unless needed
@@ -75,9 +82,11 @@ This section is dedicated to quirks relating to boot.efi patching with FwRuntime
 
 **MmioWhitelist**:
 
-This section is allowing devices to be passthrough to macOS that are generally ignored, most users can ignore this section.
+This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.
 
 **Quirks**:
+
+Settings relating to boot.efi patching and firmware fixes, default will work for us
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -86,7 +95,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **DisableSingleUser**: NO
    * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
-   * Needed for systems with non-functioning NVRAM like Z390 and such
+   * Needed for systems with non-functioning NVRAM
 * **DiscardHibernateMap**: NO
    * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES
@@ -112,15 +121,15 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 **Add**: Sets device properties from a map.
 
-By default, the Sample.plist has this section set for iGPU and audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x1b,0x0)` can be removed from both the `Add` and the `Block` sections. For audio we'll be setting the layout in the boot-args section.
+By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
-TL;DR, delete all the PCIRoot's here as we won't be using this section.
+TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ## Kernel
 
 ![Kernel](https://i.imgur.com/ehG6Da6.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run Cmd/Ctrl+R to add all their kexts in the correct order without manually typing each kext out.
+**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
 * **BundlePath** 
    * Name of the kext
@@ -128,7 +137,7 @@ TL;DR, delete all the PCIRoot's here as we won't be using this section.
 * **Enabled** 
    * Self-explanatory, either enables or disables the kext
 * **ExecutablePath** 
-   * Path to the actual executable hidden within the kext, you can see what path you kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
+   * Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
    * ex: `Contents/MacOS/Lilu`
 * **PlistPath** 
    * Path to the `info.plist` hidden within the kext
@@ -136,14 +145,10 @@ TL;DR, delete all the PCIRoot's here as we won't be using this section.
 
 **Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't require this)
 
-* **CpuidMask**: When set to Zero, original CPU bit will be used
-   * `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
-   * ex: CPUID `0x0306A9` would be `A9 06 03 00 | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
-* **CpuidData**: The value for the CPU spoofing
-   * `FF FF FF FF | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
-   * Swap `00` for `FF` if needing to swap with a longer value
+* **CpuidMask**: Leave this blank
+* **CpuidData**: Leave this blank
 
-**Block**: Blocks kexts from loading. Sometimes needed for disabling Apple's trackpad driver for some laptops.
+**Block**: Blocks kexts from loading. Not relevant for us
 
 **Patch**: This is where the AMD kernel patching magic happens. Please do note that `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303):
 
@@ -160,6 +165,7 @@ To merge:
 ![](/extra-files/gif.gif)
 
 **Quirks**:
+Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`, `PanicNoKextDump`, `PowerTimeoutKernelPanic` and `XhciPortLimit`. Everything else should be left as default
 
 * **AppleCpuPmCfgLock**: NO 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. AMD users can ignore
@@ -171,11 +177,11 @@ To merge:
    * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this
 * **CustomSMBIOSGuid**: NO 
    * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandom with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
-* **DisableIOMapper**: NO 
-   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems. Effects on AMD systems vary so recommended to disable SVM(SecureVirtualMachine) in BIOS
+* **DisableIoMapper**: NO 
+   * AMD doesn't have DMAR or VT-D support so irrelevant
 * **DummyPowerManagement**: YES
    * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
-* **ExternalDiskIcons**: YES 
+* **ExternalDiskIcons**: NO 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **IncreasePciBarSize**: NO
    * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this
@@ -188,14 +194,14 @@ To merge:
 * **ThirdPartyDrives**: NO 
    * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES 
-* This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
+   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
 
 
 ## Misc
 
 ![Misc](https://i.imgur.com/4ORf7HB.png)
 
-**Boot**: Settings for boot screen \(leave as-is unless you know what you're doing\)
+**Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
    * Best to avoid hibernation with Hackintoshes all together
 * **HideSelf**: YES
@@ -216,7 +222,7 @@ To merge:
 * **UsePicker**: YES
    * Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
 
-**Debug**: Debug has special use cases, leave as-is unless you know what you're doing.
+**Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
 
 * **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 * **Target**: `67`
@@ -226,7 +232,9 @@ To merge:
 
 These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
 
-**Security**: Security is pretty self-explanatory.
+**Security**: Security is pretty self-explanatory, **do not skip**
+
+We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `RequireVault` and `ScanPolicy`
 
 * **AllowNvramReset**: YES
    * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
@@ -237,13 +245,13 @@ These values are based of those calculated in [OpenCore debugging](/troubleshoot
 * **ExposeSensitiveData**: `6`
    * Shows more debug information, requires debug version of OpenCore
 * **RequireSignature**: NO
-   * We won't be dealing vaulting so we can ignore
+   * We won't be dealing vaulting so we can ignore, **won't boot with this enabled**
 * **RequireVault**: NO
-   * We won't be dealing vaulting so we can ignore as well
+   * We won't be dealing vaulting so we can ignore as well, **won't boot with this enabled**
 * **ScanPolicy**: `0` 
-   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details
+   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USBs with this set to default**
 
-**Tools** Used for running OC debugging tools like clearing NVRAM
+**Tools** Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you. For us, we won't be using any tools
 * **Name**
    * Name shown in OpenCore
 * **Enabled**
@@ -267,17 +275,17 @@ These values are based of those calculated in [OpenCore debugging](/troubleshoot
 
 **Add**: 
 
-4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 \(Booter Path, majority can ignore but \)
+4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)
 
 * **UIScale**:
    * 01: Standard resolution(Clover equivalent is `0x28`)
    * 02: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
 
-7C436110-AB2A-4BBB-A880-FE41995C9F82 \(System Integrity Protection bitmask\)
+7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
 
 * **boot-args**:
    * **-v** - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-   * **debug=0x100** - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can \(hopefully\) glean some useful info and follow the breadcrumbs to get past the issues.
+   * **debug=0x100** - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues.
 
    * **keepsyms=1** - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
    * **npci=0x2000** - this disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes. **Not needed if Above4GDecoding is enabled**
@@ -302,7 +310,7 @@ Recommended to leave enabled for best security practices
       * American: `en-US:0`(`656e2d55533a30` in HEX)
       * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
-**Block**: Forcibly rewrites NVRAM variables, do note that `Add` will not overwrite values already present in NVRAM so values like `boot-args` should be left.
+**Block**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
 
 **LegacyEnable**: NO
@@ -356,12 +364,16 @@ The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
 
 We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
 
-**Reminder that you want valid serial numbers but those not in use, you want to get a message back like: "Purchase Date not Validated"**
+**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
 [Apple Check Coverage page](https://checkcoverage.apple.com)
 
 **Automatic**: YES 
-* Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+
+* Generates Platforminfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+
+**Generic**:
+
 * **SpoofVendor**: YES
    * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
 * **AdviseWindows**: NO
@@ -388,7 +400,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Drivers**: Add your .efi drivers here
 
-**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
+**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, everything should be left as default
 
 * **KeyForgetThreshold**: `5`
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
@@ -402,12 +414,12 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Swaps `Option` and `Cmd` key
 * **PointerSupport**: `NO`
    * Used for fixing broken pointer support, commonly used for Z87 Asus boards
-* **PointerSupportMode**:
+* **PointerSupportMode**: [Blank]
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
    * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
 
-**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
+**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs, **the one we care about is `ConsoleControl`**)
 
 * **AppleSmcIo**: NO
    * Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault
@@ -421,6 +433,8 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Some older firmware have broken Unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
 
 **Quirks**:
+
+Settings relating to UEFI, main ones we need to change: `ProvideConsoleGop`, and `RequestBootVarFallback`
 
 * **AvoidHighAlloc**: NO
    * Workaround for when te motherboard can't properly access higher memory in UEFI Boot Services. Avoid unless necessary(affected models: GA-Z77P-D3 (rev. 1.1))
@@ -461,7 +475,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
 
-[Sanity Checker](https://opencore.slowgeek.com)
+[**Sanity Checker**](https://opencore.slowgeek.com)
 
 # AMD BIOS Settings
 
