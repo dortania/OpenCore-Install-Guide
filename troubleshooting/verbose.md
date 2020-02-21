@@ -24,6 +24,7 @@ Wanting a more clean booting experience with macOS without all that verbose text
 **`Misc -> Boot`**:
 
 * `Resolution`: set to your monitor's resolution
+   * `WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)`
 * `ConsoleBehaviourOs`: set to Graphics
 * `ConsoleBehaviourUi`: set to Text
 * `ConsoleMode` set to [Blank]
