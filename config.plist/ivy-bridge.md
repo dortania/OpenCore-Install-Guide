@@ -41,7 +41,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
-  * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommeneded for other versions of macOS
+  * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS
 * [SSDT-EHCx\_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
   * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems. This can be avoided if your BIOS supports EHCI-Handoff
 * [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)

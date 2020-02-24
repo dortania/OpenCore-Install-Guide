@@ -43,7 +43,7 @@ And now you're ready to configure it!
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
-   * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommeneded for other versions of macOS
+   * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS
    * This SSDT also has a second function, USBX. This is used for forcing USB power properties and requires SSDT-EC so this just jumbles them together.
    * I've also provided a precompiled version for users with `EC0`, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
  
