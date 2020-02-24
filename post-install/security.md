@@ -36,7 +36,7 @@ Setting in your config.plist:
 * UEFI -&gt; Quirks
   * `ProvideConsoleGOP` to YES
   * `RequestBootVarRouting` set to YES
-  * `ExitBootServicesDelay` set to `5` if you recieve `Still waiting for root device` on Aptio IV firmwares(Haswell and older)
+  * `ExitBootServicesDelay` set to `3000`-`5000` if you recieve `Still waiting for root device` on Aptio IV firmwares(Broadwell and older)
 
 With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
@@ -57,8 +57,9 @@ Do note that nvram.plist won't be vaulted so users with emulated NVRAM still hav
 
 **Settings in your config.plist**:
 
-* `Misc -> Security -> RequireSignature` set to True
-* `Misc -> Security -> RequireVault` set to True
+* `Misc -> Security -> Vault`:
+   * `Basic`: Requires just vault.plist to be present, mainly used for filesystem integrity verification
+   * `Secure`: Requires both vault.plist and vault.sig, used for best secuirty as vault.plist changes require a new signature
 
 **Setting up vault**:
 
@@ -84,8 +85,7 @@ Now we're ready to run `sign.command`:
 If you're doing heavy troublehooting or have the need to disable Vault, the main things to change:
 
 * Grab a new copy of OpenCore.efi
-* `Misc -> Security -> RequireSignature` set to False
-* `Misc -> Security -> RequireVault` set to False
+* `Misc -> Security -> Vault` set to Optional
 
 
 ## ScanPolicy

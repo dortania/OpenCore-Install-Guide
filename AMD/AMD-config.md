@@ -76,7 +76,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://i.imgur.com/suElruh.png)
+![Booter](https://cdn.discordapp.com/attachments/456913818467958789/681325158815760384/Screen_Shot_2020-02-23_at_7.22.44_PM.png)
 
 This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi
 
@@ -91,11 +91,11 @@ Settings relating to boot.efi patching and firmware fixes, default will work for
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful for most firmware though breaks on some AMD systems.
+   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful for most firmware though breaks on most AMD systems.
 * **DisableSingleUser**: NO
    * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
-   * Needed for systems with non-functioning NVRAM
+   * Needed for systems with non-functioning NVRAM, you can verify [here](/post-install/nvram.md) if yours works
 * **DiscardHibernateMap**: NO
    * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES
@@ -106,6 +106,8 @@ Settings relating to boot.efi patching and firmware fixes, default will work for
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
 * **ProtectCsmRegion**: NO
    * Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
+* **ProtectSecureBoot**: NO
+   * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **SetupVirtualMap**: YES
@@ -114,10 +116,9 @@ Settings relating to boot.efi patching and firmware fixes, default will work for
    * Needed for systems with large memory maps that don't fit, don't use unless necessary
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
-
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/ThtAO95.png)
+![DeviceProperties](https://media.discordapp.net/attachments/456913818467958789/681334251865636866/Screen_Shot_2020-02-23_at_7.58.51_PM.png?width=1674&height=866)
 
 **Add**: Sets device properties from a map.
 
@@ -127,7 +128,8 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ## Kernel
 
-![Kernel](https://i.imgur.com/ehG6Da6.png)
+![Kernel](https://cdn.discordapp.com/attachments/456913818467958789/681344557090209798/Screen_Shot_2020-02-23_at_8.39.33_PM.png)
+![](https://cdn.discordapp.com/attachments/456913818467958789/681344552526675988/Screen_Shot_2020-02-23_at_8.39.49_PM.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
@@ -199,13 +201,19 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
 
 ## Misc
 
-![Misc](https://i.imgur.com/4ORf7HB.png)
+![Misc](https://cdn.discordapp.com/attachments/456913818467958789/681328971526307840/Screen_Shot_2020-02-23_at_7.37.47_PM.png)
 
 **Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
    * Best to avoid hibernation with Hackintoshes all together
+* **PickerMode**: `Builtin`
+   * Sets OpenCore to use the builtin picker
+* **HideAuxiliary**: NO
+   * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
+* **PickerAttributes**:
+   * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PollAppleHotKeys**: NO
    * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use AppleUsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
@@ -213,24 +221,21 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
       * `Cmd+R`: Boots Recovery partition
       * `Cmd+S`: Boot in Single-user mode
       * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, an alternative is `ESC` key
-* **Timeout**: `5`
-   * This sets how long OpenCore will wait until it automatically boots from the default selection
-* **ShowPicker**: YES
-   * Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
 * **TakeoffDelay**: `0`
-   * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support
-* **UsePicker**: YES
-   * Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
+  * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support  
+* **Timeout**: `5`
+  * This sets how long OpenCore will wait until it automatically boots from the default selection
 
 **Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
 
-* **DisableWatchDog**: YES \(Useful for when OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
+* **DisableWatchDog**: YES \(May need to be set for YES if OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 * **Target**: `67`
    * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483714`
    * Shows even more debug information, requires debug version of OpenCore
 
 These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
+
 
 **Security**: Security is pretty self-explanatory, **do not skip**
 
@@ -244,49 +249,45 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `Req
    * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional
 * **ExposeSensitiveData**: `6`
    * Shows more debug information, requires debug version of OpenCore
-* **RequireSignature**: NO
-   * We won't be dealing vaulting so we can ignore, **won't boot with this enabled**
-* **RequireVault**: NO
-   * We won't be dealing vaulting so we can ignore as well, **won't boot with this enabled**
+* **Vault**: `Optional`
+   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
 * **ScanPolicy**: `0` 
    * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USBs with this set to default**
 
 **Tools** Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you. For us, we won't be using any tools
-* **Name**
+* **Name** 
    * Name shown in OpenCore
-* **Enabled**
+* **Enabled** 
    * Self-explanatory, enables or disables
-* **Path**
+* **Path** 
    * Path to file after the `Tools` folder
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
 **Entries**: Used for specifying irregular boot paths that can't be found naturally with OpenCore
-* **Name**
-   * Name shown in boot picker
-* **Enabled**
-   * Self-explanatory, enables or disables
-* **Path**
-   * PCI route of boot drive, can be found with the [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases) and the `map` command
-   * ex: `PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi`
+
+Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 
 ## NVRAM
 
-![NVRAM](https://i.imgur.com/rRU63NJ.png)
+![NVRAM](https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png)
 
 **Add**: 
 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)
 
 * **UIScale**:
-   * 01: Standard resolution(Clover equivalent is `0x28`)
-   * 02: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
+   * `01`: Standard resolution(Clover equivalent is `0x28`)
+   * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
+
+* **DefaultBackgroundColor**: Background color used by boot.efi
+   * `00000000`: Syrah Black
+   * `BFBFBF00`: Light Gary
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
 
 * **boot-args**:
    * **-v** - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.
-   * **debug=0x100** - this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues.
-
+   * **debug=0x100**- this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues.
    * **keepsyms=1** - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
    * **npci=0x2000** - this disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey`. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes. **Not needed if Above4GDecoding is enabled**
    * **agdpmod=pikera** - used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**
@@ -393,14 +394,21 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://i.imgur.com/UiGGDWK.png)
+![UEFI](https://media.discordapp.net/attachments/456913818467958789/681314701333758003/Screen_Shot_2020-02-23_at_6.41.07_PM.png?width=1389&height=1770)
 
-**ConnectDrivers**: YES 
+**ConnectDrivers**: YES
+
 * Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
 
 **Drivers**: Add your .efi drivers here
 
-**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, everything should be left as default
+Only drivers present here should be:
+
+* HFSPlus.efi
+* ApfsDriverLoader.efi
+* FwRuntimeServices.efi
+
+**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
 * **KeyForgetThreshold**: `5`
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
@@ -414,17 +422,37 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Swaps `Option` and `Cmd` key
 * **PointerSupport**: `NO`
    * Used for fixing broken pointer support, commonly used for Z87 Asus boards
-* **PointerSupportMode**: [Blank]
+* **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
    * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
 
-**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs, **the one we care about is `ConsoleControl`**)
+**Output**: Relating to visual output
+
+* **TextRenderer**: `BuiltinGraphics`
+   * Used for fixing resoltuion of OpenCore itself, `Resolution` must be set to `Max` to work correctly
+* **ConsoleMode**: [Blank]
+   * Specifies Console output size, best to keep it blank
+* **Resolution**: `Max`
+   * Sets OpenCore's resolution, `Max` will use the highest avalible reolution or can be specified (`WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)`)
+* **ClearScreenOnModeSwitch**: NO
+   * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that this is only required in cases when using `System` TextRenderer
+* **IgnoreTextInGraphics**: NO
+   * Fix for UI corruption when both text and graphics outputs, only relevant for users using `System` TextRenderer 
+* **ProvideConsoleGop**: YES
+   * Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, **required for graphical output once the kernel takes over**
+* **DirectGopRendering**: NO
+   * Use builtin graphics output protocol renderer for console, mainly relevant for MacPro5,1 users
+* **ReconnectOnResChange**: NO
+* **ReplaceTabWithSpace**: NO
+   * Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed   
+* **SanitiseClearScreen**: NO
+   * Fixes High resolutions displays that display OpenCore in 1024x768, only relevant for users using `System` TextRenderer
+
+**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
 * **AppleSmcIo**: NO
    * Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault
-* **ConsoleControl**: YES
-   * Replaces Console Control protocol with a builtin version, set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
 * **FirmwareVolume**: NO
    * Fixes UI regarding Filevault, set to YES for better FileVault compatibility
 * **HashServices**: NO
@@ -432,37 +460,23 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 * **UnicodeCollation**: NO
    * Some older firmware have broken Unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
 
+
 **Quirks**:
 
-Settings relating to UEFI, main ones we need to change: `ProvideConsoleGop`, and `RequestBootVarFallback`
-
-* **AvoidHighAlloc**: NO
-   * Workaround for when te motherboard can't properly access higher memory in UEFI Boot Services. Avoid unless necessary(affected models: GA-Z77P-D3 (rev. 1.1))
 * **ExitBootServicesDelay**: `0`
-   * Only required for very specific use cases like setting to `5` for ASUS Z87-Pro running FileVault2
+   * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault2
 * **IgnoreInvalidFlexRatio**: NO
    * Fix for when MSR\_FLEX\_RATIO \(0x194\) can't be disabled in the BIOS, required for all pre-skylake based systems
-* **IgnoreTextInGraphics**: NO
-   * Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
-* **ProvideConsoleGop**: YES
-   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, **required for seeing once the kernel takes over**
 * **ReleaseUsbOwnership**: NO
    * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
 * **RequestBootVarFallback**: YES
    * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **RequestBootVarRouting**: YES
    * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
-* **ReplaceTabWithSpace**: NO
-   * Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed
-* **SanitiseClearScreen**: NO
-   * Fixes High resolutions displays that display OpenCore in 1024x768, recommened for user with 1080P+ displays
-* **ClearScreenOnModeSwitch**: NO
-   * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 * **UnblockFsConnect**: NO
    * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
 
-
-# Cleaning up
+## Cleaning up
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 

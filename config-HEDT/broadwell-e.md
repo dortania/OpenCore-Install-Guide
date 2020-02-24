@@ -75,7 +75,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://i.imgur.com/suElruh.png)
+![Booter](https://cdn.discordapp.com/attachments/456913818467958789/681325158815760384/Screen_Shot_2020-02-23_at_7.22.44_PM.png)
 
 This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi
 
@@ -105,6 +105,8 @@ Settings relating to boot.efi patching and firmware fixes, only one we need to c
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
 * **ProtectCsmRegion**: NO
    * Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
+* **ProtectSecureBoot**: NO
+   * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **SetupVirtualMap**: YES
@@ -125,7 +127,7 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ## Kernel
 
-![Kernel](https://i.imgur.com/l1pu0cJ.png)
+![Kernel](https://media.discordapp.net/attachments/456913818467958789/681335231080300564/Screen_Shot_2020-02-23_at_8.02.45_PM.png?width=1486&height=1771)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
@@ -154,14 +156,14 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 **Quirks**:
 
-Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `AppleXcpmCfgLock`, `AppleXcpmExtraMsrs`, `DisableIOMapper`,  `PanicNoKextDump`, `PowerTimeoutKernelPanic` and `XhciPortLimit`. Everything else should be left as default
+Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `AppleXcpmCfgLock`, `DisableIOMapper`,  `PanicNoKextDump`, `PowerTimeoutKernelPanic` and `XhciPortLimit`. Everything else should be left as default
 
 * **AppleCpuPmCfgLock**: YES 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmCfgLock**: YES 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmExtraMsrs**: YES 
-   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Needs to be enabled for `Emulate` to work correctly
+   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower
 * **AppleXcpmForceBoost**: NO
    * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this
 * **CustomSMBIOSGuid**: NO 
@@ -189,13 +191,19 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ## Misc
 
-![Misc](https://i.imgur.com/OROZbCk.png)
+![Misc](https://cdn.discordapp.com/attachments/456913818467958789/681328971526307840/Screen_Shot_2020-02-23_at_7.37.47_PM.png)
 
 **Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
    * Best to avoid hibernation with Hackintoshes all together
+* **PickerMode**: `Builtin`
+   * Sets OpenCore to use the builtin picker
+* **HideAuxiliary**: NO
+   * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
+* **PickerAttributes**:
+   * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PollAppleHotKeys**: NO
    * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use AppleUsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
@@ -203,14 +211,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
       * `Cmd+R`: Boots Recovery partition
       * `Cmd+S`: Boot in Single-user mode
       * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, an alternative is `ESC` key
-* **Timeout**: `5`
-   * This sets how long OpenCore will wait until it automatically boots from the default selection
-* **ShowPicker**: YES
-   * Shows OpenCore's UI, needed for seeing your available drives or set to NO to follow default option
 * **TakeoffDelay**: `0`
   * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support  
-* **UsePicker**: YES
-   * Uses OpenCore's default GUI, set to NO if you wish to use a different GUI
+* **Timeout**: `5`
+  * This sets how long OpenCore will wait until it automatically boots from the default selection
 
 **Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
 
@@ -235,10 +239,8 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `Req
    * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional
 * **ExposeSensitiveData**: `6`
    * Shows more debug information, requires debug version of OpenCore
-* **RequireSignature**: NO
-   * We won't be dealing vaulting so we can ignore, **won't boot with this enabled**
-* **RequireVault**: NO
-   * We won't be dealing vaulting so we can ignore as well, **won't boot with this enabled**
+* **Vault**: `Optional`
+   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
 * **ScanPolicy**: `0` 
    * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USBs with this set to default**
 
@@ -252,25 +254,24 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `Req
    * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
 
 **Entries**: Used for specifying irregular boot paths that can't be found naturally with OpenCore
-* **Name**
-   * Name shown in boot picker
-* **Enabled**
-   * Self-explanatory, enables or disables
-* **Path**
-   * PCI route of boot drive, can be found with the [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases) and the `map` command
-   * ex: `PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi`
+
+Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 
 ## NVRAM
 
-![NVRAM](https://i.imgur.com/HM4FTH6.png)
+![NVRAM](https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png)
 
 **Add**: 
 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)
 
 * **UIScale**:
-   * 01: Standard resolution(Clover equivalent is `0x28`)
-   * 02: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
+   * `01`: Standard resolution(Clover equivalent is `0x28`)
+   * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
+
+* **DefaultBackgroundColor**: Background color used by boot.efi
+   * `00000000`: Syrah Black
+   * `BFBFBF00`: Light Gary
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
 

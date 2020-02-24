@@ -42,10 +42,9 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 ## Stuck on `no vault provided!`
 
-Turn the following off in your config.plist under `Misc -> Security`:
+Turn the following off in your config.plist under `Misc -> Security -> Vault`:
 
-* `RequireSignature`
-* `RequireVault`
+* `Basic`
 
 If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
@@ -53,7 +52,7 @@ If you have already executed the `sign.command` you will need to restore the Ope
 
 Couple problems:
 
-* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Quirks
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
 * Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're Opencore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
@@ -77,7 +76,7 @@ Main things to check:
 ## Black screen after picker
 
 This is due to missing ConsoleGOP, enable it under your config:
-* `UEFI -> Quirks -> ProvideConsoleGOP`
+* `UEFI -> Output -> ProvideConsoleGOP`
 
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 

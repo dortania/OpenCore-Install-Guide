@@ -119,7 +119,12 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 # Boot Graphics
 
-**UIScale**
+**DefaultBackgroundColor**:
+* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> DefaultBackgroundColor`
+   * `00000000`: Syrah Black
+   * `BFBFBF00`: Light Gary
+
+**UIScale**:
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`
    * 1 -> `01`
    * 2 -> `02`
