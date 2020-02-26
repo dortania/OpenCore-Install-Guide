@@ -407,6 +407,8 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
    * Mojave works fine
 * Blender 2.8.0+ won't work
    * 2.7.9 is last good version
+* IDA Pro won't install
+   * There's an Intel specific check in the installer, app itself is likely fine
 * 15/16h CPU webpages crashing
    * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
 
@@ -474,11 +476,15 @@ Make sure `Add Python to PATH`
 So couple things:
 
 * iStat Menus doesn't yet support MacPro7,1 readouts
-* VirtualSMC's sensors do not support AMD
+* VirtualSMC's bundled sensors do not support AMD
 
-For iStat, you'll have to wait for an update. For AMD users, you can use: [FakeSMC3_with_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases)
+For iStat, you'll have to wait for an update. For AMD users, you can use either:
 
-**Note for AMD**:
+* [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor/releases)
+   * Still in early beta but great work has been done, note it's been mainly tested on Ryzen
+* [FakeSMC3_with_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases)
+
+**Note for AMD with FakeSMC**:
 * FileVault support requires more work with FakeSMC
 * Make sure no other SMC kexts are present, specifically those from [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
 

@@ -111,6 +111,7 @@ Settings relating to boot.efi patching and firmware fixes, only one we need to c
    * Needed for systems with large memory maps that don't fit, don't use unless necessary
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
+
 ## DeviceProperties
 
 ![DeviceProperties](https://media.discordapp.net/attachments/456913818467958789/681334251865636866/Screen_Shot_2020-02-23_at_7.58.51_PM.png?width=1674&height=866)
