@@ -40,7 +40,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * Audio renames: Handled by AppleALC
    * change HDAS to HDEF
    * change CAVS to HDEF
-   * cahnge AZAL to HDEF
+   * change AZAL to HDEF
 * Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)
    * change STAS to [Blank]
 * NVMe patches: NVMeFix.kext fixes power management
@@ -131,12 +131,17 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> DefaultBackgroundColor`
    * `00000000`: Syrah Black
    * `BFBFBF00`: Light Gary
+   * To calcuate your own, convert an `RGB` value to `HEX`
 
 **EFILoginHiDPI**:
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> EFILoginHiDPI | Data | <>`
    * 0 -> `<00000000>`
    * 1 -> `<01000000>`
 
+**flagstate**:
+* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> flagstate | Data | <>`
+   * 0 -> `<00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000`(dumped from a mac)
+   * NVRAM location needs to be double checked for this one
 
 **UIScale**:
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale | Data | <>`
@@ -151,6 +156,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **HWPEnable**: Better alternative is to propery manage `MSR 0x770` with [HWPEnable](https://github.com/headkaze/HWPEnable)
 
+**QEMU**: Proper VM/KVM support is implemented in Opencore
+
 **TurboDisable**: Better alternative is to control your frequencies with [CPUFriend](https://github.com/acidanthera/CPUFriend) or [ssdtPRGen](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
 # Devices
@@ -160,7 +167,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * ClockID: `DeviceProperties -> Add -> PCIRoot... -> AAPL,clock-id`
 * HighCurrent: `DeviceProperties -> Add -> PCIRoot... -> AAPL, HighCurrent`
    * Irrelevant for OS X 10.11 and newer
-   * Newer variant is either PowerProperties defined in `IOUSBHostFamily.kext -> AppleUSBHostPlatformProperties` or added with a USBX SSDT for iMac17,1 and newer
+   * Newer variant is either PowerProperties defined in `IOUSBHostFamily.kext -> AppleUSBHostPlatformProperties` or added with a USBX SSDT for Skylake SMBIOS and newer
 
 **Audio**:
 
@@ -421,6 +428,12 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 **SmUUID**:
 * `PlatformInfo -> Generic -> SystemUUID`
 
+**Memory**:
+* No way to currently map memory slots
+
+**Slots AAPL Injection**:
+* `DeviceProperties -> Add -> PCIRoot... -> APPL,slot-name | string | Add slot`
+
 # System Parameters
 
 **CustomUUID**:
@@ -442,9 +455,34 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 * This only works up to 10.7 on Clover, and OpenCore requires an OS that supports a prelinked(10.7) so there can't be an equivalant 
 
 
+**ExposeSysVariables**:
+* Just add your SMBIOS properties under `Platforminfo`
+* Confusing quirk tbh, it's not even mentioned in more recent versions of the Clover docs on AppleLife
+
 **NvidiaWeb**: 
 
 * What this does is apply ```sudo nvram nvda_drv=1``` on every boot. To get a similar effect you can find it under the following path:
 * `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> nvda_drv: <31>`
 
 
+# Status
+
+**Section finished 100%**:
+
+* Boot Graphics
+* Disable Drivers
+* RTVariables
+* SMBIOS
+* SystemParameters
+
+**Section mostly finished**:
+
+* Acpi
+* Boot
+* CPU
+* Devices
+* KernelAndKextPatches
+
+**Section missing**:
+
+* GUI

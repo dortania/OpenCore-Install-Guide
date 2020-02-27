@@ -406,6 +406,22 @@ Only drivers present here should be:
 * ApfsDriverLoader.efi
 * FwRuntimeServices.efi
 
+**Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default)
+
+* **AudioSupport**: NO
+   * Used for enabling AudioDxe support, for this guide we'll be avoiding
+* **AudioDevice**: [Blank]
+   * This will be the PciRoot of your audio device, [gfxutil](https://github.com/acidanthera/gfxutil/releases) is a great utility to find this
+   * When none specified it uses the first one it finds
+* **AudioCodec**: 0
+   * Specify your audio codec, 
+   * When none specified it uses the first one it finds
+* **AudioOut**: 0
+   * Specifies which output is used
+   * When none specified it uses the first one it finds
+* **PlayChime**
+   * Emulates the iconic Mac startup sound
+
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
 * **KeyForgetThreshold**: `5`

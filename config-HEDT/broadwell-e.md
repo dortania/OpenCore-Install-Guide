@@ -376,7 +376,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://i.imgur.com/UiGGDWK.png)
+![UEFI](https://media.discordapp.net/attachments/456913818467958789/681314701333758003/Screen_Shot_2020-02-23_at_6.41.07_PM.png?width=1389&height=1770)
 
 **ConnectDrivers**: YES
 
@@ -384,7 +384,29 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Drivers**: Add your .efi drivers here
 
-**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, everything should be left as default
+Only drivers present here should be:
+
+* HFSPlus.efi
+* ApfsDriverLoader.efi
+* FwRuntimeServices.efi
+
+**Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default)
+
+* **AudioSupport**: NO
+   * Used for enabling AudioDxe support, for this guide we'll be avoiding
+* **AudioDevice**: [Blank]
+   * This will be the PciRoot of your audio device, [gfxutil](https://github.com/acidanthera/gfxutil/releases) is a great utility to find this
+   * When none specified it uses the first one it finds
+* **AudioCodec**: 0
+   * Specify your audio codec, 
+   * When none specified it uses the first one it finds
+* **AudioOut**: 0
+   * Specifies which output is used
+   * When none specified it uses the first one it finds
+* **PlayChime**
+   * Emulates the iconic Mac startup sound
+
+**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
 * **KeyForgetThreshold**: `5`
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
@@ -398,18 +420,37 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
    * Swaps `Option` and `Cmd` key
 * **PointerSupport**: `NO`
    * Used for fixing broken pointer support, commonly used for Z87 Asus boards
-* **PointerSupportMode**: [Blank]
+* **PointerSupportMode**:
    * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
 * **TimerResolution**: `50000`
    * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
 
-**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs, **the one we care about is `ConsoleControl`**)
+**Output**: Relating to visual output
 
+* **TextRenderer**: `BuiltinGraphics`
+   * Used for fixing resoltuion of OpenCore itself, `Resolution` must be set to `Max` to work correctly
+* **ConsoleMode**: [Blank]
+   * Specifies Console output size, best to keep it blank
+* **Resolution**: `Max`
+   * Sets OpenCore's resolution, `Max` will use the highest avalible reolution or can be specified (`WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)`)
+* **ClearScreenOnModeSwitch**: NO
+   * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that this is only required in cases when using `System` TextRenderer
+* **IgnoreTextInGraphics**: NO
+   * Fix for UI corruption when both text and graphics outputs, only relevant for users using `System` TextRenderer 
+* **ProvideConsoleGop**: YES
+   * Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, **required for graphical output once the kernel takes over**
+* **DirectGopRendering**: NO
+   * Use builtin graphics output protocol renderer for console, mainly relevant for MacPro5,1 users
+* **ReconnectOnResChange**: NO
+* **ReplaceTabWithSpace**: NO
+   * Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed   
+* **SanitiseClearScreen**: NO
+   * Fixes High resolutions displays that display OpenCore in 1024x768, only relevant for users using `System` TextRenderer
+
+**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
 * **AppleSmcIo**: NO
    * Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault
-* **ConsoleControl**: YES
-   * Replaces Console Control protocol with a builtin version, set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware
 * **FirmwareVolume**: NO
    * Fixes UI regarding Filevault, set to YES for better FileVault compatibility
 * **HashServices**: NO
@@ -420,30 +461,16 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 **Quirks**:
 
-Settings relating to UEFI, main ones we need to change: `IgnoreInvalidFlexRatio`, `ProvideConsoleGop`, and `RequestBootVarFallback`
-
-* **AvoidHighAlloc**: NO
-   * Workaround for when te motherboard can't properly access higher memory in UEFI Boot Services. Avoid unless necessary\(affected models: GA-Z77P-D3 \(rev. 1.1\)\)
 * **ExitBootServicesDelay**: `0`
-   * Only required for very specific use cases like setting to `5` for ASUS Z87-Pro running FileVault2
+   * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault2
 * **IgnoreInvalidFlexRatio**: YES
    * Fix for when MSR\_FLEX\_RATIO \(0x194\) can't be disabled in the BIOS, required for all pre-skylake based systems
-* **IgnoreTextInGraphics**: NO
-   * Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo\(no verbose screen\)
-* **ProvideConsoleGop**: YES
-   * Enables GOP\(Graphics output Protcol\) which the macOS bootloader requires for console handle, **required for seeing once the kernel takes over**
 * **ReleaseUsbOwnership**: NO
    * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
 * **RequestBootVarFallback**: YES
    * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **RequestBootVarRouting**: YES
    * Redirects AptioMemeoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
-* **ReplaceTabWithSpace**: NO
-   * Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed
-* **SanitiseClearScreen**: NO
-   * Fixes High resolutions displays that display OpenCore in 1024x768, recommended for users with 1080P+ displays
-* **ClearScreenOnModeSwitch**: NO
-   * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed
 * **UnblockFsConnect**: NO
    * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
 

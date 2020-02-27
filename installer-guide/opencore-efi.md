@@ -34,13 +34,21 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
       * Used for Haswell and older when no NVMe driver is built into the firmware
    * XhciDxe.efi
       * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+   * HiiDatabase.efi
+      * Used for fixing GUI support like Shell.efi on Sandy Bridge and older
 
-* **Remove from Tools:**
+* **Remove everything from Tools:**
+   * BootKicker.efi
+      * Used for fixing the Apple picker on genuine Macs
    * CleanNvram.efi
       * We'll be using OpenCore's built-in function
+   * GopStop.efi
+      * Used for [testing GOP](https://github.com/acidanthera/OcSupportPkg/tree/master/Application/GopStop)
+   * HdaCodecDump.efi
+      * Used for finding info for AudioDxe setup, this is not covered in this guide so not needed
    * VerifyMsrE2.efi
       * Used for [verifying MSR lock](/extras/msr-lock.md), for install we can ignore
-
+      
 A cleaned up EFI:
 
 ![Clean EFI](https://i.imgur.com/2INJYol.png)
