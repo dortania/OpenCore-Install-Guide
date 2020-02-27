@@ -51,6 +51,7 @@ See supported chipset on respective drivers:
 Unsupported ethernet models:
 * Realtek L8200A(Only found in Asus boards)
 * Realtek RTL8125(2.5Gbe, mostly found on higher end gaming boards)
+   * [Meize's statement on the driver](https://www.insanelymac.com/forum/topic/287161-new-driver-for-realtek-rtl8111/?do=findComment&comment=2705551)
 
 And see [Wireless Buyers Guide](https://khronokernel-7.gitbook.io/wireless-buyers-guide/) for supported wifi cards. All built in motherboard wireless ccards will not work in macOS, they must be swapped.
 
