@@ -132,6 +132,14 @@ The two ig-platform-id's we use are as follows:
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64 or 96MB recommended).
 
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| AAPL,ig-platform-id | Data | <00001219> |
+| framebuffer-patch-enable | Data | <01000000> |
+| framebuffer-stolenmem | Data | <00003001> |
+
+(This is an example for an HD 530 without a dGPU and no BIOS options for iGPU memory)
+
 `PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).

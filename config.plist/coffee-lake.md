@@ -135,22 +135,19 @@ The two ig-platform-id's we use are as follows:
 * `0x3E920003` - this is used when the iGPU is only used for computing tasks and doesn't drive a display
   * `0300923E` when hex-swapped
 
-Worth noting that for 10.12 -&gt; 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up.
+Worth noting that for 10.12 -&gt; 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up. 10.13.6 natively supports Coffee Lake
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64 or 96MB recommended).
 
-I added another section as well that shows a fake `device-id` for the i3-8100's UHD 630. This has a different device id than the UHD 630 found on the 8700k, for instance, \(`3e918086` vs `3e928086` \).
-
-For this - we follow a similar procedure as our above ig-platform-id hex swapping - but this time, we only work with the first two pairs of hex bytes. If we think of our device id as 0xAABB0000, our swapped version would look like 0xBBAA0000. We don't do anything with the last 2 pairs of hex bytes.
-
-The device-id fake is set up like so:
-
-* `0x3e920000` - this is the device id for the UHD 630 found on an 8700k
-  * `923e0000` when hex swapped
-
-Note: FakeID is only required for High Sierra, Mojave doesn't require this
-
 For users with black screen issues after verbose on B360, B365, H310, H370, Z390, please see the [BusID iGPU patching](/extras/gpu-patches.md#iGPU-BusID-Patching) page
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| AAPL,ig-platform-id | Data | <07009B3E> |
+| framebuffer-patch-enable | Data | <01000000> |
+| framebuffer-stolenmem | Data | <00003001> |
+
+(This is an example for an UHD 630 without a dGPU and no BIOS options for iGPU memory)
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 

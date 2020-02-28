@@ -127,12 +127,20 @@ This section is set up via Headkaze's [_Intel Framebuffer Patching Guide_](https
 
 If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like `DDCCBBAA`
 
-The two ig-platform-id's we use are as follows:
+The ig-platform-id's we use is as follows:
 
 * `0x0166000A` - this is the standard hex for the ig-plat
   * `0A006601` when hex-swapped
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64 or 96MB recommended).
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| AAPL,ig-platform-id | Data | <0A006601> |
+| framebuffer-patch-enable | Data | <01000000> |
+| framebuffer-stolenmem | Data | <00003001> |
+
+
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 
