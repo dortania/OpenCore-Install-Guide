@@ -1,6 +1,6 @@
 # Haswell-E
 
-Last edited: Febuary 18, 2020
+Last edited: March 2, 2020
 
 ## Starting Point
 
@@ -26,9 +26,7 @@ Now with those downloaded, we can get to really get started:
    * This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config
    * Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you're troubleshooting
 
-And now you're ready to configure it!
-
-**And read this guide more than once before setting up OpenCore** and make sure you have it set up correctly. **Do note that images will not always be the most up-to-date** so please read the text below them, if nothing's mentioned then leave as default.
+**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
 ## ACPI
 
@@ -192,7 +190,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ## Misc
 
-![Misc](https://cdn.discordapp.com/attachments/456913818467958789/681328971526307840/Screen_Shot_2020-02-23_at_7.37.47_PM.png)
+![Misc](https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png)
 
 **Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
@@ -205,6 +203,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Hides the EFI partition as a boot option in OC's boot picker
 * **PickerAttributes**:
    * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+* **PickerAudioAssist**: NO
+   * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO
    * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use AppleUsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
@@ -294,11 +294,16 @@ csr-active-config is set to `00000000` which enables System Integrity Protection
 Recommended to leave enabled for best security practices
 
 * **nvda\_drv**: &lt;&gt; 
-   * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD and Intel GPU users should leave this area blank.**
+   * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD, Intel and Kepler GPU users should delete this section.**
 * **prev-lang:kbd**: &lt;&gt; 
    * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it(**Default in Sample config is Russian**):
    * American: `en-US:0`(`656e2d55533a30` in HEX)
    * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+   * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
+   
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| prev-lang:kbd | String | en-US:0 |
 
 **Block**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
@@ -316,7 +321,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](https://i.imgur.com/RKIXoi5.png)
+![PlatformInfo](https://i.imgur.com/CrqeCea.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
@@ -403,7 +408,7 @@ Only drivers present here should be:
 * **AudioOut**: 0
    * Specifies which output is used
    * When none specified it uses the first one it finds
-* **PlayChime**
+* **PlayChime**: NO
    * Emulates the iconic Mac startup sound
 
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
