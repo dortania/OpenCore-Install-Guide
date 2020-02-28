@@ -53,6 +53,15 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * change TMR to TIMR
    * change PIC to IPIC
    * change GBE1 to ETH0
+   
+**Patches**
+
+* TgtBridge patches: No feature parity in OpenCore, see comments(TgtBridge was very buggy in Clover):
+   * [Vit's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2682158)
+   * [Andrey's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2678273)
+
+* DisableASPM:
+   * `DeviceProperties -> Add -> PCIRoot... -> pci-aspm-default | Data | <00>`
 
 **Fixes**:
 
@@ -177,7 +186,7 @@ path/to/gfxutil -f HDEF
 ```
 * Inject: `DeviceProperties -> Add -> PCIRoot... -> layout-id`
 * AFGLowPowerState: `DeviceProperties -> Add -> PCIRoot... -> AFGLowPowerState -> <01000000>`
-* ResetHDA: [CodecCommander](https://bitbucket.org/RehabMan/os-x-eapd-codec-commander/downloads/)
+* ResetHDA: [JackFix](https://github.com/fewtarius/jackfix)(well to be specific it's `jackfix.sh`)
 
 **Add Properties**: 
 * No equivalent, need to specify with a PCIRoot path
