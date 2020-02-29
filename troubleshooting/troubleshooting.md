@@ -338,6 +338,12 @@ If these fixes do not work, see the [Fixing iServices page](/post-install/iservi
 ```text
 path/to/gfxutil -f HDEF
 ```
+
+Or a neat feature of gfxutil:
+
+```text
+path/to/gfxutil -f audio
+```
   
   Then add this PCIRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
   

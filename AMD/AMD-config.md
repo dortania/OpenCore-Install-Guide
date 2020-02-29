@@ -414,21 +414,24 @@ Only drivers present here should be:
 * ApfsDriverLoader.efi
 * FwRuntimeServices.efi
 
-**Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default)
+**Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS
 
 * **AudioSupport**: NO
-   * Used for enabling AudioDxe support, for this guide we'll be avoiding
+   * Used for enabling the audio port out, this requires AudioOut
 * **AudioDevice**: [Blank]
-   * This will be the PciRoot of your audio device, [gfxutil](https://github.com/acidanthera/gfxutil/releases) is a great utility to find this
-   * When none specified it uses the first one it finds
+   * This will be the PciRoot of your audio device, [gfxutil](https://github.com/acidanthera/gfxutil/releases) and debug log are great ways to find this
 * **AudioCodec**: 0
-   * Specify your audio codec, 
-   * When none specified it uses the first one it finds
+   * Specify your audio codec address, can be found in either debug log or with under `IOHDACodecAddress` in IOService
 * **AudioOut**: 0
-   * Specifies which output is used
-   * When none specified it uses the first one it finds
+   * Specifies which output is used, use the debug log to see what your board has
+   * Same idea, can be found in either debug log or with [HdaCodecDump.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+* **MinimumVolume**: 20
+   * Default sound level for audio output
 * **PlayChime**: NO
    * Emulates the iconic Mac startup sound
+   * This also requires [`AXEFIAudio_VoiceOver_Boot.wav`](https://github.com/acidanthera/OcBinaryData/blob/master/Resources/Audio/AXEFIAudio_VoiceOver_Boot.wav) under EFI/OC/Resources/Audio
+* **VolumeAmplifier**: 0
+   * Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000, see [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info on calculation
 
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
