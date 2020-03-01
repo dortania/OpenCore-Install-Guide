@@ -1,6 +1,6 @@
 # Gathering files
 
-Last edited: Febuary 14, 2020
+Last edited: March 1, 2020
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
