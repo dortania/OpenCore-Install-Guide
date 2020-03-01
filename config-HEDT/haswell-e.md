@@ -73,7 +73,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/456913818467958789/681325158815760384/Screen_Shot_2020-02-23_at_7.22.44_PM.png)
+![Booter](https://cdn.discordapp.com/attachments/683011276938543134/683505771153326081/Screen_Shot_2020-02-29_at_7.47.35_PM.png)
 
 This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi
 
@@ -116,7 +116,7 @@ Settings relating to boot.efi patching and firmware fixes, only one we need to c
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/N44BEKs.png)
+![DeviceProperties](https://media.discordapp.net/attachments/456913818467958789/681334251865636866/Screen_Shot_2020-02-23_at_7.58.51_PM.png?width=1674&height=866)
 
 **Add**: Sets device properties from a map.
 
@@ -381,7 +381,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://media.discordapp.net/attachments/456913818467958789/681314701333758003/Screen_Shot_2020-02-23_at_6.41.07_PM.png?width=1389&height=1770)
+![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518166915481677/Screen_Shot_2020-02-29_at_8.36.55_PM.png)
 
 **ConnectDrivers**: YES
 

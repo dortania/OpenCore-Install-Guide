@@ -424,7 +424,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 ## UEFI
 
-![UEFI](https://media.discordapp.net/attachments/456913818467958789/681314701333758003/Screen_Shot_2020-02-23_at_6.41.07_PM.png?width=1389&height=1770)
+![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518166915481677/Screen_Shot_2020-02-29_at_8.36.55_PM.png)
 
 **ConnectDrivers**: YES
 
