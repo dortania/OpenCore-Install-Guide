@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-Last edited: Febuary 11, 2020
+Last edited: March 2, 2020
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 

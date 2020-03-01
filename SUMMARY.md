@@ -16,6 +16,8 @@
 
 ## Intel HEDT Config.plist
 
+* [Haswell-E](config-HEDT/haswell-e.md)
+* [Broadwell-E](config-HEDT/broadwell-e.md)
 * [Skylake-X](config-HEDT/skylake-x.md)
 
 ## AMD Config.plist

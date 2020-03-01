@@ -1,6 +1,6 @@
 # Security and FileVault
 
-Last edited: Febuary 13, 2020
+Last edited: March 2, 2020
 
 So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through and setting up some of OpenCore's great secuirty features:
 
@@ -15,9 +15,9 @@ FileVault is macOS's builtin drive encyption, and with OpenCore support for it h
 To start, you'll need the following .efi drivers:
 
 * FwRuntimeServices.efi
-  * [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg/releases) for DuetPkg users(systesm without UEFI support)
+  * [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg/releases) for DuetPkg users(systems without UEFI support)
 
-**Do not use VirtualSMC.efi with OpenCore, its already baked inside**
+**Do not use VirtualSMC.efi with OpenCore, its already baked inside**. You do however require VirtualSMC.kext still
 
 Setting in your config.plist:
 
@@ -28,17 +28,20 @@ Setting in your config.plist:
 * NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
 * UEFI -&gt; Input
-  * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of UsbKbdxe should avoid)
+  * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of AppleUsbKbDxe should avoid)
+* UEFI -> Output
+  * `ProvideConsoleGOP` to YES
 * UEFI -&gt; Protocols
   * `FirmwareVolume` set to YES
   * `HashServices` set to YES for Haswell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
   * `AppleSmcIo` set to YES(this replaces VirtualSMC.efi)
 * UEFI -&gt; Quirks
-  * `ProvideConsoleGOP` to YES
   * `RequestBootVarRouting` set to YES
   * `ExitBootServicesDelay` set to `3000`-`5000` if you recieve `Still waiting for root device` on Aptio IV firmwares(Broadwell and older)
 
 With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
+
+For UI issues, see [Fixing Resolution and Verbose](/troubleshooting/verbose.md)
 
 ## Vault
 
