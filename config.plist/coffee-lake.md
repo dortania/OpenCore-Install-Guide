@@ -143,9 +143,9 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | <07009B3E> |
-| framebuffer-patch-enable | Data | <01000000> |
-| framebuffer-stolenmem | Data | <00003001> |
+| AAPL,ig-platform-id | Data | 07009B3E |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for an UHD 630 without a dGPU and no BIOS options for iGPU memory)
 
