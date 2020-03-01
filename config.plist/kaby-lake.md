@@ -134,9 +134,9 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | <00001259> |
-| framebuffer-patch-enable | Data | <01000000> |
-| framebuffer-stolenmem | Data | <00003001> |
+| AAPL,ig-platform-id | Data | 00001259 |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for an HD 630 without a dGPU and no BIOS options for iGPU memory)
 

@@ -134,9 +134,9 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | <0A006601> |
-| framebuffer-patch-enable | Data | <01000000> |
-| framebuffer-stolenmem | Data | <00003001> |
+| AAPL,ig-platform-id | Data | 0A006601 |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
 
 
 

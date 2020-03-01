@@ -144,10 +144,10 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | <0300220D> |
-| framebuffer-patch-enable | Data | <01000000> |
-| framebuffer-stolenmem | Data | <00003001> |
-| device-id | Data | <12040000> |
+| AAPL,ig-platform-id | Data | 0300220D |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
+| device-id | Data | 12040000 |
 
 (This is an example for an HD 4600 without a dGPU and no BIOS options for iGPU memory)
 
