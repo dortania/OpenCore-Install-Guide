@@ -165,6 +165,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4" data-path="../extras/acpi.html">
+            
+                <a href="../extras/acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -244,7 +257,33 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../config-HEDT/skylake-x.html">
+        <li class="chapter " data-level="3.1" data-path="../config-HEDT/haswell-e.html">
+            
+                <a href="../config-HEDT/haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../config-HEDT/broadwell-e.html">
+            
+                <a href="../config-HEDT/broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../config-HEDT/skylake-x.html">
             
                 <a href="../config-HEDT/skylake-x.html">
             
@@ -389,20 +428,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="../extras/acpi.html">
-            
-                <a href="../extras/acpi.html">
-            
-                    
-                    Getting started with ACPI
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.4" data-path="verbose.html">
+        <li class="chapter " data-level="7.3" data-path="verbose.html">
             
                 <a href="verbose.html">
             
@@ -415,7 +441,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5" data-path="../extras/kalsr-fix.html">
+        <li class="chapter " data-level="7.4" data-path="../extras/kalsr-fix.html">
             
                 <a href="../extras/kalsr-fix.html">
             
@@ -428,7 +454,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../extras/msr-lock.html">
+        <li class="chapter " data-level="7.5" data-path="../extras/msr-lock.html">
             
                 <a href="../extras/msr-lock.html">
             
@@ -441,7 +467,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.7" data-path="../post-install/iservices.html">
+        <li class="chapter " data-level="7.6" data-path="../post-install/iservices.html">
             
                 <a href="../post-install/iservices.html">
             
@@ -520,7 +546,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="general-troubleshooting">General Troubleshooting</h1>
-<p>Last edited: Febuary 11, 2020</p>
+<p>Last edited: March 2, 2020</p>
 <p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:</p>
 <ul>
 <li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a><ul>
@@ -564,18 +590,18 @@
 <li>Booting OpenCore reboots to BIOS</li>
 </ul>
 <h2 id="stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></h2>
-<p>Turn the following off in your config.plist under <code>Misc -&gt; Security</code>:</p>
+<p>Turn the following off in your config.plist under <code>Misc -&gt; Security -&gt; Vault</code>:</p>
 <ul>
-<li><code>RequireSignature</code></li>
-<li><code>RequireVault</code></li>
+<li><code>Basic</code></li>
 </ul>
 <p>If you have already executed the <code>sign.command</code> you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a></p>
 <h2 id="stuck-on-endrandomseed">Stuck on EndRandomSeed</h2>
 <p>Couple problems:</p>
 <ul>
-<li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -&gt; Quirks</li>
+<li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -&gt; Output</li>
 <li>Missing <a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">kernel patches</a>(only applies for AMD CPUs, make sure they&apos;re Opencore patches and not Clover. Clover uses <code>MatchOS</code> while OpenCore has <code>MinKernel</code> and <code>Maxkernel</code>)</li>
 <li><code>IgnoreInvalidFlexRatio</code> missing, this is needed for Broadwell and older. <strong>Not for AMD and Skylake or newer</strong></li>
+<li><code>AppleXcpmExtraMsrs</code> may be required, this is generally meant for Pentiums, HEDT and other odd systems. <strong>Don&apos;t use on AMD</strong></li>
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
@@ -593,7 +619,7 @@
 <h2 id="black-screen-after-picker">Black screen after picker</h2>
 <p>This is due to missing ConsoleGOP, enable it under your config:</p>
 <ul>
-<li><code>UEFI -&gt; Quirks -&gt; ProvideConsoleGOP</code></li>
+<li><code>UEFI -&gt; Output -&gt; ProvideConsoleGOP</code></li>
 </ul>
 <p>If this doesn&apos;t help, grab the <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">debug versions</a> of <code>OpenCore.efi</code> and <code>BOOTx64.efi</code> and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.</p>
 <h2 id="stuck-on-oc-ocapplegenericinput---success">Stuck on <code>OC: OcAppleGenericInput... - Success</code></h2>
@@ -816,6 +842,9 @@
 </ul>
 <pre><code class="lang-text">path/to/gfxutil -f HDEF
 </code></pre>
+<p>Or a neat feature of gfxutil:</p>
+<pre><code class="lang-text">path/to/gfxutil -f audio
+</code></pre>
 <p>  Then add this PCIRoot with the child <code>layout-id</code> to your config.plist under DeviceProperties -&gt; Add:</p>
 <p>  <img src="https://i.imgur.com/oV3xqta.png" alt=""></p>
 <p>Then find out your layout-id for your specific codec: <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">AppleALC&apos;s supported codec</a></p>
@@ -921,6 +950,10 @@
 <li>2.7.9 is last good version</li>
 </ul>
 </li>
+<li>IDA Pro won&apos;t install<ul>
+<li>There&apos;s an Intel specific check in the installer, app itself is likely fine</li>
+</ul>
+</li>
 <li>15/16h CPU webpages crashing<ul>
 <li>Follow directions here after UPDATE 5: <a href="https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&amp;comment=2661857" target="_blank">Fix webpages</a></li>
 </ul>
@@ -979,10 +1012,17 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <p>So couple things:</p>
 <ul>
 <li>iStat Menus doesn&apos;t yet support MacPro7,1 readouts</li>
-<li>VirtualSMC&apos;s sensors do not support AMD</li>
+<li>VirtualSMC&apos;s bundled sensors do not support AMD</li>
 </ul>
-<p>For iStat, you&apos;ll have to wait for an update. For AMD users, you can use: <a href="https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases" target="_blank">FakeSMC3_with_plugins</a></p>
-<p><strong>Note for AMD</strong>:</p>
+<p>For iStat, you&apos;ll have to wait for an update. For AMD users, you can use either:</p>
+<ul>
+<li><a href="https://github.com/trulyspinach/SMCAMDProcessor/releases" target="_blank">SMCAMDProcessor</a><ul>
+<li>Still in early beta but great work has been done, note it&apos;s been mainly tested on Ryzen</li>
+</ul>
+</li>
+<li><a href="https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases" target="_blank">FakeSMC3_with_plugins</a></li>
+</ul>
+<p><strong>Note for AMD with FakeSMC</strong>:</p>
 <ul>
 <li>FileVault support requires more work with FakeSMC</li>
 <li>Make sure no other SMC kexts are present, specifically those from <a href="https://github.com/acidanthera/VirtualSMC/releases" target="_blank">VirtualSMC</a></li>
@@ -1038,7 +1078,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-01T16:23:32.960Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T16:24:18.899Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.3","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-02T15:48:15.416Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-02T15:48:59.498Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

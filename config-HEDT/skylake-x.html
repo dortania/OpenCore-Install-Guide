@@ -65,7 +65,7 @@
     <link rel="next" href="../AMD/AMD-config.html" />
     
     
-    <link rel="prev" href="../config.plist/coffee-lake.html" />
+    <link rel="prev" href="broadwell-e.html" />
     
 
     </head>
@@ -165,6 +165,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4" data-path="../extras/acpi.html">
+            
+                <a href="../extras/acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -244,7 +257,33 @@
         
         
     
-        <li class="chapter active" data-level="3.1" data-path="skylake-x.html">
+        <li class="chapter " data-level="3.1" data-path="haswell-e.html">
+            
+                <a href="haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="broadwell-e.html">
+            
+                <a href="broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.3" data-path="skylake-x.html">
             
                 <a href="skylake-x.html">
             
@@ -389,20 +428,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="../extras/acpi.html">
-            
-                <a href="../extras/acpi.html">
-            
-                    
-                    Getting started with ACPI
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.4" data-path="../troubleshooting/verbose.html">
+        <li class="chapter " data-level="7.3" data-path="../troubleshooting/verbose.html">
             
                 <a href="../troubleshooting/verbose.html">
             
@@ -415,7 +441,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5" data-path="../extras/kalsr-fix.html">
+        <li class="chapter " data-level="7.4" data-path="../extras/kalsr-fix.html">
             
                 <a href="../extras/kalsr-fix.html">
             
@@ -428,7 +454,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../extras/msr-lock.html">
+        <li class="chapter " data-level="7.5" data-path="../extras/msr-lock.html">
             
                 <a href="../extras/msr-lock.html">
             
@@ -441,7 +467,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.7" data-path="../post-install/iservices.html">
+        <li class="chapter " data-level="7.6" data-path="../post-install/iservices.html">
             
                 <a href="../post-install/iservices.html">
             
@@ -520,7 +546,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="skylake-x">Skylake-X</h1>
-<p>Last edited: Febuary 18, 2020</p>
+<p>Last edited: March 2, 2020</p>
 <h2 id="starting-point">Starting Point</h2>
 <p>So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won&apos;t be left in the cold. This also means if you have issues, review your config settings to make sure they&apos;re correct. Main things to note with OpenCore:</p>
 <ul>
@@ -544,11 +570,11 @@
 </li>
 <li>Run the Clean Snapshot function(<strong>Cmd/Ctrl + Shift + R</strong> and point it at your EFI/OC folder), <ul>
 <li>This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config</li>
-<li>Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you&apos;re troubleshooting
-<strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing&apos;s mentioned then leave as default.</strong></li>
+<li>Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you&apos;re troubleshooting</li>
 </ul>
 </li>
 </ul>
+<p><strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing&apos;s mentioned then leave as default.</strong></p>
 <h2 id="acpi">ACPI</h2>
 <p><img src="https://i.imgur.com/IkLFucw.png" alt="ACPI"></p>
 <p><strong>Add:</strong></p>
@@ -596,7 +622,7 @@
 </li>
 </ul>
 <h2 id="booter">Booter</h2>
-<p><img src="https://i.imgur.com/suElruh.png" alt="Booter"></p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/683505771153326081/Screen_Shot_2020-02-29_at_7.47.35_PM.png" alt="Booter"></p>
 <p>This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi</p>
 <p><strong>MmioWhitelist</strong>:</p>
 <p>This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.</p>
@@ -639,6 +665,10 @@
 <li>Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary</li>
 </ul>
 </li>
+<li><strong>ProtectSecureBoot</strong>: NO<ul>
+<li>Fixes secureboot keys on MacPro5,1 and Insyde firmwares</li>
+</ul>
+</li>
 <li><strong>ProvideCustomSlide</strong>: YES<ul>
 <li>If there&apos;s a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving <code>Only N/256 slide values are usable!</code> debug message</li>
 </ul>
@@ -652,17 +682,17 @@
 </ul>
 </li>
 <li><strong>SignalAppleOS</strong>: NO<ul>
-<li>Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro&apos;s with dGPUs as booting Windows won&apos;t allow for the iGPU to be used<h2 id="deviceproperties">DeviceProperties</h2>
-</li>
+<li>Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro&apos;s with dGPUs as booting Windows won&apos;t allow for the iGPU to be used</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://i.imgur.com/N44BEKs.png" alt="DeviceProperties"></p>
+<h2 id="deviceproperties">DeviceProperties</h2>
+<p><img src="https://media.discordapp.net/attachments/456913818467958789/681334251865636866/Screen_Shot_2020-02-23_at_7.58.51_PM.png?width=1674&amp;height=866" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
 <p>By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot <code>PciRoot(0x0)/Pci(0x2,0x0)</code> can be removed from <code>Add</code> section. For audio we&apos;ll be setting the layout in the boot-args section, so removal of <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> is also recommended from both <code>Add</code> and <code>Block</code> sections</p>
 <p>TL;DR, delete all the PciRoot&apos;s here as we won&apos;t be using this section.</p>
 <h2 id="kernel">Kernel</h2>
-<p><img src="https://i.imgur.com/l1pu0cJ.png" alt="Kernel"></p>
+<p><img src="https://media.discordapp.net/attachments/456913818467958789/681335231080300564/Screen_Shot_2020-02-23_at_8.02.45_PM.png?width=1486&amp;height=1771" alt="Kernel"></p>
 <p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run <strong>Cmd/Ctrl + Shift + R</strong> to add all their kexts in the correct order without manually typing each kext out.</p>
 <ul>
 <li><strong>BundlePath</strong><ul>
@@ -750,15 +780,31 @@
 </ul>
 <p>The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such</p>
 <h2 id="misc">Misc</h2>
-<p><img src="https://i.imgur.com/OROZbCk.png" alt="Misc"></p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png" alt="Misc"></p>
 <p><strong>Boot</strong>: Settings for boot screen (Leave everything as default)</p>
 <ul>
 <li><strong>HibernateMode</strong>: None<ul>
 <li>Best to avoid hibernation with Hackintoshes all together</li>
 </ul>
 </li>
+<li><strong>PickerMode</strong>: <code>Builtin</code><ul>
+<li>Sets OpenCore to use the builtin picker</li>
+</ul>
+</li>
+<li><strong>HideAuxiliary</strong>: NO<ul>
+<li>Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour</li>
+</ul>
+</li>
 <li><strong>HideSelf</strong>: YES<ul>
 <li>Hides the EFI partition as a boot option in OC&apos;s boot picker</li>
+</ul>
+</li>
+<li><strong>PickerAttributes</strong>:<ul>
+<li>Sets OpenCore&apos;s UI color, won&apos;t be covered here but see 8.3.8 of <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more info</li>
+</ul>
+</li>
+<li><strong>PickerAudioAssist</strong>: NO<ul>
+<li>Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled</li>
 </ul>
 </li>
 <li><strong>PollAppleHotKeys</strong>: NO<ul>
@@ -772,20 +818,12 @@
 </li>
 </ul>
 </li>
-<li><strong>Timeout</strong>: <code>5</code><ul>
-<li>This sets how long OpenCore will wait until it automatically boots from the default selection</li>
-</ul>
-</li>
-<li><strong>ShowPicker</strong>: YES<ul>
-<li>Shows OpenCore&apos;s UI, needed for seeing your available drives or set to NO to follow default option</li>
-</ul>
-</li>
 <li><strong>TakeoffDelay</strong>: <code>0</code><ul>
 <li>Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support  </li>
 </ul>
 </li>
-<li><strong>UsePicker</strong>: YES<ul>
-<li>Uses OpenCore&apos;s default GUI, set to NO if you wish to use a different GUI</li>
+<li><strong>Timeout</strong>: <code>5</code><ul>
+<li>This sets how long OpenCore will wait until it automatically boots from the default selection</li>
 </ul>
 </li>
 </ul>
@@ -821,12 +859,8 @@
 <li>Shows more debug information, requires debug version of OpenCore</li>
 </ul>
 </li>
-<li><strong>RequireSignature</strong>: NO<ul>
-<li>We won&apos;t be dealing vaulting so we can ignore, <strong>won&apos;t boot with this enabled</strong></li>
-</ul>
-</li>
-<li><strong>RequireVault</strong>: NO<ul>
-<li>We won&apos;t be dealing vaulting so we can ignore as well, <strong>won&apos;t boot with this enabled</strong></li>
+<li><strong>Vault</strong>: <code>Optional</code><ul>
+<li>We won&apos;t be dealing vaulting so we can ignore, <strong>you won&apos;t boot with this set to Secure</strong></li>
 </ul>
 </li>
 <li><strong>ScanPolicy</strong>: <code>0</code> <ul>
@@ -851,29 +885,22 @@
 </li>
 </ul>
 <p><strong>Entries</strong>: Used for specifying irregular boot paths that can&apos;t be found naturally with OpenCore</p>
-<ul>
-<li><strong>Name</strong><ul>
-<li>Name shown in boot picker</li>
-</ul>
-</li>
-<li><strong>Enabled</strong><ul>
-<li>Self-explanatory, enables or disables</li>
-</ul>
-</li>
-<li><strong>Path</strong><ul>
-<li>PCI route of boot drive, can be found with the <a href="https://github.com/acidanthera/OpenCoreShell/releases" target="_blank">OpenCoreShell</a> and the <code>map</code> command</li>
-<li>ex: <code>PciRoot(0x0)/Pci(0x1D,0x4)/Pci(0x0,0x0)/NVMe(0x1,09-63-E3-44-8B-44-1B-00)/HD(1,GPT,11F42760-7AB1-4DB5-924B-D12C52895FA9,0x28,0x64000)/\EFI\Microsoft\Boot\bootmgfw.efi</code></li>
-</ul>
-</li>
-</ul>
+<p>Won&apos;t be covered here, see 8.6 of <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more info</p>
 <h2 id="nvram">NVRAM</h2>
-<p><img src="https://i.imgur.com/HM4FTH6.png" alt="NVRAM"></p>
+<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png" alt="NVRAM"></p>
 <p><strong>Add</strong>: </p>
 <p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)</p>
 <ul>
-<li><strong>UIScale</strong>:<ul>
-<li>01: Standard resolution(Clover equivalent is <code>0x28</code>)</li>
-<li>02: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is <code>0x2A</code>)</li>
+<li><p><strong>UIScale</strong>:</p>
+<ul>
+<li><code>01</code>: Standard resolution(Clover equivalent is <code>0x28</code>)</li>
+<li><code>02</code>: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is <code>0x2A</code>)</li>
+</ul>
+</li>
+<li><p><strong>DefaultBackgroundColor</strong>: Background color used by boot.efi</p>
+<ul>
+<li><code>00000000</code>: Syrah Black</li>
+<li><code>BFBFBF00</code>: Light Gary</li>
 </ul>
 </li>
 </ul>
@@ -899,16 +926,33 @@
 <p>Recommended to leave enabled for best security practices</p>
 <ul>
 <li><strong>nvda_drv</strong>: &lt;&gt; <ul>
-<li>For enabling Nvidia WebDrivers, set to 31 if running a <a href="https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs" target="_blank">Maxwell or Pascal GPU</a>. This is the same as setting nvda_drv=1 but instead we translate it from <a href="https://www.browserling.com/tools/hex-to-text" target="_blank">text to hex</a>, Clover equivalent is <code>NvidiaWeb</code>. <strong>AMD and Intel GPU users should leave this area blank.</strong></li>
+<li>For enabling Nvidia WebDrivers, set to 31 if running a <a href="https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs" target="_blank">Maxwell or Pascal GPU</a>. This is the same as setting nvda_drv=1 but instead we translate it from <a href="https://www.browserling.com/tools/hex-to-text" target="_blank">text to hex</a>, Clover equivalent is <code>NvidiaWeb</code>. <strong>AMD, Intel and Kepler GPU users should delete this section.</strong></li>
 </ul>
 </li>
 <li><strong>prev-lang:kbd</strong>: &lt;&gt; <ul>
 <li>Needed for non-latin keyboards in the format of <code>lang-COUNTRY:keyboard</code>, recommeneded to keep blank though you can specify it(<strong>Default in Sample config is Russian</strong>):</li>
 <li>American: <code>en-US:0</code>(<code>656e2d55533a30</code> in HEX)</li>
 <li>Full list can be found in <a href="https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></li>
+<li>Hint: <code>prev-lang:kbd</code> can be changed into a String so you can input <code>en-US:0</code> directly instead of converting to HEX</li>
 </ul>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">prev-lang:kbd</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">en-US:0</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Block</strong>: Forcibly rewrites NVRAM variables, do note that <code>Add</code> <strong>will not overwrite</strong> values already present in NVRAM so values like <code>boot-args</code> should be left alone.</p>
 <p><strong>LegacyEnable</strong>: NO</p>
 <ul>
@@ -927,7 +971,7 @@
 <li>Enables writing to flash memory for all added variables.</li>
 </ul>
 <h2 id="platforminfo">Platforminfo</h2>
-<p><img src="https://i.imgur.com/RKIXoi5.png" alt="PlatformInfo"></p>
+<p><img src="https://i.imgur.com/CrqeCea.png" alt="PlatformInfo"></p>
 <p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application. </p>
 <p>For this Skylake-X example, we&apos;ll choose the iMacPro1,1 SMBIOS.</p>
 <p>Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:</p>
@@ -979,13 +1023,52 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li>Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk</li>
 </ul>
 <h2 id="uefi">UEFI</h2>
-<p><img src="https://i.imgur.com/UiGGDWK.png" alt="UEFI"></p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/683518959873425639/Screen_Shot_2020-02-29_at_8.40.06_PM.png" alt="UEFI"></p>
 <p><strong>ConnectDrivers</strong>: YES</p>
 <ul>
 <li>Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.</li>
 </ul>
 <p><strong>Drivers</strong>: Add your .efi drivers here</p>
-<p><strong>Input</strong>: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, everything should be left as default</p>
+<p>Only drivers present here should be:</p>
+<ul>
+<li>HFSPlus.efi</li>
+<li>ApfsDriverLoader.efi</li>
+<li>FwRuntimeServices.efi</li>
+</ul>
+<p><strong>Audio</strong>: Related to AudioDxe settings, for us we&apos;ll be ignoring(leave as default). This is unrelated to audio support in macOS</p>
+<ul>
+<li><strong>AudioSupport</strong>: NO<ul>
+<li>Used for enabling the audio port out, this requires AudioOut</li>
+</ul>
+</li>
+<li><strong>AudioDevice</strong>: [Blank]<ul>
+<li>This will be the PciRoot of your audio device, <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> and debug log are great ways to find this</li>
+</ul>
+</li>
+<li><strong>AudioCodec</strong>: 0<ul>
+<li>Specify your audio codec address, can be found in either debug log or with under <code>IOHDACodecAddress</code> in IOService</li>
+</ul>
+</li>
+<li><strong>AudioOut</strong>: 0<ul>
+<li>Specifies which output is used, use the debug log to see what your board has</li>
+<li>Same idea, can be found in either debug log or with <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">HdaCodecDump.efi</a></li>
+</ul>
+</li>
+<li><strong>MinimumVolume</strong>: 20<ul>
+<li>Default sound level for audio output</li>
+</ul>
+</li>
+<li><strong>PlayChime</strong>: NO<ul>
+<li>Emulates the iconic Mac startup sound</li>
+<li>This also requires <a href="https://github.com/acidanthera/OcBinaryData/blob/master/Resources/Audio/AXEFIAudio_VoiceOver_Boot.wav" target="_blank"><code>AXEFIAudio_VoiceOver_Boot.wav</code></a> under EFI/OC/Resources/Audio</li>
+</ul>
+</li>
+<li><strong>VolumeAmplifier</strong>: 0<ul>
+<li>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000, see <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more info on calculation</li>
+</ul>
+</li>
+</ul>
+<p><strong>Input</strong>: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support</p>
 <ul>
 <li><strong>KeyForgetThreshold</strong>: <code>5</code><ul>
 <li>The delay between each key input when holding a key down, for best results use <code>5</code> milliseconds</li>
@@ -1011,7 +1094,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li>Used for fixing broken pointer support, commonly used for Z87 Asus boards</li>
 </ul>
 </li>
-<li><strong>PointerSupportMode</strong>: [Blank]<ul>
+<li><strong>PointerSupportMode</strong>:<ul>
 <li>Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank</li>
 </ul>
 </li>
@@ -1020,14 +1103,50 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </ul>
 </li>
 </ul>
-<p><strong>Protocols</strong>: (Most values can be ignored here as they&apos;re meant for real Macs/VMs, <strong>the one we care about is <code>ConsoleControl</code></strong>)</p>
+<p><strong>Output</strong>: Relating to visual output</p>
+<ul>
+<li><strong>TextRenderer</strong>: <code>BuiltinGraphics</code><ul>
+<li>Used for fixing resoltuion of OpenCore itself, <code>Resolution</code> must be set to <code>Max</code> to work correctly</li>
+</ul>
+</li>
+<li><strong>ConsoleMode</strong>: [Blank]<ul>
+<li>Specifies Console output size, best to keep it blank</li>
+</ul>
+</li>
+<li><strong>Resolution</strong>: <code>Max</code><ul>
+<li>Sets OpenCore&apos;s resolution, <code>Max</code> will use the highest avalible reolution or can be specified (<code>WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)</code>)</li>
+</ul>
+</li>
+<li><strong>ClearScreenOnModeSwitch</strong>: NO<ul>
+<li>Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that this is only required in cases when using <code>System</code> TextRenderer</li>
+</ul>
+</li>
+<li><strong>IgnoreTextInGraphics</strong>: NO<ul>
+<li>Fix for UI corruption when both text and graphics outputs, only relevant for users using <code>System</code> TextRenderer </li>
+</ul>
+</li>
+<li><strong>ProvideConsoleGop</strong>: YES<ul>
+<li>Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, <strong>required for graphical output once the kernel takes over</strong></li>
+</ul>
+</li>
+<li><strong>DirectGopRendering</strong>: NO<ul>
+<li>Use builtin graphics output protocol renderer for console, mainly relevant for MacPro5,1 users</li>
+</ul>
+</li>
+<li><strong>ReconnectOnResChange</strong>: NO</li>
+<li><strong>ReplaceTabWithSpace</strong>: NO<ul>
+<li>Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed   </li>
+</ul>
+</li>
+<li><strong>SanitiseClearScreen</strong>: NO<ul>
+<li>Fixes High resolutions displays that display OpenCore in 1024x768, only relevant for users using <code>System</code> TextRenderer</li>
+</ul>
+</li>
+</ul>
+<p><strong>Protocols</strong>: (Most values can be ignored here as they&apos;re meant for real Macs/VMs)</p>
 <ul>
 <li><strong>AppleSmcIo</strong>: NO<ul>
 <li>Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault</li>
-</ul>
-</li>
-<li><strong>ConsoleControl</strong>: YES<ul>
-<li>Replaces Console Control protocol with a builtin version, set to YES otherwise you may see text output during booting instead of nice Apple logo. Required for most APTIO firmware</li>
 </ul>
 </li>
 <li><strong>FirmwareVolume</strong>: NO<ul>
@@ -1044,26 +1163,13 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </li>
 </ul>
 <p><strong>Quirks</strong>:</p>
-<p>Settings relating to UEFI, main ones we need to change: <code>ProvideConsoleGop</code>, and <code>RequestBootVarFallback</code></p>
 <ul>
-<li><strong>AvoidHighAlloc</strong>: NO<ul>
-<li>Workaround for when te motherboard can&apos;t properly access higher memory in UEFI Boot Services. Avoid unless necessary(affected models: GA-Z77P-D3 (rev. 1.1))</li>
-</ul>
-</li>
 <li><strong>ExitBootServicesDelay</strong>: <code>0</code><ul>
-<li>Only required for very specific use cases like setting to <code>5</code> for ASUS Z87-Pro running FileVault2</li>
+<li>Only required for very specific use cases like setting to <code>3000</code> - <code>5000</code> for ASUS Z87-Pro running FileVault2</li>
 </ul>
 </li>
 <li><strong>IgnoreInvalidFlexRatio</strong>: NO<ul>
 <li>Fix for when MSR_FLEX_RATIO (0x194) can&apos;t be disabled in the BIOS, required for all pre-skylake based systems</li>
-</ul>
-</li>
-<li><strong>IgnoreTextInGraphics</strong>: NO<ul>
-<li>Fix for UI corruption when both text and graphics outputs happen, set to YES with SanitiseClearScreen also set to YES for pure Apple Logo(no verbose screen)</li>
-</ul>
-</li>
-<li><strong>ProvideConsoleGop</strong>: YES<ul>
-<li>Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, <strong>required for seeing once the kernel takes over</strong></li>
 </ul>
 </li>
 <li><strong>ReleaseUsbOwnership</strong>: NO<ul>
@@ -1076,18 +1182,6 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </li>
 <li><strong>RequestBootVarRouting</strong>: YES<ul>
 <li>Redirects AptioMemeoryFix from <code>EFI_GLOBAL_VARIABLE_GUID</code> to <code>OC\_VENDOR\_VARIABLE\_GUID</code>. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.</li>
-</ul>
-</li>
-<li><strong>ReplaceTabWithSpace</strong>: NO<ul>
-<li>Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed</li>
-</ul>
-</li>
-<li><strong>SanitiseClearScreen</strong>: NO<ul>
-<li>Fixes High resolutions displays that display OpenCore in 1024x768, recommended for users with 1080P+ displays</li>
-</ul>
-</li>
-<li><strong>ClearScreenOnModeSwitch</strong>: NO<ul>
-<li>Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that ConsoleControl set to True may be needed</li>
 </ul>
 </li>
 <li><strong>UnblockFsConnect</strong>: NO<ul>
@@ -1165,7 +1259,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 
             
                 
-                <a href="../config.plist/coffee-lake.html" class="navigation navigation-prev " aria-label="Previous page: Coffee Lake">
+                <a href="broadwell-e.html" class="navigation navigation-prev " aria-label="Previous page: Broadwell-E">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -1181,7 +1275,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.1","depth":1,"next":{"title":"AMD","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-03-01T16:23:32.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T16:24:18.899Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.3","depth":1,"next":{"title":"AMD","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"previous":{"title":"Broadwell-E","level":"3.2","depth":1,"path":"config-HEDT/broadwell-e.md","ref":"config-HEDT/broadwell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-03-02T15:48:15.320Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-02T15:48:59.498Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -163,6 +163,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4" data-path="extras/acpi.html">
+            
+                <a href="extras/acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -242,7 +255,33 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="config-HEDT/skylake-x.html">
+        <li class="chapter " data-level="3.1" data-path="config-HEDT/haswell-e.html">
+            
+                <a href="config-HEDT/haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="config-HEDT/broadwell-e.html">
+            
+                <a href="config-HEDT/broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="config-HEDT/skylake-x.html">
             
                 <a href="config-HEDT/skylake-x.html">
             
@@ -387,20 +426,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="extras/acpi.html">
-            
-                <a href="extras/acpi.html">
-            
-                    
-                    Getting started with ACPI
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.4" data-path="troubleshooting/verbose.html">
+        <li class="chapter " data-level="7.3" data-path="troubleshooting/verbose.html">
             
                 <a href="troubleshooting/verbose.html">
             
@@ -413,7 +439,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5" data-path="extras/kalsr-fix.html">
+        <li class="chapter " data-level="7.4" data-path="extras/kalsr-fix.html">
             
                 <a href="extras/kalsr-fix.html">
             
@@ -426,7 +452,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="extras/msr-lock.html">
+        <li class="chapter " data-level="7.5" data-path="extras/msr-lock.html">
             
                 <a href="extras/msr-lock.html">
             
@@ -439,7 +465,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.7" data-path="post-install/iservices.html">
+        <li class="chapter " data-level="7.6" data-path="post-install/iservices.html">
             
                 <a href="post-install/iservices.html">
             
@@ -518,7 +544,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="introduction">Introduction</h1>
-<p>Last edited: Febuary 13, 2020</p>
+<p>Last edited: March 2, 2020</p>
 <ul>
 <li><a href="https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/" target="_blank">GitHub Pages link with Darkmode support</a></li>
 </ul>
@@ -526,13 +552,13 @@
 <p>OpenCore is an open-source unconventional first-in-class piece of software designed to intercept kernel loading to insert a highly advanced rootkit, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed.</p>
 <p>Please remember that OpenCore is still new and currently in beta. Unless you want to be on the bleeding edge of Hackintosh development or are planning on contributing to the project, you probably don&apos;t want to migrate if you have a stable system currently.</p>
 <p>Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the <a href="https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/" target="_blank">r/Hackintosh Vanilla Desktop Guide</a>. And those who have issues can visit both the <a href="https://www.reddit.com/r/hackintosh/" target="_blank">r/Hackintosh subreddit</a> and <a href="https://discord.gg/u8V7N5C" target="_blank">r/Hackintosh discord</a> for more help.</p>
-<p><strong>This guide supports 0.5.5</strong>, newer versions will require you to read the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf" target="_blank">Differences.pdf</a>. Guide will be updated soon after each <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCore release</a></p>
+<p><strong>This guide supports 0.5.6</strong>, newer versions will require you to read the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf" target="_blank">Differences.pdf</a>. Guide will be updated soon after each <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCore release</a></p>
 <h3 id="advantages-of-opencore">Advantages of OpenCore</h3>
 <ul>
 <li>On average, OpenCore systems boot faster than those using Clover as less auto-patching is done</li>
 <li>OpenCore offers better overall security with better support for FileVault, no need to disable SIP and even secure boot support via <a href="post-install/security.html#Vault">Vaulting</a></li>
 <li>OpenCore supports boot hotkey support via <code>boot.efi</code> - hold <code>Option</code> or <code>ESC</code> at startup to choose a boot device, <code>Cmd+R</code> to enter Recovery or <code>Cmd+Opt+P+R</code> to reset NVRAM.</li>
-<li>OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which <a href="https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l663" target="_blank">Clover uses</a></li>
+<li>OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which <a href="https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kext_inject.cpp#L920" target="_blank">Clover uses</a></li>
 <li>BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.</li>
 <li>Future development for <a href="https://github.com/acidanthera/AptioFixPkg" target="_blank">AptioMemoryFix</a> is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.</li>
 <li>UEFI and Legacy boot modes are supported.</li>
@@ -612,7 +638,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"OpenCore Vanilla Guide","level":"1.1","depth":1,"next":{"title":"Creating the USB","level":"1.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"README.md","mtime":"2020-03-01T16:23:32.860Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-01T16:24:18.899Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"OpenCore Vanilla Guide","level":"1.1","depth":1,"next":{"title":"Creating the USB","level":"1.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"README.md","mtime":"2020-03-02T15:48:15.316Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-02T15:48:59.498Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
