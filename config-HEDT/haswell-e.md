@@ -161,7 +161,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmCfgLock**: YES 
    * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
-* **AppleXcpmExtraMsrs**: NO 
+* **AppleXcpmExtraMsrs**: YES 
    * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower
 * **AppleXcpmForceBoost**: NO
    * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this
