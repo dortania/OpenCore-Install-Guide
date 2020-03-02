@@ -72,7 +72,10 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 **Ethernet**:
 
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
-  * Required for Intel NICs, chipsets that are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SmallTreeIntel82576.kext.zip). AMD motherboards with intel NICs generally run I211-AT
+  * Required for Intel NICs, chipsets that are based off of I211-AT will need the SmallTreeIntel82576 kext
+* [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
+  * Required for I211-AT NICs, based off of the SmallTree kext but patched to support I211-AT
+  * Required for most AMD boards running Intel NICs
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)

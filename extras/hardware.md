@@ -44,13 +44,14 @@ So this little section is for those who are wanting to know whether their hardwa
 See supported chipset on respective drivers:
 
 * [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
-   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://drive.google.com/file/d/0B5Txx3pb7pgcOG5lSEF2VzFySWM/view?usp=sharing)
+   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
 
 Unsupported ethernet models:
 * Realtek L8200A(Only found in Asus boards)
 * Realtek RTL8125(2.5Gbe, mostly found on higher end gaming boards)
+   * [Meize's statement on the driver](https://www.insanelymac.com/forum/topic/287161-new-driver-for-realtek-rtl8111/?do=findComment&comment=2705551)
 
 And see [Wireless Buyers Guide](https://khronokernel-7.gitbook.io/wireless-buyers-guide/) for supported wifi cards. All built in motherboard wireless ccards will not work in macOS, they must be swapped.
 
