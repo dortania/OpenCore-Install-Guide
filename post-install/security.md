@@ -63,6 +63,8 @@ Do note that nvram.plist won't be vaulted so users with emulated NVRAM still hav
 * `Misc -> Security -> Vault`:
    * `Basic`: Requires just vault.plist to be present, mainly used for filesystem integrity verification
    * `Secure`: Requires both vault.plist and vault.sig, used for best secuirty as vault.plist changes require a new signature
+* `Booter -> ProtectSecureBoot:` `YES`
+   * Needed with Insyde firmwares for fixing secureboot keys and reporting violations
 
 **Setting up vault**:
 

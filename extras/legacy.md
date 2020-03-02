@@ -1,6 +1,6 @@
 # Legacy Install
 
-Last editied: January 27, 2020
+Last editied: March 2, 2020
 
 Wanna try OpenCore but can't boot UEFI based sources? Well don't fret, there's hope for you! OpenCore supports DuetPkg which emulates a UEFI environment for legacy systems.
 
@@ -31,4 +31,9 @@ This will give you a list of available disks, choose yours and you will be promp
 
 This will provide you with an EFI partition with a `boot` file, this is where we'll add our OpenCore EFI.
 
-**Note**: You will need [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases).efi for picker support
+**Note**: The firmware drivers used for legacy users differ slightly:
+
+* [AppleUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases) 
+   * For picker support in the Opencore menu
+* [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
+   * Needed for seeing Hfs drives like installers, the legacy variant is required for SnadyBridge and older due to missing RDRAND instruction support
