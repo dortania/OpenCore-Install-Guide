@@ -1,5 +1,5 @@
 # Introduction
-Last edited: Febuary 13, 2020
+Last edited: March 2, 2020
 * [GitHub Pages link with Darkmode support](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
 
 ### About
@@ -10,14 +10,14 @@ Please remember that OpenCore is still new and currently in beta. Unless you wan
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
-**This guide supports 0.5.5**, newer versions will require you to read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf). Guide will be updated soon after each [OpenCore release](https://github.com/acidanthera/OpenCorePkg/releases)
+**This guide supports 0.5.6**, newer versions will require you to read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf). Guide will be updated soon after each [OpenCore release](https://github.com/acidanthera/OpenCorePkg/releases)
 
 ### Advantages of OpenCore
 
 * On average, OpenCore systems boot faster than those using Clover as less auto-patching is done
 * OpenCore offers better overall security with better support for FileVault, no need to disable SIP and even secure boot support via [Vaulting](/post-install/security.md#Vault)
 * OpenCore supports boot hotkey support via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.
-* OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://sourceforge.net/p/cloverefiboot/code/HEAD/tree/rEFIt_UEFI/Platform/kext_inject.c#l663)
+* OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kext_inject.cpp#L920)
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
 * Future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
 * UEFI and Legacy boot modes are supported.

@@ -5,6 +5,7 @@
    * [macOS install](/installer-guide/mac-install.md)
    * [Windows install](/installer-guide/winblows-install.md)
 * [Gathering files](ktext.md)
+* [Getting started with ACPI](extras/acpi.md)
 
 ## Intel Config.plist
 
@@ -16,6 +17,8 @@
 
 ## Intel HEDT Config.plist
 
+* [Haswell-E](config-HEDT/haswell-e.md)
+* [Broadwell-E](config-HEDT/broadwell-e.md)
 * [Skylake-X](config-HEDT/skylake-x.md)
 
 ## AMD Config.plist
@@ -38,7 +41,6 @@
 
 * [Legacy Install](extras/legacy.md)
 * [GPU Patching](extras/gpu-patches.md)
-* [Getting started with ACPI](extras/acpi.md)
 * [Fixing Resolution and Verbose](troubleshooting/verbose.md)
 * [Fixing KALSR slide values](extras/kalsr-fix.md)
 * [Fixing CFG Lock](extras/msr-lock.md)

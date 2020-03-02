@@ -1,6 +1,6 @@
 # Gathering files
 
-Last edited: March 1, 2020
+Last edited: March 2, 2020
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -14,7 +14,7 @@ These are the drivers used by OpenCore, for the majority of systems you only nee
 
 * [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Needed for seeing APFS volumes(ie. macOS)
-* [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) **or** [HfsPlus.efi](https://cdn.discordapp.com/attachments/606452360495104000/633621011887292416/HFSPlus.efi)
+* [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) **or** [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
    * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix HFS drivers**
 * [FwRuntimeServices.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
@@ -27,7 +27,8 @@ For legacy users:
    * Used for Haswell and older when no NVMe driver is built into the firmware, not needed if you're not using an NVMe drive
 * [XhciDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
    * Used for Sandy Bridge and older when no XHCI driver is built into the firmware, not needed if you're not using a USB 3.0 expansion card
-
+* [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
+   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on SandyBridge and older
 
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
 

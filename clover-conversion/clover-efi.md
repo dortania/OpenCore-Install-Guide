@@ -44,6 +44,8 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * FirmwareVolume.efi
 * HashServiceFix.efi
 * VirtualSMC.efi
+* BootChimeDxe.efi
+* AudioDxe.efi(well kinda, see AudioDxe shipped with [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg))
 
 
 **Explictely unsupported drivers:**

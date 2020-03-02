@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-Last edited: Febuary 11, 2020
+Last edited: March 2, 2020
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
@@ -42,10 +42,9 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 ## Stuck on `no vault provided!`
 
-Turn the following off in your config.plist under `Misc -> Security`:
+Turn the following off in your config.plist under `Misc -> Security -> Vault`:
 
-* `RequireSignature`
-* `RequireVault`
+* `Basic`
 
 If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
@@ -53,9 +52,10 @@ If you have already executed the `sign.command` you will need to restore the Ope
 
 Couple problems:
 
-* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Quirks
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
 * Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're Opencore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
+* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems. **Don't use on AMD**
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
@@ -77,7 +77,7 @@ Main things to check:
 ## Black screen after picker
 
 This is due to missing ConsoleGOP, enable it under your config:
-* `UEFI -> Quirks -> ProvideConsoleGOP`
+* `UEFI -> Output -> ProvideConsoleGOP`
 
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 
@@ -338,6 +338,12 @@ If these fixes do not work, see the [Fixing iServices page](/post-install/iservi
 ```text
 path/to/gfxutil -f HDEF
 ```
+
+Or a neat feature of gfxutil:
+
+```text
+path/to/gfxutil -f audio
+```
   
   Then add this PCIRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
   
@@ -408,6 +414,8 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
    * Mojave works fine
 * Blender 2.8.0+ won't work
    * 2.7.9 is last good version
+* IDA Pro won't install
+   * There's an Intel specific check in the installer, app itself is likely fine
 * 15/16h CPU webpages crashing
    * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
 
@@ -475,11 +483,15 @@ Make sure `Add Python to PATH`
 So couple things:
 
 * iStat Menus doesn't yet support MacPro7,1 readouts
-* VirtualSMC's sensors do not support AMD
+* VirtualSMC's bundled sensors do not support AMD
 
-For iStat, you'll have to wait for an update. For AMD users, you can use: [FakeSMC3_with_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases)
+For iStat, you'll have to wait for an update. For AMD users, you can use either:
 
-**Note for AMD**:
+* [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor/releases)
+   * Still in early beta but great work has been done, note it's been mainly tested on Ryzen
+* [FakeSMC3_with_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases)
+
+**Note for AMD with FakeSMC**:
 * FileVault support requires more work with FakeSMC
 * Make sure no other SMC kexts are present, specifically those from [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
 
