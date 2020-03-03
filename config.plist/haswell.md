@@ -534,6 +534,12 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
 
+**Sanity check**:
+
+So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
+
+* [**Sanity Checker**](https://opencore.slowgeek.com)
+
 # Intel BIOS settings
 
 **Disable:**
