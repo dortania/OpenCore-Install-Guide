@@ -42,9 +42,9 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 ## Stuck on `no vault provided!`
 
-Turn the following off in your config.plist under `Misc -> Security -> Vault`:
+Turn off file vault in your config.plist under `Misc -> Security -> Vault` by setting it to:
 
-* `Basic`
+* `Optional`
 
 If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
