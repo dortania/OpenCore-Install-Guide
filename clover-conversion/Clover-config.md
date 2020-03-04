@@ -63,6 +63,9 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * DisableASPM:
    * `DeviceProperties -> Add -> PCIRoot... -> pci-aspm-default | Data | <00>`
 
+* HaltEnabler:
+   * `ACPI -> Quirks -> FadtEnableReset -> YES`
+
 **Fixes**:
 
 * **FixIPIC**:
