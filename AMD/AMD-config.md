@@ -537,5 +537,8 @@ So what in the world needs to be done once everything is installed? Well here's 
 * [Disable OpenCore logging](/troubleshooting/debug.md)
 * [Enabling FileVault and other security features](/post-install/security.md)
 * [Fixing iMessage](/post-install/iservices.md)
-* Correcting audio, reread the DeviceProperties on how
+* [Correcting audio](https://github.com/acidanthera/applealc/wiki/supported-codecs)
+   * `alcid=xxx` in boot args, try 1 layout-id at a time
+   * ie. `alcid=1` then reboot and test, still broke then remove previous arg and add `alcid=2`, etc
 * [Booting macOS without the USB](/post-install/oc2hdd.md)
+* [Fixing AMD Temperature readings](https://github.com/trulyspinach/SMCAMDProcessor)
