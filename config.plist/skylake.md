@@ -119,7 +119,7 @@ Settings relating to boot.efi patching and firmware fixes, default will work for
 
 **Add**: Sets device properties from a map.
 
-This section is set up via Headkaze's [_Intel Framebuffer Patching Guide_](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271) and applies only one actual property to begin, which is the _ig-platform-id_. The way we get the proper value for this is to look at the ig-platform-id we intend to use, then swap the pairs of hex bytes.
+This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for fixing certain iGPU properties like `ig-platform-id`. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.
 
 If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like `DDCCBBAA`
 
@@ -130,7 +130,7 @@ The two ig-platform-id's we use are as follows:
 * `0x19120001` - this is used when the iGPU is only used for computing tasks and doesn't drive a display
   * `01001219` when hex-swapped
 
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64 or 96MB recommended).
+We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available. 
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -541,6 +541,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
+* DVMT Pre-Allocated(iGPU Memory): 64MB
 
 # Post-install
 
