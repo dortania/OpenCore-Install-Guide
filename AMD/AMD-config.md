@@ -538,8 +538,4 @@ So what in the world needs to be done once everything is installed? Well here's 
 * [Enabling FileVault and other security features](/post-install/security.md)
 * [Fixing iMessage](/post-install/iservices.md)
 * Correcting audio, reread the DeviceProperties on how
-* Moving OpenCore from the USB to your main drive
-   * Mount USB's EFI
-   * Copy EFI folder to the desktop
-   * Unmount USB and mount boot drive's EFI
-   * Paste EFI onto the root of the drive
+* [Booting macOS without the USB](/post-install/oc2hdd.md)
