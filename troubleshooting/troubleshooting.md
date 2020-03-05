@@ -288,6 +288,8 @@ This is likely due to faultly or outright missing NullCPUPowerManagement, the on
 
 With OS X 10.11 El Capitan, Apple imposed a 15 USB port limit. To get around this we actually create a USB map to include ports we want and kick out extras we don't care about. For install, set `Kernel -> Quirks -> XhciPortLimit -> Enabled` but for post install we recommend making a map as the port limit patch isn't guaranteed to work with future versions of macOS.
 
+First try your USB stick in a different USB port.
+
 For 15h and 16h AMD CPUs, you may need to add the following:
 * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
 
