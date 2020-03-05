@@ -402,9 +402,9 @@ Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemo
 
 So with AMD, whenever Apple calls CPU specific functions the app witll either not work or outright crash. Here are some apps and their "fixes":
 
-* Adobe Products don't always work and there is no fix for lightroom at the moment
+* Adobe Products don't always work
    * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
-   * Do note these fixes just disable functionality, they're not real fixes
+   * Do note these fixes just disables functionality, they're not really fixes
 * Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
    * VirtualBox works fine as it doesn't use AppleHV
    * VMware 10 and older can work as well
@@ -412,8 +412,6 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
    * Docker toolbox is the only solution as it's based off of VirtualBox, many feautures are unavailble with this version
 * Xcode AppleWatch simulator is broken in Catalina
    * Mojave works fine
-* Blender 2.8.0+ won't work
-   * 2.7.9 is last good version
 * IDA Pro won't install
    * There's an Intel specific check in the installer, app itself is likely fine
 * 15/16h CPU webpages crashing
