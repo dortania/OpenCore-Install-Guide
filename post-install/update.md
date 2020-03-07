@@ -72,11 +72,11 @@ So the process goes as follows:
 
 ## Updating macOS
 
-* So this is probably one of the most challenging parts about a hackintosh, mainaning it through OS updates. The main things to keep in mind:
+* So this is probably one of the most challenging parts about a hackintosh, maintaining it through OS updates. The main things to keep in mind:
    * With OS updates, make sure everything has been updated and you have some form of recovery like TimeMachine or an older macOS installer with a known good EFI on it
+   * Do a bit of google-fu to see if others are having issues with the newest update
 
-* And for those who're wanting a bit more of a detailed map of what's changed in macOS versions, see below:
-
+* I've also provided a bit more of a detailed map of what's changed in macOS versions, see below:
 
 **macOS Catalina**
 
@@ -86,6 +86,7 @@ So the process goes as follows:
    * MacPro5,1 support has been dropped
 * 10.15.1
    * Requires WhateverGreen 1.3.4+
+   * Broke DRM for many GPUs(see [DRM Chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md))
    * Requires all previous fixes
 * 10.15.2
   * Fixes Navi support in the installer
@@ -94,6 +95,6 @@ So the process goes as follows:
   * No change
   * Requires all previous fixes
 * 10.15.4
-  * Fixes DRM on many Polaris GPUs
-  * Requires all previous fixes
+  * Fixes DRM on many Ellesmere based Polaris GPUs
+  * Requires all previous fixes(excluding `shikigva=80` for Polaris DRM for most users)
 
