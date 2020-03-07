@@ -1,4 +1,4 @@
-Last edited: January 27, 2020
+Last edited: March 6, 2020
 
 With OpenCore I think it's about time we finally destroy some AMD myths, like how USB is just screwed on AMD and can't be mapped. Well, that is false! And I will show you the path of enlightenment.
 
@@ -6,6 +6,9 @@ So why would I want to use this? Well, a couple of reasons:
 * Add missing USB ports that macOS didn't automatically add
 * Remove unwanted devices like intel Bluetooth conflicting with Broadcom's
 * Stability by removing USB port limit patches
+
+For a more user-friendly guide, see Aleksander's post: [Why you need to care about USB mapping](https://aplus.rs/2020/usb-mapping-why/)
+
 # Backstory to USB on macOS
 
 For the best explainer, please read Corp's [USB map guide](https://usb-map.gitbook.io/project/terms-of-endearment). For the lazy here's a super quick explainer:

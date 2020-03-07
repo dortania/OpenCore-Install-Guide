@@ -81,11 +81,11 @@ This section is dedicated to quirks relating to boot.efi patching with FwRuntime
 
 **MmioWhitelist**:
 
-This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 **Quirks**:
 
-Settings relating to boot.efi patching and firmware fixes, default will work for us
+Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `SetupVirtualMap`
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc

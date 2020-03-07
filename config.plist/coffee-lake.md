@@ -87,7 +87,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 **Quirks**:
 
-Settings relating to boot.efi patching and firmware fixes, only one we need to change is `DevirtualiseMmio`
+Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio` and `SetupVirtualMap`
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
