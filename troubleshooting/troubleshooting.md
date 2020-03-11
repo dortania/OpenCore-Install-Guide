@@ -25,6 +25,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * Black screen after picker
 * Stuck on `OC: OcAppleGenericInput... - Success`
 * Stuck on `OCB: OcScanForBootEntries failure - Not Found`
+* Stuck on `OCB: failed to match a default boot option`
 * Stuck on `OCABC: Memory pool allocation failure - Not Found`
 * Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`
 * Stuck on `OC: Driver XXX.efi at 0 cannot be found`
@@ -97,6 +98,11 @@ If this doesn't help, grab the [debug versions](https://github.com/acidanthera/O
 ## Stuck on `OCB: OcScanForBootEntries failure - Not Found`
 
 This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
+* `Misc -> Security -> ScanPolicy -> 0`
+
+## Stuck on `OCB: failed to match a default boot option`
+
+Same fix as `OCB: OcScanForBootEntries failure - Not Found`, OpenCore is unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
 * `Misc -> Security -> ScanPolicy -> 0`
 
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
