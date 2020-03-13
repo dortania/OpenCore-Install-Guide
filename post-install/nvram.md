@@ -57,7 +57,7 @@ Within your config.plist:
 
 * **Booter**: 
   * `DisableVariableWrite`: set to `YES`
-* **Misc -&gt; Secuirty**:
+* **Misc -&gt; Security**:
   * `ExposeSensitiveData`: set to `0x3`
 * **NVRAM**:
   * `LegacyEnable`: set to `YES`

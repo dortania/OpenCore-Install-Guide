@@ -488,6 +488,6 @@ For iStat, you'll have to wait for an update. For AMD users, you can use either:
 So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you'll have to find other means to make an installer(Google's your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you'll need to format the drive you want to install onto with DiskUtility. See the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) on best practices
 
 Now to get onto troubleshooting:
-* Make sure `Misc -> Secuirty -> ScanPolicy` is set to `0` to show all drives
+* Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
 * Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table

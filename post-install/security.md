@@ -2,7 +2,7 @@
 
 Last edited: March 2, 2020
 
-So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through and setting up some of OpenCore's great secuirty features:
+So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through and setting up some of OpenCore's great Security features:
 
 * [FileVault](/post-install/security.md#FileVault)
 * [Vault](/post-install/security.md#Vault)
@@ -62,7 +62,7 @@ Do note that nvram.plist won't be vaulted so users with emulated NVRAM still hav
 
 * `Misc -> Security -> Vault`:
    * `Basic`: Requires just vault.plist to be present, mainly used for filesystem integrity verification
-   * `Secure`: Requires both vault.plist and vault.sig, used for best secuirty as vault.plist changes require a new signature
+   * `Secure`: Requires both vault.plist and vault.sig, used for best security as vault.plist changes require a new signature
 * `Booter -> ProtectSecureBoot:` `YES`
    * Needed with Insyde firmwares for fixing secureboot keys and reporting violations
 
