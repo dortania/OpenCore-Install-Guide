@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>macOS install · GitBook</title>
+        <title>Booting without USB · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -62,10 +62,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="winblows-install.html" />
+    <link rel="next" href="../misc/credit.html" />
     
     
-    <link rel="prev" href="opencore-efi.html" />
+    <link rel="prev" href="audio.html" />
     
 
     </head>
@@ -107,9 +107,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="opencore-efi.html">
+        <li class="chapter " data-level="1.2" data-path="../installer-guide/opencore-efi.html">
             
-                <a href="opencore-efi.html">
+                <a href="../installer-guide/opencore-efi.html">
             
                     
                     Creating the USB
@@ -121,9 +121,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="mac-install.html">
+        <li class="chapter " data-level="1.2.1" data-path="../installer-guide/mac-install.html">
             
-                <a href="mac-install.html">
+                <a href="../installer-guide/mac-install.html">
             
                     
                     macOS install
@@ -134,9 +134,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="winblows-install.html">
+        <li class="chapter " data-level="1.2.2" data-path="../installer-guide/winblows-install.html">
             
-                <a href="winblows-install.html">
+                <a href="../installer-guide/winblows-install.html">
             
                     
                     Windows install
@@ -323,9 +323,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../post-install/">
+        <li class="chapter " data-level="5.1" data-path="./">
             
-                <a href="../post-install/">
+                <a href="./">
             
                     
                     Post-Install
@@ -441,9 +441,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../post-install/iservices.html">
+        <li class="chapter " data-level="7.6" data-path="iservices.html">
             
-                <a href="../post-install/iservices.html">
+                <a href="iservices.html">
             
                     
                     Fixing iServices
@@ -454,9 +454,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.7" data-path="../post-install/nvram.html">
+        <li class="chapter " data-level="7.7" data-path="nvram.html">
             
-                <a href="../post-install/nvram.html">
+                <a href="nvram.html">
             
                     
                     Emulated NVRAM
@@ -467,9 +467,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../post-install/spoof.html">
+        <li class="chapter " data-level="7.8" data-path="spoof.html">
             
-                <a href="../post-install/spoof.html">
+                <a href="spoof.html">
             
                     
                     Disabling GPU
@@ -480,9 +480,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.9" data-path="../post-install/security.html">
+        <li class="chapter " data-level="7.9" data-path="security.html">
             
-                <a href="../post-install/security.html">
+                <a href="security.html">
             
                     
                     Security and FileVault
@@ -493,9 +493,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.10" data-path="../post-install/audio.html">
+        <li class="chapter " data-level="7.10" data-path="audio.html">
             
-                <a href="../post-install/audio.html">
+                <a href="audio.html">
             
                     
                     Fixing Audio
@@ -506,9 +506,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.11" data-path="../post-install/oc2hdd.html">
+        <li class="chapter active" data-level="7.11" data-path="oc2hdd.html">
             
-                <a href="../post-install/oc2hdd.html">
+                <a href="oc2hdd.html">
             
                     
                     Booting without USB
@@ -569,7 +569,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >macOS install</a>
+        <a href=".." >Booting without USB</a>
     </h1>
 </div>
 
@@ -584,41 +584,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="making-the-installer-in-macos">Making the installer in macOS</h1>
-<p>Last edited: January 18, 2020</p>
-<p>While you don&apos;t need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.</p>
-<p><strong>Note for legacy users</strong></p>
-<ul>
-<li>If you want to use OpenCore on a system without UEFI, please follow the <a href="../extras/legacy.html">Legacy Install</a> section first, after you can continue following the <strong>Base folder structure</strong> section</li>
-</ul>
-<p>To start we&apos;ll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you&apos;re just making a bootable OpenCore stick and not an installer. For everyone else, here&apos;s your options for obtaining macOS directly from Apple&apos;s servers:</p>
-<ul>
-<li><p>AppStore links: </p>
-<ul>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12" target="_blank">High Sierra</a>, </li>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12" target="_blank">Mojave</a>, </li>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12" target="_blank">Catalina</a></li>
-</ul>
-</li>
-<li><p><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a>:</p>
-<ul>
-<li>Download the full macOS installer</li>
-<li>Run <code>BuildmacOSInstallApp</code> then drag and drop the <code>macOS Downloads</code> folder found in GibMacOS</li>
-</ul>
-</li>
-</ul>
-<p>Next we&apos;ll want to format our USB HFS+/MacOS Journaled with GUID partition map, must be 12GB for macOS Catalina.as-is recommended to name it <code>MyVolume</code> as the script below can be used as-is.</p>
-<p><img src="https://i.imgur.com/numOUnF.png" alt="Formatting the USB"></p>
-<p>Next run the <code>createinstallmedia</code> command provided by <a href="https://support.apple.com/en-us/HT201372" target="_blank">Apple</a>, note that the command is made for USB&apos;s formatted with the name <code>MyVolume</code>:</p>
-<pre><code class="lang-text">sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
-</code></pre>
-<p>This will take some time so may want to grab a coffee or continue reading the guide(to be fair you really shouldn&apos;t be following this guide step by step without reading the whole thing first)</p>
-<h2 id="setting-up-opencores-efi-environment">Setting up OpenCore&apos;s EFI environment</h2>
-<p>Setting up OpenCore&apos;s EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is hidden from the end user, this is where our friend <a href="https://github.com/corpnewt/MountEFI" target="_blank">mountEFI</a> comes in:</p>
-<p><img src="https://i.imgur.com/4l1oK8i.png" alt="MountEFI"></p>
-<p>You&apos;ll notice that once we open the EFI partition, it&apos;s empty. This is where the fun begins.</p>
-<p><img src="https://i.imgur.com/EDeZB3u.png" alt="Empty EFI partition"></p>
-<h3 id="now-with-all-this-done-return-to-creating-the-usb-to-finish-up-your-work">Now with all this done, return to <a href="opencore-efi.html">Creating the USB</a> to finish up your work</h3>
+                                <h1 id="moving-opencore-from-usb-to-macos-drive">Moving OpenCore from USB to macOS Drive</h1>
+<p>Last edited: March 7, 2020</p>
+<h2 id="grabbing-opencore-off-the-usb">Grabbing OpenCore off the USB</h2>
+<p>So to start, we&apos;ll first want to grab OpenCore off of our installer. To do this, we&apos;ll be using a neat tool from CorpNewt called <a href="https://github.com/corpnewt/MountEFI" target="_blank">MountEFI</a></p>
+<p>For this example, we&apos;ll assume your USB is called <code>Install macOS Catalina</code>:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/684629962539663390/Screen_Shot_2020-03-03_at_10.13.56_PM.png" alt=""></p>
+<p>Once the EFI&apos;s mounted, we&apos;ll want to grab our EFI folder on there and keep in a safe place. We&apos;ll then want to <strong>eject the USB drive&apos;s EFI</strong> as having multiple EFIs mounted can confuse macOS sometimes, best practice is to keep only 1 EFI mounted at a time(you can eject just the EFI, the drive itself doesn&apos;t need to be removed)</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/684634974753652970/Screen_Shot_2020-03-03_at_10.34.15_PM.png" alt=""></p>
+<p>Now with this done, lets mount our macOS drive. With macOS Catalina, macOS is actually partitioned into 2 volumes: System Partition and User Partition. This means that MountEFI may report multiple drives in it&apos;s picker but each partition will still share the same EFI(The UEFI spec only allows for 1 EFI per drive). You can tell if it&apos;s the same drive with disk<strong>X</strong>sY (Y is just to say what parition it is)</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/684635377297915932/Screen_Shot_2020-03-03_at_10.22.20_PM.png" alt=""></p>
+<p>When you mount your main drive&apos;s EFI, you may be greeted with a folder called <code>APPLE</code>, this is used for updating the firmware on real Macs but has no effect on our hardware. You can wipe everything on the EFI partition and replace it with the one found on your USB</p>
+<h2 id="special-notes-for-legacy-users">Special notes for legacy users</h2>
+<p>When transfering over your EFI, there are still boot sectors that need to be written to so your non-UEFI BIOS would be able to find it So don&apos;t forget to rerun the <a href="../extras/legacy.html"><code>BootInstall.command</code></a> on your macOS drive</p>
 
                                 
                                 </section>
@@ -646,12 +624,12 @@
 
             
                 
-                <a href="opencore-efi.html" class="navigation navigation-prev " aria-label="Previous page: Creating the USB">
+                <a href="audio.html" class="navigation navigation-prev " aria-label="Previous page: Fixing Audio">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="winblows-install.html" class="navigation navigation-next " aria-label="Next page: Windows install">
+                <a href="../misc/credit.html" class="navigation navigation-next " aria-label="Next page: Credit">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -662,7 +640,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"macOS install","level":"1.2.1","depth":2,"next":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/mac-install.md","mtime":"2020-03-13T05:46:08.735Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-13T05:46:55.690Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Booting without USB","level":"7.11","depth":1,"next":{"title":"Credit","level":"8.1","depth":1,"path":"misc/credit.md","ref":"misc/credit.md","articles":[]},"previous":{"title":"Fixing Audio","level":"7.10","depth":1,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/oc2hdd.md","mtime":"2020-03-13T05:46:08.735Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-13T05:46:55.690Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

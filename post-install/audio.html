@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>macOS install · GitBook</title>
+        <title>Fixing Audio · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -62,10 +62,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="winblows-install.html" />
+    <link rel="next" href="oc2hdd.html" />
     
     
-    <link rel="prev" href="opencore-efi.html" />
+    <link rel="prev" href="security.html" />
     
 
     </head>
@@ -107,9 +107,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="opencore-efi.html">
+        <li class="chapter " data-level="1.2" data-path="../installer-guide/opencore-efi.html">
             
-                <a href="opencore-efi.html">
+                <a href="../installer-guide/opencore-efi.html">
             
                     
                     Creating the USB
@@ -121,9 +121,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="mac-install.html">
+        <li class="chapter " data-level="1.2.1" data-path="../installer-guide/mac-install.html">
             
-                <a href="mac-install.html">
+                <a href="../installer-guide/mac-install.html">
             
                     
                     macOS install
@@ -134,9 +134,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="winblows-install.html">
+        <li class="chapter " data-level="1.2.2" data-path="../installer-guide/winblows-install.html">
             
-                <a href="winblows-install.html">
+                <a href="../installer-guide/winblows-install.html">
             
                     
                     Windows install
@@ -323,9 +323,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../post-install/">
+        <li class="chapter " data-level="5.1" data-path="./">
             
-                <a href="../post-install/">
+                <a href="./">
             
                     
                     Post-Install
@@ -441,9 +441,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../post-install/iservices.html">
+        <li class="chapter " data-level="7.6" data-path="iservices.html">
             
-                <a href="../post-install/iservices.html">
+                <a href="iservices.html">
             
                     
                     Fixing iServices
@@ -454,9 +454,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.7" data-path="../post-install/nvram.html">
+        <li class="chapter " data-level="7.7" data-path="nvram.html">
             
-                <a href="../post-install/nvram.html">
+                <a href="nvram.html">
             
                     
                     Emulated NVRAM
@@ -467,9 +467,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../post-install/spoof.html">
+        <li class="chapter " data-level="7.8" data-path="spoof.html">
             
-                <a href="../post-install/spoof.html">
+                <a href="spoof.html">
             
                     
                     Disabling GPU
@@ -480,9 +480,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.9" data-path="../post-install/security.html">
+        <li class="chapter " data-level="7.9" data-path="security.html">
             
-                <a href="../post-install/security.html">
+                <a href="security.html">
             
                     
                     Security and FileVault
@@ -493,9 +493,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.10" data-path="../post-install/audio.html">
+        <li class="chapter active" data-level="7.10" data-path="audio.html">
             
-                <a href="../post-install/audio.html">
+                <a href="audio.html">
             
                     
                     Fixing Audio
@@ -506,9 +506,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.11" data-path="../post-install/oc2hdd.html">
+        <li class="chapter " data-level="7.11" data-path="oc2hdd.html">
             
-                <a href="../post-install/oc2hdd.html">
+                <a href="oc2hdd.html">
             
                     
                     Booting without USB
@@ -569,7 +569,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >macOS install</a>
+        <a href=".." >Fixing Audio</a>
     </h1>
 </div>
 
@@ -584,41 +584,66 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="making-the-installer-in-macos">Making the installer in macOS</h1>
-<p>Last edited: January 18, 2020</p>
-<p>While you don&apos;t need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.</p>
-<p><strong>Note for legacy users</strong></p>
-<ul>
-<li>If you want to use OpenCore on a system without UEFI, please follow the <a href="../extras/legacy.html">Legacy Install</a> section first, after you can continue following the <strong>Base folder structure</strong> section</li>
-</ul>
-<p>To start we&apos;ll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you&apos;re just making a bootable OpenCore stick and not an installer. For everyone else, here&apos;s your options for obtaining macOS directly from Apple&apos;s servers:</p>
-<ul>
-<li><p>AppStore links: </p>
-<ul>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12" target="_blank">High Sierra</a>, </li>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12" target="_blank">Mojave</a>, </li>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12" target="_blank">Catalina</a></li>
-</ul>
-</li>
-<li><p><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a>:</p>
-<ul>
-<li>Download the full macOS installer</li>
-<li>Run <code>BuildmacOSInstallApp</code> then drag and drop the <code>macOS Downloads</code> folder found in GibMacOS</li>
-</ul>
-</li>
-</ul>
-<p>Next we&apos;ll want to format our USB HFS+/MacOS Journaled with GUID partition map, must be 12GB for macOS Catalina.as-is recommended to name it <code>MyVolume</code> as the script below can be used as-is.</p>
-<p><img src="https://i.imgur.com/numOUnF.png" alt="Formatting the USB"></p>
-<p>Next run the <code>createinstallmedia</code> command provided by <a href="https://support.apple.com/en-us/HT201372" target="_blank">Apple</a>, note that the command is made for USB&apos;s formatted with the name <code>MyVolume</code>:</p>
-<pre><code class="lang-text">sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+                                <h1 id="fixing-audio-with-applealc">Fixing audio with AppleALC</h1>
+<p>So to start, we&apos;ll assume you already have Lilu and AppleALC installed, if you&apos;re unsure if it&apos;s been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):</p>
+<pre><code class="lang-text">kextstat | grep -E &quot;AppleHDA|AppleALC|Lilu&quot;
 </code></pre>
-<p>This will take some time so may want to grab a coffee or continue reading the guide(to be fair you really shouldn&apos;t be following this guide step by step without reading the whole thing first)</p>
-<h2 id="setting-up-opencores-efi-environment">Setting up OpenCore&apos;s EFI environment</h2>
-<p>Setting up OpenCore&apos;s EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is hidden from the end user, this is where our friend <a href="https://github.com/corpnewt/MountEFI" target="_blank">mountEFI</a> comes in:</p>
-<p><img src="https://i.imgur.com/4l1oK8i.png" alt="MountEFI"></p>
-<p>You&apos;ll notice that once we open the EFI partition, it&apos;s empty. This is where the fun begins.</p>
-<p><img src="https://i.imgur.com/EDeZB3u.png" alt="Empty EFI partition"></p>
-<h3 id="now-with-all-this-done-return-to-creating-the-usb-to-finish-up-your-work">Now with all this done, return to <a href="opencore-efi.html">Creating the USB</a> to finish up your work</h3>
+<p>If all 3 show up, you&apos;re good to go. And make sure VoodooHDA <strong>is not present</strong>. This will conflict with AppleALC otherwise</p>
+<h2 id="finding-your-layout-id">Finding your layout ID</h2>
+<p>So for this example, we&apos;ll assume your codec is ALC1220. To verify yours, you have a couple options:</p>
+<ul>
+<li>Checking motherboard&apos;s spec page and manual</li>
+<li>Check DeviceManager in Windows</li>
+<li>Run <code>cat</code> in terminal on Linux<ul>
+<li><code>cat /proc/asound/card0/codec#0 | less</code></li>
+</ul>
+</li>
+</ul>
+<p>Now with a codec, we&apos;ll want to cross reference it with AppleALC&apos;s supported codec list:</p>
+<ul>
+<li><a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a></li>
+</ul>
+<p>With the ALC1220, we get the following:</p>
+<pre><code class="lang-text">0x100003, layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34
+</code></pre>
+<p>So from this it tells us 2 things:</p>
+<ul>
+<li>Which hardware revision is supported(<code>0x100003</code>), only relevant when multiple revisions are listed with different layouts</li>
+<li>Various layout IDs supported by our codec(<code>layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34</code>)</li>
+</ul>
+<p>Now with a list of supported layout IDs,  we&apos;re ready to try some out</p>
+<h2 id="testing-your-layout">Testing your layout</h2>
+<p>To test out our layout IDs, we&apos;re going to be using the boot-arg <code>alcid=xxx</code> where xxx is your layout. Remember that to try layout IDs <strong>one at a time</strong>. Do not add multiple IDs or alcid boot-args, if one doesn&apos;t work then try the next ID and etc</p>
+<pre><code class="lang-text">NVRAM
+&#x251C;&#x2500;&#x2500; Add
+   &#x251C;&#x2500;&#x2500; 7C436110-AB2A-4BBB-A880-FE41995C9F82
+      &#x251C;&#x2500;&#x2500; bootargs | String | alcid=11
+</code></pre>
+<h2 id="making-layout-id-more-permanent">Making Layout ID more permanent</h2>
+<p>Once you&apos;ve found a Layout ID that works with your hack, we can create a more permanant solution for closer to how real macs set their Layout ID. </p>
+<p>With AppleALC, there&apos;s a priority hiarchy with which properties are prioritized:</p>
+<ol>
+<li><code>alcid=xxx</code> boot-arg, useful for debugging and overrides all other values</li>
+<li><code>alc-layout-id</code> in DeviceProperties, recommended for AppleALC</li>
+<li><code>layout-id</code> in DeviceProperties, same property Macs use</li>
+</ol>
+<p>As we can see in <a href="https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L189-L192" target="_blank">AppeALC&apos;s source</a>, it expects your layout ID to be set via <code>alc-layout-id</code> so to make things easier on AppleALC we&apos;ll set it with DeviceProperties</p>
+<p>To start, we&apos;ll need to find out where our Audio controller is located on the PCI map. For this, we&apos;ll be using a handy tool called <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> then with the macOS terminal:</p>
+<pre><code class="lang-text">path/to/gfxutil -f HDEF
+</code></pre>
+<p>Then add this PciRoot with the child <code>alc-layout-id</code> to your config.plist under DeviceProperties -&gt; Add:
+<img src="https://cdn.discordapp.com/attachments/683011276938543134/687881523349028894/Screen_Shot_2020-03-12_at_10.35.25_PM.png" alt=""></p>
+<p>Note that the value is in HEX/Data, you can use a simple <a href="https://www.rapidtables.com/convert/number/decimal-to-hex.html" target="_blank">decimal to hexidecimal calculator</a> to find yours. <code>printf &apos;%x\n&apos; DECI_VAL</code>:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/687885415302430753/Screen_Shot_2020-03-12_at_10.49.34_PM.png" alt=""></p>
+<p>So in this example, <code>alcid=11</code> would become <code>alc-layout-id | Data | &lt;0B000000&gt;</code></p>
+<h2 id="miscellaneous-issues">Miscellaneous issues</h2>
+<p><strong>No Mic on AMD</strong>:</p>
+<ul>
+<li>This is a common issue with when runnign AppleALC with AMD, specifcally no patches have been made to support Mic unput. At the moment the &quot;best&quot; solution is to either buy a USB DAC/Mic or go the VoodooHDA.kext method. Problem with VoodooHDA is that it&apos;s been known to be unstable and have worse audio quality than AppleALC</li>
+</ul>
+<p><strong>Same layout ID from Clover doesn&apos;t work on OpenCore</strong></p>
+<p>This is likely do to IRQ conflicts, on Clover there&apos;s a whole sweep of ACPI hotpatches that are applied automagically. Fixing this is a little bit painful but <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a>&apos;s <code>FixHPET</code> option can handle most cases.</p>
+<p>For odd cases where RTC and HPET take IRQs from other devices like USB and audio, you can reference the <a href="https://github.com/khronokernel/trashOS/blob/master/HP-Compaq-DC7900/README.md#dsdt-edits" target="_blank">HP Compaq DC7900 ACPI patch</a> example in the trashOS repo</p>
 
                                 
                                 </section>
@@ -646,12 +671,12 @@
 
             
                 
-                <a href="opencore-efi.html" class="navigation navigation-prev " aria-label="Previous page: Creating the USB">
+                <a href="security.html" class="navigation navigation-prev " aria-label="Previous page: Security and FileVault">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="winblows-install.html" class="navigation navigation-next " aria-label="Next page: Windows install">
+                <a href="oc2hdd.html" class="navigation navigation-next " aria-label="Next page: Booting without USB">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -662,7 +687,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"macOS install","level":"1.2.1","depth":2,"next":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/mac-install.md","mtime":"2020-03-13T05:46:08.735Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-13T05:46:55.690Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing Audio","level":"7.10","depth":1,"next":{"title":"Booting without USB","level":"7.11","depth":1,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"previous":{"title":"Security and FileVault","level":"7.9","depth":1,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/audio.md","mtime":"2020-03-13T05:46:08.735Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-13T05:46:55.690Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

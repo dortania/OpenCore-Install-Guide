@@ -31,5 +31,3 @@ For some reason people kept using these flags into Clover which had no effect, a
 **GraphicsEnabler=No**
 
 **IGPEnabler=Yes**
-
-**PCIRootUID=1**
