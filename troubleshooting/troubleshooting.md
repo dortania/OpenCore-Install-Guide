@@ -230,14 +230,15 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
-Well this general area is where a lot of PCI devices are configured, and is where most boot ing issues with AMD hacks happen. The main places to check:
+Well this general area is where a lot of PCI devices are configured, and is where most booting issues with AMD hacks happen. The main places to check:
 
 * **Missing EC patch**: 
-   * Make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
-   * If you don't have one, grab it here: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
+   * For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
+   * If you don't have one, grab it here: [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)
+   * Laptop users will need to rename their main EC: [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)
 
 * **IRQ conflict**: 
-   * Most common on laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET and ACPI patches to your config
+   * Most common on older laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
 
 * **PCI allocation issue**:
    * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares
