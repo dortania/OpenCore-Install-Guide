@@ -341,31 +341,7 @@ If these fixes do not work, see the [Fixing iServices page](/post-install/iservi
 
 ## No on-board audio
 
-* Verify that your PCIRoot is correct for your audio controller, this can be verified with [gfxutil](https://github.com/acidanthera/gfxutil/releases) though keep in mind that not all audio controllers are named HDEF. Verfy what yours is via IORegistryExplorer(Common 2 are HDEF and HDAS)
-
-```text
-path/to/gfxutil -f HDEF
-```
-
-Or a neat feature of gfxutil:
-
-```text
-path/to/gfxutil -f audio
-```
-  
-  Then add this PCIRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
-  
-  ![](https://i.imgur.com/oV3xqta.png)
-  
-Then find out your layout-id for your specific codec: [AppleALC's supported codec](https://github.com/acidanthera/applealc/wiki/supported-codecs)
-  
-For this example, we'll find the layout-id for ALC1150. Looking at the supported list we're given the following:
-```text
-0x100001, layout 1, 2, 3, 5, 7, 11
-```
-`0x100001` refers to the codc revision, you can ignore this. For us what we care about is `layout 1, 2, 3, 5, 7, 11`, we want to test each one individually until you find a layout that works best for you. Remember that the DeviceProperty is in HEX, converting 5 to HEX becomes `05000000`  and converting 11 to HEX becomes `0B000000` .
-  
-Alternative is using `alcid=xxx` in your boot-args and replace `xxx` with your layout-id
+Refer to [Fixing Audio with AppleALC](/post-install/audio.md) section
 
 ## BIOS reset or sent into Safemode after reboot/shutdown?
 

@@ -515,16 +515,4 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
 
-# Post-install
-
-So what in the world needs to be done once everything is installed? Well here's some things you can do:
-
-
-* [USB mapping](https://usb-map.gitbook.io/project/) 
-* [Testing and setting up emulated NVRAM](/post-install/nvram.md)
-* [Correcting audio](https://github.com/acidanthera/applealc/wiki/supported-codecs)
-   * `alcid=xxx` in boot args, try 1 layout-id at a time
-   * ie. `alcid=1` then reboot and test, still broke then remove previous arg and add `alcid=2`, etc
-* [Enabling FileVault and other security features](/post-install/security.md)
-* [Fixing iMessage](/post-install/iservices.md)
-* [Booting macOS without the USB](/post-install/oc2hdd.md)
+# [Post-install](/post-install/README.md)

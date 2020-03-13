@@ -8,6 +8,7 @@ To get started, we have some resouces that will aid you:
 
 * [Config.plist conversion](/clover-conversion/Clover-config.md)
 * [Firmware driver conversion(.efi)](/clover-conversion/clover-efi.md)
+* [Boot Argument conversion](/clover-conversion/Clover-boot-arg.md)
 
 # Cleaning the Clover Junk in macOS
 

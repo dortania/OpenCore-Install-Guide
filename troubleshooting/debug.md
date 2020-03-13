@@ -52,3 +52,6 @@ Just like with `Target`, we use a HEX calculator then convert to decimal:
 
 **DisableWatchdog**: YES Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
 
+## Disabling logging
+
+To remove all file logging, set `Target` to `0`

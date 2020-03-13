@@ -545,16 +545,5 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 32MB
 
-# Post-install
-
-So what in the world needs to be done once everything is installed? Well here's some things you can do:
-
-* [Fix CPU Power Management](https://github.com/Piker-Alpha/ssdtPRGen.sh)(run ssdtPRGen.sh and add the SSDT.aml to EFI and config)
-* [USB mapping](https://usb-map.gitbook.io/project/) 
-* [Correcting audio](https://github.com/acidanthera/applealc/wiki/supported-codecs)
-   * `alcid=xxx` in boot args, try 1 layout-id at a time
-   * ie. `alcid=1` then reboot and test, still broke then remove previous arg and add `alcid=2`, etc
-* [Enabling FileVault and other security features](../post-install/security.md)
-* [Fixing iMessage](/post-install/iservices.md)
-* [Booting macOS without the USB](/post-install/oc2hdd.md)
+# [Post-install](/post-install/README.md)
 
