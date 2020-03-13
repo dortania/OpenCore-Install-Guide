@@ -64,6 +64,7 @@ path/to/gfxutil -f HDEF
 ```
 
 Then add this PciRoot with the child `alc-layout-id` to your config.plist under DeviceProperties -> Add:
+
 ![](https://cdn.discordapp.com/attachments/683011276938543134/687881523349028894/Screen_Shot_2020-03-12_at_10.35.25_PM.png)
 
 Note that the value is in HEX/Data, you can use a simple [decimal to hexidecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
