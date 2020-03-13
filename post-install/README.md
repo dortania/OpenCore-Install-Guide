@@ -1,5 +1,7 @@
 # Post Install
 
+Last editied: March 12, 2020
+
 So you've finally finsihed installing macOS with OpenCore but know there's still some things to clean up, well you've come to the right place!
 
 ## Universal
