@@ -1,5 +1,7 @@
 # Fixing audio with AppleALC
 
+Last edited: March 12, 2020
+
 So to start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 
 ```text
