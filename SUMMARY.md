@@ -48,6 +48,7 @@
 * [Security and FileVault](post-install/security.md)
 * [Fixing Audio](post-install/audio.md)
 * [Booting without USB](post-install/oc2hdd.md)
+* [Updating OpenCore, kexts and macOS](/post-install/update.md)
 
 ## Misc
 
