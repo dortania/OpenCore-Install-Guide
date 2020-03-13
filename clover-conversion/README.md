@@ -37,6 +37,6 @@ Users of Clover's Preference Pane will also need to remove that:
 The other thing that Clover may have hidden from you is NVRAM variables, this is bad as Opencore won't overwrite variables unless explicitly told via the `Block` feature found under `NVRAM -> Block`. To fix this, we'll need to clear then via Opencore's `ClearNvram` feature.
 
 In you config.plist:
-* `Misc -> Secuirty -> AllowNvramReset -> True`
+* `Misc -> Security -> AllowNvramReset -> True`
 
 And on your initl boot of Opencore, select `ClearNvram` boot option. This will wipe everything and reboot the system when finished.
