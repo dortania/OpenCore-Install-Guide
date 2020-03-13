@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-Last edited: March 2, 2020
+Last edited: March 12, 2020
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
@@ -235,9 +235,14 @@ Well this general area is where a lot of PCI devices are configured, and is wher
 * **Missing EC patch**: 
    * Make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
    * If you don't have one, grab it here: [SSDT-EC-USBX-AMD.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
+
 * **IRQ conflict**: 
+   * Most common on laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET and ACPI patches to your config
+
+* **PCI allocation issue**:
+   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares
    * Make sure either Above4GDecoding is enabled in the BIOS, if no option availible then add `npci=0x2000` to boot args. **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
-   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
+   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled\
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
