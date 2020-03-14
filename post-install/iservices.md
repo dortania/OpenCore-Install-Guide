@@ -33,9 +33,9 @@ This last one is what we're after, as we want something genuine but currently no
 
 ## Fixing En0
 
-To start, grab Hackintool and head to Info -> Misc
+To start, grab [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/) ([Github link](https://github.com/headkaze/Hackintool)) and head to System -> Peripherals (Info -> Misc on older versions of Hackintool)
 
-Here under Network Interfaces, look for `En0` under BSD Names and check whether the device has a checkmark under Builtin. If there is a checkmark, skip to Fixing ROM section otherwise continue reading.
+Here under Network Interfaces (network card icon), look for `en0` under `BSD` and check whether the device has a checkmark under Builtin. If there is a checkmark, skip to Fixing ROM section otherwise continue reading.
 
 > What if I don't have En0 at all?!?
 
@@ -79,7 +79,7 @@ When adding this to your config, `c0:7e:bf:c3:af:ff` should be converted to `c07
 
 ## Verifying NVRAM
 
-Something that many forget about iServices is that NVRAM is curtial to getting it working correcttly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.
+Something that many forget about iServices is that NVRAM is crucial to getting it working correctly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.
 
 So we'll need to verify NVRAM works, regardless if "it should work" as some firmwares can be more of a pain than others.
 
