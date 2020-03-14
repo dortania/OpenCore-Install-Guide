@@ -79,7 +79,7 @@ When adding this to your config, `c0:7e:bf:c3:af:ff` should be converted to `c07
 
 ## Verifying NVRAM
 
-Something that many forget about iServices is that NVRAM is curtial to getting it working correcttly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.
+Something that many forget about iServices is that NVRAM is crucial to getting it working correctly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.
 
 So we'll need to verify NVRAM works, regardless if "it should work" as some firmwares can be more of a pain than others.
 
