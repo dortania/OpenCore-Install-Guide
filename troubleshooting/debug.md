@@ -1,6 +1,7 @@
 # OpenCore Debugging
 
-Last edited: January 13, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 Needing to figure out why you're getting issues or stalling? Well, you've come to the right place.
 

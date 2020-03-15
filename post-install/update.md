@@ -1,6 +1,7 @@
 # Updating OpenCore and macOS
 
-Last Edited: March 7, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 ## Updating OpenCore
 

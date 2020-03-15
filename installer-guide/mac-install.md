@@ -1,7 +1,8 @@
 
 # Making the installer in macOS
 
-Last edited: January 18, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 

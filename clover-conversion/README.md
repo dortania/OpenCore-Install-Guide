@@ -1,6 +1,7 @@
 # Converting from Clover to OpenCore
 
-Last edited: Febuary 13, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 So you see the new fancy Opencore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with Opencore but many do not, here we'll be going over what you can bring over and what you cannot.
 

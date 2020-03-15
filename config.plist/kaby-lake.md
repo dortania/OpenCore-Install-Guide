@@ -1,6 +1,7 @@
 # Kaby Lake
 
-Last edited: March 2, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 ## Starting Point
 

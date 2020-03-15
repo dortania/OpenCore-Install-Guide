@@ -1,5 +1,8 @@
 # Fixing iMessage and other services with OpenCore
 
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
+
 This page is for those having iMessage and other iServices issues, this is a very basic guide so will not go as in-depth into the issues as some other guides. This specific guide is a translation and reinterpretation of the AppleLife Guide on fixing iService: [Как завести сервисы Apple - iMessage, FaceTime, iCloud](https://applelife.ru/posts/727913)
 
 ## Generate a new Serial
