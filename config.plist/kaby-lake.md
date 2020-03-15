@@ -242,7 +242,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
-**Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
+**Debug**: Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`)
 
 * **DisableWatchDog**: YES \(May need to be set for YES if OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 * **Target**: `67`
@@ -356,7 +356,7 @@ For this Kaby Lake example, we'll chose the iMac18,1 SMBIOS - this is done inten
 * `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
 
 
-Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:
+Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```text
   #######################################################

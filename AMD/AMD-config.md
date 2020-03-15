@@ -229,7 +229,7 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
-**Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
+**Debug**: Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`)
 
 * **DisableWatchDog**: YES \(May need to be set for YES if OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
 * **Target**: `67`
@@ -347,7 +347,7 @@ For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with c
 * iMac14,2: Nvidia Kepler and newer
 
 
-Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:
+Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```text
   #######################################################
