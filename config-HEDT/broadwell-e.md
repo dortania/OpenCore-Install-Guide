@@ -75,7 +75,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ![Booter](https://cdn.discordapp.com/attachments/683011276938543134/683505771153326081/Screen_Shot_2020-02-29_at_7.47.35_PM.png)
 
-This section is dedicated to quirks relating to boot.efi patching with FwRuntimeServices, the replacement for AptioMemoryFix.efi
+This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
 **MmioWhitelist**:
 
@@ -206,7 +206,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **PickerAudioAssist**: NO
    * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO
-   * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use AppleUsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
+   * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use OpenUsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
       * `Cmd+V`: Enables verbose
       * `Cmd+Opt+P+R`: Cleans NVRAM 
       * `Cmd+R`: Boots Recovery partition
@@ -252,7 +252,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `Req
    * Self-explanatory, enables or disables
 * **Path** 
    * Path to file after the `Tools` folder
-   * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
+   * ex: [OpenShell.efi](https://github.com/acidanthera/OpenCorePkg/releases)
 
 **Entries**: Used for specifying irregular boot paths that can't be found naturally with OpenCore
 
@@ -394,7 +394,7 @@ Only drivers present here should be:
 
 * HFSPlus.efi
 * ApfsDriverLoader.efi
-* FwRuntimeServices.efi
+* OpenRuntime.efi
 
 **Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS
 
@@ -422,7 +422,7 @@ Only drivers present here should be:
 * **KeyMergeThreshold**: `2`
    * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
 * **KeySupport**: `YES`
-   * Enables OpenCore's built in key support and **required for boot picker selection**, do not use with AppleUsbKbDxe.efi
+   * Enables OpenCore's built in key support and **required for boot picker selection**, do not use with OpenUsbKbDxe.efi
 * **KeySupportMode**: `Auto`
    * Keyboard translation for OpenCore
 * **KeySwap**: `NO`

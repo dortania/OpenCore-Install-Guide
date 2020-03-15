@@ -159,14 +159,14 @@ Missing or incorrect `Executable path`
 * AMD kernel patches aren't working(AMD Users only):
     * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
-    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
-    * If the above doesn't work, reverse: disable `KeySupport`, then add [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
+    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
+    * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
     
 ## Can't select anything in the picker
     
 * Incompatible keyboard driver:
-     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
-     * If the above doesn't work, reverse: disable `KeySupport`, then add [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
+     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
+     * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
 
 ## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 

@@ -14,8 +14,8 @@ FileVault is macOS's builtin drive encyption, and with OpenCore support for it h
 
 To start, you'll need the following .efi drivers:
 
-* FwRuntimeServices.efi
-  * [AppleUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg/releases) for DuetPkg users(systems without UEFI support)
+* OpenRuntime.efi
+  * [OpenUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg/releases) for DuetPkg users(systems without UEFI support)
 
 **Do not use VirtualSMC.efi with OpenCore, its already baked inside**. You do however require VirtualSMC.kext still
 
@@ -28,7 +28,7 @@ Setting in your config.plist:
 * NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
 * UEFI -&gt; Input
-  * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of AppleUsbKbDxe should avoid)
+  * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of OpenUsbKbDxe should avoid)
 * UEFI -> Output
   * `ProvideConsoleGOP` to YES
 * UEFI -&gt; Protocols

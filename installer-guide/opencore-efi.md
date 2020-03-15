@@ -28,14 +28,14 @@ To setup OpenCore’s folder structure, you’ll want to grab the EFI folder fou
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
 * **Remove from Drivers:**
-   * AppleUsbKbDxe.efi
+   * OpenUsbKbDxe.efi
       * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
    * NvmExpressDxe.efi
       * Used for Haswell and older when no NVMe driver is built into the firmware
    * XhciDxe.efi
       * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
    * HiiDatabase.efi
-      * Used for fixing GUI support like Shell.efi on Sandy Bridge and older
+      * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
 
 * **Remove everything from Tools:**
    * BootKicker.efi

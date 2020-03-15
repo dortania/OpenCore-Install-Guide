@@ -16,12 +16,12 @@ These are the drivers used by OpenCore, for the majority of systems you only nee
    * Needed for seeing APFS volumes(ie. macOS)
 * [VboxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases) **or** [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
    * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix HFS drivers**
-* [FwRuntimeServices.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+* [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used for patching boot.efi for NVRAM fixes and better memory management.
 
 For legacy users:
 
-* [AppleUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+* [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [NvmExpressDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
    * Used for Haswell and older when no NVMe driver is built into the firmware, not needed if you're not using an NVMe drive
