@@ -598,7 +598,10 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="security-and-filevault">Security and FileVault</h1>
-<p>Last edited: March 2, 2020</p>
+<ul>
+<li>Last edited: March 15, 2020</li>
+<li>Supported version: 0.5.6</li>
+</ul>
 <p>So something that makes OpenCore truly special is how it&apos;s been built with security in mind which is quite rare especially in the Hackintosh community. Well here we&apos;ll be going through and setting up some of OpenCore&apos;s great Security features:</p>
 <ul>
 <li><a href="security.html#FileVault">FileVault</a></li>
@@ -639,7 +642,7 @@
 </li>
 <li>UEFI -&gt; Protocols<ul>
 <li><code>FirmwareVolume</code> set to YES</li>
-<li><code>HashServices</code> set to YES for Haswell and older(this includes X99), this is needed for systems with broken SHA-1 hashing</li>
+<li><code>HashServices</code> set to YES for Broadwell and older(this includes X99), this is needed for systems with broken SHA-1 hashing</li>
 <li><code>AppleSmcIo</code> set to YES(this replaces VirtualSMC.efi)</li>
 </ul>
 </li>
@@ -802,7 +805,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"7.9","depth":1,"next":{"title":"Fixing Audio","level":"7.10","depth":1,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},"previous":{"title":"Disabling GPU","level":"7.8","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-03-14T03:32:33.607Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-14T03:33:18.675Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"7.9","depth":1,"next":{"title":"Fixing Audio","level":"7.10","depth":1,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},"previous":{"title":"Disabling GPU","level":"7.8","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-03-15T21:34:33.512Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-15T21:35:25.774Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

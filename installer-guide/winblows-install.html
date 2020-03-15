@@ -598,19 +598,24 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="making-the-installer-in-windows">Making the installer in Windows</h1>
-<p>Last edited: January 18, 2020</p>
+<ul>
+<li>Last edited: March 15, 2020</li>
+<li>Supported version: 0.5.6</li>
+</ul>
 <p>While you don&apos;t need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.</p>
 <p>To start you&apos;ll need the following:</p>
 <ul>
 <li>4GB USB Stick</li>
 <li><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a></li>
 </ul>
+<h2 id="downloading-macos">Downloading macOS</h2>
 <p>To start, open gibMacOS.bat as Admin and select <code>Toggle Recovery-Only</code>:</p>
 <p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668211243554963533/unknown.png" alt=""></p>
 <p>Now search through for your desired version of macOS, for this example we&apos;ll choose option 5 for macOS Catalina:</p>
 <p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668211633105010718/unknown.png" alt=""></p>
 <p>This will download the RecoveryHDMetaDmg.pkg to <code>\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx</code></p>
 <p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668211921484382218/unknown.png" alt=""></p>
+<h2 id="making-the-installer">Making the installer</h2>
 <p>Next open <code>makeinstall.bat</code> as Admin and select your drive with option O for OpenCore( ex: 1O).</p>
 <p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668213205579071598/unknown.png" alt=""></p>
 <p>Once your drive is formatted, it will then ask you for the <code>RecoveryHDMetaDMG.pkg</code> that we downloaded earlier. Top right of the file window will let you copy the file path:</p>
@@ -663,7 +668,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Windows install","level":"1.2.2","depth":2,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/winblows-install.md","mtime":"2020-03-14T03:32:33.607Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-14T03:33:18.675Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Windows install","level":"1.2.2","depth":2,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/winblows-install.md","mtime":"2020-03-15T21:34:33.512Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-15T21:35:25.774Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

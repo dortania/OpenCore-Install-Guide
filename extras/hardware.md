@@ -1,6 +1,7 @@
 # Supported hardware
 
-Last edited: January 2, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 So this little section is for those who are wanting to know whether their hardware will work in macOS
 

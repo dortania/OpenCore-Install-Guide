@@ -1,4 +1,5 @@
-Last edited: March 6, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 With OpenCore I think it's about time we finally destroy some AMD myths, like how USB is just screwed on AMD and can't be mapped. Well, that is false! And I will show you the path of enlightenment.
 
@@ -8,6 +9,8 @@ So why would I want to use this? Well, a couple of reasons:
 * Stability by removing USB port limit patches
 
 For a more user-friendly guide, see Aleksander's post: [Why you need to care about USB mapping](https://aplus.rs/2020/usb-mapping-why/)
+
+**Note**: This guide only supports Ryzen and newer, this is due to all the firmware stupidity that surrounds 15h and 16h CPUs
 
 # Backstory to USB on macOS
 
