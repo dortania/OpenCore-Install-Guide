@@ -47,7 +47,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/ACPI.
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension\(Assembled\) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
 
 **Block**
@@ -107,6 +107,8 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
    * Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProtectSecureBoot**: NO
    * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
+* **ProtectUefiServices**: NO
+   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and certain Coffeelake systems
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **SetupVirtualMap**: YES
@@ -152,7 +154,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 (This is an example for an HD 4400 without a dGPU and no BIOS options for iGPU memory)
 
 
-`PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
+`PciRoot(0x0)/Pci(0x1f,0x3)` -> `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 
@@ -255,7 +257,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 **Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
 
-* **DisableWatchDog**: YES \(May need to be set for YES if OpenCore is stalling on something while booting, can also help for early macOS boot issues\)
+* **AppleDebug**: YES
+   * Enables boot.efi logging, useful for debuuging. Note this is only supported on 10.15.4 and newer
+* **DisableWatchDog**: YES
+   * Disables the UEFI watchdog, can help with early boot issues
 * **Target**: `67`
    * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483714`
@@ -304,7 +309,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 * **UIScale**:
    * `01`: Standard resolution(Clover equivalent is `0x28`)
-   * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`\)
+   * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`)
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
    * `00000000`: Syrah Black
@@ -329,9 +334,9 @@ csr-active-config is set to `00000000` which enables System Integrity Protection
 
 Recommended to leave enabled for best security practices
 
-* **nvda\_drv**: &lt;&gt; 
+* **nvda\_drv**: &lt;> 
    * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD, Intel and Kepler GPU users should delete this section.**
-* **prev-lang:kbd**: &lt;&gt; 
+* **prev-lang:kbd**: &lt;> 
    * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it(**Default in Sample config is Russian**):
    * American: `en-US:0`(`656e2d55533a30` in HEX)
    * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
@@ -382,15 +387,15 @@ Serial:       C02M9SYJFY10
 Board Serial: C02408101J9G2Y7A8
 SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 ```
-The `Type` part gets copied to Generic -&gt; SystemProductName.
+The `Type` part gets copied to Generic -> SystemProductName.
 
-The `Serial` part gets copied to Generic -&gt; SystemSerialNumber.
+The `Serial` part gets copied to Generic -> SystemSerialNumber.
 
-The `Board Serial` part gets copied to Generic -&gt; MLB.
+The `Board Serial` part gets copied to Generic -> MLB.
 
-The `SmUUID` part gets copied toto Generic -&gt; SystemUUID.
+The `SmUUID` part gets copied toto Generic -> SystemUUID.
 
-We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
 
 **Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
@@ -435,7 +440,7 @@ We set Generic -&gt; ROM to either an Apple ROM \(dumped from a real Mac\), your
 
 Only drivers present here should be:
 
-* HFSPlus.efi
+* HfsPlus.efi
 * ApfsDriverLoader.efi
 * OpenRuntime.efi
 
@@ -460,6 +465,8 @@ Only drivers present here should be:
 
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
+* **KeyFiltering**: NO
+   * Verifies and discards uninitialised data, mainly prevalent on 7 series Gigabyte boards
 * **KeyForgetThreshold**: `5`
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
 * **KeyMergeThreshold**: `2`
@@ -516,7 +523,7 @@ Only drivers present here should be:
 * **ExitBootServicesDelay**: `0`
    * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault2
 * **IgnoreInvalidFlexRatio**: YES
-   * Fix for when MSR\_FLEX\_RATIO \(0x194\) can't be disabled in the BIOS, required for all pre-skylake based systems
+   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-skylake based systems
 * **ReleaseUsbOwnership**: NO
    * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
 * **RequestBootVarFallback**: YES
@@ -546,12 +553,12 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 **Disable:**
 
 * Fast Boot
-* VT-d\(can be enabled if you set `DisableIoMapper` to YES\)
+* VT-d(can be enabled if you set `DisableIoMapper` to YES)
 * CSM
 * Thunderbolt
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock\(MSR 0xE2 write protection\)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+* CFG Lock(MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
 
 **Enable:**
 

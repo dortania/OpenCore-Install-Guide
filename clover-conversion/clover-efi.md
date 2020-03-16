@@ -8,7 +8,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 
 * ApfsDriverLoader.efi
 * OpenRuntime.efi
-* HFSPlus.efi
+* HfsPlus.efi
 * VBoxHfs.efi
 * EnhancedFatDxe.efi
 * OpenUsbKbDxe.efi

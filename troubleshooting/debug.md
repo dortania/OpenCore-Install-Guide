@@ -27,7 +27,7 @@ To calculate the target, we can use a HEX calculator and then convert it to deci
 
 `0x53` converted to decimal becomes `83`
 
-So we can set `Misc` -&gt; `Debug` -&gt; `Target` -&gt; `83`
+So we can set `Misc` -> `Debug` -> `Target` -> `83`
 
 **DisplayLevel**
 
@@ -48,7 +48,7 @@ For us we just want the following:
 
 Just like with `Target`, we use a HEX calculator then convert to decimal:
 
-`0x80000042` Converted to decimal `Misc` -&gt; `Debug` -&gt; `DisplayLevel` -&gt; `2147483714`
+`0x80000042` Converted to decimal `Misc` -> `Debug` -> `DisplayLevel` -> `2147483714`
 
 **DisableWatchdog**: YES Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
 

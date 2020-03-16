@@ -21,21 +21,21 @@ To start, you'll need the following .efi drivers:
 
 Setting in your config.plist:
 
-* Misc -&gt; Boot 
-  * `PollAppleHotKeys` set to YES(While not needed can be helpfu\)
-* Misc -&gt; Security
+* Misc -> Boot 
+  * `PollAppleHotKeys` set to YES(While not needed can be helpfu)
+* Misc -> Security
   * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional)
-* NVRAM -&gt; Add -&gt; 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+* NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
-* UEFI -&gt; Input
+* UEFI -> Input
   * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of OpenUsbKbDxe should avoid)
 * UEFI -> Output
   * `ProvideConsoleGOP` to YES
-* UEFI -&gt; Protocols
+* UEFI -> Protocols
   * `FirmwareVolume` set to YES
   * `HashServices` set to YES for Haswell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
   * `AppleSmcIo` set to YES(this replaces VirtualSMC.efi)
-* UEFI -&gt; Quirks
+* UEFI -> Quirks
   * `RequestBootVarRouting` set to YES
   * `ExitBootServicesDelay` set to `3000`-`5000` if you recieve `Still waiting for root device` on Aptio IV firmwares(Broadwell and older)
 

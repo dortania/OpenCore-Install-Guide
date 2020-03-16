@@ -46,7 +46,7 @@ The real fix to this is quite simple actually, the process is both the same for 
   * Clover Shell(most users already have this included, usually called shell64.efi or some variation)
 * OpenCore users:
   * [OpenRuntime](https://github.com/acidanthera/OpenCorePkg/releases)
-  * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)(Don't forget to enable this under `Root->Misc->Tools`)
+  * [OpenShell](https://github.com/acidanthera/OpenCorePkg/releases)(Don't forget to enable this under `Root->Misc->Tools`)
   * Config.plist settings:
     * AvoidRuntimeDefrag: `YES`
        * Fixes UEFI runtime services like date, time, NVRAM, etc
@@ -56,6 +56,8 @@ The real fix to this is quite simple actually, the process is both the same for 
        * Allows us to use slide in safe mode, just so if you have other issues troubleshooting won't mess it up.
     * EnableWriteUnprotector: `YES`
        * Allows us to write to certain areas that the firmware locks, specifically the CR0 register.
+	* ProtectUefiServices: `YES`
+	   * This is extremly important to enable on Icelake and Coffeelake machines, otherwise DevirtualiseMmio will not work due to memory protetions in place
     * ProvideCustomSlide: `YES`
        * Kinda need that slide to do any real work.
     * SetupVirtualMap: `YES`
@@ -120,7 +122,7 @@ Whenever the returned value is **not** the original(`0x6B500000` vs `0x6B626000`
 
 > But wait for just a second, this is higher than 256!
 
-That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be `0000000000100000`)
+That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be `0000000000100000`).
 
 And just to make it a bit clearer on the formula:
 
@@ -149,5 +151,5 @@ Directory of fs0:\
 fs0:\> memmap > memmap.txt
 ```
 
-This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord and type `$slide [insert a link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
+This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type `$slide [insert a link to memmap.txt]`
 

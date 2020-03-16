@@ -72,7 +72,7 @@ Another other possible problem is IRQ conflicts, Clover has plenty of different 
 Main things to check:
 
 * ScanPolicy set to `0` to show all drives
-* Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)
+* Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus(or VBoxHfs)
 * Enable `AvoidHighAlloc` if you're running a network recovery install
 
 ## Black screen after picker
@@ -107,7 +107,7 @@ Same fix as `OCB: OcScanForBootEntries failure - Not Found`, OpenCore is unable 
 
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
 
-This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -&gt; Booter -&gt; Quirks is correct and verify your BIOS settings:
+This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -> Booter -> Quirks is correct and verify your BIOS settings:
 
 * Above4GDecoding is Enabled
 * CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
@@ -118,7 +118,7 @@ This is due to either using a Clover config with OpenCore or using a configurato
 
 ## Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 
-Verify that your EFI/OC/Drivers matches up with your config.plist -&gt; UEFi -&gt; Drivers
+Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Drivers
 
 ## Stuck on `Buffer Too Small`
 
@@ -159,14 +159,14 @@ Missing or incorrect `Executable path`
 * AMD kernel patches aren't working(AMD Users only):
     * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
-    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
-    * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
+    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
+    * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
     
 ## Can't select anything in the picker
     
 * Incompatible keyboard driver:
-     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
-     * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
+     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
+     * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
 
 ## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 
