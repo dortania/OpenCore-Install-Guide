@@ -182,7 +182,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 ## `Couldn't allocate runtime area` errors?
 
-See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix)
+See [Fixing KASLR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix)
 
 ## SSDTs not being added
 
