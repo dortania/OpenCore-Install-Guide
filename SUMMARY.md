@@ -4,6 +4,7 @@
 * [Creating the USB](/installer-guide/opencore-efi.md)
    * [macOS install](/installer-guide/mac-install.md)
    * [Windows install](/installer-guide/winblows-install.md)
+   * [Linux install](/installer-guide/linux-install.md)
 * [Gathering files](ktext.md)
 * [Getting started with ACPI](extras/acpi.md)
 
