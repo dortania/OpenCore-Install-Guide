@@ -764,11 +764,11 @@
 <p>If we think of our ig-plat as <code>0xAABBCCDD</code>, our swapped version would look like <code>DDCCBBAA</code></p>
 <p>The two ig-platform-id&apos;s we use are as follows:</p>
 <ul>
-<li><code>0x0D220003</code> - this is used when the iGPU is used to drive a display<ul>
+<li><code>0x0D220003</code> - this is used when the Desktop iGPU is used to drive a display<ul>
 <li><code>0300220D</code> when hex-swapped</li>
 </ul>
 </li>
-<li><code>0x04120004</code> - this is used when the iGPU is only used for computing tasks and doesn&apos;t drive a display<ul>
+<li><code>0x04120004</code> - this is used when the Desktop iGPU is only used for computing tasks and doesn&apos;t drive a display<ul>
 <li><code>04001204</code> when hex-swapped</li>
 </ul>
 </li>
@@ -814,6 +814,7 @@
 </tbody>
 </table>
 <p>(This is an example for an HD 4400 without a dGPU and no BIOS options for iGPU memory)</p>
+<p><strong>Special note</strong>: Mobile users should refer to mobile iGPU section for what properties should be used: <a href="https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching" target="_blank">iGPU Patching</a></p>
 <p><code>PciRoot(0x0)/Pci(0x1f,0x3)</code> -&gt; <code>Layout-id</code></p>
 <ul>
 <li>Applies AppleALC audio injection, you&apos;ll need to do your own research on which codec your motherboard has and match it with AppleALC&apos;s layout. <a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a>.</li>
@@ -1408,7 +1409,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-03-18T14:47:07.420Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-18T14:47:57.997Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-03-19T19:29:44.600Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-19T19:30:36.522Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
