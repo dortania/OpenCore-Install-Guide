@@ -6,10 +6,10 @@ This section is mainly relevant for laptops to save some headaches when followin
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookAir5,1 | Dual Core 15w(Low End) | iGPU | 11" |
-| MacBookAir5,2 | Dual Core 15w(Low End) | iGPU | 13" |
+| MacBookAir5,1 | Dual Core 17w(Low End) | iGPU | 11" |
+| MacBookAir5,2 | Dual Core 17w(Low End) | iGPU | 13" |
 | MacBookPro10,1 | Quad Core 45w | iGPU + dGPU | 15" |
-| MacBookPro10,2 | Dual Core 15w(High End) | iGPU | 13" |
+| MacBookPro10,2 | Dual Core 35w(High End) | iGPU | 13" |
 
 ## Haswell (4th Gen)
 
@@ -17,7 +17,7 @@ This section is mainly relevant for laptops to save some headaches when followin
 | :--- | :--- | :--- | :--- |
 | MacBookAir6,1 | Dual Core 15w(Low End) | iGPU | 11" |
 | MacBookAir6,2 | Dual Core 15w(Low End) | iGPU | 13" |
-| MacBookPro11,1 | Dual Core 15w(High End) | iGPU | 13" |
+| MacBookPro11,1 | Dual Core 28w(High End) | iGPU | 13" |
 | MacBookPro11,2 | Quad Core 45w | iGPU | 15" |
 | MacBookPro11,3 | Quad Core 45w | iGPU + Nvidia dGPU | 15" |
 | MacBookPro11,4 | Quad Core 45w | iGPU | 15" |
@@ -30,7 +30,7 @@ This section is mainly relevant for laptops to save some headaches when followin
 | MacBook8,1 | Dual Core 7w(Low End) | iGPU | 12" |
 | MacBookAir7,1 | Dual Core 15w(Low End) | iGPU | 11" |
 | MacBookAir7,2 | Dual Core 15w(Low End) | iGPU | 13" |
-| MacBookPro12,1 | Dual Core 15w(High End) | iGPU | 13" |
+| MacBookPro12,1 | Dual Core 28w(High End) | iGPU | 13" |
 | MacBookPro11,2 | Quad Core 45w | iGPU | 15" |
 | MacBookPro11,3 | Quad Core 45w | iGPU + Nvidia dGPU | 15" |
 | MacBookPro11,4 | Quad Core 45w | iGPU | 15" |
