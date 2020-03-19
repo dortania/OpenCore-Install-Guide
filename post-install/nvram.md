@@ -65,7 +65,6 @@ Within your config.plist:
   * `LegacyOverwrite` set to `YES`
   * `LegacySchema`: NVRAM variables set(OpenCore compares these to the variables present in nvram.plist)
   * `WriteFlash`: set to `NO`
-* `ExposeSensitiveData`: set to `0x3`
 
 And within your EFI:
 
