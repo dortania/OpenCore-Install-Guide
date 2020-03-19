@@ -126,9 +126,9 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x19120000` - this is used when the iGPU is used to drive a display
+* `0x19120000` - this is used when the Desktop iGPU is used to drive a display
   * `00001219` when hex-swapped
-* `0x19120001` - this is used when the iGPU is only used for computing tasks and doesn't drive a display
+* `0x19120001` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
   * `01001219` when hex-swapped
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available. 
@@ -140,6 +140,8 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 | framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for an HD 530 without a dGPU and no BIOS options for iGPU memory)
+
+**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 

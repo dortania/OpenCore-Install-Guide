@@ -131,9 +131,9 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x3E9B0007` - this is used when the iGPU is used to drive a display
+* `0x3E9B0007` - this is used when the Desktop iGPU is used to drive a display
   * `07009B3E` when hex-swapped
-* `0x3E920003` - this is used when the iGPU is only used for computing tasks and doesn't drive a display
+* `0x3E920003` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
   * `0300923E` when hex-swapped
 
 Worth noting that for 10.12 -&gt; 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up. 10.13.6 natively supports Coffee Lake
@@ -149,6 +149,8 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 | framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for an UHD 630 without a dGPU and no BIOS options for iGPU memory)
+
+**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 

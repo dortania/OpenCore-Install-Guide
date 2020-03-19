@@ -129,9 +129,9 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x0D220003` - this is used when the iGPU is used to drive a display
+* `0x0D220003` - this is used when the Desktop iGPU is used to drive a display
   * `0300220D` when hex-swapped
-* `0x04120004` - this is used when the iGPU is only used for computing tasks and doesn't drive a display
+* `0x04120004` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
   * `04001204` when hex-swapped
 
 I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
@@ -152,6 +152,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 (This is an example for an HD 4400 without a dGPU and no BIOS options for iGPU memory)
 
+**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -&gt; `Layout-id`
 
