@@ -612,9 +612,10 @@
                                 
                                 <h1 id="haswell">Haswell</h1>
 <ul>
-<li>Last edited: March 15, 2020</li>
+<li>Last edited: March 19, 2020</li>
 <li>Supported version: 0.5.6</li>
 </ul>
+<p><strong>Both Haswell and Broadwell users can follow this</strong></p>
 <h2 id="starting-point">Starting Point</h2>
 <p>So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won&apos;t be left in the cold. This also means if you have issues, review your config settings to make sure they&apos;re correct. Main things to note with OpenCore:</p>
 <ul>
@@ -813,7 +814,34 @@
 </tr>
 </tbody>
 </table>
-<p>(This is an example for an HD 4400 without a dGPU and no BIOS options for iGPU memory)</p>
+<p>(This is an example for a desktop HD 4400 without a dGPU and no BIOS options for iGPU memory)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AAPL,ig-platform-id</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">07002216</td>
+</tr>
+<tr>
+<td style="text-align:left">framebuffer-patch-enable</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">01000000</td>
+</tr>
+<tr>
+<td style="text-align:left">framebuffer-stolenmem</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">00003001</td>
+</tr>
+</tbody>
+</table>
+<p>(This is an example for a desktop Iris Pro 6200 and no BIOS options for iGPU memory)</p>
 <p><strong>Special note</strong>: Mobile users should refer to mobile iGPU section for what properties should be used: <a href="https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching" target="_blank">iGPU Patching</a></p>
 <p><code>PciRoot(0x0)/Pci(0x1f,0x3)</code> -&gt; <code>Layout-id</code></p>
 <ul>
@@ -1114,9 +1142,12 @@
 <li>iMac14,1 
 Haswell with dGPU</li>
 <li>iMac14,2 
-Haswell Refresh</li>
-<li>iMac15,1</li>
+Haswell Refresh (Devil&apos;s Canyon)</li>
+<li>iMac15,1
+Broadwell</li>
+<li>iMac16,1</li>
 </ul>
+<p><strong>Note</strong>: Mobile users should refer to the SMBIOS page on which to choose: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md" target="_blank">Mobile SMBIOS</a></p>
 <p>Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:</p>
 <pre><code class="lang-text">  #######################################################
  #               iMac15,1 SMBIOS Info                  #
@@ -1409,7 +1440,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-03-19T22:02:10.176Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-19T22:02:58.006Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-03-20T01:35:11.189Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T01:35:58.366Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -6,8 +6,8 @@ This section is mainly relevant for laptops to save some headaches when followin
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookAir5,1 | Dual Core 17w(Low End) | iGPU: HD 4000 | 11" |
-| MacBookAir5,2 | Dual Core 17w(Low End) | iGPU: HD 4000 | 13" |
+| MacBookAir5,1 | Dual Core 17w | iGPU: HD 4000 | 11" |
+| MacBookAir5,2 | Dual Core 17w | iGPU: HD 4000 | 13" |
 | MacBookPro10,1 | Quad Core 45w | iGPU: HD 4000 + dGPU: GT650M | 15" |
 | MacBookPro10,2 | Dual Core 35w(High End) | iGPU: HD 4000 | 13" |
 
@@ -15,9 +15,9 @@ This section is mainly relevant for laptops to save some headaches when followin
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookAir6,1 | Dual Core 15w(Low End) | iGPU: HD 5000 | 11" |
-| MacBookAir6,2 | Dual Core 15w(Low End) | iGPU: HD 5000 | 13" |
-| MacBookPro11,1 | Dual Core 28w(High End) | iGPU: Iris 5100 | 13" |
+| MacBookAir6,1 | Dual Core 15w | iGPU: HD 5000 | 11" |
+| MacBookAir6,2 | Dual Core 15w | iGPU: HD 5000 | 13" |
+| MacBookPro11,1 | Dual Core 28w | iGPU: Iris 5100 | 13" |
 | MacBookPro11,2 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
 | MacBookPro11,3 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
 | MacBookPro11,4 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
@@ -28,8 +28,8 @@ This section is mainly relevant for laptops to save some headaches when followin
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
 | MacBook8,1 | Dual Core 7w(Low End) | iGPU: HD 5300 | 12" |
-| MacBookAir7,1 | Dual Core 15w(Low End) | iGPU: HD 6000 | 11" |
-| MacBookAir7,2 | Dual Core 15w(Low End) | iGPU: HD 6000 | 13" |
+| MacBookAir7,1 | Dual Core 15w | iGPU: HD 6000 | 11" |
+| MacBookAir7,2 | Dual Core 15w | iGPU: HD 6000 | 13" |
 | MacBookPro12,1 | Dual Core 28w(High End) | iGPU: Iris 6100 | 13" |
 | MacBookPro11,2 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
 | MacBookPro11,3 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
@@ -57,8 +57,8 @@ This section is mainly relevant for laptops to save some headaches when followin
 
 | SMBIOS | CPU Type | GPU Type | Display Size | Year |
 | :--- | :--- | :--- | :--- | :--- |
-| MacBookAir8,1 | Dual Core 7w(Amber Lake Y) | iGPU: UHD 617 | 13" | 2018 |
-| MacBookAir8,2 | Dual Core 7w(Amber Lake Y) | iGPU: UHD 617 | 13" | 2019 |
+| MacBookAir8,1 | Dual Core 7w | iGPU: UHD 617 | 13" | 2018 |
+| MacBookAir8,2 | Dual Core 7w | iGPU: UHD 617 | 13" | 2019 |
 
 ## Coffeelake (8th Gen)
 
