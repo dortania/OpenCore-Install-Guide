@@ -131,10 +131,12 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x0D220003` - this is used when the Desktop iGPU is used to drive a display
+* `0x0D220003` - this is used when the Desktop Haswell iGPU is used to drive a display
   * `0300220D` when hex-swapped
-* `0x04120004` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
+* `0x04120004` - this is used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display
   * `04001204` when hex-swapped
+* `0x0D220003` - this is used when the Desktop Broadwell iGPU
+  * `07002216` when hex-swapped
 
 I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
 
