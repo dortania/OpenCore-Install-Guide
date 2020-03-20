@@ -1,6 +1,6 @@
 # Skylake
 
-* Last edited: March 15, 2020
+* Last edited: March 19, 2020
 * Supported version: 0.5.6
 
 ## Starting Point
@@ -139,7 +139,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 | framebuffer-patch-enable | Data | 01000000 |
 | framebuffer-stolenmem | Data | 00003001 |
 
-(This is an example for an HD 530 without a dGPU and no BIOS options for iGPU memory)
+(This is an example for a desktop HD 530 without a dGPU and no BIOS options for iGPU memory)
 
 **Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
@@ -353,6 +353,8 @@ Recommended to leave enabled for best security practices
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
 For this Skylake example, we'll choose the iMac17,1 SMBIOS.
+
+**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
