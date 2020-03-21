@@ -22,6 +22,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -610,7 +614,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="emulated-nvram">Emulated NVRAM</h1>
+                                <h1 id="emulated-nvram"><a name="emulated-nvram" class="plugin-anchor" href="#emulated-nvram"><i class="fa fa-link" aria-hidden="true"></i></a>Emulated NVRAM</h1>
 <ul>
 <li>Last edited: March 15, 2020</li>
 <li>Supported version: 0.5.6</li>
@@ -621,7 +625,7 @@
 <li>X299</li>
 </ul>
 <p>For B360, B365, H310, H370, Z390 users, make sure you have <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl" target="_blank">SSDT-PMC</a> both under EFI/OC/ACPI and config.plist -&gt; ACPI -&gt; Add. For more info on making and compiling SSDTs, please see <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
-<h2 id="cleaning-out-the-clover-gunk">Cleaning out the Clover gunk</h2>
+<h2 id="cleaning-out-the-clover-gunk"><a name="cleaning-out-the-clover-gunk" class="plugin-anchor" href="#cleaning-out-the-clover-gunk"><i class="fa fa-link" aria-hidden="true"></i></a>Cleaning out the Clover gunk</h2>
 <p>So some may not have noticed but Clover may have installed RC scripts into macOS for proper NVRAM emulation. This is an issue as it conflicts with OpenCore&apos;s method of emulation.</p>
 <p>Files to delete:</p>
 <ul>
@@ -638,7 +642,7 @@
 <li><code>/etc/rc.boot.d</code></li>
 <li><code>/etc/rc.shutdown.d&#x200B;</code></li>
 </ul>
-<h2 id="verifying-if-you-have-working-nvram">Verifying if you have working NVRAM</h2>
+<h2 id="verifying-if-you-have-working-nvram"><a name="verifying-if-you-have-working-nvram" class="plugin-anchor" href="#verifying-if-you-have-working-nvram"><i class="fa fa-link" aria-hidden="true"></i></a>Verifying if you have working NVRAM</h2>
 <p>To start, open the terminal and run the following one line at a time:</p>
 <pre><code class="lang-text">sudo -s
 sudo nvram -c 
@@ -650,7 +654,7 @@ exit
 </code></pre>
 <p>If nothing returns then your NVRAM is not working. If a line containing <code>myvar test</code> returns, your NVRAM is working.</p>
 <p>Note: <code>nvram -c</code> requires SIP to be off, an alternative is to wipe NVRAM at the boot menu. Reminder you&apos;ll need <code>Misc -&gt; Security -&gt; AllowNvramReset -&gt; YES</code></p>
-<h2 id="enabling-emulated-nvram-with-a-nvramplist">Enabling emulated NVRAM (with a nvram.plist)</h2>
+<h2 id="enabling-emulated-nvram-with-a-nvramplist"><a name="enabling-emulated-nvram-with-a-nvramplist" class="plugin-anchor" href="#enabling-emulated-nvram-with-a-nvramplist"><i class="fa fa-link" aria-hidden="true"></i></a>Enabling emulated NVRAM (with a nvram.plist)</h2>
 <p>To enable emulated NVRAM, you&apos;ll need 3 things set:</p>
 <p>Within your config.plist:</p>
 <ul>
@@ -724,7 +728,7 @@ exit
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Emulated NVRAM","level":"7.7","depth":1,"next":{"title":"Disabling GPU","level":"7.8","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"previous":{"title":"Fixing iServices","level":"7.6","depth":1,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/nvram.md","mtime":"2020-03-20T21:21:25.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T21:22:15.195Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Emulated NVRAM","level":"7.7","depth":1,"next":{"title":"Disabling GPU","level":"7.8","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"previous":{"title":"Fixing iServices","level":"7.6","depth":1,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/nvram.md","mtime":"2020-03-21T16:55:13.188Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-21T16:57:46.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -740,6 +744,10 @@ exit
     
         
         <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-edit/plugin.js"></script>
         
     
         

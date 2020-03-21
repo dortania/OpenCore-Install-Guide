@@ -22,6 +22,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -610,17 +614,17 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="fixing-kaslr-slide-values">Fixing KASLR slide values</h1>
+                                <h1 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="plugin-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing KASLR slide values</h1>
 <ul>
 <li>Last edited: March 15, 2020</li>
 <li>Supported version: 0.5.6</li>
 </ul>
-<h2 id="fixing-kaslr-slide-values">Fixing KASLR slide values</h2>
+<h2 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="plugin-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing KASLR slide values</h2>
 <p>This section is for users who wish to understand and fix &quot;Couldn&apos;t allocate runtime area&quot; errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.</p>
-<h2 id="so-what-is-kaslr">So what is KASLR?</h2>
+<h2 id="so-what-is-kaslr"><a name="so-what-is-kaslr" class="plugin-anchor" href="#so-what-is-kaslr"><i class="fa fa-link" aria-hidden="true"></i></a>So what is KASLR?</h2>
 <p>Well KASLR stands for Kernel address space layout randomization, what it&apos;s used for is security purposes. Specifically, this makes it much harder for attackers to figure out where the important objects are in memory as it&apos;s always random both between machines and between boots. <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">M</a><a href="https://lwn.net/Articles/569635/" target="_blank">ore in-depth explainer on KASLR</a></p>
 <p>Where this becomes an issue is when you introduce devices with either small memory maps or just way too many devices present. There likely is space for the kernel to operate but there&apos;s also free space where the kernel won&apos;t fit entirely. This is where <code>slide=xxx</code> fits in. Instead of letting macOS choose a random area to operate in each boot, we&apos;ll constrain it to somewhere that we know will work.</p>
-<h2 id="and-who-is-this-info-for">And who is this info for?</h2>
+<h2 id="and-who-is-this-info-for"><a name="and-who-is-this-info-for" class="plugin-anchor" href="#and-who-is-this-info-for"><i class="fa fa-link" aria-hidden="true"></i></a>And who is this info for?</h2>
 <p>Well as I mentioned earlier, this is for users who don&apos;t have enough space for the kernel or moves to a place that is too small. You&apos;ll generally experience an error similar to this when booting:</p>
 <pre><code class="lang-text">Error allocating 0x1197b pages at 0x0000000017a80000 alloc type 2
 Couldn&apos;t allocate runtime area
@@ -633,7 +637,7 @@ Couldn&apos;t allocate runtime area
 </code></pre>
 <p>The best part about these errors is that they can be random, also the reason why power cycling your PC 20 times also can fix the issue but only temporarily.</p>
 <p>Fun Fact: It takes around 31 ms to find an area to operate in, manually setting a slide value can on average can reduce boot times by 0.207%!!!</p>
-<h2 id="so-how-do-i-fix-this">So how do I fix this?</h2>
+<h2 id="so-how-do-i-fix-this"><a name="so-how-do-i-fix-this" class="plugin-anchor" href="#so-how-do-i-fix-this"><i class="fa fa-link" aria-hidden="true"></i></a>So how do I fix this?</h2>
 <p>The real fix to this is quite simple actually, the process is both the same for Clover and OpenCore users. What you&apos;ll need:</p>
 <ul>
 <li>Clover users:<ul>
@@ -678,7 +682,7 @@ Couldn&apos;t allocate runtime area
 </ul>
 </li>
 </ul>
-<h2 id="prepping-the-bios">Prepping the BIOS</h2>
+<h2 id="prepping-the-bios"><a name="prepping-the-bios" class="plugin-anchor" href="#prepping-the-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Prepping the BIOS</h2>
 <p>The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:</p>
 <ul>
 <li>Update BIOS(extremely important as early BIOS&apos;s shipped are known to have memory map issues, especially with Z390)</li>
@@ -700,7 +704,7 @@ Couldn&apos;t allocate runtime area
 </ul>
 </li>
 </ul>
-<h2 id="finding-the-slide-value">Finding the Slide value</h2>
+<h2 id="finding-the-slide-value"><a name="finding-the-slide-value" class="plugin-anchor" href="#finding-the-slide-value"><i class="fa fa-link" aria-hidden="true"></i></a>Finding the Slide value</h2>
 <p>Now what you&apos;ll want to do is open the EFI shell in your boot manager of choice and run <code>memmap</code>. This will give you a list of all pages and their sizes. This is where the fun begins.</p>
 <p>Example of what you&apos;ll see:</p>
 <table>
@@ -894,7 +898,7 @@ fs0:\&gt; memmap &gt; memmap.txt
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"next":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"7.3","depth":1,"path":"troubleshooting/verbose.md","ref":"troubleshooting/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-03-20T21:21:25.832Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T21:22:15.195Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"next":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"7.3","depth":1,"path":"troubleshooting/verbose.md","ref":"troubleshooting/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-03-21T16:55:13.188Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-21T16:57:46.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -910,6 +914,10 @@ fs0:\&gt; memmap &gt; memmap.txt
     
         
         <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-edit/plugin.js"></script>
         
     
         

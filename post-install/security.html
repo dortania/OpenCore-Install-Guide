@@ -22,6 +22,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -610,7 +614,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="security-and-filevault">Security and FileVault</h1>
+                                <h1 id="security-and-filevault"><a name="security-and-filevault" class="plugin-anchor" href="#security-and-filevault"><i class="fa fa-link" aria-hidden="true"></i></a>Security and FileVault</h1>
 <ul>
 <li>Last edited: March 15, 2020</li>
 <li>Supported version: 0.5.6</li>
@@ -621,7 +625,7 @@
 <li><a href="security.html#Vault">Vault</a></li>
 <li><a href="security.html#ScanPolicy">ScanPolicy</a></li>
 </ul>
-<h2 id="filevault">FileVault</h2>
+<h2 id="filevault"><a name="filevault" class="plugin-anchor" href="#filevault"><i class="fa fa-link" aria-hidden="true"></i></a>FileVault</h2>
 <p>FileVault is macOS&apos;s builtin drive encyption, and with OpenCore support for it has been drastcally improved compared to the legacy Clover drivers.</p>
 <p>To start, you&apos;ll need the following .efi drivers:</p>
 <ul>
@@ -667,7 +671,7 @@
 </ul>
 <p>With all this, you can proceed to enable FileVault like on a normal mac under <code>System Preferences -&gt; Security &amp; Privacy -&gt; FileVault</code></p>
 <p>For UI issues, see <a href="../troubleshooting/verbose.html">Fixing Resolution and Verbose</a></p>
-<h2 id="vault">Vault</h2>
+<h2 id="vault"><a name="vault" class="plugin-anchor" href="#vault"><i class="fa fa-link" aria-hidden="true"></i></a>Vault</h2>
 <p><strong>What is vaulting?</strong></p>
 <p>Well vaulting is based around 2 things, vault.plist and vault.sig:</p>
 <ul>
@@ -707,7 +711,7 @@
 <li>Grab a new copy of OpenCore.efi</li>
 <li><code>Misc -&gt; Security -&gt; Vault</code> set to Optional</li>
 </ul>
-<h2 id="scanpolicy">ScanPolicy</h2>
+<h2 id="scanpolicy"><a name="scanpolicy" class="plugin-anchor" href="#scanpolicy"><i class="fa fa-link" aria-hidden="true"></i></a>ScanPolicy</h2>
 <p>What this quirk allows to prevent scanning and booting from untrusted sources. Setting to <code>0</code> will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.</p>
 <p>To calculate the ScanPolicy value, you simply add up all the hexidecimal values(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with <code>&#x2318;+3</code>). Once it&apos;s all added up, you would add this hexidecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)</p>
 <p><code>0x00000001 (bit 0)</code> &#x2014; OC_SCAN_FILE_SYSTEM_LOCK</p>
@@ -818,7 +822,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"7.9","depth":1,"next":{"title":"Fixing Audio","level":"7.10","depth":1,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},"previous":{"title":"Disabling GPU","level":"7.8","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-03-20T21:21:25.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T21:22:15.195Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"7.9","depth":1,"next":{"title":"Fixing Audio","level":"7.10","depth":1,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},"previous":{"title":"Disabling GPU","level":"7.8","depth":1,"path":"post-install/spoof.md","ref":"post-install/spoof.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-03-21T16:55:13.188Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-21T16:57:46.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -834,6 +838,10 @@
     
         
         <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-edit/plugin.js"></script>
         
     
         

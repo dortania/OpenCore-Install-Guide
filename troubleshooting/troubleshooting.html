@@ -22,6 +22,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -610,7 +614,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="general-troubleshooting">General Troubleshooting</h1>
+                                <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
 <li>Last edited: March 15, 2020</li>
 <li>Supported version: 0.5.6</li>
@@ -636,7 +640,7 @@
 </ul>
 <p>While still a work in progress, laptop users wanting to convert an existing Clover install can see the  <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion" target="_blank">Clover to OpenCore conversion</a> for more info</p>
 <p><strong>And if your issue is not covered, please read the offical OpenCore documentation: <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a></strong></p>
-<h1 id="opencore-booting">OpenCore booting</h1>
+<h1 id="opencore-booting"><a name="opencore-booting" class="plugin-anchor" href="#opencore-booting"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore booting</h1>
 <ul>
 <li>Stuck on <code>no vault provided!</code></li>
 <li>Stuck on EndRandomSeed</li>
@@ -658,13 +662,13 @@
 <li>SSDTs not being added</li>
 <li>Booting OpenCore reboots to BIOS</li>
 </ul>
-<h2 id="stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></h2>
+<h2 id="stuck-on-no-vault-provided"><a name="stuck-on-no-vault-provided" class="plugin-anchor" href="#stuck-on-no-vault-provided"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>no vault provided!</code></h2>
 <p>Turn off file vault in your config.plist under <code>Misc -&gt; Security -&gt; Vault</code> by setting it to:</p>
 <ul>
 <li><code>Optional</code></li>
 </ul>
 <p>If you have already executed the <code>sign.command</code> you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a></p>
-<h2 id="stuck-on-endrandomseed">Stuck on EndRandomSeed</h2>
+<h2 id="stuck-on-endrandomseed"><a name="stuck-on-endrandomseed" class="plugin-anchor" href="#stuck-on-endrandomseed"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on EndRandomSeed</h2>
 <p>Couple problems:</p>
 <ul>
 <li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -&gt; Output</li>
@@ -678,20 +682,20 @@
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <p>Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt&apos;s also got a fix: <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a>&apos;s FixHPET option</p>
-<h2 id="cant-see-macos-partitions">Can&apos;t see macOS partitions</h2>
+<h2 id="cant-see-macos-partitions"><a name="cant-see-macos-partitions" class="plugin-anchor" href="#cant-see-macos-partitions"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t see macOS partitions</h2>
 <p>Main things to check:</p>
 <ul>
 <li>ScanPolicy set to <code>0</code> to show all drives</li>
 <li>Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)</li>
 <li>Enable <code>AvoidHighAlloc</code> if you&apos;re running a network recovery install</li>
 </ul>
-<h2 id="black-screen-after-picker">Black screen after picker</h2>
+<h2 id="black-screen-after-picker"><a name="black-screen-after-picker" class="plugin-anchor" href="#black-screen-after-picker"><i class="fa fa-link" aria-hidden="true"></i></a>Black screen after picker</h2>
 <p>This is due to missing ConsoleGOP, enable it under your config:</p>
 <ul>
 <li><code>UEFI -&gt; Output -&gt; ProvideConsoleGOP</code></li>
 </ul>
 <p>If this doesn&apos;t help, grab the <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">debug versions</a> of <code>OpenCore.efi</code> and <code>BOOTx64.efi</code> and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.</p>
-<h2 id="stuck-on-oc-ocapplegenericinput---success">Stuck on <code>OC: OcAppleGenericInput... - Success</code></h2>
+<h2 id="stuck-on-oc-ocapplegenericinput---success"><a name="stuck-on-oc-ocapplegenericinput---success" class="plugin-anchor" href="#stuck-on-oc-ocapplegenericinput---success"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OC: OcAppleGenericInput... - Success</code></h2>
 <p>So this isn&apos;t actually an error, instead OpenCore isn&apos;t showing you all the debug info. This is right before/while the kernel is being loaded so things we need to check for:</p>
 <ul>
 <li>Intel:<ul>
@@ -708,34 +712,34 @@
 </li>
 </ul>
 <p>If this doesn&apos;t help, grab the <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">debug versions</a> of <code>OpenCore.efi</code> and <code>BOOTx64.efi</code> and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.</p>
-<h2 id="stuck-on-ocb-ocscanforbootentries-failure---not-found">Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></h2>
+<h2 id="stuck-on-ocb-ocscanforbootentries-failure---not-found"><a name="stuck-on-ocb-ocscanforbootentries-failure---not-found" class="plugin-anchor" href="#stuck-on-ocb-ocscanforbootentries-failure---not-found"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></h2>
 <p>This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to <code>0</code> will allow all boot options to be shown</p>
 <ul>
 <li><code>Misc -&gt; Security -&gt; ScanPolicy -&gt; 0</code></li>
 </ul>
-<h2 id="stuck-on-ocb-failed-to-match-a-default-boot-option">Stuck on <code>OCB: failed to match a default boot option</code></h2>
+<h2 id="stuck-on-ocb-failed-to-match-a-default-boot-option"><a name="stuck-on-ocb-failed-to-match-a-default-boot-option" class="plugin-anchor" href="#stuck-on-ocb-failed-to-match-a-default-boot-option"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OCB: failed to match a default boot option</code></h2>
 <p>Same fix as <code>OCB: OcScanForBootEntries failure - Not Found</code>, OpenCore is unable to find any drives with the current ScanPolicy, setting to <code>0</code> will allow all boot options to be shown</p>
 <ul>
 <li><code>Misc -&gt; Security -&gt; ScanPolicy -&gt; 0</code></li>
 </ul>
-<h2 id="stuck-on-ocabc-memory-pool-allocation-failure---not-found">Stuck on <code>OCABC: Memory pool allocation failure - Not Found</code></h2>
+<h2 id="stuck-on-ocabc-memory-pool-allocation-failure---not-found"><a name="stuck-on-ocabc-memory-pool-allocation-failure---not-found" class="plugin-anchor" href="#stuck-on-ocabc-memory-pool-allocation-failure---not-found"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OCABC: Memory pool allocation failure - Not Found</code></h2>
 <p>This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -&gt; Booter -&gt; Quirks is correct and verify your BIOS settings:</p>
 <ul>
 <li>Above4GDecoding is Enabled</li>
 <li>CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)</li>
 </ul>
-<h2 id="stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters">Stuck on <code>OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...</code></h2>
+<h2 id="stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters"><a name="stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters" class="plugin-anchor" href="#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...</code></h2>
 <p>This is due to either using a Clover config with OpenCore or using a configurator such as Mackie&apos;s Clover and OpenCore configurator. You&apos;ll need to start over and make a new config or figure out all the garbage you need to remove from your config. <strong>This is why we don&apos;t support configurators, they are known for these issues</strong></p>
-<h2 id="stuck-on-oc-driver-xxxefi-at-0-cannot-be-found">Stuck on <code>OC: Driver XXX.efi at 0 cannot be found</code></h2>
+<h2 id="stuck-on-oc-driver-xxxefi-at-0-cannot-be-found"><a name="stuck-on-oc-driver-xxxefi-at-0-cannot-be-found" class="plugin-anchor" href="#stuck-on-oc-driver-xxxefi-at-0-cannot-be-found"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OC: Driver XXX.efi at 0 cannot be found</code></h2>
 <p>Verify that your EFI/OC/Drivers matches up with your config.plist -&gt; UEFi -&gt; Drivers</p>
-<h2 id="stuck-on-buffer-too-small">Stuck on <code>Buffer Too Small</code></h2>
+<h2 id="stuck-on-buffer-too-small"><a name="stuck-on-buffer-too-small" class="plugin-anchor" href="#stuck-on-buffer-too-small"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>Buffer Too Small</code></h2>
 <ul>
 <li><code>UEFI -&gt; Quirks -&gt; AvoidHighAlloc -&gt; Enable</code></li>
 <li>Enable Above4GDecoding in the BIOS</li>
 </ul>
-<h2 id="stuck-on-plist-only-kext-has-cfbundleexecutable-key">Stuck on <code>Plist only kext has CFBundleExecutable key</code></h2>
+<h2 id="stuck-on-plist-only-kext-has-cfbundleexecutable-key"><a name="stuck-on-plist-only-kext-has-cfbundleexecutable-key" class="plugin-anchor" href="#stuck-on-plist-only-kext-has-cfbundleexecutable-key"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>Plist only kext has CFBundleExecutable key</code></h2>
 <p>Missing or incorrect <code>Executable path</code></p>
-<h2 id="receiving-failed-to-parse-real-field-of-type-1">Receiving &quot;Failed to parse real field of type 1&quot;</h2>
+<h2 id="receiving-failed-to-parse-real-field-of-type-1"><a name="receiving-failed-to-parse-real-field-of-type-1" class="plugin-anchor" href="#receiving-failed-to-parse-real-field-of-type-1"><i class="fa fa-link" aria-hidden="true"></i></a>Receiving &quot;Failed to parse real field of type 1&quot;</h2>
 <ul>
 <li><p>A value is set as <code>real</code> when it&apos;s not supposed to be, generally being that Xcode converted <code>HaltLevel</code> by accident:</p>
 <pre><code class="lang-text">&lt;key&gt;HaltLevel&lt;/key&gt;
@@ -749,7 +753,7 @@
 </code></pre>
 </li>
 </ul>
-<h2 id="stuck-after-selection-macos-partition-on-opencore">Stuck after selection macOS partition on OpenCore</h2>
+<h2 id="stuck-after-selection-macos-partition-on-opencore"><a name="stuck-after-selection-macos-partition-on-opencore" class="plugin-anchor" href="#stuck-after-selection-macos-partition-on-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck after selection macOS partition on OpenCore</h2>
 <ul>
 <li>CFG-Lock not off(Intel Users only), couple solutions:<ul>
 <li><a href="../extras/msr-lock.html">Patch your MSR E2</a>(Recommended solution)</li>
@@ -766,7 +770,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="cant-select-anything-in-the-picker">Can&apos;t select anything in the picker</h2>
+<h2 id="cant-select-anything-in-the-picker"><a name="cant-select-anything-in-the-picker" class="plugin-anchor" href="#cant-select-anything-in-the-picker"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t select anything in the picker</h2>
 <ul>
 <li>Incompatible keyboard driver:<ul>
 <li>Disable <code>PollAppleHotKeys</code> and enable <code>KeySupport</code>, then remove <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">AppleUsbKbDxe</a> from your config.plist -&gt; UEFI -&gt; Drivers</li>
@@ -774,7 +778,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac">Stuck on <code>This version of Mac OS X is not supported: Reason Mac...</code></h2>
+<h2 id="stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac"><a name="stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac" class="plugin-anchor" href="#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>This version of Mac OS X is not supported: Reason Mac...</code></h2>
 <p>This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in <code>PlatformInfo-&gt;Generic</code> with <code>Automatic</code> enabled. Reminder of supported SMBIOS:</p>
 <ul>
 <li>iMac13,x+</li>
@@ -784,9 +788,9 @@
 <li>MacBookAir5,x+</li>
 <li>MacBookPro9,x+</li>
 </ul>
-<h2 id="couldnt-allocate-runtime-area-errors"><code>Couldn&apos;t allocate runtime area</code> errors?</h2>
+<h2 id="couldnt-allocate-runtime-area-errors"><a name="couldnt-allocate-runtime-area-errors" class="plugin-anchor" href="#couldnt-allocate-runtime-area-errors"><i class="fa fa-link" aria-hidden="true"></i></a><code>Couldn&apos;t allocate runtime area</code> errors?</h2>
 <p>See <a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix" target="_blank">Fixing KASLR slide values</a></p>
-<h2 id="ssdts-not-being-added">SSDTs not being added</h2>
+<h2 id="ssdts-not-being-added"><a name="ssdts-not-being-added" class="plugin-anchor" href="#ssdts-not-being-added"><i class="fa fa-link" aria-hidden="true"></i></a>SSDTs not being added</h2>
 <p>So with Opencore, there&apos;s some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:</p>
 <pre><code>* Original Table Header:
 *     Signature        &quot;SSDT&quot;
@@ -800,12 +804,12 @@
 *     Compiler Version 0x20190509 (538510601)
 </code></pre><p>The <code>Length</code> and <code>checksum</code> value is what we care about, so if our SSDT is actually 347 bytes then we want to change <code>Length</code> to <code>0x0000015B (347)</code>(the <code>015B</code> is in HEX)</p>
 <p>Best way to actually fix this is to grab a newer copy of iASL or Acidanthera&apos;s copy of <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">maciASL</a> and remaking the SSDT</p>
-<h2 id="booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</h2>
+<h2 id="booting-opencore-reboots-to-bios"><a name="booting-opencore-reboots-to-bios" class="plugin-anchor" href="#booting-opencore-reboots-to-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Booting OpenCore reboots to BIOS</h2>
 <ul>
 <li>Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)</li>
 </ul>
 <p><img src="https://i.imgur.com/9RyBQ0L.png" alt="Directory Structure from OpenCore&apos;s DOC"></p>
-<h1 id="macos-booting">macOS booting</h1>
+<h1 id="macos-booting"><a name="macos-booting" class="plugin-anchor" href="#macos-booting"><i class="fa fa-link" aria-hidden="true"></i></a>macOS booting</h1>
 <ul>
 <li>Stuck on <code>RTC...</code>, <code>PCI ConfigurationBegins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></li>
 <li>&quot;Waiting for Root Device&quot; or Prohibited Sign error</li>
@@ -821,7 +825,7 @@
 <li>Frozen in the macOS installer after 30 seconds</li>
 <li>15h/16h CPU reboot after Data &amp; Privacy screen</li>
 </ul>
-<h2 id="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy">Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></h2>
+<h2 id="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><a name="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy" class="plugin-anchor" href="#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></h2>
 <p>Well this general area is where a lot of PCI devices are configured, and is where most booting issues with AMD hacks happen. The main places to check:</p>
 <ul>
 <li><p><strong>Missing EC patch</strong>: </p>
@@ -844,7 +848,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</h2>
+<h2 id="waiting-for-root-device-or-prohibited-sign-error"><a name="waiting-for-root-device-or-prohibited-sign-error" class="plugin-anchor" href="#waiting-for-root-device-or-prohibited-sign-error"><i class="fa fa-link" aria-hidden="true"></i></a>&quot;Waiting for Root Device&quot; or Prohibited Sign error</h2>
 <ul>
 <li>Generally seen as a USB error, couple ways to fix:<ul>
 <li>if you&apos;re hitting the 15 port limit, you can temporarily get around this with <code>XhciPortLimit</code> but for long term use, we recommend making a <a href="https://github.com/corpnewt/USBMap" target="_blank">USBmap</a>. CorpNewt also has a guide for this: <a href="https://usb-map.gitbook.io/project/" target="_blank">USBmap Guide</a></li>
@@ -852,35 +856,35 @@
 </ul>
 </li>
 </ul>
-<h2 id="macos-installer-in-russian">macOS installer in Russian</h2>
+<h2 id="macos-installer-in-russian"><a name="macos-installer-in-russian" class="plugin-anchor" href="#macos-installer-in-russian"><i class="fa fa-link" aria-hidden="true"></i></a>macOS installer in Russian</h2>
 <p>Default sample config is in russian because slavs rule the Hackintosh world, check your prev-lang:kbd value under <code>NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82</code>. Set to <code>656e2d55533a30</code> for American: en-US:0 and a full list can be found in <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></p>
 <p>You may also need to reset NVRAM in the boot picker as well</p>
 <p>Still didn&apos;t work? Well time for the big guns. We&apos;ll force remove that exact property and let OpenCore rebuild it:</p>
 <p><code>NVRAM -&gt; Block -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82 -&gt; Item 0</code> then set it Type <code>String</code> and Value <code>prev-lang:kbd</code></p>
 <p><img src="https://cdn.discordapp.com/attachments/456913818467958789/673947840791445538/Screen_Shot_2020-02-03_at_10.47.40_AM.png" alt=""></p>
-<h2 id="stuck-on-or-near-ioconsoleusers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></h2>
+<h2 id="stuck-on-or-near-ioconsoleusers-gioscreenlock"><a name="stuck-on-or-near-ioconsoleusers-gioscreenlock" class="plugin-anchor" href="#stuck-on-or-near-ioconsoleusers-gioscreenlock"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></h2>
 <p>This is right before the GPU is properly initialized, verify the following:</p>
 <ul>
 <li>GPU is UEFI capable(GTX 7XX/2013+)</li>
 <li>CSM is off in the BIOS</li>
 <li>Forcing PCIe 3.0 link speed</li>
 </ul>
-<h2 id="black-screen-after-ioconsoleusers-gioscreenlock-on-navi">Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</h2>
+<h2 id="black-screen-after-ioconsoleusers-gioscreenlock-on-navi"><a name="black-screen-after-ioconsoleusers-gioscreenlock-on-navi" class="plugin-anchor" href="#black-screen-after-ioconsoleusers-gioscreenlock-on-navi"><i class="fa fa-link" aria-hidden="true"></i></a>Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</h2>
 <ul>
 <li>Add <code>agdpmod=pikera</code> to boot args</li>
 <li>switch between different display outputs</li>
 </ul>
-<h2 id="300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></h2>
+<h2 id="300-series-intel-stalling-on-apfsmodulestart"><a name="300-series-intel-stalling-on-apfsmodulestart" class="plugin-anchor" href="#300-series-intel-stalling-on-apfsmodulestart"><i class="fa fa-link" aria-hidden="true"></i></a>300 series Intel stalling on <code>apfs_module_start...</code></h2>
 <p>Commonly due to systems running AWAC clocks, pleas see the <a href="../extras/acpi.html">Getting started with ACPI</a> section</p>
-<h2 id="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</h2>
+<h2 id="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina"><a name="stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina" class="plugin-anchor" href="#stalling-on-apfsmodulestart-waiting-for-root-device-waiting-onioresources-previous-shutdown-cause-in-catalina"><i class="fa fa-link" aria-hidden="true"></i></a>Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</h2>
 <p>Verify your EC SSDT is enabled and correct for your system. See the <a href="https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/" target="_blank">What&apos;s new in macOS Catalina</a> post for more info</p>
-<h2 id="kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></h2>
+<h2 id="kernel-panic-cannot-perform-kext-summary"><a name="kernel-panic-cannot-perform-kext-summary" class="plugin-anchor" href="#kernel-panic-cannot-perform-kext-summary"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>Cannot perform kext summary</code></h2>
 <p>Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don&apos;t.</p>
-<h2 id="kernel-panic-appleintelmcereporter">Kernel Panic <code>AppleIntelMCEReporter</code></h2>
+<h2 id="kernel-panic-appleintelmcereporter"><a name="kernel-panic-appleintelmcereporter" class="plugin-anchor" href="#kernel-panic-appleintelmcereporter"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>AppleIntelMCEReporter</code></h2>
 <p>With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add <a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a> to both </p>
-<h2 id="kernel-panic-appleintelcpupowermanagement">Kernel Panic <code>AppleIntelCPUPowerManagement</code></h2>
+<h2 id="kernel-panic-appleintelcpupowermanagement"><a name="kernel-panic-appleintelcpupowermanagement" class="plugin-anchor" href="#kernel-panic-appleintelcpupowermanagement"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>AppleIntelCPUPowerManagement</code></h2>
 <p>This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
-<h2 id="stop-sign-with-corrupted-textstill-waiting-for-root-device">Stop Sign with corrupted text(Still waiting for Root Device)</h2>
+<h2 id="stop-sign-with-corrupted-textstill-waiting-for-root-device"><a name="stop-sign-with-corrupted-textstill-waiting-for-root-device" class="plugin-anchor" href="#stop-sign-with-corrupted-textstill-waiting-for-root-device"><i class="fa fa-link" aria-hidden="true"></i></a>Stop Sign with corrupted text(Still waiting for Root Device)</h2>
 <p>With OS X 10.11 El Capitan, Apple imposed a 15 USB port limit. To get around this we actually create a USB map to include ports we want and kick out extras we don&apos;t care about. For install, set <code>Kernel -&gt; Quirks -&gt; XhciPortLimit -&gt; Enabled</code> but for post install we recommend making a map as the port limit patch isn&apos;t guaranteed to work with future versions of macOS.</p>
 <p>First try your USB stick in a different USB port.</p>
 <p>For 15h and 16h AMD CPUs, you may need to add the following:</p>
@@ -891,15 +895,15 @@
 <ul>
 <li><a href="https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip" target="_blank">AMD StopSign-fixv5</a></li>
 </ul>
-<h2 id="frozen-in-the-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</h2>
+<h2 id="frozen-in-the-macos-installer-after-30-seconds"><a name="frozen-in-the-macos-installer-after-30-seconds" class="plugin-anchor" href="#frozen-in-the-macos-installer-after-30-seconds"><i class="fa fa-link" aria-hidden="true"></i></a>Frozen in the macOS installer after 30 seconds</h2>
 <p>This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
-<h2 id="15h16h-cpu-reboot-after-data--privacy-screen">15h/16h CPU reboot after Data &amp; Privacy screen</h2>
+<h2 id="15h16h-cpu-reboot-after-data--privacy-screen"><a name="15h16h-cpu-reboot-after-data--privacy-screen" class="plugin-anchor" href="#15h16h-cpu-reboot-after-data--privacy-screen"><i class="fa fa-link" aria-hidden="true"></i></a>15h/16h CPU reboot after Data &amp; Privacy screen</h2>
 <p>Follow directions here after UPDATE 2: <a href="https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&amp;comment=2658085" target="_blank">Fix Data and Privacy reboot</a></p>
-<h2 id="macos-frozen-right-before-login">macOS frozen right before login</h2>
+<h2 id="macos-frozen-right-before-login"><a name="macos-frozen-right-before-login" class="plugin-anchor" href="#macos-frozen-right-before-login"><i class="fa fa-link" aria-hidden="true"></i></a>macOS frozen right before login</h2>
 <p>This is a common example of screwed up TSC, for most system add <a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a></p>
 <p>For Skylake-X, many firmwares including Asus and EVGA won&apos;t write to all cores. So we&apos;ll need to reset the TSC on cold boot and wake with <a href="https://github.com/interferenc/TSCAdjustReset" target="_blank">TSCAdjustReset</a>. Compiled version can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip" target="_blank">TSCAdjustReset.kext</a>. Note that you <strong>must</strong> open up the kext(ShowPackageContents in finder, <code>Contents -&gt; Info.plist</code>) and change the Info.plist -&gt; <code>IOKitPersonalities -&gt; IOPropertyMatch -&gt; IOCPUNumber</code> to the number of CPU threads you have starting from <code>0</code>(i9 7980xe 18 core would be <code>35</code> as it has 36 threads total)</p>
 <p><img src="https://cdn.discordapp.com/attachments/478720084072988672/669453323589386254/IMG_20200122_090803.jpg" alt=""></p>
-<h1 id="macos-post-install">macOS post-install</h1>
+<h1 id="macos-post-install"><a name="macos-post-install" class="plugin-anchor" href="#macos-post-install"><i class="fa fa-link" aria-hidden="true"></i></a>macOS post-install</h1>
 <ul>
 <li><a href="troubleshooting.html#Broken-iMessage-and-Siri">Broken iMessage and Siri</a></li>
 <li>No on-board audio</li>
@@ -910,7 +914,7 @@
 <li>Apps crashing on AMD</li>
 <li>No temperature/fan sensor output</li>
 </ul>
-<h2 id="broken-imessage-and-siri">Broken iMessage and Siri</h2>
+<h2 id="broken-imessage-and-siri"><a name="broken-imessage-and-siri" class="plugin-anchor" href="#broken-imessage-and-siri"><i class="fa fa-link" aria-hidden="true"></i></a>Broken iMessage and Siri</h2>
 <ul>
 <li>En0 device not setup as <code>Built-in</code>, couple ways to fix:<ul>
 <li>Find PCI path for your NIC with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>(ie: <code>ethernet</code>, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of <code>built-in</code> with the value of <code>01</code> and type <code>Data</code>. Hackintool can also grab the PCIRooth path if you&apos;re having issues with gfxutil. <strong>Recommended method</strong></li>
@@ -920,9 +924,9 @@
 </ul>
 <p><img src="https://i.imgur.com/DtYtwCQ.png" alt=""></p>
 <p>If these fixes do not work, see the <a href="../post-install/iservices.html">Fixing iServices page</a> for more in-depth guide.</p>
-<h2 id="no-on-board-audio">No on-board audio</h2>
+<h2 id="no-on-board-audio"><a name="no-on-board-audio" class="plugin-anchor" href="#no-on-board-audio"><i class="fa fa-link" aria-hidden="true"></i></a>No on-board audio</h2>
 <p>Refer to <a href="../post-install/audio.html">Fixing Audio with AppleALC</a> section</p>
-<h2 id="bios-reset-or-sent-into-safemode-after-rebootshutdown">BIOS reset or sent into Safemode after reboot/shutdown?</h2>
+<h2 id="bios-reset-or-sent-into-safemode-after-rebootshutdown"><a name="bios-reset-or-sent-into-safemode-after-rebootshutdown" class="plugin-anchor" href="#bios-reset-or-sent-into-safemode-after-rebootshutdown"><i class="fa fa-link" aria-hidden="true"></i></a>BIOS reset or sent into Safemode after reboot/shutdown?</h2>
 <p>Issue with AppleRTC, quite a simple fix:</p>
 <ul>
 <li>Under <code>Kernel -&gt; patch</code>:</li>
@@ -978,22 +982,22 @@
 </tr>
 </tbody>
 </table>
-<h2 id="macos-gpu-acceleration-missing-on-amd-x570">macOS GPU acceleration missing on AMD X570</h2>
+<h2 id="macos-gpu-acceleration-missing-on-amd-x570"><a name="macos-gpu-acceleration-missing-on-amd-x570" class="plugin-anchor" href="#macos-gpu-acceleration-missing-on-amd-x570"><i class="fa fa-link" aria-hidden="true"></i></a>macOS GPU acceleration missing on AMD X570</h2>
 <p>Verify the following:</p>
 <ul>
 <li>GPU is UEFI capable(GTX 7XX/2013+)</li>
 <li>CSM is off in the BIOS</li>
 <li>Forcing PCIe 3.0 link speed</li>
 </ul>
-<h2 id="drm-broken">DRM Broken</h2>
+<h2 id="drm-broken"><a name="drm-broken" class="plugin-anchor" href="#drm-broken"><i class="fa fa-link" aria-hidden="true"></i></a>DRM Broken</h2>
 <p>With Haswell and newer iGPUs, DRM is outright broken on them with macOS Catalina. This includes iTunes Movies, Apple TV+, Amazon Prime and Netflix, the only fix is getting a supported dGPU preferably Polaris or newer that supports HEVC. </p>
 <p>More other GPUs, try different shiki boot args:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md" target="_blank">WhateverGreen&apos;s DRM Chart</a></li>
 </ul>
-<h2 id="memory-modules-misconfigured-on-macpro71">&quot;Memory Modules Misconfigured&quot; on MacPro7,1</h2>
+<h2 id="memory-modules-misconfigured-on-macpro71"><a name="memory-modules-misconfigured-on-macpro71" class="plugin-anchor" href="#memory-modules-misconfigured-on-macpro71"><i class="fa fa-link" aria-hidden="true"></i></a>&quot;Memory Modules Misconfigured&quot; on MacPro7,1</h2>
 <p>Add <a href="https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/" target="_blank">MacProMemoryNotificationDisabler kext</a> to EFI/OC/Kexts and <code>Kernel -&gt; Add</code>. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.</p>
-<h2 id="apps-crashing-on-amd">Apps crashing on AMD</h2>
+<h2 id="apps-crashing-on-amd"><a name="apps-crashing-on-amd" class="plugin-anchor" href="#apps-crashing-on-amd"><i class="fa fa-link" aria-hidden="true"></i></a>Apps crashing on AMD</h2>
 <p><del>Easy fix, buy Intel</del></p>
 <p>So with AMD, whenever Apple calls CPU specific functions the app witll either not work or outright crash. Here are some apps and their &quot;fixes&quot;:</p>
 <ul>
@@ -1024,7 +1028,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="other-issues">Other issues</h1>
+<h1 id="other-issues"><a name="other-issues" class="plugin-anchor" href="#other-issues"><i class="fa fa-link" aria-hidden="true"></i></a>Other issues</h1>
 <ul>
 <li>Can&apos;t run <code>acpidump.efi</code></li>
 <li>Fixing SSDTTime: <code>Could not locate or download iasl!</code></li>
@@ -1034,7 +1038,7 @@
 <li>No temperature/fan sensor output</li>
 <li>Can&apos;t find Windows/Bootcamp drive in picker</li>
 </ul>
-<h2 id="cant-run-acpidumpefi">Can&apos;t run <code>acpidump.efi</code></h2>
+<h2 id="cant-run-acpidumpefi"><a name="cant-run-acpidumpefi" class="plugin-anchor" href="#cant-run-acpidumpefi"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t run <code>acpidump.efi</code></h2>
 <p>Call upon OpenCore shell:</p>
 <pre><code class="lang-text">shell&gt; fs0: //replace with proper drive
 
@@ -1048,14 +1052,14 @@ fs0:\&gt; cd EFI\OC\Tools //note that its with forward slashes
 
 fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 </code></pre>
-<h2 id="fixing-ssdttime-could-not-locate-or-download-iasl">Fixing SSDTTime: <code>Could not locate or download iasl!</code></h2>
+<h2 id="fixing-ssdttime-could-not-locate-or-download-iasl"><a name="fixing-ssdttime-could-not-locate-or-download-iasl" class="plugin-anchor" href="#fixing-ssdttime-could-not-locate-or-download-iasl"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing SSDTTime: <code>Could not locate or download iasl!</code></h2>
 <p>This is usually due to an outdated version of Python, try either updating Python or add iasl to the scripts folder for SSDTTime:</p>
 <ul>
 <li><a href="https://bitbucket.org/RehabMan/acpica/downloads/iasl.zip" target="_blank">iasl macOS version</a></li>
 <li><a href="https://acpica.org/sites/acpica/files/iasl-win-20180105.zip" target="_blank">iasl Windows version</a></li>
 <li><a href="http://amdosx.kellynet.nl/iasl.zip" target="_blank">iasl Linux version</a></li>
 </ul>
-<h2 id="fix-python-python-is-not-installed-or-not-found-on-path">Fix Python: <code>Python is not installed or not found on PATH</code></h2>
+<h2 id="fix-python-python-is-not-installed-or-not-found-on-path"><a name="fix-python-python-is-not-installed-or-not-found-on-path" class="plugin-anchor" href="#fix-python-python-is-not-installed-or-not-found-on-path"><i class="fa fa-link" aria-hidden="true"></i></a>Fix Python: <code>Python is not installed or not found on PATH</code></h2>
 <p>Easy fix, download and install the latest python:</p>
 <ul>
 <li><a href="https://www.python.org/downloads/macos" target="_blank">macOS link</a></li>
@@ -1064,16 +1068,16 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 </ul>
 <p>Make sure <code>Add Python to PATH</code></p>
 <p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668209828958830613/unknown.png" alt=""></p>
-<h2 id="windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</h2>
+<h2 id="windows-startup-disk-cant-see-apfs-drives"><a name="windows-startup-disk-cant-see-apfs-drives" class="plugin-anchor" href="#windows-startup-disk-cant-see-apfs-drives"><i class="fa fa-link" aria-hidden="true"></i></a>Windows Startup Disk can&apos;t see APFS drives</h2>
 <ul>
 <li>Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: <a href="https://github.com/corpnewt/brigadier" target="_blank">CorpNewt&apos;s brigadier</a></li>
 </ul>
-<h2 id="incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</h2>
+<h2 id="incorrect-resolution-with-opencore"><a name="incorrect-resolution-with-opencore" class="plugin-anchor" href="#incorrect-resolution-with-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Incorrect resolution with OpenCore</h2>
 <ul>
 <li>Follow <a href="verbose.html">Hiding Verbose</a> for correct setup, set <code>UIScale</code> to <code>02</code> for HiDPI</li>
 <li>Users also have noticed that setting <code>ConsoleMode</code> to Max will sometimes fail, leaving it empty can help</li>
 </ul>
-<h2 id="no-temperaturefan-sensor-output">No temperature/fan sensor output</h2>
+<h2 id="no-temperaturefan-sensor-output"><a name="no-temperaturefan-sensor-output" class="plugin-anchor" href="#no-temperaturefan-sensor-output"><i class="fa fa-link" aria-hidden="true"></i></a>No temperature/fan sensor output</h2>
 <p>So couple things:</p>
 <ul>
 <li>iStat Menus doesn&apos;t yet support MacPro7,1 readouts</li>
@@ -1092,7 +1096,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li>FileVault support requires more work with FakeSMC</li>
 <li>Make sure no other SMC kexts are present, specifically those from <a href="https://github.com/acidanthera/VirtualSMC/releases" target="_blank">VirtualSMC</a></li>
 </ul>
-<h2 id="cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/Bootcamp drive in picker</h2>
+<h2 id="cant-find-windowsbootcamp-drive-in-picker"><a name="cant-find-windowsbootcamp-drive-in-picker" class="plugin-anchor" href="#cant-find-windowsbootcamp-drive-in-picker"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t find Windows/Bootcamp drive in picker</h2>
 <p>So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you&apos;ll have to find other means to make an installer(Google&apos;s your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you&apos;ll need to format the drive you want to install onto with DiskUtility. See the <a href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/" target="_blank">Multiboot Guide</a> on best practices</p>
 <p>Now to get onto troubleshooting:</p>
 <ul>
@@ -1143,7 +1147,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Post-Install","level":"5.1","depth":1,"path":"post-install/README.md","ref":"post-install/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-20T21:21:25.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T21:22:15.195Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Post-Install","level":"5.1","depth":1,"path":"post-install/README.md","ref":"post-install/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-21T16:55:13.188Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-21T16:57:46.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -1159,6 +1163,10 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     
         
         <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-edit/plugin.js"></script>
         
     
         

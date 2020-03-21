@@ -22,6 +22,10 @@
                 
             
                 
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -610,7 +614,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="gathering-files">Gathering files</h1>
+                                <h1 id="gathering-files"><a name="gathering-files" class="plugin-anchor" href="#gathering-files"><i class="fa fa-link" aria-hidden="true"></i></a>Gathering files</h1>
 <ul>
 <li>Last edited: March 15, 2020</li>
 <li>Supported version: 0.5.6</li>
@@ -620,7 +624,7 @@
 <p>What&apos;s the best way to figure out if my hardware is supported?</p>
 </blockquote>
 <p>See the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/hardware.md" target="_blank"><strong>supported hardware section</strong></a> for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.</p>
-<h2 id="firmware-drivers">Firmware Drivers</h2>
+<h2 id="firmware-drivers"><a name="firmware-drivers" class="plugin-anchor" href="#firmware-drivers"><i class="fa fa-link" aria-hidden="true"></i></a>Firmware Drivers</h2>
 <p>These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">ApfsDriverLoader.efi</a><ul>
@@ -656,7 +660,7 @@
 </li>
 </ul>
 <p>For a full list of compatible drivers, see 11.2 Properties in the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">OpenCorePkg Docs</a>. These files will go in your Drivers folder in your EFI</p>
-<h2 id="kexts">Kexts</h2>
+<h2 id="kexts"><a name="kexts" class="plugin-anchor" href="#kexts"><i class="fa fa-link" aria-hidden="true"></i></a>Kexts</h2>
 <p>A kext is a <strong>k</strong>ernel <strong>ext</strong>ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI</p>
 <p>All kext listed below can be found <strong>pre-compiled</strong> in the <a href="http://kexts.goldfish64.com/" target="_blank">Kext Repo</a>. Kexts here are compiled each time there&apos;s a new commit.</p>
 <p><strong>Must haves</strong>:</p>
@@ -797,7 +801,7 @@
 </li>
 </ul>
 <p>Please refer to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md" target="_blank">Kexts.md</a> for a full list of supported kexts</p>
-<h2 id="ssdts">SSDTs</h2>
+<h2 id="ssdts"><a name="ssdts" class="plugin-anchor" href="#ssdts"><i class="fa fa-link" aria-hidden="true"></i></a>SSDTs</h2>
 <p>So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in <strong>your specific ACPI section of the config.plist</strong>, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now. </p>
 <p><a href="extras/acpi.html">Getting started with ACPI</a> has an extended section on SSDTs including compiling them on different platforms.</p>
 <p>A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):</p>
@@ -847,7 +851,7 @@
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
 </ul>
-<h1 id="now-head-to-your-specific-cpu-section-to-setup-your-configplist">Now head to your specific CPU section to setup your config.plist</h1>
+<h1 id="now-head-to-your-specific-cpu-section-to-setup-your-configplist"><a name="now-head-to-your-specific-cpu-section-to-setup-your-configplist" class="plugin-anchor" href="#now-head-to-your-specific-cpu-section-to-setup-your-configplist"><i class="fa fa-link" aria-hidden="true"></i></a>Now head to your specific CPU section to setup your config.plist</h1>
 <p><strong>Intel Config.plist</strong></p>
 <ul>
 <li><a href="config.plist/ivy-bridge.html">Ivy Bridge</a></li>
@@ -907,7 +911,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Getting started with ACPI","level":"1.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-03-20T21:21:25.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T21:22:15.195Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Getting started with ACPI","level":"1.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-03-21T16:55:13.188Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-21T16:57:46.083Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -923,6 +927,10 @@
     
         
         <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github-edit/plugin.js"></script>
         
     
         

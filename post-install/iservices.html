@@ -22,6 +22,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -610,13 +614,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="fixing-imessage-and-other-services-with-opencore">Fixing iMessage and other services with OpenCore</h1>
+                                <h1 id="fixing-imessage-and-other-services-with-opencore"><a name="fixing-imessage-and-other-services-with-opencore" class="plugin-anchor" href="#fixing-imessage-and-other-services-with-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing iMessage and other services with OpenCore</h1>
 <ul>
 <li>Last edited: March 15, 2020</li>
 <li>Supported version: 0.5.6</li>
 </ul>
 <p>This page is for those having iMessage and other iServices issues, this is a very basic guide so will not go as in-depth into the issues as some other guides. This specific guide is a translation and reinterpretation of the AppleLife Guide on fixing iService: <a href="https://applelife.ru/posts/727913" target="_blank">&#x41A;&#x430;&#x43A; &#x437;&#x430;&#x432;&#x435;&#x441;&#x442;&#x438; &#x441;&#x435;&#x440;&#x432;&#x438;&#x441;&#x44B; Apple - iMessage, FaceTime, iCloud</a></p>
-<h2 id="generate-a-new-serial">Generate a new Serial</h2>
+<h2 id="generate-a-new-serial"><a name="generate-a-new-serial" class="plugin-anchor" href="#generate-a-new-serial"><i class="fa fa-link" aria-hidden="true"></i></a>Generate a new Serial</h2>
 <p>Download <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> and select option 1 to download MacSerial and next option 3 to generate some new serials. What we&apos;re looking for is a valid serial that currently has no registered purchase date.</p>
 <p>Tip: <code>iMacPro1,1 10</code> will print 10 serials, this will save you some time on generating</p>
 <p><img src="https://i.imgur.com/cVL7ETT.png" alt=""></p>
@@ -634,7 +638,7 @@
 <li>Board Serial = MLB</li>
 <li>SmUUID = SystemUUID</li>
 </ul>
-<h2 id="fixing-en0">Fixing En0</h2>
+<h2 id="fixing-en0"><a name="fixing-en0" class="plugin-anchor" href="#fixing-en0"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing En0</h2>
 <p>To start, grab <a href="https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/" target="_blank">Hackintool</a> (<a href="https://github.com/headkaze/Hackintool" target="_blank">Github link</a>) and head to System -&gt; Peripherals (Info -&gt; Misc on older versions of Hackintool)</p>
 <p>Here under Network Interfaces (network card icon), look for <code>en0</code> under <code>BSD</code> and check whether the device has a checkmark under Builtin. If there is a checkmark, skip to Fixing ROM section otherwise continue reading.</p>
 <blockquote>
@@ -653,7 +657,7 @@ sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 <p><img src="https://i.imgur.com/1aTlAC6.png" alt="Copy PCIRoot"></p>
 <p>Now with the PCIRoot, go into your config.plist -&gt; DeviceProperties -&gt; Add and apply the property of <code>built-in</code> with type <code>Data</code> and value <code>01</code></p>
 <p><img src="https://i.imgur.com/vGwow2X.png" alt="Add to config.plist"></p>
-<h2 id="fixing-rom">Fixing ROM</h2>
+<h2 id="fixing-rom"><a name="fixing-rom" class="plugin-anchor" href="#fixing-rom"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing ROM</h2>
 <p>This is a section many may have forgotten about but this is found in your config.plist under PlatformInfo -&gt; generic -&gt; ROM</p>
 <p>To find your actual MAC Address/ROM value, you can find in a couple places:</p>
 <ul>
@@ -664,11 +668,11 @@ sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 <p>Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we&apos;ll be  using our real MAC Address but note that this is another option</p>
 <p>When adding this to your config, <code>c0:7e:bf:c3:af:ff</code> should be converted to <code>c07ebfc3afff</code> as the <code>Data</code> type cannot accept colons(<code>:</code>).</p>
 <p><img src="https://i.imgur.com/vAW6Rkz.png" alt=""></p>
-<h2 id="verifying-nvram">Verifying NVRAM</h2>
+<h2 id="verifying-nvram"><a name="verifying-nvram" class="plugin-anchor" href="#verifying-nvram"><i class="fa fa-link" aria-hidden="true"></i></a>Verifying NVRAM</h2>
 <p>Something that many forget about iServices is that NVRAM is crucial to getting it working correctly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.</p>
 <p>So we&apos;ll need to verify NVRAM works, regardless if &quot;it should work&quot; as some firmwares can be more of a pain than others.</p>
 <p>Please refer to the <a href="nvram.html">Emulated NVRAM</a> section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you dont.</p>
-<h2 id="clean-out-old-attempts">Clean out old attempts</h2>
+<h2 id="clean-out-old-attempts"><a name="clean-out-old-attempts" class="plugin-anchor" href="#clean-out-old-attempts"><i class="fa fa-link" aria-hidden="true"></i></a>Clean out old attempts</h2>
 <p>This is important for those who&apos;ve tried setting up iMessage but failed, to start make sure your NVRAM has been cleared. You can enable the option in the boot picker in your config under config.plist -&gt; Misc -&gt; Security -&gt; AllowNvramReset.</p>
 <p>Next open terminal and run the following:</p>
 <pre><code class="lang-text">sudo rm -rf ~/Library/Caches/com.apple.iCloudHelper* \
@@ -687,12 +691,12 @@ sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
             ~/Library/Preferences/com.apple.security* \
             ~/Library/Messages
 </code></pre>
-<h2 id="verifying-your-work-one-last-time">Verifying your work one last time</h2>
+<h2 id="verifying-your-work-one-last-time"><a name="verifying-your-work-one-last-time" class="plugin-anchor" href="#verifying-your-work-one-last-time"><i class="fa fa-link" aria-hidden="true"></i></a>Verifying your work one last time</h2>
 <p>Grab <a href="https://github.com/acidanthera/MacInfoPkg/releases" target="_blank">macserial</a> and run the following:</p>
 <pre><code class="lang-text">path/to/macserial -s
 </code></pre>
 <p>This will provide us with a full rundown of our system, verify that what is presented matches up with your work.</p>
-<h2 id="cleaning-up-your-appleid">Cleaning up your AppleID</h2>
+<h2 id="cleaning-up-your-appleid"><a name="cleaning-up-your-appleid" class="plugin-anchor" href="#cleaning-up-your-appleid"><i class="fa fa-link" aria-hidden="true"></i></a>Cleaning up your AppleID</h2>
 <ul>
 <li>Remove all devices from your AppleID: <a href="https://appleid.apple.com/account/manage" target="_blank">Manage your devices</a></li>
 <li>Enable 2 Factor-Auth</li>
@@ -711,7 +715,7 @@ etc ...
 </ul>
 <p>And a final layer of precaution is to make a new AppleID to play with, this makes sure that if you do end up blacklisting your account that it&apos;s not your main.</p>
 <p>An extra tip is adding a payment card to the account, some users found this also helped with iMessage activation.</p>
-<h2 id="customer-code-error">Customer Code error</h2>
+<h2 id="customer-code-error"><a name="customer-code-error" class="plugin-anchor" href="#customer-code-error"><i class="fa fa-link" aria-hidden="true"></i></a>Customer Code error</h2>
 <p>Welp mate, you&apos;ve done it. You blackmailed your AppleID. The fix is simple but not pretty, <strong>you MUST call Apple</strong>. Otherwise, there is no proceeding besides using a new account. Adding a payment card before calling can help legitimise the account so it doesn&apos;t seem as much like a bot.</p>
 <p><img src="https://i.imgur.com/ypDy99L.png" alt=""></p>
 
@@ -757,7 +761,7 @@ etc ...
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"7.6","depth":1,"next":{"title":"Emulated NVRAM","level":"7.7","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-03-20T21:21:25.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T21:22:15.195Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"7.6","depth":1,"next":{"title":"Emulated NVRAM","level":"7.7","depth":1,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-03-21T16:55:13.188Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-21T16:57:46.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -773,6 +777,10 @@ etc ...
     
         
         <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-edit/plugin.js"></script>
         
     
         

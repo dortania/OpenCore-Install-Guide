@@ -22,6 +22,10 @@
                 
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -610,13 +614,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="fixing-cfg-lock">Fixing CFG Lock</h1>
+                                <h1 id="fixing-cfg-lock"><a name="fixing-cfg-lock" class="plugin-anchor" href="#fixing-cfg-lock"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing CFG Lock</h1>
 <ul>
 <li>Last edited: March 15, 2020</li>
 <li>Supported version: 0.5.6</li>
 </ul>
 <p>Do note that this is only recommended for users who have already installed macOS, for users who are ibnstalling for the first time enable <code>AppleCpuPmCfgLock</code> and <code>AppleXcpmCfgLock</code> under <code>Kernel -&gt; Quirks</code></p>
-<h2 id="disabling-cfg-lock">Disabling CFG Lock</h2>
+<h2 id="disabling-cfg-lock"><a name="disabling-cfg-lock" class="plugin-anchor" href="#disabling-cfg-lock"><i class="fa fa-link" aria-hidden="true"></i></a>Disabling CFG Lock</h2>
 <p>So you&apos;ve installed macOS but you&apos;re using those pesky <code>CFG-Lock</code> patches that we want to get rid of, well to do this is fairly simple. You&apos;ll need the following:</p>
 <p>Inside your EFI/OC/Tools folder and config.plist:</p>
 <ul>
@@ -635,9 +639,9 @@
 </ul>
 <p>And the final part, grabbing your BIOS from the vendors&apos; website.</p>
 <p>Now the fun part!</p>
-<h2 id="checking-if-cfg-lock-can-be-turned-off">Checking if CFG-Lock can be turned off</h2>
+<h2 id="checking-if-cfg-lock-can-be-turned-off"><a name="checking-if-cfg-lock-can-be-turned-off" class="plugin-anchor" href="#checking-if-cfg-lock-can-be-turned-off"><i class="fa fa-link" aria-hidden="true"></i></a>Checking if CFG-Lock can be turned off</h2>
 <p>Boot OpenCore and select the <code>VerifyMsrE2</code> option in the picker. This tool will tell you whether your BIOS supports CFG-Lock and if it can be unlocked.</p>
-<h2 id="turning-off-cfg-lock-manually">Turning off CFG-Lock manually</h2>
+<h2 id="turning-off-cfg-lock-manually"><a name="turning-off-cfg-lock-manually" class="plugin-anchor" href="#turning-off-cfg-lock-manually"><i class="fa fa-link" aria-hidden="true"></i></a>Turning off CFG-Lock manually</h2>
 <ol>
 <li>Open your firmware with UEFITool and then find <code>CFG Lock</code> as a Unicode string. If nothing pops up then your firmware doesn&apos;t support <code>CFG Lock</code>, otherwise continue on. </li>
 </ol>
@@ -704,7 +708,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"next":{"title":"Fixing iServices","level":"7.6","depth":1,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"path":"extras/kalsr-fix.md","ref":"extras/kalsr-fix.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/msr-lock.md","mtime":"2020-03-20T21:21:25.832Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-20T21:22:15.195Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing CFG Lock","level":"7.5","depth":1,"next":{"title":"Fixing iServices","level":"7.6","depth":1,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"path":"extras/kalsr-fix.md","ref":"extras/kalsr-fix.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/msr-lock.md","mtime":"2020-03-21T16:55:13.188Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-21T16:57:46.083Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -720,6 +724,10 @@
     
         
         <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-edit/plugin.js"></script>
         
     
         
