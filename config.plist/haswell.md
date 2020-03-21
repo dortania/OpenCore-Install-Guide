@@ -377,14 +377,14 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
 
-Haswell with only iGPU
-* iMac14,1 
-Haswell with dGPU
-* iMac14,2 
-Haswell Refresh (Devil's Canyon)
-* iMac15,1
-Broadwell
-* iMac16,1
+* Haswell with only iGPU
+   * iMac14,1
+* Haswell with dGPU
+   * iMac14,2
+* Haswell Refresh (Devil's Canyon)
+   * iMac15,1
+* Broadwell
+   * iMac16,1
 
 **Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
 
