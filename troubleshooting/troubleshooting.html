@@ -615,7 +615,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Mar 22 2020 16:24:23 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Mar 22 2020 18:04:47 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -827,6 +827,7 @@
 <li>Stop Sign with corrupted text(Still waiting for Root Device)</li>
 <li>Frozen in the macOS installer after 30 seconds</li>
 <li>15h/16h CPU reboot after Data &amp; Privacy screen</li>
+<li>Sleep crashing on AMD</li>
 </ul>
 <h2 id="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><a name="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy" class="plugin-anchor" href="#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></h2>
 <p>Well this general area is where a lot of PCI devices are configured, and is where most booting issues with AMD hacks happen. The main places to check:</p>
@@ -1031,6 +1032,22 @@
 </ul>
 </li>
 </ul>
+<h2 id="sleep-crashing-on-amd"><a name="sleep-crashing-on-amd" class="plugin-anchor" href="#sleep-crashing-on-amd"><i class="fa fa-link" aria-hidden="true"></i></a>Sleep crashing on AMD</h2>
+<p>This is generally seen on AMD who use the chipset&apos;s USB controller, specifically for the Ryzen series and newer. The main way to tell if you&apos;re having issues with this is checking logs after either sleeping or waking:</p>
+<ul>
+<li>In terminal:<ul>
+<li><code>log show --last 1d | grep &quot;Wake reason&quot;</code> verify it</li>
+</ul>
+</li>
+</ul>
+<p>Should result in something like this:</p>
+<pre><code class="lang-text`">Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.
+</code></pre>
+<p>You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:</p>
+<ul>
+<li>Avoid the chipset USB all together(ideally set <code>_STA = 0x0</code> to disabe the controller outright with an SSDT)</li>
+<li>Correct the USBX power properties to what the controller expects</li>
+</ul>
 <h1 id="other-issues"><a name="other-issues" class="plugin-anchor" href="#other-issues"><i class="fa fa-link" aria-hidden="true"></i></a>Other issues</h1>
 <ul>
 <li>Can&apos;t run <code>acpidump.efi</code></li>
@@ -1107,16 +1124,6 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li>Enable <code>Misc -&gt; Boot -&gt; Hideself</code> is enabled when Windows bootloader is loacated on the same drive</li>
 <li>Enable <code>Platforminfo -&gt; Generic -&gt; AdviseWindows -&gt; True</code> if the EFI partition isn&apos;t the first on the partition table</li>
 </ul>
-<h2 id="sleep-crash"><a name="sleep-crash" class="plugin-anchor" href="#sleep-crash"><i class="fa fa-link" aria-hidden="true"></i></a>Sleep crash</h2>
-<p>If your panic log like
-<code>Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.</code>
-You can use the following solutions to temporarily solve the sleep problem.</p>
-<ul>
-<li>Check your USB ports</li>
-<li>Make sure no usb devices are connected to XHC0</li>
-<li>Sleep and weak</li>
-<li>Run <code>log show --last 1d | grep &quot;Wake reason&quot;</code> verify it</li>
-</ul>
 
                                 
                                 </section>
@@ -1160,7 +1167,7 @@ You can use the following solutions to temporarily solve the sleep problem.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Post-Install","level":"5.1","depth":1,"path":"post-install/README.md","ref":"post-install/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-22T16:24:23.700Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-22T16:26:24.574Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Post-Install","level":"5.1","depth":1,"path":"post-install/README.md","ref":"post-install/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-22T18:04:47.457Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-22T18:06:53.108Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
