@@ -1,5 +1,5 @@
 {
-    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "github-edit", "anchors"],
+    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "github-edit", "anchors", "last-modified"],
     "pluginsConfig": {
         "fontsettings": {
             "theme":  "night",
