@@ -228,6 +228,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 * Stop Sign with corrupted text(Still waiting for Root Device)
 * Frozen in the macOS installer after 30 seconds
 * 15h/16h CPU reboot after Data & Privacy screen
+* Sleep crashing on AMD
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -408,6 +409,23 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
 * 15/16h CPU webpages crashing
    * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
 
+## Sleep crashing on AMD
+
+This is generally seen on AMD who use the chipset's USB controller, specifically for the Ryzen series and newer. The main way to tell if you're having issues with this is checking logs after either sleeping or waking:
+
+* In terminal:
+   * `log show --last 1d | grep "Wake reason"` verify it
+
+Should result in something like this:
+
+```text`
+Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.
+```
+
+You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:
+
+* Avoid the chipset USB all together(ideally set `_STA = 0x0` to disabe the controller outright with an SSDT)
+* Correct the USBX power properties to what the controller expects
 
 # Other issues
 
@@ -492,12 +510,3 @@ Now to get onto troubleshooting:
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
 * Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
-
-##Sleep crash
-If your panic log like
-`Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.`
-You can use the following solutions to temporarily solve the sleep problem.
-* Check your USB ports
-* Make sure no usb devices are connected to XHC0
-* Sleep and weak
-* Run `log show --last 1d | grep "Wake reason"` verify it
