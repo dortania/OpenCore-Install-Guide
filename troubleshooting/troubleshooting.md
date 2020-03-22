@@ -492,3 +492,12 @@ Now to get onto troubleshooting:
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
 * Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
+
+##Sleep crash
+If your panic log like
+`Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.`
+You can use the following solutions to temporarily solve the sleep problem.
+* Check your USB ports
+* Make sure no usb devices are connected to XHC0
+* Sleep and weak
+* Run `log show --last 1d | grep "Wake reason"` verify it
