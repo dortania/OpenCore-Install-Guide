@@ -302,7 +302,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 csr-active-config is set to `00000000` which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
 * `00000000` - SIP completely enabled
-* `30000000` - Allow unsigned kexts and writing to protected fs locations
+* `03000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 
 Recommended to leave enabled for best security practices
