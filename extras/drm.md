@@ -7,7 +7,7 @@ So with DRM, we have a couple things we need to mention:
    * See [GPU Buyers Guide](https://khronokernel-3.gitbook.io/gpu-buyers-guide/) for supported cards
 * DRM on Z370 and older are broken for iGPU only systems
    * Z390, B360, H370, H310 boards and newer are supported
-* Working Hadware acceleration and decoding
+* Working hardware acceleration and decoding
 
 ## Testing Hardware Acceleration and Decoding
 
@@ -115,8 +115,4 @@ kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: 
 ```
 
 ![](https://cdn.discordapp.com/attachments/683011276938543134/691724984808243281/Screen_Shot_2020-03-23_at_1.04.57_PM.png)
-
-
-Sources for this guide:
-
 
