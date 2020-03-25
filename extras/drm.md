@@ -1,4 +1,4 @@
-# Fixing DRM support
+# Fixing DRM support and iGPU performance
 
 So with DRM, we have a couple things we need to mention:
 
@@ -58,7 +58,7 @@ So before we get too deep, lets actually make sure that DRM is broken, but we'll
 
 **FairPlay 4.x**: Mixed DRM, found on AppleTV+
 
-* You can open TV.app, choose TV+ → Free Apple TV+ Premieres, then click on any episode to test without any registration or trial
+* You can open TV.app, choose TV+ -> Free Apple TV+ Premieres, then click on any episode to test without any registration or trial
 * Apple TV+ also has a free trial if you want to use it
 * Note: Requires either an iGPU or newer AMD GPU to work (Polaris+)
    * Possible to force FairPlay 1.x for unsupported/older hardware combinations
@@ -67,14 +67,30 @@ If everything passes good on these tests, you have no need to continue! Otherwis
 
 ## Fixing DRM
 
-So for fixing DRM on hackintoshes can go down 2 routes:
+So for fixing DRM on hackintoshes can go down mainly 1 route:
 
-* Load Apple's own GuC onto the iGPU(only properly supported on Z390, B360, H370, H310 and newer) <!-- what shall we do with this? -->
 * Patching DRM to use either software or AMD decoding
 
-**iGPU for DRM**
+It is possible to fix DRM on Z390, B360, H370, H310 boards and newer but this requires a clean ME region(requires SPI flasher) and [PavpProvision](https://github.com/acidanthera/OpenCorePkg/tree/master/Application/PavpProvision) to manually edit the source code with provisioning certificates from Apple firmware. This is extremely complicated, hardware breaking if not done correctly so not a practical route to go down for most users
 
-So a neat feature with newer Lilu and WhateverGreen builds are that you can now load Apple's iGPU firmware(GuC, Graphics micro code). There's still some limitation but a huge advancement like allowing GPU frequency, main issue:
+**dGPU/software for DRM**
+
+For dGPU/software setups, it gets a bit more complicated. Luckily Vit made a great little chart for different hardware configurations:
+
+* [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
+
+For AMD dGPU + iGPU + Z390, B360, H370, H310 or newer are recommended to use the following under `boot-args`:
+
+* igfxfw=2
+* shikigva=80
+
+This will enable Apple's GuC to load but still make the dGPU do the DRM work
+
+Note that shikigva args are meant to be placed in the boot-args section, do not mix shikigva flags together *unless* you are applying `shikigva` to a specific GPU(This is a neat feature of WhateverGreen where you can apply specific falgs to specific GPUs via `DeviceProperties`)
+
+## Fixing iGPU performance
+
+So how do you fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code), the main things to note
 
 * Firmware loading is retricted to Kabylake and newer
     * This still breaks for many so only recommended on Z390, B360, H370, H310 and newer
@@ -88,24 +104,6 @@ igfxfw | Data | <02 00 00 00>
 ```
 For enabling the firmware loading
 
-```text
-shikigva | Data | <50 00 00 00>
-```
-For disabling WEG/Shiki's DRM patches
-
-You can also add `shikigva=128` to boot-args to force the hardware RM for Fairplay 1.x though not required
-
-
-**dGPU/software for DRM**
-
-
-For dGPU/software setups, it gets a bit more complicated. Luckily Vit made a great little chart for different hardware configurations:
-
-* [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
-
-Note that shikigva args are meant to be placed in the boot-args section, **do not mix shikigva flags together**
-
-## Testing iGPU performance
 
 The best way to check is to monitor the iGPU's frequency is with either [Intel Power Gadget](https://software.intel.com/en-us/articles/intel-power-gadget) or checking the boot logs for Apple Scheduler references. Make sure you have the `igfxfw` property applied:
 
