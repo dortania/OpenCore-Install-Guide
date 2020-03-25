@@ -15,12 +15,17 @@ This section is benificial for all, regardless of hardware.
 * [Updating OpenCore, kexts and macOS](/post-install/update.md)
 * [Disabling OpenCore Logging](/troubleshooting/debug.md)
 * [Fixing iServices](/post-install/iservices.md)
+* [Fixing DRM](/extras/drm.md)
 
 ## Intel
 
 Used for Intel's consumer line
 
 * [Fixing Intel USB](https://usb-map.gitbook.io/project/)
+
+
+For sandy and Ivy Bridge:
+* [Fixing Power Management](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
 ## Intel HEDT
 

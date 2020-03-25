@@ -56,3 +56,7 @@ And for those who have either recommendations or issues with this guide can find
   * [acpica](https://github.com/acpica/acpica/tree/master/source/tools/acpidump)
 * iServices Guide:
   * [Как завести сервисы Apple - iMessage, FaceTime, iCloud](https://applelife.ru/threads/nastrojka-app-store-imessage-facetime-i-icloud.40790/page-219#post-727913)
+* iGPU and DRM configuration:
+   * [WhateverGreen's manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+   * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
+   * [DRM Testing](https://applelife.ru/threads/proigryvanie-zaschischjonnogo-kontenta-na-raznom-oborudovanii.1349123/page-67#post-846582)
