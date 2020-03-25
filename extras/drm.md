@@ -3,10 +3,10 @@
 So with DRM, we have a couple things we need to mention:
 
 
-* DRM requires a supported GPU
+* DRM requires a supported dGPU
    * See [GPU Buyers Guide](https://khronokernel-3.gitbook.io/gpu-buyers-guide/) for supported cards
-* DRM on Z370 and older are broken for iGPU only systems
-   * Z390, B360, H370, H310 boards and newer are supported
+* DRM is broken for iGPU-only systems
+   * This started from around 10.12.3
 * Working hardware acceleration and decoding
 
 ## Testing Hardware Acceleration and Decoding
@@ -45,21 +45,23 @@ So before we get too deep, lets actually make sure that DRM is broken, but we'll
 
 **FairPlay 1.x**: Software based DRM, used for supporting legacy macs more easily
 
-* Easiest way to test this is by playing an iTunes movies or trailer: [Fairplay1.x test](https://drive.google.com/file/d/12pQ5FFpdHdGOVV6jvbqEq2wmkpMKxsOF/view)
+* Easiest way to test this is by playing an iTunes movie: [Fairplay1.x test](https://drive.google.com/file/d/12pQ5FFpdHdGOVV6jvbqEq2wmkpMKxsOF/view)
+  * FairPlay 1.x trailers will work on any configuration if WhateverGreen is properly set up - including iGPU-only configurations. However, FairPlay 1.x *movies* will only play on iGPU-only configurations for around 3-5 seconds, erroring after that HDCP is unsupported.
 
-**FairPlay 2.x/3.x**: Hardware based DRM, found in Netflix, AmazonPrime
+**FairPlay 2.x/3.x**: Hardware based DRM, found in Netflix, Amazon Prime
 
 * There's a couple ways to test:
    * Play a show in Netflix or Amazon Prime
-   * Play an AmazonPrime trailer: [Spiderman Far from home](https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP)
+   * Play an Amazon Prime trailer: [Spider-Man: Far From Home](https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP)
       * Trailer itself isn't DRM encrypted but Amazon still does the check before playing
-* Note: Requires either an iGPU or newer AMD GPU to work(Polaris+)
+* Note: Requires either an iGPU or newer AMD GPU to work (Polaris+)
 
-**FairPlay 4.x**: Hardware based DRM, found on AppleTV+
+**FairPlay 4.x**: Mixed DRM, found on AppleTV+
 
-* AppleTV+ comes with a free trial
-* Note: Requires either an iGPU or newer AMD GPU to work(Polaris+)
-   * Possible to force Fairplay 1,x for unsupported/older hardware combinations
+* You can open TV.app, choose TV+ → Free Apple TV+ Premieres, then click on any episode to test without any registration or trial
+* Apple TV+ also has a free trial if you want to use it
+* Note: Requires either an iGPU or newer AMD GPU to work (Polaris+)
+   * Possible to force FairPlay 1.x for unsupported/older hardware combinations
 
 If everything passes good on these tests, you have no need to continue! Otherwise proceed on
 
@@ -67,7 +69,7 @@ If everything passes good on these tests, you have no need to continue! Otherwis
 
 So for fixing DRM on hackintoshes can go down 2 routes:
 
-* Load Apple's own GuC onto the iGPU(only properly supported on Z390, B360, H370, H310 and newer)
+* Load Apple's own GuC onto the iGPU(only properly supported on Z390, B360, H370, H310 and newer) <!-- what shall we do with this? -->
 * Patching DRM to use either software or AMD decoding
 
 **iGPU for DRM**
