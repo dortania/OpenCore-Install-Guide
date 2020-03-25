@@ -1,12 +1,12 @@
-# Fixing DRM support
+# Fixing DRM support and iGPU performance
 
 So with DRM, we have a couple things we need to mention:
 
 
-* DRM requires a supported GPU
+* DRM requires a supported dGPU
    * See [GPU Buyers Guide](https://khronokernel-3.gitbook.io/gpu-buyers-guide/) for supported cards
-* DRM on Z370 and older are broken for iGPU only systems
-   * Z390, B360, H370, H310 boards and newer are supported
+* DRM is broken for iGPU-only systems
+   * This started from around 10.12.3
 * Working hardware acceleration and decoding
 
 ## Testing Hardware Acceleration and Decoding
@@ -45,34 +45,52 @@ So before we get too deep, lets actually make sure that DRM is broken, but we'll
 
 **FairPlay 1.x**: Software based DRM, used for supporting legacy macs more easily
 
-* Easiest way to test this is by playing an iTunes movies or trailer: [Fairplay1.x test](https://drive.google.com/file/d/12pQ5FFpdHdGOVV6jvbqEq2wmkpMKxsOF/view)
+* Easiest way to test this is by playing an iTunes movie: [Fairplay1.x test](https://drive.google.com/file/d/12pQ5FFpdHdGOVV6jvbqEq2wmkpMKxsOF/view)
+  * FairPlay 1.x trailers will work on any configuration if WhateverGreen is properly set up - including iGPU-only configurations. However, FairPlay 1.x *movies* will only play on iGPU-only configurations for around 3-5 seconds, erroring after that HDCP is unsupported.
 
-**FairPlay 2.x/3.x**: Hardware based DRM, found in Netflix, AmazonPrime
+**FairPlay 2.x/3.x**: Hardware based DRM, found in Netflix, Amazon Prime
 
 * There's a couple ways to test:
    * Play a show in Netflix or Amazon Prime
-   * Play an AmazonPrime trailer: [Spiderman Far from home](https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP)
+   * Play an Amazon Prime trailer: [Spider-Man: Far From Home](https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP)
       * Trailer itself isn't DRM encrypted but Amazon still does the check before playing
-* Note: Requires either an iGPU or newer AMD GPU to work(Polaris+)
+* Note: Requires either an iGPU or newer AMD GPU to work (Polaris+)
 
-**FairPlay 4.x**: Hardware based DRM, found on AppleTV+
+**FairPlay 4.x**: Mixed DRM, found on AppleTV+
 
-* AppleTV+ comes with a free trial
-* Note: Requires either an iGPU or newer AMD GPU to work(Polaris+)
-   * Possible to force Fairplay 1,x for unsupported/older hardware combinations
+* You can open TV.app, choose TV+ -> Free Apple TV+ Premieres, then click on any episode to test without any registration or trial
+* Apple TV+ also has a free trial if you want to use it
+* Note: Requires either an iGPU or newer AMD GPU to work (Polaris+)
+   * Possible to force FairPlay 1.x for unsupported/older hardware combinations
 
 If everything passes good on these tests, you have no need to continue! Otherwise proceed on
 
 ## Fixing DRM
 
-So for fixing DRM on hackintoshes can go down 2 routes:
+So for fixing DRM on hackintoshes can go down mainly 1 route:
 
-* Load Apple's own GuC onto the iGPU(only properly supported on Z390, B360, H370, H310 and newer)
 * Patching DRM to use either software or AMD decoding
 
-**iGPU for DRM**
+It is possible to fix DRM on Z390, B360, H370, H310 boards and newer but this requires a clean ME region(requires SPI flasher) and [PavpProvision](https://github.com/acidanthera/OpenCorePkg/tree/master/Application/PavpProvision) to manually edit the source code with provisioning certificates from Apple firmware. This is extremely complicated, hardware breaking if not done correctly so not a practical route to go down for most users
 
-So a neat feature with newer Lilu and WhateverGreen builds are that you can now load Apple's iGPU firmware(GuC, Graphics micro code). There's still some limitation but a huge advancement like allowing GPU frequency, main issue:
+**dGPU/software for DRM**
+
+For dGPU/software setups, it gets a bit more complicated. Luckily Vit made a great little chart for different hardware configurations:
+
+* [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
+
+For AMD dGPU + iGPU + Z390, B360, H370, H310 or newer are recommended to use the following under `boot-args`:
+
+* igfxfw=2
+* shikigva=80
+
+This will enable Apple's GuC to load but still make the dGPU do the DRM work
+
+Note that shikigva args are meant to be placed in the boot-args section, do not mix shikigva flags together *unless* you are applying `shikigva` to a specific GPU(This is a neat feature of WhateverGreen where you can apply specific falgs to specific GPUs via `DeviceProperties`)
+
+## Fixing iGPU performance
+
+So how do you fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code), the main things to note
 
 * Firmware loading is retricted to Kabylake and newer
     * This still breaks for many so only recommended on Z390, B360, H370, H310 and newer
@@ -86,24 +104,6 @@ igfxfw | Data | <02 00 00 00>
 ```
 For enabling the firmware loading
 
-```text
-shikigva | Data | <50 00 00 00>
-```
-For disabling WEG/Shiki's DRM patches
-
-You can also add `shikigva=128` to boot-args to force the hardware RM for Fairplay 1.x though not required
-
-
-**dGPU/software for DRM**
-
-
-For dGPU/software setups, it gets a bit more complicated. Luckily Vit made a great little chart for different hardware configurations:
-
-* [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
-
-Note that shikigva args are meant to be placed in the boot-args section, **do not mix shikigva flags together**
-
-## Testing iGPU performance
 
 The best way to check is to monitor the iGPU's frequency is with either [Intel Power Gadget](https://software.intel.com/en-us/articles/intel-power-gadget) or checking the boot logs for Apple Scheduler references. Make sure you have the `igfxfw` property applied:
 
