@@ -50,7 +50,7 @@
 * [Fixing Audio](/post-install/audio.md)
 * [Booting without USB](/post-install/oc2hdd.md)
 * [Updating OpenCore, kexts and macOS](/post-install/update.md)
-* [Fixing DRM](/extras/drm.md)
+
 
 ## Misc
 
