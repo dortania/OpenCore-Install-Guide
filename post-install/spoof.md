@@ -1,7 +1,6 @@
 # Disabling GPU
 
-* Last edited: March 15, 2020
-* Supported version: 0.5.6
+* Supported version: 0.5.7
 
 ## GPU Spoof
 

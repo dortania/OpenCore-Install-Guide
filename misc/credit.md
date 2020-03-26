@@ -1,7 +1,6 @@
 # Credit
 
-* Last edited: March 15, 2020
-* Supported version: 0.5.6
+* Supported version: 0.5.7
 
 No good guide is made by one man, here's credit to those who've helped out:
 

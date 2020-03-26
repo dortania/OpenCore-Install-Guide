@@ -1,7 +1,6 @@
 # Skylake
 
-* Last edited: March 19, 2020
-* Supported version: 0.5.6
+* Supported version: 0.5.7
 
 ## Starting Point
 
