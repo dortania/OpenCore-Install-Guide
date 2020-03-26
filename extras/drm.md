@@ -59,7 +59,7 @@ So before we get too deep, lets actually make sure that DRM is broken, but we'll
 
 **FairPlay 4.x**: Mixed DRM, found on AppleTV+
 
-* You can open TV.app, choose TV+ -> Free Apple TV+ Premieres, then click on any episode to test without any registration or trial
+* You can open TV.app, choose TV+ -> Free Apple TV+ Premieres, then click on any episode to test without any trial (you do need an iCloud account)
 * Apple TV+ also has a free trial if you want to use it
 * Note: Requires either an absent iGPU (Xeon) or newer AMD GPU to work (Polaris+)
    * Possible to force FairPlay 1.x when iGPU is absent
