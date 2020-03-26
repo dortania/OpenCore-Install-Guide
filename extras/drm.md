@@ -72,31 +72,39 @@ So for fixing DRM on hackintoshes can go down mainly 1 route: patching DRM to us
 
 * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 
-For AMD dGPU + iGPU + Z390, B360, H370, H310 or newer are recommended to use the following under `boot-args`:
+So how do you use it? First, identify what configuration you have in the chart (AMD represents GPU, not CPU). The SMBIOS listed (IM = iMac, MM = Mac Mini, IMP = iMac Pro, MP = Mac Pro) is what you should use if you match the hardware configuration. If you do not match any of the configurations in the chart, you are out of luck.
 
-* igfxfw=2
-* shikigva=80
+Next, identify what Shiki mode you need to use. If there are two configurations for your setup, they will differ in the Shiki flags used. Generally, you want hardware decoding over software decoding. If the mode column is blank, then you are done. Otherwise, you should add `shikigva` as a property to any GPU, using DevicesProperties > Add. For example, if the mode I need to use is `shikigva=80`:
 
-This will enable Apple's GuC to load but still make the dGPU do the DRM work
+![Example of shikigva in Devices Properties](https://user-images.githubusercontent.com/4348897/77592865-2e909100-6f04-11ea-8d7b-f9846ac15ebc.png)
 
-Note that shikigva args are meant to be placed in the boot-args section, do not mix shikigva flags together *unless* you are applying `shikigva` to a specific GPU(This is a neat feature of WhateverGreen where you can apply specific falgs to specific GPUs via `DeviceProperties`)
+You can also use the boot argument - this is in the mode column.
+
+Here's one example. If I have a Intel i9-9900K and an RX 560, my configuration is "AMD+IGPU", and I should be using an iMac or Mac Mini SMBIOS (for this specific configuration iMac19,1). Then I see there are two options for my configuration: one where the mode is `shikigva=16`, and one with `shikigva=80`. I see the difference is in "Prime Trailers" and "Prime/Netflix". I want Netflix to work, so I choose the `shikigva=80` option. I inject `shikigva` with type number and value `80` into my iGPU or dGPU, reboot, and DRM should work.
+
+Here's another example. This time, I have an Ryzen 3700X and an RX 480. My configuration in this case is just "AMD", and I should be using an iMac Pro or Mac Pro SMIOS. Again, there are two options: no shiki arguments, and `shikigva=128`. I prefer hardware decoding over software decoding, so I choose the `shikigva=128` option, and again inject `shikigva` into my dGPU, this time with value `128`. A reboot and DRM works.
+
+**Notes:**
+
+  * If you inject `shikigva` using DeviceProperties, ensure you only do so to one GPU, otherwise the first WhateverGreen finds will be used, and that is not guaranteed to be the same. 
+  * IQSV stands for Intel Quick Sync Video: this only works if iGPU is present and enabled and it is set up correctly.
+  * Special configurations (like Haswell + AMD dGPU with an iMac SMBIOS, but iGPU is disabled) are not covered in the chart. You must do research on this yourself.
+  * [Shiki source](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp) is useful in understanding what flags do what and when they should be used, and may help with special configurations.
 
 ## Fixing iGPU performance
 
 So how do you fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code), the main things to note
 
-* Firmware loading is retricted to Kaby Lake and newer
+* Firmware loading is retricted to Skylake and newer
     * This still breaks for many so only recommended on Z390, B360, H370, H310 and newer
 
-> So how do you apply it?
+So how do you apply it?
 
-Under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`
-
+Under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`, add:
 ```text
 igfxfw | Data | <02 00 00 00>
 ```
-For enabling the firmware loading
-
+to enable firmware loading.
 
 The best way to check is to monitor the iGPU's frequency is with either [Intel Power Gadget](https://software.intel.com/en-us/articles/intel-power-gadget) or checking the boot logs for Apple Scheduler references. Make sure you have the `igfxfw` property applied:
 
