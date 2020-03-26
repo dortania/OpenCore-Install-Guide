@@ -38,7 +38,7 @@ So the process goes as follows:
 
    * `EFI/BOOT/BOOTx64.efi`
    * `EFI/OC/OpenCore.efi`
-   * `EFI/OC/Drivers/FwRuntimeServices`(**Don't forget this one, OpenCore will not boot with mismatched versions**)
+   * `EFI/OC/Drivers/OpenRuntime`(**Don't forget this one, OpenCore will not boot with mismatched versions**)
 
 * You can also update other drivers you have if present, these are just the ones that **must** be updated in order to boot correctly
 

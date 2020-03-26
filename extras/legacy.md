@@ -34,7 +34,7 @@ This will provide you with an EFI partition with a `boot` file, this is where we
 
 **Note**: The firmware drivers used for legacy users differ slightly:
 
-* [AppleUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases) 
+* [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases) 
    * For picker support in the Opencore menu
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
    * Needed for seeing Hfs drives like installers, the legacy variant is required for SnadyBridge and older due to missing RDRAND instruction support

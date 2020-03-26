@@ -58,7 +58,7 @@ Within your config.plist:
 
 * **Booter**: 
   * `DisableVariableWrite`: set to `YES`
-* **Misc -&gt; Security**:
+* **Misc -> Security**:
   * `ExposeSensitiveData`: set to `0x3`
 * **NVRAM**:
   * `LegacyEnable`: set to `YES`
@@ -68,7 +68,7 @@ Within your config.plist:
 
 And within your EFI:
 
-* `FwRuntimeServices.efi` driver(this is needed for proper sleep, shutdown and other services to work correctly
+* `OpenRuntime.efi` driver(this is needed for proper sleep, shutdown and other services to work correctly
 
 Now grab the 'LogoutHook.command' and place it somewhere safe (e.g. within your user directory, as shown below):
 

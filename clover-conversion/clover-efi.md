@@ -8,11 +8,11 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 **Supported ones:**
 
 * ApfsDriverLoader.efi
-* FwRuntimeServices.efi
-* HFSPlus.efi
+* OpenRuntime.efi
+* HfsPlus.efi
 * VBoxHfs.efi
 * EnhancedFatDxe.efi
-* AppleUsbKbDxe.efi
+* OpenUsbKbDxe.efi
 * UsbMouseDxe.efi
 * XhciDxe.efi
 * AudioDxe.efi
@@ -58,9 +58,9 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * OsxFatBinaryDrv.efi
 * OsxLowMemFixDrv.efi
 * SMCHelper.efi
-* UsbKbDxe.efi(replaced with AppleUsbKbDxe.efi)
+* UsbKbDxe.efi(replaced with OpenUsbKbDxe.efi)
 
 
 # AptioMemoryFix
 
-Well before we actually get started on converting the Clover config, we must first talk about converting from AptioMemoryFix. The main thing to note is that it's inside of OpenCore with FwRuntimeServices being an extension, this means that AptioMemoryFix and that there's also a lot more settings to choose from. Please see the hardware specific sections of the OpenCore guide to know what booter settings your system may require(HEDT like X99 and X299 should look to the closest CPU like Skylake-X should refer to Skylake guide and **read the comments** as they mention specifics for your system).
+Well before we actually get started on converting the Clover config, we must first talk about converting from AptioMemoryFix. The main thing to note is that it's inside of OpenCore with OpenRuntime being an extension, this means that AptioMemoryFix and that there's also a lot more settings to choose from. Please see the hardware specific sections of the OpenCore guide to know what booter settings your system may require(HEDT like X99 and X299 should look to the closest CPU like Skylake-X should refer to Skylake guide and **read the comments** as they mention specifics for your system).

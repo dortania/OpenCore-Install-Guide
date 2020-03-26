@@ -28,7 +28,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 
 * Kernel extensions are loaded in the order specified in your config file, so you must load an extension's dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.
 * ACPI patches and SSDTs are applied to all operating systems. Adjust your SSDTs with `If (_OSI ("Darwin")) {}` or use [rEFind](http://rodsbooks.com/refind/) in conjunction with OpenCore.
-* Some systems require pure UEFI mode to boot. \(This setting is commonly called "Windows 8.1/10 UEFI Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)\)
+* Some systems require pure UEFI mode to boot. (This setting is commonly called "Windows 8.1/10 UEFI Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
 * Issues can occur if NVMe devices are set up as SATA devices in the BIOS.
 * OpenCore requires a version of macOS that supports a prelinked kernel, this means any installs of OS X 10.7 Lion or newer are supported with some later versions of OS X 10.6 Snow Leopard also having support.
 
@@ -42,8 +42,8 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Thunderbolt
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock\(MSR 0xE2 write protection\)
-  * If this can't be turned off in the BIOS\(or even found\) please consider patching it out. See [Fixing CFG Lock](extras/msr-lock.md) for more info.
+* CFG Lock(MSR 0xE2 write protection)
+  * If this can't be turned off in the BIOS(or even found) please consider patching it out. See [Fixing CFG Lock](extras/msr-lock.md) for more info.
     * AMD CPU users don't need to worry about.
 
 **Enable:**
@@ -54,5 +54,5 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
-* Legacy RTC Device\(Relevant for Z370+\)
+* Legacy RTC Device(Relevant for Z370+)
 
