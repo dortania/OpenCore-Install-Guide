@@ -1,6 +1,7 @@
 # Broadwell-E
 
-Last edited: March 2, 2020 
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 ## Starting Point
 
@@ -219,7 +220,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
-**Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
+**Debug**: Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`)
 
 * **AppleDebug**: YES
    * Enables boot.efi logging, useful for debuuging. Note this is only supported on 10.15.4 and newer
@@ -293,7 +294,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 csr-active-config is set to `00000000` which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
 * `00000000` - SIP completely enabled
-* `30000000` - Allow unsigned kexts and writing to protected fs locations
+* `03000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 
 Recommended to leave enabled for best security practices
@@ -332,7 +333,7 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Broadwell-E example, we'll choose the iMacPro1,1 SMBIOS.
 
-Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:
+Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```text
   #######################################################

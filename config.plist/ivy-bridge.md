@@ -1,6 +1,7 @@
 # Ivy Bridge
 
-Last edited: March 2, 2020
+* Last edited: March 19, 2020
+* Supported version: 0.5.6
 
 ## Starting Point
 
@@ -141,7 +142,9 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 | framebuffer-patch-enable | Data | 01000000 |
 | framebuffer-stolenmem | Data | 00003001 |
 
+(This is an example for a desktop HD 4000 and no BIOS options for iGPU memory)
 
+**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -> `Layout-id`
 
@@ -244,7 +247,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
-**Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
+**Debug**: Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`)
 
 * **AppleDebug**: YES
    * Enables boot.efi logging, useful for debuuging. Note this is only supported on 10.15.4 and newer
@@ -318,7 +321,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 csr-active-config is set to `00000000` which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
 * `00000000` - SIP completely enabled
-* `30000000` - Allow unsigned kexts and writing to protected fs locations
+* `03000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 
 Recommended to leave enabled for best security practices
@@ -355,9 +358,14 @@ Recommended to leave enabled for best security practices
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
-For this Ivy Bridge example, we'll choose the iMac13,2 SMBIOS.
+For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Ivy Bridge:
 
-Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:
+* `iMac13,1` - this is used for computers utilizing the iGPU for displaying.
+* `iMac13,2` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
+
+**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
+
+Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```text
   #######################################################

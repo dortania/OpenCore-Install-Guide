@@ -1,6 +1,7 @@
 # Clover Boot Arg Conversion
 
-Last edited: March 2, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 This section is mainly used for explaining what boot-args are no longer relevant, it's quite common for users to be still carrying legacy args which have little to no real affect in newer versions of macOS or have little use in OpenCore
 
@@ -28,6 +29,15 @@ This list is based of memory and an annoyed self with seeing these flags keep po
 
 For some reason people kept using these flags into Clover which had no effect, and so we really need to stop the train on this one with OpenCore
 
-**GraphicsEnabler=No**
+**PCIRootUID=Value**
 
-**IGPEnabler=Yes**
+* This sets the `_UID` of `Device (PCI0)` to whatever the value is, supposedly needed on legacy AMD GPUs but this is debatable. Ironically Clover still uses this flag but most users know it from Chameleon. [Source](https://github.com/CloverHackyColor/CloverBootloader/blob/81f2b91b1552a4387abaa2c48a210c63d5b6233c/rEFIt_UEFI/Platform/FixBiosDsdt.cpp#L1630-L1674)
+
+**GraphicsEnabler=Yes/No**
+
+* No clue tbh, InjectAMD/Nvidia was the Clover equivlant but no feature parity in OpenCore besides running [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
+
+**IGPEnabler=Yes/No**
+
+* Same idea as GraphicsEnabler, Clover equivlant is InjectIntel so feature parity would be [WhateverGreen's Framebuffer patching](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+

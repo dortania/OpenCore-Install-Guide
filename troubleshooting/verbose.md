@@ -1,6 +1,7 @@
 # Fixing Resolution and Verbose
 
-Last edited: Febuary 18, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 Wanting a more clean booting experience with macOS without all that verbose text while booting? Well you need a couple things:
 

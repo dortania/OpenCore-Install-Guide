@@ -1,12 +1,15 @@
 # Making the installer in Windows
 
-Last edited: January 18, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
 To start you'll need the following:
 * 4GB USB Stick
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
+
+## Downloading macOS
 
 To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only`:
 
@@ -19,6 +22,8 @@ Now search through for your desired version of macOS, for this example we'll cho
 This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx`
 
 ![](https://cdn.discordapp.com/attachments/456913818467958789/668211921484382218/unknown.png)
+
+## Making the installer
 
 Next open `makeinstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O).
 

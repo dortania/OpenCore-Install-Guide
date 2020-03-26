@@ -1,6 +1,7 @@
 # Fixing CFG Lock
 
-Last editied: January 13, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 Do note that this is only recommended for users who have already installed macOS, for users who are ibnstalling for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
 

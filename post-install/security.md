@@ -1,6 +1,7 @@
 # Security and FileVault
 
-Last edited: March 2, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through and setting up some of OpenCore's great Security features:
 
@@ -33,7 +34,7 @@ Setting in your config.plist:
   * `ProvideConsoleGOP` to YES
 * UEFI -> Protocols
   * `FirmwareVolume` set to YES
-  * `HashServices` set to YES for Haswell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
+  * `HashServices` set to YES for Broadwell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
   * `AppleSmcIo` set to YES(this replaces VirtualSMC.efi)
 * UEFI -> Quirks
   * `RequestBootVarRouting` set to YES

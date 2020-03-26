@@ -1,6 +1,7 @@
 # Updating OpenCore and macOS
 
-Last Edited: March 7, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 ## Updating OpenCore
 
@@ -95,6 +96,7 @@ So the process goes as follows:
   * No change
   * Requires all previous fixes
 * 10.15.4
+  * [AMD CPU users need to update `cpuid_set_cpufamily` patch](https://github.com/AMD-OSX/AMD_Vanilla)
   * Fixes DRM on many Ellesmere based Polaris GPUs
   * Requires all previous fixes(excluding `shikigva=80` for Polaris DRM for most users)
 

@@ -1,6 +1,7 @@
 # General Troubleshooting
 
-Last edited: March 12, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
@@ -90,8 +91,8 @@ So this isn't actually an error, instead OpenCore isn't showing you all the debu
    * CFG-Lock disabled in the BIOS **or** `AppleCpuPmCfgLock` and `AppleCpuPmCfgLock` enabled under Kernel -> Quirks
 * AMD:
    * Verify you have added the correct kernel patches to your config(remember, OpenCore patches use `MinKernel` and `MaxKernel` while Clover has `MatchOS`)
-      * [Ryzen/Threadripper(17h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/17h-patches.plist.zip)
-      * [Bulldozer/Jaguar(15h/16h)](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/15h-16h-patches.plist.zip)
+      * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h)
+      * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h)
 
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 
@@ -181,7 +182,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 ## `Couldn't allocate runtime area` errors?
 
-See [Fixing KALSR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix)
+See [Fixing KASLR slide values](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix)
 
 ## SSDTs not being added
 
@@ -227,6 +228,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 * Stop Sign with corrupted text(Still waiting for Root Device)
 * Frozen in the macOS installer after 30 seconds
 * 15h/16h CPU reboot after Data & Privacy screen
+* Sleep crashing on AMD
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -253,7 +255,7 @@ Well this general area is where a lot of PCI devices are configured, and is wher
 
 ## macOS installer in Russian
 
-Default sample config is in russian because slavs rule the Hackintosh world, check your prev-lang:kbd value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OcSupportPkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+Default sample config is in russian because slavs rule the Hackintosh world, check your prev-lang:kbd value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
 You may also need to reset NVRAM in the boot picker as well
 
@@ -407,6 +409,23 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
 * 15/16h CPU webpages crashing
    * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
 
+## Sleep crashing on AMD
+
+This is generally seen on AMD who use the chipset's USB controller, specifically for the Ryzen series and newer. The main way to tell if you're having issues with this is checking logs after either sleeping or waking:
+
+* In terminal:
+   * `log show --last 1d | grep "Wake reason"` verify it
+
+Should result in something like this:
+
+```text`
+Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.
+```
+
+You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:
+
+* Avoid the chipset USB all together(ideally set `_STA = 0x0` to disabe the controller outright with an SSDT)
+* Correct the USBX power properties to what the controller expects
 
 # Other issues
 

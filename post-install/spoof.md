@@ -1,6 +1,7 @@
 # Disabling GPU
 
-Last edited: January 21, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 ## GPU Spoof
 
@@ -23,7 +24,7 @@ By far the simplest way, all you need to do is add the following boot-arg:
 
 Do note that this will disable all GPUs excluding the iGPU
 
-### DevicePropeties Method
+### DeviceProperties Method
 
 Here is quite simple, find the PCI route with [gfxutil](https://github.com/acidanthera/gfxutil/releases) and then create a new DeviceProperties section with your spoof:
 

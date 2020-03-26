@@ -1,6 +1,7 @@
 # Emulated NVRAM
 
-Last edited: January 13, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are X99 and some X299 series chipsets:
 
@@ -64,7 +65,6 @@ Within your config.plist:
   * `LegacyOverwrite` set to `YES`
   * `LegacySchema`: NVRAM variables set(OpenCore compares these to the variables present in nvram.plist)
   * `WriteFlash`: set to `NO`
-* `ExposeSensitiveData`: set to `0x3`
 
 And within your EFI:
 

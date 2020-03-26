@@ -1,6 +1,7 @@
 # Converting common properties from Clover to Opencore
 
-Last edited: Febuary 18, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -16,7 +17,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
    * change EHC1 to EH01
    * change EHC2 to EH02
-* XHCI Patches: Not needed anymore, recommended to make an [Injector kext](https://github.com/corpnewt/USBMap) instead to kick out the built-in injectors
+* XHCI Patches: Not needed once an [Injector kext](https://github.com/corpnewt/USBMap) is made
    * change XHCI to XHC
    * change XHC1 to XHC
 * SATA patches: Purely cosmetic in macOS now
@@ -41,9 +42,9 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * change HDAS to HDEF
    * change CAVS to HDEF
    * change AZAL to HDEF
-* Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)
+* Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)(SSDT-AWAC)
    * change STAS to [Blank]
-* NVMe patches: NVMeFix.kext fixes power management
+* NVMe patches: [NVMeFix](https://github.com/acidanthera/NVMeFix) fixes power management
    * change PXSX to ANS1
    * change PXSX to ANS2
 * Other purely consmetic patches:
@@ -54,6 +55,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * change PIC to IPIC
    * change GBE1 to ETH0
    
+
 **Patches**
 
 * TgtBridge patches: No feature parity in OpenCore, see comments(TgtBridge was very buggy in Clover):
@@ -94,7 +96,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * **FixADP1**:
    * Renames device `AC0_` to `ADP1`, see [Rename-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
-
+* Also injects `Name (_PRW, Package (0x02) {0x1C,0x03})` into the device if not present. [Source](https://github.com/CloverHackyColor/CloverBootloader/blob/81f2b91b1552a4387abaa2c48a210c63d5b6233c/rEFIt_UEFI/Platform/FixBiosDsdt.cpp#L1677-L1692)
+   
 * **FixRTC**:
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 * **FixTMR**:

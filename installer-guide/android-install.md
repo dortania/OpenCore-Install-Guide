@@ -1,5 +1,8 @@
 # Making the installer with an Android Phone
 
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
+
 (This is a joke, you can follow this but you really should just buy a $3 USB)
 
 

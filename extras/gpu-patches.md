@@ -1,6 +1,7 @@
 # GPU Patching
 
-Last edited: Febuary 6, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen's autopatches:
 

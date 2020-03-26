@@ -1,6 +1,7 @@
 # Creating the USB
 
-Last edited: Febuary 13, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 Requirements:
 
@@ -17,6 +18,7 @@ Depending on which OS you're on, see your specific section on making the USB, th
 
 * [macOS users](/installer-guide/mac-install.md)
 * [Windows users](/installer-guide/winblows-install.md)
+* [Linux users](/installer-guide/linux-install.md)
 
 
 # Setting up the EFI

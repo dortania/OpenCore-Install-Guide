@@ -1,6 +1,7 @@
 # Coffee Lake
 
-Last edited: March 2, 2020
+* Last edited: March 19, 2020
+* Supported version: 0.5.6
 
 ## Starting Point
 
@@ -133,9 +134,9 @@ If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like 
 
 The two ig-platform-id's we use are as follows:
 
-* `0x3E9B0007` - this is used when the iGPU is used to drive a display
+* `0x3E9B0007` - this is used when the Desktop iGPU is used to drive a display
   * `07009B3E` when hex-swapped
-* `0x3E920003` - this is used when the iGPU is only used for computing tasks and doesn't drive a display
+* `0x3E920003` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
   * `0300923E` when hex-swapped
 
 Worth noting that for 10.12 -> 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up. 10.13.6 natively supports Coffee Lake
@@ -150,7 +151,9 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 | framebuffer-patch-enable | Data | 01000000 |
 | framebuffer-stolenmem | Data | 00003001 |
 
-(This is an example for an UHD 630 without a dGPU and no BIOS options for iGPU memory)
+(This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
+
+**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -> `Layout-id`
 
@@ -253,7 +256,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
-**Debug**: Helpful for debuggin OpenCore boot issues(We'll be chnging everything *but* `DisplayDelay`)
+**Debug**: Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`)
 
 * **AppleDebug**: YES
    * Enables boot.efi logging, useful for debuuging. Note this is only supported on 10.15.4 and newer
@@ -327,7 +330,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 csr-active-config is set to `00000000` which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
 
 * `00000000` - SIP completely enabled
-* `30000000` - Allow unsigned kexts and writing to protected fs locations
+* `03000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 
 Recommended to leave enabled for best security practices
@@ -369,8 +372,10 @@ For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intenti
 * `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
 * `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
    * Note: While iMac19,1 and iMac19,2 are a closer match, these SMBIOS are not compatible with versions of macOS older than Mojave and not all fixes are compatible with them(ie: USBInjectAll)
+   
+**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
 
-Run GenSMBIOS, pick option 1. for downloading MacSerial and Option 3. for selecting out SMBIOS.  This will give us an output similar to the following:
+Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```text
   #######################################################

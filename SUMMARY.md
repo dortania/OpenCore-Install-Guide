@@ -4,6 +4,7 @@
 * [Creating the USB](/installer-guide/opencore-efi.md)
    * [macOS install](/installer-guide/mac-install.md)
    * [Windows install](/installer-guide/winblows-install.md)
+   * [Linux install](/installer-guide/linux-install.md)
 * [Gathering files](ktext.md)
 * [Getting started with ACPI](extras/acpi.md)
 
@@ -37,18 +38,19 @@
 
 ## Extras
 
-* [Legacy Install](extras/legacy.md)
-* [GPU Patching](extras/gpu-patches.md)
-* [Fixing Resolution and Verbose](troubleshooting/verbose.md)
-* [Fixing KALSR slide values](extras/kalsr-fix.md)
-* [Fixing CFG Lock](extras/msr-lock.md)
+* [Legacy Install](/extras/legacy.md)
+* [GPU Patching](/extras/gpu-patches.md)
+* [Fixing Resolution and Verbose](/troubleshooting/verbose.md)
+* [Fixing KASLR slide values](/extras/kalsr-fix.md)
+* [Fixing CFG Lock](/extras/msr-lock.md)
 * [Fixing iServices](/post-install/iservices.md)
-* [Emulated NVRAM](post-install/nvram.md)
-* [Disabling GPU](post-install/spoof.md)
-* [Security and FileVault](post-install/security.md)
-* [Fixing Audio](post-install/audio.md)
-* [Booting without USB](post-install/oc2hdd.md)
+* [Emulated NVRAM](/post-install/nvram.md)
+* [Disabling GPU](/post-install/spoof.md)
+* [Security and FileVault](/post-install/security.md)
+* [Fixing Audio](/post-install/audio.md)
+* [Booting without USB](/post-install/oc2hdd.md)
 * [Updating OpenCore, kexts and macOS](/post-install/update.md)
+
 
 ## Misc
 

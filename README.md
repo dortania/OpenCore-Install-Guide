@@ -1,5 +1,6 @@
 # Introduction
-Last edited: March 2, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 * [GitHub Pages link with Darkmode support](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
 
 ### About

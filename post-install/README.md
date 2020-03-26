@@ -1,6 +1,7 @@
 # Post Install
 
-Last editied: March 12, 2020
+* Last edited: March 15, 2020
+* Supported version: 0.5.6
 
 So you've finally finsihed installing macOS with OpenCore but know there's still some things to clean up, well you've come to the right place!
 
@@ -20,6 +21,10 @@ This section is benificial for all, regardless of hardware.
 Used for Intel's consumer line
 
 * [Fixing Intel USB](https://usb-map.gitbook.io/project/)
+
+
+For sandy and Ivy Bridge:
+* [Fixing Power Management](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
 ## Intel HEDT
 
