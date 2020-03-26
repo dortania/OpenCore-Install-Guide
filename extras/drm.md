@@ -6,7 +6,8 @@ So with DRM, we have a couple things we need to mention:
 * DRM requires a supported dGPU
    * See [GPU Buyers Guide](https://khronokernel-3.gitbook.io/gpu-buyers-guide/) for supported cards
 * DRM is broken for iGPU-only systems
-   * This started from around 10.12.3
+   * Has never worked for Haswell and up
+   * For Ivy Bridge, could be fixed with Shiki (now WhateverGreen) til 10.12.2, but broke with 10.12.3
 * Working hardware acceleration and decoding
 
 ## Testing Hardware Acceleration and Decoding
@@ -54,28 +55,20 @@ So before we get too deep, lets actually make sure that DRM is broken, but we'll
    * Play a show in Netflix or Amazon Prime
    * Play an Amazon Prime trailer: [Spider-Man: Far From Home](https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP)
       * Trailer itself isn't DRM encrypted but Amazon still does the check before playing
-* Note: Requires either an iGPU or newer AMD GPU to work (Polaris+)
+* Note: Requires newer AMD GPU to work (Polaris+)
 
 **FairPlay 4.x**: Mixed DRM, found on AppleTV+
 
 * You can open TV.app, choose TV+ -> Free Apple TV+ Premieres, then click on any episode to test without any registration or trial
 * Apple TV+ also has a free trial if you want to use it
-* Note: Requires either an iGPU or newer AMD GPU to work (Polaris+)
-   * Possible to force FairPlay 1.x for unsupported/older hardware combinations
+* Note: Requires either an absent iGPU (Xeon) or newer AMD GPU to work (Polaris+)
+   * Possible to force FairPlay 1.x when iGPU is absent
 
 If everything passes good on these tests, you have no need to continue! Otherwise proceed on
 
 ## Fixing DRM
 
-So for fixing DRM on hackintoshes can go down mainly 1 route:
-
-* Patching DRM to use either software or AMD decoding
-
-It is possible to fix DRM on Z390, B360, H370, H310 boards and newer but this requires a clean ME region(requires SPI flasher) and [PavpProvision](https://github.com/acidanthera/OpenCorePkg/tree/master/Application/PavpProvision) to manually edit the source code with provisioning certificates from Apple firmware. This is extremely complicated, hardware breaking if not done correctly so not a practical route to go down for most users
-
-**dGPU/software for DRM**
-
-For dGPU/software setups, it gets a bit more complicated. Luckily Vit made a great little chart for different hardware configurations:
+So for fixing DRM on hackintoshes can go down mainly 1 route: patching DRM to use either software or AMD decoding. Vit made a great little chart for different hardware configurations:
 
 * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 
@@ -92,7 +85,7 @@ Note that shikigva args are meant to be placed in the boot-args section, do not 
 
 So how do you fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code), the main things to note
 
-* Firmware loading is retricted to Kabylake and newer
+* Firmware loading is retricted to Kaby Lake and newer
     * This still breaks for many so only recommended on Z390, B360, H370, H310 and newer
 
 > So how do you apply it?
