@@ -5,8 +5,8 @@ So with DRM, we have a couple things we need to mention:
 * DRM requires a supported dGPU
    * See the [GPU Buyers Guide](https://khronokernel-3.gitbook.io/gpu-buyers-guide/) for supported cards
 * DRM is broken for iGPU-only systems
-   * Has never worked for Haswell and up
-   * For Ivy Bridge, could be fixed with Shiki (now WhateverGreen) til 10.12.2, but broke with 10.12.3
+   * These have never worked with Haswell and newer
+   * For Ivy Bridge, this could be fixed with Shiki (now WhateverGreen) til 10.12.2, but broke with 10.12.3
 * Working hardware acceleration and decoding
 
 ## Testing Hardware Acceleration and Decoding
@@ -32,6 +32,7 @@ If you fail at this point, there's a couple things you can check for:
    * Make sure not to have any legacy graphics patches present as they've been absorbed into WhateverGreen:
       * IntelGraphicsFixup.kext
       * NvidiaGraphicsFixup.kext
+      *Shiki.kext
 
 To check if Lilu and WhateverGreen loaded correctly:
 
@@ -71,17 +72,17 @@ So for fixing DRM on hackintoshes we can go down mainly 1 route: patching DRM to
 
 * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 
-So how do you use it? First, identify what configuration you have in the chart (AMD represents GPU, not CPU). The SMBIOS listed (IM = iMac, MM = Mac Mini, IMP = iMac Pro, MP = Mac Pro) is what you should use if you match the hardware configuration. If you don't match any of the configurations in the chart, you are out of luck.
+So how do you use it? First, identify what configuration you have in the chart (AMD represents GPU, not CPU). The SMBIOS listed (IM = iMac, MM = Mac Mini, IMP = iMac Pro, MP = Mac Pro) is what you should use if you match the hardware configuration. If you don't match any of the configurations in the chart, you're out of luck.
 
-Next, identify what Shiki mode you need to use. If there are two configurations for your setup, they will differ in the Shiki flags used. Generally, you want hardware decoding over software decoding. If the mode column is blank, then you are done. Otherwise, you should add `shikigva` as a property to any GPU, using DevicesProperties > Add. For example, if the mode I need to use is `shikigva=80`:
+Next, identify what Shiki mode you need to use. If there are two configurations for your setup, they will differ in the Shiki flags used. Generally, you want hardware decoding over software decoding. If the mode column is blank, then you are done. Otherwise, you should add `shikigva` as a property to any GPU, using DevicesProperties > Add. For example, if the mode we need to use is `shikigva=80`:
 
-![Example of shikigva in Devices Properties](https://i.imgur.com/qvtGPM5.png)
+![Example of shikigva in Devices Properties](https://cdn.discordapp.com/attachments/683011276938543134/693487632247947386/Screen_Shot_2020-03-28_at_9.50.11_AM.png)
 
 You can also use the boot argument - this is in the mode column.
 
-Here's one example. If I have a Intel i9-9900K and an RX 560, my configuration is "AMD+IGPU", and I should be using an iMac or Mac Mini SMBIOS (for this specific configuration, iMac19,1). Then I see there are two options for my configuration: one where the mode is `shikigva=16`, and one with `shikigva=80`. I see the difference is in "Prime Trailers" and "Prime/Netflix". I want Netflix to work, so I choose the `shikigva=80` option. I inject `shikigva` with type number/integer and value `80` into my iGPU or dGPU, reboot, and DRM should work.
+Here's one example. If we have an Intel i9-9900K and an RX 560, the configuration would be "AMD+IGPU", and we should be using an iMac or Mac Mini SMBIOS (for this specific configuration, iMac19,1). Then we see there are two options for the configuration: one where the mode is `shikigva=16`, and one with `shikigva=80`. We see the difference is in "Prime Trailers" and "Prime/Netflix". We want Netflix to work, so we'll choose the `shikigva=80` option. Then inject `shikigva` with type number/integer and value `80` into our iGPU or dGPU, reboot, and DRM should work.
 
-Here's another example. This time, I have an Ryzen 3700X and an RX 480. My configuration in this case is just "AMD", and I should be using an iMac Pro or Mac Pro SMIOS. Again, there are two options: no shiki arguments, and `shikigva=128`. I prefer hardware decoding over software decoding, so I choose the `shikigva=128` option, and again inject `shikigva` into my dGPU, this time with value `128`. A reboot and DRM works.
+Here's another example. This time, We have an Ryzen 3700X and an RX 480. Our configuration in this case is just "AMD", and we should be using either an iMac Pro or Mac Pro SMBIOS. Again, there are two options: no shiki arguments, and `shikigva=128`. We prefer hardware decoding over software decoding, so we'll choose the `shikigva=128` option, and again inject `shikigva` into our dGPU, this time with value `128`. A reboot and DRM works.
 
 **Notes:**
 
@@ -96,20 +97,20 @@ Here's another example. This time, I have an Ryzen 3700X and an RX 480. My confi
 
 ## Fixing iGPU performance
 
-So how do you fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:
-  *  Skylake and newer CPU
-  * **and** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (*not* Z370, as it is actually 200-series)
+So how do we fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:
+  * Skylake and newer CPU with a supported iGPU
+  * **And** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (*not* Z370, as it is actually 200-series)
   * Do note that even with recent chipsets, firmware loading is not guaranteed to work. If you experience a kernel panic or lots of graphics errors after trying this, it is probably because firmware loading is not supported on your setup.
 
-So how do you apply it?
+So how do we apply it?
 
 Under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`, add:
 ```text
 igfxfw | Data | <02 00 00 00>
 ```
-to enable firmware loading.
+To enable firmware loading.
 
-![Example of igfxfw injected into iGPU](https://i.imgur.com/mRjPMLz.png)
+![Example of igfxfw injected into iGPU](https://cdn.discordapp.com/attachments/683011276938543134/693540218074300516/Screen_Shot_2020-03-28_at_1.19.54_PM.png)
 
 The best way to check is to monitor the iGPU's frequency is with either [Intel Power Gadget](https://software.intel.com/en-us/articles/intel-power-gadget) or checking the boot logs for Apple Scheduler references. Make sure you have the `igfxfw` property applied:
 
