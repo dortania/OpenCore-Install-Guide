@@ -86,6 +86,9 @@ Here's another example. This time, I have an Ryzen 3700X and an RX 480. My confi
 **Notes:**
 
   * You can use [gfxutil](https://github.com/acidanthera/gfxutil/releases) to find the path to your iGPU/dGPU.
+     * `path/to/gfxutil -f GFX0`
+	 * `GFX0`: For dGPUs, if multiple installed check IORegistryExplorer for what your AMD card is called
+	 * `IGPU`: For iGPU
   * If you inject `shikigva` using DeviceProperties, ensure you only do so to one GPU, otherwise WhateverGreen will use whatever it finds first and it is not guaranteed to be consistent. 
   * IQSV stands for Intel Quick Sync Video: this only works if iGPU is present and enabled and it is set up correctly.
   * Special configurations (like Haswell + AMD dGPU with an iMac SMBIOS, but iGPU is disabled) are not covered in the chart. You must do research on this yourself.
