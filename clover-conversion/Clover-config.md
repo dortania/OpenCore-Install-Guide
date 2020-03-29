@@ -338,9 +338,11 @@ An odd quirk for Dell systems running APTIO V(or just skylake, Slice doesn't rea
 
 **KextsToPatch**:
 * `Kernel -> Patch`
+* See [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md) for common patch conversions
 
 **KernelToPatch**:
 * `Kernel -> Patch`
+* See [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md) for common patch conversions
 
 **ForceKextsToLoad**:
 * Not a great solution but injecting the kext "works"
