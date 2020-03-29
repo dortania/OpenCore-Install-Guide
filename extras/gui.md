@@ -1,11 +1,8 @@
-**Work In Progress**
-
 # OpenCore beauty treatment
 
-Main things this guide will go over:
+Main thing this guide will go over:
 
 * Giving OpenCore a GUI
-* Enabling the BootChime
 
 ## Setting up OpenCore's GUI
 
@@ -29,7 +26,3 @@ Now in our config.plist, we have 2 things we need to fix:
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
 
 ![](https://cdn.discordapp.com/attachments/683011276938543134/693871107354394674/vmware_2019-10-06_19-47-27.png)
-
-## Setting up AudioDxe and BootChime 
-
-Use ears
