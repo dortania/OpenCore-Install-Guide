@@ -218,6 +218,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 * Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 * "Waiting for Root Device" or Prohibited Sign error
 * macOS installer in Russian
+* macOS Installer being damadged
 * Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 * Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 * 300 series Intel stalling on `apfs_module_start...`
@@ -264,6 +265,21 @@ Still didn't work? Well time for the big guns. We'll force remove that exact pro
 `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
 
 ![](https://cdn.discordapp.com/attachments/456913818467958789/673947840791445538/Screen_Shot_2020-02-03_at_10.47.40_AM.png)
+
+## macOS Installer being damadged
+
+If you've download macOS before October 2019, you likely have an expired macOS Installer certificate, there's 2 ways to fix this:
+
+* Download newest copy of macOS
+* Change date in terminal to when the certificate was valid
+
+For the latter:
+* Disconnect all networking devices(Ethernet, disable Wifi)
+* In the recovery terminal set to September 1st, 2019:
+
+```text
+date 0901000019
+```
 
 ## Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 

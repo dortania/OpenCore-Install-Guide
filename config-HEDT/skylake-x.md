@@ -144,7 +144,11 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
    * Path to the `info.plist` hidden within the kext
    * ex: `Contents/Info.plist`
 
+<<<<<<< Local Changes
+**Emulate**: Needed for spoofing unsupported CPUs, thankfully both Skylake-X and Cascade Lake-X have the same CPU ID as Xeon W chips which ship in the iMac Pro. So here we'll leave it blank
+=======
 **Emulate**: Needed for spoofing unsupported CPUs, all Skylake X CPUs are natively supported
+>>>>>>> External Changes
 
 
 **Block**: Blocks kexts from loading. Not relevant for us
