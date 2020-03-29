@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Post-Install · GitBook</title>
+        <title>Fixing DRM · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="security.html" />
+    <link rel="next" href="iservices.html" />
     
     
-    <link rel="prev" href="../AMD/AMD-config.html" />
+    <link rel="prev" href="verbose.html" />
     
 
     </head>
@@ -340,7 +340,7 @@
         
         
     
-        <li class="chapter active" data-level="5.1" data-path="./">
+        <li class="chapter " data-level="5.1" data-path="./">
             
                 <a href="./">
             
@@ -432,7 +432,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.7" data-path="drm.html">
+        <li class="chapter active" data-level="5.1.7" data-path="drm.html">
             
                 <a href="drm.html">
             
@@ -618,7 +618,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Post-Install</a>
+        <a href=".." >Fixing DRM</a>
     </h1>
 </div>
 
@@ -636,44 +636,132 @@
                                 <blockquote>
 <p><em>Last modified: Sun Mar 29 2020 17:20:59 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="post-install"><a name="post-install" class="plugin-anchor" href="#post-install"><i class="fa fa-link" aria-hidden="true"></i></a>Post Install</h1>
+<h1 id="fixing-drm-support-and-igpu-performance"><a name="fixing-drm-support-and-igpu-performance" class="plugin-anchor" href="#fixing-drm-support-and-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing DRM support and iGPU performance</h1>
+<p>So with DRM, we have a couple things we need to mention:</p>
 <ul>
-<li>Last edited: March 15, 2020</li>
-<li>Supported version: 0.5.6</li>
+<li>DRM requires a supported dGPU<ul>
+<li>See the <a href="https://khronokernel-3.gitbook.io/gpu-buyers-guide/" target="_blank">GPU Buyers Guide</a> for supported cards</li>
 </ul>
-<p>So you&apos;ve finally finsihed installing macOS with OpenCore but know there&apos;s still some things to clean up, well you&apos;ve come to the right place!</p>
-<h2 id="universal"><a name="universal" class="plugin-anchor" href="#universal"><i class="fa fa-link" aria-hidden="true"></i></a>Universal</h2>
-<p>This section is benificial for all, regardless of hardware.</p>
+</li>
+<li>DRM is broken for iGPU-only systems<ul>
+<li>These have never worked with Haswell and newer</li>
+<li>For Ivy Bridge, this could be fixed with Shiki (now WhateverGreen) til 10.12.2, but broke with 10.12.3</li>
+</ul>
+</li>
+<li>Working hardware acceleration and decoding</li>
+</ul>
+<h2 id="testing-hardware-acceleration-and-decoding"><a name="testing-hardware-acceleration-and-decoding" class="plugin-anchor" href="#testing-hardware-acceleration-and-decoding"><i class="fa fa-link" aria-hidden="true"></i></a>Testing Hardware Acceleration and Decoding</h2>
+<p>So before we can get started with fixing DRM, we need to make sure your hardware is working. The best way to check is by running <a href="https://i.applelife.ru/2019/05/451893_10.12_VDADecoderChecker.zip" target="_blank">VDADecoderChecker</a>:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/692237447203127356/Screen_Shot_2020-03-24_at_11.04.19_PM.png" alt=""></p>
+<p>If you fail at this point, there&apos;s a couple things you can check for:</p>
 <ul>
-<li><a href="audio.html">Correcting Audio</a></li>
-<li><a href="security.html">Enabling FileVault and other security features</a></li>
-<li><a href="oc2hdd.html">Booting macOS without a USB</a></li>
-<li><a href="update.html">Updating OpenCore, kexts and macOS</a></li>
-<li><a href="../troubleshooting/debug.html">Disabling OpenCore Logging</a></li>
-<li><a href="iservices.html">Fixing iServices</a></li>
-<li><a href="drm.html">Fixing DRM</a></li>
+<li>Make sure your hardware is supported<ul>
+<li>See <a href="https://khronokernel-3.gitbook.io/gpu-buyers-guide/" target="_blank">GPU Buyers Guide</a></li>
 </ul>
-<h2 id="intel"><a name="intel" class="plugin-anchor" href="#intel"><i class="fa fa-link" aria-hidden="true"></i></a>Intel</h2>
-<p>Used for Intel&apos;s consumer line</p>
+</li>
+<li>Make sure the SMBIOS you&apos;re running matches with your hardware<ul>
+<li>Don&apos;t use a Mac Mini SMBIOS on a desktop for example, as Mac Minis run mobile hardware and so macOS will expect the same</li>
+</ul>
+</li>
+<li>Make sure the iGPU is enabled in the BIOS and has the correct properties for your setup (<code>AAPL,ig-platform-id</code> and if needed, <code>device-id</code>)<ul>
+<li>You can either review the DeviceProperties section from the guide or <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md" target="_blank">WhateverGreen&apos;s manual</a></li>
+</ul>
+</li>
+<li>Avoid unnessary ACPI renames, all important ones are handled in WhateverGreen<ul>
+<li>change GFX0 to IGPU</li>
+<li>change PEG0 to GFX0</li>
+<li>change HECI to IMEI</li>
+<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/Clover-config.md" target="_blank">etc</a></li>
+</ul>
+</li>
+<li>Make sure Lilu and WhateverGreen are loaded<ul>
+<li>Make sure not to have any legacy graphics patches present as they&apos;ve been absorbed into WhateverGreen:<ul>
+<li>IntelGraphicsFixup.kext</li>
+<li>NvidiaGraphicsFixup.kext
+*Shiki.kext</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>To check if Lilu and WhateverGreen loaded correctly:</p>
+<pre><code class="lang-text">kextstat | grep -E &quot;Lilu|WhateverGreen&quot;
+</code></pre>
+<h2 id="testing-drm"><a name="testing-drm" class="plugin-anchor" href="#testing-drm"><i class="fa fa-link" aria-hidden="true"></i></a>Testing DRM</h2>
+<p>So before we get too deep, we need to go over some things, mainly the types of DRM you&apos;ll see out in the wild:</p>
+<p><strong>FairPlay 1.x</strong>: Software based DRM, used for supporting legacy Macs more easily</p>
 <ul>
-<li><a href="https://usb-map.gitbook.io/project/" target="_blank">Fixing Intel USB</a></li>
+<li>Easiest way to test this is by playing an iTunes movie: <a href="https://drive.google.com/file/d/12pQ5FFpdHdGOVV6jvbqEq2wmkpMKxsOF/view" target="_blank">FairPlay 1.x test</a><ul>
+<li>FairPlay 1.x trailers will work on any configuration if WhateverGreen is properly set up - including iGPU-only configurations. However, FairPlay 1.x <em>movies</em> will only play on iGPU-only configurations for around 3-5 seconds, erroring that HDCP is unsupported afterwards.</li>
 </ul>
-<p>For sandy and Ivy Bridge:</p>
+</li>
+</ul>
+<p><strong>FairPlay 2.x/3.x</strong>: Hardware based DRM, found in Netflix, Amazon Prime</p>
 <ul>
-<li><a href="https://github.com/Piker-Alpha/ssdtPRGen.sh" target="_blank">Fixing Power Management</a></li>
+<li>There&apos;s a couple ways to test:<ul>
+<li>Play a show in Netflix or Amazon Prime</li>
+<li>Play an Amazon Prime trailer: <a href="https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP" target="_blank">Spider-Man: Far From Home</a><ul>
+<li>Trailer itself does not use DRM but Amazon still checks before playing</li>
 </ul>
-<h2 id="intel-hedt"><a name="intel-hedt" class="plugin-anchor" href="#intel-hedt"><i class="fa fa-link" aria-hidden="true"></i></a>Intel HEDT</h2>
-<p>Used for Intel&apos;s High End and Server line</p>
+</li>
+</ul>
+</li>
+<li>Note: Requires newer AMD GPU to work (Polaris+)</li>
+</ul>
+<p><strong>FairPlay 4.x</strong>: Mixed DRM, found on AppleTV+</p>
 <ul>
-<li><a href="https://usb-map.gitbook.io/project/" target="_blank">Fixing Intel USB</a></li>
-<li><a href="nvram.html">Emulating NVRAM</a></li>
+<li>You can open TV.app, choose TV+ -&gt; Free Apple TV+ Premieres, then click on any episode to test without any trial (you do need an iCloud account)</li>
+<li>Apple TV+ also has a free trial if you want to use it</li>
+<li>Note: Requires either an absent iGPU (Xeon) or newer AMD GPU to work (Polaris+)<ul>
+<li>Possible to force FairPlay 1.x when iGPU is absent</li>
 </ul>
-<h2 id="amd"><a name="amd" class="plugin-anchor" href="#amd"><i class="fa fa-link" aria-hidden="true"></i></a>AMD</h2>
-<p>Used for AMD CPU based hardware</p>
+</li>
+</ul>
+<p>If everything works on these tests, you have no need to continue! Otherwise, proceed on.</p>
+<h2 id="fixing-drm"><a name="fixing-drm" class="plugin-anchor" href="#fixing-drm"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing DRM</h2>
+<p>So for fixing DRM on hackintoshes we can go down mainly 1 route: patching DRM to use either software or AMD decoding. Vit made a great little chart for different hardware configurations:</p>
 <ul>
-<li><a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md" target="_blank">Fixing AMD USB</a></li>
-<li><a href="https://github.com/trulyspinach/SMCAMDProcessor" target="_blank">Fixing AMD Temperature readings</a></li>
+<li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md" target="_blank">WhateverGreen&apos;s DRM chart</a></li>
 </ul>
+<p>So how do you use it? First, identify what configuration you have in the chart (AMD represents GPU, not CPU). The SMBIOS listed (IM = iMac, MM = Mac Mini, IMP = iMac Pro, MP = Mac Pro) is what you should use if you match the hardware configuration. If you don&apos;t match any of the configurations in the chart, you&apos;re out of luck.</p>
+<p>Next, identify what Shiki mode you need to use. If there are two configurations for your setup, they will differ in the Shiki flags used. Generally, you want hardware decoding over software decoding. If the mode column is blank, then you are done. Otherwise, you should add <code>shikigva</code> as a property to any GPU, using DevicesProperties &gt; Add. For example, if the mode we need to use is <code>shikigva=80</code>:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/693487632247947386/Screen_Shot_2020-03-28_at_9.50.11_AM.png" alt="Example of shikigva in Devices Properties"></p>
+<p>You can also use the boot argument - this is in the mode column.</p>
+<p>Here&apos;s one example. If we have an Intel i9-9900K and an RX 560, the configuration would be &quot;AMD+IGPU&quot;, and we should be using an iMac or Mac Mini SMBIOS (for this specific configuration, iMac19,1). Then we see there are two options for the configuration: one where the mode is <code>shikigva=16</code>, and one with <code>shikigva=80</code>. We see the difference is in &quot;Prime Trailers&quot; and &quot;Prime/Netflix&quot;. We want Netflix to work, so we&apos;ll choose the <code>shikigva=80</code> option. Then inject <code>shikigva</code> with type number/integer and value <code>80</code> into our iGPU or dGPU, reboot, and DRM should work.</p>
+<p>Here&apos;s another example. This time, We have an Ryzen 3700X and an RX 480. Our configuration in this case is just &quot;AMD&quot;, and we should be using either an iMac Pro or Mac Pro SMBIOS. Again, there are two options: no shiki arguments, and <code>shikigva=128</code>. We prefer hardware decoding over software decoding, so we&apos;ll choose the <code>shikigva=128</code> option, and again inject <code>shikigva</code> into our dGPU, this time with value <code>128</code>. A reboot and DRM works.</p>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>You can use <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> to find the path to your iGPU/dGPU.<ul>
+<li><code>path/to/gfxutil -f GFX0</code></li>
+<li><code>GFX0</code>: For dGPUs, if multiple installed check IORegistryExplorer for what your AMD card is called</li>
+<li><code>IGPU</code>: For iGPU</li>
+</ul>
+</li>
+<li>If you inject <code>shikigva</code> using DeviceProperties, ensure you only do so to one GPU, otherwise WhateverGreen will use whatever it finds first and it is not guaranteed to be consistent. </li>
+<li>IQSV stands for Intel Quick Sync Video: this only works if iGPU is present and enabled and it is set up correctly.</li>
+<li>Special configurations (like Haswell + AMD dGPU with an iMac SMBIOS, but iGPU is disabled) are not covered in the chart. You must do research on this yourself.</li>
+<li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp" target="_blank">Shiki source</a> is useful in understanding what flags do what and when they should be used, and may help with special configurations.</li>
+</ul>
+<h2 id="fixing-igpu-performance"><a name="fixing-igpu-performance" class="plugin-anchor" href="#fixing-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing iGPU performance</h2>
+<p>So how do we fix iGPU performance on a hackintosh? Well by loading Apple&apos;s GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:</p>
+<ul>
+<li>Skylake and newer CPU with a <a href="https://khronokernel-3.gitbook.io/gpu-buyers-guide/modern-gpus/intel-gpu" target="_blank">supported iGPU</a></li>
+<li><strong>And</strong> a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (<strong><em>not</em></strong> Z370, as it is actually 200-series)</li>
+<li>Do note that even with recent chipsets, firmware loading is not guaranteed to work. If you experience a kernel panic or lots of graphics errors after trying this, it is probably because firmware loading is not supported on your setup.</li>
+</ul>
+<p>So how do we apply it?</p>
+<p>Under <code>DeviceProperties -&gt; Add -&gt; PciRoot(0x0)/Pci(0x2,0x0)</code>, add:</p>
+<pre><code class="lang-text">igfxfw | Data | &lt;02 00 00 00&gt;
+</code></pre>
+<p>To enable firmware loading.</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/693540218074300516/Screen_Shot_2020-03-28_at_1.19.54_PM.png" alt="Example of igfxfw injected into iGPU"></p>
+<p>The best way to check is to monitor the iGPU&apos;s frequency is with either <a href="https://software.intel.com/en-us/articles/intel-power-gadget" target="_blank">Intel Power Gadget</a> or checking the boot logs for Apple Scheduler references. Make sure you have the <code>igfxfw</code> property applied:</p>
+<pre><code class="lang-text">kernel: (AppleIntelCFLGraphics) [IGPU] Graphics Firmware Version: 2.14.0.0
+kernel: (AppleIntelCFLGraphics) [IGPU] Graphics Firmware Version: 2.14.0.0
+kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: Apple Firmware
+kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: Apple Firmware
+</code></pre>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/691724984808243281/Screen_Shot_2020-03-23_at_1.04.57_PM.png" alt=""></p>
 
                                 
                                 </section>
@@ -701,12 +789,12 @@
 
             
                 
-                <a href="../AMD/AMD-config.html" class="navigation navigation-prev " aria-label="Previous page: AMD">
+                <a href="verbose.html" class="navigation navigation-prev " aria-label="Previous page: Fixing Resolution and Verbose">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="security.html" class="navigation navigation-next " aria-label="Next page: Security and FileVault">
+                <a href="iservices.html" class="navigation navigation-next " aria-label="Next page: Fixing iServices">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -717,7 +805,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Post-Install","level":"5.1","depth":1,"next":{"title":"Security and FileVault","level":"5.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"previous":{"title":"AMD","level":"4.1","depth":1,"path":"AMD/AMD-config.md","ref":"AMD/AMD-config.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/README.md","mtime":"2020-03-29T17:20:59.511Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-29T17:22:57.658Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"5.1.7","depth":2,"next":{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-03-29T17:20:59.511Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-29T17:22:57.658Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

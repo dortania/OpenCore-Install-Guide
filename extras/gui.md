@@ -6,7 +6,6 @@ Main things this guide will go over:
 
 * Giving OpenCore a GUI
 * Enabling the BootChime
-* Adding rEFind as a preboot to OpenCore
 
 ## Setting up OpenCore's GUI
 
@@ -29,17 +28,8 @@ Now in our config.plist, we have 2 things we need to fix:
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
 
-![]()
+![](https://cdn.discordapp.com/attachments/683011276938543134/693871107354394674/vmware_2019-10-06_19-47-27.png)
 
 ## Setting up AudioDxe and BootChime 
 
 Use ears
-
-## Setting up rEFind
-
-This section is either for the lazy for have trashy hack configs who don't want to clean up their mess or want to boot Linux without haing OpenCore crash it. To start we'll need the following:
-
-* [rEFInd](https://sourceforge.net/projects/refind/files/latest/download)
-
-
-Now delete it and just use your BIOS
