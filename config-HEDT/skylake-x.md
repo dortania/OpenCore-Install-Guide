@@ -34,7 +34,7 @@ Now with those downloaded, we can get to really get started:
 
 **Add:**
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
@@ -144,12 +144,7 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
    * Path to the `info.plist` hidden within the kext
    * ex: `Contents/Info.plist`
 
-<<<<<<< Local Changes
 **Emulate**: Needed for spoofing unsupported CPUs, thankfully both Skylake-X and Cascade Lake-X have the same CPU ID as Xeon W chips which ship in the iMac Pro. So here we'll leave it blank
-=======
-**Emulate**: Needed for spoofing unsupported CPUs, all Skylake X CPUs are natively supported
->>>>>>> External Changes
-
 
 **Block**: Blocks kexts from loading. Not relevant for us
 

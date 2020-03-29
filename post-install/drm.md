@@ -98,8 +98,8 @@ Here's another example. This time, We have an Ryzen 3700X and an RX 480. Our con
 ## Fixing iGPU performance
 
 So how do we fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:
-  * Skylake and newer CPU with a supported iGPU
-  * **And** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (*not* Z370, as it is actually 200-series)
+  * Skylake and newer CPU with a [supported iGPU](https://khronokernel-3.gitbook.io/gpu-buyers-guide/modern-gpus/intel-gpu)
+  * **And** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (***not*** Z370, as it is actually 200-series)
   * Do note that even with recent chipsets, firmware loading is not guaranteed to work. If you experience a kernel panic or lots of graphics errors after trying this, it is probably because firmware loading is not supported on your setup.
 
 So how do we apply it?

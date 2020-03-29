@@ -15,6 +15,7 @@ This section is benificial for all, regardless of hardware.
 * [Updating OpenCore, kexts and macOS](/post-install/update.md)
 * [Disabling OpenCore Logging](/troubleshooting/debug.md)
 * [Fixing iServices](/post-install/iservices.md)
+* [Fixing DRM](/post-install/drm.md)
 
 ## Intel
 
