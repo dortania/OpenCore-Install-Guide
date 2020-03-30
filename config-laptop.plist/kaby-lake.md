@@ -414,11 +414,11 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Kaby Lake example, we'll chose the MacBookPro14,1 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
 
-| SMBIOS | CPU Type | GPU Type | Display Size |
-| :--- | :--- | :--- | :--- |
-| MacBookPro14,1 | Dual Core 15w(Low End) | iGPU: Iris Plus 640 | 13" |
-| MacBookPro14,2 | Dual Core 15w(High End) | iGPU: Iris Plus 650 | 13" |
-| MacBookPro14,3 | Quad Core 45w | iGPU: HD 630 + dGPU: RP555/560 | 15" |
+| SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
+| :--- | :--- | :--- | :--- | :--- |
+| MacBookPro14,1 | Dual Core 15w(Low End) | iGPU: Iris Plus 640 | 13" | No |
+| MacBookPro14,2 | Dual Core 15w(High End) | iGPU: Iris Plus 650 | 13" | Yes |
+| MacBookPro14,3 | Quad Core 45w | iGPU: HD 630 + dGPU: RP555/560 | 15" | Yes |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

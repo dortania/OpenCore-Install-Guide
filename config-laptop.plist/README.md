@@ -1,7 +1,5 @@
 # Creating our config
 
-## For all Issues with OpenCore section, [blame Slav](https://github.com/khronokernel)
-
 Now comes the fun part, making our config.plist. Follow your respective section for configuring, the typical breakdown of how to follow:
 
 [Ivy Bridge](/config-laptop.plist/ivy-bridge.md)
@@ -26,3 +24,7 @@ Now comes the fun part, making our config.plist. Follow your respective section 
 [Coffee Lake Plus(9th Gen)](/config-laptop.plist/coffee-lake-plus.md)
 * 9000 series, 2019 era
 * Comet Lake also applies
+
+Special notes:
+
+* Ice Lake is not yet supported, while macOS does have support both MacInfoPkg and WhateverGreen need to be adapted. And we also need framebuffer dumps to get a good idea on what's needed

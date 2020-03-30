@@ -404,12 +404,12 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical breakdown is as follows:
 
-| SMBIOS | CPU Type | GPU Type | Display Size |
-| :--- | :--- | :--- | :--- |
-| MacBook9,1 | Dual Core 7w(Low End) | iGPU: HD 515 | 12" |
-| MacBookPro13,1 | Dual Core 15w(Low End) | iGPU: Iris 540 | 13" |
-| MacBookPro13,2 | Dual Core 15w(High End) | iGPU: Iris 550 | 13" |
-| MacBookPro13,3 | Quad Core 45w | iGPU: HD 530 + dGPU: RP450/455 | 15" |
+| SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
+| :--- | :--- | :--- | :--- | :--- |
+| MacBook9,1 | Dual Core 7w(Low End) | iGPU: HD 515 | 12" | No |
+| MacBookPro13,1 | Dual Core 15w(Low End) | iGPU: Iris 540 | 13" | No |
+| MacBookPro13,2 | Dual Core 15w(High End) | iGPU: Iris 550 | 13" | Yes |
+| MacBookPro13,3 | Quad Core 45w | iGPU: HD 530 + dGPU: RP450/455 | 15" | Yes |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

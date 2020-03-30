@@ -161,8 +161,8 @@ To figure out what kind of keyboard and trackpad you have, check DeviceManager i
 
 * [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
    * Recommended for SMBIOS that include a TouchID sensor to fix auth issues
+   * Found on Skylake and newer, the Platforminfo section of each guide will notify you if the SMBIOS has a Touch ID
  
-
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
