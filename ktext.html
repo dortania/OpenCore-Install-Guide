@@ -634,7 +634,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Mon Mar 30 2020 03:42:40 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Mar 30 2020 15:58:11 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gathering-files"><a name="gathering-files" class="plugin-anchor" href="#gathering-files"><i class="fa fa-link" aria-hidden="true"></i></a>Gathering files</h1>
 <ul>
@@ -841,32 +841,61 @@
 </ul>
 </li>
 </ul>
+<p><strong>Laptop Specifics</strong>:</p>
+<ul>
+<li><p><a href="https://github.com/acidanthera/VoodooPS2/releases" target="_blank">VoodooPS2</a></p>
+<ul>
+<li>Required for systems with PS2 keyboards and trackpads</li>
+<li>Trackpad users should also pair this with <a href="https://github.com/acidanthera/VoodooInput/releases" target="_blank">VoodooInput</a>(This must come before VoodooPS2 in your config.plist)</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/alexandred/VoodooI2C/releases" target="_blank">VoodooI2C</a> </p>
+<ul>
+<li>Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines</li>
+<li>To be paired with a plugin:<ul>
+<li>VoodooI2CHID - Implements the Microsoft HID device specification.</li>
+<li>VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)</li>
+<li>VoodooI2CSynaptics - Implements support for Synaptics proprietary devices.</li>
+<li>VoodooI2CFTE - Implements support for the FTE1001 touchpad.</li>
+<li>VoodooI2CUPDDEngine - Implements Touchbase driver support.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>To figure out what kind of keyboard and trackpad you have, check DeviceManager in Windows or <code>dmesg |grep input</code> in Linux</p>
+<ul>
+<li><a href="https://github.com/al3xtjames/NoTouchID/releases" target="_blank">NoTouchID</a><ul>
+<li>Recommended for SMBIOS that include a TouchID sensor to fix auth issues</li>
+</ul>
+</li>
+</ul>
 <p>Please refer to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md" target="_blank">Kexts.md</a> for a full list of supported kexts</p>
 <h2 id="ssdts"><a name="ssdts" class="plugin-anchor" href="#ssdts"><i class="fa fa-link" aria-hidden="true"></i></a>SSDTs</h2>
 <p>So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in <strong>your specific ACPI section of the config.plist</strong>, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now. </p>
 <p><a href="extras/acpi.html">Getting started with ACPI</a> has an extended section on SSDTs including compiling them on different platforms.</p>
 <p>A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):</p>
-<p><strong>Ivy Bridge:</strong></p>
+<p><strong>Desktop Ivy Bridge:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a></li>
 <li><a href="https://github.com/Piker-Alpha/ssdtPRGen.sh" target="_blank">CPU-PM</a></li>
 </ul>
-<p><strong>Haswell:</strong></p>
+<p><strong>Desktop Haswell:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a></li>
 </ul>
-<p><strong>Skylake:</strong></p>
+<p><strong>Desktop Skylake:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
 </ul>
-<p><strong>Kabylake:</strong></p>
+<p><strong>Desktop Kabylake:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
 </ul>
-<p><strong>Coffeelake:</strong></p>
+<p><strong>Desktop Coffeelake:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
@@ -888,7 +917,7 @@
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
 </ul>
-<p><strong>AMD:</strong></p>
+<p><strong>Desktop AMD:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
 </ul>
@@ -952,7 +981,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Getting started with ACPI","level":"1.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-03-30T03:42:40.373Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-30T03:44:43.480Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Getting started with ACPI","level":"1.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-03-30T15:58:11.764Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-30T16:00:17.980Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

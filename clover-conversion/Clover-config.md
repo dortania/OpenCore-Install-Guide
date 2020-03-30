@@ -384,6 +384,7 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 
 **AppleRTC**
 * This has been turned into a kext patch, this is needed anytime you have either BIOS reset or safe mode issues.
+* **Note**: This patch no longer works with macOS Catalina 10.15.4, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
 * Under `Kernel -> patch`:
 
 | Key | Type | Value |
@@ -396,6 +397,8 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 |Limit|Number|0|
 |Find|Data||
 |Replace|Data|c3|
+
+
 
 
 **FakeCPUID**:
