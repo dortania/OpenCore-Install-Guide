@@ -85,7 +85,21 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 **USB**:
 
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-  * Used for injecting Intel USB controllers, H370, B360, H310 and X79/X99/X299 systems will likely need [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All) as well. **USBInjectAll does not work on AMD CPU based systems**
+  * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
+  * Not needed on Skylake and newer 
+  * Does not work on AMD CPUs **at all**
+ 
+* [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
+   * Needed for non-native USB controllers
+   * Common chipsets needing this:
+      * H370
+      * B360
+      * H310
+      * Z390(Not needed on High Sierra and newer)
+      * X79
+      * X99
+      * X299(Not needed on High Sierra and newer)
+      * AsRock boards(On Intel motherboards specifically, basically all of their boards)
 
 **WiFi and Bluetooth**:
 
@@ -106,8 +120,8 @@ The order in `Kernel -> Add` should be:
 
 **AMD CPU Specific kexts**:
 
-* [~~NullCPUPowerManagment~~](https://github.com/corpnewt/NullCPUPowerManagement)
-   * Thanks to OpenCore 0.5.5, we have a much better solution known as `DummyPowerManagement` found under `Kernel -> Quirks`
+* [~~NullCPUPowerManagment~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+   * Thanks to OpenCore 0.5.5, we have a much better solution known as `DummyPowerManagement` found under `Kernel -> Quirks`s
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
   * USB fix for AMD FX systems, no effect on Ryzen
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)

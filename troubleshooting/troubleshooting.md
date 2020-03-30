@@ -394,11 +394,7 @@ Verify the following:
 
 ## DRM Broken
 
-With Haswell and newer iGPUs, DRM is outright broken on them with macOS Catalina. This includes iTunes Movies, Apple TV+, Amazon Prime and Netflix, the only fix is getting a supported dGPU preferably Polaris or newer that supports HEVC. 
-
-More other GPUs, try different shiki boot args:
-
-* [WhateverGreen's DRM Chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
+See [Fixing DRM](/post-install/drm.md) page
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
@@ -416,6 +412,7 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
 * Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
    * VirtualBox works fine as it doesn't use AppleHV
    * VMware 10 and older can work as well
+   * Parallels 13.1.0 and older are known to work as well
 * Docker broken
    * Docker toolbox is the only solution as it's based off of VirtualBox, many feautures are unavailble with this version
 * Xcode AppleWatch simulator is broken in Catalina

@@ -361,11 +361,11 @@ Recommended to leave enabled for best security practices
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
-For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Coffee Lake:
+For this Coffee Lake example, I chose the iMac19,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Coffee Lake:
 
-* `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
-* `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
-   * Note: While iMac19,1 and iMac19,2 are a closer match, these SMBIOS are not compatible with versions of macOS older than Mojave and not all fixes are compatible with them(ie: USBInjectAll)
+* `iMac19,1` - For Mojave and newer
+* `iMac18,3` - For High Sierra and older
+   * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOs with Web Drivers
    
 **Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
 
@@ -373,10 +373,10 @@ Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selectin
 
 ```text
   #######################################################
- #               iMac18,1 SMBIOS Info                  #
+ #               iMac19,1 SMBIOS Info                  #
 #######################################################
 
-Type:         iMac18,1
+Type:         iMac19,1
 Serial:       C02XG0FDH7JY
 Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
