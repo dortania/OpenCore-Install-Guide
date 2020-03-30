@@ -634,7 +634,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Mon Mar 30 2020 02:56:16 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Mar 30 2020 03:42:40 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="making-the-installer-in-macos"><a name="making-the-installer-in-macos" class="plugin-anchor" href="#making-the-installer-in-macos"><i class="fa fa-link" aria-hidden="true"></i></a>Making the installer in macOS</h1>
 <ul>
@@ -646,30 +646,28 @@
 <ul>
 <li>If you want to use OpenCore on a system without UEFI, please follow the <a href="../extras/legacy.html">Legacy Install</a> section first, after you can continue following the <strong>Base folder structure</strong> section</li>
 </ul>
-<p>To start we&apos;ll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you&apos;re just making a bootable OpenCore stick and not an installer. For everyone else, here&apos;s your options for obtaining macOS directly from Apple&apos;s servers:</p>
-<ul>
-<li><p>AppStore links: </p>
-<ul>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-high-sierra/id1246284741?mt=12" target="_blank">High Sierra</a>, </li>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-mojave/id1398502828?mt=12" target="_blank">Mojave</a>, </li>
-<li><a href="macappstores://itunes.apple.com/us/app/macos-catalina/id1466841314?mt=12" target="_blank">Catalina</a></li>
-</ul>
-</li>
-<li><p><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a>:</p>
-<ul>
-<li>Download the full macOS installer</li>
-<li>Run <code>BuildmacOSInstallApp</code> then drag and drop the <code>macOS Downloads</code> folder found in GibMacOS</li>
-</ul>
-</li>
-</ul>
-<p>Next we&apos;ll want to format our USB HFS+/MacOS Journaled with GUID partition map, must be 12GB for macOS Catalina.as-is recommended to name it <code>MyVolume</code> as the script below can be used as-is.</p>
+<p>To start we&apos;ll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you&apos;re just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the appstore or with GibMacOS</p>
+<h2 id="dowloading-macos"><a name="dowloading-macos" class="plugin-anchor" href="#dowloading-macos"><i class="fa fa-link" aria-hidden="true"></i></a>Dowloading macOS</h2>
+<p>Now lets grab <a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a> and run the <code>gibMacOS.command</code>:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/694020134993657896/Screen_Shot_2020-03-29_at_9.07.46_PM.png" alt=""></p>
+<p>From this, we get a nice list of macOS installers. If you need beta versions of macOS, you can select <code>C. Change Catalog</code>. For this example we&apos;ll choose 1:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/694021256974041128/Screen_Shot_2020-03-29_at_9.12.31_PM.png" alt=""></p>
+<p>This is going to take a while as we&apos;re downloading the entire 8GB+ macOS installer, so highly recommend reading the rest of the guide while you wait.</p>
+<p>Once finished, we&apos;ll next want to run the <code>BuildmacOSInstallApp.command</code>:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/694022317956923442/Screen_Shot_2020-03-29_at_9.16.29_PM.png" alt=""></p>
+<p>It&apos;s gonna ask for the macOS installer files, at the moment they&apos;re in peices in the <code>macOS Downloads</code> folder found in GibMacOS</p>
+<p>Once it&apos;s done, you can find it with the rest of the files. I recommend moving it to your applications folder to make things a bit easier with the next section.</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/694022821902549054/Screen_Shot_2020-03-29_at_9.18.19_PM.png" alt=""></p>
+<h2 id="setting-up-the-installer"><a name="setting-up-the-installer" class="plugin-anchor" href="#setting-up-the-installer"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up the installer</h2>
+<p>Now we&apos;ll be formatting the USB to prep for both the macOS installer and OpenCore. We&apos;ll want to use MacOS Extended(HFS+) with a GUID partition map. What this will do is create 2 partitions. The main <code>MyVolume</code> and a second called <code>EFI</code> which is used as a boot partition where your fimrware will check for boot files.</p>
 <p><img src="https://i.imgur.com/numOUnF.png" alt="Formatting the USB"></p>
 <p>Next run the <code>createinstallmedia</code> command provided by <a href="https://support.apple.com/en-us/HT201372" target="_blank">Apple</a>, note that the command is made for USB&apos;s formatted with the name <code>MyVolume</code>:</p>
 <pre><code class="lang-text">sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 </code></pre>
 <p>This will take some time so may want to grab a coffee or continue reading the guide(to be fair you really shouldn&apos;t be following this guide step by step without reading the whole thing first)</p>
+<p>You can also replace the <code>createinstallmedia</code> path with that of where your installer&apos;s located, same idea with the drive name.</p>
 <h2 id="setting-up-opencores-efi-environment"><a name="setting-up-opencores-efi-environment" class="plugin-anchor" href="#setting-up-opencores-efi-environment"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up OpenCore&apos;s EFI environment</h2>
-<p>Setting up OpenCore&apos;s EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is hidden from the end user, this is where our friend <a href="https://github.com/corpnewt/MountEFI" target="_blank">mountEFI</a> comes in:</p>
+<p>Setting up OpenCore&apos;s EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend <a href="https://github.com/corpnewt/MountEFI" target="_blank">mountEFI</a> comes in:</p>
 <p><img src="https://i.imgur.com/4l1oK8i.png" alt="MountEFI"></p>
 <p>You&apos;ll notice that once we open the EFI partition, it&apos;s empty. This is where the fun begins.</p>
 <p><img src="https://i.imgur.com/EDeZB3u.png" alt="Empty EFI partition"></p>
@@ -717,7 +715,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"macOS install","level":"1.2.1","depth":2,"next":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/mac-install.md","mtime":"2020-03-30T02:56:16.659Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-30T02:58:33.267Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"macOS install","level":"1.2.1","depth":2,"next":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"previous":{"title":"Creating the USB","level":"1.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/mac-install.md","mtime":"2020-03-30T03:42:40.373Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-30T03:44:43.480Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
