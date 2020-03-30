@@ -142,6 +142,27 @@ The order in `Kernel -> Add` should be:
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
    * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
 
+**Laptop Specifics**:
+
+* [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
+   * Required for systems with PS2 keyboards and trackpads
+   * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)(This must come before VoodooPS2 in your config.plist)
+
+* [VoodooI2C](https://github.com/alexandred/VoodooI2C/releases) 
+   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
+   * To be paired with a plugin:
+      * VoodooI2CHID - Implements the Microsoft HID device specification.
+      * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
+      * VoodooI2CSynaptics - Implements support for Synaptics proprietary devices.
+      * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
+      * VoodooI2CUPDDEngine - Implements Touchbase driver support.
+
+To figure out what kind of keyboard and trackpad you have, check DeviceManager in Windows or `dmesg |grep input` in Linux
+
+* [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
+   * Recommended for SMBIOS that include a TouchID sensor to fix auth issues
+ 
+
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
@@ -153,23 +174,23 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 
 A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
 
-**Ivy Bridge:**
+**Desktop Ivy Bridge:**
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
 * [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
-**Haswell:**
+**Desktop Haswell:**
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
 
-**Skylake:**
+**Desktop Skylake:**
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 
-**Kabylake:**
+**Desktop Kabylake:**
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 
-**Coffeelake:**
+**Desktop Coffeelake:**
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 * [SSDT AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
@@ -187,7 +208,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 
-**AMD:**
+**Desktop AMD:**
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 
 # Now head to your specific CPU section to setup your config.plist

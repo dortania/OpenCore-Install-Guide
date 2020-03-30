@@ -384,6 +384,8 @@ Issue with AppleRTC, quite a simple fix:
 |Find|Data||
 |Replace|Data|c3|
 
+**Note**: This patch no longer works with macOS Catalina 10.15.4, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
+
 ## macOS GPU acceleration missing on AMD X570
 
 Verify the following:
