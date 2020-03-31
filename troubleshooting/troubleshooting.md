@@ -50,6 +50,10 @@ Turn off file vault in your config.plist under `Misc -> Security -> Vault` by se
 
 If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
+## Stuck on `OC: Invalid Vault mode`
+
+This is likely a spelling mistake, options in OpenCore are case-sensitve so make sure you check closely, **O**ptional is the correct way to enter it under Misc -> Security
+
 ## Stuck on EndRandomSeed
 
 Couple problems:
