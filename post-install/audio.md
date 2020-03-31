@@ -81,7 +81,7 @@ So in this example, `alcid=11` would become `alc-layout-id | Data | <0B000000>`
 
 **No Mic on AMD**:
 
-* This is a common issue with when running AppleALC with AMD, specifcally no patches have been made to support Mic unput. At the moment the "best" solution is to either buy a USB DAC/Mic or go the VoodooHDA.kext method. Problem with VoodooHDA is that it's been known to be unstable and have worse audio quality than AppleALC
+* This is a common issue with when running AppleALC with AMD, specifcally no patches have been made to support Mic input. At the moment the "best" solution is to either buy a USB DAC/Mic or go the VoodooHDA.kext method. Problem with VoodooHDA is that it's been known to be unstable and have worse audio quality than AppleALC
 
 **Same layout ID from Clover doesn't work on OpenCore**
 
