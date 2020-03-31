@@ -455,6 +455,7 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 * Incorrect resolution with OpenCore
 * No temperature/fan sensor output
 * Can't find Windows/Bootcamp drive in picker
+* iASL warning, # unresolved
 
 ## Can't run `acpidump.efi`
 
@@ -529,3 +530,17 @@ Now to get onto troubleshooting:
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
 * Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
+
+## iASL warning, # unresolved
+
+If you try to decompile your DSDT and get an error similar to this:
+
+```text
+iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
+```
+
+This happens when one ACPI table requires the rest for proper referncing, it does not accect the creation of DSDTs as we're only using it for creating a select few SSDTs. For those who are worried, you can run the following:
+
+```text
+iasl * [insert all ACPI files here]
+```
