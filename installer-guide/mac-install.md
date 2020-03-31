@@ -27,7 +27,7 @@ Once finished, we'll next want to run the `BuildmacOSInstallApp.command`:
 
 ![](https://cdn.discordapp.com/attachments/683011276938543134/694022317956923442/Screen_Shot_2020-03-29_at_9.16.29_PM.png)
 
-It's gonna ask for the macOS installer files, at the moment they're in peices in the `macOS Downloads` folder found in GibMacOS
+It's gonna ask for the macOS installer files, at the moment they're in pieces in the `macOS Downloads` folder found in GibMacOS
 
 Once it's done, you can find it with the rest of the files. I recommend moving it to your applications folder to make things a bit easier with the next section.
 
