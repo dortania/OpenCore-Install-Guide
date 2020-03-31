@@ -634,7 +634,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Tue Mar 31 2020 21:55:39 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue Mar 31 2020 23:33:48 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -1090,6 +1090,7 @@
 <li>Incorrect resolution with OpenCore</li>
 <li>No temperature/fan sensor output</li>
 <li>Can&apos;t find Windows/Bootcamp drive in picker</li>
+<li>iASL warning, # unresolved</li>
 </ul>
 <h2 id="cant-run-acpidumpefi"><a name="cant-run-acpidumpefi" class="plugin-anchor" href="#cant-run-acpidumpefi"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t run <code>acpidump.efi</code></h2>
 <p>Call upon OpenCore shell:</p>
@@ -1157,6 +1158,13 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li>Enable <code>Misc -&gt; Boot -&gt; Hideself</code> is enabled when Windows bootloader is loacated on the same drive</li>
 <li>Enable <code>Platforminfo -&gt; Generic -&gt; AdviseWindows -&gt; True</code> if the EFI partition isn&apos;t the first on the partition table</li>
 </ul>
+<h2 id="iasl-warning--unresolved"><a name="iasl-warning--unresolved" class="plugin-anchor" href="#iasl-warning--unresolved"><i class="fa fa-link" aria-hidden="true"></i></a>iASL warning, # unresolved</h2>
+<p>If you try to decompile your DSDT and get an error similar to this:</p>
+<pre><code class="lang-text">iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
+</code></pre>
+<p>This happens when one ACPI table requires the rest for proper referncing, it does not accect the creation of DSDTs as we&apos;re only using it for creating a select few SSDTs. For those who are worried, you can run the following:</p>
+<pre><code class="lang-text">iasl * [insert all ACPI files here]
+</code></pre>
 
                                 
                                 </section>
@@ -1200,7 +1208,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-31T21:55:39.695Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-31T21:57:54.656Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-03-31T23:33:48.300Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-31T23:35:49.076Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
