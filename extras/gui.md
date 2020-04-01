@@ -1,5 +1,7 @@
 # OpenCore beauty treatment
 
+* Supported version: 0.5.7
+
 Main thing this guide will go over:
 
 * Giving OpenCore a GUI
