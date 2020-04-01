@@ -43,7 +43,7 @@ If you have issues with installation, see [Installing rEFInd Manually Using Linu
 
 Now that rEFInd's installed, we'll want to grab the `refind.conf-sample` and rename it to `refind.conf` if you haven't already. Next open it up in a text editor and scroll to the bottom of the file, you'll find some example bootloader setups. For us we care about adding OpenCore to the picker, note that BOOTx64.efi **must** be booted first before OpenCore.
 
-Example of 
+Example of a refind.conf supporting OpenCore, Arch and Windows:
 
 
 ```text
