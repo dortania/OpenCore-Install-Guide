@@ -90,3 +90,6 @@ So to start, we'll need a couple things:
       * ex: (70 * VolumeAmplifier)/100 = 100  -> (100 * 100) / 70 = VolumeAmplifier = 142.9(we'll round it to 143 for simplicity)
 
 
+Once done, you should get something like this:
+
+![](https://cdn.discordapp.com/attachments/683011276938543134/694692811643027517/Screen_Shot_2020-03-31_at_5.40.14_PM.png)
