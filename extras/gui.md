@@ -24,7 +24,7 @@ Once you have both of these, we'll next want to add it to our EFI partition:
 Now in our config.plist, we have 2 things we need to fix:
 
 * `Misc -> PickerMode -> External`
-* `UEFI -> Drivers` and add OpenCanopy
+* `UEFI -> Drivers` and add OpenCanopy.efi
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
 
@@ -87,7 +87,7 @@ So to start, we'll need a couple things:
    * The Volume amplification, value will differ depending on your codec
    * Formula is as follows:
       * (SystemAudioVolume * VolumeAmplifier)/100 = Raw Volume(but cannot exceed 100)
-      * ex: (70 * VolumeAmplifier)/100 = 100  -> (100 * 100) / 70 = VolumeAmplifier = 142.9(we'll round it to 143 for simplicity)
+      * ex: (`70` * VolumeAmplifier)/`100` = `100`  -> (`100` * `100`) / `70` = VolumeAmplifier = `142.9`(we'll round it to `143` for simplicity)
 
 
 Once done, you should get something like this:
