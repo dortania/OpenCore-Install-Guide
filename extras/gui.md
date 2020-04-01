@@ -93,3 +93,11 @@ So to start, we'll need a couple things:
 Once done, you should get something like this:
 
 ![](https://cdn.discordapp.com/attachments/683011276938543134/694692811643027517/Screen_Shot_2020-03-31_at_5.40.14_PM.png)
+
+
+**Note for visually impaired**:
+
+* OpenCore hasn't forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault voiceover with these 2 settings:
+   * `Misc -> PickerAudioAssist -> True` to enable picker audio
+   * `UEFI -> Protocols -> AppleAudio -> True` to enable FileVault voice over
+      * See[Security and FileVault](/post-install/security.md) on how to setup the rest for proper FileVault support
