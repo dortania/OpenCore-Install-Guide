@@ -13,6 +13,7 @@ And depending on your preferred OS, you've got a couple options for setting up r
 
 * [macOS Setup](/extras/refind.md#macos-setup)
 * [Linux Setup](/extras/refind.md#linux-setup)
+* [Windows Setup](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 ## macOS Setup
 
@@ -20,7 +21,7 @@ And depending on your preferred OS, you've got a couple options for setting up r
 * Move OpenCore's `BOOTx64.efi` to EFI/OC/
 * Rename `refind_x64.efi` to `BOOTx64.efi`
 * Move rEFInd's `BOOTx64.efi`to EFI/BOOT
-* Add the folders `drivers_x64`, `tools` and `icons` to EFI/OC
+* Add the folders `drivers_x64`, `tools` and `icons` to EFI/BOOT
 * Grab refind.conf-sample and add it to EFI/OC
 * Rename `refind.conf-sample`to `refind.conf`
 
@@ -66,8 +67,4 @@ scanfor manual,external
 For those who want the OpenCore icon, you can grab the original files from OpenCorePkg repo: [OpenCore logo](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/Logos)
 
 * Note that rEFInd expects a 128x128 PNG for icons
-
-Sources:
-
-* [rEFInd](https://www.rodsbooks.com/refind/index.html)
 
