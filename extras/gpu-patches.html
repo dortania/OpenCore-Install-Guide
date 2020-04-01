@@ -634,7 +634,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 01 2020 00:15:03 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed Apr 01 2020 01:20:32 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gpu-patching"><a name="gpu-patching" class="plugin-anchor" href="#gpu-patching"><i class="fa fa-link" aria-hidden="true"></i></a>GPU Patching</h1>
 <ul>
@@ -713,21 +713,27 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 </ul>
 <h3 id="mapping-video-ports"><a name="mapping-video-ports" class="plugin-anchor" href="#mapping-video-ports"><i class="fa fa-link" aria-hidden="true"></i></a>Mapping video ports</h3>
 <ol>
-<li>Plug display into HDMI port</li>
-<li>Set Port 1 to the HDMI connector type:</li>
+<li><p>Plug display into HDMI port</p>
+</li>
+<li><p>Set Port 1 to the HDMI connector type:</p>
+<ul>
 <li>01xx0900 <strong>00080000</strong> C7030000</li>
+</ul>
+</li>
 <li><p>Disable ports 2 and 3 with busid=00:</p>
-</li>
-<li><p>02<strong>00</strong>0A00 00040000 C7030000</p>
-</li>
-<li><p>03<strong>00</strong>0800 00040000 C7030000</p>
+<ul>
+<li>02<strong>00</strong>0A00 00040000 C7030000</li>
+<li>03<strong>00</strong>0800 00040000 C7030000</li>
+</ul>
 </li>
 <li><p>Walk through busids for Port 1 if the previous didn&apos;t work(yup you gotta do a shit ton of reboots). The maximum busid on most platforms is 0x06</p>
-</li>
+<ul>
 <li>01<strong>01</strong>0900 00080000 C7030000</li>
 <li>01<strong>02</strong>0900 00080000 C7030000</li>
 <li>01<strong>03</strong>0900 00080000 C7030000</li>
 <li>etc</li>
+</ul>
+</li>
 </ol>
 <p>If you still get no output, set port 1&apos;s busid to 00 and start going through busids for port 2 and so on</p>
 <ul>
@@ -792,7 +798,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"iGPU Patching","level":"7.2","depth":1,"next":{"title":"Fixing KASLR slide values","level":"7.3","depth":1,"path":"extras/kalsr-fix.md","ref":"extras/kalsr-fix.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-04-01T00:15:03.156Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-01T00:17:06.430Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"iGPU Patching","level":"7.2","depth":1,"next":{"title":"Fixing KASLR slide values","level":"7.3","depth":1,"path":"extras/kalsr-fix.md","ref":"extras/kalsr-fix.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-04-01T01:20:32.981Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-01T01:22:37.522Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
