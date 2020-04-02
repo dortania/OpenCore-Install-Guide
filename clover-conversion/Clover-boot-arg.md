@@ -9,12 +9,14 @@ This list is based of memory and an annoyed self with seeing these flags keep po
 
 ## macOS flags
 
-**dart=0**: Used for disabling VT-D support
+**dart=0**: 
+* Used for disabling VT-D support
 * With Clover, when this flag was present it would also drop your DMAR table from ACPI 
 * This flag also requires SIP to be disabled in macOS 10.15 catalina, so with OpenCore this flag is no longer recommended and instead replaced with `Kernel -> Quirks -> DisableIoMapper`
 
 **kext-dev-mode=1**:
-* Used for allowing unsigned kexts to be loaded, this also required `CSR_ALLOW_UNSIGNED_KEXTS` bit to be flipped in `csr-active-config` NVRAM variable
+* Used for allowing unsigned kexts to be loaded, flag only present in Yosemite
+* `CSR_ALLOW_UNSIGNED_KEXTS` bit to be flipped in `csr-active-config` NVRAM variable for newer releases
 * This is not needed on OpenCore due to the kernel injection method used: Attatching to the prelinked kernel
 
 
@@ -35,7 +37,7 @@ For some reason people kept using these flags into Clover which had no effect, a
 
 **GraphicsEnabler=Yes/No**
 
-* No clue tbh, InjectAMD/Nvidia was the Clover equivlant but no feature parity in OpenCore besides running [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
+* InjectAMD/Nvidia was the Clover equivlant but no feature parity in OpenCore besides running [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
 
 **IGPEnabler=Yes/No**
 

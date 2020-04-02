@@ -5,7 +5,7 @@
  */
 
 
-DefinitionBlock ("", "SSDT", 2, "ACDT", "SsdtEC", 0x00001000)
+DefinitionBlock ("", "SSDT", 2, "Slav", "SsdtEC", 0x00001000)
 {
     External (_SB_.PCI0.LPCB, DeviceObj)
     External (_SB_.PCI0.LPCB.H_EC, DeviceObj)

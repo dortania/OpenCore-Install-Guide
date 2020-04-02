@@ -6,7 +6,7 @@
  * Source for SSDT: Rehabman
  */
 
-DefinitionBlock ("", "SSDT", 2, "hack", "ZPTS", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "Slav", "ZPTS", 0x00000000)
 {
     External (_SB_.PCI0.XHC_.PMEE, FieldUnitObj)
     External (ZPTS, MethodObj)    // 1 Arguments
