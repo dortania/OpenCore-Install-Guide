@@ -1,4 +1,4 @@
-DefinitionBlock ("", "SSDT", 2, "Apple", "Radeon", 0x00001000)
+DefinitionBlock ("", "SSDT", 2, "Slav", "Radeon", 0x00001000)
 {
     External (_SB_.PCI0.GFX0.PEGP, DeviceObj)    // (from opcode)
 

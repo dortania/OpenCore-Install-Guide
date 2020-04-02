@@ -1,5 +1,6 @@
 # Setting up rEFInd
 
+* Supported version: 0.5.6
 
 This section is for the lazy who don't want to clean up their EFI to fix other OS booting.
 

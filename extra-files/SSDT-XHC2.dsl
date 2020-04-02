@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20190509 (538510601)
  */
-DefinitionBlock ("", "SSDT", 2, "hack", "_XHCX", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "Slav", "_XHCX", 0x00000000)
 {
     External (_SB_.PCI0.GP13, DeviceObj) // Partial path to controller
     External (_SB_.PCI0.GP13.XHC0, DeviceObj) // Full path to controller
