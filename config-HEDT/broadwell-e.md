@@ -101,20 +101,23 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
    * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
-* **ProtectCsmRegion**: NO
-   * Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
+* **ProtectMemoryRegion**: NO
+   * Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares
 * **ProtectSecureBoot**: NO
    * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
-   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and certain Coffeelake systems
+   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffeelake systems
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+* **RebuildAppleMemoryMap**: YES
+   * Generates Memory Map compatible with macOS, recommeneded for ATPIO IV firmwares and HEDT platforms
 * **SetupVirtualMap**: YES
    * Fixes SetVirtualAddresses calls to virtual addresses
-* **ShrinkMemoryMap**: NO
-   * Needed for systems with large memory maps that don't fit, don't use unless necessary
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
+* **SyncRuntimePermissions**: NO
+   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+
 
 ## DeviceProperties
 

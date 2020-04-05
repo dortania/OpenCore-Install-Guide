@@ -62,7 +62,7 @@ The real fix to this is quite simple actually, the process is both the same for 
        * Kinda need that slide to do any real work.
     * SetupVirtualMap: `YES`
        * Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.
-    * ShrinkMemoryMap: `YES`
+    * RebuildAppleMemoryMap: `YES`
        * Fixes issues with very large memory maps that don't fit, very useful for X99 and X299 platforms and sometimes for Z390.
 
 ## Prepping the BIOS
