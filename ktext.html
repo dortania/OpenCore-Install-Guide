@@ -634,7 +634,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Thu Apr 02 2020 23:52:45 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 05 2020 00:40:40 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gathering-files"><a name="gathering-files" class="plugin-anchor" href="#gathering-files"><i class="fa fa-link" aria-hidden="true"></i></a>Gathering files</h1>
 <ul>
@@ -653,7 +653,7 @@
 <li>Needed for seeing APFS volumes(ie. macOS)</li>
 </ul>
 </li>
-<li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">VboxHfs.efi</a> <strong>or</strong> <a href="https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi" target="_blank">HfsPlus.efi</a><ul>
+<li><a href="https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi" target="_blank">HfsPlus.efi</a> <strong>or</strong> <a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">VboxHfs.efi</a><ul>
 <li>Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). <strong>Do not mix HFS drivers</strong></li>
 </ul>
 </li>
@@ -677,7 +677,7 @@
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi" target="_blank">HfsPlusLegacy.efi</a><ul>
-<li>Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on SandyBridge and older</li>
+<li>Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older</li>
 </ul>
 </li>
 </ul>
@@ -722,6 +722,7 @@
 <ul>
 <li><a href="https://github.com/acidanthera/WhateverGreen/releases" target="_blank">WhateverGreen</a><ul>
 <li>Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.</li>
+<li>Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see * <a href="extras/acpi.html">Getting started with ACPI</a> for more info</li>
 </ul>
 </li>
 </ul>
@@ -764,6 +765,7 @@
 <li><p><a href="https://github.com/RehabMan/OS-X-USB-Inject-All" target="_blank">XHCI-unsupported</a></p>
 <ul>
 <li>Needed for non-native USB controllers</li>
+<li>AMD CPU based systems don&apos;t need this</li>
 <li>Common chipsets needing this:<ul>
 <li>H370</li>
 <li>B360</li>
@@ -785,7 +787,7 @@
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/BrcmPatchRAM/releases" target="_blank">BrcmPatchRAM</a><ul>
-<li>Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple Airport cards.</li>
+<li>Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.</li>
 <li>To be paired with BrcmFirmwareData.kext<ul>
 <li>BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)</li>
 <li>BrcmPatchRAM2 for 10.11-10.14</li>
@@ -804,11 +806,11 @@
 <p><strong>AMD CPU Specific kexts</strong>:</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><del>NullCPUPowerManagment</del></a><ul>
-<li>Thanks to OpenCore 0.5.5, we have a much better solution known as <code>DummyPowerManagement</code> found under <code>Kernel -&gt; Quirks</code>s</li>
+<li>We have a much better solution known as <code>DummyPowerManagement</code> found under <code>Kernel -&gt; Quirks</code></li>
 </ul>
 </li>
 <li><a href="https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip" target="_blank">XLNCUSBFIX</a><ul>
-<li>USB fix for AMD FX systems, no effect on Ryzen</li>
+<li>USB fix for AMD FX systems, not recommended for Ryzen</li>
 </ul>
 </li>
 <li><a href="https://sourceforge.net/projects/voodoohda/" target="_blank">VoodooHDA</a><ul>
@@ -899,7 +901,7 @@
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT AWAC</a></li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl" target="_blank">SSDT-PMC</a></li>
 </ul>
 <p><strong>Haswell-E:</strong></p>
@@ -916,28 +918,13 @@
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a></li>
 </ul>
 <p><strong>Desktop AMD:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
 </ul>
-<h1 id="now-head-to-your-specific-cpu-section-to-setup-your-configplist"><a name="now-head-to-your-specific-cpu-section-to-setup-your-configplist" class="plugin-anchor" href="#now-head-to-your-specific-cpu-section-to-setup-your-configplist"><i class="fa fa-link" aria-hidden="true"></i></a>Now head to your specific CPU section to setup your config.plist</h1>
-<p><strong>Intel Config.plist</strong></p>
-<ul>
-<li><a href="config.plist/ivy-bridge.html">Ivy Bridge</a></li>
-<li><a href="config.plist/haswell.html">Haswell</a></li>
-<li><a href="config.plist/skylake.html">Skylake</a></li>
-<li><a href="config.plist/kaby-lake.html">Kaby Lake</a></li>
-<li><a href="config.plist/coffee-lake.html">Coffee Lake</a></li>
-</ul>
-<p><strong>Intel HEDT Config.plist</strong></p>
-<ul>
-<li><a href="config-HEDT/skylake-x.html">Skylake-X</a></li>
-</ul>
-<p><strong>AMD Config.plist</strong></p>
-<ul>
-<li><a href="AMD/AMD-config.html">AMD</a></li>
-</ul>
+<h1 id="now-head-getting-started-with-acpi"><a name="now-head-getting-started-with-acpi" class="plugin-anchor" href="#now-head-getting-started-with-acpi"><i class="fa fa-link" aria-hidden="true"></i></a>Now head <a href="https://khronokernel.github.io/Getting-Started-With-ACPI/" target="_blank">Getting Started With ACPI</a></h1>
 
                                 
                                 </section>
@@ -981,7 +968,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Getting started with ACPI","level":"1.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-04-02T23:52:45.388Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-02T23:55:03.476Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Getting started with ACPI","level":"1.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-04-05T00:40:40.235Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-05T00:42:52.453Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
