@@ -82,7 +82,7 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 
 **Quirks**:
 
-Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `SetupVirtualMap`
+Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `SetupVirtualMap`, `RebuildAppleMemoryMap` and `SyncRuntimePermissions` 
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -96,8 +96,8 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
    * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES
    * Allows for slide values to be used in Safemode
-* **EnableWriteUnprotector**: NO
-   * Removes write protection from CR0 register during their execution, should not be used with the combination of `RebuildAppleMemoryMap` and `SyncRuntimePermissions` unless you recieve early kernel panics
+* **EnableWriteUnprotector**: YES
+   * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
 * **ProtectMemoryRegion**: NO

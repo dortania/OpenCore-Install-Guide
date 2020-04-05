@@ -96,8 +96,8 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
    * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES
    * Allows for slide values to be used in Safemode
-* **EnableWriteUnprotector**: NO
-   * Removes write protection from CR0 register during their execution, should not be used with the combination of `RebuildAppleMemoryMap` and `SyncRuntimePermissions` unless you recieve early kernel panics
+* **EnableWriteUnprotector**: YES
+   * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
 * **ProtectMemoryRegion**: NO
