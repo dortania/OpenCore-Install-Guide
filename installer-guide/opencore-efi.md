@@ -45,7 +45,7 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
    * CleanNvram.efi
       * We'll be using OpenCore's built-in function
    * GopStop.efi
-      * Used for [testing GOP](https://github.com/acidanthera/OcSupportPkg/tree/master/Application/GopStop)
+      * Used for [testing GOP](https://github.com/acidanthera/OpenCorePkg/blob/master/Application/GopStop/README.md)
    * HdaCodecDump.efi
       * Used for finding info for AudioDxe setup, this is not covered in this guide so not needed
    * VerifyMsrE2.efi
