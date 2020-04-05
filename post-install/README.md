@@ -22,6 +22,7 @@ This section is benificial for all, regardless of hardware.
 Used for Intel's consumer line
 
 * [Fixing Intel USB](https://usb-map.gitbook.io/project/)
+* [Fixing CFG Lock](extras/msr-lock.md)
 
 
 For sandy and Ivy Bridge:
@@ -33,6 +34,9 @@ Used for Intel's High End and Server line
 
 * [Fixing Intel USB](https://usb-map.gitbook.io/project/)
 * [Emulating NVRAM](/post-install/nvram.md)
+
+For Sandy and Ivy Bridge E:
+* [Fixing Power Management](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
 ## AMD
 
