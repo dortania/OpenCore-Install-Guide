@@ -18,10 +18,10 @@ Once that's done, we'll need a couple things:
 
 Once you have both of these, we'll next want to add it to our EFI partition:
 
-* Add the Resources folder to EFI
+* Add the Resources folder to EFI/OC
 * Add OpenCanopy.efi to EFI/Drivers
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/696734012252880926/Screen_Shot_2020-04-06_at_8.51.39_AM.png)
+![](https://cdn.discordapp.com/attachments/683011276938543134/693888491603361822/Screen_Shot_2020-03-29_at_12.24.22_PM.png)
 
 Now in our config.plist, we have 2 things we need to fix:
 
