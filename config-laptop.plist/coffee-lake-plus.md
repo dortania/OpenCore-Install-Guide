@@ -295,7 +295,7 @@ These values are based of those calculated in [OpenCore debugging](/troubleshoot
 
 **Security**: Security is pretty self-explanatory, **do not skip**
 
-We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `RequireVault` and `ScanPolicy`
+We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 
 * **AllowNvramReset**: YES
    * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
