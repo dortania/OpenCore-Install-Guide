@@ -1,6 +1,6 @@
 # Introduction
-* Last edited: March 15, 2020
-* Supported version: 0.5.6
+
+* Supported version: 0.5.7
 * [GitHub Pages link with Darkmode support](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/)
 
 ### About
@@ -11,7 +11,7 @@ Please remember that OpenCore is still new and currently in beta. While quite st
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
-**This guide supports 0.5.6**, newer versions will require you to read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf). Guide will be updated soon after each [OpenCore release](https://github.com/acidanthera/OpenCorePkg/releases)
+**This guide supports 0.5.7**, newer versions will require you to read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf). Guide will be updated soon after each [OpenCore release](https://github.com/acidanthera/OpenCorePkg/releases)
 
 ### Advantages of OpenCore
 
@@ -44,8 +44,8 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Thunderbolt
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock\(MSR 0xE2 write protection\)
-  * If this can't be turned off in the BIOS\(or even found\) please consider patching it out. See [Fixing CFG Lock](extras/msr-lock.md) for more info.
+* CFG Lock(MSR 0xE2 write protection)
+  * If this can't be turned off in the BIOS(or even found) please consider patching it out. See [Fixing CFG Lock](extras/msr-lock.md) for more info.
     * AMD CPU users don't need to worry about.
 
 **Enable:**

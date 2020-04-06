@@ -1,7 +1,6 @@
 # Fixing KASLR slide values
 
-* Last edited: March 15, 2020
-* Supported version: 0.5.6
+* Supported version: 0.5.7
 
 ## Fixing KASLR slide values
 
@@ -42,27 +41,35 @@ Fun Fact: It takes around 31 ms to find an area to operate in, manually setting 
 
 The real fix to this is quite simple actually, the process is both the same for Clover and OpenCore users. What you'll need:
 
-* Clover users:
-  * [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg/releases)(Don't mix Aptio fixes together or use OsxAptioFixDrvX, only AptioMemoryFix is supported in this guide)
+* **Clover users**:
   * Clover Shell(most users already have this included, usually called shell64.efi or some variation)
-* OpenCore users:
-  * [FwRuntimeServices](https://github.com/acidanthera/OpenCorePkg/releases)
-  * [OpenCoreShell](https://github.com/acidanthera/OpenCoreShell/releases)(Don't forget to enable this under `Root->Misc->Tools`)
-  * Config.plist settings:
-    * AvoidRuntimeDefrag: `YES`
-       * Fixes UEFI runtime services like date, time, NVRAM, etc
-    * DevirtualiseMmio: `YES`
-       * Reduces stolen memory footprint so we're given more options for slide values, **do not use on AMD CPU based systems**
-    * EnableSafeModeSlide: `YES`
-       * Allows us to use slide in safe mode, just so if you have other issues troubleshooting won't mess it up.
-    * EnableWriteUnprotector: `YES`
-       * Allows us to write to certain areas that the firmware locks, specifically the CR0 register.
-    * ProvideCustomSlide: `YES`
-       * Fixes slide values to *hopefully* use valid regions
-    * SetupVirtualMap: `YES`
-       * Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.
-    * ShrinkMemoryMap: `YES`
-       * Fixes issues with very large memory maps that don't fit, very useful for X99 and X299 platforms and sometimes for Z390.
+     * This will be found under `EFI/CLOVER/tools`
+     * If you're missing this, you can grab it from the [CLOVER.zip](https://github.com/CloverHackyColor/CloverBootloader/releases)
+  * [OcQuirks](https://github.com/ReddestDream/OcQuirks/releases)(Don't mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide)
+      * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
+  * OpenRuntime.efi(Bundled with OcQuirks)
+     * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
+  * OcQuirks.plist(Bundled with OcQuirks)
+     * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
+
+* **OpenCore users**:
+  * [OpenRuntime](https://github.com/acidanthera/OpenCorePkg/releases)
+  * [OpenShell](https://github.com/acidanthera/OpenCorePkg/releases)(Don't forget to enable this under `Root -> Misc -> Tools`)
+
+And we'll also need to configure our config.plist -> Booter(for OpenCore) or OcQuirks.plist(for Clover):
+
+* **AvoidRuntimeDefrag**: YES
+   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+* **DevirtualiseMmio**: YES
+   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390.
+* **EnableSafeModeSlide**: YES
+   * Allows for slide values to be used in Safemode
+* **ProtectUefiServices**: NO
+   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, 300 series and newer systems like Ice Lake and Comet Lake
+* **ProvideCustomSlide**: YES
+   * This makes sure the kernel will only choose good regions and avoid those that may result inboot failures. It's still random but omits those bad reions in its randomization
+* **RebuildAppleMemoryMap**: YES
+   * Generates Memory Map compatible with macOS, this makes sure our memory map will fit to what the kernel expects
 
 ## Prepping the BIOS
 
@@ -82,6 +89,10 @@ The reason we need to reset the memory map is we want it to be more deterministi
   * `Thunderbolt`: Many hacks don't have thunderbolt working, boards that don't have thunderbolt but have this option just waste more space.
   * `LED lighting`: Sorry mate, time to go.
   * `Legacy USB`: More Legacy Crap.
+
+## Test boot
+
+With our adjusted EFI, config.plist and BIOS settings, it's time we try out our new setup. If you still have issues, well it looks like we'll need to do a deep dive and calculate our slide value
 
 ## Finding the Slide value
 
@@ -121,7 +132,7 @@ Whenever the returned value is **not** the original(`0x6B500000` vs `0x6B626000`
 
 > But wait for just a second, this is higher than 256!
 
-That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be `0000000000100000`)
+That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be `0000000000100000`).
 
 And just to make it a bit clearer on the formula:
 
@@ -150,7 +161,7 @@ Directory of fs0:\
 fs0:\> memmap > memmap.txt
 ```
 
-This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord and type `$slide [insert a link to memmap.txt]`. Do note that this doesn't always work so so may still need to do this manually.
+This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type `$slide [insert a link to memmap.txt]`
 
 ## Using DevirtualiseMmio
 

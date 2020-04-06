@@ -1,7 +1,6 @@
 # Emulated NVRAM
 
-* Last edited: March 15, 2020
-* Supported version: 0.5.6
+* Supported version: 0.5.7
 
 So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are X99 and some X299 series chipsets:
 
@@ -58,7 +57,7 @@ Within your config.plist:
 
 * **Booter**: 
   * `DisableVariableWrite`: set to `YES`
-* **Misc -&gt; Security**:
+* **Misc -> Security**:
   * `ExposeSensitiveData`: set to `0x3`
 * **NVRAM**:
   * `LegacyEnable`: set to `YES`
@@ -68,7 +67,7 @@ Within your config.plist:
 
 And within your EFI:
 
-* `FwRuntimeServices.efi` driver(this is needed for proper sleep, shutdown and other services to work correctly
+* `OpenRuntime.efi` driver(this is needed for proper sleep, shutdown and other services to work correctly
 
 Now grab the 'LogoutHook.command' and place it somewhere safe (e.g. within your user directory, as shown below):
 

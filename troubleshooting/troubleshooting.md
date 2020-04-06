@@ -1,7 +1,6 @@
 # General Troubleshooting
 
-* Last edited: March 15, 2020
-* Supported version: 0.5.6
+* Supported version: 0.5.7
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
 
@@ -77,7 +76,7 @@ Another other possible problem is IRQ conflicts, Clover has plenty of different 
 Main things to check:
 
 * ScanPolicy set to `0` to show all drives
-* Have the proper firmware drivers such as ApfsDriverLoader and HFSPlus(or VBoxHfs)
+* Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus(or VBoxHfs)
 * Enable `AvoidHighAlloc` if you're running a network recovery install
 
 ## Black screen after picker
@@ -112,7 +111,7 @@ Same fix as `OCB: OcScanForBootEntries failure - Not Found`, OpenCore is unable 
 
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
 
-This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -&gt; Booter -&gt; Quirks is correct and verify your BIOS settings:
+This is due to either incorrect BIOS settings and/or incorrect Booter values. Make sure config.plist -> Booter -> Quirks is correct and verify your BIOS settings:
 
 * Above4GDecoding is Enabled
 * CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
@@ -123,7 +122,7 @@ This is due to either using a Clover config with OpenCore or using a configurato
 
 ## Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 
-Verify that your EFI/OC/Drivers matches up with your config.plist -&gt; UEFi -&gt; Drivers
+Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Drivers
 
 ## Stuck on `Buffer Too Small`
 
@@ -164,14 +163,14 @@ Missing or incorrect `Executable path`
 * AMD kernel patches aren't working(AMD Users only):
     * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
-    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
-    * If the above doesn't work, reverse: disable `KeySupport`, then add [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
+    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
+    * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
     
 ## Can't select anything in the picker
     
 * Incompatible keyboard driver:
-     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -&gt; UEFI -&gt; Drivers
-     * If the above doesn't work, reverse: disable `KeySupport`, then add [AppleUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -&gt; UEFI -&gt; Drivers
+     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
+     * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
 
 ## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 
@@ -355,7 +354,6 @@ For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. 
 * DRM Broken
 * "Memory Modules Misconfigured" on MacPro7,1
 * Apps crashing on AMD
-* No temperature/fan sensor output
 
 ## Broken iMessage and Siri 
 
@@ -455,6 +453,8 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 * Incorrect resolution with OpenCore
 * No temperature/fan sensor output
 * Can't find Windows/Bootcamp drive in picker
+* Booting Windows results in Bluescreen or Linux crashes
+* Booting Windows error: `OCB: StartImage failed - Already started`
 * iASL warning, # unresolved
 
 ## Can't run `acpidump.efi`
@@ -530,6 +530,19 @@ Now to get onto troubleshooting:
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
 * Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
+
+
+## Booting Windows results in Bluescreen or Linux crashes
+
+This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your fimrware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
+
+Common Windows error code:
+
+* `0xc000000d`
+
+## Booting Windows error: `OCB: StartImage failed - Already started`
+
+This is due to OpenCore getting confused when trying to boot boot Windows and acidentally thinking it's booting OpenCore. This can be avoided by either adding a custom drive path under entires and have Windows with it's bootloader renamed *or* move Windows to it's own drive
 
 ## iASL warning, # unresolved
 

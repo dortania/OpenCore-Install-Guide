@@ -24,7 +24,8 @@
 
 ## AMD Config.plist
 
-* [AMD](/AMD/AMD-config.md)
+* [Bulldozer/Jaguar](AMD/fx.md)
+* [Zen](AMD/zen.md)
 
 ## Post Install
 
