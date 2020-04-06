@@ -39,6 +39,7 @@
    * [Fixing DRM](/post-install/drm.md)
    * [Fixing iServices](/post-install/iservices.md)
    * [Emulated NVRAM](/post-install/nvram.md)
+   * [Add GUI and Bootchime](gui.md)
 
 ## Troubleshooting
 
@@ -48,6 +49,7 @@
 ## Extras
 
 * [Legacy Install](/extras/legacy.md)
+* [Add GUI and Bootchime](/extras/gui.md)
 * [iGPU Patching](/extras/gpu-patches.md)
 * [Fixing KASLR slide values](/extras/kalsr-fix.md)
 * [Disabling unsupported GPUs](/extras/spoof.md)
