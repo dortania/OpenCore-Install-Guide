@@ -7,53 +7,53 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 **Supported ones:**
 
 * ApfsDriverLoader.efi
-* OpenRuntime.efi
-* HfsPlus.efi
-* VBoxHfs.efi
-* EnhancedFatDxe.efi
-* OpenUsbKbDxe.efi
-* UsbMouseDxe.efi
-* XhciDxe.efi
 * AudioDxe.efi
 * BootChimeDxe.efi
+* EnhancedFatDxe.efi
+* GrubEXFAT.efi
+* GrubISO9660.efi
+* GrubNTFS.efi
+* GrubUDF.efi
+* HfsPlus.efi
+* NTFS.efi
 * NvmExpressDxe.efi
-* TbtForcePower.efi
+* OpenRuntime.efi
+* OpenUsbKbDxe.efi
 * Ps2MouseDxe.efi
+* TbtForcePower.efi
+* UsbMouseDxe.efi
 * VBoxExt2.efi
 * VBoxExt4.efi
-* NTFS.efi
+* VBoxHfs.efi
 * VBoxIso9600.efi
-* GrubUDF.efi
-* GrubNTFS.efi
-* GrubISO9660.efi
-* GrubEXFAT.efi
+* XhciDxe.efi
 
 **Drivers provided/merged into Opencore and so are no longer needed:**
 
-* DataHubDxe.efi
-* EnglishDxe.efi
-* AppleGenericInput.efi
-* AppleUiSupport.efi
-* AppleImageCodec.efi
-* AppleUITheme.efi
-* AppleKeyMapAggregator.efi
 * AppleEvent.efi
+* AppleGenericInput.efi
+* AppleImageCodec.efi
+* AppleKeyMapAggregator.efi
+* AppleUiSupport.efi
+* AppleUITheme.efi
 * AptioInputFix.efi
-* EmuVariableUEFI.efi
 * AptioMemoryFix.efi
+* AudioDxe.efi(well kinda, see AudioDxe shipped with [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg))
+* BootChimeDxe.efi
+* DataHubDxe.efi
+* EmuVariableUEFI.efi
+* EnglishDxe.efi
 * FirmwareVolume.efi
 * HashServiceFix.efi
 * VirtualSMC.efi
-* BootChimeDxe.efi
-* AudioDxe.efi(well kinda, see AudioDxe shipped with [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg))
 
 
 **Explictely unsupported drivers:**
 
-* osxaptiofixdrv.efi
-* osxaptiofix2drv.efi
 * osxaptiofix2drv-free2000.efi
+* osxaptiofix2drv.efi
 * osxaptiofix3drv.efi
+* osxaptiofixdrv.efi
 * OsxFatBinaryDrv.efi
 * OsxLowMemFixDrv.efi
 * SMCHelper.efi
