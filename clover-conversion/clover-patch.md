@@ -4,6 +4,8 @@ Little section mentioning common Kernel and Kexts patches that have been absorbe
 
 ## Kernel Patches
 
+For a full list of patches OpenCore supports, see [/Library/OcAppleKernelLib/CommonPatches.c](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c)
+
 **General Patches**:
 
 * `MSR 0xE2 _xcpm_idle instant reboot` (c) Pike R. Alpha
@@ -24,7 +26,7 @@ All of the following patches are inside the `Kernel -> Quirk -> AppleXcpmExtraMs
 
 ## Kext Patches
 
-* AppleAHCIPort External Icon Patch
+* AppleAHCIPort External Icon Patch1
    * `Kernel -> Quirks -> ExternalDiskIcons`
 * SSD Trim Enabler
    * `Kernel -> Quirks -> ThirdPartyDrives`
