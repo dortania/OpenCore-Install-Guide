@@ -337,9 +337,11 @@ An odd quirk for Dell systems running APTIO V(or just skylake, Slice doesn't rea
 
 **KextsToPatch**:
 * `Kernel -> Patch`
+* See [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md) for common patch conversions
 
 **KernelToPatch**:
 * `Kernel -> Patch`
+* See [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md) for common patch conversions
 
 **ForceKextsToLoad**:
 * Not a great solution but injecting the kext "works"
@@ -351,7 +353,7 @@ An odd quirk for Dell systems running APTIO V(or just skylake, Slice doesn't rea
 **KernelXCPM**:
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
 
-For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OcSupportPkg/blob/b2b0fa3c060403fdf0d42d319bd0902df62959f0/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's `kernel_patcher.c` ](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transfered over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to Opencore:
+For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's `kernel_patcher.c` ](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transfered over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to Opencore:
 
 ```
 Base: _xcpm_bootstrap
@@ -381,6 +383,7 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 
 **AppleRTC**
 * This has been turned into a kext patch, this is needed anytime you have either BIOS reset or safe mode issues.
+* **Note**: This patch no longer works with macOS Catalina 10.15.4, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
 * Under `Kernel -> patch`:
 
 | Key | Type | Value |
@@ -393,6 +396,8 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 |Limit|Number|0|
 |Find|Data||
 |Replace|Data|c3|
+
+
 
 
 **FakeCPUID**:

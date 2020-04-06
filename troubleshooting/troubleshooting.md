@@ -49,6 +49,10 @@ Turn off file vault in your config.plist under `Misc -> Security -> Vault` by se
 
 If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
+## Stuck on `OC: Invalid Vault mode`
+
+This is likely a spelling mistake, options in OpenCore are case-sensitve so make sure you check closely, **O**ptional is the correct way to enter it under Misc -> Security
+
 ## Stuck on EndRandomSeed
 
 Couple problems:
@@ -217,6 +221,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 * Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 * "Waiting for Root Device" or Prohibited Sign error
 * macOS installer in Russian
+* macOS Installer being damadged
 * Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 * Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 * 300 series Intel stalling on `apfs_module_start...`
@@ -263,6 +268,21 @@ Still didn't work? Well time for the big guns. We'll force remove that exact pro
 `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
 
 ![](https://cdn.discordapp.com/attachments/456913818467958789/673947840791445538/Screen_Shot_2020-02-03_at_10.47.40_AM.png)
+
+## macOS Installer being damadged
+
+If you've download macOS before October 2019, you likely have an expired macOS Installer certificate, there's 2 ways to fix this:
+
+* Download newest copy of macOS
+* Change date in terminal to when the certificate was valid
+
+For the latter:
+* Disconnect all networking devices(Ethernet, disable Wifi)
+* In the recovery terminal set to September 1st, 2019:
+
+```text
+date 0901000019
+```
 
 ## Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 
@@ -366,6 +386,8 @@ Issue with AppleRTC, quite a simple fix:
 |Find|Data||
 |Replace|Data|c3|
 
+**Note**: This patch no longer works with macOS Catalina 10.15.4, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
+
 ## macOS GPU acceleration missing on AMD X570
 
 Verify the following:
@@ -376,11 +398,7 @@ Verify the following:
 
 ## DRM Broken
 
-With Haswell and newer iGPUs, DRM is outright broken on them with macOS Catalina. This includes iTunes Movies, Apple TV+, Amazon Prime and Netflix, the only fix is getting a supported dGPU preferably Polaris or newer that supports HEVC. 
-
-More other GPUs, try different shiki boot args:
-
-* [WhateverGreen's DRM Chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
+See [Fixing DRM](/post-install/drm.md) page
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
@@ -398,6 +416,7 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
 * Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
    * VirtualBox works fine as it doesn't use AppleHV
    * VMware 10 and older can work as well
+   * Parallels 13.1.0 and older are known to work as well
 * Docker broken
    * Docker toolbox is the only solution as it's based off of VirtualBox, many feautures are unavailble with this version
 * Xcode AppleWatch simulator is broken in Catalina
@@ -436,6 +455,7 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 * Can't find Windows/Bootcamp drive in picker
 * Booting Windows results in Bluescreen or Linux crashes
 * Booting Windows error: `OCB: StartImage failed - Already started`
+* iASL warning, # unresolved
 
 ## Can't run `acpidump.efi`
 
@@ -523,3 +543,17 @@ Common Windows error code:
 ## Booting Windows error: `OCB: StartImage failed - Already started`
 
 This is due to OpenCore getting confused when trying to boot boot Windows and acidentally thinking it's booting OpenCore. This can be avoided by either adding a custom drive path under entires and have Windows with it's bootloader renamed *or* move Windows to it's own drive
+
+## iASL warning, # unresolved
+
+If you try to decompile your DSDT and get an error similar to this:
+
+```text
+iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
+```
+
+This happens when one ACPI table requires the rest for proper referncing, it does not accect the creation of DSDTs as we're only using it for creating a select few SSDTs. For those who are worried, you can run the following:
+
+```text
+iasl * [insert all ACPI files here]
+```

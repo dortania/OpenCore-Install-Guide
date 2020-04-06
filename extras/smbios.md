@@ -49,6 +49,7 @@ This section is mainly relevant for laptops to save some headaches when followin
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
+| MacBook10,1 | Dual Core 4.5w (Ultra Low End) | iGPU: HD 615 | 12" |
 | MacBookPro14,1 | Dual Core 15w(Low End) | iGPU: Iris Plus 640 | 13" |
 | MacBookPro14,2 | Dual Core 15w(High End) | iGPU: Iris Plus 650 | 13" |
 | MacBookPro14,3 | Quad Core 45w | iGPU: HD 630 + dGPU: RP555/560 | 15" |

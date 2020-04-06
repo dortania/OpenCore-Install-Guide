@@ -9,6 +9,7 @@ To get started, we have some resouces that will aid you:
 * [Config.plist conversion](/clover-conversion/Clover-config.md)
 * [Firmware driver conversion(.efi)](/clover-conversion/clover-efi.md)
 * [Boot Argument conversion](/clover-conversion/Clover-boot-arg.md)
+* [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md)
 
 # Cleaning the Clover Junk in macOS
 
@@ -39,4 +40,4 @@ The other thing that Clover may have hidden from you is NVRAM variables, this is
 In you config.plist:
 * `Misc -> Security -> AllowNvramReset -> True`
 
-And on your initl boot of Opencore, select `ClearNvram` boot option. This will wipe everything and reboot the system when finished.
+And on your initial boot of Opencore, select `ClearNvram` boot option. This will wipe everything and reboot the system when finished.

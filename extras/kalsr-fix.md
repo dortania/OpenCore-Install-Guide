@@ -163,3 +163,39 @@ fs0:\> memmap > memmap.txt
 
 This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type `$slide [insert a link to memmap.txt]`
 
+## Using DevirtualiseMmio
+
+DevirtualiseMmio is quite an interesting quirk, specifically in that it gets around a huge hurdle with many PCI device systems like some Z390 boards and virtually all HEDT boards like X99 and X299. How it does this is it takes MMIO regions and removes runtime attributes allowing them to be used as space for the kernel to sit comfortably, pair this with `ProvideCustomSlide` qurik means we can keep the secuirty feature of slide while also getting a bootable machine.
+
+For extremely problamatic systems like Threadripper TRX40 19H, we need to find specific regions that aren't required for proper operation. This is where `MmioWhitelist` comes into play. Note that whitelisting isn't required for most systems
+
+If you run the debug version of OpenCore with DevirtualiseMmio, you'll notice this in your logs:
+
+```text
+21:495 00:009 OCABC: MMIO devirt start
+21:499 00:003 OCABC: MMIO devirt 0x60000000 (0x10000 pages, 0x8000000000000001) skip 0
+21:503 00:003 OCABC: MMIO devirt 0xFE000000 (0x11 pages, 0x8000000000000001) skip 0
+21:506 00:003 OCABC: MMIO devirt 0xFEC00000 (0x1 pages, 0x8000000000000001) skip 0
+21:510 00:003 OCABC: MMIO devirt 0xFED00000 (0x1 pages, 0x8000000000000001) skip 0
+21:513 00:003 OCABC: MMIO devirt 0xFEE00000 (0x1 pages, 0x800000000000100D) skip 0
+21:516 00:003 OCABC: MMIO devirt 0xFF000000 (0x1000 pages, 0x800000000000100D) skip 0
+21:520 00:003 OCABC: MMIO devirt end, saved 278608 KB
+```
+
+* Note: See [OpenCore Debugging](/troubleshooting/debug.md) on how to enable logging to file
+
+So we have 6 regions we need to go through and see which are bad, best idea is to block all MMIO sections *except* one and try each region to get a list of good regions. 
+
+Now lets take the above example and create our own MmioWhitelist, we'll need to first convert the address from hexidecimal to decimal:
+
+MMIO devirt 0x60000000 -> 1610612736
+MMIO devirt 0xFE000000 -> 4261412864
+MMIO devirt 0xFEC00000 -> 4273995776
+MMIO devirt 0xFED00000 -> 4275044352
+MMIO devirt 0xFEE00000 -> 4276092928
+MMIO devirt 0xFF000000 -> 4278190080
+
+Should look something like this when done:
+
+![](https://cdn.discordapp.com/attachments/683011276938543134/694398967475339344/Screen_Shot_2020-03-30_at_10.13.27_PM.png)
+

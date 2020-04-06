@@ -1,4 +1,4 @@
-# Kaby Lake
+# Ivy Bridge
 
 * Supported version: 0.5.7
 
@@ -29,22 +29,27 @@ Now with those downloaded, we can get to really get started:
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
 ## ACPI
-![ACPI](https://i.imgur.com/IkLFucw.png)
+
+![ACPI](https://i.imgur.com/QFsl9R1.png)
 
 **Add:**
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://khronokernel.github.io/Getting-Started-With-ACPI/)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
-* [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-   * Allows for native CPU power management on Haswell and newer, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`
-* [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
-   * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS
-   * This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.
+
+* [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)
+   * Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in post install.
+* [SSDT-PNLF](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/SSDT-PNLF.dsl)
+   * Adds brightness control support
+* [SSDT-XOSI](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-XOSI.aml)
+   * Used for enabling Windows features in macOS, mainly needed for I2C controllers
+* [SSDT-GPIO](https://github.com/khronokernel/Getting-Started-With-ACPI/blob/master/extra-files/SSDT-GPI0.dsl)
+   * Creates a stub so VoodooI2C can connect
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/ACPI.
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://khronokernel.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
 
 **Block**
@@ -53,7 +58,28 @@ This blocks certain ACPI tabes from loading, for us we can ignore this
 
 **Patch**:
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
+This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc.\) via OpenCore. For us, we'll need a couple:
+
+* EC Rename
+   * Needed for Catalina support as it doesn't like the standard one found on most PCs, follow the [Fixing Embedded Controllers Guide](https://khronokernel.github.io/Getting-Started-With-ACPI/) on how to determine what EC you have and apply the appropriate patches
+* OSI rename
+   * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT
+   
+| Comment | String | Change XXXX to EC |
+| :--- | :--- | :--- |
+| Enabled | String | YES |
+| Count | Number | 0 |
+| Limit | Nuber | 0 |
+| Find | Data | xxxxxxxx |
+| Replace | Data | 45435f5f |
+   
+| Comment | String | Change _OSI to XOSI |
+| :--- | :--- | :--- |
+| Enabled | String | YES |
+| Count | Number | 0 |
+| Limit | Nuber | 0 |
+| Find | Data | 5f4f5349 |
+| Replace | Data | 584f5349 |
 
 **Quirk**: 
 
@@ -72,7 +98,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/683011276938543134/696571557115461632/Screen_Shot_2020-04-05_at_10.04.04_PM.png)
+![Booter](https://cdn.discordapp.com/attachments/456913818467958789/681325158815760384/Screen_Shot_2020-02-23_at_7.22.44_PM.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -82,7 +108,7 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 
 **Quirks**:
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and `SetupVirtualMap`
+Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `SetupVirtualMap`
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -100,52 +126,71 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
    * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
-* **ProtectMemoryRegion**: NO
-   * Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares
+* **ProtectCsmRegion**: NO
+   * Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
 * **ProtectSecureBoot**: NO
    * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
-   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffeelake systems
+   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and certain Coffeelake systems
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
-* **RebuildAppleMemoryMap**: YES
-   * Generates Memory Map compatible with macOS
-* **SetupVirtualMap**: NO
-   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
+* **SetupVirtualMap**: YES
+   * Fixes SetVirtualAddresses calls to virtual addresses
+* **ShrinkMemoryMap**: NO
+   * Needed for systems with large memory maps that don't fit, don't use unless necessary
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
-* **SyncRuntimePermissions**: YES
-    * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
-
 
 ## DeviceProperties
-
-![DeviceProperties](https://i.imgur.com/zNnP5mT.png)
+![DeviceProperties](https://i.imgur.com/Aw9t9vI.png)
 
 **Add**: Sets device properties from a map.
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for fixing certain iGPU properties like `ig-platform-id`. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.
 
+
 If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like `DDCCBBAA`
 
-The two ig-platform-id's we use are as follows:
+| iGPU | device-id | AAPL,ig-platform-id | Port Count | Stolen Memory | Framebuffer Memory | Video RAM | Connectors |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Intel HD Graphics 4000 | 66010001 | 01006601 | 4 | 96MB | 24MB | 1536MB | LVDS1 HDMI1 DP2 |
+| Intel HD Graphics 4000 | 66010002 | 02006601 | 1 | 64MB | 24MB | 1536MB | LVDS1 |
+| **Intel HD Graphics 4000 <sup>1</sup>** * | 66010003 | 03006601 | 4 | 64MB | 16MB | 1536MB | LVDS1 DP3 |
+| **Intel HD Graphics 4000 <sup>2</sup>** | 66010004 | 04006601 | 1 | 32MB | 16MB | 1536MB | LVDS1 |
+| Intel HD Graphics 4000 | 66010008 | 08006601 | 3 | 64MB | 16MB | 1536MB | LVDS1 DP2 |
+| **Intel HD Graphics 4000 <sup>3</sup>** | 66010009 | 09006601 | 3 | 64MB | 16MB | 1536MB | LVDS1 DP2 |
 
-* `0x59120000` - this is used when the Desktop iGPU is used to drive a display
-  * `00001259` when hex-swapped
-* `0x59120003` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
-  * `03001259` when hex-swapped
-  
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available. 
+#### Special Notes:
 
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | 00001259 |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
+* For these cards, no `device-id` property is required.
 
-(This is an example for a desktop HD 630 without a dGPU and no BIOS options for iGPU memory)
+* <sup>1</sup> : to be used with 1366 by 768 displays or lower (main)
 
-**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
+* <sup>2</sup> : to be used with 1600 by 900 displays or higher (main)
+
+* <sup>3</sup> : to be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with <sup>1</sup> and <sup>2</sup> first then try this.
+
+* VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)
+
+* For `04006601` platform, as you can tell, it has only one output, which is not enough for external connectors (HDMI/DP), you may need to add these extra parameters (credit to Rehabman)
+
+  | Key | Type | Value | Explanation |
+  | :--- | :--- | :--- | :--- |
+  | `framebuffer-patch-enable` | Number | `1`                                                          | *enabling the semantic patches in principle* (from WEG manual) |
+  | `framebuffer-memorycount`  | Number | `2`                                                          | Matching FBMemoryCount to the one on `03006601` (1 on `04` vs 2 on `03`) |
+  | `framebuffer-pipecount`    | Number | `2`                                                          | Matching PipeCount to the one on `03006601` (3 on `04` vs 2 on `03`) |
+  | `framebuffer-portcount`    | Number | `4`                                                          | Matching PortCount to the one on `03006601` (1 on `04` vs 4 on `03`) |
+  | `framebuffer-stolenmem`    | Data   | `00000004`                                                   | Matching STOLEN memory to 64MB (0x04000000 from hex to base 10 in Bytes) to the one on `03006601`<br />Check [here](https://www.tonymacx86.com/threads/guide-alternative-to-the-minstolensize-patch-with-32mb-dvmt-prealloc.221506/) for more information. |
+  | `framebuffer-con1-enable`  | Number | `1`                                                          | This will enable patching on *connector1* of the driver. (Which is the second connector after con0, which is the eDP/LVDS one) |
+  | `framebuffer-con1-alldata` | Data   | `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000` | When using `all data` with a connector, either you give all information of that connector (port-bused-type-flag) or that port and the ones following it, like in this case.<br />In this case, the ports in `04` are limited to `1`:<br />`05030000 02000000 30020000` (which corresponds to port 5, which is LVDS)<br />However on `03` there are 3 extra ports:<br />`05030000 02000000 30000000` (LVDS, con0, like `04`)<br/>`02050000 00040000 07040000` (DP, con1)<br/>`03040000 00040000 81000000` (DP, con2)<br/>`04060000 00040000 81000000` (DP, con3)<br />Since we changed the number of PortCount to `4` in a platform that has only 1, that means we need to define the 3 others (and we that starting with con1 to the end).<br /> |
+
+* Some laptops from this era came with a mixed chipset setup, using Ivy Bridge CPUs with Sandy Bridge chipsets which creates issues with macOS since it expects a certain IMEI ID that it doesn't find and would get stuck at boot, to fix this we need to fake the IMEI's IDs in these models
+
+  * To know if you're affected check if your CPU is an intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M)
+  * In your config add a new PciRoot device named `PciRoot(0x0)/Pci(0x16,0x0)`
+    * Key: `device-id`
+    * Type: Data
+    * Value: `3A1E0000`
 
 `PciRoot(0x0)/Pci(0x1f,0x3)` -> `Layout-id`
 
@@ -155,7 +200,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
 
 **Block**: Removes device properties from the map, for us we can ignore this
 
-Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifically Little Endians that modern CPUs use for ordering bytes
+Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifically Little Endians that modern CPUs use for ordering bytes. The more you know!
 
 ## Kernel
 
@@ -205,7 +250,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **ExternalDiskIcons**: NO 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **IncreasePciBarSize**: NO
-   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
+   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this
 * **LapicKernelPanic**: NO 
    * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
@@ -232,10 +277,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **ConsoleAttributes**: `0`
+* **PickerAttributes**:
    * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
-* **PickerAttributes**: `0`
-   * Used for setting custom picker attributes, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAudioAssist**: NO
    * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO
@@ -317,6 +360,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
    * **debug=0x100**- this disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues.
    * **keepsyms=1** - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself.
    * **alcid=1** - used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system.
+   * **-wegnoegpu** - Disables all other GPUs besides the integrated GPU, needed as the dGPUs in laptops are not supported
    
    
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
@@ -357,28 +401,30 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](https://i.imgur.com/M46vPwX.png)
+![PlatformInfo](https://i.imgur.com/5rl12dZ.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
-For this Kaby Lake example, we'll chose the iMac18,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Kaby Lake:
+For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
 
-* `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
-* `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
+| SMBIOS | CPU Type | GPU Type | Display Size |
+| :--- | :--- | :--- | :--- |
+| MacBookAir5,1 | Dual Core 17w | iGPU: HD 4000 | 11" |
+| MacBookAir5,2 | Dual Core 17w | iGPU: HD 4000 | 13" |
+| MacBookPro10,1 | Quad Core 45w | iGPU: HD 4000 + dGPU: GT650M | 15" |
+| MacBookPro10,2 | Dual Core 35w(High End) | iGPU: HD 4000 | 13" |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```text
   #######################################################
- #               iMac18,1 SMBIOS Info                  #
+ #               MacBookPro10,2 SMBIOS Info                  #
 #######################################################
 
-Type:         iMac18,1
-Serial:       C02Z2CZ5H7JY
-Board Serial: C02928701GUH69FFB
-SmUUID:       AA043F8D-33B6-4A1A-94F7-46972AAD0607
+Type:         MacBookPro10,2
+Serial:       C02KCYZLDNCW
+Board Serial: C02309301QXF2FRJC
+SmUUID:       A154B586-874B-4E57-A1FF-9D6E503E4580
 ```
 The `Type` part gets copied to Generic -> SystemProductName.
 
@@ -423,7 +469,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518959873425639/Screen_Shot_2020-02-29_at_8.40.06_PM.png)
+![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518166915481677/Screen_Shot_2020-02-29_at_8.36.55_PM.png)
 
 **ConnectDrivers**: YES
 
@@ -515,7 +561,7 @@ Only drivers present here should be:
 
 * **ExitBootServicesDelay**: `0`
    * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault2
-* **IgnoreInvalidFlexRatio**: NO
+* **IgnoreInvalidFlexRatio**: YES
    * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-skylake based systems
 * **ReleaseUsbOwnership**: NO
    * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
@@ -561,6 +607,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 64MB
+* DVMT Pre-Allocated(iGPU Memory): 32MB
 
 # [Post-install](/post-install/README.md)
+

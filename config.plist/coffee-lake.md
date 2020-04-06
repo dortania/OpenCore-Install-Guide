@@ -34,7 +34,7 @@ Now with those downloaded, we can get to really get started:
 
 **Add:**
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
@@ -215,7 +215,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **ExternalDiskIcons**: NO 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **IncreasePciBarSize**: NO
-   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this
+   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
 * **LapicKernelPanic**: NO 
    * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
@@ -371,11 +371,11 @@ Recommended to leave enabled for best security practices
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
-For this Coffee Lake example, I chose the iMac18,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Coffee Lake:
+For this Coffee Lake example, I chose the iMac19,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Coffee Lake:
 
-* `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
-* `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
-   * Note: While iMac19,1 and iMac19,2 are a closer match, these SMBIOS are not compatible with versions of macOS older than Mojave and not all fixes are compatible with them(ie: USBInjectAll)
+* `iMac19,1` - For Mojave and newer
+* `iMac18,3` - For High Sierra and older
+   * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOs with Web Drivers
    
 **Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
 
@@ -383,10 +383,10 @@ Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selectin
 
 ```text
   #######################################################
- #               iMac18,1 SMBIOS Info                  #
+ #               iMac19,1 SMBIOS Info                  #
 #######################################################
 
-Type:         iMac18,1
+Type:         iMac19,1
 Serial:       C02XG0FDH7JY
 Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8

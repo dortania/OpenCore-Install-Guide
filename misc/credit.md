@@ -59,3 +59,5 @@ And for those who have either recommendations or issues with this guide can find
    * [WhateverGreen's manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
    * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
    * [DRM Testing](https://applelife.ru/threads/proigryvanie-zaschischjonnogo-kontenta-na-raznom-oborudovanii.1349123/page-67#post-846582)
+* rEFInd Guide:
+   * [rEFInd Manual](https://www.rodsbooks.com/refind/index.html)

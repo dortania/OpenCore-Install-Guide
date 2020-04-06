@@ -33,7 +33,7 @@ Now with those downloaded, we can get to really get started:
 
 **Add:**
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
@@ -147,8 +147,7 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
    * Path to the `info.plist` hidden within the kext
    * ex: `Contents/Info.plist`
 
-**Emulate**: Needed for spoofing unsupported CPUs, all Skylake X CPUs are natively supported
-
+**Emulate**: Needed for spoofing unsupported CPUs, thankfully both Skylake-X and Cascade Lake-X have the same CPU ID as Xeon W chips which ship in the iMac Pro. So here we'll leave it blank
 
 **Block**: Blocks kexts from loading. Not relevant for us
 
@@ -175,7 +174,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **ExternalDiskIcons**: NO 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **IncreasePciBarSize**: NO
-   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this
+   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
 * **LapicKernelPanic**: NO 
    * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
