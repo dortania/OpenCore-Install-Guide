@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Skylake · GitBook</title>
+        <title>Bulldozer/Jaguar · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="kaby-lake.html" />
+    <link rel="next" href="zen.html" />
     
     
-    <link rel="prev" href="haswell.html" />
+    <link rel="prev" href="../config-HEDT/skylake-x.html" />
     
 
     </head>
@@ -202,9 +202,9 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="ivy-bridge.html">
+        <li class="chapter " data-level="2.1" data-path="../config.plist/ivy-bridge.html">
             
-                <a href="ivy-bridge.html">
+                <a href="../config.plist/ivy-bridge.html">
             
                     
                     Ivy Bridge
@@ -215,9 +215,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2" data-path="haswell.html">
+        <li class="chapter " data-level="2.2" data-path="../config.plist/haswell.html">
             
-                <a href="haswell.html">
+                <a href="../config.plist/haswell.html">
             
                     
                     Haswell
@@ -228,9 +228,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.3" data-path="skylake.html">
+        <li class="chapter " data-level="2.3" data-path="../config.plist/skylake.html">
             
-                <a href="skylake.html">
+                <a href="../config.plist/skylake.html">
             
                     
                     Skylake
@@ -241,9 +241,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4" data-path="kaby-lake.html">
+        <li class="chapter " data-level="2.4" data-path="../config.plist/kaby-lake.html">
             
-                <a href="kaby-lake.html">
+                <a href="../config.plist/kaby-lake.html">
             
                     
                     Kaby Lake
@@ -254,9 +254,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.5" data-path="coffee-lake.html">
+        <li class="chapter " data-level="2.5" data-path="../config.plist/coffee-lake.html">
             
-                <a href="coffee-lake.html">
+                <a href="../config.plist/coffee-lake.html">
             
                     
                     Coffee Lake
@@ -320,9 +320,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../AMD/fx.html">
+        <li class="chapter active" data-level="4.1" data-path="fx.html">
             
-                <a href="../AMD/fx.html">
+                <a href="fx.html">
             
                     
                     Bulldozer/Jaguar
@@ -333,9 +333,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../AMD/zen.html">
+        <li class="chapter " data-level="4.2" data-path="zen.html">
             
-                <a href="../AMD/zen.html">
+                <a href="zen.html">
             
                     
                     Zen
@@ -631,7 +631,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Skylake</a>
+        <a href=".." >Bulldozer/Jaguar</a>
     </h1>
 </div>
 
@@ -649,7 +649,7 @@
                                 <blockquote>
 <p><em>Last modified: Mon Apr 06 2020 13:14:45 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="skylake"><a name="skylake" class="plugin-anchor" href="#skylake"><i class="fa fa-link" aria-hidden="true"></i></a>Skylake</h1>
+<h1 id="bulldozer15h-and-jaguar16h"><a name="bulldozer15h-and-jaguar16h" class="plugin-anchor" href="#bulldozer15h-and-jaguar16h"><i class="fa fa-link" aria-hidden="true"></i></a>Bulldozer(15h) and Jaguar(16h)</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
@@ -665,6 +665,10 @@
 <li><a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a>: For editing our config, this editor has some super useful tools for OpenCore</li>
 <li><a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a>: For generating our SMBIOS</li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">Sample.plist</a>: This is found under the Docs folder of the release download</li>
+<li><a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">AMD Kernel Patches</a>: Needed for booting macOS on AMD hardware(save these for later, we&apos;ll go over how to use them below)<ul>
+<li><a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h" target="_blank">Bulldozer/Jaguar(15h/16h)</a> (Supports 10.13, 10.14, and 10.15)</li>
+</ul>
+</li>
 </ul>
 <p>Now with those downloaded, we can get to really get started:</p>
 <ul>
@@ -680,24 +684,22 @@
 </ul>
 </li>
 </ul>
+<p>And now you&apos;re ready to configure it!</p>
 <p><strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing&apos;s mentioned then leave as default.</strong></p>
 <h2 id="acpi"><a name="acpi" class="plugin-anchor" href="#acpi"><i class="fa fa-link" aria-hidden="true"></i></a>ACPI</h2>
-<p><img src="https://i.imgur.com/IkLFucw.png" alt="ACPI"></p>
+<p><img src="https://i.imgur.com/zqNt4dV.png" alt="ACPI"></p>
 <p><strong>Add:</strong></p>
 <p>This is where you&apos;ll add SSDTs for your system, these are very important to <strong>booting macOS</strong> and have many uses like <a href="https://usb-map.gitbook.io/project/" target="_blank">USB maps</a>, <a href="../extras/spoof.html">disabling unsupported GPUs</a> and such. And with our system, <strong>its even required to boot</strong>. Guide on making them found here: <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
-<p>For us we&apos;ll need a couple of SSDTs to bring back functionality that Clover provided:</p>
 <ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a><ul>
-<li>Allows for native CPU power management on Haswell and newer, Clover alternative would be under <code>Acpi -&gt; GenerateOptions -&gt; PluginType</code></li>
-</ul>
-</li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a><ul>
+<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></p>
+<ul>
 <li>Hides the Embedded controller and creates a fake one for macOS, <strong>needed for all Catalina users</strong> and recommended for other versions of macOS</li>
-<li>This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.</li>
-</ul>
-</li>
+<li>This SSDT also has a second function, USBX. This is used for forcing USB power properties and requires SSDT-EC so this just jumbles them together.</li>
+<li>I&apos;ve also provided a precompiled version for users with <code>EC0</code>, this is the most common device on AMD systems: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml" target="_blank">SSDT-EC-USBX-AMD.aml</a></li>
 </ul>
 <p>Note that you <strong>should not</strong> add your generated <code>DSDT.aml</code> here, it is already in your firmware. So if present, remove the entry for it in your <code>config.plist</code> and under EFI/ACPI.</p>
+</li>
+</ul>
 <p>For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a> <strong>page.</strong> Compiled SSDTs have a <strong>.aml</strong> extension(Assembled) and will go into the <code>EFI/OC/ACPI</code> folder and <strong>must</strong> be specified in your config under <code>ACPI -&gt; Add</code> as well.</p>
 <p><strong>Block</strong></p>
 <p>This blocks certain ACPI tabes from loading, for us we can ignore this</p>
@@ -728,12 +730,12 @@
 </li>
 </ul>
 <h2 id="booter"><a name="booter" class="plugin-anchor" href="#booter"><i class="fa fa-link" aria-hidden="true"></i></a>Booter</h2>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/696571557115461632/Screen_Shot_2020-04-05_at_10.04.04_PM.png" alt="Booter"></p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/696573787994325013/Screen_Shot_2020-04-05_at_10.15.09_PM.png" alt="Booter"></p>
 <p>This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi</p>
 <p><strong>MmioWhitelist</strong>:</p>
 <p>This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with <code>DevirtualiseMmio</code></p>
 <p><strong>Quirks</strong>:</p>
-<p>Settings relating to boot.efi patching and firmware fixes, ones we need to change are <code>RebuildAppleMemoryMap</code>, <code>SyncRuntimePermissions</code> and <code>SetupVirtualMap</code></p>
+<p>Settings relating to boot.efi patching and firmware fixes, one we need to change is <code>RebuildAppleMemoryMap</code></p>
 <ul>
 <li><strong>AvoidRuntimeDefrag</strong>: YES<ul>
 <li>Fixes UEFI runtime services like date, time, NVRAM, power control, etc</li>
@@ -787,7 +789,7 @@
 <li>Generates Memory Map compatible with macOS</li>
 </ul>
 </li>
-<li><strong>SetupVirtualMap</strong>: NO<ul>
+<li><strong>SetupVirtualMap</strong>: YES<ul>
 <li>Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer</li>
 </ul>
 </li>
@@ -795,107 +797,73 @@
 <li>Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro&apos;s with dGPUs as booting Windows won&apos;t allow for the iGPU to be used</li>
 </ul>
 </li>
-<li><strong>SyncRuntimePermissions</strong>: YES<ul>
+<li><strong>SyncRuntimePermissions</strong>: NO<ul>
 <li>Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer</li>
 </ul>
 </li>
 </ul>
 <h2 id="deviceproperties"><a name="deviceproperties" class="plugin-anchor" href="#deviceproperties"><i class="fa fa-link" aria-hidden="true"></i></a>DeviceProperties</h2>
-<p><img src="https://i.imgur.com/N44BEKs.png" alt="DeviceProperties"></p>
+<p><img src="https://media.discordapp.net/attachments/456913818467958789/681334251865636866/Screen_Shot_2020-02-23_at_7.58.51_PM.png?width=1674&amp;height=866" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
-<p>This section is set up via WhateverGreen&apos;s <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md" target="_blank">Framebuffer Patching Guide</a> and is used for fixing certain iGPU properties like <code>ig-platform-id</code>. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.</p>
-<p>If we think of our ig-plat as <code>0xAABBCCDD</code>, our swapped version would look like <code>DDCCBBAA</code></p>
-<p>The two ig-platform-id&apos;s we use are as follows:</p>
-<ul>
-<li><code>0x19120000</code> - this is used when the Desktop iGPU is used to drive a display<ul>
-<li><code>00001219</code> when hex-swapped</li>
-</ul>
-</li>
-<li><code>0x19120001</code> - this is used when the Desktop iGPU is only used for computing tasks and doesn&apos;t drive a display<ul>
-<li><code>01001219</code> when hex-swapped</li>
-</ul>
-</li>
-</ul>
-<p>We also add 2 more properties, <code>framebuffer-patch-enable</code> and <code>framebuffer-stolenmem</code>. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available. </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Key</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">AAPL,ig-platform-id</td>
-<td style="text-align:left">Data</td>
-<td style="text-align:left">00001219</td>
-</tr>
-<tr>
-<td style="text-align:left">framebuffer-patch-enable</td>
-<td style="text-align:left">Data</td>
-<td style="text-align:left">01000000</td>
-</tr>
-<tr>
-<td style="text-align:left">framebuffer-stolenmem</td>
-<td style="text-align:left">Data</td>
-<td style="text-align:left">00003001</td>
-</tr>
-</tbody>
-</table>
-<p>(This is an example for a desktop HD 530 without a dGPU and no BIOS options for iGPU memory)</p>
-<p><strong>Special note</strong>: Mobile users should refer to mobile iGPU section for what properties should be used: <a href="https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching" target="_blank">iGPU Patching</a></p>
-<p><code>PciRoot(0x0)/Pci(0x1f,0x3)</code> -&gt; <code>Layout-id</code></p>
-<ul>
-<li>Applies AppleALC audio injection, you&apos;ll need to do your own research on which codec your motherboard has and match it with AppleALC&apos;s layout. <a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a>.</li>
-</ul>
-<p>For us, we&apos;ll be using the boot-arg <code>alcid=xxx</code> instead to accomplish this. <code>alcid</code> will override all other layout-IDs present</p>
-<p><strong>Block</strong>: Removes device properties from map, for us we can ignore this</p>
-<p>Fun Fact: The reason the byte order is swapped is due to <a href="https://en.wikipedia.org/wiki/Endianness" target="_blank">Endianness</a>, specifically Little Endians that modern CPUs use for ordering bytes. The more you know!</p>
+<p>By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot <code>PciRoot(0x0)/Pci(0x2,0x0)</code> can be removed from <code>Add</code> section. For audio we&apos;ll be setting the layout in the boot-args section, so removal of <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> is also recommended from both <code>Add</code> and <code>Block</code> sections</p>
+<p>TL;DR, delete all the PciRoot&apos;s here as we won&apos;t be using this section.</p>
 <h2 id="kernel"><a name="kernel" class="plugin-anchor" href="#kernel"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel</h2>
-<p><img src="https://media.discordapp.net/attachments/456913818467958789/681335231080300564/Screen_Shot_2020-02-23_at_8.02.45_PM.png?width=1486&amp;height=1771" alt="Kernel"></p>
+<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/681344557090209798/Screen_Shot_2020-02-23_at_8.39.33_PM.png" alt="Kernel">
+<img src="https://cdn.discordapp.com/attachments/456913818467958789/681344552526675988/Screen_Shot_2020-02-23_at_8.39.49_PM.png" alt=""></p>
 <p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run <strong>Cmd/Ctrl + Shift + R</strong> to add all their kexts in the correct order without manually typing each kext out.</p>
 <ul>
-<li><strong>BundlePath</strong><ul>
+<li><strong>BundlePath</strong> <ul>
 <li>Name of the kext</li>
 <li>ex: <code>Lilu.kext</code></li>
 </ul>
 </li>
-<li><strong>Enabled</strong><ul>
+<li><strong>Enabled</strong> <ul>
 <li>Self-explanatory, either enables or disables the kext</li>
 </ul>
 </li>
-<li><strong>ExecutablePath</strong><ul>
+<li><strong>ExecutablePath</strong> <ul>
 <li>Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting <code>Show Package Contents</code>. Generally, they&apos;ll be <code>Contents/MacOS/Kext</code> but some have kexts hidden within under <code>Plugin</code> folder. Do note that plist only kexts do not need this filled in.</li>
 <li>ex: <code>Contents/MacOS/Lilu</code></li>
 </ul>
 </li>
-<li><strong>PlistPath</strong><ul>
+<li><strong>PlistPath</strong> <ul>
 <li>Path to the <code>info.plist</code> hidden within the kext</li>
 <li>ex: <code>Contents/Info.plist</code></li>
 </ul>
 </li>
 </ul>
-<p><strong>Emulate</strong>: Needed for spoofing unsupported CPUs like Pentiums and Celerons</p>
+<p><strong>Emulate</strong>: Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don&apos;t require this)</p>
 <ul>
 <li><strong>CpuidMask</strong>: Leave this blank</li>
 <li><strong>CpuidData</strong>: Leave this blank</li>
 </ul>
 <p><strong>Block</strong>: Blocks kexts from loading. Not relevant for us</p>
-<p><strong>Patch</strong>: Patches both the kernel and kexts</p>
-<p><strong>Quirks</strong>:</p>
-<p>Settings relating to the kernel, for us we&apos;ll be enabling <code>AppleCpuPmCfgLock</code>, <code>AppleXcpmCfgLock</code>, <code>DisableIOMapper</code>,  <code>PanicNoKextDump</code>, <code>PowerTimeoutKernelPanic</code> and <code>XhciPortLimit</code>. Everything else should be left as default</p>
+<p><strong>Patch</strong>: This is where the AMD kernel patching magic happens. Please do note that <code>KernelToPatch</code> and <code>MatchOS</code> from Clover becomes <code>Kernel</code> and <code>MinKernel</code>/ <code>MaxKernel</code> in OpenCore, you can find pre-made patches by <a href="https://amd-osx.com/forum/memberlist.php?mode=viewprofile&amp;u=10918&amp;sid=e0feb8a14a97be482d2fd68dbc268f97" target="_blank">AlGrey</a>(algrey#9303):</p>
+<p>Kernel patches:</p>
 <ul>
-<li><strong>AppleCpuPmCfgLock</strong>: YES <ul>
-<li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. <strong>Please verify you can disable CFG-Lock, most systems won&apos;t boot with it on so requiring use of this quirk</strong></li>
+<li><a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h" target="_blank">Bulldozer/Jaguar(15h/16h)</a> (10.13, 10.14, and 10.15)</li>
+</ul>
+<p>To merge:</p>
+<ul>
+<li>Open both files, </li>
+<li>Delete the <code>Kernel -&gt; Patch</code> section from config.plist</li>
+<li>Copy the <code>Kernel -&gt; Patch</code> section from patches.plist</li>
+<li>Paste into where old patches were in config.plist</li>
+</ul>
+<p><img src="../extra-files/gif.gif" alt=""></p>
+<p><strong>Quirks</strong>:
+Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerManagement</code>, <code>PanicNoKextDump</code>, <code>PowerTimeoutKernelPanic</code> and <code>XhciPortLimit</code>. Everything else should be left as default</p>
+<ul>
+<li><strong>AppleCpuPmCfgLock</strong>: NO <ul>
+<li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. AMD users can ignore</li>
 </ul>
 </li>
-<li><strong>AppleXcpmCfgLock</strong>: YES <ul>
-<li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be KernelPM. <strong>Please verify you can disable CFG-Lock, most systems won&apos;t boot with it on so requiring use of this quirk</strong></li>
+<li><strong>AppleXcpmCfgLock</strong>: NO <ul>
+<li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be KernelPM. AMD users can ignore</li>
 </ul>
 </li>
 <li><strong>AppleXcpmExtraMsrs</strong>: NO <ul>
-<li>Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons.</li>
+<li>Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons</li>
 </ul>
 </li>
 <li><strong>AppleXcpmForceBoost</strong>: NO<ul>
@@ -903,14 +871,14 @@
 </ul>
 </li>
 <li><strong>CustomSMBIOSGuid</strong>: NO <ul>
-<li>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops</li>
+<li>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandom with <code>PlatformInfo -&gt; UpdateSMBIOSMode -&gt; Custom</code></li>
 </ul>
 </li>
-<li><strong>DisableIoMapper</strong>: YES <ul>
-<li>Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to <code>dart=0</code> as SIP can stay on in Catalina</li>
+<li><strong>DisableIoMapper</strong>: NO <ul>
+<li>AMD doesn&apos;t have DMAR or VT-D support so irrelevant</li>
 </ul>
 </li>
-<li><strong>DummyPowerManagement</strong>: NO<ul>
+<li><strong>DummyPowerManagement</strong>: YES<ul>
 <li>New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there&apos;s no native power management. Intel can ignore</li>
 </ul>
 </li>
@@ -939,11 +907,10 @@
 </ul>
 </li>
 <li><strong>XhciPortLimit</strong>: YES <ul>
-<li>This is actually the 15 port limit patch, don&apos;t rely on it as it&apos;s not a guaranteed solution for fixing USB. Please create a <a href="https://usb-map.gitbook.io/project/" target="_blank">USB map</a> when possible.</li>
+<li>This is actually the 15 port limit patch, don&apos;t rely on it as it&apos;s not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md" target="_blank">AMD USB Mapping</a></li>
 </ul>
 </li>
 </ul>
-<p>The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such</p>
 <h2 id="misc"><a name="misc" class="plugin-anchor" href="#misc"><i class="fa fa-link" aria-hidden="true"></i></a>Misc</h2>
 <p><img src="https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png" alt="Misc"></p>
 <p><strong>Boot</strong>: Settings for boot screen (Leave everything as default)</p>
@@ -1082,16 +1049,17 @@
 </ul>
 <p>7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)</p>
 <ul>
-<li><strong>boot-args</strong>:<ul>
+<li><p><strong>boot-args</strong>:</p>
+<ul>
 <li><strong>-v</strong> - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you&apos;re booting instead of the Apple logo and progress bar. It&apos;s invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.</li>
 <li><strong>debug=0x100</strong>- this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can <em>hopefully</em> glean some useful info and follow the breadcrumbs to get past the issues.</li>
 <li><strong>keepsyms=1</strong> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</li>
-<li><strong>alcid=1</strong> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system.</li>
+<li><strong>npci=0x2000</strong> - this disables some PCI debugging related to <code>kIOPCIConfiguratorPFM64</code>, alternative is <code>npci= 0x3000</code> which disables debugging related to <code>kIOPCIConfiguratorTBMSIEnable</code>and <code>gIOPCITunnelledKey</code>. Required for when getting stuck on <code>PCI Start Configuration</code> as there are IRQ conflicts relating to your PCI lanes. <strong>Not needed if Above4GDecoding is enabled</strong>. <a href="https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html" target="_blank">Source</a></li>
+<li><strong>agdpmod=pikera</strong> - used for disabling boardID on Navi GPUs(RX 5000 series), without this you&apos;ll get a black screen. <strong>Don&apos;t use if you don&apos;t have Navi</strong></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li><strong>csr-active-config</strong>: Settings for SIP, generally recommended to manually change this within Recovery partition with <code>csrutil</code> via the recovery partition</li>
+<li><p><strong>csr-active-config</strong>: Settings for SIP, generally recommended to manually change this within Recovery partition with <code>csrutil</code> via the recovery partition</p>
+</li>
 </ul>
 <p>csr-active-config is set to <code>00000000</code> which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:</p>
 <ul>
@@ -1147,20 +1115,26 @@
 <li>Enables writing to flash memory for all added variables.</li>
 </ul>
 <h2 id="platforminfo"><a name="platforminfo" class="plugin-anchor" href="#platforminfo"><i class="fa fa-link" aria-hidden="true"></i></a>Platforminfo</h2>
-<p><img src="https://i.imgur.com/RKIXoi5.png" alt="PlatformInfo"></p>
+<p><img src="https://i.imgur.com/CrqeCea.png" alt="PlatformInfo"></p>
 <p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application. </p>
-<p>For this Skylake example, we&apos;ll choose the iMac17,1 SMBIOS.</p>
-<p><strong>Note</strong>: Mobile users should refer to the SMBIOS page on which to choose: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md" target="_blank">Mobile SMBIOS</a></p>
+<p>For this example, we&apos;ll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:</p>
+<ul>
+<li>iMacPro1,1: AMD RX Polaris and Vega</li>
+<li>MacPro7,1: AMD RX Polaris, Vega and Navi(Note that MacPro7,1 is also a Catalina exclusive)</li>
+<li>MacPro6,1: AMD R5/R7/R9 and older</li>
+<li>iMac14,2: Nvidia Kepler and newer</li>
+</ul>
 <p>Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:</p>
 <pre><code class="lang-text">  #######################################################
- #               iMac17,1 SMBIOS Info                  #
+ #              iMacPro1,1 SMBIOS Info                 #
 #######################################################
 
-Type:         iMac17,1
-Serial:       C02S3HYWGG7L
-Board Serial: C02629102GUGPF7AD
-SmUUID:       3508AD44-B67D-4AD7-A109-7955130A1033
+Type:         iMacPro1,1
+Serial:       C02YX0TZHX87
+Board Serial: C029269024NJG36CB
+SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </code></pre>
+<p>The order is <code>Product | Serial | Board Serial (MLB)</code></p>
 <p>The <code>Type</code> part gets copied to Generic -&gt; SystemProductName.</p>
 <p>The <code>Serial</code> part gets copied to Generic -&gt; SystemSerialNumber.</p>
 <p>The <code>Board Serial</code> part gets copied to Generic -&gt; MLB.</p>
@@ -1178,8 +1152,8 @@ SmUUID:       3508AD44-B67D-4AD7-A109-7955130A1033
 <li>Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case</li>
 </ul>
 </li>
-<li><strong>SupportsCsm</strong>: NO<ul>
-<li>Used for when the EFI partition isn&apos;t first on the windows drive</li>
+<li><strong>AdviseWindows</strong>: NO<ul>
+<li>Used for when the EFI partition isn&apos;t first on the windows drive, generally found on systems that upgraded from Legacy to UEFI installs</li>
 </ul>
 </li>
 </ul>
@@ -1195,7 +1169,7 @@ SmUUID:       3508AD44-B67D-4AD7-A109-7955130A1033
 <ul>
 <li>Updates SMBIOS fields</li>
 </ul>
-<p><strong>UpdateSMBIOSMode</strong>: Create</p>
+<p><strong>UpdateSMBIOSMode</strong>: Create </p>
 <ul>
 <li>Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk</li>
 </ul>
@@ -1374,34 +1348,25 @@ SmUUID:       3508AD44-B67D-4AD7-A109-7955130A1033
 <p>And now you&apos;re ready to save and place it into your EFI under EFI/OC.</p>
 <p>For those having booting issues, please make sure to read the <a href="../troubleshooting/troubleshooting.html">Troubleshooting section</a> first and if your questions are still unanswered we have plenty of resources at your disposal:</p>
 <ul>
+<li><a href="https://discord.gg/QuUWg7" target="_blank">AMD OS X Discord</a></li>
 <li><a href="https://www.reddit.com/r/hackintosh/" target="_blank">r/Hackintosh Subreddit</a></li>
-<li><a href="https://discord.gg/2QYd7ZT" target="_blank">r/Hackintosh Discord</a></li>
 </ul>
 <p><strong>Sanity check</strong>:</p>
 <p>So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:</p>
 <ul>
 <li><a href="https://opencore.slowgeek.com" target="_blank"><strong>Sanity Checker</strong></a></li>
 </ul>
-<h1 id="intel-bios-settings"><a name="intel-bios-settings" class="plugin-anchor" href="#intel-bios-settings"><i class="fa fa-link" aria-hidden="true"></i></a>Intel BIOS settings</h1>
+<h1 id="amd-bios-settings"><a name="amd-bios-settings" class="plugin-anchor" href="#amd-bios-settings"><i class="fa fa-link" aria-hidden="true"></i></a>AMD BIOS Settings</h1>
 <p><strong>Disable:</strong></p>
 <ul>
 <li>Fast Boot</li>
-<li>VT-d(can be enabled if you set <code>DisableIoMapper</code> to YES)</li>
-<li>CSM</li>
-<li>Thunderbolt</li>
-<li>Intel SGX</li>
-<li>Intel Platform Trust</li>
-<li>CFG Lock(MSR 0xE2 write protection)(<strong>This must be off, if you can&apos;t find the option then enable both <code>AppleCpuPmCfgLock</code> and <code>AppleXcpmCfgLock</code> under Kernel -&gt; Quirks. Your hack will not boot with CFG-Lock enabled</strong>)</li>
+<li>Compatibility Support Module (CSM)(<strong>Must be off, GPU errors like <code>gIO</code> are common when this option in enabled</strong>)</li>
 </ul>
 <p><strong>Enable:</strong></p>
 <ul>
-<li>VT-x</li>
-<li>Above 4G decoding</li>
-<li>Hyper-Threading</li>
-<li>Execute Disable Bit</li>
+<li>Above 4G decoding(<strong>This must be on, if you can&apos;t find the option then add <code>npci=0x2000</code> to boot-args. Do not have both this option and npci enabled at the same time</strong>)</li>
 <li>EHCI/XHCI Hand-off</li>
 <li>OS type: Windows 8.1/10 UEFI Mode</li>
-<li>DVMT Pre-Allocated(iGPU Memory): 64MB</li>
 </ul>
 <h1 id="post-install"><a name="post-install" class="plugin-anchor" href="#post-install"><i class="fa fa-link" aria-hidden="true"></i></a><a href="../post-install/">Post-install</a></h1>
 
@@ -1431,12 +1396,12 @@ SmUUID:       3508AD44-B67D-4AD7-A109-7955130A1033
 
             
                 
-                <a href="haswell.html" class="navigation navigation-prev " aria-label="Previous page: Haswell">
+                <a href="../config-HEDT/skylake-x.html" class="navigation navigation-prev " aria-label="Previous page: Skylake-X">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="kaby-lake.html" class="navigation navigation-next " aria-label="Next page: Kaby Lake">
+                <a href="zen.html" class="navigation navigation-next " aria-label="Next page: Zen">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1447,7 +1412,7 @@ SmUUID:       3508AD44-B67D-4AD7-A109-7955130A1033
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Skylake","level":"2.3","depth":1,"next":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"previous":{"title":"Haswell","level":"2.2","depth":1,"path":"config.plist/haswell.md","ref":"config.plist/haswell.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/skylake.md","mtime":"2020-04-06T13:14:45.744Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-06T13:20:09.069Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Bulldozer/Jaguar","level":"4.1","depth":1,"next":{"title":"Zen","level":"4.2","depth":1,"path":"AMD/zen.md","ref":"AMD/zen.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/fx.md","mtime":"2020-04-06T13:14:45.744Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-06T13:20:09.069Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

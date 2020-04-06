@@ -320,12 +320,25 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../AMD/AMD-config.html">
+        <li class="chapter " data-level="4.1" data-path="../AMD/fx.html">
             
-                <a href="../AMD/AMD-config.html">
+                <a href="../AMD/fx.html">
             
                     
-                    AMD
+                    Bulldozer/Jaguar
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../AMD/zen.html">
+            
+                <a href="../AMD/zen.html">
+            
+                    
+                    Zen
             
                 </a>
             
@@ -634,12 +647,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Apr 05 2020 21:41:59 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Apr 06 2020 13:14:45 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="plugin-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing KASLR slide values</h1>
 <ul>
-<li>Last edited: March 15, 2020</li>
-<li>Supported version: 0.5.6</li>
+<li>Supported version: 0.5.7</li>
 </ul>
 <h2 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="plugin-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing KASLR slide values</h2>
 <p>This section is for users who wish to understand and fix &quot;Couldn&apos;t allocate runtime area&quot; errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.</p>
@@ -662,45 +674,58 @@ Couldn&apos;t allocate runtime area
 <h2 id="so-how-do-i-fix-this"><a name="so-how-do-i-fix-this" class="plugin-anchor" href="#so-how-do-i-fix-this"><i class="fa fa-link" aria-hidden="true"></i></a>So how do I fix this?</h2>
 <p>The real fix to this is quite simple actually, the process is both the same for Clover and OpenCore users. What you&apos;ll need:</p>
 <ul>
-<li>Clover users:<ul>
-<li><a href="https://github.com/acidanthera/AptioFixPkg/releases" target="_blank">AptioMemoryFix</a>(Don&apos;t mix Aptio fixes together or use OsxAptioFixDrvX, only AptioMemoryFix is supported in this guide)</li>
-<li>Clover Shell(most users already have this included, usually called shell64.efi or some variation)</li>
+<li><p><strong>Clover users</strong>:</p>
+<ul>
+<li>Clover Shell(most users already have this included, usually called shell64.efi or some variation)<ul>
+<li>This will be found under <code>EFI/CLOVER/tools</code></li>
+<li>If you&apos;re missing this, you can grab it from the <a href="https://github.com/CloverHackyColor/CloverBootloader/releases" target="_blank">CLOVER.zip</a></li>
 </ul>
 </li>
-<li>OpenCore users:<ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">FwRuntimeServices</a></li>
-<li><a href="https://github.com/acidanthera/OpenCoreShell/releases" target="_blank">OpenCoreShell</a>(Don&apos;t forget to enable this under <code>Root-&gt;Misc-&gt;Tools</code>)</li>
-<li>Config.plist settings:<ul>
-<li>AvoidRuntimeDefrag: <code>YES</code><ul>
-<li>Fixes UEFI runtime services like date, time, NVRAM, etc</li>
+<li><a href="https://github.com/ReddestDream/OcQuirks/releases" target="_blank">OcQuirks</a>(Don&apos;t mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide)<ul>
+<li>Make sure this is inside <code>EFI/CLOVER/drivers/UEFI</code></li>
 </ul>
 </li>
-<li>DevirtualiseMmio: <code>YES</code><ul>
-<li>Reduces stolen memory footprint so we&apos;re given more options for slide values, <strong>do not use on AMD CPU based systems</strong></li>
+<li>OpenRuntime.efi(Bundled with OcQuirks)<ul>
+<li>Make sure this is inside <code>EFI/CLOVER/drivers/UEFI</code></li>
 </ul>
 </li>
-<li>EnableSafeModeSlide: <code>YES</code><ul>
-<li>Allows us to use slide in safe mode, just so if you have other issues troubleshooting won&apos;t mess it up.</li>
-</ul>
-</li>
-<li>EnableWriteUnprotector: <code>YES</code><ul>
-<li>Allows us to write to certain areas that the firmware locks, specifically the CR0 register.</li>
-</ul>
-</li>
-<li>ProvideCustomSlide: <code>YES</code><ul>
-<li>Fixes slide values to <em>hopefully</em> use valid regions</li>
-</ul>
-</li>
-<li>SetupVirtualMap: <code>YES</code><ul>
-<li>Creates a layer between macOS and your memory map for greater support and fewer chances of insecure write access.</li>
-</ul>
-</li>
-<li>ShrinkMemoryMap: <code>YES</code><ul>
-<li>Fixes issues with very large memory maps that don&apos;t fit, very useful for X99 and X299 platforms and sometimes for Z390.</li>
+<li>OcQuirks.plist(Bundled with OcQuirks)<ul>
+<li>Make sure this is inside <code>EFI/CLOVER/drivers/UEFI</code></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><p><strong>OpenCore users</strong>:</p>
+<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenRuntime</a></li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenShell</a>(Don&apos;t forget to enable this under <code>Root -&gt; Misc -&gt; Tools</code>)</li>
+</ul>
+</li>
+</ul>
+<p>And we&apos;ll also need to configure our config.plist -&gt; Booter(for OpenCore) or OcQuirks.plist(for Clover):</p>
+<ul>
+<li><strong>AvoidRuntimeDefrag</strong>: YES<ul>
+<li>Fixes UEFI runtime services like date, time, NVRAM, power control, etc</li>
+</ul>
+</li>
+<li><strong>DevirtualiseMmio</strong>: YES<ul>
+<li>Reduces Stolen Memory Footprint, expands options for <code>slide=N</code> values and very helpful with fixing Memory Allocation issues on Z390.</li>
+</ul>
+</li>
+<li><strong>EnableSafeModeSlide</strong>: YES<ul>
+<li>Allows for slide values to be used in Safemode</li>
+</ul>
+</li>
+<li><strong>ProtectUefiServices</strong>: NO<ul>
+<li>Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, 300 series and newer systems like Ice Lake and Comet Lake</li>
+</ul>
+</li>
+<li><strong>ProvideCustomSlide</strong>: YES<ul>
+<li>This makes sure the kernel will only choose good regions and avoid those that may result inboot failures. It&apos;s still random but omits those bad reions in its randomization</li>
+</ul>
+</li>
+<li><strong>RebuildAppleMemoryMap</strong>: YES<ul>
+<li>Generates Memory Map compatible with macOS, this makes sure our memory map will fit to what the kernel expects</li>
 </ul>
 </li>
 </ul>
@@ -726,6 +751,8 @@ Couldn&apos;t allocate runtime area
 </ul>
 </li>
 </ul>
+<h2 id="test-boot"><a name="test-boot" class="plugin-anchor" href="#test-boot"><i class="fa fa-link" aria-hidden="true"></i></a>Test boot</h2>
+<p>With our adjusted EFI, config.plist and BIOS settings, it&apos;s time we try out our new setup. If you still have issues, well it looks like we&apos;ll need to do a deep dive and calculate our slide value</p>
 <h2 id="finding-the-slide-value"><a name="finding-the-slide-value" class="plugin-anchor" href="#finding-the-slide-value"><i class="fa fa-link" aria-hidden="true"></i></a>Finding the Slide value</h2>
 <p>Now what you&apos;ll want to do is open the EFI shell in your boot manager of choice and run <code>memmap</code>. This will give you a list of all pages and their sizes. This is where the fun begins.</p>
 <p>Example of what you&apos;ll see:</p>
@@ -856,7 +883,7 @@ Couldn&apos;t allocate runtime area
 <blockquote>
 <p>But wait for just a second, this is higher than 256!</p>
 </blockquote>
-<p>That is correct, this is caused by memory maps that include <code>Above4GDecoding</code> sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be <code>0000000000100000</code>)</p>
+<p>That is correct, this is caused by memory maps that include <code>Above4GDecoding</code> sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be <code>0000000000100000</code>).</p>
 <p>And just to make it a bit clearer on the formula:</p>
 <p>(HEX - <code>0x100000</code>)/<code>0x200000</code> = Slide Value in HEX</p>
 <p><code>0x100000</code> + (Slide Value in HEX * <code>0x200000</code>) = Your original HEX value(if not then add +1 to your slide value)</p>
@@ -876,7 +903,7 @@ Directory of fs0:\
 
 fs0:\&gt; memmap &gt; memmap.txt
 </code></pre>
-<p>This will add a <code>memmap.txt</code> file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord and type <code>$slide [insert a link to memmap.txt]</code>. Do note that this doesn&apos;t always work so so may still need to do this manually.</p>
+<p>This will add a <code>memmap.txt</code> file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type <code>$slide [insert a link to memmap.txt]</code></p>
 <h2 id="using-devirtualisemmio"><a name="using-devirtualisemmio" class="plugin-anchor" href="#using-devirtualisemmio"><i class="fa fa-link" aria-hidden="true"></i></a>Using DevirtualiseMmio</h2>
 <p>DevirtualiseMmio is quite an interesting quirk, specifically in that it gets around a huge hurdle with many PCI device systems like some Z390 boards and virtually all HEDT boards like X99 and X299. How it does this is it takes MMIO regions and removes runtime attributes allowing them to be used as space for the kernel to sit comfortably, pair this with <code>ProvideCustomSlide</code> qurik means we can keep the secuirty feature of slide while also getting a bootable machine.</p>
 <p>For extremely problamatic systems like Threadripper TRX40 19H, we need to find specific regions that aren&apos;t required for proper operation. This is where <code>MmioWhitelist</code> comes into play. Note that whitelisting isn&apos;t required for most systems</p>
@@ -946,7 +973,7 @@ MMIO devirt 0xFF000000 -&gt; 4278190080</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing KASLR slide values","level":"7.3","depth":1,"next":{"title":"Disabling unsupported GPUs","level":"7.4","depth":1,"path":"extras/spoof.md","ref":"extras/spoof.md","articles":[]},"previous":{"title":"iGPU Patching","level":"7.2","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-04-05T21:41:59.464Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-05T21:44:01.083Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing KASLR slide values","level":"7.3","depth":1,"next":{"title":"Disabling unsupported GPUs","level":"7.4","depth":1,"path":"extras/spoof.md","ref":"extras/spoof.md","articles":[]},"previous":{"title":"iGPU Patching","level":"7.2","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kalsr-fix.md","mtime":"2020-04-06T13:14:45.848Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-06T13:20:09.069Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
