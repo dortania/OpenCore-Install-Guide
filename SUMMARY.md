@@ -52,6 +52,7 @@
 * [iGPU Patching](/extras/gpu-patches.md)
 * [Fixing KASLR slide values](/extras/kalsr-fix.md)
 * [Disabling unsupported GPUs](/extras/spoof.md)
+* [Clover Conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/clover-conversion)
 
 ## Misc
 
