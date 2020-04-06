@@ -111,7 +111,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 * **RebuildAppleMemoryMap**: YES
    * Generates Memory Map compatible with macOS
 * **SetupVirtualMap**: NO
-   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
+   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: YES
@@ -266,7 +266,7 @@ These values are based of those calculated in [OpenCore debugging](/troubleshoot
 
 **Security**: Security is pretty self-explanatory, **do not skip**
 
-We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `RequireVault` and `ScanPolicy`
+We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 
 * **AllowNvramReset**: YES
    * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
