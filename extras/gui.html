@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Windows install · GitBook</title>
+        <title>Add GUI and Bootchime · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="linux-install.html" />
+    <link rel="next" href="gpu-patches.html" />
     
     
-    <link rel="prev" href="mac-install.html" />
+    <link rel="prev" href="legacy.html" />
     
 
     </head>
@@ -111,9 +111,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="opencore-efi.html">
+        <li class="chapter " data-level="1.2" data-path="../installer-guide/opencore-efi.html">
             
-                <a href="opencore-efi.html">
+                <a href="../installer-guide/opencore-efi.html">
             
                     
                     Creating the USB
@@ -125,9 +125,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="mac-install.html">
+        <li class="chapter " data-level="1.2.1" data-path="../installer-guide/mac-install.html">
             
-                <a href="mac-install.html">
+                <a href="../installer-guide/mac-install.html">
             
                     
                     macOS install
@@ -138,9 +138,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.2" data-path="winblows-install.html">
+        <li class="chapter " data-level="1.2.2" data-path="../installer-guide/winblows-install.html">
             
-                <a href="winblows-install.html">
+                <a href="../installer-guide/winblows-install.html">
             
                     
                     Windows install
@@ -151,9 +151,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="linux-install.html">
+        <li class="chapter " data-level="1.2.3" data-path="../installer-guide/linux-install.html">
             
-                <a href="linux-install.html">
+                <a href="../installer-guide/linux-install.html">
             
                     
                     Linux install
@@ -182,9 +182,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../extras/acpi.html">
+        <li class="chapter " data-level="1.4" data-path="acpi.html">
             
-                <a href="../extras/acpi.html">
+                <a href="acpi.html">
             
                     
                     Getting started with ACPI
@@ -419,9 +419,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.5" data-path="../extras/msr-lock.html">
+        <li class="chapter " data-level="5.1.5" data-path="msr-lock.html">
             
-                <a href="../extras/msr-lock.html">
+                <a href="msr-lock.html">
             
                     
                     Fixing CFG Lock
@@ -542,9 +542,9 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="../extras/legacy.html">
+        <li class="chapter " data-level="7.1" data-path="legacy.html">
             
-                <a href="../extras/legacy.html">
+                <a href="legacy.html">
             
                     
                     Legacy Install
@@ -555,9 +555,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.2" data-path="../extras/gui.html">
+        <li class="chapter active" data-level="7.2" data-path="gui.html">
             
-                <a href="../extras/gui.html">
+                <a href="gui.html">
             
                     
                     Add GUI and Bootchime
@@ -568,9 +568,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="../extras/gpu-patches.html">
+        <li class="chapter " data-level="7.3" data-path="gpu-patches.html">
             
-                <a href="../extras/gpu-patches.html">
+                <a href="gpu-patches.html">
             
                     
                     iGPU Patching
@@ -581,9 +581,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../extras/kalsr-fix.html">
+        <li class="chapter " data-level="7.4" data-path="kalsr-fix.html">
             
-                <a href="../extras/kalsr-fix.html">
+                <a href="kalsr-fix.html">
             
                     
                     Fixing KASLR slide values
@@ -594,9 +594,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5" data-path="../extras/spoof.html">
+        <li class="chapter " data-level="7.5" data-path="spoof.html">
             
-                <a href="../extras/spoof.html">
+                <a href="spoof.html">
             
                     
                     Disabling unsupported GPUs
@@ -657,7 +657,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Windows install</a>
+        <a href=".." >Add GUI and Bootchime</a>
     </h1>
 </div>
 
@@ -675,33 +675,137 @@
                                 <blockquote>
 <p><em>Last modified: Mon Apr 06 2020 15:13:03 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="making-the-installer-in-windows"><a name="making-the-installer-in-windows" class="plugin-anchor" href="#making-the-installer-in-windows"><i class="fa fa-link" aria-hidden="true"></i></a>Making the installer in Windows</h1>
+<h1 id="opencore-beauty-treatment"><a name="opencore-beauty-treatment" class="plugin-anchor" href="#opencore-beauty-treatment"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore beauty treatment</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
-<p>While you don&apos;t need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.</p>
-<p>To start you&apos;ll need the following:</p>
+<p>Main thing this guide will go over:</p>
 <ul>
-<li>4GB USB Stick</li>
-<li><a href="https://github.com/corpnewt/gibMacOS" target="_blank">GibMacOS</a></li>
+<li>Giving OpenCore a GUI</li>
+<li>Setting up a bootchime</li>
 </ul>
-<h2 id="downloading-macos"><a name="downloading-macos" class="plugin-anchor" href="#downloading-macos"><i class="fa fa-link" aria-hidden="true"></i></a>Downloading macOS</h2>
-<p>To start, open gibMacOS.bat as Admin and select <code>Toggle Recovery-Only</code>:</p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668211243554963533/unknown.png" alt=""></p>
-<p>Now search through for your desired version of macOS, for this example we&apos;ll choose option 5 for macOS Catalina:</p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668211633105010718/unknown.png" alt=""></p>
-<p>This will download the RecoveryHDMetaDmg.pkg to <code>\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx</code></p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668211921484382218/unknown.png" alt=""></p>
-<h2 id="making-the-installer"><a name="making-the-installer" class="plugin-anchor" href="#making-the-installer"><i class="fa fa-link" aria-hidden="true"></i></a>Making the installer</h2>
-<p>Next open <code>makeinstall.bat</code> as Admin and select your drive with option O for OpenCore( ex: 1O).</p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668213205579071598/unknown.png" alt=""></p>
-<p>Once your drive is formatted, it will then ask you for the <code>RecoveryHDMetaDMG.pkg</code> that we downloaded earlier. Top right of the file window will let you copy the file path:</p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668215775378800640/unknown.png" alt=""></p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668221636863852578/unknown-2.png" alt=""></p>
-<p>makeinstall will finish up by installing OpenCore to your USB&apos;s EFI System Partition, you can find this partition labeled as <code>BOOT</code>:</p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668221887163400265/unknown.png" alt=""></p>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/668222277195661353/unknown.png" alt=""></p>
-<h3 id="now-with-all-this-done-return-to-creating-the-usb-to-finish-up-your-work"><a name="now-with-all-this-done-return-to-creating-the-usb-to-finish-up-your-work" class="plugin-anchor" href="#now-with-all-this-done-return-to-creating-the-usb-to-finish-up-your-work"><i class="fa fa-link" aria-hidden="true"></i></a>Now with all this done, return to <a href="opencore-efi.html">Creating the USB</a> to finish up your work</h3>
+<h2 id="setting-up-opencores-gui"><a name="setting-up-opencores-gui" class="plugin-anchor" href="#setting-up-opencores-gui"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up OpenCore&apos;s GUI</h2>
+<p>So to get started, we&apos;re gonna need 0.5.7 as this build version has the GUI included with the rest of the files. If you&apos;re on an older version, I recommend updating: <a href="../post-install/update.html">Updating OpenCore</a></p>
+<p>Once that&apos;s done, we&apos;ll need a couple things:</p>
+<ul>
+<li><a href="https://github.com/acidanthera/OcBinaryData" target="_blank">Binary Resources</a></li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCanopy.efi</a></li>
+</ul>
+<p>Once you have both of these, we&apos;ll next want to add it to our EFI partition:</p>
+<ul>
+<li>Add the Resources folder to EFI</li>
+<li>Add OpenCanopy.efi to EFI/Drivers</li>
+</ul>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/696734012252880926/Screen_Shot_2020-04-06_at_8.51.39_AM.png" alt=""></p>
+<p>Now in our config.plist, we have 2 things we need to fix:</p>
+<ul>
+<li><code>Misc -&gt; PickerMode -&gt; External</code></li>
+<li><code>UEFI -&gt; Drivers</code> and add OpenCanopy.efi</li>
+</ul>
+<p>Once all this is saved, you can reboot and be greeted with a true Mac-like GUI</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/693871107354394674/vmware_2019-10-06_19-47-27.png" alt=""></p>
+<h2 id="setting-up-bootchime-with-audiodxe"><a name="setting-up-bootchime-with-audiodxe" class="plugin-anchor" href="#setting-up-bootchime-with-audiodxe"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up Bootchime with AudioDxe</h2>
+<p>So to start, we&apos;ll need a couple things:</p>
+<ul>
+<li>Onboard audio output<ul>
+<li>USB DACs will not work</li>
+</ul>
+</li>
+<li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AudioDxe</a> in both EFI/OC/Drivers and UEFI -&gt; Drivers</li>
+<li><a href="https://github.com/acidanthera/OcBinaryData" target="_blank">Binary Resources</a><ul>
+<li>Add the Resources folder to EFI/OC, just like we did with the OpenCore GUI section</li>
+</ul>
+</li>
+<li>Debug version of OpenCore with logging enabled<ul>
+<li>See <a href="../troubleshooting/debug.html">OpenCore Debugging</a> for more info</li>
+</ul>
+</li>
+</ul>
+<p><strong>Settings up NVRAM</strong>:</p>
+<ul>
+<li>NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82:<ul>
+<li><code>SystemAudioVolume | Data | 0x46</code></li>
+<li>This is the bootchime and screenreader volume, note it&apos;s in hexidecimal so would become <code>70</code> in decimal</li>
+</ul>
+</li>
+</ul>
+<p><strong>Setting up UEFI -&gt; Audio:</strong></p>
+<ul>
+<li><p><strong>AudioCodec:</strong></p>
+<ul>
+<li>Codec address of Audio controller</li>
+<li>To find yours:<ul>
+<li>Check IOReg -&gt; HDEF and see the <code>IOHDACodecAddress</code> property</li>
+<li>ex: <code>0x0</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Audio Device:</strong></p>
+<ul>
+<li>PciRoot of audio controller</li>
+<li>Run <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> to find the path:<ul>
+<li><code>/path/to/gfxutil -f HDEF</code></li>
+<li>ex: <code>PciRoot(0x0)/Pci(0x1f,0x3)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>AudioOut:</strong></p>
+<ul>
+<li>The specific output of your Audio controller, easiest way to find the right one is to go through each one(from 0 to N - 1)</li>
+<li>ex: <code>2</code><ul>
+<li>You can find all the ones for your codec in the OpenCore debug logs:</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-text">06:065 00:004 OCAU: Matching PciRoot(0x0)/Pci(0x1F,0x3)/VenMsg(A9003FEB-D806-41DB-A491-5405FEEF46C3,00000000)...
+06:070 00:005 OCAU: 1/2 PciRoot(0x0)/Pci(0x1F,0x3)/VenMsg(A9003FEB-D806-41DB-A491-5405FEEF46C3,00000000) (5 outputs) - Success
+</code></pre>
+<ul>
+<li><p><strong>AudioSupport:</strong></p>
+<ul>
+<li>Set this to <code>True</code></li>
+</ul>
+</li>
+<li><p><strong>MinimumVolume:</strong></p>
+<ul>
+<li>Volume level from <code>0</code> to <code>100</code></li>
+<li>To not blow the speakers, set it to <code>70</code></li>
+<li>Note bootchime will not play if MinimumVolume is higher than <code>SystemAudioVolume</code></li>
+</ul>
+</li>
+<li><p><strong>PlayChime:</strong></p>
+<ul>
+<li>Set this to <code>True</code></li>
+</ul>
+</li>
+<li><p><strong>VolumeAmplifier:</strong></p>
+<ul>
+<li>The Volume amplification, value will differ depending on your codec</li>
+<li>Formula is as follows:<ul>
+<li>(SystemAudioVolume * VolumeAmplifier)/100 = Raw Volume(but cannot exceed 100)</li>
+<li>ex: (<code>70</code> <em> VolumeAmplifier)/<code>100</code> = <code>100</code>  -&gt; (<code>100</code> </em> <code>100</code>) / <code>70</code> = VolumeAmplifier = <code>142.9</code>(we&apos;ll round it to <code>143</code> for simplicity)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Once done, you should get something like this:</p>
+<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/694692811643027517/Screen_Shot_2020-03-31_at_5.40.14_PM.png" alt=""></p>
+<p><strong>Note for visually impaired</strong>:</p>
+<ul>
+<li>OpenCore hasn&apos;t forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault voiceover with these 2 settings:<ul>
+<li><code>Misc -&gt; PickerAudioAssist -&gt; True</code> to enable picker audio</li>
+<li><code>UEFI -&gt; Protocols -&gt; AppleAudio -&gt; True</code> to enable FileVault voice over<ul>
+<li>See<a href="../post-install/security.html">Security and FileVault</a> on how to setup the rest for proper FileVault support</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -729,12 +833,12 @@
 
             
                 
-                <a href="mac-install.html" class="navigation navigation-prev " aria-label="Previous page: macOS install">
+                <a href="legacy.html" class="navigation navigation-prev " aria-label="Previous page: Legacy Install">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="linux-install.html" class="navigation navigation-next " aria-label="Next page: Linux install">
+                <a href="gpu-patches.html" class="navigation navigation-next " aria-label="Next page: iGPU Patching">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -745,7 +849,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Windows install","level":"1.2.2","depth":2,"next":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"previous":{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/winblows-install.md","mtime":"2020-04-06T15:13:03.391Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-06T15:18:45.394Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Add GUI and Bootchime","level":"7.2","depth":1,"next":{"title":"iGPU Patching","level":"7.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gui.md","mtime":"2020-04-06T15:13:03.387Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-06T15:18:45.394Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
