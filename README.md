@@ -11,7 +11,7 @@ Please remember that OpenCore is still new and currently in beta. Unless you wan
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
-**This guide supports 0.5.6**, newer versions will require you to read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf). Guide will be updated soon after each [OpenCore release](https://github.com/acidanthera/OpenCorePkg/releases)
+**This guide supports 0.5.7**, newer versions will require you to read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf). Guide will be updated soon after each [OpenCore release](https://github.com/acidanthera/OpenCorePkg/releases)
 
 ### Advantages of OpenCore
 

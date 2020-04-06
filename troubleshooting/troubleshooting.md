@@ -334,7 +334,6 @@ For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. 
 * DRM Broken
 * "Memory Modules Misconfigured" on MacPro7,1
 * Apps crashing on AMD
-* No temperature/fan sensor output
 
 ## Broken iMessage and Siri 
 
@@ -435,6 +434,8 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 * Incorrect resolution with OpenCore
 * No temperature/fan sensor output
 * Can't find Windows/Bootcamp drive in picker
+* Booting Windows results in Bluescreen or Linux crashes
+* Booting Windows error: `OCB: StartImage failed - Already started`
 
 ## Can't run `acpidump.efi`
 
@@ -509,3 +510,16 @@ Now to get onto troubleshooting:
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
 * Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
+
+
+## Booting Windows results in Bluescreen or Linux crashes
+
+This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your fimrware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
+
+Common Windows error code:
+
+* `0xc000000d`
+
+## Booting Windows error: `OCB: StartImage failed - Already started`
+
+This is due to OpenCore getting confused when trying to boot boot Windows and acidentally thinking it's booting OpenCore. This can be avoided by either adding a custom drive path under entires and have Windows with it's bootloader renamed *or* move Windows to it's own drive

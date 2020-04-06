@@ -1,4 +1,4 @@
-# AMD
+# Ryzen and Threadripper(17h)
 
 * Supported version: 0.5.7
 
@@ -17,7 +17,6 @@ Now with all that, we'll need some things to get started:
 * [Sample.plist](https://github.com/acidanthera/OpenCorePkg/releases): This is found under the Docs folder of the release download
 * [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore): Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
    * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (Supports 10.13, 10.14, and 10.15)
-   * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (Supports 10.13, 10.14, and 10.15)
 
 Now with those downloaded, we can get to really get started:
 
@@ -76,7 +75,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/456913818467958789/681325158815760384/Screen_Shot_2020-02-23_at_7.22.44_PM.png)
+![Booter](https://cdn.discordapp.com/attachments/683011276938543134/696571557115461632/Screen_Shot_2020-04-05_at_10.04.04_PM.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -91,7 +90,7 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: NO
-   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful for most firmware though breaks on most AMD systems.
+   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
 * **DisableSingleUser**: NO
    * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -113,13 +112,12 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
-   * Generates Memory Map compatible with macOS, recommended over using `EnableWriteUnprotector` on Skylake and newer
-* **SetupVirtualMap**: YES
-   * Fixes SetVirtualAddresses calls to virtual addresses
-
+   * Generates Memory Map compatible with macOS
+* **SetupVirtualMap**: NO
+   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
-* **SyncRuntimePermissions**: NO
+* **SyncRuntimePermissions**: YES
     * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
 ## DeviceProperties
@@ -128,7 +126,7 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
 
 **Add**: Sets device properties from a map.
 
-By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
+By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be VoodooHDA, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
 TL;DR, delete all the PciRoot's here as we won't be using this section.
 
@@ -162,7 +160,6 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 Kernel patches:
 * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
-* [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (10.13, 10.14, and 10.15)
 
 To merge:
 * Open both files, 
@@ -218,8 +215,10 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
    * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **PickerAttributes**:
+* **ConsoleAttributes**: `0`
    * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+* **PickerAttributes**: `0`
+   * Used for setting custom picker attributes, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAudioAssist**: NO
    * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO
@@ -272,7 +271,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `RequireSignature`, `Req
    * Self-explanatory, enables or disables
 * **Path** 
    * Path to file after the `Tools` folder
-   * ex: [Shell.efi](https://github.com/acidanthera/OpenCoreShell/releases)
+   * ex: [OpenShell.efi](https://github.com/acidanthera/OpenCorePkg/releases)
 
 **Entries**: Used for specifying irregular boot paths that can't be found naturally with OpenCore
 

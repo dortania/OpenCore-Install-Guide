@@ -77,7 +77,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/456913818467958789/681325158815760384/Screen_Shot_2020-02-23_at_7.22.44_PM.png)
+![Booter](https://cdn.discordapp.com/attachments/683011276938543134/696573787994325013/Screen_Shot_2020-04-05_at_10.15.09_PM.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -87,7 +87,7 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 
 **Quirks**:
 
-Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `SetupVirtualMap`
+Settings relating to boot.efi patching and firmware fixes, one we need to change is `RebuildAppleMemoryMap`
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -114,9 +114,9 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
-   * Generates Memory Map compatible with macOS, recommeneded for ATPIO IV firmwares and HEDT platforms
+   * Generates Memory Map compatible with macOS
 * **SetupVirtualMap**: YES
-   * Fixes SetVirtualAddresses calls to virtual addresses
+   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: NO
@@ -255,8 +255,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **PickerAttributes**:
+* **ConsoleAttributes**: `0`
    * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+* **PickerAttributes**: `0`
+   * Used for setting custom picker attributes, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAudioAssist**: NO
    * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO

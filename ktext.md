@@ -191,4 +191,5 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 **AMD Config.plist**
 
-* [AMD](/AMD/AMD-config.md)
+* [Bulldozer/Jaguar](AMD/fx.md)
+* [Zen](AMD/zen.md)

@@ -24,7 +24,7 @@ Depending on which OS you're on, see your specific section on making the USB, th
 
 To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in OpenCorePkg's releases page(this will already be done on the `BOOT` USB drive for windows users):
 
-![base EFI folder](https://i.imgur.com/PvNIR4y.png)
+![base EFI folder](https://cdn.discordapp.com/attachments/683011276938543134/696593582701805568/Screen_Shot_2020-04-05_at_11.33.56_PM.png)
 
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
@@ -37,28 +37,21 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
       * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
    * HiiDatabase.efi
       * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
+   * OpenCanopy.efi
+      * This is OpenCore's optional GUI, we'll be going over how to set this up in post-install so remove this for now
 
 * **Remove everything from Tools:**
-   * BootKicker.efi
-      * Used for fixing the Apple picker on genuine Macs
-   * CleanNvram.efi
-      * We'll be using OpenCore's built-in function
-   * GopStop.efi
-      * Used for [testing GOP](https://github.com/acidanthera/OcSupportPkg/tree/master/Application/GopStop)
-   * HdaCodecDump.efi
-      * Used for finding info for AudioDxe setup, this is not covered in this guide so not needed
-   * VerifyMsrE2.efi
-      * Used for [verifying MSR lock](/extras/msr-lock.md), for install we can ignore
+   * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting pruposes
       
 A cleaned up EFI:
 
-![Clean EFI](https://i.imgur.com/2INJYol.png)
+![Clean EFI](https://cdn.discordapp.com/attachments/683011276938543134/696593842849316904/Screen_Shot_2020-04-05_at_11.34.58_PM.png)
 
 Now you can place **your** necessary firmware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
 Here's what a populated EFI can look like:
 
-![Populated EFI folder](https://i.imgur.com/HVuyghf.png)
+![Populated EFI folder](https://cdn.discordapp.com/attachments/683011276938543134/696594137591578644/Screen_Shot_2020-04-05_at_11.36.13_PM.png)
 
 **Reminder**:
 

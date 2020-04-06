@@ -73,7 +73,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/683011276938543134/683505771153326081/Screen_Shot_2020-02-29_at_7.47.35_PM.png)
+![Booter](https://cdn.discordapp.com/attachments/683011276938543134/696572990342823976/Screen_Shot_2020-04-05_at_10.11.39_PM.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -83,7 +83,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 **Quirks**:
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio` and `SetupVirtualMap`
+Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`, `DisableVariableWrite` and `RebuildAppleMemoryMap` 
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -91,8 +91,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
    * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
 * **DisableSingleUser**: NO
    * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
-* **DisableVariableWrite**: NO
-   * Needed for systems with non-functioning NVRAM, you can verify [here](/post-install/nvram.md) if yours works
+* **DisableVariableWrite**: YES
+   * Needed for systems with non-functioning NVRAM, you can verify [here](/post-install/nvram.md) if yours works. For X99 we'll assume NVRAM doesn't work but post install you can double check
 * **DiscardHibernateMap**: NO
    * Reuse original hibernate memory map, only needed for certain legacy hardware 
 * **EnableSafeModeSlide**: YES
@@ -112,7 +112,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 * **RebuildAppleMemoryMap**: YES
    * Generates Memory Map compatible with macOS, recommeneded for ATPIO IV firmwares and HEDT platforms
 * **SetupVirtualMap**: YES
-   * Fixes SetVirtualAddresses calls to virtual addresses
+   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: NO
@@ -206,8 +206,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **PickerAttributes**:
+* **ConsoleAttributes**: `0`
    * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+* **PickerAttributes**: `0`
+   * Used for setting custom picker attributes, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAudioAssist**: NO
    * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO
