@@ -81,7 +81,7 @@ So the process goes as follows:
 **macOS Catalina**
 
 * 10.15.0
-   * [Requires proper EC](https://khronokernel.github.io/Getting-Started-With-ACPI/)
+   * [Requires proper EC](https://acpi.dortania.ml/)
    * Dual socket and most AMD CPUs need [AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
    * MacPro5,1 support has been dropped
 * 10.15.1

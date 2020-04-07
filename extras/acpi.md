@@ -7,4 +7,4 @@ This section is dedicated to the process of both dumping and making ACPI tables.
 
 Guide has been move here: 
 
-# [Getting Started With ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/)
+# [Getting Started With ACPI](https://acpi.dortania.ml/)

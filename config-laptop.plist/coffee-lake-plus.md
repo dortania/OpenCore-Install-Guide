@@ -34,13 +34,13 @@ Now with those downloaded, we can get to really get started:
 
 **Add:**
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://khronokernel.github.io/Getting-Started-With-ACPI/)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://acpi.dortania.ml/)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
    * Allows for native CPU power management on Haswell and newer, Clover alternative would be under `Acpi -> GenerateOptions -> PluginType`
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
-  * This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for 9t gen and newer boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://khronokernel.github.io/Getting-Started-With-ACPI/) page.
+  * This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for 9t gen and newer boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://acpi.dortania.ml/) page.
 * [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl)
    * 9th gen and newer don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support and uses the scope `PCI0.LPCB`, this is the most common scope so a pre-made can be found here: [SSDT-PMC.aml](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/SSDT-PMC.aml)
 * [SSDT-PNLF](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/SSDT-PNLF.dsl)
@@ -53,7 +53,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/ACPI.
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://khronokernel.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://acpi.dortania.ml/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
 
 **Block**
@@ -65,7 +65,7 @@ This blocks certain ACPI tabes from loading, for us we can ignore this
 This section allows us to dynamically modify parts of the ACPI \(DSDT, SSDT, etc.\) via OpenCore. For us, we'll need a couple:
 
 * EC Rename
-   * Needed for Catalina support as it doesn't like the standard one found on most PCs, follow the [Fixing Embedded Controllers (Laptop) Guide](https://khronokernel.github.io/Getting-Started-With-ACPI/) on how to determine what EC you have and apply the appropriate patches
+   * Needed for Catalina support as it doesn't like the standard one found on most PCs, follow the [Fixing Embedded Controllers (Laptop) Guide](https://acpi.dortania.ml/) on how to determine what EC you have and apply the appropriate patches
 * OSI rename
    * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT
 
