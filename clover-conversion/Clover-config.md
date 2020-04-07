@@ -144,7 +144,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **DefaultBackgroundColor**:
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> DefaultBackgroundColor`
    * `00000000`: Syrah Black
-   * `BFBFBF00`: Light Gary
+   * `BFBFBF00`: Light Gray
    * To calcuate your own, convert an `RGB` value to `HEX`
 
 **EFILoginHiDPI**:
