@@ -1,10 +1,14 @@
 {
-    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "github-edit", "anchors", "last-modified"],
+    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "github-edit", "anchors", "last-modified", "edit-link-plus"],
     "pluginsConfig": {
         "fontsettings": {
             "theme":  "night",
             "family": "sans"
         },
+		"edit-link-plus": {
+		            "base": "https://github.com/dortania/OpenCore-Desktop-Guide"
+			    "label": "Edit This Page"
+		        },
         "github-edit": {
             "repo": "khronokernel/Opencore-Vanilla-Desktop-Guide",
             "branch": "master"
