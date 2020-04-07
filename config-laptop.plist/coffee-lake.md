@@ -332,7 +332,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
    * `00000000`: Syrah Black
-   * `BFBFBF00`: Light Gary
+   * `BFBFBF00`: Light Gray
 
 7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
 
