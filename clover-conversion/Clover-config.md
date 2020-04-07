@@ -304,7 +304,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 **NvidiaGeneric**: 
 * `DeviceProperties -> Add -> PCIRoot... -> model | string | Add the GPU name`
 
-**NvidiaSingle**: See [disabling unsupported GPUs](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/spoof)
+**NvidiaSingle**: See [disabling unsupported GPUs](https://desktop.dortania.ml/post-install/spoof)
 
 **NvidiaNoEFI**:
 * `DeviceProperties -> Add -> PCIRoot... -> NVDA,noEFI | Boolean | True`
