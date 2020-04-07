@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Tue Apr 07 2020 18:30:37 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue Apr 07 2020 23:05:00 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -740,7 +740,7 @@
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
-<li><a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
+<li><a href="https://desktop.dortania.ml/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <p>Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt&apos;s also got a fix: <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a>&apos;s FixHPET option</p>
@@ -851,7 +851,7 @@
 <li>MacBookPro9,x+</li>
 </ul>
 <h2 id="couldnt-allocate-runtime-area-errors"><a name="couldnt-allocate-runtime-area-errors" class="plugin-anchor" href="#couldnt-allocate-runtime-area-errors"><i class="fa fa-link" aria-hidden="true"></i></a><code>Couldn&apos;t allocate runtime area</code> errors?</h2>
-<p>See <a href="https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/extras/kalsr-fix" target="_blank">Fixing KASLR slide values</a></p>
+<p>See <a href="https://desktop.dortania.ml/extras/kalsr-fix" target="_blank">Fixing KASLR slide values</a></p>
 <h2 id="ssdts-not-being-added"><a name="ssdts-not-being-added" class="plugin-anchor" href="#ssdts-not-being-added"><i class="fa fa-link" aria-hidden="true"></i></a>SSDTs not being added</h2>
 <p>So with Opencore, there&apos;s some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:</p>
 <pre><code>* Original Table Header:
@@ -895,8 +895,8 @@
 <li><p><strong>Missing EC patch</strong>: </p>
 <ul>
 <li>For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -&gt; Add, <strong>double check it&apos;s enabled.</strong></li>
-<li>If you don&apos;t have one, grab it here: <a href="https://khronokernel.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a></li>
-<li>Laptop users will need to rename their main EC: <a href="https://khronokernel.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a></li>
+<li>If you don&apos;t have one, grab it here: <a href="https://acpi.dortania.ml/" target="_blank">Getting started with ACPI</a></li>
+<li>Laptop users will need to rename their main EC: <a href="https://acpi.dortania.ml/" target="_blank">Getting started with ACPI</a></li>
 </ul>
 </li>
 <li><p><strong>IRQ conflict</strong>: </p>
@@ -1255,7 +1255,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"khronokernel/Opencore-Vanilla-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-07T18:30:37.799Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-07T18:32:36.924Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-07T23:05:00.357Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-07T23:07:12.193Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
