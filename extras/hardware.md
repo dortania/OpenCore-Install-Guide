@@ -20,7 +20,7 @@ So this little section is for those who are wanting to know whether their hardwa
 
 # GPU Compatibility
 
-* [See GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) for compatible GPUs.
+* [See GPU Buyers Guide](https://gpu.dortania.ml/) for compatible GPUs.
 
 # Motherboard Compatibility
 
@@ -55,6 +55,6 @@ Unsupported ethernet models:
 * Realtek RTL8125(2.5Gbe, mostly found on higher end gaming boards)
    * [Meize's statement on the driver](https://www.insanelymac.com/forum/topic/287161-new-driver-for-realtek-rtl8111/?do=findComment&comment=2705551)
 
-And see [Wireless Buyers Guide](https://khronokernel-7.gitbook.io/wireless-buyers-guide/) for supported wifi cards. All built in motherboard wireless ccards will not work in macOS, they must be swapped.
+And see [Wireless Buyers Guide](https://wifi.dortania.ml/) for supported wifi cards. All built in motherboard wireless ccards will not work in macOS, they must be swapped.
 
 
