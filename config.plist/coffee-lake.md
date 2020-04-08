@@ -126,7 +126,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 ## DeviceProperties
 
-![DeviceProperties](/images/config.plist/coffee-lake/DeviceProperties.png)
+![DeviceProperties](/images/config/config.plist/coffee-lake/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -367,7 +367,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](/images/config.plist/haswell/smbios.png)
+![PlatformInfo](/images/config/config.plist/haswell/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 

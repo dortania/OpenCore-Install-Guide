@@ -30,7 +30,7 @@ Now with those downloaded, we can get to really get started:
 
 ## ACPI
 
-![ACPI](/images/config.plist/ivy-bridge/acpi.png)
+![ACPI](/images/config/config.plist/ivy-bridge/acpi.png)
 
 **Add:**
 
@@ -122,7 +122,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 
 
 ## DeviceProperties
-![DeviceProperties](/images/config.plist/ivy-bridge/DeviceProperties.png)
+![DeviceProperties](/images/config/config.plist/ivy-bridge/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -358,7 +358,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](/images/config.plist/ivy-bridge/smbios.png)
+![PlatformInfo](/images/config/config.plist/ivy-bridge/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
