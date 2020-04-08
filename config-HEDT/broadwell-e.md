@@ -75,7 +75,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](/images/config/config-universal/aptio-iv-booter-hedt)
+![Booter](/images/config/config-universal/aptio-iv-booter-hedt.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -133,7 +133,7 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ## Kernel
 
-![Kernel](/images/config/config-universal/kernel.png)
+![Kernel](/images/config/config-hedt/broadwell-e/kernel.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
@@ -234,7 +234,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Disables the UEFI watchdog, can help with early boot issues
 * **Target**: `67`
    * Shows more debug information, requires debug version of OpenCore
-* **DisplayLevel**: `2147483714`
+* **DisplayLevel**: `2147483650`
    * Shows even more debug information, requires debug version of OpenCore
 
 These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
