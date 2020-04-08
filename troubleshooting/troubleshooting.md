@@ -221,7 +221,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 * Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 * "Waiting for Root Device" or Prohibited Sign error
 * macOS installer in Russian
-* macOS Installer being damadged
+* macOS Installer being damaged
 * Stuck on or near `IOConsoleUsers: gIOScreenLock...`
 * Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 * 300 series Intel stalling on `apfs_module_start...`
@@ -269,7 +269,7 @@ Still didn't work? Well time for the big guns. We'll force remove that exact pro
 
 ![](/images/troubleshooting/troubleshooting-md/lang.jpg)
 
-## macOS Installer being damadged
+## macOS Installer being damaged
 
 If you've download macOS before October 2019, you likely have an expired macOS Installer certificate, there's 2 ways to fix this:
 
