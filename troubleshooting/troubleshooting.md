@@ -212,7 +212,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
 
-![Directory Structure from OpenCore&apos;s DOC](https://i.imgur.com/9RyBQ0L.png)
+![Directory Structure from OpenCore&apos;s DOC](/images/troubleshooting/troubleshooting-md/oc-structure.png)
 
 
 
@@ -267,7 +267,7 @@ Still didn't work? Well time for the big guns. We'll force remove that exact pro
 
 `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
 
-![](https://cdn.discordapp.com/attachments/456913818467958789/673947840791445538/Screen_Shot_2020-02-03_at_10.47.40_AM.png)
+![](/images/troubleshooting/troubleshooting-md/lang.jpg)
 
 ## macOS Installer being damadged
 
@@ -343,7 +343,7 @@ This is a common example of screwed up TSC, for most system add [VoodooTSCSync](
 
 For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
-![](https://cdn.discordapp.com/attachments/478720084072988672/669453323589386254/IMG_20200122_090803.jpg)
+![](/images/troubleshooting/troubleshooting-md/asus-tsc.jpg)
 
 # macOS post-install
 
@@ -361,7 +361,7 @@ For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. 
   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
 
-![](https://i.imgur.com/DtYtwCQ.png)
+![](/images/troubleshooting/troubleshooting-md/en0-built-in.png)
 
 If these fixes do not work, see the [Fixing iServices page](/post-install/iservices.md) for more in-depth guide.
 
@@ -493,7 +493,7 @@ Easy fix, download and install the latest python:
 
 Make sure `Add Python to PATH`
 
-![](https://cdn.discordapp.com/attachments/456913818467958789/668209828958830613/unknown.png)
+![](/images/troubleshooting/troubleshooting-md/python-path.png)
 
 
 ## Windows Startup Disk can't see APFS drives
