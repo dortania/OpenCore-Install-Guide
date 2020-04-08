@@ -133,7 +133,7 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ## Kernel
 
-![Kernel](/images/config/config-hedt/broadwell-e/kernel.png)
+![Kernel](/images/config/config-HEDT/broadwell-e/kernel.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
