@@ -30,7 +30,7 @@ Now with those downloaded, we can get to really get started:
 
 ## ACPI
 
-![ACPI](/images/config.plist/ivy-bridge/acpi.png)
+![ACPI](/images/config/config.plist/ivy-bridge/acpi.png)
 
 **Add:**
 
