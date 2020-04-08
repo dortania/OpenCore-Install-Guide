@@ -144,7 +144,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
     * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
 ## DeviceProperties
-![DeviceProperties](/images/images/config/config-laptop.plist/ivy-bridge/DeviceProperties.png)
+![DeviceProperties](/images/config/config-laptop.plist/ivy-bridge/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -405,7 +405,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](/images/images/config/config-laptop.plist/ivy-bridge/smbios.png)
+![PlatformInfo](/images/config/config-laptop.plist/ivy-bridge/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 

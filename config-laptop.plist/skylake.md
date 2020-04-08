@@ -144,7 +144,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 ## DeviceProperties
 
-![DeviceProperties](/images/images/config/config-laptop.plist/skylake/DeviceProperties.png)
+![DeviceProperties](/images/config/config-laptop.plist/skylake/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -402,7 +402,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](/images/images/config/config-laptop.plist/skylake/smbios.png)
+![PlatformInfo](/images/config/config-laptop.plist/skylake/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
