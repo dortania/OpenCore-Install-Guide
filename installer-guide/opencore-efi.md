@@ -24,7 +24,7 @@ Depending on which OS you're on, see your specific section on making the USB, th
 
 To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in OpenCorePkg's releases page(this will already be done on the `BOOT` USB drive for windows users):
 
-![base EFI folder](https://cdn.discordapp.com/attachments/683011276938543134/696593582701805568/Screen_Shot_2020-04-05_at_11.33.56_PM.png)
+![base EFI folder](/images/post-install/opencore-efi-md/base-efi.png)
 
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
@@ -45,13 +45,13 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
       
 A cleaned up EFI:
 
-![Clean EFI](https://cdn.discordapp.com/attachments/683011276938543134/696593842849316904/Screen_Shot_2020-04-05_at_11.34.58_PM.png)
+![Clean EFI](/images/post-install/opencore-efi-md/clean-efi.png)
 
 Now you can place **your** necessary firmware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
 Here's what a populated EFI can look like:
 
-![Populated EFI folder](https://cdn.discordapp.com/attachments/683011276938543134/696594137591578644/Screen_Shot_2020-04-05_at_11.36.13_PM.png)
+![Populated EFI folder](/images/post-install/opencore-efi-md/populated-efi.png)
 
 **Reminder**:
 

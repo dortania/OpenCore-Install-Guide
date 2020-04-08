@@ -25,11 +25,11 @@ So the process goes as follows:
 
 * For the USB, it must be formatted as GUID. Reason for this is that GUID will autmatically create an EFI partition, though this will be hidden by default so you'll need to mount it with MountEFI.
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/685684724639072296/Screen_Shot_2020-03-06_at_8.06.00_PM.png)
+![](/images/post-install/update-md/usb-erase.png)
 
 * Now you can place your OpenCore EFI on the USB
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/685686265437487158/Screen_Shot_2020-03-06_at_8.12.18_PM.png)
+![](/images/post-install/update-md/usb-folder.png)
 
 3. **Replace the OpenCore files with the ones you just downloaded**
 
@@ -41,7 +41,7 @@ So the process goes as follows:
 
 * You can also update other drivers you have if present, these are just the ones that **must** be updated in order to boot correctly
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/685686106385154073/Screen_Shot_2020-03-06_at_8.10.14_PM.png)
+![](/images/post-install/update-md/usb-folder-highlight.png)
 
 4. **Compare your config.plist to that of the new Sample.plist**
 
@@ -54,7 +54,7 @@ So the process goes as follows:
 
 * Once you've made the adjustments and made sure you config is compliant with the newest release of OpenCore, make sure to double check your setting with the OpenCore Guide on what to set everything to, otherwise read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf) if you want to get a bit more technical.
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/685689391703785501/Screen_Shot_2020-03-06_at_8.24.15_PM.png)
+![](/images/post-install/update-md/oc-config-compare.png)
 
 4. **Boot!**
 

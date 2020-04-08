@@ -45,7 +45,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 | IOName | string | \#display |
 | class-code | data | FFFFFFFF |
 
-![](https://i.imgur.com/IjrDgNz.png)
+![](/images/extras/spoof-md/config-gpu.png)
 
 ### SSDT Method
 
@@ -110,5 +110,5 @@ Source: CorpNewt
 
 So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:
 
-![Credit to CorpNewt for image](https://i.imgur.com/TG3jGBC.png)
+![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
 

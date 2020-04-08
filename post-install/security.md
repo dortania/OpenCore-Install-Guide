@@ -78,11 +78,11 @@ The last one is what we care about: `sign.command`
 
 So when we run this command, it'll look for the EFI folder located beside our Utilities folder, so we want to bring either our personal EFI into the OpenCorePkg folder or bring Utilities into our EFI folder:
 
-![](https://cdn.discordapp.com/attachments/456913818467958789/673348313814401044/Screen_Shot_2020-02-01_at_7.05.29_PM.png)
+![](/images/post-install/security-md/sign.png)
 
 Now we're ready to run `sign.command`: 
 
-![](https://cdn.discordapp.com/attachments/456913818467958789/673348777897099274/Screen_Shot_2020-02-01_at_7.07.28_PM.png)
+![](/images/post-install/security-md/sign-demo.png)
 
 
 **Disabling Vault after setup**:
