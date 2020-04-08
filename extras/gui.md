@@ -21,7 +21,7 @@ Once you have both of these, we'll next want to add it to our EFI partition:
 * Add the Resources folder to EFI/OC
 * Add OpenCanopy.efi to EFI/Drivers
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/693888491603361822/Screen_Shot_2020-03-29_at_12.24.22_PM.png)
+![](/extras/gui-md/folder-gui.png)
 
 Now in our config.plist, we have 2 things we need to fix:
 
@@ -30,7 +30,7 @@ Now in our config.plist, we have 2 things we need to fix:
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/693871107354394674/vmware_2019-10-06_19-47-27.png)
+![](/extras/gui-md/gui.png)
 
 ## Setting up Bootchime with AudioDxe
 
@@ -94,7 +94,7 @@ So to start, we'll need a couple things:
 
 Once done, you should get something like this:
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/694692811643027517/Screen_Shot_2020-03-31_at_5.40.14_PM.png)
+![](/extras/gui-md/audio-config.png)
 
 
 **Note for visually impaired**:

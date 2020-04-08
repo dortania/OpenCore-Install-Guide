@@ -50,7 +50,7 @@
 * [Legacy Install](/extras/legacy.md)
 * [Add GUI and Bootchime](/extras/gui.md)
 * [iGPU Patching](/extras/gpu-patches.md)
-* [Fixing KASLR slide values](/extras/kalsr-fix.md)
+* [Fixing KASLR slide values](/extras/kaslr-fix.md)
 * [Disabling unsupported GPUs](/extras/spoof.md)
 * [Clover Conversion](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion)
 

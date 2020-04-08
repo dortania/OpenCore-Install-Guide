@@ -30,7 +30,7 @@ Now with those downloaded, we can get to really get started:
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/IkLFucw.png)
+![ACPI](/config/config-universal/aptio-v-acpi.png)
 
 **Add:**
 
@@ -98,22 +98,22 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/683011276938543134/683505771153326081/Screen_Shot_2020-02-29_at_7.47.35_PM.png)
+![Booter](/config/config-universal/aptio-v-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
 **MmioWhitelist**:
 
-This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 **Quirks**:
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio` and `SetupVirtualMap`
+Settings relating to boot.efi patching and firmware fixes, ones we need to change are `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and `SetupVirtualMap`
 
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: YES
-   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffeelake
+* **DevirtualiseMmio**: NO
+   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
 * **DisableSingleUser**: NO
    * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -126,25 +126,26 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
    * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
    * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary 
-* **ProtectCsmRegion**: NO
-   * Needed for fixing artefacts and sleep-wake issues, AvoidRuntimeDefrag resolves this already so avoid this quirk unless necessary
+* **ProtectMemoryRegion**: NO
+   * Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares
 * **ProtectSecureBoot**: NO
    * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
-   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
-   * If on Z390, **enable this quirk**
+   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffeelake systems
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
-* **SetupVirtualMap**: YES
-   * Fixes SetVirtualAddresses calls to virtual addresses
-* **ShrinkMemoryMap**: NO
-   * Needed for systems with large memory maps that don't fit, don't use unless necessary
+* **RebuildAppleMemoryMap**: YES
+   * Generates Memory Map compatible with macOS
+* **SetupVirtualMap**: NO
+   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
    * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
+* **SyncRuntimePermissions**: YES
+    * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/kHKNvgl.png)
+![DeviceProperties](/config/config-laptop.plist/coffeelake/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -185,7 +186,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ## Kernel
 
-![Kernel](https://media.discordapp.net/attachments/456913818467958789/681335231080300564/Screen_Shot_2020-02-23_at_8.02.45_PM.png?width=1486&height=1771)
+![Kernel](/config/config-universal/kernel.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
@@ -247,7 +248,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ## Misc
 
-![Misc](https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png)
+![Misc](/config/config-universal/misc.png)
 
 **Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
@@ -258,8 +259,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
 * **HideSelf**: YES
    * Hides the EFI partition as a boot option in OC's boot picker
-* **PickerAttributes**:
+* **ConsoleAttributes**: `0`
    * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+* **PickerAttributes**: `0`
+   * Used for setting custom picker attributes, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAudioAssist**: NO
    * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO
@@ -320,7 +323,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png)
+![NVRAM](/config/config-universal/nvram.png)
 
 **Add**: 
 
@@ -382,7 +385,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](https://i.imgur.com/JpLxh35.png)
+![PlatformInfo](/config/config-laptop.plist/coffeelake/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
@@ -450,7 +453,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518959873425639/Screen_Shot_2020-02-29_at_8.40.06_PM.png)
+![UEFI](/config/config-universal/aptio-v-uefi.png)
 
 **ConnectDrivers**: YES
 

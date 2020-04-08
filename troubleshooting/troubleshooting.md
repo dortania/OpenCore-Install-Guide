@@ -185,7 +185,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 ## `Couldn't allocate runtime area` errors?
 
-See [Fixing KASLR slide values](https://desktop.dortania.ml/extras/kalsr-fix)
+See [Fixing KASLR slide values](https://desktop.dortania.ml/extras/kaslr-fix)
 
 ## SSDTs not being added
 

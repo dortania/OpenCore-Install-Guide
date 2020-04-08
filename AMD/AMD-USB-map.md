@@ -57,7 +57,7 @@ The best way to find controllers is by searching for `XHC` and then looking at t
 
 For today's example, we'll be adding missing ports for the X399 chipset which has the identifier `PTXH`
 
-![PTXH IOReg](https://i.imgur.com/wh7mMa4.png)
+![PTXH IOReg](/images/AMD/AMD-USB-map-md/controller-name.png)
 
 As you can see from the photo above, we're missing a shit ton of ports! Specifically ports POT3, POT4, POT7, POT8, PO12, PO13, PO15, PO16, PO17, PO18, PO19, PO20, PO21, PO22!
 
@@ -65,8 +65,9 @@ So how do we fix this? Well if you look in the corner you'll see the `port` valu
 
 Next, let's take a peek at our DSDT and check for our `PTXH` device:
 
-![](https://i.imgur.com/ofYGYBS.png)
-![](https://i.imgur.com/BZtkLl7.png)
+![](/images/AMD/AMD-USB-map-md/dsdt-1.png)
+![](/images/AMD/AMD-USB-map-md/dsdt-2.png)
+
 All of our ports are here! So why in the world is macOS hiding them? Well there's a couple of reasons but this being the main: Conflicting SMBIOS USB map
 
 Inside the `AppleUSBHostPlatformProperties.kext` you'll find the USB map for most SMBIOS, this means that that machine's USB map is forced onto your system. 
@@ -75,9 +76,9 @@ Well to kick out these bad maps, we gotta make a plugin kext. For us, that's the
 
 Now right-click and press `Show Package Contents`, then navigate to `Contents/Info.plist`
 
-![](https://i.imgur.com/Vfou3S1.png)
+![](/images/AMD/AMD-USB-map-md/usb-plist.png)
 If the port values don't show in Xcode, right click and select `Show Raw Keys/Values`
-![](https://i.imgur.com/ggsZw35.png)
+![](/images/AMD/AMD-USB-map-md/usb-plist-info.png)
 
 
 So what kind of data do we shove into this plist? Well, there are a couple of sections to note:
@@ -118,7 +119,7 @@ Device (PO18)
 ```
 For us, what matters is the `Name (_ADR, 0x12) // _ADR: Address` as this tells us the location of the USB port. This value will be turned into our `port` value on the plist. Some DSDTs don't declare their USB address, for these situations we can see their IOReg properties.
 
-![](https://i.imgur.com/9R6cab8.png)
+![](/images/AMD/AMD-USB-map-md/port-info.png)
 
 **Reminder**: Don't drag and drop the kext, read the guide carefully. Rename `IONameMatch` value to the correct controller you're wanting to map and verify that the ports are named correctly to **your DSDT**. If you could drag and drop it and have it work for everyone there wouldn't be a guide ;p
 
@@ -131,7 +132,7 @@ Now we can finally start to slowly remove unwanted ports from the Info.plist and
 
 Something you may have noticed is that your DSDT is even missing some ports, like for example:
 
-![AsRock B450 missing ports](https://i.imgur.com/xz3p0H4.png)
+![AsRock B450 missing ports](/images/AMD/AMD-USB-map-md/dsdt-missing.png)
 
 In this IOReg, we're missing HS02, HS03, HS04, HS05, etc. When this happens, we actually need to outright remove all our ports from that controller in our DSDT. What this will let us do is allow macOS to build the ports itself instead of basing it off of the ACPI. Save this modified DSDT.aml and place it in your EFI/OC/ACPI folder and specify it in your config.plist -> ACPI -> Add(note that DSDT.aml must be forced to work correctly)
 
@@ -147,7 +148,7 @@ What you'll want to do is find a controller you want to rename, find its full AC
 
 Similar idea to regular SSDT renaming except you need to actually find the controller. This becomes difficult as SSDs, network controllers, etc can also show up as PXSX. Check the ACPI-path in IOreg to find its path:
 
-![](https://i.imgur.com/DLa06XN.png)
+![](/images/AMD/AMD-USB-map-md/acpi-path.png)
 
 As we can see, `IOACPIPlane:/_SB/PC00@0/RP05@1c0004/PXSX@0` would be interpreted as `_SB.PC00.RP05.PXSX`
 

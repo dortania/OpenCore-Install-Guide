@@ -30,7 +30,7 @@ Now with those downloaded, we can get to really get started:
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/IkLFucw.png)
+![ACPI](/config/config-universal/aptio-v-acpi.png)
 
 **Add:**
 
@@ -77,7 +77,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/683011276938543134/696572196310745128/Screen_Shot_2020-04-05_at_10.07.41_PM.png)
+![Booter](/config/config-universal/hedt-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -126,7 +126,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/kHKNvgl.png)
+![DeviceProperties](/config.plist/coffee-lake/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -169,7 +169,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ## Kernel
 
-![Kernel](https://media.discordapp.net/attachments/456913818467958789/681335231080300564/Screen_Shot_2020-02-23_at_8.02.45_PM.png?width=1486&height=1771)
+![Kernel](/config/config-universal/kernel.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
@@ -231,7 +231,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ## Misc
 
-![Misc](https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png)
+![Misc](/config/config-universal/misc.png)
 
 **Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
@@ -306,7 +306,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png)
+![NVRAM](/config/config-universal/nvram.png)
 
 **Add**: 
 
@@ -367,7 +367,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](https://i.imgur.com/JpLxh35.png)
+![PlatformInfo](/config.plist/haswell/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
@@ -434,7 +434,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518959873425639/Screen_Shot_2020-02-29_at_8.40.06_PM.png)
+![UEFI](/config/config-universal/aptio-v-uefi.png)
 
 **ConnectDrivers**: YES
 

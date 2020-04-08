@@ -10,21 +10,21 @@ Download [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) and select option 1 
 
 Tip: `iMacPro1,1 10` will print 10 serials, this will save you some time on generating
 
-![](https://i.imgur.com/cVL7ETT.png)
+![](/images/post-install/iservices-md/serial-list.png)
 
 Now enter the serial into the [Apple Check Coverage page](https://checkcoverage.apple.com/), you will get 1 of 3 responses:
 
 **"We’re sorry, but this serial number isn’t valid. Please check your information and try again.":**
 
-![](https://i.imgur.com/dvYcpHB.png)
+![](/images/post-install/iservices-md/not-valid.png)
 
 **Valid Purchase date:**
 
-![](https://i.imgur.com/rh0r28T.png)
+![](/images/post-install/iservices-md/valid.png)
 
 **Purchase Date not Validated:**
 
-![](https://i.imgur.com/oSLMqWa.png)
+![](/images/post-install/iservices-md/not-valid.png)
 
 This last one is what we're after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -> PlatformInfo -> Add:
 
@@ -50,19 +50,19 @@ Once done reboot and check again.
 
 If this doesn't work, add [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) and [ssdt-rmne.aml](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml) to your EFI and config.plist under Kernel -> Add and ACPI -> Add respectively. The SSDT is precompiled so no extra work needed, reminder compiled files have a .aml extension and .dsl can be seen as source code.
 
-![Find if set as Built-in](https://i.imgur.com/SPJCQKw.png)
+![Find if set as Built-in](/images/post-install/iservices-md/en0-built-in-info.png)
 
 Now head under the PCI tab of Hackintool and export your PCI DeviceProperties, this will create a pcidevices.plist on your desktop
 
-![Export PCI address](https://i.imgur.com/VAjPfol.png)
+![Export PCI address](/images/post-install/iservices-md/hackintool-export.png)
 
 Now search through the pcidevices.plist and find the PCIRoot of your ethernet controller. For us, this would be `PciRoot(0x0)/Pci(0x1f,0x6)`
 
-![Copy PCIRoot](https://i.imgur.com/1aTlAC6.png)
+![Copy PCIRoot](/images/post-install/iservices-md/find-en0.png)
 
 Now with the PCIRoot, go into your config.plist -> DeviceProperties -> Add and apply the property of `built-in` with type `Data` and value `01`
 
-![Add to config.plist](https://i.imgur.com/vGwow2X.png)
+![Add to config.plist](/images/post-install/iservices-md/config-built-in.png)
 
 ## Fixing ROM
 
@@ -77,7 +77,7 @@ Some users have even gone as far as using real Apple MAC Address dumps for their
 
 When adding this to your config, `c0:7e:bf:c3:af:ff` should be converted to `c07ebfc3afff` as the `Data` type cannot accept colons(`:`).
 
-![](https://i.imgur.com/vAW6Rkz.png)
+![](/images/post-install/iservices-md/config-rom.png)
 
 ## Verifying NVRAM
 
@@ -120,6 +120,7 @@ path/to/macserial -s
 This will provide us with a full rundown of our system, verify that what is presented matches up with your work.
 
 ## Cleaning up your AppleID
+
 * Remove all devices from your AppleID: [Manage your devices](https://appleid.apple.com/account/manage)
 * Enable 2 Factor-Auth
 * Remove all iServices from Keychain, some examples:
@@ -144,4 +145,4 @@ An extra tip is adding a payment card to the account, some users found this also
 
 Welp mate, you've done it. You blackmailed your AppleID. The fix is simple but not pretty, **you MUST call Apple**. Otherwise, there is no proceeding besides using a new account. Adding a payment card before calling can help legitimise the account so it doesn't seem as much like a bot.
 
-![](https://i.imgur.com/ypDy99L.png)
+![](/images/post-install/iservices-md/blacklist.png)

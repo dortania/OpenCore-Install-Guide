@@ -197,5 +197,5 @@ MMIO devirt 0xFF000000 -> 4278190080
 
 Should look something like this when done:
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/694398967475339344/Screen_Shot_2020-03-30_at_10.13.27_PM.png)
+![](/extras/kaslr-fix-md/mmio-white.png)
 

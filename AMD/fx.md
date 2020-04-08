@@ -34,7 +34,7 @@ And now you're ready to configure it!
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/zqNt4dV.png)
+![ACPI](/config/AMD/acpi.png)
 
 
 **Add:**
@@ -75,7 +75,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/683011276938543134/696573787994325013/Screen_Shot_2020-04-05_at_10.15.09_PM.png)
+![Booter](/config/config-universal/aptio-iv-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -122,7 +122,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 
 ## DeviceProperties
 
-![DeviceProperties](https://media.discordapp.net/attachments/456913818467958789/681334251865636866/Screen_Shot_2020-02-23_at_7.58.51_PM.png?width=1674&height=866)
+![DeviceProperties](/config/config-universal/DP-no-igpu.png)
 
 **Add**: Sets device properties from a map.
 
@@ -132,8 +132,8 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ## Kernel
 
-![Kernel](https://cdn.discordapp.com/attachments/456913818467958789/681344557090209798/Screen_Shot_2020-02-23_at_8.39.33_PM.png)
-![](https://cdn.discordapp.com/attachments/456913818467958789/681344552526675988/Screen_Shot_2020-02-23_at_8.39.49_PM.png)
+![Kernel](/config/AMD/kernel.png)
+![](/config/AMD/kernel-patch.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
@@ -167,7 +167,7 @@ To merge:
 * Copy the `Kernel -> Patch` section from patches.plist
 * Paste into where old patches were in config.plist
 
-![](/extra-files/gif.gif)
+![](/config/AMD/kernel.gif)
 
 **Quirks**:
 Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`, `PanicNoKextDump`, `PowerTimeoutKernelPanic` and `XhciPortLimit`. Everything else should be left as default
@@ -204,7 +204,7 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
 
 ## Misc
 
-![Misc](https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png)
+![Misc](/config/config-universal/misc.png)
 
 **Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
@@ -279,7 +279,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png)
+![NVRAM](/config/config-universal/nvram.png)
 
 **Add**: 
 
@@ -340,7 +340,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](https://i.imgur.com/CrqeCea.png)
+![PlatformInfo](/config/config-universal/iMacPro-smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
@@ -406,7 +406,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518959873425639/Screen_Shot_2020-02-29_at_8.40.06_PM.png)
+![UEFI](/config/config-universal/aptio-v-uefi.png)
 
 **ConnectDrivers**: YES
 

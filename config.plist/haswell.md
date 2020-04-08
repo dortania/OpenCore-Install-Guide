@@ -32,7 +32,7 @@ Now with those downloaded, we can get to really get started:
 
 ## ACPI
 
-![ACPI](https://i.imgur.com/2T0ubhy.png)
+![ACPI](/config/config-universal/aptio-iv-acpi.png)
 
 
 **Add:**
@@ -45,7 +45,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 * [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl)
    * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS
 * [SSDT-EHCx\_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl)
-  * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems. This can be avoided if your BIOS supports EHCI-Handoff
+  * Prefered alternative over renaming EHCI for setting up USB correctly on pre-skylake systems. This can be avoided if your BIOS supports EHCI-Handoff, this can be done during post-install though
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/ACPI.
 
@@ -77,7 +77,7 @@ Settings relating to ACPI, leave everything here as default.
 
 ## Booter
 
-![Booter](https://cdn.discordapp.com/attachments/683011276938543134/696573787994325013/Screen_Shot_2020-04-05_at_10.15.09_PM.png)
+![Booter](/config/config-universal/aptio-iv-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -125,7 +125,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 
 ## DeviceProperties
 
-![DeviceProperties](https://i.imgur.com/vgLIhOo.png)
+![DeviceProperties](/config.plist/haswell/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -182,7 +182,7 @@ Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en
 
 ## Kernel
 
-![Kernel](https://media.discordapp.net/attachments/456913818467958789/681335231080300564/Screen_Shot_2020-02-23_at_8.02.45_PM.png?width=1486&height=1771)
+![Kernel](/config/config-universal/kernel.png)
 
 **Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
@@ -244,7 +244,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ## Misc
 
-![Misc](https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png)
+![Misc](/config/config-universal/misc.png)
 
 **Boot**: Settings for boot screen (Leave everything as default)
 * **HibernateMode**: None
@@ -319,7 +319,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png)
+![NVRAM](/config/config-universal/nvram.png)
 
 **Add**: 
 
@@ -380,7 +380,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](https://i.imgur.com/XlxjsAd.png)
+![PlatformInfo](/config.plist/haswell/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
@@ -452,7 +452,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](https://cdn.discordapp.com/attachments/683011276938543134/683518166915481677/Screen_Shot_2020-02-29_at_8.36.55_PM.png)
+![UEFI](/config/config-universal/aptio-iv-uefi.png)
 
 **ConnectDrivers**: YES
 
