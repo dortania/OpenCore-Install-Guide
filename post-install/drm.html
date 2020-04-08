@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 08 2020 01:31:32 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed Apr 08 2020 02:28:45 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-drm-support-and-igpu-performance"><a name="fixing-drm-support-and-igpu-performance" class="plugin-anchor" href="#fixing-drm-support-and-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing DRM support and iGPU performance</h1>
 <p>So with DRM, we have a couple things we need to mention:</p>
@@ -691,7 +691,7 @@
 </ul>
 <h2 id="testing-hardware-acceleration-and-decoding"><a name="testing-hardware-acceleration-and-decoding" class="plugin-anchor" href="#testing-hardware-acceleration-and-decoding"><i class="fa fa-link" aria-hidden="true"></i></a>Testing Hardware Acceleration and Decoding</h2>
 <p>So before we can get started with fixing DRM, we need to make sure your hardware is working. The best way to check is by running <a href="https://i.applelife.ru/2019/05/451893_10.12_VDADecoderChecker.zip" target="_blank">VDADecoderChecker</a>:</p>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/692237447203127356/Screen_Shot_2020-03-24_at_11.04.19_PM.png" alt=""></p>
+<p><img src="../images/post-install/drm-md/vda.png" alt=""></p>
 <p>If you fail at this point, there&apos;s a couple things you can check for:</p>
 <ul>
 <li>Make sure your hardware is supported<ul>
@@ -764,7 +764,7 @@
 </ul>
 <p>So how do you use it? First, identify what configuration you have in the chart (AMD represents GPU, not CPU). The SMBIOS listed (IM = iMac, MM = Mac Mini, IMP = iMac Pro, MP = Mac Pro) is what you should use if you match the hardware configuration. If you don&apos;t match any of the configurations in the chart, you&apos;re out of luck.</p>
 <p>Next, identify what Shiki mode you need to use. If there are two configurations for your setup, they will differ in the Shiki flags used. Generally, you want hardware decoding over software decoding. If the mode column is blank, then you are done. Otherwise, you should add <code>shikigva</code> as a property to any GPU, using DevicesProperties &gt; Add. For example, if the mode we need to use is <code>shikigva=80</code>:</p>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/693487632247947386/Screen_Shot_2020-03-28_at_9.50.11_AM.png" alt="Example of shikigva in Devices Properties"></p>
+<p><img src="../images/post-install/drm-md/dgpu-path.png" alt="Example of shikigva in Devices Properties"></p>
 <p>You can also use the boot argument - this is in the mode column.</p>
 <p>Here&apos;s one example. If we have an Intel i9-9900K and an RX 560, the configuration would be &quot;AMD+IGPU&quot;, and we should be using an iMac or Mac Mini SMBIOS (for this specific configuration, iMac19,1). Then we see there are two options for the configuration: one where the mode is <code>shikigva=16</code>, and one with <code>shikigva=80</code>. We see the difference is in &quot;Prime Trailers&quot; and &quot;Prime/Netflix&quot;. We want Netflix to work, so we&apos;ll choose the <code>shikigva=80</code> option. Then inject <code>shikigva</code> with type number/integer and value <code>80</code> into our iGPU or dGPU, reboot, and DRM should work.</p>
 <p>Here&apos;s another example. This time, We have an Ryzen 3700X and an RX 480. Our configuration in this case is just &quot;AMD&quot;, and we should be using either an iMac Pro or Mac Pro SMBIOS. Again, there are two options: no shiki arguments, and <code>shikigva=128</code>. We prefer hardware decoding over software decoding, so we&apos;ll choose the <code>shikigva=128</code> option, and again inject <code>shikigva</code> into our dGPU, this time with value <code>128</code>. A reboot and DRM works.</p>
@@ -793,14 +793,14 @@
 <pre><code class="lang-text">igfxfw | Data | &lt;02 00 00 00&gt;
 </code></pre>
 <p>To enable firmware loading.</p>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/693540218074300516/Screen_Shot_2020-03-28_at_1.19.54_PM.png" alt="Example of igfxfw injected into iGPU"></p>
+<p><img src="../images/post-install/drm-md/igpu-path.png" alt="Example of igfxfw injected into iGPU"></p>
 <p>The best way to check is to monitor the iGPU&apos;s frequency is with either <a href="https://software.intel.com/en-us/articles/intel-power-gadget" target="_blank">Intel Power Gadget</a> or checking the boot logs for Apple Scheduler references. Make sure you have the <code>igfxfw</code> property applied:</p>
 <pre><code class="lang-text">kernel: (AppleIntelCFLGraphics) [IGPU] Graphics Firmware Version: 2.14.0.0
 kernel: (AppleIntelCFLGraphics) [IGPU] Graphics Firmware Version: 2.14.0.0
 kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: Apple Firmware
 kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: Apple Firmware
 </code></pre>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/691724984808243281/Screen_Shot_2020-03-23_at_1.04.57_PM.png" alt=""></p>
+<p><img src="../images/post-install/drm-md/igpu-frequency.png" alt=""></p>
 
                                 
                                 </section>
@@ -844,7 +844,7 @@ kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"5.1.7","depth":2,"next":{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-04-08T01:31:32.067Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T01:33:37.062Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"5.1.7","depth":2,"next":{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-04-08T02:28:45.484Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T02:30:47.803Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
