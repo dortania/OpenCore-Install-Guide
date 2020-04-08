@@ -305,7 +305,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
    * Disables the UEFI watchdog, can help with early boot issues
 * **Target**: `67`
    * Shows more debug information, requires debug version of OpenCore
-* **DisplayLevel**: `2147483714`
+* **DisplayLevel**: `2147483650`
    * Shows even more debug information, requires debug version of OpenCore
 
 These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
