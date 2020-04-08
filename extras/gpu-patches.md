@@ -5,7 +5,7 @@
 This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen's autopatches:
 
 * [Applying a fakeID for unsupported GPUs](https://acpi.dortania.ml/Universal/spoof.html)
-* [iGPU BusID patching for 300 series motherboards](/extras/gpu-patches.md#iGPU-BusID-Patching)
+* [iGPU BusID patching for 300 series motherboards](#iGPU-BusID-Patching)
 
 # Converting a clover fakeID to OpenCore
 
@@ -18,7 +18,7 @@ This section is for users running "true" 300 series motherboards( B360, B365, H3
 
 So to get started I'll assume you've already done basic framebuffer patches in your config from the [Coffeelake portion of the guide](../config.plist/coffee-lake.md), it should look something like this:
 
-![](/extras/gpu-patches-md/prereq.png)
+![](/images/extras/gpu-patches-md/prereq.png)
 
 Now that we're prepped, we can start looking into busID patching. Checking the dumps on [Insanelymac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID(Desktop UHD 630):
 
@@ -130,6 +130,6 @@ So when adding the patches, port 1 will actually become con0 as the ports start 
 
 A finished config should look something like this:
 
-![](/extras/gpu-patches-md/path-done.png)
+![](/images/extras/gpu-patches-md/path-done.png)
 
 Source for iGPU BusID patching: [CorpNewt's Brain](https://github.com/corpnewt)

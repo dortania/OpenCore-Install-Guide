@@ -21,7 +21,7 @@ Once you have both of these, we'll next want to add it to our EFI partition:
 * Add the Resources folder to EFI/OC
 * Add OpenCanopy.efi to EFI/Drivers
 
-![](/extras/gui-md/folder-gui.png)
+![](/images/extras/gui-md/folder-gui.png)
 
 Now in our config.plist, we have 2 things we need to fix:
 
@@ -30,7 +30,7 @@ Now in our config.plist, we have 2 things we need to fix:
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
 
-![](/extras/gui-md/gui.png)
+![](/images/extras/gui-md/gui.png)
 
 ## Setting up Bootchime with AudioDxe
 
@@ -94,7 +94,7 @@ So to start, we'll need a couple things:
 
 Once done, you should get something like this:
 
-![](/extras/gui-md/audio-config.png)
+![](/images/extras/gui-md/audio-config.png)
 
 
 **Note for visually impaired**:

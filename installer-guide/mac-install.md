@@ -14,29 +14,29 @@ To start we'll want to grab ourselves a copy of macOS, you can skip this and hea
 
 Now lets grab [GibMacOS](https://github.com/corpnewt/gibMacOS) and run the `gibMacOS.command`:
 
-![](/images/post-install/mac-install-md/gib.png)
+![](/images/installer-guide/mac-install-md/gib.png)
 
 From this, we get a nice list of macOS installers. If you need beta versions of macOS, you can select `C. Change Catalog`. For this example we'll choose 1:
 
-![](/images/post-install/mac-install-md/gib-process.png)
+![](/images/installer-guide/mac-install-md/gib-process.png)
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so highly recommend reading the rest of the guide while you wait.
 
 Once finished, we'll next want to run the `BuildmacOSInstallApp.command`:
 
-![](/images/post-install/mac-install-md/gib-location.png)
+![](/images/installer-guide/mac-install-md/gib-location.png)
 
 It's gonna ask for the macOS installer files, at the moment they're in pieces in the `macOS Downloads` folder found in GibMacOS
 
 Once it's done, you can find it with the rest of the files. I recommend moving it to your applications folder to make things a bit easier with the next section.
 
-![](/images/post-install/mac-install-md/gib-done.png)
+![](/images/installer-guide/mac-install-md/gib-done.png)
 
 ## Setting up the installer
 
 Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use MacOS Extended(HFS+) with a GUID partition map. What this will do is create 2 partitions. The main `MyVolume` and a second called `EFI` which is used as a boot partition where your fimrware will check for boot files.
 
-![Formatting the USB](/images/post-install/mac-install-md/format-usb.png)
+![Formatting the USB](/images/installer-guide/mac-install-md/format-usb.png)
 
 Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372), note that the command is made for USB's formatted with the name `MyVolume`:
 
@@ -52,10 +52,10 @@ You can also replace the `createinstallmedia` path with that of where your insta
 
 Setting up OpenCore's EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [mountEFI](https://github.com/corpnewt/MountEFI) comes in:
 
-![MountEFI](/images/post-install/mac-install-md/mount-efi-usb.png)
+![MountEFI](/images/installer-guide/mac-install-md/mount-efi-usb.png)
 
 You'll notice that once we open the EFI partition, it's empty. This is where the fun begins.
 
-![Empty EFI partition](/images/post-install/mac-install-md/base-efi.png)
+![Empty EFI partition](/images/installer-guide/mac-install-md/base-efi.png)
 
 ### Now with all this done, return to [Creating the USB](/installer-guide/opencore-efi.md) to finish up your work

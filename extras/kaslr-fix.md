@@ -197,5 +197,5 @@ MMIO devirt 0xFF000000 -> 4278190080
 
 Should look something like this when done:
 
-![](/extras/kaslr-fix-md/mmio-white.png)
+![](/images/extras/kaslr-fix-md/mmio-white.png)
 
