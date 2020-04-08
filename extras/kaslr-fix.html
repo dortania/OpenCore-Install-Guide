@@ -1,0 +1,1037 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Fixing KASLR slide values · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="spoof.html" />
+    
+    
+    <link rel="prev" href="gpu-patches.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    OpenCore Desktop Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../installer-guide/opencore-efi.html">
+            
+                <a href="../installer-guide/opencore-efi.html">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../installer-guide/mac-install.html">
+            
+                <a href="../installer-guide/mac-install.html">
+            
+                    
+                    macOS install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../installer-guide/winblows-install.html">
+            
+                <a href="../installer-guide/winblows-install.html">
+            
+                    
+                    Windows install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../installer-guide/linux-install.html">
+            
+                <a href="../installer-guide/linux-install.html">
+            
+                    
+                    Linux install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ktext.html">
+            
+                <a href="../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="acpi.html">
+            
+                <a href="acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../config.plist/ivy-bridge.html">
+            
+                <a href="../config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../config.plist/haswell.html">
+            
+                <a href="../config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../config.plist/skylake.html">
+            
+                <a href="../config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../config.plist/kaby-lake.html">
+            
+                <a href="../config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../config.plist/coffee-lake.html">
+            
+                <a href="../config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel HEDT Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../config-HEDT/haswell-e.html">
+            
+                <a href="../config-HEDT/haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../config-HEDT/broadwell-e.html">
+            
+                <a href="../config-HEDT/broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../config-HEDT/skylake-x.html">
+            
+                <a href="../config-HEDT/skylake-x.html">
+            
+                    
+                    Skylake-X
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../AMD/fx.html">
+            
+                <a href="../AMD/fx.html">
+            
+                    
+                    Bulldozer/Jaguar
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../AMD/zen.html">
+            
+                <a href="../AMD/zen.html">
+            
+                    
+                    Zen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../post-install/">
+            
+                <a href="../post-install/">
+            
+                    
+                    Post-Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="../post-install/security.html">
+            
+                <a href="../post-install/security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="../post-install/audio.html">
+            
+                <a href="../post-install/audio.html">
+            
+                    
+                    Fixing Audio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="../post-install/oc2hdd.html">
+            
+                <a href="../post-install/oc2hdd.html">
+            
+                    
+                    Booting without USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="../post-install/update.html">
+            
+                <a href="../post-install/update.html">
+            
+                    
+                    Updating OpenCore, kexts and macOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="msr-lock.html">
+            
+                <a href="msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="../post-install/verbose.html">
+            
+                <a href="../post-install/verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="../post-install/drm.html">
+            
+                <a href="../post-install/drm.html">
+            
+                    
+                    Fixing DRM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="../post-install/iservices.html">
+            
+                <a href="../post-install/iservices.html">
+            
+                    
+                    Fixing iServices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="../post-install/nvram.html">
+            
+                <a href="../post-install/nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../troubleshooting/troubleshooting.html">
+            
+                <a href="../troubleshooting/troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../troubleshooting/debug.html">
+            
+                <a href="../troubleshooting/debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="legacy.html">
+            
+                <a href="legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="gui.html">
+            
+                <a href="gui.html">
+            
+                    
+                    Add GUI and Bootchime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="gpu-patches.html">
+            
+                <a href="gpu-patches.html">
+            
+                    
+                    iGPU Patching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="7.4" data-path="kaslr-fix.html">
+            
+                <a href="kaslr-fix.html">
+            
+                    
+                    Fixing KASLR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="spoof.html">
+            
+                <a href="spoof.html">
+            
+                    
+                    Disabling unsupported GPUs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" >
+            
+                <a target="_blank" href="https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion">
+            
+                    
+                    Clover Conversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../misc/credit.html">
+            
+                <a href="../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Fixing KASLR slide values</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p><em>Last modified: Wed Apr 08 2020 05:37:46 GMT+0000 (Coordinated Universal Time)</em></p>
+</blockquote>
+<h1 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="plugin-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing KASLR slide values</h1>
+<ul>
+<li>Supported version: 0.5.7</li>
+</ul>
+<h2 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="plugin-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing KASLR slide values</h2>
+<p>This section is for users who wish to understand and fix &quot;Couldn&apos;t allocate runtime area&quot; errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.</p>
+<h2 id="so-what-is-kaslr"><a name="so-what-is-kaslr" class="plugin-anchor" href="#so-what-is-kaslr"><i class="fa fa-link" aria-hidden="true"></i></a>So what is KASLR?</h2>
+<p>Well KASLR stands for Kernel address space layout randomization, what it&apos;s used for is security purposes. Specifically, this makes it much harder for attackers to figure out where the important objects are in memory as it&apos;s always random both between machines and between boots. <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">M</a><a href="https://lwn.net/Articles/569635/" target="_blank">ore in-depth explainer on KASLR</a></p>
+<p>Where this becomes an issue is when you introduce devices with either small memory maps or just way too many devices present. There likely is space for the kernel to operate but there&apos;s also free space where the kernel won&apos;t fit entirely. This is where <code>slide=xxx</code> fits in. Instead of letting macOS choose a random area to operate in each boot, we&apos;ll constrain it to somewhere that we know will work.</p>
+<h2 id="and-who-is-this-info-for"><a name="and-who-is-this-info-for" class="plugin-anchor" href="#and-who-is-this-info-for"><i class="fa fa-link" aria-hidden="true"></i></a>And who is this info for?</h2>
+<p>Well as I mentioned earlier, this is for users who don&apos;t have enough space for the kernel or moves to a place that is too small. You&apos;ll generally experience an error similar to this when booting:</p>
+<pre><code class="lang-text">Error allocating 0x1197b pages at 0x0000000017a80000 alloc type 2
+Couldn&apos;t allocate runtime area
+</code></pre>
+<p>With some variation:</p>
+<pre><code class="lang-text">Only 244/256 slide values are usable!
+</code></pre>
+<p>Or even crashes while running macOS:</p>
+<pre><code class="lang-text">panic(cpu 6 caller 0xffffff801fc057ba): a freed zone element has been modified in zone kalloc.4096: expected 0x3f00116dbe8a46f6 but found 0x3f00116d00000000
+</code></pre>
+<p>The best part about these errors is that they can be random, also the reason why power cycling your PC 20 times also can fix the issue but only temporarily.</p>
+<p>Fun Fact: It takes around 31 ms to find an area to operate in, manually setting a slide value can on average can reduce boot times by 0.207%!!!</p>
+<h2 id="so-how-do-i-fix-this"><a name="so-how-do-i-fix-this" class="plugin-anchor" href="#so-how-do-i-fix-this"><i class="fa fa-link" aria-hidden="true"></i></a>So how do I fix this?</h2>
+<p>The real fix to this is quite simple actually, the process is both the same for Clover and OpenCore users. What you&apos;ll need:</p>
+<ul>
+<li><p><strong>Clover users</strong>:</p>
+<ul>
+<li>Clover Shell(most users already have this included, usually called shell64.efi or some variation)<ul>
+<li>This will be found under <code>EFI/CLOVER/tools</code></li>
+<li>If you&apos;re missing this, you can grab it from the <a href="https://github.com/CloverHackyColor/CloverBootloader/releases" target="_blank">CLOVER.zip</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/ReddestDream/OcQuirks/releases" target="_blank">OcQuirks</a>(Don&apos;t mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide)<ul>
+<li>Make sure this is inside <code>EFI/CLOVER/drivers/UEFI</code></li>
+</ul>
+</li>
+<li>OpenRuntime.efi(Bundled with OcQuirks)<ul>
+<li>Make sure this is inside <code>EFI/CLOVER/drivers/UEFI</code></li>
+</ul>
+</li>
+<li>OcQuirks.plist(Bundled with OcQuirks)<ul>
+<li>Make sure this is inside <code>EFI/CLOVER/drivers/UEFI</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>OpenCore users</strong>:</p>
+<ul>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenRuntime</a></li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenShell</a>(Don&apos;t forget to enable this under <code>Root -&gt; Misc -&gt; Tools</code>)</li>
+</ul>
+</li>
+</ul>
+<p>And we&apos;ll also need to configure our config.plist -&gt; Booter(for OpenCore) or OcQuirks.plist(for Clover):</p>
+<ul>
+<li><strong>AvoidRuntimeDefrag</strong>: YES<ul>
+<li>Fixes UEFI runtime services like date, time, NVRAM, power control, etc</li>
+</ul>
+</li>
+<li><strong>DevirtualiseMmio</strong>: YES<ul>
+<li>Reduces Stolen Memory Footprint, expands options for <code>slide=N</code> values and very helpful with fixing Memory Allocation issues on Z390.</li>
+</ul>
+</li>
+<li><strong>EnableSafeModeSlide</strong>: YES<ul>
+<li>Allows for slide values to be used in Safemode</li>
+</ul>
+</li>
+<li><strong>ProtectUefiServices</strong>: NO<ul>
+<li>Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, 300 series and newer systems like Ice Lake and Comet Lake</li>
+</ul>
+</li>
+<li><strong>ProvideCustomSlide</strong>: YES<ul>
+<li>This makes sure the kernel will only choose good regions and avoid those that may result inboot failures. It&apos;s still random but omits those bad reions in its randomization</li>
+</ul>
+</li>
+<li><strong>RebuildAppleMemoryMap</strong>: YES<ul>
+<li>Generates Memory Map compatible with macOS, this makes sure our memory map will fit to what the kernel expects</li>
+</ul>
+</li>
+</ul>
+<h2 id="prepping-the-bios"><a name="prepping-the-bios" class="plugin-anchor" href="#prepping-the-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Prepping the BIOS</h2>
+<p>The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:</p>
+<ul>
+<li>Update BIOS(extremely important as early BIOS&apos;s shipped are known to have memory map issues, especially with Z390)</li>
+<li>Clear CMOS</li>
+<li>Enable much needed BIOS settings:<ul>
+<li><code>Above4GDecoding</code>: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on some X99, X299 so recommended to test with and without.</li>
+<li><code>Boot Options -&gt; Windows8.1/10 mode</code>: This will make sure no old legacy garbage is loaded. Fun fact, <code>other OS</code> is only designed for booting older versions of Windows and not for other OS.</li>
+</ul>
+</li>
+<li>Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:<ul>
+<li><code>CSM</code>: For legacy support, adds a bunch of garbage we don&apos;t want. This also can break the shell so you can&apos;t boot into it.</li>
+<li><code>Intel SGX</code>: Software Guard Extensions, takes up a lot of space and does nothing in macOS.</li>
+<li><code>Parallel Port</code>: macOS can&apos;t even see parallel.</li>
+<li><code>Serial Port</code>: I&apos;d like to know how many of you are debugging the kernel...</li>
+<li><code>iGPU</code>: Not ideal but some systems have such bloated maps that the iGPU just can&apos;t fit.</li>
+<li><code>Thunderbolt</code>: Many hacks don&apos;t have thunderbolt working, boards that don&apos;t have thunderbolt but have this option just waste more space.</li>
+<li><code>LED lighting</code>: Sorry mate, time to go.</li>
+<li><code>Legacy USB</code>: More Legacy Crap.</li>
+</ul>
+</li>
+</ul>
+<h2 id="test-boot"><a name="test-boot" class="plugin-anchor" href="#test-boot"><i class="fa fa-link" aria-hidden="true"></i></a>Test boot</h2>
+<p>With our adjusted EFI, config.plist and BIOS settings, it&apos;s time we try out our new setup. If you still have issues, well it looks like we&apos;ll need to do a deep dive and calculate our slide value</p>
+<h2 id="finding-the-slide-value"><a name="finding-the-slide-value" class="plugin-anchor" href="#finding-the-slide-value"><i class="fa fa-link" aria-hidden="true"></i></a>Finding the Slide value</h2>
+<p>Now what you&apos;ll want to do is open the EFI shell in your boot manager of choice and run <code>memmap</code>. This will give you a list of all pages and their sizes. This is where the fun begins.</p>
+<p>Example of what you&apos;ll see:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Start</th>
+<th style="text-align:left">End</th>
+<th style="text-align:left"># Pages</th>
+<th style="text-align:left">Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">RT_Data</td>
+<td style="text-align:left">0000000000000000</td>
+<td style="text-align:left">0000000000000FFF</td>
+<td style="text-align:left">0000000000000001</td>
+<td style="text-align:left">800000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Available</td>
+<td style="text-align:left">0000000000001000</td>
+<td style="text-align:left">0000000000057FFF</td>
+<td style="text-align:left">0000000000000057</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Reserved</td>
+<td style="text-align:left">0000000000058000</td>
+<td style="text-align:left">0000000000058FFF</td>
+<td style="text-align:left">0000000000000001</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Available</td>
+<td style="text-align:left">0000000000059000</td>
+<td style="text-align:left">000000000008FFFF</td>
+<td style="text-align:left">0000000000000037</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">RT_Code</td>
+<td style="text-align:left">0000000000090000</td>
+<td style="text-align:left">0000000000090FFF</td>
+<td style="text-align:left">0000000000000001</td>
+<td style="text-align:left">800000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Available</td>
+<td style="text-align:left">0000000000091000</td>
+<td style="text-align:left">000000000009DFFF</td>
+<td style="text-align:left">000000000000000D</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Reserved</td>
+<td style="text-align:left">000000000009E000</td>
+<td style="text-align:left">000000000009FFFF</td>
+<td style="text-align:left">0000000000000002</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Available</td>
+<td style="text-align:left">0000000000100000</td>
+<td style="text-align:left">000000005B635FFF</td>
+<td style="text-align:left">000000000005B536</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">BS_Data</td>
+<td style="text-align:left">000000005B636000</td>
+<td style="text-align:left">000000005B675FFF</td>
+<td style="text-align:left">0000000000000040</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Available</td>
+<td style="text-align:left">000000005B676000</td>
+<td style="text-align:left">000000006AF77FFF</td>
+<td style="text-align:left">000000000000F902</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">LoaderCode</td>
+<td style="text-align:left">000000006AF78000</td>
+<td style="text-align:left">000000006B155FFF</td>
+<td style="text-align:left">00000000000001DE</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">BS_Data</td>
+<td style="text-align:left">000000006B156000</td>
+<td style="text-align:left">000000006B523FFF</td>
+<td style="text-align:left">00000000000003CE</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">ACPI_NVS</td>
+<td style="text-align:left">000000006B524000</td>
+<td style="text-align:left">000000006B524FFF</td>
+<td style="text-align:left">0000000000000001</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">BS_Data</td>
+<td style="text-align:left">000000006B526000</td>
+<td style="text-align:left">000000006B625FFF</td>
+<td style="text-align:left">0000000000000100</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+<tr>
+<td style="text-align:left">Available</td>
+<td style="text-align:left">000000006B626000</td>
+<td style="text-align:left">000000006B634FFF</td>
+<td style="text-align:left">000000000000000F</td>
+<td style="text-align:left">000000000000000F</td>
+</tr>
+</tbody>
+</table>
+<p>Now you may be wondering how the hell we convert this to a slide value, well it&apos;s quite simple. What we&apos;re interested in is the largest available value within the <code>Start</code> column. In this example we see that <code>000000006B626000</code> is our largest, do note that these are in HEX so if there are multiple values close to each other you may need to convert them to decimal. To the calculate slide value(macOS&apos;s built-in calculator has a programming function by pressing &#x2318;+3):</p>
+<p><code>000000006B626000</code> = <code>0x6B626000</code></p>
+<p>(<code>0x6B626000</code> - <code>0x100000</code>)/<code>0x200000</code> = <code>0x35A</code></p>
+<p>And to verify that this is correct:</p>
+<p><code>0x100000</code> + (<code>0x35A</code> * <code>0x200000</code>) = <code>0x6B500000</code></p>
+<p>Whenever the returned value is <strong>not</strong> the original(<code>0x6B500000</code> vs <code>0x6B626000</code>), just add +1 to your final slide value. This is due to rounding. So for example <code>0x35A</code> converted to decimal becomes <code>858</code> and then +1 will give you <code>slide=859</code>.</p>
+<blockquote>
+<p>But wait for just a second, this is higher than 256!</p>
+</blockquote>
+<p>That is correct, this is caused by memory maps that include <code>Above4GDecoding</code> sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be <code>0000000000100000</code>).</p>
+<p>And just to make it a bit clearer on the formula:</p>
+<p>(HEX - <code>0x100000</code>)/<code>0x200000</code> = Slide Value in HEX</p>
+<p><code>0x100000</code> + (Slide Value in HEX * <code>0x200000</code>) = Your original HEX value(if not then add +1 to your slide value)</p>
+<p>Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be <code>slide=0</code> when using <code>0x100000</code>). If this value still gives you errors then you may proceed to the second-largest <code>Start</code> value and so on.</p>
+<p>Sometimes you may find that when you calculate slide that you receive super small vales like <code>slide=-0.379150390625</code>, when this happens round this to <code>slide=0</code>.</p>
+<p>And for users who are having issues finding their slide value can also type <code>$slide [insert largest #Pages value]</code> in the #Sandbox channel on the <a href="https://discord.gg/u8V7N5C" target="_blank">r/Hackintosh Discord</a></p>
+<blockquote>
+<p>But this is soooooo hard</p>
+</blockquote>
+<p>Well fret not, for there is a simple solution. After running <code>memmap</code> in the shell, run:</p>
+<pre><code class="lang-text">shell&gt; fs0: //replace with your USB
+
+fs0:\&gt; dir //to verify this is the right directory, if not try fs1 and so on
+
+Directory of fs0:\
+01/01/01 3:30p   EFI
+
+fs0:\&gt; memmap &gt; memmap.txt
+</code></pre>
+<p>This will add a <code>memmap.txt</code> file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type <code>$slide [insert a link to memmap.txt]</code></p>
+<h2 id="using-devirtualisemmio"><a name="using-devirtualisemmio" class="plugin-anchor" href="#using-devirtualisemmio"><i class="fa fa-link" aria-hidden="true"></i></a>Using DevirtualiseMmio</h2>
+<p>DevirtualiseMmio is quite an interesting quirk, specifically in that it gets around a huge hurdle with many PCI device systems like some Z390 boards and virtually all HEDT boards like X99 and X299. How it does this is it takes MMIO regions and removes runtime attributes allowing them to be used as space for the kernel to sit comfortably, pair this with <code>ProvideCustomSlide</code> qurik means we can keep the secuirty feature of slide while also getting a bootable machine.</p>
+<p>For extremely problamatic systems like Threadripper TRX40 19H, we need to find specific regions that aren&apos;t required for proper operation. This is where <code>MmioWhitelist</code> comes into play. Note that whitelisting isn&apos;t required for most systems</p>
+<p>If you run the debug version of OpenCore with DevirtualiseMmio, you&apos;ll notice this in your logs:</p>
+<pre><code class="lang-text">21:495 00:009 OCABC: MMIO devirt start
+21:499 00:003 OCABC: MMIO devirt 0x60000000 (0x10000 pages, 0x8000000000000001) skip 0
+21:503 00:003 OCABC: MMIO devirt 0xFE000000 (0x11 pages, 0x8000000000000001) skip 0
+21:506 00:003 OCABC: MMIO devirt 0xFEC00000 (0x1 pages, 0x8000000000000001) skip 0
+21:510 00:003 OCABC: MMIO devirt 0xFED00000 (0x1 pages, 0x8000000000000001) skip 0
+21:513 00:003 OCABC: MMIO devirt 0xFEE00000 (0x1 pages, 0x800000000000100D) skip 0
+21:516 00:003 OCABC: MMIO devirt 0xFF000000 (0x1000 pages, 0x800000000000100D) skip 0
+21:520 00:003 OCABC: MMIO devirt end, saved 278608 KB
+</code></pre>
+<ul>
+<li>Note: See <a href="../troubleshooting/debug.html">OpenCore Debugging</a> on how to enable logging to file</li>
+</ul>
+<p>So we have 6 regions we need to go through and see which are bad, best idea is to block all MMIO sections <em>except</em> one and try each region to get a list of good regions. </p>
+<p>Now lets take the above example and create our own MmioWhitelist, we&apos;ll need to first convert the address from hexidecimal to decimal:</p>
+<p>MMIO devirt 0x60000000 -&gt; 1610612736
+MMIO devirt 0xFE000000 -&gt; 4261412864
+MMIO devirt 0xFEC00000 -&gt; 4273995776
+MMIO devirt 0xFED00000 -&gt; 4275044352
+MMIO devirt 0xFEE00000 -&gt; 4276092928
+MMIO devirt 0xFF000000 -&gt; 4278190080</p>
+<p>Should look something like this when done:</p>
+<p><img src="kaslr-fix-md/mmio-white.png" alt=""></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="gpu-patches.html" class="navigation navigation-prev " aria-label="Previous page: iGPU Patching">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="spoof.html" class="navigation navigation-next " aria-label="Next page: Disabling unsupported GPUs">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"next":{"title":"Disabling unsupported GPUs","level":"7.5","depth":1,"path":"extras/spoof.md","ref":"extras/spoof.md","articles":[]},"previous":{"title":"iGPU Patching","level":"7.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kaslr-fix.md","mtime":"2020-04-08T05:37:46.143Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T05:39:43.853Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-edit/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+

@@ -66,7 +66,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="kalsr-fix.md" />
+    <link rel="next" href="kaslr-fix.html" />
     
     
     <link rel="prev" href="gui.html" />
@@ -568,9 +568,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="kalsr-fix.md">
+        <li class="chapter " data-level="7.4" data-path="kaslr-fix.html">
             
-                <span>
+                <a href="kaslr-fix.html">
             
                     
                     Fixing KASLR slide values
@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 08 2020 02:28:45 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed Apr 08 2020 05:37:46 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gpu-patching"><a name="gpu-patching" class="plugin-anchor" href="#gpu-patching"><i class="fa fa-link" aria-hidden="true"></i></a>GPU Patching</h1>
 <ul>
@@ -689,7 +689,7 @@
 <h1 id="igpu-busid-patching"><a name="igpu-busid-patching" class="plugin-anchor" href="#igpu-busid-patching"><i class="fa fa-link" aria-hidden="true"></i></a>iGPU BusID Patching</h1>
 <p>This section is for users running &quot;true&quot; 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.</p>
 <p>So to get started I&apos;ll assume you&apos;ve already done basic framebuffer patches in your config from the <a href="../config.plist/coffee-lake.html">Coffeelake portion of the guide</a>, it should look something like this:</p>
-<p><img src="https://i.imgur.com/lm7LgML.png" alt=""></p>
+<p><img src="gpu-patches-md/prereq.png" alt=""></p>
 <p>Now that we&apos;re prepped, we can start looking into busID patching. Checking the dumps on <a href="https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/" target="_blank">Insanelymac</a> shows us this for the <code>3E9B0007</code> ID(Desktop UHD 630):</p>
 <pre><code class="lang-text">ID: 3E9B0007, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00801302
 TOTAL STOLEN: 58 MB, TOTAL CURSOR: 1 MB (1572864 bytes), MAX STOLEN: 172 MB, MAX OVERALL: 173 MB (181940224 bytes)
@@ -791,7 +791,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 </ul>
 <p>So when adding the patches, port 1 will actually become con0 as the ports start at 0. These are also all data types when entering your values.</p>
 <p>A finished config should look something like this:</p>
-<p><img src="https://i.imgur.com/69DyuEM.png" alt=""></p>
+<p><img src="gpu-patches-md/path-done.png" alt=""></p>
 <p>Source for iGPU BusID patching: <a href="https://github.com/corpnewt" target="_blank">CorpNewt&apos;s Brain</a></p>
 
                                 
@@ -825,7 +825,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
                 </a>
                 
                 
-                <a href="kalsr-fix.md" class="navigation navigation-next " aria-label="Next page: Fixing KASLR slide values">
+                <a href="kaslr-fix.html" class="navigation navigation-next " aria-label="Next page: Fixing KASLR slide values">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -836,7 +836,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"iGPU Patching","level":"7.3","depth":1,"next":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"path":"extras/kalsr-fix.md","ref":"extras/kalsr-fix.md","articles":[]},"previous":{"title":"Add GUI and Bootchime","level":"7.2","depth":1,"path":"extras/gui.md","ref":"extras/gui.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-04-08T02:28:45.224Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T02:30:47.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"iGPU Patching","level":"7.3","depth":1,"next":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"path":"extras/kaslr-fix.md","ref":"extras/kaslr-fix.md","articles":[]},"previous":{"title":"Add GUI and Bootchime","level":"7.2","depth":1,"path":"extras/gui.md","ref":"extras/gui.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-04-08T05:37:46.143Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T05:39:43.853Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

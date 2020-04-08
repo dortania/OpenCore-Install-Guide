@@ -23,7 +23,7 @@ Now the fun begins, we'll be grabbing our [SSDT-PLUG](https://github.com/acidant
 
 Easiest way to check what type you have is by opening up MaciASL, then `File -> NewFromACPI -> CPUSSDT`. The problem with this is that many OEMs won't even label their SSDTs correctly, instead opting for `SSDT-1`. To get around this, we have to search through *every god damn SSDT* hoping at least one of them will hold a `Processor` reference. Once you found one, it'll look something like this:
 
-![](https://cdn.discordapp.com/attachments/683011276938543134/687323498649354296/Screen_Shot_2020-03-11_at_9.37.51_AM.png)
+![](/images/AMD/NullCPU-patch-md/processor.png)
 
 From this example, our first `Processor` is tied to `C000` which means that this is our value we want to replace `CPU0` with in our SSDT-PLUG 
 

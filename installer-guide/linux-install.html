@@ -568,9 +568,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../extras/kalsr-fix.md">
+        <li class="chapter " data-level="7.4" data-path="../extras/kaslr-fix.html">
             
-                <span>
+                <a href="../extras/kaslr-fix.html">
             
                     
                     Fixing KASLR slide values
@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 08 2020 02:28:45 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed Apr 08 2020 05:37:46 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="making-the-installer-in-linux"><a name="making-the-installer-in-linux" class="plugin-anchor" href="#making-the-installer-in-linux"><i class="fa fa-link" aria-hidden="true"></i></a>Making the installer in Linux</h1>
 <ul>
@@ -691,9 +691,9 @@
 <li><code>python gibMacOS.command -r</code></li>
 </ul>
 <p>Now search through for your desired version of macOS, for this example we&apos;ll choose option 5 for macOS Catalina:</p>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/688850725337563158/Screen_Shot_2020-03-15_at_2.46.39_PM.png" alt=""></p>
+<p><img src="../images/installer-guide/linux-install-md/1-gib.png" alt=""></p>
 <p>This will download the RecoveryHDMetaDmg.pkg to <code>\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx</code></p>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/688851283855409194/Screen_Shot_2020-03-15_at_2.48.54_PM.png" alt=""></p>
+<p><img src="../images/installer-guide/linux-install-md/3-gib-finished.png" alt=""></p>
 <h2 id="making-the-installer"><a name="making-the-installer" class="plugin-anchor" href="#making-the-installer"><i class="fa fa-link" aria-hidden="true"></i></a>Making the installer</h2>
 <p>This section will target making the necessary partitions in the USB device. You can use your favorite program be it <code>gdisk</code> <code>fdisk</code> <code>parted</code> <code>gparted</code> or <code>gnome-disks</code>. This guide will focus on <code>gdisk</code> as it&apos;s nice and can change the partition type later on, as we need it so that macOS Recovery HD can boot. (the distro used here is Ubuntu 18.04, other versions or distros may work)</p>
 <p>Credit to <a href="https://github.com/midi1996" target="_blank">midi1996</a> for his work on the <a href="https://midi1996.github.io/hackintosh-internet-install-gitbook/" target="_blank">hackintosh-internet-install-gitbook</a> guide which this is based off of.</p>
@@ -701,15 +701,15 @@
 <p>In terminal:</p>
 <ol>
 <li>run <code>lsblk</code> and determine your USB device block
-<img src="https://media.discordapp.net/attachments/580631240991047701/688920468220280842/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/688920468220280842/unknown.png" alt=""></li>
 <li>run <code>sudo gdisk /dev/&lt;your USB block&gt;</code><ol>
 <li>if you&apos;re asked what partition table to use, select GPT.
-<img src="https://media.discordapp.net/attachments/580631240991047701/688920849771659265/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-5.png" alt=""></li>
 <li>send <code>p</code> to print your block&apos;s partitions (and verify it&apos;s the one needed)
-<img src="https://media.discordapp.net/attachments/580631240991047701/688921334775939093/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-6.png" alt=""></li>
 <li>send <code>o</code> to clear the partition table and make a new GPT one (if not empty)<ol>
 <li>confirm with <code>y</code>
-<img src="https://media.discordapp.net/attachments/580631240991047701/688921581032046659/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-8.png" alt=""></li>
 </ol>
 </li>
 <li>send <code>n</code><ol>
@@ -721,7 +721,7 @@
 </li>
 <li>send <code>w</code><ul>
 <li>Confirm with <code>y</code>
-<img src="https://media.discordapp.net/attachments/580631240991047701/688922153835692052/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-9.png" alt=""></li>
 <li>In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.</li>
 </ul>
 </li>
@@ -731,7 +731,7 @@
 <li>Use <code>lsblk</code> to determin your partition&apos;s identifiers</li>
 <li>run <code>sudo mkfs.vfat -F 32 -n &quot;OPENCORE&quot; /dev/&lt;your USB partition block&gt;</code> to format your USB to FAT32 and named OPENCORE</li>
 <li>then <code>cd</code> to <code>gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx</code> and you should get to a <code>pkg</code> file
-<img src="https://media.discordapp.net/attachments/580631240991047701/688923503202009227/unknown.png" alt=""><ol>
+<img src="../images/installer-guide/linux-install-md/unknown-10.png" alt=""><ol>
 <li>download <code>p7zip-full</code> (depending on your distro tools)<ul>
 <li>for ubuntu/ubuntu-based run <code>sudo apt install p7zip-full</code></li>
 <li>for arch/arch-based run <code>sudo pacman -S p7zip</code></li>
@@ -750,15 +750,15 @@
 <p>In terminal:</p>
 <ol>
 <li>run <code>lsblk</code> and determine your USB device block
-<img src="https://media.discordapp.net/attachments/580631240991047701/688920468220280842/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-11.png" alt=""></li>
 <li>run <code>sudo gdisk /dev/&lt;your USB block&gt;</code><ol>
 <li>if you&apos;re asked what partition table to use, select GPT.
-<img src="https://media.discordapp.net/attachments/580631240991047701/688920849771659265/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-12.png" alt=""></li>
 <li>send <code>p</code> to print your block&apos;s partitions (and verify it&apos;s the one needed)
-<img src="https://media.discordapp.net/attachments/580631240991047701/688921334775939093/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-13.png" alt=""></li>
 <li>send <code>o</code> to clear the partition table and make a new GPT one (if not empty)<ol>
 <li>confirm with <code>y</code>
-<img src="https://media.discordapp.net/attachments/580631240991047701/688921581032046659/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-14.png" alt=""></li>
 </ol>
 </li>
 <li>send <code>n</code><ol>
@@ -766,7 +766,7 @@
 <li>first sector: keep blank for default</li>
 <li>last sector: <code>+200M</code> to create a 200MB partition that will be named later on OPENCORE</li>
 <li>Hex code or GUID: <code>0700</code> for Microsoft basic data partition type
-<img src="https://media.discordapp.net/attachments/580631240991047701/688921775098298436/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-15.png" alt=""></li>
 </ol>
 </li>
 <li>send <code>n</code><ol>
@@ -774,12 +774,12 @@
 <li>first sector: keep blank for default</li>
 <li>last sector: keep black for default (or you can make it <code>+3G</code> if you want to partition further the rest of the USB)</li>
 <li>Hex code or GUID: <code>af00</code> for Apple HFS/HFS+ partition type
-<img src="https://media.discordapp.net/attachments/580631240991047701/688922034796757080/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-16.png" alt=""></li>
 </ol>
 </li>
 <li>send <code>w</code><ul>
 <li>Confirm with <code>y</code>
-<img src="https://media.discordapp.net/attachments/580631240991047701/688922153835692052/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-17.png" alt=""></li>
 <li>In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.</li>
 </ul>
 </li>
@@ -787,10 +787,10 @@
 </ol>
 </li>
 <li>Use <code>lsblk</code> again to determine the 200MB drive and the other partition
-<img src="https://media.discordapp.net/attachments/580631240991047701/688922702060585135/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-18.png" alt=""></li>
 <li>run <code>sudo mkfs.vfat -F 32 -n &quot;OPENCORE&quot; /dev/&lt;your 200MB partition block&gt;</code> to format the 200MB partition to FAT32, named OPENCORE</li>
 <li>then <code>cd</code> to <code>gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx</code> and you should get to a <code>pkg</code> file
-<img src="https://media.discordapp.net/attachments/580631240991047701/688923503202009227/unknown.png" alt=""><ol>
+<img src="../images/installer-guide/linux-install-md/unknown-19.png" alt=""><ol>
 <li>download <code>p7zip-full</code> (depending on your distro tools)<ul>
 <li>for ubuntu/ubuntu-based run <code>sudo apt install p7zip-full</code></li>
 <li>for arch/arch-based run <code>sudo pacman -S p7zip</code></li>
@@ -801,10 +801,10 @@
 <li>run this <code>7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*</code> this will extract the recovery from the pkg through extracting the recovery update package then extracting the recovery dmg then the hfs image from it (BaseSystem.dmg).</li>
 <li>download <code>dmg2img</code> (available on most distros)</li>
 <li>run <code>dmg2img -l BaseSystem.dmg</code> and determin which partition has <code>disk image</code> property
-<img src="https://media.discordapp.net/attachments/580631240991047701/688928772707319891/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-20.png" alt=""></li>
 <li>run <code>dmg2img -p &lt;the partition number&gt; -i BaseSystem -o &lt;your 3GB+ partition block&gt;</code> to extract and write the recovery image to the partition disk<ul>
 <li>It will take some time. A LOT if you&apos;re using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
-<img src="https://media.discordapp.net/attachments/580631240991047701/688931658904502272/unknown.png" alt=""></li>
+<img src="../images/installer-guide/linux-install-md/unknown-21.png" alt=""></li>
 </ul>
 </li>
 </ol>
@@ -854,7 +854,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Linux install","level":"1.2.3","depth":2,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/linux-install.md","mtime":"2020-04-08T02:28:45.484Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T02:30:47.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Linux install","level":"1.2.3","depth":2,"next":{"title":"Gathering files","level":"1.3","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"Windows install","level":"1.2.2","depth":2,"path":"installer-guide/winblows-install.md","ref":"installer-guide/winblows-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/linux-install.md","mtime":"2020-04-08T05:37:46.591Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T05:39:43.853Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

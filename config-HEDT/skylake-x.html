@@ -568,9 +568,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../extras/kalsr-fix.md">
+        <li class="chapter " data-level="7.4" data-path="../extras/kaslr-fix.html">
             
-                <span>
+                <a href="../extras/kaslr-fix.html">
             
                     
                     Fixing KASLR slide values
@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 08 2020 02:28:45 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed Apr 08 2020 05:37:46 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="skylake-x"><a name="skylake-x" class="plugin-anchor" href="#skylake-x"><i class="fa fa-link" aria-hidden="true"></i></a>Skylake-X</h1>
 <ul>
@@ -708,7 +708,7 @@
 </ul>
 <p><strong>And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing&apos;s mentioned then leave as default.</strong></p>
 <h2 id="acpi"><a name="acpi" class="plugin-anchor" href="#acpi"><i class="fa fa-link" aria-hidden="true"></i></a>ACPI</h2>
-<p><img src="https://i.imgur.com/IkLFucw.png" alt="ACPI"></p>
+<p><img src="../config/config-universal/aptio-v-acpi.png" alt="ACPI"></p>
 <p><strong>Add:</strong></p>
 <p>This is where you&apos;ll add SSDTs for your system, these are very important to <strong>booting macOS</strong> and have many uses like <a href="https://usb-map.gitbook.io/project/" target="_blank">USB maps</a>, <a href="../extras/spoof.html">disabling unsupported GPUs</a> and such. And with our system, <strong>its even required to boot</strong>. Guide on making them found here: <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
 <p>For us we&apos;ll need a couple of SSDTs to bring back functionality that Clover provided:</p>
@@ -758,7 +758,7 @@
 </li>
 </ul>
 <h2 id="booter"><a name="booter" class="plugin-anchor" href="#booter"><i class="fa fa-link" aria-hidden="true"></i></a>Booter</h2>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/696572196310745128/Screen_Shot_2020-04-05_at_10.07.41_PM.png" alt="Booter"></p>
+<p><img src="../config/config-universal/hedt-booter.png" alt="Booter"></p>
 <p>This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi</p>
 <p><strong>MmioWhitelist</strong>:</p>
 <p>This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.</p>
@@ -831,12 +831,12 @@
 </li>
 </ul>
 <h2 id="deviceproperties"><a name="deviceproperties" class="plugin-anchor" href="#deviceproperties"><i class="fa fa-link" aria-hidden="true"></i></a>DeviceProperties</h2>
-<p><img src="https://media.discordapp.net/attachments/456913818467958789/681334251865636866/Screen_Shot_2020-02-23_at_7.58.51_PM.png?width=1674&amp;height=866" alt="DeviceProperties"></p>
+<p><img src="../config/config-universal/DP-no-igpu.png" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
 <p>By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot <code>PciRoot(0x0)/Pci(0x2,0x0)</code> can be removed from <code>Add</code> section. For audio we&apos;ll be setting the layout in the boot-args section, so removal of <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> is also recommended from both <code>Add</code> and <code>Block</code> sections</p>
 <p>TL;DR, delete all the PciRoot&apos;s here as we won&apos;t be using this section.</p>
 <h2 id="kernel"><a name="kernel" class="plugin-anchor" href="#kernel"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel</h2>
-<p><img src="https://media.discordapp.net/attachments/456913818467958789/681335231080300564/Screen_Shot_2020-02-23_at_8.02.45_PM.png?width=1486&amp;height=1771" alt="Kernel"></p>
+<p><img src="../config/config-universal/kernel.png" alt="Kernel"></p>
 <p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run <strong>Cmd/Ctrl + Shift + R</strong> to add all their kexts in the correct order without manually typing each kext out.</p>
 <ul>
 <li><strong>BundlePath</strong><ul>
@@ -924,7 +924,7 @@
 </ul>
 <p>The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such</p>
 <h2 id="misc"><a name="misc" class="plugin-anchor" href="#misc"><i class="fa fa-link" aria-hidden="true"></i></a>Misc</h2>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/683011604182466560/Screen_Shot_2020-02-28_at_10.52.25_AM.png" alt="Misc"></p>
+<p><img src="../config/config-universal/misc.png" alt="Misc"></p>
 <p><strong>Boot</strong>: Settings for boot screen (Leave everything as default)</p>
 <ul>
 <li><strong>HibernateMode</strong>: None<ul>
@@ -1042,7 +1042,7 @@
 <p><strong>Entries</strong>: Used for specifying irregular boot paths that can&apos;t be found naturally with OpenCore</p>
 <p>Won&apos;t be covered here, see 8.6 of <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more info</p>
 <h2 id="nvram"><a name="nvram" class="plugin-anchor" href="#nvram"><i class="fa fa-link" aria-hidden="true"></i></a>NVRAM</h2>
-<p><img src="https://cdn.discordapp.com/attachments/456913818467958789/681330600606826568/Screen_Shot_2020-02-23_at_7.44.23_PM.png" alt="NVRAM"></p>
+<p><img src="../config/config-universal/nvram.png" alt="NVRAM"></p>
 <p><strong>Add</strong>: </p>
 <p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)</p>
 <ul>
@@ -1126,7 +1126,7 @@
 <li>Enables writing to flash memory for all added variables.</li>
 </ul>
 <h2 id="platforminfo"><a name="platforminfo" class="plugin-anchor" href="#platforminfo"><i class="fa fa-link" aria-hidden="true"></i></a>Platforminfo</h2>
-<p><img src="https://i.imgur.com/CrqeCea.png" alt="PlatformInfo"></p>
+<p><img src="../config/config-universal/iMacPro-smbios.png" alt="PlatformInfo"></p>
 <p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application. </p>
 <p>For this Skylake-X example, we&apos;ll choose the iMacPro1,1 SMBIOS.</p>
 <p>Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:</p>
@@ -1178,7 +1178,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li>Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk</li>
 </ul>
 <h2 id="uefi"><a name="uefi" class="plugin-anchor" href="#uefi"><i class="fa fa-link" aria-hidden="true"></i></a>UEFI</h2>
-<p><img src="https://cdn.discordapp.com/attachments/683011276938543134/683518959873425639/Screen_Shot_2020-02-29_at_8.40.06_PM.png" alt="UEFI"></p>
+<p><img src="../config/config-universal/aptio-v-uefi.png" alt="UEFI"></p>
 <p><strong>ConnectDrivers</strong>: YES</p>
 <ul>
 <li>Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.</li>
@@ -1424,7 +1424,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.3","depth":1,"next":{"title":"Bulldozer/Jaguar","level":"4.1","depth":1,"path":"AMD/fx.md","ref":"AMD/fx.md","articles":[]},"previous":{"title":"Broadwell-E","level":"3.2","depth":1,"path":"config-HEDT/broadwell-e.md","ref":"config-HEDT/broadwell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-04-08T02:28:45.120Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T02:30:47.803Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.3","depth":1,"next":{"title":"Bulldozer/Jaguar","level":"4.1","depth":1,"path":"AMD/fx.md","ref":"AMD/fx.md","articles":[]},"previous":{"title":"Broadwell-E","level":"3.2","depth":1,"path":"config-HEDT/broadwell-e.md","ref":"config-HEDT/broadwell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-04-08T05:37:46.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T05:39:43.853Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
