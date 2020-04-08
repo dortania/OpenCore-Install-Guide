@@ -146,7 +146,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 
 ## DeviceProperties
 
-![DeviceProperties](/images/images/config/config-laptop.plist/broadwell/DeviceProperties.png)
+![DeviceProperties](/images/config/config-laptop.plist/broadwell/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 
@@ -392,7 +392,7 @@ Recommended to leave enabled for best security practices
 
 ## Platforminfo
 
-![PlatformInfo](/images/images/config/config-laptop.plist/broadwell/smbios.png)
+![PlatformInfo](/images/config/config-laptop.plist/broadwell/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application. 
 
