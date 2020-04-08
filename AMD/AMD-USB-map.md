@@ -28,7 +28,7 @@ So what you'll need to get started:
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases)
 * [ProperTree](https://github.com/corpnewt/ProperTree) or some other plist editor
 * [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/raw/master/IORegistryExplorer_v2.1.zip)
-* [AMD-USB-Map.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
+* [AMD-USB-Map.kext](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
 * `XhciPortLimit` enabled under `Kernel -> Quirks`
 * Copy of your DSDT
 
@@ -71,7 +71,7 @@ All of our ports are here! So why in the world is macOS hiding them? Well there'
 
 Inside the `AppleUSBHostPlatformProperties.kext` you'll find the USB map for most SMBIOS, this means that that machine's USB map is forced onto your system. 
 
-Well to kick out these bad maps, we gotta make a plugin kext. For us, that's the [AMD-USB-Map.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
+Well to kick out these bad maps, we gotta make a plugin kext. For us, that's the [AMD-USB-Map.kext](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
 
 Now right-click and press `Show Package Contents`, then navigate to `Contents/Info.plist`
 
@@ -139,7 +139,7 @@ In this IOReg, we're missing HS02, HS03, HS04, HS05, etc. When this happens, we 
 
 This becomes a problem when we run systems with many USB controllers which all want to have the same identifier, commonly being multiple XHC0 devices or AsMedia controllers showing up as generic PXSX devices. To fix this, we'll want to make an SSDT that will rename the controller:
 
-* [SSDT-XHC2.dsl](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/tree/master/extra-files/SSDT-XHC2.dsl)
+* [SSDT-XHC2.dsl](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/extra-files/SSDT-XHC2.dsl)
 
 What you'll want to do is find a controller you want to rename, find its full ACPI path and replace the one in the sample SSDT. In our sample, we're be renaming `PCI0.GP13.XHC0` to `XHC2` so change accordingly. You may need to include the ports from the DSDT into the SSDT
 
