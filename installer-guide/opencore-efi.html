@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 08 2020 05:57:22 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed Apr 08 2020 06:17:54 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="creating-the-usb"><a name="creating-the-usb" class="plugin-anchor" href="#creating-the-usb"><i class="fa fa-link" aria-hidden="true"></i></a>Creating the USB</h1>
 <ul>
@@ -697,7 +697,7 @@
 </ul>
 <h1 id="setting-up-the-efi"><a name="setting-up-the-efi" class="plugin-anchor" href="#setting-up-the-efi"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up the EFI</h1>
 <p>To setup OpenCore&#x2019;s folder structure, you&#x2019;ll want to grab the EFI folder found in OpenCorePkg&apos;s releases page(this will already be done on the <code>BOOT</code> USB drive for windows users):</p>
-<p><img src="../images/post-install/opencore-efi-md/base-efi.png" alt="base EFI folder"></p>
+<p><img src="../images/installer-guide/opencore-efi-md/base-efi.png" alt="base EFI folder"></p>
 <p>Now something you&apos;ll notice is that it comes with a bunch of files in <code>Drivers</code> and <code>Tools</code> folder, we don&apos;t want most of these:</p>
 <ul>
 <li><p><strong>Remove from Drivers:</strong></p>
@@ -719,7 +719,7 @@
 </ul>
 </li>
 <li>OpenCanopy.efi<ul>
-<li>This is OpenCore&apos;s optional GUI, we&apos;ll be going over how to set this up in post-install so remove this for now</li>
+<li>This is OpenCore&apos;s optional GUI, we&apos;ll be going over how to set this up in installer-guide so remove this for now</li>
 </ul>
 </li>
 </ul>
@@ -731,10 +731,10 @@
 </li>
 </ul>
 <p>A cleaned up EFI:</p>
-<p><img src="../images/post-install/opencore-efi-md/clean-efi.png" alt="Clean EFI"></p>
+<p><img src="../images/installer-guide/opencore-efi-md/clean-efi.png" alt="Clean EFI"></p>
 <p>Now you can place <strong>your</strong> necessary firmware drivers(.efi) from AppleSupportPkg into the <em>Drivers</em> folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md" target="_blank">Clover firmware driver conversion</a> for more info on supported drivers and those merged into OpenCore.</p>
 <p>Here&apos;s what a populated EFI can look like:</p>
-<p><img src="../images/post-install/opencore-efi-md/populated-efi.png" alt="Populated EFI folder"></p>
+<p><img src="../images/installer-guide/opencore-efi-md/populated-efi.png" alt="Populated EFI folder"></p>
 <p><strong>Reminder</strong>:</p>
 <ul>
 <li>SSDTs and custom DSDTs(<code>.aml</code>) go in ACPI folder</li>
@@ -785,7 +785,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},"previous":{"title":"OpenCore Desktop Guide","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/opencore-efi.md","mtime":"2020-04-08T05:57:22.194Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T05:59:28.284Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},"previous":{"title":"OpenCore Desktop Guide","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/opencore-efi.md","mtime":"2020-04-08T06:17:54.122Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T06:19:49.806Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
