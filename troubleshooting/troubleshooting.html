@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 08 2020 06:17:54 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed Apr 08 2020 15:06:09 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -876,7 +876,7 @@
 <li>Stuck on <code>RTC...</code>, <code>PCI ConfigurationBegins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></li>
 <li>&quot;Waiting for Root Device&quot; or Prohibited Sign error</li>
 <li>macOS installer in Russian</li>
-<li>macOS Installer being damadged</li>
+<li>macOS Installer being damaged</li>
 <li>Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></li>
 <li>Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</li>
 <li>300 series Intel stalling on <code>apfs_module_start...</code></li>
@@ -926,7 +926,7 @@
 <p>Still didn&apos;t work? Well time for the big guns. We&apos;ll force remove that exact property and let OpenCore rebuild it:</p>
 <p><code>NVRAM -&gt; Block -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82 -&gt; Item 0</code> then set it Type <code>String</code> and Value <code>prev-lang:kbd</code></p>
 <p><img src="../images/troubleshooting/troubleshooting-md/lang.jpg" alt=""></p>
-<h2 id="macos-installer-being-damadged"><a name="macos-installer-being-damadged" class="plugin-anchor" href="#macos-installer-being-damadged"><i class="fa fa-link" aria-hidden="true"></i></a>macOS Installer being damadged</h2>
+<h2 id="macos-installer-being-damaged"><a name="macos-installer-being-damaged" class="plugin-anchor" href="#macos-installer-being-damaged"><i class="fa fa-link" aria-hidden="true"></i></a>macOS Installer being damaged</h2>
 <p>If you&apos;ve download macOS before October 2019, you likely have an expired macOS Installer certificate, there&apos;s 2 ways to fix this:</p>
 <ul>
 <li>Download newest copy of macOS</li>
@@ -1255,7 +1255,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-08T06:17:54.122Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T06:19:49.806Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-08T15:06:09.763Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-08T15:08:18.974Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
