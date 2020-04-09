@@ -2,6 +2,20 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Starting Point](/config-HEDT/skylake-x.md#starting-point)
+* [ACPI](/config-HEDT/skylake-x.md#acpi)
+* [Booter](/config-HEDT/skylake-x.md#booter)
+* [DeviceProperties](/config-HEDT/skylake-x.md#deviceproperties)
+* [Kernel](/config-HEDT/skylake-x.md#kernel)
+* [Misc](/config-HEDT/skylake-x.md#misc)
+* [NVRAM](/config-HEDT/skylake-x.md#nvram)
+* [SMBIOS](/config-HEDT/skylake-x.md#smbios)
+* [UEFI](/config-HEDT/skylake-x.md#uefi)
+* [Cleaning up](/config-HEDT/skylake-x.md#cleaning-up)
+* [Intel BIOS settings](/config-HEDT/skylake-x.md#intel-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:

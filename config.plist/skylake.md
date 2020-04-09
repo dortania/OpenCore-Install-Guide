@@ -2,6 +2,20 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Starting Point](/config.plist/skylake.md#starting-point)
+* [ACPI](/config.plist/skylake.md#acpi)
+* [Booter](/config.plist/skylake.md#booter)
+* [DeviceProperties](/config.plist/skylake.md#deviceproperties)
+* [Kernel](/config.plist/skylake.md#kernel)
+* [Misc](/config.plist/skylake.md#misc)
+* [NVRAM](/config.plist/skylake.md#nvram)
+* [SMBIOS](/config.plist/skylake.md#smbios)
+* [UEFI](/config.plist/skylake.md#uefi)
+* [Cleaning up](/config.plist/skylake.md#cleaning-up)
+* [Intel BIOS settings](/config.plist/skylake.md#intel-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:

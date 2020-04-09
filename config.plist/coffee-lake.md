@@ -2,6 +2,20 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Starting Point](/config.plist/coffee-lake.md#starting-point)
+* [ACPI](/config.plist/coffee-lake.md#acpi)
+* [Booter](/config.plist/coffee-lake.md#booter)
+* [DeviceProperties](/config.plist/coffee-lake.md#deviceproperties)
+* [Kernel](/config.plist/coffee-lake.md#kernel)
+* [Misc](/config.plist/coffee-lake.md#misc)
+* [NVRAM](/config.plist/coffee-lake.md#nvram)
+* [SMBIOS](/config.plist/coffee-lake.md#smbios)
+* [UEFI](/config.plist/coffee-lake.md#uefi)
+* [Cleaning up](/config.plist/coffee-lake.md#cleaning-up)
+* [Intel BIOS settings](/config.plist/coffee-lake.md#intel-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:

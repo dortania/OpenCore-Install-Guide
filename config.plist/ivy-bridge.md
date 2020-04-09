@@ -2,6 +2,20 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Starting Point](/config.plist/ivy-bridge.md#starting-point)
+* [ACPI](/config.plist/ivy-bridge.md#acpi)
+* [Booter](/config.plist/ivy-bridge.md#booter)
+* [DeviceProperties](/config.plist/ivy-bridge.md#deviceproperties)
+* [Kernel](/config.plist/ivy-bridge.md#kernel)
+* [Misc](/config.plist/ivy-bridge.md#misc)
+* [NVRAM](/config.plist/ivy-bridge.md#nvram)
+* [SMBIOS](/config.plist/ivy-bridge.md#smbios)
+* [UEFI](/config.plist/ivy-bridge.md#uefi)
+* [Cleaning up](/config.plist/ivy-bridge.md#cleaning-up)
+* [Intel BIOS settings](/config.plist/ivy-bridge.md#intel-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:

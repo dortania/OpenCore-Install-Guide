@@ -4,6 +4,20 @@
 
 **Both Haswell and Broadwell users can follow this**
 
+Table of Contents:
+
+* [Starting Point](/config.plist/haswell.md#starting-point)
+* [ACPI](/config.plist/haswell.md#acpi)
+* [Booter](/config.plist/haswell.md#booter)
+* [DeviceProperties](/config.plist/haswell.md#deviceproperties)
+* [Kernel](/config.plist/haswell.md#kernel)
+* [Misc](/config.plist/haswell.md#misc)
+* [NVRAM](/config.plist/haswell.md#nvram)
+* [SMBIOS](/config.plist/haswell.md#smbios)
+* [UEFI](/config.plist/haswell.md#uefi)
+* [Cleaning up](/config.plist/haswell.md#cleaning-up)
+* [Intel BIOS settings](/config.plist/haswell.md#intel-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:

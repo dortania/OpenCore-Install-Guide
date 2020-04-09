@@ -19,25 +19,25 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 # OpenCore booting
 
-* Stuck on `no vault provided!`
-* Stuck on EndRandomSeed
-* Can't see macOS partitions
-* Black screen after picker
-* Stuck on `OC: OcAppleGenericInput... - Success`
-* Stuck on `OCB: OcScanForBootEntries failure - Not Found`
-* Stuck on `OCB: failed to match a default boot option`
-* Stuck on `OCABC: Memory pool allocation failure - Not Found`
-* Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`
-* Stuck on `OC: Driver XXX.efi at 0 cannot be found`
-* Stuck on `Buffer Too Small`
-* Stuck on `Plist only kext has CFBundleExecutable key`
-* Receiving `Failed to parse real field of type 1`
-* Stuck after selection macOS partition on OpenCore
-* Can't select anything in the picker
-* Stuck on `This version of Mac OS X is not supported: Reason Mac...`
-* `Couldn't allocate runtime area` errors?
-* SSDTs not being added
-* Booting OpenCore reboots to BIOS
+* [Stuck on `no vault provided!`](/troubleshooting/troubleshooting.md#stuck-on-no-vault-provided)
+* [Stuck on EndRandomSeed](/troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
+* [Can't see macOS partitions](/troubleshooting/troubleshooting.md#cant-see-macos-partitions)
+* [Black screen after picker](/troubleshooting/troubleshooting.md#black-screen-on-picker)
+* [Stuck on `OC: OcAppleGenericInput... - Success`](/troubleshooting/troubleshooting.md#stuck-on-oc-ocapplegenericInput-success)
+* [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocb-ocscanforbootentries-failure-not-found)
+* [Stuck on `OCB: failed to match a default boot option`](/troubleshooting/troubleshooting.md#stuck-on-ocb-failed-to-match-a-default-boot-option)
+* [Stuck on `OCABC: Memory pool allocation failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocabc-memory-pool-allocation-failure-not-found)
+* [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](/troubleshooting/troubleshooting.md#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
+* [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](/troubleshooting/troubleshooting.md#stuck-on-oc-driver-xxx-efi-at-0-cannot-be-found)
+* [Stuck on `Buffer Too Small`](/troubleshooting/troubleshooting.md#stuck-on-buffer-too-small)
+* [Stuck on `Plist only kext has CFBundleExecutable key`](/troubleshooting/troubleshooting.md#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
+* [Receiving `Failed to parse real field of type 1`](/troubleshooting/troubleshooting.md#receiving-failed-to-parse-real-field-type-1)
+* [Stuck after selection macOS partition on OpenCore](/troubleshooting/troubleshooting.md#stuck-after-selection-macos-partition-on-opencore)
+* [Can't select anything in the picker](/troubleshooting/troubleshooting.md#cant-select-anything-in-the-picker)
+* [Stuck on `This version of Mac OS X is not supported: Reason Mac...`](/troubleshooting/troubleshooting.md#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac)
+* [`Couldn't allocate runtime area` errors?](/troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)
+* [SSDTs not being added](/troubleshooting/troubleshooting.md#ssdts-not-being-added)
+* [Booting OpenCore reboots to BIOS](/troubleshooting/troubleshooting.md#booting-opencore-reboots-to-bios)
 
 
 
@@ -218,21 +218,21 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 # macOS booting
 
-* Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
-* "Waiting for Root Device" or Prohibited Sign error
-* macOS installer in Russian
-* macOS Installer being damaged
-* Stuck on or near `IOConsoleUsers: gIOScreenLock...`
-* Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
-* 300 series Intel stalling on `apfs_module_start...`
-* Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
-* Kernel Panic `Cannot perform kext summary`
-* Kernel Panic `AppleIntelMCEReporter`
-* Kernel Panic `AppleIntelCPUPowerManagement`
-* Stop Sign with corrupted text(Still waiting for Root Device)
-* Frozen in the macOS installer after 30 seconds
-* 15h/16h CPU reboot after Data & Privacy screen
-* Sleep crashing on AMD
+* [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](/troubleshooting/troubleshooting.md#stuck-on-rtc-pci-configurationbegins-previous-shutdown-hpet-hid-legacy)
+* ["Waiting for Root Device" or Prohibited Sign error](/troubleshooting/troubleshooting.md#waiting-for-root-device-or-prohibited-sign-error)
+* [macOS installer in Russian](/troubleshooting/troubleshooting.md#macos-installer-in-russian)
+* [macOS Installer being damaged](/troubleshooting/troubleshooting.md#macos-installer-being-damaged)
+* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](/troubleshooting/troubleshooting.md#stuck-on-or-near-ioconsolessers-gioscreenlock)
+* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](/troubleshooting/troubleshooting.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
+* [300 series Intel stalling on `apfs_module_start...`](/troubleshooting/troubleshooting.md#300-series-intel-stalling-on-apfs_module_start)
+* [Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina](/troubleshooting/troubleshooting.md#stalling-on-apfs_module_start-waiting-for-root-device-waiting-on-ioresources-previous-shutdown-cause-in-catalina)
+* [Kernel Panic `Cannot perform kext summary`](/troubleshooting/troubleshooting.md#kernel-panic-cannot-perform-kext-summary)
+* [Kernel Panic `AppleIntelMCEReporter`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelmcereporter)
+* [Kernel Panic `AppleIntelCPUPowerManagement`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelcpupowermanagement)
+* [Stop Sign with corrupted text(Still waiting for Root Device)](/troubleshooting/troubleshooting.md#stop-sign-with-corrupted-text-still-waiting-for-root-device)
+* [Frozen in the macOS installer after 30 seconds](/troubleshooting/troubleshooting.md#frozen-in-macos-installer-after-30-seconds)
+* [15h/16h CPU reboot after Data & Privacy screen](/troubleshooting/troubleshooting.md#15h-16-h-cpu-reboot-after-data-and-privacy-screen)
+* [Sleep crashing on AMD](/troubleshooting/troubleshooting.md#sleep-crashing-on-amd)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -348,12 +348,12 @@ For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. 
 # macOS post-install
 
 * [Broken iMessage and Siri](/troubleshooting/troubleshooting.md#Broken-iMessage-and-Siri)
-* No on-board audio
-* BIOS reset or sent into Safemode after reboot/shutdown?
-* macOS GPU acceleration missing on AMD X570
-* DRM Broken
-* "Memory Modules Misconfigured" on MacPro7,1
-* Apps crashing on AMD
+* [No on-board audio](/troubleshooting/troubleshooting.md#no-on-board-audio)
+* [BIOS reset or sent into Safemode after reboot/shutdown?](/troubleshooting/troubleshooting.md#bios-reset-or-sent-into-safemode-after-reboot-shutdown)
+* [macOS GPU acceleration missing on AMD X570](/troubleshooting/troubleshooting.md#macos-gpu-acceleration-missing-on-amd-x-570)
+* [DRM Broken](/troubleshooting/troubleshooting.md#drm-broken)
+* ["Memory Modules Misconfigured" on MacPro7,1](/troubleshooting/troubleshooting.md#memory-modules-misconfigured-on-macpro-7-1)
+* [Apps crashing on AMD](/troubleshooting/troubleshooting.md#apps-crashing-on-amd)
 
 ## Broken iMessage and Siri 
 
@@ -446,16 +446,16 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 
 # Other issues
 
-* Can't run `acpidump.efi`
-* Fixing SSDTTime: `Could not locate or download iasl!`
-* Fix Python: `Python is not installed or not found on PATH`
-* Windows Startup Disk can't see APFS drives
-* Incorrect resolution with OpenCore
-* No temperature/fan sensor output
-* Can't find Windows/Bootcamp drive in picker
-* Booting Windows results in Bluescreen or Linux crashes
-* Booting Windows error: `OCB: StartImage failed - Already started`
-* iASL warning, # unresolved
+* [Can't run `acpidump.efi`](/troubleshooting/troubleshooting.md#cant-run-acpidump-efi)
+* [Fixing SSDTTime: `Could not locate or download iasl!`](/troubleshooting/troubleshooting.md#fixing-ssdttime-cant-locate-or-download-iasl)
+* [Fix Python: `Python is not installed or not found on PATH`](/troubleshooting/troubleshooting.md#fix-python-python-is-not-installed-or-not-found-on-path)
+* [Windows Startup Disk can't see APFS drives](/troubleshooting/troubleshooting.md#windows-startup-disk-cant-see-apfs-drives)
+* [Incorrect resolution with OpenCore](/troubleshooting/troubleshooting.md#incorrect-resolution-with-opencore)
+* [No temperature/fan sensor output](/troubleshooting/troubleshooting.md#no-temperature-fan-sensor-output)
+* [Can't find Windows/Bootcamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windows-bootcamp-drive-in-picker)
+* [Booting Windows results in Bluescreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
+* [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed-already-started)
+* [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning-unresolved)
 
 ## Can't run `acpidump.efi`
 

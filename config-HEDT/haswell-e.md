@@ -2,6 +2,20 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Starting Point](/config-HEDT/haswell-e.md#starting-point)
+* [ACPI](/config-HEDT/haswell-e.md#acpi)
+* [Booter](/config-HEDT/haswell-e.md#booter)
+* [DeviceProperties](/config-HEDT/haswell-e.md#deviceproperties)
+* [Kernel](/config-HEDT/haswell-e.md#kernel)
+* [Misc](/config-HEDT/haswell-e.md#misc)
+* [NVRAM](/config-HEDT/haswell-e.md#nvram)
+* [SMBIOS](/config-HEDT/haswell-e.md#smbios)
+* [UEFI](/config-HEDT/haswell-e.md#uefi)
+* [Cleaning up](/config-HEDT/haswell-e.md#cleaning-up)
+* [Intel BIOS settings](/config-HEDT/haswell-e.md#intel-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
