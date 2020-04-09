@@ -4,7 +4,7 @@
 
 What you'll need:
 
-* Working hackintosh
+* Working system
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases)
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip)
