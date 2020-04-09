@@ -439,7 +439,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * **SpoofVendor**: YES
    * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
-* **SupportsCsm**: NO
+* **AdviseWindows**: NO
    * Used for when the EFI partition isn't first on the windows drive
 
 **UpdateDataHub**: YES
