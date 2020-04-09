@@ -28,7 +28,7 @@ This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Download
 
 This section will target making the necessary partitions in the USB device. You can use your favorite program be it `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `gdisk` as it's nice and can change the partition type later on, as we need it so that macOS Recovery HD can boot. (the distro used here is Ubuntu 18.04, other versions or distros may work)
 
-Credit to [midi1996](https://github.com/midi1996) for his work on the [hackintosh-internet-install-gitbook](https://midi1996.github.io/hackintosh-internet-install-gitbook/) guide which this is based off of.
+Credit to [midi1996](https://github.com/midi1996) for his work on the [Internet Install Guide](https://midi1996.github.io/hackintosh-internet-install-gitbook/) guide which this is based off of.
 
 ### Method 1
 

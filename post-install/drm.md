@@ -68,7 +68,7 @@ If everything works on these tests, you have no need to continue! Otherwise, pro
 
 ## Fixing DRM
 
-So for fixing DRM on hackintoshes we can go down mainly 1 route: patching DRM to use either software or AMD decoding. Vit made a great little chart for different hardware configurations:
+So for fixing DRM we can go down mainly 1 route: patching DRM to use either software or AMD decoding. Vit made a great little chart for different hardware configurations:
 
 * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
 
@@ -97,7 +97,7 @@ Here's another example. This time, We have an Ryzen 3700X and an RX 480. Our con
 
 ## Fixing iGPU performance
 
-So how do we fix iGPU performance on a hackintosh? Well by loading Apple's GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:
+So how do we fix iGPU performance? Well by loading Apple's GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:
   * Skylake and newer CPU with a [supported iGPU](https://gpu.dortania.ml/modern-gpus/intel-gpu)
   * **And** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (***not*** Z370, as it is actually 200-series)
   * Do note that even with recent chipsets, firmware loading is not guaranteed to work. If you experience a kernel panic or lots of graphics errors after trying this, it is probably because firmware loading is not supported on your setup.

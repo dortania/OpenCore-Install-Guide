@@ -20,6 +20,7 @@ To calculate the target, we can use a HEX calculator and then convert it to deci
 
 * `0x01` — Enable Logging
 * `0x02` — Enable Onscreen debug
+   * Note this can heavily increase boot times on fimrwares with poor GOP implementations
 * `0x10` — Enable UEFI variable logging.
 * `0x40` — Enable logging to file.
 

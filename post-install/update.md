@@ -72,7 +72,7 @@ So the process goes as follows:
 
 ## Updating macOS
 
-* So this is probably one of the most challenging parts about a hackintosh, maintaining it through OS updates. The main things to keep in mind:
+* So this is probably one of the most challenging parts, maintaining your system through OS updates. The main things to keep in mind:
    * With OS updates, make sure everything has been updated and you have some form of recovery like TimeMachine or an older macOS installer with a known good EFI on it
    * Do a bit of google-fu to see if others are having issues with the newest update
 
