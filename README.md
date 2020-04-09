@@ -18,7 +18,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Better overall stability as patches can be much more persise: [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/) as an example
 * OpenCore offers better overall security with better support for FileVault, no need to disable System Integrity Protection(SIP) and even secure boot-like functionality support via [Vaulting](/post-install/security.md#Vault)
 * OpenCore supports boot hotkey support via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.
-* OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kext_inject.cpp#L920)
+* OpenCore is designed with the future in mind and uses modern methods to load 3rd party kernel extensions without breaking System Integrity Protection which [Clover uses](https://github.com/CloverHackyColor/CloverBootloader/blob/ea3058f86787149a5b159872cda362c1cbb1fc6c/rEFIt_UEFI/Platform/kext_inject.cpp#L990-L1015)
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
 * Future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the FwRuntimeVariable.efi being used as an extension.
 * UEFI and Legacy boot modes are supported

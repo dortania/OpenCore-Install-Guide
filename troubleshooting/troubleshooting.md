@@ -76,7 +76,7 @@ Another other possible problem is IRQ conflicts, Clover has plenty of different 
 Main things to check:
 
 * ScanPolicy set to `0` to show all drives
-* Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus(or VBoxHfs)
+* Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus
 * Enable `AvoidHighAlloc` if you're running a network recovery install
 
 ## Black screen after picker
