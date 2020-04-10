@@ -14,7 +14,7 @@ Table of Contents:
 * [SMBIOS](/AMD/fx.md#smbios)
 * [UEFI](/AMD/fx.md#uefi)
 * [Cleaning up](/AMD/fx.md#cleaning-up)
-* [Intel BIOS settings](/AMD/fx.md#amd-bios-settings)
+* [AMD BIOS settings](/AMD/fx.md#amd-bios-settings)
 
 ## Starting Point
 

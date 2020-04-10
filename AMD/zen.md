@@ -14,7 +14,7 @@ Table of Contents:
 * [SMBIOS](/AMD/zen.md#smbios)
 * [UEFI](/AMD/zen.md#uefi)
 * [Cleaning up](/AMD/zen.md#cleaning-up)
-* [Intel BIOS settings](/AMD/zen.md#amd-bios-settings)
+* [AMD BIOS settings](/AMD/zen.md#amd-bios-settings)
 
 ## Starting Point
 
