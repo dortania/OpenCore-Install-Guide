@@ -91,7 +91,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * **FixHPET**:
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 * **FixSATA**:
-   * `Kernel -> Quriks -> ExternalDiskIcons -> YES`
+   * `Kernel -> Quirks -> ExternalDiskIcons -> YES`
 
 * **FixADP1**:
    * Renames device `AC0_` to `ADP1`, see [Rename-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
