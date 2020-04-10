@@ -55,7 +55,7 @@ So to start, we'll need a couple things:
 * **AudioCodec:**
    * Codec address of Audio controller
    * To find yours:
-      * Check IOReg -> HDEF -> AppleHDAController -> IOHDACodecDevice and see the `IOHDACodecAddress` property
+      * Check IOReg -> HDEF and see the `IOHDACodecAddress` property
       * ex: `0x0`
 
 * **Audio Device:**
