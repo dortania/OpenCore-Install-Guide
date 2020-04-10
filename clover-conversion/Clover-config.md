@@ -95,7 +95,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * **FixADP1**:
    * Renames device `AC0_` to `ADP1`, see [Rename-SSDT](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
-* Also injects `Name (_PRW, Package (0x02) {0x1C,0x03})` into the device if not present. [Source](https://github.com/CloverHackyColor/CloverBootloader/blob/81f2b91b1552a4387abaa2c48a210c63d5b6233c/rEFIt_UEFI/Platform/FixBiosDsdt.cpp#L1677-L1692)
+   * Also injects `Name (_PRW, Package (0x02) {0x1C,0x03})` into the device if not present. [Source](https://github.com/CloverHackyColor/CloverBootloader/blob/81f2b91b1552a4387abaa2c48a210c63d5b6233c/rEFIt_UEFI/Platform/FixBiosDsdt.cpp#L1677-L1692)
    
 * **FixRTC**:
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
@@ -142,7 +142,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 # Boot Graphics
 
 **DefaultBackgroundColor**:
-* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> DefaultBackgroundColor`
+* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> DefaultBackgroundColor`
    * `00000000`: Syrah Black
    * `BFBFBF00`: Light Gray
    * To calcuate your own, convert an `RGB` value to `HEX`
@@ -160,7 +160,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **UIScale**:
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale | Data | <>`
    * 1 -> `<01>`
-   * 2 -> `Data | <02>`
+   * 2 -> `<02>`
 
 # Cpu
 
@@ -297,7 +297,8 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 * `DeviceProperties -> Add -> PCIRoot... -> @0,display-cfg`
 * See fassl's post on the matter: [nVidia injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
 
-**LoadVBios**: See [sample.dsl](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/Sample.dsl) for more info on custom VBIOS injection
+**LoadVBios**: 
+* See [sample.dsl](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/Sample.dsl) for more info on custom VBIOS injection
 
 **PatchVBios**: See LoadVBIOS
 
@@ -420,18 +421,19 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **BooterConfig**: 
 
-`NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`
+* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`:
 
-* 0x28: `Data | <01>`
-* 0x2A: `Data | <02>`
+   * 0x28: `Data | <01>`
+   * 0x2A: `Data | <02>`
 
 **CsrActiveConfig**:
-`NVRAM -> Add -> csr-active-config`
 
-* 0x0: `00000000`
-* 0x3: `03000000`
-* 0x67: `67000000`
-* 0x3E7: `E7030000`
+* `NVRAM -> Add -> csr-active-config`:
+
+   * 0x0: `00000000`
+   * 0x3: `03000000`
+   * 0x67: `67000000`
+   * 0x3E7: `E7030000`
 
 # SMBIOS
 

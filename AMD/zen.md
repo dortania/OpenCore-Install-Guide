@@ -2,6 +2,20 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Starting Point](/AMD/zen.md#starting-point)
+* [ACPI](/AMD/zen.md#acpi)
+* [Booter](/AMD/zen.md#booter)
+* [DeviceProperties](/AMD/zen.md#deviceproperties)
+* [Kernel](/AMD/zen.md#kernel)
+* [Misc](/AMD/zen.md#misc)
+* [NVRAM](/AMD/zen.md#nvram)
+* [SMBIOS](/AMD/zen.md#smbios)
+* [UEFI](/AMD/zen.md#uefi)
+* [Cleaning up](/AMD/zen.md#cleaning-up)
+* [Intel BIOS settings](/AMD/zen.md#amd-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:

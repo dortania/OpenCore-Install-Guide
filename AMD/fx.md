@@ -2,6 +2,20 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Starting Point](/AMD/fx.md#starting-point)
+* [ACPI](/AMD/fx.md#acpi)
+* [Booter](/AMD/fx.md#booter)
+* [DeviceProperties](/AMD/fx.md#deviceproperties)
+* [Kernel](/AMD/fx.md#kernel)
+* [Misc](/AMD/fx.md#misc)
+* [NVRAM](/AMD/fx.md#nvram)
+* [SMBIOS](/AMD/fx.md#smbios)
+* [UEFI](/AMD/fx.md#uefi)
+* [Cleaning up](/AMD/fx.md#cleaning-up)
+* [Intel BIOS settings](/AMD/fx.md#amd-bios-settings)
+
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
