@@ -673,7 +673,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Thu Apr 09 2020 22:36:51 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Fri Apr 10 2020 16:02:15 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="opencore-beauty-treatment"><a name="opencore-beauty-treatment" class="plugin-anchor" href="#opencore-beauty-treatment"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore beauty treatment</h1>
 <ul>
@@ -709,6 +709,7 @@
 <ul>
 <li>Onboard audio output<ul>
 <li>USB DACs will not work</li>
+<li>GPU audio out is a hit or miss</li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AudioDxe</a> in both EFI/OC/Drivers and UEFI -&gt; Drivers</li>
@@ -731,16 +732,27 @@
 </ul>
 <p><strong>Setting up UEFI -&gt; Audio:</strong></p>
 <ul>
-<li><p><strong>AudioCodec:</strong></p>
-<ul>
+<li><strong>AudioCodec:</strong><ul>
 <li>Codec address of Audio controller</li>
 <li>To find yours:<ul>
-<li>Check IOReg -&gt; HDEF and see the <code>IOHDACodecAddress</code> property</li>
-<li>ex: <code>0x0</code></li>
+<li>Check <a href="https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip" target="_blank">IORegistryExplorer</a> -&gt; HDEF and see the <code>IOHDACodecAddress</code> property</li>
+<li>ex: <code>0x0</code><ul>
+<li>Can also check via terminal:<pre><code class="lang-text">ioreg -rxn IOHDACodecDevice | grep VendorID   // List all possible devices
+</code></pre>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<pre><code class="lang-text">ioreg -rxn IOHDACodecDevice | grep IOHDACodecAddress // Grab the codec address
+</code></pre>
+<ul>
+<li>Note if multiple show up, use the vendor ID to find the right device</li>
+</ul>
+<ul>
 <li><p><strong>Audio Device:</strong></p>
 <ul>
 <li>PciRoot of audio controller</li>
@@ -774,7 +786,7 @@
 <ul>
 <li>Volume level from <code>0</code> to <code>100</code></li>
 <li>To not blow the speakers, set it to <code>70</code></li>
-<li>Note bootchime will not play if MinimumVolume is higher than <code>SystemAudioVolume</code></li>
+<li>Note bootchime will not play if MinimumVolume is higher than <code>SystemAudioVolume</code> that we set back in the <code>NVRAM</code> section</li>
 </ul>
 </li>
 <li><p><strong>PlayChime:</strong></p>
@@ -787,7 +799,7 @@
 <li>The Volume amplification, value will differ depending on your codec</li>
 <li>Formula is as follows:<ul>
 <li>(SystemAudioVolume * VolumeAmplifier)/100 = Raw Volume(but cannot exceed 100)</li>
-<li>ex: (<code>70</code> <em> VolumeAmplifier)/<code>100</code> = <code>100</code>  -&gt; (<code>100</code> `</em><code>`100</code>) / <code>70</code> = VolumeAmplifier = <code>142.9</code>(we&apos;ll round it to <code>143</code> for simplicity)</li>
+<li>ex: (<code>70</code> x <code>VolumeAmplifier</code>)/<code>100</code> = <code>100</code>  -&gt; (<code>100</code> x <code>100</code>) / <code>70</code> = VolumeAmplifier = <code>142.9</code>(we&apos;ll round it to <code>143</code> for simplicity)</li>
 </ul>
 </li>
 </ul>
@@ -849,7 +861,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Add GUI and Bootchime","level":"7.2","depth":1,"next":{"title":"iGPU Patching","level":"7.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gui.md","mtime":"2020-04-09T22:36:51.598Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-09T22:39:00.563Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Add GUI and Bootchime","level":"7.2","depth":1,"next":{"title":"iGPU Patching","level":"7.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gui.md","mtime":"2020-04-10T16:02:15.749Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-10T16:04:31.732Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
