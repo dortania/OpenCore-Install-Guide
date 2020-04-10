@@ -534,7 +534,7 @@ Now to get onto troubleshooting:
 
 ## Booting Windows results in Bluescreen or Linux crashes
 
-This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your fimrware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
+This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
 
 Common Windows error code:
 
@@ -542,7 +542,7 @@ Common Windows error code:
 
 ## Booting Windows error: `OCB: StartImage failed - Already started`
 
-This is due to OpenCore getting confused when trying to boot boot Windows and acidentally thinking it's booting OpenCore. This can be avoided by either adding a custom drive path under entires and have Windows with it's bootloader renamed *or* move Windows to it's own drive
+This is due to OpenCore getting confused when trying to boot boot Windows and acidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
 
 ## iASL warning, # unresolved
 

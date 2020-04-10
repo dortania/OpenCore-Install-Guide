@@ -126,7 +126,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
-   * Generates Memory Map compatible with macOS
+   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
    * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
 * **SignalAppleOS**: NO

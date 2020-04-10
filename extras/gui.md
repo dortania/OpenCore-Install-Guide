@@ -38,6 +38,7 @@ So to start, we'll need a couple things:
 
 * Onboard audio output
    * USB DACs will not work
+   * GPU audio out is a hit or miss
 * [AudioDxe](https://github.com/acidanthera/AppleSupportPkg/releases) in both EFI/OC/Drivers and UEFI -> Drivers
 * [Binary Resources](https://github.com/acidanthera/OcBinaryData)
    * Add the Resources folder to EFI/OC, just like we did with the OpenCore GUI section
@@ -55,8 +56,17 @@ So to start, we'll need a couple things:
 * **AudioCodec:**
    * Codec address of Audio controller
    * To find yours:
-      * Check IOReg -> HDEF and see the `IOHDACodecAddress` property
+      * Check [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) -> HDEF and see the `IOHDACodecAddress` property
       * ex: `0x0`
+         * Can also check via terminal:
+```text
+ioreg -rxn IOHDACodecDevice | grep VendorID   // List all possible devices
+```
+
+```text
+ioreg -rxn IOHDACodecDevice | grep IOHDACodecAddress // Grab the codec address
+```
+   * Note if multiple show up, use the vendor ID to find the right device
 
 * **Audio Device:**
    * PciRoot of audio controller
@@ -80,7 +90,7 @@ So to start, we'll need a couple things:
 * **MinimumVolume:**
    * Volume level from `0` to `100`
    * To not blow the speakers, set it to `70`
-   * Note bootchime will not play if MinimumVolume is higher than `SystemAudioVolume`
+   * Note bootchime will not play if MinimumVolume is higher than `SystemAudioVolume` that we set back in the `NVRAM` section
 
 * **PlayChime:**
    * Set this to `True`
@@ -89,7 +99,7 @@ So to start, we'll need a couple things:
    * The Volume amplification, value will differ depending on your codec
    * Formula is as follows:
       * (SystemAudioVolume * VolumeAmplifier)/100 = Raw Volume(but cannot exceed 100)
-      * ex: (`70` * VolumeAmplifier)/`100` = `100`  -> (`100` `*` `100`) / `70` = VolumeAmplifier = `142.9`(we'll round it to `143` for simplicity)
+      * ex: (`70` x `VolumeAmplifier`)/`100` = `100`  -> (`100` x `100`) / `70` = VolumeAmplifier = `142.9`(we'll round it to `143` for simplicity)
 
 
 Once done, you should get something like this:

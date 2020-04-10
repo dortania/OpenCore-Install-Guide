@@ -69,7 +69,7 @@ And we'll also need to configure our config.plist -> Booter(for OpenCore) or OcQ
 * **ProvideCustomSlide**: YES
    * This makes sure the kernel will only choose good regions and avoid those that may result inboot failures. It's still random but omits those bad reions in its randomization
 * **RebuildAppleMemoryMap**: YES
-   * Generates Memory Map compatible with macOS, this makes sure our memory map will fit to what the kernel expects
+   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this, this makes sure our memory map will fit to what the kernel expects
 
 ## Prepping the BIOS
 
