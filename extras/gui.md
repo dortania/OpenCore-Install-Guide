@@ -56,16 +56,17 @@ So to start, we'll need a couple things:
 * **AudioCodec:**
    * Codec address of Audio controller
    * To find yours:
-      * Check [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) -> HDEF and see the `IOHDACodecAddress` property
+      * Check [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) -> HDEF -> AppleHDAController -> IOHDACodecDevice and see the `IOHDACodecAddress` property
       * ex: `0x0`
          * Can also check via termina(Note if multiple show up, use the vendor ID to find the right device)l:
-         ```text
-         ioreg -rxn IOHDACodecDevice | grep VendorID   // List all possible devices
-         ```
 
-         ```text
-         ioreg -rxn IOHDACodecDevice | grep IOHDACodecAddress // Grab the codec address
-         ```
+ ```text
+ ioreg -rxn IOHDACodecDevice | grep VendorID   // List all possible devices
+ ```
+
+ ```text
+ ioreg -rxn IOHDACodecDevice | grep IOHDACodecAddress // Grab the codec address
+ ```
 
 * **Audio Device:**
    * PciRoot of audio controller

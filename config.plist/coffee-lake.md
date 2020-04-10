@@ -140,7 +140,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 ## DeviceProperties
 
-![DeviceProperties](/images/config/config.plist/coffee-lake/DeviceProperties.png)
+![DeviceProperties](/images/config/config.plist/coffeelake/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
 

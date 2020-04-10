@@ -77,7 +77,6 @@ Main things to check:
 
 * ScanPolicy set to `0` to show all drives
 * Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus
-* Enable `AvoidHighAlloc` if you're running a network recovery install
 
 ## Black screen after picker
 
@@ -126,7 +125,6 @@ Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Dri
 
 ## Stuck on `Buffer Too Small`
 
-* `UEFI -> Quirks -> AvoidHighAlloc -> Enable `
 * Enable Above4GDecoding in the BIOS
 
 ## Stuck on `Plist only kext has CFBundleExecutable key`
@@ -267,7 +265,7 @@ Still didn't work? Well time for the big guns. We'll force remove that exact pro
 
 `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
 
-![](/images/troubleshooting/troubleshooting-md/lang.jpg)
+![](/images/troubleshooting/troubleshooting-md/lang.png)
 
 ## macOS Installer being damaged
 

@@ -9,7 +9,7 @@ To start, you need the following:
 * BootInstall.command
 * Install source(MacOS Journaled + GUID, size of USb depends on the version of macOS. 16GB recommended for catalina)
 
-![BootInstall Location](/images/extras/download.png)
+![BootInstall Location](/images/extras/legacy-md/download.png)
 
 Within your OpenCore build folder, navigate to `Utilities/BootInstall`. Here you'll find a file called `BootInstall.command`. What this does is install DuetPkg to your desired drive.
 
