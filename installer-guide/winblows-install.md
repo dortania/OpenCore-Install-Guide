@@ -43,4 +43,4 @@ makeinstall will finish up by installing OpenCore to your USB's EFI System Parti
 
 
 
-### Now with all this done, return to [Creating the USB](/installer-guide/opencore-efi.md) to finish up your work
+### Now with all this done, head to [Creating the USB](/installer-guide/opencore-efi.md) to finish up your work

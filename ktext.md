@@ -122,7 +122,7 @@ The order in `Kernel -> Add` should be:
 **AMD CPU Specific kexts**:
 
 * [~~NullCPUPowerManagment~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-   * We have a much better solution known as `DummyPowerManagement` found under `Kernel -> Quirks`
+   * We have a much better solution known as `DummyPowerManagement` found under `Kernel -> Quirks` in your config.plist, this will be covered in a later page
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
   * USB fix for AMD FX systems, not recommended for Ryzen
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)

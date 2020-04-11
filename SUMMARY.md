@@ -1,10 +1,11 @@
 # Table of contents
 
 * [OpenCore Desktop Guide](README.md)
-* [Creating the USB](/installer-guide/opencore-efi.md)
+* [Creating the USB](/installer-guide/README.md)
    * [macOS install](/installer-guide/mac-install.md)
    * [Windows install](/installer-guide/winblows-install.md)
    * [Linux install](/installer-guide/linux-install.md)
+* [Setting up the EFI](/installer-guide/opencore-efi.md)
 * [Gathering files](ktext.md)
 * [Getting started with ACPI](/extras/acpi.md)
 

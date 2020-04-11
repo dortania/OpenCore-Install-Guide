@@ -19,13 +19,18 @@ Once that's done, we'll need a couple things:
 Once you have both of these, we'll next want to add it to our EFI partition:
 
 * Add the Resources folder to EFI/OC
+   * Note the 0.5.7 copy puts into the wrong spot under just EFI, this will cause an image load error and halt OpenCore
 * Add OpenCanopy.efi to EFI/Drivers
 
 ![](/images/extras/gui-md/folder-gui.png)
 
 Now in our config.plist, we have 2 things we need to fix:
 
-* `Misc -> PickerMode -> External`
+* `Misc -> PickerMode`: `External`
+* `Misc -> PickerAttributes: `1`
+   * This enables .VolumeIcon.icns reading off the drive, this is how macOS installer icons work
+      * 0x0008: This is another value which allows for alternative icons, such as the legacy GUI found on legacy Macs. This can be combined with `1` for both legacy GUI and custom drive icons(PickerAttributes: `9`)
+      * Other settings for PickerAttributes can be found in the [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
 * `UEFI -> Drivers` and add OpenCanopy.efi
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
