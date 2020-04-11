@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.7
 
-Do note that this is only recommended for users who have already installed macOS, for users who are ibnstalling for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
+Do note that this is only recommended for users who have already installed macOS, for users who are installing for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
 
 ## Disabling CFG Lock
 
@@ -11,7 +11,7 @@ So you've installed macOS but you're using those pesky `CFG-Lock` patches that w
 Inside your EFI/OC/Tools folder and config.plist:
 
 * [VerifyMsrE2](https://github.com/acidanthera/OpenCorePkg/releases)
-* [Modifed GRUB Shell](https://github.com/datasone/grub-mod-setup_var/releases)
+* [Modified GRUB Shell](https://github.com/datasone/grub-mod-setup_var/releases)
 
 And some apps to help us out:
 

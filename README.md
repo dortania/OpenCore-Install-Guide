@@ -14,7 +14,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 
 ### Advantages of OpenCore
 
-* On average, OpenCore systems boot faster than those using Clover as less unnessary patching is done
+* On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more persise: [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/) as an example
 * OpenCore offers better overall security with better support for FileVault, no need to disable System Integrity Protection(SIP) and even secure boot-like functionality support via [Vaulting](/post-install/security.md#Vault)
 * OpenCore supports boot hotkey support via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.

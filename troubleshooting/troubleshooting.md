@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.7
 
-This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:
+This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is divided up into a couple sections:
 
 * [OpenCore booting issues](/troubleshooting/troubleshooting.md#opencore-booting)
    * This is anytime before or during the loading of the macOS kernel
@@ -15,7 +15,7 @@ This section is for those having issues booting either OpenCore, macOS or having
 
 While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion) for more info
 
-**And if your issue is not covered, please read the offical OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**
+**And if your issue is not covered, please read the official OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**
 
 # OpenCore booting
 
@@ -51,7 +51,7 @@ If you have already executed the `sign.command` you will need to restore the Ope
 
 ## Stuck on `OC: Invalid Vault mode`
 
-This is likely a spelling mistake, options in OpenCore are case-sensitve so make sure you check closely, **O**ptional is the correct way to enter it under Misc -> Security
+This is likely a spelling mistake, options in OpenCore are case-sensitive so make sure you check closely, **O**ptional is the correct way to enter it under Misc -> Security
 
 ## Stuck on EndRandomSeed
 
@@ -246,7 +246,7 @@ Well this general area is where a lot of PCI devices are configured, and is wher
 
 * **PCI allocation issue**:
    * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares
-   * Make sure either Above4GDecoding is enabled in the BIOS, if no option availible then add `npci=0x2000` to boot args. **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
+   * Make sure either Above4GDecoding is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args. **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
    * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled\
 
 ## "Waiting for Root Device" or Prohibited Sign error
@@ -313,7 +313,7 @@ With macOS catalina, dual socket support is broken, and a fun fact about AMD fir
 
 ## Kernel Panic `AppleIntelCPUPowerManagement`
 
-This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quirks`
+This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quirks`
 
 ## Stop Sign with corrupted text(Still waiting for Root Device)
 
@@ -329,7 +329,7 @@ If XLNCUSBFix still doesn't work, then try the following:
 
 ## Frozen in the macOS installer after 30 seconds
 
-This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quirks`
+This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quirks`
 
 ## 15h/16h CPU reboot after Data & Privacy screen
 
@@ -406,7 +406,7 @@ Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemo
 
 ~~Easy fix, buy Intel~~
 
-So with AMD, whenever Apple calls CPU specific functions the app witll either not work or outright crash. Here are some apps and their "fixes":
+So with AMD, whenever Apple calls CPU specific functions the app will either not work or outright crash. Here are some apps and their "fixes":
 
 * Adobe Products don't always work
    * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
@@ -416,7 +416,7 @@ So with AMD, whenever Apple calls CPU specific functions the app witll either no
    * VMware 10 and older can work as well
    * Parallels 13.1.0 and older are known to work as well
 * Docker broken
-   * Docker toolbox is the only solution as it's based off of VirtualBox, many feautures are unavailble with this version
+   * Docker toolbox is the only solution as it's based off of VirtualBox, many features are unavailable with this version
 * Xcode AppleWatch simulator is broken in Catalina
    * Mojave works fine
 * IDA Pro won't install
@@ -439,7 +439,7 @@ Sleep transition timed out after 180 seconds while calling power state change ca
 
 You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:
 
-* Avoid the chipset USB all together(ideally set `_STA = 0x0` to disabe the controller outright with an SSDT)
+* Avoid the chipset USB all together(ideally set `_STA = 0x0` to disable the controller outright with an SSDT)
 * Correct the USBX power properties to what the controller expects
 
 # Other issues
@@ -526,7 +526,7 @@ So with OpenCore, we have to note that legacy Windows installs are not supported
 
 Now to get onto troubleshooting:
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
-* Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is loacated on the same drive
+* Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is located on the same drive
 * Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
 
 
@@ -540,7 +540,7 @@ Common Windows error code:
 
 ## Booting Windows error: `OCB: StartImage failed - Already started`
 
-This is due to OpenCore getting confused when trying to boot boot Windows and acidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
+This is due to OpenCore getting confused when trying to boot boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
 
 ## iASL warning, # unresolved
 
@@ -550,7 +550,7 @@ If you try to decompile your DSDT and get an error similar to this:
 iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
 ```
 
-This happens when one ACPI table requires the rest for proper referncing, it does not accect the creation of DSDTs as we're only using it for creating a select few SSDTs. For those who are worried, you can run the following:
+This happens when one ACPI table requires the rest for proper referencing, it does not accept the creation of DSDTs as we're only using it for creating a select few SSDTs. For those who are worried, you can run the following:
 
 ```text
 iasl * [insert all ACPI files here]

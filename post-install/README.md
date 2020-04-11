@@ -2,11 +2,11 @@
 
 * Supported version: 0.5.7
 
-So you've finally finsihed installing macOS with OpenCore but know there's still some things to clean up, well you've come to the right place!
+So you've finally finished installing macOS with OpenCore but know there's still some things to clean up, well you've come to the right place!
 
 ## Universal
 
-This section is benificial for all, regardless of hardware.
+This section is beneficial for all, regardless of hardware.
 
 * [Correcting Audio](/post-install/audio.md)
 * [Enabling FileVault and other security features](/post-install/security.md)

@@ -23,7 +23,7 @@ If you fail at this point, there's a couple things you can check for:
    * Don't use a Mac Mini SMBIOS on a desktop for example, as Mac Minis run mobile hardware and so macOS will expect the same
 * Make sure the iGPU is enabled in the BIOS and has the correct properties for your setup (`AAPL,ig-platform-id` and if needed, `device-id`)
    * You can either review the DeviceProperties section from the guide or [WhateverGreen's manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
-* Avoid unnessary ACPI renames, all important ones are handled in WhateverGreen
+* Avoid unnecessary ACPI renames, all important ones are handled in WhateverGreen
    * change GFX0 to IGPU
    * change PEG0 to GFX0
    * change HECI to IMEI

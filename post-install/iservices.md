@@ -71,7 +71,7 @@ This is a section many may have forgotten about but this is found in your config
 To find your actual MAC Address/ROM value, you can find in a couple places:
 * BIOS
 * macOS: System Preferences -> Network -> Ethernet -> Advanced -> MAC Address
-* Windows: Settings -> Network & Internet -> Ethernet -> Ethernet -> Phyisical MAC Address
+* Windows: Settings -> Network & Internet -> Ethernet -> Ethernet -> Physical MAC Address
 
 Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we'll be  using our real MAC Address but note that this is another option
 

@@ -23,7 +23,7 @@ So the process goes as follows:
 
 * So first, lets mount your hard drive's EFI and make a copy somewhere safe with [MountEFI](https://github.com/corpnewt/MountEFI). We won't be updating the drive's EFI at first, instead we'll be grabbing a spare USB to be our crash dummy. This allows us to keep a working copy of Opencore incase our update goes south
 
-* For the USB, it must be formatted as GUID. Reason for this is that GUID will autmatically create an EFI partition, though this will be hidden by default so you'll need to mount it with MountEFI.
+* For the USB, it must be formatted as GUID. Reason for this is that GUID will automatically create an EFI partition, though this will be hidden by default so you'll need to mount it with MountEFI.
 
 ![](/images/post-install/update-md/usb-erase.png)
 

@@ -5,7 +5,7 @@
 Main thing this guide will go over:
 
 * Giving OpenCore a GUI
-* Setting up a bootchime
+* Setting up a boot-chime
 
 ## Setting up OpenCore's GUI
 
@@ -37,7 +37,7 @@ Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
 
 ![](/images/extras/gui-md/gui.png)
 
-## Setting up Bootchime with AudioDxe
+## Setting up Boot-chime with AudioDxe
 
 So to start, we'll need a couple things:
 
@@ -54,7 +54,7 @@ So to start, we'll need a couple things:
 
 * NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82:
    * `SystemAudioVolume | Data | 0x46`
-   * This is the bootchime and screenreader volume, note it's in hexidecimal so would become `70` in decimal
+   * This is the boot-chime and screenreader volume, note it's in hexadecimal so would become `70` in decimal
 
 **Setting up UEFI -> Audio:**
 
@@ -95,7 +95,7 @@ So to start, we'll need a couple things:
 * **MinimumVolume:**
    * Volume level from `0` to `100`
    * To not blow the speakers, set it to `70`
-   * Note bootchime will not play if MinimumVolume is higher than `SystemAudioVolume` that we set back in the `NVRAM` section
+   * Note boot-chime will not play if MinimumVolume is higher than `SystemAudioVolume` that we set back in the `NVRAM` section
 
 * **PlayChime:**
    * Set this to `True`

@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.7
 
-This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen's autopatches:
+This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen's auto-patches:
 
 * [Applying a fakeID for unsupported GPUs](https://acpi.dortania.ml/Universal/spoof.html)
 * [iGPU BusID patching for 300 series motherboards](#iGPU-BusID-Patching)
@@ -37,7 +37,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 03060800 00040000 C7030000
 ```
 
-Looking at all this can be quite overwheling, but we'll break it down to be a bit simpler. For use we care about this:
+Looking at all this can be quite overwhelming, but we'll break it down to be a bit simpler. For use we care about this:
 
 ```text
 [1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x000003C7 - DP

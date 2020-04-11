@@ -14,7 +14,7 @@ Once the EFI's mounted, we'll want to grab our EFI folder on there and keep in a
 
 ![](/images/post-install/oc2hdd-md/hdd-mount.png)
 
-Now with this done, lets mount our macOS drive. With macOS Catalina, macOS is actually partitioned into 2 volumes: System Partition and User Partition. This means that MountEFI may report multiple drives in it's picker but each partition will still share the same EFI(The UEFI spec only allows for 1 EFI per drive). You can tell if it's the same drive with disk**X**sY (Y is just to say what parition it is)
+Now with this done, lets mount our macOS drive. With macOS Catalina, macOS is actually partitioned into 2 volumes: System Partition and User Partition. This means that MountEFI may report multiple drives in it's picker but each partition will still share the same EFI(The UEFI spec only allows for 1 EFI per drive). You can tell if it's the same drive with disk**X**sY (Y is just to say what partition it is)
 
 ![](/images/post-install/oc2hdd-md/hdd-clean.png)
 
@@ -23,6 +23,6 @@ When you mount your main drive's EFI, you may be greeted with a folder called `A
 
 ## Special notes for legacy users
 
-When transfering over your EFI, there are still boot sectors that need to be written to so your non-UEFI BIOS would be able to find it So don't forget to rerun the [`BootInstall.command`](/extras/legacy.md) on your macOS drive
+When transferring over your EFI, there are still boot sectors that need to be written to so your non-UEFI BIOS would be able to find it So don't forget to rerun the [`BootInstall.command`](/extras/legacy.md) on your macOS drive
 
 

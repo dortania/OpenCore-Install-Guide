@@ -54,7 +54,7 @@ In terminal:
       ![](/images/installer-guide/linux-install-md/unknown-9.png)
       * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
    6. Close `gdisk` by sending `q` (normally it should quit on its own)
-3. Use `lsblk` to determin your partition's identifiers
+3. Use `lsblk` to determine your partition's identifiers
 4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your USB partition block>` to format your USB to FAT32 and named OPENCORE
 5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file
    ![](/images/installer-guide/linux-install-md/unknown-10.png)
@@ -111,7 +111,7 @@ In terminal:
       * for all distros: **make sure you're using bash for 7zip to work**.
    2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` this will extract the recovery from the pkg through extracting the recovery update package then extracting the recovery dmg then the hfs image from it (BaseSystem.dmg).
    3. download `dmg2img` (available on most distros)
-   4. run `dmg2img -l BaseSystem.dmg` and determin which partition has `disk image` property
+   4. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
       ![](/images/installer-guide/linux-install-md/unknown-20.png)
    5. run `dmg2img -p <the partition number> -i BaseSystem -o <your 3GB+ partition block>` to extract and write the recovery image to the partition disk
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).

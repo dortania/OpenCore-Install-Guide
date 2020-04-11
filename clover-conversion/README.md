@@ -4,7 +4,7 @@
 
 So you see the new fancy Opencore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with Opencore but many do not, here we'll be going over what you can bring over and what you cannot.
 
-To get started, we have some resouces that will aid you:
+To get started, we have some resources that will aid you:
 
 * [Config.plist conversion](/clover-conversion/Clover-config.md)
 * [Firmware driver conversion(.efi)](/clover-conversion/clover-efi.md)

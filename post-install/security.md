@@ -10,7 +10,7 @@ So something that makes OpenCore truly special is how it's been built with secur
 
 ## FileVault
 
-FileVault is macOS's builtin drive encyption, and with OpenCore support for it has been drastcally improved compared to the legacy Clover drivers.
+FileVault is macOS's builtin drive encryption, and with OpenCore support for it has been drastically improved compared to the legacy Clover drivers.
 
 To start, you'll need the following .efi drivers:
 
@@ -22,9 +22,9 @@ To start, you'll need the following .efi drivers:
 Setting in your config.plist:
 
 * Misc -> Boot 
-  * `PollAppleHotKeys` set to YES(While not needed can be helpfu)
+  * `PollAppleHotKeys` set to YES(While not needed can be helpful)
 * Misc -> Security
-  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional)
+  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional)
 * NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
 * UEFI -> Input
@@ -37,7 +37,7 @@ Setting in your config.plist:
   * `AppleSmcIo` set to YES(this replaces VirtualSMC.efi)
 * UEFI -> Quirks
   * `RequestBootVarRouting` set to YES
-  * `ExitBootServicesDelay` set to `3000`-`5000` if you recieve `Still waiting for root device` on Aptio IV firmwares(Broadwell and older)
+  * `ExitBootServicesDelay` set to `3000`-`5000` if you receive `Still waiting for root device` on Aptio IV firmwares(Broadwell and older)
 
 With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
@@ -87,7 +87,7 @@ Now we're ready to run `sign.command`:
 
 **Disabling Vault after setup**:
 
-If you're doing heavy troublehooting or have the need to disable Vault, the main things to change:
+If you're doing heavy troubleshooting or have the need to disable Vault, the main things to change:
 
 * Grab a new copy of OpenCore.efi
 * `Misc -> Security -> Vault` set to Optional
@@ -95,9 +95,9 @@ If you're doing heavy troublehooting or have the need to disable Vault, the main
 
 ## ScanPolicy
 
-What this quirk allows to prevent scanning and booting from untrusted sources. Setting to `0` will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibilty and security.
+What this quirk allows to prevent scanning and booting from untrusted sources. Setting to `0` will allow all sources present to be bootable but calculating a specific ScanPolicy value will allow you a greater range of flexibility and security.
 
-To calculate the ScanPolicy value, you simply add up all the hexidecimal values(with a hexideciaml calculator, you can access this from the built-in macOS caluclator app with `⌘+3`). Once it's all added up, you would add this hexidecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)
+To calculate the ScanPolicy value, you simply add up all the hexadecimal values(with a hexadecimal calculator, you can access this from the built-in macOS calculator app with `⌘+3`). Once it's all added up, you would add this hexadecimal value to ScanPolicy(you will need to convert it to a decimal value first, Xcode will automatically convert it when you paste it)
 
 `0x00000001 (bit 0)` — OC\_SCAN\_FILE\_SYSTEM\_LOCK
 
