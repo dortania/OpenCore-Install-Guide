@@ -36,9 +36,9 @@ For some reason people kept using these flags into Clover which had no effect, a
 
 **GraphicsEnabler=Yes/No**
 
-* InjectAMD/Nvidia was the Clover equivlant but no feature parity in OpenCore besides running [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
+* InjectAMD/Nvidia was the Clover equivalent but no feature parity in OpenCore besides running [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
 
 **IGPEnabler=Yes/No**
 
-* Same idea as GraphicsEnabler, Clover equivlant is InjectIntel so feature parity would be [WhateverGreen's Framebuffer patching](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+* Same idea as GraphicsEnabler, Clover equivalent is InjectIntel so feature parity would be [WhateverGreen's Framebuffer patching](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 

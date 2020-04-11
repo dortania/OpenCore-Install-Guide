@@ -686,7 +686,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat Apr 11 2020 03:15:08 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat Apr 11 2020 22:45:34 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="haswell"><a name="haswell" class="plugin-anchor" href="#haswell"><i class="fa fa-link" aria-hidden="true"></i></a>Haswell</h1>
 <ul>
@@ -708,7 +708,7 @@
 <li><a href="haswell.html#intel-bios-settings">Intel BIOS settings</a></li>
 </ul>
 <h2 id="starting-point"><a name="starting-point" class="plugin-anchor" href="#starting-point"><i class="fa fa-link" aria-hidden="true"></i></a>Starting Point</h2>
-<p>So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won&apos;t be left in the cold. This also means if you have issues, review your config settings to make sure they&apos;re correct. Main things to note with OpenCore:</p>
+<p>So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure everything, you won&apos;t be left in the cold. This also means if you have issues, review your config settings to make sure they&apos;re correct. Main things to note with OpenCore:</p>
 <ul>
 <li><strong>All properties must be defined</strong>, there are no default OpenCore will fall back on so <strong>do not delete sections unless told explicitly so</strong>. If the guide doesn&apos;t mention the option, leave it at default.</li>
 <li><strong>The Sample.plist cannot be used As-Is</strong>, you must configure it to your system</li>
@@ -849,7 +849,7 @@
 </ul>
 </li>
 <li><strong>SignalAppleOS</strong>: NO<ul>
-<li>Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro&apos;s with dGPUs as booting Windows won&apos;t allow for the iGPU to be used</li>
+<li>Tricks the hardware into thinking its always booting macOS, mainly beneficial for MacBook Pro&apos;s with dGPUs as booting Windows won&apos;t allow for the iGPU to be used</li>
 </ul>
 </li>
 <li><strong>SyncRuntimePermissions</strong>: NO<ul>
@@ -1000,7 +1000,7 @@
 </ul>
 </li>
 <li><strong>AppleXcpmForceBoost</strong>: NO<ul>
-<li>Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this</li>
+<li>Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benefit from this</li>
 </ul>
 </li>
 <li><strong>CustomSMBIOSGuid</strong>: NO <ul>
@@ -1020,7 +1020,7 @@
 </ul>
 </li>
 <li><strong>IncreasePciBarSize</strong>: NO<ul>
-<li>Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you&apos;ll generally expereince a kernel panic on IOPCIFamily if you need this. Note this shouldn&apos;t be needed on Mojave and newer</li>
+<li>Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you&apos;ll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn&apos;t be needed on Mojave and newer</li>
 </ul>
 </li>
 <li><strong>LapicKernelPanic</strong>: NO <ul>
@@ -1089,7 +1089,7 @@
 </ul>
 </li>
 <li><strong>TakeoffDelay</strong>: <code>0</code><ul>
-<li>Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support  </li>
+<li>Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the preferred range for users with broken hotkeys support  </li>
 </ul>
 </li>
 <li><strong>Timeout</strong>: <code>5</code><ul>
@@ -1100,7 +1100,7 @@
 <p><strong>Debug</strong>: Helpful for debugging OpenCore boot issues(We&apos;ll be changing everything <em>but</em> <code>DisplayDelay</code>)</p>
 <ul>
 <li><strong>AppleDebug</strong>: YES<ul>
-<li>Enables boot.efi logging, useful for debuuging. Note this is only supported on 10.15.4 and newer</li>
+<li>Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer</li>
 </ul>
 </li>
 <li><strong>DisableWatchDog</strong>: YES<ul>
@@ -1129,7 +1129,7 @@
 </ul>
 </li>
 <li><strong>AuthRestart</strong>: NO:<ul>
-<li>Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional</li>
+<li>Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional</li>
 </ul>
 </li>
 <li><strong>ExposeSensitiveData</strong>: <code>6</code><ul>
@@ -1207,7 +1207,7 @@
 </ul>
 </li>
 <li><strong>prev-lang:kbd</strong>: &lt;&gt; <ul>
-<li>Needed for non-latin keyboards in the format of <code>lang-COUNTRY:keyboard</code>, recommeneded to keep blank though you can specify it(<strong>Default in Sample config is Russian</strong>):</li>
+<li>Needed for non-latin keyboards in the format of <code>lang-COUNTRY:keyboard</code>, recommended to keep blank though you can specify it(<strong>Default in Sample config is Russian</strong>):</li>
 <li>American: <code>en-US:0</code>(<code>656e2d55533a30</code> in HEX)</li>
 <li>Full list can be found in <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></li>
 <li>Hint: <code>prev-lang:kbd</code> can be changed into a String so you can input <code>en-US:0</code> directly instead of converting to HEX</li>
@@ -1367,7 +1367,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 <p><strong>Input</strong>: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support</p>
 <ul>
 <li><strong>KeyFiltering</strong>: NO<ul>
-<li>Verifies and discards uninitialised data, mainly prevalent on 7 series Gigabyte boards</li>
+<li>Verifies and discards uninitialized data, mainly prevalent on 7 series Gigabyte boards</li>
 </ul>
 </li>
 <li><strong>KeyForgetThreshold</strong>: <code>5</code><ul>
@@ -1406,7 +1406,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 <p><strong>Output</strong>: Relating to visual output</p>
 <ul>
 <li><strong>TextRenderer</strong>: <code>BuiltinGraphics</code><ul>
-<li>Used for fixing resoltuion of OpenCore itself, <code>Resolution</code> must be set to <code>Max</code> to work correctly</li>
+<li>Used for fixing resolution of OpenCore itself, <code>Resolution</code> must be set to <code>Max</code> to work correctly</li>
 </ul>
 </li>
 <li><strong>ConsoleMode</strong>: [Blank]<ul>
@@ -1414,7 +1414,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 </ul>
 </li>
 <li><strong>Resolution</strong>: <code>Max</code><ul>
-<li>Sets OpenCore&apos;s resolution, <code>Max</code> will use the highest avalible reolution or can be specified (<code>WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)</code>)</li>
+<li>Sets OpenCore&apos;s resolution, <code>Max</code> will use the highest available resolution or can be specified (<code>WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)</code>)</li>
 </ul>
 </li>
 <li><strong>ClearScreenOnModeSwitch</strong>: NO<ul>
@@ -1426,7 +1426,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 </ul>
 </li>
 <li><strong>ProvideConsoleGop</strong>: YES<ul>
-<li>Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, <strong>required for graphical output once the kernel takes over</strong></li>
+<li>Enables GOP(Graphics output Protocol) which the macOS bootloader requires for console handle, <strong>required for graphical output once the kernel takes over</strong></li>
 </ul>
 </li>
 <li><strong>DirectGopRendering</strong>: NO<ul>
@@ -1446,7 +1446,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
 <p><strong>Protocols</strong>: (Most values can be ignored here as they&apos;re meant for real Macs/VMs)</p>
 <ul>
 <li><strong>AppleSmcIo</strong>: NO<ul>
-<li>Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault</li>
+<li>Reinstalls Apple SMC I/O, this is the equivalent of VirtualSMC.efi which is only needed for users using FileVault</li>
 </ul>
 </li>
 <li><strong>FirmwareVolume</strong>: NO<ul>
@@ -1566,7 +1566,7 @@ SmUUID:       7B227BEC-660D-405F-8E60-411B3E4EF055
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-04-11T03:15:08.851Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T03:17:13.304Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Haswell","level":"2.2","depth":1,"next":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"previous":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/haswell.md","mtime":"2020-04-11T22:45:34.740Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T22:47:37.397Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
