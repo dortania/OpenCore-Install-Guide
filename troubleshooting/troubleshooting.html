@@ -686,13 +686,13 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat Apr 11 2020 22:45:35 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat Apr 11 2020 23:03:20 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
-<p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is devided up into a couple sections:</p>
+<p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is divided up into a couple sections:</p>
 <ul>
 <li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a><ul>
 <li>This is anytime before or during the loading of the macOS kernel</li>
@@ -712,7 +712,7 @@
 </li>
 </ul>
 <p>While still a work in progress, laptop users wanting to convert an existing Clover install can see the  <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion" target="_blank">Clover to OpenCore conversion</a> for more info</p>
-<p><strong>And if your issue is not covered, please read the offical OpenCore documentation: <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a></strong></p>
+<p><strong>And if your issue is not covered, please read the official OpenCore documentation: <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a></strong></p>
 <h1 id="opencore-booting"><a name="opencore-booting" class="plugin-anchor" href="#opencore-booting"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore booting</h1>
 <ul>
 <li><a href="troubleshooting.html#stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></a></li>
@@ -742,7 +742,7 @@
 </ul>
 <p>If you have already executed the <code>sign.command</code> you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a></p>
 <h2 id="stuck-on-oc-invalid-vault-mode"><a name="stuck-on-oc-invalid-vault-mode" class="plugin-anchor" href="#stuck-on-oc-invalid-vault-mode"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OC: Invalid Vault mode</code></h2>
-<p>This is likely a spelling mistake, options in OpenCore are case-sensitve so make sure you check closely, <strong>O</strong>ptional is the correct way to enter it under Misc -&gt; Security</p>
+<p>This is likely a spelling mistake, options in OpenCore are case-sensitive so make sure you check closely, <strong>O</strong>ptional is the correct way to enter it under Misc -&gt; Security</p>
 <h2 id="stuck-on-endrandomseed"><a name="stuck-on-endrandomseed" class="plugin-anchor" href="#stuck-on-endrandomseed"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on EndRandomSeed</h2>
 <p>Couple problems:</p>
 <ul>
@@ -918,7 +918,7 @@
 <li><p><strong>PCI allocation issue</strong>:</p>
 <ul>
 <li><strong>UPDATE YOUR BIOS</strong>, make sure it&apos;s on the latest. Most OEMs have very broken PCI allocation on older firmwares</li>
-<li>Make sure either Above4GDecoding is enabled in the BIOS, if no option availible then add <code>npci=0x2000</code> to boot args. <strong>Do not have both the Above4G setting enabled and npci in boot args, they will conflict</strong></li>
+<li>Make sure either Above4GDecoding is enabled in the BIOS, if no option available then add <code>npci=0x2000</code> to boot args. <strong>Do not have both the Above4G setting enabled and npci in boot args, they will conflict</strong></li>
 <li>Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled\</li>
 </ul>
 </li>
@@ -971,7 +971,7 @@
 <h2 id="kernel-panic-appleintelmcereporter"><a name="kernel-panic-appleintelmcereporter" class="plugin-anchor" href="#kernel-panic-appleintelmcereporter"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>AppleIntelMCEReporter</code></h2>
 <p>With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add <a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a> to both </p>
 <h2 id="kernel-panic-appleintelcpupowermanagement"><a name="kernel-panic-appleintelcpupowermanagement" class="plugin-anchor" href="#kernel-panic-appleintelcpupowermanagement"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>AppleIntelCPUPowerManagement</code></h2>
-<p>This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
+<p>This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
 <h2 id="stop-sign-with-corrupted-textstill-waiting-for-root-device"><a name="stop-sign-with-corrupted-textstill-waiting-for-root-device" class="plugin-anchor" href="#stop-sign-with-corrupted-textstill-waiting-for-root-device"><i class="fa fa-link" aria-hidden="true"></i></a>Stop Sign with corrupted text(Still waiting for Root Device)</h2>
 <p>With OS X 10.11 El Capitan, Apple imposed a 15 USB port limit. To get around this we actually create a USB map to include ports we want and kick out extras we don&apos;t care about. For install, set <code>Kernel -&gt; Quirks -&gt; XhciPortLimit -&gt; Enabled</code> but for post install we recommend making a map as the port limit patch isn&apos;t guaranteed to work with future versions of macOS.</p>
 <p>First try your USB stick in a different USB port.</p>
@@ -984,7 +984,7 @@
 <li><a href="https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip" target="_blank">AMD StopSign-fixv5</a></li>
 </ul>
 <h2 id="frozen-in-the-macos-installer-after-30-seconds"><a name="frozen-in-the-macos-installer-after-30-seconds" class="plugin-anchor" href="#frozen-in-the-macos-installer-after-30-seconds"><i class="fa fa-link" aria-hidden="true"></i></a>Frozen in the macOS installer after 30 seconds</h2>
-<p>This is likely due to faultly or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
+<p>This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
 <h2 id="15h16h-cpu-reboot-after-data--privacy-screen"><a name="15h16h-cpu-reboot-after-data--privacy-screen" class="plugin-anchor" href="#15h16h-cpu-reboot-after-data--privacy-screen"><i class="fa fa-link" aria-hidden="true"></i></a>15h/16h CPU reboot after Data &amp; Privacy screen</h2>
 <p>Follow directions here after UPDATE 2: <a href="https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&amp;comment=2658085" target="_blank">Fix Data and Privacy reboot</a></p>
 <h2 id="macos-frozen-right-before-login"><a name="macos-frozen-right-before-login" class="plugin-anchor" href="#macos-frozen-right-before-login"><i class="fa fa-link" aria-hidden="true"></i></a>macOS frozen right before login</h2>
@@ -1083,7 +1083,7 @@
 <p>Add <a href="https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/" target="_blank">MacProMemoryNotificationDisabler kext</a> to EFI/OC/Kexts and <code>Kernel -&gt; Add</code>. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.</p>
 <h2 id="apps-crashing-on-amd"><a name="apps-crashing-on-amd" class="plugin-anchor" href="#apps-crashing-on-amd"><i class="fa fa-link" aria-hidden="true"></i></a>Apps crashing on AMD</h2>
 <p><del>Easy fix, buy Intel</del></p>
-<p>So with AMD, whenever Apple calls CPU specific functions the app witll either not work or outright crash. Here are some apps and their &quot;fixes&quot;:</p>
+<p>So with AMD, whenever Apple calls CPU specific functions the app will either not work or outright crash. Here are some apps and their &quot;fixes&quot;:</p>
 <ul>
 <li>Adobe Products don&apos;t always work<ul>
 <li>Some fixes can be found here: <a href="https://adobe.amd-osx.com/" target="_blank">Adobe Fixes</a></li>
@@ -1097,7 +1097,7 @@
 </ul>
 </li>
 <li>Docker broken<ul>
-<li>Docker toolbox is the only solution as it&apos;s based off of VirtualBox, many feautures are unavailble with this version</li>
+<li>Docker toolbox is the only solution as it&apos;s based off of VirtualBox, many features are unavailable with this version</li>
 </ul>
 </li>
 <li>Xcode AppleWatch simulator is broken in Catalina<ul>
@@ -1126,7 +1126,7 @@
 </code></pre>
 <p>You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:</p>
 <ul>
-<li>Avoid the chipset USB all together(ideally set <code>_STA = 0x0</code> to disabe the controller outright with an SSDT)</li>
+<li>Avoid the chipset USB all together(ideally set <code>_STA = 0x0</code> to disable the controller outright with an SSDT)</li>
 <li>Correct the USBX power properties to what the controller expects</li>
 </ul>
 <h1 id="other-issues"><a name="other-issues" class="plugin-anchor" href="#other-issues"><i class="fa fa-link" aria-hidden="true"></i></a>Other issues</h1>
@@ -1205,7 +1205,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <p>Now to get onto troubleshooting:</p>
 <ul>
 <li>Make sure <code>Misc -&gt; Security -&gt; ScanPolicy</code> is set to <code>0</code> to show all drives</li>
-<li>Enable <code>Misc -&gt; Boot -&gt; Hideself</code> is enabled when Windows bootloader is loacated on the same drive</li>
+<li>Enable <code>Misc -&gt; Boot -&gt; Hideself</code> is enabled when Windows bootloader is located on the same drive</li>
 <li>Enable <code>Platforminfo -&gt; Generic -&gt; AdviseWindows -&gt; True</code> if the EFI partition isn&apos;t the first on the partition table</li>
 </ul>
 <h2 id="booting-windows-results-in-bluescreen-or-linux-crashes"><a name="booting-windows-results-in-bluescreen-or-linux-crashes" class="plugin-anchor" href="#booting-windows-results-in-bluescreen-or-linux-crashes"><i class="fa fa-link" aria-hidden="true"></i></a>Booting Windows results in Bluescreen or Linux crashes</h2>
@@ -1215,12 +1215,12 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li><code>0xc000000d</code></li>
 </ul>
 <h2 id="booting-windows-error-ocb-startimage-failed---already-started"><a name="booting-windows-error-ocb-startimage-failed---already-started" class="plugin-anchor" href="#booting-windows-error-ocb-startimage-failed---already-started"><i class="fa fa-link" aria-hidden="true"></i></a>Booting Windows error: <code>OCB: StartImage failed - Already started</code></h2>
-<p>This is due to OpenCore getting confused when trying to boot boot Windows and acidentally thinking it&apos;s booting OpenCore. This can be avoided by either move Windows to it&apos;s own drive <em>or</em> adding a custom drive path under BlessOverride. See <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more details.</p>
+<p>This is due to OpenCore getting confused when trying to boot boot Windows and accidentally thinking it&apos;s booting OpenCore. This can be avoided by either move Windows to it&apos;s own drive <em>or</em> adding a custom drive path under BlessOverride. See <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more details.</p>
 <h2 id="iasl-warning--unresolved"><a name="iasl-warning--unresolved" class="plugin-anchor" href="#iasl-warning--unresolved"><i class="fa fa-link" aria-hidden="true"></i></a>iASL warning, # unresolved</h2>
 <p>If you try to decompile your DSDT and get an error similar to this:</p>
 <pre><code class="lang-text">iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
 </code></pre>
-<p>This happens when one ACPI table requires the rest for proper referncing, it does not accect the creation of DSDTs as we&apos;re only using it for creating a select few SSDTs. For those who are worried, you can run the following:</p>
+<p>This happens when one ACPI table requires the rest for proper referencing, it does not accept the creation of DSDTs as we&apos;re only using it for creating a select few SSDTs. For those who are worried, you can run the following:</p>
 <pre><code class="lang-text">iasl * [insert all ACPI files here]
 </code></pre>
 
@@ -1266,7 +1266,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-11T22:45:35.173Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T22:47:37.397Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-11T23:03:20.370Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T23:05:41.677Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

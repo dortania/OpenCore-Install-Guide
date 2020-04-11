@@ -13,7 +13,7 @@ See [Kexts and Firmware drivers](https://github.com/khronokernel/Opencore-Vanill
 **ACPI Renames**:
 
 So with the transition from Clover to OpenCore we should start removing unneeded patches you may have carried along for some time:
-* EHCI Patches: Recommeneded to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
+* EHCI Patches: Recommended to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
    * change EHC1 to EH01
    * change EHC2 to EH02
 * XHCI Patches: Not needed once an [Injector kext](https://github.com/corpnewt/USBMap) is made
@@ -145,7 +145,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> DefaultBackgroundColor`
    * `00000000`: Syrah Black
    * `BFBFBF00`: Light Gray
-   * To calcuate your own, convert an `RGB` value to `HEX`
+   * To calculate your own, convert an `RGB` value to `HEX`
 
 **EFILoginHiDPI**:
 * `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> EFILoginHiDPI | Data | <>`
@@ -168,7 +168,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * `Platforminfo -> SMBIOS -> ProcessorType`
 * See [EfiPkg](https://github.com/acidanthera/EfiPkg/blob/master/Include/IndustryStandard/AppleSmBios.h) for all supported values
 
-**HWPEnable**: Better alternative is to propery manage `MSR 0x770` with [HWPEnable](https://github.com/headkaze/HWPEnable)
+**HWPEnable**: Better alternative is to properly manage `MSR 0x770` with [HWPEnable](https://github.com/headkaze/HWPEnable)
 
 **QEMU**: Proper VM/KVM support is implemented in Opencore
 
@@ -380,7 +380,7 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 
 **External Icons Patch**:
 * `kernel -> Quirks -> ExternalDiskIcons -> YES`
-* Used for when you interneal disk are seen as external on macOS
+* Used for when you internal disk are seen as external on macOS
 
 **AppleRTC**
 * This has been turned into a kext patch, this is needed anytime you have either BIOS reset or safe mode issues.
@@ -413,7 +413,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 # Rt Variables
 
 **ROM**:
-* No direct translation for `UseMacAddr0` as you need to provide your hadware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
+* No direct translation for `UseMacAddr0` as you need to provide your hardware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
 * Also verify your En0 is still built-in when running OpenCore, this can break iMessage and icloud when there's no `built-in` property.
 
 **MLB**: 
@@ -458,7 +458,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 # System Parameters
 
 **CustomUUID**:
-* Heavily deprecated and not recommended even on Clover, no equivalant on Opencore
+* Heavily deprecated and not recommended even on Clover, no equivalent on Opencore
 * More info on why: [Hardware UUID injection for opencore #711](https://github.com/acidanthera/bugtracker/issues/711)
 
 **InjectSystemID**:
@@ -473,7 +473,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 * No equivalent but you really have no excuse to keep FakeSMC inside macOS
 
 **NoCaches**:
-* This only works up to 10.7 on Clover, and OpenCore requires an OS that supports a prelinked(10.7) so there can't be an equivalant 
+* This only works up to 10.7 on Clover, and OpenCore requires an OS that supports a prelinked(10.7) so there can't be an equivalent 
 
 
 **ExposeSysVariables**:

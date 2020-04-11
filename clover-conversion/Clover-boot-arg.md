@@ -16,7 +16,7 @@ This list is based of memory and an annoyed self with seeing these flags keep po
 **kext-dev-mode=1**:
 * Used for allowing unsigned kexts to be loaded, flag only present in Yosemite
 * `CSR_ALLOW_UNSIGNED_KEXTS` bit to be flipped in `csr-active-config` NVRAM variable for newer releases
-* This is not needed on OpenCore due to the kernel injection method used: Attatching to the prelinked kernel
+* This is not needed on OpenCore due to the kernel injection method used: Attaching to the prelinked kernel
 
 
 ## Kexts flags
