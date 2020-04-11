@@ -18,7 +18,7 @@ Table of Contents:
 
 ## Starting Point
 
-So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure eveything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
 
 * **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
 * **The Sample.plist cannot be used As-Is**, you must configure it to your system
@@ -127,7 +127,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 * **SetupVirtualMap**: NO
    * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
-   * Tricks the hardware into thinking its always booting macOS, mainly benifitial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
+   * Tricks the hardware into thinking its always booting macOS, mainly beneficial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: YES
     * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
@@ -209,7 +209,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **AppleXcpmExtraMsrs**: NO 
    * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons.
 * **AppleXcpmForceBoost**: NO
-   * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benifit from this
+   * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benefit from this
 * **CustomSMBIOSGuid**: NO 
    * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES 
@@ -219,7 +219,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **ExternalDiskIcons**: NO 
    * External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.
 * **IncreasePciBarSize**: NO
-   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally expereince a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
+   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
 * **LapicKernelPanic**: NO 
    * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES 
@@ -260,14 +260,14 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
       * `Cmd+S`: Boot in Single-user mode
       * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, an alternative is `ESC` key
 * **TakeoffDelay**: `0`
-  * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the prefered range for users with broken hotkeys support  
+  * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the preferred range for users with broken hotkeys support  
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
 **Debug**: Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`)
 
 * **AppleDebug**: YES
-   * Enables boot.efi logging, useful for debuuging. Note this is only supported on 10.15.4 and newer
+   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
 * **DisableWatchDog**: YES
    * Disables the UEFI watchdog, can help with early boot issues
 * **Target**: `67`
@@ -287,7 +287,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 * **AllowSetDefault**: YES
    * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO:
-   * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be concidered a security risk so optional
+   * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional
 * **ExposeSensitiveData**: `6`
    * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
@@ -346,7 +346,7 @@ Recommended to leave enabled for best security practices
 * **nvda\_drv**: &lt;> 
    * For enabling Nvidia WebDrivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD, Intel and Kepler GPU users should delete this section.**
 * **prev-lang:kbd**: &lt;> 
-   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommeneded to keep blank though you can specify it(**Default in Sample config is Russian**):
+   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
    * American: `en-US:0`(`656e2d55533a30` in HEX)
    * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
    * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
@@ -473,7 +473,7 @@ Only drivers present here should be:
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
 * **KeyFiltering**: NO
-   * Verifies and discards uninitialised data, mainly prevalent on 7 series Gigabyte boards
+   * Verifies and discards uninitialized data, mainly prevalent on 7 series Gigabyte boards
 * **KeyForgetThreshold**: `5`
    * The delay between each key input when holding a key down, for best results use `5` milliseconds
 * **KeyMergeThreshold**: `2`
@@ -494,17 +494,17 @@ Only drivers present here should be:
 **Output**: Relating to visual output
 
 * **TextRenderer**: `BuiltinGraphics`
-   * Used for fixing resoltuion of OpenCore itself, `Resolution` must be set to `Max` to work correctly
+   * Used for fixing resolution of OpenCore itself, `Resolution` must be set to `Max` to work correctly
 * **ConsoleMode**: [Blank]
    * Specifies Console output size, best to keep it blank
 * **Resolution**: `Max`
-   * Sets OpenCore's resolution, `Max` will use the highest avalible reolution or can be specified (`WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)`)
+   * Sets OpenCore's resolution, `Max` will use the highest available resolution or can be specified (`WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080)`)
 * **ClearScreenOnModeSwitch**: NO
    * Needed for when half of the previously drawn image remains, will force black screen before switching to TextMode. Do note that this is only required in cases when using `System` TextRenderer
 * **IgnoreTextInGraphics**: NO
    * Fix for UI corruption when both text and graphics outputs, only relevant for users using `System` TextRenderer 
 * **ProvideConsoleGop**: YES
-   * Enables GOP(Graphics output Protcol) which the macOS bootloader requires for console handle, **required for graphical output once the kernel takes over**
+   * Enables GOP(Graphics output Protocol) which the macOS bootloader requires for console handle, **required for graphical output once the kernel takes over**
 * **DirectGopRendering**: NO
    * Use builtin graphics output protocol renderer for console, mainly relevant for MacPro5,1 users
 * **ReconnectOnResChange**: NO
@@ -516,7 +516,7 @@ Only drivers present here should be:
 **Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
 
 * **AppleSmcIo**: NO
-   * Reinstalls Apple SMC I/O, this is the equivlant of VirtualSMC.efi which is only needed for users using FileVault
+   * Reinstalls Apple SMC I/O, this is the equivalent of VirtualSMC.efi which is only needed for users using FileVault
 * **FirmwareVolume**: NO
    * Fixes UI regarding Filevault, set to YES for better FileVault compatibility
 * **HashServices**: NO

@@ -470,7 +470,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
    * 0x0101 -> `<0101>`
 
 **InjectKexts**:
-* No equivlant but you really have no excuse to keep FakeSMC inside macOS
+* No equivalent but you really have no excuse to keep FakeSMC inside macOS
 
 **NoCaches**:
 * This only works up to 10.7 on Clover, and OpenCore requires an OS that supports a prelinked(10.7) so there can't be an equivalant 

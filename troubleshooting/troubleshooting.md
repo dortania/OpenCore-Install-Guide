@@ -157,7 +157,7 @@ Missing or incorrect `Executable path`
 
 * CFG-Lock not off(Intel Users only), couple solutions:
     * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
-    * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommeneded long term solution as this can cause instability.
+    * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommended long term solution as this can cause instability.
 * AMD kernel patches aren't working(AMD Users only):
     * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
