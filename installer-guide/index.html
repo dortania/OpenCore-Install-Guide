@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Disabling unsupported GPUs · GitBook</title>
+        <title>Creating the USB · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,8 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="mac-install.html" />
     
-    <link rel="prev" href="kaslr-fix.html" />
+    
+    <link rel="prev" href="../" />
     
 
     </head>
@@ -109,9 +111,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../installer-guide/">
+        <li class="chapter active" data-level="1.2" data-path="./">
             
-                <a href="../installer-guide/">
+                <a href="./">
             
                     
                     Creating the USB
@@ -123,9 +125,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="../installer-guide/mac-install.html">
+        <li class="chapter " data-level="1.2.1" data-path="mac-install.html">
             
-                <a href="../installer-guide/mac-install.html">
+                <a href="mac-install.html">
             
                     
                     macOS install
@@ -136,9 +138,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="../installer-guide/winblows-install.html">
+        <li class="chapter " data-level="1.2.2" data-path="winblows-install.html">
             
-                <a href="../installer-guide/winblows-install.html">
+                <a href="winblows-install.html">
             
                     
                     Windows install
@@ -149,9 +151,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="../installer-guide/linux-install.html">
+        <li class="chapter " data-level="1.2.3" data-path="linux-install.html">
             
-                <a href="../installer-guide/linux-install.html">
+                <a href="linux-install.html">
             
                     
                     Linux install
@@ -167,9 +169,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../installer-guide/opencore-efi.html">
+        <li class="chapter " data-level="1.3" data-path="opencore-efi.html">
             
-                <a href="../installer-guide/opencore-efi.html">
+                <a href="opencore-efi.html">
             
                     
                     Setting up the EFI
@@ -193,9 +195,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="acpi.html">
+        <li class="chapter " data-level="1.5" data-path="../extras/acpi.html">
             
-                <a href="acpi.html">
+                <a href="../extras/acpi.html">
             
                     
                     Getting started with ACPI
@@ -430,9 +432,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.5" data-path="msr-lock.html">
+        <li class="chapter " data-level="5.1.5" data-path="../extras/msr-lock.html">
             
-                <a href="msr-lock.html">
+                <a href="../extras/msr-lock.html">
             
                     
                     Fixing CFG Lock
@@ -540,9 +542,9 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="legacy.html">
+        <li class="chapter " data-level="7.1" data-path="../extras/legacy.html">
             
-                <a href="legacy.html">
+                <a href="../extras/legacy.html">
             
                     
                     Legacy Install
@@ -553,9 +555,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.2" data-path="gui.html">
+        <li class="chapter " data-level="7.2" data-path="../extras/gui.html">
             
-                <a href="gui.html">
+                <a href="../extras/gui.html">
             
                     
                     Add GUI and Bootchime
@@ -566,9 +568,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="gpu-patches.html">
+        <li class="chapter " data-level="7.3" data-path="../extras/gpu-patches.html">
             
-                <a href="gpu-patches.html">
+                <a href="../extras/gpu-patches.html">
             
                     
                     iGPU Patching
@@ -579,9 +581,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="kaslr-fix.html">
+        <li class="chapter " data-level="7.4" data-path="../extras/kaslr-fix.html">
             
-                <a href="kaslr-fix.html">
+                <a href="../extras/kaslr-fix.html">
             
                     
                     Fixing KASLR slide values
@@ -592,9 +594,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="7.5" data-path="spoof.html">
+        <li class="chapter " data-level="7.5" data-path="../extras/spoof.html">
             
-                <a href="spoof.html">
+                <a href="../extras/spoof.html">
             
                     
                     Disabling unsupported GPUs
@@ -668,7 +670,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Disabling unsupported GPUs</a>
+        <a href=".." >Creating the USB</a>
     </h1>
 </div>
 
@@ -684,121 +686,28 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat Apr 11 2020 03:15:08 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat Apr 11 2020 03:15:09 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="disabling-gpu"><a name="disabling-gpu" class="plugin-anchor" href="#disabling-gpu"><i class="fa fa-link" aria-hidden="true"></i></a>Disabling GPU</h1>
+<h1 id="creating-the-usb"><a name="creating-the-usb" class="plugin-anchor" href="#creating-the-usb"><i class="fa fa-link" aria-hidden="true"></i></a>Creating the USB</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
-<h2 id="gpu-spoof"><a name="gpu-spoof" class="plugin-anchor" href="#gpu-spoof"><i class="fa fa-link" aria-hidden="true"></i></a>GPU Spoof</h2>
-<p>So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:</p>
+<p>Requirements:</p>
 <ul>
-<li>Boot Flag<ul>
-<li>Disables all GPUs except the iGPU</li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a>, highly recommend running the debug version to show more info</li>
+<li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AppleSupportPkg</a></li>
+<li><a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> to edit .plist files (OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. <strong>Please avoid these kinds of tools at all costs!</strong>).</li>
+<li>Cleaned NVRAM(This is seriously important if you used Clover before, as many variables will remain causing conflicts. Luckily with OC you can press <code>CleanNvram</code> in the boot picker when <code>AllowNvramReset</code> is enabled in your config)</li>
+<li>Basic knowledge of how a Hackintosh works and what files yours requires(ie: Type of network controller).</li>
+<li>You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI. See here on what needs to be cleaned: <a href="https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion" target="_blank">Clover Conversion</a></li>
 </ul>
-</li>
-<li>DeviceProperties<ul>
-<li>Disables GPU on a per-slot basis</li>
+<h1 id="making-the-installer"><a name="making-the-installer" class="plugin-anchor" href="#making-the-installer"><i class="fa fa-link" aria-hidden="true"></i></a>Making the installer</h1>
+<p>Depending on which OS you&apos;re on, see your specific section on making the USB:</p>
+<ul>
+<li><a href="mac-install.html">macOS users</a></li>
+<li><a href="winblows-install.html">Windows users</a></li>
+<li><a href="linux-install.html">Linux users</a></li>
 </ul>
-</li>
-<li>SSDT<ul>
-<li>Disables GPU on a per-slot basis</li>
-</ul>
-</li>
-</ul>
-<p><strong>CSM must be off in the BIOS for the spoofing to work correctly, especially on AMD CPU based systems</strong></p>
-<h3 id="boot-flag"><a name="boot-flag" class="plugin-anchor" href="#boot-flag"><i class="fa fa-link" aria-hidden="true"></i></a>Boot Flag</h3>
-<p>By far the simplest way, all you need to do is add the following boot-arg:</p>
-<p><code>-wegnoegpu</code></p>
-<p>Do note that this will disable all GPUs excluding the iGPU</p>
-<h3 id="deviceproperties-method"><a name="deviceproperties-method" class="plugin-anchor" href="#deviceproperties-method"><i class="fa fa-link" aria-hidden="true"></i></a>DeviceProperties Method</h3>
-<p>Here is quite simple, find the PCI route with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> and then create a new DeviceProperties section with your spoof:</p>
-<pre><code class="lang-text">path/to/gfxutil -f GFX0
-</code></pre>
-<p>And the output will result in something similar:</p>
-<pre><code class="lang-text">DevicePath = PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
-</code></pre>
-<p>With this, navigate towards <code>Root -&gt; DeviceProperties -&gt; Add</code> and add your PCI route with the following properties:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Key</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">data</td>
-<td style="text-align:left">23646973706C6179</td>
-</tr>
-<tr>
-<td style="text-align:left">IOName</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">#display</td>
-</tr>
-<tr>
-<td style="text-align:left">class-code</td>
-<td style="text-align:left">data</td>
-<td style="text-align:left">FFFFFFFF</td>
-</tr>
-</tbody>
-</table>
-<p><img src="../images/extras/spoof-md/config-gpu.png" alt=""></p>
-<h3 id="ssdt-method"><a name="ssdt-method" class="plugin-anchor" href="#ssdt-method"><i class="fa fa-link" aria-hidden="true"></i></a>SSDT Method</h3>
-<p>There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.</p>
-<p>Example of device path:</p>
-<p><code>\_SB.PCI0.PEG0.PEGP</code></p>
-<pre><code>DefinitionBlock (&quot;&quot;, &quot;SSDT&quot;, 2, &quot;hack&quot;, &quot;spoof&quot;, 0x00000000)
-{
-   External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
-
-   Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-   {
-      If (LOr (LNot (Arg2), LEqual (_OSI (&quot;Darwin&quot;), Zero)))
-      {
-         Return (Buffer (One)
-         {
-            0x03                                           
-         })
-      }
-
-      Return (Package (0x0A)
-      {
-         &quot;name&quot;, 
-         Buffer (0x09)
-         {
-            &quot;#display&quot;
-         }, 
-
-         &quot;IOName&quot;, 
-         &quot;#display&quot;, 
-         &quot;class-code&quot;, 
-         Buffer (0x04)
-         {
-            0xFF, 0xFF, 0xFF, 0xFF                         
-         }, 
-
-         &quot;vendor-id&quot;, 
-         Buffer (0x04)
-         {
-            0xFF, 0xFF, 0x00, 0x00                         
-         }, 
-
-         &quot;device-id&quot;, 
-         Buffer (0x04)
-         {
-            0xFF, 0xFF, 0x00, 0x00                         
-         }
-      })
-   }
-}
-</code></pre><p>A copy of this SSDT can be found here: <a href="https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl" target="_blank">Spoof-SSDT.dsl</a> You will need <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.</p>
-<p>Source: CorpNewt</p>
-<h2 id="fixing-windows"><a name="fixing-windows" class="plugin-anchor" href="#fixing-windows"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing Windows</h2>
-<p>So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:</p>
-<p><img src="../images/extras/spoof-md/corp-windows.png" alt="Credit to CorpNewt for image"></p>
 
                                 
                                 </section>
@@ -826,10 +735,14 @@
 
             
                 
-                <a href="kaslr-fix.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Fixing KASLR slide values">
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: OpenCore Desktop Guide">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="mac-install.html" class="navigation navigation-next " aria-label="Next page: macOS install">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -838,7 +751,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Disabling unsupported GPUs","level":"7.5","depth":1,"next":{"title":"Clover Conversion","level":"7.6","depth":1,"url":"https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion","ref":"https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion","articles":[]},"previous":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"path":"extras/kaslr-fix.md","ref":"extras/kaslr-fix.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/spoof.md","mtime":"2020-04-11T03:15:08.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T03:17:13.304Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},"previous":{"title":"OpenCore Desktop Guide","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/README.md","mtime":"2020-04-11T03:15:09.291Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T03:17:13.304Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -69,7 +69,7 @@
     <link rel="next" href="extras/acpi.html" />
     
     
-    <link rel="prev" href="installer-guide/linux-install.html" />
+    <link rel="prev" href="installer-guide/opencore-efi.html" />
     
 
     </head>
@@ -111,9 +111,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="installer-guide/opencore-efi.html">
+        <li class="chapter " data-level="1.2" data-path="installer-guide/">
             
-                <a href="installer-guide/opencore-efi.html">
+                <a href="installer-guide/">
             
                     
                     Creating the USB
@@ -169,7 +169,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="ktext.html">
+        <li class="chapter " data-level="1.3" data-path="installer-guide/opencore-efi.html">
+            
+                <a href="installer-guide/opencore-efi.html">
+            
+                    
+                    Setting up the EFI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="ktext.html">
             
                 <a href="ktext.html">
             
@@ -182,7 +195,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="extras/acpi.html">
+        <li class="chapter " data-level="1.5" data-path="extras/acpi.html">
             
                 <a href="extras/acpi.html">
             
@@ -673,7 +686,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Fri Apr 10 2020 18:46:51 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat Apr 11 2020 03:15:09 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gathering-files"><a name="gathering-files" class="plugin-anchor" href="#gathering-files"><i class="fa fa-link" aria-hidden="true"></i></a>Gathering files</h1>
 <ul>
@@ -844,7 +857,7 @@
 <p><strong>AMD CPU Specific kexts</strong>:</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><del>NullCPUPowerManagment</del></a><ul>
-<li>We have a much better solution known as <code>DummyPowerManagement</code> found under <code>Kernel -&gt; Quirks</code></li>
+<li>We have a much better solution known as <code>DummyPowerManagement</code> found under <code>Kernel -&gt; Quirks</code> in your config.plist, this will be covered in a later page</li>
 </ul>
 </li>
 <li><a href="https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip" target="_blank">XLNCUSBFIX</a><ul>
@@ -990,7 +1003,7 @@
 
             
                 
-                <a href="installer-guide/linux-install.html" class="navigation navigation-prev " aria-label="Previous page: Linux install">
+                <a href="installer-guide/opencore-efi.html" class="navigation navigation-prev " aria-label="Previous page: Setting up the EFI">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -1006,7 +1019,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.3","depth":1,"next":{"title":"Getting started with ACPI","level":"1.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-04-10T18:46:51.459Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-10T18:48:59.059Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.4","depth":1,"next":{"title":"Getting started with ACPI","level":"1.5","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Setting up the EFI","level":"1.3","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-04-11T03:15:09.291Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T03:17:13.304Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

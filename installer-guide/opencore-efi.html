@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Creating the USB · GitBook</title>
+        <title>Setting up the EFI · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="mac-install.html" />
+    <link rel="next" href="../ktext.html" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="linux-install.html" />
     
 
     </head>
@@ -111,9 +111,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="opencore-efi.html">
+        <li class="chapter " data-level="1.2" data-path="./">
             
-                <a href="opencore-efi.html">
+                <a href="./">
             
                     
                     Creating the USB
@@ -169,7 +169,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../ktext.html">
+        <li class="chapter active" data-level="1.3" data-path="opencore-efi.html">
+            
+                <a href="opencore-efi.html">
+            
+                    
+                    Setting up the EFI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ktext.html">
             
                 <a href="../ktext.html">
             
@@ -182,7 +195,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../extras/acpi.html">
+        <li class="chapter " data-level="1.5" data-path="../extras/acpi.html">
             
                 <a href="../extras/acpi.html">
             
@@ -657,7 +670,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Creating the USB</a>
+        <a href=".." >Setting up the EFI</a>
     </h1>
 </div>
 
@@ -673,29 +686,12 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Fri Apr 10 2020 18:46:51 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat Apr 11 2020 03:15:09 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="creating-the-usb"><a name="creating-the-usb" class="plugin-anchor" href="#creating-the-usb"><i class="fa fa-link" aria-hidden="true"></i></a>Creating the USB</h1>
+<h1 id="setting-up-the-efi"><a name="setting-up-the-efi" class="plugin-anchor" href="#setting-up-the-efi"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up the EFI</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
-<p>Requirements:</p>
-<ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a>, highly recommend running the debug version to show more info</li>
-<li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AppleSupportPkg</a></li>
-<li><a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> to edit .plist files (OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. <strong>Please avoid these kinds of tools at all costs!</strong>).</li>
-<li>Cleaned NVRAM(This is seriously important if you used Clover before, as many variables will remain causing conflicts. Luckily with OC you can press <code>CleanNvram</code> in the boot picker when <code>AllowNvramReset</code> is enabled in your config)</li>
-<li>Basic knowledge of how a Hackintosh works and what files yours requires(ie: Type of network controller).</li>
-<li>You must remove Clover from your system entirely if you wish to use it as your main boot-loader. Keep a backup of your Clover based EFI. See here on what needs to be cleaned: <a href="https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion" target="_blank">Clover Conversion</a></li>
-</ul>
-<h1 id="making-the-installer"><a name="making-the-installer" class="plugin-anchor" href="#making-the-installer"><i class="fa fa-link" aria-hidden="true"></i></a>Making the installer</h1>
-<p>Depending on which OS you&apos;re on, see your specific section on making the USB, then once done return here on setting up OpenCore:</p>
-<ul>
-<li><a href="mac-install.html">macOS users</a></li>
-<li><a href="winblows-install.html">Windows users</a></li>
-<li><a href="linux-install.html">Linux users</a></li>
-</ul>
-<h1 id="setting-up-the-efi"><a name="setting-up-the-efi" class="plugin-anchor" href="#setting-up-the-efi"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up the EFI</h1>
 <p>To setup OpenCore&#x2019;s folder structure, you&#x2019;ll want to grab the EFI folder found in OpenCorePkg&apos;s releases page(this will already be done on the <code>BOOT</code> USB drive for windows users):</p>
 <p><img src="../images/installer-guide/opencore-efi-md/base-efi.png" alt="base EFI folder"></p>
 <p>Now something you&apos;ll notice is that it comes with a bunch of files in <code>Drivers</code> and <code>Tools</code> folder, we don&apos;t want most of these:</p>
@@ -769,12 +765,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: OpenCore Desktop Guide">
+                <a href="linux-install.html" class="navigation navigation-prev " aria-label="Previous page: Linux install">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="mac-install.html" class="navigation navigation-next " aria-label="Next page: macOS install">
+                <a href="../ktext.html" class="navigation navigation-next " aria-label="Next page: Gathering files">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -785,7 +781,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Creating the USB","level":"1.2","depth":1,"next":{"title":"macOS install","level":"1.2.1","depth":2,"path":"installer-guide/mac-install.md","ref":"installer-guide/mac-install.md","articles":[]},"previous":{"title":"OpenCore Desktop Guide","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/opencore-efi.md","mtime":"2020-04-10T18:46:51.459Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-10T18:48:59.059Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setting up the EFI","level":"1.3","depth":1,"next":{"title":"Gathering files","level":"1.4","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"previous":{"title":"Linux install","level":"1.2.3","depth":2,"path":"installer-guide/linux-install.md","ref":"installer-guide/linux-install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installer-guide/opencore-efi.md","mtime":"2020-04-11T03:15:09.291Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-11T03:17:13.304Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
