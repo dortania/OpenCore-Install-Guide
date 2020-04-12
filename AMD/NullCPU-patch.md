@@ -1,4 +1,4 @@
-# Improve GPU power management and remove nullcpupowermanagement.kext
+# Improve GPU power management and remove NullCPUPowerManagement.kext
 
 * Supported version: 0.5.7
 
@@ -11,7 +11,7 @@ What you'll need:
 * [AGPMInjector](https://github.com/Pavo-IM/AGPMInjector/releases)
 
 
-# 1. Removing nullcpupowermanagement.kext: 
+# 1. Removing NullCPUPowerManagement.kext: 
 
 With the release of 0.5.5, OpenCore added a new quirk called `DummyPowerManagement`. This is our new form of NullCPUPowerManagement and should be much stabler compared to the old kext. To enable, make sure BOOTx64.efi, OpenCore.efi and your config.plist have been updated to 0.5.5, then in your config:
 

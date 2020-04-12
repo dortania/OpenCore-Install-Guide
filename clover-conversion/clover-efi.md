@@ -7,8 +7,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 **Supported ones:**
 
 * ApfsDriverLoader.efi
-* AudioDxe.efi
-* BootChimeDxe.efi
+* AudioDxe.efi(Make sure this is from [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg) and **not** Goldfish64's repo)
 * EnhancedFatDxe.efi
 * GrubEXFAT.efi
 * GrubISO9660.efi
@@ -48,8 +47,10 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * VirtualSMC.efi
 
 
-**Explictely unsupported drivers:**
+**Explicitly unsupported drivers:**
 
+* AppleUsbKbDxe.efi(replaced with OpenUsbKbDxe.efi)
+* FwRuntimeServices.efi(replaced with OpenRuntime.efi)
 * osxaptiofix2drv-free2000.efi
 * osxaptiofix2drv.efi
 * osxaptiofix3drv.efi

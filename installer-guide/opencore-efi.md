@@ -29,7 +29,7 @@ A cleaned up EFI:
 
 Now you can place **your** necessary firmware drivers(.efi) from AppleSupportPkg into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
-Here's what a populated EFI can look like:
+Here's what a populated EFI ***can*** look like(yours will be different):
 
 ![Populated EFI folder](/images/installer-guide/opencore-efi-md/populated-efi.png)
 
