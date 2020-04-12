@@ -119,7 +119,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 * **ProtectSecureBoot**: NO
    * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
-   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffeelake systems
+   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffee Lake systems
 * **ProvideCustomSlide**: YES
    * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
@@ -137,6 +137,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 ![DeviceProperties](/images/config/config.plist/skylake/DeviceProperties.png)
 
 **Add**: Sets device properties from a map.
+
+`PciRoot(0x0)/Pci(0x2,0x0)`
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for fixing certain iGPU properties like `ig-platform-id`. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.
 
@@ -161,7 +163,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 **Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
-`PciRoot(0x0)/Pci(0x1f,0x3)` -> `Layout-id`
+`PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 

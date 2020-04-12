@@ -35,6 +35,11 @@ So from this it tells us 2 things:
 
 Now with a list of supported layout IDs,  we're ready to try some out
 
+**Note**: If your Audio Codec is ALC 3XXX this is likely false and just a rebranded controller, do your research and see what the actual controller is.
+* An example of this is the ALC3263, when we look at the PCI ID we get this: `1028:0665`
+   * `1028` is Dell's Vendor ID
+   * `0665` is the device ID, and even hides a clue. It actually tells us which ALC Codec it is: ALC 665
+
 ## Testing your layout
 
 To test out our layout IDs, we're going to be using the boot-arg `alcid=xxx` where xxx is your layout. Remember that to try layout IDs **one at a time**. Do not add multiple IDs or alcid boot-args, if one doesn't work then try the next ID and etc

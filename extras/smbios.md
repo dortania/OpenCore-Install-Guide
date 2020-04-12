@@ -61,7 +61,7 @@ This section is mainly relevant for laptops to save some headaches when followin
 | MacBookAir8,1 | Dual Core 7w | iGPU: UHD 617 | 13" | 2018 |
 | MacBookAir8,2 | Dual Core 7w | iGPU: UHD 617 | 13" | 2019 |
 
-## Coffeelake (8th Gen)
+## Coffee Lake (8th Gen)
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
@@ -70,7 +70,7 @@ This section is mainly relevant for laptops to save some headaches when followin
 | MacBookPro15,3 | Hexa Core 45w | iGPU: UHD 630 + dGPU: Vega16/20 | 15" |
 | MacBookPro15,4 | Quad Core 15w | iGPU: Iris 645 | 13" |
 
-## Coffeelake Refresh (9th Gen)
+## Coffee Lake Refresh (9th Gen)
 
 
 | SMBIOS | CPU Type | GPU Type | Display Size |

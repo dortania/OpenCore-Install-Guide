@@ -32,12 +32,24 @@ If you fail at this point, there's a couple things you can check for:
    * Make sure not to have any legacy graphics patches present as they've been absorbed into WhateverGreen:
       * IntelGraphicsFixup.kext
       * NvidiaGraphicsFixup.kext
-      *Shiki.kext
+      * Shiki.kext
 
 To check if Lilu and WhateverGreen loaded correctly:
 
 ```text
 kextstat | grep -E "Lilu|WhateverGreen"
+```
+
+**Note**: On macOS 10.15 and newer, AppleGVA debugging is disabled by default, if you get a generic error while running VDADecoderChecker you can enable debugging with the following:
+
+```text
+defaults write com.apple.AppleGVA enableSyslog -boolean true
+```
+
+And to undo this once done:
+
+```text
+defaults delete com.apple.AppleGVA enableSyslog
 ```
 
 ## Testing DRM

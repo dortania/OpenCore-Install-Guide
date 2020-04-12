@@ -106,7 +106,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 * **AvoidRuntimeDefrag**: YES
    * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES
-   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffeelake
+   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
 * **DisableSingleUser**: NO
    * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
 * **DisableVariableWrite**: NO
@@ -144,6 +144,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 **Add**: Sets device properties from a map.
 
+`PciRoot(0x0)/Pci(0x2,0x0)`
+
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for fixing certain iGPU properties like `ig-platform-id`. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.
 
 If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like `DDCCBBAA`
@@ -171,7 +173,7 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 
 **Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
-`PciRoot(0x0)/Pci(0x1f,0x3)` -> `Layout-id`
+`PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 

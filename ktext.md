@@ -15,7 +15,7 @@ These are the drivers used by OpenCore, for the majority of systems you only nee
 * [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
    * Needed for seeing APFS volumes(ie. macOS)
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
-   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix HFS drivers**
+   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
 
@@ -57,7 +57,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops, **desktops can ignore**
-  * Do not use until battery has been poperly patched, can cause issues otherwise
+  * Do not use until battery has been properly patched, can cause issues otherwise
 
 **Graphics**:
 
@@ -107,7 +107,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * Used for patching non-Apple Broadcom cards, **will not work on intel, Killer, Realtek, etc**
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
+  * Used for uploading firmware on Broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
     * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
@@ -126,7 +126,7 @@ The order in `Kernel -> Add` should be:
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
   * USB fix for AMD FX systems, not recommended for Ryzen
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
-  * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticably worse than AppleALC on Zen CPUs
+  * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
 
 **Extra's**:
 
@@ -137,7 +137,7 @@ The order in `Kernel -> Add` should be:
     * MacPro7,1
     * iMacPro1,1
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
-   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremly slow or even unbootable. Skylake-X should use TSCAdjustReset instead
+   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead
 * [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset) 
    * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
@@ -154,7 +154,7 @@ The order in `Kernel -> Add` should be:
    * To be paired with a plugin:
       * VoodooI2CHID - Implements the Microsoft HID device specification.
       * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
-      * VoodooI2CSynaptics - Implements support for Synaptics proprietary devices.
+      * VoodooI2CSynaptics - Implements support for Synaptic's proprietary devices.
       * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
       * VoodooI2CUPDDEngine - Implements Touchbase driver support.
 
@@ -191,7 +191,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 
-**Desktop Coffeelake:**
+**Desktop Coffee Lake:**
 * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 * [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)
