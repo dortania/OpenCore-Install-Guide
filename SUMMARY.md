@@ -40,6 +40,7 @@
    * [Fixing DRM](/post-install/drm.md)
    * [Fixing iServices](/post-install/iservices.md)
    * [Emulated NVRAM](/post-install/nvram.md)
+   * [Fixing Power Management](/post-install/pm.md)
 
 ## Troubleshooting
 

@@ -376,7 +376,7 @@ Issue with AppleRTC, quite a simple fix:
 | Key | Type | Value |
 | :--- | :--- | :--- |
 |Comment|String|Disable RTC checksum update on poweroff|
-| Enabled | String | YES |
+| Enabled | Boolean | YES |
 |Count|Number|1|
 |Base|String|__ZN8AppleRTC14updateChecksumEv|
 |Identifier|String|com.apple.driver.AppleRTC|

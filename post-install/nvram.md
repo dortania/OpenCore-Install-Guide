@@ -53,6 +53,8 @@ Note: `nvram -c` requires SIP to be off, an alternative is to wipe NVRAM at the 
 
 To enable emulated NVRAM, you'll need 3 things set:
 
+![](/images/post-install/nvram-md)
+
 Within your config.plist:
 
 * **Booter**: 
