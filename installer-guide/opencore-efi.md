@@ -21,7 +21,7 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
       * This is OpenCore's optional GUI, we'll be going over how to set this up in installer-guide so remove this for now
 
 * **Remove everything from Tools:**
-   * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting pruposes
+   * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
       
 A cleaned up EFI:
 
