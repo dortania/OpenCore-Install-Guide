@@ -686,7 +686,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Apr 12 2020 00:16:12 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 12 2020 04:24:29 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-drm-support-and-igpu-performance"><a name="fixing-drm-support-and-igpu-performance" class="plugin-anchor" href="#fixing-drm-support-and-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing DRM support and iGPU performance</h1>
 <p>So with DRM, we have a couple things we need to mention:</p>
@@ -729,8 +729,8 @@
 <li>Make sure Lilu and WhateverGreen are loaded<ul>
 <li>Make sure not to have any legacy graphics patches present as they&apos;ve been absorbed into WhateverGreen:<ul>
 <li>IntelGraphicsFixup.kext</li>
-<li>NvidiaGraphicsFixup.kext
-*Shiki.kext</li>
+<li>NvidiaGraphicsFixup.kext</li>
+<li>Shiki.kext</li>
 </ul>
 </li>
 </ul>
@@ -738,6 +738,12 @@
 </ul>
 <p>To check if Lilu and WhateverGreen loaded correctly:</p>
 <pre><code class="lang-text">kextstat | grep -E &quot;Lilu|WhateverGreen&quot;
+</code></pre>
+<p><strong>Note</strong>: On macOS 10.15 and newer, AppleGVA debugging is disabled by default, if you get a generic error while running VDADecoderChecker you can enable debugging with the following:</p>
+<pre><code class="lang-text">defaults write com.apple.AppleGVA enableSyslog -boolean true
+</code></pre>
+<p>And to undo this once done:</p>
+<pre><code class="lang-text">defaults delete com.apple.AppleGVA enableSyslog
 </code></pre>
 <h2 id="testing-drm"><a name="testing-drm" class="plugin-anchor" href="#testing-drm"><i class="fa fa-link" aria-hidden="true"></i></a>Testing DRM</h2>
 <p>So before we get too deep, we need to go over some things, mainly the types of DRM you&apos;ll see out in the wild:</p>
@@ -857,7 +863,7 @@ kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"5.1.7","depth":2,"next":{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-04-12T00:16:12.555Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T00:18:30.409Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"5.1.7","depth":2,"next":{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-04-12T04:24:29.315Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T04:26:34.809Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

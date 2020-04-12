@@ -686,7 +686,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Apr 12 2020 00:16:12 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 12 2020 04:24:29 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gathering-files"><a name="gathering-files" class="plugin-anchor" href="#gathering-files"><i class="fa fa-link" aria-hidden="true"></i></a>Gathering files</h1>
 <ul>
@@ -705,7 +705,7 @@
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi" target="_blank">HfsPlus.efi</a><ul>
-<li>Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). <strong>Do not mix HFS drivers</strong></li>
+<li>Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). <strong>Do not mix other HFS drivers</strong></li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenRuntime.efi</a><ul>
@@ -765,7 +765,7 @@
 </li>
 <li>SMCBatteryManager.kext<ul>
 <li>Used for measuring battery readouts on laptops, <strong>desktops can ignore</strong></li>
-<li>Do not use until battery has been poperly patched, can cause issues otherwise</li>
+<li>Do not use until battery has been properly patched, can cause issues otherwise</li>
 </ul>
 </li>
 </ul>
@@ -838,7 +838,7 @@
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/BrcmPatchRAM/releases" target="_blank">BrcmPatchRAM</a><ul>
-<li>Used for uploading firmware on broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.</li>
+<li>Used for uploading firmware on Broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.</li>
 <li>To be paired with BrcmFirmwareData.kext<ul>
 <li>BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)</li>
 <li>BrcmPatchRAM2 for 10.11-10.14</li>
@@ -865,7 +865,7 @@
 </ul>
 </li>
 <li><a href="https://sourceforge.net/projects/voodoohda/" target="_blank">VoodooHDA</a><ul>
-<li>Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticably worse than AppleALC on Zen CPUs</li>
+<li>Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs</li>
 </ul>
 </li>
 </ul>
@@ -882,7 +882,7 @@
 </ul>
 </li>
 <li><a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a><ul>
-<li>Needed for syncing TSC on some of Intel&apos;s HEDT and server motherboards, without this macOS may be extremly slow or even unbootable. Skylake-X should use TSCAdjustReset instead</li>
+<li>Needed for syncing TSC on some of Intel&apos;s HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead</li>
 </ul>
 </li>
 <li><a href="https://github.com/interferenc/TSCAdjustReset" target="_blank">TSCAdjustReset</a> <ul>
@@ -908,7 +908,7 @@
 <li>To be paired with a plugin:<ul>
 <li>VoodooI2CHID - Implements the Microsoft HID device specification.</li>
 <li>VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)</li>
-<li>VoodooI2CSynaptics - Implements support for Synaptics proprietary devices.</li>
+<li>VoodooI2CSynaptics - Implements support for Synaptic&apos;s proprietary devices.</li>
 <li>VoodooI2CFTE - Implements support for the FTE1001 touchpad.</li>
 <li>VoodooI2CUPDDEngine - Implements Touchbase driver support.</li>
 </ul>
@@ -948,7 +948,7 @@
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
 </ul>
-<p><strong>Desktop Coffeelake:</strong></p>
+<p><strong>Desktop Coffee Lake:</strong></p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></li>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></li>
@@ -1019,7 +1019,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.4","depth":1,"next":{"title":"Getting started with ACPI","level":"1.5","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Setting up the EFI","level":"1.3","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-04-12T00:16:12.551Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T00:18:30.409Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.4","depth":1,"next":{"title":"Getting started with ACPI","level":"1.5","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Setting up the EFI","level":"1.3","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-04-12T04:24:29.315Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T04:26:34.809Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

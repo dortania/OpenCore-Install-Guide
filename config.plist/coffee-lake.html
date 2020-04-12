@@ -686,7 +686,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Apr 12 2020 00:16:12 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 12 2020 04:24:28 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="coffee-lake"><a name="coffee-lake" class="plugin-anchor" href="#coffee-lake"><i class="fa fa-link" aria-hidden="true"></i></a>Coffee Lake</h1>
 <ul>
@@ -801,7 +801,7 @@
 </ul>
 </li>
 <li><strong>DevirtualiseMmio</strong>: YES<ul>
-<li>Reduces Stolen Memory Footprint, expands options for <code>slide=N</code> values and very helpful with fixing Memory Allocation issues on Z390. Requires <code>ProtectUefiServices</code> as well on IceLake and Z390 Coffeelake</li>
+<li>Reduces Stolen Memory Footprint, expands options for <code>slide=N</code> values and very helpful with fixing Memory Allocation issues on Z390. Requires <code>ProtectUefiServices</code> as well on IceLake and Z390 Coffee Lake</li>
 </ul>
 </li>
 <li><strong>DisableSingleUser</strong>: NO<ul>
@@ -865,6 +865,7 @@
 <h2 id="deviceproperties"><a name="deviceproperties" class="plugin-anchor" href="#deviceproperties"><i class="fa fa-link" aria-hidden="true"></i></a>DeviceProperties</h2>
 <p><img src="../images/config/config.plist/coffeelake/DeviceProperties.png" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
+<p><code>PciRoot(0x0)/Pci(0x2,0x0)</code></p>
 <p>This section is set up via WhateverGreen&apos;s <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md" target="_blank">Framebuffer Patching Guide</a> and is used for fixing certain iGPU properties like <code>ig-platform-id</code>. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.</p>
 <p>If we think of our ig-plat as <code>0xAABBCCDD</code>, our swapped version would look like <code>DDCCBBAA</code></p>
 <p>The two ig-platform-id&apos;s we use are as follows:</p>
@@ -909,7 +910,7 @@
 </table>
 <p>(This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)</p>
 <p><strong>Special note</strong>: Mobile users should refer to mobile iGPU section for what properties should be used: <a href="https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching" target="_blank">iGPU Patching</a></p>
-<p><code>PciRoot(0x0)/Pci(0x1f,0x3)</code> -&gt; <code>Layout-id</code></p>
+<p><code>PciRoot(0x0)/Pci(0x1b,0x0)</code> -&gt; <code>Layout-id</code></p>
 <ul>
 <li>Applies AppleALC audio injection, you&apos;ll need to do your own research on which codec your motherboard has and match it with AppleALC&apos;s layout. <a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a>.</li>
 </ul>
@@ -1518,7 +1519,7 @@ SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Coffee Lake","level":"2.5","depth":1,"next":{"title":"Haswell-E","level":"3.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"previous":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/coffee-lake.md","mtime":"2020-04-12T00:16:12.103Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T00:18:30.409Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Coffee Lake","level":"2.5","depth":1,"next":{"title":"Haswell-E","level":"3.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"previous":{"title":"Kaby Lake","level":"2.4","depth":1,"path":"config.plist/kaby-lake.md","ref":"config.plist/kaby-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/coffee-lake.md","mtime":"2020-04-12T04:24:28.872Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T04:26:34.809Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
