@@ -497,6 +497,19 @@
             
         </li>
     
+        <li class="chapter " data-level="5.1.10" data-path="../post-install/pm.html">
+            
+                <a href="../post-install/pm.html">
+            
+                    
+                    Fixing Power Management
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -686,7 +699,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Apr 12 2020 04:24:28 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 12 2020 23:04:07 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="broadwell-e"><a name="broadwell-e" class="plugin-anchor" href="#broadwell-e"><i class="fa fa-link" aria-hidden="true"></i></a>Broadwell-E</h1>
 <ul>
@@ -1076,7 +1089,7 @@
 <p><strong>Entries</strong>: Used for specifying irregular boot paths that can&apos;t be found naturally with OpenCore</p>
 <p>Won&apos;t be covered here, see 8.6 of <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more info</p>
 <h2 id="nvram"><a name="nvram" class="plugin-anchor" href="#nvram"><i class="fa fa-link" aria-hidden="true"></i></a>NVRAM</h2>
-<p><img src="../images/config/config-universal/nvram.png" alt="NVRAM"></p>
+<p><img src="../images/config/config-HEDT/broadwell-e/nvram.png" alt="NVRAM"></p>
 <p><strong>Add</strong>: </p>
 <p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)</p>
 <ul>
@@ -1097,9 +1110,9 @@
 <ul>
 <li><strong>boot-args</strong>:<ul>
 <li><strong>-v</strong> - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you&apos;re booting instead of the Apple logo and progress bar. It&apos;s invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.</li>
-<li><strong>debug=0x100</strong>- this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can <em>hopefully</em> glean some useful info and follow the breadcrumbs to get past the issues.</li>
 <li><strong>keepsyms=1</strong> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</li>
-<li><strong>alcid=1</strong> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system.</li>
+<li><strong>debug=0x100</strong>- this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can <em>hopefully</em> glean some useful info and follow the breadcrumbs to get past the issues.</li>
+<li><strong>alcid=1</strong> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system. More info on this is covered in the <a href="../post-install/">Post-Install Page</a></li>
 </ul>
 </li>
 </ul>
@@ -1143,21 +1156,21 @@
 </tbody>
 </table>
 <p><strong>Block</strong>: Forcibly rewrites NVRAM variables, do note that <code>Add</code> <strong>will not overwrite</strong> values already present in NVRAM so values like <code>boot-args</code> should be left alone.</p>
-<p><strong>LegacyEnable</strong>: NO</p>
+<p><strong>LegacyEnable</strong>: YES</p>
 <ul>
-<li>Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM</li>
+<li>Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM like X99</li>
 </ul>
-<p><strong>LegacyOverwrite</strong>: NO</p>
+<p><strong>LegacyOverwrite</strong>: YES</p>
 <ul>
-<li>Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM</li>
+<li>Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM like X99</li>
 </ul>
 <p><strong>LegacySchema</strong></p>
 <ul>
 <li>Used for assigning NVRAM variables, used with LegacyEnable set to YES</li>
 </ul>
-<p><strong>WriteFlash</strong>: YES</p>
+<p><strong>WriteFlash</strong>: NO</p>
 <ul>
-<li>Enables writing to flash memory for all added variables.</li>
+<li>Enables writing to flash memory for all added variables, not compatible with emulated NVRAM</li>
 </ul>
 <h2 id="platforminfo"><a name="platforminfo" class="plugin-anchor" href="#platforminfo"><i class="fa fa-link" aria-hidden="true"></i></a>Platforminfo</h2>
 <p><img src="../images/config/config-universal/iMacPro-smbios.png" alt="PlatformInfo"></p>
@@ -1458,7 +1471,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"3.2","depth":1,"next":{"title":"Skylake-X","level":"3.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"3.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-04-12T04:24:28.872Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T04:26:34.809Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"3.2","depth":1,"next":{"title":"Skylake-X","level":"3.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"3.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-04-12T23:04:07.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T23:06:03.792Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -497,6 +497,19 @@
             
         </li>
     
+        <li class="chapter " data-level="5.1.10" data-path="../post-install/pm.html">
+            
+                <a href="../post-install/pm.html">
+            
+                    
+                    Fixing Power Management
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -686,7 +699,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Apr 12 2020 04:24:28 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 12 2020 23:04:07 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="kaby-lake"><a name="kaby-lake" class="plugin-anchor" href="#kaby-lake"><i class="fa fa-link" aria-hidden="true"></i></a>Kaby Lake</h1>
 <ul>
@@ -903,7 +916,7 @@
 <ul>
 <li>Applies AppleALC audio injection, you&apos;ll need to do your own research on which codec your motherboard has and match it with AppleALC&apos;s layout. <a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a>.</li>
 </ul>
-<p>For us, we&apos;ll be using the boot-arg <code>alcid=xxx</code> instead to accomplish this. <code>alcid</code> will override all other layout-IDs present</p>
+<p>For us, we&apos;ll be using the boot-arg <code>alcid=xxx</code> instead to accomplish this. <code>alcid</code> will override all other layout-IDs present. More info on this is covered in the <a href="../post-install/">Post-Install Page</a></p>
 <p><strong>Block</strong>: Removes device properties from the map, for us we can ignore this</p>
 <p>Fun Fact: The reason the byte order is swapped is due to <a href="https://en.wikipedia.org/wiki/Endianness" target="_blank">Endianness</a>, specifically Little Endians that modern CPUs use for ordering bytes</p>
 <h2 id="kernel"><a name="kernel" class="plugin-anchor" href="#kernel"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel</h2>
@@ -1138,9 +1151,9 @@
 <ul>
 <li><strong>boot-args</strong>:<ul>
 <li><strong>-v</strong> - this enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you&apos;re booting instead of the Apple logo and progress bar. It&apos;s invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc.</li>
-<li><strong>debug=0x100</strong>- this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can <em>hopefully</em> glean some useful info and follow the breadcrumbs to get past the issues.</li>
 <li><strong>keepsyms=1</strong> - this is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what&apos;s causing the panic itself.</li>
-<li><strong>alcid=1</strong> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system.</li>
+<li><strong>debug=0x100</strong>- this disables macOS&apos;s watchdog which helps prevents a reboot on a kernel panic. That way you can <em>hopefully</em> glean some useful info and follow the breadcrumbs to get past the issues.</li>
+<li><strong>alcid=1</strong> - used for setting layout-id for AppleALC, see <a href="https://github.com/acidanthera/applealc/wiki/supported-codecs" target="_blank">supported codecs</a> to figure out which layout to use for your specific system. More info on this is covered in the <a href="../post-install/">Post-Install Page</a></li>
 </ul>
 </li>
 </ul>
@@ -1505,7 +1518,7 @@ SmUUID:       AA043F8D-33B6-4A1A-94F7-46972AAD0607
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Kaby Lake","level":"2.4","depth":1,"next":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"previous":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/kaby-lake.md","mtime":"2020-04-12T04:24:28.876Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T04:26:34.809Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Kaby Lake","level":"2.4","depth":1,"next":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"previous":{"title":"Skylake","level":"2.3","depth":1,"path":"config.plist/skylake.md","ref":"config.plist/skylake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","github-edit","anchors","last-modified"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","addcssjs":{"css":[],"js":[]},"fontsettings":{"family":"sans","size":2,"theme":"night"},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","sharing":{"all":[],"facebook":false,"google":false,"instapaper":false,"twitter":false,"vk":false,"weibo":false},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/kaby-lake.md","mtime":"2020-04-12T23:04:07.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-12T23:06:03.792Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
