@@ -1,4 +1,4 @@
-# Credit
+# Credits
 
 * Supported version: 0.5.7
 
@@ -18,6 +18,9 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
   * For the original AMD Vanilla Guide
   * Corrections to AMD portion of the guide
+* [DhinakG](https://github.com/dhinakg)
+  * Random guide related stuff
+* [and the rest of the dortania team](https://github.com/dortania) for helping out
   
 And to the rest who've helped out as well, thank you!
 
@@ -40,12 +43,13 @@ Guides linked or those that inspired this guide:
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
 * [gfxutil](https://github.com/acidanthera/gfxutil/releases)
 
-And for those who have either recommendations or issues with this guide can find the Github for this site [here](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide)
+And for those who have recommendations or issues with this guide, you can find the GitHub repo for this site [here](https://github.com/dortania/Opencore-Desktop-Guide).
 
 **Sources**:
 
+* [OpenCore Documentation](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs)
 * KASLR slide:
-  * [Vit9696's Explainer](https://www.insanelymac.com/forum/topic/331381-aptiomemoryfix/?do=findComment&comment=2564269)
+  * [vit9696's Explainer](https://www.insanelymac.com/forum/topic/331381-aptiomemoryfix/?do=findComment&comment=2564269)
   * [Apianti's explainer](https://www.reddit.com/r/hackintosh/comments/cfjyla/i_unleashed_a_plague_upon_you_guys_and_i_am_sorry/)
   * [KASLR Explainer](https://lwn.net/Articles/569635/)
   * [More KASLR Explainer](https://www.blackhat.com/docs/us-16/materials/us-16-Jang-Breaking-Kernel-Address-Space-Layout-Randomization-KASLR-With-Intel-TSX.pdf)
