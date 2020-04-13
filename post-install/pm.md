@@ -13,7 +13,7 @@ So before we can fine tune power manegement to our liking, we need to first make
 AMD CPUs can also use this as long as `DummyPowerManagement` is enabled in your config, the reason you'd want this is it allows you to enable [enable AppleGraphicsPowerManagement](/post-install/pm.md#enabling-applegraphicspowermanagement)
 
 
-To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and search for `AppleACPICPU`:
+To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and look for `AppleACPICPU`(note if you use search, it may find entries):
 
 ![](/images/post-install/pm-md/X86PlatformShim.png)
 
