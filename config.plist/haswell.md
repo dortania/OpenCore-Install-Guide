@@ -13,7 +13,7 @@ Table of Contents:
 * [Kernel](/config.plist/haswell.md#kernel)
 * [Misc](/config.plist/haswell.md#misc)
 * [NVRAM](/config.plist/haswell.md#nvram)
-* [SMBIOS](/config.plist/haswell.md#smbios)
+* [SMBIOS](/config.plist/haswell.md#platforminfo)
 * [UEFI](/config.plist/haswell.md#uefi)
 * [Cleaning up](/config.plist/haswell.md#cleaning-up)
 * [Intel BIOS settings](/config.plist/haswell.md#intel-bios-settings)

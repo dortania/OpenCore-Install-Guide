@@ -29,5 +29,5 @@ Used for Intel's consumer line
 
 Used for AMD CPU based hardware
 
-* [Fixing AMD USB](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
+* [Fixing AMD USB](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
 * [Fixing AMD Temperature readings](https://github.com/trulyspinach/SMCAMDProcessor)

@@ -38,6 +38,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * [`Couldn't allocate runtime area` errors?](/troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)
 * [SSDTs not being added](/troubleshooting/troubleshooting.md#ssdts-not-being-added)
 * [Booting OpenCore reboots to BIOS](/troubleshooting/troubleshooting.md#booting-opencore-reboots-to-bios)
+* [OCABC: Incompatible OpenRuntime r4, require r10](/troubleshooting/troubleshooting.md#ocabc-incompatible-openruntime-r4-require-r10)
 
 
 
@@ -212,6 +213,9 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 ![Directory Structure from OpenCore&apos;s DOC](/images/troubleshooting/troubleshooting-md/oc-structure.png)
 
+## OCABC: Incompatible OpenRuntime r4, require r10
+
+Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime are **all from the same exact build**. Anything mismatched will break booting
 
 
 # macOS booting
