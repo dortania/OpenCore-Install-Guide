@@ -7,4 +7,4 @@ This section is dedicated to the process of both dumping and making ACPI tables.
 
 Guide has been move here: 
 
-# [Getting Started With ACPI](https://acpi.dortania.ml/)
+# [Getting Started With ACPI](https://dortanian.github.io/Getting-Started-With-ACPI/)
