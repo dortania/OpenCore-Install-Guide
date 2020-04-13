@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/config.plist/skylake.md#kernel)
 * [Misc](/config.plist/skylake.md#misc)
 * [NVRAM](/config.plist/skylake.md#nvram)
-* [SMBIOS](/config.plist/skylake.md#smbios)
+* [SMBIOS](/config.plist/skylake.md#platforminfo)
 * [UEFI](/config.plist/skylake.md#uefi)
 * [Cleaning up](/config.plist/skylake.md#cleaning-up)
 * [Intel BIOS settings](/config.plist/skylake.md#intel-bios-settings)

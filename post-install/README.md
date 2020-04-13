@@ -23,12 +23,6 @@ Used for Intel's consumer line
 
 * [Fixing Intel USB](https://usb-map.gitbook.io/project/)
 * [Fixing CFG Lock](extras/msr-lock.md)
-
-## Intel HEDT
-
-Used for Intel's High End and Server line
-
-* [Fixing Intel USB](https://usb-map.gitbook.io/project/)
 * [Emulating NVRAM](/post-install/nvram.md)
 
 ## AMD

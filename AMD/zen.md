@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/AMD/zen.md#kernel)
 * [Misc](/AMD/zen.md#misc)
 * [NVRAM](/AMD/zen.md#nvram)
-* [SMBIOS](/AMD/zen.md#smbios)
+* [SMBIOS](/AMD/zen.md#platforminfo)
 * [UEFI](/AMD/zen.md#uefi)
 * [Cleaning up](/AMD/zen.md#cleaning-up)
 * [AMD BIOS settings](/AMD/zen.md#amd-bios-settings)

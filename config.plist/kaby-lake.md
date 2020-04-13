@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/config.plist/kaby-lake.md#kernel)
 * [Misc](/config.plist/kaby-lake.md#misc)
 * [NVRAM](/config.plist/kaby-lake.md#nvram)
-* [SMBIOS](/config.plist/kaby-lake.md#smbios)
+* [SMBIOS](/config.plist/kaby-lake.md#platforminfo)
 * [UEFI](/config.plist/kaby-lake.md#uefi)
 * [Cleaning up](/config.plist/kaby-lake.md#cleaning-up)
 * [Intel BIOS settings](/config.plist/kaby-lake.md#intel-bios-settings)

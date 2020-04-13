@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/config.plist/coffee-lake.md#kernel)
 * [Misc](/config.plist/coffee-lake.md#misc)
 * [NVRAM](/config.plist/coffee-lake.md#nvram)
-* [SMBIOS](/config.plist/coffee-lake.md#smbios)
+* [SMBIOS](/config.plist/coffee-lake.md#platforminfo)
 * [UEFI](/config.plist/coffee-lake.md#uefi)
 * [Cleaning up](/config.plist/coffee-lake.md#cleaning-up)
 * [Intel BIOS settings](/config.plist/coffee-lake.md#intel-bios-settings)

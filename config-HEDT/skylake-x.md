@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/config-HEDT/skylake-x.md#kernel)
 * [Misc](/config-HEDT/skylake-x.md#misc)
 * [NVRAM](/config-HEDT/skylake-x.md#nvram)
-* [SMBIOS](/config-HEDT/skylake-x.md#smbios)
+* [SMBIOS](/config-HEDT/skylake-x.md#platforminfo)
 * [UEFI](/config-HEDT/skylake-x.md#uefi)
 * [Cleaning up](/config-HEDT/skylake-x.md#cleaning-up)
 * [Intel BIOS settings](/config-HEDT/skylake-x.md#intel-bios-settings)

@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/config.plist/ivy-bridge.md#kernel)
 * [Misc](/config.plist/ivy-bridge.md#misc)
 * [NVRAM](/config.plist/ivy-bridge.md#nvram)
-* [SMBIOS](/config.plist/ivy-bridge.md#smbios)
+* [SMBIOS](/config.plist/ivy-bridge.md#platforminfo)
 * [UEFI](/config.plist/ivy-bridge.md#uefi)
 * [Cleaning up](/config.plist/ivy-bridge.md#cleaning-up)
 * [Intel BIOS settings](/config.plist/ivy-bridge.md#intel-bios-settings)

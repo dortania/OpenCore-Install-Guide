@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/config-HEDT/broadwell-e.md#kernel)
 * [Misc](/config-HEDT/broadwell-e.md#misc)
 * [NVRAM](/config-HEDT/broadwell-e.md#nvram)
-* [SMBIOS](/config-HEDT/broadwell-e.md#smbios)
+* [SMBIOS](/config-HEDT/broadwell-e.md#platforminfo)
 * [UEFI](/config-HEDT/broadwell-e.md#uefi)
 * [Cleaning up](/config-HEDT/broadwell-e.md#cleaning-up)
 * [Intel BIOS settings](/config-HEDT/broadwell-e.md#intel-bios-settings)

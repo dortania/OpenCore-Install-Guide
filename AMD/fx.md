@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/AMD/fx.md#kernel)
 * [Misc](/AMD/fx.md#misc)
 * [NVRAM](/AMD/fx.md#nvram)
-* [SMBIOS](/AMD/fx.md#smbios)
+* [SMBIOS](/AMD/fx.md#platforminfo)
 * [UEFI](/AMD/fx.md#uefi)
 * [Cleaning up](/AMD/fx.md#cleaning-up)
 * [AMD BIOS settings](/AMD/fx.md#amd-bios-settings)

@@ -11,7 +11,7 @@ Table of Contents:
 * [Kernel](/config-HEDT/haswell-e.md#kernel)
 * [Misc](/config-HEDT/haswell-e.md#misc)
 * [NVRAM](/config-HEDT/haswell-e.md#nvram)
-* [SMBIOS](/config-HEDT/haswell-e.md#smbios)
+* [SMBIOS](/config-HEDT/haswell-e.md#platforminfo)
 * [UEFI](/config-HEDT/haswell-e.md#uefi)
 * [Cleaning up](/config-HEDT/haswell-e.md#cleaning-up)
 * [Intel BIOS settings](/config-HEDT/haswell-e.md#intel-bios-settings)
