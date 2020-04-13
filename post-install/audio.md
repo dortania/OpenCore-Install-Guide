@@ -36,9 +36,7 @@ So from this it tells us 2 things:
 Now with a list of supported layout IDs,  we're ready to try some out
 
 **Note**: If your Audio Codec is ALC 3XXX this is likely false and just a rebranded controller, do your research and see what the actual controller is.
-* An example of this is the ALC3263, when we look at the PCI ID we get this: `1028:0665`
-   * `1028` is Dell's Vendor ID
-   * `0665` is the device ID, and even hides a clue. It actually tells us which ALC Codec it is: ALC 665
+* An example of this is the ALC3601, but when we load up Linux the real name is shown: ALC 671
 
 ## Testing your layout
 
