@@ -4,9 +4,9 @@
 
 So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through and setting up some of OpenCore's great Security features:
 
-* [FileVault](/post-install/security.md#FileVault)
-* [Vault](/post-install/security.md#Vault)
-* [ScanPolicy](/post-install/security.md#ScanPolicy)
+* [FileVault](/post-install/security.md#filevault)
+* [Vault](/post-install/security.md#vault)
+* [ScanPolicy](/post-install/security.md#scanpolicy)
 
 ## FileVault
 

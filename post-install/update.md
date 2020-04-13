@@ -2,6 +2,12 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Updating OpenCore](/post-install/update.md#updating-opencore)
+* [Updating Kexts](/post-install/update.md#updating-kexts)
+* [Updating macOS](/post-install/update.md#updating-macos)
+
 ## Updating OpenCore
 
 So the main things to note with updating OpenCore:

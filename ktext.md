@@ -96,10 +96,9 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
       * H370
       * B360
       * H310
-      * Z390(Not needed on High Sierra and newer)
+      * Z390(Not needed on Mojave and newer)
       * X79
       * X99
-      * X299(Not needed on High Sierra and newer)
       * AsRock boards(On Intel motherboards specifically, basically all of their boards)
 
 **WiFi and Bluetooth**:
