@@ -66,7 +66,25 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 **Block**
 
-This blocks certain ACPI tabes from loading, for us we can ignore this
+This blocks certain ACPI tabes from loading, for us we reallly care about this. Main reason is that Apple's XCPM does not support IvyBridge all to well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT and drop the old tables:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| All | Boolean | YES |
+| Comment | String | Drop CpuPm |
+| Enabled | Boolean | YES |
+| OemTableId | Data | 437075506d000000 |
+| TableLength | Number | 0 |
+| TableSignature | Data | 53534454 |
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| All | Boolean | YES |
+| Comment | String | Drop Cpu0Ist |
+| Enabled | Boolean | YES |
+| OemTableId | Data | 4370753049737400 |
+| TableLength | Number | 0 |
+| TableSignature | Data | 53534454 |
 
 **Patch**:
 
@@ -383,7 +401,7 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 * `iMac13,1` - this is used for computers utilizing the iGPU for displaying.
 * `iMac13,2` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
 
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extras/smbios.md)
+**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/Opencore-Desktop-Guide/blob//master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

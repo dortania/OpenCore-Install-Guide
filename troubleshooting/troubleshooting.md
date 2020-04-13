@@ -13,7 +13,7 @@ This section is for those having issues booting either OpenCore, macOS or having
 * [Other issues](/troubleshooting/troubleshooting.md#other-issues)
    * This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc
 
-While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/clover-conversion) for more info
+While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/Opencore-Desktop-Guide/blob//master/clover-conversion) for more info
 
 **And if your issue is not covered, please read the official OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**
 
@@ -343,7 +343,7 @@ Follow directions here after UPDATE 2: [Fix Data and Privacy reboot](https://www
 
 This is a common example of screwed up TSC, for most system add [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
 
-For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
+For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/Opencore-Desktop-Guide/blob//master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
 ![](/images/troubleshooting/troubleshooting-md/asus-tsc.jpg)
 
