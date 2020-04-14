@@ -715,7 +715,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Tue Apr 14 2020 14:38:14 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue Apr 14 2020 15:46:41 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -783,7 +783,7 @@
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
-<li><a href="https://desktop.dortania.ml/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
+<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <p>Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt&apos;s also got a fix: <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a>&apos;s FixHPET option</p>
@@ -892,7 +892,7 @@
 <li>MacBookPro9,x+</li>
 </ul>
 <h2 id="couldnt-allocate-runtime-area-errors"><a name="couldnt-allocate-runtime-area-errors" class="plugin-anchor" href="#couldnt-allocate-runtime-area-errors"><i class="fa fa-link" aria-hidden="true"></i></a><code>Couldn&apos;t allocate runtime area</code> errors?</h2>
-<p>See <a href="https://desktop.dortania.ml/extras/kaslr-fix" target="_blank">Fixing KASLR slide values</a></p>
+<p>See <a href="https://dortania.github.io/OpenCore-Desktop-Guide/extras/kaslr-fix" target="_blank">Fixing KASLR slide values</a></p>
 <h2 id="ssdts-not-being-added"><a name="ssdts-not-being-added" class="plugin-anchor" href="#ssdts-not-being-added"><i class="fa fa-link" aria-hidden="true"></i></a>SSDTs not being added</h2>
 <p>So with Opencore, there&apos;s some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:</p>
 <pre><code>* Original Table Header:
@@ -938,8 +938,8 @@
 <li><p><strong>Missing EC patch</strong>: </p>
 <ul>
 <li>For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -&gt; Add, <strong>double check it&apos;s enabled.</strong></li>
-<li>If you don&apos;t have one, grab it here: <a href="https://acpi.dortania.ml/" target="_blank">Getting started with ACPI</a></li>
-<li>Laptop users will need to rename their main EC: <a href="https://acpi.dortania.ml/" target="_blank">Getting started with ACPI</a></li>
+<li>If you don&apos;t have one, grab it here: <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a></li>
+<li>Laptop users will need to rename their main EC: <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a></li>
 </ul>
 </li>
 <li><p><strong>IRQ conflict</strong>: </p>
@@ -1302,7 +1302,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-14T14:38:14.198Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-14T14:39:04.246Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-14T15:46:41.995Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-14T15:47:37.238Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
