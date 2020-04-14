@@ -33,9 +33,9 @@ Now in our config.plist, we have 2 things we need to fix:
       * Other settings for PickerAttributes can be found in the [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
 * `UEFI -> Drivers` and add OpenCanopy.efi
 
-Once all this is saved, you can reboot and be greeted with a true Mac-like GUI
+Once all this is saved, you can reboot and be greeted with a true Mac-like GUI:
 
-![](/images/extras/gui-md/gui.png)
+![Credit to Vit9696](/images/extras/gui-md/gui.png)
 
 ## Setting up Boot-chime with AudioDxe
 

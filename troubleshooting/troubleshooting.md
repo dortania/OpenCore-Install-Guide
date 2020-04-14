@@ -390,6 +390,14 @@ Issue with AppleRTC, quite a simple fix:
 
 **Note**: This patch no longer works with macOS Catalina 10.15.4, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
 
+The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
+
+```text
+rtcfx_exclude=00-FF
+```
+
+If this works, slowly shorten the exculded area until you find the part macOS is getting fussy on
+
 ## macOS GPU acceleration missing on AMD X570
 
 Verify the following:
