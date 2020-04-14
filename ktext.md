@@ -86,7 +86,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
-  * Not needed on Skylake and newer 
+  * Shouldn't be needed on Skylake and newer
   * Does not work on AMD CPUs **at all**
  
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)

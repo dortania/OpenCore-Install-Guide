@@ -55,7 +55,7 @@ Now lets run CPUFriendFriend.command
 
 The `min hex freq` should be what the lowest possible TDP for the CPU, on Intel's [ARK site](https://ark.intel.com/) search for `TDP-down Frequency` and convert this value to HEX. Note that not all CPUs support `TDP-down Frequency`, like the i7-9700T vs i7 9700. In these scenarios, you'll go with the base clock of the CPU.
 
-For this example we'll be using the [i9 7920x](https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html) which has a base clock of 2.9 Ghz, so remove the decimal and convert this to HEX: `29 -> 1B`
+For this example we'll be using the [i9 7920x](https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html) which has a base clock of 2.9 Ghz, so remove the decimal and convert this to HEX: `29 -> 1D`
 
 ```text
 echo "obase=16; 29" | bc
