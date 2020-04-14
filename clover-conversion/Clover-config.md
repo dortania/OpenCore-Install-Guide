@@ -32,7 +32,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * change PEG0 to GFX0
    * change PEGP to GFX0
    * change SL01 to PEGP
-* EC Patches: See here on best solution: [Getting started with ACPI](https://dortanian.github.io/Getting-Started-With-ACPI/)
+* EC Patches: See here on best solution: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
    * change EC0 to EC
    * change H_EC to EC
    * change ECDV to EC
@@ -41,7 +41,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * change HDAS to HDEF
    * change CAVS to HDEF
    * change AZAL to HDEF
-* Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://dortanian.github.io/Getting-Started-With-ACPI/)(SSDT-AWAC)
+* Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)(SSDT-AWAC)
    * change STAS to [Blank]
 * NVMe patches: [NVMeFix](https://github.com/acidanthera/NVMeFix) fixes power management
    * change PXSX to ANS1
@@ -103,7 +103,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
    * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
 * **AddPNLF**:
-   * See [SSDT-PNLF](https://dortanian.github.io/Getting-Started-With-ACPI/Laptops/backlight.html)
+   * See [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html)
 
 * **AddIMEI**:
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
@@ -122,7 +122,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * **PluginType**:
    * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
    * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this though HEDT systems will need to manually make theirs. 
-   * See [Getting started with ACPI](https://dortanian.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
+   * See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
 
 * **Generate P States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For SandyBridge and IvyBridge)
 * **Generate C States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For SandyBridge and IvyBridge)
@@ -278,7 +278,7 @@ Just don't add your drivers to `UEFI -> Drivers`
 * `DeviceProperties -> Add -> PCIRoot... -> vendor-id`
 * `DeviceProperties -> Add -> PCIRoot... -> ATY,VendorID`
 
-**Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seems to fail sometimes when trying to spoof a GPU: [Renaming GPUs](https://dortanian.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
+**Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seems to fail sometimes when trying to spoof a GPU: [Renaming GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/Sample.dsl) in the WhateverGreen docs
 
 **Custom EDID**
@@ -305,7 +305,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 **NvidiaGeneric**: 
 * `DeviceProperties -> Add -> PCIRoot... -> model | string | Add the GPU name`
 
-**NvidiaSingle**: See [disabling unsupported GPUs](https://dortanian.github.io/OpenCore-Desktop-Guide/post-install/spoof)
+**NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/spoof)
 
 **NvidiaNoEFI**:
 * `DeviceProperties -> Add -> PCIRoot... -> NVDA,noEFI | Boolean | True`

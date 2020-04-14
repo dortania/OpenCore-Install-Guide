@@ -3,7 +3,7 @@
 So with DRM, we have a couple things we need to mention:
 
 * DRM requires a supported dGPU
-   * See the [GPU Buyers Guide](https://dortanian.github.io/GPU-Buyers-Guide/) for supported cards
+   * See the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/) for supported cards
 * DRM is broken for iGPU-only systems
    * These have never worked with Haswell and newer
    * For Ivy Bridge, this could be fixed with Shiki (now WhateverGreen) til 10.12.2, but broke with 10.12.3
@@ -18,7 +18,7 @@ So before we can get started with fixing DRM, we need to make sure your hardware
 If you fail at this point, there's a couple things you can check for:
 
 * Make sure your hardware is supported
-   * See [GPU Buyers Guide](https://dortanian.github.io/GPU-Buyers-Guide/)
+   * See [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
 * Make sure the SMBIOS you're running matches with your hardware
    * Don't use a Mac Mini SMBIOS on a desktop for example, as Mac Minis run mobile hardware and so macOS will expect the same
 * Make sure the iGPU is enabled in the BIOS and has the correct properties for your setup (`AAPL,ig-platform-id` and if needed, `device-id`)
@@ -110,7 +110,7 @@ Here's another example. This time, We have an Ryzen 3700X and an RX 480. Our con
 ## Fixing iGPU performance
 
 So how do we fix iGPU performance? Well by loading Apple's GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:
-  * Skylake and newer CPU with a [supported iGPU](https://dortanian.github.io/GPU-Buyers-Guide/modern-gpus/intel-gpu)
+  * Skylake and newer CPU with a [supported iGPU](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/intel-gpu)
   * **And** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (***not*** Z370, as it is actually 200-series)
   * Do note that even with recent chipsets, firmware loading is not guaranteed to work. If you experience a kernel panic or lots of graphics errors after trying this, it is probably because firmware loading is not supported on your setup.
 
