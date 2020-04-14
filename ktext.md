@@ -212,4 +212,4 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 **Desktop AMD:**
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
 
-# Now head [Getting Started With ACPI](https://acpi.dortania.ml/)
+# Now head [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)

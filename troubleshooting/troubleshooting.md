@@ -65,7 +65,7 @@ Couple problems:
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
-* [Fixing CFG Lock](https://desktop.dortania.ml/post-install/msr-lock) 
+* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock) 
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
 
 Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt's also got a fix: [SSDTTime](https://github.com/corpnewt/SSDTTime)'s FixHPET option
@@ -184,7 +184,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 ## `Couldn't allocate runtime area` errors?
 
-See [Fixing KASLR slide values](https://desktop.dortania.ml/extras/kaslr-fix)
+See [Fixing KASLR slide values](https://dortania.github.io/OpenCore-Desktop-Guide/extras/kaslr-fix)
 
 ## SSDTs not being added
 
@@ -242,8 +242,8 @@ Well this general area is where a lot of PCI devices are configured, and is wher
 
 * **Missing EC patch**: 
    * For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
-   * If you don't have one, grab it here: [Getting started with ACPI](https://acpi.dortania.ml/)
-   * Laptop users will need to rename their main EC: [Getting started with ACPI](https://acpi.dortania.ml/)
+   * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+   * Laptop users will need to rename their main EC: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 * **IRQ conflict**: 
    * Most common on older laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)

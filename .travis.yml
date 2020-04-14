@@ -13,7 +13,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   name: Travis Build Bot
-  fqdn: desktop.dortania.ml
   keep_history: true
   on:
     branch: master
