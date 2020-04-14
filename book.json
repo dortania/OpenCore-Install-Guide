@@ -1,5 +1,5 @@
 {
-    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "github-edit", "anchors", "last-modified"],
+    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "github-edit", "anchors", "last-modified", "medium-zoom"],
     "pluginsConfig": {
         "fontsettings": {
             "theme":  "night",
@@ -21,6 +21,11 @@
             "weibo": false,
             "all": false
         }
+    },
+    "medium-zoom": {
+      "margin": 24,
+      "background": "#363b40",
+      "scrollOffset": 0
     },
     "pdf": {
         "pageNumbers": false,
