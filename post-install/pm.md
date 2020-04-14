@@ -2,15 +2,12 @@
 
 * [Enabling X86PlatformShim](/post-install/pm.md#enabling-x86platformplugin)
 * [Using CPU Friend](/post-install/pm.md#using-cpu-friend)
-* [Enabling AppleGraphicsPowerManagement](/post-install/pm.md#enabling-applegraphicspowermanagement)
 * [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management)
 
 
 ## Enabling X86PlatformPlugin
 
 So before we can fine tune power manegement to our liking, we need to first make sure Apple's XCPM core is loaded. Note that this is supported **only on Haswell and newer**, Sandy and Ivy Bridge should refer to the bottom of the guide: [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management). 
-
-AMD CPUs can also use this as long as `DummyPowerManagement` is enabled in your config, the reason you'd want this is it allows you to enable [enable AppleGraphicsPowerManagement](/post-install/pm.md#enabling-applegraphicspowermanagement)
 
 
 To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and look for `AppleACPICPU`(note if you use search, it may find entries):
@@ -82,25 +79,9 @@ Once you're finished, you'll be provided with a CPUFriendDataProvider.kext and s
 
 **Note**: Load order does not matter with the CPUFriendDataProvider as it's just a plist-only kext
 
-## Enabling AppleGraphicsPowerManagement
-
-So AppleGraphicsPowerManagement is pretty straight forward, it's power management for your GPU. With Apple, only a certain few PCI IDs are allowed within the walled garden for AppleGraphicsPowerManagement. What we're gonna do is force our GPU's PCI ID into AGPM's Info.plist, you can see if AppleGraphicsPowerManagement is working by searching `AGPM` in IOReg and see if it's attached to your GPU(see image below)
-
-For this, we're gonna need a couple things:
-
-* X86PlatformPlugin -> AGPMEnabler loaded
-* [AGPMInjector](https://github.com/Pavo-IM/AGPMInjector/releases)
-
-Now open up AGPMInjector and run it, then add the kext to both your config.plist under kernel -> Add and into EFI/OC/Kexts.
-
-And voila! you're done! To double check your work, see if AGPM is loaded on your GPU:
-
-![](/images/post-install/pm-md/agpm.png)
-
-
 ## Sandy and Ivy Bridge Power Management
 
-With Sandy and Ivy Bridge, consumer PCs have issues connecting to Apple's XCPM. So to get around this we need to create our own Power Management. Unfortunately this won't let X86PlatformPlugin connect so we cannot enable AppleGraphicsPowerManagement.
+With Sandy and Ivy Bridge, consumer PCs have issues connecting to Apple's XCPM. So to get around this we need to create our own Power Management Table.
 
 What we'll need:
 * CpuPm and Cpu0Ist tables dropped
