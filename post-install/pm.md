@@ -53,12 +53,17 @@ Now lets run CPUFriendFriend.command
 
 ![](/images/post-install/pm-md/lpm.png)
 
-The `min hex freq` should be what the lowest possible TDP for the CPU, on Intel's [ARK site](https://ark.intel.com/) search for `TDP-down Frequency` and convert this value to HEX. Note that not all CPUs support `TDP-down Frequency`, like the i7-9700T vs i7 9700. In these scenarios, you'll go with the base clock of the CPU.
+The `min hex freq` should be what the lowest possible TDP for the CPU, on Intel's [ARK site](https://ark.intel.com/) search for `TDP-down Frequency` and convert this value to HEX. Note that not all CPUs support `TDP-down Frequency`, like the i7-9700T vs i7 9700. In these scenarios, you'll want to do a bit more research into your CPU, specifically:
 
-For this example we'll be using the [i9 7920x](https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html) which has a base clock of 2.9 Ghz, so remove the decimal and convert this to HEX: `29 -> 1D`
+* Minimum Multiplier (Generally stable with x10 on Intel's consumer platform)
+* FSB (Front Side Bus Frequency, this is 100Mhz on most CPUs)
+
+LPM = MinMultiplier x FSB
+
+For this example we'll be using the [i9 7920x](https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html) which has a base clock of 2.9 Ghz but no LPM, so we'll choose 1.3 Ghz(13x100) and work our way up/down until we find stability.
 
 ```text
-echo "obase=16; 29" | bc
+echo "obase=16; 13" | bc
 ```
 
 ![](/images/post-install/pm-md/epp.png)
