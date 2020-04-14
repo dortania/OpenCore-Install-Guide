@@ -39,12 +39,12 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 **Disable:**
 
 * Fast Boot
-* VT-d(can be enabled if you set DisableIoMapper to YES)
+* VT-d (can be enabled if you set DisableIoMapper to YES)
 * CSM
 * Thunderbolt
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock(MSR 0xE2 write protection)
+* CFG Lock (MSR 0xE2 write protection)
   * If this can't be turned off in the BIOS(or even found) please consider patching it out. See [Fixing CFG Lock](extras/msr-lock.md) for more info.
     * AMD CPU users don't need to worry about.
 
