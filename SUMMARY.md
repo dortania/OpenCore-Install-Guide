@@ -41,6 +41,7 @@
    * [Fixing iServices](/post-install/iservices.md)
    * [Emulated NVRAM](/post-install/nvram.md)
    * [Fixing Power Management](/post-install/pm.md)
+   * [USB Mapping](/post-install/usb.md)
 
 ## Troubleshooting
 
