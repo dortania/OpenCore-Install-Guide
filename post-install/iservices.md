@@ -24,7 +24,7 @@ Now enter the serial into the [Apple Check Coverage page](https://checkcoverage.
 
 **Purchase Date not Validated:**
 
-![](/images/post-install/iservices-md/not-valid.png)
+![](/images/post-install/iservices-md/no-purchase.png)
 
 This last one is what we're after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -> PlatformInfo -> Add:
 
