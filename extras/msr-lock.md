@@ -2,6 +2,12 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Disabling CFG Lock](/extras/msr-lock.md#disabling-cfg-lock)
+* [Checking if CFG-Lock can be turned off](/extras/msr-lock.md#checking-if-cfg-lock-can-be-turned-off)
+* [Turning off CFG-Lock manually](/extras/msr-lock.md#turning-off-cfg-lock-manaully)
+
 Do note that this is only recommended for users who have already installed macOS, for users who are installing for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
 
 ## Disabling CFG Lock

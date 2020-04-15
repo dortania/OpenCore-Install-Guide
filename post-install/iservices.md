@@ -2,7 +2,19 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Generate a new Serial](/post-services/iservices.md#)
+* [Fixing En0](/post-services/iservices.md#fixing-en0)
+* [Fixing ROM](/post-services/iservices.md#fixing-rom)
+* [Verifying NVRAM](/post-services/iservices.md#verifying-nvram)
+* [Clean out old attempts](/post-services/iservices.md#clean-out-old-attempts)
+* [Cleaning up your AppleID](/post-services/iservices.md#cleaning-your-appleid)
+* [Customer Code error](/post-services/iservices.md#customer-code-error)
+
 This page is for those having iMessage and other iServices issues, this is a very basic guide so will not go as in-depth into the issues as some other guides. This specific guide is a translation and reinterpretation of the AppleLife Guide on fixing iService: [Как завести сервисы Apple - iMessage, FaceTime, iCloud](https://applelife.ru/posts/727913)
+
+**Note**: You and you alone are responsible for your AppleID, read the guide carefully and take full responsibility if you screw up. Dortania and other guides are not held accountable for what **you** do.
 
 ## Generate a new Serial
 

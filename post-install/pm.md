@@ -4,7 +4,6 @@
 * [Using CPU Friend](/post-install/pm.md#using-cpu-friend)
 * [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management)
 
-
 ## Enabling X86PlatformPlugin
 
 So before we can fine tune power manegement to our liking, we need to first make sure Apple's XCPM core is loaded. Note that this is supported **only on Haswell and newer**, Sandy and Ivy Bridge should refer to the bottom of the guide: [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management). 

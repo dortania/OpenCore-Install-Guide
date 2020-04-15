@@ -1,5 +1,14 @@
 # Fixing DRM support and iGPU performance
 
+* Supported version: 0.5.7
+
+Table of Contents:
+
+* [Testing Hardware Acceleration and Decoding](/post-install/drm.md#testng-hardware-acceleration-and-decoding)
+* [Testing DRM](/post-install/drm.md#testing-drm)
+* [Fixing DRM](/post-install/drm.md#fixing-drm)
+* [Fixing iGPU performance](/post-install/drm.md#fixing-igpu-performance)
+
 So with DRM, we have a couple things we need to mention:
 
 * DRM requires a supported dGPU

@@ -4,8 +4,8 @@
 
 Main thing this guide will go over:
 
-* Giving OpenCore a GUI
-* Setting up a boot-chime
+* [Giving OpenCore a GUI](/extras/gui.md#giving-opencore-a-gui)
+* [Setting up a boot-chime](/extras/gui.md#setting-up-a-boot-chime)
 
 ## Setting up OpenCore's GUI
 

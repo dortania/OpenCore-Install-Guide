@@ -2,6 +2,13 @@
 
 * Supported version: 0.5.7
 
+Table of Contents:
+
+* [Finding your layout ID](/post-install/audio.md#fixing-your-layout-id)
+* [Testing your layout](/post-install/audio.md#testing-your-layout)
+* [Making Layout ID more permanent](/post-install/audio.md#making-layout-id-more-permanent)
+* [Miscellaneous issues](/post-install/audio.md#miscellaneous-issues)
+
 So to start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 
 ```text

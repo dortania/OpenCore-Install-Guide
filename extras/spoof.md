@@ -2,7 +2,12 @@
 
 * Supported version: 0.5.7
 
-## GPU Spoof
+Table of Contents:
+
+* [Boot Flag](/extras/spoof.md#boot-flag)
+* [DeviceProperties Method](/extras/spoof.md#deviceproperties-method)
+* [SSDT Method](/extras/spoof.md#ssdt-method)
+* [Fixing Windows](/extras/spoof.md#fixing-windows)
 
 So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 

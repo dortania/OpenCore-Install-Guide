@@ -65,3 +65,7 @@ And for those who have recommendations or issues with this guide, you can find t
    * [DRM Testing](https://applelife.ru/threads/proigryvanie-zaschischjonnogo-kontenta-na-raznom-oborudovanii.1349123/page-67#post-846582)
 * rEFInd Guide:
    * [rEFInd Manual](https://www.rodsbooks.com/refind/index.html)
+* USB Mapping Guide:
+   * [XHCI Wake issues](https://osy.gitbook.io/hac-mini-guide/details/usb-fix)
+   * [CorpNewt's USB Map Guide](https://usb-map.gitbook.io/project/)
+   * [AppleLife USB Map Guide](https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/)
