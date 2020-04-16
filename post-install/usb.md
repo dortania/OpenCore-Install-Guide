@@ -5,15 +5,22 @@
 * [System Preparation](/post-install/usb.md#system-preparation)
 * [USB Mapping](/post-install/usb.md#usb-mapping)
    * [Intel USB Mapping](/post-install/usb.md#intel-usb-mapping)
+      * [Removing ACPI Renames](/post-install/usb.md#removing-acpi-renames)
    * [AMD and 3rd Party USB Mapping](/post-install/usb.md#amd-and-3rd-party-usb-mapping)
-* [Fixing USB Power](/post-install/usb.md#fixing-usb-power)
-* [Fixing Shutdown/Restart](/post-install/usb.md#fixing-shutdownrestart)
-* [GPRW/UPRW/LANC Instant Wake Patch](/post-install/usb.md#gprwuprwlanc-instant-wake-patch)
-* [Keyboard Wake Issues](/post-install/usb.md#keyboard-wake-issues)
+      * [Cry a bit](/post-install/usb.md#cry-a-bit)
+      * [Cry some more](/post-install/usb.md#cry-some-more)
+      * [Buy some Intel hardware](/post-install/usb.md#buy-some-intel-hardware)
+      * [Go to Intel USB mapping](/post-install/usb.md#intel-usb-mapping)
+* [Miscellaneous Fixes](/post-install/usb.md#miscellaneous-fixes)
+   * [Fixing USB Power](/post-install/usb.md#fixing-usb-power)
+   * [Fixing Shutdown/Restart](/post-install/usb.md#fixing-shutdownrestart)
+   * [GPRW/UPRW/LANC Instant Wake Patch](/post-install/usb.md#gprwuprwlanc-instant-wake-patch)
+   * [Keyboard Wake Issues](/post-install/usb.md#keyboard-wake-issues)
 
 
 To-do:
 
+* [AMD and 3rd Party USB Mapping](/post-install/usb.md#amd-and-3rd-party-usb-mapping)
 * Multiple Controller with same name
 * Missing Ports
 * Better explain USB Mapping
@@ -69,6 +76,7 @@ So before we can USB map, we need to set a couple things:
 
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/) under both EFI/OC/Kexts and config.plist -> Kernel -> Add
    * We need this kext to make sure any ports not defined in ACPI will still show up in macOS, note that this *shouldn't* be required on Skylake and newer as the USB ports are defined within ACPI
+   * Note that this **does not work on AMD**
 * config.plist -> Kernel -> Quirks -> XhciPortLimit -> True
    * So we can temporally get around the 15 port limit to map our ports
 * config.plist -> ACPI -> Patch -> EHCI and XHCI ACPI renames
@@ -146,7 +154,7 @@ Here we're greeted with all the possible USB ports in ACPI:
 | 3 | USB 3.0 Type-A connector | 3.0, 3.1 and 3.2 ports share the same Type |
 | 8 | Type C connector - USB 2.0-only | Mainly seen in phones
 | 9 | Type C connector - USB 2.0 and USB 3.0 with Switch | Flipping the device **does not** change the ACPI port |
-| 10 | Type C connector - USB 2.0 and USB 3.0 without Switch | Flipping the device **does** change the ACPI port |
+| 10 | Type C connector - USB 2.0 and USB 3.0 without Switch | Flipping the device **does** change the ACPI port. generally seen on 3.1/2 motherboard headers |
 | 255 | Proprietary connector | For Internal USB ports like Bluetooth |
 
 But now we must part into 2 sections, depending on which hardware you have:
@@ -156,7 +164,7 @@ But now we must part into 2 sections, depending on which hardware you have:
 
 ### Intel USB Mapping
 
-USB mapping on Intel is super easy mainly because both the ACPI is sane and more tools avalible for the platform. For this guide well be using the [USBmap tool](https://github.com/corpnewt/USBMap) from CorpNewt.
+USB mapping on Intel is super easy mainly because both the ACPI is sane and more tools available for the platform. For this guide well be using the [USBmap tool](https://github.com/corpnewt/USBMap) from CorpNewt.
 
 Now open up USBmap.command and select `D.  Discover Ports`:
 
@@ -195,8 +203,21 @@ Now reboot and run USBmap again, you should see a lot less ports in your map:
 
 #### Removing ACPI Renames
 
+Now once you've mapped your USB ports, we can finally remove those pesky ACPI renames. USBmap.command will have made the kext with the renamed controllers so we're going to have to change them back to the proper names to avoid any headaches when booting Windows or Linux. 
 
-Now once you've mapped your USB ports, we can finally 
+To start, right click the kext and select `Show Package Contents`, then head to `Contents -> Info.plist`
+
+![](/images/post-install/usb-md/remove-rename.png)
+
+And you'll want to rename the `IONameMatch` value to your unpatched controller's name:
+
+* SHCI -> XHC1
+* EH01 -> EHC1
+* EH02 -> EHC2
+
+And once that's done, you'll next want to head to your config.plist and disable the ACPI patches
+
+* ACPI -> Patch -> Enabled -> False
 
 ### AMD and 3rd Party USB Mapping
 
@@ -204,6 +225,22 @@ To be written, for now see the  [AMD-USB-map.md](https://github.com/dortania/Ope
 
 For all I care, AMD hackintoshes don't exist. Please don't make me look at another AMD DSDT please, just buy Intel
 
+To do:
+
+* Getting your DSDT
+* Creating the map
+* Port mapping on screwed up DSDTs
+* Port mapping when you have multiple of the same controller
+
+#### Cry a bit
+
+#### Cry some more
+
+#### Buy some Intel hardware
+
+### [Go to Intel USB mapping](/post-install/usb.md#intel-usb-mapping)
+
+# Miscellaneous Fixes
 ## Fixing USB Power
 
 With Skylake and newer SMBIOS, Apple no longer provides USB power settings via, this means we need to adopt the same method real Macs do and supply macOS with a USBX device. This will set both the wake and sleep power values for all your USB ports. The following SMBIOS need USBX:
