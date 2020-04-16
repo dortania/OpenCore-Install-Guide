@@ -82,7 +82,7 @@ Main things to check:
 ## Black screen after picker
 
 This is due to missing ConsoleGOP, enable it under your config:
-* `UEFI -> Output -> ProvideConsoleGOP`
+* `UEFI -> Output -> ProvideConsoleGop`
 
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 

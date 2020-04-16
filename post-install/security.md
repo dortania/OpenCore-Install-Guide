@@ -30,7 +30,7 @@ Setting in your config.plist:
 * UEFI -> Input
   * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of OpenUsbKbDxe should avoid)
 * UEFI -> Output
-  * `ProvideConsoleGOP` to YES
+  * `ProvideConsoleGop` to YES
 * UEFI -> Protocols
   * `FirmwareVolume` set to YES
   * `HashServices` set to YES for Broadwell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
