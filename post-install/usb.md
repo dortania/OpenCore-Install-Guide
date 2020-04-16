@@ -241,6 +241,7 @@ To do:
 ### [Go to Intel USB mapping](/post-install/usb.md#intel-usb-mapping)
 
 # Miscellaneous Fixes
+
 ## Fixing USB Power
 
 With Skylake and newer SMBIOS, Apple no longer provides USB power settings via, this means we need to adopt the same method real Macs do and supply macOS with a USBX device. This will set both the wake and sleep power values for all your USB ports. The following SMBIOS need USBX:
