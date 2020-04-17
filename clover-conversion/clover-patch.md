@@ -9,7 +9,7 @@ For a full list of patches OpenCore supports, see [/Library/OcAppleKernelLib/Com
 **General Patches**:
 
 * `MSR 0xE2 _xcpm_idle instant reboot` (c) Pike R. Alpha
-   * `Kernel -> Quirks -> AppleXcpmCfgLock`
+  * `Kernel -> Quirks -> AppleXcpmCfgLock`
 
 **HEDT Specific Patches**:
 
@@ -21,25 +21,25 @@ All of the following patches are inside the `Kernel -> Quirk -> AppleXcpmExtraMs
 * `_xcpm_SMT_scope_msrs` #2 (c) Pike R. Alpha
 * `_xcpm_core_scope_msrs` © Pike R. Alpha
 * `_xcpm_ performance_patch` © Pike R. Alpha
-*  xcpm MSR Patch 1 and 2 @Pike R. Alpha
-* `/0x82D390/MSR_PP0_POLICY 0x63a xcpm support` patch 1 and 2 Pike R. Alpha 
+* xcpm MSR Patch 1 and 2 @Pike R. Alpha
+* `/0x82D390/MSR_PP0_POLICY 0x63a xcpm support` patch 1 and 2 Pike R. Alpha
 
 ## Kext Patches
 
 * AppleAHCIPort External Icon Patch1
-   * `Kernel -> Quirks -> ExternalDiskIcons`
+  * `Kernel -> Quirks -> ExternalDiskIcons`
 * SSD Trim Enabler
-   * `Kernel -> Quirks -> ThirdPartyDrives`
+  * `Kernel -> Quirks -> ThirdPartyDrives`
 * USB Port Limit Patches
-   * `Kernel -> Quirks -> XhciPortLimit`
+  * `Kernel -> Quirks -> XhciPortLimit`
 * FredWst DP/HDMI patch
-   * [AppleALC](https://github.com/acidanthera/AppleALC/releases) + [WhateverGreen](https://github.com/acidanthera/whatevergreen/releases)
+  * [AppleALC](https://github.com/acidanthera/AppleALC/releases) + [WhateverGreen](https://github.com/acidanthera/whatevergreen/releases)
 * IOPCIFamily Patch
-   * `Kernel -> Quirks -> IncreasePciBarSize`
+  * `Kernel -> Quirks -> IncreasePciBarSize`
 * Disable board-ID check
-   * [WhateverGreen](https://github.com/acidanthera/whatevergreen/releases)
+  * [WhateverGreen](https://github.com/acidanthera/whatevergreen/releases)
 * AppleHDA Patch
-   * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
+  * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
 * IONVMe Patches
-   * Not required anymore on High Sierra and newer
-   * For power management on Mojave and newer: [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
+  * Not required anymore on High Sierra and newer
+  * For power management on Mojave and newer: [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)

@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.7
 
-Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different. 
+Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different.
 
 **Supported ones:**
 
@@ -46,7 +46,6 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * HashServiceFix.efi
 * VirtualSMC.efi
 
-
 **Explicitly unsupported drivers:**
 
 * AppleUsbKbDxe.efi(replaced with OpenUsbKbDxe.efi)
@@ -59,7 +58,6 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * OsxLowMemFixDrv.efi
 * SMCHelper.efi
 * UsbKbDxe.efi(replaced with OpenUsbKbDxe.efi)
-
 
 # AptioMemoryFix
 

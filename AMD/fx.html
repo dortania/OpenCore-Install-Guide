@@ -715,7 +715,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Fri Apr 17 2020 22:11:30 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Fri Apr 17 2020 22:24:52 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="bulldozer15h-and-jaguar16h"><a name="bulldozer15h-and-jaguar16h" class="plugin-anchor" href="#bulldozer15h-and-jaguar16h"><i class="fa fa-link" aria-hidden="true"></i></a>Bulldozer(15h) and Jaguar(16h)</h1>
 <ul>
@@ -760,7 +760,7 @@
 <li>Windows: <code>ProperTree.bat</code></li>
 </ul>
 </li>
-<li>Run the Clean Snapshot function(<strong>Cmd/Ctrl + Shift + R</strong> and point it at your EFI/OC folder), <ul>
+<li>Run the Clean Snapshot function(<strong>Cmd/Ctrl + Shift + R</strong> and point it at your EFI/OC folder),<ul>
 <li>This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config</li>
 <li>Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you&apos;re troubleshooting</li>
 </ul>
@@ -787,7 +787,7 @@
 <p>This blocks certain ACPI tabes from loading, for us we can ignore this</p>
 <p><strong>Patch</strong>:</p>
 <p>This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore</p>
-<p><strong>Quirk</strong>: </p>
+<p><strong>Quirk</strong>:</p>
 <p>Settings relating to ACPI, leave everything here as default.</p>
 <ul>
 <li><strong>FadtEnableReset</strong>: NO<ul>
@@ -836,7 +836,7 @@
 </ul>
 </li>
 <li><strong>DiscardHibernateMap</strong>: NO<ul>
-<li>Reuse original hibernate memory map, only needed for certain legacy hardware </li>
+<li>Reuse original hibernate memory map, only needed for certain legacy hardware</li>
 </ul>
 </li>
 <li><strong>EnableSafeModeSlide</strong>: YES<ul>
@@ -848,7 +848,7 @@
 </ul>
 </li>
 <li><strong>ForceExitBootServices</strong>: NO<ul>
-<li>Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don&apos;t use unless necessary </li>
+<li>Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don&apos;t use unless necessary</li>
 </ul>
 </li>
 <li><strong>ProtectMemoryRegion</strong>: NO<ul>
@@ -894,21 +894,21 @@
 <img src="../images/config/AMD/kernel-patch.png" alt=""></p>
 <p><strong>Add</strong>: Here&apos;s where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that <a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a> users can run <strong>Cmd/Ctrl + Shift + R</strong> to add all their kexts in the correct order without manually typing each kext out.</p>
 <ul>
-<li><strong>BundlePath</strong> <ul>
+<li><strong>BundlePath</strong><ul>
 <li>Name of the kext</li>
 <li>ex: <code>Lilu.kext</code></li>
 </ul>
 </li>
-<li><strong>Enabled</strong> <ul>
+<li><strong>Enabled</strong><ul>
 <li>Self-explanatory, either enables or disables the kext</li>
 </ul>
 </li>
-<li><strong>ExecutablePath</strong> <ul>
+<li><strong>ExecutablePath</strong><ul>
 <li>Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting <code>Show Package Contents</code>. Generally, they&apos;ll be <code>Contents/MacOS/Kext</code> but some have kexts hidden within under <code>Plugin</code> folder. Do note that plist only kexts do not need this filled in.</li>
 <li>ex: <code>Contents/MacOS/Lilu</code></li>
 </ul>
 </li>
-<li><strong>PlistPath</strong> <ul>
+<li><strong>PlistPath</strong><ul>
 <li>Path to the <code>info.plist</code> hidden within the kext</li>
 <li>ex: <code>Contents/Info.plist</code></li>
 </ul>
@@ -927,7 +927,7 @@
 </ul>
 <p>To merge:</p>
 <ul>
-<li>Open both files, </li>
+<li>Open both files,</li>
 <li>Delete the <code>Kernel -&gt; Patch</code> section from config.plist</li>
 <li>Copy the <code>Kernel -&gt; Patch</code> section from patches.plist</li>
 <li>Paste into where old patches were in config.plist</li>
@@ -936,15 +936,15 @@
 <p><strong>Quirks</strong>:
 Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerManagement</code>, <code>PanicNoKextDump</code>, <code>PowerTimeoutKernelPanic</code> and <code>XhciPortLimit</code>. Everything else should be left as default</p>
 <ul>
-<li><strong>AppleCpuPmCfgLock</strong>: NO <ul>
+<li><strong>AppleCpuPmCfgLock</strong>: NO<ul>
 <li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. AMD users can ignore</li>
 </ul>
 </li>
-<li><strong>AppleXcpmCfgLock</strong>: NO <ul>
+<li><strong>AppleXcpmCfgLock</strong>: NO<ul>
 <li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be KernelPM. AMD users can ignore</li>
 </ul>
 </li>
-<li><strong>AppleXcpmExtraMsrs</strong>: NO <ul>
+<li><strong>AppleXcpmExtraMsrs</strong>: NO<ul>
 <li>Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons</li>
 </ul>
 </li>
@@ -952,11 +952,11 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 <li>Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benefit from this</li>
 </ul>
 </li>
-<li><strong>CustomSMBIOSGuid</strong>: NO <ul>
+<li><strong>CustomSMBIOSGuid</strong>: NO<ul>
 <li>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandem with <code>PlatformInfo -&gt; UpdateSMBIOSMode -&gt; Custom</code></li>
 </ul>
 </li>
-<li><strong>DisableIoMapper</strong>: NO <ul>
+<li><strong>DisableIoMapper</strong>: NO<ul>
 <li>AMD doesn&apos;t have DMAR or VT-D support so irrelevant</li>
 </ul>
 </li>
@@ -964,7 +964,7 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 <li>New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there&apos;s no native power management. Intel can ignore</li>
 </ul>
 </li>
-<li><strong>ExternalDiskIcons</strong>: NO <ul>
+<li><strong>ExternalDiskIcons</strong>: NO<ul>
 <li>External Icons Patch, for when internal drives are treated as external drives but can also make USB drives internal. For NVMe on Z87 and below you just add built-in property via DeviceProperties.</li>
 </ul>
 </li>
@@ -972,11 +972,11 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 <li>Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you&apos;ll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn&apos;t be needed on Mojave and newer</li>
 </ul>
 </li>
-<li><strong>LapicKernelPanic</strong>: NO <ul>
+<li><strong>LapicKernelPanic</strong>: NO<ul>
 <li>Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is <code>Kernel LAPIC</code></li>
 </ul>
 </li>
-<li><strong>PanicNoKextDump</strong>: YES <ul>
+<li><strong>PanicNoKextDump</strong>: YES<ul>
 <li>Allows for reading kernel panics logs when kernel panics occur</li>
 </ul>
 </li>
@@ -984,11 +984,11 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 <li>Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.</li>
 </ul>
 </li>
-<li><strong>ThirdPartyDrives</strong>: NO <ul>
+<li><strong>ThirdPartyDrives</strong>: NO<ul>
 <li>Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM</li>
 </ul>
 </li>
-<li><strong>XhciPortLimit</strong>: YES <ul>
+<li><strong>XhciPortLimit</strong>: YES<ul>
 <li>This is actually the 15 port limit patch, don&apos;t rely on it as it&apos;s not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: <a href="https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/AMD/AMD-USB-map.md" target="_blank">AMD USB Mapping</a></li>
 </ul>
 </li>
@@ -1028,7 +1028,7 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 <li><strong>PollAppleHotKeys</strong>: NO<ul>
 <li>Allows you to use Apple&apos;s hotkeys during boot, depending on the firmware you may need to use OpenUsbKbDxe.efi instead of OpenCore&apos;s builtin support. Do note that if you can select anything in OC&apos;s picker, disabling this option can help. Popular commands:<ul>
 <li><code>Cmd+V</code>: Enables verbose</li>
-<li><code>Cmd+Opt+P+R</code>: Cleans NVRAM </li>
+<li><code>Cmd+Opt+P+R</code>: Cleans NVRAM</li>
 <li><code>Cmd+R</code>: Boots Recovery partition</li>
 <li><code>Cmd+S</code>: Boot in Single-user mode</li>
 <li><code>Option/Alt</code>: Shows boot picker when <code>ShowPicker</code> set to <code>NO</code>, an alternative is <code>ESC</code> key</li>
@@ -1088,22 +1088,22 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 <li>We won&apos;t be dealing vaulting so we can ignore, <strong>you won&apos;t boot with this set to Secure</strong></li>
 </ul>
 </li>
-<li><strong>ScanPolicy</strong>: <code>0</code> <ul>
+<li><strong>ScanPolicy</strong>: <code>0</code><ul>
 <li><code>0</code> allows you to see all drives available, please refer to <a href="../post-install/security.html">Security</a> section for further details. <strong>Will not boot USBs with this set to default</strong></li>
 </ul>
 </li>
 </ul>
 <p><strong>Tools</strong> Used for running OC debugging tools like the shell, ProperTree&apos;s snapshot function will add these for you. For us, we won&apos;t be using any tools</p>
 <ul>
-<li><strong>Name</strong> <ul>
+<li><strong>Name</strong><ul>
 <li>Name shown in OpenCore</li>
 </ul>
 </li>
-<li><strong>Enabled</strong> <ul>
+<li><strong>Enabled</strong><ul>
 <li>Self-explanatory, enables or disables</li>
 </ul>
 </li>
-<li><strong>Path</strong> <ul>
+<li><strong>Path</strong><ul>
 <li>Path to file after the <code>Tools</code> folder</li>
 <li>ex: <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenShell.efi</a></li>
 </ul>
@@ -1113,7 +1113,7 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 <p>Won&apos;t be covered here, see 8.6 of <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more info</p>
 <h2 id="nvram"><a name="nvram" class="plugin-anchor" href="#nvram"><i class="fa fa-link" aria-hidden="true"></i></a>NVRAM</h2>
 <p><img src="../images/config/config-universal/nvram.png" alt="NVRAM"></p>
-<p><strong>Add</strong>: </p>
+<p><strong>Add</strong>:</p>
 <p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)</p>
 <ul>
 <li><p><strong>UIScale</strong>:</p>
@@ -1151,11 +1151,11 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 </ul>
 <p>Recommended to leave enabled for best security practices</p>
 <ul>
-<li><strong>nvda_drv</strong>: &lt;&gt; <ul>
+<li><strong>nvda_drv</strong>: &lt;&gt;<ul>
 <li>For enabling Nvidia WebDrivers, set to 31 if running a <a href="https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs" target="_blank">Maxwell or Pascal GPU</a>. This is the same as setting nvda_drv=1 but instead we translate it from <a href="https://www.browserling.com/tools/hex-to-text" target="_blank">text to hex</a>, Clover equivalent is <code>NvidiaWeb</code>. <strong>AMD, Intel and Kepler GPU users should delete this section.</strong></li>
 </ul>
 </li>
-<li><strong>prev-lang:kbd</strong>: &lt;&gt; <ul>
+<li><strong>prev-lang:kbd</strong>: &lt;&gt;<ul>
 <li>Needed for non-latin keyboards in the format of <code>lang-COUNTRY:keyboard</code>, recommended to keep blank though you can specify it(<strong>Default in Sample config is Russian</strong>):</li>
 <li>American: <code>en-US:0</code>(<code>656e2d55533a30</code> in HEX)</li>
 <li>Full list can be found in <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></li>
@@ -1198,7 +1198,7 @@ Settings relating to the kernel, for us we&apos;ll be enabling <code>DummyPowerM
 </ul>
 <h2 id="platforminfo"><a name="platforminfo" class="plugin-anchor" href="#platforminfo"><i class="fa fa-link" aria-hidden="true"></i></a>Platforminfo</h2>
 <p><img src="../images/config/config-universal/iMacPro-smbios.png" alt="PlatformInfo"></p>
-<p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application. </p>
+<p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application.</p>
 <p>For this example, we&apos;ll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:</p>
 <ul>
 <li>iMacPro1,1: AMD RX Polaris and Vega</li>
@@ -1224,7 +1224,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>. After install follow the <a href="../post-install/iservices.html">Fixing iServices</a> page on how to find your real MAC Address)</p>
 <p><strong>Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: &quot;Invalid Serial&quot; or &quot;Purchase Date not Validated&quot;</strong></p>
 <p><a href="https://checkcoverage.apple.com" target="_blank">Apple Check Coverage page</a></p>
-<p><strong>Automatic</strong>: YES </p>
+<p><strong>Automatic</strong>: YES</p>
 <ul>
 <li>Generates Platforminfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</li>
 </ul>
@@ -1251,7 +1251,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <ul>
 <li>Updates SMBIOS fields</li>
 </ul>
-<p><strong>UpdateSMBIOSMode</strong>: Create </p>
+<p><strong>UpdateSMBIOSMode</strong>: Create</p>
 <ul>
 <li>Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk</li>
 </ul>
@@ -1359,7 +1359,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </ul>
 </li>
 <li><strong>IgnoreTextInGraphics</strong>: NO<ul>
-<li>Fix for UI corruption when both text and graphics outputs, only relevant for users using <code>System</code> TextRenderer </li>
+<li>Fix for UI corruption when both text and graphics outputs, only relevant for users using <code>System</code> TextRenderer</li>
 </ul>
 </li>
 <li><strong>ProvideConsoleGop</strong>: YES<ul>
@@ -1372,7 +1372,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </li>
 <li><strong>ReconnectOnResChange</strong>: NO</li>
 <li><strong>ReplaceTabWithSpace</strong>: NO<ul>
-<li>Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed   </li>
+<li>Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed</li>
 </ul>
 </li>
 <li><strong>SanitiseClearScreen</strong>: NO<ul>
@@ -1494,7 +1494,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Bulldozer/Jaguar","level":"4.1","depth":1,"next":{"title":"Zen","level":"4.2","depth":1,"path":"AMD/zen.md","ref":"AMD/zen.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/fx.md","mtime":"2020-04-17T22:11:30.707Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-17T22:12:25.127Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Bulldozer/Jaguar","level":"4.1","depth":1,"next":{"title":"Zen","level":"4.2","depth":1,"path":"AMD/zen.md","ref":"AMD/zen.md","articles":[]},"previous":{"title":"Skylake-X","level":"3.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"AMD/fx.md","mtime":"2020-04-17T22:24:52.045Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-17T22:25:44.668Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

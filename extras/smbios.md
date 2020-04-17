@@ -72,7 +72,6 @@ This section is mainly relevant for laptops to save some headaches when followin
 
 ## Coffee Lake Refresh (9th Gen)
 
-
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
 | MacBookPro16,1 | Hexa/Octa Core 45w | iGPU: UHD 630 + dGPU: 5300/5500M | 15" |
@@ -94,4 +93,3 @@ This section is mainly relevant for laptops to save some headaches when followin
 | MacBookAir9,1 | Dual/Quad Core 9w | iGPU: G4/G7 | 13" |
 
 * **Note**: MacInfoPkg does not have this SMBIOS yet in it's generation tool
-

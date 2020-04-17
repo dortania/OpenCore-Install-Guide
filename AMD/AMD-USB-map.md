@@ -3,6 +3,7 @@
 With OpenCore I think it's about time we finally destroy some AMD myths, like how USB is just screwed on AMD and can't be mapped. Well, that is false! And I will show you the path of enlightenment.
 
 So why would I want to use this? Well, a couple of reasons:
+
 * Add missing USB ports that macOS didn't automatically add
 * Remove unwanted devices like intel Bluetooth conflicting with Broadcom's
 * Stability by removing USB port limit patches
@@ -24,6 +25,7 @@ For the best explainer, please read Corp's [USB map guide](https://usb-map.gitbo
 # Getting started
 
 So what you'll need to get started:
+
 * Running macOS (this can be done in windows/linux though you'll need macOS to actually use the port map)
 * [MaciASL](https://github.com/acidanthera/MaciASL/releases)
 * [ProperTree](https://github.com/corpnewt/ProperTree) or some other plist editor
@@ -32,11 +34,9 @@ So what you'll need to get started:
 * `XhciPortLimit` enabled under `Kernel -> Quirks`
 * Copy of your DSDT
 
-
 # Getting your DSDT
 
 Open MaciASL on the target machine and you'll be presented with your system DSDT, that simple!
-
 
 # Creating the map
 
@@ -51,7 +51,6 @@ So to start off, open IORegistryExplorer and find the USB controller you'd wish 
 * XHCX
 * AS43
 * PTXH (Commonly associated with AMD Chipset controllers)
-
 
 The best way to find controllers is by searching for `XHC` and then looking at the results that come up, the parent of all the ports is the USB controller. Do note that many boards have multiple controllers but the port limit is per controller.
 
@@ -70,7 +69,7 @@ Next, let's take a peek at our DSDT and check for our `PTXH` device:
 
 All of our ports are here! So why in the world is macOS hiding them? Well there's a couple of reasons but this being the main: Conflicting SMBIOS USB map
 
-Inside the `AppleUSBHostPlatformProperties.kext` you'll find the USB map for most SMBIOS, this means that that machine's USB map is forced onto your system. 
+Inside the `AppleUSBHostPlatformProperties.kext` you'll find the USB map for most SMBIOS, this means that that machine's USB map is forced onto your system.
 
 Well to kick out these bad maps, we gotta make a plugin kext. For us, that's the [AMD-USB-Map.kext](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/extra-files/AMD-USB-Map.kext.zip)
 
@@ -79,7 +78,6 @@ Now right-click and press `Show Package Contents`, then navigate to `Contents/In
 ![](/images/AMD/AMD-USB-map-md/usb-plist.png)
 If the port values don't show in Xcode, right click and select `Show Raw Keys/Values`
 ![](/images/AMD/AMD-USB-map-md/usb-plist-info.png)
-
 
 So what kind of data do we shove into this plist? Well, there are a couple of sections to note:
 
@@ -90,6 +88,7 @@ So what kind of data do we shove into this plist? Well, there are a couple of se
 * **UsbConnector**: The type of USB connector, which can be found on the [ACPI 6.3 spec, section 9.14](https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf)
 
 UsbConnector types that we care about:
+
 ```
 0: USB 2.0 Type-A connector
 3: USB 3.0 Type-A connector
@@ -98,9 +97,10 @@ UsbConnector types that we care about:
 10: Type C connector - USB 2.0 and USB 3.0 without Switch, flipping the device **does** change the ACPI port
 255: Proprietary connector - For Internal USB ports like Bluetooth
 ```
+
 > How do I know which ports are 2.0 and which are 3.0?
 
-Well, the easiest way is grabbing a USB 2.0 and USB 3.0 device, then write down which ports are are what type from observing IOReg. 
+Well, the easiest way is grabbing a USB 2.0 and USB 3.0 device, then write down which ports are are what type from observing IOReg.
 
 Now, let's take this section:
 
@@ -110,13 +110,14 @@ Device (PO18)
    Name (_ADR, 0x12) // _ADR: Address
    Name (_UPC, Package (0x04) // _UPC: USB Port Capabilities
       {
-         Zero, 
-         0xFF, 
-         Zero, 
+         Zero,
+         0xFF,
+         Zero,
          Zero
       })
    }
 ```
+
 For us, what matters is the `Name (_ADR, 0x12) // _ADR: Address` as this tells us the location of the USB port. This value will be turned into our `port` value on the plist. Some DSDTs don't declare their USB address, for these situations we can see their IOReg properties.
 
 ![](/images/AMD/AMD-USB-map-md/port-info.png)
@@ -126,7 +127,6 @@ For us, what matters is the `Name (_ADR, 0x12) // _ADR: Address` as this tells u
 Now save and add this to both your kext folder and config.plist then reboot!
 
 Now we can finally start to slowly remove unwanted ports from the Info.plist and remove the `XhciPortLimit` quirk once you have 15 ports total or less per controller.
-
 
 # Port mapping on screwed up DSDTs
 
@@ -151,7 +151,6 @@ Similar idea to regular SSDT renaming except you need to actually find the contr
 ![](/images/AMD/AMD-USB-map-md/acpi-path.png)
 
 As we can see, `IOACPIPlane:/_SB/PC00@0/RP05@1c0004/PXSX@0` would be interpreted as `_SB.PC00.RP05.PXSX`
-
 
 # Fixing USB power on AMD
 
