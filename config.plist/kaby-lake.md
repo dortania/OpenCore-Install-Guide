@@ -382,7 +382,7 @@ For this Kaby Lake example, we'll chose the iMac18,1 SMBIOS - this is done inten
 * `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
 * `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
 
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/Opencore-Desktop-Guide/blob//master/extras/smbios.md)
+**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

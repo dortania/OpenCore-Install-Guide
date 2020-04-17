@@ -58,7 +58,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 * [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
    * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS
    * This SSDT also has a second function, USBX. This is used for forcing USB power properties and requires SSDT-EC so this just jumbles them together.
-   * I've also provided a precompiled version for users with `EC0`, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/dortania/Opencore-Desktop-Guide/blob//master/extra-files/SSDT-EC-USBX-AMD.aml)
+   * I've also provided a precompiled version for users with `EC0`, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
  
  Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/ACPI.
 

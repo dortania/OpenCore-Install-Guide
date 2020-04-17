@@ -107,7 +107,7 @@ Example of device path:
     }
 
 
-A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/Opencore-Desktop-Guide/blob//master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
+A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
 
 Source: CorpNewt
 
