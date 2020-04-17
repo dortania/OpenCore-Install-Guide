@@ -45,6 +45,8 @@ This last one is what we're after, as we want something genuine but currently no
 * Board Serial = MLB
 * SmUUID = SystemUUID
 
+**Note**:  "We’re sorry, but this serial number isn’t valid. Please check your information and try again." works for many users as well, do note though if you've had a bad track record with Apple/iServices you many need one that's "Purchase Date not Validated". Otherwise there may be suspicion 
+
 ## Fixing En0
 
 To start, grab [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/) ([Github link](https://github.com/headkaze/Hackintool)) and head to System -> Peripherals (Info -> Misc on older versions of Hackintool)
@@ -151,7 +153,7 @@ etc ...
 
 And a final layer of precaution is to make a new AppleID to play with, this makes sure that if you do end up blacklisting your account that it's not your main.
 
-An extra tip is adding a payment card to the account, some users found this also helped with iMessage activation.
+**Tip**:  Adding a payment card to the account and having a decent amount of purchases can also help. While not concrete, you can think of an AppleID as a credit score where the better an Apple customer you are the more likely they won't have activation issues or get an easier pass with AppleSupport
 
 ## Customer Code error
 
