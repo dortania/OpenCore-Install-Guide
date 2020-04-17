@@ -78,6 +78,7 @@ Main things to check:
 
 * ScanPolicy set to `0` to show all drives
 * Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus
+* Set UnblockFsConnect to True in config.plist/UEFI/Quirks. Needed for some HP systems
 
 ## Black screen after picker
 
