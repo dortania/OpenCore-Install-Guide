@@ -162,4 +162,4 @@ Something that users have noticed is that certain devices tend to break on certa
 * Webcams
 * Bluetooth Dongles
 
-To fix this, we'll want to do is force USB power properties onto each USB controller by using [SSDT-EC-USBX-AMD](https://github.com/dortania/Opencore-Desktop-Guide/blob//master/extra-files/SSDT-EC-USBX-AMD.aml). This SSDT is ready to be used as-is so I've provided a precompiled version, all that needs to be done is add it to your config.plist under ACPI->Add and to your EFI under EFI/OC/ACPI.
+To fix this, we'll want to do is force USB power properties onto each USB controller by using [SSDT-EC-USBX-AMD](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml). This SSDT is ready to be used as-is so I've provided a precompiled version, all that needs to be done is add it to your config.plist under ACPI->Add and to your EFI under EFI/OC/ACPI.
