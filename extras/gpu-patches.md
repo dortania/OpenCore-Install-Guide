@@ -11,7 +11,6 @@ This little section is for those who need more than what is provided by simple f
 
 Guide moved here: [Renaming GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 
-
 # iGPU BusID Patching
 
 This section is for users running "true" 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.
@@ -111,9 +110,9 @@ List of connector types:
 
 If you still get no output, set port 1's busid to 00 and start going through busids for port 2 and so on
 
-   * 01000900 00040000 C7030000
-   * 02xx0A00 00080000 C7030000
-   * 03000800 00040000 C7030000
+* 01000900 00040000 C7030000
+* 02xx0A00 00080000 C7030000
+* 03000800 00040000 C7030000
 
 ### Adding to your config.plist
 

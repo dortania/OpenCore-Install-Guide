@@ -60,7 +60,6 @@ Example of device path:
 
 `\_SB.PCI0.PEG0.PEGP`
 
-
     DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
     {
        External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
@@ -106,7 +105,6 @@ Example of device path:
        }
     }
 
-
 A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
 
 Source: CorpNewt
@@ -116,4 +114,3 @@ Source: CorpNewt
 So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:
 
 ![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
-

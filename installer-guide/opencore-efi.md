@@ -9,20 +9,20 @@ To setup OpenCore’s folder structure, you’ll want to grab the EFI folder fou
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
 * **Remove from Drivers:**
-   * OpenUsbKbDxe.efi
-      * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
-   * NvmExpressDxe.efi
-      * Used for Haswell and older when no NVMe driver is built into the firmware
-   * XhciDxe.efi
-      * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
-   * HiiDatabase.efi
-      * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
-   * OpenCanopy.efi
-      * This is OpenCore's optional GUI, we'll be going over how to set this up in installer-guide so remove this for now
+  * OpenUsbKbDxe.efi
+    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+  * NvmExpressDxe.efi
+    * Used for Haswell and older when no NVMe driver is built into the firmware
+  * XhciDxe.efi
+    * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+  * HiiDatabase.efi
+    * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
+  * OpenCanopy.efi
+    * This is OpenCore's optional GUI, we'll be going over how to set this up in installer-guide so remove this for now
 
 * **Remove everything from Tools:**
-   * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
-      
+  * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
+
 A cleaned up EFI:
 
 ![Clean EFI](/images/installer-guide/opencore-efi-md/clean-efi.png)
@@ -40,4 +40,3 @@ Here's what a populated EFI ***can*** look like(yours will be different):
 * Firmware drivers(`.efi`) go in the Drivers folder
 
 ## Now head to [Gathering Files](/ktext.md) to get the needed kexts and firmware drivers
-

@@ -60,12 +60,12 @@ And for those who have recommendations or issues with this guide, you can find t
 * iServices Guide:
   * [Как завести сервисы Apple - iMessage, FaceTime, iCloud](https://applelife.ru/threads/nastrojka-app-store-imessage-facetime-i-icloud.40790/page-219#post-727913)
 * iGPU and DRM configuration:
-   * [WhateverGreen's manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
-   * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
-   * [DRM Testing](https://applelife.ru/threads/proigryvanie-zaschischjonnogo-kontenta-na-raznom-oborudovanii.1349123/page-67#post-846582)
+  * [WhateverGreen's manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+  * [WhateverGreen's DRM chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md)
+  * [DRM Testing](https://applelife.ru/threads/proigryvanie-zaschischjonnogo-kontenta-na-raznom-oborudovanii.1349123/page-67#post-846582)
 * rEFInd Guide:
-   * [rEFInd Manual](https://www.rodsbooks.com/refind/index.html)
+  * [rEFInd Manual](https://www.rodsbooks.com/refind/index.html)
 * USB Mapping Guide:
-   * [XHCI Wake issues](https://osy.gitbook.io/hac-mini-guide/details/usb-fix)
-   * [CorpNewt's USB Map Guide](https://usb-map.gitbook.io/project/)
-   * [AppleLife USB Map Guide](https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/)
+  * [XHCI Wake issues](https://osy.gitbook.io/hac-mini-guide/details/usb-fix)
+  * [CorpNewt's USB Map Guide](https://usb-map.gitbook.io/project/)
+  * [AppleLife USB Map Guide](https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/)

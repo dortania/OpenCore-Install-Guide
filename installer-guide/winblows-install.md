@@ -5,6 +5,7 @@
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
 To start you'll need the following:
+
 * 4GB USB Stick
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
@@ -39,8 +40,5 @@ makeinstall will finish up by installing OpenCore to your USB's EFI System Parti
 ![](/images/installer-guide/winblows-install-md/make-install-done.png)
 
 ![](/images/installer-guide/winblows-install-md/EFI-base.png)
-
-
-
 
 ### Now with all this done, head to [Creating the USB](/installer-guide/opencore-efi.md) to finish up your work

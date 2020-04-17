@@ -39,7 +39,7 @@ Boot OpenCore and select the `VerifyMsrE2` option in the picker. This tool will 
 
 ## Turning off CFG-Lock manually
 
-1. Open your firmware with UEFITool and then find `CFG Lock` as a Unicode string. If nothing pops up then your firmware doesn't support `CFG Lock`, otherwise continue on. 
+1. Open your firmware with UEFITool and then find `CFG Lock` as a Unicode string. If nothing pops up then your firmware doesn't support `CFG Lock`, otherwise continue on.
 
 ![](/images/extras/msr-lock-md/uefi-tool.png)
 
@@ -65,4 +65,3 @@ Boot OpenCore and select the `VerifyMsrE2` option in the picker. This tool will 
 And you're done! Now you'll have correct CPU power management
 
 **Note**: Every time you reset your BIOS you will need to flip this bit again, make sure to write it down with the BIOS version so you know which.
-
