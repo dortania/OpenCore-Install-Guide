@@ -85,9 +85,9 @@ This is a section many may have forgotten about but this is found in your config
 To find your actual MAC Address/ROM value, you can find in a couple places:
 * BIOS
 * macOS: System Preferences -> Network -> Ethernet -> Advanced -> MAC Address
-* Windows: Settings -> Network & Internet -> Ethernet -> Ethernet -> Physical MAC Address
+* Windows: Settings -> Network & Internet -> Ethernet -> Ethernet -> Physical MAC Addressß
 
-Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we'll be  using our real MAC Address but note that this is another option
+Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we'll be using our real MAC Address but note that this is another option.
 
 When adding this to your config, `c0:7e:bf:c3:af:ff` should be converted to `c07ebfc3afff` as the `Data` type cannot accept colons(`:`).
 
@@ -157,6 +157,6 @@ And a final layer of precaution is to make a new AppleID to play with, this make
 
 ## Customer Code error
 
-Welp mate, you've done it. You blackmailed your AppleID. The fix is simple but not pretty, **you MUST call Apple**. Otherwise, there is no proceeding besides using a new account. Adding a payment card before calling can help legitimise the account so it doesn't seem as much like a bot.
+Welp mate, you've done it. You blackmailed your AppleID. The fix is simple but not pretty, **you MUST call Apple**. Otherwise, there is no proceeding besides using a new account. Adding a payment card before calling can help legitimize the account so it doesn't seem as much like a bot.
 
 ![](/images/post-install/iservices-md/blacklist.png)
