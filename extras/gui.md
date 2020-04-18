@@ -20,7 +20,7 @@ Once you have both of these, we'll next want to add it to our EFI partition:
 
 * Add the Resources folder to EFI/OC
   * Note the 0.5.7 copy puts into the wrong spot under just EFI, this will cause an image load error and halt OpenCore
-* Add OpenCanopy.efi to EFI/Drivers
+* Add OpenCanopy.efi to EFI/OC/Drivers
 
 ![](/images/extras/gui-md/folder-gui.png)
 
