@@ -356,6 +356,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 **KernelPm**:
 
 * `Kernel -> Quirks -> AppleXcpmCfgLock -> YES`
+* Note that Clover will auto-apply this patch without setting it if the MSR E2 was locked, so you may actually need AppleXcpmCfgLock even if Clover didn't
 
 **AppleIntelCPUPM**:
 
