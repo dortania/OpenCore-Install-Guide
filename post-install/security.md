@@ -15,7 +15,7 @@ FileVault is macOS's builtin drive encryption, and with OpenCore support for it 
 To start, you'll need the following .efi drivers:
 
 * OpenRuntime.efi
-  * [OpenUsbKbDxe.efi](https://github.com/acidanthera/AppleSupportPkg/releases) for DuetPkg users(systems without UEFI support)
+  * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases) for DuetPkg users(systems without UEFI support)
 
 **Do not use VirtualSMC.efi with OpenCore, its already baked inside**. You do however require VirtualSMC.kext still
 

@@ -58,5 +58,6 @@
 
 ## Misc
 
+* [Contributing](CONTRIBUTING.md)
 * [Credit](/misc/credit.md)
 

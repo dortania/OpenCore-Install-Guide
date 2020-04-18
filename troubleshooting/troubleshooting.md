@@ -218,6 +218,8 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime are **all from the same exact build**. Anything mismatched will break booting
 
+* **Note**: FwRuntimeServices has been renamed to OpenRuntime with 0.5.7 and newer
+
 
 # macOS booting
 
