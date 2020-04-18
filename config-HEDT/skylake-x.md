@@ -184,6 +184,8 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DisableRtcChecksum**: NO
+  * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safemode after reboot/shutdown
 * **DummyPowerManagement**: NO
   * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
 * **ExternalDiskIcons**: NO
@@ -419,8 +421,26 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 Only drivers present here should be:
 
 * HfsPlus.efi
-* ApfsDriverLoader.efi
 * OpenRuntime.efi
+
+**APFS**: Settings related to the APFS driver
+
+* **EnableJumpstart**: YES
+  * Allows us to load Apple's APFS driver
+
+* **HideVerbose**: NO
+  * Hides verbose, generally not needed
+
+* **JumpstartHotPlug**: NO
+  * Allows APFS hot-plug at the OpenCore boot menu, for us we'll ignore
+
+* **MinDate**: `0`
+  * Minimum date allowed for Apple's APFS to load, current default is set to 2020/01/01
+  * Setting to `-1` will allow any version of APFS to load, note this is highly discouraged for security reasons
+
+* **MinVersion**: `0`
+  * Minimum macOS version that OpenCore will load the APFS driver, current default is set to 10.13.6
+  * Setting to `-1` will allow any version of APFS to load, note this is highly discouraged for security reasons
 
 **Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS
 

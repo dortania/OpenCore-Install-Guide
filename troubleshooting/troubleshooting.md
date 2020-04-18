@@ -77,8 +77,13 @@ Another other possible problem is IRQ conflicts, Clover has plenty of different 
 Main things to check:
 
 * ScanPolicy set to `0` to show all drives
-* Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus
+* Have the proper firmware drivers such as HfsPlus
 * Set UnblockFsConnect to True in config.plist/UEFI/Quirks. Needed for some HP systems
+* Set `UEFI -> APFS` to see APFS based drives:
+   * **EnableJumpstart**: YES
+   * **HideVerbose**: YES
+   * **MinDate**: `-1`
+   * **MinVersion**: `-1`
 
 ## Black screen after picker
 
@@ -378,20 +383,9 @@ Refer to [Fixing Audio with AppleALC](/post-install/audio.md) section
 
 Issue with AppleRTC, quite a simple fix:
 
-* Under `Kernel -> patch`:
+* config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
 
-| Key | Type | Value |
-| :--- | :--- | :--- |
-|Comment|String|Disable RTC checksum update on poweroff|
-| Enabled | Boolean | YES |
-|Count|Number|1|
-|Base|String|__ZN8AppleRTC14updateChecksumEv|
-|Identifier|String|com.apple.driver.AppleRTC|
-|Limit|Number|0|
-|Find|Data||
-|Replace|Data|c3|
-
-**Note**: This patch no longer works with macOS Catalina 10.15.4, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
+**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
 
 The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
 
@@ -399,7 +393,7 @@ The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup)
 rtcfx_exclude=00-FF
 ```
 
-If this works, slowly shorten the exculded area until you find the part macOS is getting fussy on
+If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on
 
 ## macOS GPU acceleration missing on AMD X570
 
