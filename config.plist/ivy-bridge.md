@@ -311,6 +311,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
+  * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USBs with this set to default**
 
