@@ -35,7 +35,7 @@ Once it's done, you can find it with the rest of the files. I recommend moving i
 
 ## Setting up the installer
 
-Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use MacOS Extended(HFS+) with a GUID partition map. What this will do is create 2 partitions. The main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
+Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended(HFS+) with a GUID partition map. What this will do is create 2 partitions. The main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
 
 ![Formatting the USB](/images/installer-guide/mac-install-md/format-usb.png)
 

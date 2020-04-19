@@ -395,7 +395,7 @@ For this Coffee Lake example, I chose the iMac19,1 SMBIOS - this is done intenti
 
 * `iMac19,1` - For Mojave and newer
 * `iMac18,3` - For High Sierra and older
-  * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOs with Web Drivers
+  * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOS with Web Drivers
 
 **Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extras/smbios.md)
 
