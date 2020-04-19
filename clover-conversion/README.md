@@ -33,6 +33,7 @@ If folders are empty then delete them as well:
 Users of Clover's Preference Pane will also need to remove that:
 
 * `/Library/PreferencePanes/Clover.prefPane`
+* `/Library/Application\ Support/clover`
 
 # Cleaning the Clover Junk in your hardware
 
