@@ -4,38 +4,53 @@
 * Supported version: 0.5.7
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
+This guide works for a release of you choice as long as it is listed in the catalog
 
 **Note for legacy users**
 
-* If you want to use OpenCore on a system without UEFI, please follow the [Legacy Install](https://dortania.github.io/OpenCore-Desktop-Guide/extras/legacy.html) section first, after you can continue following the **Base folder structure** section
+* To use OpenCore on an older system with no UEFI (Plain Bios):
+1. First follow the [Legacy Install](https://dortania.github.io/OpenCore-Desktop-Guide/extras/legacy.html) section
+2. Once completed, continue the guide at the **Base folder structure** section
 
-To start we'll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you're just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the AppStore or with GibMacOS
+* If you are making an OpenCore bootable stick skip this section and head to **Formatting the USB**
 
 ## Downloading macOS
 
-Now lets grab [GibMacOS](https://github.com/corpnewt/gibMacOS) and run the `gibMacOS.command`:
+From a Mac OS machine that meets the requirements of the OS version you want to install, go directly to the Appstore and download the desired OS release the continue and continue to **Setting up the installer**
+
+For machines that cannot download from the Appstore an image or for specific OS releases please use the GibMacOS utility.
+
+Now lets grab [GibMacOS](https://github.com/corpnewt/gibMacOS), unzip on a local directory.
+Open a terminal window in the /gibMacOS/master directory and at the prompt run with "sudo" the `gibMacOS.command`: sudo gibMacOS.command
 
 ![](/images/installer-guide/mac-install-md/gib.png)
 
-From this, we get a nice list of macOS installers. If you need beta versions of macOS, you can select `C. Change Catalog`. For this example we'll choose 1:
+By default you get a list of the latest macOS installers.
+If you need beta versions of macOS, you can select `C. Change Catalog` which will give you additional options.
+In this example we will be installing Catalina and we will enter 1 at the prompt:
 
 ![](/images/installer-guide/mac-install-md/gib-process.png)
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so highly recommend reading the rest of the guide while you wait.
 
-Once finished, we'll next want to run the `BuildmacOSInstallApp.command`:
+Once the download is finished exit the utility but do no close the terminal window
+At the prompt run with "sudo" the utility `BuildmacOSInstallApp.command`: sudo BuildmacOSInstallApp.command
 
 ![](/images/installer-guide/mac-install-md/gib-location.png)
 
-It's gonna ask for the macOS installer files, at the moment they're in pieces in the `macOS Downloads` folder found in GibMacOS
+You will be prompted for the macOS installer files which were downloaded to the `macOS Downloads` folder in GibMacOS.
+From the Finder drill down to the folder containing the downloaded files and either drag it to the command line or "command+c" and paste it to the command line.
 
-Once it's done, you can find it with the rest of the files. I recommend moving it to your applications folder to make things a bit easier with the next section.
+Once the task is completed exit the utility
+You will find the Install file in the directory
+Move the newly created image to Applications folder. It will simplify the next section.
 
 ![](/images/installer-guide/mac-install-md/gib-done.png)
 
 ## Setting up the installer
-
-Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended(HFS+) with a GUID partition map. What this will do is create 2 partitions. The main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
+Note. Be aware that in some instances you may need a USB 2.0 stick and/or port.
+Make sure that there are no partitions in the stick.
+Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use MacOS Extended(HFS+) with a GUID partition map. What this will do is create 2 partitions. The main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files (The EFI is hidden).
 
 ![Formatting the USB](/images/installer-guide/mac-install-md/format-usb.png)
 
