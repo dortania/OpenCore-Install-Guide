@@ -27,7 +27,7 @@ Once you have both of these, we'll next want to add it to our EFI partition:
 Now in our config.plist, we have 2 things we need to fix:
 
 * `Misc -> PickerMode`: `External`
-* `Misc -> PickerAttributes:`1`
+* `Misc -> PickerAttributes`:`1`
   * This enables .VolumeIcon.icns reading off the drive, this is how macOS installer icons work
     * 0x0008: This is another value which allows for alternative icons, such as the legacy GUI found on legacy Macs. This can be combined with `1` for both legacy GUI and custom drive icons(PickerAttributes: `9`)
     * Other settings for PickerAttributes can be found in the [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)

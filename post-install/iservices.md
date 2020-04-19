@@ -4,7 +4,7 @@
 
 Table of Contents:
 
-* [Generate a new Serial](/post-install/iservices.md#)
+* [Generate a new Serial](/post-install/iservices.md#generate-a-new-serial)
 * [Fixing En0](/post-install/iservices.md#fixing-en0)
 * [Fixing ROM](/post-install/iservices.md#fixing-rom)
 * [Verifying NVRAM](/post-install/iservices.md#verifying-nvram)
