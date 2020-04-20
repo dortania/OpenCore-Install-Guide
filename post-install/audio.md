@@ -85,6 +85,7 @@ Note that the value is in HEX/Data, you can use a simple [decimal to hexadecimal
 
 So in this example, `alcid=11` would become `alc-layout-id | Data | <0B000000>`
 
+Note that the final value should be 4 bytes in total(ie. `0B 00 00 00` )
 
 ## Miscellaneous issues
 
