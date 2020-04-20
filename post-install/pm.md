@@ -11,7 +11,9 @@ So before we can fine tune power manegement to our liking, we need to first make
 
 To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and look for `AppleACPICPU`(note if you use search, it may find entries):
 
-![](/images/post-install/pm-md/X86PlatformShim.png)
+XCPM Present           |  Missing XCPM
+:-------------------------:|:-------------------------:
+![](/images/post-install/pm-md/pm-working.png)  |  ![](/images/post-install/pm-md/pm-not-working.png)
 
 As you can see from the left image, we have the X86PlatformPlugin attached meaning Apple's CPU Power Management Drivers are doing their thing. If you get something like to the right image, then there's likely an issue. Make sure to check the following:
 

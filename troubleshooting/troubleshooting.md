@@ -22,13 +22,13 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * [Stuck on `no vault provided!`](/troubleshooting/troubleshooting.md#stuck-on-no-vault-provided)
 * [Stuck on EndRandomSeed](/troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
 * [Can't see macOS partitions](/troubleshooting/troubleshooting.md#cant-see-macos-partitions)
-* [Black screen after picker](/troubleshooting/troubleshooting.md#black-screen-on-picker)
-* [Stuck on `OC: OcAppleGenericInput... - Success`](/troubleshooting/troubleshooting.md#stuck-on-oc-ocapplegenericInput-success)
-* [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocb-ocscanforbootentries-failure-not-found)
+* [Black screen after picker](/troubleshooting/troubleshooting.md#black-screen-after-picker)
+* [Stuck on `OC: OcAppleGenericInput... - Success`](/troubleshooting/troubleshooting.md#stuck-on-oc-ocapplegenericinput---success)
+* [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocb-ocscanforbootentries-failure---not-found)
 * [Stuck on `OCB: failed to match a default boot option`](/troubleshooting/troubleshooting.md#stuck-on-ocb-failed-to-match-a-default-boot-option)
-* [Stuck on `OCABC: Memory pool allocation failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocabc-memory-pool-allocation-failure-not-found)
+* [Stuck on `OCABC: Memory pool allocation failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocabc-memory-pool-allocation-failure---not-found)
 * [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](/troubleshooting/troubleshooting.md#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
-* [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](/troubleshooting/troubleshooting.md#stuck-on-oc-driver-xxx-efi-at-0-cannot-be-found)
+* [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](/troubleshooting/troubleshooting.md#stuck-on-oc-driver-xxxefi-at-0-cannot-be-found)
 * [Stuck on `Buffer Too Small`](/troubleshooting/troubleshooting.md#stuck-on-buffer-too-small)
 * [Stuck on `Plist only kext has CFBundleExecutable key`](/troubleshooting/troubleshooting.md#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
 * [Receiving `Failed to parse real field of type 1`](/troubleshooting/troubleshooting.md#receiving-failed-to-parse-real-field-type-1)
@@ -44,33 +44,31 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 ## Stuck on `no vault provided!`
 
-Turn off file vault in your config.plist under `Misc -> Security -> Vault` by setting it to:
+Turn off Vaulting in your config.plist under `Misc -> Security -> Vault` by setting it to:
 
 * `Optional`
 
 If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
+**Note**: Vault and FileVault are 2 separate things, see [Security and FileVault](/post-install/security.md) for more details
+
 ## Stuck on `OC: Invalid Vault mode`
 
-This is likely a spelling mistake, options in OpenCore are case-sensitive so make sure you check closely, **O**ptional is the correct way to enter it under Misc -> Security
+This is likely a spelling mistake, options in OpenCore are case-sensitive so make sure you check closely, **O**ptional is the correct way to enter it under `Misc -> Security -> Vault`
 
 ## Stuck on EndRandomSeed
 
 Couple problems:
 
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're Opencore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
-* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems. **Don't use on AMD**
+* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
 * [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock) 
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
-
-Another other possible problem is IRQ conflicts, Clover has plenty of different fixes that it can apply without you directly setting them. This makes it much more difficult when converting from Clover to OpenCore though luckily CorpNewt's also got a fix: [SSDTTime](https://github.com/corpnewt/SSDTTime)'s FixHPET option
-
-
 
 ## Can't see macOS partitions
 
@@ -78,7 +76,7 @@ Main things to check:
 
 * ScanPolicy set to `0` to show all drives
 * Have the proper firmware drivers such as ApfsDriverLoader and HfsPlus
-* Set UnblockFsConnect to True in config.plist/UEFI/Quirks. Needed for some HP systems
+* Set UnblockFsConnect to True in config.plist -> UEFI -> Quirks. Needed for some HP systems
 
 ## Black screen after picker
 
@@ -116,6 +114,7 @@ This is due to either incorrect BIOS settings and/or incorrect Booter values. Ma
 
 * Above4GDecoding is Enabled
 * CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
+* BIOS is up-to-date(Z390 and HEDT are known for having poorly written firmwares)
 
 ## Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`
 
@@ -123,7 +122,9 @@ This is due to either using a Clover config with OpenCore or using a configurato
 
 ## Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 
-Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFi -> Drivers
+Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFI -> Drivers
+
+Note that the entries are case-sensitive.
 
 ## Stuck on `Buffer Too Small`
 
@@ -185,7 +186,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 ## `Couldn't allocate runtime area` errors?
 
-See [Fixing KASLR slide values](https://dortania.github.io/OpenCore-Desktop-Guide/extras/kaslr-fix)
+See [Fixing KASLR slide values](/extras/kaslr-fix.md)
 
 ## SSDTs not being added
 
@@ -241,30 +242,54 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
-Well this general area is where a lot of PCI devices are configured, and is where most booting issues with AMD hacks happen. The main places to check:
+Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names incude:
+
+* `apfs_module_start...`, 
+* `Waiting for Root device`, 
+* `Waiting on...IOResources...`, 
+* `previous shutdown cause...`
+
+The main places to check:
 
 * **Missing EC patch**: 
    * For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
    * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
    * Laptop users will need to rename their main EC: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+      * **Do not use SSDT-EC on a laptop**
 
 * **IRQ conflict**: 
    * Most common on older laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
 
 * **PCI allocation issue**:
-   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares
-   * Make sure either Above4GDecoding is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args. **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
+   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
+   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args. 
+      * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**. This rule does not apply to X99
    * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled\
+   
+* **NVRAM Failing**:
+   * Common issue HEDT and 300 series motherboards, you have a couple paths to go down:
+      * 300 Series Consumer Intel: See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on making SSDT-PMC.aml
+      * HEDT: See [Emulating NVRAM](/post-install/nvram.md) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
+ 
+* **RTC Missing**: 
+   * Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
+   * Some drunk firmware writer at HP also disabled the RTC on the HP 250 g6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
+   
+   
+Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
+
+![](/images/troubleshooting/troubleshooting-md/rtc.png)
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
 * Generally seen as a USB error, couple ways to fix:
-  * if you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
+  * If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
   * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
+     * Enabling XHCI Handoff in the BIOS can fix this as well
 
 ## macOS installer in Russian
 
-Default sample config is in russian because slavs rule the Hackintosh world, check your prev-lang:kbd value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+Default sample config is in russian because slavs rule the Hackintosh world, check your `prev-lang:kbd` value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
 You may also need to reset NVRAM in the boot picker as well
 
@@ -300,15 +325,12 @@ This is right before the GPU is properly initialized, verify the following:
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 
 * Add `agdpmod=pikera` to boot args
-* switch between different display outputs
+* Switch between different display outputs
+* Try running MacPro7,1 SMBIOS with the boot-arg `agdpmod=ignore`
 
 ## 300 series Intel stalling on `apfs_module_start...`
 
 Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](/extras/acpi.md) section
-
-## Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina
-
-Verify your EC SSDT is enabled and correct for your system. See the [What's new in macOS Catalina](https://www.reddit.com/r/hackintosh/comments/den28t/whats_new_in_macos_catalina/) post for more info
 
 ## Kernel Panic `Cannot perform kext summary`
 
@@ -316,7 +338,7 @@ Generally seen as an issue surrounding the prelinked kernel, specifically that m
 
 ## Kernel Panic `AppleIntelMCEReporter`
 
-With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) to both 
+With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) to both EFI/OC/Kexts and config.plist -> Kernel -> Add
 
 ## Kernel Panic `AppleIntelCPUPowerManagement`
 
@@ -333,6 +355,8 @@ For 15h and 16h AMD CPUs, you may need to add the following:
 
 If XLNCUSBFix still doesn't work, then try the following:
 * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
+
+Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use USBInjectAll to fix booting, note that this only works on Intel USB Chipsets
 
 ## Frozen in the macOS installer after 30 seconds
 
