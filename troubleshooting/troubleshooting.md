@@ -493,6 +493,7 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 * [Booting Windows results in Bluescreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
 * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed-already-started)
 * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning-unresolved)
+* [No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volume-brightness-control-on-external-monitors)
 
 ## Can't run `acpidump.efi`
 
@@ -594,3 +595,7 @@ This happens when one ACPI table requires the rest for proper referencing, it do
 ```text
 iasl * [insert all ACPI files here]
 ```
+
+## No Volume/Brightness control on external monitors
+
+Oddly enough, macOS has locked down digital audio from having control. To bring back some functionality, the app [MonitorControl](https://github.com/the0neyouseek/MonitorControl/releases) has done great work on improving support in macOS
