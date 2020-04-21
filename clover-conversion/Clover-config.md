@@ -23,12 +23,12 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * SATA patches: Purely cosmetic in macOS now
   * change SAT0 to SATA
   * change SAT1 to SATA
-* IMEI Patches: Handled by WhateverGreen
+* IMEI Patches: Handled by [WhateverGreen](https://github.com/acidanthera/whatevergreen/releases)
   * change HECI to IMEI
   * change HEC1 to IMEI
   * change MEI to IMEI
   * change IDER to MEID
-* GFX patches: Handled by WhateverGreen
+* GFX patches: Handled by [WhateverGreen](https://github.com/acidanthera/whatevergreen/releases)
   * change GFX0 to IGPU
   * change PEG0 to GFX0
   * change PEGP to GFX0
@@ -38,16 +38,17 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * change H_EC to EC
   * change ECDV to EC
   * change PGEC to EC
-* Audio renames: Handled by AppleALC
+* Audio renames: Handled by [AppleALC](https://github.com/acidanthera/AppleALC)
   * change HDAS to HDEF
   * change CAVS to HDEF
   * change AZAL to HDEF
+  * change ALZA to HDEF
 * Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)(SSDT-AWAC)
   * change STAS to [Blank]
 * NVMe patches: [NVMeFix](https://github.com/acidanthera/NVMeFix) fixes power management
   * change PXSX to ANS1
   * change PXSX to ANS2
-* Other purely consmetic patches:
+* Other purely cosmetic patches:
   * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)
   * change PC00 to PCIO
   * change FPU to MATH
