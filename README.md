@@ -41,7 +41,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Fast Boot
 * VT-d (can be enabled if you set DisableIoMapper to YES)
 * CSM
-* Thunderbolt(For intial install, as Thunderbolt can cause issues if not setup correctly)
+* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)
