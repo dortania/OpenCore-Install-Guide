@@ -115,7 +115,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
   * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary
-* **ProtectMemoryRegion**: NO
+* **ProtectMemoryRegions**: NO
   * Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares
 * **ProtectSecureBoot**: NO
   * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
