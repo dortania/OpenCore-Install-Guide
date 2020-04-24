@@ -104,9 +104,9 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 **WiFi and Bluetooth**:
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
-  * Used for patching non-Apple Broadcom cards, **will not work on intel, Killer, Realtek, etc**
+  * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Used for uploading firmware on Broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
+  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
     * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
@@ -157,7 +157,7 @@ The order in `Kernel -> Add` should be:
     * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
     * VoodooI2CUPDDEngine - Implements Touchbase driver support.
 
-To figure out what kind of keyboard and trackpad you have, check DeviceManager in Windows or `dmesg |grep input` in Linux
+To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg |grep input` in Linux
 
 * [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
   * Recommended for SMBIOS that include a TouchID sensor to fix auth issues

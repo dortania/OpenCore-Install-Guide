@@ -5,7 +5,7 @@ With OpenCore I think it's about time we finally destroy some AMD myths, like ho
 So why would I want to use this? Well, a couple of reasons:
 
 * Add missing USB ports that macOS didn't automatically add
-* Remove unwanted devices like intel Bluetooth conflicting with Broadcom's
+* Remove unwanted devices like Intel Bluetooth conflicting with Broadcom's
 * Stability by removing USB port limit patches
 
 For a more user-friendly guide, see Aleksander's post: [Why you need to care about USB mapping](https://aplus.rs/2020/usb-mapping-why/)

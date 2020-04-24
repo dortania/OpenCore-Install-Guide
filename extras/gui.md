@@ -115,5 +115,5 @@ Once done, you should get something like this:
 
 * OpenCore hasn't forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault voiceover with these 2 settings:
   * `Misc -> PickerAudioAssist -> True` to enable picker audio
-  * `UEFI -> Protocols -> AppleAudio -> True` to enable FileVault voice over
+  * `UEFI -> ProtocolOverrides -> AppleAudio -> True` to enable FileVault voice over
     * See [Security and FileVault](/post-install/security.md) on how to setup the rest for proper FileVault support

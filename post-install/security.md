@@ -31,7 +31,7 @@ Setting in your config.plist:
   * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of OpenUsbKbDxe should avoid)
 * UEFI -> Output
   * `ProvideConsoleGop` to YES
-* UEFI -> Protocols
+* UEFI -> ProtocolOverrides
   * `FirmwareVolume` set to YES
   * `HashServices` set to YES for Broadwell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
   * `AppleSmcIo` set to YES(this replaces VirtualSMC.efi)
@@ -64,7 +64,7 @@ Do note that nvram.plist won't be vaulted so users with emulated NVRAM still hav
    * `Basic`: Requires just vault.plist to be present, mainly used for filesystem integrity verification
    * `Secure`: Requires both vault.plist and vault.sig, used for best security as vault.plist changes require a new signature
 * `Booter -> ProtectSecureBoot:` `YES`
-   * Needed with Insyde firmwares for fixing secureboot keys and reporting violations
+   * Needed with Insyde firmwares for fixing Secure Boot keys and reporting violations
 
 **Setting up vault**:
 
@@ -105,7 +105,7 @@ To calculate the ScanPolicy value, you simply add up all the hexadecimal values(
 
 `0x00000002 (bit 1)` — OC\_SCAN\_DEVICE\_LOCK
 
-* restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC_SCAN\_ALLOW\_DEVICE_.
+* restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognized as SATA. Cases like this must be reported. Known device types are prefixed with OC_SCAN\_ALLOW\_DEVICE_.
 
 `0x00000100 (bit 8)` — OC\_SCAN\_ALLOW\_FS\_APFS
 

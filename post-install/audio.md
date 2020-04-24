@@ -22,7 +22,7 @@ If all 3 show up, you're good to go. And make sure VoodooHDA **is not present**.
 So for this example, we'll assume your codec is ALC1220. To verify yours, you have a couple options:
 
 * Checking motherboard's spec page and manual
-* Check DeviceManager in Windows
+* Check Device Manager in Windows
 * Run `cat` in terminal on Linux
    * `cat /proc/asound/card0/codec#0 | less`
    

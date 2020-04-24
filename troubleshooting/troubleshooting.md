@@ -254,7 +254,7 @@ Well this general area is where a lot of PCI devices are configured, and is wher
    * Laptop users will need to rename their main EC: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 * **IRQ conflict**: 
-   * Most common on older laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
+   * Most common on older laptops and pre-builts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
 
 * **PCI allocation issue**:
    * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares
