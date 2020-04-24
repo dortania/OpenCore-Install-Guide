@@ -13,7 +13,7 @@ This section is for those having issues booting either OpenCore, macOS or having
 * [Other issues](/troubleshooting/troubleshooting.md#other-issues)
    * This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc
 
-While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/clover-conversion) for more info
+While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion) for more info
 
 **And if your issue is not covered, please read the official OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**
 
@@ -21,6 +21,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 * [Stuck on `no vault provided!`](/troubleshooting/troubleshooting.md#stuck-on-no-vault-provided)
 * [Stuck on EndRandomSeed](/troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
+* [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eb-log-exitbs-start)
 * [Can't see macOS partitions](/troubleshooting/troubleshooting.md#cant-see-macos-partitions)
 * [Black screen after picker](/troubleshooting/troubleshooting.md#black-screen-after-picker)
 * [Stuck on `OC: OcAppleGenericInput... - Success`](/troubleshooting/troubleshooting.md#stuck-on-oc-ocapplegenericinput---success)
@@ -48,7 +49,7 @@ Turn off Vaulting in your config.plist under `Misc -> Security -> Vault` by sett
 
 * `Optional`
 
-If you have already executed the `sign.command` you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
+If you have already executed the `sign.command` you will need to restore the OpenCore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of OpenCore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
 **Note**: Vault and FileVault are 2 separate things, see [Security and FileVault](/post-install/security.md) for more details
 
@@ -59,6 +60,20 @@ This is likely a spelling mistake, options in OpenCore are case-sensitive so mak
 ## Stuck on EndRandomSeed
 
 Couple problems:
+
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
+* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
+* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+
+Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
+
+* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock) 
+* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
+
+## Stuck on `[EB|#LOG:EXITBS:START]`
+
+This is actually the exact same error as `EndRandomSeed` so all the same fixes apply:
 
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
 * Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
@@ -190,7 +205,7 @@ See [Fixing KASLR slide values](/extras/kaslr-fix.md)
 
 ## SSDTs not being added
 
-So with Opencore, there's some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:
+So with OpenCore, there's some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:
 
 ```
 * Original Table Header:
@@ -239,6 +254,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Frozen in the macOS installer after 30 seconds](/troubleshooting/troubleshooting.md#frozen-in-macos-installer-after-30-seconds)
 * [15h/16h CPU reboot after Data & Privacy screen](/troubleshooting/troubleshooting.md#15h-16-h-cpu-reboot-after-data-and-privacy-screen)
 * [Sleep crashing on AMD](/troubleshooting/troubleshooting.md#sleep-crashing-on-amd)
+* [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -373,6 +389,16 @@ This is a common example of screwed up TSC, for most system add [VoodooTSCSync](
 For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
 ![](/images/troubleshooting/troubleshooting-md/asus-tsc.jpg)
+
+## Kernel Panic on `Invalid frame pointer`
+
+So this is due to some issue around the `Booter -> Quirks` you set, main things to check for:
+
+* `SetupVirtualMap`
+   * required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems
+   * Note that Icelake's memory protections break this quirks so avoid it
+* `RebuildAppleMemoryMap`
+   * Makes sure the memory map is compatible with macOS, some OEMs like Lenovo do not like this quirk so disable it
 
 # macOS post-install
 
