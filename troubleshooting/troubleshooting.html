@@ -728,7 +728,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 22 2020 17:03:46 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Fri Apr 24 2020 20:15:13 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -753,12 +753,13 @@
 </ul>
 </li>
 </ul>
-<p>While still a work in progress, laptop users wanting to convert an existing Clover install can see the  <a href="https://github.com/dortania/Opencore-Desktop-Guide/blob/master/clover-conversion" target="_blank">Clover to OpenCore conversion</a> for more info</p>
+<p>While still a work in progress, laptop users wanting to convert an existing Clover install can see the  <a href="https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion" target="_blank">Clover to OpenCore conversion</a> for more info</p>
 <p><strong>And if your issue is not covered, please read the official OpenCore documentation: <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a></strong></p>
 <h1 id="opencore-booting"><a name="opencore-booting" class="plugin-anchor" href="#opencore-booting"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore booting</h1>
 <ul>
 <li><a href="troubleshooting.html#stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></a></li>
 <li><a href="troubleshooting.html#stuck-on-endrandomseed">Stuck on EndRandomSeed</a></li>
+<li><a href="troubleshooting.html#stuck-on-eb-log-exitbs-start">Stuck on <code>[EB|#LOG:EXITBS:START]</code></a></li>
 <li><a href="troubleshooting.html#cant-see-macos-partitions">Can&apos;t see macOS partitions</a></li>
 <li><a href="troubleshooting.html#black-screen-after-picker">Black screen after picker</a></li>
 <li><a href="troubleshooting.html#stuck-on-oc-ocapplegenericinput---success">Stuck on <code>OC: OcAppleGenericInput... - Success</code></a></li>
@@ -783,12 +784,25 @@
 <ul>
 <li><code>Optional</code></li>
 </ul>
-<p>If you have already executed the <code>sign.command</code> you will need to restore the Opencore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of Opencore.efi here: <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a></p>
+<p>If you have already executed the <code>sign.command</code> you will need to restore the OpenCore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of OpenCore.efi here: <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a></p>
 <p><strong>Note</strong>: Vault and FileVault are 2 separate things, see <a href="../post-install/security.html">Security and FileVault</a> for more details</p>
 <h2 id="stuck-on-oc-invalid-vault-mode"><a name="stuck-on-oc-invalid-vault-mode" class="plugin-anchor" href="#stuck-on-oc-invalid-vault-mode"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>OC: Invalid Vault mode</code></h2>
 <p>This is likely a spelling mistake, options in OpenCore are case-sensitive so make sure you check closely, <strong>O</strong>ptional is the correct way to enter it under <code>Misc -&gt; Security -&gt; Vault</code></p>
 <h2 id="stuck-on-endrandomseed"><a name="stuck-on-endrandomseed" class="plugin-anchor" href="#stuck-on-endrandomseed"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on EndRandomSeed</h2>
 <p>Couple problems:</p>
+<ul>
+<li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -&gt; Output</li>
+<li>Missing <a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">kernel patches</a>(only applies for AMD CPUs, make sure they&apos;re OpenCore patches and not Clover. Clover uses <code>MatchOS</code> while OpenCore has <code>MinKernel</code> and <code>Maxkernel</code>)</li>
+<li><code>IgnoreInvalidFlexRatio</code> missing, this is needed for Broadwell and older. <strong>Not for AMD and Skylake or newer</strong></li>
+<li><code>AppleXcpmExtraMsrs</code> may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. <strong>Do not use on AMD</strong></li>
+</ul>
+<p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
+<ul>
+<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
+<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
+</ul>
+<h2 id="stuck-on-eblogexitbsstart"><a name="stuck-on-eblogexitbsstart" class="plugin-anchor" href="#stuck-on-eblogexitbsstart"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>[EB|#LOG:EXITBS:START]</code></h2>
+<p>This is actually the exact same error as <code>EndRandomSeed</code> so all the same fixes apply:</p>
 <ul>
 <li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -&gt; Output</li>
 <li>Missing <a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">kernel patches</a>(only applies for AMD CPUs, make sure they&apos;re OpenCore patches and not Clover. Clover uses <code>MatchOS</code> while OpenCore has <code>MinKernel</code> and <code>Maxkernel</code>)</li>
@@ -910,7 +924,7 @@
 <h2 id="couldnt-allocate-runtime-area-errors"><a name="couldnt-allocate-runtime-area-errors" class="plugin-anchor" href="#couldnt-allocate-runtime-area-errors"><i class="fa fa-link" aria-hidden="true"></i></a><code>Couldn&apos;t allocate runtime area</code> errors?</h2>
 <p>See <a href="../extras/kaslr-fix.html">Fixing KASLR slide values</a></p>
 <h2 id="ssdts-not-being-added"><a name="ssdts-not-being-added" class="plugin-anchor" href="#ssdts-not-being-added"><i class="fa fa-link" aria-hidden="true"></i></a>SSDTs not being added</h2>
-<p>So with Opencore, there&apos;s some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:</p>
+<p>So with OpenCore, there&apos;s some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:</p>
 <pre><code>* Original Table Header:
 *     Signature        &quot;SSDT&quot;
 *     Length           0x0000015D (349)
@@ -950,6 +964,7 @@
 <li><a href="troubleshooting.html#frozen-in-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</a></li>
 <li><a href="troubleshooting.html#15h-16-h-cpu-reboot-after-data-and-privacy-screen">15h/16h CPU reboot after Data &amp; Privacy screen</a></li>
 <li><a href="troubleshooting.html#sleep-crashing-on-amd">Sleep crashing on AMD</a></li>
+<li><a href="troubleshooting.html#kernel-panic-on-invalid-frame-pointer">Kernel Panic on <code>Invalid frame pointer</code></a></li>
 </ul>
 <h2 id="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><a name="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy" class="plugin-anchor" href="#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></h2>
 <p>Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names incude:</p>
@@ -1075,6 +1090,19 @@
 <p>This is a common example of screwed up TSC, for most system add <a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a></p>
 <p>For Skylake-X, many firmwares including Asus and EVGA won&apos;t write to all cores. So we&apos;ll need to reset the TSC on cold boot and wake with <a href="https://github.com/interferenc/TSCAdjustReset" target="_blank">TSCAdjustReset</a>. Compiled version can be found here: <a href="https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip" target="_blank">TSCAdjustReset.kext</a>. Note that you <strong>must</strong> open up the kext(ShowPackageContents in finder, <code>Contents -&gt; Info.plist</code>) and change the Info.plist -&gt; <code>IOKitPersonalities -&gt; IOPropertyMatch -&gt; IOCPUNumber</code> to the number of CPU threads you have starting from <code>0</code>(i9 7980xe 18 core would be <code>35</code> as it has 36 threads total)</p>
 <p><img src="../images/troubleshooting/troubleshooting-md/asus-tsc.jpg" alt=""></p>
+<h2 id="kernel-panic-on-invalid-frame-pointer"><a name="kernel-panic-on-invalid-frame-pointer" class="plugin-anchor" href="#kernel-panic-on-invalid-frame-pointer"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic on <code>Invalid frame pointer</code></h2>
+<p>So this is due to some issue around the <code>Booter -&gt; Quirks</code> you set, main things to check for:</p>
+<ul>
+<li><code>SetupVirtualMap</code><ul>
+<li>required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems</li>
+<li>Note that Icelake&apos;s memory protections break this quirks so avoid it</li>
+</ul>
+</li>
+<li><code>RebuildAppleMemoryMap</code><ul>
+<li>Makes sure the memory map is compatible with macOS, some OEMs like Lenovo do not like this quirk so disable it</li>
+</ul>
+</li>
+</ul>
 <h1 id="macos-post-install"><a name="macos-post-install" class="plugin-anchor" href="#macos-post-install"><i class="fa fa-link" aria-hidden="true"></i></a>macOS post-install</h1>
 <ul>
 <li><a href="troubleshooting.html#Broken-iMessage-and-Siri">Broken iMessage and Siri</a></li>
@@ -1357,7 +1385,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-22T17:03:46.432Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-22T17:04:48.253Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-24T20:15:13.911Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-24T20:16:07.257Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
