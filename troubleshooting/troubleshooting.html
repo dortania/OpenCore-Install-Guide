@@ -728,7 +728,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat Apr 25 2020 14:58:11 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat Apr 25 2020 17:12:17 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -759,7 +759,7 @@
 <ul>
 <li><a href="troubleshooting.html#stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></a></li>
 <li><a href="troubleshooting.html#stuck-on-endrandomseed">Stuck on EndRandomSeed</a></li>
-<li><a href="troubleshooting.html#stuck-on-eb-log-exitbs-start">Stuck on <code>[EB|#LOG:EXITBS:START]</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-eblogexitbsstart">Stuck on <code>[EB|#LOG:EXITBS:START]</code></a></li>
 <li><a href="troubleshooting.html#cant-see-macos-partitions">Can&apos;t see macOS partitions</a></li>
 <li><a href="troubleshooting.html#black-screen-after-picker">Black screen after picker</a></li>
 <li><a href="troubleshooting.html#stuck-on-oc-ocapplegenericinput---success">Stuck on <code>OC: OcAppleGenericInput... - Success</code></a></li>
@@ -960,7 +960,6 @@
 <li><a href="troubleshooting.html#kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></a></li>
 <li><a href="troubleshooting.html#kernel-panic-appleintelmcereporter">Kernel Panic <code>AppleIntelMCEReporter</code></a></li>
 <li><a href="troubleshooting.html#kernel-panic-appleintelcpupowermanagement">Kernel Panic <code>AppleIntelCPUPowerManagement</code></a></li>
-<li><a href="troubleshooting.html#stop-sign-with-corrupted-text-still-waiting-for-root-device">Stop Sign with corrupted text(Still waiting for Root Device)</a></li>
 <li><a href="troubleshooting.html#frozen-in-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</a></li>
 <li><a href="troubleshooting.html#15h-16-h-cpu-reboot-after-data-and-privacy-screen">15h/16h CPU reboot after Data &amp; Privacy screen</a></li>
 <li><a href="troubleshooting.html#sleep-crashing-on-amd">Sleep crashing on AMD</a></li>
@@ -1020,16 +1019,26 @@
 <p>Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like <code>STAS</code>):</p>
 <p><img src="../images/troubleshooting/troubleshooting-md/rtc.png" alt=""></p>
 <h2 id="waiting-for-root-device-or-prohibited-sign-error"><a name="waiting-for-root-device-or-prohibited-sign-error" class="plugin-anchor" href="#waiting-for-root-device-or-prohibited-sign-error"><i class="fa fa-link" aria-hidden="true"></i></a>&quot;Waiting for Root Device&quot; or Prohibited Sign error</h2>
+<p>Generally seen as a USB error, couple ways to fix:</p>
 <ul>
-<li>Generally seen as a USB error, couple ways to fix:<ul>
 <li>If you&apos;re hitting the 15 port limit, you can temporarily get around this with <code>XhciPortLimit</code> but for long term use, we recommend making a <a href="https://github.com/corpnewt/USBMap" target="_blank">USBmap</a>. CorpNewt also has a guide for this: <a href="https://usb-map.gitbook.io/project/" target="_blank">USBmap Guide</a></li>
-<li>Another issue can be that certain firmware won&apos;t pass USB ownership to macOS, to fix this we can enable <code>ReleaseUsbOwnership</code>. Clover equivalent is <code>FixOwnership</code><ul>
+<li><p>Another issue can be that certain firmware won&apos;t pass USB ownership to macOS, to fix this we can enable <code>UEFI -&gt; Quriks -&gt; ReleaseUsbOwnership</code> in your config.plist</p>
+<ul>
 <li>Enabling XHCI Handoff in the BIOS can fix this as well</li>
 </ul>
 </li>
+<li><p>For 15h and 16h AMD CPUs, you may need to add the following:</p>
+<ul>
+<li><a href="https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip" target="_blank">XLNCUSBFix.kext</a></li>
+</ul>
+</li>
+<li><p>If XLNCUSBFix still doesn&apos;t work, then try the following:</p>
+<ul>
+<li><a href="https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip" target="_blank">AMD StopSign-fixv5</a></li>
 </ul>
 </li>
 </ul>
+<p>Another possible issue is missing USB ports in your DSDT, macOS isn&apos;t great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won&apos;t be able to find it. To fix this we use <a href="https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/" target="_blank">USBInjectAll</a> to fix booting, note that this only works on Intel USB Chipsets and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)</p>
 <h2 id="macos-installer-in-russian"><a name="macos-installer-in-russian" class="plugin-anchor" href="#macos-installer-in-russian"><i class="fa fa-link" aria-hidden="true"></i></a>macOS installer in Russian</h2>
 <p>Default sample config is in russian because slavs rule the Hackintosh world, check your <code>prev-lang:kbd</code> value under <code>NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82</code>. Set to <code>656e2d55533a30</code> for American: en-US:0 and a full list can be found in <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></p>
 <p>You may also need to reset NVRAM in the boot picker as well</p>
@@ -1070,18 +1079,6 @@
 <p>With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add <a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a> to both EFI/OC/Kexts and config.plist -&gt; Kernel -&gt; Add</p>
 <h2 id="kernel-panic-appleintelcpupowermanagement"><a name="kernel-panic-appleintelcpupowermanagement" class="plugin-anchor" href="#kernel-panic-appleintelcpupowermanagement"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>AppleIntelCPUPowerManagement</code></h2>
 <p>This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
-<h2 id="stop-sign-with-corrupted-textstill-waiting-for-root-device"><a name="stop-sign-with-corrupted-textstill-waiting-for-root-device" class="plugin-anchor" href="#stop-sign-with-corrupted-textstill-waiting-for-root-device"><i class="fa fa-link" aria-hidden="true"></i></a>Stop Sign with corrupted text(Still waiting for Root Device)</h2>
-<p>With OS X 10.11 El Capitan, Apple imposed a 15 USB port limit. To get around this we actually create a USB map to include ports we want and kick out extras we don&apos;t care about. For install, set <code>Kernel -&gt; Quirks -&gt; XhciPortLimit -&gt; Enabled</code> but for post install we recommend making a map as the port limit patch isn&apos;t guaranteed to work with future versions of macOS.</p>
-<p>First try your USB stick in a different USB port.</p>
-<p>For 15h and 16h AMD CPUs, you may need to add the following:</p>
-<ul>
-<li><a href="https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip" target="_blank">XLNCUSBFix.kext</a></li>
-</ul>
-<p>If XLNCUSBFix still doesn&apos;t work, then try the following:</p>
-<ul>
-<li><a href="https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip" target="_blank">AMD StopSign-fixv5</a></li>
-</ul>
-<p>Another possible issue is missing USB ports in your DSDT, macOS isn&apos;t great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won&apos;t be able to find it. To fix this we use USBInjectAll to fix booting, note that this only works on Intel USB Chipsets</p>
 <h2 id="frozen-in-the-macos-installer-after-30-seconds"><a name="frozen-in-the-macos-installer-after-30-seconds" class="plugin-anchor" href="#frozen-in-the-macos-installer-after-30-seconds"><i class="fa fa-link" aria-hidden="true"></i></a>Frozen in the macOS installer after 30 seconds</h2>
 <p>This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
 <h2 id="15h16h-cpu-reboot-after-data--privacy-screen"><a name="15h16h-cpu-reboot-after-data--privacy-screen" class="plugin-anchor" href="#15h16h-cpu-reboot-after-data--privacy-screen"><i class="fa fa-link" aria-hidden="true"></i></a>15h/16h CPU reboot after Data &amp; Privacy screen</h2>
@@ -1254,6 +1251,7 @@
 <li><a href="troubleshooting.html#incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</a></li>
 <li><a href="troubleshooting.html#no-temperature-fan-sensor-output">No temperature/fan sensor output</a></li>
 <li><a href="troubleshooting.html#cant-find-windows-bootcamp-drive-in-picker">Can&apos;t find Windows/Bootcamp drive in picker</a></li>
+<li><a href="troubleshooting.html#you-cant-change-the-startup-disk-to-the-selected-disk">&quot;You can&apos;t change the startup disk to the selected disk&quot; error</a></li>
 <li><a href="troubleshooting.html#booting-windows-results-in-bluescreen-or-linux-crashes">Booting Windows results in Bluescreen or Linux crashes</a></li>
 <li><a href="troubleshooting.html#booting-windows-error-ocb-startimage-failed-already-started">Booting Windows error: <code>OCB: StartImage failed - Already started</code></a></li>
 <li><a href="troubleshooting.html#iasl-warning-unresolved">iASL warning, # unresolved</a></li>
@@ -1323,8 +1321,13 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <ul>
 <li>Make sure <code>Misc -&gt; Security -&gt; ScanPolicy</code> is set to <code>0</code> to show all drives</li>
 <li>Enable <code>Misc -&gt; Boot -&gt; Hideself</code> is enabled when Windows bootloader is located on the same drive</li>
-<li>Enable <code>Platforminfo -&gt; Generic -&gt; AdviseWindows -&gt; True</code> if the EFI partition isn&apos;t the first on the partition table</li>
 </ul>
+<h2 id="you-cant-change-the-startup-disk-to-the-selected-disk-error"><a name="you-cant-change-the-startup-disk-to-the-selected-disk-error" class="plugin-anchor" href="#you-cant-change-the-startup-disk-to-the-selected-disk-error"><i class="fa fa-link" aria-hidden="true"></i></a>&quot;You can&apos;t change the startup disk to the selected disk&quot; error</h2>
+<p>This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:</p>
+<ul>
+<li><code>PlatformInfo -&gt; Generic -&gt; AdviseWindows -&gt; True</code></li>
+</ul>
+<p><img src="../images/troubleshooting/troubleshooting-md/error.png" alt=""></p>
 <h2 id="booting-windows-results-in-bluescreen-or-linux-crashes"><a name="booting-windows-results-in-bluescreen-or-linux-crashes" class="plugin-anchor" href="#booting-windows-results-in-bluescreen-or-linux-crashes"><i class="fa fa-link" aria-hidden="true"></i></a>Booting Windows results in Bluescreen or Linux crashes</h2>
 <p>This is due to alignment issues, make sure <code>SyncRuntimePermissions</code> is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)</p>
 <p>Common Windows error code:</p>
@@ -1385,7 +1388,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-25T14:58:11.459Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-25T14:59:03.747Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-25T17:12:17.209Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-25T17:13:08.589Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
