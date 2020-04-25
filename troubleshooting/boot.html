@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Updating OpenCore, kexts and macOS · GitBook</title>
+        <title>macOS Boot Process · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -71,10 +71,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../extras/msr-lock.html" />
+    <link rel="next" href="../extras/legacy.html" />
     
     
-    <link rel="prev" href="oc2hdd.html" />
+    <link rel="prev" href="debug.html" />
     
 
     <style>
@@ -382,9 +382,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="./">
+        <li class="chapter " data-level="5.1" data-path="../post-install/">
             
-                <a href="./">
+                <a href="../post-install/">
             
                     
                     Post-Install
@@ -396,9 +396,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="5.1.1" data-path="security.html">
+        <li class="chapter " data-level="5.1.1" data-path="../post-install/security.html">
             
-                <a href="security.html">
+                <a href="../post-install/security.html">
             
                     
                     Security and FileVault
@@ -409,9 +409,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.2" data-path="audio.html">
+        <li class="chapter " data-level="5.1.2" data-path="../post-install/audio.html">
             
-                <a href="audio.html">
+                <a href="../post-install/audio.html">
             
                     
                     Fixing Audio
@@ -422,9 +422,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.3" data-path="oc2hdd.html">
+        <li class="chapter " data-level="5.1.3" data-path="../post-install/oc2hdd.html">
             
-                <a href="oc2hdd.html">
+                <a href="../post-install/oc2hdd.html">
             
                     
                     Booting without USB
@@ -435,9 +435,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="5.1.4" data-path="update.html">
+        <li class="chapter " data-level="5.1.4" data-path="../post-install/update.html">
             
-                <a href="update.html">
+                <a href="../post-install/update.html">
             
                     
                     Updating OpenCore, kexts and macOS
@@ -461,9 +461,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.6" data-path="verbose.html">
+        <li class="chapter " data-level="5.1.6" data-path="../post-install/verbose.html">
             
-                <a href="verbose.html">
+                <a href="../post-install/verbose.html">
             
                     
                     Fixing Resolution and Verbose
@@ -474,9 +474,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.7" data-path="drm.html">
+        <li class="chapter " data-level="5.1.7" data-path="../post-install/drm.html">
             
-                <a href="drm.html">
+                <a href="../post-install/drm.html">
             
                     
                     Fixing DRM
@@ -487,9 +487,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.8" data-path="iservices.html">
+        <li class="chapter " data-level="5.1.8" data-path="../post-install/iservices.html">
             
-                <a href="iservices.html">
+                <a href="../post-install/iservices.html">
             
                     
                     Fixing iServices
@@ -500,9 +500,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.9" data-path="nvram.html">
+        <li class="chapter " data-level="5.1.9" data-path="../post-install/nvram.html">
             
-                <a href="nvram.html">
+                <a href="../post-install/nvram.html">
             
                     
                     Emulated NVRAM
@@ -513,9 +513,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.10" data-path="pm.html">
+        <li class="chapter " data-level="5.1.10" data-path="../post-install/pm.html">
             
-                <a href="pm.html">
+                <a href="../post-install/pm.html">
             
                     
                     Fixing Power Management
@@ -538,9 +538,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../troubleshooting/troubleshooting.html">
+        <li class="chapter " data-level="6.1" data-path="troubleshooting.html">
             
-                <a href="../troubleshooting/troubleshooting.html">
+                <a href="troubleshooting.html">
             
                     
                     General Troubleshooting
@@ -551,9 +551,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../troubleshooting/debug.html">
+        <li class="chapter " data-level="6.2" data-path="debug.html">
             
-                <a href="../troubleshooting/debug.html">
+                <a href="debug.html">
             
                     
                     OpenCore Debugging
@@ -564,9 +564,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../troubleshooting/boot.html">
+        <li class="chapter active" data-level="6.3" data-path="boot.html">
             
-                <a href="../troubleshooting/boot.html">
+                <a href="boot.html">
             
                     
                     macOS Boot Process
@@ -725,7 +725,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Updating OpenCore, kexts and macOS</a>
+        <a href=".." >macOS Boot Process</a>
     </h1>
 </div>
 
@@ -743,133 +743,118 @@
                                 <blockquote>
 <p><em>Last modified: Sat Apr 25 2020 20:16:20 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="updating-opencore-and-macos"><a name="updating-opencore-and-macos" class="plugin-anchor" href="#updating-opencore-and-macos"><i class="fa fa-link" aria-hidden="true"></i></a>Updating OpenCore and macOS</h1>
+<h1 id="understanding-the-macos-boot-process"><a name="understanding-the-macos-boot-process" class="plugin-anchor" href="#understanding-the-macos-boot-process"><i class="fa fa-link" aria-hidden="true"></i></a>Understanding the macOS Boot Process</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
 <p>Table of Contents:</p>
 <ul>
-<li><a href="update.html#updating-opencore">Updating OpenCore</a></li>
-<li><a href="update.html#updating-kexts">Updating Kexts</a></li>
-<li><a href="update.html#updating-macos">Updating macOS</a></li>
+<li><a href="boot.html#opencore-booting">OpenCore Booting</a></li>
+<li><a href="boot.html#bootefi-handoff">boot.efi Handoff</a></li>
+<li><a href="boot.html#xnukernel-handoff">XNU/Kernel Handoff</a></li>
+<li><a href="boot.html#macos-handoff">macOS Handoff</a></li>
 </ul>
-<h2 id="updating-opencore"><a name="updating-opencore" class="plugin-anchor" href="#updating-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Updating OpenCore</h2>
-<p>So the main things to note with updating OpenCore:</p>
+<p>So with troubleshooting a hackintosh, it can be a bit difficult to really understand <em>where</em> you&apos;re getting stuck as the exact keyword you&apos;re trying to search for may not match anything on google. While this page won&apos;t solve all your issues, it should at least help better understand where in the macOS boot-process you&apos;re getting stuck and hopefully give some ideas as to why you&apos;re stuck.</p>
+<h2 id="opencore-booting"><a name="opencore-booting" class="plugin-anchor" href="#opencore-booting"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore Booting</h2>
+<p>This section will be brief, as OpenCore boot issues are fairly rare and usually simple user error:</p>
 <ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">Releases</a> happen the first monday of every month</li>
-<li>The <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf" target="_blank">Differences.pdf</a> will tell you all the things added and removed from this version of OpenCore compared to the previous release</li>
-<li>The OpenCore Vanilla Guide will have a note on the <a href="./">README.md</a> about what release version it supports</li>
+<li>System powers on and searches for boot devices</li>
+<li>System locates BOOTx64.efi on your OpenCore USB under EFI/BOOT/</li>
+<li>BOOTx64.efi is loaded which then chain-loads OpenCore.efi from EFI/OC/</li>
+<li>NVRAM Properties are applied</li>
+<li>EFI drivers are loaded from EFI/OC/Drivers</li>
+<li>Graphics Output Protocol(GOP) is installed</li>
+<li>ACPI Tables are loaded from EFI/OC/ACPI</li>
+<li>SMBIOS Data is applied</li>
+<li>OpenCore loads and shows you all possible boot options</li>
+<li>You now boot your macOS installer</li>
 </ul>
-<blockquote>
-<p>So how do I update?</p>
-</blockquote>
-<p>So the process goes as follows:</p>
-<ol>
-<li><p><strong>Download the latest releases of OpenCore and co.</strong></p>
-</li>
-<li><p><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a></p>
-</li>
-<li><p><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AppleSupportPkg</a></p>
-</li>
-<li><p><strong>Mount your EFI</strong></p>
-</li>
-<li><p>So first, lets mount your hard drive&apos;s EFI and make a copy somewhere safe with <a href="https://github.com/corpnewt/MountEFI" target="_blank">MountEFI</a>. We won&apos;t be updating the drive&apos;s EFI at first, instead we&apos;ll be grabbing a spare USB to be our crash dummy. This allows us to keep a working copy of Opencore incase our update goes south</p>
-</li>
-<li><p>For the USB, it must be formatted as GUID. Reason for this is that GUID will automatically create an EFI partition, though this will be hidden by default so you&apos;ll need to mount it with MountEFI.</p>
-</li>
-</ol>
-<p><img src="../images/post-install/update-md/usb-erase.png" alt=""></p>
+<p>If you&apos;re having issues booting at this point, main things to check for:</p>
 <ul>
-<li>Now you can place your OpenCore EFI on the USB</li>
+<li><a href="troubleshooting.html#stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></a></li>
+<li><a href="troubleshooting.html#cant-see-macos-partitions">Can&apos;t see macOS partitions</a></li>
+<li><a href="troubleshooting.html#black-screen-after-picker">Black screen after picker</a></li>
+<li><a href="troubleshooting.html#booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</a></li>
 </ul>
-<p><img src="../images/post-install/update-md/usb-folder.png" alt=""></p>
-<ol>
-<li><p><strong>Replace the OpenCore files with the ones you just downloaded</strong></p>
-</li>
-<li><p>The important ones to update:</p>
+<p>For the rest of the possible issues, see here:</p>
 <ul>
-<li><code>EFI/BOOT/BOOTx64.efi</code></li>
-<li><code>EFI/OC/OpenCore.efi</code></li>
-<li><code>EFI/OC/Drivers/OpenRuntime</code>(<strong>Don&apos;t forget this one, OpenCore will not boot with mismatched versions</strong>)</li>
+<li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a></li>
 </ul>
-</li>
-<li><p>You can also update other drivers you have if present, these are just the ones that <strong>must</strong> be updated in order to boot correctly</p>
-</li>
-</ol>
-<p><img src="../images/post-install/update-md/usb-folder-highlight.png" alt=""></p>
-<ol>
-<li><p><strong>Compare your config.plist to that of the new Sample.plist</strong></p>
-</li>
-<li><p>With this, there&apos;s a couple ways to do this:</p>
+<h2 id="bootefi-handoff"><a name="bootefi-handoff" class="plugin-anchor" href="#bootefi-handoff"><i class="fa fa-link" aria-hidden="true"></i></a>boot.efi Handoff</h2>
+<p><img src="../images/troubleshooting/boot-md/1-boot-efi.png" alt=""></p>
+<p>This is where macOS&apos;s bootloader comes onto the scene, specifically what it does is prep the environment for the kernel to load. If you&apos;re getting stuck at this point, there&apos;s likely an issue with loading the kernel, main culprits:</p>
 <ul>
-<li><a href="https://github.com/corpnewt/OCConfigCompare" target="_blank">OCConfigCompare</a> to compare between the sample.plist and your config.plist</li>
-<li><code>diff (file input 1) (file input 2)</code> in terminal</li>
-<li><a href="https://www.scootersoftware.com" target="_blank">BeyondCompare</a> </li>
-<li>Make a new config based off reading the updated Opencore Vanilla Guide</li>
+<li><a href="troubleshooting.html#stuck-on-eblogexitbsstart">Stuck on <code>[EB|#LOG:EXITBS:START]</code></a></li>
+<li><a href="troubleshooting.html#couldnt-allocate-runtime-area-errors"><code>Couldn&apos;t allocate runtime area</code> errors</a></li>
 </ul>
-</li>
-<li><p>Once you&apos;ve made the adjustments and made sure you config is compliant with the newest release of OpenCore, make sure to double check your setting with the OpenCore Guide on what to set everything to, otherwise read the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf" target="_blank">Differences.pdf</a> if you want to get a bit more technical.</p>
-</li>
-</ol>
-<p><img src="../images/post-install/update-md/oc-config-compare.png" alt=""></p>
-<ol>
-<li><p><strong>Boot!</strong></p>
-</li>
-<li><p>Once everything&apos;s working with the dummy USB, you can mount the EFI and move it over to the hard drive&apos;s EFI partition. Remember to keep a copy of your old EFI in cases where OpenCore is acting funny down the road</p>
-</li>
-</ol>
-<h2 id="updating-kexts"><a name="updating-kexts" class="plugin-anchor" href="#updating-kexts"><i class="fa fa-link" aria-hidden="true"></i></a>Updating Kexts</h2>
+<p>For the rest of the possible issues, see here:</p>
 <ul>
-<li><p>Updating Kexts is a similar process to updating OpenCore, make a copy of everything and update on a dummy USB in case there&apos;s issues</p>
-</li>
-<li><p>The easiest way to update your kexts is via 2 tools:</p>
+<li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a></li>
+</ul>
+<p><strong>Note</strong>: In macOS 10.15.4, Apple changed the boot.efi debugging protocol, so things will look quite a bit different from before but all the same rules still apply</p>
+<h2 id="xnukernel-handoff"><a name="xnukernel-handoff" class="plugin-anchor" href="#xnukernel-handoff"><i class="fa fa-link" aria-hidden="true"></i></a>XNU/Kernel Handoff</h2>
+<p>Now that boot.efi has setup everything for us, we now get to watch the kernel do it&apos;s thing:</p>
+<p><img src="../images/troubleshooting/boot-md/2-kernel-start.png" alt=""></p>
+<p>This section is where SMBIOS data is verified, ACPI tables/Kexts are loaded and macOS tries to get everything in order. Failures here are generally a result of:</p>
 <ul>
-<li><a href="https://github.com/corpnewt/Lilu-and-Friends" target="_blank">Lilu and Friends</a> to download and compile the kexts</li>
-<li><a href="https://github.com/corpnewt/KextExtractor" target="_blank">Kext Extractor</a> to merge them into your EFI</li>
+<li>Corrupted SSDTs</li>
+<li>Corrupted kexts(or incorrectly setup under your config.plist -&gt; Kernel -&gt; Add)</li>
+<li>Messed up memory map</li>
 </ul>
-</li>
-</ul>
-<h2 id="updating-macos"><a name="updating-macos" class="plugin-anchor" href="#updating-macos"><i class="fa fa-link" aria-hidden="true"></i></a>Updating macOS</h2>
+<p>See here for more troubleshooting info:</p>
 <ul>
-<li><p>So this is probably one of the most challenging parts, maintaining your system through OS updates. The main things to keep in mind:</p>
+<li><a href="troubleshooting.html#kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></a></li>
+<li><a href="troubleshooting.html#kernel-panic-on-invalid-frame-pointer">Kernel Panic on <code>Invalid frame pointer</code></a></li>
+</ul>
+<p><img src="../images/troubleshooting/boot-md/5-apfs-module.png" alt=""></p>
+<p>Now here we have <code>[ PCI configurations begin ]</code>, this section can be seen as a hardware test for our systems, kexts and SSDTs we injected, the main things that are tested here:</p>
 <ul>
-<li>With OS updates, make sure everything has been updated and you have some form of recovery like TimeMachine or an older macOS installer with a known good EFI on it</li>
-<li>Do a bit of google-fu to see if others are having issues with the newest update</li>
+<li>Embedded Controllers</li>
+<li>Storage(NVMe, SATA, etc)</li>
+<li>PCI/e</li>
+<li>NVRAM</li>
+<li>RTC</li>
+<li>PS2 and I2C</li>
 </ul>
-</li>
-<li><p>I&apos;ve also provided a bit more of a detailed map of what&apos;s changed in macOS versions, see below:</p>
-</li>
-</ul>
-<p><strong>macOS Catalina</strong></p>
+<p>For more specific info on how to get around this area, see here:</p>
 <ul>
-<li>10.15.0<ul>
-<li><a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Requires proper EC</a></li>
-<li>Dual socket and most AMD CPUs need <a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler.kext</a></li>
-<li>MacPro5,1 support has been dropped</li>
+<li><a href="troubleshooting.html#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy">Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></a></li>
 </ul>
-</li>
-<li>10.15.1<ul>
-<li>Requires WhateverGreen 1.3.4+</li>
-<li>Broke DRM for many GPUs(see <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md" target="_blank">DRM Chart</a>)</li>
-<li>Requires all previous fixes</li>
+<p><img src="../images/troubleshooting/boot-md/6-USB-setup.png" alt=""></p>
+<p>This is where the 15 port limit and USB mapping comes into play, and where the infamous &quot;Waiting for Root Device&quot; errors pops in, main things to check for:</p>
+<ul>
+<li><a href="troubleshooting.html#waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</a></li>
 </ul>
-</li>
-<li>10.15.2<ul>
-<li>Fixes Navi support in the installer</li>
-<li>Requires all previous fixes</li>
+<p><img src="../images/troubleshooting/boot-md/8-dsmos-arrived.png" alt=""></p>
+<p>This is where our FakeSMC/VirtualSMC come into the scene and do their magic, DSMOS itself is a kext that verifies if your system has an SMC and will request a key. If this key is missing, then DSMOS will not decrypt the rest of the binaries and you&apos;ll get stuck here. You may also get stuck at AppleACPICPU which is just the same error.</p>
+<ul>
+<li><a href="troubleshooting.html#kextd-stall0-appleacpicpu">kextd stall[0]: AppleACPICPU</a></li>
 </ul>
-</li>
-<li>10.15.3<ul>
-<li>No change</li>
-<li>Requires all previous fixes</li>
+<pre><code class="lang-text">Your karma check for today:
+There once was a user that whined
+his existing OS was so blind,
+he&apos;d do better to pirate an OS that ran great
+but found his hardware declined.
+Please don&apos;t steal Mac OS!
+Really, that&apos;s way uncool.
+(C) Apple Computer, Inc.
+</code></pre>
+<p>Source: Dont Steal Mac OS X.kext</p>
+<p><img src="../images/troubleshooting/boot-md/9-audio.png" alt=""></p>
+<p>This is where Apple&apos;s audio driver comes in, and where AppleALC shines. Generally rare to see issues here but if you do, try disabling AppleALC and any other audio related kexts.</p>
+<p><img src="../images/troubleshooting/boot-md/10-GPU.png" alt=""></p>
+<p>And here we get to the GPU driver initialization, and where WhateverGreen also does its magic. Generally errors here are due to the GPU and not WhateverGreen itself, main culprits:</p>
+<ul>
+<li><a href="troubleshooting.html#stuck-on-or-near-ioconsolessers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></a></li>
+<li><a href="troubleshooting.html#black-screen-after-ioconsoleusers-gioscreenlock-on-navi">Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</a></li>
 </ul>
-</li>
-<li>10.15.4<ul>
-<li><a href="https://github.com/AMD-OSX/AMD_Vanilla" target="_blank">AMD CPU users need to update <code>cpuid_set_cpufamily</code> patch</a></li>
-<li>Fixes DRM on many Ellesmere based Polaris GPUs</li>
-<li>Requires all previous fixes(excluding <code>shikigva=80</code> for Polaris DRM for most users)</li>
-</ul>
-</li>
+<h2 id="macos-handoff"><a name="macos-handoff" class="plugin-anchor" href="#macos-handoff"><i class="fa fa-link" aria-hidden="true"></i></a>macOS Handoff</h2>
+<p><img src="../images/troubleshooting/boot-md/11-boot.png" alt=""></p>
+<p>And you&apos;ve finally got past all that verbose! If you&apos;re getting stuck at the Apple logo after all that verbose, then there&apos;s a couple things to check for:</p>
+<ul>
+<li><a href="troubleshooting.html#macos-frozen-right-before-login">macOS frozen right before login</a></li>
+<li><a href="troubleshooting.html#black-screen-after-ioconsoleusers-gioscreenlock-on-navi">Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</a></li>
+<li><a href="troubleshooting.html#frozen-in-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</a></li>
 </ul>
 
                                 
@@ -898,12 +883,12 @@
 
             
                 
-                <a href="oc2hdd.html" class="navigation navigation-prev " aria-label="Previous page: Booting without USB">
+                <a href="debug.html" class="navigation navigation-prev " aria-label="Previous page: OpenCore Debugging">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../extras/msr-lock.html" class="navigation navigation-next " aria-label="Next page: Fixing CFG Lock">
+                <a href="../extras/legacy.html" class="navigation navigation-next " aria-label="Next page: Legacy Install">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -914,7 +899,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Updating OpenCore, kexts and macOS","level":"5.1.4","depth":2,"next":{"title":"Fixing CFG Lock","level":"5.1.5","depth":2,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"previous":{"title":"Booting without USB","level":"5.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/update.md","mtime":"2020-04-25T20:16:20.671Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-25T20:17:11.255Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"macOS Boot Process","level":"6.3","depth":1,"next":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"previous":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/boot.md","mtime":"2020-04-25T20:16:20.671Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-25T20:17:11.255Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
