@@ -46,6 +46,7 @@
 
 * [General Troubleshooting](/troubleshooting/troubleshooting.md)
 * [OpenCore Debugging](/troubleshooting/debug.md)
+* [macOS Boot Process](/troubleshooting/boot.md)
 
 ## Extras
 
