@@ -13,7 +13,7 @@ So with troubleshooting a hackintosh, it can be a bit difficult to really unders
 
 ## OpenCore Booting
 
-This section will be brief, as Opencore boot issues are fairly rare and usually simple user error:
+This section will be brief, as OpenCore boot issues are fairly rare and usually simple user error:
 
 * System powers on and searches for boot devices
 * System locates BOOTx64.efi on your OpenCore USB under EFI/BOOT/
