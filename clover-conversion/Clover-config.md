@@ -433,7 +433,7 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 | Key | Type | Value |
 | :--- | :--- | :--- |
 |Comment|String|Disable RTC checksum update on poweroff|
-| Enabled | String | YES |
+| Enabled | Boolean | YES |
 |Count|Number|1|
 |Base|String|__ZN8AppleRTC14updateChecksumEv|
 |Identifier|String|com.apple.driver.AppleRTC|

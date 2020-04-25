@@ -21,7 +21,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 
 * [Stuck on `no vault provided!`](/troubleshooting/troubleshooting.md#stuck-on-no-vault-provided)
 * [Stuck on EndRandomSeed](/troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
-* [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eb-log-exitbs-start)
+* [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eblogexitbsstart)
 * [Can't see macOS partitions](/troubleshooting/troubleshooting.md#cant-see-macos-partitions)
 * [Black screen after picker](/troubleshooting/troubleshooting.md#black-screen-after-picker)
 * [Stuck on `OC: OcAppleGenericInput... - Success`](/troubleshooting/troubleshooting.md#stuck-on-oc-ocapplegenericinput---success)
@@ -250,7 +250,6 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Kernel Panic `Cannot perform kext summary`](/troubleshooting/troubleshooting.md#kernel-panic-cannot-perform-kext-summary)
 * [Kernel Panic `AppleIntelMCEReporter`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelmcereporter)
 * [Kernel Panic `AppleIntelCPUPowerManagement`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelcpupowermanagement)
-* [Stop Sign with corrupted text(Still waiting for Root Device)](/troubleshooting/troubleshooting.md#stop-sign-with-corrupted-text-still-waiting-for-root-device)
 * [Frozen in the macOS installer after 30 seconds](/troubleshooting/troubleshooting.md#frozen-in-macos-installer-after-30-seconds)
 * [15h/16h CPU reboot after Data & Privacy screen](/troubleshooting/troubleshooting.md#15h-16-h-cpu-reboot-after-data-and-privacy-screen)
 * [Sleep crashing on AMD](/troubleshooting/troubleshooting.md#sleep-crashing-on-amd)
@@ -298,10 +297,20 @@ Example of what a disabled RTC with no way to enable looks like(note that there 
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
-* Generally seen as a USB error, couple ways to fix:
-  * If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
-  * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `ReleaseUsbOwnership`. Clover equivalent is `FixOwnership`
-     * Enabling XHCI Handoff in the BIOS can fix this as well
+Generally seen as a USB error, couple ways to fix:
+
+* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
+* Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quriks -> ReleaseUsbOwnership` in your config.plist
+  * Enabling XHCI Handoff in the BIOS can fix this as well
+ 
+* For 15h and 16h AMD CPUs, you may need to add the following:
+  * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
+
+* If XLNCUSBFix still doesn't work, then try the following:
+  * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
+  
+Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/) to fix booting, note that this only works on Intel USB Chipsets and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
+
 
 ## macOS installer in Russian
 
@@ -359,20 +368,6 @@ With macOS catalina, dual socket support is broken, and a fun fact about AMD fir
 ## Kernel Panic `AppleIntelCPUPowerManagement`
 
 This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quirks`
-
-## Stop Sign with corrupted text(Still waiting for Root Device)
-
-With OS X 10.11 El Capitan, Apple imposed a 15 USB port limit. To get around this we actually create a USB map to include ports we want and kick out extras we don't care about. For install, set `Kernel -> Quirks -> XhciPortLimit -> Enabled` but for post install we recommend making a map as the port limit patch isn't guaranteed to work with future versions of macOS.
-
-First try your USB stick in a different USB port.
-
-For 15h and 16h AMD CPUs, you may need to add the following:
-* [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
-
-If XLNCUSBFix still doesn't work, then try the following:
-* [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
-
-Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use USBInjectAll to fix booting, note that this only works on Intel USB Chipsets
 
 ## Frozen in the macOS installer after 30 seconds
 
@@ -516,6 +511,7 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 * [Incorrect resolution with OpenCore](/troubleshooting/troubleshooting.md#incorrect-resolution-with-opencore)
 * [No temperature/fan sensor output](/troubleshooting/troubleshooting.md#no-temperature-fan-sensor-output)
 * [Can't find Windows/Bootcamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windows-bootcamp-drive-in-picker)
+* ["You can't change the startup disk to the selected disk" error](/troubleshooting/troubleshooting.md#you-cant-change-the-startup-disk-to-the-selected-disk)
 * [Booting Windows results in Bluescreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
 * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed-already-started)
 * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning-unresolved)
@@ -593,8 +589,14 @@ So with OpenCore, we have to note that legacy Windows installs are not supported
 Now to get onto troubleshooting:
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is located on the same drive
-* Enable `Platforminfo -> Generic -> AdviseWindows -> True` if the EFI partition isn't the first on the partition table
 
+## "You can't change the startup disk to the selected disk" error
+
+This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:
+
+* `PlatformInfo -> Generic -> AdviseWindows -> True`
+
+![](/images/troubleshooting/troubleshooting-md/error.png)
 
 ## Booting Windows results in Bluescreen or Linux crashes
 

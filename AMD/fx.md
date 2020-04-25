@@ -233,7 +233,7 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
 * **ConsoleAttributes**: `0`
   * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAttributes**: `0`
-  * Used for setting custom picker attributes, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+  * Used for setting custom picker attributes, use of this setting will be covered in [Post-Install](/extras/gui.md)
 * **PickerAudioAssist**: NO
   * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
 * **PollAppleHotKeys**: NO
@@ -416,7 +416,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
 * **AdviseWindows**: NO
-  * Used for when the EFI partition isn't first on the windows drive, generally found on systems that upgraded from Legacy to UEFI installs
+  * Used for when the EFI partition isn't first on the Windows drive, generally found on systems that upgraded from Legacy to UEFI installs
 
 **UpdateDataHub**: YES
 
