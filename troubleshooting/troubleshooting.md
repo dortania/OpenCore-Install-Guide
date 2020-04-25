@@ -254,6 +254,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [15h/16h CPU reboot after Data & Privacy screen](/troubleshooting/troubleshooting.md#15h-16-h-cpu-reboot-after-data-and-privacy-screen)
 * [Sleep crashing on AMD](/troubleshooting/troubleshooting.md#sleep-crashing-on-amd)
 * [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
+* [`kextd stall[0]: AppleACPICPU`](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -394,6 +395,14 @@ So this is due to some issue around the `Booter -> Quirks` you set, main things 
    * Note that Icelake's memory protections break this quirks so avoid it
 * `RebuildAppleMemoryMap`
    * Makes sure the memory map is compatible with macOS, some OEMs like Lenovo do not like this quirk so disable it
+   
+## `kextd stall[0]: AppleACPICPU`
+
+This is due to either a missing SMC emulator or broken one, make sure of the following:
+
+* Lilu and VirtualSMC are both in EFI/OC/kexts and in your config.plist
+* Lilu is before VirtualSMC in the kext list
+* Last resort is to try FakeSMC instead, **do not have both VirtualSMC and FakeSMC enabled**
 
 # macOS post-install
 

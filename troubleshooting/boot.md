@@ -90,6 +90,36 @@ This is where the 15 port limit and USB mapping comes into play, and where the i
 
 * ["Waiting for Root Device" or Prohibited Sign error](/troubleshooting/troubleshooting.md#waiting-for-root-device-or-prohibited-sign-error)
 
+![](/images/troubleshooting/boot-md/8-dsmos-arrived.png)
+
+This is where our FakeSMC/VirtualSMC come into the scene and do their magic, DSMOS itself is a kext that verifies if your system has an SMC and will request a key. If this key is missing, then DSMOS will not decrypt the rest of the binaries and you'll get stuck here. You may also get stuck at AppleACPICPU which is just the same error.
+
+* [kextd stall[0]: AppleACPICPU](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
+
+```text
+Your karma check for today:
+There once was a user that whined
+his existing OS was so blind,
+he'd do better to pirate an OS that ran great
+but found his hardware declined.
+Please don't steal Mac OS!
+Really, that's way uncool.
+(C) Apple Computer, Inc.
+```
+
+Source: Dont Steal Mac OS X.kext
+
+![](/images/troubleshooting/boot-md/9-audio.png)
+
+This is where Apple's audio driver comes in, and where AppleALC shines. Generally rare to see issues here but if you do, try disabling AppleALC and any other audio related kexts.
+
+![](/images/troubleshooting/boot-md/10-GPU.png)
+
+And here we get to the GPU driver initialization, and where WhateverGreen also does its magic. Generally errors here are due to the GPU and not WhateverGreen itself, main culprits:
+
+* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](/troubleshooting/troubleshooting.md#stuck-on-or-near-ioconsolessers-gioscreenlock)
+* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](/troubleshooting/troubleshooting.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
+
 ## macOS Handoff
 
 ![](/images/troubleshooting/boot-md/11-boot.png)
