@@ -41,7 +41,7 @@ For the rest of the possible issues, see here:
 
 ![](/images/troubleshooting/boot-md/1-boot-efi.png)
 
-This is where macOS's bootloader comes onto the scene, specifically what it does is prep the environment for the kernel to load. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
+This is where macOS's bootloader(boot.efi) comes onto the scene, specifically what it does is prep the environment for the kernel to load and where Opencore injects kexts. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
 
 * [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eblogexitbsstart)
 * [`Couldn't allocate runtime area` errors](/troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)
@@ -54,7 +54,7 @@ For the rest of the possible issues, see here:
 
 ## XNU/Kernel Handoff
 
-Now that boot.efi has setup everything for us, we now get to watch the kernel do it's thing:
+Now that boot.efi has setup everything for us, we now get to watch the kernel do it's thing. This section is commonly referred as the [Rooting phase](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/booting/booting.html):
 
 ![](/images/troubleshooting/boot-md/2-kernel-start.png)
 
@@ -71,7 +71,9 @@ See here for more troubleshooting info:
 
 ![](/images/troubleshooting/boot-md/5-apfs-module.png)
 
-Now here we have `[ PCI configurations begin ]`, this section can be seen as a hardware test for our systems, kexts and SSDTs we injected, the main things that are tested here:
+Now here we have `[ PCI configurations begin ]`, this section can be seen as a hardware test for our systems, kexts and SSDTs we injected, and where IOKit starts hardware probs to find devices to attach to.
+
+The main things that are tested here:
 
 * Embedded Controllers
 * Storage(NVMe, SATA, etc)

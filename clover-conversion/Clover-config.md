@@ -109,6 +109,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * **AddIMEI**:
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
   * WhateverGreen will also handle fixing IMEI naming
+  * For SandyBridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
 
 * **FixIntelGfx**:
   * WhateverGreen handles this
