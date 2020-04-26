@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat Apr 25 2020 20:16:19 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 26 2020 15:40:26 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="haswell-e"><a name="haswell-e" class="plugin-anchor" href="#haswell-e"><i class="fa fa-link" aria-hidden="true"></i></a>Haswell-E</h1>
 <ul>
@@ -794,22 +794,25 @@
 <p><strong>Add:</strong></p>
 <p>This is where you&apos;ll add SSDTs for your system, these are very important to <strong>booting macOS</strong> and have many uses like <a href="https://usb-map.gitbook.io/project/" target="_blank">USB maps</a>, <a href="../extras/spoof.html">disabling unsupported GPUs</a> and such. And with our system, <strong>its even required to boot</strong>. Guide on making them found here: <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
 <p>For us we&apos;ll need a couple of SSDTs to bring back functionality that Clover provided:</p>
-<ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a><ul>
-<li>Allows for native CPU power management on Haswell and newer, Clover alternative would be under <code>Acpi -&gt; GenerateOptions -&gt; PluginType</code></li>
-</ul>
-</li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a><ul>
-<li>Hides the Embedded controller and creates a fake one for macOS, <strong>needed for all Catalina users</strong> and recommended for other versions of macOS</li>
-</ul>
-</li>
-<li><p><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl" target="_blank">SSDT-EHCx_OFF</a></p>
-<ul>
-<li>Preferred alternative over renaming EHCI for setting up USB correctly on pre-Skylake systems. This can be avoided if your BIOS supports EHCI-Handoff, this can be done during post-install though</li>
-</ul>
-<p>Note that you <strong>should not</strong> add your generated <code>DSDT.aml</code> here, it is already in your firmware. So if present, remove the entry for it in your <code>config.plist</code> and under EFI/OC/ACPI.</p>
-</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Required_SSDTs</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong><a href="https://github.com/Piker-Alpha/ssdtPRGen.sh" target="_blank">SSDT-PM</a></strong></td>
+<td style="text-align:left">Needed for proper CPU power management, you will need to run Pike&apos;s ssdtPRGen.sh script to generate this file. This will be run in <a href="../post-install/">post install</a>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl" target="_blank">SSDT-EC</a></strong></td>
+<td style="text-align:left">Hides the Embedded controller and creates a fake one for macOS, <strong>needed for all Catalina users</strong> and recommended for other versions of macOS.</td>
+</tr>
+</tbody>
+</table>
+<p> Note that you <strong>should not</strong> add your generated <code>DSDT.aml</code> here, it is already in your firmware. So if present, remove the entry for it in your <code>config.plist</code> and under EFI/OC/ACPI.</p>
 <p>For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a> <strong>page.</strong> Compiled SSDTs have a <strong>.aml</strong> extension(Assembled) and will go into the <code>EFI/OC/ACPI</code> folder and <strong>must</strong> be specified in your config under <code>ACPI -&gt; Add</code> as well.</p>
 <p><strong>Block</strong></p>
 <p>This blocks certain ACPI tabes from loading, for us we can ignore this</p>
@@ -1556,7 +1559,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Haswell-E","level":"3.1","depth":1,"next":{"title":"Broadwell-E","level":"3.2","depth":1,"path":"config-HEDT/broadwell-e.md","ref":"config-HEDT/broadwell-e.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/haswell-e.md","mtime":"2020-04-25T20:16:19.936Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-25T20:17:11.255Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Haswell-E","level":"3.1","depth":1,"next":{"title":"Broadwell-E","level":"3.2","depth":1,"path":"config-HEDT/broadwell-e.md","ref":"config-HEDT/broadwell-e.md","articles":[]},"previous":{"title":"Coffee Lake","level":"2.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/haswell-e.md","mtime":"2020-04-26T15:40:26.800Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-26T15:41:20.743Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

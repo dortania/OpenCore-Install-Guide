@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat Apr 25 2020 20:16:19 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun Apr 26 2020 15:40:26 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="skylake-x"><a name="skylake-x" class="plugin-anchor" href="#skylake-x"><i class="fa fa-link" aria-hidden="true"></i></a>Skylake-X</h1>
 <ul>
@@ -794,21 +794,28 @@
 <p><strong>Add:</strong></p>
 <p>This is where you&apos;ll add SSDTs for your system, these are very important to <strong>booting macOS</strong> and have many uses like <a href="https://usb-map.gitbook.io/project/" target="_blank">USB maps</a>, <a href="../extras/spoof.html">disabling unsupported GPUs</a> and such. And with our system, <strong>its even required to boot</strong>. Guide on making them found here: <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
 <p>For us we&apos;ll need a couple of SSDTs to bring back functionality that Clover provided:</p>
-<ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a><ul>
-<li>Allows for native CPU power management on Haswell and newer, Clover alternative would be under <code>Acpi -&gt; GenerateOptions -&gt; PluginType</code></li>
-</ul>
-</li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a><ul>
-<li>Hides the Embedded controller and creates a fake one for macOS, <strong>needed for all Catalina users</strong> and recommended for other versions of macOS</li>
-<li>This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.</li>
-</ul>
-</li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a><ul>
-<li>This is the <a href="https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2" target="_blank">300 series RTC patch</a>, required for some X299 boards which prevent systems from booting macOS. The alternative is <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a> for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see <a href="../extras/acpi.html">Getting started with ACPI</a> page. Mainly Gigabyte&apos;s X299X and AsRock boards require AWAC patching</li>
-</ul>
-</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Required_SSDTs</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></strong></td>
+<td style="text-align:left">Allows for native CPU power management on Haswell and newer, Clover alternative would be under <code>Acpi -&gt; GenerateOptions -&gt; PluginType</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></strong></td>
+<td style="text-align:left">Hides the Embedded controller and creates a fake one for macOS, <strong>needed for all Catalina users</strong> and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a></strong></td>
+<td style="text-align:left">This is the <a href="https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2" target="_blank">300 series RTC patch</a>, required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a> for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see <a href="../extras/acpi.html">Getting started with ACPI</a> page.</td>
+</tr>
+</tbody>
+</table>
 <p>Note that you <strong>should not</strong> add your generated <code>DSDT.aml</code> here, it is already in your firmware. So if present, remove the entry for it in your <code>config.plist</code> and under EFI/OC/ACPI.</p>
 <p>For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a> <strong>page.</strong> Compiled SSDTs have a <strong>.aml</strong> extension(Assembled) and will go into the <code>EFI/OC/ACPI</code> folder and <strong>must</strong> be specified in your config under <code>ACPI -&gt; Add</code> as well.</p>
 <p><strong>Block</strong></p>
@@ -1544,7 +1551,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.3","depth":1,"next":{"title":"Bulldozer/Jaguar","level":"4.1","depth":1,"path":"AMD/fx.md","ref":"AMD/fx.md","articles":[]},"previous":{"title":"Broadwell-E","level":"3.2","depth":1,"path":"config-HEDT/broadwell-e.md","ref":"config-HEDT/broadwell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-04-25T20:16:19.936Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-25T20:17:11.255Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Skylake-X","level":"3.3","depth":1,"next":{"title":"Bulldozer/Jaguar","level":"4.1","depth":1,"path":"AMD/fx.md","ref":"AMD/fx.md","articles":[]},"previous":{"title":"Broadwell-E","level":"3.2","depth":1,"path":"config-HEDT/broadwell-e.md","ref":"config-HEDT/broadwell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/skylake-x.md","mtime":"2020-04-26T15:40:26.800Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-26T15:41:20.743Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
