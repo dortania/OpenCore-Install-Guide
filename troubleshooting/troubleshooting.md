@@ -243,7 +243,8 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * ["Waiting for Root Device" or Prohibited Sign error](/troubleshooting/troubleshooting.md#waiting-for-root-device-or-prohibited-sign-error)
 * [macOS installer in Russian](/troubleshooting/troubleshooting.md#macos-installer-in-russian)
 * [macOS Installer being damaged](/troubleshooting/troubleshooting.md#macos-installer-being-damaged)
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](/troubleshooting/troubleshooting.md#stuck-on-or-near-ioconsolessers-gioscreenlock)
+* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](/troubleshooting/troubleshooting.md#stuck-on-or-near-ioconsoleusers-gioscreenlock)
+* [Scrambled Screen on laptops](/troubleshooting/troubleshooting.md#scrambled-screen-on-laptops)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](/troubleshooting/troubleshooting.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 * [300 series Intel stalling on `apfs_module_start...`](/troubleshooting/troubleshooting.md#300-series-intel-stalling-on-apfs_module_start)
 * [Stalling on `apfs_module_start...`, `Waiting for Root device`, `Waiting on...IOResources...`, `previous shutdown cause...` in Catalina](/troubleshooting/troubleshooting.md#stalling-on-apfs_module_start-waiting-for-root-device-waiting-on-ioresources-previous-shutdown-cause-in-catalina)
@@ -252,6 +253,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Kernel Panic `AppleIntelCPUPowerManagement`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelcpupowermanagement)
 * [Frozen in the macOS installer after 30 seconds](/troubleshooting/troubleshooting.md#frozen-in-macos-installer-after-30-seconds)
 * [15h/16h CPU reboot after Data & Privacy screen](/troubleshooting/troubleshooting.md#15h-16-h-cpu-reboot-after-data-and-privacy-screen)
+* [Keyboard works but trackpad does not](/troubleshooting/troubleshooting.md#keyboard-works-but-trackpad-does-not)
 * [Sleep crashing on AMD](/troubleshooting/troubleshooting.md#sleep-crashing-on-amd)
 * [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
 * [`kextd stall[0]: AppleACPICPU`](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
@@ -340,13 +342,21 @@ For the latter:
 date 0901000019
 ```
 
-## Stuck on or near `IOConsoleUsers: gIOScreenLock...`
+## Stuck on or near `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
 
 This is right before the GPU is properly initialized, verify the following:
 
 * GPU is UEFI capable(GTX 7XX/2013+)
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
+* Double check that ig-platform-id and device-id are valid if running an iGPU.
+* Trying various [WhateverGreen Fixes](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+  * `-igfxmlr` boot argument. This can also manifest as a "Divide by Zero" error.
+
+## Scrambled Screen on laptops
+
+![Scrambled Screen](/images/install/Scrambled.jpg)
+Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
 
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 
@@ -385,6 +395,20 @@ This is a common example of screwed up TSC, for most system add [VoodooTSCSync](
 For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
 ![](/images/troubleshooting/troubleshooting-md/asus-tsc.jpg)
+
+## Keyboard works but trackpad does not
+
+Make sure that VoodooInput is listed *before* VoodooPS2 and VoodooI2C kexts in your config.plist.
+
+### VoodooI2C Troubleshooting
+
+Check the order that your kexts load - make they match what is shown under [Gathering Files](/OpenCore/ktext.md):
+
+1. VoodooGPIO, VoodooInput, and VoodooI2CServices in any order (Found under VoodooI2C.kext/Contents/PlugIns)
+2. VoodooI2C
+3. Satellite/Plugin Kext
+
+Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI -> Add in your config.plist. If you are still having issues, reference the [Getting Started With ACPI GPIO page](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html). 
 
 ## Kernel Panic on `Invalid frame pointer`
 
