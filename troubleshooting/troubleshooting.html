@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun Apr 26 2020 23:45:08 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Apr 27 2020 23:54:59 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -966,7 +966,8 @@
 <li><a href="troubleshooting.html#waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</a></li>
 <li><a href="troubleshooting.html#macos-installer-in-russian">macOS installer in Russian</a></li>
 <li><a href="troubleshooting.html#macos-installer-being-damaged">macOS Installer being damaged</a></li>
-<li><a href="troubleshooting.html#stuck-on-or-near-ioconsolessers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-or-near-ioconsoleusers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></a></li>
+<li><a href="troubleshooting.html#scrambled-screen-on-laptops">Scrambled Screen on laptops</a></li>
 <li><a href="troubleshooting.html#black-screen-after-ioconsoleusers-gioscreenlock-on-navi">Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</a></li>
 <li><a href="troubleshooting.html#300-series-intel-stalling-on-apfs_module_start">300 series Intel stalling on <code>apfs_module_start...</code></a></li>
 <li><a href="troubleshooting.html#stalling-on-apfs_module_start-waiting-for-root-device-waiting-on-ioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</a></li>
@@ -975,6 +976,7 @@
 <li><a href="troubleshooting.html#kernel-panic-appleintelcpupowermanagement">Kernel Panic <code>AppleIntelCPUPowerManagement</code></a></li>
 <li><a href="troubleshooting.html#frozen-in-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</a></li>
 <li><a href="troubleshooting.html#15h-16-h-cpu-reboot-after-data-and-privacy-screen">15h/16h CPU reboot after Data &amp; Privacy screen</a></li>
+<li><a href="troubleshooting.html#keyboard-works-but-trackpad-does-not">Keyboard works but trackpad does not</a></li>
 <li><a href="troubleshooting.html#sleep-crashing-on-amd">Sleep crashing on AMD</a></li>
 <li><a href="troubleshooting.html#kernel-panic-on-invalid-frame-pointer">Kernel Panic on <code>Invalid frame pointer</code></a></li>
 <li><a href="troubleshooting.html#kextd-stall0-appleacpicpu"><code>kextd stall[0]: AppleACPICPU</code></a></li>
@@ -1072,13 +1074,21 @@
 </ul>
 <pre><code class="lang-text">date 0901000019
 </code></pre>
-<h2 id="stuck-on-or-near-ioconsoleusers-gioscreenlock"><a name="stuck-on-or-near-ioconsoleusers-gioscreenlock" class="plugin-anchor" href="#stuck-on-or-near-ioconsoleusers-gioscreenlock"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></h2>
+<h2 id="stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3"><a name="stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3" class="plugin-anchor" href="#stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code>/<code>gIOLockState (3...</code></h2>
 <p>This is right before the GPU is properly initialized, verify the following:</p>
 <ul>
 <li>GPU is UEFI capable(GTX 7XX/2013+)</li>
 <li>CSM is off in the BIOS</li>
 <li>Forcing PCIe 3.0 link speed</li>
+<li>Double check that ig-platform-id and device-id are valid if running an iGPU.</li>
+<li>Trying various <a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md" target="_blank">WhateverGreen Fixes</a><ul>
+<li><code>-igfxmlr</code> boot argument. This can also manifest as a &quot;Divide by Zero&quot; error.</li>
 </ul>
+</li>
+</ul>
+<h2 id="scrambled-screen-on-laptops"><a name="scrambled-screen-on-laptops" class="plugin-anchor" href="#scrambled-screen-on-laptops"><i class="fa fa-link" aria-hidden="true"></i></a>Scrambled Screen on laptops</h2>
+<p><img src="../images/install/Scrambled.jpg" alt="Scrambled Screen">
+Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot; or other legacy setting.</p>
 <h2 id="black-screen-after-ioconsoleusers-gioscreenlock-on-navi"><a name="black-screen-after-ioconsoleusers-gioscreenlock-on-navi" class="plugin-anchor" href="#black-screen-after-ioconsoleusers-gioscreenlock-on-navi"><i class="fa fa-link" aria-hidden="true"></i></a>Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</h2>
 <ul>
 <li>Add <code>agdpmod=pikera</code> to boot args</li>
@@ -1101,6 +1111,16 @@
 <p>This is a common example of screwed up TSC, for most system add <a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a></p>
 <p>For Skylake-X, many firmwares including Asus and EVGA won&apos;t write to all cores. So we&apos;ll need to reset the TSC on cold boot and wake with <a href="https://github.com/interferenc/TSCAdjustReset" target="_blank">TSCAdjustReset</a>. Compiled version can be found here: <a href="https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip" target="_blank">TSCAdjustReset.kext</a>. Note that you <strong>must</strong> open up the kext(ShowPackageContents in finder, <code>Contents -&gt; Info.plist</code>) and change the Info.plist -&gt; <code>IOKitPersonalities -&gt; IOPropertyMatch -&gt; IOCPUNumber</code> to the number of CPU threads you have starting from <code>0</code>(i9 7980xe 18 core would be <code>35</code> as it has 36 threads total)</p>
 <p><img src="../images/troubleshooting/troubleshooting-md/asus-tsc.jpg" alt=""></p>
+<h2 id="keyboard-works-but-trackpad-does-not"><a name="keyboard-works-but-trackpad-does-not" class="plugin-anchor" href="#keyboard-works-but-trackpad-does-not"><i class="fa fa-link" aria-hidden="true"></i></a>Keyboard works but trackpad does not</h2>
+<p>Make sure that VoodooInput is listed <em>before</em> VoodooPS2 and VoodooI2C kexts in your config.plist.</p>
+<h3 id="voodooi2c-troubleshooting"><a name="voodooi2c-troubleshooting" class="plugin-anchor" href="#voodooi2c-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>VoodooI2C Troubleshooting</h3>
+<p>Check the order that your kexts load - make they match what is shown under <a href="../OpenCore/ktext.md">Gathering Files</a>:</p>
+<ol>
+<li>VoodooGPIO, VoodooInput, and VoodooI2CServices in any order (Found under VoodooI2C.kext/Contents/PlugIns)</li>
+<li>VoodooI2C</li>
+<li>Satellite/Plugin Kext</li>
+</ol>
+<p>Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI -&gt; Add in your config.plist. If you are still having issues, reference the <a href="https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html" target="_blank">Getting Started With ACPI GPIO page</a>. </p>
 <h2 id="kernel-panic-on-invalid-frame-pointer"><a name="kernel-panic-on-invalid-frame-pointer" class="plugin-anchor" href="#kernel-panic-on-invalid-frame-pointer"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic on <code>Invalid frame pointer</code></h2>
 <p>So this is due to some issue around the <code>Booter -&gt; Quirks</code> you set, main things to check for:</p>
 <ul>
@@ -1409,7 +1429,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-26T23:45:08.495Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-26T23:46:01.347Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-27T23:54:59.995Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-27T23:55:51.607Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
