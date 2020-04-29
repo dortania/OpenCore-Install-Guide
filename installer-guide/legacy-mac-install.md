@@ -1,6 +1,8 @@
 # Grabbing older versions of macOS/OS X
 
-So with older versions of macOS/OS X, Apple removed them from their Software Catalog that GibMacOS pulls from. To get around this, we can actually use Apple's archived versions. Luckily for us, we don't need to resort to sketchy sites instead using Apple's official site(Note that Mavericks and older are no longer offically hosted):
+* Note: For those doubting OpenCore works on older versions, see here: [OpenCore running on legacy](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/installer-guide/legacy/README.md)
+
+So with older versions of macOS/OS X, Apple removed them from their Software Catalog that GibMacOS pulls from. To get around this, we can actually use Apple's archived versions. Luckily for us, we don't need to resort to sketchy sites instead using Apple's official site(Note that Mavericks and older are no longer officially hosted):
 
 * [How to upgrade to OS X Yosemite](https://support.apple.com/en-ca/HT210717)
 * [How to upgrade to OS X El Capitan](https://support.apple.com/en-us/HT206886)
