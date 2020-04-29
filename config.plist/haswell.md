@@ -161,13 +161,14 @@ The device-id fake is set up like so:
 * `0x04120000` - this is the device id for HD 4600 which does have support in macOS
   * `12040000` when hex swapped
 
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
+We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`. The first enables patching via WhateverGreen.kext, the second sets the min stolen memory to 19MB and third sets the framebuffer memory to 9MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | AAPL,ig-platform-id | Data | 0300220D |
 | framebuffer-patch-enable | Data | 01000000 |
 | framebuffer-stolenmem | Data | 00003001 |
+| framebuffer-fbmem | Data | 00009000 |
 | device-id | Data | 12040000 |
 
 (This is an example for a desktop HD 4400 without a dGPU and no BIOS options for iGPU memory)
@@ -177,6 +178,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 | AAPL,ig-platform-id | Data | 07002216 |
 | framebuffer-patch-enable | Data | 01000000 |
 | framebuffer-stolenmem | Data | 00003001 |
+| framebuffer-fbmem | Data | 00009000 |
 
 (This is an example for a desktop Iris Pro 6200 and no BIOS options for iGPU memory)
 

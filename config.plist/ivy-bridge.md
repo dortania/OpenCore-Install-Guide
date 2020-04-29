@@ -166,15 +166,11 @@ The ig-platform-id's we use is as follows:
 * `0x0166000A` - this is the standard hex for the ig-plat
   * `0A006601` when hex-swapped
 
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(32MB recommended) but required when not available.
-
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | AAPL,ig-platform-id | Data | 0A006601 |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
 
-(This is an example for a desktop HD 4000 and no BIOS options for iGPU memory)
+(This is an example for a desktop HD 4000)
 
 **Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
