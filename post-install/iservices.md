@@ -110,21 +110,21 @@ This is important for those who've tried setting up iMessage but failed, to star
 
 Next open terminal and run the following:
 ```text
-sudo rm -rf ~/Library/Caches/com.apple.iCloudHelper* \
-            ~/Library/Caches/com.apple.Messages* \
-            ~/Library/Caches/com.apple.imfoundation.IMRemoteURLConnectionAgent* \
-            ~/Library/Preferences/com.apple.iChat* \
-            ~/Library/Preferences/com.apple.icloud* \
-            ~/Library/Preferences/com.apple.imagent* \
-            ~/Library/Preferences/com.apple.imessage* \
-            ~/Library/Preferences/com.apple.imservice* \
-            ~/Library/Preferences/com.apple.ids.service* \
-            ~/Library/Preferences/com.apple.madrid.plist* \
-            ~/Library/Preferences/com.apple.imessage.bag.plist* \
-            ~/Library/Preferences/com.apple.identityserviced* \
-            ~/Library/Preferences/com.apple.ids.service* \
-            ~/Library/Preferences/com.apple.security* \
-            ~/Library/Messages
+sudo rm -rf ~/Library/Caches/com.apple.iCloudHelper*
+sudo rm -rf ~/Library/Caches/com.apple.Messages*
+sudo rm -rf ~/Library/Caches/com.apple.imfoundation.IMRemoteURLConnectionAgent*
+sudo rm -rf ~/Library/Preferences/com.apple.iChat*
+sudo rm -rf ~/Library/Preferences/com.apple.icloud*
+sudo rm -rf ~/Library/Preferences/com.apple.imagent*
+sudo rm -rf ~/Library/Preferences/com.apple.imessage*
+sudo rm -rf ~/Library/Preferences/com.apple.imservice*
+sudo rm -rf ~/Library/Preferences/com.apple.ids.service*
+sudo rm -rf ~/Library/Preferences/com.apple.madrid.plist*
+sudo rm -rf ~/Library/Preferences/com.apple.imessage.bag.plist*
+sudo rm -rf ~/Library/Preferences/com.apple.identityserviced*
+sudo rm -rf ~/Library/Preferences/com.apple.ids.service*
+sudo rm -rf ~/Library/Preferences/com.apple.security*
+sudo rm -rf ~/Library/Messages
 ```
 
 ## Verifying your work one last time
