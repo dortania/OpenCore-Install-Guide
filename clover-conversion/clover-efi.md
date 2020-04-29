@@ -7,17 +7,22 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 **Supported ones:**
 
 * ApfsDriverLoader.efi
-* AudioDxe.efi(Make sure this is from [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg) and **not** Goldfish64's repo)
+* AudioDxe.efi(Make sure this is from [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg) and **not** Goldfish64's or Clover's repo)
 * EnhancedFatDxe.efi
+* ExFatDxeLegacy.efi
+* ExFatDxe.efi
 * GrubEXFAT.efi
 * GrubISO9660.efi
 * GrubNTFS.efi
 * GrubUDF.efi
+* HiiDatabase.efi
 * HfsPlus.efi
+* HfsPlusLegacy.efi
 * NTFS.efi
 * NvmExpressDxe.efi
 * OpenRuntime.efi
 * OpenUsbKbDxe.efi
+* OsxFatBinaryDrv.efi
 * Ps2MouseDxe.efi
 * TbtForcePower.efi
 * UsbMouseDxe.efi
@@ -44,11 +49,14 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * EnglishDxe.efi
 * FirmwareVolume.efi
 * HashServiceFix.efi
+* SMCHelper.efi
+* OcQuirks.efi
 * VirtualSMC.efi
 
 **Explicitly unsupported drivers:**
 
 * AppleUsbKbDxe.efi(replaced with OpenUsbKbDxe.efi)
+* FSInject.efi
 * FwRuntimeServices.efi(replaced with OpenRuntime.efi)
 * osxaptiofix2drv-free2000.efi
 * osxaptiofix2drv.efi
@@ -56,7 +64,6 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * osxaptiofixdrv.efi
 * OsxFatBinaryDrv.efi
 * OsxLowMemFixDrv.efi
-* SMCHelper.efi
 * UsbKbDxe.efi(replaced with OpenUsbKbDxe.efi)
 
 # AptioMemoryFix
