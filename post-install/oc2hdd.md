@@ -22,9 +22,6 @@ Now with this done, lets mount our macOS drive. With macOS Catalina, macOS is ac
 
 When you mount your main drive's EFI, you may be greeted with a folder called `APPLE`, this is used for updating the firmware on real Macs but has no effect on our hardware. You can wipe everything on the EFI partition and replace it with the one found on your USB
 
-
 ## Special notes for legacy users
 
 When transferring over your EFI, there are still boot sectors that need to be written to so your non-UEFI BIOS would be able to find it. So don't forget to rerun the [`BootInstall.command`](/extras/legacy.md) on your macOS drive
-
-

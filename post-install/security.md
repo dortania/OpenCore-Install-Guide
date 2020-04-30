@@ -21,7 +21,7 @@ To start, you'll need the following .efi drivers:
 
 Setting in your config.plist:
 
-* Misc -> Boot 
+* Misc -> Boot
   * `PollAppleHotKeys` set to YES(While not needed can be helpful)
 * Misc -> Security
   * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional)
@@ -52,7 +52,7 @@ Well vaulting is based around 2 things, vault.plist and vault.sig:
 * vault.plist: a "snapshot" of your EFI
 * vault.sig: validation of vault.plist
 
-This can be seen as secure boot for OpenCore, so no one can modify it and get in without your permission. 
+This can be seen as secure boot for OpenCore, so no one can modify it and get in without your permission.
 
 The specifics of vaulting is that a 256 byte RSA-2048 signature of vault.plist will be shoved into our OpenCore.efi. This key can either be shoved into [OpenCoreVault.c](https://github.com/acidanthera/OpenCorePkg/blob/master/Platform/OpenCore/OpenCoreVault.c) before compiling or with `sign.command` if you already have OpenCore.efi compiled.
 
@@ -61,10 +61,10 @@ Do note that nvram.plist won't be vaulted so users with emulated NVRAM still hav
 **Settings in your config.plist**:
 
 * `Misc -> Security -> Vault`:
-   * `Basic`: Requires just vault.plist to be present, mainly used for filesystem integrity verification
-   * `Secure`: Requires both vault.plist and vault.sig, used for best security as vault.plist changes require a new signature
+  * `Basic`: Requires just vault.plist to be present, mainly used for filesystem integrity verification
+  * `Secure`: Requires both vault.plist and vault.sig, used for best security as vault.plist changes require a new signature
 * `Booter -> ProtectSecureBoot:` `YES`
-   * Needed with Insyde firmwares for fixing secureboot keys and reporting violations
+  * Needed with Insyde firmwares for fixing secureboot keys and reporting violations
 
 **Setting up vault**:
 
@@ -80,10 +80,9 @@ So when we run this command, it'll look for the EFI folder located beside our Ut
 
 ![](/images/post-install/security-md/sign.png)
 
-Now we're ready to run `sign.command`: 
+Now we're ready to run `sign.command`:
 
 ![](/images/post-install/security-md/sign-demo.png)
-
 
 **Disabling Vault after setup**:
 
@@ -91,7 +90,6 @@ If you're doing heavy troubleshooting or have the need to disable Vault, the mai
 
 * Grab a new copy of OpenCore.efi
 * `Misc -> Security -> Vault` set to Optional
-
 
 ## ScanPolicy
 
@@ -145,7 +143,7 @@ To calculate the ScanPolicy value, you simply add up all the hexadecimal values(
 
 `0x00400000 (bit 22)` - OC\_SCAN\_ALLOW\_DEVICE\_FIREWIRE
 
-* allow scanning FireWire devices. 
+* allow scanning FireWire devices.
 
 `0x00800000 (bit 23)` — OC\_SCAN\_ALLOW\_DEVICE\_SDCARD
 
@@ -153,12 +151,12 @@ To calculate the ScanPolicy value, you simply add up all the hexadecimal values(
 
 By default, ScanPolicy is given a value of `0xF0103`(983,299) which is the combination of the following:
 
-* OC\_SCAN\_FILE\_SYSTEM\_LOCK 
+* OC\_SCAN\_FILE\_SYSTEM\_LOCK
 * OC\_SCAN\_DEVICE\_LOCK
 * OC\_SCAN\_ALLOW\_FS\_APFS
-* OC\_SCAN\_ALLOW\_DEVICE\_SATA 
-* OC\_SCAN\_ALLOW\_DEVICE\_SASEX 
-* OC\_SCAN\_ALLOW\_DEVICE\_SCSI 
+* OC\_SCAN\_ALLOW\_DEVICE\_SATA
+* OC\_SCAN\_ALLOW\_DEVICE\_SASEX
+* OC\_SCAN\_ALLOW\_DEVICE\_SCSI
 * OC\_SCAN\_ALLOW\_DEVICE\_NVME
 
 And lets just say for this example that you want to add OC\_SCAN\_ALLOW\_DEVICE\_USB:

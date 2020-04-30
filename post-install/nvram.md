@@ -10,7 +10,7 @@ Table of Contents:
 
 So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are X99 and some X299 series chipsets:
 
-* X99 
+* X99
 * X299
 
 For B360, B365, H310, H370, Z390 users, make sure you have [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl) both under EFI/OC/ACPI and config.plist -> ACPI -> Add. For more info on making and compiling SSDTs, please see [**Getting started with ACPI**](../extras/acpi.md)
@@ -40,7 +40,7 @@ To start, open the terminal and run the following one line at a time:
 
 ```text
 sudo -s
-sudo nvram -c 
+sudo nvram -c
 sudo nvram myvar=test
 exit
 ```
@@ -63,7 +63,7 @@ To enable emulated NVRAM, you'll need 3 things set:
 
 Within your config.plist:
 
-* **Booter**: 
+* **Booter**:
   * `DisableVariableWrite`: set to `YES`
 * **Misc -> Security**:
   * `ExposeSensitiveData`: set to `0x3`
@@ -90,4 +90,3 @@ And voila! You have emulated NVRAM!
 Do keep in mind this requires the `nvram` command to support the `-x` flag for this to work correctly which is unavailable on macOS 10.12 and below. If you are installing macOS 10.12 or earlier, you need to copy `nvram.mojave` into the same folder as `LogoutHook.command`, which fixes this by invoking it instead of the system `nvram` command.
 
 Something else to note is that macOS is only able to read nvram.plist but it won't be able to write to nvram.plist unless running the shutdown process. This means running the test above won't work
-

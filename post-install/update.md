@@ -41,9 +41,9 @@ So the process goes as follows:
 
 * The important ones to update:
 
-   * `EFI/BOOT/BOOTx64.efi`
-   * `EFI/OC/OpenCore.efi`
-   * `EFI/OC/Drivers/OpenRuntime`(**Don't forget this one, OpenCore will not boot with mismatched versions**)
+  * `EFI/BOOT/BOOTx64.efi`
+  * `EFI/OC/OpenCore.efi`
+  * `EFI/OC/Drivers/OpenRuntime`(**Don't forget this one, OpenCore will not boot with mismatched versions**)
 
 * You can also update other drivers you have if present, these are just the ones that **must** be updated in order to boot correctly
 
@@ -53,10 +53,10 @@ So the process goes as follows:
 
 * With this, there's a couple ways to do this:
 
-   * [OCConfigCompare](https://github.com/corpnewt/OCConfigCompare) to compare between the sample.plist and your config.plist
-   * `diff (file input 1) (file input 2)` in terminal
-   * [BeyondCompare](https://www.scootersoftware.com) 
-   * Make a new config based off reading the updated Opencore Vanilla Guide
+  * [OCConfigCompare](https://github.com/corpnewt/OCConfigCompare) to compare between the sample.plist and your config.plist
+  * `diff (file input 1) (file input 2)` in terminal
+  * [BeyondCompare](https://www.scootersoftware.com)
+  * Make a new config based off reading the updated Opencore Vanilla Guide
 
 * Once you've made the adjustments and made sure you config is compliant with the newest release of OpenCore, make sure to double check your setting with the OpenCore Guide on what to set everything to, otherwise read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf) if you want to get a bit more technical.
 
@@ -72,28 +72,27 @@ So the process goes as follows:
 
 * The easiest way to update your kexts is via 2 tools:
 
-   * [Lilu and Friends](https://github.com/corpnewt/Lilu-and-Friends) to download and compile the kexts
-   * [Kext Extractor](https://github.com/corpnewt/KextExtractor) to merge them into your EFI
-
+  * [Lilu and Friends](https://github.com/corpnewt/Lilu-and-Friends) to download and compile the kexts
+  * [Kext Extractor](https://github.com/corpnewt/KextExtractor) to merge them into your EFI
 
 ## Updating macOS
 
 * So this is probably one of the most challenging parts, maintaining your system through OS updates. The main things to keep in mind:
-   * With OS updates, make sure everything has been updated and you have some form of recovery like TimeMachine or an older macOS installer with a known good EFI on it
-   * Do a bit of google-fu to see if others are having issues with the newest update
+  * With OS updates, make sure everything has been updated and you have some form of recovery like TimeMachine or an older macOS installer with a known good EFI on it
+  * Do a bit of google-fu to see if others are having issues with the newest update
 
 * I've also provided a bit more of a detailed map of what's changed in macOS versions, see below:
 
 **macOS Catalina**
 
 * 10.15.0
-   * [Requires proper EC](https://dortania.github.io/Getting-Started-With-ACPI/)
-   * Dual socket and most AMD CPUs need [AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-   * MacPro5,1 support has been dropped
+  * [Requires proper EC](https://dortania.github.io/Getting-Started-With-ACPI/)
+  * Dual socket and most AMD CPUs need [AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
+  * MacPro5,1 support has been dropped
 * 10.15.1
-   * Requires WhateverGreen 1.3.4+
-   * Broke DRM for many GPUs(see [DRM Chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md))
-   * Requires all previous fixes
+  * Requires WhateverGreen 1.3.4+
+  * Broke DRM for many GPUs(see [DRM Chart](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md))
+  * Requires all previous fixes
 * 10.15.2
   * Fixes Navi support in the installer
   * Requires all previous fixes
@@ -104,4 +103,3 @@ So the process goes as follows:
   * [AMD CPU users need to update `cpuid_set_cpufamily` patch](https://github.com/AMD-OSX/AMD_Vanilla)
   * Fixes DRM on many Ellesmere based Polaris GPUs
   * Requires all previous fixes(excluding `shikigva=80` for Polaris DRM for most users)
-

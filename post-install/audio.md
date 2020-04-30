@@ -15,7 +15,29 @@ So to start, we'll assume you already have Lilu and AppleALC installed, if you'r
 kextstat | grep -E "AppleHDA|AppleALC|Lilu"
 ```
 
-If all 3 show up, you're good to go. And make sure VoodooHDA **is not present**. This will conflict with AppleALC otherwise
+If all 3 show up, you're good to go. And make sure VoodooHDA **is not present**. This will conflict with AppleALC otherwise.
+
+> Hey one or more of these kexts aren't showing up
+
+Generally the best place to start is by looking through your OpenCore logs and seeing if Lilu and AppleALC injected correctly:
+
+```text
+14:354 00:020 OC: Prelink injection Lilu.kext () - Success
+14:367 00:012 OC: Prelink injection AppleALC.kext () - Success
+```
+
+If it says failed to inject:
+
+```text
+15:448 00:007 OC: Prelink injection AppleALC.kext () - Invalid Parameter
+```
+
+Main places you can check as to why:
+
+* **Injection order**: Make sure that Lilu is above AppleALC in kext order
+* **All kexts are latest release**: Especially important for Lilu plugins, as mismatched kexts can cause issues
+
+Note: To setup file logging, see [OpenCore Debugging](https://dortania.github.io/OpenCore-Desktop-Guide/troubleshooting/debug.html).
 
 ## Finding your layout ID
 
@@ -24,12 +46,12 @@ So for this example, we'll assume your codec is ALC1220. To verify yours, you ha
 * Checking motherboard's spec page and manual
 * Check DeviceManager in Windows
 * Run `cat` in terminal on Linux
-   * `cat /proc/asound/card0/codec#0 | less`
-   
+  * `cat /proc/asound/card0/codec#0 | less`
+
 Now with a codec, we'll want to cross reference it with AppleALC's supported codec list:
 
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
-   
+
 With the ALC1220, we get the following:
 
 ```text
@@ -37,12 +59,14 @@ With the ALC1220, we get the following:
 ```
 
 So from this it tells us 2 things:
+
 * Which hardware revision is supported(`0x100003`), only relevant when multiple revisions are listed with different layouts
 * Various layout IDs supported by our codec(`layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34`)
 
 Now with a list of supported layout IDs,  we're ready to try some out
 
 **Note**: If your Audio Codec is ALC 3XXX this is likely false and just a rebranded controller, do your research and see what the actual controller is.
+
 * An example of this is the ALC3601, but when we load up Linux the real name is shown: ALC 671
 
 ## Testing your layout
@@ -56,10 +80,9 @@ NVRAM
       ├── bootargs | String | alcid=11
 ```
 
-## Making Layout ID more permanent 
+## Making Layout ID more permanent
 
-Once you've found a Layout ID that works with your hack, we can create a more permanent solution for closer to how real macs set their Layout ID. 
-
+Once you've found a Layout ID that works with your hack, we can create a more permanent solution for closer to how real macs set their Layout ID.
 
 With AppleALC, there's a priority hierarchy with which properties are prioritized:
 

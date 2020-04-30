@@ -5,13 +5,13 @@
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is divided up into a couple sections:
 
 * [OpenCore booting issues](/troubleshooting/troubleshooting.md#opencore-booting)
-   * This is anytime before or during the loading of the macOS kernel
+  * This is anytime before or during the loading of the macOS kernel
 * [macOS booting issues](/troubleshooting/troubleshooting.md#macos-booting)
-   * Anytime between the kernel loading and installing macOS
+  * Anytime between the kernel loading and installing macOS
 * [macOS post-install issues](/troubleshooting/troubleshooting.md#macos-post-install)
-   * Anytime after macOS is installed
+  * Anytime after macOS is installed
 * [Other issues](/troubleshooting/troubleshooting.md#other-issues)
-   * This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc
+  * This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc
 
 While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion) for more info
 
@@ -41,8 +41,6 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * [Booting OpenCore reboots to BIOS](/troubleshooting/troubleshooting.md#booting-opencore-reboots-to-bios)
 * [OCABC: Incompatible OpenRuntime r4, require r10](/troubleshooting/troubleshooting.md#ocabc-incompatible-openruntime-r4-require-r10)
 
-
-
 ## Stuck on `no vault provided!`
 
 Turn off Vaulting in your config.plist under `Misc -> Security -> Vault` by setting it to:
@@ -68,7 +66,7 @@ Couple problems:
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
-* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock) 
+* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock)
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
@@ -82,7 +80,7 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
-* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock) 
+* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock)
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
 
 ## Can't see macOS partitions
@@ -96,31 +94,34 @@ Main things to check:
 ## Black screen after picker
 
 This is due to missing ConsoleGOP, enable it under your config:
+
 * `UEFI -> Output -> ProvideConsoleGop`
 
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 
-## Stuck on `OC: OcAppleGenericInput... - Success` 
+## Stuck on `OC: OcAppleGenericInput... - Success`
 
 So this isn't actually an error, instead OpenCore isn't showing you all the debug info. This is right before/while the kernel is being loaded so things we need to check for:
 
 * Intel:
-   * CFG-Lock disabled in the BIOS **or** `AppleCpuPmCfgLock` and `AppleCpuPmCfgLock` enabled under Kernel -> Quirks
+  * CFG-Lock disabled in the BIOS **or** `AppleCpuPmCfgLock` and `AppleCpuPmCfgLock` enabled under Kernel -> Quirks
 * AMD:
-   * Verify you have added the correct kernel patches to your config(remember, OpenCore patches use `MinKernel` and `MaxKernel` while Clover has `MatchOS`)
-      * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h)
-      * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h)
+  * Verify you have added the correct kernel patches to your config(remember, OpenCore patches use `MinKernel` and `MaxKernel` while Clover has `MatchOS`)
+    * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h)
+    * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h)
 
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 
 ## Stuck on `OCB: OcScanForBootEntries failure - Not Found`
 
 This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
+
 * `Misc -> Security -> ScanPolicy -> 0`
 
 ## Stuck on `OCB: failed to match a default boot option`
 
 Same fix as `OCB: OcScanForBootEntries failure - Not Found`, OpenCore is unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
+
 * `Misc -> Security -> ScanPolicy -> 0`
 
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
@@ -174,19 +175,19 @@ Missing or incorrect `Executable path`
 ## Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off(Intel Users only), couple solutions:
-    * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
-    * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommended long term solution as this can cause instability.
+  * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
+  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommended long term solution as this can cause instability.
 * AMD kernel patches aren't working(AMD Users only):
-    * Either outdated or missing kernel patches
+  * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
-    * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
-    * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
-    
+  * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
+  * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
+
 ## Can't select anything in the picker
-    
+
 * Incompatible keyboard driver:
-     * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
-     * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
+  * Disable `PollAppleHotKeys` and enable `KeySupport`, then remove [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) from your config.plist -> UEFI -> Drivers
+  * If the above doesn't work, reverse: disable `KeySupport`, then add [OpenUsbKbDxe](https://github.com/acidanthera/OpenCorePkg/releases) to your config.plist -> UEFI -> Drivers
 
 ## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 
@@ -199,7 +200,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 * MacBookAir5,x+
 * MacBookPro9,x+
 
-## `Couldn't allocate runtime area` errors?
+## `Couldn't allocate runtime area` errors
 
 See [Fixing KASLR slide values](/extras/kaslr-fix.md)
 
@@ -236,7 +237,6 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 
 * **Note**: FwRuntimeServices has been renamed to OpenRuntime with 0.5.7 and newer
 
-
 # macOS booting
 
 * [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](/troubleshooting/troubleshooting.md#stuck-on-rtc-pci-configurationbegins-previous-shutdown-hpet-hid-legacy)
@@ -262,38 +262,37 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 
 Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names incude:
 
-* `apfs_module_start...`, 
-* `Waiting for Root device`, 
-* `Waiting on...IOResources...`, 
+* `apfs_module_start...`,
+* `Waiting for Root device`,
+* `Waiting on...IOResources...`,
 * `previous shutdown cause...`
 
 The main places to check:
 
-* **Missing EC patch**: 
-   * For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
-   * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
-   * Laptop users will need to rename their main EC: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
-      * **Do not use SSDT-EC on a laptop**
+* **Missing EC patch**:
+  * For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
+  * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+  * Laptop users will need to rename their main EC: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+    * **Do not use SSDT-EC on a laptop**
 
-* **IRQ conflict**: 
-   * Most common on older laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
+* **IRQ conflict**:
+  * Most common on older laptops and prebuilts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
 
 * **PCI allocation issue**:
-   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
-   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args. 
-      * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**. This rule does not apply to X99
-   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled\
-   
+  * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
+  * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
+    * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**. This rule does not apply to X99
+  * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled\
+
 * **NVRAM Failing**:
-   * Common issue HEDT and 300 series motherboards, you have a couple paths to go down:
-      * 300 Series Consumer Intel: See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on making SSDT-PMC.aml
-      * HEDT: See [Emulating NVRAM](/post-install/nvram.md) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
- 
-* **RTC Missing**: 
-   * Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
-   * Some drunk firmware writer at HP also disabled the RTC on the HP 250 g6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
-   
-   
+  * Common issue HEDT and 300 series motherboards, you have a couple paths to go down:
+    * 300 Series Consumer Intel: See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on making SSDT-PMC.aml
+    * HEDT: See [Emulating NVRAM](/post-install/nvram.md) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
+
+* **RTC Missing**:
+  * Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
+  * Some drunk firmware writer at HP also disabled the RTC on the HP 250 g6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
+
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 
 ![](/images/troubleshooting/troubleshooting-md/rtc.png)
@@ -305,7 +304,7 @@ Generally seen as a USB error, couple ways to fix:
 * If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
 * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quriks -> ReleaseUsbOwnership` in your config.plist
   * Enabling XHCI Handoff in the BIOS can fix this as well
- 
+
 * For 15h and 16h AMD CPUs, you may need to add the following:
   * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
 
@@ -313,7 +312,6 @@ Generally seen as a USB error, couple ways to fix:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
   
 Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/) to fix booting, note that this only works on Intel USB Chipsets and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
-
 
 ## macOS installer in Russian
 
@@ -335,6 +333,7 @@ If you've download macOS before October 2019, you likely have an expired macOS I
 * Change date in terminal to when the certificate was valid
 
 For the latter:
+
 * Disconnect all networking devices(Ethernet, disable Wifi)
 * In the recovery terminal set to September 1st, 2019:
 
@@ -408,18 +407,18 @@ Check the order that your kexts load - make they match what is shown under [Gath
 2. VoodooI2C
 3. Satellite/Plugin Kext
 
-Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI -> Add in your config.plist. If you are still having issues, reference the [Getting Started With ACPI GPIO page](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html). 
+Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI -> Add in your config.plist. If you are still having issues, reference the [Getting Started With ACPI GPIO page](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html).
 
 ## Kernel Panic on `Invalid frame pointer`
 
 So this is due to some issue around the `Booter -> Quirks` you set, main things to check for:
 
 * `SetupVirtualMap`
-   * required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems
-   * Note that Icelake's memory protections break this quirks so avoid it
+  * required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems
+  * Note that Icelake's memory protections break this quirks so avoid it
 * `RebuildAppleMemoryMap`
-   * Makes sure the memory map is compatible with macOS, some OEMs like Lenovo do not like this quirk so disable it
-   
+  * Makes sure the memory map is compatible with macOS, some OEMs like Lenovo do not like this quirk so disable it
+
 ## `kextd stall[0]: AppleACPICPU`
 
 This is due to either a missing SMC emulator or broken one, make sure of the following:
@@ -438,7 +437,7 @@ This is due to either a missing SMC emulator or broken one, make sure of the fol
 * ["Memory Modules Misconfigured" on MacPro7,1](/troubleshooting/troubleshooting.md#memory-modules-misconfigured-on-macpro-7-1)
 * [Apps crashing on AMD](/troubleshooting/troubleshooting.md#apps-crashing-on-amd)
 
-## Broken iMessage and Siri 
+## Broken iMessage and Siri
 
 * En0 device not setup as `Built-in`, couple ways to fix:
   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
@@ -452,7 +451,7 @@ If these fixes do not work, see the [Fixing iServices page](/post-install/iservi
 
 Refer to [Fixing Audio with AppleALC](/post-install/audio.md) section
 
-## BIOS reset or sent into Safemode after reboot/shutdown?
+## BIOS reset or sent into Safemode after reboot/shutdown
 
 Issue with AppleRTC, quite a simple fix:
 
@@ -502,32 +501,33 @@ Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemo
 So with AMD, whenever Apple calls CPU specific functions the app will either not work or outright crash. Here are some apps and their "fixes":
 
 * Adobe Products don't always work
-   * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
-   * Do note these fixes just disables functionality, they're not really fixes
+  * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
+  * Do note these fixes just disables functionality, they're not really fixes
 * Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
-   * VirtualBox works fine as it doesn't use AppleHV
-   * VMware 10 and older can work as well
-   * Parallels 13.1.0 and older are known to work as well
+  * VirtualBox works fine as it doesn't use AppleHV
+  * VMware 10 and older can work as well
+  * Parallels 13.1.0 and older are known to work as well
 * Docker broken
-   * Docker toolbox is the only solution as it's based off of VirtualBox, many features are unavailable with this version
+  * Docker toolbox is the only solution as it's based off of VirtualBox, many features are unavailable with this version
 * Xcode AppleWatch simulator is broken in Catalina
-   * Mojave works fine
+  * Mojave works fine
 * IDA Pro won't install
-   * There's an Intel specific check in the installer, app itself is likely fine
+  * There's an Intel specific check in the installer, app itself is likely fine
 * 15/16h CPU webpages crashing
-   * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
+  * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
 
 ## Sleep crashing on AMD
 
 This is generally seen on AMD who use the chipset's USB controller, specifically for the Ryzen series and newer. The main way to tell if you're having issues with this is checking logs after either sleeping or waking:
 
 * In terminal:
-   * `log show --last 1d | grep "Wake reason"` verify it
+  * `log show --last 1d | grep "Wake reason"` verify it
 
 Should result in something like this:
 
 ```text`
 Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.
+
 ```
 
 You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:
@@ -588,7 +588,6 @@ Make sure `Add Python to PATH`
 
 ![](/images/troubleshooting/troubleshooting-md/python-path.png)
 
-
 ## Windows Startup Disk can't see APFS drives
 
 * Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: [CorpNewt's brigadier](https://github.com/corpnewt/brigadier)
@@ -608,10 +607,11 @@ So couple things:
 For iStat, you'll have to wait for an update. For AMD users, you can use either:
 
 * [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor/releases)
-   * Still in early beta but great work has been done, note it's been mainly tested on Ryzen
+  * Still in early beta but great work has been done, note it's been mainly tested on Ryzen
 * [FakeSMC3_with_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases)
 
 **Note for AMD with FakeSMC**:
+
 * FileVault support requires more work with FakeSMC
 * Make sure no other SMC kexts are present, specifically those from [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
 
@@ -620,6 +620,7 @@ For iStat, you'll have to wait for an update. For AMD users, you can use either:
 So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you'll have to find other means to make an installer(Google's your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you'll need to format the drive you want to install onto with DiskUtility. See the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) on best practices
 
 Now to get onto troubleshooting:
+
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
 * Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is located on the same drive
 

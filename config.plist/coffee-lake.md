@@ -337,16 +337,16 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
 
 * **General Purpose boot-args**:
-   
+
 | boot-args | Description |
 | :--- | :--- |
 | **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
 | **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
 | **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](/post-install/audio.md) |
-   
- * **GPU-Specific boot-args**:
- 
+
+* **GPU-Specific boot-args**:
+
 | boot-args | Description |
 | :--- | :--- |
 | **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |

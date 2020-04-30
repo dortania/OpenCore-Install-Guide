@@ -32,11 +32,13 @@ mkdir MacInstall && cd MacInstall
 Now we get to the fun part, extracting the installer(Note this may take a few minutes):
 
 * For El Capitan(10.11) and older:
+
 ```
 xar -xf /Volumes/Install\ OS\ X/InstallMacOSX.pkg
 ```
 
 * For Sierra(10.12):
+
 ```
 xar -xf /Volumes/Install\ macOS/InstallOS.pkg
 ```
@@ -44,6 +46,7 @@ xar -xf /Volumes/Install\ macOS/InstallOS.pkg
 Next, run the following(one at a time):
 
 * Yosemite:
+
 ```
 cd InstallMacOSX.pkg
 tar xvzf Payload
@@ -52,6 +55,7 @@ mv Install\ OS\ X\ Yosemite.app /Applications
 ```
 
 * El Capitan:
+
 ```
 cd InstallMacOSX.pkg
 tar xvzf Payload
@@ -60,13 +64,13 @@ mv Install\ OS\ X\ El\ Capitan.app /Applications
 ```
 
 * Sierra:
+
 ```
 cd InstallOS.pkg
 tar xvzf Payload
 mv InstallESD.dmg Install\ macOS\ Sierra.app/Contents/SharedSupport/
 mv Install\ macOS\ Sierra.app /Applications
 ```
-
 
 ## Creating the Installer
 
@@ -77,27 +81,30 @@ Now we'll be formatting the USB to prep for both the macOS installer and OpenCor
 Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372), note that the command is made for USB's formatted with the name `MyVolume`:
 
 * Mavericks:
+
 ```text
 sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ Mavericks.app --nointeraction
 ```
 
 * Yosemite:
+
 ```text
 sudo /Applications/Install\ OS\ X\ Yosemite.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ Yosemite.app
 ```
 
 * El Capitan:
+
 ```text
 sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app
 ```
 
 * Sierra:
+
 ```text
 sudo /Applications/Install\ macOS\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
 This will take some time so may want to grab a coffee or continue reading the guide(to be fair you really shouldn't be following this guide step by step without reading the whole thing first)
-
 
 ## Setting up OpenCore's EFI environment
 

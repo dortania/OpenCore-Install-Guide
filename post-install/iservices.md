@@ -45,7 +45,7 @@ This last one is what we're after, as we want something genuine but currently no
 * Board Serial = MLB
 * SmUUID = SystemUUID
 
-**Note**:  "We’re sorry, but this serial number isn’t valid. Please check your information and try again." works for many users as well, do note though if you've had a bad track record with Apple/iServices you many need one that's "Purchase Date not Validated". Otherwise there may be suspicion 
+**Note**:  "We’re sorry, but this serial number isn’t valid. Please check your information and try again." works for many users as well, do note though if you've had a bad track record with Apple/iServices you many need one that's "Purchase Date not Validated". Otherwise there may be suspicion
 
 **Note 2**: Using a "Purchase Date not Validated:" can cause issues down the line if another machine of the same serial ever gets activated, for initial setup it can help alleviate issues with your account but in the long run an invalid serial can be a safer choice.
 
@@ -58,10 +58,12 @@ Here under Network Interfaces (network card icon), look for `en0` under `BSD` an
 > What if I don't have En0 at all?!?
 
 Well, we'll want to reset macOS so it can build the interfaces fresh, open terminal and run the following:
+
 ```text
 sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
 sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 ```
+
 Once done reboot and check again.
 
 If this doesn't work, add [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) and [ssdt-rmne.aml](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml) to your EFI and config.plist under Kernel -> Add and ACPI -> Add respectively. The SSDT is precompiled so no extra work needed, reminder compiled files have a .aml extension and .dsl can be seen as source code.
@@ -85,6 +87,7 @@ Now with the PCIRoot, go into your config.plist -> DeviceProperties -> Add and a
 This is a section many may have forgotten about but this is found in your config.plist under PlatformInfo -> generic -> ROM
 
 To find your actual MAC Address/ROM value, you can find in a couple places:
+
 * BIOS
 * macOS: System Preferences -> Network -> Ethernet -> Advanced -> MAC Address
 * Windows: Settings -> Network & Internet -> Ethernet -> Ethernet -> Physical MAC Address
@@ -103,12 +106,12 @@ So we'll need to verify NVRAM works, regardless if "it should work" as some firm
 
 Please refer to the [Emulated NVRAM](/post-install/nvram.md) section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you dont.
 
-
 ## Clean out old attempts
 
 This is important for those who've tried setting up iMessage but failed, to start make sure your NVRAM has been cleared. You can enable the option in the boot picker in your config under config.plist -> Misc -> Security -> AllowNvramReset.
 
 Next open terminal and run the following:
+
 ```text
 sudo rm -rf ~/Library/Caches/com.apple.iCloudHelper*
 sudo rm -rf ~/Library/Caches/com.apple.Messages*
@@ -130,9 +133,11 @@ sudo rm -rf ~/Library/Messages
 ## Verifying your work one last time
 
 Grab [macserial](https://github.com/acidanthera/MacInfoPkg/releases) and run the following:
+
 ```text
 path/to/macserial -s
 ```
+
 This will provide us with a full rundown of our system, verify that what is presented matches up with your work.
 
 ## Cleaning up your AppleID
@@ -140,6 +145,7 @@ This will provide us with a full rundown of our system, verify that what is pres
 * Remove all devices from your AppleID: [Manage your devices](https://appleid.apple.com/account/manage)
 * Enable 2 Factor-Auth
 * Remove all iServices from Keychain, some examples:
+
 ```text
 ids: identity-rsa-key-pair-signature-v1
 ids: identity-rsa-private-key
