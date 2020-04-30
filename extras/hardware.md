@@ -49,9 +49,9 @@ See supported chipset on respective drivers:
   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
-   * For Realtek's Gigabit Ethernet
+  * For Realtek's Gigabit Ethernet
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
-   * For Realtek's 2.5Gb Ethernet
+  * For Realtek's 2.5Gb Ethernet
 
 Unsupported ethernet models:
 

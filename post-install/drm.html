@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 29 2020 18:47:16 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Thu Apr 30 2020 15:04:49 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-drm-support-and-igpu-performance"><a name="fixing-drm-support-and-igpu-performance" class="plugin-anchor" href="#fixing-drm-support-and-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing DRM support and iGPU performance</h1>
 <ul>
@@ -804,6 +804,22 @@
 <p>To check if Lilu and WhateverGreen loaded correctly:</p>
 <pre><code class="lang-text">kextstat | grep -E &quot;Lilu|WhateverGreen&quot;
 </code></pre>
+<blockquote>
+<p>Hey one or more of these kexts aren&apos;t showing up</p>
+</blockquote>
+<p>Generally the best place to start is by looking through your OpenCore logs and seeing if Lilu and WhateverGreen injected correctly:</p>
+<pre><code class="lang-text">14:354 00:020 OC: Prelink injection Lilu.kext () - Success
+14:367 00:012 OC: Prelink injection WhateverGreen.kext () - Success
+</code></pre>
+<p>If it says failed to inject:</p>
+<pre><code class="lang-text">15:448 00:007 OC: Prelink injection WhateverGreen.kext () - Invalid Parameter
+</code></pre>
+<p>Main places you can check as to why:</p>
+<ul>
+<li><strong>Injection order</strong>: Make sure that Lilu is above AppleALC in kext order</li>
+<li><strong>All kexts are latest release</strong>: Especially important for Lilu plugins, as mismatched kexts can cause issues</li>
+</ul>
+<p>Note: To setup file logging, see <a href="https://dortania.github.io/OpenCore-Desktop-Guide/troubleshooting/debug.html" target="_blank">OpenCore Debugging</a>.</p>
 <p><strong>Note</strong>: On macOS 10.15 and newer, AppleGVA debugging is disabled by default, if you get a generic error while running VDADecoderChecker you can enable debugging with the following:</p>
 <pre><code class="lang-text">defaults write com.apple.AppleGVA enableSyslog -boolean true
 </code></pre>
@@ -860,7 +876,7 @@
 <li><code>IGPU</code>: For iGPU</li>
 </ul>
 </li>
-<li>If you inject <code>shikigva</code> using DeviceProperties, ensure you only do so to one GPU, otherwise WhateverGreen will use whatever it finds first and it is not guaranteed to be consistent. </li>
+<li>If you inject <code>shikigva</code> using DeviceProperties, ensure you only do so to one GPU, otherwise WhateverGreen will use whatever it finds first and it is not guaranteed to be consistent.</li>
 <li>IQSV stands for Intel Quick Sync Video: this only works if iGPU is present and enabled and it is set up correctly.</li>
 <li>Special configurations (like Haswell + AMD dGPU with an iMac SMBIOS, but iGPU is disabled) are not covered in the chart. You must do research on this yourself.</li>
 <li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp" target="_blank">Shiki source</a> is useful in understanding what flags do what and when they should be used, and may help with special configurations.</li>
@@ -928,7 +944,7 @@ kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"5.1.7","depth":2,"next":{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-04-29T18:47:16.362Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-29T18:48:11.323Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"5.1.7","depth":2,"next":{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-04-30T15:04:49.688Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-30T15:05:42.748Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 29 2020 18:47:16 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Thu Apr 30 2020 15:04:49 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-imessage-and-other-services-with-opencore"><a name="fixing-imessage-and-other-services-with-opencore" class="plugin-anchor" href="#fixing-imessage-and-other-services-with-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing iMessage and other services with OpenCore</h1>
 <ul>
@@ -777,7 +777,7 @@
 <li>Board Serial = MLB</li>
 <li>SmUUID = SystemUUID</li>
 </ul>
-<p><strong>Note</strong>:  &quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot; works for many users as well, do note though if you&apos;ve had a bad track record with Apple/iServices you many need one that&apos;s &quot;Purchase Date not Validated&quot;. Otherwise there may be suspicion </p>
+<p><strong>Note</strong>:  &quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot; works for many users as well, do note though if you&apos;ve had a bad track record with Apple/iServices you many need one that&apos;s &quot;Purchase Date not Validated&quot;. Otherwise there may be suspicion</p>
 <p><strong>Note 2</strong>: Using a &quot;Purchase Date not Validated:&quot; can cause issues down the line if another machine of the same serial ever gets activated, for initial setup it can help alleviate issues with your account but in the long run an invalid serial can be a safer choice.</p>
 <h2 id="fixing-en0"><a name="fixing-en0" class="plugin-anchor" href="#fixing-en0"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing En0</h2>
 <p>To start, grab <a href="https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/" target="_blank">Hackintool</a> (<a href="https://github.com/headkaze/Hackintool" target="_blank">Github link</a>) and head to System -&gt; Peripherals (Info -&gt; Misc on older versions of Hackintool)</p>
@@ -841,7 +841,9 @@ sudo rm -rf ~/Library/Messages
 <ul>
 <li>Remove all devices from your AppleID: <a href="https://appleid.apple.com/account/manage" target="_blank">Manage your devices</a></li>
 <li>Enable 2 Factor-Auth</li>
-<li>Remove all iServices from Keychain, some examples:<pre><code class="lang-text">ids: identity-rsa-key-pair-signature-v1
+<li>Remove all iServices from Keychain, some examples:</li>
+</ul>
+<pre><code class="lang-text">ids: identity-rsa-key-pair-signature-v1
 ids: identity-rsa-private-key
 ids: identity-rsa-public-key
 ids: message-protection-key
@@ -852,8 +854,6 @@ iMessage Signing Key
 com.apple.facetime: registrationV1
 etc ...
 </code></pre>
-</li>
-</ul>
 <p>And a final layer of precaution is to make a new AppleID to play with, this makes sure that if you do end up blacklisting your account that it&apos;s not your main.</p>
 <p><strong>Tip</strong>:  Adding a payment card to the account and having a decent amount of purchases can also help. While not concrete, you can think of an AppleID as a credit score where the better an Apple customer you are the more likely they won&apos;t have activation issues or get an easier pass with AppleSupport</p>
 <h2 id="customer-code-error"><a name="customer-code-error" class="plugin-anchor" href="#customer-code-error"><i class="fa fa-link" aria-hidden="true"></i></a>Customer Code error</h2>
@@ -902,7 +902,7 @@ etc ...
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"5.1.8","depth":2,"next":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Fixing DRM","level":"5.1.7","depth":2,"path":"post-install/drm.md","ref":"post-install/drm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-04-29T18:47:16.362Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-29T18:48:11.323Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"5.1.8","depth":2,"next":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Fixing DRM","level":"5.1.7","depth":2,"path":"post-install/drm.md","ref":"post-install/drm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-04-30T15:04:49.688Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-30T15:05:42.748Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 29 2020 18:47:16 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Thu Apr 30 2020 15:04:49 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="security-and-filevault"><a name="security-and-filevault" class="plugin-anchor" href="#security-and-filevault"><i class="fa fa-link" aria-hidden="true"></i></a>Security and FileVault</h1>
 <ul>
@@ -765,7 +765,7 @@
 <p><strong>Do not use VirtualSMC.efi with OpenCore, its already baked inside</strong>. You do however require VirtualSMC.kext still</p>
 <p>Setting in your config.plist:</p>
 <ul>
-<li>Misc -&gt; Boot <ul>
+<li>Misc -&gt; Boot<ul>
 <li><code>PollAppleHotKeys</code> set to YES(While not needed can be helpful)</li>
 </ul>
 </li>
@@ -806,7 +806,7 @@
 <li>vault.plist: a &quot;snapshot&quot; of your EFI</li>
 <li>vault.sig: validation of vault.plist</li>
 </ul>
-<p>This can be seen as secure boot for OpenCore, so no one can modify it and get in without your permission. </p>
+<p>This can be seen as secure boot for OpenCore, so no one can modify it and get in without your permission.</p>
 <p>The specifics of vaulting is that a 256 byte RSA-2048 signature of vault.plist will be shoved into our OpenCore.efi. This key can either be shoved into <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Platform/OpenCore/OpenCoreVault.c" target="_blank">OpenCoreVault.c</a> before compiling or with <code>sign.command</code> if you already have OpenCore.efi compiled.</p>
 <p>Do note that nvram.plist won&apos;t be vaulted so users with emulated NVRAM still have risk of someone adding/removing certain NVRAM variables</p>
 <p><strong>Settings in your config.plist</strong>:</p>
@@ -831,7 +831,7 @@
 <p>The last one is what we care about: <code>sign.command</code></p>
 <p>So when we run this command, it&apos;ll look for the EFI folder located beside our Utilities folder, so we want to bring either our personal EFI into the OpenCorePkg folder or bring Utilities into our EFI folder:</p>
 <p><img src="../images/post-install/security-md/sign.png" alt=""></p>
-<p>Now we&apos;re ready to run <code>sign.command</code>: </p>
+<p>Now we&apos;re ready to run <code>sign.command</code>:</p>
 <p><img src="../images/post-install/security-md/sign-demo.png" alt=""></p>
 <p><strong>Disabling Vault after setup</strong>:</p>
 <p>If you&apos;re doing heavy troubleshooting or have the need to disable Vault, the main things to change:</p>
@@ -888,7 +888,7 @@
 </ul>
 <p><code>0x00400000 (bit 22)</code> - OC_SCAN_ALLOW_DEVICE_FIREWIRE</p>
 <ul>
-<li>allow scanning FireWire devices. </li>
+<li>allow scanning FireWire devices.</li>
 </ul>
 <p><code>0x00800000 (bit 23)</code> &#x2014; OC_SCAN_ALLOW_DEVICE_SDCARD</p>
 <ul>
@@ -896,12 +896,12 @@
 </ul>
 <p>By default, ScanPolicy is given a value of <code>0xF0103</code>(983,299) which is the combination of the following:</p>
 <ul>
-<li>OC_SCAN_FILE_SYSTEM_LOCK </li>
+<li>OC_SCAN_FILE_SYSTEM_LOCK</li>
 <li>OC_SCAN_DEVICE_LOCK</li>
 <li>OC_SCAN_ALLOW_FS_APFS</li>
-<li>OC_SCAN_ALLOW_DEVICE_SATA </li>
-<li>OC_SCAN_ALLOW_DEVICE_SASEX </li>
-<li>OC_SCAN_ALLOW_DEVICE_SCSI </li>
+<li>OC_SCAN_ALLOW_DEVICE_SATA</li>
+<li>OC_SCAN_ALLOW_DEVICE_SASEX</li>
+<li>OC_SCAN_ALLOW_DEVICE_SCSI</li>
 <li>OC_SCAN_ALLOW_DEVICE_NVME</li>
 </ul>
 <p>And lets just say for this example that you want to add OC_SCAN_ALLOW_DEVICE_USB:</p>
@@ -950,7 +950,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.1.1","depth":2,"next":{"title":"Fixing Audio","level":"5.1.2","depth":2,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},"previous":{"title":"Post-Install","level":"5.1","depth":1,"path":"post-install/README.md","ref":"post-install/README.md","articles":[{"title":"Security and FileVault","level":"5.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},{"title":"Fixing Audio","level":"5.1.2","depth":2,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},{"title":"Booting without USB","level":"5.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},{"title":"Updating OpenCore, kexts and macOS","level":"5.1.4","depth":2,"path":"post-install/update.md","ref":"post-install/update.md","articles":[]},{"title":"Fixing CFG Lock","level":"5.1.5","depth":2,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},{"title":"Fixing DRM","level":"5.1.7","depth":2,"path":"post-install/drm.md","ref":"post-install/drm.md","articles":[]},{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-04-29T18:47:16.362Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-29T18:48:11.323Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Security and FileVault","level":"5.1.1","depth":2,"next":{"title":"Fixing Audio","level":"5.1.2","depth":2,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},"previous":{"title":"Post-Install","level":"5.1","depth":1,"path":"post-install/README.md","ref":"post-install/README.md","articles":[{"title":"Security and FileVault","level":"5.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},{"title":"Fixing Audio","level":"5.1.2","depth":2,"path":"post-install/audio.md","ref":"post-install/audio.md","articles":[]},{"title":"Booting without USB","level":"5.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},{"title":"Updating OpenCore, kexts and macOS","level":"5.1.4","depth":2,"path":"post-install/update.md","ref":"post-install/update.md","articles":[]},{"title":"Fixing CFG Lock","level":"5.1.5","depth":2,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},{"title":"Fixing Resolution and Verbose","level":"5.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},{"title":"Fixing DRM","level":"5.1.7","depth":2,"path":"post-install/drm.md","ref":"post-install/drm.md","articles":[]},{"title":"Fixing iServices","level":"5.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/security.md","mtime":"2020-04-30T15:04:49.688Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-30T15:05:42.748Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

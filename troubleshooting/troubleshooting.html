@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 29 2020 18:47:16 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Thu Apr 30 2020 15:04:49 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -811,7 +811,7 @@
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
-<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
+<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a></li>
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <h2 id="stuck-on-eblogexitbsstart"><a name="stuck-on-eblogexitbsstart" class="plugin-anchor" href="#stuck-on-eblogexitbsstart"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>[EB|#LOG:EXITBS:START]</code></h2>
@@ -824,7 +824,7 @@
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
-<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a> </li>
+<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a></li>
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <h2 id="cant-see-macos-partitions"><a name="cant-see-macos-partitions" class="plugin-anchor" href="#cant-see-macos-partitions"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t see macOS partitions</h2>
@@ -934,7 +934,7 @@
 <li>MacBookAir5,x+</li>
 <li>MacBookPro9,x+</li>
 </ul>
-<h2 id="couldnt-allocate-runtime-area-errors"><a name="couldnt-allocate-runtime-area-errors" class="plugin-anchor" href="#couldnt-allocate-runtime-area-errors"><i class="fa fa-link" aria-hidden="true"></i></a><code>Couldn&apos;t allocate runtime area</code> errors?</h2>
+<h2 id="couldnt-allocate-runtime-area-errors"><a name="couldnt-allocate-runtime-area-errors" class="plugin-anchor" href="#couldnt-allocate-runtime-area-errors"><i class="fa fa-link" aria-hidden="true"></i></a><code>Couldn&apos;t allocate runtime area</code> errors</h2>
 <p>See <a href="../extras/kaslr-fix.html">Fixing KASLR slide values</a></p>
 <h2 id="ssdts-not-being-added"><a name="ssdts-not-being-added" class="plugin-anchor" href="#ssdts-not-being-added"><i class="fa fa-link" aria-hidden="true"></i></a>SSDTs not being added</h2>
 <p>So with OpenCore, there&apos;s some extra security checks added around ACPI files, specifically that table length header must equal to the file size. This is actually the fault of iASL when you compiled the file. Example of how to find it:</p>
@@ -984,14 +984,14 @@
 <h2 id="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><a name="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy" class="plugin-anchor" href="#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></h2>
 <p>Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names incude:</p>
 <ul>
-<li><code>apfs_module_start...</code>, </li>
-<li><code>Waiting for Root device</code>, </li>
-<li><code>Waiting on...IOResources...</code>, </li>
+<li><code>apfs_module_start...</code>,</li>
+<li><code>Waiting for Root device</code>,</li>
+<li><code>Waiting on...IOResources...</code>,</li>
 <li><code>previous shutdown cause...</code></li>
 </ul>
 <p>The main places to check:</p>
 <ul>
-<li><p><strong>Missing EC patch</strong>: </p>
+<li><p><strong>Missing EC patch</strong>:</p>
 <ul>
 <li>For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -&gt; Add, <strong>double check it&apos;s enabled.</strong></li>
 <li>If you don&apos;t have one, grab it here: <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a></li>
@@ -1001,7 +1001,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>IRQ conflict</strong>: </p>
+<li><p><strong>IRQ conflict</strong>:</p>
 <ul>
 <li>Most common on older laptops and prebuilts, run SSDTTime&apos;s FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)</li>
 </ul>
@@ -1009,7 +1009,7 @@
 <li><p><strong>PCI allocation issue</strong>:</p>
 <ul>
 <li><strong>UPDATE YOUR BIOS</strong>, make sure it&apos;s on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD</li>
-<li>Make sure either Above4G is enabled in the BIOS, if no option available then add <code>npci=0x2000</code> to boot args. <ul>
+<li>Make sure either Above4G is enabled in the BIOS, if no option available then add <code>npci=0x2000</code> to boot args.<ul>
 <li>AMD CPU Note: <strong>Do not have both the Above4G setting enabled and npci in boot args, they will conflict</strong>. This rule does not apply to X99</li>
 </ul>
 </li>
@@ -1025,7 +1025,7 @@
 </li>
 </ul>
 </li>
-<li><p><strong>RTC Missing</strong>: </p>
+<li><p><strong>RTC Missing</strong>:</p>
 <ul>
 <li>Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a> on creating an SSDT-AWAC.aml</li>
 <li>Some drunk firmware writer at HP also disabled the RTC on the HP 250 g6 with no way to actually re-enable it, for users cursed with such hardware you&apos;ll need to create a fake RTC clock for macOS to play with:</li>
@@ -1120,7 +1120,7 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <li>VoodooI2C</li>
 <li>Satellite/Plugin Kext</li>
 </ol>
-<p>Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI -&gt; Add in your config.plist. If you are still having issues, reference the <a href="https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html" target="_blank">Getting Started With ACPI GPIO page</a>. </p>
+<p>Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI -&gt; Add in your config.plist. If you are still having issues, reference the <a href="https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html" target="_blank">Getting Started With ACPI GPIO page</a>.</p>
 <h2 id="kernel-panic-on-invalid-frame-pointer"><a name="kernel-panic-on-invalid-frame-pointer" class="plugin-anchor" href="#kernel-panic-on-invalid-frame-pointer"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic on <code>Invalid frame pointer</code></h2>
 <p>So this is due to some issue around the <code>Booter -&gt; Quirks</code> you set, main things to check for:</p>
 <ul>
@@ -1163,7 +1163,7 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <p>If these fixes do not work, see the <a href="../post-install/iservices.html">Fixing iServices page</a> for more in-depth guide.</p>
 <h2 id="no-on-board-audio"><a name="no-on-board-audio" class="plugin-anchor" href="#no-on-board-audio"><i class="fa fa-link" aria-hidden="true"></i></a>No on-board audio</h2>
 <p>Refer to <a href="../post-install/audio.html">Fixing Audio with AppleALC</a> section</p>
-<h2 id="bios-reset-or-sent-into-safemode-after-rebootshutdown"><a name="bios-reset-or-sent-into-safemode-after-rebootshutdown" class="plugin-anchor" href="#bios-reset-or-sent-into-safemode-after-rebootshutdown"><i class="fa fa-link" aria-hidden="true"></i></a>BIOS reset or sent into Safemode after reboot/shutdown?</h2>
+<h2 id="bios-reset-or-sent-into-safemode-after-rebootshutdown"><a name="bios-reset-or-sent-into-safemode-after-rebootshutdown" class="plugin-anchor" href="#bios-reset-or-sent-into-safemode-after-rebootshutdown"><i class="fa fa-link" aria-hidden="true"></i></a>BIOS reset or sent into Safemode after reboot/shutdown</h2>
 <p>Issue with AppleRTC, quite a simple fix:</p>
 <ul>
 <li>Under <code>Kernel -&gt; patch</code>:</li>
@@ -1429,7 +1429,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-29T18:47:16.362Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-29T18:48:11.323Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-04-30T15:04:49.688Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-30T15:05:42.748Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

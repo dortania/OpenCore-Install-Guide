@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Wed Apr 29 2020 18:47:16 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Thu Apr 30 2020 15:04:49 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-audio-with-applealc"><a name="fixing-audio-with-applealc" class="plugin-anchor" href="#fixing-audio-with-applealc"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing audio with AppleALC</h1>
 <ul>
@@ -757,7 +757,23 @@
 <p>So to start, we&apos;ll assume you already have Lilu and AppleALC installed, if you&apos;re unsure if it&apos;s been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):</p>
 <pre><code class="lang-text">kextstat | grep -E &quot;AppleHDA|AppleALC|Lilu&quot;
 </code></pre>
-<p>If all 3 show up, you&apos;re good to go. And make sure VoodooHDA <strong>is not present</strong>. This will conflict with AppleALC otherwise</p>
+<p>If all 3 show up, you&apos;re good to go. And make sure VoodooHDA <strong>is not present</strong>. This will conflict with AppleALC otherwise.</p>
+<blockquote>
+<p>Hey one or more of these kexts aren&apos;t showing up</p>
+</blockquote>
+<p>Generally the best place to start is by looking through your OpenCore logs and seeing if Lilu and AppleALC injected correctly:</p>
+<pre><code class="lang-text">14:354 00:020 OC: Prelink injection Lilu.kext () - Success
+14:367 00:012 OC: Prelink injection AppleALC.kext () - Success
+</code></pre>
+<p>If it says failed to inject:</p>
+<pre><code class="lang-text">15:448 00:007 OC: Prelink injection AppleALC.kext () - Invalid Parameter
+</code></pre>
+<p>Main places you can check as to why:</p>
+<ul>
+<li><strong>Injection order</strong>: Make sure that Lilu is above AppleALC in kext order</li>
+<li><strong>All kexts are latest release</strong>: Especially important for Lilu plugins, as mismatched kexts can cause issues</li>
+</ul>
+<p>Note: To setup file logging, see <a href="https://dortania.github.io/OpenCore-Desktop-Guide/troubleshooting/debug.html" target="_blank">OpenCore Debugging</a>.</p>
 <h2 id="finding-your-layout-id"><a name="finding-your-layout-id" class="plugin-anchor" href="#finding-your-layout-id"><i class="fa fa-link" aria-hidden="true"></i></a>Finding your layout ID</h2>
 <p>So for this example, we&apos;ll assume your codec is ALC1220. To verify yours, you have a couple options:</p>
 <ul>
@@ -793,7 +809,7 @@
       &#x251C;&#x2500;&#x2500; bootargs | String | alcid=11
 </code></pre>
 <h2 id="making-layout-id-more-permanent"><a name="making-layout-id-more-permanent" class="plugin-anchor" href="#making-layout-id-more-permanent"><i class="fa fa-link" aria-hidden="true"></i></a>Making Layout ID more permanent</h2>
-<p>Once you&apos;ve found a Layout ID that works with your hack, we can create a more permanent solution for closer to how real macs set their Layout ID. </p>
+<p>Once you&apos;ve found a Layout ID that works with your hack, we can create a more permanent solution for closer to how real macs set their Layout ID.</p>
 <p>With AppleALC, there&apos;s a priority hierarchy with which properties are prioritized:</p>
 <ol>
 <li><code>alcid=xxx</code> boot-arg, useful for debugging and overrides all other values</li>
@@ -861,7 +877,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing Audio","level":"5.1.2","depth":2,"next":{"title":"Booting without USB","level":"5.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/audio.md","mtime":"2020-04-29T18:47:16.358Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-29T18:48:11.323Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing Audio","level":"5.1.2","depth":2,"next":{"title":"Booting without USB","level":"5.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/audio.md","mtime":"2020-04-30T15:04:49.688Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-30T15:05:42.748Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

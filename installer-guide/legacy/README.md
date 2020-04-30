@@ -15,5 +15,3 @@ Page more to prove it's possible to install legacy versions of macOS/OS X with O
 ![](/images/installer-guide/legacy-mac-install-md/dumpster/10.13-HighSierra.png)
 
 ![](/images/installer-guide/legacy-mac-install-md/dumpster/10.15-Catalina.png)
-
-
