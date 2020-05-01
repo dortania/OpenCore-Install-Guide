@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20190509 (538510601)
  */
-DefinitionBlock ("", "SSDT", 2, "Slav", "spoof", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "DRTNIA", "spoof", 0x00000000)
 {
     External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
 
