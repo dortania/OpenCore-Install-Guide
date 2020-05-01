@@ -1,6 +1,6 @@
 # Haswell
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 **Both Haswell and Broadwell users can follow this**
 

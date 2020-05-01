@@ -1,6 +1,6 @@
 # Skylake-X
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 Table of Contents:
 

@@ -1,6 +1,6 @@
 # Moving OpenCore from USB to macOS Drive
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 ## Grabbing OpenCore off the USB
 

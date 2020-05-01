@@ -1,6 +1,6 @@
 # OpenCore beauty treatment
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 Main thing this guide will go over:
 
@@ -9,7 +9,7 @@ Main thing this guide will go over:
 
 ## Setting up OpenCore's GUI
 
-So to get started, we're gonna need 0.5.7 as this build version has the GUI included with the rest of the files. If you're on an older version, I recommend updating: [Updating OpenCore](/post-install/update.md)
+So to get started, we're gonna need 0.5.7 or newer as these builds have the GUI included with the rest of the files. If you're on an older version, I recommend updating: [Updating OpenCore](/post-install/update.md)
 
 Once that's done, we'll need a couple things:
 
@@ -18,8 +18,7 @@ Once that's done, we'll need a couple things:
 
 Once you have both of these, we'll next want to add it to our EFI partition:
 
-* Add the Resources folder to EFI/OC
-  * Note the 0.5.7 copy puts into the wrong spot under just EFI, this will cause an image load error and halt OpenCore
+* Add the [Resources folder](https://github.com/acidanthera/OcBinaryData) to EFI/OC
 * Add OpenCanopy.efi to EFI/Drivers
 
 ![](/images/extras/gui-md/folder-gui.png)

@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is divided up into a couple sections:
 

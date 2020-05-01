@@ -1,12 +1,11 @@
 # Clover Firmware driver conversion
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different.
 
 **Supported ones:**
 
-* ApfsDriverLoader.efi
 * AudioDxe.efi(Make sure this is from [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg) and **not** Goldfish64's repo)
 * EnhancedFatDxe.efi
 * GrubEXFAT.efi
@@ -29,6 +28,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 
 **Drivers provided/merged into Opencore and so are no longer needed:**
 
+* ApfsDriverLoader.efi
 * AppleEvent.efi
 * AppleGenericInput.efi
 * AppleImageCodec.efi

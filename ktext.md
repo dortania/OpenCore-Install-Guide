@@ -1,6 +1,6 @@
 # Gathering files
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -23,7 +23,7 @@ For legacy users:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
-* [NvmExpressDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)ß
+* [NvmExpressDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Used for Haswell and older when no NVMe driver is built into the firmware, not needed if you're not using an NVMe drive
 * [XhciDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Used for Sandy Bridge and older when no XHCI driver is built into the firmware, not needed if you're not using a USB 3.0 expansion card
