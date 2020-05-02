@@ -9,6 +9,9 @@ Table of Contents:
 * [Making Layout ID more permanent](/post-install/audio.md#making-layout-id-more-permanent)
 * [Miscellaneous issues](/post-install/audio.md#miscellaneous-issues)
 * [Troubleshooting](/post-install/audio.md#troubleshooting)
+  * [Checking if you have the right kexts](#checking-if-you-have-the-right-kexts)
+  * [Checking if AppleALC is patching correctly](#checking-if-applealc-is-patching-correctly)
+  * [Checking AppleHDA is vanilla](#checking-applehda-is-vanilla)
 
 So to start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 
@@ -57,9 +60,9 @@ To test out our layout IDs, we're going to be using the boot-arg `alcid=xxx` whe
 ```text
 config.plist
 ├── NVRAM
-		├── Add
-			 ├── 7C436110-AB2A-4BBB-A880-FE41995C9F82
-				 					├── boot-args | String | alcid=11
+  ├── Add
+    ├── 7C436110-AB2A-4BBB-A880-FE41995C9F82
+          ├── boot-args | String | alcid=11
 ```
 
 ## Making Layout ID more permanent
@@ -163,7 +166,17 @@ As you can see from the above image, we have the following:
 * `alc-layout-id` is a property showing our boot-arg/DeviceProperty injection was successful
   * Note: `layout-id | Data | 07000000` is the default layout, and `alc-layout-id` will override it and be the layout AppleHDA will use
 
-Note: **Do not rename your audio controller manually**, this can cause issues as AppleALC is trying to patch already and can create issues. Let AppleALC do it's work.
+Note: **Do not rename your audio controller manually**, this can cause issues as AppleALC is trying to patch already. Let AppleALC do it's work.
+
+**More examples**:
+
+* Correct vs Incorrect layout IDs:
+
+Correct alc-layout-id           |  Incorrect alc-layout-id
+:-------------------------:|:-------------------------:
+![](/images/post-install/audio-md/right-layout.png)  |  ![](/images/post-install/audio-md/wrong-layout.png)
+
+As you can see from the above 2, the right image is missing a lot of AppleHDAInput devices, meaning that AppleALC can't match up your physical ports to something it can understand and output to. This means you've got some work to find the right layout ID for your system.
 
 #### Checking AppleHDA is vanilla
 
