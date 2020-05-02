@@ -8,6 +8,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 
 * ApfsDriverLoader.efi
 * AudioDxe.efi(Make sure this is from [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg) and **not** Goldfish64's or Clover's repo)
+* CsmVideoDxe.efi(Note that [BiosVideo.efi](https://github.com/acidanthera/DuetPkg) may be preferred)
 * EnhancedFatDxe.efi
 * ExFatDxeLegacy.efi
 * ExFatDxe.efi

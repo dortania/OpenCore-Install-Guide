@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat May 02 2020 00:32:08 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat May 02 2020 23:54:12 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -750,19 +750,89 @@
 <p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is divided up into a couple sections:</p>
 <ul>
 <li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a><ul>
-<li>This is anytime before or during the loading of the macOS kernel</li>
+<li>This is anytime before or during the loading of the macOS kernel<ul>
+<li><a href="troubleshooting.html#stuck-on-no-vault-provided">Stuck on <code>no vault provided!</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-endrandomseed">Stuck on EndRandomSeed</a></li>
+<li><a href="troubleshooting.html#stuck-on-eblogexitbsstart">Stuck on <code>[EB|#LOG:EXITBS:START]</code></a></li>
+<li><a href="troubleshooting.html#cant-see-macos-partitions">Can&apos;t see macOS partitions</a></li>
+<li><a href="troubleshooting.html#black-screen-after-picker">Black screen after picker</a></li>
+<li><a href="troubleshooting.html#stuck-on-oc-ocapplegenericinput---success">Stuck on <code>OC: OcAppleGenericInput... - Success</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-ocb-ocscanforbootentries-failure---not-found">Stuck on <code>OCB: OcScanForBootEntries failure - Not Found</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-ocb-failed-to-match-a-default-boot-option">Stuck on <code>OCB: failed to match a default boot option</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-ocabc-memory-pool-allocation-failure---not-found">Stuck on <code>OCABC: Memory pool allocation failure - Not Found</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters">Stuck on <code>OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-oc-driver-xxxefi-at-0-cannot-be-found">Stuck on <code>OC: Driver XXX.efi at 0 cannot be found</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-buffer-too-small">Stuck on <code>Buffer Too Small</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-plist-only-kext-has-cfbundleexecutable-key">Stuck on <code>Plist only kext has CFBundleExecutable key</code></a></li>
+<li><a href="troubleshooting.html#receiving-failed-to-parse-real-field-of-type-1">Receiving <code>Failed to parse real field of type 1</code></a></li>
+<li><a href="troubleshooting.html#stuck-after-selection-macos-partition-on-opencore">Stuck after selection macOS partition on OpenCore</a></li>
+<li><a href="troubleshooting.html#cant-select-anything-in-the-picker">Can&apos;t select anything in the picker</a></li>
+<li><a href="troubleshooting.html#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac">Stuck on <code>This version of Mac OS X is not supported: Reason Mac...</code></a></li>
+<li><a href="troubleshooting.html#couldnt-allocate-runtime-area-errors"><code>Couldn&apos;t allocate runtime area</code> errors?</a></li>
+<li><a href="troubleshooting.html#ssdts-not-being-added">SSDTs not being added</a></li>
+<li><a href="troubleshooting.html#booting-opencore-reboots-to-bios">Booting OpenCore reboots to BIOS</a></li>
+<li><a href="troubleshooting.html#ocabc-incompatible-openruntime-r4-require-r10">OCABC: Incompatible OpenRuntime r4, require r10</a></li>
 </ul>
 </li>
-<li><a href="troubleshooting.html#macos-booting">macOS booting issues</a><ul>
-<li>Anytime between the kernel loading and installing macOS</li>
+</ul>
+</li>
+<li><p><a href="troubleshooting.html#macos-booting">macOS booting issues</a></p>
+<ul>
+<li><p>Anytime between the kernel loading and installing macOS</p>
+<ul>
+<li><a href="troubleshooting.html#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy">Stuck on <code>RTC...</code>, <code>PCI ConfigurationBegins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></a></li>
+<li><a href="troubleshooting.html#waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</a></li>
+<li><a href="troubleshooting.html#macos-installer-in-russian">macOS installer in Russian</a></li>
+<li><a href="troubleshooting.html#macos-installer-being-damaged">macOS Installer being damaged</a></li>
+<li><a href="troubleshooting.html#stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></a></li>
+<li><a href="troubleshooting.html#scrambled-screen-on-laptops">Scrambled Screen on laptops</a></li>
+<li><a href="troubleshooting.html#black-screen-after-ioconsoleusers-gioscreenlock-on-navi">Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</a></li>
+<li><p><a href="troubleshooting.html#300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></a></p>
+</li>
+<li><p><a href="troubleshooting.html#kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></a></p>
+</li>
+<li><a href="troubleshooting.html#kernel-panic-appleintelmcereporter">Kernel Panic <code>AppleIntelMCEReporter</code></a></li>
+<li><a href="troubleshooting.html#kernel-panic-appleintelcpupowermanagement">Kernel Panic <code>AppleIntelCPUPowerManagement</code></a></li>
+<li><a href="troubleshooting.html#frozen-in-the-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</a></li>
+<li><a href="troubleshooting.html#15h16h-cpu-reboot-after-data--privacy-screen">15h/16h CPU reboot after Data &amp; Privacy screen</a></li>
+<li><a href="troubleshooting.html#keyboard-works-but-trackpad-does-not">Keyboard works but trackpad does not</a></li>
+<li><a href="troubleshooting.html#sleep-crashing-on-amd">Sleep crashing on AMD</a></li>
+<li><a href="troubleshooting.html#kernel-panic-on-invalid-frame-pointer">Kernel Panic on <code>Invalid frame pointer</code></a></li>
+<li><a href="troubleshooting.html#kextd-stall0-appleacpicpu"><code>kextd stall[0]: AppleACPICPU</code></a></li>
+<li><a href="troubleshooting.html#mediakit-reports-not-enough-space">MediaKit reports not enough space</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="troubleshooting.html#macos-post-install">macOS post-install issues</a><ul>
-<li>Anytime after macOS is installed</li>
+<li>Anytime after macOS is installed<ul>
+<li><a href="troubleshooting.html#broken-imessage-and-siri">Broken iMessage and Siri</a></li>
+<li><a href="troubleshooting.html#no-on-board-audio">No on-board audio</a></li>
+<li><a href="troubleshooting.html#bios-reset-or-sent-into-safemode-after-rebootshutdown">BIOS reset or sent into Safemode after reboot/shutdown?</a></li>
+<li><a href="troubleshooting.html#macos-gpu-acceleration-missing-on-amd-x570">macOS GPU acceleration missing on AMD X570</a></li>
+<li><a href="troubleshooting.html#drm-broken">DRM Broken</a></li>
+<li><a href="troubleshooting.html#memory-modules-misconfigured-on-macpro71">&quot;Memory Modules Misconfigured&quot; on MacPro7,1</a></li>
+<li><a href="troubleshooting.html#apps-crashing-on-amd">Apps crashing on AMD</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="troubleshooting.html#other-issues">Other issues</a><ul>
-<li>This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc</li>
+<li>This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc<ul>
+<li><a href="troubleshooting.html#cant-run-acpidumpefi">Can&apos;t run <code>acpidump.efi</code></a></li>
+<li><a href="troubleshooting.html#fixing-ssdttime-could-not-locate-or-download-iasl">Fixing SSDTTime: <code>Could not locate or download iasl!</code></a></li>
+<li><a href="troubleshooting.html#fix-python-python-is-not-installed-or-not-found-on-path">Fix Python: <code>Python is not installed or not found on PATH</code></a></li>
+<li><a href="troubleshooting.html#windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</a></li>
+<li><a href="troubleshooting.html#incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</a></li>
+<li><a href="troubleshooting.html#no-temperaturefan-sensor-output">No temperature/fan sensor output</a></li>
+<li><a href="troubleshooting.html#cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/Bootcamp drive in picker</a></li>
+<li><a href="troubleshooting.html#you-cant-change-the-startup-disk-to-the-selected-disk-error">&quot;You can&apos;t change the startup disk to the selected disk&quot; error</a></li>
+<li><a href="troubleshooting.html#booting-windows-results-in-bluescreen-or-linux-crashes">Booting Windows results in Bluescreen or Linux crashes</a></li>
+<li><a href="troubleshooting.html#booting-windows-error-ocb-startimage-failed---already-started">Booting Windows error: <code>OCB: StartImage failed - Already started</code></a></li>
+<li><a href="troubleshooting.html#iasl-warning--unresolved">iASL warning, # unresolved</a></li>
+<li>[No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -783,7 +853,7 @@
 <li><a href="troubleshooting.html#stuck-on-oc-driver-xxxefi-at-0-cannot-be-found">Stuck on <code>OC: Driver XXX.efi at 0 cannot be found</code></a></li>
 <li><a href="troubleshooting.html#stuck-on-buffer-too-small">Stuck on <code>Buffer Too Small</code></a></li>
 <li><a href="troubleshooting.html#stuck-on-plist-only-kext-has-cfbundleexecutable-key">Stuck on <code>Plist only kext has CFBundleExecutable key</code></a></li>
-<li><a href="troubleshooting.html#receiving-failed-to-parse-real-field-type-1">Receiving <code>Failed to parse real field of type 1</code></a></li>
+<li><a href="troubleshooting.html#receiving-failed-to-parse-real-field-of-type-1">Receiving <code>Failed to parse real field of type 1</code></a></li>
 <li><a href="troubleshooting.html#stuck-after-selection-macos-partition-on-opencore">Stuck after selection macOS partition on OpenCore</a></li>
 <li><a href="troubleshooting.html#cant-select-anything-in-the-picker">Can&apos;t select anything in the picker</a></li>
 <li><a href="troubleshooting.html#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac">Stuck on <code>This version of Mac OS X is not supported: Reason Mac...</code></a></li>
@@ -962,24 +1032,26 @@
 </ul>
 <h1 id="macos-booting"><a name="macos-booting" class="plugin-anchor" href="#macos-booting"><i class="fa fa-link" aria-hidden="true"></i></a>macOS booting</h1>
 <ul>
-<li><a href="troubleshooting.html#stuck-on-rtc-pci-configurationbegins-previous-shutdown-hpet-hid-legacy">Stuck on <code>RTC...</code>, <code>PCI ConfigurationBegins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy">Stuck on <code>RTC...</code>, <code>PCI ConfigurationBegins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></a></li>
 <li><a href="troubleshooting.html#waiting-for-root-device-or-prohibited-sign-error">&quot;Waiting for Root Device&quot; or Prohibited Sign error</a></li>
 <li><a href="troubleshooting.html#macos-installer-in-russian">macOS installer in Russian</a></li>
 <li><a href="troubleshooting.html#macos-installer-being-damaged">macOS Installer being damaged</a></li>
-<li><a href="troubleshooting.html#stuck-on-or-near-ioconsoleusers-gioscreenlock">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></a></li>
+<li><a href="troubleshooting.html#stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3">Stuck on or near <code>IOConsoleUsers: gIOScreenLock...</code></a></li>
 <li><a href="troubleshooting.html#scrambled-screen-on-laptops">Scrambled Screen on laptops</a></li>
 <li><a href="troubleshooting.html#black-screen-after-ioconsoleusers-gioscreenlock-on-navi">Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</a></li>
-<li><a href="troubleshooting.html#300-series-intel-stalling-on-apfs_module_start">300 series Intel stalling on <code>apfs_module_start...</code></a></li>
-<li><a href="troubleshooting.html#stalling-on-apfs_module_start-waiting-for-root-device-waiting-on-ioresources-previous-shutdown-cause-in-catalina">Stalling on <code>apfs_module_start...</code>, <code>Waiting for Root device</code>, <code>Waiting on...IOResources...</code>, <code>previous shutdown cause...</code> in Catalina</a></li>
-<li><a href="troubleshooting.html#kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></a></li>
+<li><p><a href="troubleshooting.html#300-series-intel-stalling-on-apfsmodulestart">300 series Intel stalling on <code>apfs_module_start...</code></a></p>
+</li>
+<li><p><a href="troubleshooting.html#kernel-panic-cannot-perform-kext-summary">Kernel Panic <code>Cannot perform kext summary</code></a></p>
+</li>
 <li><a href="troubleshooting.html#kernel-panic-appleintelmcereporter">Kernel Panic <code>AppleIntelMCEReporter</code></a></li>
 <li><a href="troubleshooting.html#kernel-panic-appleintelcpupowermanagement">Kernel Panic <code>AppleIntelCPUPowerManagement</code></a></li>
-<li><a href="troubleshooting.html#frozen-in-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</a></li>
-<li><a href="troubleshooting.html#15h-16-h-cpu-reboot-after-data-and-privacy-screen">15h/16h CPU reboot after Data &amp; Privacy screen</a></li>
+<li><a href="troubleshooting.html#frozen-in-the-macos-installer-after-30-seconds">Frozen in the macOS installer after 30 seconds</a></li>
+<li><a href="troubleshooting.html#15h16h-cpu-reboot-after-data--privacy-screen">15h/16h CPU reboot after Data &amp; Privacy screen</a></li>
 <li><a href="troubleshooting.html#keyboard-works-but-trackpad-does-not">Keyboard works but trackpad does not</a></li>
 <li><a href="troubleshooting.html#sleep-crashing-on-amd">Sleep crashing on AMD</a></li>
 <li><a href="troubleshooting.html#kernel-panic-on-invalid-frame-pointer">Kernel Panic on <code>Invalid frame pointer</code></a></li>
 <li><a href="troubleshooting.html#kextd-stall0-appleacpicpu"><code>kextd stall[0]: AppleACPICPU</code></a></li>
+<li><a href="troubleshooting.html#mediakit-reports-not-enough-space">MediaKit reports not enough space</a></li>
 </ul>
 <h2 id="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><a name="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy" class="plugin-anchor" href="#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></h2>
 <p>Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names incude:</p>
@@ -1087,7 +1159,7 @@
 </li>
 </ul>
 <h2 id="scrambled-screen-on-laptops"><a name="scrambled-screen-on-laptops" class="plugin-anchor" href="#scrambled-screen-on-laptops"><i class="fa fa-link" aria-hidden="true"></i></a>Scrambled Screen on laptops</h2>
-<p><img src="../images/install/Scrambled.jpg" alt="Scrambled Screen">
+<p><img src="../images/troubleshooting/troubleshooting-md/Scrambled.jpg" alt="Scrambled Screen">
 Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot; or other legacy setting.</p>
 <h2 id="black-screen-after-ioconsoleusers-gioscreenlock-on-navi"><a name="black-screen-after-ioconsoleusers-gioscreenlock-on-navi" class="plugin-anchor" href="#black-screen-after-ioconsoleusers-gioscreenlock-on-navi"><i class="fa fa-link" aria-hidden="true"></i></a>Black screen after <code>IOConsoleUsers: gIOScreenLock...</code> on Navi</h2>
 <ul>
@@ -1141,14 +1213,37 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <li>Lilu is before VirtualSMC in the kext list</li>
 <li>Last resort is to try FakeSMC instead, <strong>do not have both VirtualSMC and FakeSMC enabled</strong></li>
 </ul>
+<h2 id="mediakit-reports-not-enough-space"><a name="mediakit-reports-not-enough-space" class="plugin-anchor" href="#mediakit-reports-not-enough-space"><i class="fa fa-link" aria-hidden="true"></i></a>MediaKit reports not enough space</h2>
+<p>This error is due to a small EFI, by default Windows will create a 100MB EFI whereas macOS will expect 200MB. To get around this you have 2 way to go:</p>
+<ul>
+<li>Expand the EFI of the drive to 200MB(See Google on how)</li>
+<li>Format the entire drive instead of just the partition<ul>
+<li>Note by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices(Alternatively you can press the view button)</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Default</th>
+<th style="text-align:center">Show All Devices(Cmd+2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="../images/troubleshooting/troubleshooting-md/Default.png" alt=""></td>
+<td style="text-align:center"><img src="../images/troubleshooting/troubleshooting-md/Showalldevices.png" alt=""></td>
+</tr>
+</tbody>
+</table>
 <h1 id="macos-post-install"><a name="macos-post-install" class="plugin-anchor" href="#macos-post-install"><i class="fa fa-link" aria-hidden="true"></i></a>macOS post-install</h1>
 <ul>
-<li><a href="troubleshooting.html#Broken-iMessage-and-Siri">Broken iMessage and Siri</a></li>
+<li><a href="troubleshooting.html#broken-imessage-and-siri">Broken iMessage and Siri</a></li>
 <li><a href="troubleshooting.html#no-on-board-audio">No on-board audio</a></li>
-<li><a href="troubleshooting.html#bios-reset-or-sent-into-safemode-after-reboot-shutdown">BIOS reset or sent into Safemode after reboot/shutdown?</a></li>
-<li><a href="troubleshooting.html#macos-gpu-acceleration-missing-on-amd-x-570">macOS GPU acceleration missing on AMD X570</a></li>
+<li><a href="troubleshooting.html#bios-reset-or-sent-into-safemode-after-rebootshutdown">BIOS reset or sent into Safemode after reboot/shutdown?</a></li>
+<li><a href="troubleshooting.html#macos-gpu-acceleration-missing-on-amd-x570">macOS GPU acceleration missing on AMD X570</a></li>
 <li><a href="troubleshooting.html#drm-broken">DRM Broken</a></li>
-<li><a href="troubleshooting.html#memory-modules-misconfigured-on-macpro-7-1">&quot;Memory Modules Misconfigured&quot; on MacPro7,1</a></li>
+<li><a href="troubleshooting.html#memory-modules-misconfigured-on-macpro71">&quot;Memory Modules Misconfigured&quot; on MacPro7,1</a></li>
 <li><a href="troubleshooting.html#apps-crashing-on-amd">Apps crashing on AMD</a></li>
 </ul>
 <h2 id="broken-imessage-and-siri"><a name="broken-imessage-and-siri" class="plugin-anchor" href="#broken-imessage-and-siri"><i class="fa fa-link" aria-hidden="true"></i></a>Broken iMessage and Siri</h2>
@@ -1285,18 +1380,18 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 </ul>
 <h1 id="other-issues"><a name="other-issues" class="plugin-anchor" href="#other-issues"><i class="fa fa-link" aria-hidden="true"></i></a>Other issues</h1>
 <ul>
-<li><a href="troubleshooting.html#cant-run-acpidump-efi">Can&apos;t run <code>acpidump.efi</code></a></li>
-<li><a href="troubleshooting.html#fixing-ssdttime-cant-locate-or-download-iasl">Fixing SSDTTime: <code>Could not locate or download iasl!</code></a></li>
+<li><a href="troubleshooting.html#cant-run-acpidumpefi">Can&apos;t run <code>acpidump.efi</code></a></li>
+<li><a href="troubleshooting.html#fixing-ssdttime-could-not-locate-or-download-iasl">Fixing SSDTTime: <code>Could not locate or download iasl!</code></a></li>
 <li><a href="troubleshooting.html#fix-python-python-is-not-installed-or-not-found-on-path">Fix Python: <code>Python is not installed or not found on PATH</code></a></li>
 <li><a href="troubleshooting.html#windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</a></li>
 <li><a href="troubleshooting.html#incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</a></li>
-<li><a href="troubleshooting.html#no-temperature-fan-sensor-output">No temperature/fan sensor output</a></li>
-<li><a href="troubleshooting.html#cant-find-windows-bootcamp-drive-in-picker">Can&apos;t find Windows/Bootcamp drive in picker</a></li>
-<li><a href="troubleshooting.html#you-cant-change-the-startup-disk-to-the-selected-disk">&quot;You can&apos;t change the startup disk to the selected disk&quot; error</a></li>
+<li><a href="troubleshooting.html#no-temperaturefan-sensor-output">No temperature/fan sensor output</a></li>
+<li><a href="troubleshooting.html#cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/Bootcamp drive in picker</a></li>
+<li><a href="troubleshooting.html#you-cant-change-the-startup-disk-to-the-selected-disk-error">&quot;You can&apos;t change the startup disk to the selected disk&quot; error</a></li>
 <li><a href="troubleshooting.html#booting-windows-results-in-bluescreen-or-linux-crashes">Booting Windows results in Bluescreen or Linux crashes</a></li>
-<li><a href="troubleshooting.html#booting-windows-error-ocb-startimage-failed-already-started">Booting Windows error: <code>OCB: StartImage failed - Already started</code></a></li>
-<li><a href="troubleshooting.html#iasl-warning-unresolved">iASL warning, # unresolved</a></li>
-<li><a href="troubleshooting.html#no-volume-brightness-control-on-external-monitors">No Volume/Brightness control on external monitors</a></li>
+<li><a href="troubleshooting.html#booting-windows-error-ocb-startimage-failed---already-started">Booting Windows error: <code>OCB: StartImage failed - Already started</code></a></li>
+<li><a href="troubleshooting.html#iasl-warning--unresolved">iASL warning, # unresolved</a></li>
+<li><a href="troubleshooting.html#no-volumebrightness-control-on-external-monitors">No Volume/Brightness control on external monitors</a></li>
 </ul>
 <h2 id="cant-run-acpidumpefi"><a name="cant-run-acpidumpefi" class="plugin-anchor" href="#cant-run-acpidumpefi"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t run <code>acpidump.efi</code></h2>
 <p>Call upon OpenCore shell:</p>
@@ -1429,7 +1524,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-02T00:32:08.327Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-02T00:32:58.649Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-02T23:54:12.651Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-02T23:55:03.953Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
