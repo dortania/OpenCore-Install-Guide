@@ -43,8 +43,11 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * change CAVS to HDEF
   * change AZAL to HDEF
   * change ALZA to HDEF
+  * change B0D3 to HDAU
 * Z390 BIOS RTC bug fix: See here on best solution: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)(SSDT-AWAC)
   * change STAS to [Blank]
+  * Fix Z390 BIOS DSDT Device(RTC) bug
+  * Fix 300-series RTC Bug
 * NVMe patches: [NVMeFix](https://github.com/acidanthera/NVMeFix) fixes power management
   * change PXSX to ANS1
   * change PXSX to ANS2
