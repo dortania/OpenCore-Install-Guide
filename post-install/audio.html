@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Credit · GitBook</title>
+        <title>Fixing Audio · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -71,8 +71,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="oc2hdd.html" />
     
-    <link rel="prev" href="../CONTRIBUTING.html" />
+    
+    <link rel="prev" href="security.html" />
     
 
     <style>
@@ -380,9 +382,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../post-install/">
+        <li class="chapter " data-level="5.1" data-path="./">
             
-                <a href="../post-install/">
+                <a href="./">
             
                     
                     Post-Install
@@ -394,9 +396,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="5.1.1" data-path="../post-install/security.html">
+        <li class="chapter " data-level="5.1.1" data-path="security.html">
             
-                <a href="../post-install/security.html">
+                <a href="security.html">
             
                     
                     Security and FileVault
@@ -407,9 +409,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.2" data-path="../post-install/audio.html">
+        <li class="chapter active" data-level="5.1.2" data-path="audio.html">
             
-                <a href="../post-install/audio.html">
+                <a href="audio.html">
             
                     
                     Fixing Audio
@@ -420,9 +422,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.3" data-path="../post-install/oc2hdd.html">
+        <li class="chapter " data-level="5.1.3" data-path="oc2hdd.html">
             
-                <a href="../post-install/oc2hdd.html">
+                <a href="oc2hdd.html">
             
                     
                     Booting without USB
@@ -433,9 +435,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.4" data-path="../post-install/update.html">
+        <li class="chapter " data-level="5.1.4" data-path="update.html">
             
-                <a href="../post-install/update.html">
+                <a href="update.html">
             
                     
                     Updating OpenCore, kexts and macOS
@@ -459,9 +461,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.6" data-path="../post-install/verbose.html">
+        <li class="chapter " data-level="5.1.6" data-path="verbose.html">
             
-                <a href="../post-install/verbose.html">
+                <a href="verbose.html">
             
                     
                     Fixing Resolution and Verbose
@@ -472,9 +474,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.7" data-path="../post-install/drm.html">
+        <li class="chapter " data-level="5.1.7" data-path="drm.html">
             
-                <a href="../post-install/drm.html">
+                <a href="drm.html">
             
                     
                     Fixing DRM
@@ -485,9 +487,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.8" data-path="../post-install/iservices.html">
+        <li class="chapter " data-level="5.1.8" data-path="iservices.html">
             
-                <a href="../post-install/iservices.html">
+                <a href="iservices.html">
             
                     
                     Fixing iServices
@@ -498,9 +500,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.9" data-path="../post-install/nvram.html">
+        <li class="chapter " data-level="5.1.9" data-path="nvram.html">
             
-                <a href="../post-install/nvram.html">
+                <a href="nvram.html">
             
                     
                     Emulated NVRAM
@@ -511,9 +513,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.10" data-path="../post-install/pm.html">
+        <li class="chapter " data-level="5.1.10" data-path="pm.html">
             
-                <a href="../post-install/pm.html">
+                <a href="pm.html">
             
                     
                     Fixing Power Management
@@ -680,9 +682,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="8.2" data-path="credit.html">
+        <li class="chapter " data-level="8.2" data-path="../misc/credit.html">
             
-                <a href="credit.html">
+                <a href="../misc/credit.html">
             
                     
                     Credit
@@ -723,7 +725,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Credit</a>
+        <a href=".." >Fixing Audio</a>
     </h1>
 </div>
 
@@ -741,102 +743,161 @@
                                 <blockquote>
 <p><em>Last modified: Sun May 03 2020 17:56:47 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="credits"><a name="credits" class="plugin-anchor" href="#credits"><i class="fa fa-link" aria-hidden="true"></i></a>Credits</h1>
+<h1 id="fixing-audio-with-applealc"><a name="fixing-audio-with-applealc" class="plugin-anchor" href="#fixing-audio-with-applealc"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing audio with AppleALC</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
-<p>No good guide is made by one man, here&apos;s credit to those who&apos;ve helped out:</p>
+<p>Table of Contents:</p>
 <ul>
-<li><a href="https://github.com/vit9696" target="_blank">vit9696</a><ul>
-<li>One of many developers of OpenCore</li>
-<li>Corrections to the original guide</li>
-<li>Corrections to this guide...(seriously this man deserves a medal)</li>
+<li><a href="audio.html#fixing-your-layout-id">Finding your layout ID</a></li>
+<li><a href="audio.html#testing-your-layout">Testing your layout</a></li>
+<li><a href="audio.html#making-layout-id-more-permanent">Making Layout ID more permanent</a></li>
+<li><a href="audio.html#miscellaneous-issues">Miscellaneous issues</a></li>
+<li><a href="audio.html#troubleshooting">Troubleshooting</a><ul>
+<li><a href="#checking-if-you-have-the-right-kexts">Checking if you have the right kexts</a></li>
+<li><a href="#checking-if-applealc-is-patching-correctly">Checking if AppleALC is patching correctly</a></li>
+<li><a href="#checking-applehda-is-vanilla">Checking AppleHDA is vanilla</a></li>
 </ul>
 </li>
-<li><a href="https://github.com/corpnewt" target="_blank">CorpNewt</a><ul>
-<li>Heavily inspiring this guide(if not a rip off) and helping overal with questions and advice</li>
-<li>Spoof SSDT source</li>
 </ul>
-</li>
-<li><a href="https://github.com/midi1996" target="_blank">Midi</a><ul>
-<li>Corrections and recommendations for the guide</li>
-</ul>
-</li>
-<li><a href="https://amd-osx.com/forum/memberlist.php?mode=viewprofile&amp;u=10918&amp;sid=e0feb8a14a97be482d2fd68dbc268f97" target="_blank">AlGrey#9303</a><ul>
-<li>AMD Kernel patches</li>
-</ul>
-</li>
-<li><a href="https://forum.amd-osx.com/memberlist.php?mode=viewprofile&amp;u=52179&amp;sid=8efaeb1fa4989b6792f0f4836bea0c74" target="_blank">NoOne/IOIIIO</a><ul>
-<li>For the original AMD Vanilla Guide</li>
-<li>Corrections to AMD portion of the guide</li>
-</ul>
-</li>
-<li><a href="https://github.com/dhinakg" target="_blank">DhinakG</a><ul>
-<li>Random guide related stuff</li>
-</ul>
-</li>
-<li><a href="https://github.com/dortania" target="_blank">and the rest of the dortania team</a> for helping out</li>
-</ul>
-<p>And to the rest who&apos;ve helped out as well, thank you!</p>
-<p><strong>Developers of OpenCore</strong>:</p>
+<p>So to start, we&apos;ll assume you already have Lilu and AppleALC installed, if you&apos;re unsure if it&apos;s been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):</p>
+<pre><code class="lang-text">kextstat | grep -E &quot;AppleHDA|AppleALC|Lilu&quot;
+</code></pre>
+<p>If all 3 show up, you&apos;re good to go. And make sure VoodooHDA <strong>is not present</strong>. This will conflict with AppleALC otherwise.</p>
+<p>If you&apos;re having issues, see the <a href="audio.html#Troubleshooting">Troubleshooting section</a></p>
+<h2 id="finding-your-layout-id"><a name="finding-your-layout-id" class="plugin-anchor" href="#finding-your-layout-id"><i class="fa fa-link" aria-hidden="true"></i></a>Finding your layout ID</h2>
+<p>So for this example, we&apos;ll assume your codec is ALC1220. To verify yours, you have a couple options:</p>
 <ul>
-<li><a href="https://github.com/al3xtjames" target="_blank">al3xtjames</a></li>
-<li><a href="https://github.com/Andrey1970AppleLife" target="_blank">Andrey1970AppleLife</a></li>
-<li><a href="https://github.com/Download-Fritz" target="_blank">Download-Fritz</a></li>
-<li><a href="https://github.com/Goldfish64" target="_blank">Goldfish64</a></li>
-<li><a href="https://github.com/PMHeart" target="_blank">PMHeart</a></li>
-<li><a href="https://github.com/savvamitrofanov" target="_blank">savvamitrofanov</a></li>
-<li><a href="https://github.com/vit9696" target="_blank">vit9696</a></li>
+<li>Checking motherboard&apos;s spec page and manual</li>
+<li>Check DeviceManager in Windows</li>
+<li>Run <code>cat</code> in terminal on Linux<ul>
+<li><code>cat /proc/asound/card0/codec#0 | less</code></li>
 </ul>
-<p>Guides linked or those that inspired this guide:</p>
+</li>
+</ul>
+<p>Now with a codec, we&apos;ll want to cross reference it with AppleALC&apos;s supported codec list:</p>
 <ul>
-<li><a href="https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/" target="_blank">r/Hackintosh Vanilla Desktop Guide</a></li>
-<li><a href="https://kb.hackintoshisfun.ml/clover/" target="_blank">All-in-one Vanilla AMD Hackintosh Guide</a></li>
-<li><a href="https://usb-map.gitbook.io/project/" target="_blank">USB Map Guide</a></li>
-<li><a href="https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271" target="_blank">Intel Framebuffer Patching</a></li>
 <li><a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank">AppleALC Supported Codecs</a></li>
-<li><a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a></li>
 </ul>
-<p>And for those who have recommendations or issues with this guide, you can find the GitHub repo for this site <a href="https://github.com/dortania/Opencore-Desktop-Guide" target="_blank">here</a>.</p>
-<p><strong>Sources</strong>:</p>
+<p>With the ALC1220, we get the following:</p>
+<pre><code class="lang-text">0x100003, layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34
+</code></pre>
+<p>So from this it tells us 2 things:</p>
 <ul>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/tree/master/Docs" target="_blank">OpenCore Documentation</a></li>
-<li>KASLR slide:<ul>
-<li><a href="https://www.insanelymac.com/forum/topic/331381-aptiomemoryfix/?do=findComment&amp;comment=2564269" target="_blank">vit9696&apos;s Explainer</a></li>
-<li><a href="https://www.reddit.com/r/hackintosh/comments/cfjyla/i_unleashed_a_plague_upon_you_guys_and_i_am_sorry/" target="_blank">Apianti&apos;s explainer</a></li>
-<li><a href="https://lwn.net/Articles/569635/" target="_blank">KASLR Explainer</a></li>
-<li><a href="https://www.blackhat.com/docs/us-16/materials/us-16-Jang-Breaking-Kernel-Address-Space-Layout-Randomization-KASLR-With-Intel-TSX.pdf" target="_blank">More KASLR Explainer</a></li>
+<li>Which hardware revision is supported(<code>0x100003</code>), only relevant when multiple revisions are listed with different layouts</li>
+<li>Various layout IDs supported by our codec(<code>layout 1, 2, 3, 5, 7, 11, 13, 15, 16, 21, 27, 28, 29, 34</code>)</li>
+</ul>
+<p>Now with a list of supported layout IDs,  we&apos;re ready to try some out</p>
+<p><strong>Note</strong>: If your Audio Codec is ALC 3XXX this is likely false and just a rebranded controller, do your research and see what the actual controller is.</p>
+<ul>
+<li>An example of this is the ALC3601, but when we load up Linux the real name is shown: ALC 671</li>
+</ul>
+<h2 id="testing-your-layout"><a name="testing-your-layout" class="plugin-anchor" href="#testing-your-layout"><i class="fa fa-link" aria-hidden="true"></i></a>Testing your layout</h2>
+<p>To test out our layout IDs, we&apos;re going to be using the boot-arg <code>alcid=xxx</code> where xxx is your layout. Remember that to try layout IDs <strong>one at a time</strong>. Do not add multiple IDs or alcid boot-args, if one doesn&apos;t work then try the next ID and etc</p>
+<pre><code class="lang-text">config.plist
+&#x251C;&#x2500;&#x2500; NVRAM
+  &#x251C;&#x2500;&#x2500; Add
+    &#x251C;&#x2500;&#x2500; 7C436110-AB2A-4BBB-A880-FE41995C9F82
+          &#x251C;&#x2500;&#x2500; boot-args | String | alcid=11
+</code></pre>
+<h2 id="making-layout-id-more-permanent"><a name="making-layout-id-more-permanent" class="plugin-anchor" href="#making-layout-id-more-permanent"><i class="fa fa-link" aria-hidden="true"></i></a>Making Layout ID more permanent</h2>
+<p>Once you&apos;ve found a Layout ID that works with your hack, we can create a more permanent solution for closer to how real macs set their Layout ID.</p>
+<p>With AppleALC, there&apos;s a priority hierarchy with which properties are prioritized:</p>
+<ol>
+<li><code>alcid=xxx</code> boot-arg, useful for debugging and overrides all other values</li>
+<li><code>alc-layout-id</code> in DeviceProperties, recommended for AppleALC</li>
+<li><code>layout-id</code> in DeviceProperties, same property Macs use</li>
+</ol>
+<p>As we can see in <a href="https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L189-L192" target="_blank">AppeALC&apos;s source</a>, it expects your layout ID to be set via <code>alc-layout-id</code> so to make things easier on AppleALC we&apos;ll set it with DeviceProperties</p>
+<p>To start, we&apos;ll need to find out where our Audio controller is located on the PCI map. For this, we&apos;ll be using a handy tool called <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> then with the macOS terminal:</p>
+<pre><code class="lang-text">path/to/gfxutil -f HDEF
+</code></pre>
+<p>Then add this PciRoot with the child <code>alc-layout-id</code> to your config.plist under DeviceProperties -&gt; Add:</p>
+<p><img src="../images/post-install/audio-md/config-layout-id.png" alt=""></p>
+<p>Note that the value is in HEX/Data, you can use a simple <a href="https://www.rapidtables.com/convert/number/decimal-to-hex.html" target="_blank">decimal to hexadecimal calculator</a> to find yours. <code>printf &apos;%x\n&apos; DECI_VAL</code>:</p>
+<p><img src="../images/post-install/audio-md/hex-convert.png" alt=""></p>
+<p>So in this example, <code>alcid=11</code> would become <code>alc-layout-id | Data | &lt;0B000000&gt;</code></p>
+<p>Note that the final value should be 4 bytes in total(ie. <code>0B 00 00 00</code> ), for layout IDs surpassing 255(<code>FF 00 00 00</code>) will need to remember that the bytes are swapped. So 256 will become <code>FF 01 00 00</code></p>
+<h2 id="miscellaneous-issues"><a name="miscellaneous-issues" class="plugin-anchor" href="#miscellaneous-issues"><i class="fa fa-link" aria-hidden="true"></i></a>Miscellaneous issues</h2>
+<p><strong>No Mic on AMD</strong>:</p>
+<ul>
+<li>This is a common issue with when running AppleALC with AMD, specifically no patches have been made to support Mic input. At the moment the &quot;best&quot; solution is to either buy a USB DAC/Mic or go the VoodooHDA.kext method. Problem with VoodooHDA is that it&apos;s been known to be unstable and have worse audio quality than AppleALC</li>
+</ul>
+<p><strong>Same layout ID from Clover doesn&apos;t work on OpenCore</strong></p>
+<p>This is likely do to IRQ conflicts, on Clover there&apos;s a whole sweep of ACPI hot-patches that are applied automagically. Fixing this is a little bit painful but <a href="https://github.com/corpnewt/SSDTTime" target="_blank">SSDTTime</a>&apos;s <code>FixHPET</code> option can handle most cases.</p>
+<p>For odd cases where RTC and HPET take IRQs from other devices like USB and audio, you can reference the <a href="https://github.com/khronokernel/trashOS/blob/master/HP-Compaq-DC7900/README.md#dsdt-edits" target="_blank">HP Compaq DC7900 ACPI patch</a> example in the trashOS repo</p>
+<h2 id="troubleshooting"><a name="troubleshooting" class="plugin-anchor" href="#troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>Troubleshooting</h2>
+<p>So for troubleshooting, we&apos;ll need to go over a couple things:</p>
+<ul>
+<li><a href="#checking-if-you-have-the-right-kexts">Checking if you have the right kexts</a></li>
+<li><a href="#checking-if-applealc-is-patching-correctly">Checking if AppleALC is patching correctly</a></li>
+<li><a href="#checking-applehda-is-vanilla">Checking AppleHDA is vanilla</a></li>
+</ul>
+<h4 id="checking-if-you-have-the-right-kexts"><a name="checking-if-you-have-the-right-kexts" class="plugin-anchor" href="#checking-if-you-have-the-right-kexts"><i class="fa fa-link" aria-hidden="true"></i></a>Checking if you have the right kexts</h4>
+<p>o start, we&apos;ll assume you already have Lilu and AppleALC installed, if you&apos;re unsure if it&apos;s been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):</p>
+<pre><code class="lang-text">kextstat | grep -E &quot;AppleHDA|AppleALC|Lilu&quot;
+</code></pre>
+<p>If all 3 show up, you&apos;re good to go. And make sure VoodooHDA <strong>is not present</strong>. This will conflict with AppleALC otherwise. Other kexts to make sure you do not have in your system:</p>
+<ul>
+<li>realtekALC.kext</li>
+<li>CloverALC.kext</li>
+<li>VoodooHDA.kext</li>
+<li>HDA Blocker.kext</li>
+<li>HDAEnabler#.kext(# can be 1, 2, or 3)</li>
+</ul>
+<blockquote>
+<p>Hey Lilu and/or AppleALC aren&apos;t showing up</p>
+</blockquote>
+<p>Generally the best place to start is by looking through your OpenCore logs and seeing if Lilu and AppleALC injected correctly:</p>
+<pre><code class="lang-text">14:354 00:020 OC: Prelink injection Lilu.kext () - Success
+14:367 00:012 OC: Prelink injection AppleALC.kext () - Success
+</code></pre>
+<p>If it says failed to inject:</p>
+<pre><code class="lang-text">15:448 00:007 OC: Prelink injection AppleALC.kext () - Invalid Parameter
+</code></pre>
+<p>Main places you can check as to why:</p>
+<ul>
+<li><strong>Injection order</strong>: Make sure that Lilu is above AppleALC in kext order</li>
+<li><strong>All kexts are latest release</strong>: Especially important for Lilu plugins, as mismatched kexts can cause issues</li>
+</ul>
+<p>Note: To setup file logging, see <a href="https://dortania.github.io/OpenCore-Desktop-Guide/troubleshooting/debug.html" target="_blank">OpenCore Debugging</a>.</p>
+<h4 id="checking-if-applealc-is-patching-correctly"><a name="checking-if-applealc-is-patching-correctly" class="plugin-anchor" href="#checking-if-applealc-is-patching-correctly"><i class="fa fa-link" aria-hidden="true"></i></a>Checking if AppleALC is patching correctly</h4>
+<p>So with AppleALC, one of the most easiest things to check if the patching was done right was to see if your audio controller was renamed correctly. Grab <a href="https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip" target="_blank">IORegistryExplorer</a> and see if you have an HDEF device:</p>
+<p><img src="../images/post-install/audio-md/hdef.png" alt=""></p>
+<p>As you can see from the above image, we have the following:</p>
+<ul>
+<li>HDEF Device meaning our rename did the job</li>
+<li>AppleHDAController attached meaning Apple&apos;s audio kext attached successfully</li>
+<li><code>alc-layout-id</code> is a property showing our boot-arg/DeviceProperty injection was successful<ul>
+<li>Note: <code>layout-id | Data | 07000000</code> is the default layout, and <code>alc-layout-id</code> will override it and be the layout AppleHDA will use</li>
 </ul>
 </li>
-<li>Cleaning RC scripts:<ul>
-<li><a href="https://www.tonymacx86.com/resources/clover-emulated-nvram-uninstaller.368/" target="_blank">Clover Emulated NVRAM Uninstaller</a></li>
 </ul>
-</li>
-<li>ACPI Dumping:<ul>
-<li><a href="https://github.com/acpica/acpica/tree/master/source/tools/acpidump" target="_blank">acpica</a></li>
+<p>Note: <strong>Do not rename your audio controller manually</strong>, this can cause issues as AppleALC is trying to patch already. Let AppleALC do it&apos;s work.</p>
+<p><strong>More examples</strong>:</p>
+<ul>
+<li>Correct vs Incorrect layout IDs:</li>
 </ul>
-</li>
-<li>iServices Guide:<ul>
-<li><a href="https://applelife.ru/threads/nastrojka-app-store-imessage-facetime-i-icloud.40790/page-219#post-727913" target="_blank">&#x41A;&#x430;&#x43A; &#x437;&#x430;&#x432;&#x435;&#x441;&#x442;&#x438; &#x441;&#x435;&#x440;&#x432;&#x438;&#x441;&#x44B; Apple - iMessage, FaceTime, iCloud</a></li>
-</ul>
-</li>
-<li>iGPU and DRM configuration:<ul>
-<li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md" target="_blank">WhateverGreen&apos;s manual</a></li>
-<li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md" target="_blank">WhateverGreen&apos;s DRM chart</a></li>
-<li><a href="https://applelife.ru/threads/proigryvanie-zaschischjonnogo-kontenta-na-raznom-oborudovanii.1349123/page-67#post-846582" target="_blank">DRM Testing</a></li>
-</ul>
-</li>
-<li>rEFInd Guide:<ul>
-<li><a href="https://www.rodsbooks.com/refind/index.html" target="_blank">rEFInd Manual</a></li>
-</ul>
-</li>
-<li>USB Mapping Guide:<ul>
-<li><a href="https://osy.gitbook.io/hac-mini-guide/details/usb-fix" target="_blank">XHCI Wake issues</a></li>
-<li><a href="https://usb-map.gitbook.io/project/" target="_blank">CorpNewt&apos;s USB Map Guide</a></li>
-<li><a href="https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/" target="_blank">AppleLife USB Map Guide</a></li>
-</ul>
-</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Correct alc-layout-id</th>
+<th style="text-align:center">Incorrect alc-layout-id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="../images/post-install/audio-md/right-layout.png" alt=""></td>
+<td style="text-align:center"><img src="../images/post-install/audio-md/wrong-layout.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<p>As you can see from the above 2, the right image is missing a lot of AppleHDAInput devices, meaning that AppleALC can&apos;t match up your physical ports to something it can understand and output to. This means you&apos;ve got some work to find the right layout ID for your system.</p>
+<h4 id="checking-applehda-is-vanilla"><a name="checking-applehda-is-vanilla" class="plugin-anchor" href="#checking-applehda-is-vanilla"><i class="fa fa-link" aria-hidden="true"></i></a>Checking AppleHDA is vanilla</h4>
+<p>This section is mainly relevant for those who were replacing the stock AppleHDA with a custom one, this is going to verify whether or not yours is genuine:</p>
+<pre><code class="lang-text">sudo kextcache -i / &amp;&amp; sudo kextcache -u /
+</code></pre>
+<p>This will check if the signature is valid for AppleHDA, if it&apos;s not then you&apos;re going to need to either get an original copy of AppleHDA for your system and replace it or update macOS(kexts will be cleaned out on updates). This will only happen when you&apos;re manually patched AppleHDA so if this is a fresh install it&apos;s highly unlikely you will have signature issues.</p>
 
                                 
                                 </section>
@@ -864,10 +925,14 @@
 
             
                 
-                <a href="../CONTRIBUTING.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Contributing">
+                <a href="security.html" class="navigation navigation-prev " aria-label="Previous page: Security and FileVault">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="oc2hdd.html" class="navigation navigation-next " aria-label="Next page: Booting without USB">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -876,7 +941,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Credit","level":"8.2","depth":1,"previous":{"title":"Contributing","level":"8.1","depth":1,"path":"CONTRIBUTING.md","ref":"CONTRIBUTING.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"misc/credit.md","mtime":"2020-05-03T17:56:47.415Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:57:44.451Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing Audio","level":"5.1.2","depth":2,"next":{"title":"Booting without USB","level":"5.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"previous":{"title":"Security and FileVault","level":"5.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/audio.md","mtime":"2020-05-03T17:56:47.415Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:57:44.451Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

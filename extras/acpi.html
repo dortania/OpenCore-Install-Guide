@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Add GUI and Bootchime · GitBook</title>
+        <title>Getting started with ACPI · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -71,10 +71,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="gpu-patches.html" />
+    <link rel="next" href="../config.plist/ivy-bridge.html" />
     
     
-    <link rel="prev" href="legacy.html" />
+    <link rel="prev" href="../ktext.html" />
     
 
     <style>
@@ -211,7 +211,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="acpi.html">
+        <li class="chapter active" data-level="1.5" data-path="acpi.html">
             
                 <a href="acpi.html">
             
@@ -597,7 +597,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="7.2" data-path="gui.html">
+        <li class="chapter " data-level="7.2" data-path="gui.html">
             
                 <a href="gui.html">
             
@@ -725,7 +725,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Add GUI and Bootchime</a>
+        <a href=".." >Getting started with ACPI</a>
     </h1>
 </div>
 
@@ -743,157 +743,13 @@
                                 <blockquote>
 <p><em>Last modified: Sun May 03 2020 17:56:46 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="opencore-beauty-treatment"><a name="opencore-beauty-treatment" class="plugin-anchor" href="#opencore-beauty-treatment"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore beauty treatment</h1>
+<h1 id="getting-started-with-acpi"><a name="getting-started-with-acpi" class="plugin-anchor" href="#getting-started-with-acpi"><i class="fa fa-link" aria-hidden="true"></i></a>Getting started with ACPI</h1>
 <ul>
 <li>Supported version: 0.5.7</li>
 </ul>
-<p>Main thing this guide will go over:</p>
-<ul>
-<li><a href="gui.html#giving-opencore-a-gui">Giving OpenCore a GUI</a></li>
-<li><a href="gui.html#setting-up-a-boot-chime">Setting up a boot-chime</a></li>
-</ul>
-<h2 id="setting-up-opencores-gui"><a name="setting-up-opencores-gui" class="plugin-anchor" href="#setting-up-opencores-gui"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up OpenCore&apos;s GUI</h2>
-<p>So to get started, we&apos;re gonna need 0.5.7 as this build version has the GUI included with the rest of the files. If you&apos;re on an older version, I recommend updating: <a href="../post-install/update.html">Updating OpenCore</a></p>
-<p>Once that&apos;s done, we&apos;ll need a couple things:</p>
-<ul>
-<li><a href="https://github.com/acidanthera/OcBinaryData" target="_blank">Binary Resources</a></li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCanopy.efi</a></li>
-</ul>
-<p>Once you have both of these, we&apos;ll next want to add it to our EFI partition:</p>
-<ul>
-<li>Add the Resources folder to EFI/OC<ul>
-<li>Note the 0.5.7 copy puts into the wrong spot under just EFI, this will cause an image load error and halt OpenCore</li>
-</ul>
-</li>
-<li>Add OpenCanopy.efi to EFI/OC/Drivers</li>
-</ul>
-<p><img src="../images/extras/gui-md/folder-gui.png" alt=""></p>
-<p>Now in our config.plist, we have 2 things we need to fix:</p>
-<ul>
-<li><code>Misc -&gt; PickerMode</code>: <code>External</code></li>
-<li><code>Misc -&gt; PickerAttributes</code>:<code>1</code><ul>
-<li>This enables .VolumeIcon.icns reading off the drive, this is how macOS installer icons work<ul>
-<li>0x0008: This is another value which allows for alternative icons, such as the legacy GUI found on legacy Macs. This can be combined with <code>1</code> for both legacy GUI and custom drive icons(PickerAttributes: <code>9</code>)</li>
-<li>Other settings for PickerAttributes can be found in the <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>UEFI -&gt; Drivers</code> and add OpenCanopy.efi</li>
-</ul>
-<p>Once all this is saved, you can reboot and be greeted with a true Mac-like GUI:</p>
-<p><img src="../images/extras/gui-md/gui.png" alt="Credit to Vit9696"></p>
-<h2 id="setting-up-boot-chime-with-audiodxe"><a name="setting-up-boot-chime-with-audiodxe" class="plugin-anchor" href="#setting-up-boot-chime-with-audiodxe"><i class="fa fa-link" aria-hidden="true"></i></a>Setting up Boot-chime with AudioDxe</h2>
-<p>So to start, we&apos;ll need a couple things:</p>
-<ul>
-<li>Onboard audio output<ul>
-<li>USB DACs will not work</li>
-<li>GPU audio out is a hit or miss</li>
-</ul>
-</li>
-<li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">AudioDxe</a> in both EFI/OC/Drivers and UEFI -&gt; Drivers</li>
-<li><a href="https://github.com/acidanthera/OcBinaryData" target="_blank">Binary Resources</a><ul>
-<li>Add the Resources folder to EFI/OC, just like we did with the OpenCore GUI section</li>
-<li>For those running out of space, <code>OCEFIAudio_VoiceOver_Boot.wav</code> is all that&apos;s required for the Boot-Chime</li>
-</ul>
-</li>
-<li>Debug version of OpenCore with logging enabled<ul>
-<li>See <a href="../troubleshooting/debug.html">OpenCore Debugging</a> for more info</li>
-</ul>
-</li>
-</ul>
-<p><strong>Settings up NVRAM</strong>:</p>
-<ul>
-<li>NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82:<ul>
-<li><code>SystemAudioVolume | Data | 0x46</code></li>
-<li>This is the boot-chime and screenreader volume, note it&apos;s in hexadecimal so would become <code>70</code> in decimal</li>
-</ul>
-</li>
-</ul>
-<p><strong>Setting up UEFI -&gt; Audio:</strong></p>
-<ul>
-<li><p><strong>AudioCodec:</strong></p>
-<ul>
-<li>Codec address of Audio controller</li>
-<li>To find yours:<ul>
-<li>Check <a href="https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip" target="_blank">IORegistryExplorer</a> -&gt; HDEF -&gt; AppleHDAController -&gt; IOHDACodecDevice and see the <code>IOHDACodecAddress</code> property</li>
-<li>ex: <code>0x0</code><ul>
-<li>Can also check via termina(Note if multiple show up, use the vendor ID to find the right device)l:</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="lang-text">ioreg -rxn IOHDACodecDevice | grep VendorID   // List all possible devices
-</code></pre>
-<pre><code class="lang-text">ioreg -rxn IOHDACodecDevice | grep IOHDACodecAddress // Grab the codec address
-</code></pre>
-</li>
-<li><p><strong>Audio Device:</strong></p>
-<ul>
-<li>PciRoot of audio controller</li>
-<li>Run <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a> to find the path:<ul>
-<li><code>/path/to/gfxutil -f HDEF</code></li>
-<li>ex: <code>PciRoot(0x0)/Pci(0x1f,0x3)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>AudioOut:</strong></p>
-<ul>
-<li>The specific output of your Audio controller, easiest way to find the right one is to go through each one(from 0 to N - 1)</li>
-<li>ex: <code>2</code><ul>
-<li>You can find all the ones for your codec in the OpenCore debug logs:</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="lang-text">06:065 00:004 OCAU: Matching PciRoot(0x0)/Pci(0x1F,0x3)/VenMsg(A9003FEB-D806-41DB-A491-5405FEEF46C3,00000000)...
-06:070 00:005 OCAU: 1/2 PciRoot(0x0)/Pci(0x1F,0x3)/VenMsg(A9003FEB-D806-41DB-A491-5405FEEF46C3,00000000) (5 outputs) - Success
-</code></pre>
-<ul>
-<li><p><strong>AudioSupport:</strong></p>
-<ul>
-<li>Set this to <code>True</code></li>
-</ul>
-</li>
-<li><p><strong>MinimumVolume:</strong></p>
-<ul>
-<li>Volume level from <code>0</code> to <code>100</code></li>
-<li>To not blow the speakers, set it to <code>70</code></li>
-<li>Note boot-chime will not play if MinimumVolume is higher than <code>SystemAudioVolume</code> that we set back in the <code>NVRAM</code> section</li>
-</ul>
-</li>
-<li><p><strong>PlayChime:</strong></p>
-<ul>
-<li>Set this to <code>True</code></li>
-</ul>
-</li>
-<li><p><strong>VolumeAmplifier:</strong></p>
-<ul>
-<li>The Volume amplification, value will differ depending on your codec</li>
-<li>Formula is as follows:<ul>
-<li>(SystemAudioVolume * VolumeAmplifier)/100 = Raw Volume(but cannot exceed 100)</li>
-<li>ex: (<code>70</code> x <code>VolumeAmplifier</code>)/<code>100</code> = <code>100</code>  -&gt; (<code>100</code> x <code>100</code>) / <code>70</code> = VolumeAmplifier = <code>142.9</code>(we&apos;ll round it to <code>143</code> for simplicity)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Once done, you should get something like this:</p>
-<p><img src="../images/extras/gui-md/audio-config.png" alt=""></p>
-<p><strong>Note for visually impaired</strong>:</p>
-<ul>
-<li>OpenCore hasn&apos;t forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault voiceover with these 2 settings:<ul>
-<li><code>Misc -&gt; PickerAudioAssist -&gt; True</code> to enable picker audio</li>
-<li><code>UEFI -&gt; Protocols -&gt; AppleAudio -&gt; True</code> to enable FileVault voice over<ul>
-<li>See <a href="../post-install/security.html">Security and FileVault</a> on how to setup the rest for proper FileVault support</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>This section is dedicated to the process of both dumping and making ACPI tables. Due to the many different types of SSDT possible, the guide has been spun out into it&apos;s own.</p>
+<p>Guide has been move here:</p>
+<h1 id="getting-started-with-acpi"><a name="getting-started-with-acpi" class="plugin-anchor" href="#getting-started-with-acpi"><i class="fa fa-link" aria-hidden="true"></i></a><a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting Started With ACPI</a></h1>
 
                                 
                                 </section>
@@ -921,12 +777,12 @@
 
             
                 
-                <a href="legacy.html" class="navigation navigation-prev " aria-label="Previous page: Legacy Install">
+                <a href="../ktext.html" class="navigation navigation-prev " aria-label="Previous page: Gathering files">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="gpu-patches.html" class="navigation navigation-next " aria-label="Next page: iGPU Patching">
+                <a href="../config.plist/ivy-bridge.html" class="navigation navigation-next " aria-label="Next page: Ivy Bridge">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -937,7 +793,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Add GUI and Bootchime","level":"7.2","depth":1,"next":{"title":"iGPU Patching","level":"7.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"previous":{"title":"Legacy Install","level":"7.1","depth":1,"path":"extras/legacy.md","ref":"extras/legacy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gui.md","mtime":"2020-05-03T17:56:46.643Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:57:44.451Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Getting started with ACPI","level":"1.5","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Gathering files","level":"1.4","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/acpi.md","mtime":"2020-05-03T17:56:46.639Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:57:44.451Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
