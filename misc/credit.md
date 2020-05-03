@@ -1,4 +1,4 @@
-# Credits
+# Credit
 
 * Supported version: 0.5.7
 
@@ -7,13 +7,13 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [vit9696](https://github.com/vit9696)
   * One of many developers of OpenCore
   * Corrections to the original guide
-  * Corrections to this guide...(seriously this man deserves a medal)
+  * Corrections to this guide...\(seriously this man deserves a medal\)
 * [CorpNewt](https://github.com/corpnewt)
-  * Heavily inspiring this guide(if not a rip off) and helping overal with questions and advice
+  * Heavily inspiring this guide\(if not a rip off\) and helping overal with questions and advice
   * Spoof SSDT source
 * [Midi](https://github.com/midi1996)
   * Corrections and recommendations for the guide
-* [AlGrey#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
+* [AlGrey\#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
   * AMD Kernel patches
 * [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
   * For the original AMD Vanilla Guide
@@ -21,7 +21,7 @@ No good guide is made by one man, here's credit to those who've helped out:
 * [DhinakG](https://github.com/dhinakg)
   * Random guide related stuff
 * [and the rest of the dortania team](https://github.com/dortania) for helping out
-  
+
 And to the rest who've helped out as well, thank you!
 
 **Developers of OpenCore**:
@@ -69,3 +69,4 @@ And for those who have recommendations or issues with this guide, you can find t
   * [XHCI Wake issues](https://osy.gitbook.io/hac-mini-guide/details/usb-fix)
   * [CorpNewt's USB Map Guide](https://usb-map.gitbook.io/project/)
   * [AppleLife USB Map Guide](https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/)
+

@@ -1,4 +1,4 @@
-# Making the installer in Windows
+# Windows install
 
 * Supported version: 0.5.7
 
@@ -13,32 +13,33 @@ To start you'll need the following:
 
 To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only`:
 
-![](/images/installer-guide/winblows-install-md/gib-default.png)
+![](../.gitbook/assets/gib-default.png)
 
 Now search through for your desired version of macOS, for this example we'll choose option 5 for macOS Catalina:
 
-![](/images/installer-guide/winblows-install-md/gib-recovery.png)
+![](../.gitbook/assets/gib-recovery.png)
 
 This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx`
 
-![](/images/installer-guide/winblows-install-md/gib-done.png)
+![](../.gitbook/assets/gib-done%20%281%29.png)
 
 ## Making the installer
 
-Next open `makeinstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O).
+Next open `makeinstall.bat` as Admin and select your drive with option O for OpenCore\( ex: 1O\).
 
-![](/images/installer-guide/winblows-install-md/make-install.png)
+![](../.gitbook/assets/make-install.png)
 
 Once your drive is formatted, it will then ask you for the `RecoveryHDMetaDMG.pkg` that we downloaded earlier. Top right of the file window will let you copy the file path:
 
-![](/images/installer-guide/winblows-install-md/make-install-location.png)
+![](../.gitbook/assets/make-install-location.png)
 
-![](/images/installer-guide/winblows-install-md/recovery-location.png)
+![](../.gitbook/assets/recovery-location.png)
 
 makeinstall will finish up by installing OpenCore to your USB's EFI System Partition, you can find this partition labeled as `BOOT`:
 
-![](/images/installer-guide/winblows-install-md/make-install-done.png)
+![](../.gitbook/assets/make-install-done.png)
 
-![](/images/installer-guide/winblows-install-md/EFI-base.png)
+![](../.gitbook/assets/efi-base.png)
 
-### Now with all this done, head to [Setting up the EFI](/installer-guide/opencore-efi.md) to finish up your work
+### Now with all this done, head to [Setting up the EFI](../opencore-efi.md) to finish up your work
+

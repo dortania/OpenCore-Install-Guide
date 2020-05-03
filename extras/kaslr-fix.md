@@ -4,13 +4,13 @@
 
 Table of Contents:
 
-* [So what is KASLR?](/extras/kaslr-fix.md#so-what-is-kaslr)
-* [And who is this info for?](/extras/kaslr-fix.md#and-who-is-this-info-for)
-* [So how do I fix this?](/extras/kaslr-fix.md#so-how-do-i-fix-this)
-* [Prepping the BIOS](/extras/kaslr-fix.md#prepping-the-bios)
-* [Test boot](/extras/kaslr-fix.md#test-boot)
-* [Finding the Slide value](/extras/kaslr-fix.md#finding-the-slide-value)
-* [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
+* [So what is KASLR?](kaslr-fix.md#so-what-is-kaslr)
+* [And who is this info for?](kaslr-fix.md#and-who-is-this-info-for)
+* [So how do I fix this?](kaslr-fix.md#so-how-do-i-fix-this)
+* [Prepping the BIOS](kaslr-fix.md#prepping-the-bios)
+* [Test boot](kaslr-fix.md#test-boot)
+* [Finding the Slide value](kaslr-fix.md#finding-the-slide-value)
+* [Using DevirtualiseMmio](kaslr-fix.md#using-devirtualisemmio)
 
 This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.
 
@@ -50,21 +50,20 @@ Fun Fact: It takes around 31 ms to find an area to operate in, manually setting 
 The real fix to this is quite simple actually, the process is both the same for Clover and OpenCore users. What you'll need:
 
 * **Clover users**:
-  * Clover Shell(most users already have this included, usually called shell64.efi or some variation)
+  * Clover Shell\(most users already have this included, usually called shell64.efi or some variation\)
     * This will be found under `EFI/CLOVER/tools`
     * If you're missing this, you can grab it from the [CLOVER.zip](https://github.com/CloverHackyColor/CloverBootloader/releases)
-  * [OcQuirks](https://github.com/ReddestDream/OcQuirks/releases)(Don't mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide)
+  * [OcQuirks](https://github.com/ReddestDream/OcQuirks/releases)\(Don't mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide\)
     * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
-  * OpenRuntime.efi(Bundled with OcQuirks)
+  * OpenRuntime.efi\(Bundled with OcQuirks\)
     * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
-  * OcQuirks.plist(Bundled with OcQuirks)
+  * OcQuirks.plist\(Bundled with OcQuirks\)
     * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
-
 * **OpenCore users**:
   * [OpenRuntime](https://github.com/acidanthera/OpenCorePkg/releases)
-  * [OpenShell](https://github.com/acidanthera/OpenCorePkg/releases)(Don't forget to enable this under `Root -> Misc -> Tools`)
+  * [OpenShell](https://github.com/acidanthera/OpenCorePkg/releases)\(Don't forget to enable this under `Root -> Misc -> Tools`\)
 
-And we'll also need to configure our config.plist -> Booter(for OpenCore) or OcQuirks.plist(for Clover):
+And we'll also need to configure our config.plist -&gt; Booter\(for OpenCore\) or OcQuirks.plist\(for Clover\):
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -81,14 +80,14 @@ And we'll also need to configure our config.plist -> Booter(for OpenCore) or OcQ
 
 ## Prepping the BIOS
 
-The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:
+The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases\(Memory Maps are not always consistent on boots\). To prep:
 
-* Update BIOS(extremely important as early BIOS's shipped are known to have memory map issues, especially with Z390)
+* Update BIOS\(extremely important as early BIOS's shipped are known to have memory map issues, especially with Z390\)
 * Clear CMOS
 * Enable much needed BIOS settings:
   * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on some X99, X299 so recommended to test with and without.
   * `Boot Options -> Windows8.1/10 mode`: This will make sure no old legacy garbage is loaded. Fun fact, `other OS` is only designed for booting older versions of Windows and not for other OS.
-* Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:
+* Disable as many unneeded devices in the BIOS\(this means there is less variation in the map on each boot, so fewer chances of boot failure\). Common settings:
   * `CSM`: For legacy support, adds a bunch of garbage we don't want. This also can break the shell so you can't boot into it.
   * `Intel SGX`: Software Guard Extensions, takes up a lot of space and does nothing in macOS.
   * `Parallel Port`: macOS can't even see parallel.
@@ -126,33 +125,33 @@ Example of what you'll see:
 | BS\_Data | 000000006B526000 | 000000006B625FFF | 0000000000000100 | 000000000000000F |
 | Available | 000000006B626000 | 000000006B634FFF | 000000000000000F | 000000000000000F |
 
-Now you may be wondering how the hell we convert this to a slide value, well it's quite simple. What we're interested in is the largest available value within the `Start` column. In this example we see that `000000006B626000` is our largest, do note that these are in HEX so if there are multiple values close to each other you may need to convert them to decimal. To the calculate slide value(macOS's built-in calculator has a programming function by pressing ⌘+3):
+Now you may be wondering how the hell we convert this to a slide value, well it's quite simple. What we're interested in is the largest available value within the `Start` column. In this example we see that `000000006B626000` is our largest, do note that these are in HEX so if there are multiple values close to each other you may need to convert them to decimal. To the calculate slide value\(macOS's built-in calculator has a programming function by pressing ⌘+3\):
 
 `000000006B626000` = `0x6B626000`
 
-(`0x6B626000` - `0x100000`)/`0x200000` = `0x35A`
+\(`0x6B626000` - `0x100000`\)/`0x200000` = `0x35A`
 
 And to verify that this is correct:
 
-`0x100000` + (`0x35A` * `0x200000`) = `0x6B500000`
+`0x100000` + \(`0x35A` \* `0x200000`\) = `0x6B500000`
 
-Whenever the returned value is **not** the original(`0x6B500000` vs `0x6B626000`), just add +1 to your final slide value. This is due to rounding. So for example `0x35A` converted to decimal becomes `858` and then +1 will give you `slide=859`.
+Whenever the returned value is **not** the original\(`0x6B500000` vs `0x6B626000`\), just add +1 to your final slide value. This is due to rounding. So for example `0x35A` converted to decimal becomes `858` and then +1 will give you `slide=859`.
 
 > But wait for just a second, this is higher than 256!
 
-That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be `0000000000100000`).
+That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value\(for us that would be `0000000000100000`\).
 
 And just to make it a bit clearer on the formula:
 
-(HEX - `0x100000`)/`0x200000` = Slide Value in HEX
+\(HEX - `0x100000`\)/`0x200000` = Slide Value in HEX
 
-`0x100000` + (Slide Value in HEX * `0x200000`) = Your original HEX value(if not then add +1 to your slide value)
+`0x100000` + \(Slide Value in HEX \* `0x200000`\) = Your original HEX value\(if not then add +1 to your slide value\)
 
-Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`). If this value still gives you errors then you may proceed to the second-largest `Start` value and so on.
+Now navigate into your config.plist and add your slide value with the rest of your boot arguments\(for us it would be `slide=0` when using `0x100000`\). If this value still gives you errors then you may proceed to the second-largest `Start` value and so on.
 
 Sometimes you may find that when you calculate slide that you receive super small vales like `slide=-0.379150390625`, when this happens round this to `slide=0`.
 
-And for users who are having issues finding their slide value can also type `$slide [insert largest #Pages value]` in the #Sandbox channel on the [r/Hackintosh Discord](https://discord.gg/u8V7N5C)
+And for users who are having issues finding their slide value can also type `$slide [insert largest #Pages value]` in the \#Sandbox channel on the [r/Hackintosh Discord](https://discord.gg/u8V7N5C)
 
 > But this is soooooo hard
 
@@ -169,7 +168,7 @@ Directory of fs0:\
 fs0:\> memmap > memmap.txt
 ```
 
-This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type `$slide [insert a link to memmap.txt]`
+This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the \#Sandbox channel and type `$slide [insert a link to memmap.txt]`
 
 ## Using DevirtualiseMmio
 
@@ -190,19 +189,15 @@ If you run the debug version of OpenCore with DevirtualiseMmio, you'll notice th
 21:520 00:003 OCABC: MMIO devirt end, saved 278608 KB
 ```
 
-* Note: See [OpenCore Debugging](/troubleshooting/debug.md) on how to enable logging to file
+* Note: See [OpenCore Debugging](../troubleshooting/debug.md) on how to enable logging to file
 
-So we have 6 regions we need to go through and see which are bad, best idea is to block all MMIO sections *except* one and try each region to get a list of good regions.
+So we have 6 regions we need to go through and see which are bad, best idea is to block all MMIO sections _except_ one and try each region to get a list of good regions.
 
 Now lets take the above example and create our own MmioWhitelist, we'll need to first convert the address from hexadecimal to decimal:
 
-MMIO devirt 0x60000000 -> 1610612736
-MMIO devirt 0xFE000000 -> 4261412864
-MMIO devirt 0xFEC00000 -> 4273995776
-MMIO devirt 0xFED00000 -> 4275044352
-MMIO devirt 0xFEE00000 -> 4276092928
-MMIO devirt 0xFF000000 -> 4278190080
+MMIO devirt 0x60000000 -&gt; 1610612736 MMIO devirt 0xFE000000 -&gt; 4261412864 MMIO devirt 0xFEC00000 -&gt; 4273995776 MMIO devirt 0xFED00000 -&gt; 4275044352 MMIO devirt 0xFEE00000 -&gt; 4276092928 MMIO devirt 0xFF000000 -&gt; 4278190080
 
 Should look something like this when done:
 
-![](/images/extras/kaslr-fix-md/mmio-white.png)
+![](../.gitbook/assets/mmio-white.png)
+

@@ -1,13 +1,13 @@
-# Disabling GPU
+# Disabling unsupported GPUs
 
 * Supported version: 0.5.7
 
 Table of Contents:
 
-* [Boot Flag](/extras/spoof.md#boot-flag)
-* [DeviceProperties Method](/extras/spoof.md#deviceproperties-method)
-* [SSDT Method](/extras/spoof.md#ssdt-method)
-* [Fixing Windows](/extras/spoof.md#fixing-windows)
+* [Boot Flag](spoof.md#boot-flag)
+* [DeviceProperties Method](spoof.md#deviceproperties-method)
+* [SSDT Method](spoof.md#ssdt-method)
+* [Fixing Windows](spoof.md#fixing-windows)
 
 So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 
@@ -50,7 +50,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 | IOName | string | \#display |
 | class-code | data | FFFFFFFF |
 
-![](/images/extras/spoof-md/config-gpu.png)
+![](../.gitbook/assets/config-gpu.png)
 
 ### SSDT Method
 
@@ -60,52 +60,54 @@ Example of device path:
 
 `\_SB.PCI0.PEG0.PEGP`
 
-    DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
-    {
-       External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
-    
-       Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-       {
-          If (LOr (LNot (Arg2), LEqual (_OSI ("Darwin"), Zero)))
-          {
-             Return (Buffer (One)
-             {
-                0x03                                           
-             })
-          }
-    
-          Return (Package (0x0A)
-          {
-             "name", 
-             Buffer (0x09)
-             {
-                "#display"
-             }, 
-    
-             "IOName", 
-             "#display", 
-             "class-code", 
-             Buffer (0x04)
-             {
-                0xFF, 0xFF, 0xFF, 0xFF                         
-             }, 
+```text
+DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
+{
+   External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
 
-             "vendor-id", 
-             Buffer (0x04)
-             {
-                0xFF, 0xFF, 0x00, 0x00                         
-             }, 
-    
-             "device-id", 
-             Buffer (0x04)
-             {
-                0xFF, 0xFF, 0x00, 0x00                         
-             }
-          })
-       }
-    }
+   Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+   {
+      If (LOr (LNot (Arg2), LEqual (_OSI ("Darwin"), Zero)))
+      {
+         Return (Buffer (One)
+         {
+            0x03                                           
+         })
+      }
 
-A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
+      Return (Package (0x0A)
+      {
+         "name", 
+         Buffer (0x09)
+         {
+            "#display"
+         }, 
+
+         "IOName", 
+         "#display", 
+         "class-code", 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0xFF, 0xFF                         
+         }, 
+
+         "vendor-id", 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0x00, 0x00                         
+         }, 
+
+         "device-id", 
+         Buffer (0x04)
+         {
+            0xFF, 0xFF, 0x00, 0x00                         
+         }
+      })
+   }
+}
+```
+
+A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -&gt; Save As -&gt; ACPI Machine Language.
 
 Source: CorpNewt
 
@@ -113,4 +115,5 @@ Source: CorpNewt
 
 So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:
 
-![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
+![Credit to CorpNewt for image](../.gitbook/assets/corp-windows.png)
+
