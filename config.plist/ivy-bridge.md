@@ -63,7 +63,7 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 **Block**
 
-This blocks certain ACPI tabes from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all to well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](/post-install/README.md) and drop the old tables:
+This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all to well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](/post-install/README.md) and drop the old tables:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -302,7 +302,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO:
-  * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional
+  * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
 * **BootProtect**: None
   * Allows the use of Boostrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
@@ -503,7 +503,7 @@ Only drivers present here should be:
 
 **Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Bootchime](/post-install/README.md)
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](/post-install/README.md)
 
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
@@ -555,7 +555,7 @@ Only drivers present here should be:
 **Quirks**:
 
 * **ExitBootServicesDelay**: `0`
-  * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault2
+  * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault 2
 * **IgnoreInvalidFlexRatio**: YES
   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
 * **ReleaseUsbOwnership**: NO

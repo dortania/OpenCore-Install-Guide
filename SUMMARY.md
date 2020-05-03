@@ -51,7 +51,7 @@
 ## Extras
 
 * [Legacy Install](/extras/legacy.md)
-* [Add GUI and Bootchime](/extras/gui.md)
+* [Add GUI and Boot-chime](/extras/gui.md)
 * [iGPU Patching](/extras/gpu-patches.md)
 * [Fixing KASLR slide values](/extras/kaslr-fix.md)
 * [Disabling unsupported GPUs](/extras/spoof.md)
