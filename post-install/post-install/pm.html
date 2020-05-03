@@ -1,0 +1,1029 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Fixing Power Management · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-medium-zoom/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../troubleshooting/troubleshooting.html" />
+    
+    
+    <link rel="prev" href="nvram.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    OpenCore Desktop Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../installer-guide/">
+            
+                <a href="../../installer-guide/">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../installer-guide/mac-install.html">
+            
+                <a href="../../installer-guide/mac-install.html">
+            
+                    
+                    macOS install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../installer-guide/winblows-install.html">
+            
+                <a href="../../installer-guide/winblows-install.html">
+            
+                    
+                    Windows install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../installer-guide/linux-install.html">
+            
+                <a href="../../installer-guide/linux-install.html">
+            
+                    
+                    Linux install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../opencore-efi.html">
+            
+                <a href="../../opencore-efi.html">
+            
+                    
+                    Adding The Base OpenCore Files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../ktext.html">
+            
+                <a href="../../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../acpi.html">
+            
+                <a href="../../acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../intel-config.plist/ivy-bridge.html">
+            
+                <a href="../../intel-config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../intel-config.plist/haswell.html">
+            
+                <a href="../../intel-config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../../intel-config.plist/skylake.html">
+            
+                <a href="../../intel-config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../../intel-config.plist/kaby-lake.html">
+            
+                <a href="../../intel-config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../../intel-config.plist/coffee-lake.html">
+            
+                <a href="../../intel-config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel HEDT Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../intel-hedt-config.plist/haswell-e.html">
+            
+                <a href="../../intel-hedt-config.plist/haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../../intel-hedt-config.plist/broadwell-e.html">
+            
+                <a href="../../intel-hedt-config.plist/broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../../intel-hedt-config.plist/skylake-x.html">
+            
+                <a href="../../intel-hedt-config.plist/skylake-x.html">
+            
+                    
+                    Skylake-X
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../../amd-config.plist/fx.html">
+            
+                <a href="../../amd-config.plist/fx.html">
+            
+                    
+                    Bulldozer/Jaguar
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../../amd-config.plist/zen.html">
+            
+                <a href="../../amd-config.plist/zen.html">
+            
+                    
+                    Zen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Post-Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="audio.html">
+            
+                <a href="audio.html">
+            
+                    
+                    Fixing Audio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="oc2hdd.html">
+            
+                <a href="oc2hdd.html">
+            
+                    
+                    Booting without USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="update.html">
+            
+                <a href="update.html">
+            
+                    
+                    Updating OpenCore, kexts and macOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="msr-lock.html">
+            
+                <a href="msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="verbose.html">
+            
+                <a href="verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="drm.html">
+            
+                <a href="drm.html">
+            
+                    
+                    Fixing DRM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="iservices.html">
+            
+                <a href="iservices.html">
+            
+                    
+                    Fixing iServices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="nvram.html">
+            
+                <a href="nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="5.1.10" data-path="pm.html">
+            
+                <a href="pm.html">
+            
+                    
+                    Fixing Power Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../../troubleshooting/troubleshooting.html">
+            
+                <a href="../../troubleshooting/troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../../troubleshooting/debug.html">
+            
+                <a href="../../troubleshooting/debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../../troubleshooting/boot.html">
+            
+                <a href="../../troubleshooting/boot.html">
+            
+                    
+                    macOS Boot Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../../extras/legacy.html">
+            
+                <a href="../../extras/legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../../extras/gui.html">
+            
+                <a href="../../extras/gui.html">
+            
+                    
+                    Add GUI and Bootchime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../../extras/gpu-patches.html">
+            
+                <a href="../../extras/gpu-patches.html">
+            
+                    
+                    iGPU Patching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../../extras/kaslr-fix.html">
+            
+                <a href="../../extras/kaslr-fix.html">
+            
+                    
+                    Fixing KASLR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../../extras/spoof.html">
+            
+                <a href="../../extras/spoof.html">
+            
+                    
+                    Disabling unsupported GPUs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" >
+            
+                <a target="_blank" href="https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion">
+            
+                    
+                    Clover Conversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../../misc/contributing.html">
+            
+                <a href="../../misc/contributing.html">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../../misc/credit.html">
+            
+                <a href="../../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Fixing Power Management</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p><em>Last modified: Sun May 03 2020 17:54:35 GMT+0000 (Coordinated Universal Time)</em></p>
+</blockquote>
+<h1 id="fixing-power-management"><a name="fixing-power-management" class="plugin-anchor" href="#fixing-power-management"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing Power Management</h1>
+<ul>
+<li><a href="pm.html#enabling-x86platformplugin">Enabling X86PlatformShim</a></li>
+<li><a href="pm.html#using-cpu-friend">Using CPU Friend</a></li>
+<li><a href="pm.html#sandy-and-ivy-bridge-power-management">Sandy and Ivy Bridge Power Management</a></li>
+</ul>
+<h2 id="enabling-x86platformplugin"><a name="enabling-x86platformplugin" class="plugin-anchor" href="#enabling-x86platformplugin"><i class="fa fa-link" aria-hidden="true"></i></a>Enabling X86PlatformPlugin</h2>
+<p>So before we can fine tune power manegement to our liking, we need to first make sure Apple&apos;s XCPM core is loaded. Note that this is supported <strong>only on Haswell and newer</strong>, Sandy and Ivy Bridge should refer to the bottom of the guide: <a href="pm.html#sandy-and-ivy-bridge-power-management">Sandy and Ivy Bridge Power Management</a>.</p>
+<p>To start, grab <a href="https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip" target="_blank">IORegistryExplorer</a> and look for <code>AppleACPICPU</code>(note if you use search, it may find entries):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">XCPM Present</th>
+<th style="text-align:center">Missing XCPM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="../../.gitbook/assets/pm-working.png" alt=""></td>
+<td style="text-align:center"><img src="../../.gitbook/assets/pm-not-working.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<p>As you can see from the left image, we have the X86PlatformPlugin attached meaning Apple&apos;s CPU Power Management Drivers are doing their thing. If you get something like to the right image, then there&apos;s likely an issue. Make sure to check the following:</p>
+<ul>
+<li>SSDT-PLUG.<strong>aml</strong> is both present and enabled in your config.plist and EFI/OC/ACPI<ul>
+<li>If you&apos;re missing this, head to <a href="https://dortanian.github.io/Getting-Started-With-ACPI" target="_blank">Getting Started With ACPI</a> on how to make this</li>
+</ul>
+</li>
+<li>SSDT-PLUG is set to the first thread of your CPU, you can check by selecting the first CPU listed(<code>CP00</code> for our example) and make sure you have this in the properties:</li>
+</ul>
+<pre><code class="lang-text">plugin-type | Number | 0x1
+</code></pre>
+<p><strong>X99 Note</strong>:</p>
+<p>XCPM does not natively support Haswell-E and Broadwell-E, this means we need to spoof the CPU ID into a model that does supports XCPM:</p>
+<ul>
+<li><strong>Haswell E</strong>:<ul>
+<li><code>Kernel -&gt; Emulate</code>:<ul>
+<li>Cpuid1Data&#xFEFF;: <code>C3060300 00000000 00000000 00000000</code></li>
+<li>Cpuid1Mask: <code>FFFFFFFF 00000000 00000000 00000000</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Broadwell-E</strong>:<ul>
+<li><code>Kernel -&gt; Emulate</code>:<ul>
+<li>Cpuid1Data&#xFEFF;: <code>D4060300&#xFEFF; 00000000 00000000 00000000</code></li>
+<li>Cpuid1Mask: <code>FFFFFFFF 00000000 00000000 00000000</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="using-cpu-friend"><a name="using-cpu-friend" class="plugin-anchor" href="#using-cpu-friend"><i class="fa fa-link" aria-hidden="true"></i></a>Using CPU Friend</h2>
+<p>To start, we&apos;re gonna need a couple things:</p>
+<ul>
+<li>X86PlatformPlugin loaded</li>
+<li><a href="https://github.com/acidanthera/CPUFriend/releases" target="_blank">CPUFriend</a></li>
+<li><a href="https://github.com/corpnewt/CPUFriendFriend" target="_blank">CPUFriendFriend</a></li>
+</ul>
+<p>Now lets run CPUFriendFriend.command</p>
+<p><img src="../../.gitbook/assets/lpm.png" alt=""></p>
+<p>The <code>min hex freq</code> should be what the lowest possible TDP for the CPU, on Intel&apos;s <a href="https://ark.intel.com/" target="_blank">ARK site</a> search for <code>TDP-down Frequency</code> and convert this value to HEX. Note that not all CPUs support <code>TDP-down Frequency</code>, like the i7-9700T vs i7 9700. In these scenarios, you&apos;ll want to do a bit more research into your CPU, specifically:</p>
+<ul>
+<li>Minimum Multiplier (Generally stable with x10 on Intel&apos;s consumer platform)</li>
+<li>FSB (Front Side Bus Frequency, this is 100Mhz on most CPUs)</li>
+</ul>
+<p>LPM = MinMultiplier x FSB</p>
+<p>For this example we&apos;ll be using the <a href="https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html" target="_blank">i9 7920x</a> which has a base clock of 2.9 Ghz but no LPM, so we&apos;ll choose 1.3 Ghz(13x100) and work our way up/down until we find stability.</p>
+<pre><code class="lang-text">echo &quot;obase=16; 13&quot; | bc
+</code></pre>
+<p><img src="../../.gitbook/assets/epp.png" alt=""></p>
+<p>Next up is the Energy Performance Preference, EPP. This tells macOS how fast to turbo up the CPU to its full clock. <code>00</code> will tell macOS to let the CPU go as fast as it can as quickly as it can while <code>FF</code> will tell macOS to take things slowly and let the CPU ramp up over a much longer period of time. Depending on what you&apos;re doing and the cooling on your machine, you may want to set something in the middle. Below chart can help out a bit:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">EPP</th>
+<th style="text-align:left">Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0x00-0x3F</td>
+<td style="text-align:left">Max Performance</td>
+</tr>
+<tr>
+<td style="text-align:left">0x40-0x7F</td>
+<td style="text-align:left">Balance performance</td>
+</tr>
+<tr>
+<td style="text-align:left">0x80-0xBF</td>
+<td style="text-align:left">Balance power</td>
+</tr>
+<tr>
+<td style="text-align:left">0xC0-0xFF</td>
+<td style="text-align:left">Max Power Saving</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../../.gitbook/assets/done.png" alt=""> <img src="../../.gitbook/assets/files.png" alt=""></p>
+<p>Once you&apos;re finished, you&apos;ll be provided with a CPUFriendDataProvider.kext and ssdt_data.aml. Which you choose is your preference but I recommend the kext variant to avoid any headaches with data injection into Windows and Linux.</p>
+<p><strong>Note</strong>: Load order does not matter with the CPUFriendDataProvider as it&apos;s just a plist-only kext</p>
+<h2 id="sandy-and-ivy-bridge-power-management"><a name="sandy-and-ivy-bridge-power-management" class="plugin-anchor" href="#sandy-and-ivy-bridge-power-management"><i class="fa fa-link" aria-hidden="true"></i></a>Sandy and Ivy Bridge Power Management</h2>
+<p>With Sandy and Ivy Bridge, consumer PCs have issues connecting to Apple&apos;s XCPM. So to get around this we need to create our own Power Management Table.</p>
+<p>What we&apos;ll need:</p>
+<ul>
+<li>CpuPm and Cpu0Ist tables dropped</li>
+<li><a href="https://github.com/Piker-Alpha/ssdtPRGen.sh" target="_blank">ssdtPRgen</a></li>
+</ul>
+<p>To drop the CpuPm and Cpu0Ist tables, head to ACPI -&gt; Block:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">All</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">YES</td>
+</tr>
+<tr>
+<td style="text-align:left">Comment</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">Drop CpuPm</td>
+</tr>
+<tr>
+<td style="text-align:left">Enabled</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">YES</td>
+</tr>
+<tr>
+<td style="text-align:left">OemTableId</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">437075506d000000</td>
+</tr>
+<tr>
+<td style="text-align:left">TableLength</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">TableSignature</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">53534454</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">All</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">YES</td>
+</tr>
+<tr>
+<td style="text-align:left">Comment</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">Drop Cpu0Ist</td>
+</tr>
+<tr>
+<td style="text-align:left">Enabled</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">YES</td>
+</tr>
+<tr>
+<td style="text-align:left">OemTableId</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">4370753049737400</td>
+</tr>
+<tr>
+<td style="text-align:left">TableLength</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">TableSignature</td>
+<td style="text-align:left">Data</td>
+<td style="text-align:left">53534454</td>
+</tr>
+</tbody>
+</table>
+<p>Once this is done, we can now grab ssdtPRgen and run it:</p>
+<p><img src="../../.gitbook/assets/prgen-run.png" alt=""></p>
+<p>Once you&apos;re done, you&apos;ll be provided with an SSDT.aml under <code>/Users/your-name&gt;/Library/ssdtPRGen/ssdt.dsl</code>, you can easily find it with the Cmd+Shift+G shortcut and pasting <code>~/Library/ssdtPRGen/</code></p>
+<p><img src="../../.gitbook/assets/prgen-done.png" alt=""></p>
+<p>Remember to now add this to both EFI/OC/ACPI and your config.plist, I recommend renaming it to SSDT-PM to find it more easily</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="nvram.html" class="navigation navigation-prev " aria-label="Previous page: Emulated NVRAM">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../troubleshooting/troubleshooting.html" class="navigation navigation-next " aria-label="Next page: General Troubleshooting">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"previous":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/post-install/nvram.md","ref":"post-install/post-install/nvram.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/post-install/pm.md","mtime":"2020-05-03T17:54:35.678Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:55:30.291Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-medium-zoom/medium-zoom.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-medium-zoom/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+

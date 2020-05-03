@@ -1,0 +1,840 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Getting started with ACPI · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-medium-zoom/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="intel-config.plist/ivy-bridge.html" />
+    
+    
+    <link rel="prev" href="ktext.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    OpenCore Desktop Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="installer-guide/">
+            
+                <a href="installer-guide/">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="installer-guide/mac-install.html">
+            
+                <a href="installer-guide/mac-install.html">
+            
+                    
+                    macOS install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="installer-guide/winblows-install.html">
+            
+                <a href="installer-guide/winblows-install.html">
+            
+                    
+                    Windows install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="installer-guide/linux-install.html">
+            
+                <a href="installer-guide/linux-install.html">
+            
+                    
+                    Linux install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="opencore-efi.html">
+            
+                <a href="opencore-efi.html">
+            
+                    
+                    Adding The Base OpenCore Files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="ktext.html">
+            
+                <a href="ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="acpi.html">
+            
+                <a href="acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="intel-config.plist/ivy-bridge.html">
+            
+                <a href="intel-config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="intel-config.plist/haswell.html">
+            
+                <a href="intel-config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="intel-config.plist/skylake.html">
+            
+                <a href="intel-config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="intel-config.plist/kaby-lake.html">
+            
+                <a href="intel-config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="intel-config.plist/coffee-lake.html">
+            
+                <a href="intel-config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel HEDT Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="intel-hedt-config.plist/haswell-e.html">
+            
+                <a href="intel-hedt-config.plist/haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="intel-hedt-config.plist/broadwell-e.html">
+            
+                <a href="intel-hedt-config.plist/broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="intel-hedt-config.plist/skylake-x.html">
+            
+                <a href="intel-hedt-config.plist/skylake-x.html">
+            
+                    
+                    Skylake-X
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="amd-config.plist/fx.html">
+            
+                <a href="amd-config.plist/fx.html">
+            
+                    
+                    Bulldozer/Jaguar
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="amd-config.plist/zen.html">
+            
+                <a href="amd-config.plist/zen.html">
+            
+                    
+                    Zen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="post-install/post-install/">
+            
+                <a href="post-install/post-install/">
+            
+                    
+                    Post-Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="post-install/post-install/security.html">
+            
+                <a href="post-install/post-install/security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="post-install/post-install/audio.html">
+            
+                <a href="post-install/post-install/audio.html">
+            
+                    
+                    Fixing Audio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="post-install/post-install/oc2hdd.html">
+            
+                <a href="post-install/post-install/oc2hdd.html">
+            
+                    
+                    Booting without USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="post-install/post-install/update.html">
+            
+                <a href="post-install/post-install/update.html">
+            
+                    
+                    Updating OpenCore, kexts and macOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="post-install/post-install/msr-lock.html">
+            
+                <a href="post-install/post-install/msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="post-install/post-install/verbose.html">
+            
+                <a href="post-install/post-install/verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="post-install/post-install/drm.html">
+            
+                <a href="post-install/post-install/drm.html">
+            
+                    
+                    Fixing DRM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="post-install/post-install/iservices.html">
+            
+                <a href="post-install/post-install/iservices.html">
+            
+                    
+                    Fixing iServices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="post-install/post-install/nvram.html">
+            
+                <a href="post-install/post-install/nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="post-install/post-install/pm.html">
+            
+                <a href="post-install/post-install/pm.html">
+            
+                    
+                    Fixing Power Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="troubleshooting/troubleshooting.html">
+            
+                <a href="troubleshooting/troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="troubleshooting/debug.html">
+            
+                <a href="troubleshooting/debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="troubleshooting/boot.html">
+            
+                <a href="troubleshooting/boot.html">
+            
+                    
+                    macOS Boot Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="extras/legacy.html">
+            
+                <a href="extras/legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="extras/gui.html">
+            
+                <a href="extras/gui.html">
+            
+                    
+                    Add GUI and Bootchime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="extras/gpu-patches.html">
+            
+                <a href="extras/gpu-patches.html">
+            
+                    
+                    iGPU Patching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="extras/kaslr-fix.html">
+            
+                <a href="extras/kaslr-fix.html">
+            
+                    
+                    Fixing KASLR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="extras/spoof.html">
+            
+                <a href="extras/spoof.html">
+            
+                    
+                    Disabling unsupported GPUs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" >
+            
+                <a target="_blank" href="https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion">
+            
+                    
+                    Clover Conversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="misc/contributing.html">
+            
+                <a href="misc/contributing.html">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="misc/credit.html">
+            
+                <a href="misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Getting started with ACPI</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p><em>Last modified: Sun May 03 2020 17:54:34 GMT+0000 (Coordinated Universal Time)</em></p>
+</blockquote>
+<h1 id="getting-started-with-acpi"><a name="getting-started-with-acpi" class="plugin-anchor" href="#getting-started-with-acpi"><i class="fa fa-link" aria-hidden="true"></i></a>Getting started with ACPI</h1>
+<h2 id="getting-started-with-acpi"><a name="getting-started-with-acpi" class="plugin-anchor" href="#getting-started-with-acpi"><i class="fa fa-link" aria-hidden="true"></i></a>Getting started with ACPI</h2>
+<ul>
+<li>Supported version: 0.5.7</li>
+</ul>
+<p>This section is dedicated to the process of both dumping and making ACPI tables. Due to the many different types of SSDT possible, the guide has been spun out into it&apos;s own.</p>
+<p>Guide has been move here:</p>
+<h2 id="getting-started-with-acpi"><a name="getting-started-with-acpi" class="plugin-anchor" href="#getting-started-with-acpi"><i class="fa fa-link" aria-hidden="true"></i></a><a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting Started With ACPI</a></h2>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ktext.html" class="navigation navigation-prev " aria-label="Previous page: Gathering files">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="intel-config.plist/ivy-bridge.html" class="navigation navigation-next " aria-label="Next page: Ivy Bridge">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Getting started with ACPI","level":"1.5","depth":1,"next":{"title":"Ivy Bridge","level":"2.1","depth":1,"path":"intel-config.plist/ivy-bridge.md","ref":"intel-config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Gathering files","level":"1.4","depth":1,"path":"ktext.md","ref":"ktext.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"acpi.md","mtime":"2020-05-03T17:54:34.871Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:55:30.291Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-medium-zoom/medium-zoom.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-medium-zoom/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,948 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Fixing iServices · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-medium-zoom/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <link rel="stylesheet" href="../../styles/website.css">
+        
+    
+
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="nvram.html" />
+    
+    
+    <link rel="prev" href="drm.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    OpenCore Desktop Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../installer-guide/">
+            
+                <a href="../../installer-guide/">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../installer-guide/mac-install.html">
+            
+                <a href="../../installer-guide/mac-install.html">
+            
+                    
+                    macOS install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../installer-guide/winblows-install.html">
+            
+                <a href="../../installer-guide/winblows-install.html">
+            
+                    
+                    Windows install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../installer-guide/linux-install.html">
+            
+                <a href="../../installer-guide/linux-install.html">
+            
+                    
+                    Linux install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../opencore-efi.html">
+            
+                <a href="../../opencore-efi.html">
+            
+                    
+                    Adding The Base OpenCore Files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../ktext.html">
+            
+                <a href="../../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../acpi.html">
+            
+                <a href="../../acpi.html">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../intel-config.plist/ivy-bridge.html">
+            
+                <a href="../../intel-config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../intel-config.plist/haswell.html">
+            
+                <a href="../../intel-config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../../intel-config.plist/skylake.html">
+            
+                <a href="../../intel-config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../../intel-config.plist/kaby-lake.html">
+            
+                <a href="../../intel-config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../../intel-config.plist/coffee-lake.html">
+            
+                <a href="../../intel-config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel HEDT Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../intel-hedt-config.plist/haswell-e.html">
+            
+                <a href="../../intel-hedt-config.plist/haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../../intel-hedt-config.plist/broadwell-e.html">
+            
+                <a href="../../intel-hedt-config.plist/broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../../intel-hedt-config.plist/skylake-x.html">
+            
+                <a href="../../intel-hedt-config.plist/skylake-x.html">
+            
+                    
+                    Skylake-X
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../../amd-config.plist/fx.html">
+            
+                <a href="../../amd-config.plist/fx.html">
+            
+                    
+                    Bulldozer/Jaguar
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../../amd-config.plist/zen.html">
+            
+                <a href="../../amd-config.plist/zen.html">
+            
+                    
+                    Zen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Post-Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="audio.html">
+            
+                <a href="audio.html">
+            
+                    
+                    Fixing Audio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="oc2hdd.html">
+            
+                <a href="oc2hdd.html">
+            
+                    
+                    Booting without USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="update.html">
+            
+                <a href="update.html">
+            
+                    
+                    Updating OpenCore, kexts and macOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="msr-lock.html">
+            
+                <a href="msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="verbose.html">
+            
+                <a href="verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="drm.html">
+            
+                <a href="drm.html">
+            
+                    
+                    Fixing DRM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="5.1.8" data-path="iservices.html">
+            
+                <a href="iservices.html">
+            
+                    
+                    Fixing iServices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="nvram.html">
+            
+                <a href="nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="pm.html">
+            
+                <a href="pm.html">
+            
+                    
+                    Fixing Power Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../../troubleshooting/troubleshooting.html">
+            
+                <a href="../../troubleshooting/troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../../troubleshooting/debug.html">
+            
+                <a href="../../troubleshooting/debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../../troubleshooting/boot.html">
+            
+                <a href="../../troubleshooting/boot.html">
+            
+                    
+                    macOS Boot Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../../extras/legacy.html">
+            
+                <a href="../../extras/legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../../extras/gui.html">
+            
+                <a href="../../extras/gui.html">
+            
+                    
+                    Add GUI and Bootchime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../../extras/gpu-patches.html">
+            
+                <a href="../../extras/gpu-patches.html">
+            
+                    
+                    iGPU Patching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../../extras/kaslr-fix.html">
+            
+                <a href="../../extras/kaslr-fix.html">
+            
+                    
+                    Fixing KASLR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../../extras/spoof.html">
+            
+                <a href="../../extras/spoof.html">
+            
+                    
+                    Disabling unsupported GPUs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" >
+            
+                <a target="_blank" href="https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion">
+            
+                    
+                    Clover Conversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../../misc/contributing.html">
+            
+                <a href="../../misc/contributing.html">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../../misc/credit.html">
+            
+                <a href="../../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Fixing iServices</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p><em>Last modified: Sun May 03 2020 17:54:35 GMT+0000 (Coordinated Universal Time)</em></p>
+</blockquote>
+<h1 id="fixing-iservices"><a name="fixing-iservices" class="plugin-anchor" href="#fixing-iservices"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing iServices</h1>
+<ul>
+<li>Supported version: 0.5.7</li>
+</ul>
+<p>Table of Contents:</p>
+<ul>
+<li><a href="iservices.html#generate-a-new-serial">Generate a new Serial</a></li>
+<li><a href="iservices.html#fixing-en0">Fixing En0</a></li>
+<li><a href="iservices.html#fixing-rom">Fixing ROM</a></li>
+<li><a href="iservices.html#verifying-nvram">Verifying NVRAM</a></li>
+<li><a href="iservices.html#clean-out-old-attempts">Clean out old attempts</a></li>
+<li><a href="iservices.html#cleaning-your-appleid">Cleaning up your AppleID</a></li>
+<li><a href="iservices.html#customer-code-error">Customer Code error</a></li>
+</ul>
+<p>This page is for those having iMessage and other iServices issues, this is a very basic guide so will not go as in-depth into the issues as some other guides. This specific guide is a translation and reinterpretation of the AppleLife Guide on fixing iService: <a href="https://applelife.ru/posts/727913" target="_blank">&#x41A;&#x430;&#x43A; &#x437;&#x430;&#x432;&#x435;&#x441;&#x442;&#x438; &#x441;&#x435;&#x440;&#x432;&#x438;&#x441;&#x44B; Apple - iMessage, FaceTime, iCloud</a></p>
+<p><strong>Note</strong>: You and you alone are responsible for your AppleID, read the guide carefully and take full responsibility if you screw up. Dortania and other guides are not held accountable for what <strong>you</strong> do.</p>
+<h2 id="generate-a-new-serial"><a name="generate-a-new-serial" class="plugin-anchor" href="#generate-a-new-serial"><i class="fa fa-link" aria-hidden="true"></i></a>Generate a new Serial</h2>
+<p>Download <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> and select option 1 to download MacSerial and next option 3 to generate some new serials. What we&apos;re looking for is a valid serial that currently has no registered purchase date.</p>
+<p>Tip: <code>iMacPro1,1 10</code> will print 10 serials, this will save you some time on generating</p>
+<p><img src="../../.gitbook/assets/serial-list.png" alt=""></p>
+<p>Now enter the serial into the <a href="https://checkcoverage.apple.com/" target="_blank">Apple Check Coverage page</a>, you will get 1 of 3 responses:</p>
+<p><strong>&quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot;:</strong></p>
+<p><img src="../../.gitbook/assets/not-valid.png" alt=""></p>
+<p><strong>Valid Purchase date:</strong></p>
+<p><img src="../../.gitbook/assets/valid.png" alt=""></p>
+<p><strong>Purchase Date not Validated:</strong></p>
+<p><img src="../../.gitbook/assets/no-purchase.png" alt=""></p>
+<p>This last one is what we&apos;re after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -&gt; PlatformInfo -&gt; Add:</p>
+<ul>
+<li>Type = SystemProductName</li>
+<li>Serial = SystemSerialNumber</li>
+<li>Board Serial = MLB</li>
+<li>SmUUID = SystemUUID</li>
+</ul>
+<p><strong>Note</strong>: &quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot; works for many users as well, do note though if you&apos;ve had a bad track record with Apple/iServices you many need one that&apos;s &quot;Purchase Date not Validated&quot;. Otherwise there may be suspicion</p>
+<p><strong>Note 2</strong>: Using a &quot;Purchase Date not Validated:&quot; can cause issues down the line if another machine of the same serial ever gets activated, for initial setup it can help alleviate issues with your account but in the long run an invalid serial can be a safer choice.</p>
+<h2 id="fixing-en0"><a name="fixing-en0" class="plugin-anchor" href="#fixing-en0"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing En0</h2>
+<p>To start, grab <a href="https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/" target="_blank">Hackintool</a> (<a href="https://github.com/headkaze/Hackintool" target="_blank">Github link</a>) and head to System -&gt; Peripherals (Info -&gt; Misc on older versions of Hackintool)</p>
+<p>Here under Network Interfaces (network card icon), look for <code>en0</code> under <code>BSD</code> and check whether the device has a checkmark under Builtin. If there is a checkmark, skip to Fixing ROM section otherwise continue reading.</p>
+<blockquote>
+<p>What if I don&apos;t have En0 at all?!?</p>
+</blockquote>
+<p>Well, we&apos;ll want to reset macOS so it can build the interfaces fresh, open terminal and run the following:</p>
+<pre><code class="lang-text">sudo rm /Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
+sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
+</code></pre>
+<p>Once done reboot and check again.</p>
+<p>If this doesn&apos;t work, add <a href="https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/" target="_blank">NullEthernet.kext</a> and <a href="https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml" target="_blank">ssdt-rmne.aml</a> to your EFI and config.plist under Kernel -&gt; Add and ACPI -&gt; Add respectively. The SSDT is precompiled so no extra work needed, reminder compiled files have a .aml extension and .dsl can be seen as source code.</p>
+<p><img src="../../.gitbook/assets/en0-built-in-info.png" alt="Find if set as Built-in"></p>
+<p>Now head under the PCI tab of Hackintool and export your PCI DeviceProperties, this will create a pcidevices.plist on your desktop</p>
+<p><img src="../../.gitbook/assets/hackintool-export.png" alt="Export PCI address"></p>
+<p>Now search through the pcidevices.plist and find the PCIRoot of your ethernet controller. For us, this would be <code>PciRoot(0x0)/Pci(0x1f,0x6)</code></p>
+<p><img src="../../.gitbook/assets/find-en0.png" alt="Copy PCIRoot"></p>
+<p>Now with the PCIRoot, go into your config.plist -&gt; DeviceProperties -&gt; Add and apply the property of <code>built-in</code> with type <code>Data</code> and value <code>01</code></p>
+<p><img src="../../.gitbook/assets/config-built-in.png" alt="Add to config.plist"></p>
+<h2 id="fixing-rom"><a name="fixing-rom" class="plugin-anchor" href="#fixing-rom"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing ROM</h2>
+<p>This is a section many may have forgotten about but this is found in your config.plist under PlatformInfo -&gt; generic -&gt; ROM</p>
+<p>To find your actual MAC Address/ROM value, you can find in a couple places:</p>
+<ul>
+<li>BIOS</li>
+<li>macOS: System Preferences -&gt; Network -&gt; Ethernet -&gt; Advanced -&gt; MAC Address</li>
+<li>Windows: Settings -&gt; Network &amp; Internet -&gt; Ethernet -&gt; Ethernet -&gt; Physical MAC Address</li>
+</ul>
+<p>Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we&apos;ll be using our real MAC Address but note that this is another option.</p>
+<p>When adding this to your config, <code>c0:7e:bf:c3:af:ff</code> should be converted to <code>c07ebfc3afff</code> as the <code>Data</code> type cannot accept colons(<code>:</code>).</p>
+<p><img src="../../.gitbook/assets/config-rom.png" alt=""></p>
+<h2 id="verifying-nvram"><a name="verifying-nvram" class="plugin-anchor" href="#verifying-nvram"><i class="fa fa-link" aria-hidden="true"></i></a>Verifying NVRAM</h2>
+<p>Something that many forget about iServices is that NVRAM is crucial to getting it working correctly, the reason being is that iMessage keys and such are stored in NVRAM. Without NVRAM, iMessage can neither see nor store keys.</p>
+<p>So we&apos;ll need to verify NVRAM works, regardless if &quot;it should work&quot; as some firmwares can be more of a pain than others.</p>
+<p>Please refer to the <a href="nvram.html">Emulated NVRAM</a> section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you dont.</p>
+<h2 id="clean-out-old-attempts"><a name="clean-out-old-attempts" class="plugin-anchor" href="#clean-out-old-attempts"><i class="fa fa-link" aria-hidden="true"></i></a>Clean out old attempts</h2>
+<p>This is important for those who&apos;ve tried setting up iMessage but failed, to start make sure your NVRAM has been cleared. You can enable the option in the boot picker in your config under config.plist -&gt; Misc -&gt; Security -&gt; AllowNvramReset.</p>
+<p>Next open terminal and run the following:</p>
+<pre><code class="lang-text">sudo rm -rf ~/Library/Caches/com.apple.iCloudHelper*
+sudo rm -rf ~/Library/Caches/com.apple.Messages*
+sudo rm -rf ~/Library/Caches/com.apple.imfoundation.IMRemoteURLConnectionAgent*
+sudo rm -rf ~/Library/Preferences/com.apple.iChat*
+sudo rm -rf ~/Library/Preferences/com.apple.icloud*
+sudo rm -rf ~/Library/Preferences/com.apple.imagent*
+sudo rm -rf ~/Library/Preferences/com.apple.imessage*
+sudo rm -rf ~/Library/Preferences/com.apple.imservice*
+sudo rm -rf ~/Library/Preferences/com.apple.ids.service*
+sudo rm -rf ~/Library/Preferences/com.apple.madrid.plist*
+sudo rm -rf ~/Library/Preferences/com.apple.imessage.bag.plist*
+sudo rm -rf ~/Library/Preferences/com.apple.identityserviced*
+sudo rm -rf ~/Library/Preferences/com.apple.ids.service*
+sudo rm -rf ~/Library/Preferences/com.apple.security*
+sudo rm -rf ~/Library/Messages
+</code></pre>
+<h2 id="verifying-your-work-one-last-time"><a name="verifying-your-work-one-last-time" class="plugin-anchor" href="#verifying-your-work-one-last-time"><i class="fa fa-link" aria-hidden="true"></i></a>Verifying your work one last time</h2>
+<p>Grab <a href="https://github.com/acidanthera/MacInfoPkg/releases" target="_blank">macserial</a> and run the following:</p>
+<pre><code class="lang-text">path/to/macserial -s
+</code></pre>
+<p>This will provide us with a full rundown of our system, verify that what is presented matches up with your work.</p>
+<h2 id="cleaning-up-your-appleid"><a name="cleaning-up-your-appleid" class="plugin-anchor" href="#cleaning-up-your-appleid"><i class="fa fa-link" aria-hidden="true"></i></a>Cleaning up your AppleID</h2>
+<ul>
+<li>Remove all devices from your AppleID: <a href="https://appleid.apple.com/account/manage" target="_blank">Manage your devices</a></li>
+<li>Enable 2 Factor-Auth</li>
+<li>Remove all iServices from Keychain, some examples:</li>
+</ul>
+<pre><code class="lang-text">ids: identity-rsa-key-pair-signature-v1
+ids: identity-rsa-private-key
+ids: identity-rsa-public-key
+ids: message-protection-key
+ids: message-protection-public-data-registered
+ids: personal-public-key-cache
+iMessage Encryption Key
+iMessage Signing Key
+com.apple.facetime: registrationV1
+etc ...
+</code></pre>
+<p>And a final layer of precaution is to make a new AppleID to play with, this makes sure that if you do end up blacklisting your account that it&apos;s not your main.</p>
+<p><strong>Tip</strong>: Adding a payment card to the account and having a decent amount of purchases can also help. While not concrete, you can think of an AppleID as a credit score where the better an Apple customer you are the more likely they won&apos;t have activation issues or get an easier pass with AppleSupport</p>
+<h2 id="customer-code-error"><a name="customer-code-error" class="plugin-anchor" href="#customer-code-error"><i class="fa fa-link" aria-hidden="true"></i></a>Customer Code error</h2>
+<p>Welp mate, you&apos;ve done it. You blackmailed your AppleID. The fix is simple but not pretty, <strong>you MUST call Apple</strong>. Otherwise, there is no proceeding besides using a new account. Adding a payment card before calling can help legitimize the account so it doesn&apos;t seem as much like a bot.</p>
+<p><img src="../../.gitbook/assets/blacklist.png" alt=""></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="drm.html" class="navigation navigation-prev " aria-label="Previous page: Fixing DRM">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="nvram.html" class="navigation navigation-next " aria-label="Next page: Emulated NVRAM">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"5.1.8","depth":2,"next":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/post-install/nvram.md","ref":"post-install/post-install/nvram.md","articles":[]},"previous":{"title":"Fixing DRM","level":"5.1.7","depth":2,"path":"post-install/post-install/drm.md","ref":"post-install/post-install/drm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/post-install/iservices.md","mtime":"2020-05-03T17:54:35.678Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:55:30.291Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-medium-zoom/medium-zoom.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-medium-zoom/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+
