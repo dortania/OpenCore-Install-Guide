@@ -12,10 +12,10 @@ Table of Contents:
 So with DRM, we have a couple things we need to mention:
 
 * DRM requires a supported dGPU
-   * See the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/) for supported cards
+  * See the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/) for supported cards
 * DRM is broken for iGPU-only systems
-   * These have never worked with Haswell and newer
-   * For Ivy Bridge, this could be fixed with Shiki (now WhateverGreen) til 10.12.2, but broke with 10.12.3
+  * These have never worked with Haswell and newer
+  * For Ivy Bridge, this could be fixed with Shiki (now WhateverGreen) til 10.12.2, but broke with 10.12.3
 * Working hardware acceleration and decoding
 
 ## Testing Hardware Acceleration and Decoding
@@ -27,27 +27,49 @@ So before we can get started with fixing DRM, we need to make sure your hardware
 If you fail at this point, there's a couple things you can check for:
 
 * Make sure your hardware is supported
-   * See [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
+  * See [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
 * Make sure the SMBIOS you're running matches with your hardware
-   * Don't use a Mac Mini SMBIOS on a desktop for example, as Mac Minis run mobile hardware and so macOS will expect the same
+  * Don't use a Mac Mini SMBIOS on a desktop for example, as Mac Minis run mobile hardware and so macOS will expect the same
 * Make sure the iGPU is enabled in the BIOS and has the correct properties for your setup (`AAPL,ig-platform-id` and if needed, `device-id`)
-   * You can either review the DeviceProperties section from the guide or [WhateverGreen's manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+  * You can either review the DeviceProperties section from the guide or [WhateverGreen's manual](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 * Avoid unnecessary ACPI renames, all important ones are handled in WhateverGreen
-   * change GFX0 to IGPU
-   * change PEG0 to GFX0
-   * change HECI to IMEI
-   * [etc](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/clover-conversion/Clover-config.md)
+  * change GFX0 to IGPU
+  * change PEG0 to GFX0
+  * change HECI to IMEI
+  * [etc](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/clover-conversion/Clover-config.md)
 * Make sure Lilu and WhateverGreen are loaded
-   * Make sure not to have any legacy graphics patches present as they've been absorbed into WhateverGreen:
-      * IntelGraphicsFixup.kext
-      * NvidiaGraphicsFixup.kext
-      * Shiki.kext
+  * Make sure not to have any legacy graphics patches present as they've been absorbed into WhateverGreen:
+    * IntelGraphicsFixup.kext
+    * NvidiaGraphicsFixup.kext
+    * Shiki.kext
 
 To check if Lilu and WhateverGreen loaded correctly:
 
 ```text
 kextstat | grep -E "Lilu|WhateverGreen"
 ```
+
+> Hey one or more of these kexts aren't showing up
+
+Generally the best place to start is by looking through your OpenCore logs and seeing if Lilu and WhateverGreen injected correctly:
+
+```text
+14:354 00:020 OC: Prelink injection Lilu.kext () - Success
+14:367 00:012 OC: Prelink injection WhateverGreen.kext () - Success
+```
+
+If it says failed to inject:
+
+```text
+15:448 00:007 OC: Prelink injection WhateverGreen.kext () - Invalid Parameter
+```
+
+Main places you can check as to why:
+
+* **Injection order**: Make sure that Lilu is above AppleALC in kext order
+* **All kexts are latest release**: Especially important for Lilu plugins, as mismatched kexts can cause issues
+
+Note: To setup file logging, see [OpenCore Debugging](https://dortania.github.io/OpenCore-Desktop-Guide/troubleshooting/debug.html).
 
 **Note**: On macOS 10.15 and newer, AppleGVA debugging is disabled by default, if you get a generic error while running VDADecoderChecker you can enable debugging with the following:
 
@@ -73,9 +95,9 @@ So before we get too deep, we need to go over some things, mainly the types of D
 **FairPlay 2.x/3.x**: Hardware based DRM, found in Netflix, Amazon Prime
 
 * There's a couple ways to test:
-   * Play a show in Netflix or Amazon Prime
-   * Play an Amazon Prime trailer: [Spider-Man: Far From Home](https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP)
-      * Trailer itself does not use DRM but Amazon still checks before playing
+  * Play a show in Netflix or Amazon Prime
+  * Play an Amazon Prime trailer: [Spider-Man: Far From Home](https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TP6D1DP)
+    * Trailer itself does not use DRM but Amazon still checks before playing
 * Note: Requires newer AMD GPU to work (Polaris+)
 
 **FairPlay 4.x**: Mixed DRM, found on AppleTV+
@@ -83,7 +105,7 @@ So before we get too deep, we need to go over some things, mainly the types of D
 * You can open TV.app, choose TV+ -> Free Apple TV+ Premieres, then click on any episode to test without any trial (you do need an iCloud account)
 * Apple TV+ also has a free trial if you want to use it
 * Note: Requires either an absent iGPU (Xeon) or newer AMD GPU to work (Polaris+)
-   * Possible to force FairPlay 1.x when iGPU is absent
+  * Possible to force FairPlay 1.x when iGPU is absent
 
 If everything works on these tests, you have no need to continue! Otherwise, proceed on.
 
@@ -107,28 +129,31 @@ Here's another example. This time, We have an Ryzen 3700X and an RX 480. Our con
 
 **Notes:**
 
-  * You can use [gfxutil](https://github.com/acidanthera/gfxutil/releases) to find the path to your iGPU/dGPU.
-     * `path/to/gfxutil -f GFX0`
-	 * `GFX0`: For dGPUs, if multiple installed check IORegistryExplorer for what your AMD card is called
-	 * `IGPU`: For iGPU
-  * If you inject `shikigva` using DeviceProperties, ensure you only do so to one GPU, otherwise WhateverGreen will use whatever it finds first and it is not guaranteed to be consistent. 
-  * IQSV stands for Intel Quick Sync Video: this only works if iGPU is present and enabled and it is set up correctly.
-  * Special configurations (like Haswell + AMD dGPU with an iMac SMBIOS, but iGPU is disabled) are not covered in the chart. You must do research on this yourself.
-  * [Shiki source](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp) is useful in understanding what flags do what and when they should be used, and may help with special configurations.
+* You can use [gfxutil](https://github.com/acidanthera/gfxutil/releases) to find the path to your iGPU/dGPU.
+  * `path/to/gfxutil -f GFX0`
+  * `GFX0`: For dGPUs, if multiple installed check IORegistryExplorer for what your AMD card is called
+  * `IGPU`: For iGPU
+* If you inject `shikigva` using DeviceProperties, ensure you only do so to one GPU, otherwise WhateverGreen will use whatever it finds first and it is not guaranteed to be consistent.
+* IQSV stands for Intel Quick Sync Video: this only works if iGPU is present and enabled and it is set up correctly.
+* Special configurations (like Haswell + AMD dGPU with an iMac SMBIOS, but iGPU is disabled) are not covered in the chart. You must do research on this yourself.
+* [Shiki source](https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp) is useful in understanding what flags do what and when they should be used, and may help with special configurations.
 
 ## Fixing iGPU performance
 
 So how do we fix iGPU performance? Well by loading Apple's GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:
-  * Skylake and newer CPU with a [supported iGPU](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/intel-gpu)
-  * **And** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (***not*** Z370, as it is actually 200-series)
-  * Do note that even with recent chipsets, firmware loading is not guaranteed to work. If you experience a kernel panic or lots of graphics errors after trying this, it is probably because firmware loading is not supported on your setup.
+
+* Skylake and newer CPU with a [supported iGPU](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/intel-gpu)
+* **And** a recent chipset, 300-series or newer: Z390, B360, H370, H310, etc. (***not*** Z370, as it is actually 200-series)
+* Do note that even with recent chipsets, firmware loading is not guaranteed to work. If you experience a kernel panic or lots of graphics errors after trying this, it is probably because firmware loading is not supported on your setup.
 
 So how do we apply it?
 
 Under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`, add:
+
 ```text
 igfxfw | Data | <02 00 00 00>
 ```
+
 To enable firmware loading.
 
 ![Example of igfxfw injected into iGPU](/images/post-install/drm-md/igpu-path.png)
@@ -143,4 +168,3 @@ kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: 
 ```
 
 ![](/images/post-install/drm-md/igpu-frequency.png)
-

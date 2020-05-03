@@ -30,9 +30,10 @@ If folders are empty then delete them as well:
 * `/etc/rc.boot.d`
 * `/etc/rc.shutdown.d​`
 
-Users of Clover's Preference Pane will also need to remove that:
+Users of Clover's Preference Pane will also need to remove these:
 
 * `/Library/PreferencePanes/Clover.prefPane`
+* `/Library/Application\ Support/clover`
 
 # Cleaning the Clover Junk in your hardware
 

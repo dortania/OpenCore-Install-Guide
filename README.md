@@ -4,9 +4,9 @@
 
 ### About
 
-OpenCore is an open-source unconventional first-in-class piece of software designed to intercept kernel loading to insert a highly advanced rootkit, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed with many using it on KVMs and [real Macs](https://forums.macrumors.com/threads/opencore-on-the-mac-pro.2207814/)
+OpenCore is an open-source, unconventional, first-in-class piece of software designed to intercept kernel loading to insert a highly advanced rootkit, designed to be an alternative to Clover. OpenCore aims to resolve the constraints and issues imposed by Clover by providing a more versatile and modular system which can better understand symbols and structures to make patching far more precise and effective. And with its custom prelinker, kext injection becomes macOS version agnostic meaning day 1 support on any macOS version supporting a prelinked kernel. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed with many using it on KVMs and even [real Macs](https://forums.macrumors.com/threads/opencore-on-the-mac-pro.2207814/)
 
-Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, is still being frequently updated and so chunks configuration change quite often(ie. New quirks replacing old ones)
+Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, is still being frequently updated and so chunks of configuration change quite often(ie. New quirks replacing old ones)
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those starting, please see the [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/). And those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
@@ -28,7 +28,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 
 * Kernel extensions are loaded in the order specified in your config file, so you must load an extension's dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.
 * SMBIOS data, ACPI patches and DSDT/SSDTs are applied to all operating systems. Adjust your SSDTs with `If (_OSI ("Darwin")) {}`
-   * Note that all SSDTs mentioned in this guide have been updated accordingly and should not affect booting
+  * Note that all SSDTs mentioned in this guide have been updated accordingly and should not affect booting
 * Some systems require pure UEFI mode to boot. \(This setting is commonly called "Windows 8.1/10 UEFI Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md)\)
 * Issues can occur if NVMe devices are set up as SATA devices in the BIOS.
 * OpenCore requires a version of macOS that supports a prelinked kernel, this means any installs of OS X 10.7 Lion or newer are supported with some later versions of OS X 10.6 Snow Leopard also having support.
@@ -41,7 +41,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Fast Boot
 * VT-d (can be enabled if you set DisableIoMapper to YES)
 * CSM
-* Thunderbolt
+* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)
@@ -56,4 +56,3 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
-

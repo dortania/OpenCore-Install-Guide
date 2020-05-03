@@ -49,11 +49,12 @@ See supported chipset on respective drivers:
   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
+  * For Realtek's Gigabit Ethernet
+* [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
+  * For Realtek's 2.5Gb Ethernet
 
 Unsupported ethernet models:
 
 * Realtek L8200A(Only found in Asus boards)
-* Realtek RTL8125(2.5Gbe, mostly found on higher end gaming boards)
-  * [Meize's statement on the driver](https://www.insanelymac.com/forum/topic/287161-new-driver-for-realtek-rtl8111/?do=findComment&comment=2705551)
 
 And see [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for supported wifi cards. All built in motherboard wireless ccards will not work in macOS, they must be swapped.

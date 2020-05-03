@@ -29,5 +29,13 @@ Used for Intel's consumer line
 
 Used for AMD CPU based hardware
 
-* [Fixing AMD USB](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
+* [Fixing AMD USB](https://dortania.github.io/USB-Map-Guide/)
 * [Fixing AMD Temperature readings](https://github.com/trulyspinach/SMCAMDProcessor)
+
+## Maxwell and Pascal
+
+For those limited to macOS High Sierra and are having issues installing web drivers, the following tool will help patch in support:
+
+* [Web-Driver-Toolkit](https://github.com/corpnewt/Web-Driver-Toolkit)
+
+Note: Kepler GPUs do not need web drivers, they're natively supported by macOS even in Catalina

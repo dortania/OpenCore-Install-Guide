@@ -13,14 +13,14 @@ To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenC
 * `0x04` — Enable logging to Data Hub.
 * `0x08` — Enable serial port logging.
 * `0x10` — Enable UEFI variable logging.
-* `0x20` — Enable non-volatile UEFI variable logging. 
+* `0x20` — Enable non-volatile UEFI variable logging.
 * `0x40` — Enable logging to file.
 
 To calculate the target, we can use a HEX calculator and then convert it to decimal. For us we want to have our values on stored onto a .txt file for later viewing:
 
 * `0x01` — Enable Logging
 * `0x02` — Enable Onscreen debug
-   * Note this can heavily increase boot times on firmwares with poor GOP implementations
+  * Note this can heavily increase boot times on firmwares with poor GOP implementations
 * `0x10` — Enable UEFI variable logging.
 * `0x40` — Enable logging to file.
 

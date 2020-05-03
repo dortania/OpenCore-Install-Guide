@@ -11,6 +11,8 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
 
 To start we'll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you're just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the App Store or with gibMacOS
 
+For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra and older), follow the [Legacy macOS install](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/installer-guide/legacy-mac-install.md) guide
+
 ## Downloading macOS
 
 Now lets grab [GibMacOS](https://github.com/corpnewt/gibMacOS) and run the `gibMacOS.command`:
@@ -59,4 +61,4 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ![Empty EFI partition](/images/installer-guide/mac-install-md/base-efi.png)
 
-### Now with all this done, head to [Creating the USB](/installer-guide/opencore-efi.md) to finish up your work
+### Now with all this done, head to [Setting up the EFI](/installer-guide/opencore-efi.md) to finish up your work

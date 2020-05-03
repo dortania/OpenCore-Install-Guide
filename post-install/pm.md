@@ -1,4 +1,4 @@
-# Optimizing Power Management 
+# Optimizing Power Management
 
 * [Enabling X86PlatformShim](/post-install/pm.md#enabling-x86platformplugin)
 * [Using CPU Friend](/post-install/pm.md#using-cpu-friend)
@@ -6,17 +6,18 @@
 
 ## Enabling X86PlatformPlugin
 
-So before we can fine tune power manegement to our liking, we need to first make sure Apple's XCPM core is loaded. Note that this is supported **only on Haswell and newer**, Sandy and Ivy Bridge should refer to the bottom of the guide: [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management). 
-
+So before we can fine tune power manegement to our liking, we need to first make sure Apple's XCPM core is loaded. Note that this is supported **only on Haswell and newer**, Sandy and Ivy Bridge should refer to the bottom of the guide: [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management).
 
 To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and look for `AppleACPICPU`(note if you use search, it may find entries):
 
-![](/images/post-install/pm-md/X86PlatformShim.png)
+XCPM Present           |  Missing XCPM
+:-------------------------:|:-------------------------:
+![](/images/post-install/pm-md/pm-working.png)  |  ![](/images/post-install/pm-md/pm-not-working.png)
 
 As you can see from the left image, we have the X86PlatformPlugin attached meaning Apple's CPU Power Management Drivers are doing their thing. If you get something like to the right image, then there's likely an issue. Make sure to check the following:
 
 * SSDT-PLUG.**aml** is both present and enabled in your config.plist and EFI/OC/ACPI
-   * If you're missing this, head to [Getting Started With ACPI](https://acpi.dortania.ml) on how to make this
+  * If you're missing this, head to [Getting Started With ACPI](https://dortanian.github.io/Getting-Started-With-ACPI) on how to make this
 * SSDT-PLUG is set to the first thread of your CPU, you can check by selecting the first CPU listed(`CP00` for our example) and make sure you have this in the properties:
 
 ```text
@@ -29,16 +30,15 @@ XCPM does not natively support Haswell-E and Broadwell-E, this means we need to 
 
 * **Haswell E**:
 
-   * `Kernel -> Emulate`:
-      * Cpuid1Data﻿: `C3060300 00000000 00000000 00000000﻿﻿`
-      * Cpuid1Mask: `FFFFFFFF 00000000 00000000 00000000`
-
+  * `Kernel -> Emulate`:
+    * Cpuid1Data﻿: `C3060300 00000000 00000000 00000000`
+    * Cpuid1Mask: `FFFFFFFF 00000000 00000000 00000000`
 
 * **Broadwell-E**:
 
-   * `Kernel -> Emulate`:
-      * Cpuid1Data﻿: `D4060300﻿ 00000000 00000000 00000000﻿﻿`
-      * Cpuid1Mask: `FFFFFFFF 00000000 00000000 00000000`
+  * `Kernel -> Emulate`:
+    * Cpuid1Data﻿: `D4060300﻿ 00000000 00000000 00000000`
+    * Cpuid1Mask: `FFFFFFFF 00000000 00000000 00000000`
 
 ## Using CPU Friend
 
@@ -79,7 +79,7 @@ Next up is the Energy Performance Preference, EPP. This tells macOS how fast to 
 ![](/images/post-install/pm-md/done.png)
 ![](/images/post-install/pm-md/files.png)
 
-Once you're finished, you'll be provided with a CPUFriendDataProvider.kext and ssdt_data.aml. Which you choose is your preference but I recommend the kext variant to avoid any headaches with data injection into Windows and Linux. 
+Once you're finished, you'll be provided with a CPUFriendDataProvider.kext and ssdt_data.aml. Which you choose is your preference but I recommend the kext variant to avoid any headaches with data injection into Windows and Linux.
 
 **Note**: Load order does not matter with the CPUFriendDataProvider as it's just a plist-only kext
 
@@ -88,6 +88,7 @@ Once you're finished, you'll be provided with a CPUFriendDataProvider.kext and s
 With Sandy and Ivy Bridge, consumer PCs have issues connecting to Apple's XCPM. So to get around this we need to create our own Power Management Table.
 
 What we'll need:
+
 * CpuPm and Cpu0Ist tables dropped
 * [ssdtPRgen](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
@@ -120,5 +121,3 @@ Once you're done, you'll be provided with an SSDT.aml under `/Users/your-name>/L
 ![](/images/post-install/pm-md/prgen-done.png)
 
 Remember to now add this to both EFI/OC/ACPI and your config.plist, I recommend renaming it to SSDT-PM to find it more easily
-
-

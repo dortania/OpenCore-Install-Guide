@@ -39,7 +39,7 @@ Some guidelines when contributing via PRs:
 
 ### How to Contribute
 
-Best way to test your commits and make sure they are formatted correctly is downloading `nodejs` and getting the [gitbook-cli](https://github.com/GitbookIO/gitbook-cli) tools and [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) tool. When you run `gitbook serve`, it will set up a local webserver which you can connect to view the changes you made. `markdownlint *` will throw any errors at you about formatting as well, and `markdownlint -f *` will attempt to fix these.
+Best way to test your commits and make sure they are formatted correctly is downloading `nodejs` and getting the [gitbook-cli](https://github.com/GitbookIO/gitbook-cli) and [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) tools. When you run `gitbook serve`, it will set up a local webserver which you can connect to view the changes you made. `markdownlint *` will throw any errors at you about formatting as well, and `markdownlint -f *` will attempt to fix these.
 
 * [Fork this repo](https://github.com/dortania/OpenCore-Desktop-Guide/fork/)
 * Install the required tools:
