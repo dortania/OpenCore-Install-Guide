@@ -17,7 +17,7 @@ XCPM Present           |  Missing XCPM
 As you can see from the left image, we have the X86PlatformPlugin attached meaning Apple's CPU Power Management Drivers are doing their thing. If you get something like to the right image, then there's likely an issue. Make sure to check the following:
 
 * SSDT-PLUG.**aml** is both present and enabled in your config.plist and EFI/OC/ACPI
-  * If you're missing this, head to [Getting Started With ACPI](https://acpi.dortania.ml) on how to make this
+  * If you're missing this, head to [Getting Started With ACPI](https://dortanian.github.io/Getting-Started-With-ACPI) on how to make this
 * SSDT-PLUG is set to the first thread of your CPU, you can check by selecting the first CPU listed(`CP00` for our example) and make sure you have this in the properties:
 
 ```text
