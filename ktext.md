@@ -1,7 +1,5 @@
 # Gathering files
 
-## Gathering files
-
 * Supported version: 0.5.7
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
@@ -10,21 +8,21 @@ This section is for gathering miscellaneous files for booting macOS, we do expec
 
 See the [**supported hardware section**](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extras/hardware.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
 
-### Firmware Drivers
+## Firmware Drivers
 
 These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
 
 * [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
-  * Needed for seeing APFS volumes\(ie. macOS\)
+  * Needed for seeing APFS volumes(ie. macOS)
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
-  * Needed for seeing HFS volumes\(ie. macOS Installers and Recovery partitions/images\). **Do not mix other HFS drivers**
+  * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
 
 For legacy users:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI\(Ivy Bridge and newer\)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [NvmExpressDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Used for Haswell and older when no NVMe driver is built into the firmware, not needed if you're not using an NVMe drive
 * [XhciDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
@@ -34,7 +32,7 @@ For legacy users:
 
 For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
 
-### Kexts
+## Kexts
 
 A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI
 
@@ -65,7 +63,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
   * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
-  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see \* [Getting started with ACPI](acpi.md) for more info
+  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see * [Getting started with ACPI](/extras/acpi.md) for more info
 
 **Audio**:
 
@@ -90,8 +88,9 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
-  * Not needed on Skylake and newer\(AsRock is dumb and does need this\)
+  * Not needed on Skylake and newer(AsRock is dumb and does need this)
   * Does not work on AMD CPUs **at all**
+
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
   * Needed for non-native USB controllers
   * AMD CPU based systems don't need this
@@ -99,10 +98,10 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
     * H370
     * B360
     * H310
-    * Z390\(Not needed on Mojave and newer\)
+    * Z390(Not needed on Mojave and newer)
     * X79
     * X99
-    * AsRock boards\(On Intel motherboards specifically, basically all of their boards\)
+    * AsRock boards(On Intel motherboards specifically, basically all of their boards)
 
 **WiFi and Bluetooth**:
 
@@ -111,7 +110,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * Used for uploading firmware on Broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
-    * BrcmPatchRAM3 for 10.14+ \(must be paired with BrcmBluetoothInjector\)
+    * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.10 or older
 
@@ -141,7 +140,7 @@ The order in `Kernel -> Add` should be:
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead
 * [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)
-  * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext\(ShowPackageContents in finder, `Contents -> Info.plist`\) and change the Info.plist -&gt; `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`\(i9 7980xe 18 core would be `35` as it has 36 threads total\)
+  * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
   * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
 
@@ -149,12 +148,13 @@ The order in `Kernel -> Add` should be:
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * Required for systems with PS2 keyboards and trackpads
-  * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)\(This must come before VoodooPS2 in your config.plist\)
+  * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)(This must come before VoodooPS2 in your config.plist)
+
 * [VoodooI2C](https://github.com/alexandred/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
   * To be paired with a plugin:
     * VoodooI2CHID - Implements the Microsoft HID device specification.
-    * VoodooI2CElan - Implements support for Elan proprietary devices. \(does not work on ELAN1200+, use the HID instead\)
+    * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
     * VoodooI2CSynaptics - Implements support for Synaptic's proprietary devices.
     * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
     * VoodooI2CUPDDEngine - Implements Touchbase driver support.
@@ -166,30 +166,29 @@ To figure out what kind of keyboard and trackpad you have, check DeviceManager i
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
-### SSDTs
+## SSDTs
 
 So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in **your specific ACPI section of the config.plist**, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now.
 
-[Getting started with ACPI](acpi.md) has an extended section on SSDTs including compiling them on different platforms.
+[Getting started with ACPI](/extras/acpi.md) has an extended section on SSDTs including compiling them on different platforms.
 
-A quick TL;DR of needed SSDTs\(This is source code, you will have to compile them into a .aml file\):
+A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
 
-#### Desktop
+### Desktop
 
-| SSDT | IvyBridge | Haswell/Broadwell | Skylake | KabyLake | CoffeeLake | CometLake | AMD\(15/16/17h\) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)\(Run in Post-Install\) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | N/A |
+| SSDT | IvyBridge | Haswell/Broadwell | Skylake | KabyLake | CoffeeLake | CometLake | AMD(15/16/17h) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)(Run in Post-Install) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | N/A |
 | **EC** | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) |
 | **AWAC** | N/A | N/A | N/A | N/A | [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) | [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) | N/A |
 | **NVRAM** | N/A | N/A | N/A | N/A | [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl) | [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl) | N/A |
 
-#### High End Desktop
+### High End Desktop
 
 | SSDT | IvyBridge-E | Haswell-E | Broadwell-E | Skylake-X |
-| :--- | :--- | :--- | :--- | :--- |
-| **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)\(Run in Post-Install\) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)(Run in Post-Install) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) | [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl) |
 | **EC** | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) |
 | **AWAC** | N/A | N/A | N/A | [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) |
 
-## Now head [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
-
+# Now head [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
