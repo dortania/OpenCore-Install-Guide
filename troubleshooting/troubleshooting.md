@@ -371,7 +371,9 @@ Generally seen as a USB error, couple ways to fix:
 * If XLNCUSBFix still doesn't work, then try the following:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
   
-Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/) to fix booting, note that this only works on Intel USB Chipsets and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
+Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/) to fix booting, note that this **only works on Intel USB Chipsets** and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
+
+For AMD users with missing ports in DSDT, you're gonna have to try all the ports in your system and pray, generally 3.1 AsMedia ports work without issue.
 
 ## macOS installer in Russian
 
