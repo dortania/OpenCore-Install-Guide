@@ -24,7 +24,7 @@ Setting in your config.plist:
 * Misc -> Boot
   * `PollAppleHotKeys` set to YES(While not needed can be helpful)
 * Misc -> Security
-  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional)
+  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional)
 * NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
 * UEFI -> Input
