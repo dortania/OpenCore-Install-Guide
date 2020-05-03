@@ -451,8 +451,8 @@ Only drivers present here should be:
 * **EnableJumpstart**: YES
   * Allows us to load Apple's APFS driver
 
-* **HideVerbose**: NO
-  * Hides verbose, generally not needed
+* **HideVerbose**: YES
+  * Hides APFS debugging info, generally not needed
 
 * **JumpstartHotPlug**: NO
   * Allows APFS hot-plug at the OpenCore boot menu, for us we'll ignore
@@ -467,22 +467,7 @@ Only drivers present here should be:
 
 **Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS
 
-* **AudioSupport**: NO
-  * Used for enabling the audio port out, this requires AudioOut
-* **AudioDevice**: [Blank]
-  * This will be the PciRoot of your audio device, [gfxutil](https://github.com/acidanthera/gfxutil/releases) and debug log are great ways to find this
-* **AudioCodec**: 0
-  * Specify your audio codec address, can be found in either debug log or with under `IOHDACodecAddress` in IOService
-* **AudioOut**: 0
-  * Specifies which output is used, use the debug log to see what your board has
-  * Same idea, can be found in either debug log or with [HdaCodecDump.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-* **MinimumVolume**: 20
-  * Default sound level for audio output
-* **PlayChime**: NO
-  * Emulates the iconic Mac startup sound
-  * This also requires [`AXEFIAudio_VoiceOver_Boot.wav`](https://github.com/acidanthera/OcBinaryData/blob/master/Resources/Audio/AXEFIAudio_VoiceOver_Boot.wav) under EFI/OC/Resources/Audio
-* **VolumeAmplifier**: 0
-  * Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000, see [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info on calculation
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Bootchime](/post-install/README.md)
 
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
@@ -527,16 +512,9 @@ Only drivers present here should be:
 * **SanitiseClearScreen**: NO
   * Fixes High resolutions displays that display OpenCore in 1024x768, only relevant for users using `System` TextRenderer
 
-**ProtocolOverrides**: (Most values can be ignored here as they're meant for real Macs/VMs)
+**ProtocolOverrides**: Most values can be ignored here as they're meant for real Macs/VMs
 
-* **AppleSmcIo**: NO
-  * Reinstalls Apple SMC I/O, this is the equivalent of VirtualSMC.efi which is only needed for users using FileVault
-* **FirmwareVolume**: NO
-  * Fixes UI regarding FileVault, set to YES for better FileVault compatibility
-* **HashServices**: NO
-  * Fixes incorrect cursor size when running FileVault, set to YES for better FileVault compatibility
-* **UnicodeCollation**: NO
-  * Some older firmware have broken Unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
+* For FileVault users please see the Post Install page: [Security and FileVault](/post-install/README.md)
 
 **Quirks**:
 
