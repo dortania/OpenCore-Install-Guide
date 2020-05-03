@@ -11,6 +11,8 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
 * **Remove from Drivers:**
   * OpenUsbKbDxe.efi
     * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+  * UsbMouseDxe.efi
+    * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
   * NvmExpressDxe.efi
     * Used for Haswell and older when no NVMe driver is built into the firmware
   * XhciDxe.efi
@@ -19,6 +21,8 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
     * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
   * OpenCanopy.efi
     * This is OpenCore's optional GUI, we'll be going over how to set this up in installer-guide so remove this for now
+  * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
+    * Pretty obvious when you need this, USB keyboard and mouse users don't need it
 
 * **Remove everything from Tools:**
   * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
