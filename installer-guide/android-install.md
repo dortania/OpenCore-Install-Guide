@@ -1,6 +1,6 @@
 # Making the installer with an Android Phone
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 (This is a joke, you can follow this but you really should just buy a $3 USB)
 

@@ -602,7 +602,7 @@
                 <a href="extras/gui.html">
             
                     
-                    Add GUI and Bootchime
+                    Add GUI and Boot-chime
             
                 </a>
             
@@ -741,11 +741,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun May 03 2020 17:56:47 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon May 04 2020 13:24:21 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gathering-files"><a name="gathering-files" class="plugin-anchor" href="#gathering-files"><i class="fa fa-link" aria-hidden="true"></i></a>Gathering files</h1>
 <ul>
-<li>Supported version: 0.5.7</li>
+<li>Supported version: 0.5.8</li>
 </ul>
 <p>This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won&apos;t be deep diving in here.</p>
 <blockquote>
@@ -755,8 +755,9 @@
 <h2 id="firmware-drivers"><a name="firmware-drivers" class="plugin-anchor" href="#firmware-drivers"><i class="fa fa-link" aria-hidden="true"></i></a>Firmware Drivers</h2>
 <p>These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:</p>
 <ul>
-<li><a href="https://github.com/acidanthera/AppleSupportPkg/releases" target="_blank">ApfsDriverLoader.efi</a><ul>
-<li>Needed for seeing APFS volumes(ie. macOS)</li>
+<li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><del>ApfsDriverLoader.efi</del></a><ul>
+<li><del>Needed for seeing APFS volumes(ie. macOS)</del>. </li>
+<li>As of OpenCore 0.5.8, this driver is built in and configured via config.plist -&gt; UEFI -&gt; APFS</li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi" target="_blank">HfsPlus.efi</a><ul>
@@ -892,11 +893,11 @@
 <p><strong>WiFi and Bluetooth</strong>:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/AirportBrcmFixup/releases" target="_blank">AirportBrcmFixup</a><ul>
-<li>Used for patching non-Apple Broadcom cards, <strong>will not work on intel, Killer, Realtek, etc</strong></li>
+<li>Used for patching non-Apple Broadcom cards, <strong>will not work on Intel, Killer, Realtek, etc</strong></li>
 </ul>
 </li>
 <li><a href="https://github.com/acidanthera/BrcmPatchRAM/releases" target="_blank">BrcmPatchRAM</a><ul>
-<li>Used for uploading firmware on Broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.</li>
+<li>Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/Fenvi Airport cards.</li>
 <li>To be paired with BrcmFirmwareData.kext<ul>
 <li>BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)</li>
 <li>BrcmPatchRAM2 for 10.11-10.14</li>
@@ -974,7 +975,7 @@
 </ul>
 </li>
 </ul>
-<p>To figure out what kind of keyboard and trackpad you have, check DeviceManager in Windows or <code>dmesg |grep input</code> in Linux</p>
+<p>To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or <code>dmesg |grep input</code> in Linux</p>
 <ul>
 <li><a href="https://github.com/al3xtjames/NoTouchID/releases" target="_blank">NoTouchID</a><ul>
 <li>Recommended for SMBIOS that include a TouchID sensor to fix auth issues</li>
@@ -1122,7 +1123,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.4","depth":1,"next":{"title":"Getting started with ACPI","level":"1.5","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Adding The Base OpenCore Files","level":"1.3","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-05-03T17:56:47.415Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-03T17:57:44.451Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"1.4","depth":1,"next":{"title":"Getting started with ACPI","level":"1.5","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Adding The Base OpenCore Files","level":"1.3","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-05-04T13:24:21.882Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T13:25:17.610Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
