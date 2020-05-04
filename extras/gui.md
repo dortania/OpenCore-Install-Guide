@@ -15,6 +15,7 @@ Once that's done, we'll need a couple things:
 
 * [Binary Resources](https://github.com/acidanthera/OcBinaryData)
 * [OpenCanopy.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+  * Note: OpenCanopy.efi must be from the same build as your OpenCore files, as mismatched files can cause boot issues
 
 Once you have both of these, we'll next want to add it to our EFI partition:
 
