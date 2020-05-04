@@ -1,6 +1,6 @@
 # Fixing KASLR slide values
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 Table of Contents:
 
@@ -71,7 +71,7 @@ And we'll also need to configure our config.plist -> Booter(for OpenCore) or OcQ
 * **DevirtualiseMmio**: YES
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390.
 * **EnableSafeModeSlide**: YES
-  * Allows for slide values to be used in Safemode
+  * Allows for slide values to be used in Safe mode
 * **ProtectUefiServices**: NO
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, 300 series and newer systems like Ice Lake and Comet Lake
 * **ProvideCustomSlide**: YES

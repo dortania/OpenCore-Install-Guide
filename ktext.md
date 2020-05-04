@@ -1,6 +1,6 @@
 # Gathering files
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -12,8 +12,9 @@ See the [**supported hardware section**](https://github.com/dortania/Opencore-De
 
 These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
 
-* [ApfsDriverLoader.efi](https://github.com/acidanthera/AppleSupportPkg/releases)
-  * Needed for seeing APFS volumes(ie. macOS)
+* [~~ApfsDriverLoader.efi~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+  * ~~Needed for seeing APFS volumes(ie. macOS)~~. 
+  * As of OpenCore 0.5.8, this driver is built in and configured via config.plist -> UEFI -> APFS
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
@@ -106,9 +107,9 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 **WiFi and Bluetooth**:
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
-  * Used for patching non-Apple Broadcom cards, **will not work on intel, Killer, Realtek, etc**
+  * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Used for uploading firmware on Broadcom bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
+  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
     * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
@@ -159,7 +160,7 @@ The order in `Kernel -> Add` should be:
     * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
     * VoodooI2CUPDDEngine - Implements Touchbase driver support.
 
-To figure out what kind of keyboard and trackpad you have, check DeviceManager in Windows or `dmesg |grep input` in Linux
+To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg |grep input` in Linux
 
 * [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
   * Recommended for SMBIOS that include a TouchID sensor to fix auth issues

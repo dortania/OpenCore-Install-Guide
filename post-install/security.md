@@ -1,6 +1,6 @@
 # Security and FileVault
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 So something that makes OpenCore truly special is how it's been built with security in mind which is quite rare especially in the Hackintosh community. Well here we'll be going through and setting up some of OpenCore's great Security features:
 
@@ -24,14 +24,14 @@ Setting in your config.plist:
 * Misc -> Boot
   * `PollAppleHotKeys` set to YES(While not needed can be helpful)
 * Misc -> Security
-  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional)
+  * `AuthRestart` set to YES(Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional)
 * NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
   * `UIScale` set to `02` for high resolution small displays
 * UEFI -> Input
   * `KeySupport` set to YES(Only when using OpenCore's builtin input, users of OpenUsbKbDxe should avoid)
 * UEFI -> Output
   * `ProvideConsoleGop` to YES
-* UEFI -> Protocols
+* UEFI -> ProtocolOverrides
   * `FirmwareVolume` set to YES
   * `HashServices` set to YES for Broadwell and older(this includes X99), this is needed for systems with broken SHA-1 hashing
   * `AppleSmcIo` set to YES(this replaces VirtualSMC.efi)
@@ -103,7 +103,7 @@ To calculate the ScanPolicy value, you simply add up all the hexadecimal values(
 
 `0x00000002 (bit 1)` — OC\_SCAN\_DEVICE\_LOCK
 
-* restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognised as SATA. Cases like this must be reported. Known device types are prefixed with OC_SCAN\_ALLOW\_DEVICE_.
+* restricts scanning to only known device types defined as a part of this policy. This is not always possible to detect protocol tunneling, so be aware that on some systems it may be possible for e.g. USB HDDs to be recognized as SATA. Cases like this must be reported. Known device types are prefixed with OC_SCAN\_ALLOW\_DEVICE_.
 
 `0x00000100 (bit 8)` — OC\_SCAN\_ALLOW\_FS\_APFS
 

@@ -1,6 +1,6 @@
 # Ivy Bridge
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 Table of Contents:
 
@@ -63,7 +63,7 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 **Block**
 
-This blocks certain ACPI tabes from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all to well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT and drop the old tables:
+This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all to well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](/post-install/README.md) and drop the old tables:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -121,13 +121,13 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 * **DevirtualiseMmio**: NO
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
 * **DisableSingleUser**: NO
-  * Disables the use of `Cmd+S` and `-s`, this is closer to the behaviour of T2 based machines
+  * Disables the use of `Cmd+S` and `-s`, this is closer to the behavior of T2 based machines
 * **DisableVariableWrite**: NO
   * Needed for systems with non-functioning NVRAM, you can verify [here](/post-install/nvram.md) if yours works
 * **DiscardHibernateMap**: NO
   * Reuse original hibernate memory map, only needed for certain legacy hardware
 * **EnableSafeModeSlide**: YES
-  * Allows for slide values to be used in Safemode
+  * Allows for slide values to be used in Safe mode
 * **EnableWriteUnprotector**: YES
   * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
@@ -135,7 +135,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 * **ProtectMemoryRegions**: NO
   * Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares
 * **ProtectSecureBoot**: NO
-  * Fixes secureboot keys on MacPro5,1 and Insyde firmwares
+  * Fixes Secure Boot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffee Lake systems
 * **ProvideCustomSlide**: YES
@@ -182,7 +182,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
 
 **Block**: Removes device properties from the map, for us we can ignore this
 
-Fun Fact: The reason the byte order is swapped is due to [Endianness](https://en.wikipedia.org/wiki/Endianness), specifically Little Endians that modern CPUs use for ordering bytes. The more you know!
+Fun Fact: The reason the byte order is swapped is because most modern processors are [Little Endian](https://en.wikipedia.org/wiki/Endianness). The more you know!
 
 ## Kernel
 
@@ -227,6 +227,8 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DisableRtcChecksum**: NO
+  * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
 * **DummyPowerManagement**: NO
   * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
 * **ExternalDiskIcons**: NO
@@ -257,7 +259,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **PickerMode**: `Builtin`
   * Sets OpenCore to use the builtin picker
 * **HideAuxiliary**: NO
-  * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behaviour
+  * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behavior
 * **HideSelf**: YES
   * Hides the EFI partition as a boot option in OC's boot picker
 * **ConsoleAttributes**: `0`
@@ -300,14 +302,16 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO:
-  * Enables Authenticated restart for FileVault2 so password is not required on reboot. Can be considered a security risk so optional
+  * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
+* **BootProtect**: None
+  * Allows the use of Boostrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USBs with this set to default**
+  * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USB devices with this set to default**
 
 **Tools** Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you. For us, we won't be using any tools
 
@@ -476,27 +480,30 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 Only drivers present here should be:
 
 * HfsPlus.efi
-* ApfsDriverLoader.efi
 * OpenRuntime.efi
+
+**APFS**: Settings related to the APFS driver
+
+* **EnableJumpstart**: YES
+  * Allows us to load Apple's APFS driver
+
+* **HideVerbose**: YES
+  * Hides APFS debugging info, generally not needed
+
+* **JumpstartHotPlug**: NO
+  * Allows APFS hot-plug at the OpenCore boot menu, for us we'll ignore
+
+* **MinDate**: `0`
+  * Minimum date allowed for Apple's APFS to load, current default is set to 2020/01/01
+  * Setting to `-1` will allow any version of APFS to load, note this is highly discouraged for security reasons
+
+* **MinVersion**: `0`
+  * Minimum macOS version that OpenCore will load the APFS driver, current default is set to 10.13.6
+  * Setting to `-1` will allow any version of APFS to load, note this is highly discouraged for security reasons
 
 **Audio**: Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS
 
-* **AudioSupport**: NO
-  * Used for enabling the audio port out, this requires AudioOut
-* **AudioDevice**: [Blank]
-  * This will be the PciRoot of your audio device, [gfxutil](https://github.com/acidanthera/gfxutil/releases) and debug log are great ways to find this
-* **AudioCodec**: 0
-  * Specify your audio codec address, can be found in either debug log or with under `IOHDACodecAddress` in IOService
-* **AudioOut**: 0
-  * Specifies which output is used, use the debug log to see what your board has
-  * Same idea, can be found in either debug log or with [HdaCodecDump.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-* **MinimumVolume**: 20
-  * Default sound level for audio output
-* **PlayChime**: NO
-  * Emulates the iconic Mac startup sound
-  * This also requires [`AXEFIAudio_VoiceOver_Boot.wav`](https://github.com/acidanthera/OcBinaryData/blob/master/Resources/Audio/AXEFIAudio_VoiceOver_Boot.wav) under EFI/OC/Resources/Audio
-* **VolumeAmplifier**: 0
-  * Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000, see [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info on calculation
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](/post-install/README.md)
 
 **Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
@@ -541,21 +548,14 @@ Only drivers present here should be:
 * **SanitiseClearScreen**: NO
   * Fixes High resolutions displays that display OpenCore in 1024x768, only relevant for users using `System` TextRenderer
 
-**Protocols**: (Most values can be ignored here as they're meant for real Macs/VMs)
+**ProtocolOverrides**: Most values can be ignored here as they're meant for real Macs/VMs
 
-* **AppleSmcIo**: NO
-  * Reinstalls Apple SMC I/O, this is the equivalent of VirtualSMC.efi which is only needed for users using FileVault
-* **FirmwareVolume**: NO
-  * Fixes UI regarding FileVault, set to YES for better FileVault compatibility
-* **HashServices**: NO
-  * Fixes incorrect cursor size when running FileVault, set to YES for better FileVault compatibility
-* **UnicodeCollation**: NO
-  * Some older firmware have broken Unicode collation, fixes UEFI shell compatibility on these systems(generally IvyBridge and older)
+* For FileVault users please see the Post Install page: [Security and FileVault](/post-install/README.md)
 
 **Quirks**:
 
 * **ExitBootServicesDelay**: `0`
-  * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault2
+  * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault 2
 * **IgnoreInvalidFlexRatio**: YES
   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
 * **ReleaseUsbOwnership**: NO
@@ -566,6 +566,10 @@ Only drivers present here should be:
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+
+**ReservedMemory**:
+
+Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide
 
 ## Cleaning up
 

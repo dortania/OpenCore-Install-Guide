@@ -1,6 +1,6 @@
 # Supported hardware
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 So this little section is for those who are wanting to know whether their hardware will work in macOS
 
@@ -25,7 +25,7 @@ So this little section is for those who are wanting to know whether their hardwa
 # Motherboard Compatibility
 
 * All AMD and Intel motherboards are supported to a certain extent
-* Some intel HEDT systems will need emulated NVRAM
+* Some Intel HEDT systems will need emulated NVRAM
 * Some Z370 and Z390 boards have AWAC clocks, these are incompatible with macOS and so will need an RTC fix
 
 # SSD Compatibility

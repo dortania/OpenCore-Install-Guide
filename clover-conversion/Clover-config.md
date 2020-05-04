@@ -1,6 +1,6 @@
 # Converting common properties from Clover to Opencore
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -430,20 +430,19 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 
 **AppleRTC**
 
-* This has been turned into a kext patch, this is needed anytime you have either BIOS reset or safe mode issues.
-* **Note**: This patch no longer works with macOS Catalina 10.15.4, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
-* Under `Kernel -> patch`:
+Issue with AppleRTC, quite a simple fix:
 
-| Key | Type | Value |
-| :--- | :--- | :--- |
-|Comment|String|Disable RTC checksum update on poweroff|
-| Enabled | Boolean | YES |
-|Count|Number|1|
-|Base|String|__ZN8AppleRTC14updateChecksumEv|
-|Identifier|String|com.apple.driver.AppleRTC|
-|Limit|Number|0|
-|Find|Data||
-|Replace|Data|c3|
+* config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
+
+**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
+
+The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
+
+```text
+rtcfx_exclude=00-FF
+```
+
+If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on
 
 **FakeCPUID**:
 
