@@ -10,7 +10,7 @@ See the [**supported hardware section**](https://github.com/dortania/OpenCore-De
 
 ## Firmware Drivers
 
-These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
+These are the drivers used by OpenCore, for the majority of systems you only need 2 .efi drivers to get up and running:
 
 * [~~ApfsDriverLoader.efi~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
   * ~~Needed for seeing APFS volumes(ie. macOS)~~.
