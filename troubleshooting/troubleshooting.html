@@ -43,17 +43,17 @@
 
     
         
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
         <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 
@@ -741,13 +741,14 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Tue May 05 2020 14:15:57 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue May 05 2020 16:23:04 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
 <li>Supported version: 0.5.8</li>
 </ul>
-<p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is divided up into a couple sections:</p>
+<p>This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you&apos;re confused as to where exactly in the macOS boot process you&apos;re stuck, reading the <a href="boot.html">macOS Boot Process</a> page can help clarify thins.</p>
+<p>Table of Contents:</p>
 <ul>
 <li><a href="troubleshooting.html#opencore-booting">OpenCore booting issues</a><ul>
 <li>This is anytime before or during the loading of the macOS kernel<ul>
@@ -878,24 +879,26 @@
 <li>Missing <a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">kernel patches</a>(only applies for AMD CPUs, make sure they&apos;re OpenCore patches and not Clover. Clover uses <code>MatchOS</code> while OpenCore has <code>MinKernel</code> and <code>Maxkernel</code>)</li>
 <li><code>IgnoreInvalidFlexRatio</code> missing, this is needed for Broadwell and older. <strong>Not for AMD and Skylake or newer</strong></li>
 <li><code>AppleXcpmExtraMsrs</code> may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. <strong>Do not use on AMD</strong></li>
+<li><code>SetupVirtualMap</code> may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.</li>
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
 <li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a></li>
-<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
+<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <h2 id="stuck-on-eblogexitbsstart"><a name="stuck-on-eblogexitbsstart" class="plugin-anchor" href="#stuck-on-eblogexitbsstart"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>[EB|#LOG:EXITBS:START]</code></h2>
-<p>This is actually the exact same error as <code>EndRandomSeed</code> so all the same fixes apply:</p>
+<p>This is actually the exact same error as <code>EndRandomSeed</code> so all the same fixes apply(10.15.4 and newer changed the debug protocol for those curious):</p>
 <ul>
 <li><code>ProvideConsoleGop</code> is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -&gt; Output</li>
 <li>Missing <a href="https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore" target="_blank">kernel patches</a>(only applies for AMD CPUs, make sure they&apos;re OpenCore patches and not Clover. Clover uses <code>MatchOS</code> while OpenCore has <code>MinKernel</code> and <code>Maxkernel</code>)</li>
 <li><code>IgnoreInvalidFlexRatio</code> missing, this is needed for Broadwell and older. <strong>Not for AMD and Skylake or newer</strong></li>
 <li><code>AppleXcpmExtraMsrs</code> may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. <strong>Do not use on AMD</strong></li>
+<li><code>SetupVirtualMap</code> may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.</li>
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
 <li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a></li>
-<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
+<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <h2 id="cant-see-macos-partitions"><a name="cant-see-macos-partitions" class="plugin-anchor" href="#cant-see-macos-partitions"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t see macOS partitions</h2>
 <p>Main things to check:</p>
@@ -980,7 +983,7 @@
 <ul>
 <li>CFG-Lock not off(Intel Users only), couple solutions:<ul>
 <li><a href="../extras/msr-lock.html">Patch your MSR E2</a>(Recommended solution)</li>
-<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
+<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 </li>
 <li>AMD kernel patches aren&apos;t working(AMD Users only):<ul>
@@ -1104,7 +1107,7 @@
 </li>
 <li><p><strong>RTC Missing</strong>:</p>
 <ul>
-<li>Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a> on creating an SSDT-AWAC.aml</li>
+<li>Commonly found on 300 series and X299/Cascade Lake-X refresh motherboards, caused by the RTC clock being disabled by default. See <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a> on creating an SSDT-AWAC.aml</li>
 <li>Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it, for users cursed with such hardware you&apos;ll need to create a fake RTC clock for macOS to play with:</li>
 </ul>
 </li>
@@ -1312,8 +1315,8 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <li>There&apos;s an Intel specific check in the installer, app itself is likely fine</li>
 </ul>
 </li>
-<li>15/16h CPU webpages crashing<ul>
-<li>Follow directions here after UPDATE 5: <a href="https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&amp;comment=2661857" target="_blank">Fix webpages</a></li>
+<li>15/16h CPU web pages crashing<ul>
+<li>Follow directions here after UPDATE 5: <a href="https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&amp;comment=2661857" target="_blank">Fix web pages</a></li>
 </ul>
 </li>
 </ul>
@@ -1426,7 +1429,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li><code>0xc000000d</code></li>
 </ul>
 <h2 id="booting-windows-error-ocb-startimage-failed---already-started"><a name="booting-windows-error-ocb-startimage-failed---already-started" class="plugin-anchor" href="#booting-windows-error-ocb-startimage-failed---already-started"><i class="fa fa-link" aria-hidden="true"></i></a>Booting Windows error: <code>OCB: StartImage failed - Already started</code></h2>
-<p>This is due to OpenCore getting confused when trying to boot boot Windows and accidentally thinking it&apos;s booting OpenCore. This can be avoided by either move Windows to it&apos;s own drive <em>or</em> adding a custom drive path under BlessOverride. See <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more details.</p>
+<p>This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it&apos;s booting OpenCore. This can be avoided by either move Windows to it&apos;s own drive <em>or</em> adding a custom drive path under BlessOverride. See <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more details.</p>
 <h2 id="iasl-warning--unresolved"><a name="iasl-warning--unresolved" class="plugin-anchor" href="#iasl-warning--unresolved"><i class="fa fa-link" aria-hidden="true"></i></a>iASL warning, # unresolved</h2>
 <p>If you try to decompile your DSDT and get an error similar to this:</p>
 <pre><code class="lang-text">iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
@@ -1479,7 +1482,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-05T14:15:57.924Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-05T14:16:49.558Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-05T16:23:04.835Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-05T16:24:18.799Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

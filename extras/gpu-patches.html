@@ -43,17 +43,17 @@
 
     
         
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
         <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 
@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Tue May 05 2020 14:15:57 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue May 05 2020 16:23:04 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gpu-patching"><a name="gpu-patching" class="plugin-anchor" href="#gpu-patching"><i class="fa fa-link" aria-hidden="true"></i></a>GPU Patching</h1>
 <ul>
@@ -756,7 +756,7 @@
 <p>Guide moved here: <a href="https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html" target="_blank">Renaming GPUs</a></p>
 <h1 id="igpu-busid-patching"><a name="igpu-busid-patching" class="plugin-anchor" href="#igpu-busid-patching"><i class="fa fa-link" aria-hidden="true"></i></a>iGPU BusID Patching</h1>
 <p>This section is for users running &quot;true&quot; 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.</p>
-<p>So to get started I&apos;ll assume you&apos;ve already done basic framebuffer patches in your config from the <a href="../config.plist/coffee-lake.html">Coffeelake portion of the guide</a>, it should look something like this:</p>
+<p>So to get started I&apos;ll assume you&apos;ve already done basic framebuffer patches in your config from the <a href="../config.plist/coffee-lake.html">Coffee Lake portion of the guide</a>, it should look something like this:</p>
 <p><img src="../images/extras/gpu-patches-md/prereq.png" alt=""></p>
 <p>Now that we&apos;re prepped, we can start looking into busID patching. Checking the dumps on <a href="https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/" target="_blank">InsanelyMac</a> shows us this for the <code>3E9B0007</code> ID(Desktop UHD 630):</p>
 <pre><code class="lang-text">ID: 3E9B0007, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00801302
@@ -848,7 +848,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 <li>03000800 00040000 C7030000</li>
 </ul>
 <h3 id="adding-to-your-configplist"><a name="adding-to-your-configplist" class="plugin-anchor" href="#adding-to-your-configplist"><i class="fa fa-link" aria-hidden="true"></i></a>Adding to your config.plist</h3>
-<p>So adding these patches are simple though a bunch of entires are required:</p>
+<p>So adding these patches are simple though a bunch of entries are required:</p>
 <ul>
 <li>framebuffer-con0-enable = <code>01000000</code></li>
 <li>framebuffer-con1-enable = <code>01000000</code></li>
@@ -904,7 +904,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"iGPU Patching","level":"7.3","depth":1,"next":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"path":"extras/kaslr-fix.md","ref":"extras/kaslr-fix.md","articles":[]},"previous":{"title":"Add GUI and Boot-chime","level":"7.2","depth":1,"path":"extras/gui.md","ref":"extras/gui.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-05-05T14:15:57.160Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-05T14:16:49.558Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"iGPU Patching","level":"7.3","depth":1,"next":{"title":"Fixing KASLR slide values","level":"7.4","depth":1,"path":"extras/kaslr-fix.md","ref":"extras/kaslr-fix.md","articles":[]},"previous":{"title":"Add GUI and Boot-chime","level":"7.2","depth":1,"path":"extras/gui.md","ref":"extras/gui.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-05-05T16:23:04.079Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-05T16:24:18.799Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
