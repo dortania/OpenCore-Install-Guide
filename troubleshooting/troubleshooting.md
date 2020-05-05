@@ -664,7 +664,7 @@ Make sure `Add Python to PATH`
 
 ## Incorrect resolution with OpenCore
 
-* Follow [Hiding Verbose](verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
+* Follow [Fixing Resolution and Verbose](/post-install/verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
 ## No temperature/fan sensor output
