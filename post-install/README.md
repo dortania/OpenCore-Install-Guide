@@ -22,7 +22,7 @@ This section is beneficial for all, regardless of hardware.
 Used for Intel's consumer line
 
 * [Fixing Intel USB](https://usb-map.gitbook.io/project/)
-* [Fixing CFG Lock](extras/msr-lock.md)
+* [Fixing CFG Lock](/extras/msr-lock.md)
 * [Emulating NVRAM](/post-install/nvram.md)
 
 ## AMD
