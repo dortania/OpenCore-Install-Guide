@@ -248,8 +248,6 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
   * Sets OpenCore to use the builtin picker
 * **HideAuxiliary**: NO
   * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behavior
-* **HideSelf**: YES
-  * Hides the EFI partition as a boot option in OC's boot picker
 * **ConsoleAttributes**: `0`
   * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAttributes**: `0`
@@ -289,8 +287,10 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
-* **AuthRestart**: NO:
+* **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
+* **BlacklistAppleUpdate**: True
+  * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
 * **BootProtect**: None
   * Allows the use of Boostrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
