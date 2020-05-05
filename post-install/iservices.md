@@ -12,7 +12,7 @@ Table of Contents:
 * [Cleaning up your AppleID](/post-install/iservices.md#cleaning-your-appleid)
 * [Customer Code error](/post-install/iservices.md#customer-code-error)
 
-This page is for those having iMessage and other iServices issues, this is a very basic guide so will not go as in-depth into the issues as some other guides. This specific guide is a translation and reinterpretation of the AppleLife Guide on fixing iService: [Как завести сервисы Apple - iMessage, FaceTime, iCloud](https://applelife.ru/posts/727913)
+This page is for those having iMessage and other iServices issues, this is a very basic guide so will not go as in-depth into the issues as some other guides. This specific guide is a translation and reinterpretation of the AppleLife Guide on fixing iServices: [Как завести сервисы Apple - iMessage, FaceTime, iCloud](https://applelife.ru/posts/727913)
 
 **Note**: You and you alone are responsible for your AppleID, read the guide carefully and take full responsibility if you screw up. Dortania and other guides are not held accountable for what **you** do.
 
@@ -25,7 +25,6 @@ Tip: `iMacPro1,1 10` will print 10 serials, this will save you some time on gene
 ![](/images/post-install/iservices-md/serial-list.png)
 
 Now enter the serial into the [Apple Check Coverage page](https://checkcoverage.apple.com/), you will get 1 of 3 responses:
-
 
 We’re sorry, but this serial number isn’t valid |  Valid Purchase date | Purchase Date not Validated
 :-------------------------:|:-------------------------:|:-------------------------:
@@ -46,7 +45,7 @@ This last one is what we're after, as we want something genuine but currently no
 
 To start, grab [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/) ([Github link](https://github.com/headkaze/Hackintool)) and head to System -> Peripherals (Info -> Misc on older versions of Hackintool)
 
-Here under Network Interfaces (network card icon), look for `en0` under `BSD` and check whether the device has a checkmark under Builtin. If there is a checkmark, skip to Fixing ROM section otherwise continue reading.
+Here under Network Interfaces (network card icon), look for `en0` under `BSD` and check whether the device has a check mark under Builtin. If there is a check mark, skip to Fixing ROM section otherwise continue reading.
 
 > What if I don't have En0 at all?!?
 
@@ -97,7 +96,7 @@ Something that many forget about iServices is that NVRAM is crucial to getting i
 
 So we'll need to verify NVRAM works, regardless if "it should work" as some firmwares can be more of a pain than others.
 
-Please refer to the [Emulated NVRAM](/post-install/nvram.md) section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you dont.
+Please refer to the [Emulated NVRAM](/post-install/nvram.md) section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you don't.
 
 ## Clean out old attempts
 

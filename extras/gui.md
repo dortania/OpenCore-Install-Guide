@@ -55,7 +55,7 @@ So to start, we'll need a couple things:
 
 * NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82:
   * `SystemAudioVolume | Data | 0x46`
-  * This is the boot-chime and screenreader volume, note it's in hexadecimal so would become `70` in decimal
+  * This is the boot-chime and screen reader volume, note it's in hexadecimal so would become `70` in decimal
 
 **Setting up UEFI -> Audio:**
 
@@ -113,7 +113,7 @@ Once done, you should get something like this:
 
 **Note for visually impaired**:
 
-* OpenCore hasn't forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault voiceover with these 2 settings:
+* OpenCore hasn't forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault VoiceOver with these 2 settings:
   * `Misc -> Boot -> PickerAudioAssist -> True` to enable picker audio
   * `UEFI -> ProtocolOverrides -> AppleAudio -> True` to enable FileVault voice over
     * See [Security and FileVault](/post-install/security.md) on how to setup the rest for proper FileVault support

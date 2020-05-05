@@ -314,7 +314,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 | boot-args | Description |
 | :--- | :--- |
 | **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's WebDrivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
 
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
 

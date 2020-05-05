@@ -1,6 +1,6 @@
 # Understanding the macOS Boot Process
 
-* Supported version: 0.5.7
+* Supported version: 0.5.8
 
 Table of Contents:
 
@@ -43,6 +43,7 @@ For the rest of the possible issues, see here:
 
 This is where macOS's bootloader(boot.efi) comes onto the scene, specifically what it does is prep the environment for the kernel to load and where OpenCore injects kexts. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
 
+* [Stuck on EndRandomSeed](/troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
 * [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eblogexitbsstart)
 * [`Couldn't allocate runtime area` errors](/troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)
 

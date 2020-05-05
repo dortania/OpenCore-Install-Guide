@@ -22,7 +22,7 @@ This list is based of memory and an annoyed self with seeing these flags keep po
 
 ## Kexts flags
 
-**nvda_drv=1**: Used for enabling Nvidia's WebDrivers, no longer works in macOS 10.12
+**nvda_drv=1**: Used for enabling Nvidia's Web Drivers, no longer works in macOS 10.12
 
 * This flag was actually turned into `nvda_drv_vrl=1` for Sierra and High Sierra
 

@@ -55,7 +55,7 @@ Now lets run CPUFriendFriend.command
 The `min hex freq` should be what the lowest possible TDP for the CPU, on Intel's [ARK site](https://ark.intel.com/) search for `TDP-down Frequency` and convert this value to HEX. Note that not all CPUs support `TDP-down Frequency`, like the i7-9700T vs i7 9700. In these scenarios, you'll want to do a bit more research into your CPU, specifically:
 
 * Minimum Multiplier (Generally stable with x10 on Intel's consumer platform)
-* FSB (Front Side Bus Frequency, this is 100Mhz on most CPUs)
+* FSB (Front Side Bus Frequency, this is 100MHz on most CPUs)
 
 LPM = MinMultiplier x FSB
 
@@ -90,7 +90,7 @@ With Sandy and Ivy Bridge, consumer PCs have issues connecting to Apple's XCPM. 
 What we'll need:
 
 * CpuPm and Cpu0Ist tables dropped
-* [ssdtPRgen](https://github.com/Piker-Alpha/ssdtPRGen.sh)
+* [ssdtPRGen](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
 To drop the CpuPm and Cpu0Ist tables, head to ACPI -> Block:
 
@@ -112,7 +112,7 @@ To drop the CpuPm and Cpu0Ist tables, head to ACPI -> Block:
 | TableLength | Number | 0 |
 | TableSignature | Data | 53534454 |
 
-Once this is done, we can now grab ssdtPRgen and run it:
+Once this is done, we can now grab ssdtPRGen and run it:
 
 ![](/images/post-install/pm-md/prgen-run.png)
 

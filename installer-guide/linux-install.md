@@ -58,7 +58,7 @@ In terminal:
 5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file
    ![](/images/installer-guide/linux-install-md/unknown-10.png)
    1. download `p7zip-full` \(depending on your distro tools\)
-      * for ubuntu/ubuntu-based run `sudo apt install p7zip-full`
+      * for Ubuntu/Ubuntu-based run `sudo apt install p7zip-full`
       * for arch/arch-based run `sudo pacman -S p7zip`
       * for the rest of you, you should know
       * for all distros: **make sure you're using bash for 7zip to work**.
@@ -104,7 +104,7 @@ In terminal:
 5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file
    ![](/images/installer-guide/linux-install-md/unknown-19.png)
    1. download `p7zip-full` \(depending on your distro tools\)
-      * for ubuntu/ubuntu-based run `sudo apt install p7zip-full`
+      * for Ubuntu/Ubuntu-based run `sudo apt install p7zip-full`
       * for arch/arch-based run `sudo pacman -S p7zip`
       * for the rest of you, you should know
       * for all distros: **make sure you're using bash for 7zip to work**.

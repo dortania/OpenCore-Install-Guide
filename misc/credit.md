@@ -9,7 +9,7 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Corrections to the original guide
   * Corrections to this guide...(seriously this man deserves a medal)
 * [CorpNewt](https://github.com/corpnewt)
-  * Heavily inspiring this guide(if not a rip off) and helping overal with questions and advice
+  * Heavily inspiring this guide(if not a rip off) and helping overall with questions and advice
   * Spoof SSDT source
 * [Midi](https://github.com/midi1996)
   * Corrections and recommendations for the guide

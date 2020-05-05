@@ -15,7 +15,7 @@ Guide moved here: [Renaming GPUs](https://dortania.github.io/Getting-Started-Wit
 
 This section is for users running "true" 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.
 
-So to get started I'll assume you've already done basic framebuffer patches in your config from the [Coffeelake portion of the guide](../config.plist/coffee-lake.md), it should look something like this:
+So to get started I'll assume you've already done basic framebuffer patches in your config from the [Coffee Lake portion of the guide](../config.plist/coffee-lake.md), it should look something like this:
 
 ![](/images/extras/gpu-patches-md/prereq.png)
 
@@ -116,7 +116,7 @@ If you still get no output, set port 1's busid to 00 and start going through bus
 
 ### Adding to your config.plist
 
-So adding these patches are simple though a bunch of entires are required:
+So adding these patches are simple though a bunch of entries are required:
 
 * framebuffer-con0-enable = `01000000`
 * framebuffer-con1-enable = `01000000`

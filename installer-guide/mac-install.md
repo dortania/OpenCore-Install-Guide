@@ -53,7 +53,7 @@ You can also replace the `createinstallmedia` path with that of where your insta
 
 ## Setting up OpenCore's EFI environment
 
-Setting up OpenCore's EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [ MountEFI](https://github.com/corpnewt/MountEFI) comes in:
+Setting up OpenCore's EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [MountEFI](https://github.com/corpnewt/MountEFI) comes in:
 
 ![MountEFI](/images/installer-guide/mac-install-md/mount-efi-usb.png)
 

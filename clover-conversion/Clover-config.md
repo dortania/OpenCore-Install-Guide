@@ -87,7 +87,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * This will not harm Windows or Linux installs as this is just adding missing methods that should've been there to start with. *Blame the firmware writers*
 
 * **FixDisplay**:
-  * Manual framebuffer patching, WhaterGreen does most of the work already
+  * Manual framebuffer patching, WhateverGreen does most of the work already
 
 * **AddMCHC**:
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
@@ -150,7 +150,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * `Misc -> Security -> AllowSetDefault -> True`
   * Press Ctrl+Enter in the picker to set default device
-* Alternative is StartupDisk in macOS's System Preferences, just like on real Macs
+* Alternative is Startup Disk in macOS's System Preferences, just like on real Macs
 
 # Boot Graphics
 
@@ -326,7 +326,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 **display-cfg**:
 
 * `DeviceProperties -> Add -> PciRoot... -> @0,display-cfg`
-* See fassl's post on the matter: [nVidia injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
+* See fassl's post on the matter: [Nvidia injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
 
 **LoadVBios**:
 
@@ -371,7 +371,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **DellSMBIOSPatch**:
 
-An odd quirk for Dell systems running APTIO V(or just skylake, Slice doesn't really know either)
+An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't really know either)
 
 * `Kernel -> Quirks -> CustomSMBIOSGuid -> YES`
 * `PlatformInfo -> UpdateSMBIOSMode -> Custom`
@@ -399,7 +399,7 @@ An odd quirk for Dell systems running APTIO V(or just skylake, Slice doesn't rea
 
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
 
-For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transfered over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to OpenCore:
+For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transferred over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to OpenCore:
 
 ```
 Base: _xcpm_bootstrap
@@ -461,7 +461,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 **ROM**:
 
 * No direct translation for `UseMacAddr0` as you need to provide your hardware ROM, can be found in `System Preferences -> Network -> Advanced -> Hardware`
-* Also verify your En0 is still built-in when running OpenCore, this can break iMessage and icloud when there's no `built-in` property.
+* Also verify your En0 is still built-in when running OpenCore, this can break iMessage and iCloud when there's no `built-in` property.
 
 **MLB**:
 
@@ -514,7 +514,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 **CustomUUID**:
 
 * Heavily deprecated and not recommended even on Clover, no equivalent on OpenCore
-* More info on why: [Hardware UUID injection for opencore #711](https://github.com/acidanthera/bugtracker/issues/711)
+* More info on why: [Hardware UUID injection for OpenCore #711](https://github.com/acidanthera/bugtracker/issues/711)
 
 **InjectSystemID**:
 

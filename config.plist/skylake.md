@@ -141,7 +141,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for fixing certain iGPU properties like `ig-platform-id`. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.
 
-If we think of our ig-plat as `0xAABBCCDD`, our swapped version would look like `DDCCBBAA`
+If we think of our ig-platform-id as `0xAABBCCDD`, our swapped version would look like `DDCCBBAA`
 
 The two ig-platform-id's we use are as follows:
 
@@ -348,7 +348,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 | boot-args | Description |
 | :--- | :--- |
 | **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's WebDrivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition

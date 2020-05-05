@@ -2,75 +2,77 @@
 
 * Supported version: 0.5.8
 
-This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. This page is divided up into a couple sections:
+This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](/troubleshooting/boot.md) page can help clarify thins.
+
+Table of Contents:
 
 * [OpenCore booting issues](/troubleshooting/troubleshooting.md#opencore-booting)
   * This is anytime before or during the loading of the macOS kernel
-	 * [Stuck on `no vault provided!`](/troubleshooting/troubleshooting.md#stuck-on-no-vault-provided)
-	 * [Stuck on EndRandomSeed](/troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
-	 * [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eblogexitbsstart)
-	 * [Can't see macOS partitions](/troubleshooting/troubleshooting.md#cant-see-macos-partitions)
-	 * [Black screen after picker](/troubleshooting/troubleshooting.md#black-screen-after-picker)
-	 * [Stuck on `OC: OcAppleGenericInput... - Success`](/troubleshooting/troubleshooting.md#stuck-on-oc-ocapplegenericinput---success)
-	 * [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocb-ocscanforbootentries-failure---not-found)
-	 * [Stuck on `OCB: failed to match a default boot option`](/troubleshooting/troubleshooting.md#stuck-on-ocb-failed-to-match-a-default-boot-option)
-	 * [Stuck on `OCABC: Memory pool allocation failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocabc-memory-pool-allocation-failure---not-found)
-	 * [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](/troubleshooting/troubleshooting.md#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
-	 * [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](/troubleshooting/troubleshooting.md#stuck-on-oc-driver-xxxefi-at-0-cannot-be-found)
-	 * [Stuck on `Buffer Too Small`](/troubleshooting/troubleshooting.md#stuck-on-buffer-too-small)
-	 * [Stuck on `Plist only kext has CFBundleExecutable key`](/troubleshooting/troubleshooting.md#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
-	 * [Receiving `Failed to parse real field of type 1`](/troubleshooting/troubleshooting.md#receiving-failed-to-parse-real-field-of-type-1)
-	 * [Stuck after selection macOS partition on OpenCore](/troubleshooting/troubleshooting.md#stuck-after-selection-macos-partition-on-opencore)
-	 * [Can't select anything in the picker](/troubleshooting/troubleshooting.md#cant-select-anything-in-the-picker)
-	 * [Stuck on `This version of Mac OS X is not supported: Reason Mac...`](/troubleshooting/troubleshooting.md#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac)
-	 * [`Couldn't allocate runtime area` errors?](/troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)
-	 * [SSDTs not being added](/troubleshooting/troubleshooting.md#ssdts-not-being-added)
-	 * [Booting OpenCore reboots to BIOS](/troubleshooting/troubleshooting.md#booting-opencore-reboots-to-bios)
-	 * [OCABC: Incompatible OpenRuntime r4, require r10](/troubleshooting/troubleshooting.md#ocabc-incompatible-openruntime-r4-require-r10)
+    * [Stuck on `no vault provided!`](/troubleshooting/troubleshooting.md#stuck-on-no-vault-provided)
+    * [Stuck on EndRandomSeed](/troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
+    * [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eblogexitbsstart)
+    * [Can't see macOS partitions](/troubleshooting/troubleshooting.md#cant-see-macos-partitions)
+    * [Black screen after picker](/troubleshooting/troubleshooting.md#black-screen-after-picker)
+    * [Stuck on `OC: OcAppleGenericInput... - Success`](/troubleshooting/troubleshooting.md#stuck-on-oc-ocapplegenericinput---success)
+    * [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocb-ocscanforbootentries-failure---not-found)
+    * [Stuck on `OCB: failed to match a default boot option`](/troubleshooting/troubleshooting.md#stuck-on-ocb-failed-to-match-a-default-boot-option)
+    * [Stuck on `OCABC: Memory pool allocation failure - Not Found`](/troubleshooting/troubleshooting.md#stuck-on-ocabc-memory-pool-allocation-failure---not-found)
+    * [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](/troubleshooting/troubleshooting.md#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
+    * [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](/troubleshooting/troubleshooting.md#stuck-on-oc-driver-xxxefi-at-0-cannot-be-found)
+    * [Stuck on `Buffer Too Small`](/troubleshooting/troubleshooting.md#stuck-on-buffer-too-small)
+    * [Stuck on `Plist only kext has CFBundleExecutable key`](/troubleshooting/troubleshooting.md#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
+    * [Receiving `Failed to parse real field of type 1`](/troubleshooting/troubleshooting.md#receiving-failed-to-parse-real-field-of-type-1)
+    * [Stuck after selection macOS partition on OpenCore](/troubleshooting/troubleshooting.md#stuck-after-selection-macos-partition-on-opencore)
+    * [Can't select anything in the picker](/troubleshooting/troubleshooting.md#cant-select-anything-in-the-picker)
+    * [Stuck on `This version of Mac OS X is not supported: Reason Mac...`](/troubleshooting/troubleshooting.md#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac)
+    * [`Couldn't allocate runtime area` errors?](/troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)
+    * [SSDTs not being added](/troubleshooting/troubleshooting.md#ssdts-not-being-added)
+    * [Booting OpenCore reboots to BIOS](/troubleshooting/troubleshooting.md#booting-opencore-reboots-to-bios)
+    * [OCABC: Incompatible OpenRuntime r4, require r10](/troubleshooting/troubleshooting.md#ocabc-incompatible-openruntime-r4-require-r10)
 * [macOS booting issues](/troubleshooting/troubleshooting.md#macos-booting)
   * Anytime between the kernel loading and installing macOS
-	 * [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](/troubleshooting/troubleshooting.md#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
-	 * ["Waiting for Root Device" or Prohibited Sign error](/troubleshooting/troubleshooting.md#waiting-for-root-device-or-prohibited-sign-error)
-	 * [macOS installer in Russian](/troubleshooting/troubleshooting.md#macos-installer-in-russian)
-	 * [macOS Installer being damaged](/troubleshooting/troubleshooting.md#macos-installer-being-damaged)
-	 * [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](/troubleshooting/troubleshooting.md#stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3)
-	 * [Scrambled Screen on laptops](/troubleshooting/troubleshooting.md#scrambled-screen-on-laptops)
-	 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](/troubleshooting/troubleshooting.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-	 * [300 series Intel stalling on `apfs_module_start...`](/troubleshooting/troubleshooting.md#300-series-intel-stalling-on-apfsmodulestart)
+    * [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](/troubleshooting/troubleshooting.md#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
+    * ["Waiting for Root Device" or Prohibited Sign error](/troubleshooting/troubleshooting.md#waiting-for-root-device-or-prohibited-sign-error)
+    * [macOS installer in Russian](/troubleshooting/troubleshooting.md#macos-installer-in-russian)
+    * [macOS Installer being damaged](/troubleshooting/troubleshooting.md#macos-installer-being-damaged)
+    * [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](/troubleshooting/troubleshooting.md#stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3)
+    * [Scrambled Screen on laptops](/troubleshooting/troubleshooting.md#scrambled-screen-on-laptops)
+    * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](/troubleshooting/troubleshooting.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
+    * [300 series Intel stalling on `apfs_module_start...`](/troubleshooting/troubleshooting.md#300-series-intel-stalling-on-apfsmodulestart)
 
-	 * [Kernel Panic `Cannot perform kext summary`](/troubleshooting/troubleshooting.md#kernel-panic-cannot-perform-kext-summary)
-	 * [Kernel Panic `AppleIntelMCEReporter`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelmcereporter)
-	 * [Kernel Panic `AppleIntelCPUPowerManagement`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelcpupowermanagement)
-	 * [Frozen in the macOS installer after 30 seconds](/troubleshooting/troubleshooting.md#frozen-in-the-macos-installer-after-30-seconds)
-	 * [15h/16h CPU reboot after Data & Privacy screen](/troubleshooting/troubleshooting.md#15h16h-cpu-reboot-after-data--privacy-screen)
-	 * [Keyboard works but trackpad does not](/troubleshooting/troubleshooting.md#keyboard-works-but-trackpad-does-not)
-	 * [Sleep crashing on AMD](/troubleshooting/troubleshooting.md#sleep-crashing-on-amd)
-	 * [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
-	 * [`kextd stall[0]: AppleACPICPU`](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
-	 * [MediaKit reports not enough space](/troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
+    * [Kernel Panic `Cannot perform kext summary`](/troubleshooting/troubleshooting.md#kernel-panic-cannot-perform-kext-summary)
+    * [Kernel Panic `AppleIntelMCEReporter`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelmcereporter)
+    * [Kernel Panic `AppleIntelCPUPowerManagement`](/troubleshooting/troubleshooting.md#kernel-panic-appleintelcpupowermanagement)
+    * [Frozen in the macOS installer after 30 seconds](/troubleshooting/troubleshooting.md#frozen-in-the-macos-installer-after-30-seconds)
+    * [15h/16h CPU reboot after Data & Privacy screen](/troubleshooting/troubleshooting.md#15h16h-cpu-reboot-after-data--privacy-screen)
+    * [Keyboard works but trackpad does not](/troubleshooting/troubleshooting.md#keyboard-works-but-trackpad-does-not)
+    * [Sleep crashing on AMD](/troubleshooting/troubleshooting.md#sleep-crashing-on-amd)
+    * [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
+    * [`kextd stall[0]: AppleACPICPU`](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
+    * [MediaKit reports not enough space](/troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
 * [macOS post-install issues](/troubleshooting/troubleshooting.md#macos-post-install)
   * Anytime after macOS is installed
-	 * [Broken iMessage and Siri](/troubleshooting/troubleshooting.md#broken-imessage-and-siri)
-	 * [No on-board audio](/troubleshooting/troubleshooting.md#no-on-board-audio)
-	 * [BIOS reset or sent into Safemode after reboot/shutdown?](/troubleshooting/troubleshooting.md#bios-reset-or-sent-into-safemode-after-rebootshutdown)
-	 * [macOS GPU acceleration missing on AMD X570](/troubleshooting/troubleshooting.md#macos-gpu-acceleration-missing-on-amd-x570)
-	 * [DRM Broken](/troubleshooting/troubleshooting.md#drm-broken)
-	 * ["Memory Modules Misconfigured" on MacPro7,1](/troubleshooting/troubleshooting.md#memory-modules-misconfigured-on-macpro71)
-	 * [Apps crashing on AMD](/troubleshooting/troubleshooting.md#apps-crashing-on-amd)
+    * [Broken iMessage and Siri](/troubleshooting/troubleshooting.md#broken-imessage-and-siri)
+    * [No on-board audio](/troubleshooting/troubleshooting.md#no-on-board-audio)
+    * [BIOS reset or sent into Safemode after reboot/shutdown?](/troubleshooting/troubleshooting.md#bios-reset-or-sent-into-safemode-after-rebootshutdown)
+    * [macOS GPU acceleration missing on AMD X570](/troubleshooting/troubleshooting.md#macos-gpu-acceleration-missing-on-amd-x570)
+    * [DRM Broken](/troubleshooting/troubleshooting.md#drm-broken)
+    * ["Memory Modules Misconfigured" on MacPro7,1](/troubleshooting/troubleshooting.md#memory-modules-misconfigured-on-macpro71)
+    * [Apps crashing on AMD](/troubleshooting/troubleshooting.md#apps-crashing-on-amd)
 * [Other issues](/troubleshooting/troubleshooting.md#other-issues)
   * This includes troubleshooting tools used for making your USB, fixing cosmetics in OpenCore, etc
-	 * [Can't run `acpidump.efi`](/troubleshooting/troubleshooting.md#cant-run-acpidumpefi)
-	 * [Fixing SSDTTime: `Could not locate or download iasl!`](/troubleshooting/troubleshooting.md#fixing-ssdttime-could-not-locate-or-download-iasl)
-	 * [Fix Python: `Python is not installed or not found on PATH`](/troubleshooting/troubleshooting.md#fix-python-python-is-not-installed-or-not-found-on-path)
-	 * [Windows Startup Disk can't see APFS drives](/troubleshooting/troubleshooting.md#windows-startup-disk-cant-see-apfs-drives)
-	 * [Incorrect resolution with OpenCore](/troubleshooting/troubleshooting.md#incorrect-resolution-with-opencore)
-	 * [No temperature/fan sensor output](/troubleshooting/troubleshooting.md#no-temperaturefan-sensor-output)
-	 * [Can't find Windows/BootCamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windowsbootcamp-drive-in-picker)
-	 * ["You can't change the startup disk to the selected disk" error](/troubleshooting/troubleshooting.md#you-cant-change-the-startup-disk-to-the-selected-disk-error)
-	 * [Booting Windows results in BlueScreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
-	 * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed---already-started)
-	 * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning--unresolved)
-	 * [No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors
+    * [Can't run `acpidump.efi`](/troubleshooting/troubleshooting.md#cant-run-acpidumpefi)
+    * [Fixing SSDTTime: `Could not locate or download iasl!`](/troubleshooting/troubleshooting.md#fixing-ssdttime-could-not-locate-or-download-iasl)
+    * [Fix Python: `Python is not installed or not found on PATH`](/troubleshooting/troubleshooting.md#fix-python-python-is-not-installed-or-not-found-on-path)
+    * [Windows Startup Disk can't see APFS drives](/troubleshooting/troubleshooting.md#windows-startup-disk-cant-see-apfs-drives)
+    * [Incorrect resolution with OpenCore](/troubleshooting/troubleshooting.md#incorrect-resolution-with-opencore)
+    * [No temperature/fan sensor output](/troubleshooting/troubleshooting.md#no-temperaturefan-sensor-output)
+    * [Can't find Windows/BootCamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windowsbootcamp-drive-in-picker)
+    * ["You can't change the startup disk to the selected disk" error](/troubleshooting/troubleshooting.md#you-cant-change-the-startup-disk-to-the-selected-disk-error)
+    * [Booting Windows results in BlueScreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
+    * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed---already-started)
+    * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning--unresolved)
+    * [No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors
 
 While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion) for more info
 
@@ -122,25 +124,27 @@ Couple problems:
 * Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 * `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+* `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
 * [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock)
-* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
+* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
 
-This is actually the exact same error as `EndRandomSeed` so all the same fixes apply:
+This is actually the exact same error as `EndRandomSeed` so all the same fixes apply(10.15.4 and newer changed the debug protocol for those curious):
 
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
 * Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 * `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+* `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
 * [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock)
-* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
+* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
 
 ## Can't see macOS partitions
 
@@ -150,10 +154,10 @@ Main things to check:
 * Have the proper firmware drivers such as HfsPlus(Note ApfsDriverLoader shouldn't be used in 0.5.8)
 * Set UnblockFsConnect to True in config.plist -> UEFI -> Quirks. Needed for some HP systems
 * Set `UEFI -> APFS` to see APFS based drives:
-   * **EnableJumpstart**: YES
-   * **HideVerbose**: YES
-   * **MinDate**: `-1`
-   * **MinVersion**: `-1`
+  * **EnableJumpstart**: YES
+  * **HideVerbose**: YES
+  * **MinDate**: `-1`
+  * **MinVersion**: `-1`
 
 ## Black screen after picker
 
@@ -240,7 +244,7 @@ Missing or incorrect `Executable path`
 
 * CFG-Lock not off(Intel Users only), couple solutions:
   * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
-  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
+  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
 * AMD kernel patches aren't working(AMD Users only):
   * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
@@ -353,7 +357,7 @@ The main places to check:
     * HEDT: See [Emulating NVRAM](/post-install/nvram.md) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
 
 * **RTC Missing**:
-  * Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
+  * Commonly found on 300 series and X299/Cascade Lake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
   * Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
 
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
@@ -498,13 +502,11 @@ This error is due to a small EFI, by default Windows will create a 100MB EFI whe
 
 * Expand the EFI of the drive to 200MB(See Google on how)
 * Format the entire drive instead of just the partition
-   * Note by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices(Alternatively you can press the view button)
+  * Note by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices(Alternatively you can press the view button)
 
 Default           |  Show All Devices(Cmd+2)
 :-------------------------:|:-------------------------:
 ![](/images/troubleshooting/troubleshooting-md/Default.png)  |  ![](/images/troubleshooting/troubleshooting-md/Showalldevices.png)
-
-
 
 # macOS post-install
 
@@ -581,8 +583,8 @@ So with AMD, whenever Apple calls CPU specific functions the app will either not
   * Mojave works fine
 * IDA Pro won't install
   * There's an Intel specific check in the installer, app itself is likely fine
-* 15/16h CPU webpages crashing
-  * Follow directions here after UPDATE 5: [Fix webpages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
+* 15/16h CPU web pages crashing
+  * Follow directions here after UPDATE 5: [Fix web pages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
 
 ## Sleep crashing on AMD
 
@@ -710,7 +712,7 @@ Common Windows error code:
 
 ## Booting Windows error: `OCB: StartImage failed - Already started`
 
-This is due to OpenCore getting confused when trying to boot boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
+This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
 
 ## iASL warning, # unresolved
 

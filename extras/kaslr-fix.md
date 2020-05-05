@@ -75,7 +75,7 @@ And we'll also need to configure our config.plist -> Booter(for OpenCore) or OcQ
 * **ProtectUefiServices**: NO
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, 300 series and newer systems like Ice Lake and Comet Lake
 * **ProvideCustomSlide**: YES
-  * This makes sure the kernel will only choose good regions and avoid those that may result inboot failures. It's still random but omits those bad reions in its randomization
+  * This makes sure the kernel will only choose good regions and avoid those that may result in boot failures. It's still random but omits those bad regions in its randomization
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this, this makes sure our memory map will fit to what the kernel expects
 
