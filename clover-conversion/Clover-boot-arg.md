@@ -4,7 +4,7 @@
 
 This section is mainly used for explaining what boot-args are no longer relevant, it's quite common for users to be still carrying legacy args which have little to no real affect in newer versions of macOS or have little use in OpenCore
 
-This list is based of memory and an annoyed self with seeing these flags keep popping up, got other flags to add then I recommend [opening an issue](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/issues). All help is welcomed!
+This list is based of memory and an annoyed self with seeing these flags keep popping up, got other flags to add then I recommend [opening an issue](https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/issues). All help is welcomed!
 
 ## macOS flags
 
@@ -12,7 +12,7 @@ This list is based of memory and an annoyed self with seeing these flags keep po
 
 * Used for disabling VT-D support
 * With Clover, when this flag was present it would also drop your DMAR table from ACPI
-* This flag also requires SIP to be disabled in macOS 10.15 catalina, so with OpenCore this flag is no longer recommended and instead replaced with `Kernel -> Quirks -> DisableIoMapper`
+* This flag also requires SIP to be disabled in macOS 10.15 Catalina, so with OpenCore this flag is no longer recommended and instead replaced with `Kernel -> Quirks -> DisableIoMapper`
 
 **kext-dev-mode=1**:
 

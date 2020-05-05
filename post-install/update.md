@@ -12,7 +12,7 @@ Table of Contents:
 
 So the main things to note with updating OpenCore:
 
-* [Releases](https://github.com/acidanthera/OpenCorePkg/releases) happen the first monday of every month
+* [Releases](https://github.com/acidanthera/OpenCorePkg/releases) happen the first Monday of every month
 * The [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf) will tell you all the things added and removed from this version of OpenCore compared to the previous release
 * The OpenCore Vanilla Guide will have a note on the [README.md](README.md) about what release version it supports
 
@@ -27,7 +27,7 @@ So the process goes as follows:
 
 2. **Mount your EFI**
 
-* So first, lets mount your hard drive's EFI and make a copy somewhere safe with [MountEFI](https://github.com/corpnewt/MountEFI). We won't be updating the drive's EFI at first, instead we'll be grabbing a spare USB to be our crash dummy. This allows us to keep a working copy of Opencore incase our update goes south
+* So first, lets mount your hard drive's EFI and make a copy somewhere safe with [MountEFI](https://github.com/corpnewt/MountEFI). We won't be updating the drive's EFI at first, instead we'll be grabbing a spare USB to be our crash dummy. This allows us to keep a working copy of OpenCore in case our update goes south
 
 * For the USB, it must be formatted as GUID. Reason for this is that GUID will automatically create an EFI partition, though this will be hidden by default so you'll need to mount it with MountEFI.
 
@@ -56,7 +56,7 @@ So the process goes as follows:
   * [OCConfigCompare](https://github.com/corpnewt/OCConfigCompare) to compare between the sample.plist and your config.plist
   * `diff (file input 1) (file input 2)` in terminal
   * [BeyondCompare](https://www.scootersoftware.com)
-  * Make a new config based off reading the updated Opencore Vanilla Guide
+  * Make a new config based off reading the updated OpenCore Vanilla Guide
 
 * Once you've made the adjustments and made sure you config is compliant with the newest release of OpenCore, make sure to double check your setting with the OpenCore Guide on what to set everything to, otherwise read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf) if you want to get a bit more technical.
 

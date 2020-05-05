@@ -7,7 +7,7 @@ Wanna try OpenCore but can't boot UEFI based sources? Well don't fret, there's h
 To start, you need the following:
 
 * BootInstall.command
-* Install source(MacOS Journaled + GUID, size of USb depends on the version of macOS. 16GB recommended for catalina)
+* Install source(MacOS Journaled + GUID, size of USB depends on the version of macOS. 16GB recommended for Catalina)
 
 ![BootInstall Location](/images/extras/legacy-md/download.png)
 
@@ -34,6 +34,6 @@ This will provide you with an EFI partition with a `boot` file, this is where we
 **Note**: The firmware drivers used for legacy users differ slightly:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * For picker support in the Opencore menu
+  * For picker support in the OpenCore menu
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
-  * Needed for seeing Hfs drives like installers, the legacy variant is required for SandyBridge and older due to missing RDRAND instruction support
+  * Needed for seeing Hfs drives like installers, the legacy variant is required for Sandy Bridge and older due to missing RDRAND instruction support

@@ -6,7 +6,7 @@
 
 ## Enabling X86PlatformPlugin
 
-So before we can fine tune power manegement to our liking, we need to first make sure Apple's XCPM core is loaded. Note that this is supported **only on Haswell and newer**, Sandy and Ivy Bridge should refer to the bottom of the guide: [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management).
+So before we can fine tune power management to our liking, we need to first make sure Apple's XCPM core is loaded. Note that this is supported **only on Haswell and newer**, Sandy and Ivy Bridge should refer to the bottom of the guide: [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management).
 
 To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and look for `AppleACPICPU`(note if you use search, it may find entries):
 
@@ -59,7 +59,7 @@ The `min hex freq` should be what the lowest possible TDP for the CPU, on Intel'
 
 LPM = MinMultiplier x FSB
 
-For this example we'll be using the [i9 7920x](https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html) which has a base clock of 2.9 Ghz but no LPM, so we'll choose 1.3 Ghz(13x100) and work our way up/down until we find stability.
+For this example we'll be using the [i9 7920x](https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html) which has a base clock of 2.9 GHz but no LPM, so we'll choose 1.3 GHz(13x100) and work our way up/down until we find stability.
 
 ```text
 echo "obase=16; 13" | bc

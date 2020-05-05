@@ -113,9 +113,9 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 * **EnableWriteUnprotector**: YES
   * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
-  * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary
+  * Ensures ExitBootServices calls succeeds even when the Memory Map has changed, don't use unless necessary
 * **ProtectMemoryRegions**: NO
-  * Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares
+  * Needed for fixing artifacts and sleep-wake issues, generally only needed on very old firmwares
 * **ProtectSecureBoot**: NO
   * Fixes Secure Boot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
@@ -137,7 +137,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 **Add**: Sets device properties from a map.
 
-By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
+By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
 TL;DR, delete all the PciRoot's here as we won't be using this section.
 
@@ -359,7 +359,7 @@ Recommended to leave enabled for best security practices
 
 * Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
 
-## Platforminfo
+## PlatformInfo
 
 ![PlatformInfo](/images/config/config-universal/iMacPro-smbios.png)
 
@@ -386,7 +386,7 @@ The `Serial` part gets copied to Generic -> SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -> MLB.
 
-The `SmUUID` part gets copied toto Generic -> SystemUUID.
+The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
 
@@ -396,7 +396,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 **Automatic**: YES
 
-* Generates Platforminfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+* Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
 **Generic**:
 

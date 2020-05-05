@@ -57,4 +57,4 @@ Unsupported ethernet models:
 
 * Realtek L8200A(Only found in Asus boards)
 
-And see [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for supported wifi cards. All built in motherboard wireless ccards will not work in macOS, they must be swapped.
+And see [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for supported wifi cards. All built in motherboard wireless cards will not work in macOS, they must be swapped.

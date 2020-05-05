@@ -64,7 +64,7 @@ In terminal:
       * for all distros: **make sure you're using bash for 7zip to work**.
    2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` to extract `BaseSystem.dmg` and `BaseSystem.chunklist`
    3. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your USB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your USB partition block> /where/your/mount/stuff`, sudo is required)
-   4. `cd` to your usb driver and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
+   4. `cd` to your USB driver and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
    5. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
 
 ### Method 2 (in case 1 didn't work)
@@ -108,7 +108,7 @@ In terminal:
       * for arch/arch-based run `sudo pacman -S p7zip`
       * for the rest of you, you should know
       * for all distros: **make sure you're using bash for 7zip to work**.
-   2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` this will extract the recovery from the pkg through extracting the recovery update package then extracting the recovery dmg then the hfs image from it (BaseSystem.dmg).
+   2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` this will extract the recovery from the pkg through extracting the recovery update package then extracting the recovery dmg then the HFS image from it (BaseSystem.dmg).
    3. download `dmg2img` (available on most distros)
    4. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
       ![](/images/installer-guide/linux-install-md/unknown-20.png)

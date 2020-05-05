@@ -41,7 +41,7 @@ For the rest of the possible issues, see here:
 
 ![](/images/troubleshooting/boot-md/1-boot-efi.png)
 
-This is where macOS's bootloader(boot.efi) comes onto the scene, specifically what it does is prep the environment for the kernel to load and where Opencore injects kexts. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
+This is where macOS's bootloader(boot.efi) comes onto the scene, specifically what it does is prep the environment for the kernel to load and where OpenCore injects kexts. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
 
 * [Stuck on `[EB|#LOG:EXITBS:START]`](/troubleshooting/troubleshooting.md#stuck-on-eblogexitbsstart)
 * [`Couldn't allocate runtime area` errors](/troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)

@@ -131,9 +131,9 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 * **EnableWriteUnprotector**: YES
   * Removes write protection from CR0 register during their execution
 * **ForceExitBootServices**: NO
-  * Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don't use unless necessary
+  * Ensures ExitBootServices calls succeeds even when the Memory Map has changed, don't use unless necessary
 * **ProtectMemoryRegions**: NO
-  * Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares
+  * Needed for fixing artifacts and sleep-wake issues, generally only needed on very old firmwares
 * **ProtectSecureBoot**: NO
   * Fixes Secure Boot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
@@ -400,7 +400,7 @@ Recommended to leave enabled for best security practices
 
 * Enables writing to flash memory for all added variables.
 
-## Platforminfo
+## PlatformInfo
 
 ![PlatformInfo](/images/config/config.plist/ivy-bridge/smbios.png)
 
@@ -411,7 +411,7 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 * `iMac13,1` - this is used for computers utilizing the iGPU for displaying.
 * `iMac13,2` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
 
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extras/smbios.md)
+**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
@@ -432,7 +432,7 @@ The `Serial` part gets copied to Generic -> SystemSerialNumber.
 
 The `Board Serial` part gets copied to Generic -> MLB.
 
-The `SmUUID` part gets copied toto Generic -> SystemUUID.
+The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
 
@@ -442,7 +442,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 **Automatic**: YES
 
-* Generates Platforminfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+* Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
 **Generic**:
 

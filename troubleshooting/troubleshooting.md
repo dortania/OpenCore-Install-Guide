@@ -65,9 +65,9 @@ This section is for those having issues booting either OpenCore, macOS or having
 	 * [Windows Startup Disk can't see APFS drives](/troubleshooting/troubleshooting.md#windows-startup-disk-cant-see-apfs-drives)
 	 * [Incorrect resolution with OpenCore](/troubleshooting/troubleshooting.md#incorrect-resolution-with-opencore)
 	 * [No temperature/fan sensor output](/troubleshooting/troubleshooting.md#no-temperaturefan-sensor-output)
-	 * [Can't find Windows/Bootcamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windowsbootcamp-drive-in-picker)
+	 * [Can't find Windows/BootCamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windowsbootcamp-drive-in-picker)
 	 * ["You can't change the startup disk to the selected disk" error](/troubleshooting/troubleshooting.md#you-cant-change-the-startup-disk-to-the-selected-disk-error)
-	 * [Booting Windows results in Bluescreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
+	 * [Booting Windows results in BlueScreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
 	 * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed---already-started)
 	 * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning--unresolved)
 	 * [No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors
@@ -240,7 +240,7 @@ Missing or incorrect `Executable path`
 
 * CFG-Lock not off(Intel Users only), couple solutions:
   * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
-  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment repectively. Not recommended long term solution as this can cause instability.
+  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.
 * AMD kernel patches aren't working(AMD Users only):
   * Either outdated or missing kernel patches
 * Incompatible keyboard driver:
@@ -287,7 +287,7 @@ So with OpenCore, there's some extra security checks added around ACPI files, sp
 
 The `Length` and `checksum` value is what we care about, so if our SSDT is actually 347 bytes then we want to change `Length` to `0x0000015B (347)`(the `015B` is in HEX)
 
-Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's copy of [maciASL](https://github.com/acidanthera/MaciASL/releases) and remaking the SSDT
+Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's copy of [MaciASL](https://github.com/acidanthera/MaciASL/releases) and remaking the SSDT
 
 ## Booting OpenCore reboots to BIOS
 
@@ -325,7 +325,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
-Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names incude:
+Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names include:
 
 * `apfs_module_start...`,
 * `Waiting for Root device`,
@@ -335,7 +335,7 @@ Well this general area is where a lot of PCI devices are first setup and configu
 The main places to check:
 
 * **Missing EC patch**:
-  * For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
+  * For desktops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
   * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
   * Laptop users will need to rename their main EC: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
     * **Do not use SSDT-EC on a laptop**
@@ -354,7 +354,7 @@ The main places to check:
 
 * **RTC Missing**:
   * Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
-  * Some drunk firmware writer at HP also disabled the RTC on the HP 250 g6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
+  * Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
 
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 
@@ -380,7 +380,7 @@ For AMD users with missing ports in DSDT, you're gonna have to try all the ports
 
 ## macOS installer in Russian
 
-Default sample config is in russian because slavs rule the Hackintosh world, check your `prev-lang:kbd` value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+Default sample config is in Russian because slavs rule the Hackintosh world, check your `prev-lang:kbd` value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
 
 You may also need to reset NVRAM in the boot picker as well
 
@@ -438,7 +438,7 @@ Generally seen as an issue surrounding the prelinked kernel, specifically that m
 
 ## Kernel Panic `AppleIntelMCEReporter`
 
-With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) to both EFI/OC/Kexts and config.plist -> Kernel -> Add
+With macOS Catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) to both EFI/OC/Kexts and config.plist -> Kernel -> Add
 
 ## Kernel Panic `AppleIntelCPUPowerManagement`
 
@@ -456,7 +456,7 @@ Follow directions here after UPDATE 2: [Fix Data and Privacy reboot](https://www
 
 This is a common example of screwed up TSC, for most system add [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
 
-For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
+For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
 ![](/images/troubleshooting/troubleshooting-md/asus-tsc.jpg)
 
@@ -519,7 +519,7 @@ Default           |  Show All Devices(Cmd+2)
 ## Broken iMessage and Siri
 
 * En0 device not setup as `Built-in`, couple ways to fix:
-  * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PCIRooth path if you're having issues with gfxutil. **Recommended method**
+  * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PciRoot path if you're having issues with gfxutil. **Recommended method**
   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
 
 ![](/images/troubleshooting/troubleshooting-md/en0-built-in.png)
@@ -571,13 +571,13 @@ So with AMD, whenever Apple calls CPU specific functions the app will either not
 * Adobe Products don't always work
   * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
   * Do note these fixes just disables functionality, they're not really fixes
-* Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, Vmware)
+* Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, VMware)
   * VirtualBox works fine as it doesn't use AppleHV
   * VMware 10 and older can work as well
   * Parallels 13.1.0 and older are known to work as well
 * Docker broken
   * Docker toolbox is the only solution as it's based off of VirtualBox, many features are unavailable with this version
-* Xcode AppleWatch simulator is broken in Catalina
+* Xcode Apple Watch simulator is broken in Catalina
   * Mojave works fine
 * IDA Pro won't install
   * There's an Intel specific check in the installer, app itself is likely fine
@@ -611,9 +611,9 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 * [Windows Startup Disk can't see APFS drives](/troubleshooting/troubleshooting.md#windows-startup-disk-cant-see-apfs-drives)
 * [Incorrect resolution with OpenCore](/troubleshooting/troubleshooting.md#incorrect-resolution-with-opencore)
 * [No temperature/fan sensor output](/troubleshooting/troubleshooting.md#no-temperaturefan-sensor-output)
-* [Can't find Windows/Bootcamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windowsbootcamp-drive-in-picker)
+* [Can't find Windows/BootCamp drive in picker](/troubleshooting/troubleshooting.md#cant-find-windowsbootcamp-drive-in-picker)
 * ["You can't change the startup disk to the selected disk" error](/troubleshooting/troubleshooting.md#you-cant-change-the-startup-disk-to-the-selected-disk-error)
-* [Booting Windows results in Bluescreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
+* [Booting Windows results in BlueScreen or Linux crashes](/troubleshooting/troubleshooting.md#booting-windows-results-in-bluescreen-or-linux-crashes)
 * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed---already-started)
 * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning--unresolved)
 * [No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors)
@@ -658,7 +658,7 @@ Make sure `Add Python to PATH`
 
 ## Windows Startup Disk can't see APFS drives
 
-* Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: [CorpNewt's brigadier](https://github.com/corpnewt/brigadier)
+* Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: [CorpNewt's brigadier](https://github.com/corpnewt/brigadier)
 
 ## Incorrect resolution with OpenCore
 
@@ -683,7 +683,7 @@ For iStat, you'll have to wait for an update. For AMD users, you can use either:
 * FileVault support requires more work with FakeSMC
 * Make sure no other SMC kexts are present, specifically those from [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
 
-## Can't find Windows/Bootcamp drive in picker
+## Can't find Windows/BootCamp drive in picker
 
 So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you'll have to find other means to make an installer(Google's your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you'll need to format the drive you want to install onto with DiskUtility. See the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) on best practices
 
@@ -700,7 +700,7 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 
 ![](/images/troubleshooting/troubleshooting-md/error.png)
 
-## Booting Windows results in Bluescreen or Linux crashes
+## Booting Windows results in BlueScreen or Linux crashes
 
 This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
 

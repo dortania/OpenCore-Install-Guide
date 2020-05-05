@@ -35,7 +35,7 @@ Now in our config.plist, we have 2 things we need to fix:
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI:
 
-![Credit to Vit9696](/images/extras/gui-md/gui.png)
+![Credit to vit9696](/images/extras/gui-md/gui.png)
 
 ## Setting up Boot-chime with AudioDxe
 
@@ -64,7 +64,7 @@ So to start, we'll need a couple things:
   * To find yours:
     * Check [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) -> HDEF -> AppleHDAController -> IOHDACodecDevice and see the `IOHDACodecAddress` property
     * ex: `0x0`
-      * Can also check via termina(Note if multiple show up, use the vendor ID to find the right device)l:
+      * Can also check via terminal(Note if multiple show up, use the vendor ID to find the right device)l:
 
  ```text
  ioreg -rxn IOHDACodecDevice | grep VendorID   // List all possible devices

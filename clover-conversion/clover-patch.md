@@ -1,6 +1,6 @@
 # Converting common Kernel and Kext patches
 
-Little section mentioning common Kernel and Kexts patches that have been absorbed into OpenCore or other kexts. This list is not complete so any that may have been forgotten can be mentioned by opening a new [issue](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/issues). Any help is much appreciated
+Little section mentioning common Kernel and Kexts patches that have been absorbed into OpenCore or other kexts. This list is not complete so any that may have been forgotten can be mentioned by opening a new [issue](https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/issues). Any help is much appreciated
 
 ## Kernel Patches
 

@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.8
 
-So you see the new fancy Opencore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with Opencore but many do not, here we'll be going over what you can bring over and what you cannot.
+So you see the new fancy OpenCore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with OpenCore but many do not, here we'll be going over what you can bring over and what you cannot.
 
 To get started, we have some resources that will aid you:
 
@@ -37,10 +37,10 @@ Users of Clover's Preference Pane will also need to remove these:
 
 # Cleaning the Clover Junk in your hardware
 
-The other thing that Clover may have hidden from you is NVRAM variables, this is bad as Opencore won't overwrite variables unless explicitly told via the `Block` feature found under `NVRAM -> Block`. To fix this, we'll need to clear then via Opencore's `ClearNvram` feature.
+The other thing that Clover may have hidden from you is NVRAM variables, this is bad as OpenCore won't overwrite variables unless explicitly told via the `Block` feature found under `NVRAM -> Block`. To fix this, we'll need to clear then via OpenCore's `ClearNvram` feature.
 
 In you config.plist:
 
 * `Misc -> Security -> AllowNvramReset -> True`
 
-And on your initial boot of Opencore, select `ClearNvram` boot option. This will wipe everything and reboot the system when finished.
+And on your initial boot of OpenCore, select `ClearNvram` boot option. This will wipe everything and reboot the system when finished.

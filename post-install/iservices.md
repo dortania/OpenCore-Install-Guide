@@ -26,19 +26,12 @@ Tip: `iMacPro1,1 10` will print 10 serials, this will save you some time on gene
 
 Now enter the serial into the [Apple Check Coverage page](https://checkcoverage.apple.com/), you will get 1 of 3 responses:
 
-**"We’re sorry, but this serial number isn’t valid. Please check your information and try again.":**
 
-![](/images/post-install/iservices-md/not-valid.png)
+We’re sorry, but this serial number isn’t valid |  Valid Purchase date | Purchase Date not Validated
+:-------------------------:|:-------------------------:|:-------------------------:
+![](/images/post-install/iservices-md/not-valid.png) | ![](/images/post-install/iservices-md/valid.png) |  ![](/images/post-install/iservices-md/no-purchase.png)
 
-**Valid Purchase date:**
-
-![](/images/post-install/iservices-md/valid.png)
-
-**Purchase Date not Validated:**
-
-![](/images/post-install/iservices-md/no-purchase.png)
-
-This last one is what we're after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -> PlatformInfo -> Add:
+This last one is what we're after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -> PlatformInfo -> Generic:
 
 * Type = SystemProductName
 * Serial = SystemSerialNumber
@@ -74,11 +67,11 @@ Now head under the PCI tab of Hackintool and export your PCI DeviceProperties, t
 
 ![Export PCI address](/images/post-install/iservices-md/hackintool-export.png)
 
-Now search through the pcidevices.plist and find the PCIRoot of your ethernet controller. For us, this would be `PciRoot(0x0)/Pci(0x1f,0x6)`
+Now search through the pcidevices.plist and find the PciRoot of your ethernet controller. For us, this would be `PciRoot(0x0)/Pci(0x1f,0x6)`
 
-![Copy PCIRoot](/images/post-install/iservices-md/find-en0.png)
+![Copy PciRoot](/images/post-install/iservices-md/find-en0.png)
 
-Now with the PCIRoot, go into your config.plist -> DeviceProperties -> Add and apply the property of `built-in` with type `Data` and value `01`
+Now with the PciRoot, go into your config.plist -> DeviceProperties -> Add and apply the property of `built-in` with type `Data` and value `01`
 
 ![Add to config.plist](/images/post-install/iservices-md/config-built-in.png)
 

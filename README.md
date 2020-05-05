@@ -22,7 +22,7 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
 * Future development for [AptioMemoryFix](https://github.com/acidanthera/AptioFixPkg) is directly tied to OpenCore, specifically being absorbed into OpenCore itself with the OpenRuntime.efi being used as an extension.
 * UEFI and Legacy boot modes are supported
-* More sophisticated patching such as mask patching means macOS updates have very little chance of breaking AMD systems, with [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore) supporting all versions of High Sierra, Mojave and Catalina. **All future AMD OSX development is tied to Opencore**, so for 10.15.2+ you'll need OpenCore
+* More sophisticated patching such as mask patching means macOS updates have very little chance of breaking AMD systems, with [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore) supporting all versions of High Sierra, Mojave and Catalina. **All future AMD OSX development is tied to OpenCore**, so for 10.15.2+ you'll need OpenCore
 
 ### OpenCore Tips
 

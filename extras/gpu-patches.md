@@ -19,7 +19,7 @@ So to get started I'll assume you've already done basic framebuffer patches in y
 
 ![](/images/extras/gpu-patches-md/prereq.png)
 
-Now that we're prepped, we can start looking into busID patching. Checking the dumps on [Insanelymac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID(Desktop UHD 630):
+Now that we're prepped, we can start looking into busID patching. Checking the dumps on [InsanelyMac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID(Desktop UHD 630):
 
 ```text
 ID: 3E9B0007, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00801302
