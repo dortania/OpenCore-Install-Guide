@@ -77,7 +77,7 @@ This section is mainly relevant for laptops to save some headaches when followin
 | MacBookPro16,1 | Hexa/Octa Core 45w | iGPU: UHD 630 + dGPU: 5300/5500M | 15" |
 | MacBookPro15,2 | Quad Core 15w | iGPU: Iris 655 | 13" |
 
-## Cometlake (10th Gen)
+## Comet Lake (10th Gen)
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |

@@ -1,4 +1,4 @@
-# Converting common properties from Clover to Opencore
+# Converting common properties from Clover to OpenCore
 
 * Supported version: 0.5.8
 
@@ -6,7 +6,7 @@ So this little(well not so little as I reread this...) page is for users who are
 
 # Kexts and Firmware drivers
 
-See [Kexts and Firmware drivers](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/clover-conversion/clover-efi.md).
+See [Kexts and Firmware drivers](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion/clover-efi.md).
 
 # Acpi
 
@@ -51,6 +51,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * NVMe patches: [NVMeFix](https://github.com/acidanthera/NVMeFix) fixes power management
   * change PXSX to ANS1
   * change PXSX to ANS2
+* Airport/Wifi Patches: [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
+  * change PXSX to ARPT
 * Other purely cosmetic patches:
   * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)
   * change PC00 to PCIO
@@ -66,7 +68,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * [Andrey's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2678273)
 
 * DisableASPM:
-  * `DeviceProperties -> Add -> PCIRoot... -> pci-aspm-default | Data | <00>`
+  * `DeviceProperties -> Add -> PciRoot... -> pci-aspm-default | Data | <00>`
 
 * HaltEnabler:
   * `ACPI -> Quirks -> FadtEnableReset -> YES`
@@ -98,7 +100,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * `Kernel -> Quirks -> ExternalDiskIcons -> YES`
 
 * **FixADP1**:
-  * Renames device `AC0_` to `ADP1`, see [Rename-SSDT](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
+  * Renames device `AC0_` to `ADP1`, see [Rename-SSDT](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
   * Also injects `Name (_PRW, Package (0x02) {0x1C,0x03})` into the device if not present. [Source](https://github.com/CloverHackyColor/CloverBootloader/blob/81f2b91b1552a4387abaa2c48a210c63d5b6233c/rEFIt_UEFI/Platform/FixBiosDsdt.cpp#L1677-L1692)
 
 * **FixRTC**:
@@ -112,7 +114,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * **AddIMEI**:
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
   * WhateverGreen will also handle fixing IMEI naming
-  * For SandyBridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
+  * For Sandy Bridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
 
 * **FixIntelGfx**:
   * WhateverGreen handles this
@@ -131,8 +133,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this though HEDT systems will need to manually make theirs.
   * See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
 
-* **Generate P States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For SandyBridge and IvyBridge)
-* **Generate C States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For SandyBridge and IvyBridge)
+* **Generate P States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For Sandy Bridge and IvyBridge)
+* **Generate C States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For Sandy Bridge and IvyBridge)
 
 # Boot
 
@@ -181,12 +183,12 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Type**:
 
-* `Platforminfo -> SMBIOS -> ProcessorType`
+* `PlatformInfo -> SMBIOS -> ProcessorType`
 * See [EfiPkg](https://github.com/acidanthera/EfiPkg/blob/master/Include/IndustryStandard/AppleSmBios.h) for all supported values
 
 **HWPEnable**: Better alternative is to properly manage `MSR 0x770` with [HWPEnable](https://github.com/headkaze/HWPEnable)
 
-**QEMU**: Proper VM/KVM support is implemented in Opencore
+**QEMU**: Proper VM/KVM support is implemented in OpenCore
 
 **TurboDisable**: Better alternative is to control your frequencies with [CPUFriend](https://github.com/acidanthera/CPUFriend) or [ssdtPRGen](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
@@ -195,33 +197,33 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **USB**:
 
 * FixOwnership: `UEFI -> Quirk -> ReleaseUsbOwnership`
-* ClockID: `DeviceProperties -> Add -> PCIRoot... -> AAPL,clock-id`
-* HighCurrent: `DeviceProperties -> Add -> PCIRoot... -> AAPL, HighCurrent`
+* ClockID: `DeviceProperties -> Add -> PciRoot... -> AAPL,clock-id`
+* HighCurrent: `DeviceProperties -> Add -> PciRoot... -> AAPL, HighCurrent`
   * Irrelevant for OS X 10.11 and newer
   * Newer variant is either PowerProperties defined in `IOUSBHostFamily.kext -> AppleUSBHostPlatformProperties` or added with a USBX SSDT for Skylake SMBIOS and newer
 
 **Audio**:
 
-For the following, you will need to know your PCIRoot for your audio controller and its name(commonly known as HDEF but also HDAS, HDAU and such), this can be found with [gfxutil](https://github.com/acidanthera/gfxutil/releases):
+For the following, you will need to know your PciRoot for your audio controller and its name(commonly known as HDEF but also HDAS, HDAU and such), this can be found with [gfxutil](https://github.com/acidanthera/gfxutil/releases):
 
 ```
 path/to/gfxutil -f HDEF
 ```
 
-* Inject: `DeviceProperties -> Add -> PCIRoot... -> layout-id`
-* AFGLowPowerState: `DeviceProperties -> Add -> PCIRoot... -> AFGLowPowerState -> <01000000>`
+* Inject: `DeviceProperties -> Add -> PciRoot... -> layout-id`
+* AFGLowPowerState: `DeviceProperties -> Add -> PciRoot... -> AFGLowPowerState -> <01000000>`
 * ResetHDA: [JackFix](https://github.com/fewtarius/jackfix)(well to be specific it's `jackfix.sh`)
 
 **Add Properties**:
 
-* No equivalent, need to specify with a PCIRoot path
+* No equivalent, need to specify with a PciRoot path
 
 **Properties**:
 
 * `DeviceProperties -> Add`
 
 **FakeID**:
-For the following, you will need to know your PCIRoot for your device and apply their properties with `DeviceProperties -> Add`, PCIRoot can be found with [gfxutil](https://github.com/acidanthera/gfxutil/releases)
+For the following, you will need to know your PciRoot for your device and apply their properties with `DeviceProperties -> Add`, PciRoot can be found with [gfxutil](https://github.com/acidanthera/gfxutil/releases)
 
 * **USB**
   * `device-id`
@@ -277,31 +279,31 @@ Just don't add your drivers to `UEFI -> Drivers`
 
 **InjectIntel**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> Vendor`
-* `DeviceProperties -> Add -> PCIRoot... -> deviceID`
+* `DeviceProperties -> Add -> PciRoot... -> Vendor`
+* `DeviceProperties -> Add -> PciRoot... -> deviceID`
 
 **InjectAti**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> deviceID`
-* `DeviceProperties -> Add -> PCIRoot... -> Connectors`
+* `DeviceProperties -> Add -> PciRoot... -> deviceID`
+* `DeviceProperties -> Add -> PciRoot... -> Connectors`
 
 **InjectNvidia**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> DeviceID`
-* `DeviceProperties -> Add -> PCIRoot... -> Family`
+* `DeviceProperties -> Add -> PciRoot... -> DeviceID`
+* `DeviceProperties -> Add -> PciRoot... -> Family`
 
 **FakeIntel**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> device-id`
-* `DeviceProperties -> Add -> PCIRoot... -> vendor-id`
+* `DeviceProperties -> Add -> PciRoot... -> device-id`
+* `DeviceProperties -> Add -> PciRoot... -> vendor-id`
 
 **FakeAti**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> device-id`
-* `DeviceProperties -> Add -> PCIRoot... -> ATY,DeviceID`
-* `DeviceProperties -> Add -> PCIRoot... -> @0,compatible`
-* `DeviceProperties -> Add -> PCIRoot... -> vendor-id`
-* `DeviceProperties -> Add -> PCIRoot... -> ATY,VendorID`
+* `DeviceProperties -> Add -> PciRoot... -> device-id`
+* `DeviceProperties -> Add -> PciRoot... -> ATY,DeviceID`
+* `DeviceProperties -> Add -> PciRoot... -> @0,compatible`
+* `DeviceProperties -> Add -> PciRoot... -> vendor-id`
+* `DeviceProperties -> Add -> PciRoot... -> ATY,VendorID`
 
 **Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seems to fail sometimes when trying to spoof a GPU: [Renaming GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/Sample.dsl) in the WhateverGreen docs
@@ -312,18 +314,18 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **Dual Link**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> AAPL00,DualLink`
+* `DeviceProperties -> Add -> PciRoot... -> AAPL00,DualLink`
   * 1 -> `<01000000>`
   * 0 -> `<00000000>`
 
 **NVCAP**
 
-* `DeviceProperties -> Add -> PCIRoot... -> NVCAP`
-* See [NVCAP-settings](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/NVCAP-settings.png) for more details, image courtesy of Clover manual
+* `DeviceProperties -> Add -> PciRoot... -> NVCAP`
+* See [NVCAP-settings](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/NVCAP-settings.png) for more details, image courtesy of Clover manual
 
 **display-cfg**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> @0,display-cfg`
+* `DeviceProperties -> Add -> PciRoot... -> @0,display-cfg`
 * See fassl's post on the matter: [nVidia injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
 
 **LoadVBios**:
@@ -334,13 +336,13 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **NvidiaGeneric**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> model | string | Add the GPU name`
+* `DeviceProperties -> Add -> PciRoot... -> model | string | Add the GPU name`
 
 **NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/spoof)
 
 **NvidiaNoEFI**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> NVDA,noEFI | Boolean | True`
+* `DeviceProperties -> Add -> PciRoot... -> NVDA,noEFI | Boolean | True`
 * See FredWst' comment for more info: [GT 640 scramble](https://www.insanelymac.com/forum/topic/306156-clover-problems-and-solutions/?do=findComment&comment=2443062)
 
 **ig-platform-id**:
@@ -349,11 +351,11 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **BootDisplay**:
 
-* `DeviceProperties -> Add -> PCIRoot... ->  @0,AAPL,boot-display`
+* `DeviceProperties -> Add -> PciRoot... ->  @0,AAPL,boot-display`
 
 **RadeonDeInit**:
 
-* [Radeon-Denit-SSDT](https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
+* [Radeon-Denit-SSDT](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
 * Do note that this is meant for GFX0, adjust for your system
 
 # Kernel and Kext Patches
@@ -397,7 +399,7 @@ An odd quirk for Dell systems running APTIO V(or just skylake, Slice doesn't rea
 
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
 
-For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transfered over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to Opencore:
+For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transfered over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to OpenCore:
 
 ```
 Base: _xcpm_bootstrap
@@ -415,7 +417,7 @@ ReplaceMask: 0000FF0000
 Skip: 0
 ```
 
-[Source](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/issues/32)
+[Source](https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/issues/32)
 
 For Low end Haswell+ like Celerons, please see here for recommended patches: [Bugtracker Issues 365](https://github.com/acidanthera/bugtracker/issues/365)
 
@@ -505,13 +507,13 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **Slots AAPL Injection**:
 
-* `DeviceProperties -> Add -> PCIRoot... -> APPL,slot-name | string | Add slot`
+* `DeviceProperties -> Add -> PciRoot... -> APPL,slot-name | string | Add slot`
 
 # System Parameters
 
 **CustomUUID**:
 
-* Heavily deprecated and not recommended even on Clover, no equivalent on Opencore
+* Heavily deprecated and not recommended even on Clover, no equivalent on OpenCore
 * More info on why: [Hardware UUID injection for opencore #711](https://github.com/acidanthera/bugtracker/issues/711)
 
 **InjectSystemID**:
@@ -534,7 +536,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **ExposeSysVariables**:
 
-* Just add your SMBIOS properties under `Platforminfo`
+* Just add your SMBIOS properties under `PlatformInfo`
 * Confusing quirk tbh, it's not even mentioned in more recent versions of the Clover docs on AppleLife
 
 **NvidiaWeb**:

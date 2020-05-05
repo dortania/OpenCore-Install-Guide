@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.8
 
-Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on Opencore, firmware drivers are a bit different.
+Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on OpenCore, firmware drivers are a bit different.
 
 **Supported ones:**
 
@@ -32,7 +32,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * VBoxIso9600.efi
 * XhciDxe.efi
 
-**Drivers provided/merged into Opencore and so are no longer needed:**
+**Drivers provided/merged into OpenCore and so are no longer needed:**
 
 * ApfsDriverLoader.efi
 * AppleEvent.efi
@@ -69,4 +69,4 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 
 # AptioMemoryFix
 
-Well before we actually get started on converting the Clover config, we must first talk about converting from AptioMemoryFix. The main thing to note is that it's inside of OpenCore with OpenRuntime being an extension, this means that AptioMemoryFix and that there's also a lot more settings to choose from. Please see the hardware specific sections of the OpenCore guide to know what booter settings your system may require(HEDT like X99 and X299 should look to the closest CPU like Skylake-X should refer to Skylake guide and **read the comments** as they mention specifics for your system).
+Well before we actually get started on converting the Clover config, we must first talk about converting from AptioMemoryFix. The main thing to note is that it's inside of OpenCore with OpenRuntime being an extension, this means that AptioMemoryFix and that there's also a lot more settings to choose from. Please see the hardware specific sections of the OpenCore guide to know what Booter settings your system may require(HEDT like X99 and X299 should look to the closest CPU like Skylake-X should refer to Skylake guide and **read the comments** as they mention specifics for your system).

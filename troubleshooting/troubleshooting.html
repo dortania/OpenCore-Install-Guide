@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Mon May 04 2020 18:27:55 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue May 05 2020 04:50:16 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -825,9 +825,9 @@
 <li><a href="troubleshooting.html#windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</a></li>
 <li><a href="troubleshooting.html#incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</a></li>
 <li><a href="troubleshooting.html#no-temperaturefan-sensor-output">No temperature/fan sensor output</a></li>
-<li><a href="troubleshooting.html#cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/Bootcamp drive in picker</a></li>
+<li><a href="troubleshooting.html#cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/BootCamp drive in picker</a></li>
 <li><a href="troubleshooting.html#you-cant-change-the-startup-disk-to-the-selected-disk-error">&quot;You can&apos;t change the startup disk to the selected disk&quot; error</a></li>
-<li><a href="troubleshooting.html#booting-windows-results-in-bluescreen-or-linux-crashes">Booting Windows results in Bluescreen or Linux crashes</a></li>
+<li><a href="troubleshooting.html#booting-windows-results-in-bluescreen-or-linux-crashes">Booting Windows results in BlueScreen or Linux crashes</a></li>
 <li><a href="troubleshooting.html#booting-windows-error-ocb-startimage-failed---already-started">Booting Windows error: <code>OCB: StartImage failed - Already started</code></a></li>
 <li><a href="troubleshooting.html#iasl-warning--unresolved">iASL warning, # unresolved</a></li>
 <li>[No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors</li>
@@ -980,7 +980,7 @@
 <ul>
 <li>CFG-Lock not off(Intel Users only), couple solutions:<ul>
 <li><a href="../extras/msr-lock.html">Patch your MSR E2</a>(Recommended solution)</li>
-<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment repectively. Not recommended long term solution as this can cause instability.</li>
+<li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagment respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 </li>
 <li>AMD kernel patches aren&apos;t working(AMD Users only):<ul>
@@ -1026,7 +1026,7 @@
 *     Compiler ID      &quot;INTL&quot;
 *     Compiler Version 0x20190509 (538510601)
 </code></pre><p>The <code>Length</code> and <code>checksum</code> value is what we care about, so if our SSDT is actually 347 bytes then we want to change <code>Length</code> to <code>0x0000015B (347)</code>(the <code>015B</code> is in HEX)</p>
-<p>Best way to actually fix this is to grab a newer copy of iASL or Acidanthera&apos;s copy of <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">maciASL</a> and remaking the SSDT</p>
+<p>Best way to actually fix this is to grab a newer copy of iASL or Acidanthera&apos;s copy of <a href="https://github.com/acidanthera/MaciASL/releases" target="_blank">MaciASL</a> and remaking the SSDT</p>
 <h2 id="booting-opencore-reboots-to-bios"><a name="booting-opencore-reboots-to-bios" class="plugin-anchor" href="#booting-opencore-reboots-to-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Booting OpenCore reboots to BIOS</h2>
 <ul>
 <li>Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)</li>
@@ -1061,7 +1061,7 @@
 <li><a href="troubleshooting.html#mediakit-reports-not-enough-space">MediaKit reports not enough space</a></li>
 </ul>
 <h2 id="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><a name="stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy" class="plugin-anchor" href="#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>RTC...</code>, <code>PCI Configuration Begins</code>, <code>Previous Shutdown...</code>, <code>HPET</code>, <code>HID: Legacy...</code></h2>
-<p>Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names incude:</p>
+<p>Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names include:</p>
 <ul>
 <li><code>apfs_module_start...</code>,</li>
 <li><code>Waiting for Root device</code>,</li>
@@ -1071,7 +1071,7 @@
 <p>The main places to check:</p>
 <ul>
 <li><strong>Missing EC patch</strong>:<ul>
-<li>For dekstops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -&gt; Add, <strong>double check it&apos;s enabled.</strong></li>
+<li>For desktops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -&gt; Add, <strong>double check it&apos;s enabled.</strong></li>
 <li>If you don&apos;t have one, grab it here: <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a></li>
 <li>Laptop users will need to rename their main EC: <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a><ul>
 <li><strong>Do not use SSDT-EC on a laptop</strong></li>
@@ -1105,7 +1105,7 @@
 <li><p><strong>RTC Missing</strong>:</p>
 <ul>
 <li>Commonly found on 300 series and X299/CasacdeLake-X refresh motherboards, caused by the RTC clock being disabled by default. See <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a> on creating an SSDT-AWAC.aml</li>
-<li>Some drunk firmware writer at HP also disabled the RTC on the HP 250 g6 with no way to actually re-enable it, for users cursed with such hardware you&apos;ll need to create a fake RTC clock for macOS to play with:</li>
+<li>Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it, for users cursed with such hardware you&apos;ll need to create a fake RTC clock for macOS to play with:</li>
 </ul>
 </li>
 </ul>
@@ -1134,7 +1134,7 @@
 <p>Another possible issue is missing USB ports in your DSDT, macOS isn&apos;t great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won&apos;t be able to find it. To fix this we use <a href="https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/" target="_blank">USBInjectAll</a> to fix booting, note that this <strong>only works on Intel USB Chipsets</strong> and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)</p>
 <p>For AMD users with missing ports in DSDT, you&apos;re gonna have to try all the ports in your system and pray, generally 3.1 AsMedia ports work without issue.</p>
 <h2 id="macos-installer-in-russian"><a name="macos-installer-in-russian" class="plugin-anchor" href="#macos-installer-in-russian"><i class="fa fa-link" aria-hidden="true"></i></a>macOS installer in Russian</h2>
-<p>Default sample config is in russian because slavs rule the Hackintosh world, check your <code>prev-lang:kbd</code> value under <code>NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82</code>. Set to <code>656e2d55533a30</code> for American: en-US:0 and a full list can be found in <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></p>
+<p>Default sample config is in Russian because slavs rule the Hackintosh world, check your <code>prev-lang:kbd</code> value under <code>NVRAM -&gt; Add -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82</code>. Set to <code>656e2d55533a30</code> for American: en-US:0 and a full list can be found in <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt" target="_blank">AppleKeyboardLayouts.txt</a></p>
 <p>You may also need to reset NVRAM in the boot picker as well</p>
 <p>Still didn&apos;t work? Well time for the big guns. We&apos;ll force remove that exact property and let OpenCore rebuild it:</p>
 <p><code>NVRAM -&gt; Block -&gt; 7C436110-AB2A-4BBB-A880-FE41995C9F82 -&gt; Item 0</code> then set it Type <code>String</code> and Value <code>prev-lang:kbd</code></p>
@@ -1178,7 +1178,7 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <h2 id="kernel-panic-cannot-perform-kext-summary"><a name="kernel-panic-cannot-perform-kext-summary" class="plugin-anchor" href="#kernel-panic-cannot-perform-kext-summary"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>Cannot perform kext summary</code></h2>
 <p>Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don&apos;t.</p>
 <h2 id="kernel-panic-appleintelmcereporter"><a name="kernel-panic-appleintelmcereporter" class="plugin-anchor" href="#kernel-panic-appleintelmcereporter"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>AppleIntelMCEReporter</code></h2>
-<p>With macOS catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add <a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a> to both EFI/OC/Kexts and config.plist -&gt; Kernel -&gt; Add</p>
+<p>With macOS Catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add <a href="https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip" target="_blank">AppleMCEReporterDisabler</a> to both EFI/OC/Kexts and config.plist -&gt; Kernel -&gt; Add</p>
 <h2 id="kernel-panic-appleintelcpupowermanagement"><a name="kernel-panic-appleintelcpupowermanagement" class="plugin-anchor" href="#kernel-panic-appleintelcpupowermanagement"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic <code>AppleIntelCPUPowerManagement</code></h2>
 <p>This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX&apos;s Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from <code>Kernel -&gt; Add</code> and <code>EFI/OC/Kexts</code> then enable <code>DummyPowerManagement</code> under <code>Kernel -&gt; Quirks</code></p>
 <h2 id="frozen-in-the-macos-installer-after-30-seconds"><a name="frozen-in-the-macos-installer-after-30-seconds" class="plugin-anchor" href="#frozen-in-the-macos-installer-after-30-seconds"><i class="fa fa-link" aria-hidden="true"></i></a>Frozen in the macOS installer after 30 seconds</h2>
@@ -1187,7 +1187,7 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <p>Follow directions here after UPDATE 2: <a href="https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&amp;comment=2658085" target="_blank">Fix Data and Privacy reboot</a></p>
 <h2 id="macos-frozen-right-before-login"><a name="macos-frozen-right-before-login" class="plugin-anchor" href="#macos-frozen-right-before-login"><i class="fa fa-link" aria-hidden="true"></i></a>macOS frozen right before login</h2>
 <p>This is a common example of screwed up TSC, for most system add <a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a></p>
-<p>For Skylake-X, many firmwares including Asus and EVGA won&apos;t write to all cores. So we&apos;ll need to reset the TSC on cold boot and wake with <a href="https://github.com/interferenc/TSCAdjustReset" target="_blank">TSCAdjustReset</a>. Compiled version can be found here: <a href="https://github.com/dortania/Opencore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip" target="_blank">TSCAdjustReset.kext</a>. Note that you <strong>must</strong> open up the kext(ShowPackageContents in finder, <code>Contents -&gt; Info.plist</code>) and change the Info.plist -&gt; <code>IOKitPersonalities -&gt; IOPropertyMatch -&gt; IOCPUNumber</code> to the number of CPU threads you have starting from <code>0</code>(i9 7980xe 18 core would be <code>35</code> as it has 36 threads total)</p>
+<p>For Skylake-X, many firmwares including Asus and EVGA won&apos;t write to all cores. So we&apos;ll need to reset the TSC on cold boot and wake with <a href="https://github.com/interferenc/TSCAdjustReset" target="_blank">TSCAdjustReset</a>. Compiled version can be found here: <a href="https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip" target="_blank">TSCAdjustReset.kext</a>. Note that you <strong>must</strong> open up the kext(ShowPackageContents in finder, <code>Contents -&gt; Info.plist</code>) and change the Info.plist -&gt; <code>IOKitPersonalities -&gt; IOPropertyMatch -&gt; IOCPUNumber</code> to the number of CPU threads you have starting from <code>0</code>(i9 7980xe 18 core would be <code>35</code> as it has 36 threads total)</p>
 <p><img src="../images/troubleshooting/troubleshooting-md/asus-tsc.jpg" alt=""></p>
 <h2 id="keyboard-works-but-trackpad-does-not"><a name="keyboard-works-but-trackpad-does-not" class="plugin-anchor" href="#keyboard-works-but-trackpad-does-not"><i class="fa fa-link" aria-hidden="true"></i></a>Keyboard works but trackpad does not</h2>
 <p>Make sure that VoodooInput is listed <em>before</em> VoodooPS2 and VoodooI2C kexts in your config.plist.</p>
@@ -1255,7 +1255,7 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <h2 id="broken-imessage-and-siri"><a name="broken-imessage-and-siri" class="plugin-anchor" href="#broken-imessage-and-siri"><i class="fa fa-link" aria-hidden="true"></i></a>Broken iMessage and Siri</h2>
 <ul>
 <li>En0 device not setup as <code>Built-in</code>, couple ways to fix:<ul>
-<li>Find PCI path for your NIC with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>(ie: <code>ethernet</code>, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of <code>built-in</code> with the value of <code>01</code> and type <code>Data</code>. Hackintool can also grab the PCIRooth path if you&apos;re having issues with gfxutil. <strong>Recommended method</strong></li>
+<li>Find PCI path for your NIC with <a href="https://github.com/acidanthera/gfxutil/releases" target="_blank">gfxutil</a>(ie: <code>ethernet</code>, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of <code>built-in</code> with the value of <code>01</code> and type <code>Data</code>. Hackintool can also grab the PciRoot path if you&apos;re having issues with gfxutil. <strong>Recommended method</strong></li>
 <li><a href="https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/" target="_blank">NullEthernet.kext</a> + <a href="https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml" target="_blank">SSDT-RMNE</a>. <strong>Only recommended when first solution doesn&apos;t work</strong></li>
 </ul>
 </li>
@@ -1294,7 +1294,7 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <li>Do note these fixes just disables functionality, they&apos;re not really fixes</li>
 </ul>
 </li>
-<li>Virtual Machine running off of AppleHV&apos;s framework will not work(ie: Parallels 15, Vmware)<ul>
+<li>Virtual Machine running off of AppleHV&apos;s framework will not work(ie: Parallels 15, VMware)<ul>
 <li>VirtualBox works fine as it doesn&apos;t use AppleHV</li>
 <li>VMware 10 and older can work as well</li>
 <li>Parallels 13.1.0 and older are known to work as well</li>
@@ -1304,7 +1304,7 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <li>Docker toolbox is the only solution as it&apos;s based off of VirtualBox, many features are unavailable with this version</li>
 </ul>
 </li>
-<li>Xcode AppleWatch simulator is broken in Catalina<ul>
+<li>Xcode Apple Watch simulator is broken in Catalina<ul>
 <li>Mojave works fine</li>
 </ul>
 </li>
@@ -1341,9 +1341,9 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <li><a href="troubleshooting.html#windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</a></li>
 <li><a href="troubleshooting.html#incorrect-resolution-with-opencore">Incorrect resolution with OpenCore</a></li>
 <li><a href="troubleshooting.html#no-temperaturefan-sensor-output">No temperature/fan sensor output</a></li>
-<li><a href="troubleshooting.html#cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/Bootcamp drive in picker</a></li>
+<li><a href="troubleshooting.html#cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/BootCamp drive in picker</a></li>
 <li><a href="troubleshooting.html#you-cant-change-the-startup-disk-to-the-selected-disk-error">&quot;You can&apos;t change the startup disk to the selected disk&quot; error</a></li>
-<li><a href="troubleshooting.html#booting-windows-results-in-bluescreen-or-linux-crashes">Booting Windows results in Bluescreen or Linux crashes</a></li>
+<li><a href="troubleshooting.html#booting-windows-results-in-bluescreen-or-linux-crashes">Booting Windows results in BlueScreen or Linux crashes</a></li>
 <li><a href="troubleshooting.html#booting-windows-error-ocb-startimage-failed---already-started">Booting Windows error: <code>OCB: StartImage failed - Already started</code></a></li>
 <li><a href="troubleshooting.html#iasl-warning--unresolved">iASL warning, # unresolved</a></li>
 <li><a href="troubleshooting.html#no-volumebrightness-control-on-external-monitors">No Volume/Brightness control on external monitors</a></li>
@@ -1380,7 +1380,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <p><img src="../images/troubleshooting/troubleshooting-md/python-path.png" alt=""></p>
 <h2 id="windows-startup-disk-cant-see-apfs-drives"><a name="windows-startup-disk-cant-see-apfs-drives" class="plugin-anchor" href="#windows-startup-disk-cant-see-apfs-drives"><i class="fa fa-link" aria-hidden="true"></i></a>Windows Startup Disk can&apos;t see APFS drives</h2>
 <ul>
-<li>Outdated Bootcamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: <a href="https://github.com/corpnewt/brigadier" target="_blank">CorpNewt&apos;s brigadier</a></li>
+<li>Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: <a href="https://github.com/corpnewt/brigadier" target="_blank">CorpNewt&apos;s brigadier</a></li>
 </ul>
 <h2 id="incorrect-resolution-with-opencore"><a name="incorrect-resolution-with-opencore" class="plugin-anchor" href="#incorrect-resolution-with-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Incorrect resolution with OpenCore</h2>
 <ul>
@@ -1406,7 +1406,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li>FileVault support requires more work with FakeSMC</li>
 <li>Make sure no other SMC kexts are present, specifically those from <a href="https://github.com/acidanthera/VirtualSMC/releases" target="_blank">VirtualSMC</a></li>
 </ul>
-<h2 id="cant-find-windowsbootcamp-drive-in-picker"><a name="cant-find-windowsbootcamp-drive-in-picker" class="plugin-anchor" href="#cant-find-windowsbootcamp-drive-in-picker"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t find Windows/Bootcamp drive in picker</h2>
+<h2 id="cant-find-windowsbootcamp-drive-in-picker"><a name="cant-find-windowsbootcamp-drive-in-picker" class="plugin-anchor" href="#cant-find-windowsbootcamp-drive-in-picker"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t find Windows/BootCamp drive in picker</h2>
 <p>So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you&apos;ll have to find other means to make an installer(Google&apos;s your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you&apos;ll need to format the drive you want to install onto with DiskUtility. See the <a href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/" target="_blank">Multiboot Guide</a> on best practices</p>
 <p>Now to get onto troubleshooting:</p>
 <ul>
@@ -1419,7 +1419,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
 <li><code>PlatformInfo -&gt; Generic -&gt; AdviseWindows -&gt; True</code></li>
 </ul>
 <p><img src="../images/troubleshooting/troubleshooting-md/error.png" alt=""></p>
-<h2 id="booting-windows-results-in-bluescreen-or-linux-crashes"><a name="booting-windows-results-in-bluescreen-or-linux-crashes" class="plugin-anchor" href="#booting-windows-results-in-bluescreen-or-linux-crashes"><i class="fa fa-link" aria-hidden="true"></i></a>Booting Windows results in Bluescreen or Linux crashes</h2>
+<h2 id="booting-windows-results-in-bluescreen-or-linux-crashes"><a name="booting-windows-results-in-bluescreen-or-linux-crashes" class="plugin-anchor" href="#booting-windows-results-in-bluescreen-or-linux-crashes"><i class="fa fa-link" aria-hidden="true"></i></a>Booting Windows results in BlueScreen or Linux crashes</h2>
 <p>This is due to alignment issues, make sure <code>SyncRuntimePermissions</code> is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)</p>
 <p>Common Windows error code:</p>
 <ul>
@@ -1479,7 +1479,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-04T18:27:55.730Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T18:28:52.823Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"5.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-05T04:50:16.518Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-05T04:51:09.810Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

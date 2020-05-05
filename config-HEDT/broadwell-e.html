@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Mon May 04 2020 18:27:54 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue May 05 2020 04:50:15 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="broadwell-e"><a name="broadwell-e" class="plugin-anchor" href="#broadwell-e"><i class="fa fa-link" aria-hidden="true"></i></a>Broadwell-E</h1>
 <ul>
@@ -879,11 +879,11 @@
 </ul>
 </li>
 <li><strong>ForceExitBootServices</strong>: NO<ul>
-<li>Ensures ExitBootServices calls succeeds even when MemoryMap has changed, don&apos;t use unless necessary</li>
+<li>Ensures ExitBootServices calls succeeds even when the Memory Map has changed, don&apos;t use unless necessary</li>
 </ul>
 </li>
 <li><strong>ProtectMemoryRegions</strong>: NO<ul>
-<li>Needed for fixing artefacts and sleep-wake issues, generally only needed on very old firmwares</li>
+<li>Needed for fixing artifacts and sleep-wake issues, generally only needed on very old firmwares</li>
 </ul>
 </li>
 <li><strong>ProtectSecureBoot</strong>: NO<ul>
@@ -918,7 +918,7 @@
 <h2 id="deviceproperties"><a name="deviceproperties" class="plugin-anchor" href="#deviceproperties"><i class="fa fa-link" aria-hidden="true"></i></a>DeviceProperties</h2>
 <p><img src="../images/config/config-universal/DP-no-igpu.png" alt="DeviceProperties"></p>
 <p><strong>Add</strong>: Sets device properties from a map.</p>
-<p>By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PCIRoot <code>PciRoot(0x0)/Pci(0x2,0x0)</code> can be removed from <code>Add</code> section. For audio we&apos;ll be setting the layout in the boot-args section, so removal of <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> is also recommended from both <code>Add</code> and <code>Block</code> sections</p>
+<p>By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PciRoot <code>PciRoot(0x0)/Pci(0x2,0x0)</code> can be removed from <code>Add</code> section. For audio we&apos;ll be setting the layout in the boot-args section, so removal of <code>PciRoot(0x0)/Pci(0x1b,0x0)</code> is also recommended from both <code>Add</code> and <code>Block</code> sections</p>
 <p>TL;DR, delete all the PciRoot&apos;s here as we won&apos;t be using this section.</p>
 <h2 id="kernel"><a name="kernel" class="plugin-anchor" href="#kernel"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel</h2>
 <p><img src="../images/config/config-HEDT/broadwell-e/kernel.png" alt="Kernel"></p>
@@ -1268,7 +1268,7 @@
 <ul>
 <li>Enables writing to flash memory for all added variables, not compatible with emulated NVRAM</li>
 </ul>
-<h2 id="platforminfo"><a name="platforminfo" class="plugin-anchor" href="#platforminfo"><i class="fa fa-link" aria-hidden="true"></i></a>Platforminfo</h2>
+<h2 id="platforminfo"><a name="platforminfo" class="plugin-anchor" href="#platforminfo"><i class="fa fa-link" aria-hidden="true"></i></a>PlatformInfo</h2>
 <p><img src="../images/config/config-universal/iMacPro-smbios.png" alt="PlatformInfo"></p>
 <p>For setting up the SMBIOS info, we&apos;ll use CorpNewt&apos;s <a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a> application.</p>
 <p>For this Broadwell-E example, we&apos;ll choose the iMacPro1,1 SMBIOS.</p>
@@ -1285,13 +1285,13 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <p>The <code>Type</code> part gets copied to Generic -&gt; SystemProductName.</p>
 <p>The <code>Serial</code> part gets copied to Generic -&gt; SystemSerialNumber.</p>
 <p>The <code>Board Serial</code> part gets copied to Generic -&gt; MLB.</p>
-<p>The <code>SmUUID</code> part gets copied toto Generic -&gt; SystemUUID.</p>
+<p>The <code>SmUUID</code> part gets copied to Generic -&gt; SystemUUID.</p>
 <p>We set Generic -&gt; ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we&apos;ll use <code>11223300 0000</code>. After install follow the <a href="../post-install/iservices.html">Fixing iServices</a> page on how to find your real MAC Address)</p>
 <p><strong>Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: &quot;Invalid Serial&quot; or &quot;Purchase Date not Validated&quot;</strong></p>
 <p><a href="https://checkcoverage.apple.com" target="_blank">Apple Check Coverage page</a></p>
 <p><strong>Automatic</strong>: YES</p>
 <ul>
-<li>Generates Platforminfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</li>
+<li>Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections</li>
 </ul>
 <p><strong>Generic</strong>:</p>
 <ul>
@@ -1554,7 +1554,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"3.2","depth":1,"next":{"title":"Skylake-X","level":"3.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"3.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-05-04T18:27:54.949Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T18:28:52.823Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"3.2","depth":1,"next":{"title":"Skylake-X","level":"3.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"3.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-05-05T04:50:15.753Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-05T04:51:09.810Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

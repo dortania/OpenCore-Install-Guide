@@ -741,7 +741,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Mon May 04 2020 18:27:55 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue May 05 2020 04:50:16 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-imessage-and-other-services-with-opencore"><a name="fixing-imessage-and-other-services-with-opencore" class="plugin-anchor" href="#fixing-imessage-and-other-services-with-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing iMessage and other services with OpenCore</h1>
 <ul>
@@ -764,13 +764,23 @@
 <p>Tip: <code>iMacPro1,1 10</code> will print 10 serials, this will save you some time on generating</p>
 <p><img src="../images/post-install/iservices-md/serial-list.png" alt=""></p>
 <p>Now enter the serial into the <a href="https://checkcoverage.apple.com/" target="_blank">Apple Check Coverage page</a>, you will get 1 of 3 responses:</p>
-<p><strong>&quot;We&#x2019;re sorry, but this serial number isn&#x2019;t valid. Please check your information and try again.&quot;:</strong></p>
-<p><img src="../images/post-install/iservices-md/not-valid.png" alt=""></p>
-<p><strong>Valid Purchase date:</strong></p>
-<p><img src="../images/post-install/iservices-md/valid.png" alt=""></p>
-<p><strong>Purchase Date not Validated:</strong></p>
-<p><img src="../images/post-install/iservices-md/no-purchase.png" alt=""></p>
-<p>This last one is what we&apos;re after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -&gt; PlatformInfo -&gt; Add:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">We&#x2019;re sorry, but this serial number isn&#x2019;t valid</th>
+<th style="text-align:center">Valid Purchase date</th>
+<th style="text-align:center">Purchase Date not Validated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="../images/post-install/iservices-md/not-valid.png" alt=""></td>
+<td style="text-align:center"><img src="../images/post-install/iservices-md/valid.png" alt=""></td>
+<td style="text-align:center"><img src="../images/post-install/iservices-md/no-purchase.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<p>This last one is what we&apos;re after, as we want something genuine but currently not in use by anyone. Now we can translate the rest of the values into our config.plist -&gt; PlatformInfo -&gt; Generic:</p>
 <ul>
 <li>Type = SystemProductName</li>
 <li>Serial = SystemSerialNumber</li>
@@ -794,9 +804,9 @@ sudo rm /Library/Preferences/SystemConfiguration/preferences.plist
 <p><img src="../images/post-install/iservices-md/en0-built-in-info.png" alt="Find if set as Built-in"></p>
 <p>Now head under the PCI tab of Hackintool and export your PCI DeviceProperties, this will create a pcidevices.plist on your desktop</p>
 <p><img src="../images/post-install/iservices-md/hackintool-export.png" alt="Export PCI address"></p>
-<p>Now search through the pcidevices.plist and find the PCIRoot of your ethernet controller. For us, this would be <code>PciRoot(0x0)/Pci(0x1f,0x6)</code></p>
-<p><img src="../images/post-install/iservices-md/find-en0.png" alt="Copy PCIRoot"></p>
-<p>Now with the PCIRoot, go into your config.plist -&gt; DeviceProperties -&gt; Add and apply the property of <code>built-in</code> with type <code>Data</code> and value <code>01</code></p>
+<p>Now search through the pcidevices.plist and find the PciRoot of your ethernet controller. For us, this would be <code>PciRoot(0x0)/Pci(0x1f,0x6)</code></p>
+<p><img src="../images/post-install/iservices-md/find-en0.png" alt="Copy PciRoot"></p>
+<p>Now with the PciRoot, go into your config.plist -&gt; DeviceProperties -&gt; Add and apply the property of <code>built-in</code> with type <code>Data</code> and value <code>01</code></p>
 <p><img src="../images/post-install/iservices-md/config-built-in.png" alt="Add to config.plist"></p>
 <h2 id="fixing-rom"><a name="fixing-rom" class="plugin-anchor" href="#fixing-rom"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing ROM</h2>
 <p>This is a section many may have forgotten about but this is found in your config.plist under PlatformInfo -&gt; generic -&gt; ROM</p>
@@ -902,7 +912,7 @@ etc ...
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"5.1.8","depth":2,"next":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Fixing DRM","level":"5.1.7","depth":2,"path":"post-install/drm.md","ref":"post-install/drm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-05-04T18:27:55.730Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T18:28:52.823Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing iServices","level":"5.1.8","depth":2,"next":{"title":"Emulated NVRAM","level":"5.1.9","depth":2,"path":"post-install/nvram.md","ref":"post-install/nvram.md","articles":[]},"previous":{"title":"Fixing DRM","level":"5.1.7","depth":2,"path":"post-install/drm.md","ref":"post-install/drm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"css":[],"js":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/iservices.md","mtime":"2020-05-05T04:50:16.518Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-05T04:51:09.810Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
