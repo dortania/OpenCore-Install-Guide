@@ -149,9 +149,9 @@ If we think of our ig-platform-id as `0xAABBCCDD`, our swapped version would loo
 The two ig-platform-id's we use are as follows:
 
 * `0x3E9B0007` - this is used when the Desktop iGPU is used to drive a display
-  * `07009B3E` when hex-swapped
+  * `07009B3E` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
 * `0x3E920003` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
-  * `0300923E` when hex-swapped
+  * `0300923E` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
 
 Worth noting that for 10.12 -> 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up. 10.13.6 natively supports Coffee Lake
 

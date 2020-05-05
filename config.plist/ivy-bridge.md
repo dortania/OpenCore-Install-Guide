@@ -164,7 +164,7 @@ If we think of our ig-platform-id as `0xAABBCCDD`, our swapped version would loo
 The ig-platform-id's we use is as follows:
 
 * `0x0166000A` - this is the standard hex for the ig-platform-id
-  * `0A006601` when hex-swapped
+  * `0A006601` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
 
 | Key | Type | Value |
 | :--- | :--- | :--- |

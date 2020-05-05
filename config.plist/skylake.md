@@ -146,9 +146,9 @@ If we think of our ig-platform-id as `0xAABBCCDD`, our swapped version would loo
 The two ig-platform-id's we use are as follows:
 
 * `0x19120000` - this is used when the Desktop iGPU is used to drive a display
-  * `00001219` when hex-swapped
+  * `00001219` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
 * `0x19120001` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
-  * `01001219` when hex-swapped
+  * `01001219` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
 
 We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`. The first enables patching via WhateverGreen.kext, the second sets the min stolen memory to 19MB and third sets the framebuffer memory to 9MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
