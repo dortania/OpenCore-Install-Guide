@@ -6,11 +6,15 @@ Wanting a more clean booting experience with macOS without all that verbose text
 
 ## Recommended Configuration
 
-**`NVRAM -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`**:
+**`Misc -> Debug`**
+
+* Set `AppleDebug` to False, this will remove boot.efi debugging right at the start of booting.
+
+**`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`**:
 
 * Remove `-v` from your config.plist
 
-**`NVRAM -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale`**:
+**`NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale`**:
 
 * `01`: Standard resolution
 * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
