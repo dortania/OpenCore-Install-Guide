@@ -80,7 +80,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
   * Required for most AMD boards running Intel NICs
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
-* [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
+* [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
   * For Realtek's 2.5Gb Ethernet
