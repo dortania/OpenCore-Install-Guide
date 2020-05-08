@@ -38,7 +38,7 @@ Guides linked or those that inspired this guide:
 
 * [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)
 * [All-in-one Vanilla AMD Hackintosh Guide](https://kb.hackintoshisfun.ml/clover/)
-* [USB Map Guide](https://usb-map.gitbook.io/project/)
+* [USB Map Guide](https://dortania.github.io/USB-Map-Guide/)
 * [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
 * [gfxutil](https://github.com/acidanthera/gfxutil/releases)
@@ -67,5 +67,5 @@ And for those who have recommendations or issues with this guide, you can find t
   * [rEFInd Manual](https://www.rodsbooks.com/refind/index.html)
 * USB Mapping Guide:
   * [XHCI Wake issues](https://osy.gitbook.io/hac-mini-guide/details/usb-fix)
-  * [CorpNewt's USB Map Guide](https://usb-map.gitbook.io/project/)
+  * [CorpNewt's USB Map Guide](https://dortania.github.io/USB-Map-Guide/)
   * [AppleLife USB Map Guide](https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/)
