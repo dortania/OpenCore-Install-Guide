@@ -45,7 +45,7 @@ So this little section is for those who are wanting to know whether their hardwa
 
 See supported chipset on respective drivers:
 
-* [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
+* [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
