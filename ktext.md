@@ -73,7 +73,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 **Ethernet**:
 
-* [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
+* [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for I211 NICs, based off of the SmallTree kext but patched to support I211
