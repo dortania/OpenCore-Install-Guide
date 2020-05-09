@@ -752,7 +752,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Fri May 08 2020 17:42:49 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sat May 09 2020 17:34:40 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -894,7 +894,7 @@
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
-<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a></li>
+<li><a href="../extras/msr-lock.html">Fixing CFG Lock</a></li>
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <h2 id="stuck-on-eblogexitbsstart"><a name="stuck-on-eblogexitbsstart" class="plugin-anchor" href="#stuck-on-eblogexitbsstart"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>[EB|#LOG:EXITBS:START]</code></h2>
@@ -908,7 +908,7 @@
 </ul>
 <p>Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). <strong>Do note this is for Intel users only, not AMD.</strong> When this happens, there&apos;s a couple of possible fixes:</p>
 <ul>
-<li><a href="https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock" target="_blank">Fixing CFG Lock</a></li>
+<li><a href="../extras/msr-lock.html">Fixing CFG Lock</a></li>
 <li>Enable <code>AppleXcpmCfgLock</code> and <code>AppleCpuPmCfgLock</code>, this disables <code>PKG_CST_CNFIG_CONTROL</code> within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.</li>
 </ul>
 <h2 id="cant-see-macos-partitions"><a name="cant-see-macos-partitions" class="plugin-anchor" href="#cant-see-macos-partitions"><i class="fa fa-link" aria-hidden="true"></i></a>Can&apos;t see macOS partitions</h2>
@@ -1128,7 +1128,7 @@
 <h2 id="waiting-for-root-device-or-prohibited-sign-error"><a name="waiting-for-root-device-or-prohibited-sign-error" class="plugin-anchor" href="#waiting-for-root-device-or-prohibited-sign-error"><i class="fa fa-link" aria-hidden="true"></i></a>&quot;Waiting for Root Device&quot; or Prohibited Sign error</h2>
 <p>Generally seen as a USB error, couple ways to fix:</p>
 <ul>
-<li>If you&apos;re hitting the 15 port limit, you can temporarily get around this with <code>XhciPortLimit</code> but for long term use, we recommend making a <a href="https://github.com/corpnewt/USBMap" target="_blank">USBmap</a>. CorpNewt also has a guide for this: <a href="https://usb-map.gitbook.io/project/" target="_blank">USBmap Guide</a></li>
+<li>If you&apos;re hitting the 15 port limit, you can temporarily get around this with <code>XhciPortLimit</code> but for long term use, we recommend making a <a href="https://github.com/corpnewt/USBMap" target="_blank">USBmap</a>. CorpNewt also has a guide for this: <a href="https://dortania.github.io/USB-Map-Guide/" target="_blank">USBmap Guide</a></li>
 <li><p>Another issue can be that certain firmware won&apos;t pass USB ownership to macOS, to fix this we can enable <code>UEFI -&gt; Quriks -&gt; ReleaseUsbOwnership</code> in your config.plist</p>
 <ul>
 <li>Enabling XHCI Handoff in the BIOS can fix this as well</li>
@@ -1216,6 +1216,10 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <h2 id="kernel-panic-on-invalid-frame-pointer"><a name="kernel-panic-on-invalid-frame-pointer" class="plugin-anchor" href="#kernel-panic-on-invalid-frame-pointer"><i class="fa fa-link" aria-hidden="true"></i></a>Kernel Panic on <code>Invalid frame pointer</code></h2>
 <p>So this is due to some issue around the <code>Booter -&gt; Quirks</code> you set, main things to check for:</p>
 <ul>
+<li><code>DevirtualiseMmio</code><ul>
+<li>Certain MMIO spaces are still required to function correctly, so you&apos;ll need to either exclude these regions in Booter -&gt; MmioWhitelist or disable this quirk outright</li>
+</ul>
+</li>
 <li><code>SetupVirtualMap</code><ul>
 <li>required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems</li>
 <li>Note that Icelake&apos;s memory protections break this quirks so avoid it</li>
@@ -1489,7 +1493,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing USB","level":"5.1.11","depth":2,"url":"https://dortania.github.io/USB-Map-Guide/","ref":"https://dortania.github.io/USB-Map-Guide/","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-08T17:42:49.167Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-08T17:44:04.009Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Fixing USB","level":"5.1.11","depth":2,"url":"https://dortania.github.io/USB-Map-Guide/","ref":"https://dortania.github.io/USB-Map-Guide/","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-09T17:34:40.102Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-09T17:35:54.821Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
