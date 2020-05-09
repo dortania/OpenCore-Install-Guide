@@ -128,7 +128,7 @@ Couple problems:
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
-* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock)
+* [Fixing CFG Lock](/extras/msr-lock.md)
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
@@ -143,7 +143,7 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
-* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/msr-lock)
+* [Fixing CFG Lock](/extras/msr-lock.md)
 * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
 
 ## Can't see macOS partitions
@@ -368,7 +368,7 @@ Example of what a disabled RTC with no way to enable looks like(note that there 
 
 Generally seen as a USB error, couple ways to fix:
 
-* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://usb-map.gitbook.io/project/)
+* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://dortania.github.io/USB-Map-Guide/)
 * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quriks -> ReleaseUsbOwnership` in your config.plist
   * Enabling XHCI Handoff in the BIOS can fix this as well
 
@@ -482,6 +482,8 @@ Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI 
 
 So this is due to some issue around the `Booter -> Quirks` you set, main things to check for:
 
+* `DevirtualiseMmio`
+  * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright
 * `SetupVirtualMap`
   * required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems
   * Note that Icelake's memory protections break this quirks so avoid it

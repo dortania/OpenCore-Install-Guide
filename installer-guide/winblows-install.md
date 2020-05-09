@@ -29,7 +29,7 @@ Next open `MakeInstall.bat` as Admin and select your drive with option O for Ope
 
 ![](/images/installer-guide/winblows-install-md/make-install.png)
 
-Once your drive is formatted, it will then ask you for the `RecoveryHDMetaDMG.pkg` that we downloaded earlier. Top right of the file window will let you copy the file path:
+Once your drive is formatted, it will then ask you for the `RecoveryHDMetaDMG.pkg` that we downloaded earlier. Top left of the file window will let you copy the file path:
 
 ![](/images/installer-guide/winblows-install-md/make-install-location.png)
 
