@@ -53,9 +53,7 @@ So you've finally got the installer booted, got through the verbose and hit the 
   * By default, macOS will setup freshly formatted drives with 200MB
   * See the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) for more info on partitioning a Windows Drive
 
-Once you start the installation, you will want to wait until the lappie restarts. You will once again want to boot into OpenCore, but rather than selecting your USB installer/recovery - you will want to select the macOS installer on the hard drive to continue installation. You should get an apple logo, and after a few minutes you should get a timer at the bottom saying "x minutes remaining". This may be a good time to get a drink or snack as this will take a while. It may restart a couple more times, but if all goes well, it should finally plop you at the "Setup your Mac screen"
-
-* You may want to set OpenCore to be your first boot option and set `Misc->Boot->Timeout` to something like 5-10 seconds to automatically have it go through the installer.
+Once you start the installation, you will want to wait until the system restarts. You will once again want to boot into OpenCore, but rather than selecting your USB installer/recovery - you will want to select the macOS installer on the hard drive to continue installation. You should get an apple logo, and after a few minutes you should get a timer at the bottom saying "x minutes remaining". This may be a good time to get a drink or snack as this will take a while. It may restart a couple more times, but if all goes well, it should finally plop you at the "Setup your Mac screen"
 
 You're in! 🎉
-You will want to go through the Post-Installation pages to finish setting up your laptop.
+You will want to go through the Post-Installation pages to finish setting up your system.
