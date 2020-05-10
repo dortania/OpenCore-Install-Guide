@@ -17,12 +17,15 @@ CFG-Lock is a setting in your BIOS that allows for a specific register(in this c
 So to fix it we have 2 options:
 
 1. Patch macOS to work with our hardware
-  * This creates instability and unnecessary patching for many
-  * The 2 patches we use for this:
-    * `AppleCpuPmCfgLock` for AppleIntelPowerManagement.kext
-    * `AppleXcpmCfgLock` for the Kernel(XNU)
+
+* This creates instability and unnecessary patching for many
+* The 2 patches we use for this:
+  * `AppleCpuPmCfgLock` for AppleIntelPowerManagement.kext
+  * `AppleXcpmCfgLock` for the Kernel(XNU)
+
 2. Patch our firmware to support MSR E2 write
-  * Very much preferred, as avoids patching allowing for greater flexibility regarding stability and OS upgrades
+
+* Very much preferred, as avoids patching allowing for greater flexibility regarding stability and OS upgrades
   
 Note: Penyrn based machines actually don't need to worry about unlocking this register
 

@@ -125,6 +125,7 @@ Couple problems:
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 * `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, disabling this quirk isn't recommended but may be required on some laptops and certain desktops
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 
@@ -140,6 +141,7 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 * `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, disabling this quirk isn't recommended but may be required on some laptops and certain desktops
 
 Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
 

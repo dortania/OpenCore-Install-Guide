@@ -28,6 +28,16 @@
 * [Bulldozer/Jaguar](AMD/fx.md)
 * [Zen](AMD/zen.md)
 
+## Installation
+
+* [Installation Process](/installation/installation-process.md)
+
+## Troubleshooting
+
+* [General Troubleshooting](/troubleshooting/troubleshooting.md)
+* [OpenCore Debugging](/troubleshooting/debug.md)
+* [macOS Boot Process](/troubleshooting/boot.md)
+
 ## Post Install
 
 * [Post-Install](/post-install/README.md)
@@ -42,12 +52,6 @@
   * [Emulated NVRAM](/post-install/nvram.md)
   * [Fixing Power Management](/post-install/pm.md)
   * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
-
-## Troubleshooting
-
-* [General Troubleshooting](/troubleshooting/troubleshooting.md)
-* [OpenCore Debugging](/troubleshooting/debug.md)
-* [macOS Boot Process](/troubleshooting/boot.md)
 
 ## Extras
 
