@@ -1,9 +1,8 @@
 # Config setup for Legacy Hardware
 
-While this guide will not cover the entirety of config setup for hardware not included in this guide, we will however give some pointers as to the specifics of installing with older hardware. 
+While this guide will not cover the entirety of config setup for hardware not included in this guide, we will however give some pointers as to the specifics of installing with older hardware.
 
 Note that critical thinking and google will be required.
-
 
 ## Sandy Bridge(Second Generation i-series)
 
@@ -16,12 +15,12 @@ Actually almost identical to an Ivy Bridge hack, the main things that need to be
   * [SSDT-IMEI Method](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
 * iGPU setup is different
   * Use `AAPL,snb-platform-id` instead of `AAPL,ig-platform-id`
-     * Desktop iGPU only:
-	 * `AAPL,snb-platform-id | Data | 10000300`
-	 * `device-id | Data | 26010000`
-     * Desktop iGPU + dGPU: 
-	 * `AAPL,snb-platform-id | Data | 00000500`
-	 * `device-id | Data | 26010000`
+    * Desktop iGPU only:
+    * `AAPL,snb-platform-id | Data | 10000300`
+    * `device-id | Data | 26010000`
+    * Desktop iGPU + dGPU:
+    * `AAPL,snb-platform-id | Data | 00000500`
+    * `device-id | Data | 26010000`
   * For Mojave and newer, iGPU must be disabled
 * SMBIOS will depend on macOS version
   * iMac12,1 or iMac12,2 for High Sierra and older
@@ -37,7 +36,6 @@ Actually almost identical to an Ivy Bridge hack, the main things that need to be
 * SMBIOS will depend on macOS version
   * iMac11,1, iMac11,2 or iMac11,3 for High Sierra and older
   * iMac13,2 for Mojave and newer
-
 
 ## Penryn(Core2 Series)
 

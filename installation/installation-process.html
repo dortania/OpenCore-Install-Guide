@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>iGPU Patching · GitBook</title>
+        <title>Installation Process · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -71,10 +71,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="kaslr-fix.html" />
+    <link rel="next" href="../troubleshooting/troubleshooting.html" />
     
     
-    <link rel="prev" href="gui.html" />
+    <link rel="prev" href="../AMD/zen.html" />
     
 
     <style>
@@ -211,9 +211,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="acpi.html">
+        <li class="chapter " data-level="1.5" data-path="../extras/acpi.html">
             
-                <a href="acpi.html">
+                <a href="../extras/acpi.html">
             
                     
                     Getting started with ACPI
@@ -382,9 +382,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../installation/installation-process.html">
+        <li class="chapter active" data-level="5.1" data-path="installation-process.html">
             
-                <a href="../installation/installation-process.html">
+                <a href="installation-process.html">
             
                     
                     Installation Process
@@ -514,9 +514,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.1.5" data-path="msr-lock.html">
+        <li class="chapter " data-level="7.1.5" data-path="../extras/msr-lock.html">
             
-                <a href="msr-lock.html">
+                <a href="../extras/msr-lock.html">
             
                     
                     Fixing CFG Lock
@@ -617,9 +617,9 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="legacy.html">
+        <li class="chapter " data-level="8.1" data-path="../extras/legacy.html">
             
-                <a href="legacy.html">
+                <a href="../extras/legacy.html">
             
                     
                     Legacy Install
@@ -630,9 +630,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="gui.html">
+        <li class="chapter " data-level="8.2" data-path="../extras/gui.html">
             
-                <a href="gui.html">
+                <a href="../extras/gui.html">
             
                     
                     Add GUI and Boot-chime
@@ -643,9 +643,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="8.3" data-path="gpu-patches.html">
+        <li class="chapter " data-level="8.3" data-path="../extras/gpu-patches.html">
             
-                <a href="gpu-patches.html">
+                <a href="../extras/gpu-patches.html">
             
                     
                     iGPU Patching
@@ -656,9 +656,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="kaslr-fix.html">
+        <li class="chapter " data-level="8.4" data-path="../extras/kaslr-fix.html">
             
-                <a href="kaslr-fix.html">
+                <a href="../extras/kaslr-fix.html">
             
                     
                     Fixing KASLR slide values
@@ -669,9 +669,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.5" data-path="spoof.html">
+        <li class="chapter " data-level="8.5" data-path="../extras/spoof.html">
             
-                <a href="spoof.html">
+                <a href="../extras/spoof.html">
             
                     
                     Disabling unsupported GPUs
@@ -758,7 +758,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >iGPU Patching</a>
+        <a href=".." >Installation Process</a>
     </h1>
 </div>
 
@@ -774,126 +774,104 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun May 10 2020 18:00:39 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Sun May 10 2020 18:00:40 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="gpu-patching"><a name="gpu-patching" class="plugin-anchor" href="#gpu-patching"><i class="fa fa-link" aria-hidden="true"></i></a>GPU Patching</h1>
+<h1 id="installation-process"><a name="installation-process" class="plugin-anchor" href="#installation-process"><i class="fa fa-link" aria-hidden="true"></i></a>Installation Process</h1>
+<p>Now that you&apos;ve finished setting up OpenCore, you&apos;re finally able to boot, main things to keep in mind:</p>
 <ul>
-<li>Supported version: 0.5.8</li>
+<li>Enable BIOS settings optimal for macOS</li>
+<li>Read up on the <a href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/" target="_blank">Multiboot Guide</a><ul>
+<li>Mainly relevant for those running a single drive for multiple OSes</li>
 </ul>
-<p>This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen&apos;s auto-patches:</p>
+</li>
+<li>And a copy of the <a href="../troubleshooting/troubleshooting.html">General Troubleshooting</a> page</li>
+<li>Read up on the <a href="../troubleshooting/boot.html">macOS Boot Process</a><ul>
+<li>Can help first time installers better understand where they may be getting stuck</li>
+</ul>
+</li>
+<li>And a ton of patience</li>
+</ul>
+<h2 id="double-checking-your-work"><a name="double-checking-your-work" class="plugin-anchor" href="#double-checking-your-work"><i class="fa fa-link" aria-hidden="true"></i></a>Double checking your work</h2>
+<p>One last thing we should go over before booting is how your EFI is setup:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Good EFI</th>
+<th style="text-align:center">Bad EFI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="../images/installation/install-md/good-efi.png" alt=""></td>
+<td style="text-align:center"><img src="../images/installation/install-md/bad-efi.png" alt=""></td>
+</tr>
+<tr>
+<td style="text-align:center">* EFI folder found on EFI partition</td>
+<td style="text-align:center">* EFI folder missing</td>
+</tr>
+<tr>
+<td style="text-align:center">* ACPI Files are compiled(.aml)</td>
+<td style="text-align:center">* ACPI Files are not compiled(.dsl)</td>
+</tr>
+<tr>
+<td style="text-align:center">* DSDT is not included</td>
+<td style="text-align:center">* DSDT is included</td>
+</tr>
+<tr>
+<td style="text-align:center">* Removed unneeded Drivers(.efi)</td>
+<td style="text-align:center">* Leaves default Drivers</td>
+</tr>
+<tr>
+<td style="text-align:center">* Removed unneeded Tools(.efi)</td>
+<td style="text-align:center">* Leaves default Tools</td>
+</tr>
+<tr>
+<td style="text-align:center">* All files in the Kexts folder end in .kext</td>
+<td style="text-align:center">* Includes source code and folders</td>
+</tr>
+<tr>
+<td style="text-align:center">* config.plist found under EFI/OC</td>
+<td style="text-align:center">* Neither renamed or placed the .plist in right location</td>
+</tr>
+<tr>
+<td style="text-align:center">* Only uses kexts that are needed</td>
+<td style="text-align:center">* Downloaded every kext listed</td>
+</tr>
+</tbody>
+</table>
+<p>And a reminder that slowgeek site is your friend:</p>
 <ul>
-<li><a href="https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html" target="_blank">Applying a fakeID for unsupported GPUs</a></li>
-<li><a href="#iGPU-BusID-Patching">iGPU BusID patching for 300 series motherboards</a></li>
+<li><a href="https://opencore.slowgeek.com" target="_blank"><strong>Sanity Checker</strong></a></li>
 </ul>
-<h1 id="converting-a-clover-fakeid-to-opencore"><a name="converting-a-clover-fakeid-to-opencore" class="plugin-anchor" href="#converting-a-clover-fakeid-to-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Converting a clover fakeID to OpenCore</h1>
-<p>Guide moved here: <a href="https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html" target="_blank">Renaming GPUs</a></p>
-<h1 id="igpu-busid-patching"><a name="igpu-busid-patching" class="plugin-anchor" href="#igpu-busid-patching"><i class="fa fa-link" aria-hidden="true"></i></a>iGPU BusID Patching</h1>
-<p>This section is for users running &quot;true&quot; 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.</p>
-<p>So to get started I&apos;ll assume you&apos;ve already done basic framebuffer patches in your config from the <a href="../config.plist/coffee-lake.html">Coffee Lake portion of the guide</a>, it should look something like this:</p>
-<p><img src="../images/extras/gpu-patches-md/prereq.png" alt=""></p>
-<p>Now that we&apos;re prepped, we can start looking into busID patching. Checking the dumps on <a href="https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/" target="_blank">InsanelyMac</a> shows us this for the <code>3E9B0007</code> ID(Desktop UHD 630):</p>
-<pre><code class="lang-text">ID: 3E9B0007, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00801302
-TOTAL STOLEN: 58 MB, TOTAL CURSOR: 1 MB (1572864 bytes), MAX STOLEN: 172 MB, MAX OVERALL: 173 MB (181940224 bytes)
-GPU Name: Intel UHD Graphics 630
-Model Name(s):
-Camelia: Disabled
-Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
-[1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x000003C7 - DP
-[2] busId: 0x04, pipe: 10, type: 0x00000400, flags: 0x000003C7 - DP
-[3] busId: 0x06, pipe: 8, type: 0x00000400, flags: 0x000003C7 - DP
-01050900 00040000 C7030000
-02040A00 00040000 C7030000
-03060800 00040000 C7030000
-</code></pre>
-<p>Looking at all this can be quite overwhelming, but we&apos;ll break it down to be a bit simpler. For use we care about this:</p>
-<pre><code class="lang-text">[1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x000003C7 - DP
-[2] busId: 0x04, pipe: 10, type: 0x00000400, flags: 0x000003C7 - DP
-[3] busId: 0x06, pipe: 8, type: 0x00000400, flags: 0x000003C7 - DP
-01050900 00040000 C7030000
-02040A00 00040000 C7030000
-03060800 00040000 C7030000
-</code></pre>
-<p>These are your iGPUs ports by default, lets go through port 1 and see what each section is used for:</p>
-<p>The first port:</p>
-<pre><code class="lang-text">01050900 00040000 C7030000
-</code></pre>
-<p>Port: 01</p>
-<ul>
-<li><strong>01</strong>050900 00040000 C7030000</li>
-</ul>
-<p>busId: 0x05</p>
-<ul>
-<li>01<strong>05</strong>0900 00040000 C7030000</li>
-</ul>
-<p>Pipe Number 9 (little endian):</p>
-<ul>
-<li>0105<strong>0900</strong> 00040000 C7030000</li>
-</ul>
-<p>Connector type: DisplayPort</p>
-<ul>
-<li>01050900 <strong>00040000</strong> C7030000</li>
-</ul>
-<p>Flags - We leave it as default:</p>
-<ul>
-<li>01050900 00040000 <strong>C7030000</strong></li>
-</ul>
-<p>Things to note:</p>
-<ul>
-<li>You cannot use the same busId twice, having 2 in use will create conflicts</li>
-<li>Pipe number and flags don&apos;t need to changed</li>
-</ul>
-<p>List of connector types:</p>
-<ul>
-<li><code>00 04 00 00</code> - DisplayPort</li>
-<li><code>00 08 00 00</code> - HDMI</li>
-<li><code>04 00 00 00</code> - Digital DVI</li>
-<li><code>02 00 00 00</code> - LVDS (for laptops)</li>
-<li><code>01 00 00 00</code> - Dummy port</li>
-</ul>
-<h3 id="mapping-video-ports"><a name="mapping-video-ports" class="plugin-anchor" href="#mapping-video-ports"><i class="fa fa-link" aria-hidden="true"></i></a>Mapping video ports</h3>
+<h2 id="booting-the-opencore-usb"><a name="booting-the-opencore-usb" class="plugin-anchor" href="#booting-the-opencore-usb"><i class="fa fa-link" aria-hidden="true"></i></a>Booting the OpenCore USB</h2>
+<p>So you&apos;re now ready to finally put the USB stick into your computer and boot off of it, remember that your laptop will still default to the internal drive with Windows so you&apos;ll need to enter the BIOS or boot menu and select the USB. You&apos;ll need to check in the user manual or use a bit of google to find out what Fn key accesses the BIOS and boot menu(ie. Esc, F2, F10 or F12)</p>
+<p>Once you boot the USB, you&apos;ll likely be greeted to the following boot options:</p>
 <ol>
-<li><p>Plug display into HDMI port</p>
-</li>
-<li><p>Set Port 1 to the HDMI connector type:</p>
-<ul>
-<li>01xx0900 <strong>00080000</strong> C7030000</li>
-</ul>
-</li>
-<li><p>Disable ports 2 and 3 with busid=00:</p>
-<ul>
-<li>02<strong>00</strong>0A00 00040000 C7030000</li>
-<li>03<strong>00</strong>0800 00040000 C7030000</li>
-</ul>
-</li>
-<li><p>Walk through busids for Port 1 if the previous didn&apos;t work(yup you gotta do a shit ton of reboots). The maximum busid on most platforms is 0x06</p>
-<ul>
-<li>01<strong>01</strong>0900 00080000 C7030000</li>
-<li>01<strong>02</strong>0900 00080000 C7030000</li>
-<li>01<strong>03</strong>0900 00080000 C7030000</li>
-<li>etc</li>
-</ul>
-</li>
+<li>Windows</li>
+<li>macOS Base System (External) / Install macOS Catalina (External)</li>
+<li>OpenShell.efi</li>
+<li>Reset NVRAM</li>
 </ol>
-<p>If you still get no output, set port 1&apos;s busid to 00 and start going through busids for port 2 and so on</p>
+<p>For use, <strong>Option 2.</strong> is the one we want. Depending how the installer was made, it may report as either <strong>&quot;macOS Base System (External)&quot;</strong> if created in Linux or Windows and <strong>&quot;Install macOS Catalina (External)&quot;</strong> if created in macOS.</p>
+<h2 id="macos-installer"><a name="macos-installer" class="plugin-anchor" href="#macos-installer"><i class="fa fa-link" aria-hidden="true"></i></a>macOS Installer</h2>
+<p>So you&apos;ve finally got the installer booted, got through the verbose and hit the installer! Now that you&apos;ve gotten this far,  the main things to keep in mind:</p>
 <ul>
-<li>01000900 00040000 C7030000</li>
-<li>02xx0A00 00080000 C7030000</li>
-<li>03000800 00040000 C7030000</li>
+<li>Drives you wish to install macOS on <strong>must</strong> be both of GUID partition Scheme <strong>and</strong> APFS<ul>
+<li>High Sierra on HDD and all Sierra users will need to use macOS Journaled(HFS+)</li>
 </ul>
-<h3 id="adding-to-your-configplist"><a name="adding-to-your-configplist" class="plugin-anchor" href="#adding-to-your-configplist"><i class="fa fa-link" aria-hidden="true"></i></a>Adding to your config.plist</h3>
-<p>So adding these patches are simple though a bunch of entries are required:</p>
+</li>
+<li>The drive <strong>must</strong> also have a 200MB partition<ul>
+<li>By default, macOS will setup freshly formatted drives with 200MB</li>
+<li>See the <a href="https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/" target="_blank">Multiboot Guide</a> for more info on partitioning a Windows Drive</li>
+</ul>
+</li>
+</ul>
+<p>Once you start the installation, you will want to wait until the lappie restarts. You will once again want to boot into OpenCore, but rather than selecting your USB installer/recovery - you will want to select the macOS installer on the hard drive to continue installation. You should get an apple logo, and after a few minutes you should get a timer at the bottom saying &quot;x minutes remaining&quot;. This may be a good time to get a drink or snack as this will take a while. It may restart a couple more times, but if all goes well, it should finally plop you at the &quot;Setup your Mac screen&quot;</p>
 <ul>
-<li>framebuffer-con0-enable = <code>01000000</code></li>
-<li>framebuffer-con1-enable = <code>01000000</code></li>
-<li>framebuffer-con2-enable = <code>01000000</code></li>
-<li>framebuffer-con0-alldata = port 1</li>
-<li>framebuffer-con1-alldata = port 2</li>
-<li>framebuffer-con2-alldata = port 3</li>
+<li>You may want to set OpenCore to be your first boot option and set <code>Misc-&gt;Boot-&gt;Timeout</code> to something like 5-10 seconds to automatically have it go through the installer.</li>
 </ul>
-<p>So when adding the patches, port 1 will actually become con0 as the ports start at 0. These are also all data types when entering your values.</p>
-<p>A finished config should look something like this:</p>
-<p><img src="../images/extras/gpu-patches-md/path-done.png" alt=""></p>
-<p>Source for iGPU BusID patching: <a href="https://github.com/corpnewt" target="_blank">CorpNewt&apos;s Brain</a></p>
+<p>You&apos;re in! &#x1F389;
+You will want to go through the Post-Installation pages to finish setting up your laptop.</p>
 
                                 
                                 </section>
@@ -921,12 +899,12 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
 
             
                 
-                <a href="gui.html" class="navigation navigation-prev " aria-label="Previous page: Add GUI and Boot-chime">
+                <a href="../AMD/zen.html" class="navigation navigation-prev " aria-label="Previous page: Zen">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="kaslr-fix.html" class="navigation navigation-next " aria-label="Next page: Fixing KASLR slide values">
+                <a href="../troubleshooting/troubleshooting.html" class="navigation navigation-next " aria-label="Next page: General Troubleshooting">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -937,7 +915,7 @@ Mobile: 0, PipeCount: 3, PortCount: 3, FBMemoryCount: 3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"iGPU Patching","level":"8.3","depth":1,"next":{"title":"Fixing KASLR slide values","level":"8.4","depth":1,"path":"extras/kaslr-fix.md","ref":"extras/kaslr-fix.md","articles":[]},"previous":{"title":"Add GUI and Boot-chime","level":"8.2","depth":1,"path":"extras/gui.md","ref":"extras/gui.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/gpu-patches.md","mtime":"2020-05-10T18:00:39.912Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-10T18:02:00.347Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Installation Process","level":"5.1","depth":1,"next":{"title":"General Troubleshooting","level":"6.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"previous":{"title":"Zen","level":"4.2","depth":1,"path":"AMD/zen.md","ref":"AMD/zen.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"installation/installation-process.md","mtime":"2020-05-10T18:00:40.700Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-10T18:02:00.347Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

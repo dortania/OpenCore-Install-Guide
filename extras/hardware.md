@@ -35,7 +35,6 @@ So this little section is for those who are wanting to know whether their hardwa
   * Instability and kernel panics are common
 * [970 Evo Plus requires a firmware upgrade to work](https://www.tonymacx86.com/threads/do-the-samsung-970-evo-plus-drives-work-new-firmware-available-2b2qexm7.270757/page-14#post-1960453)
 
-
 # Audio Compatibility
 
 * See the AppleALC wiki for supported codecs: [Supported codecs
