@@ -33,26 +33,3 @@ Lastly, this guide is only meant to be a starting point in your journey with Ope
 * Issues can occur if NVMe devices are set up as SATA devices in the BIOS.
 * OpenCore requires a version of macOS that supports a prelinked kernel, this means any installs of OS X 10.7 Lion or newer are supported with some later versions of OS X 10.6 Snow Leopard also having support.
 * Those having issues converting can refer to the [Clover Conversion](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion) page
-
-### Recommended BIOS settings
-
-**Disable:**
-
-* Fast Boot
-* VT-d (can be enabled if you set DisableIoMapper to YES)
-* CSM
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
-* Intel SGX
-* Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)
-  * If this can't be turned off in the BIOS(or even found) please consider patching it out. See [Fixing CFG Lock](extras/msr-lock.md) for more info.
-    * AMD CPU users don't need to worry about.
-
-**Enable:**
-
-* VT-X
-* Above 4G decoding
-* Hyper-Threading
-* Execute Disable Bit
-* EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode
