@@ -163,6 +163,8 @@ The device-id fake is set up like so:
 
 We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`. The first enables patching via WhateverGreen.kext, the second sets the min stolen memory to 19MB and third sets the framebuffer memory to 9MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
+* **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`
+
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | AAPL,ig-platform-id | Data | 0300220D |
