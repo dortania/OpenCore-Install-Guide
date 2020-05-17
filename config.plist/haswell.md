@@ -63,7 +63,7 @@ Note that you **should not** add your generated `DSDT.aml` here, it is already i
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
-**Block**
+**Delete:**
 
 This blocks certain ACPI tables from loading, for us we can ignore this
 
@@ -292,6 +292,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 * **AppleDebug**: YES
   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
+* **ApplePanic**: YES
+  * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
 * **Target**: `67`
@@ -392,7 +394,7 @@ Recommended to leave enabled for best security practices
 | :--- | :--- | :--- |
 | prev-lang:kbd | String | en-US:0 |
 
-**Block**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+**Delete**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
 **LegacyEnable**: NO
 
@@ -570,14 +572,14 @@ Only drivers present here should be:
 
 **Quirks**:
 
+* **DeduplicateBootOrder**: YES
+  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **ExitBootServicesDelay**: `0`
   * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault 2
 * **IgnoreInvalidFlexRatio**: YES
   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
 * **ReleaseUsbOwnership**: NO
   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
-* **RequestBootVarFallback**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 * **UnblockFsConnect**: NO

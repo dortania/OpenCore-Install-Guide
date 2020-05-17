@@ -44,7 +44,7 @@ So to start, we'll need a couple things:
 * Onboard audio output
   * USB DACs will not work
   * GPU audio out is a hit or miss
-* [AudioDxe](https://github.com/acidanthera/AppleSupportPkg/releases) in both EFI/OC/Drivers and UEFI -> Drivers
+* [AudioDxe](https://github.com/acidanthera/OpenCorePkg/releases) in both EFI/OC/Drivers and UEFI -> Drivers
 * [Binary Resources](https://github.com/acidanthera/OcBinaryData)
   * Add the Resources folder to EFI/OC, just like we did with the OpenCore GUI section
   * For those running out of space, `OCEFIAudio_VoiceOver_Boot.wav` is all that's required for the Boot-Chime

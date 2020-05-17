@@ -227,6 +227,7 @@ GTX
 GUID
 GenSMBIOS
 GibMacOS
+GitBook
 Github
 Goldfish64
 Goldfish64's
@@ -696,6 +697,7 @@ kextd
 kexts
 lapic
 lappie
+linter
 macOS
 macOS's
 macOS(\.)?

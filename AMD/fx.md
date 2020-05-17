@@ -63,7 +63,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
-**Block**
+**Delete:**
 
 This blocks certain ACPI tables from loading, for us we can ignore this
 
@@ -252,6 +252,8 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
 
 * **AppleDebug**: YES
   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
+* **ApplePanic**: YES
+  * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
 * **Target**: `67`
@@ -351,7 +353,7 @@ Recommended to leave enabled for best security practices
 | :--- | :--- | :--- |
 | prev-lang:kbd | String | en-US:0 |
 
-**Block**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+**Delete**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
 **LegacyEnable**: NO
 
