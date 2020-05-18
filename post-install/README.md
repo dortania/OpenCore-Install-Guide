@@ -16,6 +16,8 @@ This section is beneficial for all, regardless of hardware:
 * [Fixing iServices](/post-install/iservices.md)
 * [Fixing DRM](/post-install/drm.md)
 * [Fixing Power Management](/post-install/pm.md)
+* [Setting up Bootstrap.efi](/post-install/multiboot/bootstrap.md)
+* [Installing BootCamp](/post-install/multiboot/bootcamp.md)
 * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
 
 ## Intel

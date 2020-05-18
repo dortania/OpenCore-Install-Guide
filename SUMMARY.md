@@ -51,6 +51,8 @@
   * [Fixing iServices](/post-install/iservices.md)
   * [Emulated NVRAM](/post-install/nvram.md)
   * [Fixing Power Management](/post-install/pm.md)
+  * [Setting up Bootstrap.efi](/post-install/multiboot/bootstrap.md)
+  * [Installing BootCamp](/post-install/multiboot/bootcamp.md)
   * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
 
 ## Extras
