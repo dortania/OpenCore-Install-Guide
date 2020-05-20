@@ -31,24 +31,23 @@ If no new boot option is created, you can go down and follow the troubleshooting
 
 This is mainly as a mini-guide in case BootProtect doesn't work or you'd like to do it manually.
 
-### Quick UEFI Shell Reference Guide
+* [Verify Bootstrap entry was applied](#verify-bootstrap-entry-was-applied)
+* [Removing Bootstrap entry from BIOS](#removing-bootstrap-entry-from-bios)
 
-* `map` \- Lists devices that you can boot from.
-* `drive:` \- Change to the drive you select. Ex. `FS0:`
-* `ls` or `dir` \- List the content of the selected drive.
-* `cd` \- Change directories.
-* `bcfg` \- Boot configuration, used to read and write BIOS boot data.
+### Verify Bootstrap entry was applied
 
-### Adding OpenCore to your BIOS
+For those wanting to verify that the entry was applied in OpenCore, enabling logging(see [OpenCore Debugging](/troubleshooting/debug.md)) and check for entries similar to these:
 
-* First, use `map` to find your devices.
-* Once you have an idea of your device, select it by typing `DEVICE:` replacing device with the actual device. Ex. FS0:
-* Use `ls` to determine the content of the device. It should contain an EFI folder. Use `ls EFI` to look inside the EFI folder. Within the EFI folder you should find BOOT and OC.
-* Use `bcfg boot dump` to view your currently configured boot devices.
-* Use `bcfg boot add 00 {The device containing your EFI}:\EFI\OC\Bootstrap\Bootstrap.EFI Boot9696` to add an entry to the beginning of your boot map.
-  * ex. `bcfg boot add 00 FS0:\EFI\OC\Bootstrap\Bootstrap.EFI Boot9696`
-  * Note: 00 is the boot order ranking, 00 being the very first one, and it increments by one, 01 being the second, 02 being the third and so on.
-* Rerun the boot dump command to verify.
-* Reboot.
+```
+OCB: Have existing option 1, valid 1
+OCB: Boot order has first option as the default option
+```
 
-Credit to [Fewtarious](https://gist.github.com/fewtarius/99e24d7f5afa13cf26ecbe33b864a657) for the original guide
+### Removing Bootstrap entry from BIOS
+
+Because the Bootstrap entry is a protected entry when reseting NVRAM, you'll need to set certain settings:
+
+* Misc -> Security -> AllowNvramReset -> true
+* Misc -> Security -> BootProtect -> None
+
+Once these 2 are set in your config.plist, you can next reboot into the OpenCore picker and select the `Reset NVRAM` entry

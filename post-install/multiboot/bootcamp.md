@@ -32,6 +32,8 @@ To install, it's as simple as grabbing [Brigadier](https://github.com/corpnewt/b
 path/to/Brigadier --model MacPro7,1
 ```
 
+* **Note**: Older versions of the Bootcamp installer(6.0) do not support APFS, you'll need to either choose a newer SMBIOS that would have it bundled(ie. iMac 19,1) or after installation update your bootcamp software. See below for more details on troubleshooting: [Windows Startup Disk can't see APFS drives](#windows-startup-disk-cant-see-apfs-drives)
+
 ![](/images/bootcamp-md/extension.png)
 
 Next you will find our bootcamp drivers under either:
@@ -96,7 +98,14 @@ Misc -> BlessOverride -> \EFI\Microsoft\Boot\bootmgfw.efi
 
 ## "You can't change the startup disk to the selected disk" error
 
-This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:
+This is commonly caused by either:
+
+* 3rd Party NTFS Drivers(ie. Paragon)
+* Irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. 
+
+To fix the former, either disable or uninstall these tools.
+
+To fix the latter, we need to enable this quirk:
 
 * `PlatformInfo -> Generic -> AdviseWindows -> True`
 
@@ -105,6 +114,12 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 ## Booting Windows results in BlueScreen or Linux crashes
 
 This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
+
+For Z390 and newer motherboards, you'll also want to enable `ProtectUefiServices` to ensure OpenCore's patches are applying correctly.
+
+If your firmware is is quite old(generally 2013 and older), you'll want to enable `ProtectMemoryRegions`.
+
+Due to the variations of firmwares from vendor to vendor, you'll need to play around with the combination of these 3 quirks and see which works best.
 
 Common Windows error code:
 
@@ -116,4 +131,9 @@ This is due to OpenCore getting confused when trying to boot Windows and acciden
 
 ## Windows Startup Disk can't see APFS drives
 
-* Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). You can try to alleviate these issues by selecting a newer SMBIOS from brigadier(ie. `--model iMac19,1`)
+* Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). You can try to alleviate these issues by either updating to the newest release with Apple's software updater or selecting a newer SMBIOS from brigadier(ie. `--model iMac19,1`) and when running brigadier.
+
+For the latter, you'll need to run the following(replace `filename.msi` with the Bootcamp installation msi):
+```
+msiexec.exe /x "c:\filename.msi"
+``` 
