@@ -20,9 +20,8 @@ So the main things to note with updating OpenCore:
 
 So the process goes as follows:
 
-1. **Download the latest releases of OpenCore and co.**
+1. **Download the latest release of OpenCore**
 
-* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 * [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
 2. **Mount your EFI**
