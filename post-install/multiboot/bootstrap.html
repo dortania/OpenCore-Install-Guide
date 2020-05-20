@@ -800,7 +800,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Mon May 18 2020 14:44:09 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed May 20 2020 23:34:18 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="using-bootstrapefi"><a name="using-bootstrapefi" class="plugin-anchor" href="#using-bootstrapefi"><i class="fa fa-link" aria-hidden="true"></i></a>Using Bootstrap.efi</h1>
 <ul>
@@ -834,29 +834,21 @@
 <p>If no new boot option is created, you can go down and follow the troubleshooting steps on manually adding it. But triple check the above settings are correct on your system.</p>
 <h2 id="troubleshooting"><a name="troubleshooting" class="plugin-anchor" href="#troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>Troubleshooting</h2>
 <p>This is mainly as a mini-guide in case BootProtect doesn&apos;t work or you&apos;d like to do it manually.</p>
-<h3 id="quick-uefi-shell-reference-guide"><a name="quick-uefi-shell-reference-guide" class="plugin-anchor" href="#quick-uefi-shell-reference-guide"><i class="fa fa-link" aria-hidden="true"></i></a>Quick UEFI Shell Reference Guide</h3>
 <ul>
-<li><code>map</code> - Lists devices that you can boot from.</li>
-<li><code>drive:</code> - Change to the drive you select. Ex. <code>FS0:</code></li>
-<li><code>ls</code> or <code>dir</code> - List the content of the selected drive.</li>
-<li><code>cd</code> - Change directories.</li>
-<li><code>bcfg</code> - Boot configuration, used to read and write BIOS boot data.</li>
+<li><a href="#verify-bootstrap-entry-was-applied">Verify Bootstrap entry was applied</a></li>
+<li><a href="#removing-bootstrap-entry-from-bios">Removing Bootstrap entry from BIOS</a></li>
 </ul>
-<h3 id="adding-opencore-to-your-bios"><a name="adding-opencore-to-your-bios" class="plugin-anchor" href="#adding-opencore-to-your-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Adding OpenCore to your BIOS</h3>
+<h3 id="verify-bootstrap-entry-was-applied"><a name="verify-bootstrap-entry-was-applied" class="plugin-anchor" href="#verify-bootstrap-entry-was-applied"><i class="fa fa-link" aria-hidden="true"></i></a>Verify Bootstrap entry was applied</h3>
+<p>For those wanting to verify that the entry was applied in OpenCore, enabling logging(see <a href="../../troubleshooting/debug.html">OpenCore Debugging</a>) and check for entries similar to these:</p>
+<pre><code>OCB: Have existing option 1, valid 1
+OCB: Boot order has first option as the default option
+</code></pre><h3 id="removing-bootstrap-entry-from-bios"><a name="removing-bootstrap-entry-from-bios" class="plugin-anchor" href="#removing-bootstrap-entry-from-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Removing Bootstrap entry from BIOS</h3>
+<p>Because the Bootstrap entry is a protected entry when reseting NVRAM, you&apos;ll need to set certain settings:</p>
 <ul>
-<li>First, use <code>map</code> to find your devices.</li>
-<li>Once you have an idea of your device, select it by typing <code>DEVICE:</code> replacing device with the actual device. Ex. FS0:</li>
-<li>Use <code>ls</code> to determine the content of the device. It should contain an EFI folder. Use <code>ls EFI</code> to look inside the EFI folder. Within the EFI folder you should find BOOT and OC.</li>
-<li>Use <code>bcfg boot dump</code> to view your currently configured boot devices.</li>
-<li>Use <code>bcfg boot add 00 {The device containing your EFI}:\EFI\OC\Bootstrap\Bootstrap.EFI Boot9696</code> to add an entry to the beginning of your boot map.<ul>
-<li>ex. <code>bcfg boot add 00 FS0:\EFI\OC\Bootstrap\Bootstrap.EFI Boot9696</code></li>
-<li>Note: 00 is the boot order ranking, 00 being the very first one, and it increments by one, 01 being the second, 02 being the third and so on.</li>
+<li>Misc -&gt; Security -&gt; AllowNvramReset -&gt; true</li>
+<li>Misc -&gt; Security -&gt; BootProtect -&gt; None</li>
 </ul>
-</li>
-<li>Rerun the boot dump command to verify.</li>
-<li>Reboot.</li>
-</ul>
-<p>Credit to <a href="https://gist.github.com/fewtarius/99e24d7f5afa13cf26ecbe33b864a657" target="_blank">Fewtarious</a> for the original guide</p>
+<p>Once these 2 are set in your config.plist, you can next reboot into the OpenCore picker and select the <code>Reset NVRAM</code> entry</p>
 
                                 
                                 </section>
@@ -900,7 +892,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Setting up Bootstrap.efi","level":"7.1.11","depth":2,"next":{"title":"Installing BootCamp","level":"7.1.12","depth":2,"path":"post-install/multiboot/bootcamp.md","ref":"post-install/multiboot/bootcamp.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"7.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/multiboot/bootstrap.md","mtime":"2020-05-18T14:44:09.631Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-18T14:45:24.669Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setting up Bootstrap.efi","level":"7.1.11","depth":2,"next":{"title":"Installing BootCamp","level":"7.1.12","depth":2,"path":"post-install/multiboot/bootcamp.md","ref":"post-install/multiboot/bootcamp.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"7.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/multiboot/bootstrap.md","mtime":"2020-05-20T23:34:18.599Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-20T23:35:37.872Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

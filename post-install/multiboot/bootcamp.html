@@ -798,7 +798,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Mon May 18 2020 14:44:09 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Wed May 20 2020 23:34:18 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="installing-and-using-bootcamp-utilities"><a name="installing-and-using-bootcamp-utilities" class="plugin-anchor" href="#installing-and-using-bootcamp-utilities"><i class="fa fa-link" aria-hidden="true"></i></a>Installing and using BootCamp utilities</h1>
 <ul>
@@ -838,7 +838,10 @@
 <h2 id="installation"><a name="installation" class="plugin-anchor" href="#installation"><i class="fa fa-link" aria-hidden="true"></i></a>Installation</h2>
 <p>To install, it&apos;s as simple as grabbing <a href="https://github.com/corpnewt/brigadier" target="_blank">Brigadier</a> and running either <code>Brigadier.bat</code> for Windows or <code>Brigadier.command</code> for macOS. If the SMBIOS you&apos;re currently using either has BootCamp issues or want to download for another SMBIOS, you can add <code>--  model{SMBIOS}</code> to the end:</p>
 <pre><code>path/to/Brigadier --model MacPro7,1
-</code></pre><p><img src="../../images/bootcamp-md/extension.png" alt=""></p>
+</code></pre><ul>
+<li><strong>Note</strong>: Older versions of the Bootcamp installer(6.0) do not support APFS, you&apos;ll need to either choose a newer SMBIOS that would have it bundled(ie. iMac 19,1) or after installation update your bootcamp software. See below for more details on troubleshooting: <a href="#windows-startup-disk-cant-see-apfs-drives">Windows Startup Disk can&apos;t see APFS drives</a></li>
+</ul>
+<p><img src="../../images/bootcamp-md/extension.png" alt=""></p>
 <p>Next you will find our bootcamp drivers under either:</p>
 <ul>
 <li>Windows:</li>
@@ -894,13 +897,22 @@
 <pre><code>Misc -&gt; BlessOverride -&gt; \EFI\Microsoft\Boot\bootmgfw.efi
 </code></pre><p><img src="../../images/win-md/blessoverride.png" alt=""></p>
 <h2 id="you-cant-change-the-startup-disk-to-the-selected-disk-error"><a name="you-cant-change-the-startup-disk-to-the-selected-disk-error" class="plugin-anchor" href="#you-cant-change-the-startup-disk-to-the-selected-disk-error"><i class="fa fa-link" aria-hidden="true"></i></a>&quot;You can&apos;t change the startup disk to the selected disk&quot; error</h2>
-<p>This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:</p>
+<p>This is commonly caused by either:</p>
+<ul>
+<li>3rd Party NTFS Drivers(ie. Paragon)</li>
+<li>Irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. </li>
+</ul>
+<p>To fix the former, either disable or uninstall these tools.</p>
+<p>To fix the latter, we need to enable this quirk:</p>
 <ul>
 <li><code>PlatformInfo -&gt; Generic -&gt; AdviseWindows -&gt; True</code></li>
 </ul>
 <p><img src="../../images/bootcamp-md/error.png" alt=""></p>
 <h2 id="booting-windows-results-in-bluescreen-or-linux-crashes"><a name="booting-windows-results-in-bluescreen-or-linux-crashes" class="plugin-anchor" href="#booting-windows-results-in-bluescreen-or-linux-crashes"><i class="fa fa-link" aria-hidden="true"></i></a>Booting Windows results in BlueScreen or Linux crashes</h2>
 <p>This is due to alignment issues, make sure <code>SyncRuntimePermissions</code> is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)</p>
+<p>For Z390 and newer motherboards, you&apos;ll also want to enable <code>ProtectUefiServices</code> to ensure OpenCore&apos;s patches are applying correctly.</p>
+<p>If your firmware is is quite old(generally 2013 and older), you&apos;ll want to enable <code>ProtectMemoryRegions</code>.</p>
+<p>Due to the variations of firmwares from vendor to vendor, you&apos;ll need to play around with the combination of these 3 quirks and see which works best.</p>
 <p>Common Windows error code:</p>
 <ul>
 <li><code>0xc000000d</code></li>
@@ -909,9 +921,11 @@
 <p>This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it&apos;s booting OpenCore. This can be avoided by either move Windows to it&apos;s own drive <em>or</em> adding a custom drive path under BlessOverride. See <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> and <a href="#cant-find-windowsbootcamp-drive-in-picker">Can&apos;t find Windows/BootCamp drive in picker</a> entry for more details.</p>
 <h2 id="windows-startup-disk-cant-see-apfs-drives"><a name="windows-startup-disk-cant-see-apfs-drives" class="plugin-anchor" href="#windows-startup-disk-cant-see-apfs-drives"><i class="fa fa-link" aria-hidden="true"></i></a>Windows Startup Disk can&apos;t see APFS drives</h2>
 <ul>
-<li>Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). You can try to alleviate these issues by selecting a newer SMBIOS from brigadier(ie. <code>--model iMac19,1</code>)</li>
+<li>Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). You can try to alleviate these issues by either updating to the newest release with Apple&apos;s software updater or selecting a newer SMBIOS from brigadier(ie. <code>--model iMac19,1</code>) and when running brigadier.</li>
 </ul>
-
+<p>For the latter, you&apos;ll need to run the following(replace <code>filename.msi</code> with the Bootcamp installation msi):</p>
+<pre><code>msiexec.exe /x &quot;c:\filename.msi&quot;
+</code></pre>
                                 
                                 </section>
                             
@@ -950,7 +964,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Installing BootCamp","level":"7.1.12","depth":2,"next":{"title":"Fixing USB","level":"7.1.13","depth":2,"url":"https://dortania.github.io/USB-Map-Guide/","ref":"https://dortania.github.io/USB-Map-Guide/","articles":[]},"previous":{"title":"Setting up Bootstrap.efi","level":"7.1.11","depth":2,"path":"post-install/multiboot/bootstrap.md","ref":"post-install/multiboot/bootstrap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/multiboot/bootcamp.md","mtime":"2020-05-18T14:44:09.631Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-18T14:45:24.669Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Installing BootCamp","level":"7.1.12","depth":2,"next":{"title":"Fixing USB","level":"7.1.13","depth":2,"url":"https://dortania.github.io/USB-Map-Guide/","ref":"https://dortania.github.io/USB-Map-Guide/","articles":[]},"previous":{"title":"Setting up Bootstrap.efi","level":"7.1.11","depth":2,"path":"post-install/multiboot/bootstrap.md","ref":"post-install/multiboot/bootstrap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/multiboot/bootcamp.md","mtime":"2020-05-20T23:34:18.599Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-20T23:35:37.872Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
