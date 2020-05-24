@@ -114,6 +114,7 @@ So for troubleshooting, we'll need to go over a couple things:
 * [Checking if you have the right kexts](#checking-if-you-have-the-right-kexts)
 * [Checking if AppleALC is patching correctly](#checking-if-applealc-is-patching-correctly)
 * [Checking AppleHDA is vanilla](#checking-applehda-is-vanilla)
+* [AppleALC working inconsistently](#applealc-working-inconsistently)
 
 #### Checking if you have the right kexts
 
@@ -187,3 +188,13 @@ sudo kextcache -i / && sudo kextcache -u /
 ```
 
 This will check if the signature is valid for AppleHDA, if it's not then you're going to need to either get an original copy of AppleHDA for your system and replace it or update macOS(kexts will be cleaned out on updates). This will only happen when you're manually patched AppleHDA so if this is a fresh install it's highly unlikely you will have signature issues.
+
+#### AppleALC working inconsistently
+
+Sometimes race conditions can occur where AppleALC is a bit too slow and unable to patch AppleHDAController in time, to get around this you can actually specify in boot-args the delay:
+
+```
+alcdelay=1000
+```
+
+The above boot-arg will delay AppleHDAController by 1000 ms(1 second), note `alcdelay` cannot exceed [3000 ms](https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L308L311)
