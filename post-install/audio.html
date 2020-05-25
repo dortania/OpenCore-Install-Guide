@@ -800,7 +800,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sun May 24 2020 18:46:04 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon May 25 2020 17:55:35 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="fixing-audio-with-applealc"><a name="fixing-audio-with-applealc" class="plugin-anchor" href="#fixing-audio-with-applealc"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing audio with AppleALC</h1>
 <ul>
@@ -873,10 +873,18 @@
 </code></pre>
 <p>Then add this PciRoot with the child <code>alc-layout-id</code> to your config.plist under DeviceProperties -&gt; Add:</p>
 <p><img src="../images/post-install/audio-md/config-layout-id.png" alt=""></p>
-<p>Note that the value is in HEX/Data, you can use a simple <a href="https://www.rapidtables.com/convert/number/decimal-to-hex.html" target="_blank">decimal to hexadecimal calculator</a> to find yours. <code>printf &apos;%x\n&apos; DECI_VAL</code>:</p>
+<p>Note that AppleALC can accept both Decimal/Number and Hexideciaml/Data, generally the best method is Hex as you avoid any unnecessary conversions. You can use a simple <a href="https://www.rapidtables.com/convert/number/decimal-to-hex.html" target="_blank">decimal to hexadecimal calculator</a> to find yours. <code>printf &apos;%x\n&apos; DECI_VAL</code>:</p>
 <p><img src="../images/post-install/audio-md/hex-convert.png" alt=""></p>
-<p>So in this example, <code>alcid=11</code> would become <code>alc-layout-id | Data | &lt;0B000000&gt;</code></p>
-<p>Note that the final value should be 4 bytes in total(ie. <code>0B 00 00 00</code> ), for layout IDs surpassing 255(<code>FF 00 00 00</code>) will need to remember that the bytes are swapped. So 256 will become <code>FF 01 00 00</code></p>
+<p>So in this example, <code>alcid=11</code> would become  either:</p>
+<ul>
+<li><code>alc-layout-id | Data | &lt;0B000000&gt;</code></li>
+<li><code>alc-layout-id | Number | &lt;11&gt;</code></li>
+</ul>
+<p>Note that the final HEX/Data value should be 4 bytes in total(ie. <code>0B 00 00 00</code> ), for layout IDs surpassing 255(<code>FF 00 00 00</code>) will need to remember that the bytes are swapped. So 256 will become <code>FF 01 00 00</code></p>
+<ul>
+<li>HEX Swapping and data size can be completely ignored using the Decimal/Number method</li>
+</ul>
+<p><strong>Reminder</strong>: You <strong>MUST</strong> remove the boot-arg afterwards, as it will always have the top priority and so AppleALC will ignore all other entries like in DeviceProperties</p>
 <h2 id="miscellaneous-issues"><a name="miscellaneous-issues" class="plugin-anchor" href="#miscellaneous-issues"><i class="fa fa-link" aria-hidden="true"></i></a>Miscellaneous issues</h2>
 <p><strong>No Mic on AMD</strong>:</p>
 <ul>
@@ -959,9 +967,12 @@
 </code></pre>
 <p>This will check if the signature is valid for AppleHDA, if it&apos;s not then you&apos;re going to need to either get an original copy of AppleHDA for your system and replace it or update macOS(kexts will be cleaned out on updates). This will only happen when you&apos;re manually patched AppleHDA so if this is a fresh install it&apos;s highly unlikely you will have signature issues.</p>
 <h4 id="applealc-working-inconsistently"><a name="applealc-working-inconsistently" class="plugin-anchor" href="#applealc-working-inconsistently"><i class="fa fa-link" aria-hidden="true"></i></a>AppleALC working inconsistently</h4>
-<p>Sometimes race conditions can occur where AppleALC is a bit too slow and unable to patch AppleHDAController in time, to get around this you can actually specify in boot-args the delay:</p>
+<p>Sometimes race conditions can occur where your hardware isn&apos;t initialized in time for AppleHDAController resulting in no sound output. To get around this, you can either: </p>
+<p>Specify in boot-args the delay:</p>
 <pre><code>alcdelay=1000
-</code></pre><p>The above boot-arg will delay AppleHDAController by 1000 ms(1 second), note <code>alcdelay</code> cannot exceed <a href="https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L308L311" target="_blank">3000 ms</a></p>
+</code></pre><p>Or Specify via DeviceProperties:</p>
+<pre><code>alc-delay | Number | 1000
+</code></pre><p>The above boot-arg/property will delay AppleHDAController by 1000 ms(1 second), note the ALC delay cannot exceed <a href="https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L308L311" target="_blank">3000 ms</a></p>
 
                                 
                                 </section>
@@ -1005,7 +1016,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing Audio","level":"7.1.2","depth":2,"next":{"title":"Booting without USB","level":"7.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"previous":{"title":"Security and FileVault","level":"7.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/audio.md","mtime":"2020-05-24T18:46:04.441Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-24T18:47:19.663Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing Audio","level":"7.1.2","depth":2,"next":{"title":"Booting without USB","level":"7.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"previous":{"title":"Security and FileVault","level":"7.1.1","depth":2,"path":"post-install/security.md","ref":"post-install/security.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/audio.md","mtime":"2020-05-25T17:55:35.675Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-25T17:56:51.504Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
