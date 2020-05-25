@@ -87,13 +87,19 @@ Then add this PciRoot with the child `alc-layout-id` to your config.plist under 
 
 ![](/images/post-install/audio-md/config-layout-id.png)
 
-Note that the value is in HEX/Data, you can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
+Note that AppleALC can accept both Decimal/Number and Hexideciaml/Data, generally the best method is Hex as you avoid any unnecessary conversions. You can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
 
 ![](/images/post-install/audio-md/hex-convert.png)
 
-So in this example, `alcid=11` would become `alc-layout-id | Data | <0B000000>`
+So in this example, `alcid=11` would become  either:
 
-Note that the final value should be 4 bytes in total(ie. `0B 00 00 00` ), for layout IDs surpassing 255(`FF 00 00 00`) will need to remember that the bytes are swapped. So 256 will become `FF 01 00 00`
+* `alc-layout-id | Data | <0B000000>`
+* `alc-layout-id | Number | <11>`
+
+Note that the final HEX/Data value should be 4 bytes in total(ie. `0B 00 00 00` ), for layout IDs surpassing 255(`FF 00 00 00`) will need to remember that the bytes are swapped. So 256 will become `FF 01 00 00`
+* HEX Swapping and data size can be completely ignored using the Decimal/Number method
+
+**Reminder**: You **MUST** remove the boot-arg afterwards, as it will always have the top priority and so AppleALC will ignore all other entries like in DeviceProperties
 
 ## Miscellaneous issues
 
@@ -191,10 +197,19 @@ This will check if the signature is valid for AppleHDA, if it's not then you're 
 
 #### AppleALC working inconsistently
 
-Sometimes race conditions can occur where AppleALC is a bit too slow and unable to patch AppleHDAController in time, to get around this you can actually specify in boot-args the delay:
+Sometimes race conditions can occur where your hardware isn't initialized in time for AppleHDAController resulting in no sound output. To get around this, you can either: 
+
+Specify in boot-args the delay:
 
 ```
 alcdelay=1000
 ```
 
-The above boot-arg will delay AppleHDAController by 1000 ms(1 second), note `alcdelay` cannot exceed [3000 ms](https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L308L311)
+Or Specify via DeviceProperties:
+
+```
+alc-delay | Number | 1000
+```
+
+
+The above boot-arg/property will delay AppleHDAController by 1000 ms(1 second), note the ALC delay cannot exceed [3000 ms](https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L308L311)
