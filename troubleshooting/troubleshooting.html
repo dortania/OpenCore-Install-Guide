@@ -800,7 +800,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Tue May 26 2020 16:11:49 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Tue May 26 2020 17:19:24 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="general-troubleshooting"><a name="general-troubleshooting" class="plugin-anchor" href="#general-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>General Troubleshooting</h1>
 <ul>
@@ -1252,7 +1252,21 @@ Enable CSM in your UEFI settings. This may appear as &quot;Boot legacy ROMs&quot
 <h2 id="macos-frozen-right-before-login"><a name="macos-frozen-right-before-login" class="plugin-anchor" href="#macos-frozen-right-before-login"><i class="fa fa-link" aria-hidden="true"></i></a>macOS frozen right before login</h2>
 <p>This is a common example of screwed up TSC, for most system add <a href="https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/" target="_blank">VoodooTSCSync</a></p>
 <p>For Skylake-X, many firmwares including Asus and EVGA won&apos;t write to all cores. So we&apos;ll need to reset the TSC on cold boot and wake with <a href="https://github.com/interferenc/TSCAdjustReset" target="_blank">TSCAdjustReset</a>. Compiled version can be found here: <a href="https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip" target="_blank">TSCAdjustReset.kext</a>. Note that you <strong>must</strong> open up the kext(ShowPackageContents in finder, <code>Contents -&gt; Info.plist</code>) and change the Info.plist -&gt; <code>IOKitPersonalities -&gt; IOPropertyMatch -&gt; IOCPUNumber</code> to the number of CPU threads you have starting from <code>0</code>(i9 7980xe 18 core would be <code>35</code> as it has 36 threads total)</p>
-<p><img src="../images/troubleshooting/troubleshooting-md/asus-tsc.jpg" alt=""></p>
+<p>The most common way to see the TSC issue:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Case 1</th>
+<th style="text-align:center">Case 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="../images/troubleshooting/troubleshooting-md/asus-tsc.png" alt=""></td>
+<td style="text-align:center"><img src="../images/troubleshooting/troubleshooting-md/asus-tsc-2.png" alt=""></td>
+</tr>
+</tbody>
+</table>
 <h2 id="keyboard-works-but-trackpad-does-not"><a name="keyboard-works-but-trackpad-does-not" class="plugin-anchor" href="#keyboard-works-but-trackpad-does-not"><i class="fa fa-link" aria-hidden="true"></i></a>Keyboard works but trackpad does not</h2>
 <p>Make sure that VoodooInput is listed <em>before</em> VoodooPS2 and VoodooI2C kexts in your config.plist.</p>
 <h3 id="voodooi2c-troubleshooting"><a name="voodooi2c-troubleshooting" class="plugin-anchor" href="#voodooi2c-troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>VoodooI2C Troubleshooting</h3>
@@ -1547,7 +1561,7 @@ fs0:\EFI\OC\Tools&gt; acpidump.efi -b -n DSDT -z
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Installation Process","level":"5.1","depth":1,"path":"installation/installation-process.md","ref":"installation/installation-process.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-26T16:11:49.151Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-26T16:13:08.621Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"General Troubleshooting","level":"6.1","depth":1,"next":{"title":"OpenCore Debugging","level":"6.2","depth":1,"path":"troubleshooting/debug.md","ref":"troubleshooting/debug.md","articles":[]},"previous":{"title":"Installation Process","level":"5.1","depth":1,"path":"installation/installation-process.md","ref":"installation/installation-process.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/troubleshooting.md","mtime":"2020-05-26T17:19:24.190Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-26T17:20:39.098Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
