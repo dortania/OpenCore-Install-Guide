@@ -127,8 +127,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
-* **SetupVirtualMap**: NO
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+* **SetupVirtualMap**: YES
+  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
   * Tricks the hardware into thinking its always booting macOS, mainly beneficial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: YES

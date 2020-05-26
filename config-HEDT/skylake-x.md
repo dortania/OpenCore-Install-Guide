@@ -1,4 +1,4 @@
-# Skylake-X
+# Skylake-X/W and Cascade Lake-X/W
 
 * Supported version: 0.5.8
 
@@ -121,12 +121,13 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Fixes Secure Boot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffee Lake systems
+  * X299 Refresh boards also need this(Comet Lake)
 * **ProvideCustomSlide**: YES
   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
-* **SetupVirtualMap**: NO
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+* **SetupVirtualMap**: YES
+  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
   * Tricks the hardware into thinking its always booting macOS, mainly beneficial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: YES
@@ -175,7 +176,8 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **AppleXcpmCfgLock**: YES
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmExtraMsrs**: NO
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Skylake-X can ignore
+  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Skylake-X can ignore.
+  * Certain systems(mainly Skylake-SP) may require this quirk to boot.
 * **AppleXcpmForceBoost**: NO
   * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benefit from this
 * **CustomSMBIOSGuid**: NO
