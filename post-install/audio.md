@@ -72,10 +72,8 @@ Once you've found a Layout ID that works with your hack, we can create a more pe
 With AppleALC, there's a priority hierarchy with which properties are prioritized:
 
 1. `alcid=xxx` boot-arg, useful for debugging and overrides all other values
-2. `alc-layout-id` in DeviceProperties, recommended for AppleALC
-3. `layout-id` in DeviceProperties, same property Macs use
-
-As we can see in [AppeALC's source](https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L189-L192), it expects your layout ID to be set via `alc-layout-id` so to make things easier on AppleALC we'll set it with DeviceProperties
+2. `alc-layout-id` in DeviceProperties, **should only be used on Apple hardware**
+3. `layout-id` in DeviceProperties, **should be used on both Apple and non-Apple hardware**
 
 To start, we'll need to find out where our Audio controller is located on the PCI map. For this, we'll be using a handy tool called [gfxutil](https://github.com/acidanthera/gfxutil/releases) then with the macOS terminal:
 
@@ -83,18 +81,18 @@ To start, we'll need to find out where our Audio controller is located on the PC
 path/to/gfxutil -f HDEF
 ```
 
-Then add this PciRoot with the child `alc-layout-id` to your config.plist under DeviceProperties -> Add:
+Then add this PciRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
 
 ![](/images/post-install/audio-md/config-layout-id.png)
 
-Note that AppleALC can accept both Decimal/Number and Hexideciaml/Data, generally the best method is Hex as you avoid any unnecessary conversions. You can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
+Note that AppleALC can accept both Decimal/Number and Hexadecimal/Data, generally the best method is Hex as you avoid any unnecessary conversions. You can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
 
 ![](/images/post-install/audio-md/hex-convert.png)
 
 So in this example, `alcid=11` would become  either:
 
-* `alc-layout-id | Data | <0B000000>`
-* `alc-layout-id | Number | <11>`
+* `layout-id | Data | <0B000000>`
+* `layout-id | Number | <11>`
 
 Note that the final HEX/Data value should be 4 bytes in total(ie. `0B 00 00 00` ), for layout IDs surpassing 255(`FF 00 00 00`) will need to remember that the bytes are swapped. So 256 will become `FF 01 00 00`
 * HEX Swapping and data size can be completely ignored using the Decimal/Number method
@@ -179,7 +177,7 @@ Note: **Do not rename your audio controller manually**, this can cause issues as
 
 * Correct vs Incorrect layout IDs:
 
-Correct alc-layout-id           |  Incorrect alc-layout-id
+Correct layout-id           |  Incorrect layout-id
 :-------------------------:|:-------------------------:
 ![](/images/post-install/audio-md/right-layout.png)  |  ![](/images/post-install/audio-md/wrong-layout.png)
 
