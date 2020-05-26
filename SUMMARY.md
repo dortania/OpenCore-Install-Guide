@@ -51,6 +51,7 @@
   * [Fixing iServices](/post-install/iservices.md)
   * [Emulated NVRAM](/post-install/nvram.md)
   * [Fixing Power Management](/post-install/pm.md)
+  * [Fixing Sleep](/post-install/sleep.md)
   * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
 
 ## Extras
