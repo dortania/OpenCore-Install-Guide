@@ -105,11 +105,18 @@ Note that the final HEX/Data value should be 4 bytes in total(ie. `0B 00 00 00` 
 
 * This is a common issue with when running AppleALC with AMD, specifically no patches have been made to support Mic input. At the moment the "best" solution is to either buy a USB DAC/Mic or go the VoodooHDA.kext method. Problem with VoodooHDA is that it's been known to be unstable and have worse audio quality than AppleALC
 
-**Same layout ID from Clover doesn't work on OpenCore**
+**Same layout ID from Clover doesn't work on OpenCore**:
 
 This is likely do to IRQ conflicts, on Clover there's a whole sweep of ACPI hot-patches that are applied automagically. Fixing this is a little bit painful but [SSDTTime](https://github.com/corpnewt/SSDTTime)'s `FixHPET` option can handle most cases.
 
 For odd cases where RTC and HPET take IRQs from other devices like USB and audio, you can reference the [HP Compaq DC7900 ACPI patch](https://github.com/khronokernel/trashOS/blob/master/HP-Compaq-DC7900/README.md#dsdt-edits) example in the trashOS repo
+
+**Kernel Panic on power state changes in 10.15**:
+
+* Enable PowerTimeoutKernelPanic in your config.plist:
+  * `Kernel -> Quirks -> PowerTimeoutKernelPanic -> True`
+  
+Alternatively you can use `setpowerstate_panic=0` in boot-args, which is the equivalent of the above quirk.
 
 ## Troubleshooting
 
