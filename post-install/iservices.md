@@ -41,6 +41,8 @@ This last one is what we're after, as we want something genuine but currently no
 
 **Note 2**: Using a "Purchase Date not Validated:" can cause issues down the line if another machine of the same serial ever gets activated, for initial setup it can help alleviate issues with your account but in the long run an invalid serial can be a safer choice.
 
+**Note3**: Checking too many serials may result in your access being denied to Apple Check Coverage page, to bypass this limitation it's advised to use a VPN or [tor browser](https://www.torproject.org/download/) or any other service that allows you to change/mask your IP address.
+
 ## Fixing En0
 
 To start, grab [Hackintool](https://www.tonymacx86.com/threads/release-hackintool-v3-x-x.254559/) ([Github link](https://github.com/headkaze/Hackintool)) and head to System -> Peripherals (Info -> Misc on older versions of Hackintool)
