@@ -1,6 +1,10 @@
 # Table of contents
 
 * [OpenCore Desktop Guide](README.md)
+* [Why OpenCore](why-oc.md)
+
+## USB Creation
+
 * [Creating the USB](/installer-guide/README.md)
   * [macOS install](/installer-guide/mac-install.md)
   * [Windows install](/installer-guide/winblows-install.md)

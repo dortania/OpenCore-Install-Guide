@@ -101,7 +101,7 @@ Misc -> BlessOverride -> \EFI\Microsoft\Boot\bootmgfw.efi
 This is commonly caused by either:
 
 * 3rd Party NTFS Drivers(ie. Paragon)
-* Irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. 
+* Irregular partition setup of the Windows drive, specifically that the EFI is not the first partition.
 
 To fix the former, either disable or uninstall these tools.
 
@@ -134,6 +134,7 @@ This is due to OpenCore getting confused when trying to boot Windows and acciden
 * Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). You can try to alleviate these issues by either updating to the newest release with Apple's software updater or selecting a newer SMBIOS from brigadier(ie. `--model iMac19,1`) and when running brigadier.
 
 For the latter, you'll need to run the following(replace `filename.msi` with the Bootcamp installation msi):
+
 ```
 msiexec.exe /x "c:\filename.msi"
-``` 
+```

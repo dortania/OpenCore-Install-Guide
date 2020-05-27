@@ -12,6 +12,7 @@ Table of Contents:
   * [Checking if you have the right kexts](#checking-if-you-have-the-right-kexts)
   * [Checking if AppleALC is patching correctly](#checking-if-applealc-is-patching-correctly)
   * [Checking AppleHDA is vanilla](#checking-applehda-is-vanilla)
+  * [AppleALC working inconsistently](#applealc-working-inconsistently)
 
 So to start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 
@@ -21,7 +22,7 @@ kextstat | grep -E "AppleHDA|AppleALC|Lilu"
 
 If all 3 show up, you're good to go. And make sure VoodooHDA **is not present**. This will conflict with AppleALC otherwise.
 
-If you're having issues, see the [Troubleshooting section](/post-install/audio.md#Troubleshooting)
+If you're having issues, see the [Troubleshooting section](/post-install/audio.md#troubleshooting)
 
 ## Finding your layout ID
 
@@ -81,6 +82,8 @@ To start, we'll need to find out where our Audio controller is located on the PC
 path/to/gfxutil -f HDEF
 ```
 
+![](/images/post-install/audio-md/gfxutil-hdef.png)
+
 Then add this PciRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
 
 ![](/images/post-install/audio-md/config-layout-id.png)
@@ -95,6 +98,7 @@ So in this example, `alcid=11` would become  either:
 * `layout-id | Number | <11>`
 
 Note that the final HEX/Data value should be 4 bytes in total(ie. `0B 00 00 00` ), for layout IDs surpassing 255(`FF 00 00 00`) will need to remember that the bytes are swapped. So 256 will become `FF 01 00 00`
+
 * HEX Swapping and data size can be completely ignored using the Decimal/Number method
 
 **Reminder**: You **MUST** remove the boot-arg afterwards, as it will always have the top priority and so AppleALC will ignore all other entries like in DeviceProperties
@@ -129,7 +133,7 @@ So for troubleshooting, we'll need to go over a couple things:
 
 #### Checking if you have the right kexts
 
-o start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
+To start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 
 ```text
 kextstat | grep -E "AppleHDA|AppleALC|Lilu"
@@ -182,8 +186,6 @@ Note: **Do not rename your audio controller manually**, this can cause issues as
 
 **More examples**:
 
-* Correct vs Incorrect layout IDs:
-
 Correct layout-id           |  Incorrect layout-id
 :-------------------------:|:-------------------------:
 ![](/images/post-install/audio-md/right-layout.png)  |  ![](/images/post-install/audio-md/wrong-layout.png)
@@ -202,7 +204,7 @@ This will check if the signature is valid for AppleHDA, if it's not then you're 
 
 #### AppleALC working inconsistently
 
-Sometimes race conditions can occur where your hardware isn't initialized in time for AppleHDAController resulting in no sound output. To get around this, you can either: 
+Sometimes race conditions can occur where your hardware isn't initialized in time for AppleHDAController resulting in no sound output. To get around this, you can either:
 
 Specify in boot-args the delay:
 
@@ -210,11 +212,10 @@ Specify in boot-args the delay:
 alcdelay=1000
 ```
 
-Or Specify via DeviceProperties:
+Or Specify via DeviceProperties(in your HDEF device):
 
 ```
 alc-delay | Number | 1000
 ```
-
 
 The above boot-arg/property will delay AppleHDAController by 1000 ms(1 second), note the ALC delay cannot exceed [3000 ms](https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L308L311)
