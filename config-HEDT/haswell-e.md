@@ -1,6 +1,6 @@
 # Haswell-E
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Table of Contents:
 
@@ -520,6 +520,8 @@ Only drivers present here should be:
   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+* **TscSyncTimeout**: `0`
+  * Attempts to fix the TSC on badly behaving platforms, mainly relevant for those running debug kernels as this quirks cannot fix S3 wakes. Instead VoodooTsc is the preferred option.
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
 

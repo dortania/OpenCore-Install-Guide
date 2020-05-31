@@ -1,6 +1,6 @@
 # Fixing Resolution and Verbose
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Wanting a more clean booting experience with macOS without all that verbose text while booting? Well you need a couple things:
 

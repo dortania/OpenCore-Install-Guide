@@ -1,6 +1,7 @@
 # Comet Lake
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
+* **Note**: This guide only supports Comet Lake on 10.15.5 or newer
 
 Table of Contents:
 
@@ -193,7 +194,7 @@ Fun Fact: The reason the byte order is swapped is because most modern processors
   * Path to the `info.plist` hidden within the kext
   * ex: `Contents/Info.plist`
 
-**Emulate**: Needed for spoofing unsupported CPUs, thankfully in 10.15.5 Comet Lake S support was added so no need to spoof here.
+**Emulate**: Needed for spoofing unsupported CPUs, thankfully in 10.15.5 Comet Lake S support was added so no need to spoof here. For those running High Sierra or Mojave, you will need the below to spoof to a supported CPU model(due to stability issues, this guide will not go over such CPUID spoofs)
 
 **Block**: Blocks kexts from loading. Not relevant for us
 
@@ -544,16 +545,18 @@ Only drivers present here should be:
 
 **Quirks**:
 
+* **DeduplicateBootOrder**: YES
+  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **ExitBootServicesDelay**: `0`
   * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault 2
 * **IgnoreInvalidFlexRatio**: NO
   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
 * **ReleaseUsbOwnership**: NO
   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
-* **RequestBootVarFallback**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+* **TscSyncTimeout**: `0`
+  * Attempts to fix the TSC on badly behaving platforms, mainly relevant for those running debug kernels as this quirks cannot fix S3 wakes. Instead VoodooTsc is the preferred option.
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
 

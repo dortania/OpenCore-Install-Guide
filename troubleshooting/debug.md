@@ -1,6 +1,6 @@
 # OpenCore Debugging
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Needing to figure out why you're getting issues or stalling? Well, you've come to the right place.
 

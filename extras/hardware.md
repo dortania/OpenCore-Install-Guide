@@ -1,6 +1,6 @@
 # Supported hardware
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 So this little section is for those who are wanting to know whether their hardware will work in macOS
 

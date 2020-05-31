@@ -1,6 +1,6 @@
 # OpenCore beauty treatment
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Main thing this guide will go over:
 
