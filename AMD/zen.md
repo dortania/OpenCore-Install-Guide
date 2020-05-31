@@ -52,12 +52,11 @@ And now you're ready to configure it!
 
 **Add:**
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/USB-Map-Guide/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
-* [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)
-  * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS
-  * This SSDT also has a second function, USBX. This is used for forcing USB power properties and requires SSDT-EC so this just jumbles them together.
-  * I've also provided a precompiled version for users with `EC0`, this is the most common device on AMD systems: [SSDT-EC-USBX-AMD.aml](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/SSDT-EC-USBX-AMD.aml)
+| Required_SSDTs | Description |
+| :--- | :--- |
+| **[SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)** | * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. A pre-built can be found here if you have issues: [SSDT-EC-USBX-DESKTOP](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-USBX-DESKTOP.aml) |
 
  Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -126,8 +125,8 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
-* **SetupVirtualMap**: NO
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+* **SetupVirtualMap**: YES
+  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
   * Tricks the hardware into thinking its always booting macOS, mainly beneficial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: YES
@@ -276,7 +275,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 * **BlacklistAppleUpdate**: True
   * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
 * **BootProtect**: None
-  * Allows the use of Boostrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`

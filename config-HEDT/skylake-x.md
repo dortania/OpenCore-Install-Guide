@@ -1,4 +1,4 @@
-# Skylake-X
+# Skylake-X/W and Cascade Lake-X/W
 
 * Supported version: 0.5.8
 
@@ -48,14 +48,14 @@ Now with those downloaded, we can get to really get started:
 
 **Add:**
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://usb-map.gitbook.io/project/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/USB-Map-Guide/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)** | Allows for native CPU power management on Haswell and newer |
-| **[SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)** | Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. |
+| **[SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)** | Allows for native CPU power management on Haswell and newer. A pre-built can be found here if you have issues: [SSDT-PLUG-DRTNIA](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-PLUG-DRTNIA.aml) |
+| **[SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)** | * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. A pre-built can be found here if you have issues: [SSDT-EC-USBX-DESKTOP](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-USBX-DESKTOP.aml) |
 | **[SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](../extras/acpi.md) page. |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
@@ -121,12 +121,13 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Fixes Secure Boot keys on MacPro5,1 and Insyde firmwares
 * **ProtectUefiServices**: NO
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and newer Coffee Lake systems
+  * X299 Refresh boards also need this(Comet Lake)
 * **ProvideCustomSlide**: YES
   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
-* **SetupVirtualMap**: NO
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+* **SetupVirtualMap**: YES
+  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
   * Tricks the hardware into thinking its always booting macOS, mainly beneficial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: YES
@@ -175,7 +176,8 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **AppleXcpmCfgLock**: YES
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmExtraMsrs**: NO
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Skylake-X can ignore
+  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Skylake-X can ignore.
+  * Certain systems(mainly Skylake-SP) may require this quirk to boot.
 * **AppleXcpmForceBoost**: NO
   * Forces maximum multiplier, only recommended to enable on scientific or media calculation machines that are constantly under load. Main Xeons benefit from this
 * **CustomSMBIOSGuid**: NO
@@ -199,7 +201,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **ThirdPartyDrives**: NO
   * Enables TRIM, not needed for NVMe but AHCI based drives may require this. Please check under system report to see if your drive supports TRIM
 * **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://usb-map.gitbook.io/project/) when possible.
+  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/USB-Map-Guide/) when possible.
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
@@ -261,7 +263,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 * **BlacklistAppleUpdate**: True
   * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
 * **BootProtect**: None
-  * Allows the use of Boostrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
@@ -548,6 +550,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+
 **Enable:**
 
 * VT-x

@@ -10,6 +10,25 @@ Table of Contents:
 
 Do note that this is only recommended for users who have already installed macOS, for users who are installing for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
 
+## What is CFG-Lock
+
+CFG-Lock is a setting in your BIOS that allows for a specific register(in this case the MSR 0xE2) to be written to. By default, most motherboards lock this variable with many even hiding the option outright in the GUI. And why we care about it is that macOS actually wants to write to this variable, and not just one part of macOS. Instead both the Kernel(XNU) and AppleIntelPowerManagement want this register.
+
+So to fix it we have 2 options:
+
+1. Patch macOS to work with our hardware
+
+* This creates instability and unnecessary patching for many
+* The 2 patches we use for this:
+  * `AppleCpuPmCfgLock` for AppleIntelPowerManagement.kext
+  * `AppleXcpmCfgLock` for the Kernel(XNU)
+
+2. Patch our firmware to support MSR E2 write
+
+* Very much preferred, as avoids patching allowing for greater flexibility regarding stability and OS upgrades
+  
+Note: Penyrn based machines actually don't need to worry about unlocking this register
+
 ## Disabling CFG Lock
 
 So you've installed macOS but you're using those pesky `CFG-Lock` patches that we want to get rid of, well to do this is fairly simple. You'll need the following:

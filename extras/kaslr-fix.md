@@ -196,12 +196,12 @@ So we have 6 regions we need to go through and see which are bad, best idea is t
 
 Now lets take the above example and create our own MmioWhitelist, we'll need to first convert the address from hexadecimal to decimal:
 
-MMIO devirt 0x60000000 -> 1610612736
-MMIO devirt 0xFE000000 -> 4261412864
-MMIO devirt 0xFEC00000 -> 4273995776
-MMIO devirt 0xFED00000 -> 4275044352
-MMIO devirt 0xFEE00000 -> 4276092928
-MMIO devirt 0xFF000000 -> 4278190080
+* MMIO devirt 0x60000000 -> 1610612736
+* MMIO devirt 0xFE000000 -> 4261412864
+* MMIO devirt 0xFEC00000 -> 4273995776
+* MMIO devirt 0xFED00000 -> 4275044352
+* MMIO devirt 0xFEE00000 -> 4276092928
+* MMIO devirt 0xFF000000 -> 4278190080
 
 Should look something like this when done:
 

@@ -1,6 +1,10 @@
 # Table of contents
 
 * [OpenCore Desktop Guide](README.md)
+* [Why OpenCore](why-oc.md)
+
+## USB Creation
+
 * [Creating the USB](/installer-guide/README.md)
   * [macOS install](/installer-guide/mac-install.md)
   * [Windows install](/installer-guide/winblows-install.md)
@@ -16,17 +20,28 @@
 * [Skylake](/config.plist/skylake.md)
 * [Kaby Lake](/config.plist/kaby-lake.md)
 * [Coffee Lake](/config.plist/coffee-lake.md)
+* [Comet Lake](/config.plist/comet-lake.md)
 
 ## Intel HEDT Config.plist
 
 * [Haswell-E](/config-HEDT/haswell-e.md)
 * [Broadwell-E](/config-HEDT/broadwell-e.md)
-* [Skylake-X](/config-HEDT/skylake-x.md)
+* [Skylake/Cascade Lake-X/W](/config-HEDT/skylake-x.md)
 
 ## AMD Config.plist
 
 * [Bulldozer/Jaguar](AMD/fx.md)
 * [Zen](AMD/zen.md)
+
+## Installation
+
+* [Installation Process](/installation/installation-process.md)
+
+## Troubleshooting
+
+* [General Troubleshooting](/troubleshooting/troubleshooting.md)
+* [OpenCore Debugging](/troubleshooting/debug.md)
+* [macOS Boot Process](/troubleshooting/boot.md)
 
 ## Post Install
 
@@ -41,12 +56,9 @@
   * [Fixing iServices](/post-install/iservices.md)
   * [Emulated NVRAM](/post-install/nvram.md)
   * [Fixing Power Management](/post-install/pm.md)
-
-## Troubleshooting
-
-* [General Troubleshooting](/troubleshooting/troubleshooting.md)
-* [OpenCore Debugging](/troubleshooting/debug.md)
-* [macOS Boot Process](/troubleshooting/boot.md)
+  * [Setting up Bootstrap.efi](/post-install/multiboot/bootstrap.md)
+  * [Installing BootCamp](/post-install/multiboot/bootcamp.md)
+  * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
 
 ## Extras
 

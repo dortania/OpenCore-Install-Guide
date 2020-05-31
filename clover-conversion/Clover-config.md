@@ -75,6 +75,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Fixes**:
 
+* **FixAirport**:
+  * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
 * **FixIPIC**:
   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
@@ -88,9 +90,6 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * **FixDisplay**:
   * Manual framebuffer patching, WhateverGreen does most of the work already
-
-* **AddMCHC**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
 * **FixHDA**:
   * Handled by AppleALC
@@ -110,11 +109,15 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * **AddPNLF**:
   * See [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html)
-
+* **AddMCHC**:
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 * **AddIMEI**:
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
   * WhateverGreen will also handle fixing IMEI naming
   * For Sandy Bridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
+* **FakeLPC**:
+  * `DeviceProperties -> Add -> PciRoot... -> device-id`
+  * You'll want to spoof it to a supported LPC controller already in AppleLPC
 
 * **FixIntelGfx**:
   * WhateverGreen handles this
@@ -130,7 +133,6 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * **PluginType**:
   * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-  * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this though HEDT systems will need to manually make theirs.
   * See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
 
 * **Generate P States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For Sandy Bridge and IvyBridge)
@@ -163,9 +165,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **EFILoginHiDPI**:
 
-* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> EFILoginHiDPI | Data | <>`
-  * 0 -> `<00000000>`
-  * 1 -> `<01000000>`
+* Clover only flag, for OpenCore UI scaling see UIScale and `UEFI -> Output`
 
 **flagstate**:
 
@@ -476,7 +476,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **CsrActiveConfig**:
 
-* `NVRAM -> Add -> csr-active-config`:
+* `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`:
 
   * 0x0: `00000000`
   * 0x3: `03000000`

@@ -10,7 +10,7 @@ See the [**supported hardware section**](https://github.com/dortania/OpenCore-De
 
 ## Firmware Drivers
 
-These are the drivers used by OpenCore, for the majority of systems you only need 3 .efi drivers to get up and running:
+These are the drivers used by OpenCore, for the majority of systems you only need 2 .efi drivers to get up and running:
 
 * [~~ApfsDriverLoader.efi~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
   * ~~Needed for seeing APFS volumes(ie. macOS)~~.
@@ -45,7 +45,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
   * Emulates the SMC chip found on real macs, without this macOS will not boot
   * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
 * [Lilu](https://github.com/vit9696/Lilu/releases)
-  * A kext to patch many processes, required for AppleALC and WhateverGreen and recommended for VirtualSMC
+  * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work
 
 **VirtualSMC Plugins**:
 
@@ -73,21 +73,21 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 **Ethernet**:
 
-* [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
+* [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for I211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
-* [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
+* [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
   * For Realtek's 2.5Gb Ethernet
 
 **USB**:
 
-* [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
+* [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases)
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
   * Not needed on Skylake and newer(AsRock is dumb and does need this)
   * Does not work on AMD CPUs **at all**

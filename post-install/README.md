@@ -6,7 +6,7 @@ So you've finally finished installing macOS with OpenCore but know there's still
 
 ## Universal
 
-This section is beneficial for all, regardless of hardware.
+This section is beneficial for all, regardless of hardware:
 
 * [Correcting Audio](/post-install/audio.md)
 * [Enabling FileVault and other security features](/post-install/security.md)
@@ -16,20 +16,24 @@ This section is beneficial for all, regardless of hardware.
 * [Fixing iServices](/post-install/iservices.md)
 * [Fixing DRM](/post-install/drm.md)
 * [Fixing Power Management](/post-install/pm.md)
+* [Setting up Bootstrap.efi](/post-install/multiboot/bootstrap.md)
+* [Installing BootCamp](/post-install/multiboot/bootcamp.md)
+* [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
 
 ## Intel
 
-Used for Intel's consumer line
+Used for Intel's consumer line:
 
-* [Fixing Intel USB](https://usb-map.gitbook.io/project/)
 * [Fixing CFG Lock](/extras/msr-lock.md)
+
+And with the HEDT series:
+
 * [Emulating NVRAM](/post-install/nvram.md)
 
 ## AMD
 
-Used for AMD CPU based hardware
+Used for AMD CPU based hardware:
 
-* [Fixing AMD USB](https://dortania.github.io/USB-Map-Guide/)
 * [Fixing AMD Temperature readings](https://github.com/trulyspinach/SMCAMDProcessor)
 
 ## Maxwell and Pascal

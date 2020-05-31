@@ -2,7 +2,11 @@
 
 * Supported version: 0.5.8
 
-To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/)(this will already be done on the `BOOT` USB drive for windows users):
+To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/) and place it on the root of your EFI partition
+
+* Windows users: This will already be done on the `BOOT` USB drive created by MakeInstall
+* Linux users: This is the `OPENCORE` partition we created earlier
+  * Note that Method 1 only creates 1 partition, while Method 2 creates 2 partitions
 
 ![base EFI folder](/images/installer-guide/opencore-efi-md/base-efi.png)
 
@@ -20,9 +24,10 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
   * HiiDatabase.efi
     * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
   * OpenCanopy.efi
-    * This is OpenCore's optional GUI, we'll be going over how to set this up in installer-guide so remove this for now
+    * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](/extras/gui.md) so remove this for now
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
     * Pretty obvious when you need this, USB keyboard and mouse users don't need it
+    * Reminder: PS2 ≠ USB
 
 * **Remove everything from Tools:**
   * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes

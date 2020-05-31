@@ -31,9 +31,9 @@ So this little section is for those who are wanting to know whether their hardwa
 # SSD Compatibility
 
 * No eMMC storage
-* ~~Samsung's early 970 Evo Plus and PM981 models don't work~
-  * [970 Evo Plus requires a firmware upgrade to work](https://www.tonymacx86.com/threads/do-the-samsung-970-evo-plus-drives-work-new-firmware-available-2b2qexm7.270757/page-14#post-1960453)
-  * PM981 has been fixed with [NVMeFix](https://github.com/acidanthera/NVMeFix/releases) ver. 1.0.2
+* Samsung's PM981 and Micorn's 2200S
+  * Instability and kernel panics are common
+* [970 Evo Plus requires a firmware upgrade to work](https://www.tonymacx86.com/threads/do-the-samsung-970-evo-plus-drives-work-new-firmware-available-2b2qexm7.270757/page-14#post-1960453)
 
 # Audio Compatibility
 
@@ -45,7 +45,7 @@ So this little section is for those who are wanting to know whether their hardwa
 
 See supported chipset on respective drivers:
 
-* [IntelMausiEthernet](https://github.com/Mieze/IntelMausiEthernet)
+* [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for Intel NICs, newer chipsets are based off of I211-AT will need the [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X)
