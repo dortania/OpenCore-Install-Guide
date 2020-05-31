@@ -7,7 +7,7 @@ Wanting a more clean booting experience with macOS without all that verbose text
 * [macOS Decluttering](#macos-decluttering)
 * [OpenCore Decluttering](#opencore-decluttering)
 
-## macOS Decluttering 
+## macOS Decluttering
 
 **`Misc -> Debug`**
 
