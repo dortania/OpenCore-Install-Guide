@@ -92,7 +92,7 @@ What we'll need:
 * CpuPm and Cpu0Ist tables dropped
 * [ssdtPRGen](https://github.com/Piker-Alpha/ssdtPRGen.sh)
 
-To drop the CpuPm and Cpu0Ist tables, head to ACPI -> Block:
+To drop the CpuPm and Cpu0Ist tables, head to ACPI -> Delete:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |

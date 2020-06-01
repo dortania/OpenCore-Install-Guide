@@ -1,6 +1,6 @@
 # Why OpenCore over Clover and others
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 This section is a brief rundown as to why the community has been transitioning over to OpenCore, for those who just want a macOS machine can skip this page.
 

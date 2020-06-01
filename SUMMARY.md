@@ -20,6 +20,7 @@
 * [Skylake](/config.plist/skylake.md)
 * [Kaby Lake](/config.plist/kaby-lake.md)
 * [Coffee Lake](/config.plist/coffee-lake.md)
+* [Comet Lake](/config.plist/comet-lake.md)
 
 ## Intel HEDT Config.plist
 

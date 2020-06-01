@@ -1,6 +1,6 @@
 # Fixing CFG Lock
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Table of Contents:
 

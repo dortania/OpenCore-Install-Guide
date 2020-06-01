@@ -1,6 +1,6 @@
 # Emulated NVRAM
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Table of Contents:
 
@@ -14,6 +14,8 @@ So this section is for those who don't have native NVRAM, the most common hardwa
 * X299
 
 For B360, B365, H310, H370, Z390 users, make sure you have [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl) both under EFI/OC/ACPI and config.plist -> ACPI -> Add. For more info on making and compiling SSDTs, please see [**Getting started with ACPI**](../extras/acpi.md)
+
+**Note**: Desktop Z490 boards do not need this, the chipset's NVRAM is natively supported
 
 ## Cleaning out the Clover gunk
 

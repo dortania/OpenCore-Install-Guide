@@ -1,6 +1,6 @@
 # Post Install
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 So you've finally finished installing macOS with OpenCore but know there's still some things to clean up, well you've come to the right place!
 

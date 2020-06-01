@@ -86,13 +86,14 @@ So with OpenCore, we have to note that legacy Windows installs are not supported
 Now to get onto troubleshooting:
 
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
-* Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is located on the same drive
 
 If Windows and OpenCore's boot loaders are on the same drive, you'll need to add a BlessOverride entry:
 
 ```
 Misc -> BlessOverride -> \EFI\Microsoft\Boot\bootmgfw.efi
 ```
+
+* **Note**: As of OpenCore 0.5.9, this no longer needs to be specified. OpenCore should pick up on this entry automatically
 
 ![](/images/win-md/blessoverride.png)
 
