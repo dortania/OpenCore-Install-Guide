@@ -277,33 +277,53 @@ Just don't add your drivers to `UEFI -> Drivers`
 
 # Graphics
 
+* Note: PciRoot... should be replaced with 
+
 **InjectIntel**:
 
-* `DeviceProperties -> Add -> PciRoot... -> Vendor`
-* `DeviceProperties -> Add -> PciRoot... -> deviceID`
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> device-id`
+  * ie. `66010003` for the HD 4000
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> vendor-id -> <86800000>`
 
 **InjectAti**:
 
-* `DeviceProperties -> Add -> PciRoot... -> deviceID`
-* `DeviceProperties -> Add -> PciRoot... -> Connectors`
+* `DeviceProperties -> Add -> PciRoot... -> device-id`
+  * ie: `<B0670000>` for the R9 390X
+* `DeviceProperties -> Add -> PciRoot... -> @0,connector-type`
+  * You may need to add additional Connectors (ie. @1,connector-type, @2,connector-type) for the amount of ports you have. See here for the list of connector types:
+
+```
+LVDS                    <02 00 00 00>
+DVI (Dual Link)         <04 00 00 00>
+DVI (Single Link)       <00 02 00 00>
+VGA                     <10 00 00 00>
+S-Video                 <80 00 00 00>
+DP                      <00 04 00 00>
+HDMI                    <00 08 00 00>
+DUMMY                   <01 00 00 00>
+```
 
 **InjectNvidia**:
 
-* `DeviceProperties -> Add -> PciRoot... -> DeviceID`
+* `DeviceProperties -> Add -> PciRoot... -> device-id`
 * `DeviceProperties -> Add -> PciRoot... -> Family`
 
 **FakeIntel**:
 
-* `DeviceProperties -> Add -> PciRoot... -> device-id`
-* `DeviceProperties -> Add -> PciRoot... -> vendor-id`
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> device-id`
+  * ie. `66010003` for the HD 4000
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> vendor-id -> <86800000>`
 
 **FakeAti**:
 
 * `DeviceProperties -> Add -> PciRoot... -> device-id`
+  * ie: `<B0670000>` for the R9 390X
 * `DeviceProperties -> Add -> PciRoot... -> ATY,DeviceID`
+  * ie: `<B067>` for the R9 390X
 * `DeviceProperties -> Add -> PciRoot... -> @0,compatible`
-* `DeviceProperties -> Add -> PciRoot... -> vendor-id`
-* `DeviceProperties -> Add -> PciRoot... -> ATY,VendorID`
+  * ie. `ATY,Elodea` for HD 6970M
+* `DeviceProperties -> Add -> PciRoot... -> vendor-id-> <02100000>`
+* `DeviceProperties -> Add -> PciRoot... -> ATY,VendorID -> <0210>`
 
 **Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seems to fail sometimes when trying to spoof a GPU: [Renaming GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/Sample.dsl) in the WhateverGreen docs
@@ -347,7 +367,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **ig-platform-id**:
 
-* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> ig-platform-id`
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> APPL,ig-platform-id`
 
 **BootDisplay**:
 
