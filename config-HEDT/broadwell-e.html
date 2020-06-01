@@ -316,6 +316,19 @@
             
         </li>
     
+        <li class="chapter " data-level="3.6" data-path="../config.plist/comet-lake.html">
+            
+                <a href="../config.plist/comet-lake.html">
+            
+                    
+                    Comet Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -820,11 +833,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat May 30 2020 18:20:19 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Jun 01 2020 14:41:46 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="broadwell-e"><a name="broadwell-e" class="plugin-anchor" href="#broadwell-e"><i class="fa fa-link" aria-hidden="true"></i></a>Broadwell-E</h1>
 <ul>
-<li>Supported version: 0.5.8</li>
+<li>Supported version: 0.5.9</li>
 </ul>
 <p>Table of Contents:</p>
 <ul>
@@ -893,7 +906,7 @@
 </table>
 <p>Note that you <strong>should not</strong> add your generated <code>DSDT.aml</code> here, it is already in your firmware. So if present, remove the entry for it in your <code>config.plist</code> and under EFI/OC/ACPI.</p>
 <p>For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a> <strong>page.</strong> Compiled SSDTs have a <strong>.aml</strong> extension(Assembled) and will go into the <code>EFI/OC/ACPI</code> folder and <strong>must</strong> be specified in your config under <code>ACPI -&gt; Add</code> as well.</p>
-<p><strong>Block</strong></p>
+<p><strong>Delete:</strong></p>
 <p>This blocks certain ACPI tables from loading, for us we can ignore this</p>
 <p><strong>Patch</strong>:</p>
 <p>This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore</p>
@@ -1115,10 +1128,6 @@
 <li>Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behavior</li>
 </ul>
 </li>
-<li><strong>HideSelf</strong>: YES<ul>
-<li>Hides the EFI partition as a boot option in OC&apos;s boot picker</li>
-</ul>
-</li>
 <li><strong>ConsoleAttributes</strong>: <code>0</code><ul>
 <li>Sets OpenCore&apos;s UI color, won&apos;t be covered here but see 8.3.8 of <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf" target="_blank">Configuration.pdf</a> for more info</li>
 </ul>
@@ -1157,6 +1166,10 @@
 <li>Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer</li>
 </ul>
 </li>
+<li><strong>ApplePanic</strong>: YES<ul>
+<li>Attempts to log kernel panics to disk</li>
+</ul>
+</li>
 <li><strong>DisableWatchDog</strong>: YES<ul>
 <li>Disables the UEFI watchdog, can help with early boot issues</li>
 </ul>
@@ -1182,8 +1195,12 @@
 <li>Allow <code>CTRL+Enter</code> and <code>CTRL+Index</code> to set default boot device in the picker</li>
 </ul>
 </li>
-<li><strong>AuthRestart</strong>: NO:<ul>
+<li><strong>AuthRestart</strong>: NO<ul>
 <li>Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional</li>
+</ul>
+</li>
+<li><strong>BlacklistAppleUpdate</strong>: True<ul>
+<li>Ignores Apple&apos;s firmware updater, recommended to enable as to avoid issues with installs and updates</li>
 </ul>
 </li>
 <li><strong>BootProtect</strong>: None<ul>
@@ -1330,7 +1347,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Block</strong>: Forcibly rewrites NVRAM variables, do note that <code>Add</code> <strong>will not overwrite</strong> values already present in NVRAM so values like <code>boot-args</code> should be left alone.</p>
+<p><strong>Delete</strong>: Forcibly rewrites NVRAM variables, do note that <code>Add</code> <strong>will not overwrite</strong> values already present in NVRAM so values like <code>boot-args</code> should be left alone.</p>
 <p><strong>LegacyEnable</strong>: YES</p>
 <ul>
 <li>Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM like X99</li>
@@ -1530,6 +1547,10 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 </ul>
 <p><strong>Quirks</strong>:</p>
 <ul>
+<li><strong>DeduplicateBootOrder</strong>: YES<ul>
+<li>Request fallback of some Boot prefixed variables from <code>OC_VENDOR_VARIABLE_GUID</code> to <code>EFI_GLOBAL_VARIABLE_GUID</code>. Used for fixing boot options.</li>
+</ul>
+</li>
 <li><strong>ExitBootServicesDelay</strong>: <code>0</code><ul>
 <li>Only required for very specific use cases like setting to <code>3000</code> - <code>5000</code> for ASUS Z87-Pro running FileVault 2</li>
 </ul>
@@ -1542,12 +1563,12 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 <li>Releases USB controller from firmware driver, needed for when your firmware doesn&apos;t support EHCI/XHCI Handoff. Clover equivalent is <code>FixOwnership</code></li>
 </ul>
 </li>
-<li><strong>RequestBootVarFallback</strong>: YES<ul>
-<li>Request fallback of some Boot prefixed variables from <code>OC_VENDOR_VARIABLE_GUID</code> to <code>EFI_GLOBAL_VARIABLE_GUID</code>. Used for fixing boot options.</li>
-</ul>
-</li>
 <li><strong>RequestBootVarRouting</strong>: YES<ul>
 <li>Redirects AptioMemoryFix from <code>EFI_GLOBAL_VARIABLE_GUID</code> to <code>OC\_VENDOR\_VARIABLE\_GUID</code>. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.</li>
+</ul>
+</li>
+<li><strong>TscSyncTimeout</strong>: <code>0</code><ul>
+<li>Attempts to fix the TSC on badly behaving platforms, mainly relevant for those running debug kernels as this quirks cannot fix S3 wakes. Instead VoodooTsc is the preferred option.</li>
 </ul>
 </li>
 <li><strong>UnblockFsConnect</strong>: NO<ul>
@@ -1633,7 +1654,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"4.2","depth":1,"next":{"title":"Skylake/Cascade Lake-X/W","level":"4.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"4.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-05-30T18:20:19.335Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-30T18:21:43.736Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"4.2","depth":1,"next":{"title":"Skylake/Cascade Lake-X/W","level":"4.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"4.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-06-01T14:41:46.831Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-01T14:43:04.635Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

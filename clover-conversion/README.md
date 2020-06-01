@@ -1,6 +1,6 @@
 # Converting from Clover to OpenCore
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 So you see the new fancy OpenCore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with OpenCore but many do not, here we'll be going over what you can bring over and what you cannot.
 
@@ -11,7 +11,7 @@ To get started, we have some resources that will aid you:
 * [Boot Argument conversion](/clover-conversion/Clover-boot-arg.md)
 * [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md)
 
-# Cleaning the Clover Junk in macOS
+## Cleaning the Clover Junk in macOS
 
 So to start, Clover would like to give a big F*** You if you're using emulated NVRAM. Why? Well it likely installed some trash that's a pain in the arse to get rid of. You will need to have SIP disabled to clean it up.
 
@@ -35,7 +35,7 @@ Users of Clover's Preference Pane will also need to remove these:
 * `/Library/PreferencePanes/Clover.prefPane`
 * `/Library/Application\ Support/clover`
 
-# Cleaning the Clover Junk in your hardware
+## Cleaning the Clover Junk in your hardware
 
 The other thing that Clover may have hidden from you is NVRAM variables, this is bad as OpenCore won't overwrite variables unless explicitly told via the `Block` feature found under `NVRAM -> Block`. To fix this, we'll need to clear then via OpenCore's `ClearNvram` feature.
 

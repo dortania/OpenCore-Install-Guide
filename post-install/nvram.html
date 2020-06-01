@@ -316,6 +316,19 @@
             
         </li>
     
+        <li class="chapter " data-level="3.6" data-path="../config.plist/comet-lake.html">
+            
+                <a href="../config.plist/comet-lake.html">
+            
+                    
+                    Comet Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -820,11 +833,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat May 30 2020 18:20:20 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Jun 01 2020 14:41:47 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="emulated-nvram"><a name="emulated-nvram" class="plugin-anchor" href="#emulated-nvram"><i class="fa fa-link" aria-hidden="true"></i></a>Emulated NVRAM</h1>
 <ul>
-<li>Supported version: 0.5.8</li>
+<li>Supported version: 0.5.9</li>
 </ul>
 <p>Table of Contents:</p>
 <ul>
@@ -838,6 +851,7 @@
 <li>X299</li>
 </ul>
 <p>For B360, B365, H310, H370, Z390 users, make sure you have <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl" target="_blank">SSDT-PMC</a> both under EFI/OC/ACPI and config.plist -&gt; ACPI -&gt; Add. For more info on making and compiling SSDTs, please see <a href="../extras/acpi.html"><strong>Getting started with ACPI</strong></a></p>
+<p><strong>Note</strong>: Desktop Z490 boards do not need this, the chipset&apos;s NVRAM is natively supported</p>
 <h2 id="cleaning-out-the-clover-gunk"><a name="cleaning-out-the-clover-gunk" class="plugin-anchor" href="#cleaning-out-the-clover-gunk"><i class="fa fa-link" aria-hidden="true"></i></a>Cleaning out the Clover gunk</h2>
 <p>So some may not have noticed but Clover may have installed RC scripts into macOS for proper NVRAM emulation. This is an issue as it conflicts with OpenCore&apos;s method of emulation.</p>
 <p>Files to delete:</p>
@@ -942,7 +956,7 @@ exit
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Emulated NVRAM","level":"8.1.9","depth":2,"next":{"title":"Fixing Power Management","level":"8.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"previous":{"title":"Fixing iServices","level":"8.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/nvram.md","mtime":"2020-05-30T18:20:20.147Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-30T18:21:43.736Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Emulated NVRAM","level":"8.1.9","depth":2,"next":{"title":"Fixing Power Management","level":"8.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"previous":{"title":"Fixing iServices","level":"8.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/nvram.md","mtime":"2020-06-01T14:41:47.635Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-01T14:43:04.635Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

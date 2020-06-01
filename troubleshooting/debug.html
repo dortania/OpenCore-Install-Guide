@@ -316,6 +316,19 @@
             
         </li>
     
+        <li class="chapter " data-level="3.6" data-path="../config.plist/comet-lake.html">
+            
+                <a href="../config.plist/comet-lake.html">
+            
+                    
+                    Comet Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -820,15 +833,42 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<p><em>Last modified: Sat May 30 2020 18:20:20 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Jun 01 2020 14:41:47 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="opencore-debugging"><a name="opencore-debugging" class="plugin-anchor" href="#opencore-debugging"><i class="fa fa-link" aria-hidden="true"></i></a>OpenCore Debugging</h1>
 <ul>
-<li>Supported version: 0.5.8</li>
+<li>Supported version: 0.5.9</li>
 </ul>
 <p>Needing to figure out why you&apos;re getting issues or stalling? Well, you&apos;ve come to the right place.</p>
-<p>To start, make sure you&apos;re using either the <code>DEBUG</code> or <code>NOOPT</code> versions of OpenCore. This will provide much more info than the <code>RELEASE</code> version.</p>
-<p><strong>Target</strong> Used for enabling different levels of debugging</p>
+<p>To start, make sure you&apos;re using either the <code>DEBUG</code> or <code>NOOPT</code> versions of OpenCore. This will provide much more info than the <code>RELEASE</code> version, the specific files that need to be swapped:</p>
+<ul>
+<li>EFI/BOOT/<ul>
+<li><code>BOOTx64.efi</code></li>
+</ul>
+</li>
+<li>EFI/OC/Bootstrap/<ul>
+<li><code>Bootstrap.efi</code></li>
+</ul>
+</li>
+<li>EFI/OC/Drivers/<ul>
+<li><code>OpenRuntime.efi</code></li>
+</ul>
+</li>
+<li>EFI/OC/<ul>
+<li><code>OpenCore.efi</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="../images/troubleshooting/debug-md/replace.png" alt=""></p>
+<p>Next, head to your config.plist and locate the <code>Misc</code> section, we have a couple entries we&apos;ll want to play with here:</p>
+<p><strong>AppleDebug</strong>: YES</p>
+<p>Provides much more debugging information, specifically relating to boot.efi and will also store the log to disk.</p>
+<p><strong>ApplePanic</strong>: YES</p>
+<p>This will allow kernel panics to be stored to disk, highly recommend keeping <code>keepsyms=1</code> in boot-args to preserve as much info as possible.</p>
+<p><strong>DisableWatchdog</strong>: YES</p>
+<p>Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.</p>
+<p><strong>Target</strong>: <code>67</code>(or calculate one below)</p>
+<p>Used for enabling different levels of debugging</p>
 <ul>
 <li><code>0x01</code> &#x2014; Enable Logging</li>
 <li><code>0x02</code> &#x2014; Enable Onscreen debug</li>
@@ -851,7 +891,7 @@
 <p><code>0x01</code> + <code>0x02</code> + <code>0x10</code> + <code>0x40</code> = <code>0x53</code></p>
 <p><code>0x53</code> converted to decimal becomes <code>83</code></p>
 <p>So we can set <code>Misc</code> -&gt; <code>Debug</code> -&gt; <code>Target</code> -&gt; <code>83</code></p>
-<p><strong>DisplayLevel</strong></p>
+<p><strong>DisplayLevel</strong>: <code>2147483714</code>(or calculate one below)</p>
 <p>Used for setting what is logged</p>
 <ul>
 <li><code>0x00000002</code> &#x2014; DEBUG_WARN in DEBUG, NOOPT, RELEASE.</li>
@@ -869,7 +909,8 @@
 </ul>
 <p>Just like with <code>Target</code>, we use a HEX calculator then convert to decimal:</p>
 <p><code>0x80000042</code> Converted to decimal <code>Misc</code> -&gt; <code>Debug</code> -&gt; <code>DisplayLevel</code> -&gt; <code>2147483714</code></p>
-<p><strong>DisableWatchdog</strong>: YES Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.</p>
+<p>Once done, your config.plist should look like this:</p>
+<p><img src="../images/troubleshooting/debug-md/debug.png" alt=""></p>
 <h2 id="disabling-logging"><a name="disabling-logging" class="plugin-anchor" href="#disabling-logging"><i class="fa fa-link" aria-hidden="true"></i></a>Disabling logging</h2>
 <p>To remove all file logging, set <code>Target</code> to <code>0</code></p>
 
@@ -915,7 +956,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"OpenCore Debugging","level":"7.2","depth":1,"next":{"title":"macOS Boot Process","level":"7.3","depth":1,"path":"troubleshooting/boot.md","ref":"troubleshooting/boot.md","articles":[]},"previous":{"title":"General Troubleshooting","level":"7.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/debug.md","mtime":"2020-05-30T18:20:20.147Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-30T18:21:43.736Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"OpenCore Debugging","level":"7.2","depth":1,"next":{"title":"macOS Boot Process","level":"7.3","depth":1,"path":"troubleshooting/boot.md","ref":"troubleshooting/boot.md","articles":[]},"previous":{"title":"General Troubleshooting","level":"7.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/debug.md","mtime":"2020-06-01T14:41:47.635Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-01T14:43:04.635Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
