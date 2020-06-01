@@ -37,21 +37,19 @@ Once building process for macOS Install app has been done, our new macOS Install
 
 ## Setting up the installer
 
-Now, we will format a USB flash drive to prepare it for both the macOS installer and OpenCore. We will want to use macOS Extended (HFS+) with a GUID partition map. What this will do is create 2 partitions. The main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
+Using 'Disk Utility' app we will format USB flash drive (grab one larger than 8GB) to prepare it for macOS installer and OpenCore. We will format it as Extended (HFS+) with a GUID partition map. This will create 2 partitions. The main, `MyVolume` and a second one called `EFI` which is used as a boot partition where your firmware will check for boot files.
 
-* Note that by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices (alternatively, you can press the view button)
+* Note that by default Disk Utility is showing partitions. Press Cmd/Win+2 to show devices (alternatively, you can display devices using view menu entry, too)
 
 ![Formatting the USB](/images/installer-guide/mac-install-md/format-usb.png)
 
-Next, run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372). Please note that the command below presumes USB ihas been formatted with the name `MyVolume`:
+Next, we will use `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372). Please note that for this example the command below presumes USB has been formatted using the name `MyVolume`. Of course, you can replace the `createinstallmedia` path with any other path containing your macOS Install app. The same applies to the drive name.
 
 ```text
 sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
 Again, this will take time. You might want to grab a cup of coffee and/or continue reading this guide. To be honest, you really should not be following this guide without reading the whole thing first.
-
-Of course, you can replace the `createinstallmedia` path with any other path containing your macOS Install app. The same applies to the drive name part.
 
 ## Setting up OpenCore's EFI environment
 
