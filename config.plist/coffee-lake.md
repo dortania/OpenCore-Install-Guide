@@ -393,7 +393,7 @@ Recommended to leave enabled for best security practices
 
 **LegacySchema**
 
-* Used for assigning NVRAM variables, used with LegacyEnable set to YES
+* Used for assigning NVRAM variables, used only if LegacyEnable property is set to YES.
 
 **WriteFlash**: YES
 
