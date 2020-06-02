@@ -18,29 +18,29 @@ Table of Contents:
 
 ## Starting Point
 
-So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+Making a config.plist may seem hard but it's not. It will take some time but this guide will tell you how to configure everything. You won't be left in the cold. This also means that if you run into issues, review your config settings to make sure they are correct. Main things to note with OpenCore are:
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **All properties must be defined**, there are no defaults OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
+* **The Sample.plist cannot be used As-Is**, you must configure it to your system.
+* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and some, like Mackie's, will even add Clover properties and corrupt plists!
 
-Now with all that, we'll need some things to get started:
+With that in mind, before we start we will need the following:
 
 * [ProperTree](https://github.com/corpnewt/ProperTree): For editing our config, this editor has some super useful tools for OpenCore
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS): For generating our SMBIOS
 * [Sample.plist](https://github.com/acidanthera/OpenCorePkg/releases): This is found under the Docs folder of the release download
 
-Now with those downloaded, we can get to really get started:
+Now, with those downloaded, let's start:
 
 * Grab the **Sample.plist** and rename to **config.plist**
 * Open your new config.plist in ProperTree
   * macOS: `ProperTree.command`
   * Windows: `ProperTree.bat`
-* Run the Clean Snapshot function(**Cmd/Ctrl + Shift + R** and point it at your EFI/OC folder),
+* Run the Clean Snapshot function (**Cmd/Ctrl + Shift + R** and point it at your EFI/OC folder),
   * This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config
-  * Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you're troubleshooting
+  * Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for troubleshooting
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+**Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
 ## ACPI
 
@@ -65,7 +65,7 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 **Delete:**
 
-This blocks certain ACPI tables from loading, for us we can ignore this
+This blocks certain ACPI tables from loading, for now we can ignore this
 
 **Patch**:
 
@@ -157,7 +157,7 @@ Worth noting that for 10.12 -> 10.13.5, you would need to fake the iGPU to the s
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
-* **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
+* **Note**: Headless framebuffers (where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
 
 For users with black screen issues after verbose on B360, B365, H310, H370, Z390, please see the [BusID iGPU patching](/extras/gpu-patches.md#iGPU-BusID-Patching) page
 
@@ -185,7 +185,7 @@ Fun Fact: The reason the byte order is swapped is because most modern processors
 
 ![Kernel](/images/config/config-universal/kernel.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+**Add**: Here you will specify which kexts to load. Order matters properly here and make sure Lilu.kext is always the first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without having to manually type each kext out.
 
 * **BundlePath**
   * Name of the kext
@@ -193,7 +193,7 @@ Fun Fact: The reason the byte order is swapped is because most modern processors
 * **Enabled**
   * Self-explanatory, either enables or disables the kext
 * **ExecutablePath**
-  * Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
+  * Path to the actual executable is hidden within the kext, you can see kext's path by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden under `Plugin` folder. Do note that plist-only kexts do not need this filled in.
   * ex: `Contents/MacOS/Lilu`
 * **PlistPath**
   * Path to the `info.plist` hidden within the kext
@@ -243,7 +243,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/USB-Map-Guide/) when possible.
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+The reason is that `UsbInjectAll` reimplements built-in macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such.
 
 ## Misc
 
@@ -254,7 +254,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **HibernateMode**: None
   * Best to avoid hibernation with Hackintoshes all together
 * **PickerMode**: `Builtin`
-  * Sets OpenCore to use the builtin picker
+  * Sets OpenCore to use the built-in picker
 * **HideAuxiliary**: NO
   * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behavior
 * **ConsoleAttributes**: `0`
@@ -262,9 +262,9 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **PickerAttributes**: `0`
   * Used for setting custom picker attributes, use of this setting will be covered in [Post-Install](/extras/gui.md)
 * **PickerAudioAssist**: NO
-  * Used for enabling VoiceOver like support in the picker, unless you want your hack talking to you keep this disabled
+  * Used for enabling VoiceOver like support in the picker. Leave this disabled unless you want your Hackintosh talking to you.
 * **PollAppleHotKeys**: NO
-  * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use OpenUsbKbDxe.efi instead of OpenCore's builtin support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
+  * Allows you to use Apple's hotkeys during boot, depending on the firmware you may need to use OpenUsbKbDxe.efi instead of OpenCore's built-in support. Do note that if you can select anything in OC's picker, disabling this option can help. Popular commands:
     * `Cmd+V`: Enables verbose
     * `Cmd+Opt+P+R`: Cleans NVRAM
     * `Cmd+R`: Boots Recovery partition
@@ -295,13 +295,13 @@ These values are based of those calculated in [OpenCore debugging](/troubleshoot
 We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 
 * **AllowNvramReset**: YES
-  * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
+  * Allow resetting NVRAM both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO
-  * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
+  * Enables Authenticated restart for FileVault 2. With Authenticated restart enabled FileVault password is not required on reboot. Can be considered a security risk so optional. 
 * **BlacklistAppleUpdate**: True
-  * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
+  * Ignores Apple's firmware updater, recommended enabled to avoid issues with installs and updates
 * **BootProtect**: None
   * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
@@ -324,7 +324,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 
 **Entries**: Used for specifying irregular boot paths that can't be found naturally with OpenCore
 
-Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+Won't be covered here. For more info, see point 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf).
 
 ## NVRAM
 
@@ -335,7 +335,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)
 
 * **UIScale**:
-  * `01`: Standard resolution(Clover equivalent is `0x28`)
+  * `01`: Standard resolution (Clover equivalent is `0x28`)
   * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`)
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
@@ -348,7 +348,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 | boot-args | Description |
 | :--- | :--- |
-| **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
+| **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. This is invaluable to any Hackintosher since it provides you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
 | **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
 | **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](/post-install/audio.md) |
@@ -434,9 +434,9 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page to learn how to find your real MAC Address)
 
-**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
+**Reminder: you want either invalid serial number or a valid but unused serial number. You want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
 [Apple Check Coverage page](https://checkcoverage.apple.com)
 
@@ -477,7 +477,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 **Drivers**: Add your .efi drivers here
 
-Only drivers present here should be:
+The only drivers that should be present here are:
 
 * HfsPlus.efi
 * OpenRuntime.efi
@@ -514,7 +514,7 @@ Only drivers present here should be:
 * **KeyMergeThreshold**: `2`
   * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
 * **KeySupport**: `YES`
-  * Enables OpenCore's built in key support and **required for boot picker selection**, do not use with OpenUsbKbDxe.efi
+  * Enables OpenCore's built-in key support and **required for boot picker selection**, do not use with OpenUsbKbDxe.efi
 * **KeySupportMode**: `Auto`
   * Keyboard translation for OpenCore
 * **KeySwap**: `NO`
@@ -541,7 +541,7 @@ Only drivers present here should be:
 * **ProvideConsoleGop**: YES
   * Enables GOP(Graphics output Protocol) which the macOS bootloader requires for console handle, **required for graphical output once the kernel takes over**
 * **DirectGopRendering**: NO
-  * Use builtin graphics output protocol renderer for console, mainly relevant for MacPro5,1 users
+  * Use built-in graphics output protocol renderer for console, mainly relevant for MacPro5,1 users
 * **ReconnectOnResChange**: NO
 * **ReplaceTabWithSpace**: NO
   * Depending on the firmware, some system may need this to properly edit files in the UEFI shell when unable to handle Tabs. This swaps it for spaces instead-but majority can ignore it but do note that ConsoleControl set to True may be needed
@@ -567,15 +567,15 @@ Only drivers present here should be:
 * **TscSyncTimeout**: `0`
   * Attempts to fix the TSC on badly behaving platforms, mainly relevant for those running debug kernels as this quirks cannot fix S3 wakes. Instead VoodooTsc is the preferred option.
 * **UnblockFsConnect**: NO
-  * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+  * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed.
 
 **ReservedMemory**:
 
-Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide
+Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide.
 
 ## Cleaning up
 
-And now you're ready to save and place it into your EFI under EFI/OC.
+Now you are ready to save and place it into your EFI under EFI/OC.
 
 For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
@@ -584,7 +584,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 **Sanity check**:
 
-So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
+Thanks to the efforts of Ramus, we have an amazing tool to help verify your config for those who may have missed something:
 
 * [**Sanity Checker**](https://opencore.slowgeek.com)
 
