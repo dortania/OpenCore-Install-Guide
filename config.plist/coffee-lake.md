@@ -426,13 +426,13 @@ Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 ```
 
-The `Type` part gets copied to Generic -> SystemProductName.
+Copy `Type` value to Generic -> SystemProductName.
 
-The `Serial` part gets copied to Generic -> SystemSerialNumber.
+Copy `Serial` value to Generic -> SystemSerialNumber.
 
-The `Board Serial` part gets copied to Generic -> MLB.
+Copy `Board Serial` value to Generic -> MLB.
 
-The `SmUUID` part gets copied to Generic -> SystemUUID.
+Copy `SmUUID` value to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page to learn how to find your real MAC Address)
 
