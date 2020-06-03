@@ -1,6 +1,6 @@
 # Post Install
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 So you've finally finished installing macOS with OpenCore but know there's still some things to clean up, well you've come to the right place!
 
@@ -16,6 +16,8 @@ This section is beneficial for all, regardless of hardware:
 * [Fixing iServices](/post-install/iservices.md)
 * [Fixing DRM](/post-install/drm.md)
 * [Fixing Power Management](/post-install/pm.md)
+* [Setting up Bootstrap.efi](/post-install/multiboot/bootstrap.md)
+* [Installing BootCamp](/post-install/multiboot/bootcamp.md)
 * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
 
 ## Intel

@@ -1,6 +1,6 @@
 # Coffee Lake
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Table of Contents:
 
@@ -54,16 +54,16 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)** | Allows for native CPU power management on Haswell and newer. A pre-built can be found here if you have issues: [SSDT-PLUG-DRTNIA](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/SSDT-PLUG-DRTNIA.aml) |
-| **[SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)** | * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. A pre-built can be found here if you have issues: [SSDT-EC-USBX-DESKTOP](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/SSDT-EC-USBX-DESKTOP.aml) |
+| **[SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)** | Allows for native CPU power management on Haswell and newer. A pre-built can be found here if you have issues: [SSDT-PLUG-DRTNIA](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-PLUG-DRTNIA.aml) |
+| **[SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)** | * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users** and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. A pre-built can be found here if you have issues: [SSDT-EC-USBX-DESKTOP](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-USBX-DESKTOP.aml) |
 | **[SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](../extras/acpi.md) page. |
-| **[SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. Pre-built can be found here if you have issues: [SSDT-PMC.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/SSDT-PMC.aml) |
+| **[SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. Pre-built can be found here if you have issues: [SSDT-PMC.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-PMC.aml) |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
-**Block**
+**Delete:**
 
 This blocks certain ACPI tables from loading, for us we can ignore this
 
@@ -127,8 +127,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
-* **SetupVirtualMap**: NO
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+* **SetupVirtualMap**: YES
+  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SignalAppleOS**: NO
   * Tricks the hardware into thinking its always booting macOS, mainly beneficial for MacBook Pro's with dGPUs as booting Windows won't allow for the iGPU to be used
 * **SyncRuntimePermissions**: YES
@@ -155,7 +155,7 @@ The two ig-platform-id's we use are as follows:
 
 Worth noting that for 10.12 -> 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up. 10.13.6 natively supports Coffee Lake
 
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available. 
+We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
 * **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
 
@@ -257,8 +257,6 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
   * Sets OpenCore to use the builtin picker
 * **HideAuxiliary**: NO
   * Hides Recovery and other partitions unless spacebar is pressed, more closely matches real Mac behavior
-* **HideSelf**: YES
-  * Hides the EFI partition as a boot option in OC's boot picker
 * **ConsoleAttributes**: `0`
   * Sets OpenCore's UI color, won't be covered here but see 8.3.8 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 * **PickerAttributes**: `0`
@@ -281,6 +279,8 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 * **AppleDebug**: YES
   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
+* **ApplePanic**: YES
+  * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
 * **Target**: `67`
@@ -298,8 +298,10 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
-* **AuthRestart**: NO:
+* **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
+* **BlacklistAppleUpdate**: True
+  * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
 * **BootProtect**: None
   * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
@@ -379,7 +381,7 @@ Recommended to leave enabled for best security practices
 | :--- | :--- | :--- |
 | prev-lang:kbd | String | en-US:0 |
 
-**Block**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+**Delete**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
 **LegacyEnable**: NO
 
@@ -552,16 +554,18 @@ Only drivers present here should be:
 
 **Quirks**:
 
+* **DeduplicateBootOrder**: YES
+  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **ExitBootServicesDelay**: `0`
   * Only required for very specific use cases like setting to `3000` - `5000` for ASUS Z87-Pro running FileVault 2
 * **IgnoreInvalidFlexRatio**: NO
   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
 * **ReleaseUsbOwnership**: NO
   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Clover equivalent is `FixOwnership`
-* **RequestBootVarFallback**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+* **TscSyncTimeout**: `0`
+  * Attempts to fix the TSC on badly behaving platforms, mainly relevant for those running debug kernels as this quirks cannot fix S3 wakes. Instead VoodooTsc is the preferred option.
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
 

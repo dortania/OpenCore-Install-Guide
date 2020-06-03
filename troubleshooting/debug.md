@@ -1,12 +1,39 @@
 # OpenCore Debugging
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Needing to figure out why you're getting issues or stalling? Well, you've come to the right place.
 
-To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenCore. This will provide much more info than the `RELEASE` version.
+To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenCore. This will provide much more info than the `RELEASE` version, the specific files that need to be swapped:
 
-**Target** Used for enabling different levels of debugging
+* EFI/BOOT/
+  * `BOOTx64.efi`
+* EFI/OC/Bootstrap/
+  * `Bootstrap.efi`
+* EFI/OC/Drivers/
+  * `OpenRuntime.efi`
+* EFI/OC/
+  * `OpenCore.efi`
+
+![](/images/troubleshooting/debug-md/replace.png)
+
+Next, head to your config.plist and locate the `Misc` section, we have a couple entries we'll want to play with here:
+
+**AppleDebug**: YES
+
+Provides much more debugging information, specifically relating to boot.efi and will also store the log to disk.
+
+**ApplePanic**: YES
+
+This will allow kernel panics to be stored to disk, highly recommend keeping `keepsyms=1` in boot-args to preserve as much info as possible.
+
+**DisableWatchdog**: YES
+
+Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
+
+**Target**: `67`(or calculate one below)
+
+Used for enabling different levels of debugging
 
 * `0x01` — Enable Logging
 * `0x02` — Enable Onscreen debug
@@ -30,7 +57,7 @@ To calculate the target, we can use a HEX calculator and then convert it to deci
 
 So we can set `Misc` -> `Debug` -> `Target` -> `83`
 
-**DisplayLevel**
+**DisplayLevel**: `2147483714`(or calculate one below)
 
 Used for setting what is logged
 
@@ -51,7 +78,9 @@ Just like with `Target`, we use a HEX calculator then convert to decimal:
 
 `0x80000042` Converted to decimal `Misc` -> `Debug` -> `DisplayLevel` -> `2147483714`
 
-**DisableWatchdog**: YES Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
+Once done, your config.plist should look like this:
+
+![](/images/troubleshooting/debug-md/debug.png)
 
 ## Disabling logging
 

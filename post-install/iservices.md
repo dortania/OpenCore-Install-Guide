@@ -1,6 +1,6 @@
 # Fixing iMessage and other services with OpenCore
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Table of Contents:
 
@@ -40,6 +40,8 @@ This last one is what we're after, as we want something genuine but currently no
 **Note**:  "We’re sorry, but this serial number isn’t valid. Please check your information and try again." works for many users as well, do note though if you've had a bad track record with Apple/iServices you many need one that's "Purchase Date not Validated". Otherwise there may be suspicion
 
 **Note 2**: Using a "Purchase Date not Validated:" can cause issues down the line if another machine of the same serial ever gets activated, for initial setup it can help alleviate issues with your account but in the long run an invalid serial can be a safer choice.
+
+**Note3**: Checking too many serials may result in your access being denied to Apple Check Coverage page, to bypass this limitation it's advised to use a VPN or [tor browser](https://www.torproject.org/download/) or any other service that allows you to change/mask your IP address.
 
 ## Fixing En0
 

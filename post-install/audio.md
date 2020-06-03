@@ -1,6 +1,6 @@
 # Fixing audio with AppleALC
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Table of Contents:
 
@@ -12,6 +12,7 @@ Table of Contents:
   * [Checking if you have the right kexts](#checking-if-you-have-the-right-kexts)
   * [Checking if AppleALC is patching correctly](#checking-if-applealc-is-patching-correctly)
   * [Checking AppleHDA is vanilla](#checking-applehda-is-vanilla)
+  * [AppleALC working inconsistently](#applealc-working-inconsistently)
 
 So to start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 
@@ -21,7 +22,7 @@ kextstat | grep -E "AppleHDA|AppleALC|Lilu"
 
 If all 3 show up, you're good to go. And make sure VoodooHDA **is not present**. This will conflict with AppleALC otherwise.
 
-If you're having issues, see the [Troubleshooting section](/post-install/audio.md#Troubleshooting)
+If you're having issues, see the [Troubleshooting section](/post-install/audio.md#troubleshooting)
 
 ## Finding your layout ID
 
@@ -72,10 +73,8 @@ Once you've found a Layout ID that works with your hack, we can create a more pe
 With AppleALC, there's a priority hierarchy with which properties are prioritized:
 
 1. `alcid=xxx` boot-arg, useful for debugging and overrides all other values
-2. `alc-layout-id` in DeviceProperties, recommended for AppleALC
-3. `layout-id` in DeviceProperties, same property Macs use
-
-As we can see in [AppeALC's source](https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L189-L192), it expects your layout ID to be set via `alc-layout-id` so to make things easier on AppleALC we'll set it with DeviceProperties
+2. `alc-layout-id` in DeviceProperties, **should only be used on Apple hardware**
+3. `layout-id` in DeviceProperties, **should be used on both Apple and non-Apple hardware**
 
 To start, we'll need to find out where our Audio controller is located on the PCI map. For this, we'll be using a handy tool called [gfxutil](https://github.com/acidanthera/gfxutil/releases) then with the macOS terminal:
 
@@ -83,17 +82,26 @@ To start, we'll need to find out where our Audio controller is located on the PC
 path/to/gfxutil -f HDEF
 ```
 
-Then add this PciRoot with the child `alc-layout-id` to your config.plist under DeviceProperties -> Add:
+![](/images/post-install/audio-md/gfxutil-hdef.png)
+
+Then add this PciRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
 
 ![](/images/post-install/audio-md/config-layout-id.png)
 
-Note that the value is in HEX/Data, you can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
+Note that AppleALC can accept both Decimal/Number and Hexadecimal/Data, generally the best method is Hex as you avoid any unnecessary conversions. You can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
 
 ![](/images/post-install/audio-md/hex-convert.png)
 
-So in this example, `alcid=11` would become `alc-layout-id | Data | <0B000000>`
+So in this example, `alcid=11` would become  either:
 
-Note that the final value should be 4 bytes in total(ie. `0B 00 00 00` ), for layout IDs surpassing 255(`FF 00 00 00`) will need to remember that the bytes are swapped. So 256 will become `FF 01 00 00`
+* `layout-id | Data | <0B000000>`
+* `layout-id | Number | <11>`
+
+Note that the final HEX/Data value should be 4 bytes in total(ie. `0B 00 00 00` ), for layout IDs surpassing 255(`FF 00 00 00`) will need to remember that the bytes are swapped. So 256 will become `FF 01 00 00`
+
+* HEX Swapping and data size can be completely ignored using the Decimal/Number method
+
+**Reminder**: You **MUST** remove the boot-arg afterwards, as it will always have the top priority and so AppleALC will ignore all other entries like in DeviceProperties
 
 ## Miscellaneous issues
 
@@ -101,11 +109,18 @@ Note that the final value should be 4 bytes in total(ie. `0B 00 00 00` ), for la
 
 * This is a common issue with when running AppleALC with AMD, specifically no patches have been made to support Mic input. At the moment the "best" solution is to either buy a USB DAC/Mic or go the VoodooHDA.kext method. Problem with VoodooHDA is that it's been known to be unstable and have worse audio quality than AppleALC
 
-**Same layout ID from Clover doesn't work on OpenCore**
+**Same layout ID from Clover doesn't work on OpenCore**:
 
 This is likely do to IRQ conflicts, on Clover there's a whole sweep of ACPI hot-patches that are applied automagically. Fixing this is a little bit painful but [SSDTTime](https://github.com/corpnewt/SSDTTime)'s `FixHPET` option can handle most cases.
 
 For odd cases where RTC and HPET take IRQs from other devices like USB and audio, you can reference the [HP Compaq DC7900 ACPI patch](https://github.com/khronokernel/trashOS/blob/master/HP-Compaq-DC7900/README.md#dsdt-edits) example in the trashOS repo
+
+**Kernel Panic on power state changes in 10.15**:
+
+* Enable PowerTimeoutKernelPanic in your config.plist:
+  * `Kernel -> Quirks -> PowerTimeoutKernelPanic -> True`
+  
+Alternatively you can use `setpowerstate_panic=0` in boot-args, which is the equivalent of the above quirk.
 
 ## Troubleshooting
 
@@ -114,10 +129,11 @@ So for troubleshooting, we'll need to go over a couple things:
 * [Checking if you have the right kexts](#checking-if-you-have-the-right-kexts)
 * [Checking if AppleALC is patching correctly](#checking-if-applealc-is-patching-correctly)
 * [Checking AppleHDA is vanilla](#checking-applehda-is-vanilla)
+* [AppleALC working inconsistently](#applealc-working-inconsistently)
 
 #### Checking if you have the right kexts
 
-o start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
+To start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 
 ```text
 kextstat | grep -E "AppleHDA|AppleALC|Lilu"
@@ -170,9 +186,7 @@ Note: **Do not rename your audio controller manually**, this can cause issues as
 
 **More examples**:
 
-* Correct vs Incorrect layout IDs:
-
-Correct alc-layout-id           |  Incorrect alc-layout-id
+Correct layout-id           |  Incorrect layout-id
 :-------------------------:|:-------------------------:
 ![](/images/post-install/audio-md/right-layout.png)  |  ![](/images/post-install/audio-md/wrong-layout.png)
 
@@ -187,3 +201,21 @@ sudo kextcache -i / && sudo kextcache -u /
 ```
 
 This will check if the signature is valid for AppleHDA, if it's not then you're going to need to either get an original copy of AppleHDA for your system and replace it or update macOS(kexts will be cleaned out on updates). This will only happen when you're manually patched AppleHDA so if this is a fresh install it's highly unlikely you will have signature issues.
+
+#### AppleALC working inconsistently
+
+Sometimes race conditions can occur where your hardware isn't initialized in time for AppleHDAController resulting in no sound output. To get around this, you can either:
+
+Specify in boot-args the delay:
+
+```
+alcdelay=1000
+```
+
+Or Specify via DeviceProperties(in your HDEF device):
+
+```
+alc-delay | Number | 1000
+```
+
+The above boot-arg/property will delay AppleHDAController by 1000 ms(1 second), note the ALC delay cannot exceed [3000 ms](https://github.com/acidanthera/AppleALC/blob/master/AppleALC/kern_alc.cpp#L308L311)

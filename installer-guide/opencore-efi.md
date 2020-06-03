@@ -1,6 +1,6 @@
 # Adding The Base OpenCore Files
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/) and place it on the root of your EFI partition
 

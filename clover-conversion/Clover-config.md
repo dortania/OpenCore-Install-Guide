@@ -1,6 +1,6 @@
 # Converting common properties from Clover to OpenCore
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -75,6 +75,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Fixes**:
 
+* **FixAirport**:
+  * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
 * **FixIPIC**:
   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
@@ -88,9 +90,6 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * **FixDisplay**:
   * Manual framebuffer patching, WhateverGreen does most of the work already
-
-* **AddMCHC**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
 * **FixHDA**:
   * Handled by AppleALC
@@ -110,11 +109,15 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 * **AddPNLF**:
   * See [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html)
-
+* **AddMCHC**:
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 * **AddIMEI**:
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
   * WhateverGreen will also handle fixing IMEI naming
   * For Sandy Bridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
+* **FakeLPC**:
+  * `DeviceProperties -> Add -> PciRoot... -> device-id`
+  * You'll want to spoof it to a supported LPC controller already in AppleLPC
 
 * **FixIntelGfx**:
   * WhateverGreen handles this
@@ -124,13 +127,12 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **DropTables**:
 
-* `ACPI -> Block`
+* `ACPI -> Delete`
 
 **SSDT**:
 
 * **PluginType**:
   * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
-  * Do note that this SSDT is made for systems where AppleACPICPU attaches CPU0, though some ACPI tables have theirs starting at PR00 so adjust accordingly. CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) can help you with this though HEDT systems will need to manually make theirs.
   * See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
 
 * **Generate P States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For Sandy Bridge and IvyBridge)
@@ -163,9 +165,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **EFILoginHiDPI**:
 
-* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> EFILoginHiDPI | Data | <>`
-  * 0 -> `<00000000>`
-  * 1 -> `<01000000>`
+* Clover only flag, for OpenCore UI scaling see UIScale and `UEFI -> Output`
 
 **flagstate**:
 
@@ -277,33 +277,53 @@ Just don't add your drivers to `UEFI -> Drivers`
 
 # Graphics
 
+* Note: PciRoot... should be replaced with
+
 **InjectIntel**:
 
-* `DeviceProperties -> Add -> PciRoot... -> Vendor`
-* `DeviceProperties -> Add -> PciRoot... -> deviceID`
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> device-id`
+  * ie. `66010003` for the HD 4000
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> vendor-id -> <86800000>`
 
 **InjectAti**:
 
-* `DeviceProperties -> Add -> PciRoot... -> deviceID`
-* `DeviceProperties -> Add -> PciRoot... -> Connectors`
+* `DeviceProperties -> Add -> PciRoot... -> device-id`
+  * ie: `<B0670000>` for the R9 390X
+* `DeviceProperties -> Add -> PciRoot... -> @0,connector-type`
+  * You may need to add additional Connectors (ie. @1,connector-type, @2,connector-type) for the amount of ports you have. See here for the list of connector types:
+
+```
+LVDS                    <02 00 00 00>
+DVI (Dual Link)         <04 00 00 00>
+DVI (Single Link)       <00 02 00 00>
+VGA                     <10 00 00 00>
+S-Video                 <80 00 00 00>
+DP                      <00 04 00 00>
+HDMI                    <00 08 00 00>
+DUMMY                   <01 00 00 00>
+```
 
 **InjectNvidia**:
 
-* `DeviceProperties -> Add -> PciRoot... -> DeviceID`
+* `DeviceProperties -> Add -> PciRoot... -> device-id`
 * `DeviceProperties -> Add -> PciRoot... -> Family`
 
 **FakeIntel**:
 
-* `DeviceProperties -> Add -> PciRoot... -> device-id`
-* `DeviceProperties -> Add -> PciRoot... -> vendor-id`
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> device-id`
+  * ie. `66010003` for the HD 4000
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> vendor-id -> <86800000>`
 
 **FakeAti**:
 
 * `DeviceProperties -> Add -> PciRoot... -> device-id`
+  * ie: `<B0670000>` for the R9 390X
 * `DeviceProperties -> Add -> PciRoot... -> ATY,DeviceID`
+  * ie: `<B067>` for the R9 390X
 * `DeviceProperties -> Add -> PciRoot... -> @0,compatible`
-* `DeviceProperties -> Add -> PciRoot... -> vendor-id`
-* `DeviceProperties -> Add -> PciRoot... -> ATY,VendorID`
+  * ie. `ATY,Elodea` for HD 6970M
+* `DeviceProperties -> Add -> PciRoot... -> vendor-id-> <02100000>`
+* `DeviceProperties -> Add -> PciRoot... -> ATY,VendorID -> <0210>`
 
 **Note**: See here on making an SSDT for GPU Spoofing, DeviceProperties injection via OpenCore seems to fail sometimes when trying to spoof a GPU: [Renaming GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/Sample.dsl) in the WhateverGreen docs
@@ -347,7 +367,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **ig-platform-id**:
 
-* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> ig-platform-id`
+* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> APPL,ig-platform-id`
 
 **BootDisplay**:
 
@@ -476,7 +496,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **CsrActiveConfig**:
 
-* `NVRAM -> Add -> csr-active-config`:
+* `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`:
 
   * 0x0: `00000000`
   * 0x3: `03000000`

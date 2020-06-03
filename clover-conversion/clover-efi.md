@@ -1,12 +1,12 @@
 # Clover Firmware driver conversion
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on OpenCore, firmware drivers are a bit different.
 
 **Supported ones:**
 
-* AudioDxe.efi(Make sure this is from [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg) and **not** Goldfish64's or Clover's repo)
+* AudioDxe.efi(Make sure this is from [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) and **not** Goldfish64's or Clover's repo)
 * CsmVideoDxe.efi(Note that [BiosVideo.efi](https://github.com/acidanthera/DuetPkg) may be preferred)
 * EnhancedFatDxe.efi
 * ExFatDxeLegacy.efi
@@ -43,7 +43,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 * AppleUITheme.efi
 * AptioInputFix.efi
 * AptioMemoryFix.efi
-* AudioDxe.efi(well kinda, see AudioDxe shipped with [AppleSupportPkg](https://github.com/acidanthera/AppleSupportPkg))
+* AudioDxe.efi(well kinda, see AudioDxe shipped with [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg))
 * BootChimeDxe.efi
 * DataHubDxe.efi
 * EmuVariableUEFI.efi

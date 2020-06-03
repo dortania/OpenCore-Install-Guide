@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-* Supported version: 0.5.8
+* Supported version: 0.5.9
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](/troubleshooting/boot.md) page can help clarify thins.
 
@@ -50,6 +50,7 @@ Table of Contents:
     * [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
     * [`kextd stall[0]: AppleACPICPU`](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
     * [MediaKit reports not enough space](/troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
+    * [DiskUtility failing to erase](/troubleshooting/troubleshooting.md#diskutility-fialing-to-erase)
 * [macOS post-install issues](/troubleshooting/troubleshooting.md#macos-post-install)
   * Anytime after macOS is installed
     * [Broken iMessage and Siri](/troubleshooting/troubleshooting.md#broken-imessage-and-siri)
@@ -328,6 +329,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
 * [`kextd stall[0]: AppleACPICPU`](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
 * [MediaKit reports not enough space](/troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
+* [DiskUtility failing to erase](/troubleshooting/troubleshooting.md#diskutility-fialing-to-erase)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -343,16 +345,20 @@ The main places to check:
 * **Missing EC patch**:
   * For desktops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
   * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
-  * Laptop users will need to rename their main EC: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
-    * **Do not use SSDT-EC on a laptop**
 * **IRQ conflict**:
   * Most common on older laptops and pre-builts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
 * **PCI allocation issue**:
   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
     * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**. This rule does not apply to X99
-  * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled\
+  * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
 
+* **NVMe or SATA issue**:
+  * Sometimes if either a bad SATA controller or an unsupported NVMe drive are used, you can commonly get stuck here. Things you can check:
+    * Not using either a Samsung PM981 or Micron 2200S NVMe SSD
+    * Samsung 970EvoPlus running the latest firmware(older firmwares were known for instability and stalls, [see here for more info](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
+    * SATA Hot-Plug is disabled in the BIOS(more commonly to cause issues on AMD CPU based systems)
+    * Ensure NVMe drives are set as NVMe mode in BIOS(some BIOS have a bug where you can set NVMe drives as SATA)
 * **NVRAM Failing**:
   * Common issue HEDT and 300 series motherboards, you have a couple paths to go down:
     * 300 Series Consumer Intel: See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on making SSDT-PMC.aml
@@ -380,7 +386,7 @@ Generally seen as a USB error, couple ways to fix:
 * If XLNCUSBFix still doesn't work, then try the following:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
   
-Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/) to fix booting, note that this **only works on Intel USB Chipsets** and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
+Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases) to fix booting, note that this **only works on Intel USB Chipsets** and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
 
 For AMD users with missing ports in DSDT, you're gonna have to try all the ports in your system and pray, generally 3.1 AsMedia ports work without issue.
 
@@ -464,7 +470,11 @@ This is a common example of screwed up TSC, for most system add [VoodooTSCSync](
 
 For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
-![](/images/troubleshooting/troubleshooting-md/asus-tsc.jpg)
+The most common way to see the TSC issue:
+
+Case 1    |  Case 2
+:-------------------------:|:-------------------------:
+![](/images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](/images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
 ## Keyboard works but trackpad does not
 
@@ -511,6 +521,16 @@ This error is due to a small EFI, by default Windows will create a 100MB EFI whe
 Default           |  Show All Devices(Cmd+2)
 :-------------------------:|:-------------------------:
 ![](/images/troubleshooting/troubleshooting-md/Default.png)  |  ![](/images/troubleshooting/troubleshooting-md/Showalldevices.png)
+
+## DiskUtility failing to erase
+
+This is either 1(or more) of 5 issues:
+
+* Formatting partition and not the drive, see [MediaKit reports not enough space](/troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
+* DiskUtility has an odd bug where it will fail on first erase, try erasing again
+* SATA Hot-plug support in the BIOS is causing issues(try disabling this option)
+* Old firmware, make sure the drive is on the latest firmware
+* And finally, you may just have a bad drive
 
 # macOS post-install
 
