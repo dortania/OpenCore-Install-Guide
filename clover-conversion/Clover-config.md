@@ -277,7 +277,7 @@ Just don't add your drivers to `UEFI -> Drivers`
 
 # Graphics
 
-* Note: PciRoot... should be replaced with 
+* Note: PciRoot... should be replaced with
 
 **InjectIntel**:
 
