@@ -529,7 +529,7 @@ This is either 1(or more) of 5 issues:
 * Formatting partition and not the drive, see [MediaKit reports not enough space](/troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
 * DiskUtility has an odd bug where it will fail on first erase, try erasing again
 * SATA Hot-plug support in the BIOS is causing issues(try disabling this option)
-* Old firmware, make sure the drive is on the lastest firmware
+* Old firmware, make sure the drive is on the latest firmware
 * And finally, you may just have a bad drive
 
 # macOS post-install

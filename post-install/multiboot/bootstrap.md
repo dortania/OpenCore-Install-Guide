@@ -45,7 +45,7 @@ OCB: Boot order has first option as the default option
 
 ### Removing Bootstrap entry from BIOS
 
-Because the Bootstrap entry is a protected entry when reseting NVRAM, you'll need to set certain settings:
+Because the Bootstrap entry is a protected entry when resetting NVRAM, you'll need to set certain settings:
 
 * Misc -> Security -> AllowNvramReset -> true
 * Misc -> Security -> BootProtect -> None
