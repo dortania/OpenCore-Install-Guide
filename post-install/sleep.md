@@ -5,7 +5,7 @@
 **Work In Progress**
 
 * TO DO:
-  * Display
+  * Display -> ApplePS2Keyboard trash
 
 So to understand how to fix sleep issues in macOS, we need to first look at what contributes to sleep issues most of the time:
 
@@ -63,7 +63,7 @@ This will do 4 things for us:
 
 **In your config.plist**:
 
-While minimal changes are needed, here are tha ones we care about:
+While minimal changes are needed, here are the ones we care about:
 
 * `Misc -> Boot -> HibernateMode -> None`
   * We're gonna avoid the black magic that is S4 for this guide
@@ -171,11 +171,50 @@ To verify you have working CPU Power Management, see the [Fixing Power Managemen
 
 ### Displays
 
+So display issues are mainly for laptop lid detection, specifically:
 
-Lid Detection
+* Incorrectly made SSDT-PNLF
+* Keyboard spams from lid waking it(On PS2 based keyboards)
 
-* [HibernationFixup](https://github.com/acidanthera/HibernationFixup)
-* Use proper PNLF SSDT
+The former is quite easy to fix, see here: [Backlight PNLF](/Laptops/backlight.md)
+
+The latter requires a bit more work but it's too complicated. What we'll be trying to do is fix random key spams when the lid is opened that are common on Skylake and newer HP's but can be found in other machines as well. This will also assume you have a PS2 keyboard and are using [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases),
+
+To get started, we'll need a couple things:
+
+* [DEBUG version of VoodooPS2.kext](https://github.com/acidanthera/VoodooPS2/releases)
+* [SSDT-HP-FixLidSleep.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-HP-FixLidSleep.dsl)
+* [ACPIDebug.kext](https://bitbucket.org/RehabMan/os-x-acpi-debug/downloads/)
+* [MaciASL](https://github.com/acidanthera/MaciASL/releases)
+
+Next, reboot with the debug kexts and open the console.app. Then search `ApplePS2Keyboard`, you should get something like this:
+
+![](/images/post-install/sleep-md/console.png)
+
+Here we can actually see all our keyboard calls we're sending to VoodooPS2/ApplePS2Keyboard. Now try to put that machine to sleep and wait for the keyboard spams to start when the lid opens.
+
+Below, we can see that no key was spammed. Wait a minutes... *why is there no consistent key spams...*
+
+![]()
+
+Well your PS2 keyboard isn't the only thing that will spam key presses, your Embedded Controller can as well. So to get around this. We'll need to inject some calls into our EC's methods.
+
+We're gonna assume you know the approximate key being pressed(ie. Brightness down, which commonly is F10. Yours may be different)
+
+Open up maciASL and you'll be greeted with your DSDT, search for `PNP0C09` and you should get something like this:
+
+![](/images/post-install/sleep-md/ec.png)
+
+For our example, we have an HP Elite X2 G1 where brightness down gets spammed on lid wake. And this would correspond with F9, so we'll jump to `_Q09`:
+
+![](/images/post-install/sleep-md/q09.png)
+
+We'll want to add some properties to this function, specifically this:
+
+```
+Notify(\_SB.PCI0.LPCB.PS2K, 0x0405)
+```
+
 
 ### NVRAM
 
@@ -208,9 +247,11 @@ IRQ issues usually occur during bootups but some may notice that IRQ calls can b
   * First dump your DSDT in Linux/Windows
   * then select `FixHPET` option
 
+This will provide you with both SSDT-HPET.aml and `oc_patches.plist`, You will want to add the SSDT to EFI/OC/ACPI and add the ACPI patches into your config.plist from the oc_patches.plist
+
 ### Audio
 
-Unmanaged or incorrectly managed audio devices can also cause issues, either disable unused audio devices or verify they're working correctly here:
+Unmanaged or incorrectly managed audio devices can also cause issues, either disable unused audio devices  in your BIOS or verify they're working correctly here:
 
 * [Fixing Audio](/post-install/audio.md)
 
@@ -222,14 +263,16 @@ See here on more info on how to make it: [Fixing SMBus support](https://dortania
 
 ### TSC
 
-The TSC(Time Stamp Counter) is responsible for making sure you're hardware is running at the correct speed, problem is some firmware(mainly HEDT/Server and Asus Laptops) will not write the TSC to all cores cause issues. To get around this, we have 2 options:
+The TSC(Time Stamp Counter) is responsible for making sure you're hardware is running at the correct speed, problem is some firmware(mainly HEDT/Server and Asus Laptops) will not write the TSC to all cores cause issues. To get around this, we have 3 options:
 
+* [CpuTscSync](https://github.com/lvs1974/CpuTscSync/releases)
+  * For troublesome laptops
 * [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
-  * For most HEDT hardware and troublesome laptops
+  * For most HEDT hardware
 * [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)
   * For Skylake X/W/SP and Cascade Lake X/W/SP hardware
   
-The former is plug n play, while the latter will need some customizations:
+The former 2 are plug n play, while the latter will need some customizations:
 
 * Open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 * Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip)

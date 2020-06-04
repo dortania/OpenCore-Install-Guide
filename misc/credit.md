@@ -20,7 +20,7 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Corrections to AMD portion of the guide
 * [DhinakG](https://github.com/dhinakg)
   * Random guide related stuff
-* [and the rest of the dortania team](https://github.com/dortania) for helping out
+* [And the rest of the dortania team](https://github.com/dortania) for helping out
   
 And to the rest who've helped out as well, thank you!
 
@@ -69,3 +69,6 @@ And for those who have recommendations or issues with this guide, you can find t
   * [XHCI Wake issues](https://osy.gitbook.io/hac-mini-guide/details/usb-fix)
   * [CorpNewt's USB Map Guide](https://dortania.github.io/USB-Map-Guide/)
   * [AppleLife USB Map Guide](https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/)
+* Thunderbolt Fixes:
+  * [Osy's Thunderbolt 3 Fix](https://osy.gitbook.io/hac-mini-guide/details/thunderbolt-3-fix/)
+  * [al3xtjames's ThunderboltPkg](https://github.com/al3xtjames/ThunderboltPkg/blob/master/Docs/FAQ.md)
