@@ -50,9 +50,9 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 **VirtualSMC Plugins**:
 
 * SMCProcessor.kext
-  * Used for monitoring CPU temperature, **doesn't work AMD CPU based systems**
+  * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
 * SMCSuperIO.kext
-  * Used for monitoring fan speed, **doesn't work AMD CPU based systems**
+  * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
 * SMCLightSensor.kext
   * Used for the ambient light sensor on laptops, **desktops can ignore**
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
