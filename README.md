@@ -21,7 +21,7 @@ Before we can get into the meat of this guide and setting up OpenCore, we first 
 * [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)
   * Overall guide on what to avoid and what pitfalls your hardware may hit.
 
-And once you know you're hardware's compatible, we can jump into the guides:
+And once you know your hardware's compatible, we can jump into the guides:
 
 * [OpenCore Desktop Guide](https://dortania.github.io/OpenCore-Desktop-Guide/)
   * Desktop focused and the one you're reading right now
