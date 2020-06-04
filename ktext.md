@@ -130,7 +130,7 @@ The order in `Kernel -> Add` should be:
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
 
-**Extra's**:
+**Extras**:
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
   * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
