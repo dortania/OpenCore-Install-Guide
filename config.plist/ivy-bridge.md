@@ -1,6 +1,7 @@
 # Ivy Bridge
 
 * Supported version: 0.5.9
+* [Ivy Bridge Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 Table of Contents:
 
@@ -171,8 +172,6 @@ The ig-platform-id's we use is as follows:
 | AAPL,ig-platform-id | Data | 0A006601 |
 
 (This is an example for a desktop HD 4000)
-
-**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -412,8 +411,6 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 
 * `iMac13,1` - this is used for computers utilizing the iGPU for displaying.
 * `iMac13,2` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

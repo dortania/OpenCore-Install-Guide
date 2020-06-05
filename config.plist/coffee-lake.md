@@ -1,6 +1,7 @@
 # Coffee Lake
 
 * Supported version: 0.5.9
+* [Coffee Lake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 Table of Contents:
 
@@ -153,7 +154,7 @@ The two ig-platform-id's we use are as follows:
 * `0x3E920003` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
   * `0300923E` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
 
-Worth noting that for 10.12 -> 10.13.5, you would need to fake the iGPU to the same values in the Kaby Lake guide, as this was before native Coffee Lake iGPU showed up. 10.13.6 natively supports Coffee Lake
+**Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
@@ -168,8 +169,6 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 | framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
-
-**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -410,8 +409,6 @@ For this Coffee Lake example, I chose the iMac19,1 SMBIOS - this is done intenti
 * `iMac19,1` - For Mojave and newer
 * `iMac18,3` - For High Sierra and older
   * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOS with Web Drivers
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

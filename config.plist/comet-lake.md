@@ -1,6 +1,7 @@
 # Comet Lake
 
 * Supported version: 0.5.9
+* [Comet Lake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 * **Note**: This guide only supports Comet Lake on 10.15.5 or newer
 
 Table of Contents:
@@ -164,8 +165,6 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 | framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
-
-**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -402,8 +401,6 @@ For this Comet Lake example, we'll chose the iMac19,1 SMBIOS - this is done inte
 * `iMac19,1` - For Mojave and newer
 * `iMac18,3` - For High Sierra and older
   * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOS with Web Drivers
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
