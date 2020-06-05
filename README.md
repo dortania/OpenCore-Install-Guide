@@ -6,7 +6,7 @@
 
 OpenCore is an open-sourced tool designed to prepare a system for macOS booting and has been architected to alleviate many of the constraints imposed by its alternatives like Clover(these tools are sometimes referred to as "boot loaders"). The main thing OpenCore aims to do is create a more versatile and modular system which can better understand symbols and structures to make patching far more precise and effective. And with its custom prelinker, kext injection becomes macOS version agnostic meaning day 1 support on any macOS version supporting a prelinked kernel. While OpenCore is primarily designed for Hackintosh systems, it can be used in any scenario where an emulated EFI is needed with many using it on KVMs and even [real Macs](https://forums.macrumors.com/threads/opencore-on-the-mac-pro.2207814/)
 
-Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, is still being frequently updated and so chunks of configuration change quite often(ie. New quirks replacing old ones)
+Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, it is still being frequently updated and so chunks of configuration change quite often(ie. New quirks replacing old ones)
 
 Lastly, this guide is only meant to be a starting point in your journey with OpenCore and not recommended for beginners unless absolutely necessary. For those who have issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
 
@@ -21,7 +21,7 @@ Before we can get into the meat of this guide and setting up OpenCore, we first 
 * [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)
   * Overall guide on what to avoid and what pitfalls your hardware may hit.
 
-And once you know you're hardware's compatible, we can jump into the guides:
+And once you know your hardware's compatible, we can jump into the guides:
 
 * [OpenCore Desktop Guide](https://dortania.github.io/OpenCore-Desktop-Guide/)
   * Desktop focused and the one you're reading right now
