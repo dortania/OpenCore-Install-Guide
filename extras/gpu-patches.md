@@ -19,6 +19,8 @@ So to get started I'll assume you've already done basic framebuffer patches in y
 
 ![](/images/extras/gpu-patches-md/prereq.png)
 
+* **Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
+
 Now that we're prepped, we can start looking into busID patching. Checking the dumps on [InsanelyMac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID(Desktop UHD 630):
 
 ```text
