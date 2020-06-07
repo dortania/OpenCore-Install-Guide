@@ -167,7 +167,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
 
 Fun Fact: The reason the byte order is swapped is because most modern processors are [Little Endian](https://en.wikipedia.org/wiki/Endianness). The more you know!
 
-### Block
+### Delete
 
 Removes device properties from the map, for us we can ignore this
 

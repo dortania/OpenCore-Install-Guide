@@ -58,7 +58,7 @@ This blocks certain ACPI tables from loading, for us we can ignore this.
 
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
 
-### Quirk
+### Quirks
 
 Settings relating to ACPI, leave everything here as default.
 
@@ -162,7 +162,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](/post-install/README.md)
 
-### Block
+### Delete
 
 Removes device properties from the map, for us we can ignore this
 

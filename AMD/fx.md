@@ -58,7 +58,7 @@ This blocks certain ACPI tables from loading, for us we can ignore this.
 
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
 
-### Quirk
+### Quirks
 
 Settings relating to ACPI, leave everything here as default.
 
@@ -131,6 +131,10 @@ Sets device properties from a map.
 By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
 TL;DR, delete all the PciRoot's here as we won't be using this section.
+
+### Delete
+
+Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
