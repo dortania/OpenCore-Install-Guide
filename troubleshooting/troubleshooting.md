@@ -667,7 +667,7 @@ fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 This is usually due to an outdated version of Python, try either updating Python or add iasl to the scripts folder for SSDTTime:
 
 * [iasl macOS version](https://bitbucket.org/RehabMan/acpica/downloads/iasl.zip)
-* [iasl Windows version](https://acpica.org/sites/acpica/files/iasl-win-20180105.zip)
+* [iasl Windows version](https://acpica.org/downloads/binary-tools)
 * [iasl Linux version](http://amdosx.kellynet.nl/iasl.zip)
 
 ## Fix Python: `Python is not installed or not found on PATH`

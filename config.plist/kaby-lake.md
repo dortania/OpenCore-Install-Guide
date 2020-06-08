@@ -1,6 +1,7 @@
 # Kaby Lake
 
 * Supported version: 0.5.9
+* [Kaby Lake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 Table of Contents:
 
@@ -161,8 +162,6 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 | framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for a desktop HD 630 without a dGPU and no BIOS options for iGPU memory)
-
-**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -402,8 +401,6 @@ For this Kaby Lake example, we'll chose the iMac18,1 SMBIOS - this is done inten
 
 * `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
 * `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

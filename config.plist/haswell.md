@@ -1,6 +1,7 @@
 # Haswell
 
 * Supported version: 0.5.9
+* [Haswell Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 **Both Haswell and Broadwell users can follow this**
 
@@ -183,8 +184,6 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 | framebuffer-fbmem | Data | 00009000 |
 
 (This is an example for a desktop Iris Pro 6200 and no BIOS options for iGPU memory)
-
-**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
 
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
@@ -430,8 +429,6 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
   * iMac15,1
 * Broadwell
   * iMac16,1
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

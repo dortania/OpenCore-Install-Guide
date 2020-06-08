@@ -1,6 +1,7 @@
 # Skylake
 
 * Supported version: 0.5.9
+* [Skylake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 Table of Contents:
 
@@ -163,8 +164,6 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 
 (This is an example for a desktop HD 530 without a dGPU and no BIOS options for iGPU memory)
 
-**Special note**: Mobile users should refer to mobile iGPU section for what properties should be used: [iGPU Patching](https://1revenger1.gitbook.io/laptop-guide/prepare-install-macos/display-configuration#igpu-patching)
-
 `PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
@@ -265,7 +264,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
     * `Cmd+S`: Boot in Single-user mode
     * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, an alternative is `ESC` key
 * **TakeoffDelay**: `0`
-  * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the preferred range for users with broken hotkeys support  
+  * Used to add a delay for hotkeys when OpenCore is a bit too fast to register, 5000-10000 microseconds is the preferred range for users with broken hotkeys support  
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
@@ -400,8 +399,6 @@ Recommended to leave enabled for best security practices
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
 For this Skylake example, we'll choose the iMac17,1 SMBIOS.
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extras/smbios.md)
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
