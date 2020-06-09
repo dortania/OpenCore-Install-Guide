@@ -1,8 +1,6 @@
 # Installing and using BootCamp utilities
 
-* [Preparations](#preparations)
-* [Installation](#installation)
-* [Troubleshooting](#troubleshooting)
+<extoc></extoc>
 
 So a neat feature of OpenCore is the ability to avoid the BIOS entirely and use Startup disk solely for multiboot. Problem comes in when we try to boot windows and have no way of setting the boot option back to macOS. That's where the BootCamp utilities come in.
 
