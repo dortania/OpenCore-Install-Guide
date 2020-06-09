@@ -2,12 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [Boot Flag](/extras/spoof.md#boot-flag)
-* [DeviceProperties Method](/extras/spoof.md#deviceproperties-method)
-* [SSDT Method](/extras/spoof.md#ssdt-method)
-* [Fixing Windows](/extras/spoof.md#fixing-windows)
+<extoc></extoc>
 
 So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 
@@ -109,8 +104,16 @@ A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dorta
 
 Source: CorpNewt
 
-## Fixing Windows
+## Windows GPU Selection
 
-So something that many users are annoyed about is the fact that you need to switch between GPU outputs. Well a neat little trick on Windows is that you can reroute your display options to a specific GPU:
+Depending on your setup, you may find that Windows renders games or applications using an undesired GPU.
+
+Many users only have two GPUs. Nvidia and the Intel HD/UHD IGPU. Since Nvidia no longer works on macOS, they may have the monitor plugged into the motherboards HDMI/DP connection for convenience. As a result, Windows will render all games and applications through the IGPU. You can reroute a specific game or application to a different GPU by going to: Settings > System > Display > Graphics settings 
 
 ![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
+
+The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides. Gsync will no longer work and Nvidia settings can no longer be opened. Gysnc and NV settings requires the display to be connected to the GPU. You may have increased input lag as well.
+
+If you have more than two GPUs (AMD, Nvidia and Intel), this setting is limited. If you have your monitor connected to an AMD GPU, Windows will only allow you to select the AMD GPU or the Intel IGPU. The Nvidia GPU will not show.
+
+As a recommendation, if you use both operating systems equally your best option is an HDMI or DP switch.

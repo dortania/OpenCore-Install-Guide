@@ -2,17 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [Finding your layout ID](/post-install/audio.md#fixing-your-layout-id)
-* [Testing your layout](/post-install/audio.md#testing-your-layout)
-* [Making Layout ID more permanent](/post-install/audio.md#making-layout-id-more-permanent)
-* [Miscellaneous issues](/post-install/audio.md#miscellaneous-issues)
-* [Troubleshooting](/post-install/audio.md#troubleshooting)
-  * [Checking if you have the right kexts](#checking-if-you-have-the-right-kexts)
-  * [Checking if AppleALC is patching correctly](#checking-if-applealc-is-patching-correctly)
-  * [Checking AppleHDA is vanilla](#checking-applehda-is-vanilla)
-  * [AppleALC working inconsistently](#applealc-working-inconsistently)
+<extoc></extoc>
 
 So to start, we'll assume you already have Lilu and AppleALC installed, if you're unsure if it's been loaded correctly you can run the following in terminal(This will also check if AppleHDA is loaded, as without this AppleALC has nothing to patch):
 

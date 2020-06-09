@@ -7,11 +7,11 @@ This little section is for those who need more than what is provided by simple f
 * [Applying a fakeID for unsupported GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 * [iGPU BusID patching for 300 series motherboards](#iGPU-BusID-Patching)
 
-# Converting a clover fakeID to OpenCore
+## Converting a clover fakeID to OpenCore
 
 Guide moved here: [Renaming GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 
-# iGPU BusID Patching
+## iGPU BusID Patching
 
 This section is for users running "true" 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.
 
