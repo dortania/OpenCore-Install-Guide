@@ -5,19 +5,7 @@
 
 **Both Haswell and Broadwell users can follow this**
 
-Table of Contents:
-
-* [Starting Point](/config.plist/haswell.md#starting-point)
-* [ACPI](/config.plist/haswell.md#acpi)
-* [Booter](/config.plist/haswell.md#booter)
-* [DeviceProperties](/config.plist/haswell.md#deviceproperties)
-* [Kernel](/config.plist/haswell.md#kernel)
-* [Misc](/config.plist/haswell.md#misc)
-* [NVRAM](/config.plist/haswell.md#nvram)
-* [SMBIOS](/config.plist/haswell.md#platforminfo)
-* [UEFI](/config.plist/haswell.md#uefi)
-* [Cleaning up](/config.plist/haswell.md#cleaning-up)
-* [Intel BIOS settings](/config.plist/haswell.md#intel-bios-settings)
+<extoc></extoc>
 
 ## Starting Point
 
@@ -49,7 +37,7 @@ Now with those downloaded, we can get to really get started:
 
 ![ACPI](/images/config/config-universal/aptio-iv-acpi.png)
 
-**Add:**
+### Add
 
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/USB-Map-Guide/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
 
@@ -64,15 +52,15 @@ Note that you **should not** add your generated `DSDT.aml` here, it is already i
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
-**Delete:**
+### Delete
 
-This blocks certain ACPI tables from loading, for us we can ignore this
+This blocks certain ACPI tables from loading, for us we can ignore this.
 
-**Patch**:
+### Patch
 
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
 
-**Quirk**:
+### Quirks
 
 Settings relating to ACPI, leave everything here as default.
 
@@ -93,11 +81,11 @@ Settings relating to ACPI, leave everything here as default.
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
-**MmioWhitelist**:
+### MmioWhitelist
 
 This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
-**Quirks**:
+### Quirks
 
 Settings relating to boot.efi patching and firmware fixes, one we need to change is `RebuildAppleMemoryMap`
 
@@ -138,9 +126,11 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 
 ![DeviceProperties](/images/config/config.plist/haswell/DeviceProperties.png)
 
-**Add**: Sets device properties from a map.
+### Add
 
-`PciRoot(0x0)/Pci(0x2,0x0)`
+Sets device properties from a map.
+
+#### PciRoot(0x0)/Pci(0x2,0x0)
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for fixing certain iGPU properties like `ig-platform-id`. The way we get the proper value for this is to look at the framebuffer we intend to use, then swap the pairs of hex bytes.
 
@@ -185,21 +175,28 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 
 (This is an example for a desktop Iris Pro 6200 and no BIOS options for iGPU memory)
 
-`PciRoot(0x0)/Pci(0x1b,0x0)` -> `Layout-id`
+#### PciRoot(0x0)/Pci(0x1b,0x0)
+
+`Layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* You can delete this property outright as it's unused for us at this time
 
 For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](/post-install/README.md)
 
 Fun Fact: The reason the byte order is swapped is because most modern processors are [Little Endian](https://en.wikipedia.org/wiki/Endianness). The more you know!
 
-**Block**: Removes device properties from the map, for us we can ignore this
+### Delete
+
+Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
 ![Kernel](/images/config/config-universal/kernel.png)
 
-**Add**: Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+### Add
+
+Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
 * **BundlePath**
   * Name of the kext
@@ -213,16 +210,22 @@ Fun Fact: The reason the byte order is swapped is because most modern processors
   * Path to the `info.plist` hidden within the kext
   * ex: `Contents/Info.plist`
 
-**Emulate**: Needed for spoofing unsupported CPUs like Pentiums and Celerons
+### Emulate
+
+Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
 * **CpuidMask**: Leave this blank
 * **CpuidData**: Leave this blank
 
-**Block**: Blocks kexts from loading. Not relevant for us
+### Block
 
-**Patch**: Patches both the kernel and kexts
+Blocks certain kexts from loading. Not relevant for us.
 
-**Quirks**:
+### Patch
+
+Patches both the kernel and kexts.
+
+### Quirks
 
 Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `AppleXcpmCfgLock`, `DisableIOMapper`,  `PanicNoKextDump`, `PowerTimeoutKernelPanic` and `XhciPortLimit`. Everything else should be left as default
 
@@ -263,7 +266,9 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ![Misc](/images/config/config-universal/misc.png)
 
-**Boot**: Settings for boot screen (Leave everything as default)
+### Boot
+
+Settings for boot screen (Leave everything as default).
 
 * **HibernateMode**: None
   * Best to avoid hibernation with Hackintoshes all together
@@ -289,7 +294,9 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
-**Debug**: Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`)
+### Debug
+
+Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`).
 
 * **AppleDebug**: YES
   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
@@ -304,7 +311,9 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
 
-**Security**: Security is pretty self-explanatory, **do not skip**
+### Security
+
+Security is pretty self-explanatory, **do not skip**.
 
 We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 
@@ -326,7 +335,9 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USB devices with this set to default**
 
-**Tools** Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you. For us, we won't be using any tools
+### Tools
+
+Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you. For us, we won't be using any tools.
 
 * **Name**
   * Name shown in OpenCore
@@ -336,7 +347,9 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * Path to file after the `Tools` folder
   * ex: [OpenShell.efi](https://github.com/acidanthera/OpenCorePkg/releases)
 
-**Entries**: Used for specifying irregular boot paths that can't be found naturally with OpenCore
+### Entries
+
+Used for specifying irregular boot paths that can't be found naturally with OpenCore.
 
 Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 
@@ -344,7 +357,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ![NVRAM](/images/config/config-universal/nvram.png)
 
-**Add**:
+### Add
 
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)
 
@@ -395,7 +408,9 @@ Recommended to leave enabled for best security practices
 | :--- | :--- | :--- |
 | prev-lang:kbd | String | en-US:0 |
 
-**Delete**: Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+### Delete
+
+Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
 **LegacyEnable**: NO
 
@@ -461,7 +476,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
-**Generic**:
+### Generic
 
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
@@ -492,14 +507,18 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
 
-**Drivers**: Add your .efi drivers here
+### Drivers
+
+Add your .efi drivers here.
 
 Only drivers present here should be:
 
 * HfsPlus.efi
 * OpenRuntime.efi
 
-**APFS**: Settings related to the APFS driver
+### APFS
+
+Settings related to the APFS driver.
 
 * **EnableJumpstart**: YES
   * Allows us to load Apple's APFS driver
@@ -522,7 +541,9 @@ Only drivers present here should be:
 
 * For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](/post-install/README.md)
 
-**Input**: Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
+### Input
+
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support
 
 * **KeyFiltering**: NO
   * Verifies and discards uninitialized data, mainly prevalent on 7 series Gigabyte boards
@@ -543,7 +564,9 @@ Only drivers present here should be:
 * **TimerResolution**: `50000`
   * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
 
-**Output**: Relating to visual output
+### Output
+
+Relating to visual output.
 
 * **TextRenderer**: `BuiltinGraphics`
   * Used for fixing resolution of OpenCore itself, `Resolution` must be set to `Max` to work correctly
@@ -569,7 +592,7 @@ Only drivers present here should be:
 
 * For FileVault users please see the Post Install page: [Security and FileVault](/post-install/README.md)
 
-**Quirks**:
+### Quirks
 
 * **DeduplicateBootOrder**: YES
   * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.

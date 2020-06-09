@@ -2,11 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [Updating OpenCore](/post-install/update.md#updating-opencore)
-* [Updating Kexts](/post-install/update.md#updating-kexts)
-* [Updating macOS](/post-install/update.md#updating-macos)
+<extoc></extoc>
 
 ## Updating OpenCore
 

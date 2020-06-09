@@ -1,14 +1,12 @@
 # Optimizing Power Management
 
-* [Enabling X86PlatformShim](/post-install/pm.md#enabling-x86platformplugin)
-* [Using CPU Friend](/post-install/pm.md#using-cpu-friend)
-* [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management)
+<extoc></extoc>
 
 ## Enabling X86PlatformPlugin
 
 So before we can fine tune power management to our liking, we need to first make sure Apple's XCPM core is loaded. Note that this is supported **only on Haswell and newer**, Sandy and Ivy Bridge should refer to the bottom of the guide: [Sandy and Ivy Bridge Power Management](/post-install/pm.md#sandy-and-ivy-bridge-power-management).
 
-To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and look for `AppleACPICPU`(note if you use search, it may find entries):
+To start, grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and look for `AppleACPICPU`(note if you use search, it won't show the children so clear your search once you've found the entry):
 
 XCPM Present           |  Missing XCPM
 :-------------------------:|:-------------------------:
@@ -61,6 +59,16 @@ LPM = MinMultiplier x FSB
 
 For this example we'll be using the [i9 7920x](https://ark.intel.com/content/www/us/en/ark/products/126240/intel-core-i9-7920x-x-series-processor-16-5m-cache-up-to-4-30-ghz.html) which has a base clock of 2.9 GHz but no LPM, so we'll choose 1.3 GHz(13x100) and work our way up/down until we find stability.
 
+**Note**:  Mobile SMBIOS will likely have several Frequency Vectors, this is for how many steps your CPU will take. On the MacBook9,1 SMBIOS for example, we get 3 Frequency Vectors. So the idea is:
+
+1. Lowest frequency macOS will idle at(ie. sitting at the desktop)
+2. Middle frequency for simple tasks(ie. text editing or using the finder)
+3. Average frequency for little more demanding tasks(ie. Safari, Youtube, etc)
+
+The last frequency is not your maximum frequency so don't worry about being capped at that limit.
+
+![](/images/post-install/pm-md/macbook.png)
+
 ```text
 echo "obase=16; 13" | bc
 ```
@@ -75,6 +83,8 @@ Next up is the Energy Performance Preference, EPP. This tells macOS how fast to 
 | 0x40-0x7F | Balance performance |
 | 0x80-0xBF | Balance power |
 | 0xC0-0xFF | Max Power Saving|
+
+**Note**: Only Skylake and newer SMBIOS officially support EPP
 
 ![](/images/post-install/pm-md/done.png)
 ![](/images/post-install/pm-md/files.png)

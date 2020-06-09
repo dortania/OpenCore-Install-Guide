@@ -1,9 +1,6 @@
 # Using Bootstrap.efi
 
-* [Preparation](#preperation)
-* [Troubleshooting](#troubleshooting)
-* [Quick UEFI Shell Reference Guide](#quick-uefi-shell-reference-guide)
-* [Adding OpenCore to your BIOS](#adding-opencore-to-your-bios)
+<extoc></extoc>
 
 So with OpenCore 0.5.8 and newer, we get a neat little file inside our EFI/OC/Bootstrap folder called Bootstrap.efi. What this allows us to do is add OpenCore to our motherboard's boot menu and prevent issues where either Windows or Linux try to overwrite the BOOTx64.efi file which can happen during updates and completely delete any way of booting OpenCore.
 

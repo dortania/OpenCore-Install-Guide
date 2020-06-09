@@ -2,15 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [So what is KASLR?](/extras/kaslr-fix.md#so-what-is-kaslr)
-* [And who is this info for?](/extras/kaslr-fix.md#and-who-is-this-info-for)
-* [So how do I fix this?](/extras/kaslr-fix.md#so-how-do-i-fix-this)
-* [Prepping the BIOS](/extras/kaslr-fix.md#prepping-the-bios)
-* [Test boot](/extras/kaslr-fix.md#test-boot)
-* [Finding the Slide value](/extras/kaslr-fix.md#finding-the-slide-value)
-* [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
+<extoc></extoc>
 
 This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.
 

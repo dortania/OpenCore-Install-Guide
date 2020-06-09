@@ -2,12 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [Testing Hardware Acceleration and Decoding](/post-install/drm.md#testng-hardware-acceleration-and-decoding)
-* [Testing DRM](/post-install/drm.md#testing-drm)
-* [Fixing DRM](/post-install/drm.md#fixing-drm)
-* [Fixing iGPU performance](/post-install/drm.md#fixing-igpu-performance)
+<extoc></extoc>
 
 So with DRM, we have a couple things we need to mention:
 

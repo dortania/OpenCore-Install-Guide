@@ -2,11 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [Cleaning out the Clover gunk](/post-install/nvram.md#cleaning-out-the-clover-gunk)
-* [Verifying if you have working NVRAM](/post-install/nvram.md#verifying-if-you-have-working-nvram)
-* [Enabling emulated NVRAM (with a nvram.plist)](/post-install/nvram.md#enabling-emulated-nvram-with-a-nvramplist)
+<extoc></extoc>
 
 So this section is for those who don't have native NVRAM, the most common hardware to have incompatible native NVRAM with macOS are X99 and some X299 series chipsets:
 
