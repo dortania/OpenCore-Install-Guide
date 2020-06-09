@@ -1,10 +1,13 @@
 {
-    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "anchors", "github-buttons", "last-modified", "medium-zoom"],
+    "plugins": ["theme-default", "-lunr", "-search", "search-plus", "addcssjs", "favicon-plus", "anchor-navigation-ex", "github-buttons", "last-modified", "medium-zoom"],
     "pluginsConfig": {
         "fontsettings": {
             "theme":  "night",
             "family": "sans"
         },
+	"anchor-navigation-ex": {
+		"multipleH1": false
+	},
         "github-buttons": {
           "buttons": [{
             "user": "dortania",

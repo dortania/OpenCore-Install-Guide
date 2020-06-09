@@ -7,17 +7,19 @@ This little section is for those who need more than what is provided by simple f
 * [Applying a fakeID for unsupported GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 * [iGPU BusID patching for 300 series motherboards](#iGPU-BusID-Patching)
 
-# Converting a clover fakeID to OpenCore
+## Converting a clover fakeID to OpenCore
 
 Guide moved here: [Renaming GPUs](https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html)
 
-# iGPU BusID Patching
+## iGPU BusID Patching
 
 This section is for users running "true" 300 series motherboards( B360, B365, H310, H370, Z390) who are having issues setting up their iGPU as a display out.
 
 So to get started I'll assume you've already done basic framebuffer patches in your config from the [Coffee Lake portion of the guide](../config.plist/coffee-lake.md), it should look something like this:
 
 ![](/images/extras/gpu-patches-md/prereq.png)
+
+* **Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 
 Now that we're prepped, we can start looking into busID patching. Checking the dumps on [InsanelyMac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID(Desktop UHD 630):
 

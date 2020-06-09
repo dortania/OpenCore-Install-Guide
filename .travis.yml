@@ -4,7 +4,7 @@ cache:
   npm: false
 before_script:
 - npm install -g gitbook-cli
-script: 
+script:
 - gitbook install
 - gitbook build
 - cp icons/* _book/gitbook/images
@@ -17,7 +17,5 @@ deploy:
   on:
     branch: master
   target_branch: gh-pages
-  # committer_from_gh: true
-  # allow_empty_commit: true
   github_token:
-    secure: Gw45nZAA88ecruWBTECU5B3BdlHIJNbxaaf8ZTPVxKjPM8xPdgs0ENTZmE6oSQCwTk3ozM+eTjUuJ6VQVrFjV6XpEzMcaxaajay8LUiMA8ma3Z5MNQahFizoPSAUdU0Rk6badGrHFv+BNMVhF7WTboUGwJ21wSs0n5Nm0ODL2AMz4ls2163jiRY7g8eHo6qsSuupawD1zLpLfZrW5i5jSEo1Z+t2T2GhWnuXzoC+S2tv8KWhyOt0SCeomeV1RpyjiyqZinTt3I5gtAj2ymXFoun9FLYvqlaQYfpomXP1EZQVV17kc7BjHpr1wSKKUtGgrQ2WS4PYPxP9Sa7AZlXs+1WGZ1aoM560Ju5o203FMJd7ZSNbBr+44bxiPWhz3h+xszIMJp0NcW25R12Yh7Hyw7KqH1nDNvXXbiC7u65sOIDyQn9S2vQtdpz0F5GfbOEYy761i+GSRxr7kKi0mAfi/P6zI2RtfwSW1AOyppncYVeI9d7TLuIVQ8nWdftoS+oE/N2XW4IlypLaAaG8nPyQKVGiB7fR/8KuSp4Nht0aNCOFk2UwggND6EN3YobH+AnZWN5q6c2/G/MYK68xeQ5xgH20c8+rdjZQArnfvadx23EAOBnP2246X5r1XL24Yo3cWx0VwlbFc9BbXC4JyxKweSlUV4s2dVhp88hu3EGWeto=
+    secure: huaXIb+EhuAbwdZZuEGjJ7UqP/o7/kf9gf3YGfao4cxeTr29oNFaSDwvQVh2YbOW5wLcberSyNxad+iP6u6U5ZHYMDR15DravIDd32ZrSWc+6Ws4b2VG026ZhsZgY4Vhgbg48T96rywi+7cTasWTICRburvz7r8UOf8EwU+TKtSBCPTziKhakBIRAeFExp2qcLajtFzl/2qhL1hfL20stF7Lc8IWERoTwnVLT6BgqTrqf04I71N+hEMfFZYtZ1YkbZJeKUi4fJsF1T5Vb6l6ta73ixk6hIhOWJfi4bNB4kS+6lnUVDvrK9E+jSu+iE5nlId9wHxOPlsslmDmTNJrwlY6CxeE6Oa2kOSImPxO25UJ6GPqWBxzn+uYde01uFNuYIK1ebbDwZftiaJlkMTsPsM+AKdPffF/Uo6MeCrBQa/rV7vdnimgKRGcK6OCRPNcb44gNPXeY/o7B9F9a5bZOiiytZDTQ5XJ0ohqeOc+VFtbZ7khj9qvfhVPX/a2JIYk2BiWXluXq2xlvEPNyxGrsT5yR78LYA9v8jiGRTl0kynPj/V/g4kFhLc3JPhs8TxVVgIXCM8H0KdVu2ijHBOUHrT6OwLiCfNHXlquuJVVLsj+e+8Hlbbq/44LvLa9L92QLufZWnBVtBtV9tV+wsi93JZQsxskqv2W5n064CcGA8k=

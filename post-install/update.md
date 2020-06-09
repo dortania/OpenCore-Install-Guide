@@ -2,11 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [Updating OpenCore](/post-install/update.md#updating-opencore)
-* [Updating Kexts](/post-install/update.md#updating-kexts)
-* [Updating macOS](/post-install/update.md#updating-macos)
+<extoc></extoc>
 
 ## Updating OpenCore
 
@@ -102,3 +98,6 @@ So the process goes as follows:
   * [AMD CPU users need to update `cpuid_set_cpufamily` patch](https://github.com/AMD-OSX/AMD_Vanilla)
   * Fixes DRM on many Ellesmere based Polaris GPUs
   * Requires all previous fixes(excluding `shikigva=80` for Polaris DRM for most users)
+* 10.15.5
+  * UHD 630's framebuffer broke for many, if you receive black screen you may need to swap from `07009B3E` to `00009B3E`
+  * Comet Lake S no longer requires a CPU ID spoof

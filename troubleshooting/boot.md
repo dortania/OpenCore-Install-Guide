@@ -2,12 +2,7 @@
 
 * Supported version: 0.5.9
 
-Table of Contents:
-
-* [OpenCore Booting](/troubleshooting/boot.md#opencore-booting)
-* [boot.efi Handoff](/troubleshooting/boot.md#bootefi-handoff)
-* [XNU/Kernel Handoff](/troubleshooting/boot.md#xnukernel-handoff)
-* [macOS Handoff](/troubleshooting/boot.md#macos-handoff)
+<extoc></extoc>
 
 So with troubleshooting a hackintosh, it can be a bit difficult to really understand *where* you're getting stuck as the exact keyword you're trying to search for may not match anything on google. While this page won't solve all your issues, it should at least help better understand where in the macOS boot-process you're getting stuck and hopefully give some ideas as to why you're stuck.
 

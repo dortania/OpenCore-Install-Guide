@@ -112,7 +112,7 @@ In terminal:
    3. download `dmg2img` (available on most distros)
    4. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
       ![](/images/installer-guide/linux-install-md/unknown-20.png)
-   5. run `dmg2img -p <the partition number> -i BaseSystem -o <your 3GB+ partition block>` to extract and write the recovery image to the partition disk
+   5. run `dmg2img -p <the partition number> -i BaseSystem.dmg -o <your 3GB+ partition block>` to extract and write the recovery image to the partition disk
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
       ![](/images/installer-guide/linux-install-md/unknown-21.png)
 
