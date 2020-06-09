@@ -237,7 +237,7 @@ Settings for boot screen (Leave everything as default).
     * `Cmd+S`: Boot in Single-user mode
     * `Option/Alt`: Shows boot picker when `ShowPicker` set to `NO`, an alternative is `ESC` key
 * **TakeoffDelay**: `0`
-  * Used to add a delay for hotkeys when OpenCore is a bit to fast to register, 5000-10000 microseconds is the preferred range for users with broken hotkeys support  
+  * Used to add a delay for hotkeys when OpenCore is a bit too fast to register, 5000-10000 microseconds is the preferred range for users with broken hotkeys support  
 * **Timeout**: `5`
   * This sets how long OpenCore will wait until it automatically boots from the default selection
 
