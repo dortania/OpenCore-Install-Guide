@@ -22,7 +22,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -832,20 +832,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <blockquote>
-<p><em>Last modified: Wed Jun 03 2020 14:35:17 GMT+0000 (Coordinated Universal Time)</em></p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#updating-opencore-and-macos"><b> </b>Updating OpenCore and macOS</a></li><ul><li><span class="title-icon "></span><a href="#updating-opencore"><b>1. </b>Updating OpenCore</a></li><li><span class="title-icon "></span><a href="#updating-kexts"><b>2. </b>Updating Kexts</a></li><li><span class="title-icon "></span><a href="#updating-macos"><b>3. </b>Updating macOS</a></li></ul></ul></div><a href="#updating-opencore-and-macos" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
+<p><em>Last modified: Tue Jun 09 2020 01:44:58 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="updating-opencore-and-macos"><a name="updating-opencore-and-macos" class="plugin-anchor" href="#updating-opencore-and-macos"><i class="fa fa-link" aria-hidden="true"></i></a>Updating OpenCore and macOS</h1>
+<h1 id="updating-opencore-and-macos"><a name="updating-opencore-and-macos" class="anchor-navigation-ex-anchor" href="#updating-opencore-and-macos"><i class="fa fa-link" aria-hidden="true"></i></a> Updating OpenCore and macOS</h1>
 <ul>
 <li>Supported version: 0.5.9</li>
 </ul>
-<p>Table of Contents:</p>
-<ul>
-<li><a href="update.html#updating-opencore">Updating OpenCore</a></li>
-<li><a href="update.html#updating-kexts">Updating Kexts</a></li>
-<li><a href="update.html#updating-macos">Updating macOS</a></li>
-</ul>
-<h2 id="updating-opencore"><a name="updating-opencore" class="plugin-anchor" href="#updating-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>Updating OpenCore</h2>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#updating-opencore-and-macos"><b> </b>Updating OpenCore and macOS</a></li><ul><li><span class="title-icon "></span><a href="#updating-opencore"><b>1. </b>Updating OpenCore</a></li><li><span class="title-icon "></span><a href="#updating-kexts"><b>2. </b>Updating Kexts</a></li><li><span class="title-icon "></span><a href="#updating-macos"><b>3. </b>Updating macOS</a></li></ul></ul></div>
+
+<h2 id="updating-opencore"><a name="updating-opencore" class="anchor-navigation-ex-anchor" href="#updating-opencore"><i class="fa fa-link" aria-hidden="true"></i></a>1. Updating OpenCore</h2>
 <p>So the main things to note with updating OpenCore:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">Releases</a> happen the first Monday of every month</li>
@@ -908,7 +904,7 @@
 <li><p>Once everything&apos;s working with the dummy USB, you can mount the EFI and move it over to the hard drive&apos;s EFI partition. Remember to keep a copy of your old EFI in cases where OpenCore is acting funny down the road</p>
 </li>
 </ol>
-<h2 id="updating-kexts"><a name="updating-kexts" class="plugin-anchor" href="#updating-kexts"><i class="fa fa-link" aria-hidden="true"></i></a>Updating Kexts</h2>
+<h2 id="updating-kexts"><a name="updating-kexts" class="anchor-navigation-ex-anchor" href="#updating-kexts"><i class="fa fa-link" aria-hidden="true"></i></a>2. Updating Kexts</h2>
 <ul>
 <li><p>Updating Kexts is a similar process to updating OpenCore, make a copy of everything and update on a dummy USB in case there&apos;s issues</p>
 </li>
@@ -919,7 +915,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="updating-macos"><a name="updating-macos" class="plugin-anchor" href="#updating-macos"><i class="fa fa-link" aria-hidden="true"></i></a>Updating macOS</h2>
+<h2 id="updating-macos"><a name="updating-macos" class="anchor-navigation-ex-anchor" href="#updating-macos"><i class="fa fa-link" aria-hidden="true"></i></a>3. Updating macOS</h2>
 <ul>
 <li><p>So this is probably one of the most challenging parts, maintaining your system through OS updates. The main things to keep in mind:</p>
 <ul>
@@ -958,6 +954,11 @@
 <li><a href="https://github.com/AMD-OSX/AMD_Vanilla" target="_blank">AMD CPU users need to update <code>cpuid_set_cpufamily</code> patch</a></li>
 <li>Fixes DRM on many Ellesmere based Polaris GPUs</li>
 <li>Requires all previous fixes(excluding <code>shikigva=80</code> for Polaris DRM for most users)</li>
+</ul>
+</li>
+<li>10.15.5<ul>
+<li>UHD 630&apos;s framebuffer broke for many, if you receive black screen you may need to swap from <code>07009B3E</code> to <code>00009B3E</code></li>
+<li>Comet Lake S no longer requires a CPU ID spoof</li>
 </ul>
 </li>
 </ul>
@@ -1004,7 +1005,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Updating OpenCore, kexts and macOS","level":"8.1.4","depth":2,"next":{"title":"Fixing CFG Lock","level":"8.1.5","depth":2,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"previous":{"title":"Booting without USB","level":"8.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/update.md","mtime":"2020-06-03T14:35:17.686Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-03T14:36:35.515Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Updating OpenCore, kexts and macOS","level":"8.1.4","depth":2,"next":{"title":"Fixing CFG Lock","level":"8.1.5","depth":2,"path":"extras/msr-lock.md","ref":"extras/msr-lock.md","articles":[]},"previous":{"title":"Booting without USB","level":"8.1.3","depth":2,"path":"post-install/oc2hdd.md","ref":"post-install/oc2hdd.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/update.md","mtime":"2020-06-09T01:44:58.334Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-09T01:46:12.301Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

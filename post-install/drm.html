@@ -22,7 +22,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -832,20 +832,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <blockquote>
-<p><em>Last modified: Wed Jun 03 2020 14:35:17 GMT+0000 (Coordinated Universal Time)</em></p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#fixing-drm-support-and-igpu-performance"><b> </b>Fixing DRM support and iGPU performance</a></li><ul><li><span class="title-icon "></span><a href="#testing-hardware-acceleration-and-decoding"><b>1. </b>Testing Hardware Acceleration and Decoding</a></li><li><span class="title-icon "></span><a href="#testing-drm"><b>2. </b>Testing DRM</a></li><li><span class="title-icon "></span><a href="#fixing-drm"><b>3. </b>Fixing DRM</a></li><li><span class="title-icon "></span><a href="#fixing-igpu-performance"><b>4. </b>Fixing iGPU performance</a></li></ul></ul></div><a href="#fixing-drm-support-and-igpu-performance" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
+<p><em>Last modified: Tue Jun 09 2020 01:44:58 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="fixing-drm-support-and-igpu-performance"><a name="fixing-drm-support-and-igpu-performance" class="plugin-anchor" href="#fixing-drm-support-and-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing DRM support and iGPU performance</h1>
+<h1 id="fixing-drm-support-and-igpu-performance"><a name="fixing-drm-support-and-igpu-performance" class="anchor-navigation-ex-anchor" href="#fixing-drm-support-and-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a> Fixing DRM support and iGPU performance</h1>
 <ul>
 <li>Supported version: 0.5.9</li>
 </ul>
-<p>Table of Contents:</p>
-<ul>
-<li><a href="drm.html#testng-hardware-acceleration-and-decoding">Testing Hardware Acceleration and Decoding</a></li>
-<li><a href="drm.html#testing-drm">Testing DRM</a></li>
-<li><a href="drm.html#fixing-drm">Fixing DRM</a></li>
-<li><a href="drm.html#fixing-igpu-performance">Fixing iGPU performance</a></li>
-</ul>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#fixing-drm-support-and-igpu-performance"><b> </b>Fixing DRM support and iGPU performance</a></li><ul><li><span class="title-icon "></span><a href="#testing-hardware-acceleration-and-decoding"><b>1. </b>Testing Hardware Acceleration and Decoding</a></li><li><span class="title-icon "></span><a href="#testing-drm"><b>2. </b>Testing DRM</a></li><li><span class="title-icon "></span><a href="#fixing-drm"><b>3. </b>Fixing DRM</a></li><li><span class="title-icon "></span><a href="#fixing-igpu-performance"><b>4. </b>Fixing iGPU performance</a></li></ul></ul></div>
+
 <p>So with DRM, we have a couple things we need to mention:</p>
 <ul>
 <li>DRM requires a supported dGPU<ul>
@@ -859,7 +854,7 @@
 </li>
 <li>Working hardware acceleration and decoding</li>
 </ul>
-<h2 id="testing-hardware-acceleration-and-decoding"><a name="testing-hardware-acceleration-and-decoding" class="plugin-anchor" href="#testing-hardware-acceleration-and-decoding"><i class="fa fa-link" aria-hidden="true"></i></a>Testing Hardware Acceleration and Decoding</h2>
+<h2 id="testing-hardware-acceleration-and-decoding"><a name="testing-hardware-acceleration-and-decoding" class="anchor-navigation-ex-anchor" href="#testing-hardware-acceleration-and-decoding"><i class="fa fa-link" aria-hidden="true"></i></a>1. Testing Hardware Acceleration and Decoding</h2>
 <p>So before we can get started with fixing DRM, we need to make sure your hardware is working. The best way to check is by running <a href="https://i.applelife.ru/2019/05/451893_10.12_VDADecoderChecker.zip" target="_blank">VDADecoderChecker</a>:</p>
 <p><img src="../images/post-install/drm-md/vda.png" alt=""></p>
 <p>If you fail at this point, there&apos;s a couple things you can check for:</p>
@@ -918,7 +913,7 @@
 <p>And to undo this once done:</p>
 <pre><code class="lang-text">defaults delete com.apple.AppleGVA enableSyslog
 </code></pre>
-<h2 id="testing-drm"><a name="testing-drm" class="plugin-anchor" href="#testing-drm"><i class="fa fa-link" aria-hidden="true"></i></a>Testing DRM</h2>
+<h2 id="testing-drm"><a name="testing-drm" class="anchor-navigation-ex-anchor" href="#testing-drm"><i class="fa fa-link" aria-hidden="true"></i></a>2. Testing DRM</h2>
 <p>So before we get too deep, we need to go over some things, mainly the types of DRM you&apos;ll see out in the wild:</p>
 <p><strong>FairPlay 1.x</strong>: Software based DRM, used for supporting legacy Macs more easily</p>
 <ul>
@@ -949,7 +944,7 @@
 </li>
 </ul>
 <p>If everything works on these tests, you have no need to continue! Otherwise, proceed on.</p>
-<h2 id="fixing-drm"><a name="fixing-drm" class="plugin-anchor" href="#fixing-drm"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing DRM</h2>
+<h2 id="fixing-drm"><a name="fixing-drm" class="anchor-navigation-ex-anchor" href="#fixing-drm"><i class="fa fa-link" aria-hidden="true"></i></a>3. Fixing DRM</h2>
 <p>So for fixing DRM we can go down mainly 1 route: patching DRM to use either software or AMD decoding. Vit made a great little chart for different hardware configurations:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Chart.md" target="_blank">WhateverGreen&apos;s DRM chart</a></li>
@@ -973,7 +968,7 @@
 <li>Special configurations (like Haswell + AMD dGPU with an iMac SMBIOS, but iGPU is disabled) are not covered in the chart. You must do research on this yourself.</li>
 <li><a href="https://github.com/acidanthera/WhateverGreen/blob/master/WhateverGreen/kern_shiki.hpp" target="_blank">Shiki source</a> is useful in understanding what flags do what and when they should be used, and may help with special configurations.</li>
 </ul>
-<h2 id="fixing-igpu-performance"><a name="fixing-igpu-performance" class="plugin-anchor" href="#fixing-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing iGPU performance</h2>
+<h2 id="fixing-igpu-performance"><a name="fixing-igpu-performance" class="anchor-navigation-ex-anchor" href="#fixing-igpu-performance"><i class="fa fa-link" aria-hidden="true"></i></a>4. Fixing iGPU performance</h2>
 <p>So how do we fix iGPU performance? Well by loading Apple&apos;s GuC (Graphics Micro Code). The main thing to note is that firmware loading is restricted to:</p>
 <ul>
 <li>Skylake and newer CPU with a <a href="https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/intel-gpu" target="_blank">supported iGPU</a></li>
@@ -1036,7 +1031,7 @@ kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"8.1.7","depth":2,"next":{"title":"Fixing iServices","level":"8.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"8.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-06-03T14:35:17.686Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-03T14:36:35.515Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing DRM","level":"8.1.7","depth":2,"next":{"title":"Fixing iServices","level":"8.1.8","depth":2,"path":"post-install/iservices.md","ref":"post-install/iservices.md","articles":[]},"previous":{"title":"Fixing Resolution and Verbose","level":"8.1.6","depth":2,"path":"post-install/verbose.md","ref":"post-install/verbose.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/drm.md","mtime":"2020-06-09T01:44:58.334Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-09T01:46:12.301Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -59,7 +59,6 @@ kextcache -i /​
 
 * **Note**, macOS Catalina and newer will need the `mount -uw /` command to mount the system drive as Read/Write
 
-
 ## Cleaning the Clover Junk in your hardware
 
 The other thing that Clover may have hidden from you is NVRAM variables, this is bad as OpenCore won't overwrite variables unless explicitly told via the `Block` feature found under `NVRAM -> Block`. To fix this, we'll need to clear then via OpenCore's `ClearNvram` feature.

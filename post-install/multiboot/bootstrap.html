@@ -22,7 +22,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -832,18 +832,14 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <blockquote>
-<p><em>Last modified: Wed Jun 03 2020 14:35:17 GMT+0000 (Coordinated Universal Time)</em></p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#using-bootstrapefi"><b> </b>Using Bootstrap.efi</a></li><ul><li><span class="title-icon "></span><a href="#preparation"><b>1. </b>Preparation</a></li><li><span class="title-icon "></span><a href="#booting"><b>2. </b>Booting</a></li><li><span class="title-icon "></span><a href="#troubleshooting"><b>3. </b>Troubleshooting</a></li><ul><li><span class="title-icon "></span><a href="#verify-bootstrap-entry-was-applied"><b>3.1. </b>Verify Bootstrap entry was applied</a></li><li><span class="title-icon "></span><a href="#removing-bootstrap-entry-from-bios"><b>3.2. </b>Removing Bootstrap entry from BIOS</a></li></ul></ul></ul></div><a href="#using-bootstrapefi" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
+<p><em>Last modified: Tue Jun 09 2020 01:44:58 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="using-bootstrapefi"><a name="using-bootstrapefi" class="plugin-anchor" href="#using-bootstrapefi"><i class="fa fa-link" aria-hidden="true"></i></a>Using Bootstrap.efi</h1>
-<ul>
-<li><a href="#preperation">Preparation</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-<li><a href="#quick-uefi-shell-reference-guide">Quick UEFI Shell Reference Guide</a></li>
-<li><a href="#adding-opencore-to-your-bios">Adding OpenCore to your BIOS</a></li>
-</ul>
+<h1 id="using-bootstrapefi"><a name="using-bootstrapefi" class="anchor-navigation-ex-anchor" href="#using-bootstrapefi"><i class="fa fa-link" aria-hidden="true"></i></a> Using Bootstrap.efi</h1>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#using-bootstrapefi"><b> </b>Using Bootstrap.efi</a></li><ul><li><span class="title-icon "></span><a href="#preparation"><b>1. </b>Preparation</a></li><li><span class="title-icon "></span><a href="#booting"><b>2. </b>Booting</a></li><li><span class="title-icon "></span><a href="#troubleshooting"><b>3. </b>Troubleshooting</a></li><ul><li><span class="title-icon "></span><a href="#verify-bootstrap-entry-was-applied"><b>3.1. </b>Verify Bootstrap entry was applied</a></li><li><span class="title-icon "></span><a href="#removing-bootstrap-entry-from-bios"><b>3.2. </b>Removing Bootstrap entry from BIOS</a></li></ul></ul></ul></div>
+
 <p>So with OpenCore 0.5.8 and newer, we get a neat little file inside our EFI/OC/Bootstrap folder called Bootstrap.efi. What this allows us to do is add OpenCore to our motherboard&apos;s boot menu and prevent issues where either Windows or Linux try to overwrite the BOOTx64.efi file which can happen during updates and completely delete any way of booting OpenCore.</p>
-<h2 id="preparation"><a name="preparation" class="plugin-anchor" href="#preparation"><i class="fa fa-link" aria-hidden="true"></i></a>Preparation</h2>
+<h2 id="preparation"><a name="preparation" class="anchor-navigation-ex-anchor" href="#preparation"><i class="fa fa-link" aria-hidden="true"></i></a>1. Preparation</h2>
 <p>So to start we&apos;re gonna need the following:</p>
 <ul>
 <li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCore 0.5.8 or newer</a><ul>
@@ -862,21 +858,21 @@
 </ul>
 </li>
 </ul>
-<h2 id="booting"><a name="booting" class="plugin-anchor" href="#booting"><i class="fa fa-link" aria-hidden="true"></i></a>Booting</h2>
+<h2 id="booting"><a name="booting" class="anchor-navigation-ex-anchor" href="#booting"><i class="fa fa-link" aria-hidden="true"></i></a>2. Booting</h2>
 <p>So once you&apos;ve got the prerequisites out of the way, we&apos;re ready to boot! So what the first boot with these settings enabled is create a new boot option in our BIOS(Boot9696) and every boot after this will update the entry making sure it&apos;s correct. This now allows us to either remove BOOTx64.efi or not worry about it when other OSes overwrite this file.</p>
 <p>If no new boot option is created, you can go down and follow the troubleshooting steps on manually adding it. But triple check the above settings are correct on your system.</p>
-<h2 id="troubleshooting"><a name="troubleshooting" class="plugin-anchor" href="#troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>Troubleshooting</h2>
+<h2 id="troubleshooting"><a name="troubleshooting" class="anchor-navigation-ex-anchor" href="#troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>3. Troubleshooting</h2>
 <p>This is mainly as a mini-guide in case BootProtect doesn&apos;t work or you&apos;d like to do it manually.</p>
 <ul>
 <li><a href="#verify-bootstrap-entry-was-applied">Verify Bootstrap entry was applied</a></li>
 <li><a href="#removing-bootstrap-entry-from-bios">Removing Bootstrap entry from BIOS</a></li>
 </ul>
-<h3 id="verify-bootstrap-entry-was-applied"><a name="verify-bootstrap-entry-was-applied" class="plugin-anchor" href="#verify-bootstrap-entry-was-applied"><i class="fa fa-link" aria-hidden="true"></i></a>Verify Bootstrap entry was applied</h3>
+<h3 id="verify-bootstrap-entry-was-applied"><a name="verify-bootstrap-entry-was-applied" class="anchor-navigation-ex-anchor" href="#verify-bootstrap-entry-was-applied"><i class="fa fa-link" aria-hidden="true"></i></a>3.1. Verify Bootstrap entry was applied</h3>
 <p>For those wanting to verify that the entry was applied in OpenCore, enabling logging(see <a href="../../troubleshooting/debug.html">OpenCore Debugging</a>) and check for entries similar to these:</p>
 <pre><code>OCB: Have existing option 1, valid 1
 OCB: Boot order has first option as the default option
-</code></pre><h3 id="removing-bootstrap-entry-from-bios"><a name="removing-bootstrap-entry-from-bios" class="plugin-anchor" href="#removing-bootstrap-entry-from-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Removing Bootstrap entry from BIOS</h3>
-<p>Because the Bootstrap entry is a protected entry when reseting NVRAM, you&apos;ll need to set certain settings:</p>
+</code></pre><h3 id="removing-bootstrap-entry-from-bios"><a name="removing-bootstrap-entry-from-bios" class="anchor-navigation-ex-anchor" href="#removing-bootstrap-entry-from-bios"><i class="fa fa-link" aria-hidden="true"></i></a>3.2. Removing Bootstrap entry from BIOS</h3>
+<p>Because the Bootstrap entry is a protected entry when resetting NVRAM, you&apos;ll need to set certain settings:</p>
 <ul>
 <li>Misc -&gt; Security -&gt; AllowNvramReset -&gt; true</li>
 <li>Misc -&gt; Security -&gt; BootProtect -&gt; None</li>
@@ -925,7 +921,7 @@ OCB: Boot order has first option as the default option
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Setting up Bootstrap.efi","level":"8.1.11","depth":2,"next":{"title":"Installing BootCamp","level":"8.1.12","depth":2,"path":"post-install/multiboot/bootcamp.md","ref":"post-install/multiboot/bootcamp.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"8.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/multiboot/bootstrap.md","mtime":"2020-06-03T14:35:17.686Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-03T14:36:35.515Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setting up Bootstrap.efi","level":"8.1.11","depth":2,"next":{"title":"Installing BootCamp","level":"8.1.12","depth":2,"path":"post-install/multiboot/bootcamp.md","ref":"post-install/multiboot/bootcamp.md","articles":[]},"previous":{"title":"Fixing Power Management","level":"8.1.10","depth":2,"path":"post-install/pm.md","ref":"post-install/pm.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"post-install/multiboot/bootstrap.md","mtime":"2020-06-09T01:44:58.334Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-09T01:46:12.301Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

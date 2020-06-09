@@ -22,7 +22,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -832,28 +832,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <blockquote>
-<p><em>Last modified: Wed Jun 03 2020 14:35:16 GMT+0000 (Coordinated Universal Time)</em></p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#fixing-kaslr-slide-values"><b> </b>Fixing KASLR slide values</a></li><ul><li><span class="title-icon "></span><a href="#so-what-is-kaslr"><b>1. </b>So what is KASLR</a></li><li><span class="title-icon "></span><a href="#and-who-is-this-info-for"><b>2. </b>And who is this info for</a></li><li><span class="title-icon "></span><a href="#so-how-do-i-fix-this"><b>3. </b>So how do I fix this</a></li><li><span class="title-icon "></span><a href="#prepping-the-bios"><b>4. </b>Prepping the BIOS</a></li><li><span class="title-icon "></span><a href="#test-boot"><b>5. </b>Test boot</a></li><li><span class="title-icon "></span><a href="#finding-the-slide-value"><b>6. </b>Finding the Slide value</a></li><li><span class="title-icon "></span><a href="#using-devirtualisemmio"><b>7. </b>Using DevirtualiseMmio</a></li></ul></ul></div><a href="#fixing-kaslr-slide-values" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
+<p><em>Last modified: Tue Jun 09 2020 01:44:57 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="plugin-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a>Fixing KASLR slide values</h1>
+<h1 id="fixing-kaslr-slide-values"><a name="fixing-kaslr-slide-values" class="anchor-navigation-ex-anchor" href="#fixing-kaslr-slide-values"><i class="fa fa-link" aria-hidden="true"></i></a> Fixing KASLR slide values</h1>
 <ul>
 <li>Supported version: 0.5.9</li>
 </ul>
-<p>Table of Contents:</p>
-<ul>
-<li><a href="kaslr-fix.html#so-what-is-kaslr">So what is KASLR?</a></li>
-<li><a href="kaslr-fix.html#and-who-is-this-info-for">And who is this info for?</a></li>
-<li><a href="kaslr-fix.html#so-how-do-i-fix-this">So how do I fix this?</a></li>
-<li><a href="kaslr-fix.html#prepping-the-bios">Prepping the BIOS</a></li>
-<li><a href="kaslr-fix.html#test-boot">Test boot</a></li>
-<li><a href="kaslr-fix.html#finding-the-slide-value">Finding the Slide value</a></li>
-<li><a href="kaslr-fix.html#using-devirtualisemmio">Using DevirtualiseMmio</a></li>
-</ul>
+<div id="anchor-navigation-ex-pagetop-navbar"><ul><li><span class="title-icon "></span><a href="#fixing-kaslr-slide-values"><b> </b>Fixing KASLR slide values</a></li><ul><li><span class="title-icon "></span><a href="#so-what-is-kaslr"><b>1. </b>So what is KASLR</a></li><li><span class="title-icon "></span><a href="#and-who-is-this-info-for"><b>2. </b>And who is this info for</a></li><li><span class="title-icon "></span><a href="#so-how-do-i-fix-this"><b>3. </b>So how do I fix this</a></li><li><span class="title-icon "></span><a href="#prepping-the-bios"><b>4. </b>Prepping the BIOS</a></li><li><span class="title-icon "></span><a href="#test-boot"><b>5. </b>Test boot</a></li><li><span class="title-icon "></span><a href="#finding-the-slide-value"><b>6. </b>Finding the Slide value</a></li><li><span class="title-icon "></span><a href="#using-devirtualisemmio"><b>7. </b>Using DevirtualiseMmio</a></li></ul></ul></div>
+
 <p>This section is for users who wish to understand and fix &quot;Couldn&apos;t allocate runtime area&quot; errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.</p>
-<h2 id="so-what-is-kaslr"><a name="so-what-is-kaslr" class="plugin-anchor" href="#so-what-is-kaslr"><i class="fa fa-link" aria-hidden="true"></i></a>So what is KASLR</h2>
+<h2 id="so-what-is-kaslr"><a name="so-what-is-kaslr" class="anchor-navigation-ex-anchor" href="#so-what-is-kaslr"><i class="fa fa-link" aria-hidden="true"></i></a>1. So what is KASLR</h2>
 <p>Well KASLR stands for Kernel address space layout randomization, what it&apos;s used for is security purposes. Specifically, this makes it much harder for attackers to figure out where the important objects are in memory as it&apos;s always random both between machines and between boots. <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">M</a><a href="https://lwn.net/Articles/569635/" target="_blank">ore in-depth explainer on KASLR</a></p>
 <p>Where this becomes an issue is when you introduce devices with either small memory maps or just way too many devices present. There likely is space for the kernel to operate but there&apos;s also free space where the kernel won&apos;t fit entirely. This is where <code>slide=xxx</code> fits in. Instead of letting macOS choose a random area to operate in each boot, we&apos;ll constrain it to somewhere that we know will work.</p>
-<h2 id="and-who-is-this-info-for"><a name="and-who-is-this-info-for" class="plugin-anchor" href="#and-who-is-this-info-for"><i class="fa fa-link" aria-hidden="true"></i></a>And who is this info for</h2>
+<h2 id="and-who-is-this-info-for"><a name="and-who-is-this-info-for" class="anchor-navigation-ex-anchor" href="#and-who-is-this-info-for"><i class="fa fa-link" aria-hidden="true"></i></a>2. And who is this info for</h2>
 <p>Well as I mentioned earlier, this is for users who don&apos;t have enough space for the kernel or moves to a place that is too small. You&apos;ll generally experience an error similar to this when booting:</p>
 <pre><code class="lang-text">Error allocating 0x1197b pages at 0x0000000017a80000 alloc type 2
 Couldn&apos;t allocate runtime area
@@ -866,7 +858,7 @@ Couldn&apos;t allocate runtime area
 </code></pre>
 <p>The best part about these errors is that they can be random, also the reason why power cycling your PC 20 times also can fix the issue but only temporarily.</p>
 <p>Fun Fact: It takes around 31 ms to find an area to operate in, manually setting a slide value can on average can reduce boot times by 0.207%!!!</p>
-<h2 id="so-how-do-i-fix-this"><a name="so-how-do-i-fix-this" class="plugin-anchor" href="#so-how-do-i-fix-this"><i class="fa fa-link" aria-hidden="true"></i></a>So how do I fix this</h2>
+<h2 id="so-how-do-i-fix-this"><a name="so-how-do-i-fix-this" class="anchor-navigation-ex-anchor" href="#so-how-do-i-fix-this"><i class="fa fa-link" aria-hidden="true"></i></a>3. So how do I fix this</h2>
 <p>The real fix to this is quite simple actually, the process is both the same for Clover and OpenCore users. What you&apos;ll need:</p>
 <ul>
 <li><p><strong>Clover users</strong>:</p>
@@ -924,7 +916,7 @@ Couldn&apos;t allocate runtime area
 </ul>
 </li>
 </ul>
-<h2 id="prepping-the-bios"><a name="prepping-the-bios" class="plugin-anchor" href="#prepping-the-bios"><i class="fa fa-link" aria-hidden="true"></i></a>Prepping the BIOS</h2>
+<h2 id="prepping-the-bios"><a name="prepping-the-bios" class="anchor-navigation-ex-anchor" href="#prepping-the-bios"><i class="fa fa-link" aria-hidden="true"></i></a>4. Prepping the BIOS</h2>
 <p>The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:</p>
 <ul>
 <li>Update BIOS(extremely important as early BIOS&apos;s shipped are known to have memory map issues, especially with Z390)</li>
@@ -946,9 +938,9 @@ Couldn&apos;t allocate runtime area
 </ul>
 </li>
 </ul>
-<h2 id="test-boot"><a name="test-boot" class="plugin-anchor" href="#test-boot"><i class="fa fa-link" aria-hidden="true"></i></a>Test boot</h2>
+<h2 id="test-boot"><a name="test-boot" class="anchor-navigation-ex-anchor" href="#test-boot"><i class="fa fa-link" aria-hidden="true"></i></a>5. Test boot</h2>
 <p>With our adjusted EFI, config.plist and BIOS settings, it&apos;s time we try out our new setup. If you still have issues, well it looks like we&apos;ll need to do a deep dive and calculate our slide value</p>
-<h2 id="finding-the-slide-value"><a name="finding-the-slide-value" class="plugin-anchor" href="#finding-the-slide-value"><i class="fa fa-link" aria-hidden="true"></i></a>Finding the Slide value</h2>
+<h2 id="finding-the-slide-value"><a name="finding-the-slide-value" class="anchor-navigation-ex-anchor" href="#finding-the-slide-value"><i class="fa fa-link" aria-hidden="true"></i></a>6. Finding the Slide value</h2>
 <p>Now what you&apos;ll want to do is open the EFI shell in your boot manager of choice and run <code>memmap</code>. This will give you a list of all pages and their sizes. This is where the fun begins.</p>
 <p>Example of what you&apos;ll see:</p>
 <table>
@@ -1099,7 +1091,7 @@ Directory of fs0:\
 fs0:\&gt; memmap &gt; memmap.txt
 </code></pre>
 <p>This will add a <code>memmap.txt</code> file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type <code>$slide [insert a link to memmap.txt]</code></p>
-<h2 id="using-devirtualisemmio"><a name="using-devirtualisemmio" class="plugin-anchor" href="#using-devirtualisemmio"><i class="fa fa-link" aria-hidden="true"></i></a>Using DevirtualiseMmio</h2>
+<h2 id="using-devirtualisemmio"><a name="using-devirtualisemmio" class="anchor-navigation-ex-anchor" href="#using-devirtualisemmio"><i class="fa fa-link" aria-hidden="true"></i></a>7. Using DevirtualiseMmio</h2>
 <p>DevirtualiseMmio is quite an interesting quirk, specifically in that it gets around a huge hurdle with many PCI device systems like some Z390 boards and virtually all HEDT boards like X99 and X299. How it does this is it takes MMIO regions and removes runtime attributes allowing them to be used as space for the kernel to sit comfortably, pair this with <code>ProvideCustomSlide</code> quirk means we can keep the security feature of slide while also getting a bootable machine.</p>
 <p>For extremely problematic systems like Threadripper TRX40 19H, we need to find specific regions that aren&apos;t required for proper operation. This is where <code>MmioWhitelist</code> comes into play. Note that whitelisting isn&apos;t required for most systems</p>
 <p>If you run the debug version of OpenCore with DevirtualiseMmio, you&apos;ll notice this in your logs:</p>
@@ -1170,7 +1162,7 @@ fs0:\&gt; memmap &gt; memmap.txt
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fixing KASLR slide values","level":"9.4","depth":1,"next":{"title":"Disabling unsupported GPUs","level":"9.5","depth":1,"path":"extras/spoof.md","ref":"extras/spoof.md","articles":[]},"previous":{"title":"iGPU Patching","level":"9.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchors","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kaslr-fix.md","mtime":"2020-06-03T14:35:16.886Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-03T14:36:35.515Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Fixing KASLR slide values","level":"9.4","depth":1,"next":{"title":"Disabling unsupported GPUs","level":"9.5","depth":1,"path":"extras/spoof.md","ref":"extras/spoof.md","articles":[]},"previous":{"title":"iGPU Patching","level":"9.3","depth":1,"path":"extras/gpu-patches.md","ref":"extras/gpu-patches.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/kaslr-fix.md","mtime":"2020-06-09T01:44:57.539Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-09T01:46:12.301Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

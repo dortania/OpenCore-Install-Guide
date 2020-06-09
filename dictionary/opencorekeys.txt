@@ -144,6 +144,7 @@ ReleaseUsbOwnership
 ReplaceMask
 ReplaceTabWithSpace
 RequestBootVarFallback
+RequestBootVarRouting
 ReservedMemory
 ResetHwSig
 ResetLogoStatus
@@ -177,6 +178,7 @@ TextRenderer
 ThirdPartyDrives
 TimerResolution
 UEFI
+UIScale
 UnblockFsConnect
 UnicodeCollation
 UpdateDataHub
