@@ -112,7 +112,7 @@ Many users only have two GPUs. Nvidia and the Intel HD/UHD IGPU. Since Nvidia no
 
 ![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
 
-The rendered game or application have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides. Gsync will no longer work and Nvidia settings can no longer be opened. Gysnc and NV settings requires the display to be connected to the GPU. You may have increased input lag as well.
+The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides. Gsync will no longer work and Nvidia settings can no longer be opened. Gysnc and NV settings requires the display to be connected to the GPU. You may have increased input lag as well.
 
 If you have more than two GPUs (AMD, Nvidia and Intel), this setting is limited. If you have your monitor connected to an AMD GPU, Windows will only allow you to select the AMD GPU or the Intel IGPU. The Nvidia GPU will not show.
 
