@@ -484,6 +484,7 @@ This is either 1(or more) of 5 issues:
 * ["Memory Modules Misconfigured" on MacPro7,1](/troubleshooting/troubleshooting.md#memory-modules-misconfigured-on-macpro71)
 * [Apps crashing on AMD](/troubleshooting/troubleshooting.md#apps-crashing-on-amd)
 * [AssetCache Content Caching unavailable in virtual machine](/troubleshooting/troubleshooting.md#assetcache-content-caching-unavailable-in-virtual-machine)
+* [Coffee Lake systems failing to wake](#coffee-lake-systems-failing-to-wake)
 
 ## Broken iMessage and Siri
 
@@ -583,6 +584,13 @@ AssetCacheManagerUtil[] Failed to activate content caching: Error Domain=ACSMErr
 arise due to `VMM` flag being exposed by sysctl.
 
 Apply [VmAssetCacheEnable](https://github.com/ofawx/VmAssetCacheEnable) kernel patch to disguise the flag and allow normal operation.
+
++## Coffee Lake systems failing to wake
+
+In macOS 10.15.4, there were some changes made to AGPM that can cause wake issues on Coffee Lake systems. Specifically displays hooked up to the iGPU would fail to wake. To resolve this:
+
+* Add `igfxonln=1` to boot-args
+* Make sure you're using [WhateverGreen v1.3.8](https://github.com/acidanthera/WhateverGreen/releases) or newer
 
 # Other issues
 
