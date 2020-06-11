@@ -585,7 +585,7 @@ arise due to `VMM` flag being exposed by sysctl.
 
 Apply [VmAssetCacheEnable](https://github.com/ofawx/VmAssetCacheEnable) kernel patch to disguise the flag and allow normal operation.
 
-+## Coffee Lake systems failing to wake
+## Coffee Lake systems failing to wake
 
 In macOS 10.15.4, there were some changes made to AGPM that can cause wake issues on Coffee Lake systems. Specifically displays hooked up to the iGPU would fail to wake. To resolve this:
 
