@@ -483,7 +483,7 @@ This is either 1(or more) of 5 issues:
 * [DRM Broken](/troubleshooting/troubleshooting.md#drm-broken)
 * ["Memory Modules Misconfigured" on MacPro7,1](/troubleshooting/troubleshooting.md#memory-modules-misconfigured-on-macpro71)
 * [Apps crashing on AMD](/troubleshooting/troubleshooting.md#apps-crashing-on-amd)
-* [Coffee Lake systems failing to wake](#coffee-lake-systems-failing-to-wake)
+* [AssetCache Content Caching unavailable in virtual machine](/troubleshooting/troubleshooting.md#assetcache-content-caching-unavailable-in-virtual-machine)
 
 ## Broken iMessage and Siri
 
@@ -571,6 +571,18 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 
 * Avoid the chipset USB all together(ideally set `_STA = 0x0` to disable the controller outright with an SSDT)
 * Correct the USBX power properties to what the controller expects
+
+## AssetCache Content Caching unavailable in virtual machine
+
+Errors such as:
+```bash
+$ sudo AssetCacheManagerUtil activate
+AssetCacheManagerUtil[] Failed to activate content caching: Error Domain=ACSMErrorDomain Code=5 "virtual machine"...
+```
+
+arise due to `VMM` flag being exposed by sysctl.
+
+Apply [VmAssetCacheEnable](https://github.com/ofawx/VmAssetCacheEnable) kernel patch to disguise the flag and allow normal operation.
 
 # Other issues
 
