@@ -193,7 +193,7 @@ Missing or incorrect `Executable path`
 
 ## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 
-This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. Reminder of supported SMBIOS:
+This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. Reminder of supported SMBIOS in macOS 10.15 Catalina:
 
 * iMac13,x+
 * iMacPro1,1
@@ -201,6 +201,15 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 * MacBook8,1+
 * MacBookAir5,x+
 * MacBookPro9,x+
+
+And reminder, the following SMBIOS require newer versions of macOS:
+
+* iMac19,x       10.14.4 (18E226)
+* MacPro7,1      10.15.0 (19A583)
+* MacBookAir9,1  10.15.4 (19E287)
+* MacBookPro16,1 10.15.1 (19B2093)
+* MacBookPro16,2 10.15.4 (19E2269)
+* MacBookPro16,3 10.15.4 (19E2269)
 
 ## `Couldn't allocate runtime area` errors
 
@@ -357,8 +366,10 @@ This is right before the GPU is properly initialized, verify the following:
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
 * Double check that ig-platform-id and device-id are valid if running an iGPU.
+  * Desktop UHD 630's may need to use `00009B3E` instead
 * Trying various [WhateverGreen Fixes](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
   * `-igfxmlr` boot argument. This can also manifest as a "Divide by Zero" error.
+* Coffee Lake iGPU users may also need `igfxonln=1` in 10.15.4 and newer
 
 ## Scrambled Screen on laptops
 
@@ -473,6 +484,7 @@ This is either 1(or more) of 5 issues:
 * ["Memory Modules Misconfigured" on MacPro7,1](/troubleshooting/troubleshooting.md#memory-modules-misconfigured-on-macpro71)
 * [Apps crashing on AMD](/troubleshooting/troubleshooting.md#apps-crashing-on-amd)
 * [AssetCache Content Caching unavailable in virtual machine](/troubleshooting/troubleshooting.md#assetcache-content-caching-unavailable-in-virtual-machine)
+* [Coffee Lake systems failing to wake](#coffee-lake-systems-failing-to-wake)
 
 ## Broken iMessage and Siri
 
@@ -572,6 +584,13 @@ AssetCacheManagerUtil[] Failed to activate content caching: Error Domain=ACSMErr
 arise due to `VMM` flag being exposed by sysctl.
 
 Apply [VmAssetCacheEnable](https://github.com/ofawx/VmAssetCacheEnable) kernel patch to disguise the flag and allow normal operation.
+
+## Coffee Lake systems failing to wake
+
+In macOS 10.15.4, there were some changes made to AGPM that can cause wake issues on Coffee Lake systems. Specifically displays hooked up to the iGPU would fail to wake. To resolve this:
+
+* Add `igfxonln=1` to boot-args
+* Make sure you're using [WhateverGreen v1.3.8](https://github.com/acidanthera/WhateverGreen/releases) or newer
 
 # Other issues
 
