@@ -419,7 +419,7 @@ An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't rea
 
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
 
-For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c). Some patches are not transferred over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.c#L1134-L1216) to OpenCore:
+For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.cpp). Some patches are not transferred over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.cpp#L1466-L1565) to OpenCore:
 
 ```
 Base: _xcpm_bootstrap

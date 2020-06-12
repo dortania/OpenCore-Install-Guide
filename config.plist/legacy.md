@@ -11,8 +11,7 @@ Actually almost identical to an Ivy Bridge hack, the main things that need to be
 * Follow Ivy Bridge setup for most config options
 * Must use [DuetPkg](https://dortania.github.io/OpenCore-Desktop-Guide/extras/legacy.html) as most Sandy Bridge motherboards do not support UEFI
 * IMEI will need to be faked if running Sandy Bridge CPU on an Ivy Bridge based chipset(B75, Q75, Q77, H77, Z75, Z77)
-  * [device-id method](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-20003000-sandy-bridge-processors)
-  * [SSDT-IMEI Method](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
+  * [device-id](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-20003000-sandy-bridge-processors) and [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
 * iGPU setup is different
   * Use `AAPL,snb-platform-id` instead of `AAPL,ig-platform-id`
     * Desktop iGPU only:
