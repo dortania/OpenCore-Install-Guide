@@ -192,4 +192,6 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | **EC** | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) |
 | **AWAC** | N/A | N/A | N/A | [SSDT-AWAC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl) |
 
-# Now head [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+# Now with all this done...
+
+... head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/).
