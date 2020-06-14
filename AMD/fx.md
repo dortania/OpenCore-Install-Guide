@@ -168,7 +168,7 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't r
 
 Blocks certain kexts from loading. Not relevant for us.
 
-### Patch 
+### Patch
 
 This is where the AMD kernel patching magic happens. Please do note that `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303).
 
