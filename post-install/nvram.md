@@ -9,7 +9,7 @@ So this section is for those who don't have native NVRAM, the most common hardwa
 * X99
 * X299
 
-For B360, B365, H310, H370, Z390 users, make sure you have [SSDT-PMC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PMC.dsl) both under EFI/OC/ACPI and config.plist -> ACPI -> Add. For more info on making and compiling SSDTs, please see [**Getting started with ACPI**](../extras/acpi.md)
+For B360, B365, H310, H370, Z390 users, make sure you have [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) both under EFI/OC/ACPI and config.plist -> ACPI -> Add. For more info on making and compiling SSDTs, please see [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 **Note**: Desktop Z490 boards do not need this, the chipset's NVRAM is natively supported
 
@@ -75,7 +75,7 @@ And within your EFI:
 
 * `OpenRuntime.efi` driver(this is needed for proper sleep, shutdown and other services to work correctly
 
-Now grab the 'LogoutHook.command' and place it somewhere safe (e.g. within your user directory, as shown below):
+Now grab the ['LogoutHook.command'](https://github.com/acidanthera/OpenCorePkg/releases)(Inside `/Utilities/LogoutHook/`) and place it somewhere safe (e.g. within your user directory, as shown below):
 
 `/Users/(your username)/LogoutHook/LogoutHook.command`
 

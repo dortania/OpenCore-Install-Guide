@@ -12,6 +12,7 @@
 * [Adding The Base OpenCore Files](/installer-guide/opencore-efi.md)
 * [Gathering files](ktext.md)
 * [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+* [config.plist Setup](/config.plist/README.md)
 
 ## Intel Config.plist
 

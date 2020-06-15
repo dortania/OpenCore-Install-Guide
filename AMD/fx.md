@@ -12,25 +12,17 @@ So making a config.plist may seem hard, its not. It just takes some time but thi
 * **The Sample.plist cannot be used As-Is**, you must configure it to your system
 * **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
 
-Now with all that, we'll need some things to get started:
+Now with all that, a quick reminder of the tools we need
 
-* [ProperTree](https://github.com/corpnewt/ProperTree): For editing our config, this editor has some super useful tools for OpenCore
-* [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS): For generating our SMBIOS
-* [Sample.plist](https://github.com/acidanthera/OpenCorePkg/releases): This is found under the Docs folder of the release download
-* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore): Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
+* [ProperTree](https://github.com/corpnewt/ProperTree)
+  * Universal plist editor
+* [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
+  * For generating our SMBIOS data
+* [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
+  * See previous section on how to obtain: [config.plist Setup](/config.plist/README.md)
+* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
+  * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
   * [Bulldozer/Jaguar(15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/15h_16h) (Supports 10.13, 10.14, and 10.15)
-
-Now with those downloaded, we can get to really get started:
-
-* Grab the **Sample.plist** and rename to **config.plist**
-* Open your new config.plist in ProperTree
-  * macOS: `ProperTree.command`
-  * Windows: `ProperTree.bat`
-* Run the Clean Snapshot function(**Cmd/Ctrl + Shift + R** and point it at your EFI/OC folder),
-  * This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config
-  * Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you're troubleshooting
-
-And now you're ready to configure it!
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
@@ -40,15 +32,15 @@ And now you're ready to configure it!
 
 ### Add
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/USB-Map-Guide/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](../extras/acpi.md)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/USB-Map-Guide/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl)** | * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users with a defined PNP0C09** and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. A pre-built can be found here if you have issues: [SSDT-EC-USBX-DESKTOP](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-USBX-DESKTOP.aml) |
+| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | * Hides the Embedded controller and creates a fake one for macOS, **needed for all Catalina users with a defined PNP0C09** and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. A pre-built can be found here if you have issues: [SSDT-EC-USBX-DESKTOP](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-USBX-DESKTOP.aml) |
 
  Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](../extras/acpi.md) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
 ### Delete
 
