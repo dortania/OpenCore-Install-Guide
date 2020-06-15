@@ -1,11 +1,6 @@
 # Fixing Sleep
 
-* Supported version: 0.5.8
-
-**Work In Progress**
-
-* TO DO:
-  * Display -> ApplePS2Keyboard trash
+* Supported version: 0.5.9
 
 So to understand how to fix sleep issues in macOS, we need to first look at what contributes to sleep issues most of the time:
 
@@ -67,6 +62,8 @@ While minimal changes are needed, here are the ones we care about:
 
 * `Misc -> Boot -> HibernateMode -> None`
   * We're gonna avoid the black magic that is S4 for this guide
+* `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+  * `keeysyms=1`- Makes sure that if a kernel panic does happen during sleep, that we get all the important bits from it
 
 **In your BIOS**:
 
@@ -75,7 +72,7 @@ While minimal changes are needed, here are the ones we care about:
   * Trusted Platform Module
   * Wake on USB(Certain boards may actually require this on to wake, but most will get random wakeup calls with it)
 * Enable:
-  * Wake on Bluetooth
+  * Wake on Bluetooth(If using a Bluetooth device for waking like a keyboard, otherwise you can disable)
   
 ## Main culprits
 
@@ -101,15 +98,16 @@ This guide also includes some other fixes than just mapping:
 
 ### Fixing GPUs
 
-With GPUs, it's fairly easy to know what might be causing issues. This being unsupported GPUs in macOS. By default, any GPU that doesn't have drivers already provided in the OS will run off very basic drivers known as VESA drivers. These provide minimal display output but also cause a big issue in that macOS doesn't actually know how to properly interact with these devices. To fix this, well need to either trick macOS into thinking it's a generic PCIe device(which it can better handle) or completely power off the card(on laptops, desktop dGPUs have issues)
+With GPUs, it's fairly easy to know what might be causing issues. This being unsupported GPUs in macOS. By default, any GPU that doesn't have drivers already provided in the OS will run off very basic drivers known as VESA drivers. These provide minimal display output but also cause a big issue in that macOS doesn't actually know how to properly interact with these devices. To fix this, well need to either trick macOS into thinking it's a generic PCIe device(which it can better handle, ideal for desktops) or completely power off the card(on laptops, desktop dGPUs have issues powering down)
 
 * See here for more info:
     * [Disabling desktop dGPUs](https://dortania.github.io/Getting-Started-With-ACPI/Desktops/desktop-disable.md)
     * [Disabling laptop dGPUs](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/laptop-disable.md)
 	
-Special note for iGPU users on 10.15.4 and newer:
+Special notes for iGPU users on 10.15.4 and newer:
 
 * iGPU wake is partially broken due to numerous hacks apple uses in AppleGraphicsPowerManagement.kext with real Macs, to get around this you'll likely need `igfxonln=1` to force all displays online. Obviously test first to make sure you have this issue.
+* AAPL,ig-platform-id `07009B3E` may fail for desktop Coffee Lake (UHD 630) users, you can try `00009B3E` instead
 
 Special note for 4k Displays with AMD dGPUs:
 
@@ -127,6 +125,7 @@ Thunderbolt is a very tricky topic in the community, mainly due to the complexit
 * Disable Thunderbolt 3 in the BIOS
 * Attempt to patch Thunderbolt 3:
   * [Thunderbolt 3 Fix](https://osy.gitbook.io/hac-mini-guide/details/thunderbolt-3-fix/)
+  * [ThunderboltReset](https://github.com/osy86/ThunderboltReset)
   * [ThunderboltPkg](https://github.com/al3xtjames/ThunderboltPkg/blob/master/Docs/FAQ.md)
 
 There is no real quick fix for sleep with Thunderbolt sadly.
@@ -153,12 +152,18 @@ And avoid problematic drives, the main culprits:
 * Samsung's PM981 SSDs
 * Micron's 2200S
 
-If you however do have these drives in your system, it's best to disable them via an SSDT: [Disabling desktop dGPUs](https://dortania.github.io/Getting-Started-With-ACPI/Desktops/desktop-disable.md)
+If you however do have these drives in your system, it's best to disable them via an SSDT: [Disabling desktop dGPUs](https://dortania.github.io/Getting-Started-With-ACPI/Desktops/desktop-disable.md).
 This guide is primarily for dGPU but works the exact same way with NVMe drives(as they're both just PCIe devices)
   
 ### Fixing CPU Power Management
 
+**For Intel**:
+
 To verify you have working CPU Power Management, see the [Fixing Power Management](/post-install/pm.md) page. And if not, then patch accordingly.
+
+**For AMD**:
+
+Fret not, for their is still hope for you as well! [AMDRyzenCPUPowerManagement.kext](https://github.com/trulyspinach/SMCAMDProcessor) can add power management to Ryzen based CPUs. Installation and usage is explained on the repo's README.md 
 
 ## Other Culprits
 
@@ -176,45 +181,17 @@ So display issues are mainly for laptop lid detection, specifically:
 * Incorrectly made SSDT-PNLF
 * Keyboard spams from lid waking it(On PS2 based keyboards)
 
-The former is quite easy to fix, see here: [Backlight PNLF](/Laptops/backlight.md)
+The former is quite easy to fix, see here: [Backlight PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-The latter requires a bit more work but it's too complicated. What we'll be trying to do is fix random key spams when the lid is opened that are common on Skylake and newer HP's but can be found in other machines as well. This will also assume you have a PS2 keyboard and are using [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases),
+The latter requires a bit more work but it's too complicated. What we'll be trying to do is fix random key spams when the lid is opened that are common on Skylake and newer HP's but can be found in other machines as well. This will also assume you have a PS2 keyboard and are using [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases).
 
-To get started, we'll need a couple things:
+To fix this, grab [SSDT-HP-FixLidSleep.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-HP-FixLidSleep.dsl) and adapt the ACPI pathing to your keyboard. Once this is done, compile and drop into both EFI/OC/ACPI and under config.plist -> ACPI -> Add.
 
-* [DEBUG version of VoodooPS2.kext](https://github.com/acidanthera/VoodooPS2/releases)
-* [SSDT-HP-FixLidSleep.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-HP-FixLidSleep.dsl)
-* [ACPIDebug.kext](https://bitbucket.org/RehabMan/os-x-acpi-debug/downloads/)
-* [MaciASL](https://github.com/acidanthera/MaciASL/releases)
+For 99% of HP users, this will fix the random key spam. If not, see below threads:
 
-Next, reboot with the debug kexts and open the console.app. Then search `ApplePS2Keyboard`, you should get something like this:
+While for now we don't cover this topic extensively [yet](https://github.com/dortania/bugtracker/issues/9), Rehabman's old threads on the topics should give a good idea as to how to troubleshoot:
 
-![](/images/post-install/sleep-md/console.png)
-
-Here we can actually see all our keyboard calls we're sending to VoodooPS2/ApplePS2Keyboard. Now try to put that machine to sleep and wait for the keyboard spams to start when the lid opens.
-
-Below, we can see that no key was spammed. Wait a minutes... *why is there no consistent key spams...*
-
-![]()
-
-Well your PS2 keyboard isn't the only thing that will spam key presses, your Embedded Controller can as well. So to get around this. We'll need to inject some calls into our EC's methods.
-
-We're gonna assume you know the approximate key being pressed(ie. Brightness down, which commonly is F10. Yours may be different)
-
-Open up maciASL and you'll be greeted with your DSDT, search for `PNP0C09` and you should get something like this:
-
-![](/images/post-install/sleep-md/ec.png)
-
-For our example, we have an HP Elite X2 G1 where brightness down gets spammed on lid wake. And this would correspond with F9, so we'll jump to `_Q09`:
-
-![](/images/post-install/sleep-md/q09.png)
-
-We'll want to add some properties to this function, specifically this:
-
-```
-Notify(\_SB.PCI0.LPCB.PS2K, 0x0405)
-```
-
+* [RehabMan's brightness key guide](https://www.tonymacx86.com/threads/guide-patching-dsdt-ssdt-for-laptop-backlight-control.152659/)
 
 ### NVRAM
 
