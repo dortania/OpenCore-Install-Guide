@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>OpenCore Debugging · GitBook</title>
+        <title>config.plist Setup · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -71,10 +71,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="boot.html" />
+    <link rel="next" href="ivy-bridge.html" />
     
-    
-    <link rel="prev" href="troubleshooting.html" />
     
 
     <style>
@@ -244,9 +242,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.5" data-path="../config.plist/">
+        <li class="chapter active" data-level="2.5" data-path="./">
             
-                <a href="../config.plist/">
+                <a href="./">
             
                     
                     config.plist Setup
@@ -264,9 +262,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../config.plist/ivy-bridge.html">
+        <li class="chapter " data-level="3.1" data-path="ivy-bridge.html">
             
-                <a href="../config.plist/ivy-bridge.html">
+                <a href="ivy-bridge.html">
             
                     
                     Ivy Bridge
@@ -277,9 +275,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../config.plist/haswell.html">
+        <li class="chapter " data-level="3.2" data-path="haswell.html">
             
-                <a href="../config.plist/haswell.html">
+                <a href="haswell.html">
             
                     
                     Haswell
@@ -290,9 +288,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="../config.plist/skylake.html">
+        <li class="chapter " data-level="3.3" data-path="skylake.html">
             
-                <a href="../config.plist/skylake.html">
+                <a href="skylake.html">
             
                     
                     Skylake
@@ -303,9 +301,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.4" data-path="../config.plist/kaby-lake.html">
+        <li class="chapter " data-level="3.4" data-path="kaby-lake.html">
             
-                <a href="../config.plist/kaby-lake.html">
+                <a href="kaby-lake.html">
             
                     
                     Kaby Lake
@@ -316,9 +314,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.5" data-path="../config.plist/coffee-lake.html">
+        <li class="chapter " data-level="3.5" data-path="coffee-lake.html">
             
-                <a href="../config.plist/coffee-lake.html">
+                <a href="coffee-lake.html">
             
                     
                     Coffee Lake
@@ -329,9 +327,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.6" data-path="../config.plist/comet-lake.html">
+        <li class="chapter " data-level="3.6" data-path="comet-lake.html">
             
-                <a href="../config.plist/comet-lake.html">
+                <a href="comet-lake.html">
             
                     
                     Comet Lake
@@ -448,9 +446,9 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="troubleshooting.html">
+        <li class="chapter " data-level="7.1" data-path="../troubleshooting/troubleshooting.html">
             
-                <a href="troubleshooting.html">
+                <a href="../troubleshooting/troubleshooting.html">
             
                     
                     General Troubleshooting
@@ -461,9 +459,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="7.2" data-path="debug.html">
+        <li class="chapter " data-level="7.2" data-path="../troubleshooting/debug.html">
             
-                <a href="debug.html">
+                <a href="../troubleshooting/debug.html">
             
                     
                     OpenCore Debugging
@@ -474,9 +472,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="boot.html">
+        <li class="chapter " data-level="7.3" data-path="../troubleshooting/boot.html">
             
-                <a href="boot.html">
+                <a href="../troubleshooting/boot.html">
             
                     
                     macOS Boot Process
@@ -830,7 +828,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >OpenCore Debugging</a>
+        <a href=".." >config.plist Setup</a>
     </h1>
 </div>
 
@@ -845,87 +843,117 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#opencore-debugging"><b> </b>OpenCore Debugging</a></li><ul><li><span class="title-icon "></span><a href="#disabling-logging"><b>1. </b>Disabling logging</a></li></ul></ul></div><a href="#opencore-debugging" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
-<p><em>Last modified: Mon Jun 15 2020 20:08:15 GMT+0000 (Coordinated Universal Time)</em></p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#configplist-setup"><b> </b>config.plist Setup</a></li><ul><li><span class="title-icon "></span><a href="#creating-your-configplist"><b>1. </b>Creating your config.plist</a></li><li><span class="title-icon "></span><a href="#adding-your-ssdts-kexts-and-firmware-drivers"><b>2. </b>Adding your SSDTs, Kexts and Firmware Drivers</a></li><li><span class="title-icon "></span><a href="#selecting-your-platform"><b>3. </b>Selecting your platform</a></li><ul><li><span class="title-icon "></span><a href="#intel-desktop"><b>3.1. </b>Intel Desktop</a></li><li><span class="title-icon "></span><a href="#intel-hedt"><b>3.2. </b>Intel HEDT</a></li><li><span class="title-icon "></span><a href="#amd"><b>3.3. </b>AMD</a></li><li><span class="title-icon "></span><a href="#misc"><b>3.4. </b>Misc</a></li></ul></ul></ul></div><a href="#configplist-setup" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
+<p><em>Last modified: Mon Jun 15 2020 20:08:14 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
-<h1 id="opencore-debugging"><a name="opencore-debugging" class="anchor-navigation-ex-anchor" href="#opencore-debugging"><i class="fa fa-link" aria-hidden="true"></i></a> OpenCore Debugging</h1>
+<h1 id="configplist-setup"><a name="configplist-setup" class="anchor-navigation-ex-anchor" href="#configplist-setup"><i class="fa fa-link" aria-hidden="true"></i></a> config.plist Setup</h1>
+<p>Now that we&apos;ve got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi), your USB should start to look something like this:</p>
+<p><img src="../images/config/config-universal/almost-done.png" alt=""></p>
 <ul>
-<li>Supported version: 0.5.9</li>
+<li><strong>Note</strong>: Your USB <strong>will look different</strong>, everyone&apos;s system will have different requirements. </li>
 </ul>
-<p>Needing to figure out why you&apos;re getting issues or stalling? Well, you&apos;ve come to the right place.</p>
-<p>To start, make sure you&apos;re using either the <code>DEBUG</code> or <code>NOOPT</code> versions of OpenCore. This will provide much more info than the <code>RELEASE</code> version, the specific files that need to be swapped:</p>
+<h2 id="creating-your-configplist"><a name="creating-your-configplist" class="anchor-navigation-ex-anchor" href="#creating-your-configplist"><i class="fa fa-link" aria-hidden="true"></i></a>1. Creating your config.plist</h2>
+<p>First we&apos;ll want to grab the sample.plist from the <a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">OpenCorePkg</a>, this will be located under the <code>Docs</code> folder:</p>
+<p><img src="../images/config/config-universal/sample-location.png" alt=""></p>
+<p>Next lets move it onto our USB&apos;s EFI partition(will be called BOOT on Windows) under <code>EFI/OC/</code>, and rename it to config.plist:</p>
+<p><img src="../images/config/config-universal/renamed.png" alt=""></p>
+<h2 id="adding-your-ssdts-kexts-and-firmware-drivers"><a name="adding-your-ssdts-kexts-and-firmware-drivers" class="anchor-navigation-ex-anchor" href="#adding-your-ssdts-kexts-and-firmware-drivers"><i class="fa fa-link" aria-hidden="true"></i></a>2. Adding your SSDTs, Kexts and Firmware Drivers</h2>
+<p>For the rest of this guide, you&apos;re gonna need some form of plist editing. And for our guide, we&apos;ll be using ProperTree and GenSMBIOS to help automate some of the tedious work:</p>
 <ul>
-<li>EFI/BOOT/<ul>
-<li><code>BOOTx64.efi</code></li>
+<li><a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a><ul>
+<li>Universal plist editor</li>
 </ul>
 </li>
-<li>EFI/OC/Bootstrap/<ul>
-<li><code>Bootstrap.efi</code></li>
-</ul>
-</li>
-<li>EFI/OC/Drivers/<ul>
-<li><code>OpenRuntime.efi</code></li>
-</ul>
-</li>
-<li>EFI/OC/<ul>
-<li><code>OpenCore.efi</code></li>
+<li><a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a><ul>
+<li>For generating our SMBIOS data</li>
 </ul>
 </li>
 </ul>
-<p><img src="../images/troubleshooting/debug-md/replace.png" alt=""></p>
-<p>Next, head to your config.plist and locate the <code>Misc</code> section, we have a couple entries we&apos;ll want to play with here:</p>
-<p><strong>AppleDebug</strong>: YES</p>
-<p>Provides much more debugging information, specifically relating to boot.efi and will also store the log to disk.</p>
-<p><strong>ApplePanic</strong>: YES</p>
-<p>This will allow kernel panics to be stored to disk, highly recommend keeping <code>keepsyms=1</code> in boot-args to preserve as much info as possible.</p>
-<p><strong>DisableWatchdog</strong>: YES</p>
-<p>Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.</p>
-<p><strong>Target</strong>: <code>67</code>(or calculate one below)</p>
-<p>Used for enabling different levels of debugging</p>
+<p>Next, let&apos;s open ProperTree and edit our config.plist:</p>
 <ul>
-<li><code>0x01</code> &#x2014; Enable Logging</li>
-<li><code>0x02</code> &#x2014; Enable Onscreen debug</li>
-<li><code>0x04</code> &#x2014; Enable logging to Data Hub.</li>
-<li><code>0x08</code> &#x2014; Enable serial port logging.</li>
-<li><code>0x10</code> &#x2014; Enable UEFI variable logging.</li>
-<li><code>0x20</code> &#x2014; Enable non-volatile UEFI variable logging.</li>
-<li><code>0x40</code> &#x2014; Enable logging to file.</li>
-</ul>
-<p>To calculate the target, we can use a HEX calculator and then convert it to decimal. For us we want to have our values on stored onto a .txt file for later viewing:</p>
-<ul>
-<li><code>0x01</code> &#x2014; Enable Logging</li>
-<li><code>0x02</code> &#x2014; Enable Onscreen debug<ul>
-<li>Note this can heavily increase boot times on firmwares with poor GOP implementations</li>
+<li><code>ProperTree.command</code><ul>
+<li>For macOS</li>
+<li>Pro tip: there&apos;s a <code>buildapp.command</code> utility in the <code>Scripts</code> folder that lets you turn ProperTree into a dedicated app in macOS</li>
 </ul>
 </li>
-<li><code>0x10</code> &#x2014; Enable UEFI variable logging.</li>
-<li><code>0x40</code> &#x2014; Enable logging to file.</li>
+<li><code>ProperTree.bat</code><ul>
+<li>For Windows</li>
 </ul>
-<p><code>0x01</code> + <code>0x02</code> + <code>0x10</code> + <code>0x40</code> = <code>0x53</code></p>
-<p><code>0x53</code> converted to decimal becomes <code>83</code></p>
-<p>So we can set <code>Misc</code> -&gt; <code>Debug</code> -&gt; <code>Target</code> -&gt; <code>83</code></p>
-<p><strong>DisplayLevel</strong>: <code>2147483714</code>(or calculate one below)</p>
-<p>Used for setting what is logged</p>
-<ul>
-<li><code>0x00000002</code> &#x2014; DEBUG_WARN in DEBUG, NOOPT, RELEASE.</li>
-<li><code>0x00000040</code> &#x2014; DEBUG_INFO in DEBUG, NOOPT.</li>
-<li><code>0x00400000</code> &#x2014; DEBUG_VERBOSE in custom builds.</li>
-<li><p><code>0x80000000</code> &#x2014; DEBUG_ERROR in DEBUG, NOOPT, RELEASE.</p>
-<p>A full list can be found in <a href="https://github.com/tianocore/edk2/blob/UDK2018/MdePkg/Include/Library/DebugLib.h" target="_blank">DebugLib.h</a>.</p>
 </li>
 </ul>
-<p>For us we just want the following:</p>
+<p>Once opened, press <strong>Cmd/Ctrl + Shift + R</strong> and point it at your EFI/OC folder to perform a &quot;Clean Snapshot&quot;:</p>
 <ul>
-<li><code>0x00000002</code> &#x2014; DEBUG_WARN in DEBUG, NOOPT, RELEASE.</li>
-<li><code>0x00000040</code> &#x2014; DEBUG_INFO in DEBUG, NOOPT.</li>
-<li><code>0x80000000</code> &#x2014; DEBUG_ERROR in DEBUG, NOOPT, RELEASE.</li>
+<li>This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config</li>
+<li><strong>Cmd/Ctrl + R</strong> is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you&apos;re troubleshooting but for us not needed right now</li>
 </ul>
-<p>Just like with <code>Target</code>, we use a HEX calculator then convert to decimal:</p>
-<p><code>0x80000042</code> Converted to decimal <code>Misc</code> -&gt; <code>Debug</code> -&gt; <code>DisplayLevel</code> -&gt; <code>2147483714</code></p>
-<p>Once done, your config.plist should look like this:</p>
-<p><img src="../images/troubleshooting/debug-md/debug.png" alt=""></p>
-<h2 id="disabling-logging"><a name="disabling-logging" class="anchor-navigation-ex-anchor" href="#disabling-logging"><i class="fa fa-link" aria-hidden="true"></i></a>1. Disabling logging</h2>
-<p>To remove all file logging, set <code>Target</code> to <code>0</code></p>
+<p><img src="../images/config/config-universal/before-snapshot.png" alt=""></p>
+<p>Once done, you&apos;ll see your SSDTs, Kexts and firmware drivers populated in the config.plist:</p>
+<p><img src="../images/config/config-universal/after-snapshot.png" alt=""></p>
+<p>If you wish to clean up the file a bit, you can remove the <code>#WARNING</code> entries. Though they cause no issues staying there, so up to personal preference.</p>
+<h2 id="selecting-your-platform"><a name="selecting-your-platform" class="anchor-navigation-ex-anchor" href="#selecting-your-platform"><i class="fa fa-link" aria-hidden="true"></i></a>3. Selecting your platform</h2>
+<p>Now comes the important part, selecting the configuration path. Each platform has their own unique quirks that you need to account for so knowing your hardware is super important. See below for what to follow:</p>
+<h3 id="intel-desktop"><a name="intel-desktop" class="anchor-navigation-ex-anchor" href="#intel-desktop"><i class="fa fa-link" aria-hidden="true"></i></a>3.1. Intel Desktop</h3>
+<p><a href="ivy-bridge.html">Ivy Bridge</a></p>
+<ul>
+<li>3XXX series, 2012 era</li>
+</ul>
+<p><a href="haswell.html">Haswell</a></p>
+<ul>
+<li>4XXX series, 2013 era</li>
+<li>For the 3 of you in the world with desktop Broadwell, this will also apply to you</li>
+</ul>
+<p><a href="skylake.html">Skylake</a></p>
+<ul>
+<li>6XXX series, 2015-2016 era</li>
+</ul>
+<p><a href="kaby-lake.html">Kaby Lake</a></p>
+<ul>
+<li>7XXX series, 2017 era</li>
+<li>Kaby Lake-R and Amber Lake also apply</li>
+</ul>
+<p><a href="coffee-lake.html">Coffee Lake</a></p>
+<ul>
+<li>8XXX and 9XXX series, 2017-2019 era</li>
+</ul>
+<p><a href="icelake.md">Comet Lake</a></p>
+<ul>
+<li>10XXX series, 2020 era</li>
+</ul>
+<h3 id="intel-hedt"><a name="intel-hedt" class="anchor-navigation-ex-anchor" href="#intel-hedt"><i class="fa fa-link" aria-hidden="true"></i></a>3.2. Intel HEDT</h3>
+<p>This section includes both enthusiast and server based hardware.</p>
+<p><a href="../config-HEDT/haswell-e.html">Haswell-E</a></p>
+<ul>
+<li>5XXX series, 2014 era</li>
+</ul>
+<p><a href="../config-HEDT/broadwell-e.html">Broadwell-E</a></p>
+<ul>
+<li>6XXX series, 2016 era</li>
+</ul>
+<p><a href="../config-HEDT/skylake-x.html">Skylake/Cascade Lake-X/W</a></p>
+<ul>
+<li>7XXX, 9XXX, 10XXX series, 2017-2019 era</li>
+</ul>
+<h3 id="amd"><a name="amd" class="anchor-navigation-ex-anchor" href="#amd"><i class="fa fa-link" aria-hidden="true"></i></a>3.3. AMD</h3>
+<p><a href="AMD/fx.md">Bulldozer/Jaguar</a></p>
+<ul>
+<li>Google the series, AMD had bad naming schemes and let these generations live for too long.</li>
+</ul>
+<p><a href="AMD/zen.md">Zen</a></p>
+<ul>
+<li>1XXX, 2XXX, 3XXX series, 2017-2020 era</li>
+<li>Note: Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported</li>
+</ul>
+<h3 id="misc"><a name="misc" class="anchor-navigation-ex-anchor" href="#misc"><i class="fa fa-link" aria-hidden="true"></i></a>3.4. Misc</h3>
+<ul>
+<li><a href="https://dortania.github.io/vanilla-laptop-guide/" target="_blank">Laptops</a><ul>
+<li>Dedicated guide to laptop installs.</li>
+</ul>
+</li>
+<li><a href="https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/config.plist/legacy.md" target="_blank">Legacy</a><ul>
+<li>Mainly for Sandy</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -953,12 +981,8 @@
 
             
                 
-                <a href="troubleshooting.html" class="navigation navigation-prev " aria-label="Previous page: General Troubleshooting">
-                    <i class="fa fa-angle-left"></i>
-                </a>
                 
-                
-                <a href="boot.html" class="navigation navigation-next " aria-label="Next page: macOS Boot Process">
+                <a href="ivy-bridge.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Ivy Bridge">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -969,7 +993,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"OpenCore Debugging","level":"7.2","depth":1,"next":{"title":"macOS Boot Process","level":"7.3","depth":1,"path":"troubleshooting/boot.md","ref":"troubleshooting/boot.md","articles":[]},"previous":{"title":"General Troubleshooting","level":"7.1","depth":1,"path":"troubleshooting/troubleshooting.md","ref":"troubleshooting/troubleshooting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"troubleshooting/debug.md","mtime":"2020-06-15T20:08:15.491Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T20:09:32.888Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"config.plist Setup","level":"2.5","depth":1,"next":{"title":"Ivy Bridge","level":"3.1","depth":1,"path":"config.plist/ivy-bridge.md","ref":"config.plist/ivy-bridge.md","articles":[]},"previous":{"title":"Getting started with ACPI","level":"2.4","depth":1,"url":"https://dortania.github.io/Getting-Started-With-ACPI/","ref":"https://dortania.github.io/Getting-Started-With-ACPI/","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/README.md","mtime":"2020-06-15T20:08:14.658Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T20:09:32.888Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

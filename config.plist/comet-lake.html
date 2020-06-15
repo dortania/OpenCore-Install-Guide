@@ -244,6 +244,19 @@
             
         </li>
     
+        <li class="chapter " data-level="2.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    config.plist Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
 
     
         
@@ -833,7 +846,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#comet-lake"><b> </b>Comet Lake</a></li><ul><li><span class="title-icon "></span><a href="#starting-point"><b>1. </b>Starting Point</a></li><li><span class="title-icon "></span><a href="#acpi"><b>2. </b>ACPI</a></li><ul><li><span class="title-icon "></span><a href="#add"><b>2.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#quirks"><b>2.2. </b>Quirks</a></li></ul><li><span class="title-icon "></span><a href="#booter"><b>3. </b>Booter</a></li><ul><li><span class="title-icon "></span><a href="#mmiowhitelist"><b>3.1. </b>MmioWhitelist</a></li><li><span class="title-icon "></span><a href="#quirks_1"><b>3.2. </b>Quirks</a></li></ul><li><span class="title-icon "></span><a href="#deviceproperties"><b>4. </b>DeviceProperties</a></li><ul><li><span class="title-icon "></span><a href="#add_1"><b>4.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#delete_1"><b>4.2. </b>Delete</a></li></ul><li><span class="title-icon "></span><a href="#kernel"><b>5. </b>Kernel</a></li><ul><li><span class="title-icon "></span><a href="#add_2"><b>5.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#block"><b>5.2. </b>Block</a></li><li><span class="title-icon "></span><a href="#patch_1"><b>5.3. </b>Patch</a></li><li><span class="title-icon "></span><a href="#quirks_2"><b>5.4. </b>Quirks</a></li></ul><li><span class="title-icon "></span><a href="#misc"><b>6. </b>Misc</a></li><ul><li><span class="title-icon "></span><a href="#boot"><b>6.1. </b>Boot</a></li><li><span class="title-icon "></span><a href="#debug"><b>6.2. </b>Debug</a></li><li><span class="title-icon "></span><a href="#security"><b>6.3. </b>Security</a></li><li><span class="title-icon "></span><a href="#tools"><b>6.4. </b>Tools</a></li><li><span class="title-icon "></span><a href="#entries"><b>6.5. </b>Entries</a></li></ul><li><span class="title-icon "></span><a href="#nvram"><b>7. </b>NVRAM</a></li><ul><li><span class="title-icon "></span><a href="#add_3"><b>7.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#delete_2"><b>7.2. </b>Delete</a></li></ul><li><span class="title-icon "></span><a href="#platforminfo"><b>8. </b>PlatformInfo</a></li><ul><li><span class="title-icon "></span><a href="#generic"><b>8.1. </b>Generic</a></li></ul><li><span class="title-icon "></span><a href="#uefi"><b>9. </b>UEFI</a></li><ul><li><span class="title-icon "></span><a href="#drivers"><b>9.1. </b>Drivers</a></li><li><span class="title-icon "></span><a href="#apfs"><b>9.2. </b>APFS</a></li><li><span class="title-icon "></span><a href="#input"><b>9.3. </b>Input</a></li><li><span class="title-icon "></span><a href="#output"><b>9.4. </b>Output</a></li><li><span class="title-icon "></span><a href="#quirks_3"><b>9.5. </b>Quirks</a></li></ul><li><span class="title-icon "></span><a href="#cleaning-up"><b>10. </b>Cleaning up</a></li></ul><li><span class="title-icon "></span><a href="#intel-bios-settings"><b> </b>Intel BIOS settings</a></li><li><span class="title-icon "></span><a href="#now-with-all-this-done"><b> </b>Now with all this done...</a></li></ul></div><a href="#comet-lake" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
-<p><em>Last modified: Mon Jun 15 2020 16:32:48 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Mon Jun 15 2020 20:08:14 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="comet-lake"><a name="comet-lake" class="anchor-navigation-ex-anchor" href="#comet-lake"><i class="fa fa-link" aria-hidden="true"></i></a> Comet Lake</h1>
 <ul>
@@ -850,23 +863,18 @@
 <li><strong>The Sample.plist cannot be used As-Is</strong>, you must configure it to your system</li>
 <li><strong>DO NOT USE CONFIGURATORS</strong>, these rarely respect OpenCore&apos;s configuration and even some like Mackie&apos;s will add Clover properties and corrupt plists!</li>
 </ul>
-<p>Now with all that, we&apos;ll need some things to get started:</p>
+<p>Now with all that, a quick reminder of the tools we need</p>
 <ul>
-<li><a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a>: For editing our config, this editor has some super useful tools for OpenCore</li>
-<li><a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a>: For generating our SMBIOS</li>
-<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">Sample.plist</a>: This is found under the Docs folder of the release download</li>
-</ul>
-<p>Now with those downloaded, we can get to really get started:</p>
-<ul>
-<li>Grab the <strong>Sample.plist</strong> and rename to <strong>config.plist</strong></li>
-<li>Open your new config.plist in ProperTree<ul>
-<li>macOS: <code>ProperTree.command</code></li>
-<li>Windows: <code>ProperTree.bat</code></li>
+<li><a href="https://github.com/corpnewt/ProperTree" target="_blank">ProperTree</a><ul>
+<li>Universal plist editor</li>
 </ul>
 </li>
-<li>Run the Clean Snapshot function(<strong>Cmd/Ctrl + Shift + R</strong> and point it at your EFI/OC folder),<ul>
-<li>This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config</li>
-<li>Cmd+R is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you&apos;re troubleshooting</li>
+<li><a href="https://github.com/corpnewt/GenSMBIOS" target="_blank">GenSMBIOS</a><ul>
+<li>For generating our SMBIOS data</li>
+</ul>
+</li>
+<li><a href="https://github.com/acidanthera/OpenCorePkg/releases" target="_blank">Sample/config.plist</a><ul>
+<li>See previous section on how to obtain: <a href="./">config.plist Setup</a></li>
 </ul>
 </li>
 </ul>
@@ -874,7 +882,7 @@
 <h2 id="acpi"><a name="acpi" class="anchor-navigation-ex-anchor" href="#acpi"><i class="fa fa-link" aria-hidden="true"></i></a>2. ACPI</h2>
 <p><img src="../images/config/config.plist/cometlake/acpi.png" alt="ACPI"></p>
 <h3 id="add"><a name="add" class="anchor-navigation-ex-anchor" href="#add"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. Add</h3>
-<p>This is where you&apos;ll add SSDTs for your system, these are very important to <strong>booting macOS</strong> and have many uses like <a href="https://dortania.github.io/USB-Map-Guide/" target="_blank">USB maps</a>, <a href="../extras/spoof.html">disabling unsupported GPUs</a> and such. And with our system, <strong>its even required to boot</strong>. Guide on making them found here: <a href="../extras/acpi.md"><strong>Getting started with ACPI</strong></a></p>
+<p>This is where you&apos;ll add SSDTs for your system, these are very important to <strong>booting macOS</strong> and have many uses like <a href="https://dortania.github.io/USB-Map-Guide/" target="_blank">USB maps</a>, <a href="../extras/spoof.html">disabling unsupported GPUs</a> and such. And with our system, <strong>its even required to boot</strong>. Guide on making them found here: <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank"><strong>Getting started with ACPI</strong></a></p>
 <p>For us we&apos;ll need a couple of SSDTs to bring back functionality that Clover provided:</p>
 <table>
 <thead>
@@ -885,21 +893,21 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><strong><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl" target="_blank">SSDT-PLUG</a></strong></td>
+<td style="text-align:left"><strong><a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">SSDT-PLUG</a></strong></td>
 <td style="text-align:left">Allows for native CPU power management on Haswell and newer. A pre-built can be found here if you have issues: <a href="https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-PLUG-DRTNIA.aml" target="_blank">SSDT-PLUG-DRTNIA</a></td>
 </tr>
 <tr>
-<td style="text-align:left"><strong><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl" target="_blank">SSDT-EC-USBX</a></strong></td>
+<td style="text-align:left"><strong><a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">SSDT-EC-USBX</a></strong></td>
 <td style="text-align:left"><em> Hides the Embedded controller and creates a fake one for macOS, <em>*needed for all Catalina users with a defined PNP0C09</em></em> and recommended for other versions of macOS. This SSDT also has a second function, USBX. This is used for forcing USB power properties, requires SSDT-EC so this just jumbles them together. A pre-built can be found here if you have issues: <a href="https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-EC-USBX-DESKTOP.aml" target="_blank">SSDT-EC-USBX-DESKTOP</a></td>
 </tr>
 <tr>
-<td style="text-align:left"><strong><a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-AWAC.dsl" target="_blank">SSDT-AWAC</a></strong></td>
-<td style="text-align:left">This is the <a href="https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2" target="_blank">300 series RTC patch</a>, required for all B460 and Z490 boards which prevent systems from booting macOS. The alternative is <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0.dsl" target="_blank">SSDT-RTC0</a> for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see <a href="../extras/acpi.md">Getting started with ACPI</a> page.</td>
+<td style="text-align:left"><strong><a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">SSDT-AWAC</a></strong></td>
+<td style="text-align:left">This is the <a href="https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2" target="_blank">300 series RTC patch</a>, required for all B460 and Z490 boards which prevent systems from booting macOS. The alternative is <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">SSDT-RTC0</a> for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting started with ACPI</a> page.</td>
 </tr>
 </tbody>
 </table>
 <p>Note that you <strong>should not</strong> add your generated <code>DSDT.aml</code> here, it is already in your firmware. So if present, remove the entry for it in your <code>config.plist</code> and under EFI/OC/ACPI.</p>
-<p>For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the <a href="../extras/acpi.md"><strong>Getting started with ACPI</strong></a> <strong>page.</strong> Compiled SSDTs have a <strong>.aml</strong> extension(Assembled) and will go into the <code>EFI/OC/ACPI</code> folder and <strong>must</strong> be specified in your config under <code>ACPI -&gt; Add</code> as well.</p>
+<p>For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank"><strong>Getting started with ACPI</strong></a> <strong>page.</strong> Compiled SSDTs have a <strong>.aml</strong> extension(Assembled) and will go into the <code>EFI/OC/ACPI</code> folder and <strong>must</strong> be specified in your config under <code>ACPI -&gt; Add</code> as well.</p>
 <h4 id="delete"><a name="delete" class="anchor-navigation-ex-anchor" href="#delete"><i class="fa fa-link" aria-hidden="true"></i></a>Delete</h4>
 <p>This blocks certain ACPI tables from loading, for us we can ignore this.</p>
 <h4 id="patch"><a name="patch" class="anchor-navigation-ex-anchor" href="#patch"><i class="fa fa-link" aria-hidden="true"></i></a>Patch</h4>
@@ -1713,7 +1721,7 @@ SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Comet Lake","level":"3.6","depth":1,"next":{"title":"Haswell-E","level":"4.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"previous":{"title":"Coffee Lake","level":"3.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/comet-lake.md","mtime":"2020-06-15T16:32:48.641Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T16:34:03.164Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Comet Lake","level":"3.6","depth":1,"next":{"title":"Haswell-E","level":"4.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"previous":{"title":"Coffee Lake","level":"3.5","depth":1,"path":"config.plist/coffee-lake.md","ref":"config.plist/coffee-lake.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config.plist/comet-lake.md","mtime":"2020-06-15T20:08:14.658Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T20:09:32.888Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

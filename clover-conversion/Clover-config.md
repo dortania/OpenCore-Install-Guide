@@ -132,7 +132,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **SSDT**:
 
 * **PluginType**:
-  * [SSDT-PLUG](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-PLUG.dsl)
+  * [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)
   * See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
 
 * **Generate P States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For Sandy Bridge and IvyBridge)
