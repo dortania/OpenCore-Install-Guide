@@ -180,7 +180,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | SSDT | IvyBridge | Haswell/Broadwell | Skylake | KabyLake | CoffeeLake | CometLake | AMD(15/16/17h) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)(Run in Post-Install) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
-| **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) |
+| **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
 | **AWAC** | N/A | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
 | **NVRAM** | N/A | N/A | N/A | N/A | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A | N/A |
 
@@ -189,7 +189,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | SSDT | IvyBridge-E | Haswell-E | Broadwell-E | Skylake-X |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)(Run in Post-Install) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) |
-| **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl) |
+| **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
 | **AWAC** | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) |
 
 # Now head [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
