@@ -72,3 +72,11 @@
 .gitbook-link {
     display: none !important
 }
+
+#anchor-navigation-ex-pagetop-navbar ul li a {
+    white-space: initial;
+}
+
+#anchor-navigation-ex-navbar ul li a {
+    white-space: initial;
+}
