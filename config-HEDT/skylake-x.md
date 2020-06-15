@@ -584,4 +584,6 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
 
-# [Post-install](/post-install/README.md)
+# Now with all this done...
+
+... head to [Post-install](/post-install/README.md).
