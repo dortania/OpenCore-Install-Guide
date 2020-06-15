@@ -1,6 +1,5 @@
 # Converting common Kernel and Kext patches
 
-
 ## Manually converting a patch
 
 When converting a kernel/kext patch into one for OpenCore, you'll need to remember a few things
@@ -52,7 +51,6 @@ So the above patch would become:
 | Mask | Data | |
 | ReplaceMask | Data | |
 
-
 For Min and MaxKernel, we can use the below as for info, so 18G95 has the kernel version `18.7.0` and 18G103 has `18.7.0`(both being the same kernel):
 
 * [macOS Mojave: Release history](https://en.wikipedia.org/wiki/MacOS_Mojave#Release_history)
@@ -61,11 +59,9 @@ For Identifier, you'll either define `kernel` or the kext you want to patch(ie. 
 
 Regarding Limit, Count and Skip, they are set to `0` so they apply to all instances. `Mask` and `ReplaceMask` can be left as blank as Clover doesn't support masking(until very recently but won't be covered here).
 
-
 ## Common patches in OpenCore and co.
 
 Little section mentioning common Kernel and Kexts patches that have been absorbed into OpenCore or other kexts. This list is not complete so any that may have been forgotten can be mentioned by opening a new [issue](https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/issues). Any help is much appreciated
-
 
 ### Kernel Patches
 
