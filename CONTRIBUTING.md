@@ -16,7 +16,7 @@ Note: For those wanting to contribute financially, we seriously appreciate it bu
 * Keep issues tab dedicated to guides issues only, **no personal hackintosh issues**. It is not a place to discuss installation issues.
 * If for a typo or better clarification, please indicate what page it was on. Would appreciate not going for a scavenger hunt on where these issues are.
 
-You can find the issues tab here: [OpenCore Desktop Guide Issues](https://github.com/dortania/OpenCore-Desktop-Guide/issues)
+You can find the bugtracker here: [Bugtracker](https://github.com/dortania/bugtracker)
 
 ## Contributing via PRs
 
