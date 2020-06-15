@@ -71,8 +71,6 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="extras/acpi.html" />
-    
     
     <link rel="prev" href="installer-guide/opencore-efi.html" />
     
@@ -231,9 +229,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4" data-path="extras/acpi.html">
+        <li class="chapter " data-level="2.4" >
             
-                <a href="extras/acpi.html">
+                <a target="_blank" href="https://dortania.github.io/Getting-Started-With-ACPI/">
             
                     
                     Getting started with ACPI
@@ -832,8 +830,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#gathering-files"><b> </b>Gathering files</a></li><ul><li><span class="title-icon "></span><a href="#firmware-drivers"><b>1. </b>Firmware Drivers</a></li><li><span class="title-icon "></span><a href="#kexts"><b>2. </b>Kexts</a></li><li><span class="title-icon "></span><a href="#ssdts"><b>3. </b>SSDTs</a></li><ul><li><span class="title-icon "></span><a href="#desktop"><b>3.1. </b>Desktop</a></li><li><span class="title-icon "></span><a href="#high-end-desktop"><b>3.2. </b>High End Desktop</a></li></ul></ul><li><span class="title-icon "></span><a href="#now-head-getting-started-with-acpi"><b> </b>Now head Getting Started With ACPI</a></li></ul></div><a href="#gathering-files" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
-<p><em>Last modified: Sun Jun 14 2020 16:53:45 GMT+0000 (Coordinated Universal Time)</em></p>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#gathering-files"><b> </b>Gathering files</a></li><ul><li><span class="title-icon "></span><a href="#firmware-drivers"><b>1. </b>Firmware Drivers</a></li><li><span class="title-icon "></span><a href="#kexts"><b>2. </b>Kexts</a></li><li><span class="title-icon "></span><a href="#ssdts"><b>3. </b>SSDTs</a></li><ul><li><span class="title-icon "></span><a href="#desktop"><b>3.1. </b>Desktop</a></li><li><span class="title-icon "></span><a href="#high-end-desktop"><b>3.2. </b>High End Desktop</a></li></ul></ul><li><span class="title-icon "></span><a href="#now-with-all-this-done"><b> </b>Now with all this done...</a></li></ul></div><a href="#gathering-files" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
+<p><em>Last modified: Mon Jun 15 2020 15:57:57 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="gathering-files"><a name="gathering-files" class="anchor-navigation-ex-anchor" href="#gathering-files"><i class="fa fa-link" aria-hidden="true"></i></a> Gathering files</h1>
 <ul>
@@ -921,7 +919,7 @@
 <ul>
 <li><a href="https://github.com/acidanthera/WhateverGreen/releases" target="_blank">WhateverGreen</a><ul>
 <li>Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.</li>
-<li>Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see * <a href="extras/acpi.html">Getting started with ACPI</a> for more info</li>
+<li>Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see * <a href="extras/acpi.md">Getting started with ACPI</a> for more info</li>
 </ul>
 </li>
 </ul>
@@ -1077,7 +1075,7 @@
 <p>Please refer to <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md" target="_blank">Kexts.md</a> for a full list of supported kexts</p>
 <h2 id="ssdts"><a name="ssdts" class="anchor-navigation-ex-anchor" href="#ssdts"><i class="fa fa-link" aria-hidden="true"></i></a>3. SSDTs</h2>
 <p>So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in <strong>your specific ACPI section of the config.plist</strong>, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now.</p>
-<p><a href="extras/acpi.html">Getting started with ACPI</a> has an extended section on SSDTs including compiling them on different platforms.</p>
+<p><a href="extras/acpi.md">Getting started with ACPI</a> has an extended section on SSDTs including compiling them on different platforms.</p>
 <p>A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):</p>
 <h3 id="desktop"><a name="desktop" class="anchor-navigation-ex-anchor" href="#desktop"><i class="fa fa-link" aria-hidden="true"></i></a>3.1. Desktop</h3>
 <table>
@@ -1171,7 +1169,8 @@
 </tr>
 </tbody>
 </table>
-<h1 id="now-head-getting-started-with-acpi"><a name="now-head-getting-started-with-acpi" class="anchor-navigation-ex-anchor" href="#now-head-getting-started-with-acpi"><i class="fa fa-link" aria-hidden="true"></i></a> Now head Getting Started With ACPI</h1>
+<h1 id="now-with-all-this-done"><a name="now-with-all-this-done" class="anchor-navigation-ex-anchor" href="#now-with-all-this-done"><i class="fa fa-link" aria-hidden="true"></i></a> Now with all this done...</h1>
+<p>... head to <a href="https://dortania.github.io/Getting-Started-With-ACPI/" target="_blank">Getting Started With ACPI</a>.</p>
 
                                 
                                 </section>
@@ -1199,14 +1198,10 @@
 
             
                 
-                <a href="installer-guide/opencore-efi.html" class="navigation navigation-prev " aria-label="Previous page: Adding The Base OpenCore Files">
+                <a href="installer-guide/opencore-efi.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Adding The Base OpenCore Files">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="extras/acpi.html" class="navigation navigation-next " aria-label="Next page: Getting started with ACPI">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -1215,7 +1210,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"2.3","depth":1,"next":{"title":"Getting started with ACPI","level":"2.4","depth":1,"path":"extras/acpi.md","ref":"extras/acpi.md","articles":[]},"previous":{"title":"Adding The Base OpenCore Files","level":"2.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-06-14T16:53:45.634Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-14T16:55:07.729Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gathering files","level":"2.3","depth":1,"next":{"title":"Getting started with ACPI","level":"2.4","depth":1,"url":"https://dortania.github.io/Getting-Started-With-ACPI/","ref":"https://dortania.github.io/Getting-Started-With-ACPI/","articles":[]},"previous":{"title":"Adding The Base OpenCore Files","level":"2.2","depth":1,"path":"installer-guide/opencore-efi.md","ref":"installer-guide/opencore-efi.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"ktext.md","mtime":"2020-06-15T15:57:57.550Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-15T15:59:15.587Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
