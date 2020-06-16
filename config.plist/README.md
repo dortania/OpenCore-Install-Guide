@@ -4,9 +4,7 @@ Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi),
 
 ![](/images/config/config-universal/almost-done.png)
 
-* **Note**: Your USB **will look different**, everyone's system will have different requirements. 
-
-
+* **Note**: Your USB **will look different**, everyone's system will have different requirements.
 
 ## Creating your config.plist
 
@@ -15,7 +13,6 @@ First we'll want to grab the sample.plist from the [OpenCorePkg](https://github.
 ![](/images/config/config-universal/sample-location.png)
 
 Next lets move it onto our USB's EFI partition(will be called BOOT on Windows) under `EFI/OC/`, and rename it to config.plist:
-
 
 ![](/images/config/config-universal/renamed.png)
 
@@ -27,7 +24,7 @@ For the rest of this guide, you're gonna need some form of plist editing. And fo
   * Universal plist editor
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
   * For generating our SMBIOS data
- 
+
 Next, let's open ProperTree and edit our config.plist:
 
 * `ProperTree.command`
@@ -52,7 +49,6 @@ If you wish to clean up the file a bit, you can remove the `#WARNING` entries. T
 ## Selecting your platform
 
 Now comes the important part, selecting the configuration path. Each platform has their own unique quirks that you need to account for so knowing your hardware is super important. See below for what to follow:
-
 
 ### Intel Desktop
 

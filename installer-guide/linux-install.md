@@ -116,6 +116,6 @@ In terminal:
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
       ![](/images/installer-guide/linux-install-md/unknown-21.png)
 
-### Now with all this done...
+### Now with all this done
 
 ... head to [Setting up the EFI](/installer-guide/opencore-efi.md) to finish up your work.

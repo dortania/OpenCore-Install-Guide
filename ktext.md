@@ -195,6 +195,6 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
 | **AWAC** | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) |
 
-# Now with all this done...
+# Now with all this done
 
 ... head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/).
