@@ -102,10 +102,8 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 
-* `0x3E9B0007` - this is used when the Desktop iGPU is used to drive a display
-  * `07009B3E` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
-* `0x3E920003` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
-  * `0300923E` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
+* `07009B3E` - this is used when the Desktop iGPU is used to drive a display
+* `0300923E` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
 
 **Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 

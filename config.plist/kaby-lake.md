@@ -97,10 +97,8 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 
-* `0x59120000` - this is used when the Desktop iGPU is used to drive a display
-  * `00001259` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
-* `0x59120003` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
-  * `03001259` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
+* `00001259` - this is used when the Desktop iGPU is used to drive a display
+* `03001259` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
   
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 

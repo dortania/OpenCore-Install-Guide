@@ -99,19 +99,15 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 
-* `0x0D220003` - this is used when the Desktop Haswell iGPU is used to drive a display
-  * `0300220D` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
-* `0x04120004` - this is used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display
-  * `04001204` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
-* `0x16220007` - this is used when the Desktop Broadwell iGPU
-  * `07002216` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
+* `0300220D` - this is used when the Desktop Haswell iGPU is used to drive a display
+* `04001204` - this is used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display
+* `07002216` - this is used when the Desktop Broadwell iGPU
 
 I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
 
 The device-id fake is set up like so:
 
-* `0x04120000` - this is the device id for HD 4600 which does have support in macOS
-  * `12040000` when hex swapped
+* `12040000` - this is the device id for HD 4600 which does have support in macOS
 
 We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`. The first enables patching via WhateverGreen.kext, the second sets the min stolen memory to 19MB and third sets the framebuffer memory to 9MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 

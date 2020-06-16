@@ -113,10 +113,9 @@ Sets device properties from a map.
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
 
-The ig-platform-id's we use is as follows:
+The `AAPL,ig-platform-id` we use is as follows:
 
-* `0x0166000A` - this is the standard hex for the ig-platform-id
-  * `0A006601` when hex-swapped(this is the value we use for `AAPL,ig-platform-id`)
+* `0A006601` - this is the standard hex for the ig-platform-id
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
