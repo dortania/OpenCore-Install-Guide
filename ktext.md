@@ -35,7 +35,9 @@ For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg D
 
 ## Kexts
 
-A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI
+A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI.
+
+* **Windows and Linux note**: Kexts will look like normal folders in your OS, **double check** that the folder you are installing has a .kext extension visible(and do not add one manually if it's missing)
 
 All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
 
@@ -64,7 +66,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
   * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
-  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see * [Getting started with ACPI](/extras/acpi.md) for more info
+  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see * [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
 
 **Audio**:
 
@@ -171,7 +173,7 @@ Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/maste
 
 So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in **your specific ACPI section of the config.plist**, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now.
 
-[Getting started with ACPI](/extras/acpi.md) has an extended section on SSDTs including compiling them on different platforms.
+[Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) has an extended section on SSDTs including compiling them on different platforms.
 
 A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
 
@@ -183,6 +185,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
 | **AWAC** | N/A | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
 | **NVRAM** | N/A | N/A | N/A | N/A | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A | N/A |
+| **USB** | N/A | N/A | N/A | N/A | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
 
 ### High End Desktop
 

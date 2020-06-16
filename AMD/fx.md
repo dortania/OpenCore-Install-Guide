@@ -580,6 +580,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 **Disable:**
 
 * Fast Boot
+* Secure Boot
 * Compatibility Support Module (CSM)(**Must be off, GPU errors like `gIO` are common when this option in enabled**)
 
 **Enable:**

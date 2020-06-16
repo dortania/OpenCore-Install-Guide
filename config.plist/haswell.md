@@ -626,6 +626,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 **Disable:**
 
 * Fast Boot
+* Secure Boot
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
 * CSM
 * Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
