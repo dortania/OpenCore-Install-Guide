@@ -120,7 +120,7 @@ Special note for 4k Displays with AMD dGPUs:
 
 ### Fixing Thunderbolt
 
-Thunderbolt is a very tricky topic in the community, mainly due to the complexity of the situation. You really have just 2 paths to go down:
+Thunderbolt is a very tricky topic in the community, mainly due to the complexity of the situation. You really have just 2 paths to go down if you want Thunderbolt and sleep to work simultaneously:
 
 * Disable Thunderbolt 3 in the BIOS
 * Attempt to patch Thunderbolt 3:
@@ -128,7 +128,7 @@ Thunderbolt is a very tricky topic in the community, mainly due to the complexit
   * [ThunderboltReset](https://github.com/osy86/ThunderboltReset)
   * [ThunderboltPkg](https://github.com/al3xtjames/ThunderboltPkg/blob/master/Docs/FAQ.md)
 
-There is no real quick fix for sleep with Thunderbolt sadly.
+Note: Thunderbolt can be enabled without extra work *if* you're ok without sleep, and vice versa.
 
 ### Fixing NICs
 
@@ -183,13 +183,11 @@ So display issues are mainly for laptop lid detection, specifically:
 
 The former is quite easy to fix, see here: [Backlight PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-The latter requires a bit more work but it's too complicated. What we'll be trying to do is fix random key spams when the lid is opened that are common on Skylake and newer HP's but can be found in other machines as well. This will also assume you have a PS2 keyboard and are using [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases).
+The latter requires a bit more work. What we'll be doing is trying to nullify semi random key spams that happen on Skylake and newer based HPs though pop up in other OEMs as well. This will also assume that your keyboard is PS2 based and are running [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases).
 
-To fix this, grab [SSDT-HP-FixLidSleep.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-HP-FixLidSleep.dsl) and adapt the ACPI pathing to your keyboard. Once this is done, compile and drop into both EFI/OC/ACPI and under config.plist -> ACPI -> Add.
+To fix this, grab [SSDT-HP-FixLidSleep.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-HP-FixLidSleep.dsl) and adapt the ACPI pathing to your keyboard(`_CID` value being `PNP0303`). Once this is done, compile and drop into both EFI/OC/ACPI and under config.plist -> ACPI -> Add.
 
 For 99% of HP users, this will fix the random key spam. If not, see below threads:
-
-While for now we don't cover this topic extensively [yet](https://github.com/dortania/bugtracker/issues/9), Rehabman's old threads on the topics should give a good idea as to how to troubleshoot:
 
 * [RehabMan's brightness key guide](https://www.tonymacx86.com/threads/guide-patching-dsdt-ssdt-for-laptop-backlight-control.152659/)
 
