@@ -63,7 +63,7 @@ While minimal changes are needed, here are the ones we care about:
 * `Misc -> Boot -> HibernateMode -> None`
   * We're gonna avoid the black magic that is S4 for this guide
 * `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
-  * `keeysyms=1`- Makes sure that if a kernel panic does happen during sleep, that we get all the important bits from it
+  * `keepsyms=1`- Makes sure that if a kernel panic does happen during sleep, that we get all the important bits from it
 
 **In your BIOS**:
 
