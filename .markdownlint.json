@@ -3,5 +3,6 @@
 	"line_length": false,
 	"no-alt-text": false,
 	"no-inline-html": false,
-	"header-increment": false
+	"header-increment": false,
+        "no-duplicate-header": false
 }

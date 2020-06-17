@@ -59,7 +59,7 @@ For Identifier, you'll either define `kernel` or the kext you want to patch(ie. 
 
 Regarding Limit, Count and Skip, they are set to `0` so they apply to all instances. `Mask` and `ReplaceMask` can be left as blank as Clover doesn't support masking(until very recently but won't be covered here).
 
-## Common patches in OpenCore and co.
+## Common patches in OpenCore and co
 
 Little section mentioning common Kernel and Kexts patches that have been absorbed into OpenCore or other kexts. This list is not complete so any that may have been forgotten can be mentioned by opening a new [issue](https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/issues). Any help is much appreciated
 
