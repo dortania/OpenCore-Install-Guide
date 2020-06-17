@@ -99,6 +99,10 @@ This is due to missing ConsoleGOP, enable it under your config:
 
 * `UEFI -> Output -> ProvideConsoleGop`
 
+Another possibility is that the problem occurres due to `RebuildAppleMemoryMap` being enabled, disable it under your config:
+
+* `Booter -> Quirks -> RebuildAppleMemoryMap`
+
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 
 ## Stuck on `OC: OcAppleGenericInput... - Success`
