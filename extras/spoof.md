@@ -112,8 +112,16 @@ Many users only have two GPUs. Nvidia and the Intel HD/UHD IGPU. Since Nvidia no
 
 ![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
 
-The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides. Gsync will no longer work and Nvidia settings can no longer be opened. Gysnc and NV settings requires the display to be connected to the GPU. You may have increased input lag as well.
+The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides:
 
-If you have more than two GPUs (AMD, Nvidia and Intel), this setting is limited. If you have your monitor connected to an AMD GPU, Windows will only allow you to select the AMD GPU or the Intel IGPU. The Nvidia GPU will not show.
+- GSync will no longer work.
+- Nvidia settings can no longer be opened.
+- Decreased frame rate.
+- Increased input latency.
+- Refresh rate cap.
 
-As a recommendation, if you use both operating systems equally your best option is an HDMI or DP switch.
+If your motherboard only has an HDMI connector for the IGPU, the maximum refresh rate for spec 2.1 is [120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). This assumes your board, cable and monitor are of the same spec. This means your 144Hz monitor is only seeing a maximum of 120Hz as determined by the hardware. This limitation *does not* apply if you your board has a DP connector for the IGPU.
+
+If you have more than two GPUs (AMD, Nvidia and Intel), this setting is limited. A monitor connected to the AMD GPU means Windows will only allow you to select the AMD GPU or the Intel IGPU. The Nvidia GPU will not show.
+
+Note: GSync and NV Settings requires the display to be connected to the GPU. As a recommendation, if you use both operating systems equally your best option is an HDMI or DP switch.
