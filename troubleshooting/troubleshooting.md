@@ -99,6 +99,10 @@ This is due to missing ConsoleGOP, enable it under your config:
 
 * `UEFI -> Output -> ProvideConsoleGop`
 
+Another possibility is that the problem occurres due to `RebuildAppleMemoryMap` being enabled, disable it under your config:
+
+* `Booter -> Quirks -> RebuildAppleMemoryMap`
+
 If this doesn't help, grab the [debug versions](https://github.com/acidanthera/OpenCorePkg/releases) of `OpenCore.efi` and `BOOTx64.efi` and replace them in your EFI. This will show much more info on where your hack is actually getting stuck.
 
 ## Stuck on `OC: OcAppleGenericInput... - Success`
@@ -384,7 +388,7 @@ Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other
 
 ## 300 series Intel stalling on `apfs_module_start...`
 
-Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](/extras/acpi.md) section
+Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
 
 ## Kernel Panic `Cannot perform kext summary`
 
