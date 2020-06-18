@@ -13,7 +13,7 @@ So you need to hide your unsupported GPU? Well with OpenCore things are slightly
 * SSDT
   * Disables GPU on a per-slot basis
 
-**CSM must be off in the BIOS for the spoofing to work correctly, especially on AMD CPU based systems**
+**CSM must be off in the BIOS for the spoofing to work correctly, especially on AMD CPU based systems.**
 
 ### Boot Flag
 
@@ -21,7 +21,7 @@ By far the simplest way, all you need to do is add the following boot-arg:
 
 `-wegnoegpu`
 
-Do note that this will disable all GPUs excluding the iGPU
+Do note that this will disable all GPUs excluding the iGPU.
 
 ### DeviceProperties Method
 
@@ -100,7 +100,7 @@ Example of device path:
        }
     }
 
-A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this, reminder that .aml is assembled and .dsl is source code. You can compile with MaciASL by running File -> Save As -> ACPI Machine Language.
+A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this. Remember that `.aml` is assembled and `.dsl` is source code. You can compile with MaciASL by selecting File -> Save As -> ACPI Machine Language.
 
 Source: CorpNewt
 
@@ -112,8 +112,16 @@ Many users only have two GPUs. Nvidia and the Intel HD/UHD IGPU. Since Nvidia no
 
 ![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
 
-The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides. Gsync will no longer work and Nvidia settings can no longer be opened. Gysnc and NV settings requires the display to be connected to the GPU. You may have increased input lag as well.
+The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides:
 
-If you have more than two GPUs (AMD, Nvidia and Intel), this setting is limited. If you have your monitor connected to an AMD GPU, Windows will only allow you to select the AMD GPU or the Intel IGPU. The Nvidia GPU will not show.
+- GSync will no longer work.
+- Nvidia settings can no longer be opened.
+- Decreased frame rate.
+- Increased input latency.
+- Refresh rate cap.
 
-As a recommendation, if you use both operating systems equally your best option is an HDMI or DP switch.
+If your motherboard only has an HDMI connector for the IGPU, the maximum refresh rate for spec 2.1 is [120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). This assumes your board, cable and monitor are of the same spec. This means your 144Hz monitor is only seeing a maximum of 120Hz as determined by the hardware. This limitation *does not* apply if your board has a DP connector for the IGPU.
+
+If you have more than two GPUs (AMD, Nvidia and Intel), this setting is limited. A monitor connected to the AMD GPU means Windows will only allow you to select the AMD GPU or the Intel IGPU. The Nvidia GPU will not show.
+
+Note: GSync and NV Settings requires the display to be connected to the GPU. As a recommendation, if you use both operating systems equally your best option is an HDMI or DP switch.
