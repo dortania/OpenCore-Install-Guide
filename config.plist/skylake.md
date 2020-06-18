@@ -297,7 +297,7 @@ csr-active-config is set to `00000000` which enables System Integrity Protection
 * `03000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 
-Recommended to leave enabled(`00000000`) for best security practices, see here for all possible values: [csr.h](https://github.com/apple/darwin-xnu/blob/master/bsd/sys/csr.h).
+Recommended to leave enabled (`00000000`) for best security practices, see here for all possible values: [csr.h](https://github.com/apple/darwin-xnu/blob/master/bsd/sys/csr.h).
 
 * **prev-lang:kbd**: &lt;>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
