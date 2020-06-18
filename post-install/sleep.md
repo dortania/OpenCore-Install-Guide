@@ -70,6 +70,7 @@ While minimal changes are needed, here are the ones we care about:
 * Disable:
   * Wake on LAN
   * Trusted Platform Module
+    * Note that if you're using BitLocker in Windows, disabling this will result in all your encryption keys being lost. If you're using BitLocker, either disable or note that it may be a cause for wake issues.
   * Wake on USB(Certain boards may actually require this on to wake, but most will get random wakeup calls with it)
 * Enable:
   * Wake on Bluetooth(If using a Bluetooth device for waking like a keyboard, otherwise you can disable)
@@ -161,6 +162,8 @@ This guide is primarily for dGPU but works the exact same way with NVMe drives(a
 
 To verify you have working CPU Power Management, see the [Fixing Power Management](/post-install/pm.md) page. And if not, then patch accordingly.
 
+Also note that incorrect frequency vectors can result in wake issues, so either verify you're using the correct SMBIOS or adjust the frequency vectors of your current SMBIOS with CPUFrend. Tools like [one-key-cpufriend](https://github.com/stevezhengshiqi/one-key-cpufriend) are known for creating bad frequency vectors so be careful with tools not used by Dortania. 
+
 **For AMD**:
 
 Fret not, for their is still hope for you as well! [AMDRyzenCPUPowerManagement.kext](https://github.com/trulyspinach/SMCAMDProcessor) can add power management to Ryzen based CPUs. Installation and usage is explained on the repo's README.md 
@@ -179,9 +182,17 @@ Fret not, for their is still hope for you as well! [AMDRyzenCPUPowerManagement.k
 So display issues are mainly for laptop lid detection, specifically:
 
 * Incorrectly made SSDT-PNLF
+* OS vs firmware lid wake
 * Keyboard spams from lid waking it(On PS2 based keyboards)
 
 The former is quite easy to fix, see here: [Backlight PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)
+
+For the middle, macOS's lid wake detection can bit a bit broken and you may need to outright disable it:
+
+```
+sudo pmset lidwake 0
+```
+And set `lidewake 1` to re-enable it.
 
 The latter requires a bit more work. What we'll be doing is trying to nullify semi random key spams that happen on Skylake and newer based HPs though pop up in other OEMs as well. This will also assume that your keyboard is PS2 based and are running [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases).
 
