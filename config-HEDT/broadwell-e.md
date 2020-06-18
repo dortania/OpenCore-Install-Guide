@@ -237,7 +237,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ### Add
 
-#### 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+#### `4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14`
 
 Booter Path, mainly used for UI Scaling
 
@@ -249,7 +249,7 @@ Booter Path, mainly used for UI Scaling
   * `00000000`: Syrah Black
   * `BFBFBF00`: Light Gray
 
-#### 7C436110-AB2A-4BBB-A880-FE41995C9F82
+#### `7C436110-AB2A-4BBB-A880-FE41995C9F82`
 
 System Integrity Protection bitmask
 
