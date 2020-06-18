@@ -74,7 +74,7 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 * 8XXX and 9XXX series, 2017-2019 era
 
-[Comet Lake](/config.plist/icelake.md)
+[Comet Lake](/config.plist/comet-lake.md)
 
 * 10XXX series, 2020 era
 
@@ -96,11 +96,11 @@ This section includes both enthusiast and server based hardware.
 
 ### AMD
 
-[Bulldozer/Jaguar](AMD/fx.md)
+[Bulldozer/Jaguar](/AMD/fx.md)
 
 * Google the series, AMD had bad naming schemes and let these generations live for too long.
 
-[Zen](AMD/zen.md)
+[Zen](/AMD/zen.md)
 
 * 1XXX, 2XXX, 3XXX series, 2017-2020 era
 * Note: Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported
