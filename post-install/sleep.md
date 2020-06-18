@@ -136,7 +136,7 @@ Note: Thunderbolt can be enabled without extra work *if* you're ok without sleep
 NICs(network Interface Controllers) are fairly easy to fix with sleep, it's mainly the following:
 
 * Disable `WakeOnLAN` in the BIOS
-  * Most hack kexts don't support WOL
+  * Most systems will enter a sleep/wake loop with this enabled
 * Disable `Wake for network access` in macOS(SystemPreferences -> Power)
   * Seems to break on a lot of hacks
   
@@ -150,7 +150,7 @@ So macOS can be quite picky when it comes to NVMe drives, and there's also the i
 
 And avoid problematic drives, the main culprits:
 
-* Samsung's PM981 SSDs
+* Samsung's PM981 and PM991 SSDs
 * Micron's 2200S
 
 If you however do have these drives in your system, it's best to disable them via an SSDT: [Disabling desktop dGPUs](https://dortania.github.io/Getting-Started-With-ACPI/Desktops/desktop-disable.md).
