@@ -91,7 +91,8 @@ Next up is the Energy Performance Preference, EPP. This tells macOS how fast to 
 
 Once you're finished, you'll be provided with a CPUFriendDataProvider.kext and ssdt_data.aml. Which you choose is your preference but I recommend the kext variant to avoid any headaches with data injection into Windows and Linux.
 
-**Note**: Load order does not matter with the CPUFriendDataProvider as it's just a plist-only kext
+* **Note**: Load order does not matter with the CPUFriendDataProvider as it's just a plist-only kext
+* **Note 2**: Wake issues resulting from CPUFriend is likely due to incorrect frequency vectors, every system is unique so you'll need to play around until you get a stable config. Kernel panics will have `Sleep Wake failure in efi`.
 
 ## Sandy and Ivy Bridge Power Management
 

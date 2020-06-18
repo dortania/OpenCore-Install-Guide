@@ -20,6 +20,8 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Corrections to AMD portion of the guide
 * [DhinakG](https://github.com/dhinakg)
   * Random guide related stuff
+* [Khronokernel](https://github.com/khronokernel)
+  * For both writing and maintaining the guide
 * [and the rest of the dortania team](https://github.com/dortania) for helping out
   
 And to the rest who've helped out as well, thank you!

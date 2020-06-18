@@ -41,6 +41,8 @@ To start, grab [Hackintool](https://www.tonymacx86.com/threads/release-hackintoo
 
 Here under Network Interfaces (network card icon), look for `en0` under `BSD` and check whether the device has a check mark under Builtin. If there is a check mark, skip to Fixing ROM section otherwise continue reading.
 
+* **Note**: en0 can be either Wifi, ethernet or even Thunderbolt.
+
 > What if I don't have En0 at all?!?
 
 Well, we'll want to reset macOS so it can build the interfaces fresh, open terminal and run the following:
@@ -77,6 +79,8 @@ To find your actual MAC Address/ROM value, you can find in a couple places:
 * BIOS
 * macOS: System Preferences -> Network -> Ethernet -> Advanced -> MAC Address
 * Windows: Settings -> Network & Internet -> Ethernet -> Ethernet -> Physical MAC Address
+
+* **Note**: en0 can be either Wifi, ethernet or even Thunderbolt, adapt the above example to your situation.
 
 Some users have even gone as far as using real Apple MAC Address dumps for their config, for this guide we'll be using our real MAC Address but note that this is another option.
 

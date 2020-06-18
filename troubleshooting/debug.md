@@ -12,10 +12,13 @@ To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenC
   * `Bootstrap.efi`
 * EFI/OC/Drivers/
   * `OpenRuntime.efi`
+  * `OpenCanopy.efi`(if you're using it)
 * EFI/OC/
   * `OpenCore.efi`
 
 ![](/images/troubleshooting/debug-md/replace.png)
+
+* **Note**: Generally best to debug systems without OpenCanopy, if required make sure this file is from DEBUG else there will be virtually no debug information.
 
 Next, head to your config.plist and locate the `Misc` section, we have a couple entries we'll want to play with here:
 
