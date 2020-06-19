@@ -73,7 +73,6 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
-
   * X299 Refresh boards also need this(Comet Lake)
 * **ProvideCustomSlide**: YES
   * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
@@ -81,7 +80,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
-**SyncRuntimePermissions**: YES
+* **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
 ## DeviceProperties
@@ -142,21 +141,18 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
  Skylake-X can ignore.
   * Certain systems(mainly Skylake-SP) may require this quirk to boot.
-
 * **CustomSMBIOSGuid**: NO
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
-
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES
   * Allows for reading kernel panics logs when kernel panics occur
 * **PowerTimeoutKernelPanic**: YES
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
-
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/USB-Map-Guide/) when possible.
 
@@ -235,7 +231,9 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ### Add
 
-4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)
+#### `4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14`
+
+Booter Path, mainly used for UI Scaling
 
 * **UIScale**:
   * `01`: Standard resolution(Clover equivalent is `0x28`)
@@ -245,7 +243,9 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
   * `00000000`: Syrah Black
   * `BFBFBF00`: Light Gray
 
-7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
+#### `7C436110-AB2A-4BBB-A880-FE41995C9F82`
+
+System Integrity Protection bitmask
 
 * **General Purpose boot-args**:
 
@@ -271,7 +271,7 @@ csr-active-config is set to `00000000` which enables System Integrity Protection
 * `03000000` - Allow unsigned kexts and writing to protected fs locations
 * `E7030000` - SIP completely disabled
 
-Recommended to leave enabled for best security practices
+Recommended to leave enabled (`00000000`) for best security practices, see here for all possible values: [csr.h](https://github.com/apple/darwin-xnu/blob/master/bsd/sys/csr.h).
 
 * **prev-lang:kbd**: &lt;>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
