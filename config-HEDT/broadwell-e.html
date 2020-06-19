@@ -846,7 +846,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#broadwell-e"><b> </b>Broadwell-E</a></li><ul><li><span class="title-icon "></span><a href="#starting-point"><b>1. </b>Starting Point</a></li><li><span class="title-icon "></span><a href="#acpi"><b>2. </b>ACPI</a></li><ul><li><span class="title-icon "></span><a href="#add"><b>2.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#delete"><b>2.2. </b>Delete</a></li><li><span class="title-icon "></span><a href="#patch"><b>2.3. </b>Patch</a></li><li><span class="title-icon "></span><a href="#quirks"><b>2.4. </b>Quirks</a></li></ul><li><span class="title-icon "></span><a href="#booter"><b>3. </b>Booter</a></li><ul><li><span class="title-icon "></span><a href="#mmiowhitelist"><b>3.1. </b>MmioWhitelist</a></li><li><span class="title-icon "></span><a href="#quirks_1"><b>3.2. </b>Quirks</a></li></ul><li><span class="title-icon "></span><a href="#deviceproperties"><b>4. </b>DeviceProperties</a></li><ul><li><span class="title-icon "></span><a href="#add_1"><b>4.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#delete_1"><b>4.2. </b>Delete</a></li></ul><li><span class="title-icon "></span><a href="#kernel"><b>5. </b>Kernel</a></li><ul><li><span class="title-icon "></span><a href="#add_2"><b>5.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#emulate"><b>5.2. </b>Emulate</a></li><li><span class="title-icon "></span><a href="#block"><b>5.3. </b>Block</a></li><li><span class="title-icon "></span><a href="#patch_1"><b>5.4. </b>Patch</a></li><li><span class="title-icon "></span><a href="#quirks_2"><b>5.5. </b>Quirks</a></li></ul><li><span class="title-icon "></span><a href="#misc"><b>6. </b>Misc</a></li><ul><li><span class="title-icon "></span><a href="#boot"><b>6.1. </b>Boot</a></li><li><span class="title-icon "></span><a href="#debug"><b>6.2. </b>Debug</a></li><li><span class="title-icon "></span><a href="#security"><b>6.3. </b>Security</a></li><li><span class="title-icon "></span><a href="#tools"><b>6.4. </b>Tools</a></li><li><span class="title-icon "></span><a href="#entries"><b>6.5. </b>Entries</a></li></ul><li><span class="title-icon "></span><a href="#nvram"><b>7. </b>NVRAM</a></li><ul><li><span class="title-icon "></span><a href="#add_3"><b>7.1. </b>Add</a></li><li><span class="title-icon "></span><a href="#delete_2"><b>7.2. </b>Delete</a></li></ul><li><span class="title-icon "></span><a href="#platforminfo"><b>8. </b>PlatformInfo</a></li><ul><li><span class="title-icon "></span><a href="#generic"><b>8.1. </b>Generic</a></li></ul><li><span class="title-icon "></span><a href="#uefi"><b>9. </b>UEFI</a></li><ul><li><span class="title-icon "></span><a href="#drivers"><b>9.1. </b>Drivers</a></li><li><span class="title-icon "></span><a href="#apfs"><b>9.2. </b>APFS</a></li><li><span class="title-icon "></span><a href="#audio"><b>9.3. </b>Audio</a></li><li><span class="title-icon "></span><a href="#input"><b>9.4. </b>Input</a></li><li><span class="title-icon "></span><a href="#output"><b>9.5. </b>Output</a></li><li><span class="title-icon "></span><a href="#protocoloverrides"><b>9.6. </b>ProtocolOverrides</a></li><li><span class="title-icon "></span><a href="#quirks_3"><b>9.7. </b>Quirks</a></li><li><span class="title-icon "></span><a href="#reservedmemory"><b>9.8. </b>ReservedMemory</a></li></ul><li><span class="title-icon "></span><a href="#cleaning-up"><b>10. </b>Cleaning up</a></li><li><span class="title-icon "></span><a href="#intel-bios-settings"><b>11. </b>Intel BIOS settings</a></li><ul><li><span class="title-icon "></span><a href="#disable"><b>11.1. </b>Disable</a></li><li><span class="title-icon "></span><a href="#enable"><b>11.2. </b>Enable</a></li></ul></ul><li><span class="title-icon "></span><a href="#now-with-all-this-done"><b> </b>Now with all this done</a></li></ul></div><a href="#broadwell-e" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
-<p><em>Last modified: Thu Jun 18 2020 15:59:05 GMT+0000 (Coordinated Universal Time)</em></p>
+<p><em>Last modified: Fri Jun 19 2020 01:46:56 GMT+0000 (Coordinated Universal Time)</em></p>
 </blockquote>
 <h1 id="broadwell-e"><a name="broadwell-e" class="anchor-navigation-ex-anchor" href="#broadwell-e"><i class="fa fa-link" aria-hidden="true"></i></a> Broadwell-E</h1>
 <ul>
@@ -920,18 +920,15 @@
 <li>Fixes UEFI runtime services like date, time, NVRAM, power control, etc</li>
 </ul>
 </li>
-<li><p><strong>DevirtualiseMmio</strong>: YES</p>
-<ul>
+<li><strong>DevirtualiseMmio</strong>: YES<ul>
 <li>Reduces Stolen Memory Footprint, expands options for <code>slide=N</code> values and generally useful especially on HEDT and Xeon systems</li>
 </ul>
 </li>
-<li><p><strong>DisableVariableWrite</strong>: YES</p>
-<ul>
+<li><strong>DisableVariableWrite</strong>: YES<ul>
 <li>Needed for systems with non-functioning NVRAM, you can verify <a href="../post-install/nvram.html">here</a> if yours works. For X99 we&apos;ll assume NVRAM doesn&apos;t work but post install you can double check</li>
 </ul>
 </li>
-<li><p><strong>ProvideCustomSlide</strong>: YES</p>
-<ul>
+<li><strong>ProvideCustomSlide</strong>: YES<ul>
 <li>If there&apos;s a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving <code>Only N/256 slide values are usable!</code> debug message</li>
 </ul>
 </li>
@@ -940,9 +937,7 @@
 </ul>
 </li>
 <li><strong>SetupVirtualMap</strong>: YES<ul>
-<li>Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
-<strong>SyncRuntimePermissions</strong>: NO</li>
-<li>Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer</li>
+<li>Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer</li>
 </ul>
 </li>
 </ul>
@@ -1004,13 +999,11 @@
 <li>Only needed when CFG-Lock can&apos;t be disabled in BIOS, Clover counterpart would be KernelPM. <strong>Please verify you can disable CFG-Lock, most systems won&apos;t boot with it on so requiring use of this quirk</strong></li>
 </ul>
 </li>
-<li><p><strong>AppleXcpmExtraMsrs</strong>: YES</p>
-<ul>
+<li><strong>AppleXcpmExtraMsrs</strong>: YES<ul>
 <li>Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower</li>
 </ul>
 </li>
-<li><p><strong>CustomSMBIOSGuid</strong>: NO</p>
-<ul>
+<li><strong>CustomSMBIOSGuid</strong>: NO<ul>
 <li>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops</li>
 </ul>
 </li>
@@ -1036,13 +1029,11 @@
 <li>Allows for reading kernel panics logs when kernel panics occur</li>
 </ul>
 </li>
-<li><p><strong>PowerTimeoutKernelPanic</strong>: YES</p>
-<ul>
+<li><strong>PowerTimeoutKernelPanic</strong>: YES<ul>
 <li>Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.</li>
 </ul>
 </li>
-<li><p><strong>XhciPortLimit</strong>: YES</p>
-<ul>
+<li><strong>XhciPortLimit</strong>: YES<ul>
 <li>This is actually the 15 port limit patch, don&apos;t rely on it as it&apos;s not a guaranteed solution for fixing USB. Please create a <a href="https://dortania.github.io/USB-Map-Guide/" target="_blank">USB map</a> when possible.</li>
 </ul>
 </li>
@@ -1138,7 +1129,8 @@
 <h2 id="nvram"><a name="nvram" class="anchor-navigation-ex-anchor" href="#nvram"><i class="fa fa-link" aria-hidden="true"></i></a>7. NVRAM</h2>
 <p><img src="../images/config/config-HEDT/broadwell-e/nvram.png" alt="NVRAM"></p>
 <h3 id="add_3"><a name="add_3" class="anchor-navigation-ex-anchor" href="#add_3"><i class="fa fa-link" aria-hidden="true"></i></a>7.1. Add</h3>
-<p>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)</p>
+<h4 id="4d1ede05-38c7-4a6a-9cc6-4bcca8b38c14"><a name="4d1ede05-38c7-4a6a-9cc6-4bcca8b38c14" class="anchor-navigation-ex-anchor" href="#4d1ede05-38c7-4a6a-9cc6-4bcca8b38c14"><i class="fa fa-link" aria-hidden="true"></i></a><code>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</code></h4>
+<p>Booter Path, mainly used for UI Scaling</p>
 <ul>
 <li><p><strong>UIScale</strong>:</p>
 <ul>
@@ -1153,7 +1145,8 @@
 </ul>
 </li>
 </ul>
-<p>7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)</p>
+<h4 id="7c436110-ab2a-4bbb-a880-fe41995c9f82"><a name="7c436110-ab2a-4bbb-a880-fe41995c9f82" class="anchor-navigation-ex-anchor" href="#7c436110-ab2a-4bbb-a880-fe41995c9f82"><i class="fa fa-link" aria-hidden="true"></i></a><code>7C436110-AB2A-4BBB-A880-FE41995C9F82</code></h4>
+<p>System Integrity Protection bitmask</p>
 <ul>
 <li><strong>General Purpose boot-args</strong>:</li>
 </ul>
@@ -1217,7 +1210,7 @@
 <li><code>03000000</code> - Allow unsigned kexts and writing to protected fs locations</li>
 <li><code>E7030000</code> - SIP completely disabled</li>
 </ul>
-<p>Recommended to leave enabled for best security practices</p>
+<p>Recommended to leave enabled (<code>00000000</code>) for best security practices, see here for all possible values: <a href="https://github.com/apple/darwin-xnu/blob/master/bsd/sys/csr.h" target="_blank">csr.h</a>.</p>
 <ul>
 <li><strong>prev-lang:kbd</strong>: &lt;&gt;<ul>
 <li>Needed for non-latin keyboards in the format of <code>lang-COUNTRY:keyboard</code>, recommended to keep blank though you can specify it(<strong>Default in Sample config is Russian</strong>):</li>
@@ -1442,7 +1435,7 @@ SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"4.2","depth":1,"next":{"title":"Skylake/Cascade Lake-X/W","level":"4.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"4.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-06-18T15:59:05.893Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-18T16:00:27.990Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Broadwell-E","level":"4.2","depth":1,"next":{"title":"Skylake/Cascade Lake-X/W","level":"4.3","depth":1,"path":"config-HEDT/skylake-x.md","ref":"config-HEDT/skylake-x.md","articles":[]},"previous":{"title":"Haswell-E","level":"4.1","depth":1,"path":"config-HEDT/haswell-e.md","ref":"config-HEDT/haswell-e.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"config-HEDT/broadwell-e.md","mtime":"2020-06-19T01:46:56.999Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-06-19T01:48:15.739Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
