@@ -85,7 +85,7 @@ sudo VirtualBox
 
 Attach the disks that you've created in previous steps as shown:
 
-![vbox-storage](../images/extras/bigsur-md/vbox-storage.png)
+![vbox-storage](../../images/extras/bigsur-md/vbox-storage.png)
 
 Now, close VirtualBox and add the following properties to the VM to allow it to boot. 
 
