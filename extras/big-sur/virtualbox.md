@@ -26,7 +26,7 @@ dd if=/dev/zero of="${IMAGE}.img" bs=1m count=16000
 Verify that you have a 16GB file named "Install macOS Beta.img" before continuing.  After that, attach it to your macOS system as a virtual disk using the variable you created earlier.
 
 ```bash
-export DISK=($(hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount "${IMAGE}.img"))
+export DISK=$(hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount "${IMAGE}.img")
 ```
 
 Run diskutil list and verify that you have a disk attached that is type "disk image".
@@ -42,7 +42,7 @@ diskutil list
 Now that the image is mounted, format it to Journaled HFS+.
 
 ```bash
-diskutil eraseDisk JHFS+ "${IMAGE}" ${DISK[0]}
+diskutil eraseDisk JHFS+ "${IMAGE}" ${DISK}
 ```
 
 Once the image is formatted, create the installation media.
@@ -56,7 +56,7 @@ sudo "/Applications/${IMAGE}.app/Contents/Resources/createinstallmedia" --nointe
 Now detach or eject the virtual disk, and convert it to a VDI.
 
 ```bash
-hdiutil detach ${DISK[0]}
+hdiutil detach ${DISK}
 VBoxManage convertfromraw "${IMAGE}.img" "${IMAGE}.vdi" --format VDI
 ```
 
