@@ -108,7 +108,9 @@ B75
 BGRT
 BT
 BaseSystem
+Pathname
 BeyondCompare
+Big
 BlueScreen
 BootCamp
 BootInstall
@@ -319,6 +321,8 @@ Insyde
 IntelMausi
 IntelMausiEthernet
 IvyBridge
+JDK
+JRE
 JackFix
 Journaled
 KASLR
@@ -489,9 +493,15 @@ SAT0
 SAT1
 SATA
 SGX
+mini-explainer
+MADT
 SHA-1
+bb12f5f
+MacMini6
 SL01
+BCM94331CD
 SMBUS
+VDI
 SMC
 SMCAMDProcessor
 SSD
@@ -506,6 +516,7 @@ STAS
 Safemode
 SetVirtualAddresses
 Shannee
+SharedSupport
 Shiki
 ShowPackageContents
 Siri
@@ -519,6 +530,7 @@ Speccy
 StopSign-fixv
 StopSign-fixv5
 Subreddit
+Sur
 Syrah
 SystemAudioVolume
 SystemParameters
@@ -531,6 +543,7 @@ TSC
 TSCAdjustReset
 Telemetrap
 TetherMe
+TextEdit
 TextMate
 TextMode
 TgtBridge
@@ -558,6 +571,7 @@ UsbInjectAll
 VBIOS
 VDADecoderChecker
 VM
+VMDK
 VMs
 VMware
 VPN
@@ -661,6 +675,7 @@ decompile
 decrypt
 devirt
 diskXsY
+diskutil
 distro
 distro's
 distros
@@ -729,6 +744,7 @@ ie\.
 ig-platform-id
 ig-platform-id's
 igfxfw
+img
 ix-3xxx
 jailbroken
 kernelcache
@@ -766,11 +782,13 @@ pre-compiled
 pre-made
 precompiled
 prelinked
+prelinkedkernel
 prelinker
 probs
 r10
 r4
 rEFInd
+raw2vmdk
 rebranded
 reimplements
 renderer
@@ -798,10 +816,15 @@ trashOS
 ubuntu
 unallocated
 unbootable
+unmount
 untrusted
 ver
 vit9696
 vit9696's
+vmdk
+vmx
+vmxf
+64bit
 webserver
 wifi
 x10

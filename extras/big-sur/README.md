@@ -1,19 +1,15 @@
 # OpenCore and macOS 11: Big Sur
 
 * To do:
-  * Grabbing the macOS installer(## Installation)
-  * Add VM guide(### Virtual Machine Route)
-  * Properly split up VirtualBox into separate file
-  * Add raw disk passing to VBox
-  * Cross-platform install media steps? Investigate dmg -> iso method
-  * Add Workstation and Fusion, with USB passing and raw disk passing
-  * Pass USB device instead of using raw disk for VBox? Need to investigate
+  * Clarify that raw disk works for both internal and external for VBox
+  * Add Workstation, with USB passing and raw disk passing
+  * Pass USB device instead of using raw disk for VBox, will leave to fewt
 
 It's that time of year again and with it, and a new macOS beta has been dropped. Here's all the info you need to get started.
 
 **Reminder that Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
 
-**This guide expects you to have a basic understanding of the terminal, virtual machines, and hackintoshing. If you are not familiar with these, we highly recommend you to wait until there is a easier and more straight-forward solution available.**
+**This guide expects you to have a basic understanding of the terminal, virtual machines, and hackintoshing. If you are not familiar with these, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
 
 ## Backstory
 
@@ -27,7 +23,7 @@ With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Bec
 
 Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting. Instead opting for a new bundle called the Kernel Collections, which is unfortunately not compatible with OpenCore's kext injection system currently.
 
-To get around this, we can actually force the prelinkedkernel with a simple NVRAM variable. 1 small problem, while an fully installed Big Sur has a PK, the installer doesn't have a prelinkedkernel. So we need a middle man to install macOS for us, this either being:
+To get around this, we can actually force the prelinkedkernel with a simple NVRAM variable. 1 small problem; while a fully installed Big Sur has a PK, the installer doesn't have a prelinkedkernel. So we need a middle man to install macOS for us, this either being:
 
 * A Genuine Mac
 * Virtual machine
@@ -38,7 +34,7 @@ For the former, it's as simple as run the installer, and swap the drive over to 
 
 Before we can jump head first into installing Big Sur, we need to go over a few things:
 
-### A supported SMBIOS:
+### A supported SMBIOS
 
 Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see below that yours wasn't dropped:
 
@@ -49,7 +45,7 @@ Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see bel
 
 If your SMBIOS was supported in Catalina and isn't included above, you're good to go!
 
-### Supported hardware:
+### Supported hardware
 
 Not much hardware has been dropped, though the few that have:
 
@@ -62,7 +58,7 @@ Not much hardware has been dropped, though the few that have:
 
 Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them.
 
-### Up-to-date kexts, bootloader and config.plist:
+### Up-to-date kexts, bootloader and config.plist
 
 Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here: [Kext Repo](http://kexts.goldfish64.com/) and [Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/).
 
@@ -74,11 +70,11 @@ You will also need to ensure you have a few NVRAM variables set:
     * `vsmcgen=1` (works around VirtualSMC not properly working in Big Sur)
     * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**)
   * `booter-fileset-kernel`
-    *  Set to `00`
+    * Set to `00`
     * Enables prelinkedkernel in the installed OS, you **need** this to inject kexts
   * `booter-fileset-basesystem`
-    *  Set to `00`
-    *  Attempts to enable the prelinkedkernel in the bootable installer (unfortunately, still doesn't help for many)
+    * Set to `00`
+    * Attempts to enable the prelinkedkernel in the bootable installer (unfortunately, still doesn't help for many)
 
 See below image as an example:
 
@@ -118,16 +114,16 @@ For this method, you will need to have access to external media that can later b
 
 To start, format your test drive as MacOS Journaled or APFS with a GUID partition scheme. Verify you are formatting the entire drive and not a partition, Disk Utility will only show partitions by default so press Cmd+2 to show the full drive.
 
-![](/images/extras/bigsur-md/disk-utility.png)
+![](/images/extras/big-sur/readme/disk-utility.png)
 
 Next, run the Install macOS Beta.app and select your drive:
 
-![](/images/extras/bigsur-md/select-your-drive.png)
+![](/images/extras/big-sur/readme/select-your-drive.png)
 
 The installer will proceed to install macOS onto the drive and reboot a few times. Once you hit the welcome screen, you can move the drive over to your hackintosh and attempt to boot!
 
 ### Virtual Machine Route
 
-#### VMWare
-
-Do your magic Dhinak
+* [VirtualBox](virtualbox.md)
+* [VMware Fusion](fusion.md)
+* [VMware Workstation](workstation.md)
