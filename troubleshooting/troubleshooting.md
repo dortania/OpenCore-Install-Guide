@@ -386,6 +386,8 @@ Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other
 * Switch between different display outputs
 * Try running MacPro7,1 SMBIOS with the boot-arg `agdpmod=ignore`
 
+For MSI Navi users, you'll need to apply the patch mentioned here: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
+
 ## 300 series Intel stalling on `apfs_module_start...`
 
 Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
