@@ -612,6 +612,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed---already-started)
 * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning--unresolved)
 * [No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors)
+* [Disabling SIP](#disabling-sip)
 
 ## Can't run `acpidump.efi`
 
@@ -724,3 +725,21 @@ iasl * [insert all ACPI files here]
 ## No Volume/Brightness control on external monitors
 
 Oddly enough, macOS has locked down digital audio from having control. To bring back some functionality, the app [MonitorControl](https://github.com/the0neyouseek/MonitorControl/releases) has done great work on improving support in macOS
+
+## Disabling SIP
+
+SIP or proper known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown overtime to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
+
+You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you):
+ 	 
+* `00000000` - SIP completely enabled (0x0).		 
+* `03000000` - Disable kext signing (0x1) and filesystem protections (0x2).
+* `FF030000` - Disable all [flags in macOS High Sierra](https://opensource.apple.com/source/xnu/xnu-4570.71.2/bsd/sys/csr.h.auto.html) (0x3ff).
+* `FF070000` - Disable all [flags in macOS Mojave](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) and in [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) as Apple introduced a value for executable policy.
+* `FF0F0000` - Disable all flags in macOS Big Sur (0xfff) which has another new [flag for authenticated root](https://eclecticlight.co/2020/06/25/big-surs-signed-system-volume-added-security-protection/).
+
+**Note**: Disabling SIP with OpenCore is quite a bit different compared to Clover, specifically that NVRAM variables will not be overwritten unless explicitly told so under the `Delete` section. So if you've already set SIP once either via OpenCore or in macOS, you must override the variable:
+
+* `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
+  
+![](/images/troubleshooting/troubleshooting-md/sip.png)

@@ -270,15 +270,9 @@ System Integrity Protection bitmask
 | **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
 | **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
 
-* **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
+* **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
 
-csr-active-config is set to `00000000` which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
-
-* `00000000` - SIP completely enabled
-* `03000000` - Allow unsigned kexts and writing to protected fs locations
-* `E7030000` - SIP completely disabled
-
-Recommended to leave enabled (`00000000`) for best security practices, see here for all possible values: [csr.h](https://github.com/apple/darwin-xnu/blob/master/bsd/sys/csr.h).
+csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](/troubleshooting/trooubleshooting.md#disabling-sip)
 
 * **prev-lang:kbd**: &lt;>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
