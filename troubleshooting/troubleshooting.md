@@ -388,6 +388,24 @@ Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other
 
 For MSI Navi users, you'll need to apply the patch mentioned here: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
 
+Specifically, add the following entry under `Kernel -> Patch`:
+
+```
+Base:
+Comment: Navi VBIOS Bug Patch
+Count: 1
+Enabled: YES
+Find: 4154592C526F6D2300
+Identifier: com.apple.kext.AMDRadeonX6000Framebuffer
+Limit: 0
+Mask:
+MinKernel:
+MaxKernel:
+Replace: 414D442C526F6D2300
+ReplaceMask: 
+Skip: 0
+```
+
 ## 300 series Intel stalling on `apfs_module_start...`
 
 Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
