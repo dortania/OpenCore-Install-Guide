@@ -90,7 +90,7 @@ With Big Sur, quite a bit broke. Mainly the following:
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
 
-And while not an issue, SIP has now gained a new it so to properly disable SIP you need set `csr-acive-config` to `07870000`
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set `csr-acive-config` to `FF0F0000`
 
 ## Installation
 
