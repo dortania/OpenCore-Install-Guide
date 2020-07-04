@@ -38,10 +38,13 @@ Before we can jump head first into installing Big Sur, we need to go over a few 
 
 Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see below that yours wasn't dropped:
 
-* MacBookAir5,x
-* MacBookPro10,x and older
+* iMac14,3 and older
+  * Note iMac14,4 is still supported
+* MacPro5,1 and older
 * MacMini6,x and older
-* iMac 14,3 and older(note iMac14,4 is still supported)
+* MacBook7,1 and older
+* MacBookAir5,x and older
+* MacBookPro10,x and older
 
 If your SMBIOS was supported in Catalina and isn't included above, you're good to go!
 
@@ -52,7 +55,7 @@ Not much hardware has been dropped, though the few that have:
 * Ivy Bridge CPUs.
   * Unofficially, many have been able to boot with ease.
 * Ivy Bridge iGPUs.
-  * HD 4000 and HD 2500.
+  * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
 * BCM94331CD based Wifi cards.
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
 
@@ -68,7 +71,7 @@ You will also need to ensure you have a few NVRAM variables set:
   * `boot-args`:
     * `-lilubetaall` (Enables Lilu and plugins on beta macOS versions)
     * `vsmcgen=1` (works around VirtualSMC not properly working in Big Sur)
-    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**)
+    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**. Note newer builds of WhateverGreen should fix this)
   * `booter-fileset-kernel`
     * Set to `00`
     * Enables prelinkedkernel in the installed OS, you **need** this to inject kexts
@@ -85,7 +88,7 @@ See below image as an example:
 With Big Sur, quite a bit broke. Mainly the following:
 
 * SMCBatteryManager
-  * Currently Rehabman's ACPI Battery Manager is the only working kext.
+  * Currently Rehabman's [ACPI Battery Manager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext.
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
