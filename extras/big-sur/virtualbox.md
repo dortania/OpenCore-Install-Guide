@@ -57,7 +57,7 @@ Now detach or eject the virtual disk, and convert it to a VDI.
 
 ```bash
 ### Eject all of the sub volumes first.
-for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); hdiutil eject ${VDISK} 2>/dev/null; done
+for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); do hdiutil eject ${VDISK} 2>/dev/null; done
 ### Next eject the virtual disk itself
 hdiutil eject ${DISK}
 ### Last, create the VDI image
