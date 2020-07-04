@@ -102,9 +102,11 @@ You have two options here: pass through a raw disk, or pass through an entire US
 
     Once done, you should arrive at a screen that looks like this.
     ![](../../images/extras/big-sur/fusion/vm-settings-home.png)
-7. First, select "Processors & Memory", and set the memory to at least 4096 MB. Then close the window and close VMware Fusion.
-8. (insert USB passthrough here)
-9. (If you are doing USB passthrough, skip steps 9 through 13) Locate the "macOS 10.15.vmwarevm" (or whatever you named it when saving) folder in Finder, and right click > "Show Package Contents".
+7. First, select "Processors & Memory", and set the memory to at least 4096 MB.
+8. (If you are doing raw disk passthrough, skip this step) Select "Show All" and click "USB & Bluetooth". Plug in your USB device and under "Plug In Action", change it from "Ask what to do" to "Connect to the VM". It should look similar to this when done. (In this case, "VIA AmazonBasics Hard Drive Enclos" is my device.)
+    ![](../../images/extras/big-sur/fusion/vm-settings-usb.png)
+    Then, close the window.
+9. (If you are doing USB passthrough, skip steps 9 through 13) Close the window and close VMware Fusion. Locate the "macOS 10.15.vmwarevm" (or whatever you named it when saving) folder in Finder, and right click > "Show Package Contents".
 
     The result should look like the image below.
     ![](../../images/extras/big-sur/fusion/vm-folder.png)
