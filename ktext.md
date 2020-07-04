@@ -140,7 +140,7 @@ The order in `Kernel -> Add` should be:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
-* [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
+* [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead
 * [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)
   * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
