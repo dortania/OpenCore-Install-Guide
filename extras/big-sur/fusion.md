@@ -74,11 +74,11 @@ java -jar raw2vmdk.jar "${IMAGE}.img" "${IMAGE}.vmdk"
 
 This will create a VMDK that references the `.img` file (the raw disk image) for VMware to use. If you're going to move this vmdk or transfer it to another computer, you must move the img file along with it.
 
-## Installing macOS in VMware Big Sur
+## Installing macOS Big Sur in VMware Fusion
 
 You have two options here: pass through a raw disk, or pass through an entire USB device. The steps are not that different for both, so they'll be combined here.
 
-1. (Skip this if you are passing through an entire USB) For raw disk passthrough, attach the disk that is your target for macOS installation, and  create a virtual hard disk that references it to use with Fusion.
+1. (Skip this if you are doing USB passthrough) For raw disk passthrough, attach the disk that is your target for macOS installation, and  create a virtual hard disk that references it to use with Fusion.
 
     Note: You may need to remove the partitions of the disk before using it.
 
@@ -88,7 +88,7 @@ You have two options here: pass through a raw disk, or pass through an entire US
     sudo /Applications/VMware\ Fusion.app/Contents/Library/vmware-rawdiskCreator create /dev/disk3 fullDevice RawHDD ide
     ```
 
-2. Next, start VMware Fusion and create a new virtual machine.
+2. Next, start VMware Fusion. You should see the homepage. If not, close any window that opened and select `File` > `New` from the menu bar.
     ![](../../images/extras/big-sur/fusion/homepage.png)
 3. Select the "Create a custom virtual machine" option, and select macOS 10.15 (as 10.16/11 isn't available).
     ![](../../images/extras/big-sur/fusion/choose-os.png)
