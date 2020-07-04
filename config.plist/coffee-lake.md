@@ -102,7 +102,7 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 
 * `07009B3E` - this is used when the Desktop iGPU is used to drive a display
-* `0300923E` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
+* `0300913E` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
 
 **Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 
@@ -299,15 +299,9 @@ System Integrity Protection bitmask
 | **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
-* **csr-active-config**: Settings for SIP, generally recommended to manually change this within Recovery partition with `csrutil` via the recovery partition
+* **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
 
-csr-active-config is set to `00000000` which enables System Integrity Protection. You can choose a number of other options to enable/disable sections of SIP. Some common ones are as follows:
-
-* `00000000` - SIP completely enabled
-* `03000000` - Allow unsigned kexts and writing to protected fs locations
-* `E7030000` - SIP completely disabled
-
-Recommended to leave enabled (`00000000`) for best security practices, see here for all possible values: [csr.h](https://github.com/apple/darwin-xnu/blob/master/bsd/sys/csr.h).
+csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](/troubleshooting/trooubleshooting.md#disabling-sip)
 
 * **prev-lang:kbd**: &lt;>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
@@ -473,6 +467,8 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
 
 * [**Sanity Checker**](https://opencore.slowgeek.com)
+
+Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
 ## Intel BIOS settings
 

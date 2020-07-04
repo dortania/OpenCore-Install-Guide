@@ -386,6 +386,26 @@ Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other
 * Switch between different display outputs
 * Try running MacPro7,1 SMBIOS with the boot-arg `agdpmod=ignore`
 
+For MSI Navi users, you'll need to apply the patch mentioned here: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
+
+Specifically, add the following entry under `Kernel -> Patch`:
+
+```
+Base:
+Comment: Navi VBIOS Bug Patch
+Count: 1
+Enabled: YES
+Find: 4154592C526F6D2300
+Identifier: com.apple.kext.AMDRadeonX6000Framebuffer
+Limit: 0
+Mask:
+MinKernel:
+MaxKernel:
+Replace: 414D442C526F6D2300
+ReplaceMask: 
+Skip: 0
+```
+
 ## 300 series Intel stalling on `apfs_module_start...`
 
 Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
@@ -412,7 +432,7 @@ Follow directions here after UPDATE 2: [Fix Data and Privacy reboot](https://www
 
 ## macOS frozen right before login
 
-This is a common example of screwed up TSC, for most system add [VoodooTSCSync](https://bitbucket.org/RehabMan/VoodooTSCSync/downloads/)
+This is a common example of screwed up TSC, for most system add [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
 
 For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
@@ -610,6 +630,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * [Booting Windows error: `OCB: StartImage failed - Already started`](/troubleshooting/troubleshooting.md#booting-windows-error-ocb-startimage-failed---already-started)
 * [iASL warning, # unresolved](/troubleshooting/troubleshooting.md#iasl-warning--unresolved)
 * [No Volume/Brightness control on external monitors](/troubleshooting/troubleshooting.md#no-volumebrightness-control-on-external-monitors)
+* [Disabling SIP](#disabling-sip)
 
 ## Can't run `acpidump.efi`
 
@@ -722,3 +743,21 @@ iasl * [insert all ACPI files here]
 ## No Volume/Brightness control on external monitors
 
 Oddly enough, macOS has locked down digital audio from having control. To bring back some functionality, the app [MonitorControl](https://github.com/the0neyouseek/MonitorControl/releases) has done great work on improving support in macOS
+
+## Disabling SIP
+
+SIP or proper known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
+
+You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you):
+ 	 
+* `00000000` - SIP completely enabled (0x0).		 
+* `03000000` - Disable kext signing (0x1) and filesystem protections (0x2).
+* `FF030000` - Disable all [flags in macOS High Sierra](https://opensource.apple.com/source/xnu/xnu-4570.71.2/bsd/sys/csr.h.auto.html) (0x3ff).
+* `FF070000` - Disable all [flags in macOS Mojave](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) and in [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) as Apple introduced a value for executable policy.
+* `FF0F0000` - Disable all flags in macOS Big Sur (0xfff) which has another new [flag for authenticated root](https://eclecticlight.co/2020/06/25/big-surs-signed-system-volume-added-security-protection/).
+
+**Note**: Disabling SIP with OpenCore is quite a bit different compared to Clover, specifically that NVRAM variables will not be overwritten unless explicitly told so under the `Delete` section. So if you've already set SIP once either via OpenCore or in macOS, you must override the variable:
+
+* `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
+  
+![](/images/troubleshooting/troubleshooting-md/sip.png)
