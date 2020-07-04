@@ -23,7 +23,7 @@ export IMAGE="Install macOS Beta"
 Next, create an empty 16GB image to host the media.
 
 ```bash
-makefile 16g "${IMAGE}.img"
+mkfile 16g "${IMAGE}.img"
 ```
 
 Verify that you have a 16GB file named "Install macOS Beta.img" before continuing.  After that, attach it to your macOS system as a virtual disk using the variable you created earlier.
