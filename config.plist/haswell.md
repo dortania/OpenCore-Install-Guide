@@ -483,6 +483,8 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 
 * [**Sanity Checker**](https://opencore.slowgeek.com)
 
+Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
+
 ## Intel BIOS settings
 
 ### Disable
