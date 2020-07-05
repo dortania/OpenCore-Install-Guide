@@ -334,6 +334,16 @@ Another possible issue is missing USB ports in your DSDT, macOS isn't great at f
 
 For AMD users with missing ports in DSDT, you're gonna have to try all the ports in your system and pray, generally 3.1 AsMedia ports work without issue.
 
+On rare occasions(mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
+
+* Set SATA to AHCI mode in the BIOS
+  * macOS doesn't support hardware RAID or IDE properly.
+* [SATA-unsupported.kext](https://github.com/RehabMan/hack-tools/tree/master/kexts/SATA-unsupported.kext)
+  * Adds support to obscure SATA controllers, commonly being laptops.
+  * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/foru…) may be more suitable.
+
+Note that you will only experience this issue after installing macOS onto the drive, booting the macOS installer will not error out due to SATA issues.
+
 ## macOS installer in Russian
 
 Default sample config is in Russian because slavs rule the Hackintosh world, check your `prev-lang:kbd` value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt). For those using with a simple text editor(ie. UEFI Shell, Notepad++, etc), `656e2d55533a30` will become `ZW4tVVM6MA==`
