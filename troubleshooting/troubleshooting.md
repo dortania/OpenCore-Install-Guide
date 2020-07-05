@@ -337,7 +337,8 @@ For AMD users with missing ports in DSDT, you're gonna have to try all the ports
 On rare occasions(mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
 
 * Set SATA to AHCI mode in the BIOS
-  * macOS doesn't support hardware RAID or IDE properly.
+  * macOS doesn't support hardware RAID or IDE mode properly.
+  * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accesible in macOS.
 * [SATA-unsupported.kext](https://github.com/RehabMan/hack-tools/tree/master/kexts/SATA-unsupported.kext)
   * Adds support to obscure SATA controllers, commonly being laptops.
   * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/foru…) may be more suitable.
