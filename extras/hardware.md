@@ -56,5 +56,8 @@ See supported chipset on respective drivers:
 Unsupported ethernet models:
 
 * Realtek L8200A(Only found in Asus boards)
+* Intel I225-V 
+
+For the latter, you can attempt to use IntelMausiEthernet with a device-id spoof. Example of this can be found here: [SchmockLord's Z490 build](https://github.com/SchmockLord/Hackintosh-Intel-i9-10900k-Gigabyte-Z490-Vision-D)
 
 And see [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for supported wifi cards. All built in motherboard wireless cards will not work in macOS, they must be swapped.
