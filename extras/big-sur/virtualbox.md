@@ -7,13 +7,14 @@
 - The desired macOS installation software installed to /Applications
 - A USB attached hard disk or SSD
 
-## Building Installation Media
+## Converting Installation Media
 
-Once you have the installation software installed to /Applications you will need to create a VDI of the installation media that will be used to install macOS in your VM.  The instructions below are intended to be cut and pasted without editing unless specified.
+VirtualBox cannot directly use a raw disk image, so we're going to convert it to a VDI.
 
-First, set the IMAGE variable to the name of the installation you are installing.  The example defines the image for Big Sur.
+`cd` to the location of the disk image and run the following:
 
 ```bash
+
 export IMAGE="Install macOS Beta"
 ```
 
@@ -62,6 +63,8 @@ for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); do hdiutil eje
 hdiutil eject ${DISK}
 ### Last, create the VDI image
 VBoxManage convertfromraw "${IMAGE}.img" "${IMAGE}.vdi" --format VDI
+### Change "Install macOS Big Sur Beta" if the name of the .img file differs
+VBoxManage convertfromraw "Install macOS Big Sur Beta.img" "Install macOS Big Sur Beta.vdi" --format VDI
 ```
 
 ## Installing macOS in VirtualBox

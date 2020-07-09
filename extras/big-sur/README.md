@@ -1,15 +1,10 @@
 # OpenCore and macOS 11: Big Sur
 
-* To do:
-  * Clarify that raw disk works for both internal and external for VBox
-  * Add Workstation, with USB passing and raw disk passing
-  * Pass USB device instead of using raw disk for VBox, will leave to fewt
-
 It's that time of year again and with it, and a new macOS beta has been dropped. Here's all the info you need to get started.
 
 **Reminder that Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
 
-**This guide expects you to have a basic understanding of the terminal, virtual machines, and hackintoshing. If you are not familiar with these, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
+**This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
 
 ## Backstory
 
@@ -17,18 +12,13 @@ More a mini-explainer as to why this release is a bit more painful than average 
 
 ### `AvoidRuntimeDefrag`
 
-With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpi_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now copy this table and ensure the kernel can access it.  Users will however need a build of OpenCore 0.6.0 with commit [bb12f5f](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4) or newer to resolve this issue.
+With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpi_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now copy this table and ensure the kernel can access it. Users will however need a build of OpenCore 0.6.0 with commit [`bb12f5f`](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4) or newer to resolve this issue.
 
 ### Kernel Collections vs prelinkedkernel
 
-Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting. Instead opting for a new bundle called the Kernel Collections, which is unfortunately not compatible with OpenCore's kext injection system currently.
+Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting.
 
-To get around this, we can actually force the prelinkedkernel with a simple NVRAM variable. 1 small problem; while a fully installed Big Sur has a PK, the installer doesn't have a prelinkedkernel. So we need a middle man to install macOS for us, this either being:
-
-* A Genuine Mac
-* Virtual machine
-
-For the former, it's as simple as run the installer, and swap the drive over to the hackintosh. With the latter, we'll be documenting this under [Installation's Virtual Machine Route](#virtual-machine-route).
+Due to the hard work of acidanthera, OpenCore gained experimental support for this new format in roughly 2 weeks, and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.
 
 ## Prerequisites
 
@@ -38,10 +28,13 @@ Before we can jump head first into installing Big Sur, we need to go over a few 
 
 Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see below that yours wasn't dropped:
 
-* MacBookAir5,x
-* MacBookPro10,x and older
+* iMac14,3 and older
+  * Note iMac14,4 is still supported
+* MacPro5,1 and older
 * MacMini6,x and older
-* iMac 14,3 and older(note iMac14,4 is still supported)
+* MacBook7,1 and older
+* MacBookAir5,x and older
+* MacBookPro10,x and older
 
 If your SMBIOS was supported in Catalina and isn't included above, you're good to go!
 
@@ -52,7 +45,7 @@ Not much hardware has been dropped, though the few that have:
 * Ivy Bridge CPUs.
   * Unofficially, many have been able to boot with ease.
 * Ivy Bridge iGPUs.
-  * HD 4000 and HD 2500.
+  * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
 * BCM94331CD based Wifi cards.
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
 
@@ -68,13 +61,7 @@ You will also need to ensure you have a few NVRAM variables set:
   * `boot-args`:
     * `-lilubetaall` (Enables Lilu and plugins on beta macOS versions)
     * `vsmcgen=1` (works around VirtualSMC not properly working in Big Sur)
-    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**)
-  * `booter-fileset-kernel`
-    * Set to `00`
-    * Enables prelinkedkernel in the installed OS, you **need** this to inject kexts
-  * `booter-fileset-basesystem`
-    * Set to `00`
-    * Attempts to enable the prelinkedkernel in the bootable installer (unfortunately, still doesn't help for many)
+    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**. Note newer builds of WhateverGreen should fix this)
 
 See below image as an example:
 
@@ -85,20 +72,18 @@ See below image as an example:
 With Big Sur, quite a bit broke. Mainly the following:
 
 * SMCBatteryManager
-  * Currently Rehabman's ACPI Battery Manager is the only working kext.
+  * Currently RehabMan's [ACPI Battery Manager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext.
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
 
-And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set `csr-acive-config` to `FF0F0000`
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set `csr-acive-config` to `FF0F0000`.
 
 ## Installation
 
 With installation, you'll need a few things:
 
 * macOS Big Sur installer
-* Hardware to install with
-  * This either being a Genuine Mac or virtual machine
 * A Mac, hack, or preexisting VM to download the installer and create install media
 * Latest builds of OpenCore and kexts (see above)
 * Updated config.plist with prelinkedkernel forced (see above)
@@ -110,23 +95,3 @@ To grab the Big Sur installer, download the beta profile from Apple's developer 
 3. Press `C` to change the catalog, then select the number for the developer catalog.
 4. Select the number for the Big Sur beta to start downloading it. (screenshot)
 5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Beta.app` in your `/Applications` folder. (screenshot)
-
-### Genuine Mac Route
-
-For this method, you will need to have access to external media that can later be used as a boot drive for your hackintosh. Ideally a USB to SATA/NVMe adapter would work best.
-
-To start, format your test drive as MacOS Journaled or APFS with a GUID partition scheme. Verify you are formatting the entire drive and not a partition, Disk Utility will only show partitions by default so press Cmd+2 to show the full drive.
-
-![](/images/extras/big-sur/readme/disk-utility.png)
-
-Next, run the Install macOS Beta.app and select your drive:
-
-![](/images/extras/big-sur/readme/select-your-drive.png)
-
-The installer will proceed to install macOS onto the drive and reboot a few times. Once you hit the welcome screen, you can move the drive over to your hackintosh and attempt to boot!
-
-### Virtual Machine Route
-
-* [VirtualBox](virtualbox.md)
-* [VMware Fusion](fusion.md)
-* [VMware Workstation](workstation.md)

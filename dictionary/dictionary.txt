@@ -29,6 +29,7 @@
 3D
 4G
 64MB
+64bit
 6970M
 7920x
 7980xe
@@ -105,10 +106,10 @@ Auth
 B0D3
 B360
 B75
+BCM94331CD
 BGRT
 BT
 BaseSystem
-Pathname
 BeyondCompare
 Big
 BlueScreen
@@ -157,6 +158,7 @@ CorpNewt's
 Cpu
 Cpu0Ist
 CpuPm
+CpuTscSync
 Crohn
 Crohn's
 Ctrl
@@ -349,6 +351,7 @@ Lenovo
 Lilu
 LoadVBIOS
 LucyRTL8125Ethernet
+MADT
 MBR
 MEI
 MEID
@@ -362,6 +365,7 @@ MacBookPro13
 MacBookPro14
 MacBookPro[0-9]+
 MacInfoPkg
+MacMini6
 MacOS
 MacPro5
 MacPro6
@@ -453,6 +457,7 @@ PRs
 PS2
 PXSX
 Patch1
+Pathname
 Pci
 PciRoot
 PciRoot's
@@ -493,15 +498,9 @@ SAT0
 SAT1
 SATA
 SGX
-mini-explainer
-MADT
 SHA-1
-bb12f5f
-MacMini6
 SL01
-BCM94331CD
 SMBUS
-VDI
 SMC
 SMCAMDProcessor
 SSD
@@ -570,6 +569,7 @@ Universal-IFR-Extractor
 UsbInjectAll
 VBIOS
 VDADecoderChecker
+VDI
 VM
 VMDK
 VMs
@@ -761,6 +761,7 @@ macOS(\.)?
 macserial
 markdownlint-cli
 midi1996
+mini-explainer
 msi
 multiboot
 natively
@@ -824,7 +825,6 @@ vit9696's
 vmdk
 vmx
 vmxf
-64bit
 webserver
 wifi
 x10
