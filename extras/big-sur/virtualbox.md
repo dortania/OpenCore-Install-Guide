@@ -7,61 +7,15 @@
 - The desired macOS installation software installed to /Applications
 - A USB attached hard disk or SSD
 
-## Building Installation Media
+## Converting Installation Media
 
-Once you have the installation software installed to /Applications you will need to create a VDI of the installation media that will be used to install macOS in your VM.  The instructions below are intended to be cut and pasted without editing unless specified.
+VirtualBox cannot directly use a raw disk image, so we're going to convert it to a VDI.
 
-First, set the IMAGE variable to the name of the installation you are installing.  The example defines the image for Big Sur.
-
-```bash
-export IMAGE="Install macOS Beta"
-```
-
-Next, create an empty 16GB image to host the media.
+`cd` to the location of the disk image and run the following:
 
 ```bash
-mkfile -n 16g "${IMAGE}.img"
-```
-
-Verify that you have a 16GB file named "Install macOS Beta.img" before continuing.  After that, attach it to your macOS system as a virtual disk using the variable you created earlier.
-
-```bash
-export DISK=$(hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount "${IMAGE}.img"| awk '{printf $1}')
-```
-
-Run diskutil list and verify that you have a disk attached that is type "disk image".
-
-```bash
-diskutil list
-<snip>
-/dev/disk4 (disk image):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:                                                   +16.8 GB    disk4
-```
-
-Now that the image is mounted, format it to Journaled HFS+.
-
-```bash
-diskutil eraseDisk JHFS+ "${IMAGE}" ${DISK}
-```
-
-Once the image is formatted, create the installation media.
-
-```bash
-sudo "/Applications/${IMAGE}.app/Contents/Resources/createinstallmedia" --nointeraction --volume "/Volumes/${IMAGE}"
-```
-
-(insert unmount SharedSupport here)
-
-Now detach or eject the virtual disk, and convert it to a VDI.
-
-```bash
-### Eject all of the sub volumes first.
-for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); hdiutil eject ${VDISK} 2>/dev/null; done
-### Next eject the virtual disk itself
-hdiutil eject ${DISK}
-### Last, create the VDI image
-VBoxManage convertfromraw "${IMAGE}.img" "${IMAGE}.vdi" --format VDI
+### Change "Install macOS Big Sur Beta" if the name of the .img file differs
+VBoxManage convertfromraw "Install macOS Big Sur Beta.img" "Install macOS Big Sur Beta.vdi" --format VDI
 ```
 
 ## Installing macOS in VirtualBox

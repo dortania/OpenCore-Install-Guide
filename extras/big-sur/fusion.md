@@ -8,68 +8,15 @@
 - The desired macOS installation software installed to /Applications
 - A USB attached hard disk or SSD, or an internal disk that can be passed through entirely
 
-## Building Installation Media
+## Converting Installation Media
 
-Once you have the installation software installed to /Applications you will need to create a VMDK of the installation media that will be used to install macOS in your VM.
-
-First, open Terminal and `cd` to a directory where you want to put the VMDK, if you would like to put it somewhere other than your home folder.
-
-Then, set the IMAGE variable to the name of the installer you are installing.  The example defines the image for Big Sur.
-
-```bash
-export IMAGE="Install macOS Beta"
-```
-
-Next, create an empty 16GB image to host the media.
-
-```bash
-mkfile 16g "${IMAGE}.img"
-```
-
-Verify that you have a 16GB file named "Install macOS Beta.img" before continuing.  After that, attach it to your macOS system as a virtual disk using the variable you created earlier.
-
-```bash
-export DISK=$(hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount "${IMAGE}.img" | awk '{$1=$1};1')
-```
-
-Run diskutil list and verify that you have a disk attached that is type "disk image".
-
-```bash
-diskutil list
-<snip>
-/dev/disk4 (disk image):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:                                                   +16.8 GB    disk4
-```
-
-Now that the image is mounted, format it to Journaled HFS+.
-
-```bash
-diskutil eraseDisk JHFS+ "${IMAGE}" ${DISK}
-```
-
-Once the image is formatted, create the installation media.
-
-```bash
-sudo "/Applications/${IMAGE}.app/Contents/Resources/createinstallmedia" --nointeraction --volume "/Volumes/${IMAGE}"
-```
-
-(insert unmount SharedSupport here)
-
-Now detach or eject the virtual disk
-
-```bash
-hdiutil detach ${DISK}
-```
-
-If this fails, go to Disk Utility and unmount the other disk images that have been mounted by the Big Sur installer, then run the command again.
-
-Now, we'll convert the raw disk image to a linked VMDK, which will allow you to use it as a virtual hard drive in VMware Fusion.
+VMware cannot directly use a raw disk image, so we'll create a linked VMDK, which will allow you to use it as a virtual hard drive in VMware Fusion.
 
 Download raw2vmdk from [here](../../extra-files/raw2vmdk.jar), and put it in the same directory as the `.img` file. Then, run the following command:
 
 ```bash
-java -jar raw2vmdk.jar "${IMAGE}.img" "${IMAGE}.vmdk"
+### Change "Install macOS Big Sur Beta" if the name of the .img file differs
+java -jar raw2vmdk.jar "Install macOS Big Sur Beta.img" "Install macOS Big Sur Beta.vmdk"
 ```
 
 This will create a VMDK that references the `.img` file (the raw disk image) for VMware to use. If you're going to move this vmdk or transfer it to another computer, you must move the img file along with it.
