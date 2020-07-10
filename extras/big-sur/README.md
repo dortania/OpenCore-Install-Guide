@@ -102,11 +102,34 @@ With installation, you'll need a few things:
 
 To grab the Big Sur installer, download the beta profile from Apple's developer portal, then check for updates in System Preferences. If you don't have a developer account, you can use gibMacOS to download it:
 
-1. Download gibMacOS and open `gibMacOS.command`.
-2. Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one. (screenshot)
+1. Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
+
+![](/images/extras/big-sur/readme/gib-default.png)
+
+2. Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
+
+![](/images/extras/big-sur/readme/10-16-ver.png)
+
 3. Press `C` to change the catalog, then select the number for the developer catalog.
+
+![](/images/extras/big-sur/readme/dev-cat.png)
+
 4. Select the number for the Big Sur beta to start downloading it. (screenshot)
-5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Beta.app` in your `/Applications` folder.(screenshot)
+
+![](/images/extras/big-sur/readme/big-sur-download.png)
+
+5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Big Sur Beta.app` in your `/Applications` folder.
+
+![](/images/extras/big-sur/readme/final-download.png)
+
+Run the InstallAssistant.pkg and point this to whichever drive you're booting off of, this is where the Install.app will be dropped:
+
+![](/images/extras/big-sur/readme/install-pkg.png)
+
+Once done, you should find it located in your Applications folder:
+
+![](/images/extras/big-sur/readme/done.png)
+
 
 ### Creating the installer
 
@@ -121,7 +144,7 @@ To create the USB is quite simple, grab your USB drive and open Disk Utility in 
 Once this is done, run the below command:
 
 ```
-sudo /Applications/Install\ macOS\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
 This will take some time so may want to grab a coffee, once done your USB should be good to boot!(Assuming you updated OpenCore and co earlier)
