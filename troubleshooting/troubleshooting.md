@@ -772,3 +772,25 @@ You can choose different values to enable or disable certain flags of SIP. Some 
 * `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
   
 ![](/images/troubleshooting/troubleshooting-md/sip.png)
+
+## Writing to the macOS system partition
+
+
+With macOS Catalina and newer, Apple split the OS and user data into 2 volumes where the system volume is read-only by default. To make these drives writable we'll need to do a few things:
+
+**macOS Catalina**
+
+1. [Disable SIP](#disabling-sip)
+2. Mount drive as writable (Run `sudo mount -uw /` in terminal)
+
+**macOS Big Sur**
+
+1. [Disable SIP](#disabling-sip)
+2. Mount drive as writable (See below link for command)
+3. Create a new snapshot after the changes (See below link for command)
+4. Tag this snapshot for next boot (See below link for command)
+
+Full credit and command links provided by [ASentientBot](https://forums.macrumors.com/members/asentientbot.1135186/) and [@mac_editor](https://egpu.io/forums/profile/mac_editor/): 
+
+* [MacRumors Thread](https://forums.macrumors.com/threads/macos-11-big-sur-on-unsupported-macs-thread.2242172/post-28603788)
+* [eGPU.io thread](https://egpu.io/forums/postid/82119/)
