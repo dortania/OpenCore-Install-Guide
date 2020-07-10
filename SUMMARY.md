@@ -69,6 +69,7 @@
 * [Fixing KASLR slide values](/extras/kaslr-fix.md)
 * [Disabling unsupported GPUs](/extras/spoof.md)
 * [Clover Conversion](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion)
+* [OpenCore and macOS 11: Big Sur](/extras/big-sur/README.md)
 
 ## Misc
 

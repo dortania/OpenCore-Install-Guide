@@ -53,40 +53,52 @@ Also note that AMD OSX has updated their patches, but they are experimental and 
 
 ### Up-to-date kexts, bootloader and config.plist
 
-Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here: [Kext Repo](http://kexts.goldfish64.com/) and [Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/).
+Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here: 
+
+* [Kext Repo](http://kexts.goldfish64.com/) 
+* [Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/).
 
 You will also need to ensure you have a few NVRAM variables set:
 
 * **`NVRAM` -> `Add` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82`**:
   * `boot-args`:
     * `-lilubetaall` (Enables Lilu and plugins on beta macOS versions)
-    * `vsmcgen=1` (works around VirtualSMC not properly working in Big Sur)
-    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**. Note newer builds of WhateverGreen should fix this)
-
-See below image as an example:
-
-![](/images/extras/bigsur-md/config-example.png)
+	  * Newest builds of Lilu and plugins do not require this boot-arg
+    * `vsmcgen=1` (works around VirtualSMC, or more specifically Lilu, not properly working in Big Sur)
+    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**. 
+	  * Newer builds of WhateverGreen should fix this(v1.4.1)
 
 ### Known issues
 
 With Big Sur, quite a bit broke. Mainly the following:
 
+* Lilu
+  * Mainly user-space patching has severely broke, meaning certain patches like DRM don't work
+  * Kernel-space should be working correctly with v1.4.6
+* VirtualSMC
+  * Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.
 * SMCBatteryManager
   * Currently RehabMan's [ACPI Battery Manager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext.
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
+* Intel X299 hackintoshes failing to boot
+  * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
+  * OpenCorePkg includes a sample SSDT that goes in-depth: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
-And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set `csr-acive-config` to `FF0F0000`.
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set `csr-acive-config` to `FF0F0000`. See here for more info: [Disabling SIP](/troubleshooting/troubleshooting.md#disabling-sip)
 
 ## Installation
 
 With installation, you'll need a few things:
 
 * macOS Big Sur installer
-* A Mac, hack, or preexisting VM to download the installer and create install media
+* 12GB+ USB drive
+* A Mac, hack, or pre-existing VM to download the installer and create install media
 * Latest builds of OpenCore and kexts (see above)
-* Updated config.plist with prelinkedkernel forced (see above)
+
+
+### Grabbing the installer
 
 To grab the Big Sur installer, download the beta profile from Apple's developer portal, then check for updates in System Preferences. If you don't have a developer account, you can use gibMacOS to download it:
 
@@ -94,4 +106,22 @@ To grab the Big Sur installer, download the beta profile from Apple's developer 
 2. Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one. (screenshot)
 3. Press `C` to change the catalog, then select the number for the developer catalog.
 4. Select the number for the Big Sur beta to start downloading it. (screenshot)
-5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Beta.app` in your `/Applications` folder. (screenshot)
+5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Beta.app` in your `/Applications` folder.(screenshot)
+
+### Creating the installer
+
+To create the USB is quite simple, grab your USB drive and open Disk Utility in macOS. Next format as the following:
+
+* Name:   MyVolume
+* Format: macOS Journaled
+* Scheme: GUID Partition Map
+
+![](/images/installer-guide/mac-install-md/format-usb.png)
+
+Once this is done, run the below command:
+
+```
+sudo /Applications/Install\ macOS\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+```
+
+This will take some time so may want to grab a coffee, once done your USB should be good to boot!(Assuming you updated OpenCore and co earlier)
