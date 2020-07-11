@@ -190,7 +190,7 @@ There are a lot of kexts out there, and Big Sur is still pretty new. Not all kex
 
 ## Virtual Machine Route
 
-You may still be facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor. 
+If you're still facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor. 
 
 ### Building the Installation Media
 
@@ -199,9 +199,9 @@ Requirements:
 * A computer or VM running macOS
 * The desired macOS installation software installed to /Applications
 
-Once you have the installation software installed to /Applications you will need to create a VDI of the installation media that will be used to install macOS in your VM.  The instructions below are intended to be cut and pasted without editing unless specified.
+Once you have the installation software installed to /Applications you will need to create a VDI of the installation media that will be used to install macOS in your VM. The instructions below are intended to be cut and pasted without editing unless specified.
 
-First, set the IMAGE variable to the name of the installation you are installing.  The example defines the image for Big Sur.
+First, set the IMAGE variable to the name of the installation you are installing. The example defines the image for Big Sur.
 
 ```bash
 export IMAGE="Install macOS Big Sur Beta"
@@ -241,9 +241,7 @@ Once the image is formatted, create the installation media.
 sudo "/Applications/${IMAGE}.app/Contents/Resources/createinstallmedia" --nointeraction --volume "/Volumes/${IMAGE}"
 ```
 
-(insert unmount SharedSupport here)
-
-Now detach or eject the virtual disk, and convert it to a VDI.
+Now detach or eject the virtual disk.
 
 ```bash
 ### Eject all of the sub volumes first.
