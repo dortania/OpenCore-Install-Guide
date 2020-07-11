@@ -66,21 +66,16 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`, `DisableVariableWrite` and `RebuildAppleMemoryMap`
+Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
-* **DisableVariableWrite**: YES
-  * Needed for systems with non-functioning NVRAM, you can verify [here](/post-install/nvram.md) if yours works. For X99 we'll assume NVRAM doesn't work but post install you can double check
-* **ProvideCustomSlide**: YES
-  * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
-* **RebuildAppleMemoryMap**: YES
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+* **EnableWriteUnprotector**: YES
+  * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
-. Mainly relevant for Skylake and newer
 
 ## DeviceProperties
 

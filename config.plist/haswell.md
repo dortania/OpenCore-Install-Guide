@@ -69,14 +69,12 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, one we need to change is `RebuildAppleMemoryMap`
+Settings relating to boot.efi patching and firmware fixes, the default will work for us.
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **ProvideCustomSlide**: YES
-  * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
-* **RebuildAppleMemoryMap**: YES
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+* **EnableWriteUnprotector**: YES
+  * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
 

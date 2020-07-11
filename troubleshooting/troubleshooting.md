@@ -52,33 +52,63 @@ This is likely a spelling mistake, options in OpenCore are case-sensitive so mak
 
 Couple problems:
 
-* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
-* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
-* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+**Booter Issues:**
+
+* `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, disabling this quirk isn't recommended but may be required on some laptops and certain desktops
+  * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
-Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
+To verify whether your board has MATs, check the logs for something like this:
 
-* [Fixing CFG Lock](/extras/msr-lock.md)
-* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+```
+OCABC: MAT support is 1
+```
+
+**Kernel Issues:**
+
+
+* **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* **Intel:** Missing CFG or XCPM patches
+  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+* **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+  
+**UEFI Issues:**
+
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
+* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
 
 This is actually the exact same error as `EndRandomSeed` so all the same fixes apply(10.15.4 and newer changed the debug protocol for those curious):
 
-* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
-* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
-* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+**Booter Issues:**
+
+* `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, disabling this quirk isn't recommended but may be required on some laptops and certain desktops
+  * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
-Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
+To verify whether your board has MATs, check the logs for something like this:
 
-* [Fixing CFG Lock](/extras/msr-lock.md)
-* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+```
+OCABC: MAT support is 1
+```
+
+**Kernel Issues:**
+
+
+* **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* **Intel:** Missing CFG or XCPM patches
+  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+* **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+  
+**UEFI Issues:**
+
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
+* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
 ## Can't see macOS partitions
 
@@ -333,6 +363,17 @@ Generally seen as a USB error, couple ways to fix:
 Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases) to fix booting, note that this **only works on Intel USB Chipsets** and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
 
 For AMD users with missing ports in DSDT, you're gonna have to try all the ports in your system and pray, generally 3.1 AsMedia ports work without issue.
+
+On rare occasions(mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
+
+* Set SATA to AHCI mode in the BIOS
+  * macOS doesn't support hardware RAID or IDE mode properly.
+  * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accesible in macOS.
+* [SATA-unsupported.kext](https://github.com/RehabMan/hack-tools/tree/master/kexts/SATA-unsupported.kext)
+  * Adds support to obscure SATA controllers, commonly being laptops.
+  * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/foru…) may be more suitable.
+
+Note that you will only experience this issue after installing macOS onto the drive, booting the macOS installer will not error out due to SATA issues.
 
 ## macOS installer in Russian
 
@@ -761,3 +802,25 @@ You can choose different values to enable or disable certain flags of SIP. Some 
 * `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
   
 ![](/images/troubleshooting/troubleshooting-md/sip.png)
+
+## Writing to the macOS system partition
+
+
+With macOS Catalina and newer, Apple split the OS and user data into 2 volumes where the system volume is read-only by default. To make these drives writable we'll need to do a few things:
+
+**macOS Catalina**
+
+1. [Disable SIP](#disabling-sip)
+2. Mount drive as writable (Run `sudo mount -uw /` in terminal)
+
+**macOS Big Sur**
+
+1. [Disable SIP](#disabling-sip)
+2. Mount drive as writable (See below link for command)
+3. Create a new snapshot after the changes (See below link for command)
+4. Tag this snapshot for next boot (See below link for command)
+
+Full credit and command links provided by [ASentientBot](https://forums.macrumors.com/members/asentientbot.1135186/) and [@mac_editor](https://egpu.io/forums/profile/mac_editor/): 
+
+* [MacRumors Thread](https://forums.macrumors.com/threads/macos-11-big-sur-on-unsupported-macs-thread.2242172/post-28603788)
+* [eGPU.io thread](https://egpu.io/forums/postid/82119/)
