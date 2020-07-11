@@ -29,6 +29,7 @@
 3D
 4G
 64MB
+64bit
 6970M
 7920x
 7980xe
@@ -105,10 +106,12 @@ Auth
 B0D3
 B360
 B75
+BCM94331CD
 BGRT
 BT
 BaseSystem
 BeyondCompare
+Big
 BlueScreen
 BootCamp
 BootInstall
@@ -320,6 +323,8 @@ Insyde
 IntelMausi
 IntelMausiEthernet
 IvyBridge
+JDK
+JRE
 JackFix
 Journaled
 KASLR
@@ -346,6 +351,7 @@ Lenovo
 Lilu
 LoadVBIOS
 LucyRTL8125Ethernet
+MADT
 MBR
 MEI
 MEID
@@ -359,6 +365,7 @@ MacBookPro13
 MacBookPro14
 MacBookPro[0-9]+
 MacInfoPkg
+MacMini6
 MacOS
 MacPro5
 MacPro6
@@ -450,6 +457,7 @@ PRs
 PS2
 PXSX
 Patch1
+Pathname
 Pci
 PciRoot
 PciRoot's
@@ -507,6 +515,7 @@ STAS
 Safemode
 SetVirtualAddresses
 Shannee
+SharedSupport
 Shiki
 ShowPackageContents
 Siri
@@ -520,6 +529,7 @@ Speccy
 StopSign-fixv
 StopSign-fixv5
 Subreddit
+Sur
 Syrah
 SystemAudioVolume
 SystemParameters
@@ -532,6 +542,7 @@ TSC
 TSCAdjustReset
 Telemetrap
 TetherMe
+TextEdit
 TextMate
 TextMode
 TgtBridge
@@ -558,7 +569,9 @@ Universal-IFR-Extractor
 UsbInjectAll
 VBIOS
 VDADecoderChecker
+VDI
 VM
+VMDK
 VMs
 VMware
 VPN
@@ -662,6 +675,7 @@ decompile
 decrypt
 devirt
 diskXsY
+diskutil
 distro
 distro's
 distros
@@ -730,6 +744,7 @@ ie\.
 ig-platform-id
 ig-platform-id's
 igfxfw
+img
 ix-3xxx
 jailbroken
 kernelcache
@@ -746,6 +761,7 @@ macOS(\.)?
 macserial
 markdownlint-cli
 midi1996
+mini-explainer
 msi
 multiboot
 natively
@@ -767,11 +783,13 @@ pre-compiled
 pre-made
 precompiled
 prelinked
+prelinkedkernel
 prelinker
 probs
 r10
 r4
 rEFInd
+raw2vmdk
 rebranded
 reimplements
 renderer
@@ -799,10 +817,14 @@ trashOS
 ubuntu
 unallocated
 unbootable
+unmount
 untrusted
 ver
 vit9696
 vit9696's
+vmdk
+vmx
+vmxf
 webserver
 wifi
 x10
