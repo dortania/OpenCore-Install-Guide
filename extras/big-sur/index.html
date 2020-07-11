@@ -1,0 +1,1159 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>OpenCore and macOS 11: Big Sur · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-medium-zoom/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../CONTRIBUTING.html" />
+    
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    OpenCore Desktop Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../why-oc.html">
+            
+                <a href="../../why-oc.html">
+            
+                    
+                    Why OpenCore
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">USB Creation</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../installer-guide/">
+            
+                <a href="../../installer-guide/">
+            
+                    
+                    Creating the USB
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../../installer-guide/mac-install.html">
+            
+                <a href="../../installer-guide/mac-install.html">
+            
+                    
+                    macOS install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../../installer-guide/winblows-install.html">
+            
+                <a href="../../installer-guide/winblows-install.html">
+            
+                    
+                    Windows install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../../installer-guide/linux-install.html">
+            
+                <a href="../../installer-guide/linux-install.html">
+            
+                    
+                    Linux install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../installer-guide/opencore-efi.html">
+            
+                <a href="../../installer-guide/opencore-efi.html">
+            
+                    
+                    Adding The Base OpenCore Files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../../ktext.html">
+            
+                <a href="../../ktext.html">
+            
+                    
+                    Gathering files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" >
+            
+                <a target="_blank" href="https://dortania.github.io/Getting-Started-With-ACPI/">
+            
+                    
+                    Getting started with ACPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../../config.plist/">
+            
+                <a href="../../config.plist/">
+            
+                    
+                    config.plist Setup
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../config.plist/ivy-bridge.html">
+            
+                <a href="../../config.plist/ivy-bridge.html">
+            
+                    
+                    Ivy Bridge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../../config.plist/haswell.html">
+            
+                <a href="../../config.plist/haswell.html">
+            
+                    
+                    Haswell
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../../config.plist/skylake.html">
+            
+                <a href="../../config.plist/skylake.html">
+            
+                    
+                    Skylake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../../config.plist/kaby-lake.html">
+            
+                <a href="../../config.plist/kaby-lake.html">
+            
+                    
+                    Kaby Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../../config.plist/coffee-lake.html">
+            
+                <a href="../../config.plist/coffee-lake.html">
+            
+                    
+                    Coffee Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../../config.plist/comet-lake.html">
+            
+                <a href="../../config.plist/comet-lake.html">
+            
+                    
+                    Comet Lake
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Intel HEDT Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../../config-HEDT/haswell-e.html">
+            
+                <a href="../../config-HEDT/haswell-e.html">
+            
+                    
+                    Haswell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../../config-HEDT/broadwell-e.html">
+            
+                <a href="../../config-HEDT/broadwell-e.html">
+            
+                    
+                    Broadwell-E
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../../config-HEDT/skylake-x.html">
+            
+                <a href="../../config-HEDT/skylake-x.html">
+            
+                    
+                    Skylake/Cascade Lake-X/W
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">AMD Config.plist</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../../AMD/fx.html">
+            
+                <a href="../../AMD/fx.html">
+            
+                    
+                    Bulldozer/Jaguar
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../../AMD/zen.html">
+            
+                <a href="../../AMD/zen.html">
+            
+                    
+                    Zen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Installation</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../../installation/installation-process.html">
+            
+                <a href="../../installation/installation-process.html">
+            
+                    
+                    Installation Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Troubleshooting</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../../troubleshooting/troubleshooting.html">
+            
+                <a href="../../troubleshooting/troubleshooting.html">
+            
+                    
+                    General Troubleshooting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../../troubleshooting/debug.html">
+            
+                <a href="../../troubleshooting/debug.html">
+            
+                    
+                    OpenCore Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../../troubleshooting/boot.html">
+            
+                <a href="../../troubleshooting/boot.html">
+            
+                    
+                    macOS Boot Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Post Install</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../../post-install/">
+            
+                <a href="../../post-install/">
+            
+                    
+                    Post-Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1.1" data-path="../../post-install/security.html">
+            
+                <a href="../../post-install/security.html">
+            
+                    
+                    Security and FileVault
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.2" data-path="../../post-install/audio.html">
+            
+                <a href="../../post-install/audio.html">
+            
+                    
+                    Fixing Audio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.3" data-path="../../post-install/oc2hdd.html">
+            
+                <a href="../../post-install/oc2hdd.html">
+            
+                    
+                    Booting without USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.4" data-path="../../post-install/update.html">
+            
+                <a href="../../post-install/update.html">
+            
+                    
+                    Updating OpenCore, kexts and macOS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.5" data-path="../msr-lock.html">
+            
+                <a href="../msr-lock.html">
+            
+                    
+                    Fixing CFG Lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.6" data-path="../../post-install/verbose.html">
+            
+                <a href="../../post-install/verbose.html">
+            
+                    
+                    Fixing Resolution and Verbose
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.7" data-path="../../post-install/drm.html">
+            
+                <a href="../../post-install/drm.html">
+            
+                    
+                    Fixing DRM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.8" data-path="../../post-install/iservices.html">
+            
+                <a href="../../post-install/iservices.html">
+            
+                    
+                    Fixing iServices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.9" data-path="../../post-install/nvram.html">
+            
+                <a href="../../post-install/nvram.html">
+            
+                    
+                    Emulated NVRAM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.10" data-path="../../post-install/pm.html">
+            
+                <a href="../../post-install/pm.html">
+            
+                    
+                    Fixing Power Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.11" data-path="../../post-install/multiboot/bootstrap.html">
+            
+                <a href="../../post-install/multiboot/bootstrap.html">
+            
+                    
+                    Setting up Bootstrap.efi
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.12" data-path="../../post-install/multiboot/bootcamp.html">
+            
+                <a href="../../post-install/multiboot/bootcamp.html">
+            
+                    
+                    Installing BootCamp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.13" >
+            
+                <a target="_blank" href="https://dortania.github.io/USB-Map-Guide/">
+            
+                    
+                    Fixing USB
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Extras</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="../legacy.html">
+            
+                <a href="../legacy.html">
+            
+                    
+                    Legacy Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.2" data-path="../gui.html">
+            
+                <a href="../gui.html">
+            
+                    
+                    Add GUI and Boot-chime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.3" data-path="../gpu-patches.html">
+            
+                <a href="../gpu-patches.html">
+            
+                    
+                    iGPU Patching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.4" data-path="../kaslr-fix.html">
+            
+                <a href="../kaslr-fix.html">
+            
+                    
+                    Fixing KASLR slide values
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.5" data-path="../spoof.html">
+            
+                <a href="../spoof.html">
+            
+                    
+                    Disabling unsupported GPUs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.6" >
+            
+                <a target="_blank" href="https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion">
+            
+                    
+                    Clover Conversion
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="9.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    OpenCore and macOS 11: Big Sur
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Misc</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="../../CONTRIBUTING.html">
+            
+                <a href="../../CONTRIBUTING.html">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="../../misc/credit.html">
+            
+                <a href="../../misc/credit.html">
+            
+                    
+                    Credit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >OpenCore and macOS 11: Big Sur</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#opencore-and-macos-11-big-sur"><b> </b>OpenCore and macOS 11: Big Sur</a></li><ul><li><span class="title-icon "></span><a href="#backstory"><b>1. </b>Backstory</a></li><ul><li><span class="title-icon "></span><a href="#avoidruntimedefrag"><b>1.1. </b>AvoidRuntimeDefrag</a></li><li><span class="title-icon "></span><a href="#kernel-collections-vs-prelinkedkernel"><b>1.2. </b>Kernel Collections vs prelinkedkernel</a></li></ul><li><span class="title-icon "></span><a href="#prerequisites"><b>2. </b>Prerequisites</a></li><ul><li><span class="title-icon "></span><a href="#a-supported-smbios"><b>2.1. </b>A supported SMBIOS</a></li><li><span class="title-icon "></span><a href="#supported-hardware"><b>2.2. </b>Supported hardware</a></li><li><span class="title-icon "></span><a href="#up-to-date-kexts-bootloader-and-configplist"><b>2.3. </b>Up-to-date kexts, bootloader and config.plist</a></li><li><span class="title-icon "></span><a href="#known-issues"><b>2.4. </b>Known issues</a></li></ul><li><span class="title-icon "></span><a href="#installation"><b>3. </b>Installation</a></li><ul><li><span class="title-icon "></span><a href="#grabbing-the-installer"><b>3.1. </b>Grabbing the installer</a></li><li><span class="title-icon "></span><a href="#creating-the-installer"><b>3.2. </b>Creating the installer</a></li><li><span class="title-icon "></span><a href="#installing"><b>3.3. </b>Installing</a></li></ul><li><span class="title-icon "></span><a href="#virtual-machine-route"><b>4. </b>Virtual Machine Route</a></li><ul><li><span class="title-icon "></span><a href="#building-the-installation-media"><b>4.1. </b>Building the Installation Media</a></li></ul></ul></ul></div><a href="#opencore-and-macos-11-big-sur" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><blockquote>
+<p><em>Last modified: Sat Jul 11 2020 18:02:57 GMT+0000 (Coordinated Universal Time)</em></p>
+</blockquote>
+<h1 id="opencore-and-macos-11-big-sur"><a name="opencore-and-macos-11-big-sur" class="anchor-navigation-ex-anchor" href="#opencore-and-macos-11-big-sur"><i class="fa fa-link" aria-hidden="true"></i></a> OpenCore and macOS 11: Big Sur</h1>
+<p>It&apos;s that time of year again and with it, and a new macOS beta has been dropped. Here&apos;s all the info you need to get started.</p>
+<p><strong>Reminder that Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.</strong></p>
+<p><strong>This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until there is an easier and more straight-forward solution available.</strong></p>
+<h2 id="backstory"><a name="backstory" class="anchor-navigation-ex-anchor" href="#backstory"><i class="fa fa-link" aria-hidden="true"></i></a>1. Backstory</h2>
+<p>More a mini-explainer as to why this release is a bit more painful than average macOS releases, the main culprits are as follows:</p>
+<h3 id="avoidruntimedefrag"><a name="avoidruntimedefrag" class="anchor-navigation-ex-anchor" href="#avoidruntimedefrag"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. AvoidRuntimeDefrag</h3>
+<p>With macOS Big Sur, the <code>AvoidRuntimeDefrag</code> Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to <code>cpi_count_enabled_logical_processors</code> requiring the MADT (APIC) table, and so OpenCore will now copy this table and ensure the kernel can access it. Users will however need a build of OpenCore 0.6.0 with commit <a href="https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4" target="_blank"><code>bb12f5f</code></a> or newer to resolve this issue.</p>
+<h3 id="kernel-collections-vs-prelinkedkernel"><a name="kernel-collections-vs-prelinkedkernel" class="anchor-navigation-ex-anchor" href="#kernel-collections-vs-prelinkedkernel"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Kernel Collections vs prelinkedkernel</h3>
+<p>Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting.</p>
+<p>Due to the hard work of <a href="https://github.com/acidanthera" target="_blank">@acidanthera</a>, OpenCore gained experimental support for this new format in roughly 2 weeks, and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.</p>
+<h2 id="prerequisites"><a name="prerequisites" class="anchor-navigation-ex-anchor" href="#prerequisites"><i class="fa fa-link" aria-hidden="true"></i></a>2. Prerequisites</h2>
+<p>Before we can jump head first into installing Big Sur, we need to go over a few things:</p>
+<h3 id="a-supported-smbios"><a name="a-supported-smbios" class="anchor-navigation-ex-anchor" href="#a-supported-smbios"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. A supported SMBIOS</h3>
+<p>Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see below that yours wasn&apos;t dropped:</p>
+<ul>
+<li>iMac14,3 and older<ul>
+<li>Note iMac14,4 is still supported</li>
+</ul>
+</li>
+<li>MacPro5,1 and older</li>
+<li>MacMini6,x and older</li>
+<li>MacBook7,1 and older</li>
+<li>MacBookAir5,x and older</li>
+<li>MacBookPro10,x and older</li>
+</ul>
+<p>If your SMBIOS was supported in Catalina and isn&apos;t included above, you&apos;re good to go!</p>
+<h3 id="supported-hardware"><a name="supported-hardware" class="anchor-navigation-ex-anchor" href="#supported-hardware"><i class="fa fa-link" aria-hidden="true"></i></a>2.2. Supported hardware</h3>
+<p>Not much hardware has been dropped, though the few that have:</p>
+<ul>
+<li>Ivy Bridge CPUs.<ul>
+<li>Unofficially, many have been able to boot with ease.</li>
+</ul>
+</li>
+<li>Ivy Bridge iGPUs.<ul>
+<li>HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.</li>
+</ul>
+</li>
+<li>BCM94331CD based Wifi cards.<ul>
+<li>See <a href="https://dortania.github.io/Wireless-Buyers-Guide/" target="_blank">Wireless Buyers guide</a> for potential cards to upgrade to.</li>
+</ul>
+</li>
+</ul>
+<p>Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them.</p>
+<h3 id="up-to-date-kexts-bootloader-and-configplist"><a name="up-to-date-kexts-bootloader-and-configplist" class="anchor-navigation-ex-anchor" href="#up-to-date-kexts-bootloader-and-configplist"><i class="fa fa-link" aria-hidden="true"></i></a>2.3. Up-to-date kexts, bootloader and config.plist</h3>
+<p>Ensure you&apos;ve updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here: </p>
+<ul>
+<li><a href="http://kexts.goldfish64.com/" target="_blank">Kext Repo</a> </li>
+<li><a href="http://drivers.goldfish64.com/" target="_blank">Driver Repo (contains OpenCore builds too)</a>.</li>
+</ul>
+<p>You will also need to ensure you have a few NVRAM variables set:</p>
+<ul>
+<li><strong><code>NVRAM</code> -&gt; <code>Add</code> -&gt; <code>7C436110-AB2A-4BBB-A880-FE41995C9F82</code></strong>:<ul>
+<li><code>boot-args</code>:<ul>
+<li><code>-lilubetaall</code> (Enables Lilu and plugins on beta macOS versions)<ul>
+<li>Newest builds of Lilu and plugins do not require this boot-arg</li>
+</ul>
+</li>
+<li><code>vsmcgen=1</code> (works around VirtualSMC, or more specifically Lilu, not properly working in Big Sur)</li>
+<li><code>-disablegfxfirmware</code> (Works around WhateverGreen failing, <strong>iGPUs only</strong>. <ul>
+<li>Newer builds of WhateverGreen should fix this (v1.4.1)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="known-issues"><a name="known-issues" class="anchor-navigation-ex-anchor" href="#known-issues"><i class="fa fa-link" aria-hidden="true"></i></a>2.4. Known issues</h3>
+<p>With Big Sur, quite a bit broke. Mainly the following:</p>
+<ul>
+<li>Lilu<ul>
+<li>Mainly user-space patching has severely broke, meaning certain patches like DRM don&apos;t work</li>
+<li>Kernel-space should be working correctly with v1.4.6</li>
+</ul>
+</li>
+<li>VirtualSMC<ul>
+<li>Some users may notice that even with <code>vsmcgen=1</code> in boot-args, you&apos;ll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.</li>
+</ul>
+</li>
+<li>Battery status<ul>
+<li>Currently RehabMan&apos;s <a href="https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/" target="_blank">ACPIBatteryManager</a> is the only working kext for battery status.</li>
+<li>You can set <code>MaxKernel</code> for SMCBatteryManager to <code>19.99.99</code> and <code>MinKernel</code> for ACPIBatteryManager to <code>20.0.0</code> to use SMCBatteryManager for Catalina and below and ACPIBatteryManager for Big Sur (and above).</li>
+</ul>
+</li>
+<li>AirportBrcmFixup<ul>
+<li>Forcing a specific driver to load with <code>brcmfx-driver=</code> may help</li>
+<li>BCM94352Z users for example may need <code>brcmfx-driver=2</code> in boot-args to resolve this, other chipsets will need other variables.</li>
+</ul>
+</li>
+<li>Intel HEDT hackintoshes failing to boot<ul>
+<li>This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.</li>
+<li>OpenCorePkg includes a sample SSDT that goes in-depth: <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl" target="_blank">SSDT-RTC0-RANGE.dsl</a></li>
+</ul>
+</li>
+</ul>
+<p>And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set <code>csr-acive-config</code> to <code>FF0F0000</code>. See here for more info: <a href="../../troubleshooting/troubleshooting.html#disabling-sip">Disabling SIP</a></p>
+<h2 id="installation"><a name="installation" class="anchor-navigation-ex-anchor" href="#installation"><i class="fa fa-link" aria-hidden="true"></i></a>3. Installation</h2>
+<p>With installation, you&apos;ll need a few things:</p>
+<ul>
+<li>macOS Big Sur installer</li>
+<li>12GB+ USB drive</li>
+<li>A Mac, hack, or pre-existing VM to download the installer and create install media</li>
+<li>Latest builds of OpenCore and kexts (see above)</li>
+</ul>
+<h3 id="grabbing-the-installer"><a name="grabbing-the-installer" class="anchor-navigation-ex-anchor" href="#grabbing-the-installer"><i class="fa fa-link" aria-hidden="true"></i></a>3.1. Grabbing the installer</h3>
+<p>To grab the Big Sur installer, download the beta profile from Apple&apos;s developer portal, then check for updates in System Preferences. If you don&apos;t have a developer account, you can use gibMacOS to download it:</p>
+<ol>
+<li>Download <a href="https://github.com/corpnewt/gibMacOS" target="_blank">gibMacOS</a> and open <code>gibMacOS.command</code>:</li>
+</ol>
+<p><img src="../../images/extras/big-sur/readme/gib-default.png" alt=""></p>
+<ol>
+<li>Press <code>M</code> to change the Max OS, then enter <code>10.16</code> to switch the (update) catalog to the Big Sur one.</li>
+</ol>
+<p><img src="../../images/extras/big-sur/readme/10-16-ver.png" alt=""></p>
+<ol>
+<li>Press <code>C</code> to change the catalog, then select the number for the developer catalog.</li>
+</ol>
+<p><img src="../../images/extras/big-sur/readme/dev-cat.png" alt=""></p>
+<ol>
+<li>Select the number for the Big Sur beta to start downloading it. (screenshot)</li>
+</ol>
+<p><img src="../../images/extras/big-sur/readme/big-sur-download.png" alt=""></p>
+<ol>
+<li>Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the <code>gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta</code> folder. This package from Apple will create <code>Install macOS Big Sur Beta.app</code> in your <code>/Applications</code> folder.</li>
+</ol>
+<p><img src="../../images/extras/big-sur/readme/final-download.png" alt=""></p>
+<p>Run the InstallAssistant.pkg and point this to whichever drive you&apos;re booting off of, this is where the Install.app will be dropped:</p>
+<p><img src="../../images/extras/big-sur/readme/install-pkg.png" alt=""></p>
+<p>Once done, you should find it located in your Applications folder:</p>
+<p><img src="../../images/extras/big-sur/readme/done.png" alt=""></p>
+<h3 id="creating-the-installer"><a name="creating-the-installer" class="anchor-navigation-ex-anchor" href="#creating-the-installer"><i class="fa fa-link" aria-hidden="true"></i></a>3.2. Creating the installer</h3>
+<p>To create the USB is quite simple, grab your USB drive and open Disk Utility in macOS. Next format as the following:</p>
+<ul>
+<li>Name:   MyVolume</li>
+<li>Format: macOS Journaled</li>
+<li>Scheme: GUID Partition Map</li>
+</ul>
+<p><img src="../../images/installer-guide/mac-install-md/format-usb.png" alt=""></p>
+<p>Once this is done, run the following command:</p>
+<pre><code>sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+</code></pre><p>This will take some time so may want to grab a coffee, once done your USB should be good to boot!(Assuming you updated OpenCore and co earlier)</p>
+<h3 id="installing"><a name="installing" class="anchor-navigation-ex-anchor" href="#installing"><i class="fa fa-link" aria-hidden="true"></i></a>3.3. Installing</h3>
+<p>Installing macOS 11: Big Sur on a Hackintosh is fairly similar to how previous version of macOS were installed, with the main issues being:</p>
+<ul>
+<li>KernelCollections over prelinkedkernel (discussed above)</li>
+<li>Installation being much longer<ul>
+<li>This is due to the new snapshot feature of the OS</li>
+</ul>
+</li>
+<li>Certain kexts breaking<ul>
+<li>Mainly Lilu and plugins, though quite obvious when they break</li>
+</ul>
+</li>
+</ul>
+<p>For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright.</p>
+<h4 id="stuck-at-forcing-csruntime-for-entitlement"><a name="stuck-at-forcing-csruntime-for-entitlement" class="anchor-navigation-ex-anchor" href="#stuck-at-forcing-csruntime-for-entitlement"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck at <code>Forcing CS_RUNTIME for entitlement</code></h4>
+<p><img src="../../images/extras/big-sur/readme/cs-stuck.jpg" alt="Credit to Stompy for image"></p>
+<p>This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. <strong>DO NOT RESTART</strong> thinking you&apos;re stuck, this will take quite some time to complete.</p>
+<h4 id="stuck-at-pci-configuration-begins-for-intels-hedt-boards"><a name="stuck-at-pci-configuration-begins-for-intels-hedt-boards" class="anchor-navigation-ex-anchor" href="#stuck-at-pci-configuration-begins-for-intels-hedt-boards"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck at <code>PCI Configuration Begins</code> for Intel&apos;s HEDT boards</h4>
+<p><img src="../../images/extras/big-sur/readme/rtc-error.jpg" alt=""></p>
+<p>As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you&apos;ll need to look at your RTC device and see which regions are missing. For more information, see here: <a href="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl" target="_blank">SSDT-RTC0-RANGE.dsl</a></p>
+<h4 id="stuck-on-ramrod"><a name="stuck-on-ramrod" class="anchor-navigation-ex-anchor" href="#stuck-on-ramrod"><i class="fa fa-link" aria-hidden="true"></i></a>Stuck on <code>ramrod</code>(^^^^^^^^^^^^^)</h4>
+<p><img src="../../images/extras/big-sur/readme/ramrod.jpg" alt="Credit to Notiflux for image"></p>
+<p>If you get stuck around the <code>ramrod</code> section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:</p>
+<ul>
+<li>Ensure you&apos;re using the latest builds of VitualSMC and Lilu, with the <code>vsmcgen=1</code> boot-arg</li>
+<li>Switch over to <a href="https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/" target="_blank">Rehabman&apos;s FakeSMC</a> (you can use the <code>MinKernel</code>/<code>MaxKernel</code> trick mentioned above to restrict FakeSMC to Big Sur and up</li>
+</ul>
+<p>And when switching kexts, ensure you don&apos;t have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.</p>
+<h4 id="some-kexts-may-not-be-compatible-with-big-sur-yet"><a name="some-kexts-may-not-be-compatible-with-big-sur-yet" class="anchor-navigation-ex-anchor" href="#some-kexts-may-not-be-compatible-with-big-sur-yet"><i class="fa fa-link" aria-hidden="true"></i></a>Some kexts may not be compatible with Big Sur yet</h4>
+<p>There are a lot of kexts out there, and Big Sur is still pretty new. Not all kexts are working yet, so if you&apos;re experiencing a weird kernel panic, one thing you can try is booting with only the essential kexts (Lilu, VirtualSMC/FakeSMC, WhateverGreen) and seeing if it works. If so, you can enable kexts one by one to try to narrow down the issue.</p>
+<h2 id="virtual-machine-route"><a name="virtual-machine-route" class="anchor-navigation-ex-anchor" href="#virtual-machine-route"><i class="fa fa-link" aria-hidden="true"></i></a>4. Virtual Machine Route</h2>
+<p>If you&apos;re still facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor.</p>
+<p>Note: If you have an AMD CPU, this method isn&apos;t going to work.</p>
+<h3 id="building-the-installation-media"><a name="building-the-installation-media" class="anchor-navigation-ex-anchor" href="#building-the-installation-media"><i class="fa fa-link" aria-hidden="true"></i></a>4.1. Building the Installation Media</h3>
+<p>Requirements:</p>
+<ul>
+<li>A computer or VM running macOS</li>
+<li>The desired macOS installation software installed to /Applications</li>
+</ul>
+<p>Once you have the installation software installed to /Applications you will need to create a VDI of the installation media that will be used to install macOS in your VM. The instructions below are intended to be cut and pasted without editing unless specified.</p>
+<p>First, set the IMAGE variable to the name of the installation you are installing. The example defines the image for Big Sur.</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">export</span> IMAGE=<span class="hljs-string">&quot;Install macOS Big Sur Beta&quot;</span>
+</code></pre>
+<p>Next, create an empty 16GB image to host the media.</p>
+<pre><code class="lang-bash">mkfile -n 16g <span class="hljs-string">&quot;<span class="hljs-variable">${IMAGE}</span>.img&quot;</span>
+</code></pre>
+<p>Verify that you have a 16GB file named &quot;Install macOS Beta.img&quot; before continuing.  After that, attach it to your macOS system as a virtual disk using the variable you created earlier.</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">export</span> DISK=$(hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount <span class="hljs-string">&quot;<span class="hljs-variable">${IMAGE}</span>.img&quot;</span>| awk <span class="hljs-string">&apos;{printf $1}&apos;</span>)
+</code></pre>
+<p>Run diskutil list and verify that you have a disk attached that is type &quot;disk image&quot;.</p>
+<pre><code class="lang-bash">diskutil list
+&lt;snip&gt;
+/dev/disk4 (disk image):
+   <span class="hljs-comment">#:                       TYPE NAME                    SIZE       IDENTIFIER</span>
+   0:                                                   +16.8 GB    disk4
+</code></pre>
+<p>Now that the image is mounted, format it to Journaled HFS+.</p>
+<pre><code class="lang-bash">diskutil eraseDisk JHFS+ <span class="hljs-string">&quot;<span class="hljs-variable">${IMAGE}</span>&quot;</span> <span class="hljs-variable">${DISK}</span>
+</code></pre>
+<p>Once the image is formatted, create the installation media.</p>
+<pre><code class="lang-bash">sudo <span class="hljs-string">&quot;/Applications/<span class="hljs-variable">${IMAGE}</span>.app/Contents/Resources/createinstallmedia&quot;</span> --nointeraction --volume <span class="hljs-string">&quot;/Volumes/<span class="hljs-variable">${IMAGE}</span>&quot;</span>
+</code></pre>
+<p>Now detach or eject the virtual disk.</p>
+<pre><code class="lang-bash"><span class="hljs-comment">### Eject all of the sub volumes first.</span>
+<span class="hljs-keyword">for</span> VDISK <span class="hljs-keyword">in</span> $(hdiutil info 2&gt;&amp;1 | awk <span class="hljs-string">&apos;/disk[0-9]/ {print $1}&apos;</span>); <span class="hljs-keyword">do</span> hdiutil eject <span class="hljs-variable">${VDISK}</span> 2&gt;/dev/null; <span class="hljs-keyword">done</span>
+<span class="hljs-comment">### Next eject the virtual disk itself</span>
+hdiutil eject <span class="hljs-variable">${DISK}</span>
+</code></pre>
+<p>You now have an raw image of the installer. Follow the appropriate page for the hypervisor you&apos;ll be choosing:</p>
+<ul>
+<li><a href="virtualbox.md">VirtualBox</a></li>
+<li><a href="fusion.md">VMware Fusion</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="../../CONTRIBUTING.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Contributing">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"OpenCore and macOS 11: Big Sur","level":"9.7","depth":1,"next":{"title":"Contributing","level":"10.1","depth":1,"path":"CONTRIBUTING.md","ref":"CONTRIBUTING.md","articles":[]},"previous":{"title":"Clover Conversion","level":"9.6","depth":1,"url":"https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion","ref":"https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-default","-lunr","-search","search-plus","addcssjs","favicon-plus","anchor-navigation-ex","github-buttons","last-modified","medium-zoom"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"last-modified":{},"output":"_book","intopic-toc":{"label":"Navigation"},"addcssjs":{"js":[],"css":[]},"medium-zoom":{},"fontsettings":{"theme":"night","family":"sans","size":2},"favicon-plus":{"appleTouchIconPrecomposed152":"","favicon":"","output":"_book"},"highlight":{},"github-edit":{"repo":"dortania/Opencore-Desktop-Guide","branch":"master"},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":"/icons/favicon.ico","appleTouchIconPrecomposed152":"/icons/appleTouchIconPrecomposed152.png","github-buttons":{"buttons":[{"user":"dortania","repo":"OpenCore-Desktop-Guide","type":"star","size":"large"}]},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":[]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"search-plus":{}},"theme":"default","medium-zoom":{"margin":24,"background":"#363b40","scrollOffset":0},"pdf":{"pageBreaksBefore":"/","headerTemplate":null,"paperSize":"a4","margin":{"right":62,"left":62,"top":36,"bottom":36},"fontSize":12,"fontFamily":"Arial","footerTemplate":null,"chapterMark":"pagebreak","pageNumbers":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"links":{"sharing":{"google":false,"facebook":false,"twitter":false,"weibo":false,"all":false}},"gitbook":"*"},"file":{"path":"extras/big-sur/README.md","mtime":"2020-07-11T18:02:57.480Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-07-11T18:04:12.937Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-medium-zoom/medium-zoom.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-medium-zoom/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    
+
+    </body>
+</html>
+
