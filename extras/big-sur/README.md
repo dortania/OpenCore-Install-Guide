@@ -18,7 +18,7 @@ With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Bec
 
 Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting.
 
-Due to the hard work of acidanthera, OpenCore gained experimental support for this new format in roughly 2 weeks, and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.
+Due to the hard work of [@acidanthera](https://github.com/acidanthera), OpenCore gained experimental support for this new format in roughly 2 weeks, and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.
 
 ## Prerequisites
 
@@ -66,7 +66,7 @@ You will also need to ensure you have a few NVRAM variables set:
 	  * Newest builds of Lilu and plugins do not require this boot-arg
     * `vsmcgen=1` (works around VirtualSMC, or more specifically Lilu, not properly working in Big Sur)
     * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**. 
-	  * Newer builds of WhateverGreen should fix this(v1.4.1)
+	  * Newer builds of WhateverGreen should fix this (v1.4.1)
 
 ### Known issues
 
@@ -77,8 +77,9 @@ With Big Sur, quite a bit broke. Mainly the following:
   * Kernel-space should be working correctly with v1.4.6
 * VirtualSMC
   * Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.
-* SMCBatteryManager
-  * Currently RehabMan's [ACPI Battery Manager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext.
+* Battery status
+  * Currently RehabMan's [ACPIBatteryManager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext for battery status.
+  * You can set `MaxKernel` for SMCBatteryManager to `19.99.99` and `MinKernel` for ACPIBatteryManager to `20.0.0` to use SMCBatteryManager for Catalina and below and ACPIBatteryManager for Big Sur (and above).
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
@@ -96,7 +97,6 @@ With installation, you'll need a few things:
 * 12GB+ USB drive
 * A Mac, hack, or pre-existing VM to download the installer and create install media
 * Latest builds of OpenCore and kexts (see above)
-
 
 ### Grabbing the installer
 
@@ -141,7 +141,7 @@ To create the USB is quite simple, grab your USB drive and open Disk Utility in 
 
 ![](/images/installer-guide/mac-install-md/format-usb.png)
 
-Once this is done, run the below command:
+Once this is done, run the following command:
 
 ```
 sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
@@ -151,9 +151,9 @@ This will take some time so may want to grab a coffee, once done your USB should
 
 ### Installing
 
-Installing macOS 11: Big Sur on a Hackintosh is a fairly similar to how previous version of macOS were installed, with the main issues being:
+Installing macOS 11: Big Sur on a Hackintosh is fairly similar to how previous version of macOS were installed, with the main issues being:
 
-* KernelCollections over prelinked kernel(discussed above)
+* KernelCollections over prelinkedkernel (discussed above)
 * Installation being much longer
   * This is due to the new snapshot feature of the OS
 * Certain kexts breaking
@@ -177,9 +177,14 @@ As previously mentioned, Intel HEDT motherboards may have some issues revolving 
 
 ![Credit to Notiflux for image](/images/extras/big-sur/readme/ramrod.jpg)
 
-If you get stuck around `ramrod` section, this hints that your SMC emulator is broken. To fix this, you have 2 options
+If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
 
 * Ensure you're using the latest builds of VitualSMC and Lilu, with the `vsmcgen=1` boot-arg
-* Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/)
+* Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/) (you can use the `MinKernel`/`MaxKernel` trick mentioned above to restrict FakeSMC to Big Sur and up
 
-And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist
+And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
+
+#### Some kexts may not be compatible with Big Sur yet
+
+There are a lot of kexts out there, and Big Sur is still pretty new. Not all kexts are working yet, so if you're experiencing a weird kernel panic, one thing you can try is booting with only the essential kexts (Lilu, VirtualSMC/FakeSMC, WhateverGreen) and seeing if it works. If so, you can enable kexts one by one to try to narrow down the issue.
+
