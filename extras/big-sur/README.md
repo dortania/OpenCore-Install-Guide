@@ -82,7 +82,7 @@ With Big Sur, quite a bit broke. Mainly the following:
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
-* Intel X299 hackintoshes failing to boot
+* Intel HEDT hackintoshes failing to boot
   * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
   * OpenCorePkg includes a sample SSDT that goes in-depth: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
@@ -148,3 +148,27 @@ sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createi
 ```
 
 This will take some time so may want to grab a coffee, once done your USB should be good to boot!(Assuming you updated OpenCore and co earlier)
+
+### Installing
+
+Installing macOS 11: Big Sur on a Hackintosh is a fairly similar to how previous version of macOS were installed, with the main issues being:
+
+* KernelCollections over prelinked kernel(discussed above)
+* Installation being much longer
+  * This is due to the new snapshot feature of the OS
+* Certain kexts breaking
+  * Mainly Lilu and plugins, though quite obvious when they break
+  
+For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright.
+
+#### Stuck at `Forcing CS_RUNTIME for entitlement`
+
+![Credit to Stompy for image](/images/extras/big-sur/readme/cs-stuck.jpg)
+
+This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
+
+#### Stuck at `PCI Configuration Begins` for Intel's HEDT boards
+
+![]](/images/extras/big-sur/readme/rtc-error.jpg)
+
+As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you'll need to look at your RTC device and see which regions are missing. For more information, see here: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
