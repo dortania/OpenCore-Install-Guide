@@ -66,13 +66,12 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `SetupVirtualMap`
+Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `RebuildAppleMemoryMap` and disabling `EnableWriteUnprotector`.
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-
-* **ProvideCustomSlide**: YES
-  * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
+* **EnableWriteUnprotector**: NO
+  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES

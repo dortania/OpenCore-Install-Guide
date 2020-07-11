@@ -69,17 +69,17 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`, `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and `SetupVirtualMap`
+Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `DevirtualiseMmio`, `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and disabling `EnableWriteUnprotector`.
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
+* **EnableWriteUnprotector**: NO
+  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
 * **ProtectUefiServices**: NO
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
   * If on Z390, **enable this quirk**
-* **ProvideCustomSlide**: YES
-  * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES

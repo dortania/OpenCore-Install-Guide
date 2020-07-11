@@ -52,33 +52,63 @@ This is likely a spelling mistake, options in OpenCore are case-sensitive so mak
 
 Couple problems:
 
-* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
-* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
-* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+**Booter Issues:**
+
+* `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, disabling this quirk isn't recommended but may be required on some laptops and certain desktops
+  * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
-Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
+To verify whether your board has MATs, check the logs for something like this:
 
-* [Fixing CFG Lock](/extras/msr-lock.md)
-* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+```
+OCABC: MAT support is 1
+```
+
+**Kernel Issues:**
+
+
+* **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* **Intel:** Missing CFG or XCPM patches
+  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+* **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+  
+**UEFI Issues:**
+
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
+* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
 
 This is actually the exact same error as `EndRandomSeed` so all the same fixes apply(10.15.4 and newer changed the debug protocol for those curious):
 
-* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
-* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
-* `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+**Booter Issues:**
+
+* `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, disabling this quirk isn't recommended but may be required on some laptops and certain desktops
+  * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
-Another possible problem is that some users either forget or cannot disable CFG-Lock in the BIOS(specifically relating to a locked 0xE2 MSR bit for power management, obviously much safer to turn off CFG-Lock). **Do note this is for Intel users only, not AMD.** When this happens, there's a couple of possible fixes:
+To verify whether your board has MATs, check the logs for something like this:
 
-* [Fixing CFG Lock](/extras/msr-lock.md)
-* Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+```
+OCABC: MAT support is 1
+```
+
+**Kernel Issues:**
+
+
+* **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* **Intel:** Missing CFG or XCPM patches
+  * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+* **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
+  
+**UEFI Issues:**
+
+* `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
+* `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
 ## Can't see macOS partitions
 
