@@ -172,3 +172,14 @@ This is actually the part at where macOS will seal the system volume, and where 
 ![]](/images/extras/big-sur/readme/rtc-error.jpg)
 
 As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you'll need to look at your RTC device and see which regions are missing. For more information, see here: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
+
+#### Stuck on `ramrod`(^^^^^^^^^^^^^)
+
+![Credit to Notiflux for image](/images/extras/big-sur/readme/ramrod.jpg)
+
+If you get stuck around `ramrod` section, this hints that your SMC emulator is broken. To fix this, you have 2 options
+
+* Ensure you're using the latest builds of VitualSMC and Lilu, with the `vsmcgen=1` boot-arg
+* Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/)
+
+And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist
