@@ -190,7 +190,9 @@ There are a lot of kexts out there, and Big Sur is still pretty new. Not all kex
 
 ## Virtual Machine Route
 
-If you're still facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor. 
+If you're still facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor.
+
+Note: If you have an AMD CPU, this method isn't going to work.
 
 ### Building the Installation Media
 
