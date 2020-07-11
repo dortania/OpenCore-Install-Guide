@@ -188,3 +188,71 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 
 There are a lot of kexts out there, and Big Sur is still pretty new. Not all kexts are working yet, so if you're experiencing a weird kernel panic, one thing you can try is booting with only the essential kexts (Lilu, VirtualSMC/FakeSMC, WhateverGreen) and seeing if it works. If so, you can enable kexts one by one to try to narrow down the issue.
 
+## Virtual Machine Route
+
+You may still be facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor. 
+
+### Building the Installation Media
+
+Requirements:
+
+* A computer or VM running macOS
+* The desired macOS installation software installed to /Applications
+
+Once you have the installation software installed to /Applications you will need to create a VDI of the installation media that will be used to install macOS in your VM.  The instructions below are intended to be cut and pasted without editing unless specified.
+
+First, set the IMAGE variable to the name of the installation you are installing.  The example defines the image for Big Sur.
+
+```bash
+export IMAGE="Install macOS Big Sur Beta"
+```
+
+Next, create an empty 16GB image to host the media.
+
+```bash
+mkfile -n 16g "${IMAGE}.img"
+```
+
+Verify that you have a 16GB file named "Install macOS Beta.img" before continuing.  After that, attach it to your macOS system as a virtual disk using the variable you created earlier.
+
+```bash
+export DISK=$(hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount "${IMAGE}.img"| awk '{printf $1}')
+```
+
+Run diskutil list and verify that you have a disk attached that is type "disk image".
+
+```bash
+diskutil list
+<snip>
+/dev/disk4 (disk image):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:                                                   +16.8 GB    disk4
+```
+
+Now that the image is mounted, format it to Journaled HFS+.
+
+```bash
+diskutil eraseDisk JHFS+ "${IMAGE}" ${DISK}
+```
+
+Once the image is formatted, create the installation media.
+
+```bash
+sudo "/Applications/${IMAGE}.app/Contents/Resources/createinstallmedia" --nointeraction --volume "/Volumes/${IMAGE}"
+```
+
+(insert unmount SharedSupport here)
+
+Now detach or eject the virtual disk, and convert it to a VDI.
+
+```bash
+### Eject all of the sub volumes first.
+for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); do hdiutil eject ${VDISK} 2>/dev/null; done
+### Next eject the virtual disk itself
+hdiutil eject ${DISK}
+```
+
+You now have an raw image of the installer. Follow the appropriate page for the hypervisor you'll be choosing:
+
+* [VirtualBox](virtualbox.md)
+* [VMware Fusion](fusion.md)
