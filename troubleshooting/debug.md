@@ -16,7 +16,7 @@ To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenC
 * EFI/OC/
   * `OpenCore.efi`
 
-![](/images/troubleshooting/debug-md/replace.png)
+![](../images/troubleshooting/debug-md/replace.png)
 
 * **Note**: Generally best to debug systems without OpenCanopy, if required make sure this file is from DEBUG else there will be virtually no debug information.
 
@@ -83,7 +83,7 @@ Just like with `Target`, we use a HEX calculator then convert to decimal:
 
 Once done, your config.plist should look like this:
 
-![](/images/troubleshooting/debug-md/debug.png)
+![](../images/troubleshooting/debug-md/debug.png)
 
 ## Disabling logging
 

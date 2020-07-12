@@ -274,7 +274,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
 
-![Directory Structure from OpenCore&apos;s DOC](/images/troubleshooting/troubleshooting-md/oc-structure.png)
+![Directory Structure from OpenCore&apos;s DOC](../images/troubleshooting/troubleshooting-md/oc-structure.png)
 
 ## OCABC: Incompatible OpenRuntime r4, require r10
 
@@ -344,7 +344,7 @@ The main places to check:
 
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 
-![](/images/troubleshooting/troubleshooting-md/rtc.png)
+![](../images/troubleshooting/troubleshooting-md/rtc.png)
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
@@ -385,7 +385,7 @@ Still didn't work? Well time for the big guns. We'll force remove that exact pro
 
 `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
 
-![](/images/troubleshooting/troubleshooting-md/lang.png)
+![](../images/troubleshooting/troubleshooting-md/lang.png)
 
 ## macOS Installer being damaged
 
@@ -418,7 +418,7 @@ This is right before the GPU is properly initialized, verify the following:
 
 ## Scrambled Screen on laptops
 
-![Scrambled Screen](/images/troubleshooting/troubleshooting-md/Scrambled.jpg)
+![Scrambled Screen](../images/troubleshooting/troubleshooting-md/Scrambled.jpg)
 Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
 
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
@@ -481,7 +481,7 @@ The most common way to see the TSC issue:
 
 Case 1    |  Case 2
 :-------------------------:|:-------------------------:
-![](/images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](/images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
+![](../images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](../images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
 ## Keyboard works but trackpad does not
 
@@ -527,7 +527,7 @@ This error is due to a small EFI, by default Windows will create a 100MB EFI whe
 
 Default           |  Show All Devices(Cmd+2)
 :-------------------------:|:-------------------------:
-![](/images/troubleshooting/troubleshooting-md/Default.png)  |  ![](/images/troubleshooting/troubleshooting-md/Showalldevices.png)
+![](../images/troubleshooting/troubleshooting-md/Default.png)  |  ![](../images/troubleshooting/troubleshooting-md/Showalldevices.png)
 
 ## DiskUtility failing to erase
 
@@ -557,7 +557,7 @@ This is either 1(or more) of 5 issues:
   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PciRoot path if you're having issues with gfxutil. **Recommended method**
   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
 
-![](/images/troubleshooting/troubleshooting-md/en0-built-in.png)
+![](../images/troubleshooting/troubleshooting-md/en0-built-in.png)
 
 If these fixes do not work, see the [Fixing iServices page](/post-install/iservices.md) for more in-depth guide.
 
@@ -709,7 +709,7 @@ Easy fix, download and install the latest python:
 
 Make sure `Add Python to PATH`
 
-![](/images/troubleshooting/troubleshooting-md/python-path.png)
+![](../images/troubleshooting/troubleshooting-md/python-path.png)
 
 ## Windows Startup Disk can't see APFS drives
 
@@ -753,7 +753,7 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 
 * `PlatformInfo -> Generic -> AdviseWindows -> True`
 
-![](/images/troubleshooting/troubleshooting-md/error.png)
+![](../images/troubleshooting/troubleshooting-md/error.png)
 
 ## Booting Windows results in BlueScreen or Linux crashes
 
@@ -801,7 +801,7 @@ You can choose different values to enable or disable certain flags of SIP. Some 
 
 * `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
   
-![](/images/troubleshooting/troubleshooting-md/sip.png)
+![](../images/troubleshooting/troubleshooting-md/sip.png)
 
 ## Writing to the macOS system partition
 

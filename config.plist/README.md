@@ -2,7 +2,7 @@
 
 Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi), your USB should start to look something like this:
 
-![](/images/config/config-universal/almost-done.png)
+![](../images/config/config-universal/almost-done.png)
 
 * **Note**: Your USB **will look different**, everyone's system will have different requirements.
 
@@ -10,11 +10,11 @@ Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi),
 
 First we'll want to grab the sample.plist from the [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), this will be located under the `Docs` folder:
 
-![](/images/config/config-universal/sample-location.png)
+![](../images/config/config-universal/sample-location.png)
 
 Next lets move it onto our USB's EFI partition(will be called BOOT on Windows) under `EFI/OC/`, and rename it to config.plist:
 
-![](/images/config/config-universal/renamed.png)
+![](../images/config/config-universal/renamed.png)
 
 ## Adding your SSDTs, Kexts and Firmware Drivers
 
@@ -40,11 +40,11 @@ After the config is opened, press **Cmd/Ctrl + Shift + R** and point it at your 
 * This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config
 * **Cmd/Ctrl + R** is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you're troubleshooting but for us not needed right now
 
-![](/images/config/config-universal/before-snapshot.png)
+![](../images/config/config-universal/before-snapshot.png)
 
 Once done, you'll see your SSDTs, Kexts and firmware drivers populated in the config.plist:
 
-![](/images/config/config-universal/after-snapshot.png)
+![](../images/config/config-universal/after-snapshot.png)
 
 If you wish to clean up the file a bit, you can remove the `#WARNING` entries. Though they cause no issues staying there, so up to personal preference.
 

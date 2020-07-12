@@ -16,7 +16,7 @@ One last thing we should go over before booting is how your EFI is setup:
 
 Good EFI          |  Bad EFI
 :-------------------------:|:-------------------------:
-![](/images/installation/install-md/good-efi.png)  |  ![](/images/installation/install-md/bad-efi.png)
+![](../images/installation/install-md/good-efi.png)  |  ![](../images/installation/install-md/bad-efi.png)
 * EFI folder found on EFI partition | * EFI folder missing
 * ACPI Files are compiled(.aml) | * ACPI Files are not compiled(.dsl)
 * DSDT is not included | * DSDT is included

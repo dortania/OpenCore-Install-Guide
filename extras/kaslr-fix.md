@@ -197,4 +197,4 @@ Now lets take the above example and create our own MmioWhitelist, we'll need to 
 
 Should look something like this when done:
 
-![](/images/extras/kaslr-fix-md/mmio-white.png)
+![](../images/extras/kaslr-fix-md/mmio-white.png)

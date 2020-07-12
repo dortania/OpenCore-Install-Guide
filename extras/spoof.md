@@ -45,7 +45,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 | IOName | string | \#display |
 | class-code | data | FFFFFFFF |
 
-![](/images/extras/spoof-md/config-gpu.png)
+![](../images/extras/spoof-md/config-gpu.png)
 
 ### SSDT Method
 
@@ -110,7 +110,7 @@ Depending on your setup, you may find that Windows renders games or applications
 
 Many users only have two GPUs. Nvidia and the Intel HD/UHD IGPU. Since Nvidia no longer works on macOS, they may have the monitor plugged into the motherboards HDMI/DP connection for convenience. As a result, Windows will render all games and applications through the IGPU. You can reroute a specific game or application to a different GPU by going to: Settings > System > Display > Graphics settings
 
-![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
+![Credit to CorpNewt for image](../images/extras/spoof-md/corp-windows.png)
 
 The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides:
 

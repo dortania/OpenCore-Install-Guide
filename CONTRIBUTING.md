@@ -26,7 +26,7 @@ Some guidelines when contributing via PRs:
 * Proofread your submissions.
 * Pull Requests can be denied if we feel it does not fit or has inaccurate information. We will generally tell you why it is rejected though or ask for revisions.
   * We would also appreciate sources for any bigger commits to make it easier on us to verify the info your provide is valid
-* Images must be hosted locally in the repo under the `/images/` folder
+* Images must be hosted locally in the repo under the `../images/` folder
 * Your PR must be run through a markdown lint and have all issues fixed.
 * In general, try to avoid using "non-Acidanthera" tools when possible. Generally we want to avoid use of third-party tools  - though if it's impossible otherwise, then you can link it.
   * Tools explicitly banned:

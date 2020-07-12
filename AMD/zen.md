@@ -28,7 +28,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](/images/config/AMD/acpi.png)
+![ACPI](../images/config/AMD/acpi.png)
 
 ### Add
 
@@ -56,7 +56,7 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](/images/config/config-universal/aptio-v-booter.png)
+![Booter](../images/config/config-universal/aptio-v-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -81,7 +81,7 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
 
 ## DeviceProperties
 
-![DeviceProperties](/images/config/config-universal/DP-no-igpu.png)
+![DeviceProperties](../images/config/config-universal/DP-no-igpu.png)
 
 ### Add
 
@@ -97,8 +97,8 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](/images/config/AMD/kernel.png)
-![](/images/config/AMD/kernel-patch.png)
+![Kernel](../images/config/AMD/kernel.png)
+![](../images/config/AMD/kernel-patch.png)
 
 ### Add
 
@@ -142,7 +142,7 @@ To merge:
 * Copy the `Kernel -> Patch` section from patches.plist
 * Paste into where old patches were in config.plist
 
-![](/images/config/AMD/kernel.gif)
+![](../images/config/AMD/kernel.gif)
 
 ### Quirks
 
@@ -176,7 +176,7 @@ Settings relating to the kernel, for us we'll be enabling `DummyPowerManagement`
 
 ## Misc
 
-![Misc](/images/config/config-universal/misc.png)
+![Misc](../images/config/config-universal/misc.png)
 
 ### Boot
 
@@ -243,7 +243,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](/images/config/config-universal/nvram.png)
+![NVRAM](../images/config/config-universal/nvram.png)
 
 ### Add
 
@@ -316,7 +316,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ## PlatformInfo
 
-![PlatformInfo](/images/config/config-universal/iMacPro-smbios.png)
+![PlatformInfo](../images/config/config-universal/iMacPro-smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
@@ -385,7 +385,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](/images/config/config-universal/aptio-v-uefi.png)
+![UEFI](../images/config/config-universal/aptio-v-uefi.png)
 
 **ConnectDrivers**: YES
 

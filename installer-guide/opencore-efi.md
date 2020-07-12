@@ -8,7 +8,7 @@ To setup OpenCore’s folder structure, you’ll want to grab the EFI folder fou
 * Linux users: This is the `OPENCORE` partition we created earlier
   * Note that Method 1 only creates 1 partition, while Method 2 creates 2 partitions
 
-![base EFI folder](/images/installer-guide/opencore-efi-md/base-efi.png)
+![base EFI folder](../images/installer-guide/opencore-efi-md/base-efi.png)
 
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
@@ -34,13 +34,13 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
 
 A cleaned up EFI:
 
-![Clean EFI](/images/installer-guide/opencore-efi-md/clean-efi.png)
+![Clean EFI](../images/installer-guide/opencore-efi-md/clean-efi.png)
 
 Now you can place **your** necessary firmware drivers(.efi) into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
 Here's what a populated EFI ***can*** look like (yours will be different):
 
-![Populated EFI folder](/images/installer-guide/opencore-efi-md/populated-efi.png)
+![Populated EFI folder](../images/installer-guide/opencore-efi-md/populated-efi.png)
 
 **Reminder**:
 

@@ -26,7 +26,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](/images/config/config.plist/ivy-bridge/acpi.png)
+![ACPI](../images/config/config.plist/ivy-bridge/acpi.png)
 
 ### Add
 
@@ -75,7 +75,7 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](/images/config/config-universal/aptio-iv-booter.png)
+![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -96,7 +96,7 @@ Settings relating to boot.efi patching and firmware fixes, the default will work
 
 ## DeviceProperties
 
-![DeviceProperties](/images/config/config.plist/ivy-bridge/DeviceProperties.png)
+![DeviceProperties](../images/config/config.plist/ivy-bridge/DeviceProperties.png)
 
 ### Add
 
@@ -131,7 +131,7 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](/images/config/config-universal/kernel.png)
+![Kernel](../images/config/config-universal/kernel.png)
 
 ### Add
 
@@ -191,7 +191,7 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ## Misc
 
-![Misc](/images/config/config-universal/misc.png)
+![Misc](../images/config/config-universal/misc.png)
 
 ### Boot
 
@@ -258,7 +258,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](/images/config/config-universal/nvram.png)
+![NVRAM](../images/config/config-universal/nvram.png)
 
 ### Add
 
@@ -331,7 +331,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ## PlatformInfo
 
-![PlatformInfo](/images/config/config.plist/ivy-bridge/smbios.png)
+![PlatformInfo](../images/config/config.plist/ivy-bridge/smbios.png)
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
@@ -396,7 +396,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](/images/config/config-universal/aptio-iv-uefi.png)
+![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
 
 **ConnectDrivers**: YES
 

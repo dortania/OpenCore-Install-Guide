@@ -72,15 +72,15 @@ To start, we'll need to find out where our Audio controller is located on the PC
 path/to/gfxutil -f HDEF
 ```
 
-![](/images/post-install/audio-md/gfxutil-hdef.png)
+![](../images/post-install/audio-md/gfxutil-hdef.png)
 
 Then add this PciRoot with the child `layout-id` to your config.plist under DeviceProperties -> Add:
 
-![](/images/post-install/audio-md/config-layout-id.png)
+![](../images/post-install/audio-md/config-layout-id.png)
 
 Note that AppleALC can accept both Decimal/Number and Hexadecimal/Data, generally the best method is Hex as you avoid any unnecessary conversions. You can use a simple [decimal to hexadecimal calculator](https://www.rapidtables.com/convert/number/decimal-to-hex.html) to find yours. `printf '%x\n' DECI_VAL`:
 
-![](/images/post-install/audio-md/hex-convert.png)
+![](../images/post-install/audio-md/hex-convert.png)
 
 So in this example, `alcid=11` would become  either:
 
@@ -163,7 +163,7 @@ Note: To setup file logging, see [OpenCore Debugging](https://dortania.github.io
 
 So with AppleALC, one of the most easiest things to check if the patching was done right was to see if your audio controller was renamed correctly. Grab [IORegistryExplorer](https://github.com/toleda/audio_ALCInjection/blob/master/IORegistryExplorer_v2.1.zip) and see if you have an HDEF device:
 
-![](/images/post-install/audio-md/hdef.png)
+![](../images/post-install/audio-md/hdef.png)
 
 As you can see from the above image, we have the following:
 
@@ -178,7 +178,7 @@ Note: **Do not rename your audio controller manually**, this can cause issues as
 
 Correct layout-id           |  Incorrect layout-id
 :-------------------------:|:-------------------------:
-![](/images/post-install/audio-md/right-layout.png)  |  ![](/images/post-install/audio-md/wrong-layout.png)
+![](../images/post-install/audio-md/right-layout.png)  |  ![](../images/post-install/audio-md/wrong-layout.png)
 
 As you can see from the above 2, the right image is missing a lot of AppleHDAInput devices, meaning that AppleALC can't match up your physical ports to something it can understand and output to. This means you've got some work to find the right layout ID for your system.
 

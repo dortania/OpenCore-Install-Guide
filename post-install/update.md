@@ -26,11 +26,11 @@ So the process goes as follows:
 
 * For the USB, it must be formatted as GUID. Reason for this is that GUID will automatically create an EFI partition, though this will be hidden by default so you'll need to mount it with MountEFI.
 
-![](/images/post-install/update-md/usb-erase.png)
+![](../images/post-install/update-md/usb-erase.png)
 
 * Now you can place your OpenCore EFI on the USB
 
-![](/images/post-install/update-md/usb-folder.png)
+![](../images/post-install/update-md/usb-folder.png)
 
 3. **Replace the OpenCore files with the ones you just downloaded**
 
@@ -42,7 +42,7 @@ So the process goes as follows:
 
 * You can also update other drivers you have if present, these are just the ones that **must** be updated in order to boot correctly
 
-![](/images/post-install/update-md/usb-folder-highlight.png)
+![](../images/post-install/update-md/usb-folder-highlight.png)
 
 4. **Compare your config.plist to that of the new Sample.plist**
 
@@ -55,7 +55,7 @@ So the process goes as follows:
 
 * Once you've made the adjustments and made sure you config is compliant with the newest release of OpenCore, make sure to double check your setting with the OpenCore Guide on what to set everything to, otherwise read the [Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf) if you want to get a bit more technical.
 
-![](/images/post-install/update-md/oc-config-compare.png)
+![](../images/post-install/update-md/oc-config-compare.png)
 
 4. **Boot!**
 

@@ -17,7 +17,7 @@ This section is for users running "true" 300 series motherboards( B360, B365, H3
 
 So to get started I'll assume you've already done basic framebuffer patches in your config from the [Coffee Lake portion of the guide](../config.plist/coffee-lake.md), it should look something like this:
 
-![](/images/extras/gpu-patches-md/prereq.png)
+![](../images/extras/gpu-patches-md/prereq.png)
 
 * **Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 
@@ -131,6 +131,6 @@ So when adding the patches, port 1 will actually become con0 as the ports start 
 
 A finished config should look something like this:
 
-![](/images/extras/gpu-patches-md/path-done.png)
+![](../images/extras/gpu-patches-md/path-done.png)
 
 Source for iGPU BusID patching: [CorpNewt's Brain](https://github.com/corpnewt)

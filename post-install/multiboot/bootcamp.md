@@ -32,7 +32,7 @@ path/to/Brigadier --model MacPro7,1
 
 * **Note**: Older versions of the BootCamp installer(6.0) do not support APFS, you'll need to either choose a newer SMBIOS that would have it bundled(ie. iMac 19,1) or after installation update your bootcamp software. See below for more details on troubleshooting: [Windows Startup Disk can't see APFS drives](#windows-startup-disk-cant-see-apfs-drives)
 
-![](/images/bootcamp-md/extension.png)
+![](../images/bootcamp-md/extension.png)
 
 Next you will find our bootcamp drivers under either:
 
@@ -50,11 +50,11 @@ Next you will find our bootcamp drivers under either:
 
 macOS users will next need to expand WindowsSupport.dmg and place it somewhere Windows can get.
 
-![](/images/bootcamp-md/done.png)
+![](../images/bootcamp-md/done.png)
 
 Next navigate to the `bootcamp-{filename}\BootCamp` folder and run the Setup.exe:
 
-![](/images/bootcamp-md/location.png)
+![](../images/bootcamp-md/location.png)
 
 Once all is finished, you now have BootCamp switching! There should be a little BootCamp icon in you tray now that you can select which drive to boot to.
 
@@ -93,7 +93,7 @@ Misc -> BlessOverride -> \EFI\Microsoft\Boot\bootmgfw.efi
 
 * **Note**: As of OpenCore 0.5.9, this no longer needs to be specified. OpenCore should pick up on this entry automatically
 
-![](/images/win-md/blessoverride.png)
+![](../images/win-md/blessoverride.png)
 
 ## "You can't change the startup disk to the selected disk" error
 
@@ -108,7 +108,7 @@ To fix the latter, we need to enable this quirk:
 
 * `PlatformInfo -> Generic -> AdviseWindows -> True`
 
-![](/images/bootcamp-md/error.png)
+![](../images/bootcamp-md/error.png)
 
 ## Booting Windows results in BlueScreen or Linux crashes
 

@@ -22,7 +22,7 @@ Once you have both of these, we'll next want to add it to our EFI partition:
 * Add the [Resources folder](https://github.com/acidanthera/OcBinaryData) to EFI/OC
 * Add OpenCanopy.efi to EFI/OC/Drivers
 
-![](/images/extras/gui-md/folder-gui.png)
+![](../images/extras/gui-md/folder-gui.png)
 
 Now in our config.plist, we have 2 things we need to fix:
 
@@ -35,7 +35,7 @@ Now in our config.plist, we have 2 things we need to fix:
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI:
 
-![Credit to vit9696](/images/extras/gui-md/gui.png)
+![Credit to vit9696](../images/extras/gui-md/gui.png)
 
 ## Setting up Boot-chime with AudioDxe
 
@@ -109,7 +109,7 @@ So to start, we'll need a couple things:
 
 Once done, you should get something like this:
 
-![](/images/extras/gui-md/audio-config.png)
+![](../images/extras/gui-md/audio-config.png)
 
 **Note for visually impaired**:
 

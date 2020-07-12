@@ -17,7 +17,7 @@ So with DRM, we have a couple things we need to mention:
 
 So before we can get started with fixing DRM, we need to make sure your hardware is working. The best way to check is by running [VDADecoderChecker](https://i.applelife.ru/2019/05/451893_10.12_VDADecoderChecker.zip):
 
-![](/images/post-install/drm-md/vda.png)
+![](../images/post-install/drm-md/vda.png)
 
 If you fail at this point, there's a couple things you can check for:
 
@@ -114,7 +114,7 @@ So how do you use it? First, identify what configuration you have in the chart (
 
 Next, identify what Shiki mode you need to use. If there are two configurations for your setup, they will differ in the Shiki flags used. Generally, you want hardware decoding over software decoding. If the mode column is blank, then you are done. Otherwise, you should add `shikigva` as a property to any GPU, using DeviceProperties > Add. For example, if the mode we need to use is `shikigva=80`:
 
-![Example of shikigva in Devices Properties](/images/post-install/drm-md/dgpu-path.png)
+![Example of shikigva in Devices Properties](../images/post-install/drm-md/dgpu-path.png)
 
 You can also use the boot argument - this is in the mode column.
 
@@ -151,7 +151,7 @@ igfxfw | Data | <02 00 00 00>
 
 To enable firmware loading.
 
-![Example of igfxfw injected into iGPU](/images/post-install/drm-md/igpu-path.png)
+![Example of igfxfw injected into iGPU](../images/post-install/drm-md/igpu-path.png)
 
 The best way to check is to monitor the iGPU's frequency is with either [Intel Power Gadget](https://software.intel.com/en-us/articles/intel-power-gadget) or checking the boot logs for Apple Scheduler references. Make sure you have the `igfxfw` property applied:
 
@@ -162,4 +162,4 @@ kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: 
 kernel: (AppleIntelCFLGraphics) [IGPU] Graphics accelerator is using scheduler: Apple Firmware
 ```
 
-![](/images/post-install/drm-md/igpu-frequency.png)
+![](../images/post-install/drm-md/igpu-frequency.png)
