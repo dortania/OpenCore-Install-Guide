@@ -94,7 +94,7 @@ Something that many forget about iServices is that NVRAM is crucial to getting i
 
 So we'll need to verify NVRAM works, regardless if "it should work" as some firmwares can be more of a pain than others.
 
-Please refer to the [Emulated NVRAM](/post-install/nvram.md) section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you don't.
+Please refer to the [Emulated NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html) section of the OpenCore Guide for both testing if you have working NVRAM and emulating it if you don't.
 
 ## Clean out old attempts
 

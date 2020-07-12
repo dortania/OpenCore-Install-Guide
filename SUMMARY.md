@@ -46,25 +46,11 @@
 
 ## Post Install
 
-* [Post-Install](/post-install/README.md)
-  * [Security and FileVault](/post-install/security.md)
-  * [Fixing Audio](/post-install/audio.md)
-  * [Booting without USB](/post-install/oc2hdd.md)
-  * [Updating OpenCore, kexts and macOS](/post-install/update.md)
-  * [Fixing CFG Lock](/extras/msr-lock.md)
-  * [Fixing Resolution and Verbose](/post-install/verbose.md)
-  * [Fixing DRM](/post-install/drm.md)
-  * [Fixing iServices](/post-install/iservices.md)
-  * [Emulated NVRAM](/post-install/nvram.md)
-  * [Fixing Power Management](/post-install/pm.md)
-  * [Setting up Bootstrap.efi](/post-install/multiboot/bootstrap.md)
-  * [Installing BootCamp](/post-install/multiboot/bootcamp.md)
-  * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
+* [Post-Install](https://dortania.github.io/OpenCore-Post-Install/)
 
 ## Extras
 
 * [Legacy Install](/extras/legacy.md)
-* [Add GUI and Boot-chime](/extras/gui.md)
 * [iGPU Patching](/extras/gpu-patches.md)
 * [Fixing KASLR slide values](/extras/kaslr-fix.md)
 * [Disabling unsupported GPUs](/extras/spoof.md)

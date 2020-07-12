@@ -4,12 +4,12 @@
 
 Main thing this guide will go over:
 
-* [Giving OpenCore a GUI](/extras/gui.md#giving-opencore-a-gui)
-* [Setting up a boot-chime](/extras/gui.md#setting-up-a-boot-chime)
+* [Giving OpenCore a GUI](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html#giving-opencore-a-gui)
+* [Setting up a boot-chime](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html#setting-up-a-boot-chime)
 
 ## Setting up OpenCore's GUI
 
-So to get started, we're gonna need 0.5.7 or newer as these builds have the GUI included with the rest of the files. If you're on an older version, I recommend updating: [Updating OpenCore](/post-install/update.md)
+So to get started, we're gonna need 0.5.7 or newer as these builds have the GUI included with the rest of the files. If you're on an older version, I recommend updating: [Updating OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html)
 
 Once that's done, we'll need a couple things:
 
@@ -116,4 +116,4 @@ Once done, you should get something like this:
 * OpenCore hasn't forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault VoiceOver with these 2 settings:
   * `Misc -> Boot -> PickerAudioAssist -> True` to enable picker audio
   * `UEFI -> ProtocolOverrides -> AppleAudio -> True` to enable FileVault voice over
-    * See [Security and FileVault](/post-install/security.md) on how to setup the rest for proper FileVault support
+    * See [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) on how to setup the rest for proper FileVault support

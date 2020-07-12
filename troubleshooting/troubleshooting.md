@@ -42,7 +42,7 @@ Turn off Vaulting in your config.plist under `Misc -> Security -> Vault` by sett
 
 If you have already executed the `sign.command` you will need to restore the OpenCore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of OpenCore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
-**Note**: Vault and FileVault are 2 separate things, see [Security and FileVault](/post-install/security.md) for more details
+**Note**: Vault and FileVault are 2 separate things, see [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) for more details
 
 ## Stuck on `OC: Invalid Vault mode`
 
@@ -71,7 +71,7 @@ OCABC: MAT support is 1
 * **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * **Intel:** Missing CFG or XCPM patches
   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
-  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 * **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
   
 **UEFI Issues:**
@@ -102,7 +102,7 @@ OCABC: MAT support is 1
 * **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * **Intel:** Missing CFG or XCPM patches
   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
-  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 * **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
   
 **UEFI Issues:**
@@ -211,7 +211,7 @@ Missing or incorrect `Executable path`
 ## Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off(Intel Users only), couple solutions:
-  * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
+  * [Patch your MSR E2](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)(Recommended solution)
   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
 * AMD kernel patches aren't working(AMD Users only):
   * Either outdated or missing kernel patches
@@ -336,7 +336,7 @@ The main places to check:
 * **NVRAM Failing**:
   * Common issue HEDT and 300 series motherboards, you have a couple paths to go down:
     * 300 Series Consumer Intel: See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on making SSDT-PMC.aml
-    * HEDT: See [Emulating NVRAM](/post-install/nvram.md) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
+    * HEDT: See [Emulating NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
 
 * **RTC Missing**:
   * Commonly found on 300 series and X299/Cascade Lake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
@@ -559,11 +559,11 @@ This is either 1(or more) of 5 issues:
 
 ![](../images/troubleshooting/troubleshooting-md/en0-built-in.png)
 
-If these fixes do not work, see the [Fixing iServices page](/post-install/iservices.md) for more in-depth guide.
+If these fixes do not work, see the [Fixing iServices page](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) for more in-depth guide.
 
 ## No on-board audio
 
-Refer to [Fixing Audio with AppleALC](/post-install/audio.md) section
+Refer to [Fixing Audio with AppleALC](https://dortania.github.io/OpenCore-Post-Install/) section
 
 ## BIOS reset or sent into Safemode after reboot/shutdown
 
@@ -591,7 +591,7 @@ Verify the following:
 
 ## DRM Broken
 
-See [Fixing DRM](/post-install/drm.md) page
+See [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html) page
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
@@ -717,7 +717,7 @@ Make sure `Add Python to PATH`
 
 ## Incorrect resolution with OpenCore
 
-* Follow [Fixing Resolution and Verbose](/post-install/verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
+* Follow [Fixing Resolution and Verbose](https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose.html) for correct setup, set `UIScale` to `02` for HiDPI
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
 ## No temperature/fan sensor output

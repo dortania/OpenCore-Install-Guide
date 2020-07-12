@@ -39,7 +39,7 @@ Setting in your config.plist:
 
 With all this, you can proceed to enable FileVault like on a normal mac under `System Preferences -> Security & Privacy -> FileVault`
 
-For UI issues, see [Fixing Resolution and Verbose](/post-install/verbose.md)
+For UI issues, see [Fixing Resolution and Verbose](https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose.html)
 
 ## Vault
 

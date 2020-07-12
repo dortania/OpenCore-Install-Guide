@@ -19,7 +19,7 @@ To start we'll need the following:
   * To download the BootCamp drivers
 * SMBIOS injection enabled
   * As the drivers have a SMBIOS check
-* Setup [Bootstrap.efi](/post-install/multiboot/bootstrap.md)
+* Setup [Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html)
   * Not required but can help alleviate headaches when Windows erases the BOOTx64.efi OpenCore uses
 
 ## Installation

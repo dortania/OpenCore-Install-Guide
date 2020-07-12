@@ -36,7 +36,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](/post-install/README.md). |
+| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | * Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details.) |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
@@ -45,7 +45,7 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 ### Delete
 
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all to well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](/post-install/README.md) and drop the old tables:
+This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all to well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://dortania.github.io/OpenCore-Post-Install/) and drop the old tables:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -123,7 +123,7 @@ The `AAPL,ig-platform-id` we use is as follows:
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 * You can delete this property outright as it's unused for us at this time
 
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](/post-install/README.md)
+For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Delete
 
@@ -236,7 +236,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USB devices with this set to default**
+  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
 
 ### Tools
 
@@ -285,7 +285,7 @@ System Integrity Protection bitmask
 | **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
 | **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](/post-install/audio.md) |
+| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
 
 * **GPU-Specific boot-args**:
 
@@ -361,7 +361,7 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
 **Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
@@ -419,11 +419,11 @@ Settings related to the APFS driver, leave everything here as default.
 
 Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](/post-install/README.md)
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](/post-install/README.md)
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 
@@ -431,7 +431,7 @@ Relating to OpenCore's visual output,  leave everything here as default as we ha
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](/post-install/README.md)
+Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 
@@ -493,4 +493,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 # Now with all this done
 
-... head to [Post-install](/post-install/README.md).
+... head to [Post-install](https://dortania.github.io/OpenCore-Post-Install/).

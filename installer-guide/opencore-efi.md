@@ -24,7 +24,7 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
   * HiiDatabase.efi
     * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
   * OpenCanopy.efi
-    * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](/extras/gui.md) so remove this for now
+    * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
     * Pretty obvious when you need this, USB keyboard and mouse users don't need it
     * Reminder: PS2 ≠ USB

@@ -12,7 +12,7 @@ kextstat | grep -E "AppleHDA|AppleALC|Lilu"
 
 If all 3 show up, you're good to go. And make sure VoodooHDA **is not present**. This will conflict with AppleALC otherwise.
 
-If you're having issues, see the [Troubleshooting section](/post-install/audio.md#troubleshooting)
+If you're having issues, see the [Troubleshooting section](https://dortania.github.io/OpenCore-Post-Install/#troubleshooting)
 
 ## Finding your layout ID
 

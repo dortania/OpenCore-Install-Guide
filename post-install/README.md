@@ -8,27 +8,27 @@ So you've finally finished installing macOS with OpenCore but know there's still
 
 This section is beneficial for all, regardless of hardware:
 
-* [Correcting Audio](/post-install/audio.md)
-* [Enabling FileVault and other security features](/post-install/security.md)
-* [Booting macOS without a USB](/post-install/oc2hdd.md)
-* [Updating OpenCore, kexts and macOS](/post-install/update.md)
+* [Correcting Audio](https://dortania.github.io/OpenCore-Post-Install/)
+* [Enabling FileVault and other security features](https://dortania.github.io/OpenCore-Post-Install/universal/security.html)
+* [Booting macOS without a USB](https://dortania.github.io/OpenCore-Post-Install/universal/oc2hdd.html)
+* [Updating OpenCore, kexts and macOS](https://dortania.github.io/OpenCore-Post-Install/universal/update.html)
 * [Disabling OpenCore Logging](/troubleshooting/debug.md)
-* [Fixing iServices](/post-install/iservices.md)
-* [Fixing DRM](/post-install/drm.md)
-* [Fixing Power Management](/post-install/pm.md)
-* [Setting up Bootstrap.efi](/post-install/multiboot/bootstrap.md)
-* [Installing BootCamp](/post-install/multiboot/bootcamp.md)
+* [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html)
+* [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html)
+* [Fixing Power Management](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html)
+* [Setting up Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html)
+* [Installing BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * [Fixing USB](https://dortania.github.io/USB-Map-Guide/)
 
 ## Intel
 
 Used for Intel's consumer line:
 
-* [Fixing CFG Lock](/extras/msr-lock.md)
+* [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 
 And with the HEDT series:
 
-* [Emulating NVRAM](/post-install/nvram.md)
+* [Emulating NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html)
 
 ## AMD
 

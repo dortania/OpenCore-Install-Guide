@@ -215,7 +215,7 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USB devices with this set to default**
+  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
 
 ### Tools
 
@@ -343,7 +343,7 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
 **Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
@@ -401,11 +401,11 @@ Settings related to the APFS driver, leave everything here as default.
 
 Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](/post-install/README.md)
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](/post-install/README.md)
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 
@@ -413,7 +413,7 @@ Relating to OpenCore's visual output,  leave everything here as default as we ha
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](/post-install/README.md)
+Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 
@@ -463,4 +463,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 # Now with all this done
 
-... head to [Post-install](/post-install/README.md).
+... head to [Post-install](https://dortania.github.io/OpenCore-Post-Install/).
