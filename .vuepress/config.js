@@ -27,6 +27,11 @@ module.exports = {
    *
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
+  theme: 'vuepress-theme-succinct',
+  globalUIComponents: [
+    'ThemeManager'
+  ],
+  
   themeConfig: {
 	lastUpdated: true,
 	repo: 'https://github.com/dortania/OpenCore-Desktop-Guide',
@@ -184,7 +189,7 @@ module.exports = {
         },
         {
           title: 'Extras',
-          collapsable: false,
+          collapsable: true,
           children: [
             '/extras/legacy',
 			'/extras/gpu-patches',

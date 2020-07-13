@@ -86,6 +86,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
   * For Realtek's Gigabit Ethernet
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
   * For Realtek's 2.5Gb Ethernet
+* For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
 
 **USB**:
 
@@ -179,13 +180,22 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 ### Desktop
 
-| SSDT | IvyBridge | Haswell/Broadwell | Skylake | KabyLake | CoffeeLake | CometLake | AMD(15/16/17h) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)(Run in Post-Install) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
-| **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
-| **AWAC** | N/A | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
-| **NVRAM** | N/A | N/A | N/A | N/A | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A | N/A |
-| **USB** | N/A | N/A | N/A | N/A | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
+| SSDT | IvyBridge | Haswell/Broadwell | Skylake | KabyLake | CoffeeLake |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)(Run in Post-Install) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **AWAC** | N/A | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **NVRAM** | N/A | N/A | N/A | N/A | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **USB** | N/A | N/A | N/A | N/A | N/A |
+
+
+| SSDT | CometLake | AMD(15/16/17h) |
+| :--- | :--- | :--- |
+| **CPU** |  [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
+| **EC** | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **AWAC** | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
+| **NVRAM** | N/A | N/A |
+| **USB** | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
 
 ### High End Desktop
 
@@ -195,6 +205,16 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/) |
 | **AWAC** | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) |
 
-# Now with all this done
+### Laptop
 
-... head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/).
+| SSDT | IvyBridge | Haswell | Broadwell | Skylake | KabyLake | CoffeeLake(8thGen) | Coffee/Comet/IceLake(9/10thGen) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CPU** | [CPU-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)(Run in Post-Install) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **EC** | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) + [SSDT-USBX](https://github.com/Dortania/USB-Map-Guide/blob/master/extra-files/SSDT-USBX.aml) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) + [SSDT-USBX](https://github.com/Dortania/USB-Map-Guide/blob/master/extra-files/SSDT-USBX.aml) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) + [SSDT-USBX](https://github.com/Dortania/USB-Map-Guide/blob/master/extra-files/SSDT-USBX.aml) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) + [SSDT-USBX](https://github.com/Dortania/USB-Map-Guide/blob/master/extra-files/SSDT-USBX.aml) |
+| **Backlight** | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/) | [SSDT-PNLF-CFL](https://i.applelife.ru/2019/12/463488_SSDT-PNLFCFL.aml.zip) | [SSDT-PNLF-CFL](https://i.applelife.ru/2019/12/463488_SSDT-PNLFCFL.aml.zip) |
+| **I2C TrackPad** | [SSDT-GPI0](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-GPIO.aml) | [SSDT-GPI0](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-GPIO.aml) | [SSDT-GPI0](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-GPIO.aml) | [SSDT-GPI0](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-GPIO.aml) | [SSDT-GPI0](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-GPIO.aml) | [SSDT-GPI0](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-GPIO.aml) | [SSDT-GPI0](https://github.com/hackintosh-guides/vanilla-laptop-guide/tree/master/Misc-files/SSDT-GPIO.aml) |
+| **AWAC** | N/A | N/A | N/A | N/A | N/A | N/A | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **NVRAM** | N/A | N/A | N/A | N/A | N/A | N/A | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) |
+| **IRQ Patch** | [IRQ SSDT](https://github.com/corpnewt/SSDTTime) | [IRQ SSDT](https://github.com/corpnewt/SSDTTime) | [IRQ SSDT](https://github.com/corpnewt/SSDTTime) | N/A | N/A | N/A | N/A |
+
+# Now with all this done, head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/).

@@ -87,7 +87,7 @@ With Big Sur, quite a bit broke. Mainly the following:
   * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
   * OpenCorePkg includes a sample SSDT that goes in-depth: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
-And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set `csr-acive-config` to `FF0F0000`. See here for more info: [Disabling SIP](/troubleshooting/troubleshooting.md#disabling-sip)
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](/troubleshooting/troubleshooting.md#disabling-sip)
 
 ## Installation
 
