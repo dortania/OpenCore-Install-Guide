@@ -418,7 +418,6 @@ This is right before the GPU is properly initialized, verify the following:
 
 ## Scrambled Screen on laptops
 
-![Scrambled Screen](../images/troubleshooting/troubleshooting-md/Scrambled.jpg)
 Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
 
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
@@ -628,9 +627,8 @@ This is generally seen on AMD who use the chipset's USB controller, specifically
 
 Should result in something like this:
 
-````
+```
 Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.
-
 ```
 
 You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:

@@ -104,31 +104,31 @@ To grab the Big Sur installer, download the beta profile from Apple's developer 
 
 1. Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
 
-![](../images/extras/big-sur/readme/gib-default.png)
+![](../../images/extras/big-sur/readme/gib-default.png)
 
 2. Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
 
-![](../images/extras/big-sur/readme/10-16-ver.png)
+![](../../images/extras/big-sur/readme/10-16-ver.png)
 
 3. Press `C` to change the catalog, then select the number for the developer catalog.
 
-![](../images/extras/big-sur/readme/dev-cat.png)
+![](../../images/extras/big-sur/readme/dev-cat.png)
 
 4. Select the number for the Big Sur beta to start downloading it. (screenshot)
 
-![](../images/extras/big-sur/readme/big-sur-download.png)
+![](../../images/extras/big-sur/readme/big-sur-download.png)
 
 5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Big Sur Beta.app` in your `/Applications` folder.
 
-![](../images/extras/big-sur/readme/final-download.png)
+![](../../images/extras/big-sur/readme/final-download.png)
 
 Run the InstallAssistant.pkg and point this to whichever drive you're booting off of, this is where the Install.app will be dropped:
 
-![](../images/extras/big-sur/readme/install-pkg.png)
+![](../../images/extras/big-sur/readme/install-pkg.png)
 
 Once done, you should find it located in your Applications folder:
 
-![](../images/extras/big-sur/readme/done.png)
+![](../../images/extras/big-sur/readme/done.png)
 
 
 ### Creating the installer
@@ -139,7 +139,7 @@ To create the USB is quite simple, grab your USB drive and open Disk Utility in 
 * Format: macOS Journaled
 * Scheme: GUID Partition Map
 
-![](../images/installer-guide/mac-install-md/format-usb.png)
+![](../../images/installer-guide/mac-install-md/format-usb.png)
 
 Once this is done, run the following command:
 
@@ -163,19 +163,19 @@ For the last one, if you get a kernel panic with Lilu we highly recommend you to
 
 #### Stuck at `Forcing CS_RUNTIME for entitlement`
 
-![Credit to Stompy for image](../images/extras/big-sur/readme/cs-stuck.jpg)
+![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
 This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
 
 #### Stuck at `PCI Configuration Begins` for Intel's HEDT boards
 
-![](../images/extras/big-sur/readme/rtc-error.jpg)
+![](../../images/extras/big-sur/readme/rtc-error.jpg)
 
 As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you'll need to look at your RTC device and see which regions are missing. For more information, see here: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
 #### Stuck on `ramrod`(^^^^^^^^^^^^^)
 
-![Credit to Notiflux for image](../images/extras/big-sur/readme/ramrod.jpg)
+![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
 
 If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
 
