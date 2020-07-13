@@ -221,8 +221,7 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
 
-* **IncreasePciBarSize**: NO
-  * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally experience a kernel panic on IOPCIFamily if you need this
+
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES
@@ -377,12 +376,13 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Coffee Lake Plus example, I chose the MacBookPro16,1 SMBIOS - this is done intentionally for compatibility's sake. The breakdown is as follows:
+For this Coffee Lake Plus example, we'll chose the MacBookPro16,1 SMBIOS - this is done intentionally for compatibility's sake. The breakdown is as follows(note that the below SMBIOS require macOS 10.15, Catalina):
 
 | SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |
 | MacBookPro16,1 | Hexa/Octa Core 45w | iGPU: UHD 630 + dGPU: 5300/5500M | 15" | Yes |
-| MacBookPro15,2 | Quad Core 15w | iGPU: Iris 655 | 13" | Yes |
+| MacBookPro16,3 | Quad Core 15w | iGPU: Iris 645 | 13" | Yes |
+| MacBookPro16,4 | Hexa/Octa Core 45w | iGPU: UHD 630 + dGPU: 5600M | 15" | Yes |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
