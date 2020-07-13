@@ -1,4 +1,4 @@
-const { description } = require('../../package')
+const { description } = require('../package')
 
 module.exports = {
   /**
@@ -28,25 +28,24 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-	  lastUpdated: true,
-	  repo: '',
+	lastUpdated: true,
+	repo: 'https://github.com/dortania/OpenCore-Desktop-Guide',
     editLinks: false,
     docsDir: '',
     editLinkText: '',
-    lastUpdated: true,
 	logo: '/homepage.png',
-	/*
     nav: [
       {
-        text: 'Config',
-        link: '/'
+        text: 'Home Page',
+        link: 'https://dortania.github.io/'
       },
+	  /*
       {
-        text: 'Penis',
-        link: '/config.plist/'
+        text: 'Github',
+        link: 'https://github.com/dortania/OpenCore-Desktop-Guide'
       }
+	  */
     ],
-	*/
     sidebar: [
         {
           title: 'Introduction',
@@ -120,7 +119,7 @@ module.exports = {
           	]
             },
             {
-          	title: 'AMD config.plist',
+          	title: 'AMD Desktop config.plist',
           	collapsable: true,
           	children: [
             	  '/AMD/fx',
@@ -182,7 +181,7 @@ module.exports = {
 			'/extras/gpu-patches',
 			'/extras/kaslr-fix',
 			'/extras/spoof',
-			['/extras/big-sur/', 'OpenCore and macOS 11: Big Sur'],
+			'/extras/big-sur/',
 			['https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion', 'Clover Conversion'],
           ]
         },
