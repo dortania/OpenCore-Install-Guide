@@ -90,21 +90,11 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: NO
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
-
-* **ForceExitBootServices**: NO
-  * Ensures ExitBootServices calls succeeds even when the memory map has changed, don't use unless necessary
-* **ProtectMemoryRegions**: NO
-  * Needed for fixing artifacts and sleep-wake issues, generally only needed on very old firmwares
-
-* **ProvideCustomSlide**: YES
-  * If there's a conflicting slide value, this option forces macOS to use a pseudo-random value. Needed for those receiving `Only N/256 slide values are usable!` debug message
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
-**SyncRuntimePermissions**: YES
+* **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
 ## DeviceProperties
