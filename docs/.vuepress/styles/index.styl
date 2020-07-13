@@ -1,0 +1,30 @@
+/**
+ * Custom Styles here.
+ *
+ * ref：https://v1.vuepress.vuejs.org/config/#index-styl
+ */
+
+:root
+  --bgColor $bgColor
+  --navBgColor $navBgColor
+  --sideBgColor $sideBgColor
+
+.home .hero img
+  max-width 450px!important
+
+html
+body
+  background-color var(--bgColor)
+
+.theme-default-content:not(.custom)
+  max-width 1000px
+
+.sidebar
+  background-color var(--sideBgColor)
+
+.navbar
+.links
+  background-color var(--navBgColor)!important
+
+.navbar
+  filter: drop-shadow(0px 1px 1px var(--bgColor));
