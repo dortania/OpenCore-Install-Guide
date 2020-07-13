@@ -90,6 +90,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+* **EnableWriteUnprotector**: NO
+  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES

@@ -90,10 +90,10 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **RebuildAppleMemoryMap**: YES
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+* **EnableWriteUnprotector**: YES
+  * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses
+  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
 
 
 ## DeviceProperties

@@ -94,6 +94,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
+* **EnableWriteUnprotector**: NO
+  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
 * **ProtectUefiServices**: NO
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
   * If on Z390, **enable this quirk**
