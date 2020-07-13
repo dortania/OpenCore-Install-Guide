@@ -36,8 +36,15 @@ module.exports = {
 	logo: '/homepage.png',
     nav: [
       {
-        text: 'Home Page',
-        link: 'https://dortania.github.io/'
+        text: 'Dortania Guides',
+        ariaLabel: 'Language Menu',
+        items: [
+            { text: 'Home Site', link: 'https://dortania.github.io/' },
+			{ text: 'OpenCore Post-Install', link: 'https://dortania.github.io/OpenCore-Post-Install/' },
+            { text: 'GPU Buyers Guide', link: 'https://dortania.github.io/GPU-Buyers-Guide/' },
+			{ text: 'Wireless Buyers Guide', link: 'https://dortania.github.io/Wireless-Buyers-Guide/' },
+			{ text: 'Anti Buyers Guide', link: 'https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/' },
+          ]
       },
 	  /*
       {
@@ -54,6 +61,8 @@ module.exports = {
           children: [
             '',
 			'why-oc',
+			'terminology',
+			'macos-limits',
           ]
 		  
         },
