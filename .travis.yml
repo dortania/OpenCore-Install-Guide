@@ -3,7 +3,7 @@ node_js: lts/*
 cache:
   npm: false
 before_script:
-- brew install yarn
+- pacman -S yarn
 - yarn add vuepress -D
 script:
 - yarn install
