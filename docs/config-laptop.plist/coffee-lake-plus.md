@@ -392,7 +392,7 @@ For this Coffee Lake Plus example, I chose the MacBookPro16,1 SMBIOS - this is d
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```text
+```
   #######################################################
  #               MacBookPro16,1 SMBIOS Info                  #
 #######################################################

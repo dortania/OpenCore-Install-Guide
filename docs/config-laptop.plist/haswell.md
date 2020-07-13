@@ -395,7 +395,7 @@ For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakd
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```text
+```
   #######################################################
  #               MacBookPro11,1 SMBIOS Info                  #
 #######################################################

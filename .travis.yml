@@ -6,7 +6,7 @@ before_script:
 - yarn add vuepress -D
 script:
 - yarn install
-- yarn build
+- yarn --build
 deploy:
   local_dir: _book
   provider: pages
