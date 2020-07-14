@@ -1068,13 +1068,6 @@
   dependencies:
     cross-spawn "^6.0.5"
 
-"@vuepress/plugin-medium-zoom@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@vuepress/plugin-medium-zoom/-/plugin-medium-zoom-1.5.2.tgz#d7445ed8e8ba0cec9fb9c4c91a880b4e7fd66d91"
-  integrity sha512-zH/D6AutTHktC2G/NberIRbA3msHA/4sGtemk0U+bhoB1f7CvJRjOKRxX60AiabIuWfj2+tAtR2LlCkxLq3M3g==
-  dependencies:
-    medium-zoom "^1.0.4"
-
 "@vuepress/plugin-nprogress@1.5.2", "@vuepress/plugin-nprogress@^1.5.2":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@vuepress/plugin-nprogress/-/plugin-nprogress-1.5.2.tgz#3be249ee070380d0aca2bd2fb62eab6b4e284d1b"
@@ -7463,6 +7456,13 @@ vuepress-plugin-container@^2.0.2, vuepress-plugin-container@^2.1.4:
   dependencies:
     markdown-it-container "^2.0.0"
 
+vuepress-plugin-medium-zoom@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-medium-zoom/-/vuepress-plugin-medium-zoom-1.1.8.tgz#bb1ea5cdd50efd218b385b5f5fe46c3e1d2d4ec1"
+  integrity sha512-G6s/kDw7obUqaTNhg94+wbuMYPLmPRS4jZ8voJPO/SHyKq/myzDdTL9OzYq3EMVz/P1pROYhN+jNCT7KpdaAZg==
+  dependencies:
+    medium-zoom "^1.0.4"
+
 vuepress-plugin-smooth-scroll@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/vuepress-plugin-smooth-scroll/-/vuepress-plugin-smooth-scroll-0.0.3.tgz#6eff2d4c186cca917cc9f7df2b0af7de7c8c6438"
@@ -7476,6 +7476,13 @@ vuepress-plugin-smooth-scroll@^0.0.9:
   integrity sha512-UXX+HLZO1NKVwyiOJlj0smh8F9dKnwybjEi7w/Mj9EYLhKrNYr5uXs+N+OTt8VwKCn3f0vZ1XAwFIjsPlD7GJA==
   dependencies:
     smoothscroll-polyfill "^0.4.4"
+
+vuepress-plugin-zooming@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-zooming/-/vuepress-plugin-zooming-1.1.7.tgz#837440f607f8a1782376ac8d20918842ea373f30"
+  integrity sha512-4n65OpjEJh9epJYygaHpni+YDLDZlEmHPVzTEkXz4JilBarWG4xF8g8vv4k/RnSf9W3TvrI/61KCQf2JNKI1HA==
+  dependencies:
+    zooming "^2.1.1"
 
 vuepress-theme-book@0.0.3:
   version "0.0.3"
@@ -7814,3 +7821,8 @@ zepto@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/zepto/-/zepto-1.2.0.tgz#e127bd9e66fd846be5eab48c1394882f7c0e4f98"
   integrity sha1-4Se9nmb9hGvl6rSME5SIL3wOT5g=
+
+zooming@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/zooming/-/zooming-2.1.1.tgz#3e05006b4e10335235ca626244d053d90a9c7e72"
+  integrity sha512-Z38dkZRQsFNBE67+xDBQLNKMs5J1Gc+s3/zO6iezTrC24VYLJV7YPBdBDJmiLhff5qa6Awxv4wsjqx3oYz2MYA==

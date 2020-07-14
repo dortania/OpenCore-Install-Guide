@@ -15,8 +15,9 @@
   "license": "MIT",
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.2",
-    "@vuepress/plugin-medium-zoom": "^1.5.2",
     "vuepress": "^1.5.2",
+    "vuepress-plugin-medium-zoom": "^1.1.8",
+    "vuepress-plugin-zooming": "^1.1.7",
     "vuepress-theme-book": "0.0.3",
     "vuepress-theme-dark-new": "^0.1.2",
     "vuepress-theme-succinct": "^1.5.2"
