@@ -165,25 +165,53 @@ module.exports = {
         children: [
           ['https://dortania.github.io/OpenCore-Post-Install/', 'Post-Install'],
           {
-            title: '',
-            collapsable: false,
-            children: [
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/security', 'Security and FileVault'],
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/audio', 'Fixing Audio'],
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/oc2hdd', 'Booting without USB'],
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/update', 'Updating OpenCore, kexts and macOS'],
-              ['https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock', 'Fixing CFG Lock'],
-              ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose', 'Fixing Resolution and Verbose'],
-              ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui', 'Add GUI and Boot-chime'],
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/drm', 'Fixing DRM'],
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/iservices', 'Fixing iServices'],
-              ['https://dortania.github.io/OpenCore-Post-Install/misc/nvram', 'Emulated NVRAM'],
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/pm', 'Fixing Power Management'],
-              ['https://dortania.github.io/OpenCore-Post-Install/universal/sleep', 'Fixing Sleep'],
-              ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up Bootstrap.efi'],
-              ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
-              ['https://dortania.github.io/USB-Map-Guide/', 'Fixing USB'],
-            ]
+              title: 'Universal',
+              collapsable: false,
+              sidebarDepth: 1,
+              children: [
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/security', 'Security and FileVault'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/audio', 'Fixing Audio'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/oc2hdd', 'Booting without USB'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/update', 'Updating OpenCore, kexts and macOS'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/drm', 'Fixing DRM'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/iservices', 'Fixing iServices'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/pm', 'Fixing Power Management'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/universal/sleep', 'Fixing Sleep'],
+                  ['https://dortania.github.io/USB-Map-Guide/', 'Fixing USB'],
+              ]
+          },
+          {
+              title: 'Laptop Specifics',
+              collapsable: false,
+              children: [
+                  ['https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery', 'Fixing Battery Read-outs'],
+
+              ]
+          },
+          {
+              title: 'Cosmetics',
+              collapsable: false,
+              children: [
+                  ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose', 'Fixing Resolution and Verbose'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui', 'Add GUI and Boot-chime'],
+              ]
+          },
+          {
+              title: 'Multiboot',
+              collapsable: false,
+              children: [
+                  ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up Bootstrap.efi'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
+              ]
+          },
+          {
+              title: 'Miscellaneous',
+              collapsable: false,
+              children: [
+                  ['https://dortania.github.io/OpenCore-Post-Install/misc/rtc', 'Fixing RTC'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock', 'Fixing CFG Lock'],
+                  ['https://dortania.github.io/OpenCore-Post-Install/misc/nvram', 'Emulated NVRAM'],
+              ]
           },
         ]
       },

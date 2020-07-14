@@ -274,7 +274,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
 
-![Directory Structure from OpenCore&apos;s DOC](../images/troubleshooting/troubleshooting-md/oc-structure.png)
+![Directory Structure from OpenCore's DOC](../images/troubleshooting/troubleshooting-md/oc-structure.png)
 
 ## OCABC: Incompatible OpenRuntime r4, require r10
 

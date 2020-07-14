@@ -4,13 +4,21 @@
  * ref：https://v1.vuepress.vuejs.org/config/#index-styl
  */
 
-:root
-  --bgColor $bgColor
-  --navBgColorDark $navBgColorDark
-  --sideBgColor $sideBgColor
+[data-theme='light']
+ --sideBgColor $sideBgColor
+
+[data-theme='dark']
+ --sideBgColor $sideBgColorDark
 
 .home .hero img
   max-width 450px!important
+
+// [data-theme='light']
+//   display none
+
+
+// .home .hero img
+//   max-width 450px!important
 /**
 html
 body
@@ -19,8 +27,6 @@ body
 .theme-default-content:not(.custom)
   max-width 1000px
 
-
-
 .navbar
 .links
   background-color var(--navBgColorDark)!important
@@ -28,14 +34,12 @@ body
 .navbar
   filter: drop-shadow(0px 1px 1px var(--bgColor));
 
-
-tr
-  &:nth-child(2n)
-    background-color #363b40
 */
-
-
   
 
 .sidebar
   background-color var(--sideBgColor)
+
+div[class*="language-"]
+  pre, pre[class*="language-"]
+    margin-top 0

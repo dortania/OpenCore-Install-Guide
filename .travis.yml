@@ -3,12 +3,11 @@ node_js: lts/*
 cache:
   npm: false
 before_script:
-- yarn add vuepress -D
 script:
 - yarn install
-- yarn --build
+- yarn build
 deploy:
-  local_dir: _book
+  local_dir: .vuepress/dist/
   provider: pages
   skip_cleanup: true
   name: Travis Build Bot
