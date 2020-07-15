@@ -1,7 +1,6 @@
-# Skylake
+# Desktop Skylake
 
 * Supported version: 0.5.9
-* [Skylake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 <extoc></extoc>
 

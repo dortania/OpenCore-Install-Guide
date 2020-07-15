@@ -1,7 +1,6 @@
-# Kaby Lake
+# Desktop Kaby Lake
 
 * Supported version: 0.5.9
-* [Kaby Lake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 <extoc></extoc>
 

@@ -80,6 +80,44 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 * 10XXX series, 2020 era
 
+### Intel Laptop
+
+[Ivy Bridge](/config-laptop.plist/ivy-bridge.md)
+
+* 3XXX series, 2012 era
+
+[Haswell](/config-laptop.plist/haswell.md)
+
+* 4XXX series, 2013 era
+
+[Broadwell](/config-laptop.plist/broadwell.md)
+
+* 5XXX series, 2014 era
+
+[Skylake](/config-laptop.plist/skylake.md)
+
+* 6XXX series, 2015-2016 era
+
+[Kaby Lake](/config-laptop.plist/kaby-lake.md)
+
+* 7XXX series, 2017 era
+* Kaby Lake-R and Amber Lake also apply
+
+[Coffee Lake(8th Gen)](/config-laptop.plist/coffee-lake.md)
+
+* 8XXX series, 2017-2018 era
+
+[Coffee Lake Plus(9th Gen)](/config-laptop.plist/coffee-lake-plus.md)
+
+* 9XXX series, 2019 era
+* Comet Lake also applies(10XXX series)
+
+[Icelake](/config-laptop.plist/icelake.md)
+
+* 10XXX series, 2019-2020 era
+* Do not mix this and Comet Lake up
+* Guide still under testing as WhateverGreen needs updating
+
 ### Intel HEDT
 
 This section includes both enthusiast and server based hardware.

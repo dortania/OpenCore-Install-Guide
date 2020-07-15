@@ -1,4 +1,4 @@
-# Skylake
+# Laptop Skylake
 
 * Supported version: 0.5.9
 
@@ -574,4 +574,4 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-## [Post-install](/post-install/README.md)
+## Now with all this done, head to the [Installation Page](/installation/installation-process).

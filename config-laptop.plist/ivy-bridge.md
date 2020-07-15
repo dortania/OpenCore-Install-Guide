@@ -1,4 +1,4 @@
-# Ivy Bridge
+# Laptop Ivy Bridge
 
 * Supported version: 0.5.9
 
@@ -589,4 +589,4 @@ These are the main options to check for, if you can't find it or an equivalent f
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 32MB
 
-## [Post-install](/post-install/README.md)
+## Now with all this done, head to the [Installation Page](/installation/installation-process).

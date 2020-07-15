@@ -1,7 +1,6 @@
-# Ivy Bridge
+# Desktop Ivy Bridge
 
 * Supported version: 0.5.9
-* [Ivy Bridge Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 <extoc></extoc>
 

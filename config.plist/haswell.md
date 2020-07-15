@@ -1,9 +1,6 @@
-# Haswell
+# Desktop Haswell and Broadwell
 
 * Supported version: 0.5.9
-* [Haswell Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
-
-**Both Haswell and Broadwell users can follow this**
 
 <extoc></extoc>
 

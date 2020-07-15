@@ -1,7 +1,6 @@
-# Coffee Lake
+# Desktop Coffee Lake
 
 * Supported version: 0.5.9
-* [Coffee Lake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 
 <extoc></extoc>
 
@@ -119,16 +118,6 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 | framebuffer-stolenmem | Data | 00003001 |
 
 (This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
-
-#### PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
-
-This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's i225LM driver into supporting our i225-V network controller:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| device-id | Data | F2150000 |
-
-**Note**: If your board didn't ship with the i225 card, there's no reason to add this entry.
 
 #### PciRoot(0x0)/Pci(0x1b,0x0)
 
