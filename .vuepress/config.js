@@ -63,6 +63,10 @@ module.exports = {
                 link: 'https://dortania.github.io/'
             },
             {
+                text: 'Getting Started With ACPI',
+                link: 'https://dortania.github.io/Getting-Started-With-ACPI/'
+            },
+            {
                 text: 'OpenCore Post-Install',
                 link: 'https://dortania.github.io/OpenCore-Post-Install/'
             },
@@ -127,26 +131,24 @@ module.exports = {
                 title: 'Intel Desktop config.plist',
                 collapsable: true,
                 children: [
-                    '/config.plist/ivy-bridge',
-                    '/config.plist/haswell',
-                    '/config.plist/skylake',
-                    '/config.plist/kaby-lake',
-                    '/config.plist/coffee-lake',
-                    '/config.plist/comet-lake',
+                    ['/config.plist/ivy-bridge', 'Ivy Bridge'],
+                    ['/config.plist/haswell', 'Haswell'],
+                    ['/config.plist/skylake', 'Skylake'],
+                    ['/config.plist/kaby-lake', 'Kaby Lake'],
+                    ['/config.plist/coffee-lake', 'Coffee Lake'],
+                    ['/config.plist/comet-lake', 'Comet Lake'],
                 ]
             },
             {
                 title: 'Intel Laptop config.plist',
                 collapsable: true,
                 children: [
-                    '/config-laptop.plist/ivy-bridge',
-                    '/config-laptop.plist/haswell',
-                    '/config-laptop.plist/broadwell',
-                    '/config-laptop.plist/skylake',
-                    '/config-laptop.plist/kaby-lake',
-                    '/config-laptop.plist/coffee-lake',
-                    '/config-laptop.plist/coffee-lake-plus',
-                    '/config-laptop.plist/icelake',
+                    ['/config.plist/ivy-bridge', 'Ivy Bridge'],
+                    ['/config.plist/haswell', 'Haswell'],
+                    ['/config.plist/skylake', 'Skylake'],
+                    ['/config.plist/kaby-lake', 'Kaby Lake'],
+                    ['/config.plist/coffee-lake', 'Coffee Lake'],
+                    ['/config.plist/comet-lake', 'Comet Lake'],
                 ]
             },
             {
@@ -187,12 +189,12 @@ module.exports = {
         },
         {
             title: 'Post Install',
-            collapsable: true,
+            collapsable: false,
             children: [
                 ['https://dortania.github.io/OpenCore-Post-Install/', 'Post-Install'],
                 {
                     title: 'Universal',
-                    collapsable: false,
+                    collapsable: true,
                     sidebarDepth: 1,
                     children: [
                         ['https://dortania.github.io/OpenCore-Post-Install/universal/security', 'Security and FileVault'],
@@ -208,7 +210,7 @@ module.exports = {
                 },
                 {
                     title: 'Laptop Specifics',
-                    collapsable: false,
+                    collapsable: true,
                     children: [
                         ['https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery', 'Fixing Battery Read-outs'],
 
@@ -216,7 +218,7 @@ module.exports = {
                 },
                 {
                     title: 'Cosmetics',
-                    collapsable: false,
+                    collapsable: true,
                     children: [
                         ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose', 'Fixing Resolution and Verbose'],
                         ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui', 'Add GUI and Boot-chime'],
@@ -224,7 +226,7 @@ module.exports = {
                 },
                 {
                     title: 'Multiboot',
-                    collapsable: false,
+                    collapsable: true,
                     children: [
                         ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up Bootstrap.efi'],
                         ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
@@ -232,7 +234,7 @@ module.exports = {
                 },
                 {
                     title: 'Miscellaneous',
-                    collapsable: false,
+                    collapsable: true,
                     children: [
                         ['https://dortania.github.io/OpenCore-Post-Install/misc/rtc', 'Fixing RTC'],
                         ['https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock', 'Fixing CFG Lock'],
