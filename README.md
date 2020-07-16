@@ -23,10 +23,8 @@ Before we can get into the meat of this guide and setting up OpenCore, we first 
 
 And once you know your hardware's compatible, we can jump into the guides:
 
-* [OpenCore Desktop Guide](https://dortania.github.io/OpenCore-Desktop-Guide/)
-  * Desktop focused and the one you're reading right now
-* [OpenCore Laptop guide](https://dortania.github.io/vanilla-laptop-guide/)
-  * Laptop focused
+* [OpenCore Install Guide](https://dortania.github.io/OpenCore-Desktop-Guide/)
+  * You're reading it right now!
 
 ## OpenCore Tips
 
