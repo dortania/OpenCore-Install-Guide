@@ -4,49 +4,20 @@ While this guide will not cover the entirety of config setup for hardware not in
 
 Note that critical thinking and google will be required, as I won't be holding your hand compared to other systems.
 
-## Sandy Bridge(Second Generation i-series)
+* [Penryn(Core2 Series)](/config.plist/legacy/penryn)
+* [Nehalem (First Gen i-series)](/config.plist/legacy/sandy-bridge-e)
+* [Sandy Bridge(Second Gen i-series)](/config.plist/legacy/sandy-bridge)
+* [Sandy and Ivy Bridge-E(HEDT)](/config.plist/legacy/nehalem)
 
-Actually almost identical to an Ivy Bridge hack, the main things that need to be changed:
 
-* Follow [Ivy Bridge setup](https://dortania.github.io/OpenCore-Desktop-Guide/config.plist/ivy-bridge.html) for most config options
-* Must use [DuetPkg](https://dortania.github.io/OpenCore-Desktop-Guide/extras/legacy.html) as most Sandy Bridge motherboards do not support UEFI
-* IMEI will need to be faked if running Sandy Bridge CPU on an Ivy Bridge based chipset(B75, Q75, Q77, H77, Z75, Z77)
-  * [device-id](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md#intel-hd-graphics-20003000-sandy-bridge-processors) and [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
-* iGPU setup is different
-  * Use `AAPL,snb-platform-id` instead of `AAPL,ig-platform-id`
-    * Desktop iGPU only:
-    * `AAPL,snb-platform-id | Data | 10000300`
-    * `device-id | Data | 26010000`
-    * Desktop iGPU + dGPU:
-    * `AAPL,snb-platform-id | Data | 00000500`
-    * `device-id | Data | 26010000`
-  * For Mojave and newer, iGPU must be disabled
-* SMBIOS will depend on macOS version
-  * iMac12,1 or iMac12,2 for High Sierra and older
-  * iMac13,2 for Mojave and newer
+## Adding older SMBIOS to OpenCore
 
-## Clarkdale/Arrendale(First Generation i-series)
+OpenCore by default will only include 2012 and newer SMBIOS when using the [`Automatic`](https://github.com/acidanthera/OpenCorePkg/blob/master/AppleModels/DataBase.md) feature, for the majority of users this won't bother but for us we're using legacy hardware.
 
-* Follow [Ivy Bridge setup](https://dortania.github.io/OpenCore-Desktop-Guide/config.plist/ivy-bridge.html) for most config options
-* Must use [DuetPkg](https://dortania.github.io/OpenCore-Desktop-Guide/extras/legacy.html) as virtually no Arrendale boards supported UEFI
-* Ignore DeviceProperties section
-* See here for iGPU setup: [1st Generation Intel HD Graphics QE/CI](https://www.insanelymac.com/forum/topic/286092-guide-1st-generation-intel-hd-graphics-qeci/?hl=%20vertek)
-  * For Mojave and newer, iGPU must be disabled
-* SMBIOS will depend on macOS version
-  * iMac11,1, iMac11,2 or iMac11,3 for High Sierra and older
-  * iMac13,2 for Mojave and newer
+To add support for older SMBIOS, we'll need to edit and recompile OpenCore:
 
-## Penryn(Core2 Series)
+1. Edit [update_generated.py line L305](https://github.com/acidanthera/OpenCorePkg/blob/master/AppleModels/update_generated.py#L305) from `2012` to `2010`
+2. Run [`update_generated.py`](https://github.com/acidanthera/OpenCorePkg/blob/master/AppleModels/update_generated.py)
+3. Run [`build_oc.tool`](https://github.com/acidanthera/OpenCorePkg/blob/master/build_oc.tool)
+4. Grab the compiled files under the `Binaries` folder
 
-* Follow [Ivy Bridge setup](https://dortania.github.io/OpenCore-Desktop-Guide/config.plist/ivy-bridge.html) for most config options
-* Must use [DuetPkg](https://dortania.github.io/OpenCore-Desktop-Guide/extras/legacy.html) virtually no Penryn boards supported UEFI
-* Ignore DeviceProperties section
-* See here for iGPU setup:
-  * [GMA950](https://www.applelife.ru/threads/intel-gma950-32bit-only.22726/)
-  * [GMA X3100](https://www.applelife.ru/threads/intel-gma-x3100-zavod.36617/)
-  * For Mountain Lion and newer, iGPU must be disabled
-* SMBIOS will depend on macOS version
-  * iMac10,1 High Sierra and older
-  * iMac13,2 for Mojave and newer
-* Mojave and newer will need Telemetry fixed:
-  * [Telemetrap](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/page-4?post=28447707#post-28447707)

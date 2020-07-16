@@ -167,7 +167,24 @@ module.exports = {
                     '/AMD/fx',
                     '/AMD/zen',
                 ]
-            }
+            },
+            {
+                title: 'Intel Legacy config.plist',
+                collapsable: true,
+                children: [
+                    '/config.plist/legacy',
+		            {
+		                title: 'Legacy Generation',
+		                collapsable: false,
+		                children: [
+		                    ['/config.plist/legacy/penryn', 'Penryn'],
+							['/config.plist/legacy/nehalem', 'Nehalem'],
+							['/config.plist/legacy/sandy-bridge', 'Sandy Bridge'],
+							['/config.plist/legacy/sandy-bridge-e', 'Sandy/Ivy Bridge-E'],
+		                ]
+		            },
+                ]
+            },
             ]
         },
         {

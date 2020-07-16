@@ -13,6 +13,10 @@ To setup OpenCore’s folder structure, you’ll want to grab the EFI folder fou
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
 * **Remove from Drivers:**
+  * AudioDxe.efi
+    * Unrelated to Audio support in macOS
+  * CrScreenshotDxe.efi
+    * Used for taking screenshots in UEFI, not needed by us
   * OpenUsbKbDxe.efi
     * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
   * UsbMouseDxe.efi
