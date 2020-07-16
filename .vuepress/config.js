@@ -97,6 +97,7 @@ module.exports = {
             sidebarDepth: 1,
             children: [
                 '',
+				['prerequisites', 'Getting started with OpenCore'],
                 'why-oc',
                 'terminology',
                 'macos-limits',
@@ -130,6 +131,7 @@ module.exports = {
             children: [{
                 title: 'Intel Desktop config.plist',
                 collapsable: true,
+				sidebarDepth: 2,
                 children: [
                     ['/config.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config.plist/haswell', 'Haswell'],
@@ -142,18 +144,22 @@ module.exports = {
             {
                 title: 'Intel Laptop config.plist',
                 collapsable: true,
+				sidebarDepth: 2,
                 children: [
-                    ['/config.plist/ivy-bridge', 'Ivy Bridge'],
-                    ['/config.plist/haswell', 'Haswell'],
-                    ['/config.plist/skylake', 'Skylake'],
-                    ['/config.plist/kaby-lake', 'Kaby Lake'],
-                    ['/config.plist/coffee-lake', 'Coffee Lake'],
-                    ['/config.plist/comet-lake', 'Comet Lake'],
+                    ['/config-laptop.plist/ivy-bridge', 'Ivy Bridge'],
+                    ['/config-laptop.plist/haswell', 'Haswell'],
+					['/config-laptop.plist/broadwell', 'Broadwell'],
+                    ['/config-laptop.plist/skylake', 'Skylake'],
+                    ['/config-laptop.plist/kaby-lake', 'Kaby Lake'],
+                    ['/config-laptop.plist/coffee-lake', 'Coffee Lake'],
+					['/config-laptop.plist/coffee-lake-plus', 'Coffee Lake Plus'],
+                    ['/config-laptop.plist/icelake', 'Ice Lake'],
                 ]
             },
             {
                 title: 'Intel HEDT config.plist',
                 collapsable: true,
+				sidebarDepth: 2,
                 children: [
                     '/config-HEDT/haswell-e',
                     '/config-HEDT/broadwell-e',
@@ -163,6 +169,7 @@ module.exports = {
             {
                 title: 'AMD Desktop config.plist',
                 collapsable: true,
+				sidebarDepth: 2,
                 children: [
                     '/AMD/fx',
                     '/AMD/zen',

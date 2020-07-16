@@ -29,6 +29,8 @@ Now with all that, a quick reminder of the tools we need
 
 ### Add
 
+::: tip Info
+
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
@@ -43,6 +45,8 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+
+:::
 
 ### Delete
 
@@ -79,7 +83,10 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, one we need to change is `RebuildAppleMemoryMap`
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+:::
+::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -87,6 +94,8 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
   * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
+  
+:::
 
 ## DeviceProperties
 
@@ -96,7 +105,7 @@ Settings relating to boot.efi patching and firmware fixes, one we need to change
 
 Sets device properties from a map.
 
-#### PciRoot(0x0)/Pci(0x2,0x0)
+::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
 
@@ -140,7 +149,9 @@ Note that highlighted entries with a star(*) are the recommended entries to use:
   * `framebuffer-cursor` = `00009000` (as Data)
     * We change the cursor byte from 6MB (00006000) to 9MB because of some glitches.
 
-#### PciRoot(0x0)/Pci(0x1b,0x0)
+:::
+
+::: tip PciRoot(0x0)/Pci(0x1b,0x0)
 
 `layout-id`
 
@@ -148,6 +159,8 @@ Note that highlighted entries with a star(*) are the recommended entries to use:
 * You can delete this property outright as it's unused for us at this time
 
 For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](/post-install/README.md)
+
+:::
 
 ### Delete
 
@@ -190,7 +203,23 @@ Patches both the kernel and kexts.
 
 ### Quirks
 
-Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `AppleXcpmCfgLock`, `DisableIOMapper`,  `PanicNoKextDump`, `PowerTimeoutKernelPanic` and `XhciPortLimit`. Everything else should be left as default
+::: tip Info
+
+Settings relating to the kernel, for us we'll be enabling the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
+| AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
+| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| LapicKernelPanic | NO | HP Machines will require this quirk |
+| PanicNoKextDump | YES | |
+| PowerTimeoutKernelPanic | YES | |
+| XhciPortLimit | YES | |
+
+:::
+
+::: details More in-depth Info
 
 * **AppleCpuPmCfgLock**: YES
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
@@ -213,6 +242,8 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
+:::
+
 ## Misc
 
 ![Misc](../images/config/config-universal/misc.png)
@@ -223,7 +254,20 @@ Settings for boot screen (Leave everything as default).
 
 ### Debug
 
-Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`).
+::: tip Info
+
+Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`):
+
+| Quirk | Enabled |
+| :--- | :--- |
+| AppleDebug | YES |
+| ApplePanic | YES |
+| DisableWatchDog | YES |
+| Target | 67 |
+
+:::
+
+::: details More in-depth Info
 
 * **AppleDebug**: YES
   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
@@ -238,11 +282,24 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
 
 These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
 
+:::
+
 ### Security
 
-Security is pretty self-explanatory, **do not skip**.
+::: tip Info
 
-We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
+Security is pretty self-explanatory, **do not skip**. We'll be changing the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| AllowNvramReset | YES | |
+| AllowSetDefault | YES | |
+| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+| ScanPolicy | 0 | |
+
+:::
+
+::: details More in-depth Info
 
 * **AllowNvramReset**: YES
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
@@ -260,19 +317,13 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to the desktop guide's [Security](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/security.html) section for further details. **Will not boot USB devices with this set to default**
+  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+
+:::
 
 ### Tools
 
-Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you. For us, we won't be using any tools.
-
-* **Name**
-  * Name shown in OpenCore
-* **Enabled**
-  * Self-explanatory, enables or disables
-* **Path**
-  * Path to file after the `Tools` folder
-  * ex: [OpenShell.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you.
 
 ### Entries
 
@@ -286,17 +337,29 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ### Add
 
-4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 (Booter Path, mainly used for UI Scaling)
+::: tip 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+
+Used for OpenCore's UI scaling, default will work for us. See in-depth section for more info
+
+:::
+
+::: details More in-depth Info
+
+Booter Path, mainly used for UI Scaling
 
 * **UIScale**:
-  * `01`: Standard resolution(Clover equivalent is `0x28`)
-  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`)
+  * `01`: Standard resolution
+  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
   * `00000000`: Syrah Black
   * `BFBFBF00`: Light Gray
 
-7C436110-AB2A-4BBB-A880-FE41995C9F82 (System Integrity Protection bitmask)
+:::
+
+::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
+
+System Integrity Protection bitmask
 
 * **General Purpose boot-args**:
 
@@ -329,6 +392,8 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 | :--- | :--- | :--- |
 | prev-lang:kbd | String | en-US:0 |
 
+:::
+
 ### Delete
 
 Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
@@ -352,6 +417,8 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 ## PlatformInfo
 
 ![PlatformInfo](../images/config/config-laptop.plist/haswell/smbios.png)
+
+::: tip Info
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
@@ -400,7 +467,11 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
+:::
+
 ### Generic
+
+::: details More in-depth Info
 
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
@@ -423,6 +494,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
+:::
 ## UEFI
 
 ![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
@@ -483,6 +555,19 @@ Mainly relevant for Virtual machines, legacy macs and FileVault users. See here 
 
 ### Quirks
 
+::: tip Info
+Relating to quirks with the UEFI environment, for us we'll be changing the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| IgnoreInvalidFlexRatio | YES | |
+| ReleaseUsbOwnership | YES | |
+| UnblockFsConnect | NO | Needed mainly by HP motherboards |
+
+:::
+
+::: details More in-depth Info
+
 * **DeduplicateBootOrder**: YES
   * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 
@@ -495,6 +580,8 @@ Mainly relevant for Virtual machines, legacy macs and FileVault users. See here 
 
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+
+:::
 
 ### ReservedMemory
 

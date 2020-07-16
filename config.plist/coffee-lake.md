@@ -202,6 +202,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
 | DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
 | XhciPortLimit | YES | |
@@ -535,7 +536,7 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| UnblockFsConnect | YES | Needed mainly by HP motherboards |
+| UnblockFsConnect | NO | Needed mainly by HP motherboards |
 
 :::
 
