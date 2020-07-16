@@ -106,7 +106,7 @@ module.exports = {
         {
             title: 'USB Creation',
             collapsable: false,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [{
                 title: 'Creating the USB',
                 collapsable: true,
@@ -222,7 +222,7 @@ module.exports = {
                         ['https://dortania.github.io/OpenCore-Post-Install/universal/iservices', 'Fixing iServices'],
                         ['https://dortania.github.io/OpenCore-Post-Install/universal/pm', 'Fixing Power Management'],
                         ['https://dortania.github.io/OpenCore-Post-Install/universal/sleep', 'Fixing Sleep'],
-                        ['https://dortania.github.io/USB-Map-Guide/', 'Fixing USB'],
+                        ['https://dortania.github.io/OpenCore-Post-Install/usb/', 'Fixing USB'],
                     ]
                 },
                 {

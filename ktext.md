@@ -6,50 +6,67 @@ This section is for gathering miscellaneous files for booting macOS, we do expec
 
 > What's the best way to figure out if my hardware is supported?
 
-See the [**supported hardware section**](/macos-limits.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
+See the [**Hardware Limitations page**](/macos-limits.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
+
+> What are some ways to figure out what hardware I have?
+
+Generally the product's spec page has all the info you need, but if you're still having troubles there are a few options:
+
+* **Windows**:
+  * [Speccy](https://www.ccleaner.com/speccy)
+  * DeviceManager
+* **Linux**:
+  * Run `hwinfo` in terminal
 
 ## Firmware Drivers
 
-These are the drivers used by OpenCore, for the majority of systems you only need 2 .efi drivers to get up and running:
+Firmware drivers are drivers used by OpenCore in the UEFI environment. They're mainly required to boot a machine, either by extending OpenCore's patching ability or showing you different types of drives in the OpenCore picker(ie. HFS drives).
 
-* [~~ApfsDriverLoader.efi~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-  * ~~Needed for seeing APFS volumes(ie. macOS)~~.
-  * As of OpenCore 0.5.8, this driver is built in and configured via config.plist -> UEFI -> APFS
+* **Location Note**: These files **must** be placed under `EFI/OC/Drivers/`
+
+### Universal
+
+For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
+
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
 
-For legacy users:
+### Legacy users
+
+In addition to the above, if your hardware doesn't support UEFI(2011 and older era) then you'll need the following. Pay close attention to each entry as you may not need all 4:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
-* [NvmExpressDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Used for Haswell and older when no NVMe driver is built into the firmware, not needed if you're not using an NVMe drive
-* [XhciDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Used for Sandy Bridge and older when no XHCI driver is built into the firmware, not needed if you're not using a USB 3.0 expansion card
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older
 
-For a full list of compatible drivers, see 11.2 Properties in the [OpenCorePkg Docs](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf). These files will go in your Drivers folder in your EFI
+For a full list of compatible drivers, see the [Clover conversion page](https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion). These files will go in your Drivers folder in your EFI
 
 ## Kexts
 
 A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI.
 
-* **Windows and Linux note**: Kexts will look like normal folders in your OS, **double check** that the folder you are installing has a .kext extension visible(and do not add one manually if it's missing)
+* **Windows and Linux note**: Kexts will look like normal folders in your OS, **double check** that the folder you are installing has a .kext extension visible(and do not add one manually if it's missing).
+  * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.
+* **Location Note**: These files **must** be placed under `EFI/OC/Kexts/`.
 
 All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
 
-**Must haves**:
+### Must haves
+
+Without the below 2, no system is bootable:
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
   * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
-* [Lilu](https://github.com/vit9696/Lilu/releases)
+* [Lilu](https://github.com/acidanthera/Lilu/releases)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work
 
-**VirtualSMC Plugins**:
+### VirtualSMC Plugins
+
+The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring:
 
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
@@ -62,23 +79,26 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
   * Used for measuring battery readouts on laptops, **desktops can ignore**
   * Do not use until battery has been properly patched, can cause issues otherwise
 
-**Graphics**:
+### Graphics
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
   * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
-  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see * [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
+  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
 
-**Audio**:
+### Audio
 
-* [AppleALC](https://github.com/vit9696/AppleALC/releases)
+* [AppleALC](https://github.com/acidanthera/AppleALC/releases)
   * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
 
-**Ethernet**:
+### Ethernet
+
+Here we're going to assume you know what ethernet card your system has, reminder that product spec pages will most likely list the type of network card.
 
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
-  * Required for Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
+  * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
+  * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for I211 NICs, based off of the SmallTree kext but patched to support I211
+  * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
@@ -88,7 +108,7 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
   * For Realtek's 2.5Gb Ethernet
 * For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
 
-**USB**:
+### USB
 
 * [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases)
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
@@ -105,9 +125,9 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
     * Z390(Not needed on Mojave and newer)
     * X79
     * X99
-    * AsRock boards(On Intel motherboards specifically, basically all of their boards)
+    * AsRock boards(On Intel motherboards specifically, Z490 boards do not need it however)
 
-**WiFi and Bluetooth**:
+### WiFi and Bluetooth
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
@@ -124,7 +144,7 @@ The order in `Kernel -> Add` should be:
 2. BrcmFirmwareData
 3. BrcmPatchRAM3
 
-**AMD CPU Specific kexts**:
+### AMD CPU Specific kexts
 
 * [~~NullCPUPowerManagment~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
   * We have a much better solution known as `DummyPowerManagement` found under `Kernel -> Quirks` in your config.plist, this will be covered in a later page
@@ -133,7 +153,7 @@ The order in `Kernel -> Add` should be:
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
 
-**Extras**:
+### Extras
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
   * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
@@ -148,12 +168,15 @@ The order in `Kernel -> Add` should be:
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
   * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
 
-**Laptop Specifics**:
+### Laptop Specifics
+
+To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg |grep input` in Linux
+
+#### Input drivers
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * Required for systems with PS2 keyboards and trackpads
   * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)(This must come before VoodooPS2 in your config.plist)
-
 * [VoodooI2C](https://github.com/alexandred/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
   * To be paired with a plugin:
@@ -163,10 +186,10 @@ The order in `Kernel -> Add` should be:
     * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
     * VoodooI2CUPDDEngine - Implements Touchbase driver support.
 
-To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg |grep input` in Linux
+#### Misc
 
 * [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
-  * Recommended for SMBIOS that include a TouchID sensor to fix auth issues
+  * Recommended for MacBook SMBIOS that include a TouchID sensor to fix auth issues, generally 2016 and newer SMBIOS will require this
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
