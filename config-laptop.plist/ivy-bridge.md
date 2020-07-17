@@ -50,6 +50,8 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 ### Delete
 
+::: tip Info
+
 This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](/post-install/README.md) and drop the old tables:
 
 | Key | Type | Value |
@@ -69,6 +71,8 @@ This blocks certain ACPI tables from loading, for us we really care about this. 
 | OemTableId | Data | 4370753049737400 |
 | TableLength | Number | 0 |
 | TableSignature | Data | 53534454 |
+
+:::
 
 ### Patch
 
@@ -526,6 +530,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 :::
+
 ## UEFI
 
 ![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
@@ -664,4 +669,4 @@ These are the main options to check for, if you can't find it or an equivalent f
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 32MB
 
-## Now with all this done, head to the [Installation Page](/installation/installation-process).
+## Now with all this done, head to the [Installation Page](/installation/installation-process)

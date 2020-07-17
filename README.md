@@ -4,14 +4,15 @@ heroImage: /dortania-logo-clear.png
 heroText: Dortania's OpenCore Install Guide
 actionText: Getting Started→
 actionLink: prerequisites.md
+
 meta:
 - name: description
   content: Current supported version 0.5.9
 ---
 
-## What is OpenCore?
+## Who is this guide for
 
-OpenCore is an open-sourced tool designed to prepare a system for macOS booting and has been architected to alleviate many of the constraints imposed by its alternatives like Clover. The main thing OpenCore aims to do is create a more versatile and modular system which can better understand symbols and structures to make patching far more precise and effective. And with its custom prelinker, kext injection becomes macOS version agnostic meaning day 1 support on any macOS version supporting a prelinked kernel.
+This guide focuses on the process of installing macOS on X86 based PCs, with the aid of a tool called OpenCore. This guide is open to users of all skill level but you must be willing to read, learn and google frequently. This is not a simple 1-click install setup.
 
 Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, it is still being frequently updated and so chunks of configuration change quite often(ie. New quirks replacing old ones)
 

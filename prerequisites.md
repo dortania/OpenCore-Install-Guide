@@ -1,27 +1,6 @@
 # Getting started with OpenCore
 
-Before we can jump head first into making an OpeCore based system, we need to go over a few things:
-
-* [Hardware support](#hardware-support)
-* [Prerequisites](#prerequisites)
-* [Other OpenCore Tips](#other-opencore-tips)
-
-## Hardware Support
-
-Before we can get into the meat of this guide and setting up OpenCore, we first gotta make sure your hardware can actually run macOS:
-
-
-* [Hardware Limitations](/macos-limits.md)
-
-And we've even got more detailed guides explaining this if you want to dive in more:
-
-* [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
-  * Check if your GPU is supported and which macOS version you can run.
-* [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/)
-  * Check if your WiFi card is supported.
-* [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)
-  * Overall guide on what to avoid and what pitfalls your hardware may hit.
-
+Before we can jump head first into making an OpeCore based system, we need to go over a few things.
 
 ## Prerequisites
   
@@ -52,7 +31,6 @@ And we've even got more detailed guides explaining this if you want to dive in m
      * Linux (with Python 2.7 or later), make sure it's clean and properly functioning.
    * For Windows or Linux users, **15GB** of free space on the drive you're working on. On Windows, your OS disk (C:) must have 15GB free at least.
    * For macOS users, **30GB** of free space on the system's drive.
-   
 
 ## Other OpenCore Tips
 

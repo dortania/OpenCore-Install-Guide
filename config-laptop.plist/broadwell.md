@@ -54,6 +54,8 @@ This blocks certain ACPI tables from loading, for us we can ignore this.
 
 ### Patch
 
+::: tip Info
+
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
 
 * OSI rename
@@ -66,6 +68,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Limit | Number | 0 |
 | Find | Data | 5f4f5349 |
 | Replace | Data | 584f5349 |
+
+:::
 
 ### Quirks
 
@@ -497,6 +501,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 :::
+
 ## UEFI
 
 ![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
@@ -633,4 +638,4 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-## Now with all this done, head to the [Installation Page](/installation/installation-process).
+## Now with all this done, head to the [Installation Page](/installation/installation-process)

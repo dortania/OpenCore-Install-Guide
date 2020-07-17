@@ -53,9 +53,9 @@ Also note that AMD OSX has updated their patches, but they are experimental and 
 
 ### Up-to-date kexts, bootloader and config.plist
 
-Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here: 
+Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here:
 
-* [Kext Repo](http://kexts.goldfish64.com/) 
+* [Kext Repo](http://kexts.goldfish64.com/)
 * [Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/).
 
 You will also need to ensure you have a few NVRAM variables set:
@@ -63,10 +63,10 @@ You will also need to ensure you have a few NVRAM variables set:
 * **`NVRAM` -> `Add` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82`**:
   * `boot-args`:
     * `-lilubetaall` (Enables Lilu and plugins on beta macOS versions)
-	  * Newest builds of Lilu and plugins do not require this boot-arg
+      * Newest builds of Lilu and plugins do not require this boot-arg
     * `vsmcgen=1` (works around VirtualSMC, or more specifically Lilu, not properly working in Big Sur)
-    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**. 
-	  * Newer builds of WhateverGreen should fix this (v1.4.1)
+    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**.
+      * Newer builds of WhateverGreen should fix this (v1.4.1)
 
 ### Known issues
 
@@ -129,7 +129,6 @@ Run the InstallAssistant.pkg and point this to whichever drive you're booting of
 Once done, you should find it located in your Applications folder:
 
 ![](../../images/extras/big-sur/readme/done.png)
-
 
 ### Creating the installer
 

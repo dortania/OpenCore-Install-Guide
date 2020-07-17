@@ -55,6 +55,8 @@ This blocks certain ACPI tables from loading, for us we can ignore this.
 
 ### Patch
 
+::: tip Info
+
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
 
 * OSI rename
@@ -67,6 +69,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Limit | Number | 0 |
 | Find | Data | 5f4f5349 |
 | Replace | Data | 584f5349 |
+
+:::
 
 ### Quirks
 
@@ -84,7 +88,19 @@ This section is allowing devices to be pass-through to macOS that are generally 
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`, `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and `SetupVirtualMap`
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| DevirtualiseMmio | YES |
+| EnableWriteUnprotector | NO |
+| ProtectUefiServices | YES |
+| RebuildAppleMemoryMap | YES |
+| SyncRuntimePermissions | YES |
+:::
+
+::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -92,14 +108,17 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
 * **EnableWriteUnprotector**: NO
   * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
-* **ProtectUefiServices**: YES
-  * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems.
+* **ProtectUefiServices**: NO
+  * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
+  * If on Z390, **enable this quirk**
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses
+  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+
+:::
 
 ## DeviceProperties
 
@@ -481,6 +500,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 :::
+
 ## UEFI
 
 ![UEFI](../images/config/config-universal/aptio-v-uefi.png)
@@ -619,4 +639,4 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-## Now with all this done, head to the [Installation Page](/installation/installation-process).
+## Now with all this done, head to the [Installation Page](/installation/installation-process)

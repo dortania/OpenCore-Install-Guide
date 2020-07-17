@@ -1,7 +1,5 @@
 # Hardware Limitations
 
-
-
 With macOS, there's numerous hardware limitation you need to be aware of before stepping foot into an installation. This is due to the limited amount of hardware Apple supports, and so we're either limited by what Apple or what patches the community has created.
 
 The main hardware section to be verify are:
@@ -14,6 +12,14 @@ The main hardware section to be verify are:
 * Wireless Networking
 * Miscellaneous
 
+And for expensive guides on the subjects, see here:
+
+* [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
+  * Check if your GPU is supported and which macOS version you can run.
+* [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/)
+  * Check if your WiFi card is supported.
+* [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)
+  * Overall guide on what to avoid and what pitfalls your hardware may hit.
 
 ## CPU Support
 
@@ -30,7 +36,7 @@ For CPU support, we have the following breakdown:
   * Laptop CPUs are **not** supported
   * Note that 3rd gen ThreadRipper is not officially without a Virtual Machine, 1st and 2nd gen ThreadRipper are properly supported
 
-**For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)** 
+**For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
 ## GPU Support
 

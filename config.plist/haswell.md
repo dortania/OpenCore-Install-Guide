@@ -486,6 +486,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 :::
+
 ## UEFI
 
 ![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
@@ -597,4 +598,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-# Now with all this done, head to the [Installation Page](/installation/installation-process).
+# Now with all this done, head to the [Installation Page](/installation/installation-process)

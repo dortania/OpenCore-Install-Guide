@@ -120,7 +120,9 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 (This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
 
-#### PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
+:::
+
+::: tip PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
 
 This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's i225LM driver into supporting our i225-V network controller:
 
@@ -474,6 +476,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 :::
+
 ## UEFI
 
 ![UEFI](../images/config/config-universal/aptio-v-uefi.png)
@@ -581,4 +584,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-# Now with all this done, head to the [Installation Page](/installation/installation-process).
+# Now with all this done, head to the [Installation Page](/installation/installation-process)

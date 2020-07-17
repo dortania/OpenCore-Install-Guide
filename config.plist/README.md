@@ -76,6 +76,7 @@ Now comes the important part, selecting the configuration path. Each platform ha
 | [Ice Lake](/config-laptop.plist/ice-lake.md) | 10XXX | 2019-2020 era |
 
 ### Intel HEDT
+
 This section includes both enthusiast and server based hardware.
 
 | Code Name | Series | Release |
@@ -103,4 +104,3 @@ Note that this is only guide-lines and will not be full-features guides like the
 | [Nehalem and Westmere](/config.plist/legacy/nehalem.md) | 7XX, 8XX, 9XX | 2008-2010 |
 | [Sandy Bridge](/config.plist/legacy/sandy-bridge.md) | 2XXX | 2011 |
 | [Sandy and Ivy bridge-E](/config.plist/legacy/sandy-bridge-e.md) | 2XXX, 3XXX | 2011-2013 |
-

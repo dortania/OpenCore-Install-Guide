@@ -17,14 +17,14 @@ One last thing we should go over before booting is how your EFI is setup:
 Good EFI          |  Bad EFI
 :-------------------------:|:-------------------------:
 ![](../images/installation/install-md/good-efi.png)  |  ![](../images/installation/install-md/bad-efi.png)
-* EFI folder found on EFI partition | * EFI folder missing
-* ACPI Files are compiled(.aml) | * ACPI Files are not compiled(.dsl)
-* DSDT is not included | * DSDT is included
-* Removed unneeded Drivers(.efi) | * Leaves default Drivers
-* Removed unneeded Tools(.efi) | * Leaves default Tools
-* All files in the Kexts folder end in .kext | * Includes source code and folders
-* config.plist found under EFI/OC | * Neither renamed or placed the .plist in right location
-* Only uses kexts that are needed | * Downloaded every kext listed
+*EFI folder found on EFI partition |* EFI folder missing
+*ACPI Files are compiled(.aml) |* ACPI Files are not compiled(.dsl)
+*DSDT is not included |* DSDT is included
+*Removed unneeded Drivers(.efi) |* Leaves default Drivers
+*Removed unneeded Tools(.efi) |* Leaves default Tools
+*All files in the Kexts folder end in .kext |* Includes source code and folders
+*config.plist found under EFI/OC |* Neither renamed or placed the .plist in right location
+*Only uses kexts that are needed |* Downloaded every kext listed
 
 And a reminder that slowgeek site is your friend:
 

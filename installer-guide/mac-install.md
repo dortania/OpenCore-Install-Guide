@@ -36,12 +36,12 @@ Once finished, we'll next want to run the `BuildmacOSInstallApp.command`:
 
 ![](../images/installer-guide/mac-install-md/gib-location.png)
 
-You will be prompted for the macOS installer files which were downloaded to `macOS Downloads` folder in the GibMacOS directory. 
+You will be prompted for the macOS installer files which were downloaded to `macOS Downloads` folder in the GibMacOS directory.
 
 From the Finder, drill down to the folder containing the downloaded files and either drag it to the command line or "Cmd+C" and paste it to the terminal.
 
 Once the task is completed exit the utility, you will find the Install file in the directory.
- 
+
 Move the newly created image to Applications folder, this will simplify the next section.
 
 ![](../images/installer-guide/mac-install-md/gib-done.png)

@@ -98,9 +98,9 @@ module.exports = {
             children: [
                 '',
 				['prerequisites', 'Getting started with OpenCore'],
-                'why-oc',
+				'macos-limits',
                 'terminology',
-                'macos-limits',
+                'why-oc',
             ]
 
         },

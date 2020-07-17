@@ -72,7 +72,6 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 ### Quirks
 
-
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
@@ -86,6 +85,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 :::
 
 ::: details More in-depth Info
+
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES
@@ -597,4 +597,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-# Now with all this done, head to the [Installation Page](/installation/installation-process).
+# Now with all this done, head to the [Installation Page](/installation/installation-process)

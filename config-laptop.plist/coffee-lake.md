@@ -54,6 +54,8 @@ This blocks certain ACPI tables from loading, for us we can ignore this.
 
 ### Patch
 
+::: tip Info
+
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
 
 * OSI rename
@@ -66,6 +68,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Limit | Number | 0 |
 | Find | Data | 5f4f5349 |
 | Replace | Data | 584f5349 |
+
+:::
 
 ### Quirks
 
@@ -83,7 +87,17 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and `SetupVirtualMap`
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| EnableWriteUnprotector | NO |
+| RebuildAppleMemoryMap | YES |
+| SyncRuntimePermissions | YES |
+:::
+
+::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -95,6 +109,7 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Fixes SetVirtualAddresses calls to virtual addresses
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+:::
 
 ## DeviceProperties
 
@@ -488,6 +503,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 :::
+
 ## UEFI
 
 ![UEFI](../images/config/config-universal/aptio-v-uefi.png)

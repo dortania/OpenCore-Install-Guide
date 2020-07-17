@@ -211,7 +211,6 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | **NVRAM** | N/A | N/A | N/A | N/A | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) |
 | **USB** | N/A | N/A | N/A | N/A | N/A |
 
-
 | SSDT | CometLake | AMD(15/16/17h) |
 | :--- | :--- | :--- |
 | **CPU** |  [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/) | N/A |
@@ -240,4 +239,4 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | **NVRAM** | N/A | N/A | N/A | N/A | N/A | N/A | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/) |
 | **IRQ Patch** | [IRQ SSDT](https://github.com/corpnewt/SSDTTime) | [IRQ SSDT](https://github.com/corpnewt/SSDTTime) | [IRQ SSDT](https://github.com/corpnewt/SSDTTime) | N/A | N/A | N/A | N/A |
 
-# Now with all this done, head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/).
+# Now with all this done, head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
