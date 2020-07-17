@@ -4,15 +4,15 @@ With macOS, there's numerous hardware limitation you need to be aware of before 
 
 The main hardware section to be verify are:
 
-* CPU
-* GPU
-* Motherboard
-* Storage
-* Wired Networking
-* Wireless Networking
-* Miscellaneous
+* [CPU](#cpu)
+* [GPU](#gpu)
+* [Motherboard](#motherboard)
+* [Storage](#storage)
+* [Wired Networking](#wired-networking)
+* [Wireless Networking](#wireless-networking)
+* [Miscellaneous](#miscellaneous)
 
-And for expensive guides on the subjects, see here:
+And for more detailed guides on the subject, see here:
 
 * [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
   * Check if your GPU is supported and which macOS version you can run.
@@ -34,7 +34,7 @@ For CPU support, we have the following breakdown:
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer(15h), Jaguar(16h) and Ryzen(17h) CPUs
   * Laptop CPUs are **not** supported
-  * Note that 3rd gen ThreadRipper is not officially without a Virtual Machine, 1st and 2nd gen ThreadRipper are properly supported
+  * Note that 3rd gen ThreadRipper is not officially without a KVM(Virtual Machine), 1st and 2nd gen ThreadRipper are properly supported
 
 **For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
@@ -44,29 +44,31 @@ GPU support becomes much more complicated due to the near infinite amount of GPU
 
 * AMD's GCN based GPUs are supported in the latest versions of macOS
   * AMD APUs are not supported however
-* Nvidia's Maxwell(9XX) and Pascal(10XX) GPUs are limited to macOS 10.13: High Sierra
-* Nvidia's Turing(16XX, 20XX) GPUs are **not supported in any version of macOS**
-* Nvidia's Kepler(7XX) GPUs are supported in the latest versions of macOS
-  * this is due to Apple still supporting a few MacBook Pros with Nvidia GPUs
+  * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
+* Nvidia's GPU support is complicated:
+  * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
+  * [Nvidia's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[ 16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
+  * Nvidia's [Kepler(7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS(Including macOS 11: Big Sur)
+     * This is due to Apple still supporting a few [MacBook Pros with Nvidia GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html)
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
   * Note GT2 refers to the tier of iGPU, low end GT1 iGPUs found on Pentiums, Celerons and Atoms are not supported in macOS
 
-And a bit note for **Laptops with discrete GPUs**:
+And an important note for **Laptops with discrete GPUs**:
 
 * 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these dGPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide.)
 * However, in some cases, the discrete GPU powers any external outputs (HDMI, mini DisplayPort, etc.), which may or may not work; in the case that it will work, you will have to keep the card on and running.
 * However, there are some laptops which rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually causes issues.
 
-**For a full list, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)**
+**For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)**
 
 ## Motherboard Support
 
-For the most part, all motherboards are supported as long as the CPU is. the sole exception being:
+For the most part, all motherboards are supported as long as the CPU is. The sole exception being:
 
-* AMD's B550 boards
+* [AMD's B550 boards](https://www.amd.com/en/chipsets/b550)
 
-There's currently no fixes for the boards besides running in a KVM, similar to AMD's 3rd gen ThreadRipper CPUs.
+There's currently no fixes for the boards besides running in a KVM(Virtual Machine), similar to AMD's 3rd gen ThreadRipper CPUs.
 
 ## Storage Support
 
@@ -83,7 +85,7 @@ Virtually all wired network adapters have some form of support in macOS, either 
 
 * Intel's 2.5GBe i225 networking
   * Found on high-end Desktop Comet Lake boards
-  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](https://github.com/SchmockLord/Hackintosh-Intel-i9-10900k-Gigabyte-Z490-Vision-D)
+  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](/config.plist/comet-lake#add-2)
 * Intel's server NICs
   * Workarounds are possible for [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
 * Mellanox and Qlogic server NICs
