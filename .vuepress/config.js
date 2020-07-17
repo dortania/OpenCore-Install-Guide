@@ -131,7 +131,7 @@ module.exports = {
             children: [{
                 title: 'Intel Desktop config.plist',
                 collapsable: true,
-				sidebarDepth: 2,
+				sidebarDepth: 1,
                 children: [
                     ['/config.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config.plist/haswell', 'Haswell'],
@@ -144,7 +144,7 @@ module.exports = {
             {
                 title: 'Intel Laptop config.plist',
                 collapsable: true,
-				sidebarDepth: 2,
+				sidebarDepth: 1,
                 children: [
                     ['/config-laptop.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config-laptop.plist/haswell', 'Haswell'],
@@ -159,7 +159,7 @@ module.exports = {
             {
                 title: 'Intel HEDT config.plist',
                 collapsable: true,
-				sidebarDepth: 2,
+				sidebarDepth: 1,
                 children: [
                     '/config-HEDT/haswell-e',
                     '/config-HEDT/broadwell-e',
@@ -169,7 +169,7 @@ module.exports = {
             {
                 title: 'AMD Desktop config.plist',
                 collapsable: true,
-				sidebarDepth: 2,
+				sidebarDepth: 1,
                 children: [
                     '/AMD/fx',
                     '/AMD/zen',

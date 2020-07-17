@@ -9,8 +9,11 @@
 
 **ACPI**:
 
-* SSDT-PLUG is not supported
 * Use SSDT-EC instead of SSDT-EC-USBX
+
+**Kernel**:
+
+* Ignore the `Emulate` section as the CPUs are properly supported
 
 **SMBIOS**:
 

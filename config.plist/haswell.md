@@ -98,9 +98,11 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 
-* `0300220D` - this is used when the Desktop Haswell iGPU is used to drive a display
-* `04001204` - this is used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display
-* `07002216` - this is used when the Desktop Broadwell iGPU
+| AAPL,ig-platform-id | Comment |
+| :--- | :--- |
+| 0300220D | Used when the Desktop Haswell iGPU is used to drive a display |
+| 04001204 | Used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display |
+| 07002216 | Used when the Desktop Broadwell iGPU |
 
 I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
 

@@ -1,4 +1,4 @@
-# Laptop Coffee Lake Plus
+# Laptop Coffee Lake Plus and Comet Lake
 
 * Supported version: 0.5.9
 
