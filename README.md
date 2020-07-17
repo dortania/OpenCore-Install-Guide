@@ -10,9 +10,16 @@ meta:
   content: Current supported version 0.5.9
 ---
 
-## Who is this guide for
+## What is OpenCore and who is this guide for
 
-This guide focuses on the process of installing macOS on X86 based PCs, with the aid of a tool called OpenCore. This guide is open to users of all skill level but you must be willing to read, learn and google frequently. This is not a simple 1-click install setup.
+OpenCore is what we refer to as a "boot loader", this is a complex piece of software that we use to prepare our systems for macOS. Specifically by injecting new data for macOS such as SMBIOS, ACPI tables and kexts. How this tool differs from others like Clover is that this has been designed with security and quality in mind, allowing us to use many security features on real macs such as SIP and FileVault. A more in-depth look can be found at here: [Why OpenCore over Clover and others](why-oc.md)
+
+This guide specifically focuses on 2 main things:
+
+* Installing macOS on an X86 based PC
+* Teach you what makes your hack work
+
+Because of this, you will be expected to read, learn and even google. This is not a simple 1-click install setup.
 
 Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, it is still being frequently updated and so chunks of configuration change quite often(ie. New quirks replacing old ones)
 
