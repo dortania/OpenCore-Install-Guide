@@ -23,6 +23,7 @@
     "vuepress-theme-succinct": "^1.5.2"
   },
   "dependencies": {
+    "markdown-it-multimd-table": "^4.0.3",
     "vuepress-theme-yuu": "^2.3.0"
   }
 }
