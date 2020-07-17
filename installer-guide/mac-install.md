@@ -12,7 +12,7 @@ To start we'll want to grab ourselves a copy of macOS, you can skip this and hea
 1. First follow the [Legacy Install](/extras/legacy.html) section
 2. Once completed, continue the guide at the **[Downloading macOS](#downloading-macos)** section
 
-For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra and older), follow the [Legacy macOS install](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/installer-guide/legacy-mac-install.md) guide
+For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra and older), follow the [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md) guide
 
 ## Downloading macOS
 

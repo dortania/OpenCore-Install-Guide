@@ -35,7 +35,15 @@ module.exports = {
             href: "/styles/website.css"
         },]
     ],
-    base: '/OpenCore-Desktop-Guide/',
+    base: '/OpenCore-Install-Guide/',
+	
+	markdown: {
+		extendMarkdown: md => {
+			md.use(require('markdown-it-multimd-table'), {
+				rowspan: true,
+			});
+		}
+	},
 
 
     /**
@@ -50,7 +58,7 @@ module.exports = {
 
     themeConfig: {
         lastUpdated: true,
-        repo: 'https://github.com/dortania/OpenCore-Desktop-Guide',
+        repo: 'https://github.com/dortania/OpenCore-Install-Guide',
         editLinks: false,
         docsDir: '',
         editLinkText: '',
@@ -87,7 +95,7 @@ module.exports = {
             /*
               {
                 text: 'Github',
-                link: 'https://github.com/dortania/OpenCore-Desktop-Guide'
+                link: 'https://github.com/dortania/OpenCore-Install-Guide'
               }
             */
         ],
@@ -276,7 +284,7 @@ module.exports = {
                 '/extras/kaslr-fix',
                 '/extras/spoof',
                 '/extras/big-sur/',
-                ['https://github.com/dortania/OpenCore-Desktop-Guide/tree/master/clover-conversion', 'Clover Conversion'],
+                ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
             ]
         },
         {

@@ -41,7 +41,7 @@ Some guidelines when contributing via PRs:
 
 Best way to test your commits and make sure they are formatted correctly is downloading `nodejs` and `yarn` then getting the VuePress and [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) tools. When you run `yarn dev`, it will set up a local webserver which you can connect to view the changes you made. `markdownlint *` will throw any errors at you about formatting as well, and `markdownlint -f *` will attempt to fix these.
 
-* [Fork this repo](https://github.com/dortania/OpenCore-Desktop-Guide/fork/)
+* [Fork this repo](https://github.com/dortania/OpenCore-Install-Guide/fork/)
 * Install the required tools:
   * `brew install yarn`
   * `npm install -g markdownlint-cli`

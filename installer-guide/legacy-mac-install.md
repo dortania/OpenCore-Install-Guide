@@ -1,6 +1,6 @@
 # Grabbing older versions of macOS/OS X
 
-* Note: For those doubting OpenCore works on older versions, see here: [OpenCore running on legacy](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/installer-guide/legacy/README.md)
+* Note: For those doubting OpenCore works on older versions, see here: [OpenCore running on legacy](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy/README.md)
 
 So with older versions of macOS/OS X, Apple removed them from their Software Catalog that GibMacOS pulls from. To get around this, we can actually use Apple's archived versions. Luckily for us, we don't need to resort to sketchy sites instead using Apple's official site(Note that Mavericks and older are no longer officially hosted):
 
@@ -118,4 +118,4 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
 
-### Now with all this done, head to [Setting up the EFI](https://dortania.github.io/OpenCore-Desktop-Guide/installer-guide/opencore-efi.html) to finish up your work
+### Now with all this done, head to [Setting up the EFI](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/opencore-efi.html) to finish up your work

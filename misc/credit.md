@@ -45,7 +45,7 @@ Guides linked or those that inspired this guide:
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
 * [gfxutil](https://github.com/acidanthera/gfxutil/releases)
 
-And for those who have recommendations or issues with this guide, you can find the GitHub repo for this site [here](https://github.com/dortania/OpenCore-Desktop-Guide).
+And for those who have recommendations or issues with this guide, you can find the GitHub repo for this site [here](https://github.com/dortania/OpenCore-Install-Guide).
 
 **Sources**:
 
