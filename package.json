@@ -1,7 +1,7 @@
 {
    "name":"OpenCore-Install-Guide",
-   "version":"0.0.1",
-   "description":"",
+   "version": "0.5.9",
+   "description": "Guide to put macOS on unsupported devices",
    "main":"index.js",
    "authors":{
       "name":"",
