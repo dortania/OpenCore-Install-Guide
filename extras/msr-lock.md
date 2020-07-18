@@ -13,10 +13,10 @@ CFG-Lock is a setting in your BIOS that allows for a specific register(in this c
 So to fix it we have 2 options:
 
 * Patch macOS to work with our hardware
-* This creates instability and unnecessary patching for many
-* The 2 patches we use for this:
-  * `AppleCpuPmCfgLock` for AppleIntelPowerManagement.kext
-  * `AppleXcpmCfgLock` for the Kernel(XNU)
+  * This creates instability and unnecessary patching for many
+  * The 2 patches we use for this:
+    * `AppleCpuPmCfgLock` for AppleIntelPowerManagement.kext
+    * `AppleXcpmCfgLock` for the Kernel(XNU)
 
 * Patch our firmware to support MSR E2 write
   * Very much preferred, as avoids patching allowing for greater flexibility regarding stability and OS upgrades
