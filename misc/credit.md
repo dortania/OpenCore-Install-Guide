@@ -39,7 +39,7 @@ And to the rest who've helped out as well, thank you!
 Guides linked or those that inspired this guide:
 
 * [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)
-* [All-in-one Vanilla AMD Hackintosh Guide](https://kb.hackintoshisfun.ml/clover/)
+* [All-in-one Vanilla AMD Hackintosh Guide](https://github.com/doesprintfwork/All-in-one-Vanilla-AMD-Hackintosh-Guide)
 * [USB Map Guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
 * [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)

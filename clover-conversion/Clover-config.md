@@ -84,8 +84,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
 * **FixShutdown**:
-  * [FixShutdown-USB-SSDT](https://github.com/dortania/OpenCore-Post-Install/extra-files/FixShutdown-USB-SSDT.dsl)
-  * [`_PTS` to `ZPTS` Patch](https://github.com/dortania/OpenCore-Post-Install/extra-files/FixShutdown-Patch.plist)
+  * [FixShutdown-USB-SSDT](https://github.com/dortania/OpenCore-Post-Install/blob/master/extra-files/FixShutdown-USB-SSDT.dsl)
+  * [`_PTS` to `ZPTS` Patch](https://github.com/dortania/OpenCore-Post-Install/blob/master/extra-files/FixShutdown-Patch.plist)
   * This will not harm Windows or Linux installs as this is just adding missing methods that should've been there to start with. *Blame the firmware writers*
 
 * **FixDisplay**:

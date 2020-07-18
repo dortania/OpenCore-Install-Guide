@@ -369,7 +369,7 @@ On rare occasions(mainly laptops), the SATA controller isn't officially supporte
   * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accessible in macOS.
 * [SATA-unsupported.kext](https://github.com/RehabMan/hack-tools/tree/master/kexts/SATA-unsupported.kext)
   * Adds support to obscure SATA controllers, commonly being laptops.
-  * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/foru…) may be more suitable.
+  * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) may be more suitable.
 
 Note that you will only experience this issue after installing macOS onto the drive, booting the macOS installer will not error out due to SATA issues.
 
