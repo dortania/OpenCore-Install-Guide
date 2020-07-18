@@ -3,20 +3,7 @@ const {
 } = require('../package')
 
 module.exports = {
-    /**
-     * Ref：https://v1.vuepress.vuejs.org/config/#title
-     */
     title: 'OpenCore Install Guide',
-    /**
-     * Ref：https://v1.vuepress.vuejs.org/config/#description
-     */
-    description: description,
-
-    /**
-     * Extra tags to be injected to the page HTML `<head>`
-     *
-     * ref：https://v1.vuepress.vuejs.org/config/#head
-     */
     head: [
         ['meta', {
             name: 'theme-color',
@@ -44,13 +31,7 @@ module.exports = {
 			});
 		}
 	},
-
-
-    /**
-     * Theme configuration, here is the default theme configuration for VuePress.
-     *
-     * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
-     */
+	
     theme: 'vuepress-theme-succinct',
     globalUIComponents: [
         'ThemeManager'
@@ -59,9 +40,8 @@ module.exports = {
     themeConfig: {
         lastUpdated: true,
         repo: 'https://github.com/dortania/OpenCore-Install-Guide',
-        editLinks: false,
-        docsDir: '',
-        editLinkText: '',
+		editLinks: true,
+		editLinkText: 'Help us improve this page!'
         logo: '/homepage.png',
         nav: [{
             text: 'Dortania Guides',
@@ -92,12 +72,6 @@ module.exports = {
             },
             ]
         },
-            /*
-              {
-                text: 'Github',
-                link: 'https://github.com/dortania/OpenCore-Install-Guide'
-              }
-            */
         ],
         sidebar: [{
             title: 'Introduction',
@@ -297,10 +271,6 @@ module.exports = {
         },
         ],
     },
-
-    /**
-     * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
-     */
     plugins: [
         '@vuepress/plugin-back-to-top',
         'vuepress-plugin-smooth-scroll',
