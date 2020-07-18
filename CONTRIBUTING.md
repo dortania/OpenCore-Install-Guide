@@ -39,19 +39,20 @@ Some guidelines when contributing via PRs:
 
 ### How to Contribute
 
-Best way to test your commits and make sure they are formatted correctly is downloading `nodejs` and `yarn` then getting the VuePress and [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) tools. When you run `yarn dev`, it will set up a local webserver which you can connect to view the changes you made. `markdownlint *` will throw any errors at you about formatting as well, and `markdownlint -f *` will attempt to fix these.
+Best way to test your commits and make sure they are formatted correctly is downloading Node.js then running `npm install` to install dependencies. When you run `npm run dev`, it will set up a local webserver which you can connect to view the changes you made. `npm test` will throw any errors at you about formatting and spellchecking as well. If you want `markdownlint` to automatically attempt to fix linting, run `npm run fix-lint`.
 
 * [Fork this repo](https://github.com/dortania/OpenCore-Install-Guide/fork/)
 * Install the required tools:
-  * `brew install yarn`
-  * `npm install -g markdownlint-cli`
+  * Node.js
 * Make your changes.
 * Build the site:
-  * `yarn install` (To install all the required plugins)
-  * `yarn dev` (Preview the site)
+  * `npm install` (To install all the required plugins)
+  * `npm dev` (Preview the site)
     * Can be found at `http://localhost:8080`
-* Check markdown format:
-  * `markdownlint -f *` (To fix any potential issues)
+* Check linting and spellcheck:
+  * `npm test`
+  * `npm run lint` and `npm run spellcheck` (to run them individually)
+  * `npm run fix-lint` (To fix any potential issues)
 
 ### Tips
 
