@@ -852,6 +852,8 @@ pre-Skylake
 pre-built
 pre-builts
 pre-compiled
+pre-existing
+pre-hex
 pre-made
 precompiled
 prelinked
