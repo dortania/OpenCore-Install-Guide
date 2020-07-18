@@ -80,6 +80,8 @@ Removing Cpu0Ist:
 
 ### Patch
 
+::: tip Info
+
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
 
 * OSI rename
@@ -92,6 +94,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Limit | Number | 0 |
 | Find | Data | 5f4f5349 |
 | Replace | Data | 584f5349 |
+
+:::
 
 ### Quirks
 
