@@ -1,5 +1,5 @@
 {
-  "name": "OpenCore-Desktop-Guide",
+  "name": "OpenCore-Install-Guide",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -7,14 +7,15 @@
     "name": "",
     "email": ""
   },
-  "repository": "/OpenCore-Desktop-Guide",
+  "repository": "/OpenCore-Install-Guide",
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build"
   },
-  "license": "MIT",
+  "license": "Attribution-NonCommercial-ShareAlike 4.0 International",
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.2",
+    "markdown-link-check": "^3.8.1",
     "vuepress": "^1.5.2",
     "vuepress-plugin-medium-zoom": "^1.1.8",
     "vuepress-plugin-zooming": "^1.1.7",
