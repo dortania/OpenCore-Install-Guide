@@ -1,3 +1,5 @@
+# AMD USB Map
+
 For those looking for the AMD USB map guide, it has been moved here:
 
 * [USB Map guide](https://dortania.github.io/OpenCore-Post-Install/usb/)

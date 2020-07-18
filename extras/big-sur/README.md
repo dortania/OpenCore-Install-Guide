@@ -102,23 +102,25 @@ With installation, you'll need a few things:
 
 To grab the Big Sur installer, download the beta profile from Apple's developer portal, then check for updates in System Preferences. If you don't have a developer account, you can use gibMacOS to download it:
 
-1. Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
+Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
 
 ![](../../images/extras/big-sur/readme/gib-default.png)
 
-2. Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
+Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
 
 ![](../../images/extras/big-sur/readme/10-16-ver.png)
 
-3. Press `C` to change the catalog, then select the number for the developer catalog.
+Press `C` to change the catalog, then select the number for the developer catalog.
 
 ![](../../images/extras/big-sur/readme/dev-cat.png)
 
-4. Select the number for the Big Sur beta to start downloading it. (screenshot)
+Select the number for the Big Sur beta to start downloading it. (screenshot)
 
 ![](../../images/extras/big-sur/readme/big-sur-download.png)
 
-5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Big Sur Beta.app` in your `/Applications` folder.
+Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS
+
+Downloads/developer/XXX-XXXXX - Install macOS Beta`folder. This package from Apple will create`Install macOS Big Sur Beta.app`in your`/Applications` folder.
 
 ![](../../images/extras/big-sur/readme/final-download.png)
 
@@ -178,7 +180,7 @@ As previously mentioned, Intel HEDT motherboards may have some issues revolving 
 
 If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
 
-* Ensure you're using the latest builds of VitualSMC and Lilu, with the `vsmcgen=1` boot-arg
+* Ensure you're using the latest builds of VirtualSMC and Lilu, with the `vsmcgen=1` boot-arg
 * Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/) (you can use the `MinKernel`/`MaxKernel` trick mentioned above to restrict FakeSMC to Big Sur and up
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
@@ -251,7 +253,7 @@ for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); do hdiutil eje
 hdiutil eject ${DISK}
 ```
 
-You now have an raw image of the installer. Follow the appropriate page for the hypervisor you'll be choosing:
+You now have a raw image of the installer. Follow the appropriate page for the hypervisor you'll be choosing:
 
 * [VirtualBox](virtualbox.md)
 * [VMware Fusion](fusion.md)

@@ -9,7 +9,7 @@
 
 ## Converting Installation Media
 
-VirtualBox cannot directly use a raw disk image, so we're going to convert it to a VDI.
+VirtualBox cannot directly use a raw disk image, so we're going to convert it to a `VDI`.
 
 `cd` to the location of the disk image and run the following:
 

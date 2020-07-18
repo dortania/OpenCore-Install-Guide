@@ -57,7 +57,7 @@ Couple problems:
 * `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
   * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
 To verify whether your board has MATs, check the logs for something like this:
 
@@ -87,7 +87,7 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 * `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
   * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
 To verify whether your board has MATs, check the logs for something like this:
 
@@ -127,7 +127,7 @@ This is due to missing ConsoleGOP, enable it under your config:
 
 * `UEFI -> Output -> ProvideConsoleGop`
 
-Another possibility is that the problem occurres due to `RebuildAppleMemoryMap` being enabled, disable it under your config:
+Another possibility is that the problem occurs due to `RebuildAppleMemoryMap` being enabled, disable it under your config:
 
 * `Booter -> Quirks -> RebuildAppleMemoryMap`
 
@@ -366,7 +366,7 @@ On rare occasions(mainly laptops), the SATA controller isn't officially supporte
 
 * Set SATA to AHCI mode in the BIOS
   * macOS doesn't support hardware RAID or IDE mode properly.
-  * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accesible in macOS.
+  * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accessible in macOS.
 * [SATA-unsupported.kext](https://github.com/RehabMan/hack-tools/tree/master/kexts/SATA-unsupported.kext)
   * Adds support to obscure SATA controllers, commonly being laptops.
   * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/foru…) may be more suitable.
@@ -787,8 +787,8 @@ Oddly enough, macOS has locked down digital audio from having control. To bring 
 SIP or proper known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
 
 You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you):
-   
-* `00000000` - SIP completely enabled (0x0).   
+
+* `00000000` - SIP completely enabled (0x0).
 * `03000000` - Disable kext signing (0x1) and filesystem protections (0x2).
 * `FF030000` - Disable all [flags in macOS High Sierra](https://opensource.apple.com/source/xnu/xnu-4570.71.2/bsd/sys/csr.h.auto.html) (0x3ff).
 * `FF070000` - Disable all [flags in macOS Mojave](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) and in [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) as Apple introduced a value for executable policy.

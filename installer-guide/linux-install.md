@@ -51,7 +51,7 @@ In terminal:
       * Confirm with `y`
       ![](../images/installer-guide/linux-install-md/unknown-9.png)
       * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
-   6. Close `gdisk` by sending `q` (normally it should quit on its own)
+   5. Close `gdisk` by sending `q` (normally it should quit on its own)
 3. Use `lsblk` to determine your partition's identifiers
 4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your USB partition block>` to format your USB to FAT32 and named OPENCORE
 5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file

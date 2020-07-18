@@ -1,6 +1,6 @@
 # Getting started with OpenCore
 
-Before we can jump head first into making an OpeCore based system, we need to go over a few things.
+Before we can jump head first into making an OpenCore based system, we need to go over a few things.
 
 ## Prerequisites
   

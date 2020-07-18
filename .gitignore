@@ -6,3 +6,4 @@ package-lock.json
 .vuepress/dist
 yarn.lock
 .vuepress/.config.js.swp
+yarn-error.log

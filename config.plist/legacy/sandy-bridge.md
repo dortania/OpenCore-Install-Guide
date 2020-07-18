@@ -28,7 +28,7 @@ Actually almost identical to an Ivy Bridge hack, the main things that need to be
     * `device-id | Data | 26010000`
   * Laptop iGPU(HD 3000 only):
     * `AAPL,snb-platform-id | Data | 00000100`
- 
+
 * Under `PciRoot(0x0)/Pci(0x16,0x0)`
   * `device-id | Data | 3A1C0000`
     * This is only required when using the SSDT-IMEI, see above if you need it.

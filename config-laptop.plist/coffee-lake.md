@@ -589,7 +589,7 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 :::
 
-### ReservedMemo
+### ReservedMemory
 
 Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide
 
@@ -644,4 +644,4 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-## Now with all this done, head to the [Installation Page](/installation/installation-process).
+## Now with all this done, head to the [Installation Page](/installation/installation-process)
