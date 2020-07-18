@@ -9,36 +9,13 @@
 
 [data-theme='dark']
  --sideBgColor $sideBgColorDark
- --bgColor $bgColor
+ --dropShadowColor $dropShadowColor
 
 .home .hero img
   max-width 450px!important
-
-// [data-theme='light']
-//   display none
-
-
-// .home .hero img
-//   max-width 450px!important
-/**
-html
-body
-  background-color var(--bgColor)
-
-.theme-default-content:not(.custom)
-  max-width 1000px
-
-.navbar
-.links
-  background-color var(--navBgColorDark)!important
-
-.navbar
-  filter: drop-shadow(0px 1px 1px var(--bgColor));
-
-*/
   
 .navbar
-  filter: drop-shadow(0px 1px 1px var(--bgColor));
+  filter drop-shadow(0px 1px 1px var(--dropShadowColor))
 
 .sidebar
   background-color var(--sideBgColor)
@@ -51,8 +28,8 @@ html {
   overflow:   scroll;
 }
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    width 0px
+    background transparent /* make scrollbar transparent */
 }
 
 tr
@@ -64,7 +41,7 @@ tr
 	 
 
 .dropdown-wrapper .nav-dropdown
-  border: 1px solid var(--sideBgColor)!important
+  border 1px solid var(--sideBgColor)!important
   background-color var(--sideBgColor)!important
-  box-shadow: 0px 0px 2px var(--bodyBgColor)
-  right: -12%!important
+  box-shadow 0px 0px 2px var(--bodyBgColor)
+  right -12%!important
