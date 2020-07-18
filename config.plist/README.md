@@ -96,7 +96,7 @@ This section includes both enthusiast and server based hardware.
 
 ### Legacy
 
-Note that this is only guide-lines and will not be full-features guides like the other generations. This is mainly due to not enough testing, verifiable information and overall community support as these hardware are become less and less used.
+Note that these are only guidelines and will not be full-featured guides like the other generations. This is mainly due to not enough testing, verifiable information, and overall community support as this hardware become less and less used.
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
