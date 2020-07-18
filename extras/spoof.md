@@ -27,13 +27,13 @@ Do note that this will disable all GPUs excluding the iGPU.
 
 Here is quite simple, find the PCI route with [gfxutil](https://github.com/acidanthera/gfxutil/releases) and then create a new DeviceProperties section with your spoof:
 
-```text
+```
 path/to/gfxutil -f GFX0
 ```
 
 And the output will result in something similar:
 
-```text
+```
 DevicePath = PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
 ```
 
@@ -42,65 +42,67 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | name | data | 23646973706C6179 |
-| IOName | string | \#display |
+| IOName | string | #display |
 | class-code | data | FFFFFFFF |
 
-![](/images/extras/spoof-md/config-gpu.png)
+![](../images/extras/spoof-md/config-gpu.png)
 
 ### SSDT Method
 
 There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.
 
-Example of device path:
+Example of device path for `\_SB.PCI0.PEG0.PEGP`:
 
-`\_SB.PCI0.PEG0.PEGP`
+```
 
     DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0x00000000)
     {
        External (_SB_.PCI0.PEG0.PEGP, DeviceObj)    // (from opcode)
-    
+
        Method (_SB.PCI0.PEG0.PEGP._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
        {
           If (LOr (LNot (Arg2), LEqual (_OSI ("Darwin"), Zero)))
           {
              Return (Buffer (One)
              {
-                0x03                                           
+                0x03
              })
           }
-    
+
           Return (Package (0x0A)
           {
-             "name", 
+             "name",
              Buffer (0x09)
              {
                 "#display"
-             }, 
-    
-             "IOName", 
-             "#display", 
-             "class-code", 
-             Buffer (0x04)
-             {
-                0xFF, 0xFF, 0xFF, 0xFF                         
-             }, 
+             },
 
-             "vendor-id", 
+             "IOName",
+             "#display",
+             "class-code",
              Buffer (0x04)
              {
-                0xFF, 0xFF, 0x00, 0x00                         
-             }, 
-    
-             "device-id", 
+                0xFF, 0xFF, 0xFF, 0xFF
+             },
+
+             "vendor-id",
              Buffer (0x04)
              {
-                0xFF, 0xFF, 0x00, 0x00                         
+                0xFF, 0xFF, 0x00, 0x00
+             },
+
+             "device-id",
+             Buffer (0x04)
+             {
+                0xFF, 0xFF, 0x00, 0x00
              }
           })
        }
     }
 
-A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this. Remember that `.aml` is assembled and `.dsl` is source code. You can compile with MaciASL by selecting File -> Save As -> ACPI Machine Language.
+```
+
+A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Spoof-SSDT.dsl) You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this. Remember that `.aml` is assembled and `.dsl` is source code. You can compile with MaciASL by selecting File -> Save As -> ACPI Machine Language.
 
 Source: CorpNewt
 
@@ -110,15 +112,15 @@ Depending on your setup, you may find that Windows renders games or applications
 
 Many users only have two GPUs. Nvidia and the Intel HD/UHD IGPU. Since Nvidia no longer works on macOS, they may have the monitor plugged into the motherboards HDMI/DP connection for convenience. As a result, Windows will render all games and applications through the IGPU. You can reroute a specific game or application to a different GPU by going to: Settings > System > Display > Graphics settings
 
-![Credit to CorpNewt for image](/images/extras/spoof-md/corp-windows.png)
+![Credit to CorpNewt for image](../images/extras/spoof-md/corp-windows.png)
 
 The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides:
 
-- GSync will no longer work.
-- Nvidia settings can no longer be opened.
-- Decreased frame rate.
-- Increased input latency.
-- Refresh rate cap.
+* GSync will no longer work.
+* Nvidia settings can no longer be opened.
+* Decreased frame rate.
+* Increased input latency.
+* Refresh rate cap.
 
 If your motherboard only has an HDMI connector for the IGPU, the maximum refresh rate for spec 2.1 is [120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). This assumes your board, cable and monitor are of the same spec. This means your 144Hz monitor is only seeing a maximum of 120Hz as determined by the hardware. This limitation *does not* apply if your board has a DP connector for the IGPU.
 

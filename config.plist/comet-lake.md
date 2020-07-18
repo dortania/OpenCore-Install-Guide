@@ -1,7 +1,6 @@
-# Comet Lake
+# Desktop Comet Lake
 
 * Supported version: 0.5.9
-* [Comet Lake Laptop Guide](https://dortania.github.io/vanilla-laptop-guide/OpenCore/config.html)
 * **Note**: This guide only supports Comet Lake on 10.15.5 or newer
 
 <extoc></extoc>
@@ -27,11 +26,13 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](/images/config/config.plist/cometlake/acpi.png)
+![ACPI](../images/config/config.plist/cometlake/acpi.png)
 
 ### Add
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/USB-Map-Guide/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+::: tip Info
+
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](/extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
@@ -46,11 +47,13 @@ Note that you **should not** add your generated `DSDT.aml` here, it is already i
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
-#### Delete
+:::
+
+### Delete
 
 This blocks certain ACPI tables from loading, for us we can ignore this.
 
-#### Patch
+### Patch
 
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
 
@@ -60,7 +63,7 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](/images/config/config-universal/hedt-booter.png)
+![Booter](../images/config/config-universal/hedt-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -90,20 +93,22 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 
 ## DeviceProperties
 
-![DeviceProperties](/images/config/config.plist/coffeelake/DeviceProperties.png)
+![DeviceProperties](../images/config/config.plist/cometlake/DeviceProperties.png)
 
 ### Add
 
 Sets device properties from a map.
 
-#### PciRoot(0x0)/Pci(0x2,0x0)
+::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and two values choose between are as follows:
 
-* `07009B3E` - this is used when the Desktop iGPU is used to drive a display
-* `0300C89B` - this is used when the Desktop iGPU is only used for computing tasks and doesn't drive a display
+| AAPL,ig-platform-id | Comment |
+| :--- | :--- |
+| 07009B3E | Used when the Desktop iGPU is used to drive a display |
+| 0300C89B | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
@@ -117,14 +122,30 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 (This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
 
-#### PciRoot(0x0)/Pci(0x1b,0x0)
+:::
+
+::: tip PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
+
+This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's i225LM driver into supporting our i225-V network controller:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | F2150000 |
+
+**Note**: If your board didn't ship with the Intel i225 NIC, there's no reason to add this entry.
+
+:::
+
+::: tip PciRoot(0x0)/Pci(0x1b,0x0)
 
 `layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 * You can delete this property outright as it's unused for us at this time
 
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](/post-install/README.md)
+For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
+
+:::
 
 ### Delete
 
@@ -132,7 +153,7 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](/images/config/config-universal/kernel.png)
+![Kernel](../images/config/config-universal/kernel.png)
 
 ### Add
 
@@ -162,7 +183,23 @@ Patches both the kernel and kexts.
 
 ### Quirks
 
-Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `AppleXcpmCfgLock`, `DisableIOMapper`,  `PanicNoKextDump`, `PowerTimeoutKernelPanic` and `XhciPortLimit`. Everything else should be left as default
+::: tip Info
+
+Settings relating to the kernel, for us we'll be enabling the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
+| AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
+| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| LapicKernelPanic | NO | HP Machines will require this quirk |
+| PanicNoKextDump | YES | |
+| PowerTimeoutKernelPanic | YES | |
+| XhciPortLimit | YES | |
+
+:::
+
+::: details More in-depth Info
 
 * **AppleCpuPmCfgLock**: YES
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
@@ -181,13 +218,15 @@ Settings relating to the kernel, for us we'll be enabling `AppleCpuPmCfgLock`, `
 * **PowerTimeoutKernelPanic**: YES
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
 * **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/USB-Map-Guide/) when possible.
+  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
+:::
+
 ## Misc
 
-![Misc](/images/config/config-universal/misc.png)
+![Misc](../images/config/config-universal/misc.png)
 
 ### Boot
 
@@ -195,7 +234,20 @@ Settings for boot screen (Leave everything as default).
 
 ### Debug
 
-Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`).
+::: tip Info
+
+Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`):
+
+| Quirk | Enabled |
+| :--- | :--- |
+| AppleDebug | YES |
+| ApplePanic | YES |
+| DisableWatchDog | YES |
+| Target | 67 |
+
+:::
+
+::: details More in-depth Info
 
 * **AppleDebug**: YES
   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
@@ -210,11 +262,24 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
 
 These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
 
+:::
+
 ### Security
 
-Security is pretty self-explanatory, **do not skip**.
+::: tip Info
 
-We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
+Security is pretty self-explanatory, **do not skip**. We'll be changing the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| AllowNvramReset | YES | |
+| AllowSetDefault | YES | |
+| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+| ScanPolicy | 0 | |
+
+:::
+
+::: details More in-depth Info
 
 * **AllowNvramReset**: YES
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
@@ -232,19 +297,13 @@ We'll be changing `AllowNvramReset`, `AllowSetDefault`, `Vault` and `ScanPolicy`
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](/post-install/security.md) section for further details. **Will not boot USB devices with this set to default**
+  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+
+:::
 
 ### Tools
 
-Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you. For us, we won't be using any tools.
-
-* **Name**
-  * Name shown in OpenCore
-* **Enabled**
-  * Self-explanatory, enables or disables
-* **Path**
-  * Path to file after the `Tools` folder
-  * ex: [OpenShell.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you.
 
 ### Entries
 
@@ -254,23 +313,31 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](/images/config/config-universal/nvram.png)
+![NVRAM](../images/config/config-universal/nvram.png)
 
 ### Add
 
-#### `4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14`
+::: tip 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+
+Used for OpenCore's UI scaling, default will work for us. See in-depth section for more info
+
+:::
+
+::: details More in-depth Info
 
 Booter Path, mainly used for UI Scaling
 
 * **UIScale**:
-  * `01`: Standard resolution(Clover equivalent is `0x28`)
-  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays, Clover equivalent is `0x2A`)
+  * `01`: Standard resolution
+  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
   * `00000000`: Syrah Black
   * `BFBFBF00`: Light Gray
 
-#### `7C436110-AB2A-4BBB-A880-FE41995C9F82`
+:::
+
+::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
 System Integrity Protection bitmask
 
@@ -281,7 +348,7 @@ System Integrity Protection bitmask
 | **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
 | **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](/post-install/audio.md) |
+| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
 
 * **GPU-Specific boot-args**:
 
@@ -294,7 +361,7 @@ System Integrity Protection bitmask
 
 csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](/troubleshooting/troubleshooting.md#disabling-sip)
 
-* **prev-lang:kbd**: &lt;>
+* **prev-lang:kbd**: <>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
   * American: `en-US:0`(`656e2d55533a30` in HEX)
   * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
@@ -304,9 +371,21 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 | :--- | :--- | :--- |
 | prev-lang:kbd | String | en-US:0 |
 
+:::
+
 ### Delete
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+::: tip Info
+
+Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| WriteFlash | YES |
+
+:::
+
+::: details More in-depth Info
 
 **LegacyEnable**: NO
 
@@ -324,9 +403,13 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 * Enables writing to flash memory for all added variables.
 
+:::
+
 ## PlatformInfo
 
-![PlatformInfo](/images/config/config.plist/haswell/smbios.png)
+![PlatformInfo](../images/config/config.plist/haswell/smbios.png)
+
+::: tip Info
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
@@ -338,7 +421,7 @@ For this Comet Lake example, we'll chose the iMac19,1 SMBIOS - this is done inte
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```text
+```
   #######################################################
  #               iMac19,1 SMBIOS Info                  #
 #######################################################
@@ -357,7 +440,7 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](/post-install/iservices.md) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
 **Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
@@ -367,7 +450,11 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
+:::
+
 ### Generic
+
+::: details More in-depth Info
 
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
@@ -390,9 +477,11 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
+:::
+
 ## UEFI
 
-![UEFI](/images/config/config-universal/aptio-v-uefi.png)
+![UEFI](../images/config/config-universal/aptio-v-uefi.png)
 
 **ConnectDrivers**: YES
 
@@ -415,11 +504,11 @@ Settings related to the APFS driver, leave everything here as default.
 
 Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](/post-install/README.md)
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](/post-install/README.md)
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 
@@ -427,9 +516,20 @@ Relating to OpenCore's visual output,  leave everything here as default as we ha
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](/post-install/README.md)
+Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Quirks
+
+::: tip Info
+Relating to quirks with the UEFI environment, for us we'll be changing the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| UnblockFsConnect | NO | Needed mainly by HP motherboards |
+
+:::
+
+::: details More in-depth Info
 
 * **DeduplicateBootOrder**: YES
   * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
@@ -439,6 +539,8 @@ Mainly relevant for Virtual machines, legacy macs and FileVault users. See here 
 
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+
+:::
 
 ### ReservedMemory
 
@@ -484,6 +586,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 
-# Now with all this done
-
-... head to [Post-install](/post-install/README.md).
+# Now with all this done, head to the [Installation Page](/installation/installation-process)

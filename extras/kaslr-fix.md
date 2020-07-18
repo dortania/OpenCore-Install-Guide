@@ -16,20 +16,20 @@ Where this becomes an issue is when you introduce devices with either small memo
 
 Well as I mentioned earlier, this is for users who don't have enough space for the kernel or moves to a place that is too small. You'll generally experience an error similar to this when booting:
 
-```text
+```
 Error allocating 0x1197b pages at 0x0000000017a80000 alloc type 2
 Couldn't allocate runtime area
 ```
 
 With some variation:
 
-```text
+```
 Only 244/256 slide values are usable!
 ```
 
 Or even crashes while running macOS:
 
-```text
+```
 panic(cpu 6 caller 0xffffff801fc057ba): a freed zone element has been modified in zone kalloc.4096: expected 0x3f00116dbe8a46f6 but found 0x3f00116d00000000
 ```
 
@@ -150,7 +150,7 @@ And for users who are having issues finding their slide value can also type `$sl
 
 Well fret not, for there is a simple solution. After running `memmap` in the shell, run:
 
-```text
+```
 shell> fs0: //replace with your USB
 
 fs0:\> dir //to verify this is the right directory, if not try fs1 and so on
@@ -171,7 +171,7 @@ For extremely problematic systems like Threadripper TRX40 19H, we need to find s
 
 If you run the debug version of OpenCore with DevirtualiseMmio, you'll notice this in your logs:
 
-```text
+```
 21:495 00:009 OCABC: MMIO devirt start
 21:499 00:003 OCABC: MMIO devirt 0x60000000 (0x10000 pages, 0x8000000000000001) skip 0
 21:503 00:003 OCABC: MMIO devirt 0xFE000000 (0x11 pages, 0x8000000000000001) skip 0
@@ -197,4 +197,4 @@ Now lets take the above example and create our own MmioWhitelist, we'll need to 
 
 Should look something like this when done:
 
-![](/images/extras/kaslr-fix-md/mmio-white.png)
+![](../images/extras/kaslr-fix-md/mmio-white.png)

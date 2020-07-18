@@ -53,9 +53,9 @@ Also note that AMD OSX has updated their patches, but they are experimental and 
 
 ### Up-to-date kexts, bootloader and config.plist
 
-Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here: 
+Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here:
 
-* [Kext Repo](http://kexts.goldfish64.com/) 
+* [Kext Repo](http://kexts.goldfish64.com/)
 * [Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/).
 
 You will also need to ensure you have a few NVRAM variables set:
@@ -63,10 +63,10 @@ You will also need to ensure you have a few NVRAM variables set:
 * **`NVRAM` -> `Add` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82`**:
   * `boot-args`:
     * `-lilubetaall` (Enables Lilu and plugins on beta macOS versions)
-	  * Newest builds of Lilu and plugins do not require this boot-arg
+      * Newest builds of Lilu and plugins do not require this boot-arg
     * `vsmcgen=1` (works around VirtualSMC, or more specifically Lilu, not properly working in Big Sur)
-    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**. 
-	  * Newer builds of WhateverGreen should fix this (v1.4.1)
+    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**.
+      * Newer builds of WhateverGreen should fix this (v1.4.1)
 
 ### Known issues
 
@@ -87,7 +87,7 @@ With Big Sur, quite a bit broke. Mainly the following:
   * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
   * OpenCorePkg includes a sample SSDT that goes in-depth: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
-And while not an issue, SIP has now gained a new bit so to properly disable SIP you need set `csr-acive-config` to `FF0F0000`. See here for more info: [Disabling SIP](/troubleshooting/troubleshooting.md#disabling-sip)
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](/troubleshooting/troubleshooting.md#disabling-sip)
 
 ## Installation
 
@@ -102,34 +102,35 @@ With installation, you'll need a few things:
 
 To grab the Big Sur installer, download the beta profile from Apple's developer portal, then check for updates in System Preferences. If you don't have a developer account, you can use gibMacOS to download it:
 
-1. Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
+Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
 
-![](/images/extras/big-sur/readme/gib-default.png)
+![](../../images/extras/big-sur/readme/gib-default.png)
 
-2. Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
+Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
 
-![](/images/extras/big-sur/readme/10-16-ver.png)
+![](../../images/extras/big-sur/readme/10-16-ver.png)
 
-3. Press `C` to change the catalog, then select the number for the developer catalog.
+Press `C` to change the catalog, then select the number for the developer catalog.
 
-![](/images/extras/big-sur/readme/dev-cat.png)
+![](../../images/extras/big-sur/readme/dev-cat.png)
 
-4. Select the number for the Big Sur beta to start downloading it. (screenshot)
+Select the number for the Big Sur beta to start downloading it. (screenshot)
 
-![](/images/extras/big-sur/readme/big-sur-download.png)
+![](../../images/extras/big-sur/readme/big-sur-download.png)
 
-5. Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Big Sur Beta.app` in your `/Applications` folder.
+Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS
 
-![](/images/extras/big-sur/readme/final-download.png)
+Downloads/developer/XXX-XXXXX - Install macOS Beta`folder. This package from Apple will create`Install macOS Big Sur Beta.app`in your`/Applications` folder.
+
+![](../../images/extras/big-sur/readme/final-download.png)
 
 Run the InstallAssistant.pkg and point this to whichever drive you're booting off of, this is where the Install.app will be dropped:
 
-![](/images/extras/big-sur/readme/install-pkg.png)
+![](../../images/extras/big-sur/readme/install-pkg.png)
 
 Once done, you should find it located in your Applications folder:
 
-![](/images/extras/big-sur/readme/done.png)
-
+![](../../images/extras/big-sur/readme/done.png)
 
 ### Creating the installer
 
@@ -139,7 +140,7 @@ To create the USB is quite simple, grab your USB drive and open Disk Utility in 
 * Format: macOS Journaled
 * Scheme: GUID Partition Map
 
-![](/images/installer-guide/mac-install-md/format-usb.png)
+![](../../images/installer-guide/mac-install-md/format-usb.png)
 
 Once this is done, run the following command:
 
@@ -163,23 +164,23 @@ For the last one, if you get a kernel panic with Lilu we highly recommend you to
 
 #### Stuck at `Forcing CS_RUNTIME for entitlement`
 
-![Credit to Stompy for image](/images/extras/big-sur/readme/cs-stuck.jpg)
+![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
 This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
 
 #### Stuck at `PCI Configuration Begins` for Intel's HEDT boards
 
-![](/images/extras/big-sur/readme/rtc-error.jpg)
+![](../../images/extras/big-sur/readme/rtc-error.jpg)
 
 As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you'll need to look at your RTC device and see which regions are missing. For more information, see here: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
 #### Stuck on `ramrod`(^^^^^^^^^^^^^)
 
-![Credit to Notiflux for image](/images/extras/big-sur/readme/ramrod.jpg)
+![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
 
 If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
 
-* Ensure you're using the latest builds of VitualSMC and Lilu, with the `vsmcgen=1` boot-arg
+* Ensure you're using the latest builds of VirtualSMC and Lilu, with the `vsmcgen=1` boot-arg
 * Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/) (you can use the `MinKernel`/`MaxKernel` trick mentioned above to restrict FakeSMC to Big Sur and up
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
@@ -252,7 +253,7 @@ for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); do hdiutil eje
 hdiutil eject ${DISK}
 ```
 
-You now have an raw image of the installer. Follow the appropriate page for the hypervisor you'll be choosing:
+You now have a raw image of the installer. Follow the appropriate page for the hypervisor you'll be choosing:
 
 * [VirtualBox](virtualbox.md)
 * [VMware Fusion](fusion.md)

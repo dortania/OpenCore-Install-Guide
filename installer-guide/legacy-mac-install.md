@@ -1,6 +1,6 @@
 # Grabbing older versions of macOS/OS X
 
-* Note: For those doubting OpenCore works on older versions, see here: [OpenCore running on legacy](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/installer-guide/legacy/README.md)
+* Note: For those doubting OpenCore works on older versions, see here: [OpenCore running on legacy](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy/README.md)
 
 So with older versions of macOS/OS X, Apple removed them from their Software Catalog that GibMacOS pulls from. To get around this, we can actually use Apple's archived versions. Luckily for us, we don't need to resort to sketchy sites instead using Apple's official site(Note that Mavericks and older are no longer officially hosted):
 
@@ -12,7 +12,7 @@ Step 4. within those sites will give you a link to either Apple's `InstallMacOSX
 
 For those on newer OSes than those you're trying to create an installer for, Apple will give you a pleasant error that makes you want to cave your head into a desk:
 
-![](/images/installer-guide/legacy-mac-install-md/unsupported.png)
+![](../images/installer-guide/legacy-mac-install-md/unsupported.png)
 
 If this is you, follow below. For those able to run the installer can skip and go to [Creating the installer](#creating-the-installer)
 
@@ -20,7 +20,7 @@ If this is you, follow below. For those able to run the installer can skip and g
 
 To start, grab the InstallMacOSX/InstallOS.dmg and mount it:
 
-![](/images/installer-guide/legacy-mac-install-md/mount.png)
+![](../images/installer-guide/legacy-mac-install-md/mount.png)
 
 Next, let's open up terminal window and make a folder on our desktop to break things. Run one at a time:
 
@@ -78,31 +78,31 @@ Now we'll be formatting the USB to prep for both the macOS installer and OpenCor
 
 * Note by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices(Alternatively you can press the view button)
 
-![Formatting the USB](/images/installer-guide/mac-install-md/format-usb.png)
+![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
 
 Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372), note that the command is made for USB's formatted with the name `MyVolume`:
 
 * Mavericks:
 
-```text
+```
 sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ Mavericks.app --nointeraction
 ```
 
 * Yosemite:
 
-```text
+```
 sudo /Applications/Install\ OS\ X\ Yosemite.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ Yosemite.app
 ```
 
 * El Capitan:
 
-```text
+```
 sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app
 ```
 
 * Sierra:
 
-```text
+```
 sudo /Applications/Install\ macOS\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
@@ -112,10 +112,10 @@ This will take some time so may want to grab a coffee or continue reading the gu
 
 Setting up OpenCore's EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [MountEFI](https://github.com/corpnewt/MountEFI) comes in:
 
-![MountEFI](/images/installer-guide/mac-install-md/mount-efi-usb.png)
+![MountEFI](../images/installer-guide/mac-install-md/mount-efi-usb.png)
 
 You'll notice that once we open the EFI partition, it's empty. This is where the fun begins.
 
-![Empty EFI partition](/images/installer-guide/mac-install-md/base-efi.png)
+![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
 
-### Now with all this done, head to [Setting up the EFI](https://dortania.github.io/OpenCore-Desktop-Guide/installer-guide/opencore-efi.html) to finish up your work
+### Now with all this done, head to [Setting up the EFI](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/opencore-efi.html) to finish up your work

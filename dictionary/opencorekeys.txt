@@ -169,7 +169,6 @@ SystemSKUNumber
 SystemSerialNumber
 SystemUUID
 SystemVersion
-SysttemProductName
 TableLength
 TableSignature
 TakeoffDelay

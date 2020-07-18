@@ -6,7 +6,7 @@ This section is for those having issues booting either OpenCore, macOS or having
 
 <extoc></extoc>
 
-While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion) for more info
+While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion) for more info
 
 **And if your issue is not covered, please read the official OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**
 
@@ -42,7 +42,7 @@ Turn off Vaulting in your config.plist under `Misc -> Security -> Vault` by sett
 
 If you have already executed the `sign.command` you will need to restore the OpenCore.efi file as the 256 byte RSA-2048 signature has been shoved in. Can grab a new copy of OpenCore.efi here: [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases)
 
-**Note**: Vault and FileVault are 2 separate things, see [Security and FileVault](/post-install/security.md) for more details
+**Note**: Vault and FileVault are 2 separate things, see [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) for more details
 
 ## Stuck on `OC: Invalid Vault mode`
 
@@ -57,7 +57,7 @@ Couple problems:
 * `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
   * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
 To verify whether your board has MATs, check the logs for something like this:
 
@@ -67,11 +67,10 @@ OCABC: MAT support is 1
 
 **Kernel Issues:**
 
-
 * **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * **Intel:** Missing CFG or XCPM patches
   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
-  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 * **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
   
 **UEFI Issues:**
@@ -88,7 +87,7 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 * `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](/extras/kaslr-fix.md#using-devirtualisemmio)
 * `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
   * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependant on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
 To verify whether your board has MATs, check the logs for something like this:
 
@@ -98,11 +97,10 @@ OCABC: MAT support is 1
 
 **Kernel Issues:**
 
-
 * **AMD:** Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
 * **Intel:** Missing CFG or XCPM patches
   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
-  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](/extras/msr-lock.md)
+  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 * **Intel:** `AppleXcpmExtraMsrs` may be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS. **Do not use on AMD**
   
 **UEFI Issues:**
@@ -129,7 +127,7 @@ This is due to missing ConsoleGOP, enable it under your config:
 
 * `UEFI -> Output -> ProvideConsoleGop`
 
-Another possibility is that the problem occurres due to `RebuildAppleMemoryMap` being enabled, disable it under your config:
+Another possibility is that the problem occurs due to `RebuildAppleMemoryMap` being enabled, disable it under your config:
 
 * `Booter -> Quirks -> RebuildAppleMemoryMap`
 
@@ -190,28 +188,28 @@ Missing or incorrect `Executable path`
 
 * A value is set as `real` when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
 
-  ```text
+  ```
   <key>HaltLevel</key>
   ```
 
-  ```text
+  ```
   <real>2147483648</real>
   ```
 
   To fix, swap `real` for `integer`:
 
-  ```text
+  ```
   <key>HaltLevel</key>
   ```
 
-  ```text
+  ```
   <integer>2147483648</integer>
   ```
   
 ## Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off(Intel Users only), couple solutions:
-  * [Patch your MSR E2](/extras/msr-lock.md)(Recommended solution)
+  * [Patch your MSR E2](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)(Recommended solution)
   * Enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`, this disables `PKG_CST_CNFIG_CONTROL` within the XNU and AppleIntelCPUPowerManagement respectively. Not recommended long term solution as this can cause instability.
 * AMD kernel patches aren't working(AMD Users only):
   * Either outdated or missing kernel patches
@@ -274,7 +272,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 * Incorrect EFI folder structure, make sure all of your OC files are within an EFI folder located on your ESP(EFI system partition)
 
-![Directory Structure from OpenCore&apos;s DOC](/images/troubleshooting/troubleshooting-md/oc-structure.png)
+![Directory Structure from OpenCore's DOC](../images/troubleshooting/troubleshooting-md/oc-structure.png)
 
 ## OCABC: Incompatible OpenRuntime r4, require r10
 
@@ -336,7 +334,7 @@ The main places to check:
 * **NVRAM Failing**:
   * Common issue HEDT and 300 series motherboards, you have a couple paths to go down:
     * 300 Series Consumer Intel: See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on making SSDT-PMC.aml
-    * HEDT: See [Emulating NVRAM](/post-install/nvram.md) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
+    * HEDT: See [Emulating NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
 
 * **RTC Missing**:
   * Commonly found on 300 series and X299/Cascade Lake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
@@ -344,13 +342,13 @@ The main places to check:
 
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 
-![](/images/troubleshooting/troubleshooting-md/rtc.png)
+![](../images/troubleshooting/troubleshooting-md/rtc.png)
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
 Generally seen as a USB error, couple ways to fix:
 
-* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://dortania.github.io/USB-Map-Guide/)
+* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
 * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quriks -> ReleaseUsbOwnership` in your config.plist
   * Enabling XHCI Handoff in the BIOS can fix this as well
 
@@ -368,7 +366,7 @@ On rare occasions(mainly laptops), the SATA controller isn't officially supporte
 
 * Set SATA to AHCI mode in the BIOS
   * macOS doesn't support hardware RAID or IDE mode properly.
-  * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accesible in macOS.
+  * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accessible in macOS.
 * [SATA-unsupported.kext](https://github.com/RehabMan/hack-tools/tree/master/kexts/SATA-unsupported.kext)
   * Adds support to obscure SATA controllers, commonly being laptops.
   * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/foru…) may be more suitable.
@@ -385,7 +383,7 @@ Still didn't work? Well time for the big guns. We'll force remove that exact pro
 
 `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
 
-![](/images/troubleshooting/troubleshooting-md/lang.png)
+![](../images/troubleshooting/troubleshooting-md/lang.png)
 
 ## macOS Installer being damaged
 
@@ -399,7 +397,7 @@ For the latter:
 * Disconnect all networking devices(Ethernet, disable Wifi)
 * In the recovery terminal set to September 1st, 2019:
 
-```text
+```
 date 0901000019
 ```
 
@@ -418,7 +416,6 @@ This is right before the GPU is properly initialized, verify the following:
 
 ## Scrambled Screen on laptops
 
-![Scrambled Screen](/images/troubleshooting/troubleshooting-md/Scrambled.jpg)
 Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
 
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
@@ -443,7 +440,7 @@ Mask:
 MinKernel:
 MaxKernel:
 Replace: 414D442C526F6D2300
-ReplaceMask: 
+ReplaceMask:
 Skip: 0
 ```
 
@@ -475,13 +472,13 @@ Follow directions here after UPDATE 2: [Fix Data and Privacy reboot](https://www
 
 This is a common example of screwed up TSC, for most system add [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
 
-For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
+For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
 
 The most common way to see the TSC issue:
 
 Case 1    |  Case 2
 :-------------------------:|:-------------------------:
-![](/images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](/images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
+![](../images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](../images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
 ## Keyboard works but trackpad does not
 
@@ -527,7 +524,7 @@ This error is due to a small EFI, by default Windows will create a 100MB EFI whe
 
 Default           |  Show All Devices(Cmd+2)
 :-------------------------:|:-------------------------:
-![](/images/troubleshooting/troubleshooting-md/Default.png)  |  ![](/images/troubleshooting/troubleshooting-md/Showalldevices.png)
+![](../images/troubleshooting/troubleshooting-md/Default.png)  |  ![](../images/troubleshooting/troubleshooting-md/Showalldevices.png)
 
 ## DiskUtility failing to erase
 
@@ -557,13 +554,13 @@ This is either 1(or more) of 5 issues:
   * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PciRoot path if you're having issues with gfxutil. **Recommended method**
   * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
 
-![](/images/troubleshooting/troubleshooting-md/en0-built-in.png)
+![](../images/troubleshooting/troubleshooting-md/en0-built-in.png)
 
-If these fixes do not work, see the [Fixing iServices page](/post-install/iservices.md) for more in-depth guide.
+If these fixes do not work, see the [Fixing iServices page](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) for more in-depth guide.
 
 ## No on-board audio
 
-Refer to [Fixing Audio with AppleALC](/post-install/audio.md) section
+Refer to [Fixing Audio with AppleALC](https://dortania.github.io/OpenCore-Post-Install/) section
 
 ## BIOS reset or sent into Safemode after reboot/shutdown
 
@@ -575,7 +572,7 @@ Issue with AppleRTC, quite a simple fix:
 
 The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
 
-```text
+```
 rtcfx_exclude=00-FF
 ```
 
@@ -591,7 +588,7 @@ Verify the following:
 
 ## DRM Broken
 
-See [Fixing DRM](/post-install/drm.md) page
+See [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html) page
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
@@ -628,9 +625,8 @@ This is generally seen on AMD who use the chipset's USB controller, specifically
 
 Should result in something like this:
 
-```text`
+```
 Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.
-
 ```
 
 You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:
@@ -641,6 +637,7 @@ You can double check which controller is XHC0 via IOReg and checking the Vendor 
 ## AssetCache Content Caching unavailable in virtual machine
 
 Errors such as:
+
 ```bash
 $ sudo AssetCacheManagerUtil activate
 AssetCacheManagerUtil[] Failed to activate content caching: Error Domain=ACSMErrorDomain Code=5 "virtual machine"...
@@ -677,7 +674,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 
 Call upon OpenCore shell:
 
-```text
+```
 shell> fs0: //replace with proper drive
 
 fs0:\> dir //to verify this is the right directory
@@ -709,7 +706,7 @@ Easy fix, download and install the latest python:
 
 Make sure `Add Python to PATH`
 
-![](/images/troubleshooting/troubleshooting-md/python-path.png)
+![](../images/troubleshooting/troubleshooting-md/python-path.png)
 
 ## Windows Startup Disk can't see APFS drives
 
@@ -717,7 +714,7 @@ Make sure `Add Python to PATH`
 
 ## Incorrect resolution with OpenCore
 
-* Follow [Fixing Resolution and Verbose](/post-install/verbose.md) for correct setup, set `UIScale` to `02` for HiDPI
+* Follow [Fixing Resolution and Verbose](https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose.html) for correct setup, set `UIScale` to `02` for HiDPI
 * Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
 
 ## No temperature/fan sensor output
@@ -753,7 +750,7 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 
 * `PlatformInfo -> Generic -> AdviseWindows -> True`
 
-![](/images/troubleshooting/troubleshooting-md/error.png)
+![](../images/troubleshooting/troubleshooting-md/error.png)
 
 ## Booting Windows results in BlueScreen or Linux crashes
 
@@ -771,13 +768,13 @@ This is due to OpenCore getting confused when trying to boot Windows and acciden
 
 If you try to decompile your DSDT and get an error similar to this:
 
-```text
+```
 iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
 ```
 
 This happens when one ACPI table requires the rest for proper referencing, it does not accept the creation of DSDTs as we're only using it for creating a select few SSDTs. For those who are worried, you can run the following:
 
-```text
+```
 iasl * [insert all ACPI files here]
 ```
 
@@ -790,8 +787,8 @@ Oddly enough, macOS has locked down digital audio from having control. To bring 
 SIP or proper known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
 
 You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you):
- 	 
-* `00000000` - SIP completely enabled (0x0).		 
+
+* `00000000` - SIP completely enabled (0x0).
 * `03000000` - Disable kext signing (0x1) and filesystem protections (0x2).
 * `FF030000` - Disable all [flags in macOS High Sierra](https://opensource.apple.com/source/xnu/xnu-4570.71.2/bsd/sys/csr.h.auto.html) (0x3ff).
 * `FF070000` - Disable all [flags in macOS Mojave](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) and in [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) as Apple introduced a value for executable policy.
@@ -801,10 +798,9 @@ You can choose different values to enable or disable certain flags of SIP. Some 
 
 * `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
   
-![](/images/troubleshooting/troubleshooting-md/sip.png)
+![](../images/troubleshooting/troubleshooting-md/sip.png)
 
 ## Writing to the macOS system partition
-
 
 With macOS Catalina and newer, Apple split the OS and user data into 2 volumes where the system volume is read-only by default. To make these drives writable we'll need to do a few things:
 
@@ -820,7 +816,7 @@ With macOS Catalina and newer, Apple split the OS and user data into 2 volumes w
 3. Create a new snapshot after the changes (See below link for command)
 4. Tag this snapshot for next boot (See below link for command)
 
-Full credit and command links provided by [ASentientBot](https://forums.macrumors.com/members/asentientbot.1135186/) and [@mac_editor](https://egpu.io/forums/profile/mac_editor/): 
+Full credit and command links provided by [ASentientBot](https://forums.macrumors.com/members/asentientbot.1135186/) and [@mac_editor](https://egpu.io/forums/profile/mac_editor/):
 
 * [MacRumors Thread](https://forums.macrumors.com/threads/macos-11-big-sur-on-unsupported-macs-thread.2242172/post-28603788)
 * [eGPU.io thread](https://egpu.io/forums/postid/82119/)

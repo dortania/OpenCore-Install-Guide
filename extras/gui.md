@@ -4,12 +4,12 @@
 
 Main thing this guide will go over:
 
-* [Giving OpenCore a GUI](/extras/gui.md#giving-opencore-a-gui)
-* [Setting up a boot-chime](/extras/gui.md#setting-up-a-boot-chime)
+* [Giving OpenCore a GUI](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html#giving-opencore-a-gui)
+* [Setting up a boot-chime](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html#setting-up-a-boot-chime)
 
 ## Setting up OpenCore's GUI
 
-So to get started, we're gonna need 0.5.7 or newer as these builds have the GUI included with the rest of the files. If you're on an older version, I recommend updating: [Updating OpenCore](/post-install/update.md)
+So to get started, we're gonna need 0.5.7 or newer as these builds have the GUI included with the rest of the files. If you're on an older version, I recommend updating: [Updating OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html)
 
 Once that's done, we'll need a couple things:
 
@@ -22,7 +22,7 @@ Once you have both of these, we'll next want to add it to our EFI partition:
 * Add the [Resources folder](https://github.com/acidanthera/OcBinaryData) to EFI/OC
 * Add OpenCanopy.efi to EFI/OC/Drivers
 
-![](/images/extras/gui-md/folder-gui.png)
+![](../images/extras/gui-md/folder-gui.png)
 
 Now in our config.plist, we have 2 things we need to fix:
 
@@ -35,7 +35,7 @@ Now in our config.plist, we have 2 things we need to fix:
 
 Once all this is saved, you can reboot and be greeted with a true Mac-like GUI:
 
-![Credit to vit9696](/images/extras/gui-md/gui.png)
+![Credit to vit9696](../images/extras/gui-md/gui.png)
 
 ## Setting up Boot-chime with AudioDxe
 
@@ -66,11 +66,11 @@ So to start, we'll need a couple things:
     * ex: `0x0`
       * Can also check via terminal(Note if multiple show up, use the vendor ID to find the right device)l:
 
- ```text
+ ```
  ioreg -rxn IOHDACodecDevice | grep VendorID   // List all possible devices
  ```
 
- ```text
+ ```
  ioreg -rxn IOHDACodecDevice | grep IOHDACodecAddress // Grab the codec address
  ```
 
@@ -85,7 +85,7 @@ So to start, we'll need a couple things:
   * ex: `2`
     * You can find all the ones for your codec in the OpenCore debug logs:
 
-```text
+```
 06:065 00:004 OCAU: Matching PciRoot(0x0)/Pci(0x1F,0x3)/VenMsg(A9003FEB-D806-41DB-A491-5405FEEF46C3,00000000)...
 06:070 00:005 OCAU: 1/2 PciRoot(0x0)/Pci(0x1F,0x3)/VenMsg(A9003FEB-D806-41DB-A491-5405FEEF46C3,00000000) (5 outputs) - Success
 ```
@@ -109,11 +109,11 @@ So to start, we'll need a couple things:
 
 Once done, you should get something like this:
 
-![](/images/extras/gui-md/audio-config.png)
+![](../images/extras/gui-md/audio-config.png)
 
 **Note for visually impaired**:
 
 * OpenCore hasn't forgotten about you! With the AudioDxe setup, you can enable both picker audio and FileVault VoiceOver with these 2 settings:
   * `Misc -> Boot -> PickerAudioAssist -> True` to enable picker audio
   * `UEFI -> ProtocolOverrides -> AppleAudio -> True` to enable FileVault voice over
-    * See [Security and FileVault](/post-install/security.md) on how to setup the rest for proper FileVault support
+    * See [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) on how to setup the rest for proper FileVault support

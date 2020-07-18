@@ -2,7 +2,7 @@
 
 Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi), your USB should start to look something like this:
 
-![](/images/config/config-universal/almost-done.png)
+![](../images/config/config-universal/almost-done.png)
 
 * **Note**: Your USB **will look different**, everyone's system will have different requirements.
 
@@ -10,11 +10,11 @@ Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi),
 
 First we'll want to grab the sample.plist from the [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), this will be located under the `Docs` folder:
 
-![](/images/config/config-universal/sample-location.png)
+![](../images/config/config-universal/sample-location.png)
 
 Next lets move it onto our USB's EFI partition(will be called BOOT on Windows) under `EFI/OC/`, and rename it to config.plist:
 
-![](/images/config/config-universal/renamed.png)
+![](../images/config/config-universal/renamed.png)
 
 ## Adding your SSDTs, Kexts and Firmware Drivers
 
@@ -40,11 +40,11 @@ After the config is opened, press **Cmd/Ctrl + Shift + R** and point it at your 
 * This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config
 * **Cmd/Ctrl + R** is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you're troubleshooting but for us not needed right now
 
-![](/images/config/config-universal/before-snapshot.png)
+![](../images/config/config-universal/before-snapshot.png)
 
 Once done, you'll see your SSDTs, Kexts and firmware drivers populated in the config.plist:
 
-![](/images/config/config-universal/after-snapshot.png)
+![](../images/config/config-universal/after-snapshot.png)
 
 If you wish to clean up the file a bit, you can remove the `#WARNING` entries. Though they cause no issues staying there, so up to personal preference.
 
@@ -54,62 +54,53 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 ### Intel Desktop
 
-[Ivy Bridge](/config.plist/ivy-bridge.md)
+| Code Name | Series | Release |
+| :--- | :--- | :--- |
+| [Ivy Bridge](/config.plist/ivy-bridge.md) | 3XXX | 2012 era |
+| [Haswell](/config.plist/haswell.md) | 4XXX | 2013-2014 era |
+| [Skylake](/config.plist/skylake.md) | 6XXX | 2015-2016 era |
+| [Kaby Lake](/config.plist/kaby-lake.md) | 7XXX | 2017 era |
+| [Coffee Lake](/config.plist/coffee-lake.md) | 8XXX-9XXX | 2017-2019 era |
+| [Comet Lake](/config.plist/comet-lake.md) | 10XXX | 2020 era |
 
-* 3XXX series, 2012 era
+### Intel Laptop
 
-[Haswell](/config.plist/haswell.md)
-
-* 4XXX series, 2013 era
-* For the 3 of you in the world with desktop Broadwell, this will also apply to you
-
-[Skylake](/config.plist/skylake.md)
-
-* 6XXX series, 2015-2016 era
-
-[Kaby Lake](/config.plist/kaby-lake.md)
-
-* 7XXX series, 2017 era
-* Kaby Lake-R and Amber Lake also apply
-
-[Coffee Lake](/config.plist/coffee-lake.md)
-
-* 8XXX and 9XXX series, 2017-2019 era
-
-[Comet Lake](/config.plist/comet-lake.md)
-
-* 10XXX series, 2020 era
+| Code Name | Series | Release |
+| :--- | :--- | :--- |
+| [Ivy Bridge](/config-laptop.plist/ivy-bridge.md) | 3XXX | 2012 era |
+| [Haswell](/config-laptop.plist/haswell.md) | 4XXX | 2013-2014 era |
+| [Skylake](/config-laptop.plist/skylake.md) | 6XXX | 2015-2016 era |
+| [Kaby Lake and Amber Lake](/config-laptop.plist/kaby-lake.md) | 7XXX | 2017 era |
+| [Coffee Lake](/config-laptop.plist/coffee-lake.md) | 8XXX | 2017-2018 era |
+| [Coffee Lake Plus and Comet Lake](/config-laptop.plist/coffee-lake.md) | 9XXX-10XXX | 2019-2020 era |
+| [Ice Lake](/config-laptop.plist/ice-lake.md) | 10XXX | 2019-2020 era |
 
 ### Intel HEDT
 
 This section includes both enthusiast and server based hardware.
 
-[Haswell-E](/config-HEDT/haswell-e.md)
-
-* 5XXX series, 2014 era
-
-[Broadwell-E](/config-HEDT/broadwell-e.md)
-
-* 6XXX series, 2016 era
-
-[Skylake/Cascade Lake-X/W](/config-HEDT/skylake-x.md)
-
-* 7XXX, 9XXX, 10XXX series, 2017-2019 era
+| Code Name | Series | Release |
+| :--- | :--- | :--- |
+| [Haswell-E](/config-HEDT/haswell-e.md) | 5XXX | 2014 era |
+| [Broadwell-E](/config-HEDT/broadwell-e.md) | 6XXX | 2016 era |
+| [Skylake/Cascade Lake-X/W](/config-HEDT/skylake-x.md) | 7XXX, 9XXX, 10XXX | 2017-2019 era |
 
 ### AMD
 
-[Bulldozer/Jaguar](/AMD/fx.md)
+| Code Name | Series | Release |
+| :--- | :--- | :--- |
+| [Bulldozer/Jaguar](/AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) |
+| [Zen](/AMD/zen.md) | 1XXX, 2XXX, 3XXX | 2017-2020 era |
 
-* Google the series, AMD had bad naming schemes and let these generations live for too long.
-
-[Zen](/AMD/zen.md)
-
-* 1XXX, 2XXX, 3XXX series, 2017-2020 era
 * Note: Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported
 
-### Misc
+### Legacy
 
-* [Laptops](https://dortania.github.io/vanilla-laptop-guide/)
-  * Dedicated guide to laptop installs.
-* [Legacy](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/config.plist/legacy.md)
-  * Mainly for Sandy
+Note that these are only guidelines and will not be full-featured guides like the other generations. This is mainly due to not enough testing, verifiable information, and overall community support as this hardware become less and less used.
+
+| Code Name | Series | Release |
+| :--- | :--- | :--- |
+| [Penryn](/config.plist/legacy/penryn.md) | [Too many](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2008-2010 |
+| [Nehalem and Westmere](/config.plist/legacy/nehalem.md) | 7XX, 8XX, 9XX | 2008-2010 |
+| [Sandy Bridge](/config.plist/legacy/sandy-bridge.md) | 2XXX | 2011 |
+| [Sandy and Ivy bridge-E](/config.plist/legacy/sandy-bridge-e.md) | 2XXX, 3XXX | 2011-2013 |

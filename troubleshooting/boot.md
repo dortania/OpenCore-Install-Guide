@@ -34,7 +34,7 @@ For the rest of the possible issues, see here:
 
 ## boot.efi Handoff
 
-![](/images/troubleshooting/boot-md/1-boot-efi.png)
+![](../images/troubleshooting/boot-md/1-boot-efi.png)
 
 This is where macOS's bootloader(boot.efi) comes onto the scene, specifically what it does is prep the environment for the kernel to load and where OpenCore injects kexts. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
 
@@ -52,7 +52,7 @@ For the rest of the possible issues, see here:
 
 Now that boot.efi has setup everything for us, we now get to watch the kernel do it's thing. This section is commonly referred as the [Rooting phase](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/booting/booting.html):
 
-![](/images/troubleshooting/boot-md/2-kernel-start.png)
+![](../images/troubleshooting/boot-md/2-kernel-start.png)
 
 This section is where SMBIOS data is verified, ACPI tables/Kexts are loaded and macOS tries to get everything in order. Failures here are generally a result of:
 
@@ -65,7 +65,7 @@ See here for more troubleshooting info:
 * [Kernel Panic `Cannot perform kext summary`](/troubleshooting/troubleshooting.md#kernel-panic-cannot-perform-kext-summary)
 * [Kernel Panic on `Invalid frame pointer`](/troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
 
-![](/images/troubleshooting/boot-md/5-apfs-module.png)
+![](../images/troubleshooting/boot-md/5-apfs-module.png)
 
 Now here we have `[ PCI configurations begin ]`, this section can be seen as a hardware test for our systems, kexts and SSDTs we injected, and where IOKit starts hardware probs to find devices to attach to.
 
@@ -82,19 +82,19 @@ For more specific info on how to get around this area, see here:
 
 * [Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](/troubleshooting/troubleshooting.md#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
 
-![](/images/troubleshooting/boot-md/6-USB-setup.png)
+![](../images/troubleshooting/boot-md/6-USB-setup.png)
 
 This is where the 15 port limit and USB mapping comes into play, and where the infamous "Waiting for Root Device" errors pops in, main things to check for:
 
 * ["Waiting for Root Device" or Prohibited Sign error](/troubleshooting/troubleshooting.md#waiting-for-root-device-or-prohibited-sign-error)
 
-![](/images/troubleshooting/boot-md/8-dsmos-arrived.png)
+![](../images/troubleshooting/boot-md/8-dsmos-arrived.png)
 
 This is where our FakeSMC/VirtualSMC come into the scene and do their magic, DSMOS itself is a kext that verifies if your system has an SMC and will request a key. If this key is missing, then DSMOS will not decrypt the rest of the binaries and you'll get stuck here. You may also get stuck at AppleACPICPU which is just the same error.
 
 * [kextd stall[0]: AppleACPICPU](/troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
 
-```text
+```
 Your karma check for today:
 There once was a user that whined
 his existing OS was so blind,
@@ -107,11 +107,11 @@ Really, that's way uncool.
 
 Source: Dont Steal Mac OS X.kext
 
-![](/images/troubleshooting/boot-md/9-audio.png)
+![](../images/troubleshooting/boot-md/9-audio.png)
 
 This is where Apple's audio driver comes in, and where AppleALC shines. Generally rare to see issues here but if you do, try disabling AppleALC and any other audio related kexts.
 
-![](/images/troubleshooting/boot-md/10-GPU.png)
+![](../images/troubleshooting/boot-md/10-GPU.png)
 
 And here we get to the GPU driver initialization, and where WhateverGreen also does its magic. Generally errors here are due to the GPU and not WhateverGreen itself, main culprits:
 
@@ -120,7 +120,7 @@ And here we get to the GPU driver initialization, and where WhateverGreen also d
 
 ## macOS Handoff
 
-![](/images/troubleshooting/boot-md/11-boot.png)
+![](../images/troubleshooting/boot-md/11-boot.png)
 
 And you've finally got past all that verbose! If you're getting stuck at the Apple logo after all that verbose, then there's a couple things to check for:
 

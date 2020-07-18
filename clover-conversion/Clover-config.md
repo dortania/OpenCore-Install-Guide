@@ -6,7 +6,7 @@ So this little(well not so little as I reread this...) page is for users who are
 
 # Kexts and Firmware drivers
 
-See [Kexts and Firmware drivers](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/clover-conversion/clover-efi.md).
+See [Kexts and Firmware drivers](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md).
 
 # Acpi
 
@@ -84,8 +84,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
 
 * **FixShutdown**:
-  * [FixShutdown-USB-SSDT](https://github.com/Dortania/USB-Map-Guide/blob/master/extra-files/FixShutdown-USB-SSDT.dsl)
-  * [`_PTS` to `ZPTS` Patch](https://github.com/Dortania/USB-Map-Guide/blob/master/extra-files/FixShutdown-Patch.plist)
+  * [FixShutdown-USB-SSDT](https://github.com/dortania/OpenCore-Post-Install/extra-files/FixShutdown-USB-SSDT.dsl)
+  * [`_PTS` to `ZPTS` Patch](https://github.com/dortania/OpenCore-Post-Install/extra-files/FixShutdown-Patch.plist)
   * This will not harm Windows or Linux installs as this is just adding missing methods that should've been there to start with. *Blame the firmware writers*
 
 * **FixDisplay**:
@@ -99,7 +99,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * `Kernel -> Quirks -> ExternalDiskIcons -> YES`
 
 * **FixADP1**:
-  * Renames device `AC0_` to `ADP1`, see [Rename-SSDT](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
+  * Renames device `AC0_` to `ADP1`, see [Rename-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Rename-SSDT.dsl) for an example
   * Also injects `Name (_PRW, Package (0x02) {0x1C,0x03})` into the device if not present. [Source](https://github.com/CloverHackyColor/CloverBootloader/blob/81f2b91b1552a4387abaa2c48a210c63d5b6233c/rEFIt_UEFI/Platform/FixBiosDsdt.cpp#L1677-L1692)
 
 * **FixRTC**:
@@ -341,7 +341,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 **NVCAP**
 
 * `DeviceProperties -> Add -> PciRoot... -> NVCAP`
-* See [NVCAP-settings](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/NVCAP-settings.png) for more details, image courtesy of Clover manual
+* See [NVCAP-settings](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/NVCAP-settings.png) for more details, image courtesy of Clover manual
 
 **display-cfg**:
 
@@ -358,7 +358,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 * `DeviceProperties -> Add -> PciRoot... -> model | string | Add the GPU name`
 
-**NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Desktop-Guide/post-install/spoof)
+**NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/spoof)
 
 **NvidiaNoEFI**:
 
@@ -375,7 +375,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **RadeonDeInit**:
 
-* [Radeon-Denit-SSDT](https://github.com/dortania/OpenCore-Desktop-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
+* [Radeon-Denit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
 * Do note that this is meant for GFX0, adjust for your system
 
 # Kernel and Kext Patches
@@ -460,7 +460,7 @@ Issue with AppleRTC, quite a simple fix:
 
 The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
 
-```text
+```
 rtcfx_exclude=00-FF
 ```
 

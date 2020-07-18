@@ -13,7 +13,7 @@ This section is a brief rundown as to why the community has been transitioning o
 * Better overall security in many forms:
   * No need to disable System Integrity Protection(SIP)
   * Built-in FileVault 2 support
-  * [Vaulting](/post-install/security.md#Vault) allowing to create EFI snapshots preventing unwanted modifications
+  * [Vaulting](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault) allowing to create EFI snapshots preventing unwanted modifications
   * True secure-boot support(currently going through security audit, coming soon)
 * BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
 * Supports boot hotkey via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.
