@@ -70,7 +70,17 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and disabling `EnableWriteUnprotector`.
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| EnableWriteUnprotector | NO |
+| RebuildAppleMemoryMap | YES |
+| SyncRuntimePermissions | YES |
+:::
+
+::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -79,9 +89,10 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+  * Fixes SetVirtualAddresses calls to virtual addresses
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+:::
 
 ## DeviceProperties
 
