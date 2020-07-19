@@ -5,9 +5,9 @@ Actually almost identical to an Ivy Bridge hack, the main things that need to be
 **Overall**:
 
 * Follow Ivy Bridge setup for most config options:
-  * [Desktop Ivy Bridge](/config.plist/ivy-bridge.md)
-  * [Laptop Ivy Bridge](/config-laptop.plist/ivy-bridge.md)
-* Must use [DuetPkg](/extras/legacy.md) as most Sandy Bridge motherboards do not support UEFI
+  * [Desktop Ivy Bridge](../../config.plist/ivy-bridge.md)
+  * [Laptop Ivy Bridge](../../config-laptop.plist/ivy-bridge.md)
+* Must use [DuetPkg](../../extras/legacy.md) as most Sandy Bridge motherboards do not support UEFI
 * Mountain Lion(10.8) through High Sierra(10.13) are supported
   * This is due to Lilu requiring 10.8 as minimum to operate
   * macOS Mojave(10.14) through Big Sur(11) is possible with iGPU disabled

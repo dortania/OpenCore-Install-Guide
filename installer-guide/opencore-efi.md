@@ -52,6 +52,4 @@ Here's what a populated EFI ***can*** look like (yours will be different):
 * Kexts(`.kext`) go in Kexts folder
 * Firmware drivers(`.efi`) go in the Drivers folder
 
-# Now with all this done
-
-... head to [Gathering Files](/ktext.md) to get the needed kexts and firmware drivers.
+# Now with all this done, head to [Gathering Files](../ktext.md) to get the needed kexts and firmware drivers.

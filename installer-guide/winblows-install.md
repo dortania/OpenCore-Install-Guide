@@ -41,4 +41,4 @@ MakeInstall will finish up by installing OpenCore to your USB's EFI System Parti
 
 ![](../images/installer-guide/winblows-install-md/EFI-base.png)
 
-## Now with all this done, head to [Setting up the EFI](/installer-guide/opencore-efi.md) to finish up your work.
+## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work.

@@ -9,7 +9,7 @@ To start we'll want to grab ourselves a copy of macOS, you can skip this and hea
 
 **Note for legacy users**
 
-1. First follow the [Legacy Install](/extras/legacy.html) section
+1. First follow the [Legacy Install](../extras/legacy.md) section
 2. Once completed, continue the guide at the **[Downloading macOS](#downloading-macos)** section
 
 For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra and older), follow the [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md) guide
@@ -74,4 +74,4 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
 
-## Now with all this done, head to [Setting up the EFI](/installer-guide/opencore-efi.md) to finish up your work.
+## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work.

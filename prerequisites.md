@@ -16,7 +16,7 @@ Before we can jump head first into making an OpenCore based system, we need to g
 3. _**[CRUCIAL]**_ **A BASIC KNOWLEDGE OF COMMAND LINES AND HOW TO USE A TERMINAL/COMMAND PROMPT**
    * This is not just [CRUCIAL], this is the basis of this whole guide. We can't help you if you don't know how to `cd` to a directory or delete a file.
 4. _**[CRUCIAL]**_ A machine that is compatible as seen in the _**Compatibility**_ section.
-   * [Hardware Limitations page](/macos-limits.md)
+   * [Hardware Limitations page](macos-limits.md)
 5. _**[CRUCIAL]**_ A minimum of:
    * 12GB USB if you're going to use macOS to create the USB
    * 4GB USB if you're going to use Windows or Linux for USB creation
