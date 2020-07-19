@@ -58,5 +58,5 @@ So now lets take a look at OpenCore's method:
 Things to note with OpenCore's method is:
 
 * OS Agnostic as the prelinked kernel format as stayed the same since  10.6, far harder to break support.
-  * This also means proper support starts at 10.7, though 10.6 can be used as well so long as it's already installed(106's installer doesn't have a prelinked kernel)
+  * This also means proper support starts at 10.7, though 10.6 can be used as well so long as it's already installed(10.6's installer doesn't have a prelinked kernel)
 * Far better stability as far less patching

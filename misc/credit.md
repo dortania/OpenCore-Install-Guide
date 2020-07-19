@@ -32,6 +32,7 @@ And to the rest who've helped out as well, thank you!
 * [Andrey1970AppleLife](https://github.com/Andrey1970AppleLife)
 * [Download-Fritz](https://github.com/Download-Fritz)
 * [Goldfish64](https://github.com/Goldfish64)
+* [nms42](https://github.com/nms42)
 * [PMHeart](https://github.com/PMHeart)
 * [savvamitrofanov](https://github.com/savvamitrofanov)
 * [vit9696](https://github.com/vit9696)
