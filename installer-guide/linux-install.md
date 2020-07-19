@@ -35,23 +35,23 @@ In terminal:
 
 1. run `lsblk` and determine your USB device block
 2. run `sudo gdisk /dev/<your USB block>`
-   0. if you're asked what partition table to use, select GPT.
+   1. if you're asked what partition table to use, select GPT.
       ![](../images/installer-guide/linux-install-md/unknown-5.png)
-   1. send `p` to print your block's partitions \(and verify it's the one needed\)
+   2. send `p` to print your block's partitions \(and verify it's the one needed\)
       ![](../images/installer-guide/linux-install-md/unknown-6.png)
-   2. send `o` to clear the partition table and make a new GPT one (if not empty)
+   3. send `o` to clear the partition table and make a new GPT one (if not empty)
       1. confirm with `y`
          ![](../images/installer-guide/linux-install-md/unknown-8.png)
-   3. send `n`
+   4. send `n`
       1. `partition number`: keep blank for default
       2. `first sector`: keep blank for default
       3. `last sector`: keep blank for whole disk
       4. `Hex code or GUID`: `0700` for Microsoft basic data partition type
-   4. send `w`
+   5. send `w`
       * Confirm with `y`
       ![](../images/installer-guide/linux-install-md/unknown-9.png)
       * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
-   5. Close `gdisk` by sending `q` (normally it should quit on its own)
+   6. Close `gdisk` by sending `q` (normally it should quit on its own)
 3. Use `lsblk` to determine your partition's identifiers
 4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your USB partition block>` to format your USB to FAT32 and named OPENCORE
 5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file
@@ -115,6 +115,4 @@ In terminal:
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
       ![](../images/installer-guide/linux-install-md/unknown-21.png)
 
-### Now with all this done
-
-... head to [Setting up the EFI](/installer-guide/opencore-efi.md) to finish up your work.
+## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work

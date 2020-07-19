@@ -19,7 +19,7 @@ Now with all that, a quick reminder of the tools we need
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
   * For generating our SMBIOS data
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](/config.plist/README.md)
+  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
 * [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
   * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
   * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (Supports 10.13, 10.14, and 10.15)
@@ -34,7 +34,7 @@ Now with all that, a quick reminder of the tools we need
 
 ::: tip Info
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](/post-install/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 | Required_SSDTs | Description |
 | :--- | :--- |
@@ -70,7 +70,17 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, for us we care about enabling `RebuildAppleMemoryMap` and disabling `EnableWriteUnprotector`.
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| EnableWriteUnprotector | NO |
+| RebuildAppleMemoryMap | YES |
+| SyncRuntimePermissions | YES |
+:::
+
+::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -79,9 +89,10 @@ Settings relating to boot.efi patching and firmware fixes, for us we care about 
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, not enabling may cause a kernel panic depending on your hardware
+  * Fixes SetVirtualAddresses calls to virtual addresses
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+:::
 
 ## DeviceProperties
 
@@ -225,7 +236,7 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
 
-These values are based of those calculated in [OpenCore debugging](/troubleshooting/debug.md)
+These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
 
 :::
 
@@ -325,7 +336,7 @@ System Integrity Protection bitmask
 
 * **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
 
-csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](/troubleshooting/troubleshooting.md#disabling-sip)
+csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/troubleshooting.md#disabling-sip)
 
 * **prev-lang:kbd**: <>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
@@ -519,7 +530,7 @@ Used for exempting certain memory regions from OSes to use, mainly relevant for 
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](/troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [AMD OS X Discord](https://discord.gg/QuUWg7)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
@@ -546,4 +557,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
 
-# Now with all this done, head to the [Installation Page](/installation/installation-process)
+# Now with all this done, head to the [Installation Page](../installation/installation-process.md)

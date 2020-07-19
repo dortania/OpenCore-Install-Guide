@@ -358,7 +358,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 * `DeviceProperties -> Add -> PciRoot... -> model | string | Add the GPU name`
 
-**NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/spoof)
+**NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/)
 
 **NvidiaNoEFI**:
 
@@ -399,12 +399,12 @@ An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't rea
 **KextsToPatch**:
 
 * `Kernel -> Patch`
-* See [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md) for common patch conversions
+* See [Common Kernel and Kext patch conversions](../clover-conversion/clover-patch.md) for common patch conversions
 
 **KernelToPatch**:
 
 * `Kernel -> Patch`
-* See [Common Kernel and Kext patch conversions](/clover-conversion/clover-patch.md) for common patch conversions
+* See [Common Kernel and Kext patch conversions](../clover-conversion/clover-patch.md) for common patch conversions
 
 **ForceKextsToLoad**:
 

@@ -49,7 +49,7 @@ So to start, we'll need a couple things:
   * Add the Resources folder to EFI/OC, just like we did with the OpenCore GUI section
   * For those running out of space, `OCEFIAudio_VoiceOver_Boot.wav` is all that's required for the Boot-Chime
 * Debug version of OpenCore with logging enabled
-  * See [OpenCore Debugging](/troubleshooting/debug.md) for more info
+  * See [OpenCore Debugging](../troubleshooting/debug.md) for more info
 
 **Settings up NVRAM**:
 

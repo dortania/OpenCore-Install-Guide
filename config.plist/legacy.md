@@ -4,10 +4,10 @@ While this guide will not cover the entirety of config setup for hardware not in
 
 Note that critical thinking and google will be required, as I won't be holding your hand compared to other systems.
 
-* [Penryn(Core2 Series)](/config.plist/legacy/penryn)
-* [Nehalem (First Gen i-series)](/config.plist/legacy/sandy-bridge-e)
-* [Sandy Bridge(Second Gen i-series)](/config.plist/legacy/sandy-bridge)
-* [Sandy and Ivy Bridge-E(HEDT)](/config.plist/legacy/nehalem)
+* [Penryn(Core2 Series)](../config.plist/legacy/penryn.md)
+* [Nehalem (First Gen i-series)](../config.plist/legacy/nehalem.md)
+* [Sandy Bridge(Second Gen i-series)](../config.plist/legacy/sandy-bridge.md)
+* [Sandy and Ivy Bridge-E(HEDT)](../config.plist/legacy/sandy-bridge-e.md)
 
 ## Adding older SMBIOS to OpenCore
 

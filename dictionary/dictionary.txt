@@ -676,6 +676,7 @@ XNU
 XNU's
 XOSI
 XPoint
+XXX-XXXXX
 Xcode
 Xeon
 Xeons
@@ -837,6 +838,7 @@ mini-explainer
 msi
 multiboot
 natively
+nms42
 non-UEFI
 non-latin
 npci
@@ -908,4 +910,3 @@ xcpm
 Как
 завести
 сервисы
-XXX-XXXXX

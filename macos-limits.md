@@ -66,7 +66,7 @@ And an important note for **Laptops with discrete GPUs**:
 
 For the most part, all motherboards are supported as long as the CPU is. The sole exception being:
 
-* [AMD's B550 boards](https://www.amd.com/en/chipsets/b550)
+* [AMD's B550 boards](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
 
 There's currently no fixes for the boards besides running in a KVM(Virtual Machine), similar to AMD's 3rd gen ThreadRipper CPUs.
 
@@ -85,7 +85,7 @@ Virtually all wired network adapters have some form of support in macOS, either 
 
 * Intel's 2.5GBe i225 networking
   * Found on high-end Desktop Comet Lake boards
-  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](/config.plist/comet-lake#add-2)
+  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](../config.plist/comet-lake.md#deviceproperties)
 * Intel's server NICs
   * Workarounds are possible for [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
 * Mellanox and Qlogic server NICs

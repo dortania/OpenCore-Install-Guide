@@ -15,7 +15,7 @@ No good guide is made by one man, here's credit to those who've helped out:
   * Corrections and recommendations for the guide
 * [AlGrey#9303](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)
   * AMD Kernel patches
-* [NoOne/IOIIIO](https://forum.amd-osx.com/memberlist.php?mode=viewprofile&u=52179&sid=8efaeb1fa4989b6792f0f4836bea0c74)
+* [NoOne/IOIIIO](https://github.com/IOIIIO)
   * For the original AMD Vanilla Guide
   * Corrections to AMD portion of the guide
 * [DhinakG](https://github.com/dhinakg)
@@ -32,6 +32,7 @@ And to the rest who've helped out as well, thank you!
 * [Andrey1970AppleLife](https://github.com/Andrey1970AppleLife)
 * [Download-Fritz](https://github.com/Download-Fritz)
 * [Goldfish64](https://github.com/Goldfish64)
+* [nms42](https://github.com/nms42)
 * [PMHeart](https://github.com/PMHeart)
 * [savvamitrofanov](https://github.com/savvamitrofanov)
 * [vit9696](https://github.com/vit9696)

@@ -5,8 +5,8 @@ Now that you've finished setting up OpenCore, you're finally able to boot, main 
 * Enable BIOS settings optimal for macOS
 * Read up on the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/)
   * Mainly relevant for those running a single drive for multiple OSes
-* And a copy of the [General Troubleshooting](/troubleshooting/troubleshooting.md) page
-* Read up on the [macOS Boot Process](/troubleshooting/boot.md)
+* And a copy of the [General Troubleshooting](../troubleshooting/troubleshooting.md) page
+* Read up on the [macOS Boot Process](../troubleshooting/boot.md)
   * Can help first time installers better understand where they may be getting stuck
 * And a ton of patience
 
