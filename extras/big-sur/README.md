@@ -12,7 +12,7 @@ More a mini-explainer as to why this release is a bit more painful than average 
 
 ### `AvoidRuntimeDefrag`
 
-With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpi_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now copy this table and ensure the kernel can access it. Users will however need a build of OpenCore 0.6.0 with commit [`bb12f5f`](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4) or newer to resolve this issue.
+With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpu_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now ensure this table is made accessible to the kernel can access it. Users will however need a build of OpenCore 0.6.0 with commit [`bb12f5f`](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4) or newer to resolve this issue.
 
 ### Kernel Collections vs prelinkedkernel
 
@@ -62,10 +62,11 @@ You will also need to ensure you have a few NVRAM variables set:
 
 * **`NVRAM` -> `Add` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82`**:
   * `boot-args`:
-    * `-lilubetaall` (Enables Lilu and plugins on beta macOS versions)
+    * ~~`-lilubetaall`~~
       * Newest builds of Lilu and plugins do not require this boot-arg
-    * `vsmcgen=1` (works around VirtualSMC, or more specifically Lilu, not properly working in Big Sur)
-    * `-disablegfxfirmware` (Works around WhateverGreen failing, **iGPUs only**.
+    * ~~`vsmcgen=1`~~
+	  * Newest builds of Lilu and VirtualSMC don't need this boot-arg
+    * ~~`-disablegfxfirmware`~~
       * Newer builds of WhateverGreen should fix this (v1.4.1)
 
 ### Known issues
@@ -74,12 +75,13 @@ With Big Sur, quite a bit broke. Mainly the following:
 
 * Lilu
   * Mainly user-space patching has severely broke, meaning certain patches like DRM don't work
-  * Kernel-space should be working correctly with v1.4.6
+  * Kernel-space should be working correctly with v1.4.6, but plugins may require updates to the plugins due to a complete rewrite of the patcher for Kernel Collection support.
 * VirtualSMC
-  * Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.
+  * ~~Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.~~
+  * Resolved with v1.1.5
 * Battery status
-  * Currently RehabMan's [ACPIBatteryManager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext for battery status.
-  * You can set `MaxKernel` for SMCBatteryManager to `19.99.99` and `MinKernel` for ACPIBatteryManager to `20.0.0` to use SMCBatteryManager for Catalina and below and ACPIBatteryManager for Big Sur (and above).
+  * ~~Currently RehabMan's [ACPIBatteryManager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext for battery status.~~
+  * Resolved with v1.1.5
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
