@@ -63,7 +63,7 @@ You will also need to ensure you have a few NVRAM variables set:
 * **`NVRAM` -> `Add` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82`**:
   * `boot-args`:
     * ~~`-lilubetaall`~~
-      * Newest builds of Lilu and plugins do not require this boot-arg
+      * Newest builds of Lilu and most plugins do not require this boot-arg
     * ~~`vsmcgen=1`~~
       * Newest builds of Lilu and VirtualSMC don't need this boot-arg
     * ~~`-disablegfxfirmware`~~
