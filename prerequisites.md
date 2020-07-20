@@ -1,42 +1,42 @@
-# Getting started with OpenCore
+# Comenzando con OpenCore
 
-Before we can jump head first into making an OpenCore based system, we need to go over a few things.
+Antes de comenzar a hacer un sistema basado en OpenCore, debemos repasar algunas cosas.
 
-## Prerequisites
+## Prerequisitos
   
-1. _**[CRUCIAL]**_ Time and patience.
-   * Don't start working on this if you have deadlines or important work. Hackintoshes are not something you should be relying on as a work machine.
-2. _**[CRUCIAL]**_ **KNOW YOUR HARDWARE**
-   * Your CPU name and generation
-   * Your GPUs
-   * Your storage devices (HDD/SSD, NVMe/AHCI/RAID/IDE configuration.
-   * Your laptop/desktop model if from an OEM
-   * Your **Ethernet chipset**
-   * Your WLAN/Bluetooth chipset
-3. _**[CRUCIAL]**_ **A BASIC KNOWLEDGE OF COMMAND LINES AND HOW TO USE A TERMINAL/COMMAND PROMPT**
-   * This is not just [CRUCIAL], this is the basis of this whole guide. We can't help you if you don't know how to `cd` to a directory or delete a file.
-4. _**[CRUCIAL]**_ A machine that is compatible as seen in the _**Compatibility**_ section.
-   * [Hardware Limitations page](macos-limits.md)
-5. _**[CRUCIAL]**_ A minimum of:
-   * 12GB USB if you're going to use macOS to create the USB
-   * 4GB USB if you're going to use Windows or Linux for USB creation
-6. _**[CRUCIAL]**_ An **Ethernet connection** (no WiFi dongles, Ethernet USB adapter may work depending on macOS support) and you must know your LAN card's model
-   * You must either have a physical Ethernet port, or a compatible macOS Ethernet dongle/adapter. In case you have a [compatible WiFi card](https://dortania.github.io/Wireless-Buyers-Guide/), you can also use that.
-     * Note majority of Wifi cards are not supported by macOS
-   * For people who can't use ethernet but have an android phone, you can connect your android phone to WiFi and then tether it using USB with [HoRNDIS](https://joshuawise.com/horndis#available_versions).
-7. _**[CRUCIAL]**_ **Proper OS Installation:**
-   * Be it:
-     * macOS (a fairly recent one would be better)
-     * Windows (Windows 10, 1703 or newer)
-     * Linux (with Python 2.7 or later), make sure it's clean and properly functioning.
-   * For Windows or Linux users, **15GB** of free space on the drive you're working on. On Windows, your OS disk (C:) must have 15GB free at least.
-   * For macOS users, **30GB** of free space on the system's drive.
+1. _**[CRUCIAL]**_ Tiempo y paciencia 
+   * No comienzes a trabajar en esto si tienes plazos que cumplir o trabajo importante para hacer. Los hackintoshes no son algo en lo que debas confiar como máquina de trabajo. 
+2. _**[CRUCIAL]**_ **Conoce tu hardware**
+   * El nombre de tu CPU al igual que su generación
+   * Tu(s) GPU(s)
+   * La configuración de tus dispositivos de almacenamiento (HDD/SSD, NVMe/AHCI/RAID/IDE)
+   * El modelo de tu PC/Laptop si es de un OEM
+   * Tu **Chipset de ethernet**
+   * Tu chipset WLAN/Bluetooth
+3. _**[CRUCIAL]**_ **Conocimiento básico de lineas de comandos y cómo usar terminal/cmd**
+   * Esto nó solo es [CRUCIAL], es la base de la guía. No te podremos ayudar si no sabes como usar `cd` o si no sabes cómo borrar un archivo, por ejemplo.
+4. _**[CRUCIAL]**_ Una computadora que es compatible, como se vé en la sección de _**Compatibilidad**_ .
+   * [Página de limitaciones de hardwarwe](/macos-limits.md)
+5. _**[CRUCIAL]**_ Un USB con un mínimo de:
+   * 12GB si usarás macOS para crear el USB
+   * 4GB si usarás Windows o Linux para crear el USB
+6. _**[CRUCIAL]**_ Una **conección a Ethernet** (No adaptadores WiFi, y los adaptadores USB de Ethernet pueden o no funcionar dependiendo del soporte de macOS). Debes saber el modelo de tu tarjeta LAN.
+   * Debes tener ya sea un puerto de Ethernet físico, o un adaptador/"dongle" compatible con macOS. En el caso de que tengas una [tarjeta WiFi compatible](https://dortania.github.io/Wireless-Buyers-Guide/), puedes usarla.
+     * Ten en cuenta que la mayoría de las tarjetas WiFi no son compatibles con macOS.
+   * Para las personas que no pueden usar ethernet pero tienen un teléfono android, pueden conectar su teléfono android a el WiFi y después compartir internet via USB con [HoRNDIS](https://joshuawise.com/horndis#available_versions).
+7. _**[CRUCIAL]**_ **Una instalación adecuada de un SO:**
+   * Puede ser:
+     * macOS (mejor si es una versión relativamente nueva)
+     * Windows (Windows 10, 1703 o posterior)
+     * Linux (con Python 2.7 o posterior), asegúrate que esté limpia y funcionando correctamente.
+   * Para usuarios de Windows o Linux, **15GB** de espacio libre en el disco que estés trabajando. En Windows, el disco de tu SO, (C:), debe tener al menos 15GB libres.
+   * Para usuarios de macOS, **30GB** de espacio libre en el disco de tu sistema.
 
-## Other OpenCore Tips
+## Otros tips de OpenCore
 
-* Kernel extensions are loaded in the order specified in your config file, so you must load an extension's dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.
-* SMBIOS data, ACPI patches and DSDT/SSDTs are applied to all operating systems. Adjust your SSDTs with `If (_OSI ("Darwin")) {}`
-  * Note that all SSDTs mentioned in this guide have been updated accordingly and should not affect booting
-* Some systems require pure UEFI mode to boot. (This setting is commonly called "Windows 8.1/10 UEFI Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
-* OpenCore requires a version of macOS that supports either a Prelinked Kernel or kernel Collections, this means any installs of OS X 10.7 Lion or newer are supported.
-* Those having issues converting can refer to the [Clover Conversion](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion) page
+* Las extensiones del Kernel son cargadas en el order especificado en tu archivo de configuración, así que debes cargar las dependencias de estas extenciones antes de cargar la extensión en sí. Por ejemplo, Lilu debe ser cargado antes de WhateverGreen o VirtualSMC. 
+* Los datos del SMBIOS, patches del ACPI y los SSDTs/DSDT son aplicados a todos los sistemas operativos. Puedes ajustar tus SSDTs con `If (_OSI ("Darwin")) {}`
+  * Ten en cuenta que todos los SSDTs mencionados en esta guía han sido actualizados respectivamente y no deberían afectar el arranque del sistema.
+* Algunos sistemas requieren UEFI puro para arrancar (esta configuración es comúnmente llamada "Windows 8.1/10 UEFI Mode" por los fabricantes de placas base. Véase también [flashear una ROM UEFI en GPUs más antiguas](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
+* OpenCore requiere una versión de macOS que soporta ya sea el "Prelinked Kernel" o las "Kernel Collections". Esto significa que cualquier instalación de OS X 10.7 Lion en adelante es soportado.
+* Aquellos que tengan problemas cambiando a OpenCore pueden referirse a la página de [Conversión a Clover](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion) 

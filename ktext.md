@@ -2,51 +2,51 @@
 
 * Supported version: 0.5.9
 
-This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
+Esta sección es para obtener otros archivos necesarios para arrancar macOS, esperamos que conozcas bien tu hardware  antes de comenzar y que hayas hecho un hackintosh antes, ya que no entraremos en detalle aquí. 
 
-> What's the best way to figure out if my hardware is supported?
+> ¿Cuál es la mejor manera de averiguar si mi hardware es compatible?
 
-See the [**Hardware Limitations page**](macos-limits.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
+Consulta la [**Página de limitaciones de hardware**](/macos-limits.md) para obtener una mejor idea de lo que requiere macOS para arrancar, el soporte de hardware entre Clover y OpenCore es bastante similar.
 
-> What are some ways to figure out what hardware I have?
+> ¿Cuáles son algunas formas de averiguar qué hardware tengo?
 
-Generally the product's spec page has all the info you need, but if you're still having troubles there are a few options:
+En general, la página de especificaciones del producto tiene toda la información que necesitas, pero si todavía tienes problemas, hay algunas opciones:
 
 * **Windows**:
   * [Speccy](https://www.ccleaner.com/speccy)
-  * DeviceManager
+  * Administrador de dispositivos
 * **Linux**:
-  * Run `hwinfo` in terminal
+  * Correr `hwinfo` en la terminal
 
-## Firmware Drivers
+## Drivers del firmware
 
-Firmware drivers are drivers used by OpenCore in the UEFI environment. They're mainly required to boot a machine, either by extending OpenCore's patching ability or showing you different types of drives in the OpenCore picker(ie. HFS drives).
+Los controladores de firmware son controladores utilizados por OpenCore en el entorno UEFI. Se requieren principalmente para arrancar una computadora, ya sea ampliando la capacidad de parcheo de OpenCore o mostrándole diferentes tipos de discos en el selector de OpenCore (específicamente, discos HFS).
 
-* **Location Note**: These files **must** be placed under `EFI/OC/Drivers/`
+* **Dato a tener en cuenta sobre la ubicación**: Estos archivos **deben** colocarse en `EFI / OC / Drivers /`
 
 ### Universal
 
-For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
+Para la mayoría de los sistemas, solo necesitarás 2 controladores `.efi` para comenzar a funcionar:
 
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
-  * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
+  * Necesario para ver volúmenes HFS (es decir, instaladores de macOS y particiones/imágenes de recuperación). **No mezclar con otros drivers HFS**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
+  * Reemplazo para [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), usado como una extensión para OpenCore que sirve para ayudar a parchear boot.efi, para arreglos relacionados a NVRAM y para una mejor administración de memoria.
 
-### Legacy users
+### Usuarios Legacy 
 
-In addition to the above, if your hardware doesn't support UEFI(2011 and older era) then you'll need the following. Pay close attention to each entry as you may not need all 4:
+Además de lo anterior, si tu hardware no es compatible con UEFI (2011 y anterior), necesitarás lo siguiente. Presta atención a cada entrada, ya que es posible que no necesites todas:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+  * Se utiliza para el menú de selección de OpenCore en **sistemas legacy que ejecutan DuetPkg**, [no recomendado e incluso dañino en UEFI (Ivy Bridge y más reciente)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
-  * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older
+  * Variante legacy de HfsPlus, utilizada para sistemas que carecen de soporte de instrucción RDRAND. Esto se ve generalmente en Sandy Bridge y anteriores.
 
-For a full list of compatible drivers, see the [Clover conversion page](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion). These files will go in your Drivers folder in your EFI
+Para obtener una lista completa de los drivers compatibles, consulta la [Página de conversión a Clover](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion). Estos archivos irán a tu carpeta de drivers, encontrada en tu EFI.
 
 ## Kexts
 
-A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI.
+Un kexts es una extensión del kernel, o **k**ernel **ext**ension en inglés, puedes pensar en esto como un driver para macOS, estos archivos irán a la carpeta Kexts en su EFI.
 
 * **Windows and Linux note**: Kexts will look like normal folders in your OS, **double check** that the folder you are installing has a .kext extension visible(and do not add one manually if it's missing).
   * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.

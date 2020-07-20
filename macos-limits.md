@@ -1,113 +1,113 @@
-# Hardware Limitations
+# Limitaciones de Hardware
 
-With macOS, there's numerous hardware limitation you need to be aware of before stepping foot into an installation. This is due to the limited amount of hardware Apple supports, and so we're either limited by what Apple or what patches the community has created.
+Con macOS, hay numerosas limitaciones de hardware que debes tener en cuenta antes de iniciar una instalación. Esto se debe a la cantidad limitada de hardware que admite Apple, por lo que estamos limitados por Apple o por los parches que ha creado la comunidad.
 
-The main hardware section to be verify are:
+Las secciones principales a verificar son:
 
 * [CPU](#cpu-support)
 * [GPU](#gpu-support)
-* [Motherboard](#motherboard-support)
-* [Storage](#storage-support)
-* [Wired Networking](#wired-networking)
-* [Wireless Networking](#wireless-networking)
-* [Miscellaneous](#miscellaneous)
+* [Placa base](#motherboard-support)
+* [Almacenamiento](#storage-support)
+* [Internet cableado (Ethernet)](#wired-networking)
+* [Internet inalámbrico (WiFi)](#wireless-networking)
+* [Otros](#miscellaneous)
 
-And for more detailed guides on the subject, see here:
+Para guías más detalladas en el tema, véase:
 
 * [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
-  * Check if your GPU is supported and which macOS version you can run.
+  * Verifica si tu GPU es compatible y qué version de macOS puedes correr. 
 * [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/)
-  * Check if your WiFi card is supported.
+  * Verifica si tu tarjeta WiFi es compatible.
 * [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)
-  * Overall guide on what to avoid and what pitfalls your hardware may hit.
+  * Guía en general en qué evitar y qué problemas podrías enfrentarte con tus componentes. 
 
-## CPU Support
+## Soporte de CPUs
 
-For CPU support, we have the following breakdown:
+Para el soporte de CPUs, tenemos el siguiente desglose:
 
-* Intel's Desktop CPUs are supported.
-  * Ivy Bridge through Comet Lake are supported by this guide.
-* Intel's High End Desktops and Server CPUs.
-  * Haswell-E through Cascade Lake X are supported by this guide.
-* Intel's Core i and Xeon series laptop CPUs
-  * Ivy Bridge through Ice Lake are supported by this guide.
-  * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
-* AMD's Desktop Bulldozer(15h), Jaguar(16h) and Ryzen(17h) CPUs
-  * Laptop CPUs are **not** supported
-  * Note that 3rd gen ThreadRipper is not officially without a KVM(Virtual Machine), 1st and 2nd gen ThreadRipper are properly supported
+* Las CPUs de escritorio de Intel son compatibles.
+  * Esta guía soporta desde Ivy Bridge hasta Comet Lake.
+* CPUs de gama alta y servidores de Intel.
+  * Esta guía soporta desde Haswell-E hasta Cascade Lake X.
+* CPUs de la serie i y Xeon para laptops
+  * Esta guía soporta desde Ivy Bridge hasta Ice Lake.
+  * A tener en cuenta: Las CPUs de la serie Atom, Celeron y Pentium no son compatibles.
+* Las series Bulldozer (15h), Jaguar (16h) y Ryzen (17h) AMD de escritorio.
+  * CPUs de laptop **no** son compatibles.
+  * Ten en cuenta que ThreadRipper de tercera generación no está oficialmente soportado sin un KVM (máquina virtual), pero ThreadRipper de primera y segunda generación son compatibles.
 
-**For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
+**Para obtener información más detallada, consulta aquí: [Guía de compradores Anti-Hackintosh](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
-## GPU Support
+## Soporte de GPUs
 
-GPU support becomes much more complicated due to the near infinite amount of GPUs on the market, but the general breakdown is as follows:
+El soporte de GPUs se vuelve mucho más complicado debido a la cantidad casi infinita de GPUs en el mercado, pero el desglose general es el siguiente:
 
-* AMD's GCN based GPUs are supported in the latest versions of macOS
-  * AMD APUs are not supported however
-  * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
-* Nvidia's GPU support is complicated:
-  * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
-  * [Nvidia's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
-  * Nvidia's [Kepler(7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS(Including macOS 11: Big Sur)
-    * This is due to Apple still supporting a few [MacBook Pros with Nvidia GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html)
-* Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
-  * Ivy Bridge through Ice Lake iGPU support is covered in this guide
-  * Note GT2 refers to the tier of iGPU, low end GT1 iGPUs found on Pentiums, Celerons and Atoms are not supported in macOS
+* Las GPUs AMD basadas en GCN son compatibles con las versiones más recientes de macOS.
+  * Sin embargo, las APUs de AMD no son compatibles.
+  * Las GPUs de AMD con [núcleos basados en Lexa](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) de la serie Polaris tampoco son compatibles.
+* El soporte de GPUs de Nvidia es complicado:
+  * Las GPUs de la serie [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) y [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) están limitadas a macOS 10.13: High Sierra
+  * La serie de GPUs [Tuning de Nvidia(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) **no son compatibles con ninguna versión de macOS**
+  * Las GPUs de la serie [Kepler(7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) son compatibles en las series más nuevas de macOS (Incluyendo macOS 11: Big Sur)
+    * Esto es debido a que Apple sigue soportando algunas [MacBook Pros con GPUs de Nvidia](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html)
+* iGPUs de Intel de la serie [GT2+](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) 
+  * Esta guía cubre iGPUs desde Ivy Bridge hasta Ice lake
+  * Cabe mencionar que GT2 se refiere a la serie del iGPU, iGPUs de la serie GT1, encontrada en Pentiums, Celerons y Atoms no son compatibles con macOS.
 
-And an important note for **Laptops with discrete GPUs**:
+Una nota importante para las **Laptops con GPU dedicada**:
 
-* 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these dGPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide.)
-* However, in some cases, the discrete GPU powers any external outputs (HDMI, mini DisplayPort, etc.), which may or may not work; in the case that it will work, you will have to keep the card on and running.
-* However, there are some laptops which rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually causes issues.
+* El 90% de las GPUs dedicadas en laptops no funcionarán porque están cableadas en una configuración que macOS no admite (gráficos intercambiables). Con las GPUs dedicadas de NVIDIA, esto generalmente se llama Optimus. No es posible utilizar estas GPUs para la pantalla interna, por lo que generalmente se recomienda desactivarlas y apagarlas (se tratará más adelante en esta guía).
+* Sin embargo, en algunos casos, la GPU dedicada alimenta cualquier salida externa (HDMI, mini DisplayPort, etc.), que puede o no funcionar; en caso de que funcione, deberás mantener la tarjeta en funcionamiento.
+* Sin embargo, hay algunas laptops que en raros casos no tienen gráficos intercambiables, por lo que se puede usar la tarjeta dedicada (si es compatible con macOS). Sin embargo, el cableado y la configuración de estas generalmente causan problemas.
 
-**For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)**
+**Si quieres una lista completa de las GPUs compatibles, visita la [Guía de compra de GPUs](https://dortania.github.io/GPU-Buyers-Guide/)**
 
-## Motherboard Support
+## Soporte de placas base
 
-For the most part, all motherboards are supported as long as the CPU is. The sole exception being:
+En su mayor parte, todas las placas base son compatibles siempre que la CPU lo sea tambíen. La única excepción es:
 
-* [AMD's B550 boards](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
+* [La placas base AMD B550](https://www.amd.com/en/chipsets/b550)
 
-There's currently no fixes for the boards besides running in a KVM(Virtual Machine), similar to AMD's 3rd gen ThreadRipper CPUs.
+Actualmente no hay soluciones para las placas además de ejecutarse en una KVM (máquina virtual), similar a las CPUs ThreadRipper de tercera generación de AMD.
 
-## Storage Support
+## Compatibilidad de almacenamiento
 
-For the most part, all SATA based drives are supported and majority of NVMe drives as well. The few exceptions:
+En su mayor parte, todas las unidades basadas en SATA son compatibles y la mayoría de las unidades NVMe también. Sin embargo, tenemos unas pocas excepciones:
 
-* **Samsung PM981, PM991 and Micron 2200S NVMe SSDs**
-  * These SSDs are not compatible out of the box (causing kernel panics) and therefore require [NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases) to fix these kernel panics. Note that these drives may still cause boot issues even with NVMeFix.kext.
-  * On a related note, Samsung 970 EVO Plus NVMe SSDs also had the same problem but it was fixed in a firmware update; get the update (Windows via Samsung Magician or bootable ISO) [here](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/).
-  * Also to note, laptops that use [Intel Optane Memory](https://www.intel.com/content/www/us/en/architecture-and-technology/optane-memory.html) or [Micron 3D XPoint](https://www.micron.com/products/advanced-solutions/3d-xpoint-technology) for HDD acceleration are unsupported in macOS. Some users have reported success in Catalina with even read and write support but we highly recommend removing the drive to prevent any potential boot issues.
+* **SSDs NVMe Samsung PM981, PM991 y Micron 2200S**
+  * Estos SSD no son compatibles desde el primer momento (lo que causa un "kernel panic") y, por lo tanto, requieren de [NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases) para corregir este problema. Ten en cuenta que estas unidades pueden causar problemas de arranque incluso con NVMeFix.kext.
+  * Otro caso similar fue con la SSD NVMe 970 EVO Plus de Samsung, pero esto fue corregido con una actualización de firmware. Puedes obtenerla via Windows usando la herramienta Samsung Magician o con una ISO booteable [aquí](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/).
+  * También para tener en cuenta, las computadoras portátiles que usan [Intel Optane](https://www.intel.com/content/www/us/en/architecture-and-technology/optane-memory.html) o [Micron 3D XPoint](https://www.micron.com/products/advanced-solutions/3d-xpoint-technology) para la aceleración de discos duros, no son compatibles con macOS. Sin embargo algunos usuarios han reportado éxito en Catalina incluso con soporte de lectura y escritura, pero recomendamos encarecidamente quitar la unidad para evitar posibles problemas de arranque.
 
-## Wired Networking
+## Conexión a internet cableada (Ethernet)
 
-Virtually all wired network adapters have some form of support in macOS, either by the built-in drivers or community made kexts. The main exceptions:
+Prácticamente todos los adaptadores de red con cable tienen algún tipo de soporte en macOS, ya sea por los controladores incorporados o por kexts hechos por la comunidad. Las principales excepciones son:
 
-* Intel's 2.5GBe i225 networking
-  * Found on high-end Desktop Comet Lake boards
-  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](../config.plist/comet-lake.md#deviceproperties)
-* Intel's server NICs
-  * Workarounds are possible for [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
-* Mellanox and Qlogic server NICs
+* Ethernet i225 2.5GBe de Intel
+  * Encontrado en placas base Comet Lake de gama alta de escritorio.
+  * Son postibles soluciones alternativas: [Fuente](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) y [Ejemplo](/config.plist/comet-lake#add-2)
+* NICs de servidores de Intel
+  * Hay soluciones alternativas para los chipsets [X520 y X540](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
+* NICs de servidores Mellanox y Qlogic
 
-## Wireless Networking
+## Conexión a internet inalámbrica (WiFi)
 
-Most WiFi cards that come with laptops are not supported as they are usually Intel/Qualcomm. If you are lucky, you may have a supported Atheros card, but support only runs up to High Sierra.
+La mayoría de las tarjetas WiFi que vienen con las laptops no son compatibles, ya que generalmente son Intel/Qualcomm. Si tienes suerte, es posible que tengas una tarjeta Atheros compatible, pero son compatibles hasta High Sierra.
 
-The best option is getting a supported Broadcom card; see the [WiFi Buyer's Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for recommendations.
+La mejor opción es tener una tarjeta Broadcom compatible; consulta la [Guía de compras de WiFi](https://dortania.github.io/Wireless-Buyers-Guide/) para obtener recomendaciones.
 
-## Miscellaneous
+## Otros
 
-* **Fingerprint sensors**
-  * There is no way to emulate the Touch ID sensor as of currently, so fingerprint sensors will not work.
-* **Windows Hello Face Recognition**
-  * Some laptops come with WHFR that is I2C connected (and used through your iGPU), those will not work.
-  * Some laptops come with WHFR that is USB-Connected, if you're lucky, you may get the camera functionality, but nothing else.
-* **Intel Smart Sound Technology**
-  * Laptops with Intel SST will not have anything connected through them (usually internal mic) work, as it is not supported. You can check with Device Manager on Windows.
-* **Headphone Jack Combo**
-  * Some laptops with a combo headphone jack may not get Audio Input through them and will have to either use the built-in microphone or an external Audio Input device through USB.
-* **Thunderbolt USB-C ports**
-  * (Hackintosh) Thunderbolt support is currently still iffy in macOS, even more so with Alpine Ridge controllers, which most current laptops have. There have been attempts to keep the controller powered on, which allows Thunderbolt and USB-C hotplug to work, but it comes at the cost of kernel panics and/or USB-C breaking after sleep. If you want to use the USB-C side of the port and be able to sleep, you must plug it in at boot and keep it plugged in.
-  * Note: This does not apply to USB-C only ports - only Thunderbolt 3 and USB-C combined ports.
-  * Disabling Thunderbolt in the BIOS will also resolve this.
+* **Sensores de huellas**
+  * Actualmente no hay forma de emular el sensor Touch ID, por lo que los sensores de huellas digitales no funcionarán.
+* **Reconocimiento Facial con Windows Hello**
+  * Algunas laptops vienen con WHFR que está conectado a I2C (y se usa a través de tu iGPU), esas no funcionarán.
+  * Otras vienen con WHFR que está conectado por USB, y si tienes suerte, puedes obtener la funcionalidad de la cámara, pero nada más.
+* **Tecnología Intel Smart Sound**
+  * Las laptops con Intel SST no tendrán nada conectado a través de ellas (generalmente micrófono interno) funcionando, ya que no es compatible. Puedes consultar con el Administrador de dispositivos en Windows.
+* **Combo de headphone jack**
+  * Es posible que algunas laptops con un headphone jack combinado para auriculares no reciban la entrada de audio a través de ellas y tengan que usar el micrófono incorporado o un dispositivo externo de entrada de audio a través de USB.
+* **Puertos Thunderbolt USB-C**
+  * En el caso de los hackintosh, la compatibilidad con Thunderbolt todavía es dudosa en macOS, aún más con los controladores Alpine Ridge, que son los que tienen la mayoría de las laptops actuales. Han habido intentos de mantener el controlador encendido, lo que permite que funcionen Thunderbolt y USB-C, pero esto trae como consecuencia "kernel panics" y/o la pérdida de USB-C después de suspender la laptop. Si deseas utilizar el lado USB-C del puerto y poder suspender tu hack, debes enchufarlo en el arranque y mantenerlo enchufado.
+  * Nota: Esto no se aplica solo a los puertos USB-C, solo a los puertos combinados Thunderbolt 3 y USB-C.
+  * Deshabilitar Thunderbolt en la BIOS también resolverá esto.

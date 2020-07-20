@@ -1,26 +1,20 @@
----
-home: true
-heroImage: /dortania-logo-clear.png
-heroText: Dortania's OpenCore Install Guide
-actionText: Getting Started→
-actionLink: prerequisites.md
+# Creando el USB
 
-meta:
-- name: description
-  content: Current supported version 0.5.9
----
+* Versión soportada: 0.5.9
 
-# What is OpenCore and who is this guide for
+Requerimientos:
 
-OpenCore is what we refer to as a "boot loader", this is a complex piece of software that we use to prepare our systems for macOS. Specifically by injecting new data for macOS such as SMBIOS, ACPI tables and kexts. How this tool differs from others like Clover is that this has been designed with security and quality in mind, allowing us to use many security features found on real macs such as SIP and FileVault. A more in-depth look can be found at here: [Why OpenCore over Clover and others](why-oc.md)
+* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), altamente recomendado utilizar la versión debug para obtener más información.
+* [ProperTree](https://github.com/corpnewt/ProperTree) para editar archivos .plist (OpenCore Configurator es otra herramienta pero está altamente desactualizada y la versión de Mackie es conocida por corromper .plists. **Por favor  evita este tipo de herramientas a toda costa**.
+* NVRAM limpia (Esto es de gran importancia si has usado Clover antes, ya que muchas variables seguirán causando conflictos. Afortunadamente con OpenCore puedes usar la herramienta `CleanNvram` en su menú cuando `AllowNvramReset` está habilitado en tu configuración)
+* Conocimiento básico de cómo funciona un Hackintosh y qué archivos requiere (por ejemplo el tipo de controlador de red) 
+* Debes quitar Clover de tu sistema por completo si deseas usar OpenCore como tu gestor de arranque. Sin embargo, haz una copia de seguridad de tu EFI basada en Clover. Dirígete aquí para ver qué debe ser limpiado de tu sistema:[Conversión de Clover](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion)
 
-This guide specifically focuses on 2 main things:
+# Creando el instalador
 
-* Installing macOS on an X86 based PC
-* Teach you what makes your hack work
+Dependiendo en el SO que estés corriendo, visita tu sección específica:
 
-Because of this, you will be expected to read, learn and even google. This is not a simple 1-click install setup.
-
-Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, it is still being frequently updated and so chunks of configuration change quite often(ie. New quirks replacing old ones)
-
-Lastly, those having issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh discord](https://discord.gg/u8V7N5C) for more help.
+* [Usuarios de macOS](/installer-guide/mac-install.md)
+  * Si estás corriendo Sierra/versiones anteriores a sierra, dirígete aquí [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md)
+* [Usuarios de Windows](/installer-guide/winblows-install.md)
+* [Usuarios de Linux](/installer-guide/linux-install.md)
