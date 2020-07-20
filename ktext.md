@@ -46,13 +46,13 @@ Para obtener una lista completa de los drivers compatibles, consulta la [Página
 
 ## Kexts
 
-Un kexts es una extensión del kernel, o **k**ernel **ext**ension en inglés, puedes pensar en esto como un driver para macOS, estos archivos irán a la carpeta Kexts en su EFI.
+Un kext es una extensión del kernel, o **k**ernel **ext**ension en inglés, puedes pensar en esto como un driver para macOS, estos archivos irán en la carpeta Kexts en tu EFI.
 
-* **Windows and Linux note**: Kexts will look like normal folders in your OS, **double check** that the folder you are installing has a .kext extension visible(and do not add one manually if it's missing).
-  * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.
-* **Location Note**: These files **must** be placed under `EFI/OC/Kexts/`.
+* **Nota para Windows y Linux**: Los kexts se verán como carpetas normales en tu sistema operativo, **verifica** que la carpeta que estás instalando tiene una extensión .kext visible (y no agregues una manualmente si falta).
+  * Si cualquier kext también include un archivo `.dSYM`, puedes simplemente eliminarlo, ya que sólo son para depuración. 
+* **Nota importante sobre la ubicación**: Estos archivos **deben** ser puestos en `EFI/OC/Kexts/`.
 
-All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
+Todos los kexts mencionados abajo pueden ser encontrados **pre-compilados** [en el repositorio de kexts](http://kexts.goldfish64.com/). Los kexts aquí son compilados cada vez que hay un commit. 
 
 ### Must haves
 

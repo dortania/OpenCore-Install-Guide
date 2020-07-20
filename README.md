@@ -1,20 +1,31 @@
-# Creando el USB
+---
+home: true
+heroImage: /dortania-logo-clear.png
+heroText: Guia de instalación de OpenCore de Dortania (Adaptación no oficial al español)
+actionText: Comenzando→
+actionLink: prerequisites.md
 
-* Versión soportada: 0.5.9
+meta:
+- name: description
+  content: Versión soportada actualmente 0.5.9
+---
 
-Requerimientos:
+# ¿Qué es Opencore? Y, ¿Para quién es esta guía?
 
-* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), altamente recomendado utilizar la versión debug para obtener más información.
-* [ProperTree](https://github.com/corpnewt/ProperTree) para editar archivos .plist (OpenCore Configurator es otra herramienta pero está altamente desactualizada y la versión de Mackie es conocida por corromper .plists. **Por favor  evita este tipo de herramientas a toda costa**.
-* NVRAM limpia (Esto es de gran importancia si has usado Clover antes, ya que muchas variables seguirán causando conflictos. Afortunadamente con OpenCore puedes usar la herramienta `CleanNvram` en su menú cuando `AllowNvramReset` está habilitado en tu configuración)
-* Conocimiento básico de cómo funciona un Hackintosh y qué archivos requiere (por ejemplo el tipo de controlador de red) 
-* Debes quitar Clover de tu sistema por completo si deseas usar OpenCore como tu gestor de arranque. Sin embargo, haz una copia de seguridad de tu EFI basada en Clover. Dirígete aquí para ver qué debe ser limpiado de tu sistema:[Conversión de Clover](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion)
+* **Español**:Esta es una traducción no oficial la cual no está afiliada a Dortania, y puede quedar obsoleta fácilmente. La misma está acompañada por la [traducción de la sección post-instalación de rvstry](https://github.com/rvstry/OpenCore-Post-Install).
 
-# Creando el instalador
+* **English**: This is an unofficial translation that is not affiliated with Dortania, and is likely to become outdated soon. This tranlastion is accompanied by [rvstry's translation of the OpenCore Post-Install Guide](https://github.com/rvstry/OpenCore-Post-Install).
 
-Dependiendo en el SO que estés corriendo, visita tu sección específica:
+OpenCore es a lo que nos referimos como un "gestor de arranque", ésta es una complicada pieza de software que utilizamos para preparar a nuestros sistemas para macOS. Específicamente inyectando ciertos datos a macOS como SMBIOS, tablas de ACPI y kexts (extensiones del kernel). Lo distinto de esta herramienta es que ha sido diseñada teniendo en cuenta tanto seguridad como calidad, permitiéndonos utilizar muchas herramientas de seguridad usadas en macs reales, como el SIP y FileVault. Una explicación más profunda puede ser encontrada aquí: [¿Por qué OpenCore encima de Clover y otros?](why-oc.md)
 
-* [Usuarios de macOS](/installer-guide/mac-install.md)
-  * Si estás corriendo Sierra/versiones anteriores a sierra, dirígete aquí [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md)
-* [Usuarios de Windows](/installer-guide/winblows-install.md)
-* [Usuarios de Linux](/installer-guide/linux-install.md)
+Esta guía se centrará en dos temas:
+
+* Instalar macOS en computadoras basadas en X86
+* Enseñarte qué es lo que hace funcionar a tu hack
+
+Debido a esto, esperamos que leas, aprendas y hasta busques en google. Recuerda que esto no es una simple instalación de un click.
+
+Cabe mencionar que OpenCore sigue siendo nuevo y se encuentra actualmente en beta. Por más que sea bastante estable, y posiblemente más estable que Clover en prácticamente todos los sentidos, está siendo actualizado regularmente, por lo que partes de la configuración son cambiadas frecuentemente (por ejemplo que se incorporen los llamados "quirks" y que estos subplanten a otros anteriores.)
+
+Por último, aquellos que tengan problemas pueden visitar [El subreddit de Hackintosh](https://www.reddit.com/r/hackintosh/) y [Nuestro servidor de discord](https://discord.gg/u8V7N5C) para recibir ayuda. 
+**Nota: Tanto el Subreddit como el servidor de Discord sólo admiten posts en inglés.** 
