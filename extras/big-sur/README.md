@@ -65,7 +65,7 @@ You will also need to ensure you have a few NVRAM variables set:
     * ~~`-lilubetaall`~~
       * Newest builds of Lilu and plugins do not require this boot-arg
     * ~~`vsmcgen=1`~~
-	  * Newest builds of Lilu and VirtualSMC don't need this boot-arg
+      * Newest builds of Lilu and VirtualSMC don't need this boot-arg
     * ~~`-disablegfxfirmware`~~
       * Newer builds of WhateverGreen should fix this (v1.4.1)
 
