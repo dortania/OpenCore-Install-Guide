@@ -70,7 +70,13 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| DevirtualiseMmio | YES |
+:::
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -80,6 +86,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
+
+:::
 
 ## DeviceProperties
 

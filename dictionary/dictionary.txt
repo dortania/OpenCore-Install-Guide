@@ -845,6 +845,7 @@ npci
 nvda_drv=1
 osxaptiofix2drv.efi
 passthrough
+patcher
 pentiums
 plist
 plist-only
