@@ -340,21 +340,17 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 
 Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
-**LegacyEnable**: YES
+* **LegacyEnable**: YES
+  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM like X99
 
-* Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM like X99
+* **LegacyOverwrite**: YES
+  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM like X99
 
-**LegacyOverwrite**: YES
+* **LegacySchema**
+  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
-* Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM like X99
-
-**LegacySchema**
-
-* Used for assigning NVRAM variables, used with LegacyEnable set to YES
-
-**WriteFlash**: NO
-
-* Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
+* **WriteFlash**: NO
+  * Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
 
 ## PlatformInfo
 
@@ -405,24 +401,21 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
 
-**UpdateDataHub**: YES
+* **UpdateDataHub**: YES
+  * Update Data Hub fields
 
-* Update Data Hub fields
+* **UpdateNVRAM**: YES
+  * Update NVRAM fields
 
-**UpdateNVRAM**: YES
+* **UpdateSMBIOS**: YES
+  * Updates SMBIOS fields
 
-* Update NVRAM fields
-
-**UpdateSMBIOS**: YES
-
-* Updates SMBIOS fields
-
-**UpdateSMBIOSMode**: Create
-
-* Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
+* **UpdateSMBIOSMode**: Create
+  * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
 
 :::
 
