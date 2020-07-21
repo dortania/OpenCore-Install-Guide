@@ -2,7 +2,7 @@
 home: true
 heroImage: /dortania-logo-clear.png
 heroText: Guia de instalación de OpenCore de Dortania (Adaptación no oficial al español)
-actionText: Comenzando→
+actionText: Comenzando →
 actionLink: prerequisites.md
 
 meta:
