@@ -12,7 +12,7 @@ meta:
 
 # ¿Qué es Opencore? Y, ¿para quién es esta guía?
 
-* **Español**:Esta es una traducción no oficial la cual no está afiliada a Dortania, y puede quedar obsoleta fácilmente. La misma está acompañada por la [traducción de la sección post-instalación de rvstry](https://github.com/rvstry/OpenCore-Post-Install).
+* **Español**: Esta es una traducción no oficial la cual no está afiliada a Dortania, y puede quedar obsoleta fácilmente. La misma está acompañada por la [traducción de la sección post-instalación de rvstry](https://github.com/rvstry/OpenCore-Post-Install).
 
 * **English**: This is an unofficial translation that is not affiliated with Dortania, and is likely to become outdated soon. This tranlastion is accompanied by [rvstry's translation of the OpenCore Post-Install Guide](https://github.com/rvstry/OpenCore-Post-Install).
 
