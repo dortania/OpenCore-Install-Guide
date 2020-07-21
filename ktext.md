@@ -15,6 +15,7 @@ Generally the product's spec page has all the info you need, but if you're still
 * **Windows**:
   * [Speccy](https://www.ccleaner.com/speccy)
   * DeviceManager
+  * [AIDA64](https://www.aida64.com/downloads) (have much more information than Speccy and DeviceManager)
 * **Linux**:
   * Run `hwinfo` in terminal
 
