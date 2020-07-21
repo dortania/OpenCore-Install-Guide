@@ -16,6 +16,7 @@ Actually almost identical to an Ivy Bridge hack, the main things that need to be
 
 * IMEI will need to be faked if running Sandy Bridge CPU on an Ivy Bridge based chipset(B75, Q75, Q77, H77, Z75, Z77)
   * [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
+  * If iGPU's disabled in the BIOS, no need for this SSDT
 
 **DeviceProperties**:
 
@@ -33,6 +34,7 @@ Actually almost identical to an Ivy Bridge hack, the main things that need to be
   * `device-id | Data | 3A1C0000`
     * This is only required when using the SSDT-IMEI, see above if you need it.
 * For Mojave and newer, iGPU must be disabled
+  * IMEI is only required for iGPU purposes, if disabled then no need for the device-id or SSDT-IMEI
 
 Example of config.plist for Sandy Bridge DeviceProperties setup:
 
