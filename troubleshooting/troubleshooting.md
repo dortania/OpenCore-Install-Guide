@@ -115,6 +115,7 @@ Main things to check:
 * ScanPolicy set to `0` to show all drives
 * Have the proper firmware drivers such as HfsPlus(Note ApfsDriverLoader shouldn't be used in 0.5.8)
 * Set UnblockFsConnect to True in config.plist -> UEFI -> Quirks. Needed for some HP systems
+* Set **SATA Mode**: `AHCI` in BIOS
 * Set `UEFI -> APFS` to see APFS based drives:
   * **EnableJumpstart**: YES
   * **HideVerbose**: YES
