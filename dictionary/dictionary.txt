@@ -828,6 +828,7 @@ lapic
 lappie
 licensor
 linter
+lsblk
 macOS
 macOS's
 macOS(\.)?

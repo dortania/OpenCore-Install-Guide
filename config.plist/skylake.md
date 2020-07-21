@@ -572,5 +572,6 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
 * DVMT Pre-Allocated(iGPU Memory): 64MB
+* SATA Mode: AHCI
 
 # Now with all this done, head to the [Installation Page](../installation/installation-process.md)
