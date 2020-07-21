@@ -505,7 +505,8 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 **Automatic**: YES
 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
-
+*Note that if you are using a DELL laptop and receive a firmware verifying problem look like this (see the picture below), you must use the SampleFull.plist and copy+past these information: SystemProductName, SystemSerialNumber, MLB, SystemUUID into the other keys and make sure that UpdateSMBIOSMode: Custom.
+![Verifying firmware](https://drive.google.com/file/d/1sb0zvhFhxvpJNWLSIveruqP58GlbPPJg/view?usp=sharing)
 :::
 
 ### Generic
