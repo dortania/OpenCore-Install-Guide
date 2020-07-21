@@ -303,7 +303,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [`kextd stall[0]: AppleACPICPU`](../troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
 * [MediaKit reports not enough space](../troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
 * [DiskUtility failing to erase](../troubleshooting/troubleshooting.md#diskutility-failing-to-erase)
-* [SATA Drives Not Shown in Disk Utility](../troubleshooting/troubleshooting.md#diskutility-not-showing-sata-drives)
+* [SATA Drives Not Shown in Disk Utility](../troubleshooting/troubleshooting.md#sata-drives-not-shown-in-diskutility)
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
 Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names include:
@@ -537,7 +537,7 @@ This is either 1(or more) of 5 issues:
 * Old firmware, make sure the drive is on the latest firmware
 * And finally, you may just have a bad drive
 
-## SATA Drives Not Shown in Disk Utility
+## SATA Drives Not Shown in DiskUtility
  * Make sure SATA Mode is AHCI in bios
 
 # macOS post-install
