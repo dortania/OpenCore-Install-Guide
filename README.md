@@ -25,7 +25,7 @@ Esta guía se centrará en dos temas:
 
 Debido a esto, esperamos que leas, aprendas y hasta busques en google. Recuerda que esto no es una simple instalación de un click.
 
-Cabe mencionar que OpenCore sigue siendo nuevo y se encuentra actualmente en beta. Por más que sea bastante estable, y posiblemente más estable que Clover en prácticamente todos los sentidos, está siendo actualizado regularmente, por lo que partes de la configuración son cambiadas frecuentemente (por ejemplo que se incorporen los llamados "quirks" y que estos subplanten a otros anteriores.)
+Cabe mencionar que OpenCore sigue siendo nuevo y se encuentra actualmente en Beta. Por más que sea bastante estable, y posiblemente más estable que Clover en prácticamente todos los sentidos, está siendo actualizado regularmente, por lo que partes de la configuración son cambiadas frecuentemente (por ejemplo que se incorporen los llamados "quirks" y que estos subplanten a otros anteriores).
 
 Por último, aquellos que tengan problemas pueden visitar [El subreddit de Hackintosh](https://www.reddit.com/r/hackintosh/) y [Nuestro servidor de discord](https://discord.gg/u8V7N5C) para recibir ayuda. 
 **Nota: Tanto el Subreddit como el servidor de Discord sólo admiten posts en inglés.** 
