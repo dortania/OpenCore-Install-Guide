@@ -54,154 +54,155 @@ Un kext es una extensión del kernel, o **k**ernel **ext**ension en inglés, pue
 
 Todos los kexts mencionados abajo pueden ser encontrados **pre-compilados** [en el repositorio de kexts](http://kexts.goldfish64.com/). Los kexts aquí son compilados cada vez que hay un commit. 
 
-### Must haves
+### Kexts imprescindibles
 
-Without the below 2, no system is bootable:
+Sin los siguientes 2, ningún sistema es booteable:
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
-  * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
+  * Emula el chip SMC que se encuentra en Macs reales, sin este macOS no se iniciará
+  * La alternativa es FakeSMC, que puede tener mejor o peor soporte, más comúnmente utilizado en hardware Legacy.
 * [Lilu](https://github.com/acidanthera/Lilu/releases)
-  * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work
+  * Un kext para parchear muchos procesos, requerido para AppleALC, WhateverGreen, VirtualSMC y muchos otros kexts. Sin Lilu, no funcionarán.
 
-### VirtualSMC Plugins
+### Plugins de VirtualSMC
 
-The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring:
+Los complementos a continuación no son necesarios para bootear, y simplemente agregan funcionalidad adicional al sistema, como la supervisión del hardware:
 
 * SMCProcessor.kext
-  * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
+  * Utilizado para monitorear la temperatura de la CPU, **No funciona en sistemas basados en CPUs de AMD**
 * SMCSuperIO.kext
-  * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
+  * Utilizado para monitorear la velocidad de los ventiladores, **No funciona en sistemas basados en CPUs de AMD**
 * SMCLightSensor.kext
-  * Used for the ambient light sensor on laptops, **desktops can ignore**
-  * Do not use if you don't have an ambient light sensor, can cause issues otherwise
+  * Utilizado para el sensor de luz ambiental en laptops, **las computadoras de escritorio pueden ignorar esto**
+  * No lo uses si no tienes un sensor de luz ambiental, de lo contrario este kext puede causar problemas
 * SMCBatteryManager.kext
-  * Used for measuring battery readouts on laptops, **desktops can ignore**
-  * Do not use until battery has been properly patched, can cause issues otherwise
+  * Utilizado para medir lecturas de batería en laptops, **las computadoras de escritorio pueden ignorar esto**
+  * No usar hasta que la batería haya sido parcheada correctamente, de lo contrario puede causar problemas
 
-### Graphics
+### Gráficos
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
-  * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
-  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
+  * Utilizado para DRM, el boardID, arreglos del framebuffer, etc., todas las GPUs se benefician de este kext.
+  * Tenga en cuenta que el archivo SSDT-PNLF.dsl incluido solo se requiere para laptops y computadoras All-In-One, consulte [Introducción a ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) para obtener más información
 
 ### Audio
 
 * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
-  * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
+  * Se usa para parchear AppleHDA, el cual se usa para brindarte audio integrado. AMD 15h/16h pueden tener problemas con esto y los sistemas Ryzen/Threadripper rara vez tienen soporte de micrófono.
 
 ### Ethernet
 
-Here we're going to assume you know what ethernet card your system has, reminder that product spec pages will most likely list the type of network card.
+Ahora asumiremos que sabes qué tarjeta de ethernet tiene tu sistema, recuerda que las páginas de especificaciones probablemente incluyan esta información
 
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
-  * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
-  * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
+  * Requerido por la mayoría de NICs de Intel, chipsets basados en I211 necesitarán el kext SmallTreeIntel82576.
+  * Los NICs 82578, 82579, i217, i218 e i219 de Intel son soportados oficialmente.
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
-  * Required for most AMD boards running Intel NICs
+  * Necesario para NICs i211 de Intel, este kext está basado en el kext SmallTree pero ha sido parcheado para soportar I211.
+  * Necesario para la mayoría de placas base AMD con NICs de Intel
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
-  * Required for Atheros and Killer NICs
+  * Necesario para NICs Atheros y Killer
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
-  * For Realtek's Gigabit Ethernet
+  * Para el Ethernet Gigabit de Realtek
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
-  * For Realtek's 2.5Gb Ethernet
-* For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
+  * Para el Ethernet Realtek de 2.5Gb
+* Para las NICs i225-V de Intel, los parches se mencionan en la sección de "Device Properties" en la guía para Comet Lake de escritorio. No se requiere kext.
 
 ### USB
 
 * [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases)
-  * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
-  * Not needed on Skylake and newer(AsRock is dumb and does need this)
-  * Does not work on AMD CPUs **at all**
+  * Se utiliza para inyectar controladores USB Intel en sistemas sin puertos USB definidos en ACPI
+  * No necesario en SkyLake y posterior (AsRock es tonto y necesita esto)
+  * **No funciona** en CPUs de AMD
 
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
-  * Needed for non-native USB controllers
-  * AMD CPU based systems don't need this
-  * Common chipsets needing this:
+  * Necesario para controladores USB no nativos
+  * Sistemas basados en CPUs de AMD no necesitan esto
+  * Chipsets que comúnmente necesitan esto:
     * H370
     * B360
     * H310
-    * Z390(Not needed on Mojave and newer)
+    * Z390 (No necesario en Mojave y posterior)
     * X79
     * X99
-    * AsRock boards(On Intel motherboards specifically, Z490 boards do not need it however)
+    * Placas madre AsRock (en las placas base Intel específicamente, sin embargo las placas Z490 no lo necesitan)
 
-### WiFi and Bluetooth
+### WiFi y Bluetooth
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
-  * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
+  * Se usa para parchear tarjetas Broadcom que no son de Apple, **no funcionará en Intel, Killer, Realtek, etc.**
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
-  * To be paired with BrcmFirmwareData.kext
-    * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
-    * BrcmPatchRAM2 for 10.11-10.14
-    * BrcmPatchRAM for 10.10 or older
+  * Se utiliza para cargar firmware en el chipset Bluetooth Broadcom, requerido para todas las tarjetas que no sean Apple/Airport de Fenvi.
+  * Debe ser emparejado con BrcmFirmwareData.kext
+    * BrcmPatchRAM3 para 10.14+ (debe estar acompañado de BrcmBluetoothInjector)
+    * BrcmPatchRAM2 para 10.11-10.14
+    * BrcmPatchRAM para 10.10 o anterior
 
-The order in `Kernel -> Add` should be:
+El órden en `Kernel -> Add` debe ser:
 
 1. BrcmBluetoothInjector
 2. BrcmFirmwareData
 3. BrcmPatchRAM3
 
-### AMD CPU Specific kexts
+### Kexts específicos de AMD
 
 * [~~NullCPUPowerManagment~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-  * We have a much better solution known as `DummyPowerManagement` found under `Kernel -> Quirks` in your config.plist, this will be covered in a later page
+  * Tenemos una solución mucho mejor conocida como `DummyPowerManagement` que se encuentra en `Kernel -> Quirks` en su config.plist, esto se tratará en una página luego
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
-  * USB fix for AMD FX systems, not recommended for Ryzen
+  * Arreglo de USBs para sistemas AMD FX, no recomendado para Ryzen
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
-  * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
+  * Audio para sistemas FX y soporte de Mic+Audio en panel frontal para sistemas Ryzen, no mezclar con AppleALC. La calidad de audio es notablemente peor que AppleALC en CPUs Zen
 
 ### Extras
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-  * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
-  * Affected SMBIOS:
+  * Útil desde Catalina en adelante para deshabilitar el kext AppleMCEReporter que causará pánicos en el kernel en las CPUs AMD y los sistemas de doble socket.
+  * SMBIOS afectadas:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
-  * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead
+  * Necesario para sincronizar el TSC en algunas de las placas madre de servidores y HEDT de Intel, sin este macOS puede ser extremadamente lento o incluso no booteable. Skylake-X debería usar TSCAdjustReset en su lugar
 * [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)
-  * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
+  * En Skylake-X, muchos firmwares, incluidos Asus y EVGA, no escribirán el TSC en todos los núcleos, por lo que tendremos que restablecer el TSC en el arranque en frío y en la reactivación luego de suspender el PC. La versión compilada se puede encontrar aquí: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Ten en cuenta que  **debe** abrir el kext (Mostrar contenidos del paquete en Finder, `Contents -> Info.plist`) y cambiar el Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` a la cantidad de hilos de CPU que tener desde `0` (por ejemplo, el i9 7980xe, que tiene 18 núcleos sería `36`,  ya que tiene 36 hilos en total)
+
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
-  * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
+  * Se utiliza para arreglar la administración de energía y la inicialización en NVMes que no sean de Apple, requiere macOS 10.14 o posterior
 
-### Laptop Specifics
+### Específicos de laptops
 
-To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg |grep input` in Linux
+Para saber qué tipo de teclado y trackpad tienes, consulta el Administrador de dispositivos en Windows o `dmesg | grep input` en Linux
 
 #### Input drivers
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
-  * Required for systems with PS2 keyboards and trackpads
-  * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)(This must come before VoodooPS2 in your config.plist)
+  * Necesario para sistemas con teclados y trackpads PS/2
+  * Usuarios de Trackpad también deben emparejar esto con [VoodooInput](https://github.com/acidanthera/VoodooInput/releases) (Esto debe aparecer antes que VoodooPS2 en tu config.plist)
 * [VoodooI2C](https://github.com/alexandred/VoodooI2C/releases)
-  * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
-  * To be paired with a plugin:
-    * VoodooI2CHID - Implements the Microsoft HID device specification.
-    * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
-    * VoodooI2CSynaptics - Implements support for Synaptic's proprietary devices.
-    * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
-    * VoodooI2CUPDDEngine - Implements Touchbase driver support.
+  * Se utiliza para reparar dispositivos I2C, los cuales se encuentran en algunas laptops con touchpads y pantallas táctiles más elegantes. 
+  * Debe ser emparejado a un plugin:
+    * VoodooI2CHID - Implementa la especificación del dispositivos HID de Microsoft.
+    * VoodooI2CElan - Implementa soporte para dispositivos propietarios de Elan. (no funciona en ELAN1200 +, usa el HID en vez de este)
+    * VoodooI2CSynaptics - Implementa soporte para dispositivos propietarios de Synaptics.
+    * VoodooI2CFTE - Implementa soporte para el touchpad FTE1001.
+    * VoodooI2CUPDDEngine - Implementa el soporte de drivers Touchbase.
 
-#### Misc
+#### Otros
 
 * [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
-  * Recommended for MacBook SMBIOS that include a TouchID sensor to fix auth issues, generally 2016 and newer SMBIOS will require this
+  * Recomendado para SMBIOS de MacBook que incluyen un sensor TouchID para solucionar problemas de autenticación, generalmente las SMBIOS de 2016 en adelante requerirán esto
 
-Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
+Consulta [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) para obtener una lista completa de los kexts compatibles
 
 ## SSDTs
 
-So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in **your specific ACPI section of the config.plist**, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now.
+Probablemente cuando veas todos esos SSDTs en la carpeta AcpiSamples te preguntarás si necesitas alguno de ellos. Por eso, ahora repasaremos qué SSDT(s) necesitas en **TU sección ACPI específica de tu config.plist**, ya que los SSDTs que necesitas son específicos de cada plataforma. Algunos pueden ser incluso específicos de algun sistema en particular donde deben configurarse. Es posible que te pierdas fácilmente si te doy una lista de SSDTs para elegir.
 
-[Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) has an extended section on SSDTs including compiling them on different platforms.
+[Comenzando con ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) htiene una sección más a fondo sobre SSDTs que incluye la información de cómo compilarlos en diferentes plataformas.
 
-A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
+Un dato rápido importante de los SSDTs necesarios por si no lo sabías (este es el código fuente, deberás compilarlos en un archivo .aml):
 
-### Desktop
+### PCs de escritorio
 
 | Platforms | **CPU** | **EC** | **AWAC** | **NVRAM** | **USB** |
 | :-------: | :-----: | :----: | :------: | :-------: | :-----: |
@@ -215,7 +216,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Comet Lake | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
 | AMD (15/16/17h) | N/A | ^^ | N/A | N/A | N/A |
 
-### High End Desktop
+### PCs de escritorio de gama alta
 
 | Platforms | **CPU** | **EC** | **AWAC** |
 | :-------: | :-----: | :----: | :------: |
@@ -224,7 +225,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Broadwell-E | ^^ | ^^ | ^^ |
 | Skylake-X | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) |
 
-### Laptop
+### Laptops
 
 | Platforms | **CPU** | **EC** | **Backlight** | **I2C Trackpad** | **AWAC** | **USB** | **IRQ** |
 | :-------: | :-----: | :----: | :-----------: | :--------------: | :------: | :-----: | :-----: |
@@ -239,4 +240,4 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Ice Lake | ^^ | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) | ^^ |
 
-# Now with all this done, head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+# Ahora, con todo esto hecho dirígete a [Comenzando con ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
