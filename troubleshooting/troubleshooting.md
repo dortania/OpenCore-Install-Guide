@@ -115,6 +115,7 @@ Main things to check:
 * ScanPolicy set to `0` to show all drives
 * Have the proper firmware drivers such as HfsPlus(Note ApfsDriverLoader shouldn't be used in 0.5.8)
 * Set UnblockFsConnect to True in config.plist -> UEFI -> Quirks. Needed for some HP systems
+* Set **SATA Mode**: `AHCI` in BIOS
 * Set `UEFI -> APFS` to see APFS based drives:
   * **EnableJumpstart**: YES
   * **HideVerbose**: YES
@@ -302,6 +303,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [`kextd stall[0]: AppleACPICPU`](../troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
 * [MediaKit reports not enough space](../troubleshooting/troubleshooting.md#mediakit-reports-not-enough-space)
 * [DiskUtility failing to erase](../troubleshooting/troubleshooting.md#diskutility-failing-to-erase)
+* [SATA Drives Not Shown in Disk Utility](../troubleshooting/troubleshooting.md#sata-drives-not-shown-in-diskutility)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -535,6 +537,10 @@ This is either 1(or more) of 5 issues:
 * SATA Hot-plug support in the BIOS is causing issues(try disabling this option)
 * Old firmware, make sure the drive is on the latest firmware
 * And finally, you may just have a bad drive
+
+## SATA Drives Not Shown in DiskUtility
+
+* Make sure SATA Mode is AHCI in bios
 
 # macOS post-install
 
