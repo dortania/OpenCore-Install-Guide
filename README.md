@@ -10,7 +10,7 @@ meta:
   content: Versión soportada actualmente 0.5.9
 ---
 
-# ¿Qué es Opencore? Y, ¿Para quién es esta guía?
+# ¿Qué es Opencore? Y, ¿para quién es esta guía?
 
 * **Español**:Esta es una traducción no oficial la cual no está afiliada a Dortania, y puede quedar obsoleta fácilmente. La misma está acompañada por la [traducción de la sección post-instalación de rvstry](https://github.com/rvstry/OpenCore-Post-Install).
 
