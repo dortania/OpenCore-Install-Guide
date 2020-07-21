@@ -1,44 +1,46 @@
-# Making the installer in Windows
+# Creando el instalador en Windows 
 
-* Supported version: 0.5.9
+* Versión soportada: 0.5.9
 
-While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
+Si bien no necesitas una nueva instalación de macOS para usar OpenCore, algunos usuarios prefieren tener una nueva instalación con sus actualizaciones del gestor de arranque.
 
-To start you'll need the following:
+Para comenzar necesitarás lo siguiente:
 
-* 4GB USB Stick
+* Un USB de 4GB (o más)
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
-## Downloading macOS
+## Descargando macOS
 
-To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only`:
+Para comenzar, abre gibMacOS.bat como administrador y selecciona `Toggle Recovery-Only`:
 
 ![](../images/installer-guide/winblows-install-md/gib-default.png)
 
-Now search through for your desired version of macOS, for this example we'll choose option 5 for macOS Catalina:
+Ahora busca la versión de macOS que necesitas, en este ejemplo seleccionaremos la opción 5 para macOS Catalina:
 
 ![](../images/installer-guide/winblows-install-md/gib-recovery.png)
 
-This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx`
+Esto descargará el RecoveryHDMetaDmg.pkg a `\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx`
 
 ![](../images/installer-guide/winblows-install-md/gib-done.png)
 
-## Making the installer
+## Creando el instalador
 
-Next open `MakeInstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O).
+Ahora, abre el archivo `MakeInstall.bat` como administrador y selecciona tu USB con su número y la opción 0 para OpenCore (en el ejemplo, seleccionamos 1O)
 
 ![](../images/installer-guide/winblows-install-md/make-install.png)
 
-Once your drive is formatted, it will then ask you for the `RecoveryHDMetaDMG.pkg` that we downloaded earlier. Top left of the file window will let you copy the file path:
+Una vez que el disco esté formateado, te preguntará por el `RecoveryHDMetaDMG.pkg` que descargamos anteriormente. La esquina superior izquierda de la ventana del archivo le permitirá copiar la ruta del archivo:
 
 ![](../images/installer-guide/winblows-install-md/make-install-location.png)
 
 ![](../images/installer-guide/winblows-install-md/recovery-location.png)
 
-MakeInstall will finish up by installing OpenCore to your USB's EFI System Partition, you can find this partition labeled as `BOOT`:
+MakeInstall terminará instalando OpenCore a la partición EFI de tu USB, podrás encontrar esta partición con el nombre `BOOT`:
 
 ![](../images/installer-guide/winblows-install-md/make-install-done.png)
 
 ![](../images/installer-guide/winblows-install-md/EFI-base.png)
 
-## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
+### Ahora con todo esto hecho
+
+... dirígete a [Configurando la EFI](/installer-guide/opencore-efi.md) para terminar tu trabajo.

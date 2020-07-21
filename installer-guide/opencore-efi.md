@@ -1,55 +1,56 @@
-# Adding The Base OpenCore Files
+# Agregando los archivos base de OpenCore
 
-* Supported version: 0.5.9
+* Versión soportada: 0.5.9
 
-To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/) and place it on the root of your EFI partition
+Para configurar la estructura de carpetas de OpenCore, debes tomar la carpeta EFI que se encuentra en los [lanzamientos de OpenCore](https://github.com/acidanthera/OpenCorePkg/releases/) y colocarla en la raíz de tu partición EFI
 
-* Windows users: This will already be done on the `BOOT` USB drive created by MakeInstall
-* Linux users: This is the `OPENCORE` partition we created earlier
-  * Note that Method 1 only creates 1 partition, while Method 2 creates 2 partitions
+* Usuarios de Windows: Esto ya estará en la partición `BOOT` de tu USB, el cual fue creado por MakeInstall
+* Usuarios de linux: Esta es la partición `OPENCORE` creada anteriormente
+  * Cabe mencionar que el método 1 sólo crea una partición, mientras que el método dos crea dos particiones
 
-![base EFI folder](../images/installer-guide/opencore-efi-md/base-efi.png)
+![Carpeta EFI base](../images/installer-guide/opencore-efi-md/base-efi.png)
 
-Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
+Algo que te darás cuenta es que esta carpeta viene con varios archivos en las subcarpetas `Drivers` y `Tools`, no queremos la mayoría de estos.
 
-* **Remove from Drivers:**
+* **Eliminar de drivers:**
   * AudioDxe.efi
-    * Unrelated to Audio support in macOS
+    * No relacionado con el soporte de audio en macOS
   * CrScreenshotDxe.efi
-    * Used for taking screenshots in UEFI, not needed by us
+    * Se usa para tomar capturas de pantalla en UEFI, no es necesario para nosotros
   * OpenUsbKbDxe.efi
-    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+    * Se utiliza para el menú de selección de OpenCore en **sistemas Legacy que ejecutan DuetPkg**, [no recomendado e incluso dañino en Ivy Bridge y posterior](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
   * UsbMouseDxe.efi
-    * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
+    * idea similar a OpenUsbKbDxe, solo debería ser necesaria en sistemas Legacy que usan DuetPkg
   * NvmExpressDxe.efi
-    * Used for Haswell and older when no NVMe driver is built into the firmware
+    * Se utiliza para Haswell y versiones anteriores cuando no hay un controlador NVMe integrado en el firmware
   * XhciDxe.efi
-    * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+    * Se usa para Sandy Bridge y versiones anteriores cuando no hay un controlador XHCI integrado en el firmware
   * HiiDatabase.efi
-    * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
+    * Se usa para arreglar el soporte de GUI como OpenShell.efi en Sandy Bridge y versiones anteriores
   * OpenCanopy.efi
-    * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
+    * Testa es la GUI opcional de OpenCore, veremos cómo configurar esto en [Post Instalación](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html), así que elimina esto por ahora
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
-    * Pretty obvious when you need this, USB keyboard and mouse users don't need it
-    * Reminder: PS2 ≠ USB
+    * Es bastante obvio en qué casos los lo necesitas, los usuarios de teclado y mouse USB no lo necesitan
+    * Recordatorio: PS2 ≠ USB
 
-* **Remove everything from Tools:**
-  * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
+* **Borra todo de la carpeta "tools"**
+  * Son demasiados para enumerarlos a todos, pero recomiendo mantener OpenShell.efi para solucionar eventuales problemas.
 
-A cleaned up EFI:
+Una EFI limpia:
 
-![Clean EFI](../images/installer-guide/opencore-efi-md/clean-efi.png)
+![EFI limpia](../images/installer-guide/opencore-efi-md/clean-efi.png)
 
-Now you can place **your** necessary firmware drivers(.efi) into the _Drivers_ folder and Kexts/ACPI into their respective folders. Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
-
-Here's what a populated EFI ***can*** look like (yours will be different):
+Ahora puedes colocar **tus** drivers de firmware necesarios (.efi) en la carpeta _Drivers_ y Kexts / ACPI en sus respectivas carpetas. Ten en cuenta que los drivers UEFI de Clover no son compatibles con OpenCore (EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc.). Consulta la [Página de conversión de drivers del firmware de Clover](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md) para obtener más información sobre los drivers compatibles y aquellos fusionados en OpenCore.
+Así es como ***puede*** verse un EFI poblado (el tuyo probablemente será diferente):
 
 ![Populated EFI folder](../images/installer-guide/opencore-efi-md/populated-efi.png)
 
-**Reminder**:
+**Recordatorio**:
 
-* SSDTs and custom DSDTs(`.aml`) go in ACPI folder
-* Kexts(`.kext`) go in Kexts folder
-* Firmware drivers(`.efi`) go in the Drivers folder
+* Los SSDTs y DSDTs personalizados (`.aml`) van en la carpeta ACPI
+* Los Kexts(`.kext`) van en la carpeta Kexts
+* Los drivers del Firmware (`.efi`) van el la carpeta Drivers
 
-# Now with all this done, head to [Gathering Files](../ktext.md) to get the needed kexts and firmware drivers
+# Ahora, con todo esto hecho
+
+... dirígete a [Recolectando archivos](/ktext.md) a obtener los kexts y drivers del firmware que necesitas.
