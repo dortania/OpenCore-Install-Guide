@@ -84,3 +84,5 @@ Current known translations:
 * [UselessBanana](https://github.com/UselessBanana/OpenCore-Install-Guide)(Spanish)
 * [macOS86](https://macos86.gitbook.io/guida-opencore/)(Italian)
 * [Technopat](https://www.technopat.net/sosyal/konu/opencore-ile-macos-kurulum-rehberi.963661/)(Turkish)
+
+And note that these translations are subject to authors preferences, translation changes and human errors. Please keep this in mind when reading as they're no longer official Dortania guides.
