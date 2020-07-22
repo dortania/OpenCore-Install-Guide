@@ -516,7 +516,13 @@ Another issue may be that macOS is conflicting with the write protection from CR
   * RebuildAppleMemoryMap -> False
   * SyncRuntimePermissions -> False
 
-Regarding MATs support, firmwares built against EDK 2018 will support support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has update the firmware
+Regarding MATs support, firmwares built against EDK 2018 will support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has updated the firmware, you can check the OpenCore logs whether yours supports it:
+
+```
+OCABC: MAT support is 1
+```
+
+Note `1` means it supports MATs, while `0` means it does not.
 
 ## `kextd stall[0]: AppleACPICPU`
 

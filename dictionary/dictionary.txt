@@ -213,6 +213,7 @@ E2
 EC0
 ECDV
 EDID
+EDK
 EFI
 EFI's
 EH01
@@ -513,6 +514,7 @@ Prelinked
 ProperTree
 ProperTree's
 QE/CI
+QEMU
 Qlogic
 R5/R7
 R9
