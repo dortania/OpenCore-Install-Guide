@@ -522,7 +522,7 @@ Regarding MATs support, firmwares built against EDK 2018 will support this and m
 OCABC: MAT support is 1
 ```
 
-Note `1` means it supports MATs, while `0` means it does not.
+Note: `1` means it supports MATs, while `0` means it does not.
 
 ## `kextd stall[0]: AppleACPICPU`
 
