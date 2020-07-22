@@ -502,7 +502,7 @@ So this is due to some issue around the `Booter -> Quirks` you set, main things 
   * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright
 * `SetupVirtualMap`
   * required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems
-  * Note that Icelake and Comet Lake's memory protections break this quirks so avoid it
+  * Note that Icelake and Comet Lake's memory protections break this quirk so avoid it
   * VMs like QEMU also require this quirk disabled
   
 Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
