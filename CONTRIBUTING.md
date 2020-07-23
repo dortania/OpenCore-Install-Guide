@@ -78,3 +78,11 @@ Main things to keep in mind:
 If the above are met, you're free to host your translation without issue! Dortania's sites are built with [VuePress](https://vuepress.vuejs.org) using [Travis-CI](https://travis-ci.org) and finally hosted on [Github Pages](https://pages.github.com), so there is no cost to hosting your own translation.
 
 If you have any questions or concerns with either translations or hosting, feel free to reach out on our [Bugtracker](https://github.com/dortania/bugtracker).
+
+Current known translations:
+
+* [UselessBanana](https://github.com/UselessBanana/OpenCore-Install-Guide)(Spanish)
+* [macOS86](https://macos86.gitbook.io/guida-opencore/)(Italian)
+* [Technopat](https://www.technopat.net/sosyal/konu/opencore-ile-macos-kurulum-rehberi.963661/)(Turkish)
+
+And note that these translations are subject to authors preferences, translation changes and human errors. Please keep this in mind when reading as they're no longer official Dortania guides.
