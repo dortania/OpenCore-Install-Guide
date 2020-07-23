@@ -538,5 +538,6 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x2000` to boot-args. Do not have both this option and npci enabled at the same time**)
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
+* SATA Mode: AHCI
 
 # Now with all this done, head to the [Installation Page](../installation/installation-process.md)
