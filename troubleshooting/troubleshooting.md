@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.9
 
-This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify thins.
+This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify things.
 
 <extoc></extoc>
 
@@ -349,7 +349,7 @@ Example of what a disabled RTC with no way to enable looks like(note that there 
 Generally seen as a USB error, couple ways to fix:
 
 * If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
-* Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quriks -> ReleaseUsbOwnership` in your config.plist
+* Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quirks -> ReleaseUsbOwnership` in your config.plist
   * Enabling XHCI Handoff in the BIOS can fix this as well
 
 * For 15h and 16h AMD CPUs, you may need to add the following:
