@@ -75,7 +75,7 @@ With Big Sur, quite a bit broke. Mainly the following:
 
 * Lilu
   * Mainly user-space patching has severely broke, meaning certain patches like DRM don't work
-  * Kernel-space should be working correctly with v1.4.6, but plugins may require updates to the plugins due to a complete rewrite of the patcher for Kernel Collection support.
+  * Kernel-space should be working correctly with v1.4.6, but plugins may require updates due to a complete rewrite of the patcher for Kernel Collection support.
 * VirtualSMC
   * ~~Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.~~
   * Resolved with v1.1.5
@@ -93,7 +93,7 @@ And while not an issue, SIP has now gained a new bit so to properly disable SIP 
 
 ## Installation
 
-With installation, you'll need a few things:
+For the installation, you'll need a few things:
 
 * macOS Big Sur installer
 * 12GB+ USB drive
@@ -108,7 +108,7 @@ Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.com
 
 ![](../../images/extras/big-sur/readme/gib-default.png)
 
-Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
+Press `M` to change the Max-OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
 
 ![](../../images/extras/big-sur/readme/10-16-ver.png)
 
@@ -116,7 +116,7 @@ Press `C` to change the catalog, then select the number for the developer catalo
 
 ![](../../images/extras/big-sur/readme/dev-cat.png)
 
-Select the number for the Big Sur beta to start downloading it. (screenshot)
+Select the number for the Big Sur beta to start downloading it. (Screenshot)
 
 ![](../../images/extras/big-sur/readme/big-sur-download.png)
 
@@ -136,7 +136,7 @@ Once done, you should find it located in your Applications folder:
 
 ### Creating the installer
 
-To create the USB is quite simple, grab your USB drive and open Disk Utility in macOS. Next format as the following:
+To create the USB is quite simple, grab your USB drive and open Disk Utility in macOS. Next format as follows:
 
 * Name:   MyVolume
 * Format: macOS Journaled
@@ -150,7 +150,7 @@ Once this is done, run the following command:
 sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-This will take some time so may want to grab a coffee, once done your USB should be good to boot!(Assuming you updated OpenCore and co earlier)
+This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you updated OpenCore and config.plist earlier)
 
 ### Installing
 
