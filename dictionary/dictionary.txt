@@ -590,6 +590,7 @@ TMR
 TRX40
 TSC
 TSCAdjustReset
+Technopat
 Telemetrap
 TetherMe
 TextEdit
@@ -618,6 +619,7 @@ Ubuntu
 UniBeast
 Universal-IFR-Extractor
 UsbInjectAll
+UselessBanana
 VBIOS
 VDADecoderChecker
 VDI
@@ -834,6 +836,7 @@ lsblk
 macOS
 macOS's
 macOS(\.)?
+macOS86
 macserial
 markdownlint-cli
 midi1996
