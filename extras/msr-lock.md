@@ -2,8 +2,6 @@
 
 * Supported version: 0.5.9
 
-<extoc></extoc>
-
 Do note that this is only recommended for users who have already installed macOS, for users who are installing for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
 
 ## What is CFG-Lock

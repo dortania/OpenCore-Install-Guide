@@ -2,8 +2,6 @@
 
 * Supported version: 0.5.9
 
-<extoc></extoc>
-
 So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 
 * Boot Flag

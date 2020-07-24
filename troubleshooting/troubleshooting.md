@@ -4,8 +4,6 @@
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify thins.
 
-<extoc></extoc>
-
 While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion) for more info
 
 **And if your issue is not covered, please read the official OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**

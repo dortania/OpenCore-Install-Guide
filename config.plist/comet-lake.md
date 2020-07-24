@@ -3,8 +3,6 @@
 * Supported version: 0.5.9
 * **Note**: This guide only supports Comet Lake on 10.15.5 or newer
 
-<extoc></extoc>
-
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:

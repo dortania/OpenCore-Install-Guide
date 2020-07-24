@@ -1,8 +1,7 @@
 # Laptop Ivy Bridge
 
 * Supported version: 0.5.9
-
-<extoc></extoc>
+* Note that Ivy Bridge is only supported up-to macOS 10.15, Catalina. Hacks for running later versions will not be covered
 
 ## Starting Point
 

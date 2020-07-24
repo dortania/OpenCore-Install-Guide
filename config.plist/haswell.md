@@ -2,8 +2,6 @@
 
 * Supported version: 0.5.9
 
-<extoc></extoc>
-
 ## Starting Point
 
 So making a config.plist may seem hard, its not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
@@ -418,8 +416,10 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
 
 * Haswell with only iGPU
   * iMac14,1
+    * If you plan to later run macOS 11, Big Sur, iMac14,4 will be the recommended SMBIOS
 * Haswell with dGPU
   * iMac14,2
+    * If you plan to later run macOS 11, Big Sur, iMac15,1 will be the recommended SMBIOS
 * Haswell Refresh (Devil's Canyon)
   * iMac15,1
 * Broadwell
