@@ -6,11 +6,11 @@
 
 ## Punto de comienzo
 
-Haciendo un config.plist puede parecer difícil, pero en realidad no lo es. Sólo toma tiempo, pero esta guía te dirá como configurar todo, **you won't be left in the cold.** Esto también significa que si tienes problemas, asegúrate de que todos los espacios de tu config están correctos, respaldándote con esta guía. Principales cosas a tener en cuenta con OpenCore:
+Hacer un config.plist puede parecer difícil, pero en realidad no lo es. Sólo toma tiempo, pero esta guía te dirá cómo configurar todo, **you won't be left in the cold.** Esto también significa que si tienes problemas, asegúrate de que todos los espacios de tu config estén correctos, respaldándote con esta guía. Principales cosas a tener en cuenta con OpenCore:
 
-* **Todas las propiedades deben ser definidas**, no hay opciones predeterminadas para OpenCore, así que **no elimines secciones a menos que se te diga específicamente**. Si la guía no menciona la opción, déjala como está.
+* **Todas las propiedades deben ser definidas**, no hay opciones predeterminadas para OpenCore, así que **no elimines secciones a menos que se te indique específicamente**. Si la guía no menciona la opción, déjala como está.
 * **El sample.plist no puede ser utilizado como está**, debes configurarlo para tu sistema
-* **NO USES CONFIGURADORES**, estos raramente respetan la configuración de OpenCore y algunos como los de Mackie agregarán propiedades de Clover y generarán plists corruptas!
+* **NO USES CONFIGURADORES**, éstos raramente respetan la configuración de OpenCore y algunos como los de Mackie agregarán propiedades de Clover y generarán plists corruptas!
 Ahora con todo esto, haremos un pequeño recordatorio de todo lo que necesitamos:
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
@@ -41,7 +41,7 @@ Para nosotros necesitaremos un par de SSDTs para recuperar la funcionalidad que 
 
 Ten en cuenta que **no debes** agregar tu `DSDT.aml` generado aquí, ya está en tu firmware. Entonces, si está presente, elimina la entrada correspondiente en tu `config.plist` y en EFI/OC/ACPI.
 
-Aquellos que desean una explicación más profunda en cómo hacer un dump de su DSDT, y de cómo hacer estos SSDTs y compilarlos, consulten [**Comenzando con ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/). Los SSDTs compilados tienen una extensión **.aml** (compilados) e irán a la carpeta `EFI/OC/ACPI` y **debe** especificarse en su configuración en`ACPI -> Add` también.
+Aquellos que deseen una explicación más profunda de cómo hacer un dump de su DSDT, y de cómo hacer estos SSDTs y compilarlos, consulten [**Comenzando con ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/). Los SSDTs compilados tienen una extensión **.aml** (compilados) e irán a la carpeta `EFI/OC/ACPI` y **debe** especificarse en su configuración en`ACPI -> Add` también.
 
 :::
 
@@ -49,7 +49,7 @@ Aquellos que desean una explicación más profunda en cómo hacer un dump de su 
 
 ::: tip Info
 
-Esto bloquea la carga de ciertas tablas ACPI, la principal razón de esto es que el XCPM de Apple  en nuestro caso esto es muy This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM no soporta Ivy Bridge muy bien y puede causar kernel panics con AppleIntelCPUPowerManagement al bootear. Para evitar esto necesitamos hacer nuestro propio SSDT de PM en[Post-Instalación](https://dortania.github.io/OpenCore-Post-Install/) y eliminar las tablas enteriores:
+Esto bloquea la carga de ciertas tablas ACPI, la principal razón de esto es que el XCPM de Apple  en nuestro caso esto es muy importante, la principal razón es que el XCPM de Apple no soporta Ivy Bridge muy bien y puede causar kernel panics con AppleIntelCPUPowerManagement al bootear. Para evitar esto necesitamos hacer nuestro propio SSDT de PM en[Post-Instalación](https://dortania.github.io/OpenCore-Post-Install/) y eliminar las tablas enteriores:
 
 Eliminando CpuPm:
 
@@ -81,7 +81,7 @@ Esta sección nos permite modificar dinámicamente partes del ACPI (DSDT, SSDTs,
 
 ### Quirks
 
-Configuración relacionada con ACPI, deja todo aquí como predeterminado, ya que no tenemos uso para estas peculiaridades.
+Configuración relacionada con ACPI: deja todo aquí como predeterminado, ya que no tenemos uso para estas quirks.
 
 ## Booter
 
@@ -98,14 +98,14 @@ Esta sección permite pasar espacios a macOS que generalmente se ignoran, lo que
 ::: tip Info
 Configuraciones relacionadas con parches boot.efi y correcciones de firmware, para nosotros, lo dejamos como predeterminado
 :::
-::: details More in-depth Info
+::: details Información más detallada
 
 * **AvoidRuntimeDefrag**: YES
   * Corrige runtime services de UEFI como fecha, hora, NVRAM, control de energía, etc.
 * **EnableWriteUnprotector**: YES
   * Necesario para eliminar la protección contra escritura del registro CR0.
 * **SetupVirtualMap**: YES
-  * Corrige las llamadas de `SetVirtualAddresses` a `virtual addressess`, no necesario en Skylake y posterior
+  * Corrige las llamadas de `SetVirtualAddresses` a `virtual addresses`, no necesario en Skylake y posterior
   
 :::
 
@@ -137,16 +137,16 @@ El `AAPL, ig-platform-id` que utilizamos es el siguiente:
 
 `layout-id`
 
-* Aplica la inyección de audio AppleALC, deberás hacer tu propia investigación sobre qué códec tiene tu placa base y combinarla con el layout de AppleALC. [Códecs compatibles con AppleALC](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* Puede eliminar esta propiedad directamente ya que no está utilizada para nosotros en este momento
+* Aplica la inyección de audio AppleALC. Deberás hacer tu propia investigación sobre qué códec tiene tu placa base y combinarla con el layout de AppleALC. [Códecs compatibles con AppleALC](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* Puedes eliminar esta propiedad directamente ya que no la utilizaremos en este momento
 
-Para nosotros, usaremos el boot-arg `alcid = xxx` en su lugar para lograr esto. `alcid` anulará todas las demás ID de diseño presentes. Más información sobre esto está cubierta en la [Página de post-instalación](https://dortania.github.io/OpenCore-Post-Install/)
+En nuestro caso, utilizaremos el boot-arg `alcid=xxx` en su lugar para lograrlo. `alcid` anulará todas las demás layouts ID  presentes. Encontrarás mayor información en la [Página de post-instalación](https://dortania.github.io/OpenCore-Post-Install/)
 
 :::
 
 ### Delete
 
-Elimina las propiedades del dispositivo del mapa, en nuestro caso podemos ignorar esto
+Elimina las propiedades del dispositivo del mapa. En nuestro caso podemos ignorarlo
 
 ## Kernel
 
@@ -154,7 +154,7 @@ Elimina las propiedades del dispositivo del mapa, en nuestro caso podemos ignora
 
 ### Add
 
-Aquí es donde especificas qué kexts cargar, el orden importa aquí, así que asegúrate de que Lilu.kext siempre sea el primero. Otros kexts de mayor prioridad vienen después de Lilu, como VirtualSMC, AppleALC, WhateverGreen, etc. Un recordatorio es que los usuarios de [ProperTree](https://github.com/corpnewt/ProperTree) pueden ejecutar **Cmd/Ctrl+Shift+R** para agregar todos sus kexts en el orden correcto sin escribir manualmente cada kext.
+Aquí es donde especificas qué kexts cargar. El orden importa aquí, así que asegúrate de que Lilu.kext siempre sea el primero. Otros kexts de mayor prioridad vienen después de Lilu, como VirtualSMC, AppleALC, WhateverGreen, etc. Un dato a tener en cuenta es que los usuarios de [ProperTree](https://github.com/corpnewt/ProperTree) pueden ejecutar **Cmd/Ctrl+Shift+R** para agregar todos sus kexts en el orden correcto sin escribir manualmente cada kext.
 
 * **BundlePath**
   * Nombre del kext
@@ -162,7 +162,7 @@ Aquí es donde especificas qué kexts cargar, el orden importa aquí, así que a
 * **Enabled**
   * Se explica por sí solo, define si el kext está habilitado o no.
 * **ExecutablePath**
-  * La ruta al ejecutable real está oculta dentro del kext, puedes ver qué ruta tiene tu kext haciendo clic derecho y seleccionando `Mostrar contenido del paquete`. En general, será `Contents/MacOS/Kext` pero algunos tienen kexts ocultos dentro de la carpeta `Plugin`. Tenga en cuenta que los kexts con sólo plists no necesitan que se complete esto.
+  * La ruta al ejecutable real está oculta dentro del kext, puedes ver qué ruta tiene tu kext haciendo clic derecho y seleccionando `Mostrar contenido del paquete`. En general, será `Contents/MacOS/Kext` pero algunos tienen kexts ocultos dentro de la carpeta `Plugin`. Ten en cuenta que los kexts con sólo plists no necesitan que esto sea completado.
   * ejemplo: `Contents/MacOS/Lilu`
 * **PlistPath**
   * Ruta al `info.plist`, oculto dentro del kext
@@ -201,7 +201,7 @@ Configuraciones relacionadas con el kernel, en nuestro caso habilitaremos lo sig
 
 :::
 
-::: details More in-depth Info
+::: details Información más detallada
 
 * **AppleCpuPmCfgLock**: YES
   * Solo es necesario cuando CFG-Lock no se puede deshabilitar en BIOS, la contraparte de Clover sería AppleIntelCPUPM.
@@ -211,19 +211,19 @@ Configuraciones relacionadas con el kernel, en nuestro caso habilitaremos lo sig
 * **CustomSMBIOSGuid**: NO
   * Realiza parches GUID para el modo personalizado UpdateSMBIOSMode. Generalmente relevante para portátiles Dell
 * **DisableIoMapper**: YES
-  * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+  * Necesario para encontrar la vuelta a VT-D si no puedes desactivarlo desde la BIOS o si lo necesitas para otro SO. Esto es una mejor alternativa a `dart=0` ya que el SIP puede quedarse en Catalina
 * **DisableRtcChecksum**: NO
-  * Impide que AppleRTC escriba en la suma de comprobación primaria (0x58-0x59), necesaria para los usuarios que reciben el reinicio del BIOS o son envían al modo seguro después del reinicio/apagado
+  * Impide que AppleRTC escriba en la suma de comprobación primaria (0x58-0x59), necesaria para los usuarios que reciben el reinicio del BIOS o son enviados al modo seguro después del reinicio/apagado
 * **LapicKernelPanic**: NO
-  * Inhabilita el kernel panic en la interrupción del núcleo de AP, generalmente necesaria para los sistemas HP. El equivalente de Clover es `Kernel LAPIC`
+  * Inhabilita el kernel panic en la interrupción del kernel de AP, generalmente necesaria para los sistemas HP. El equivalente de Clover es `Kernel LAPIC`
 * **PanicNoKextDump**: YES
-  * Permite leer los registros de kernel panics cuando estos ocurren
+  * Permite leer los registros de kernel panics cuando éstos ocurren
 * **PowerTimeoutKernelPanic**: YES
   * Ayuda a solucionar kernel panics relacionados con los cambios de energía con los drivers de Apple en macOS Catalina, especialmente con audio digital.
 * **XhciPortLimit**: YES
   * Este es en realidad el parche de límite de 15 puertos, no confíes en él, ya que no es una solución garantizada para reparar USBs. Crea un [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) cuando sea posible.
 
-La razón es que UsbInjectAll reimplementa la funcionalidad incorporada de macOS sin la sintonización actual adecuada. Es mucho más sencillo describir sus puertos en un solo kext con una sola plist, que no desperdiciará la memoria de tiempo de ejecución.
+La razón es que UsbInjectAll reimplementa la funcionalidad incorporada de macOS sin la sintonización adecuada. Es mucho más sencillo describir sus puertos en un solo kext con una sola plist, que no desperdiciará la memoria de tiempo de ejecución.
 
 :::
 
@@ -233,7 +233,7 @@ La razón es que UsbInjectAll reimplementa la funcionalidad incorporada de macOS
 
 ### Boot
 
-Configuración para la pantalla de inicio (Deje todo como predeterminado).
+Configuración para la pantalla de inicio (Deja todo como predeterminado).
 
 ### Debug
 
@@ -293,7 +293,7 @@ Security se explica por sí sola, **no te lo saltes**. Vamos a cambiar lo siguie
 * **BlacklistAppleUpdate**: True
   * Ignora el actualizador de firmware de Apple, que se recomienda habilitar para evitar problemas con las instalaciones y actualizaciones
 * **BootProtect**: None
-  * Ignora el actualizador de firmware de Apple, recomendado para evitar problemas con las instalaciones y actualizaciones. Permite el uso de Bootstrap.efi dentro de `EFI/OC/Bootstrap` en lugar de BOOTx64.efi, útil para aquellos que desean arrancar con rEFInd o evitar sobrescribir BOOTx64.efi con Windows. El uso adecuado de estos quirks no está cubierto en esta guía.
+  * Ignora el actualizador de firmware de Apple, recomendado para evitar problemas con las instalaciones y actualizaciones. Permite el uso de Bootstrap.efi dentro de `EFI/OC/Bootstrap` en lugar de BOOTx64.efi.Útil para aquellos que desean arrancar con rEFInd o evitar sobrescribir BOOTx64.efi con Windows. El uso adecuado de estos quirks no está cubierto en esta guía.
 * **ExposeSensitiveData**: `6`
   * Muestra más información de depuración, requiere la versión de depuración de OpenCore
 * **Vault**: `Optional`
@@ -306,7 +306,7 @@ Security se explica por sí sola, **no te lo saltes**. Vamos a cambiar lo siguie
 
 ### Tools
 
-Utilizado para ejecutar herramientas de depuración OC como el shell, la función de "Snapshot" de ProperTree las agregará por ti.
+Utilizado para ejecutar herramientas de depuración OC como el shell, la función de "Snapshot" de ProperTree las agregará por tí.
 
 ### Entries
 
@@ -357,13 +357,13 @@ Máscara de bits de Protección de integridad del sistema
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Se usa para deshabilitar el BoardID en las GPUs Navi (series RX 5000), sin esto obtendrás una pantalla negra. **No lo uses si no tienes Navi** (es decir, las tarjetas Polaris y Vega no deberían usar esto) |
+| **agdpmod=pikera** | Se usa para deshabilitar el BoardID en las GPUs Navi (series RX 5000). Sin esto obtendrás una pantalla negra. **No lo uses si no tienes Navi** (es decir, las tarjetas Polaris y Vega no deberían usar esto) |
 | **nvda_drv_vrl=1** | Se utiliza para habilitar los Web Drivers de Nvidia en las tarjetas Maxwell y Pascal en Sierra y High Sierra |
-| **-wegnoegpu** | Se usa para deshabilitar todas las otras GPU que no sean la iGPU de Intel, útil para aquellos que desean ejecutar versiones más nuevas de macOS donde su GPU dedicada no es compatible |
+| **-wegnoegpu** | Se usa para deshabilitar todas las otras GPU(s) que no sean la iGPU de Intel. Util para aquellos que deseen ejecutar versiones más nuevas de macOS donde su GPU dedicada no es compatible |
 
 * **csr-active-config**: Configuración para 'Protección de integridad del sistema' (SIP). En general, se recomienda cambiar esto con `csrutil` a través de la partición de recuperación.
 
-csr-active-config de forma predeterminada se establece en `00000000` que habilita la Protección de integridad del sistema. Puedes elegir una cantidad de valores diferentes, pero en general recomendamos mantener esto habilitado para tener mayor seguridad. Puede encontrar más información en nuestra página de solución de problemas: [Desactivar SIP](/troubleshooting/troubleshooting.md#disabling-sip)
+csr-active-config de forma predeterminada se establece en `00000000` que habilita la Protección de integridad del sistema. Puedes elegir una cantidad de valores diferentes, pero en general recomendamos mantener esto habilitado para tener mayor seguridad. Puedes encontrar más información en nuestra página de solución de problemas: [Desactivar SIP](/troubleshooting/troubleshooting.md#disabling-sip)
 
 * **prev-lang:kbd**: <>
   * Necesario para teclados no latinos en el formato de `lang-COUNTRY:keyboard`, se recomienda mantener en blanco aunque puede especificarlo (**El valor predeterminado en el sample.plist es ruso**):
@@ -379,9 +379,9 @@ csr-active-config de forma predeterminada se establece en `00000000` que habilit
 
 ### Delete
 
-::: tip Info
+::: tip Información
 
-Vuelve a escribir a la fuerza las variables de NVRAM, ten en cuenta que `Add` **no sobrescribirá** los valores ya presentes en NVRAM, por lo que los valores como `boot-args` deben dejarse solos. En nuestro caso, cambiaremos lo siguiente:
+Vuelve a escribir a la fuerza las variables de NVRAM. Ten en cuenta que `Add` **no sobrescribirá** los valores ya presentes en NVRAM, por lo que  valores como `boot-args` deben dejarse solos. En nuestro caso, cambiaremos lo siguiente:
 
 | Quirk | Enabled |
 | :--- | :--- |
@@ -417,7 +417,7 @@ Vuelve a escribir a la fuerza las variables de NVRAM, ten en cuenta que `Add` **
 
 Para configurar la información SMBIOS, usaremos la aplicación [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) hecha por [CorpNewt](https://github.com/corpnewt/).
 
-Para este ejemplo de Ivy Bridge, elegiremos el SMBIOS iMac13,2, esto se hace intencionalmente por razones de compatibilidad. Hay dos SMBIOS principales utilizados para Ivy Bridge:
+Para este ejemplo de Ivy Bridge, elegiremos el SMBIOS iMac13,2. Esto se hace intencionalmente por razones de compatibilidad. Hay dos SMBIOS principales utilizados para Ivy Bridge:
 
 * `iMac13,1` - esto se usa para computadoras que utilizan su iGPU para la imagen.
 * `iMac13,2` - esto se usa para computadoras que usan una GPU dedicada para la imagen y una iGPU solo para tareas computacionales.
@@ -443,7 +443,7 @@ La parte `Board Serial` se copia en Generic -> MLB.
 
 La parte `SmUUID` se copia en Generic -> SystemUUID.
 
-Configuramos Generic -> ROM a una ROM de Apple (extraída de una Mac real), la dirección MAC de tu NIC o cualquier dirección MAC aleatoria (podría ser solo 6 bytes aleatorios, para esta guía usaremos `11223300 0000`. Después de instalar sigue la página [Arreglando iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) para saber cómo encontrar tu dirección MAC real)
+Configuramos Generic -> ROM a una ROM de Apple (extraída de una Mac real), la dirección MAC de tu NIC o cualquier dirección MAC aleatoria (podría ser solo 6 bytes aleatorios Para esta guía usaremos `11223300 0000`. Después de instalar dirígete a la página [Arreglando iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) para saber cómo encontrar tu dirección MAC real)
 
 **Recuerda que quieres o una serie no válida o números de serie válidos, pero NO quieres series válidas que están en uso, quieres recibir un mensaje de regreso como: "Serie no válida" o "Fecha de compra no validada"**
 
@@ -460,7 +460,7 @@ Configuramos Generic -> ROM a una ROM de Apple (extraída de una Mac real), la d
 ::: details Información más detallada
 
 * **SpoofVendor**: YES
-  * Intercambia el campo del proveedor de Acidanthera, generalmente no es seguro usar Apple como proveedor.
+  * Intercambia el campo del proveedor de Acidanthera. Generalmente no es seguro usar Apple como proveedor.
 * **AdviseWindows**: NO
   * Se usa cuando la partición EFI no es la primera en la unidad de Windows
 
@@ -488,7 +488,7 @@ Configuramos Generic -> ROM a una ROM de Apple (extraída de una Mac real), la d
 
 **ConnectDrivers**: YES
 
-* Fuerza drivers .efi, el cambio a NO conectará automáticamente los controladores UEFI agregados. Esto puede hacer que el arranque sea un poco más rápido, pero no todos los controladores se conectan. (ej. ciertos controladores del sistema pueden no cargarse).
+* Fuerza drivers `.efi`. El cambio a NO conectará automáticamente los drivers UEFI agregados. Esto puede hacer que el arranque sea un poco más rápido, pero no todos los drivers se conectan. (ej. ciertos drivers del sistema pueden no cargarse).
 
 ### Drivers
 
@@ -501,7 +501,7 @@ Los únicos drivers presentes aquí deberían ser:
 
 ### APFS
 
-Configuración relacionada con el controlador APFS, deje todo aquí como predeterminado.
+Configuración relacionada con el driver de APFS. Deja todo aquí como predeterminado.
 
 ### Audio
 
