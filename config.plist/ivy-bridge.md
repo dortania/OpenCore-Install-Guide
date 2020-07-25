@@ -32,7 +32,7 @@ Ahora con todo esto, haremos un pequeño recordatorio de todo lo que necesitamos
 
 Aquí es donde agregarás los SSDTs para su sistema, estos son muy importantes para **arrancar macOS** y tienen muchos usos como [hacer USB mapping](https://dortania.github.io/OpenCore-Post-Install/usb/), [deshabilitar GPUs no compatibles](/extras/spoof.md) y demás. Y con nuestro sistema, **incluso es necesario  para bootear**. Guía sobre cómo encontrarlos aquí: [**Comenzando con ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-Para nosotros necesitaremos un par de SSDTs para recuperar la funcionalidad que Clover proporcionó:
+En nuestro caso necesitaremos un par de SSDTs para recuperar la funcionalidad que Clover proporcionó:
 
 | SSDTs requeridos | Descripción |
 | :--- | :--- |
@@ -41,7 +41,7 @@ Para nosotros necesitaremos un par de SSDTs para recuperar la funcionalidad que 
 
 Ten en cuenta que **no debes** agregar tu `DSDT.aml` generado aquí, ya está en tu firmware. Entonces, si está presente, elimina la entrada correspondiente en tu `config.plist` y en EFI/OC/ACPI.
 
-Aquellos que deseen una explicación más profunda de cómo hacer un dump de su DSDT, y de cómo hacer estos SSDTs y compilarlos, consulten [**Comenzando con ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/). Los SSDTs compilados tienen una extensión **.aml** (compilados) e irán a la carpeta `EFI/OC/ACPI` y **debe** especificarse en su configuración en`ACPI -> Add` también.
+Aquellos que deseen una explicación más profunda de cómo hacer un dump de su DSDT, y de cómo hacer estos SSDTs y compilarlos, consulten [**Comenzando con ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/). Los SSDTs compilados tienen una extensión **.aml** (compilados) e irán a la carpeta `EFI/OC/ACPI` y **debe** especificarse en tu configuración en `ACPI -> Add` también.
 
 :::
 
@@ -49,7 +49,7 @@ Aquellos que deseen una explicación más profunda de cómo hacer un dump de su 
 
 ::: tip Info
 
-Esto bloquea la carga de ciertas tablas ACPI, la principal razón de esto es que el XCPM de Apple  en nuestro caso esto es muy importante, la principal razón es que el XCPM de Apple no soporta Ivy Bridge muy bien y puede causar kernel panics con AppleIntelCPUPowerManagement al bootear. Para evitar esto necesitamos hacer nuestro propio SSDT de PM en[Post-Instalación](https://dortania.github.io/OpenCore-Post-Install/) y eliminar las tablas enteriores:
+Esto bloquea la carga de ciertas tablas ACPI, la principal razón de esto es que el XCPM de Apple en nuestro caso esto es muy importante, la principal razón es que el XCPM de Apple no soporta Ivy Bridge muy bien y puede causar kernel panics con AppleIntelCPUPowerManagement al bootear. Para evitar esto necesitamos hacer nuestro propio SSDT de PM en[Post-Instalación](https://dortania.github.io/OpenCore-Post-Install/) y eliminar las tablas enteriores:
 
 Eliminando CpuPm:
 
@@ -87,7 +87,7 @@ Configuración relacionada con ACPI: deja todo aquí como predeterminado, ya que
 
 ![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
-Esta sección está dedicada a las peculiaridades relacionadas con el parche boot.efi con OpenRuntime, el reemplazo de AptioMemoryFix.efi
+Esta sección está dedicada a los quirks relacionados con el parche boot.efi con OpenRuntime, el reemplazo de AptioMemoryFix.efi
 
 ### MmioWhitelist
 
@@ -96,7 +96,7 @@ Esta sección permite pasar espacios a macOS que generalmente se ignoran, lo que
 ### Quirks
 
 ::: tip Info
-Configuraciones relacionadas con parches boot.efi y correcciones de firmware, para nosotros, lo dejamos como predeterminado
+Configuraciones relacionadas con parches del boot.efi y correcciones de firmware, en nuestro caso dejamos como predeterminado
 :::
 ::: details Información más detallada
 
@@ -172,8 +172,8 @@ Aquí es donde especificas qué kexts cargar. El orden importa aquí, así que a
 
 Necesario para falsificar CPUs no compatibles como Pentiums y Celerons
 
-* **CpuidMask**: Deja esto blanco
-* **CpuidData**: Deja esto blanco
+* **CpuidMask**: Deja esto en blanco
+* **CpuidData**: Deja esto en blanco
 
 ### Block
 
@@ -223,7 +223,7 @@ Configuraciones relacionadas con el kernel, en nuestro caso habilitaremos lo sig
 * **XhciPortLimit**: YES
   * Este es en realidad el parche de límite de 15 puertos, no confíes en él, ya que no es una solución garantizada para reparar USBs. Crea un [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) cuando sea posible.
 
-La razón es que UsbInjectAll reimplementa la funcionalidad incorporada de macOS sin la sintonización adecuada. Es mucho más sencillo describir sus puertos en un solo kext con una sola plist, que no desperdiciará la memoria de tiempo de ejecución.
+Esto es porque UsbInjectAll reimplementa la funcionalidad incorporada de macOS sin la sintonización adecuada. Es mucho más sencillo describir sus puertos en un solo kext con una sola plist, que no desperdiciará la memoria de tiempo de ejecución.
 
 :::
 
@@ -328,7 +328,7 @@ Utilizado para el escalado de la interfaz de usuario de OpenCore, el valor prede
 
 ::: details More in-depth Info
 
-Ruta de arranque, utilizada principalmente para escalar la interfaz de usuario
+Ruta del Booter, utilizada principalmente para escalar la interfaz de usuario
 
 * **UIScale**:
   * `01`: Resolución estándar
@@ -460,25 +460,28 @@ Configuramos Generic -> ROM a una ROM de Apple (extraída de una Mac real), la d
 ::: details Información más detallada
 
 * **SpoofVendor**: YES
+  
   * Intercambia el campo del proveedor de Acidanthera. Generalmente no es seguro usar Apple como proveedor.
+
 * **AdviseWindows**: NO
+  
   * Se usa cuando la partición EFI no es la primera en la unidad de Windows
 
-**UpdateDataHub**: YES
+* **UpdateDataHub**: YES
 
-* Actualiza campos de Data Hub
+  * Actualiza campos de Data Hub
 
-**UpdateNVRAM**: YES
+* **UpdateNVRAM**: YES
 
-* Actualiza campos de NVRAM
+  * Actualiza campos de NVRAM
 
-**UpdateSMBIOS**: YES
+* **UpdateSMBIOS**: YES
 
-* Actualiza campos SMBIOS
+  * Actualiza campos SMBIOS
 
-**UpdateSMBIOSMode**: Create
+* **UpdateSMBIOSMode**: Create
 
-* Reemplaza las tablas con EfiReservedMemoryType recientemente asignadas, usar `Custom` en las  Dell que requieren el quirk CustomSMBIOS
+  * Reemplaza las tablas con EfiReservedMemoryType recientemente asignadas, usar `Custom` en las laptops Dell que requieren el quirk CustomSMBIOS
 
 :::
 
@@ -515,7 +518,7 @@ En relación con el paso de teclado con boot.efi, utilizado para la compatibilid
 
 ### Output
 
-Relating to OpenCore's visual output,  leave everything here as default as we have no use for these quirks.
+Relacionado a la salida visual de OpenCore, deja todo aquí como predeterminado, ya que no tenemos uso para estos quirks.
 
 ### ProtocolOverrides
 
