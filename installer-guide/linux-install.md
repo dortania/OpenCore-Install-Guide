@@ -55,7 +55,7 @@ En la terminal
    6. Cierra `gdisk` mandando `q` (normalmente debería cerrarse solo)
 3. Usa `lsblk` para determinar los identificadores de tu partición.
 4. Corre `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<el bloque de partición de tu USB>` para formatear tu USB a FAT32 y llamarlo OPENCORE
-5. Luego usa `cd` a `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` y deberías llegar a un archigo `pkg`. 
+5. Luego usa `cd` a `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` y deberías llegar a un archivo `pkg`. 
    ![](../images/installer-guide/linux-install-md/unknown-10.png)
    1. descarga `p7zip-full` \(dependiendo en las herramientas de tu distro\)
       * para Ubuntu/Basadas en Ubuntu corre `sudo apt install p7zip-full`
@@ -110,7 +110,7 @@ En la terminal:
       * para todas las distros: **asegúrate que estas usando bash para que 7zip funcione**.
    2. corre esto `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` para extraer `BaseSystem.dmg` y `BaseSystem.chunklist`
    3. descarga `dmg2img` (disponible en la mayoria de las distros)
-   4. corre `dmg2img -l BaseSystem.dmg` y determina qué partición tiene la propiedad `disk image` property
+   4. corre `dmg2img -l BaseSystem.dmg` y determina qué partición tiene la propiedad `disk image`
       ![](../images/installer-guide/linux-install-md/unknown-20.png)
    5. corre `dmg2img -p <el número de la partición> -i BaseSystem.dmg -o <tu bloque de partición 3GB+>` para extraer y escribir la imagen de recuperación a la partición
       * Esto llevará un tiempo. Y aún más si estás usando un USB lento.
