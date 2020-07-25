@@ -213,6 +213,7 @@ E2
 EC0
 ECDV
 EDID
+EDK
 EFI
 EFI's
 EH01
@@ -513,6 +514,7 @@ Prelinked
 ProperTree
 ProperTree's
 QE/CI
+QEMU
 Qlogic
 R5/R7
 R9
@@ -588,6 +590,7 @@ TMR
 TRX40
 TSC
 TSCAdjustReset
+Technopat
 Telemetrap
 TetherMe
 TextEdit
@@ -616,6 +619,7 @@ Ubuntu
 UniBeast
 Universal-IFR-Extractor
 UsbInjectAll
+UselessBanana
 VBIOS
 VDADecoderChecker
 VDI
@@ -828,9 +832,11 @@ lapic
 lappie
 licensor
 linter
+lsblk
 macOS
 macOS's
 macOS(\.)?
+macOS86
 macserial
 markdownlint-cli
 midi1996
