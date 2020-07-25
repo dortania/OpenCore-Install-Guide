@@ -198,7 +198,7 @@ Consulta [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/
 
 Probablemente cuando veas todos esos SSDTs en la carpeta AcpiSamples te preguntarás si necesitas alguno de ellos. Por eso, ahora repasaremos qué SSDT(s) necesitas en **TU sección ACPI específica de tu config.plist**, ya que los SSDTs que necesitas son específicos de cada plataforma. Algunos pueden ser incluso específicos de algun sistema en particular donde deben configurarse. Es posible que te pierdas fácilmente si te doy una lista de SSDTs para elegir.
 
-[Comenzando con ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) htiene una sección más a fondo sobre SSDTs que incluye la información de cómo compilarlos en diferentes plataformas.
+[Comenzando con ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) tiene una sección más a fondo sobre SSDTs que incluye la información de cómo compilarlos en diferentes plataformas.
 
 Un dato rápido importante de los SSDTs necesarios por si no lo sabías (este es el código fuente, deberás compilarlos en un archivo .aml):
 
