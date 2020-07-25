@@ -25,7 +25,7 @@ Para el resto de esta guía, necesitarás alguna forma de editar plists. En nues
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
   * Para generar los datos de nuestra SMBIOS
 
-Next, let's open ProperTree and edit our config.plist:
+Ahora, abre Propertree y edita tu config.plist:
 
 * `ProperTree.command`
   * Para macOS
@@ -33,12 +33,12 @@ Next, let's open ProperTree and edit our config.plist:
 * `ProperTree.bat`
   * Para Windows
 
-Una vez que ProperTree se esté ejecutando, abra su config.plist presionando ** Cmd / Ctrl + O ** y seleccionando el archivo `config.plist` en su USB.
+Una vez que ProperTree se esté ejecutando, abre tu config.plist presionando **Cmd/Ctrl+O** y seleccionando el archivo `config.plist` en tu USB.
 
 Después de abrir la configuración, presiona **Cmd/Ctrl+Shift+R** y apunta a tu carpeta EFI/OC para realizar un "Clean Snapshot":
 
 * Esto eliminará todas las entradas de config.plist y luego agregará todos sus SSDTs, Kexts y Drivers del Firmware a la configuración
-* **Cmd/Ctrl+R** es otra opción que agregará todos sus archivos también, pero dejará las entradas deshabilitadas si se configuraron así antes, esto es útil para cuando estés solucionando problemas, pero para nosotros no es necesario en este momento
+* **Cmd/Ctrl+R** es otra opción que agregará todos tus archivos también, pero dejará las entradas deshabilitadas si se configuraron así antes, esto es útil para cuando estés solucionando problemas, pero para nosotros no es necesario en este momento
 
 ![](../images/config/config-universal/before-snapshot.png)
 
@@ -93,7 +93,7 @@ Esta sección incluye tanto hardware de entusiastas como servidores.
 | [Bulldozer/Jaguar](/AMD/fx.md) | [Es raro](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) | [AMD era muy malo con los nombres en esos tiempos](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) |
 | [Zen](/AMD/zen.md) | 1XXX, 2XXX, 3XXX | 2017-2020 |
 
-* Nota: Threadripper de 3ra gen (39XX) no son compatibles, sin embargo, los de primera y seguna generación lo son.
+* Nota: Threadripper de 3ra gen (39XX) no son compatibles, sin embargo, los de primera y segunda generación lo son.
 
 ### Legacy
 
