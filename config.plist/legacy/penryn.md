@@ -26,6 +26,5 @@
 
 * Desktop:
   * iMac10,1 Snow Leopard(10.6) to High Sierra(10.13)
-    * Not supported by OpenCore by default, see here: [Adding older SMBIOS to OpenCore](../../config.plist/legacy.md#adding-older-smbios-to-opencore)
   * iMac13,2 for Mojave(10.14) and Catalina(10.15)
   * iMac14,4 for Big Sur(11)
