@@ -50,7 +50,8 @@ Not much hardware has been dropped, though the few that have:
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
 * Certain SATA controllers dropped
   * For some reason, Apple removed the AppleIntelPchSeriesAHCI class from AppleAHCIPort.kext. Due to the outright removal of the class, trying to spoof to another ID can fail for many and create instability for others.
-  * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleACHIPort.kext](https://cdn.discordapp.com/attachments/736290608339091589/736316536641552404/CtlnaAHCIPort.kext.zip)
+  * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleAHCIPort.kext](https://cdn.discordapp.com/attachments/736290608339091589/736316536641552404/CtlnaAHCIPort.kext.zip)
+  * This will work in both Catalina and Big Sur so you can remove SATA-unsupported if you want.
 
 Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them.
 
