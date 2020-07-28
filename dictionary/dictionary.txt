@@ -41,6 +41,7 @@
 64MB
 64bit
 6970M
+6XX
 7920x
 7980xe
 7XX
@@ -98,6 +99,7 @@ AppleID
 AppleIntelCPUPM
 AppleIntelCPUPowerManagement
 AppleIntelCPUPowerManagment
+AppleIntelPchSeriesAHCI
 AppleIntelPowerManagement
 AppleLPC
 AppleLife
@@ -224,6 +226,7 @@ EHCI
 ELAN1200
 EPP
 ETH0
+EUSB
 EVGA
 EVO
 EfiPkg
@@ -545,6 +548,7 @@ SAS
 SAT0
 SAT1
 SATA
+SATA-unsupported
 SGX
 SHA-1
 SL01
@@ -559,6 +563,7 @@ SSDTTime
 SSDTTime's
 SSDTs
 SSDs
+SSE3
 SSE4
 STAS
 Safemode
@@ -580,6 +585,7 @@ StopSign-fixv
 StopSign-fixv5
 Subreddit
 Sur
+Sur's
 Syrah
 SystemAudioVolume
 SystemParameters
@@ -610,6 +616,7 @@ UEFIExtrac
 UEFITool
 UHD
 UI
+USBE
 USBInjectAll
 USBX
 USBmap
