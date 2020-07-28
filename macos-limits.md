@@ -2,7 +2,7 @@
 
 With macOS, there's numerous hardware limitation you need to be aware of before stepping foot into an installation. This is due to the limited amount of hardware Apple supports, and so we're either limited by what Apple or what patches the community has created.
 
-The main hardware section to be verify are:
+The main hardware section to be verified are:
 
 * [CPU](#cpu-support)
 * [GPU](#gpu-support)
@@ -27,9 +27,9 @@ For CPU support, we have the following breakdown:
 
 * Intel's Desktop CPUs are supported.
   * Ivy Bridge through Comet Lake are supported by this guide.
-* Intel's High End Desktops and Server CPUs.
+* Intel's High-End Desktops and Server CPUs.
   * Haswell-E through Cascade Lake X are supported by this guide.
-* Intel's Core i and Xeon series laptop CPUs
+* Intel's Core "i" and Xeon series laptop CPUs
   * Ivy Bridge through Ice Lake are supported by this guide.
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer(15h), Jaguar(16h) and Ryzen(17h) CPUs
@@ -40,7 +40,7 @@ For CPU support, we have the following breakdown:
 
 ## GPU Support
 
-GPU support becomes much more complicated due to the near infinite amount of GPUs on the market, but the general breakdown is as follows:
+GPU support becomes much more complicated due to the near-infinite amount of GPUs on the market, but the general breakdown is as follows:
 
 * AMD's GCN based GPUs are supported in the latest versions of macOS
   * AMD APUs are not supported however
@@ -52,13 +52,13 @@ GPU support becomes much more complicated due to the near infinite amount of GPU
     * This is due to Apple still supporting a few [MacBook Pros with Nvidia GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html)
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
-  * Note GT2 refers to the tier of iGPU, low end GT1 iGPUs found on Pentiums, Celerons and Atoms are not supported in macOS
+  * Note GT2 refers to the tier of iGPU, low-end GT1 iGPUs found on Pentiums, Celerons and Atoms are not supported in macOS
 
 And an important note for **Laptops with discrete GPUs**:
 
-* 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these dGPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide.)
+* 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these discrete GPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide.)
 * However, in some cases, the discrete GPU powers any external outputs (HDMI, mini DisplayPort, etc.), which may or may not work; in the case that it will work, you will have to keep the card on and running.
-* However, there are some laptops which rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually causes issues.
+* However, there are some laptops that rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually cause issues.
 
 **For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)**
 
@@ -68,11 +68,11 @@ For the most part, all motherboards are supported as long as the CPU is. The sol
 
 * [AMD's B550 boards](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
 
-There's currently no fixes for the boards besides running in a KVM(Virtual Machine), similar to AMD's 3rd gen ThreadRipper CPUs.
+There are currently no fixes for the boards besides running in a KVM(Virtual Machine), similar to AMD's 3rd gen ThreadRipper CPUs.
 
 ## Storage Support
 
-For the most part, all SATA based drives are supported and majority of NVMe drives as well. The few exceptions:
+For the most part, all SATA based drives are supported and the majority of NVMe drives as well. The few exceptions:
 
 * **Samsung PM981, PM991 and Micron 2200S NVMe SSDs**
   * These SSDs are not compatible out of the box (causing kernel panics) and therefore require [NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases) to fix these kernel panics. Note that these drives may still cause boot issues even with NVMeFix.kext.
