@@ -10,7 +10,7 @@ It's that time of year again and with it, and a new macOS beta has been dropped.
 
 More a mini-explainer as to why this release is a bit more painful than average macOS releases, the main culprits are as follows:
 
-### `AvoidRuntimeDefrag`
+### AvoidRuntimeDefrag
 
 With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpu_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now ensure this table is made accessible to the kernel so it can access it. Users will however need a build of OpenCore 0.6.0 with commit [`bb12f5f`](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4) or newer to resolve this issue.
 
@@ -42,8 +42,9 @@ If your SMBIOS was supported in Catalina and isn't included above, you're good t
 
 Not much hardware has been dropped, though the few that have:
 
-* Ivy Bridge CPUs.
+* Ivy Bridge U, H and S CPUs.
   * Unofficially, many have been able to boot with ease.
+  * Ivy Bridge-E CPUs are still supported thanks to being in MacPro6,1
 * Ivy Bridge iGPUs.
   * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
 * BCM94331CD based Wifi cards.
@@ -168,13 +169,15 @@ Installing macOS 11: Big Sur on a Hackintosh is fairly similar to how previous v
   
 For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright.
 
+## Troubleshooting
+
 #### Stuck at `Forcing CS_RUNTIME for entitlement`
 
 ![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
 This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
 
-#### Stuck at `PCI Configuration Begins` for Intel's HEDT boards
+### Stuck at `PCI Configuration Begins` for Intel's HEDT boards
 
 ![](../../images/extras/big-sur/readme/rtc-error.jpg)
 
@@ -191,7 +194,50 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
-#### Some kexts may not be compatible with Big Sur yet
+### Stuck on [EB|`LD:OFS] Err(0xE) when booting preboot volume
+
+Full error:
+```
+[EB|`LD:OFS] Err(0xE) @ OPEN (System\\Library\\PrelinkedKernels\\prelinkedkernel)
+```
+
+This can happen when the preboot volume isn't properly updated, to fix this you'll need to boot into recovery and repair it:
+
+1. Enable JumpstartHotplug under UEFI -> APFS
+2. Boot into recovery
+3. Open terminal, and run the following:
+
+```bash
+# First, find your preboot volume
+diskutil list
+
+# from the below list, we can see our preboot volume is disk5s2
+/dev/disk5 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +255.7 GB   disk5
+                                 Physical Store disk4s2
+   1:                APFS Volume ⁨Big Sur HD - Data⁩       122.5 GB   disk5s1
+   2:                APFS Volume ⁨Preboot⁩                 309.4 MB   disk5s2
+   3:                APFS Volume ⁨Recovery⁩                887.8 MB   disk5s3
+   4:                APFS Volume ⁨VM⁩                      1.1 MB     disk5s4
+   5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
+   6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
+
+# Next run updatePreboot on the Preboot volume
+diskutil apfs updatePreboot /volume/disk5s2
+```
+
+Then finally reboot.
+
+### DeviceProperties injection failing
+
+With Big Sur, macOS has become much pickier with devices being present in ACPI. Especially if you're injecting important properties for WhateverGreen or AppleALC, you may find they're no longer applyingTo verify whether your ACPI defines your hardware, check for the `acpi-path` property in [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone/blob/master/ioreg-210.zip):
+
+![](../../images/extras/big-sur/readme/acpi-path.png)
+
+If no property is found, you'll need to create an SSDT that provides the full pathing as you likely have a PCI Bridge that is not documented in your ACPI tables. An example of this can be found here: [SSDT-BRG0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-BRG0.dsl)
+
+### Some kexts may not be compatible with Big Sur yet
 
 There are a lot of kexts out there, and Big Sur is still pretty new. Not all kexts are working yet, so if you're experiencing a weird kernel panic, one thing you can try is booting with only the essential kexts (Lilu, VirtualSMC/FakeSMC, WhateverGreen) and seeing if it works. If so, you can enable kexts one by one to try to narrow down the issue.
 

@@ -268,6 +268,7 @@ module.exports = {
         {
             title: 'Extras',
             collapsable: true,
+			sidebarDepth: 2,
             children: [
                 '/extras/legacy',
                 '/extras/gpu-patches',
