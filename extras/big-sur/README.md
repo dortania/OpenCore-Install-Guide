@@ -38,12 +38,17 @@ Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see bel
 
 If your SMBIOS was supported in Catalina and isn't included above, you're good to go!
 
+For those wanting a simple translation for their Ivy and Haswell Machines:
+
+* iMac13,2, iMac14,2 and iMac14,3 should transition over to using iMac15,1
+* iMac14,1 should transition over to iMac14,4
+
 ### Supported hardware
 
 Not much hardware has been dropped, though the few that have:
 
-* Ivy Bridge U, H and S CPUs.
-  * Unofficially, many have been able to boot with ease.
+* Official Ivy Bridge U, H and S CPUs.
+  * These CPUs will still boot without much issue, but note that no Macs are supported with consumer Ivy Bridge in Big Sur.
   * Ivy Bridge-E CPUs are still supported thanks to being in MacPro6,1
 * Ivy Bridge iGPUs.
   * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
@@ -55,6 +60,8 @@ Not much hardware has been dropped, though the few that have:
   * This will work in both Catalina and Big Sur so you can remove SATA-unsupported if you want.
 
 Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them.
+
+And a special note for MSI Navi users, you no longer require the `ATY,rom`/`-wegnoegpu` patch to boot the installer!
 
 ### Up-to-date kexts, bootloader and config.plist
 

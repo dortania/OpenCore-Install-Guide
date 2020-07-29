@@ -843,7 +843,7 @@ To verify whether your RTC is working correctly:
 /path/to/smcread -s | grep CLKT
 ```
 
-![](../../images/extras/big-sur/readme/rtc-1.png)
+![](../images/extras/big-sur/readme/rtc-1.png)
 
 This should provide you with a hexadecimal value, and once converted it should equal time elapsed from Midnight relative to Cupertino.
 
