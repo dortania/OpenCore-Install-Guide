@@ -139,7 +139,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 :::
 
-::: tip PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
+::: tip PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
 
 This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's i225LM driver into supporting our i225-V network controller:
 
@@ -147,7 +147,8 @@ This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet
 | :--- | :--- | :--- |
 | device-id | Data | F2150000 |
 
-**Note**: If your board didn't ship with the Intel i225 NIC, there's no reason to add this entry.
+* **Note**: If your board didn't ship with the Intel i225 NIC, there's no reason to add this entry.
+* **Note 2**: If you get a kernel panic on i210 kext, your Ethernet's path is likely `PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)`
 
 :::
 

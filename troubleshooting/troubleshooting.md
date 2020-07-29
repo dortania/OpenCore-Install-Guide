@@ -300,6 +300,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [`kextd stall[0]: AppleACPICPU`](#kextd-stall0-appleacpicpu)
 * [MediaKit reports not enough space](#mediakit-reports-not-enough-space)
 * [DiskUtility failing to erase](#diskutility-failing-to-erase)
+* [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -551,6 +552,15 @@ This is either 1(or more) of 5 issues:
 * SATA Hot-plug support in the BIOS is causing issues(try disabling this option)
 * Old firmware, make sure the drive is on the latest firmware
 * And finally, you may just have a bad drive
+
+## Kernel Panic on AppleIntelI210Ethernet
+
+For those running Comet lake motherboards with the i225-V NIC, you may experience a kernel panic on boot due to the i210 kext. To resolve this, make sure you have the correct PciRoot for your Ethernet. This commonly being either:
+
+* PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
+  * By default, this is what Asus and Gigabyte motherboards use
+* PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
+  * Some OEMs may use this instead
 
 # macOS post-install
 
