@@ -194,42 +194,6 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
-### Stuck on [EB|`LD:OFS] Err(0xE) when booting preboot volume
-
-Full error:
-
-```
-[EB|`LD:OFS] Err(0xE) @ OPEN (System\\Library\\PrelinkedKernels\\prelinkedkernel)
-```
-
-This can happen when the preboot volume isn't properly updated, to fix this you'll need to boot into recovery and repair it:
-
-1. Enable JumpstartHotplug under UEFI -> APFS(Recovery may not boot without this option)
-2. Boot into recovery
-3. Open terminal, and run the following:
-
-```bash
-# First, find your preboot volume
-diskutil list
-
-# from the below list, we can see our preboot volume is disk5s2
-/dev/disk5 (synthesized):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:      APFS Container Scheme -                      +255.7 GB   disk5
-                                 Physical Store disk4s2
-   1:                APFS Volume ⁨Big Sur HD - Data⁩       122.5 GB   disk5s1
-   2:                APFS Volume ⁨Preboot⁩                 309.4 MB   disk5s2
-   3:                APFS Volume ⁨Recovery⁩                887.8 MB   disk5s3
-   4:                APFS Volume ⁨VM⁩                      1.1 MB     disk5s4
-   5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
-   6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
-
-# Next run updatePreboot on the Preboot volume
-diskutil apfs updatePreboot /volume/disk5s2
-```
-
-Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
-
 ### DeviceProperties injection failing
 
 With Big Sur, macOS has become much pickier with devices being present in ACPI. Especially if you're injecting important properties for WhateverGreen or AppleALC, you may find they're no longer applying. To verify whether your ACPI defines your hardware, check for the `acpi-path` property in [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone/blob/master/ioreg-210.zip):
@@ -237,6 +201,8 @@ With Big Sur, macOS has become much pickier with devices being present in ACPI. 
 ![](../../images/extras/big-sur/readme/acpi-path.png)
 
 If no property is found, you'll need to create an SSDT that provides the full pathing as you likely have a PCI Bridge that is not documented in your ACPI tables. An example of this can be found here: [SSDT-BRG0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-BRG0.dsl)
+
+* **Note**: This issue may also pop up in older versions of macOS, however Big Sur is most likely to have issues.
 
 ### Some kexts may not be compatible with Big Sur yet
 

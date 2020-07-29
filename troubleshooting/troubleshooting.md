@@ -732,6 +732,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * ["You can't change the startup disk to the selected disk" error](#you-cant-change-the-startup-disk-to-the-selected-disk-error)
 * [Booting Windows results in BlueScreen or Linux crashes](#booting-windows-results-in-bluescreen-or-linux-crashes)
 * [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed---already-started)
+* [macOS waking up with the wrong time](#macos-waking-up-with-wrong-time)
 * [iASL warning, # unresolved](#iasl-warning--unresolved)
 * [No Volume/Brightness control on external monitors](#no-volumebrightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
@@ -829,6 +830,28 @@ Common Windows error code:
 ## Booting Windows error: `OCB: StartImage failed - Already started`
 
 This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
+
+## macOS waking up with the wrong time
+
+An odd quirk some people may notice is that from wake, macOS will have the incorrect time for a bit before self-correcting with network time check. The root cause of this issue is most likely due to your RTC not ticking, and can be resolved with a new CMOS battery(note that Z270 and newer are quite picky with voltage so choose carefully).
+
+To verify whether your RTC is working correctly:
+
+* Download [VirtualSMC v1.1.5+](https://github.com/acidanthera/virtualsmc/releases) and run the smcread tool:
+
+```bash
+/path/to/smcread -s | grep CLKT
+```
+
+![](../../images/extras/big-sur/readme/rtc-1.png)
+
+This should provide you with a hexadecimal value, and once converted it should equal time elapsed from Midnight relative to Cupertino.
+
+So for this example, we'll grab our value(`00010D13`) then convert it to decimal and finally divide it by 3600. This should result in the approximate time elapsed(in seconds) since midnight relative to Cupertino
+
+* 00010D13 (Convert to HEX)-> 68883 (Divided by 3600 so we get hours)-> 19.13h(so 19:07:48)
+
+Next you'll want to put your hack to sleep for a bit and wake it, then check the CLKT value once more to see whether it deviated more or if it has a set difference. If you find it didn't actually tick much of at all from the elapsed time, you'll need to look into buying a new battery(with proper voltage)
 
 ## iASL warning, # unresolved
 

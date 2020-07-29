@@ -5,11 +5,13 @@
 .kext
 .plist
 .txt
+00010D13
 01xx0900
 02000A00
 02xx0A00
 0x0
 0x06
+0x1
 0x1C
 0x1b
 0x2
@@ -99,6 +101,7 @@ AppleID
 AppleIntelCPUPM
 AppleIntelCPUPowerManagement
 AppleIntelCPUPowerManagment
+AppleIntelI210Ethernet
 AppleIntelPchSeriesAHCI
 AppleIntelPowerManagement
 AppleLPC
@@ -151,6 +154,7 @@ C7030000
 CAVS
 CFG
 CFG-Lock
+CLKT
 CMOS
 CONFIGURATORS
 CPU0
@@ -187,6 +191,7 @@ Crohn
 Crohn's
 CsrDecode
 Ctrl
+Cupertino
 DAC
 DACs
 DBG
@@ -693,6 +698,7 @@ XXX-XXXXX
 Xcode
 Xeon
 Xeons
+Z270
 Z370
 Z390
 Z490
@@ -791,6 +797,7 @@ hacky
 heroImage
 heroText
 hotplug
+i210
 i211
 i218
 i219
@@ -893,6 +900,7 @@ shiki
 shikigva
 slavs
 slowgeek
+smcread
 socketed
 soooooo
 spacebar
