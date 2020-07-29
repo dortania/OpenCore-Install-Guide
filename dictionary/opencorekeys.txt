@@ -94,6 +94,7 @@ IgnoreTextInGraphics
 IncreasePciBarSize
 InitialTSC
 JumpstartHotPlug
+JumpstartHotplug
 KeyFiltering
 KeyForgetThreshold
 KeyMergeThreshold

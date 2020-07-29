@@ -197,13 +197,14 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 ### Stuck on [EB|`LD:OFS] Err(0xE) when booting preboot volume
 
 Full error:
+
 ```
 [EB|`LD:OFS] Err(0xE) @ OPEN (System\\Library\\PrelinkedKernels\\prelinkedkernel)
 ```
 
 This can happen when the preboot volume isn't properly updated, to fix this you'll need to boot into recovery and repair it:
 
-1. Enable JumpstartHotplug under UEFI -> APFS
+1. Enable JumpstartHotplug under UEFI -> APFS(Recovery may not boot without this option)
 2. Boot into recovery
 3. Open terminal, and run the following:
 
@@ -227,11 +228,11 @@ diskutil list
 diskutil apfs updatePreboot /volume/disk5s2
 ```
 
-Then finally reboot.
+Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
 
 ### DeviceProperties injection failing
 
-With Big Sur, macOS has become much pickier with devices being present in ACPI. Especially if you're injecting important properties for WhateverGreen or AppleALC, you may find they're no longer applyingTo verify whether your ACPI defines your hardware, check for the `acpi-path` property in [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone/blob/master/ioreg-210.zip):
+With Big Sur, macOS has become much pickier with devices being present in ACPI. Especially if you're injecting important properties for WhateverGreen or AppleALC, you may find they're no longer applying. To verify whether your ACPI defines your hardware, check for the `acpi-path` property in [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone/blob/master/ioreg-210.zip):
 
 ![](../../images/extras/big-sur/readme/acpi-path.png)
 

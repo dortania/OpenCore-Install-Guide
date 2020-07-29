@@ -418,7 +418,6 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 * `iMac13,2` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
   * If you plan to later run macOS 11, Big Sur, iMac15,1 will be the recommended SMBIOS and the iGPU must be disabled in the BIOS due to no longer being supported
 
-
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```

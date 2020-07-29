@@ -212,6 +212,7 @@ Dortania's
 DriveDroid
 DuetPkg
 E2
+EB
 EC0
 ECDV
 EDID
@@ -379,6 +380,7 @@ Khronokernel
 L305
 L8200A
 LAPIC
+LD:OFS
 LPC
 LPC0
 LPCB
@@ -859,6 +861,7 @@ nvda_drv=1
 osxaptiofix2drv.efi
 passthrough
 patcher
+pathing
 pentiums
 plist
 plist-only
@@ -871,6 +874,7 @@ pre-compiled
 pre-existing
 pre-hex
 pre-made
+preboot
 precompiled
 prelinked
 prelinkedkernel
