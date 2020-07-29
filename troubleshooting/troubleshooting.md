@@ -13,6 +13,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * [Stuck on `no vault provided!`](#stuck-on-no-vault-provided)
 * [Stuck on EndRandomSeed](#stuck-on-endrandomseed)
 * [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eblogexitbsstart)
+* [Stuck on [EB|LD:OFS] Err(0xE) when booting preboot volume](#stuck-on-eb-ld-ofs-err-0xe-when-booting-preboot-volume)
 * [Can't see macOS partitions](#cant-see-macos-partitions)
 * [Black screen after picker](#black-screen-after-picker)
 * [Stuck on `OC: OcAppleGenericInput... - Success`](#stuck-on-oc-ocapplegenericinput---success)
@@ -105,6 +106,46 @@ OCABC: MAT support is 1
 
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
+
+### Stuck on `[EB|LD:OFS] Err(0xE)` when booting preboot volume
+
+Full error:
+
+```
+[EB|`LD:OFS] Err(0xE) @ OPEN (System\\Library\\PrelinkedKernels\\prelinkedkernel)
+```
+
+This can happen when the preboot volume isn't properly updated, to fix this you'll need to boot into recovery and repair it:
+
+1. Enable JumpstartHotplug under UEFI -> APFS(Recovery may not boot on macOS Big Sur without this option)
+2. Boot into recovery
+3. Open terminal, and run the following:
+
+```bash
+# First, find your preboot volume
+diskutil list
+
+# from the below list, we can see our preboot volume is disk5s2
+/dev/disk5 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +255.7 GB   disk5
+                                 Physical Store disk4s2
+   1:                APFS Volume ⁨Big Sur HD - Data⁩       122.5 GB   disk5s1
+   2:                APFS Volume ⁨Preboot⁩                 309.4 MB   disk5s2
+   3:                APFS Volume ⁨Recovery⁩                887.8 MB   disk5s3
+   4:                APFS Volume ⁨VM⁩                      1.1 MB     disk5s4
+   5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
+   6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
+
+# now mount the preboot volume
+diskutil mount disk5s2
+
+# Next run updatePreboot on the Preboot volume
+diskutil apfs updatePreboot /volume/disk5s2
+```
+
+Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
+
 
 ## Can't see macOS partitions
 
