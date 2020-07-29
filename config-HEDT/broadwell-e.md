@@ -76,6 +76,8 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualiseMmio | YES |
 :::
 
+::: details More in-depth Info
+
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES

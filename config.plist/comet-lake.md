@@ -71,6 +71,21 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 ### Quirks
 
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| DevirtualiseMmio | YES | |
+| EnableWriteUnprotector | NO | |
+| ProtectUefiServices | YES | |
+| RebuildAppleMemoryMap | YES | |
+| SetupVirtualMap | NO | Gigabyte boards may require this quirk enabled |
+| SyncRuntimePermissions | YES | |
+:::
+
+::: details More in-depth Info
+
 Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`, `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and disabling `EnableWriteUnprotector`.
 
 * **AvoidRuntimeDefrag**: YES
@@ -88,6 +103,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * **Note**: ASUS, Gigabyte and AsRock Z490 board will not boot with this on.
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+
+:::
 
 ## DeviceProperties
 
