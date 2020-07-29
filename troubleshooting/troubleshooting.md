@@ -146,7 +146,6 @@ diskutil apfs updatePreboot /volume/disk5s2
 
 Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
 
-
 ## Can't see macOS partitions
 
 Main things to check:
