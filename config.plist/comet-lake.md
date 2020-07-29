@@ -86,8 +86,6 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 ::: details More in-depth Info
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`, `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and disabling `EnableWriteUnprotector`.
-
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **DevirtualiseMmio**: YES
