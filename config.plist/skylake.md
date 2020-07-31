@@ -1,6 +1,6 @@
 # Desktop Skylake
 
-* Supported version: 0.5.9
+* Supported version: 0.6.0
 
 ## Starting Point
 
