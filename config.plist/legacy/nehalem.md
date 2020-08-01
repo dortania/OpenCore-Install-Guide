@@ -23,7 +23,7 @@
   * iMac13,2 for Mojave(10.14) and Catalina(10.15)
   * iMac15,1 for Big Sur(11)
 * Server/HEDT desktop
-  * MacPro5,1 for Lion(10.7) through Mojave(10.14)
+  * MacPro5,1 for Snow Leopard(10.6) through Mojave(10.14)
   * MacPro6,1 for Catalina(10.15) and Big Sur(11)
 * Laptop(Snow Leopard(10.6) to High Sierra(10.13)):
   * MacBookPro6,1
