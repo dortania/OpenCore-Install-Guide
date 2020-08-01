@@ -59,7 +59,9 @@ Not much hardware has been dropped, though the few that have:
   * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleAHCIPort.kext](../../extra-files/CtlnaAHCIPort.kext.zip)
   * This will work in both Catalina and Big Sur so you can remove SATA-unsupported if you want.
 
-Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them.
+Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them:
+
+* [Experimental Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/experimental-opencore)
 
 And a special note for MSI Navi users, you no longer require the `ATY,rom`/`-wegnoegpu` patch to boot the installer!
 
@@ -79,7 +81,7 @@ You will also need to ensure you have a few NVRAM variables set:
     * ~~`vsmcgen=1`~~
       * Newest builds of Lilu(v1.4.6+) and VirtualSMC(v1.1.5+) don't need this boot-arg
     * ~~`-disablegfxfirmware`~~
-      * Newer builds of WhateverGreen should fix this (v1.4.1+)
+      * Newer builds of WhateverGreen(v1.4.1+) resolves this
 
 ### Known issues
 
@@ -87,13 +89,13 @@ With Big Sur, quite a bit broke. Mainly the following:
 
 * Lilu
   * Mainly user-space patching has severely broke, meaning certain patches like DRM don't work
-  * Kernel-space should be working correctly with v1.4.6, but plugins may require updates to the plugins due to a complete rewrite of the patcher for Kernel Collection support.
+  * Kernel-space should be working correctly with v1.4.6+, but plugins may require updates to the plugins due to a complete rewrite of the patcher for Kernel Collection support.
 * VirtualSMC
   * ~~Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.~~
-  * Resolved with v1.1.5
+  * Resolved with v1.1.5+
 * Battery status
   * ~~Currently RehabMan's [ACPIBatteryManager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext for battery status.~~
-  * Resolved with v1.1.5
+  * Resolved with VirtualSMC v1.1.5+
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
   * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
