@@ -37,7 +37,8 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
-| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | * Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details.) |
+| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details.) |
+| **[SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Ivy Bridge CPU with 6 series motherboards |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -130,6 +131,18 @@ The `AAPL,ig-platform-id` we use is as follows:
 | AAPL,ig-platform-id | Data | 0A006601 |
 
 (This is an example for a desktop HD 4000)
+
+:::
+
+::: tip PciRoot(0x0)/Pci(0x16,0x0)
+
+This is needed if you're pairing an Ivy Bridge CPU with a 6 series motherboard(ie. H61, B65, Q65, P67, H67, Q67, Z68), specifically needed to spoof your IMEI device into being supported. 
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 3A1C0000 |
+
+**Note**: This is not needed if you have a 7 series motherboard(ie. B75, Q75, Z75, H77, Q77, Z77)
 
 :::
 
