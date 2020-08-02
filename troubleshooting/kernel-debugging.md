@@ -1,10 +1,10 @@
 # Kernel Debugging
 
-This section will go a bit deeper into the troubleshooting hole, specifically focussing on more low level debugging with serial and proper logging
+This section will go a bit deeper into the troubleshooting rabbit hole, specifically focussing on more low level debugging with serial and proper logging.
 
 ## Serial Setup
 
-While optional, serial can be super helpful in grabbing all the important info flooding your PC. It's also the only way to properly log super early kernel panics(such as `[EB|#LOG:EXITBS:START]`)
+While optional, serial can be super helpful in grabbing all the important info flooding your PC. It's also the only way to properly log super early kernel panics(such as things right after `[EB|#LOG:EXITBS:START]`)
 
 For this setup, you'll need a few things:
 
@@ -18,4 +18,44 @@ For this example, we'll be using an Asus X299-E Strix board which does have a se
 
 ![](../images/troubleshooting/kernel-debugging-md/serial-header.png)
 
-As you can see, we have a COM port on the bottom of our motherboard and even provides us with a diagram for manually hooking up our serial pins if not using a [9/10 Pin Serial Header to DB9 adapter](https://www.startech.com/ca/Cables/Serial-Parallel-PS-2/DB9-DB25/1-Port-16in-DB9-Serial-Port-Bracket-to-10-Pin-Header-Low-Profile~PLATE9M16LP)
+As you can see, we have a COM port on the bottom of our motherboard and even provides us with a diagram for manually hooking up our serial pins if you're not using a 9/10 Pin Serial Header to DB9 adapter. 
+
+For me, I'm using a simple [Serial header to DB9](https://www.amazon.ca/gp/product/B001Y1F0HW/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1), then a [DB9 to USB  RS 232 adapter](https://www.amazon.ca/gp/product/B075YGKFC1/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1) which finally terminates at my laptop.
+
+The OpenCore manual generally recommends CP21202-based UART devices:
+
+```
+To obtain the log during boot you can make the use of serial port debugging. Serial port debugging is enabled in Target, e.g. 0xB for onscreen with serial. OpenCore uses 115200 baud rate, 8 data bits, no parity, and 1 stop bit. For macOS your best choice are CP2102-based UART devices. Connect motherboard TX to USB UART RX, and motherboard GND to USB UART GND. Use screen utility to get the output, or download GUI software, such as CoolTerm.
+Note: On several motherboards (and possibly USB UART dongles) PIN naming may be incorrect. It is very common to have GND swapped with RX, thus you have to connect motherboard “TX” to USB UART GND, and motherboard “GND” to USB UART RX.
+```
+
+
+### Config.plist settings
+
+For serial setup, OpenCore actually makes this quite straight forward. 
+
+#### Misc
+
+* **SerialInt**: YES
+  * Allows for serial output
+* **Target**: 
+  * This is simply combo 67 with the additional serial output flag(0x08)
+
+
+
+### CoolTerm settings
+
+Now lets fire up [CoolTerm](https://freeware.the-meiers.org) and set a few options. When you open CoolTermn, you'll likely be greeted with a simple window. here select the Options entry:
+
+![](../images/troubleshooting/kernel-debugging-md/coolterm-first-start.png)
+![](../images/troubleshooting/kernel-debugging-md/coolterm-settings.png)
+
+Here we're given quite a few options, but the mains ones we care about are:
+
+
+
+* Port: Ensure this 
+* Baudrate = 115200
+* Data Bits = 8
+* Parity = none
+* Stop Bit = 1
