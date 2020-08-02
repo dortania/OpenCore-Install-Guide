@@ -153,6 +153,7 @@ Resolution
 SMBIOS
 SanitiseClearScreen
 ScanPolicy
+SerialInt
 SetupVirtualMap
 ShowPicker
 SignalAppleOS
@@ -163,6 +164,7 @@ SmcVersion
 SpoofVendor
 StartupPowerEvents
 SyncRuntimePermissions
+SysReport
 SystemFamily
 SystemManufacturer
 SystemProductName
