@@ -136,7 +136,7 @@ The `AAPL,ig-platform-id` we use is as follows:
 
 ::: tip PciRoot(0x0)/Pci(0x16,0x0)
 
-This is needed if you're pairing an Ivy Bridge CPU with a 6 series motherboard(ie. H61, B65, Q65, P67, H67, Q67, Z68), specifically needed to spoof your IMEI device into being supported. 
+This is needed if you're pairing an Ivy Bridge CPU with a 6 series motherboard(ie. H61, B65, Q65, P67, H67, Q67, Z68), specifically needed to spoof your IMEI device into being supported.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
