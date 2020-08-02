@@ -2,7 +2,7 @@
 
 * Supported version: 0.5.9
 * Compare the release and debug version:
-  * **Debug version:** Help you figure out why you're getting issues or istalling but require more time and space than the release version (You could replace with a release when everything work well)
+  * **Debug version:** Help you figure out why you're getting issues or stalling but requires more time for booting and space in the EFI partition than the release version (You could replace with a release when everything work well)
   * **Release version:** Boot faster and use smaller space (only some bytes) but don't have loging function and don't have as much information as debug version
 
 To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/) and place it on the root of your EFI partition
