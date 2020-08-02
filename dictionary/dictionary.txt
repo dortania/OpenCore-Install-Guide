@@ -12,6 +12,7 @@
 0x0
 0x06
 0x1
+0x16
 0x1C
 0x1b
 0x2
@@ -300,6 +301,7 @@ GuC
 Gui
 H310
 H370
+H61
 HD
 HDA
 HDAS
@@ -703,6 +705,7 @@ Z370
 Z390
 Z490
 Z67
+Z68
 Z77
 Z87
 Z87-Pro
@@ -853,6 +856,7 @@ macOS
 macOS's
 macOS(\.)?
 macOS86
+macrecovery
 macserial
 markdownlint-cli
 midi1996
