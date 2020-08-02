@@ -485,7 +485,7 @@ Skip: 0
 
 ## 300 series Intel stalling on `apfs_module_start...`
 
-Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
+Commonly due to systems running AWAC clocks, please see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
 
 ## Kernel Panic `Cannot perform kext summary`
 
