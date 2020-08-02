@@ -602,6 +602,7 @@ For those running Comet lake motherboards with the i225-V NIC, you may experienc
   * By default, this is what Asus and Gigabyte motherboards use
 * PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
   * Some OEMs may use this instead
+
 ## SATA Drives Not Shown in DiskUtility
 
 * Make sure SATA Mode is AHCI in bios
