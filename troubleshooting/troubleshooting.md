@@ -153,6 +153,7 @@ Main things to check:
 * ScanPolicy set to `0` to show all drives
 * Have the proper firmware drivers such as HfsPlus(Note ApfsDriverLoader shouldn't be used in 0.5.8)
 * Set UnblockFsConnect to True in config.plist -> UEFI -> Quirks. Needed for some HP systems
+* Set **SATA Mode**: `AHCI` in BIOS
 * Set `UEFI -> APFS` to see APFS based drives:
   * **EnableJumpstart**: YES
   * **HideVerbose**: YES
@@ -328,7 +329,6 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 * [300 series Intel stalling on `apfs_module_start...`](#300-series-intel-stalling-on-apfsmodulestart)
-
 * [Kernel Panic `Cannot perform kext summary`](#kernel-panic-cannot-perform-kext-summary)
 * [Kernel Panic `AppleIntelMCEReporter`](#kernel-panic-appleintelmcereporter)
 * [Kernel Panic `AppleIntelCPUPowerManagement`](#kernel-panic-appleintelcpupowermanagement)
@@ -341,6 +341,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [MediaKit reports not enough space](#mediakit-reports-not-enough-space)
 * [DiskUtility failing to erase](#diskutility-failing-to-erase)
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
+* [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -601,6 +602,9 @@ For those running Comet lake motherboards with the i225-V NIC, you may experienc
   * By default, this is what Asus and Gigabyte motherboards use
 * PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
   * Some OEMs may use this instead
+## SATA Drives Not Shown in DiskUtility
+
+* Make sure SATA Mode is AHCI in bios
 
 # macOS post-install
 
