@@ -1,8 +1,14 @@
 # OpenCore Debugging
 
-* Supported version: 0.5.9
+* Supported version: 0.6.0
 
-Needing to figure out why you're getting issues or stalling? Well, you've come to the right place.
+Needing to figure out why you're getting issues or stalling? Well, you've come to the right place:
+
+* [File Swap](#file-swap)
+* [Config Changes](#config-changes)
+* [Disabling all logging](#disable-all-logging)
+
+## File Swaps
 
 To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenCore. This will provide much more info than the `RELEASE` version, the specific files that need to be swapped:
 
@@ -20,31 +26,35 @@ To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenC
 
 * **Note**: Generally best to debug systems without OpenCanopy, if required make sure this file is from DEBUG else there will be virtually no debug information.
 
+## Config Changes
+
 Next, head to your config.plist and locate the `Misc` section, we have a couple entries we'll want to play with here:
 
-**AppleDebug**: YES
+### Misc
 
-Provides much more debugging information, specifically relating to boot.efi and will also store the log to disk.
+Here we'll want to enable the following:
 
-**ApplePanic**: YES
+* **AppleDebug**: YES
+  * Provides much more debugging information, specifically relating to boot.efi and will also store the log to disk.
 
-This will allow kernel panics to be stored to disk, highly recommend keeping `keepsyms=1` in boot-args to preserve as much info as possible.
+* **ApplePanic**: YES
+  * This will allow kernel panics to be stored to disk, highly recommend keeping `keepsyms=1` in boot-args to preserve as much info as possible.
 
-**DisableWatchdog**: YES
+* **DisableWatchdog**: YES
+  * Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
 
-Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
+* **Target**: `67`(or calculate one below)
+  * Used for enabling different levels of debugging
 
-**Target**: `67`(or calculate one below)
-
-Used for enabling different levels of debugging
-
-* `0x01` — Enable Logging
-* `0x02` — Enable Onscreen debug
-* `0x04` — Enable logging to Data Hub.
-* `0x08` — Enable serial port logging.
-* `0x10` — Enable UEFI variable logging.
-* `0x20` — Enable non-volatile UEFI variable logging.
-* `0x40` — Enable logging to file.
+| Value | Comment |
+| :--- | :--- |
+| `0x01` | Enable Logging |
+| `0x02` | Enable Onscreen debug |
+| `0x04` | Enable logging to Data Hub. |
+| `0x08` | Enable serial port logging. |
+| `0x10` | Enable UEFI variable logging. |
+| `0x20` | Enable non-volatile UEFI variable logging. |
+| `0x40` | Enable logging to file. |
 
 To calculate the target, we can use a HEX calculator and then convert it to decimal. For us we want to have our values on stored onto a .txt file for later viewing:
 
@@ -60,14 +70,15 @@ To calculate the target, we can use a HEX calculator and then convert it to deci
 
 So we can set `Misc` -> `Debug` -> `Target` -> `83`
 
-**DisplayLevel**: `2147483714`(or calculate one below)
+* **DisplayLevel**: `2147483714`(or calculate one below)
+  * Used for setting what is logged
 
-Used for setting what is logged
-
-* `0x00000002` — DEBUG\_WARN in DEBUG, NOOPT, RELEASE.
-* `0x00000040` — DEBUG\_INFO in DEBUG, NOOPT.
-* `0x00400000` — DEBUG\_VERBOSE in custom builds.
-* `0x80000000` — DEBUG\_ERROR in DEBUG, NOOPT, RELEASE.
+| Value | Comment |
+| :--- | :--- |
+| `0x00000002` | DEBUG\_WARN in DEBUG, NOOPT, RELEASE. |
+| `0x00000040` | DEBUG\_INFO in DEBUG, NOOPT. |
+| `0x00400000` | DEBUG\_VERBOSE in custom builds. |
+| `0x80000000` | DEBUG\_ERROR in DEBUG, NOOPT, RELEASE. |
 
   A full list can be found in [DebugLib.h](https://github.com/tianocore/edk2/blob/UDK2018/MdePkg/Include/Library/DebugLib.h).
 
@@ -85,6 +96,12 @@ Once done, your config.plist should look like this:
 
 ![](../images/troubleshooting/debug-md/debug.png)
 
-## Disabling logging
+## Disabling all logging
 
-To remove all file logging, set `Target` to `0`
+To remove all file logging, and debug messages, simply swap out all your OpenCore files for those in RELEASE like we did before in [File Swap](#file-swap) section.
+
+Lastly, to remove writing to disk set the following:
+
+* AppleDebug = `0`
+* ApplePanic = `0`
+* Target = `0`
