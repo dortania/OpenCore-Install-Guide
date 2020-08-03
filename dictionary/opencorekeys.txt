@@ -154,7 +154,7 @@ Resolution
 SMBIOS
 SanitiseClearScreen
 ScanPolicy
-SerialInt
+SerialInit
 SetupVirtualMap
 ShowPicker
 SignalAppleOS
