@@ -45,9 +45,9 @@ Example of config.plist for Sandy Bridge DeviceProperties setup:
 **SMBIOS**:
 
 * Desktop:
-  * iMac12,1 or iMac12,2 for Lion (10.7) to High Sierra(10.13)
+  * iMac12,1 or iMac12,2 for Snow Leopard (10.6) to High Sierra(10.13)
   * iMac13,2 for Mojave(10.14) and Catalina(10.15)
-  * iMac14,4 for Big Sur(11)
+  * iMac15,1 for Big Sur(11)
 * Laptop(Lion(10.7) to High Sierra(10.13)):
   * MacBookAir4,1(dual core, 17w, 11")
   * MacBookAir4,2(dual core, 17w, 13")

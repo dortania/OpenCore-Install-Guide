@@ -1,8 +1,6 @@
 # Broadwell-E
 
-* Supported version: 0.5.9
-
-<extoc></extoc>
+* Supported version: 0.6.0
 
 ## Starting Point
 
@@ -38,7 +36,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | * Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -77,6 +75,8 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | :--- | :--- |
 | DevirtualiseMmio | YES |
 :::
+
+::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -225,10 +225,15 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
   * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
-* **Target**: `67`
-  * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
+* **SerialInit**: NO
+  * Needed for setting up serial output with OpenCore
+* **SysReport**: NO
+  * Helpful for debugging such as dumping ACPI tables
+  * Note that this is limited to DEBUG versions of OpenCore
+* **Target**: `67`
+  * Shows more debug information, requires debug version of OpenCore
 
 These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
 
