@@ -38,8 +38,34 @@ For serial setup, OpenCore actually makes this quite straight forward.
 
 * **SerialInt**: YES
   * Allows for serial output
-* **Target**: 
+* **Target**: `75`
   * This is simply combo 67 with the additional serial output flag(0x08)
+  * You can calculate your own vale here: OpenCore debugging](../debug.md)
+  
+
+#### NVRAM
+
+##### boot-args
+
+Here we get to set some variables that will help us with serial output, for us we'll be using the following boot-args:
+
+```
+-v keepsyms=1 debug=0x8 serial=5 msgbuf=1048576
+```
+
+Now lets go over what each arg does:
+
+* **-v**
+  * Enables verbose output
+* **keepsyms=1**
+  * Ensures symbols are kept during kernel panics, which are greatly helpful for troubleshooting
+* **debug=0x8**
+  * Enables serial debugging with the kernel
+  * For a full list of values: [debug.h](https://github.com/apple/darwin-xnu/blob/master/osfmk/kern/debug.h#L419L447)
+
+| Value | Comment |
+| :--- | :--- |
+
 
 
 
