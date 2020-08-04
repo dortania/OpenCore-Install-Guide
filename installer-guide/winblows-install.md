@@ -1,4 +1,4 @@
-# Making the network installer in Windows
+# Making the installer in Windows
 
 * Supported version: 0.6.0
 
