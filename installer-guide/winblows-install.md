@@ -1,4 +1,4 @@
-# Making the installer in Windows
+# Making the network installer in Windows
 
 * Supported version: 0.6.0
 
@@ -6,12 +6,13 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
 
 To start you'll need the following:
 
-* 4GB USB Stick
+* 4GB USB Stick or 12GB USb Stick if offline installer
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
+
 
 ## Downloading macOS
 
-To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only`:
+To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only` to only download network installer:
 
 ![](../images/installer-guide/winblows-install-md/gib-default.png)
 
@@ -40,5 +41,9 @@ MakeInstall will finish up by installing OpenCore to your USB's EFI System Parti
 ![](../images/installer-guide/winblows-install-md/make-install-done.png)
 
 ![](../images/installer-guide/winblows-install-md/EFI-base.png)
+
+## Making the installer offline
+
+
 
 ## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
