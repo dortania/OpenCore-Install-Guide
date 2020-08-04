@@ -1,10 +1,8 @@
 # General Troubleshooting
 
-* Supported version: 0.5.9
+* Supported version: 0.6.0
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify things.
-
-<extoc></extoc>
 
 While still a work in progress, laptop users wanting to convert an existing Clover install can see the  [Clover to OpenCore conversion](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion) for more info
 
@@ -15,6 +13,7 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 * [Stuck on `no vault provided!`](#stuck-on-no-vault-provided)
 * [Stuck on EndRandomSeed](#stuck-on-endrandomseed)
 * [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eblogexitbsstart)
+* [Stuck on [EB|LD:OFS] Err(0xE) when booting preboot volume](#stuck-on-eb-ld-ofs-err-0xe-when-booting-preboot-volume)
 * [Can't see macOS partitions](#cant-see-macos-partitions)
 * [Black screen after picker](#black-screen-after-picker)
 * [Stuck on `OC: OcAppleGenericInput... - Success`](#stuck-on-oc-ocapplegenericinput---success)
@@ -108,6 +107,45 @@ OCABC: MAT support is 1
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
+### Stuck on `[EB|LD:OFS] Err(0xE)` when booting preboot volume
+
+Full error:
+
+```
+[EB|`LD:OFS] Err(0xE) @ OPEN (System\\Library\\PrelinkedKernels\\prelinkedkernel)
+```
+
+This can happen when the preboot volume isn't properly updated, to fix this you'll need to boot into recovery and repair it:
+
+1. Enable JumpstartHotplug under UEFI -> APFS(Recovery may not boot on macOS Big Sur without this option)
+2. Boot into recovery
+3. Open terminal, and run the following:
+
+```bash
+# First, find your preboot volume
+diskutil list
+
+# from the below list, we can see our preboot volume is disk5s2
+/dev/disk5 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +255.7 GB   disk5
+                                 Physical Store disk4s2
+   1:                APFS Volume ⁨Big Sur HD - Data⁩       122.5 GB   disk5s1
+   2:                APFS Volume ⁨Preboot⁩                 309.4 MB   disk5s2
+   3:                APFS Volume ⁨Recovery⁩                887.8 MB   disk5s3
+   4:                APFS Volume ⁨VM⁩                      1.1 MB     disk5s4
+   5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
+   6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
+
+# now mount the preboot volume
+diskutil mount disk5s2
+
+# Next run updatePreboot on the Preboot volume
+diskutil apfs updatePreboot /volume/disk5s2
+```
+
+Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
+
 ## Can't see macOS partitions
 
 Main things to check:
@@ -115,6 +153,7 @@ Main things to check:
 * ScanPolicy set to `0` to show all drives
 * Have the proper firmware drivers such as HfsPlus(Note ApfsDriverLoader shouldn't be used in 0.5.8)
 * Set UnblockFsConnect to True in config.plist -> UEFI -> Quirks. Needed for some HP systems
+* Set **SATA Mode**: `AHCI` in BIOS
 * Set `UEFI -> APFS` to see APFS based drives:
   * **EnableJumpstart**: YES
   * **HideVerbose**: YES
@@ -290,7 +329,6 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 * [300 series Intel stalling on `apfs_module_start...`](#300-series-intel-stalling-on-apfsmodulestart)
-
 * [Kernel Panic `Cannot perform kext summary`](#kernel-panic-cannot-perform-kext-summary)
 * [Kernel Panic `AppleIntelMCEReporter`](#kernel-panic-appleintelmcereporter)
 * [Kernel Panic `AppleIntelCPUPowerManagement`](#kernel-panic-appleintelcpupowermanagement)
@@ -302,6 +340,8 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [`kextd stall[0]: AppleACPICPU`](#kextd-stall0-appleacpicpu)
 * [MediaKit reports not enough space](#mediakit-reports-not-enough-space)
 * [DiskUtility failing to erase](#diskutility-failing-to-erase)
+* [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
+* [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -446,7 +486,7 @@ Skip: 0
 
 ## 300 series Intel stalling on `apfs_module_start...`
 
-Commonly due to systems running AWAC clocks, pleas see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
+Commonly due to systems running AWAC clocks, please see the [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) section
 
 ## Kernel Panic `Cannot perform kext summary`
 
@@ -553,6 +593,19 @@ This is either 1(or more) of 5 issues:
 * SATA Hot-plug support in the BIOS is causing issues(try disabling this option)
 * Old firmware, make sure the drive is on the latest firmware
 * And finally, you may just have a bad drive
+
+## Kernel Panic on AppleIntelI210Ethernet
+
+For those running Comet lake motherboards with the i225-V NIC, you may experience a kernel panic on boot due to the i210 kext. To resolve this, make sure you have the correct PciRoot for your Ethernet. This commonly being either:
+
+* PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
+  * By default, this is what Asus and Gigabyte motherboards use
+* PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
+  * Some OEMs may use this instead
+
+## SATA Drives Not Shown in DiskUtility
+
+* Make sure SATA Mode is AHCI in bios
 
 # macOS post-install
 
@@ -684,6 +737,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * ["You can't change the startup disk to the selected disk" error](#you-cant-change-the-startup-disk-to-the-selected-disk-error)
 * [Booting Windows results in BlueScreen or Linux crashes](#booting-windows-results-in-bluescreen-or-linux-crashes)
 * [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed---already-started)
+* [macOS waking up with the wrong time](#macos-waking-up-with-wrong-time)
 * [iASL warning, # unresolved](#iasl-warning--unresolved)
 * [No Volume/Brightness control on external monitors](#no-volumebrightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
@@ -782,6 +836,28 @@ Common Windows error code:
 
 This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
 
+## macOS waking up with the wrong time
+
+An odd quirk some people may notice is that from wake, macOS will have the incorrect time for a bit before self-correcting with network time check. The root cause of this issue is most likely due to your RTC not ticking, and can be resolved with a new CMOS battery(note that Z270 and newer are quite picky with voltage so choose carefully).
+
+To verify whether your RTC is working correctly:
+
+* Download [VirtualSMC v1.1.5+](https://github.com/acidanthera/virtualsmc/releases) and run the smcread tool:
+
+```bash
+/path/to/smcread -s | grep CLKT
+```
+
+![](../images/extras/big-sur/readme/rtc-1.png)
+
+This should provide you with a hexadecimal value, and once converted it should equal time elapsed from Midnight relative to Cupertino.
+
+So for this example, we'll grab our value(`00010D13`) then convert it to decimal and finally divide it by 3600. This should result in the approximate time elapsed(in seconds) since midnight relative to Cupertino
+
+* 00010D13 (Convert to HEX)-> 68883 (Divided by 3600 so we get hours)-> 19.13h(so 19:07:48)
+
+Next you'll want to put your hack to sleep for a bit and wake it, then check the CLKT value once more to see whether it deviated more or if it has a set difference. If you find it didn't actually tick much of at all from the elapsed time, you'll need to look into buying a new battery(with proper voltage)
+
 ## iASL warning, # unresolved
 
 If you try to decompile your DSDT and get an error similar to this:
@@ -804,7 +880,7 @@ Oddly enough, macOS has locked down digital audio from having control. To bring 
 
 SIP or proper known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
 
-You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you):
+You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you, and note that they go under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
 
 * `00000000` - SIP completely enabled (0x0).
 * `03000000` - Disable kext signing (0x1) and filesystem protections (0x2).

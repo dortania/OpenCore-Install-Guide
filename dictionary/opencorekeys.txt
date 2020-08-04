@@ -14,6 +14,7 @@ AppleDebugLog
 AppleEvent
 AppleImageConversion
 AppleKeyMap
+ApplePanic
 AppleRtcRam
 AppleSmcIo
 AppleUserInterfaceTheme
@@ -94,6 +95,7 @@ IgnoreTextInGraphics
 IncreasePciBarSize
 InitialTSC
 JumpstartHotPlug
+JumpstartHotplug
 KeyFiltering
 KeyForgetThreshold
 KeyMergeThreshold
@@ -152,6 +154,7 @@ Resolution
 SMBIOS
 SanitiseClearScreen
 ScanPolicy
+SerialInit
 SetupVirtualMap
 ShowPicker
 SignalAppleOS
@@ -162,6 +165,7 @@ SmcVersion
 SpoofVendor
 StartupPowerEvents
 SyncRuntimePermissions
+SysReport
 SystemFamily
 SystemManufacturer
 SystemProductName

@@ -5,11 +5,14 @@
 .kext
 .plist
 .txt
+00010D13
 01xx0900
 02000A00
 02xx0A00
 0x0
 0x06
+0x1
+0x16
 0x1C
 0x1b
 0x2
@@ -41,6 +44,7 @@
 64MB
 64bit
 6970M
+6XX
 7920x
 7980xe
 7XX
@@ -98,6 +102,8 @@ AppleID
 AppleIntelCPUPM
 AppleIntelCPUPowerManagement
 AppleIntelCPUPowerManagment
+AppleIntelI210Ethernet
+AppleIntelPchSeriesAHCI
 AppleIntelPowerManagement
 AppleLPC
 AppleLife
@@ -149,6 +155,7 @@ C7030000
 CAVS
 CFG
 CFG-Lock
+CLKT
 CMOS
 CONFIGURATORS
 CPU0
@@ -185,6 +192,7 @@ Crohn
 Crohn's
 CsrDecode
 Ctrl
+Cupertino
 DAC
 DACs
 DBG
@@ -210,6 +218,7 @@ Dortania's
 DriveDroid
 DuetPkg
 E2
+EB
 EC0
 ECDV
 EDID
@@ -224,6 +233,7 @@ EHCI
 ELAN1200
 EPP
 ETH0
+EUSB
 EVGA
 EVO
 EfiPkg
@@ -291,6 +301,7 @@ GuC
 Gui
 H310
 H370
+H61
 HD
 HDA
 HDAS
@@ -376,6 +387,7 @@ Khronokernel
 L305
 L8200A
 LAPIC
+LD:OFS
 LPC
 LPC0
 LPCB
@@ -545,6 +557,7 @@ SAS
 SAT0
 SAT1
 SATA
+SATA-unsupported
 SGX
 SHA-1
 SL01
@@ -559,6 +572,7 @@ SSDTTime
 SSDTTime's
 SSDTs
 SSDs
+SSE3
 SSE4
 STAS
 Safemode
@@ -580,6 +594,7 @@ StopSign-fixv
 StopSign-fixv5
 Subreddit
 Sur
+Sur's
 Syrah
 SystemAudioVolume
 SystemParameters
@@ -610,6 +625,7 @@ UEFIExtrac
 UEFITool
 UHD
 UI
+USBE
 USBInjectAll
 USBX
 USBmap
@@ -684,10 +700,12 @@ XXX-XXXXX
 Xcode
 Xeon
 Xeons
+Z270
 Z370
 Z390
 Z490
 Z67
+Z68
 Z77
 Z87
 Z87-Pro
@@ -782,6 +800,7 @@ hacky
 heroImage
 heroText
 hotplug
+i210
 i211
 i218
 i219
@@ -837,6 +856,7 @@ macOS
 macOS's
 macOS(\.)?
 macOS86
+macrecovery
 macserial
 markdownlint-cli
 midi1996
@@ -852,6 +872,7 @@ nvda_drv=1
 osxaptiofix2drv.efi
 passthrough
 patcher
+pathing
 pentiums
 plist
 plist-only
@@ -864,6 +885,7 @@ pre-compiled
 pre-existing
 pre-hex
 pre-made
+preboot
 precompiled
 prelinked
 prelinkedkernel
@@ -882,6 +904,7 @@ shiki
 shikigva
 slavs
 slowgeek
+smcread
 socketed
 soooooo
 spacebar
