@@ -1,9 +1,7 @@
 # Desktop Comet Lake
 
-* Supported version: 0.5.9
+* Supported version: 0.6.0
 * **Note**: This guide only supports Comet Lake on 10.15.5 or newer
-
-<extoc></extoc>
 
 ## Starting Point
 
@@ -39,7 +37,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | * Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for all B460 and Z490 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) page. |
 | **[SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to fix Root-device errors on Asus and potentially MSI boards. Gigabyte and AsRock motherboards **do not** need this SSDT |
 
@@ -73,7 +71,20 @@ This section is allowing devices to be passthrough to macOS that are generally i
 
 ### Quirks
 
-Settings relating to boot.efi patching and firmware fixes, ones we need to change are `DevirtualiseMmio`, `RebuildAppleMemoryMap`, `SyncRuntimePermissions` and disabling `EnableWriteUnprotector`.
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| DevirtualiseMmio | YES | |
+| EnableWriteUnprotector | NO | |
+| ProtectUefiServices | YES | |
+| RebuildAppleMemoryMap | YES | |
+| SetupVirtualMap | NO | Gigabyte boards may require this quirk enabled |
+| SyncRuntimePermissions | YES | |
+:::
+
+::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
@@ -90,6 +101,8 @@ Settings relating to boot.efi patching and firmware fixes, ones we need to chang
   * **Note**: ASUS, Gigabyte and AsRock Z490 board will not boot with this on.
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+
+:::
 
 ## DeviceProperties
 
@@ -124,7 +137,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 :::
 
-::: tip PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
+::: tip PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
 
 This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's i225LM driver into supporting our i225-V network controller:
 
@@ -132,7 +145,8 @@ This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet
 | :--- | :--- | :--- |
 | device-id | Data | F2150000 |
 
-**Note**: If your board didn't ship with the Intel i225 NIC, there's no reason to add this entry.
+* **Note**: If your board didn't ship with the Intel i225 NIC, there's no reason to add this entry.
+* **Note 2**: If you get a kernel panic on i210 kext, your Ethernet's path is likely `PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)`
 
 :::
 
@@ -255,10 +269,15 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
   * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
-* **Target**: `67`
-  * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
+* **SerialInit**: NO
+  * Needed for setting up serial output with OpenCore
+* **SysReport**: NO
+  * Helpful for debugging such as dumping ACPI tables
+  * Note that this is limited to DEBUG versions of OpenCore
+* **Target**: `67`
+  * Shows more debug information, requires debug version of OpenCore
 
 These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
 

@@ -1,8 +1,15 @@
 # Adding The Base OpenCore Files
 
-* Supported version: 0.5.9
+* Supported version: 0.6.0
 
-To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/) and place it on the root of your EFI partition
+To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/). Regarding DEBUG versus RELEASE version:
+
+* **DEBUG**: Can greatly help with debugging boot issues, however can add some noticeable delay to boot times. Once installed you can easily transition to RELEASE
+* **RELEASE**: Much snappier boot times, however virtually no useful DEBUG info is provided in OpenCore making troubleshooting much more difficult.
+
+And once downloaded, place the EFI folder(from OpenCorePkg) on the root of your EFI partition.
+
+**Note**:
 
 * Windows users: This will already be done on the `BOOT` USB drive created by MakeInstall
 * Linux users: This is the `OPENCORE` partition we created earlier

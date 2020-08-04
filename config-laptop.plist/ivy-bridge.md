@@ -1,8 +1,7 @@
 # Laptop Ivy Bridge
 
-* Supported version: 0.5.9
-
-<extoc></extoc>
+* Supported version: 0.6.0
+* Note that Ivy Bridge's iGPU is only supported up-to macOS 10.15, Catalina. Hacks for running later versions will not be covered
 
 ## Starting Point
 
@@ -323,10 +322,15 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
   * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
-* **Target**: `67`
-  * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
+* **SerialInit**: NO
+  * Needed for setting up serial output with OpenCore
+* **SysReport**: NO
+  * Helpful for debugging such as dumping ACPI tables
+  * Note that this is limited to DEBUG versions of OpenCore
+* **Target**: `67`
+  * Shows more debug information, requires debug version of OpenCore
 
 These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
 

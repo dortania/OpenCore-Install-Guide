@@ -1,8 +1,6 @@
 # Desktop Haswell and Broadwell
 
-* Supported version: 0.5.9
-
-<extoc></extoc>
+* Supported version: 0.6.0
 
 ## Starting Point
 
@@ -38,7 +36,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | * Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details.) |
+| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details.) |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -259,10 +257,15 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
   * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
-* **Target**: `67`
-  * Shows more debug information, requires debug version of OpenCore
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
+* **SerialInit**: NO
+  * Needed for setting up serial output with OpenCore
+* **SysReport**: NO
+  * Helpful for debugging such as dumping ACPI tables
+  * Note that this is limited to DEBUG versions of OpenCore
+* **Target**: `67`
+  * Shows more debug information, requires debug version of OpenCore
 
 These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
 
@@ -418,8 +421,10 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
 
 * Haswell with only iGPU
   * iMac14,1
+    * If you plan to later run macOS 11, Big Sur, iMac14,4 will be the recommended SMBIOS
 * Haswell with dGPU
   * iMac14,2
+    * If you plan to later run macOS 11, Big Sur, iMac15,1 will be the recommended SMBIOS
 * Haswell Refresh (Devil's Canyon)
   * iMac15,1
 * Broadwell
