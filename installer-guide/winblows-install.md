@@ -9,6 +9,8 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
 ## Prerequisites for offline installer
+* 4GB USB Stick
+* [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
 ## Downloading macOS
 
