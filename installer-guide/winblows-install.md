@@ -13,10 +13,14 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
 
 * 12GB USB Stick
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
+* [BDU](http://cvad-mac.narod.ru/index/bootdiskutility_exe/0-5)
+* [MakeInstallmacOS](https://github.com/doesprintfwork/MakeInstallmacOS)
+* [PARAGON-Partition-Manager-free](https://www.paragon-software.com/free/pm-express/#)
+* [Paragon-hfs-windows-trial-version](https://www.paragon-software.com/home/hfs-windows/)
 
 ## Downloading macOS
 
-To start, open gibMacOS.bat as Admin and if only want t download  network installer select `Toggle Recovery-Only` this will only download the offline installer:
+To start, open gibMacOS.bat as Admin and if only want to download  network installer select `Toggle Recovery-Only` this will only download the offline installer:
 
 ![](../images/installer-guide/winblows-install-md/gib-default.png)
 
@@ -62,16 +66,24 @@ To make an offline installer
 4. Tick Not Install Boot Records as Clover and name it EFI and rest leave as is and press OK.
 ![](../images/installer-guide/winblows-install-md/offline/BDU-Config.png)
 5. now select your USB Stick and press format.
-Now that we have a EFI and installer partitions lets add the installer to the installer partition
-6. Go to Tools--> Extract HFS(HFS+) partition from DMG-files and here go to the location where your downloaded files from GibMacOS are located and select the BaseSystem.dmg and then select where you want to save the output
+6. Now that we have a EFI and installer partitions lets add the installer to the installer partition    
+7. Go to Tools--> Extract HFS(HFS+) partition from DMG-files and here go to the location where your downloaded macOS Installer files folder(i.e.: `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx`) and select the BaseSystem.dmg and then select where you want to save the output
 ![](../images/installer-guide/winblows-install-md/offline/BDU-DMG.png)
 ![](../images/installer-guide/winblows-install-md/offline/BDU-HFS.png)
-7. now a Command Prompt will open and it will create 4.hfs in the location you selected this will take some time so be patient after that you will get a pop up HFS Volume Extracted click OK and continue
+8. now a Command Prompt will open and it will create 4.hfs in the location you selected this will take some time so be patient after that you will get a pop up HFS Volume Extracted click OK and continue
 ![](../images/installer-guide/winblows-install-md/offline/BDU-HFS-Out.png)
 ![](../images/installer-guide/winblows-install-md/offline/BDU-HFS-OK.png)
-8. Now we have to expand our USB Stick By pressing + in BDU then select the second partition
+9. Now we have to expand our USB Stick By pressing + in BDU then select the second partition
 ![](../images/installer-guide/winblows-install-md/offline/BDU-USB.png)
-9. now press restore and select the 4.hfs we extracted before
+10. now press restore and select the 4.hfs we extracted before
 ![](../images/installer-guide/winblows-install-md/offline/BDU-Restore.png)
+11. now it is going to create the installer this will take time about 10mins.
+![](../images/installer-guide/winblows-install-md/offline/BDU-Restore-Prog.png)
+12. now that we have a installer lets make it a offline installer.
+13. Put the PackAppWin.py (from MakeInstallmacOS) into the downloaded macOS Installer files folder(i.e.: `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx`) and Double click it then type P to create offline installer files inside `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx/SharedSupport` this will take approximately 10 mins after that type Q to exit.
+14. now we have to extend the installer partition created by BDU is it has enough space for the offline installer files
+15. open PARAGON Partition Manager and select your usb sticks second partition and press extend
+16. 
+
 
 ## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
