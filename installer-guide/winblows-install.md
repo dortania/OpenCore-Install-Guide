@@ -57,21 +57,21 @@ To make an offline installer
 
 1. Plug in your USB Stick if you didn't
 2. extract BDU and run it
-![](../images/installer-guide/winblows-install-md/BDU.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU.png)
 3. Go to Options-->Configuration
 4. Tick Not Install Boot Records as Clover and name it EFI and rest leave as is and press OK.
-![](../images/installer-guide/winblows-install-md/BDU-Config.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU-Config.png)
 5. now select your USB Stick and press format.
 Now that we have a EFI and installer partitions lets add the installer to the installer partition
 6. Go to Tools--> Extract HFS(HFS+) partition from DMG-files and here go to the location where your downloaded files from GibMacOS are located and select the BaseSystem.dmg and then select where you want to save the output
-![](../images/installer-guide/winblows-install-md/BDU-DMG.png)
-![](../images/installer-guide/winblows-install-md/BDU-HFS.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU-DMG.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU-HFS.png)
 7. now a Command Prompt will open and it will create 4.hfs in the location you selected this will take some time so be patient after that you will get a pop up HFS Volume Extracted click OK and continue
-![](../images/installer-guide/winblows-install-md/BDU-HFS-Out.png)
-![](../images/installer-guide/winblows-install-md/BDU-HFS-OK.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU-HFS-Out.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU-HFS-OK.png)
 8. Now we have to expand our USB Stick By pressing + in BDU then select the second partition
-![](../images/installer-guide/winblows-install-md/BDU-USB.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU-USB.png)
 9. now press restore and select the 4.hfs we extracted before
-![](../images/installer-guide/winblows-install-md/BDU-Restore.png)
+![](../images/installer-guide/winblows-install-md/offline/BDU-Restore.png)
 
 ## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
