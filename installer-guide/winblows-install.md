@@ -24,11 +24,13 @@ Now search through for your desired version of macOS, for this example we'll cho
 
 ![](../images/installer-guide/winblows-install-md/gib-recovery.png)
 
-This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx`
+This will download the installer to `\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 1x.x.x macOS xxx`
 
 ![](../images/installer-guide/winblows-install-md/gib-done.png)
 
 ## Making the installer
+* [Making the network installer](#making-the-network-installer)
+### Making the network installer
 
 Next open `MakeInstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O).
 
