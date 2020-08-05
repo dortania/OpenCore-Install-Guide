@@ -942,3 +942,8 @@ xcpm
 сервисы
 BDU
 DMG-files
+MakeInstallmacOS
+Paragon-hfs-windows-trial-version
+PC
+hfs
+haven't
