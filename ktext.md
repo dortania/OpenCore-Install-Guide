@@ -73,6 +73,8 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
 * SMCSuperIO.kext
   * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
+* SMCDellSensors.kext
+  * Used for monitoring Temperature as well as controlling fan speed on **Dell laptops**
 * SMCLightSensor.kext
   * Used for the ambient light sensor on laptops, **desktops can ignore**
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
