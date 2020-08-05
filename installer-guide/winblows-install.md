@@ -59,7 +59,7 @@ To make an offline installer
 2. extract BDU and run it
 ![](../images/installer-guide/winblows-install-md/offline/BDU.png)
 3. Go to Options-->Configuration
-4. Select Not Install, Boot Records as `Clover` and name it `EFI` and leave everything as is and press OK.
+4. Tick Not Install Boot Records as Clover and name it EFI and rest leave as is and press OK.
 ![](../images/installer-guide/winblows-install-md/offline/BDU-Config.png)
 5. now select your USB Stick and press format.
 Now that we have a EFI and installer partitions lets add the installer to the installer partition
