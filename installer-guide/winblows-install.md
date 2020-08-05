@@ -11,12 +11,12 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
 
 ## Prerequisites for offline installer
 
-* 4GB USB Stick
+* 12GB USB Stick
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
 ## Downloading macOS
 
-To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only`:
+To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only` to download  network installer only:
 
 ![](../images/installer-guide/winblows-install-md/gib-default.png)
 
