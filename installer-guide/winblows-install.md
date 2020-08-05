@@ -5,10 +5,12 @@
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
 ## Prerequisites for network installer
+
 * 4GB USB Stick
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
 ## Prerequisites for offline installer
+
 * 4GB USB Stick
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
