@@ -31,6 +31,7 @@ This will download the installer to `\gibmacos-master\macOS Downloads\publicrele
 ## Making the installer
 
 * [Making the network installer](#making-the-network-installer)
+* [Making the offline installer](#making-the-offline-installer)
 
 ### Making the network installer
 
@@ -49,5 +50,9 @@ MakeInstall will finish up by installing OpenCore to your USB's EFI System Parti
 ![](../images/installer-guide/winblows-install-md/make-install-done.png)
 
 ![](../images/installer-guide/winblows-install-md/EFI-base.png)
+
+### Making the offline installer
+
+test 123
 
 ## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
