@@ -66,24 +66,36 @@ To make an offline installer
 4. Tick Not Install Boot Records as Clover and name it EFI and rest leave as is and press OK.
 ![](../images/installer-guide/winblows-install-md/offline/BDU-Config.png)
 5. now select your USB Stick and press format.
-6. Now that we have a EFI and installer partitions lets add the installer to the installer partition    
+6. Now that we have a EFI and installer partitions lets add the installer to the installer partition
 7. Go to Tools--> Extract HFS(HFS+) partition from DMG-files and here go to the location where your downloaded macOS Installer files folder(i.e.: `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx`) and select the BaseSystem.dmg and then select where you want to save the output
 ![](../images/installer-guide/winblows-install-md/offline/BDU-DMG.png)
 ![](../images/installer-guide/winblows-install-md/offline/BDU-HFS.png)
-8. now a Command Prompt will open and it will create 4.hfs in the location you selected this will take some time so be patient after that you will get a pop up HFS Volume Extracted click OK and continue
+8. now a Command Prompt will open and it will create 4.Hfs in the location you selected this will take some time so be patient after that you will get a pop up HFS Volume Extracted click OK and continue
 ![](../images/installer-guide/winblows-install-md/offline/BDU-HFS-Out.png)
 ![](../images/installer-guide/winblows-install-md/offline/BDU-HFS-OK.png)
 9. Now we have to expand our USB Stick By pressing + in BDU then select the second partition
 ![](../images/installer-guide/winblows-install-md/offline/BDU-USB.png)
-10. now press restore and select the 4.hfs we extracted before
+10. now press restore and select the 4.Hfs we extracted before
 ![](../images/installer-guide/winblows-install-md/offline/BDU-Restore.png)
-11. now it is going to create the installer this will take time about 10mins.
+11. now it is going to create the installer this will take time about 10 Minutes.
 ![](../images/installer-guide/winblows-install-md/offline/BDU-Restore-Prog.png)
-12. now that we have a installer lets make it a offline installer.
-13. Put the PackAppWin.py (from MakeInstallmacOS) into the downloaded macOS Installer files folder(i.e.: `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx`) and Double click it then type P to create offline installer files inside `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx/SharedSupport` this will take approximately 10 mins after that type Q to exit.
-14. now we have to extend the installer partition created by BDU is it has enough space for the offline installer files
-15. open PARAGON Partition Manager and select your usb sticks second partition and press extend
-16. 
-
+12. now that we have an installer lets make it an offline installer.
+13. Put the PackAppWin.py (from MakeInstallmacOS) into the downloaded macOS Installer files folder(i.e.: `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx`) and Double click it then type P to create offline installer files inside `gibMacOS/macOS Downloads/publicrelease/xxx-xxxxx/SharedSupport` this will take approximately 10 Minutes after that type Q to exit.
+14. now we have to extend the installer partition created by BDU is it has enough space for the offline installer files.
+15. open PARAGON Partition Manager and select your USB stick's second partition and press move or resize
+![](../images/installer-guide/winblows-install-md/offline/Paragon_resize.png)
+16. then move the new volume size slider to the end and press change now it will take like 2 Minutes to complete.
+![](../images/installer-guide/winblows-install-md/offline/Paragon_resizer.png)
+17. now that we have enough space lets add the SharedSupport to the installer partition.
+18. if you haven't restarted your PC after installing paragon Hfs+ for windows then please restart.
+19. now lets mount the partition if not mounted to check open file explorer and see if there is drive named macOS Base System if not do this step or else no need
+open Hfs+ for windows select your USB stick and press mount
+![](../images/installer-guide/winblows-install-md/offline/hfs+.png)
+20. now open file explorer and go to macOS Base System (or OS X Base System)/Install macOS xxx.app/Contents and drag and drop your SharedSupport folder here
+before copy
+![](../images/installer-guide/winblows-install-md/offline/installer-before.png)
+after copy
+![](../images/installer-guide/winblows-install-md/offline/installer-after.png)
+21. your offline installer is ready
 
 ## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
