@@ -29,7 +29,9 @@ This will download the installer to `\gibmacos-master\macOS Downloads\publicrele
 ![](../images/installer-guide/winblows-install-md/gib-done.png)
 
 ## Making the installer
+
 * [Making the network installer](#making-the-network-installer)
+
 ### Making the network installer
 
 Next open `MakeInstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O).
