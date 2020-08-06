@@ -137,6 +137,7 @@ BCM94352Z
 BGRT
 BT
 BaseSystem
+Baudrate
 BeyondCompare
 Big
 BlueScreen
@@ -158,6 +159,7 @@ CFG-Lock
 CLKT
 CMOS
 CONFIGURATORS
+CP21202-based
 CPU0
 CPUFriend
 CPUFriendDataProvider
@@ -181,6 +183,7 @@ Config
 Configurator
 ConsoleControl
 ConsoleGOP
+CoolTerm
 Core2
 CorpNewt
 CorpNewt's
@@ -195,6 +198,7 @@ Ctrl
 Cupertino
 DAC
 DACs
+DB9
 DBG
 DC7900
 DMAR
@@ -592,6 +596,7 @@ Speccy
 Stompy
 StopSign-fixv
 StopSign-fixv5
+Strix
 Subreddit
 Sur
 Sur's
@@ -621,6 +626,7 @@ Touchbase
 Trackpad
 TransMac
 Typora
+UART
 UEFIExtrac
 UEFITool
 UHD
@@ -675,6 +681,7 @@ WhateverGreen
 WhateverGreen's
 Wifi
 X299
+X299-E
 X3100
 X520
 X540
@@ -722,6 +729,7 @@ al3xtjames
 alcid
 algrey
 architected
+arg
 args
 arse
 auth
@@ -756,6 +764,7 @@ csrstat
 dGPU
 dGPUs
 debug=0x100
+debug=0x8
 decompile
 decrypt
 devirt
@@ -842,6 +851,7 @@ igfxfw
 img
 ix-3xxx
 jailbroken
+keepsyms=1
 kernelcache
 kext
 kext(\.)?
@@ -940,3 +950,7 @@ xcpm
 Как
 завести
 сервисы
+CP2102
+GND
+msgbuf=1048576
+io=0xff
