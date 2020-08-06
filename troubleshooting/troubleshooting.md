@@ -649,6 +649,47 @@ rtcfx_exclude=00-FF
 
 If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on
 
+## Mouse doesn't work
+
+You can try to use the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl). 
+First, you have to open DeviceManager, and head to the following:
+
+```
+Device Manager -> Mice and other pointing devices -> Properties -> Details > BIOS device name
+```
+Then grab the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
+By default, this uses PCI0.LPCB.PS2K for the pathing. you'll want to rename accordingly.
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+    
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package()  <- Rename this
+
+```
+* Note: Although this will work for some case, the trackpad will be laggy and you can't use the physical buttons. If you can't live without the trackpad, this may be better:
+
+You have to find the path of your mouse just like the first solution. We then grab [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). By default, this uses PCI0.LPCB.PS2K so you have to rename that to make sure that the SSDT work:
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+    
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package() <- Rename this
+```
+## Fix for Dell breakless PS2 keys
+
+First of all, you need to find the path to your ACPI keyboard object in the Device Manager:
+
+```
+Device Manager -> Keyboards -> Properties -> Details > BIOS device name
+```
+After this, you would like to grab the [SSDT-KEY-DELL-WN09.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-KEY-DELL-WN09.dsl) and fix some small things in the SSDT:
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) -> Rename this
+    
+    Method(_SB.PCI0.LPCB.PS2K._DSM, 4) -> Rename this
+```
+
 ## macOS GPU acceleration missing on AMD X570
 
 Verify the following:
