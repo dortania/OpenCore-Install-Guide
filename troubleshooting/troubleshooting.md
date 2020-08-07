@@ -829,6 +829,10 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 
 If you're having issues with Start Up disk correctly applying your new boot entry, this is most likely caused by a missing DevicePathsSupported in your I/O Registry. To resolve this, ensure you are using `PlatformInfo -> Automatic -> True`
 
+Example of missing DevicePathsSupported:
+
+* [Default DevicePath match failure due to different PciRoot #664](https://github.com/acidanthera/bugtracker/issues/664#issuecomment-663873846)
+
 ## Booting Windows results in BlueScreen or Linux crashes
 
 This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
