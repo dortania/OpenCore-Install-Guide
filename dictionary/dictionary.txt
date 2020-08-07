@@ -596,6 +596,7 @@ StopSign-fixv5
 Subreddit
 Sur
 Sur's
+Synaptics
 Syrah
 SystemAudioVolume
 SystemParameters
