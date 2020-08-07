@@ -82,6 +82,12 @@ You will also need to ensure you have a few NVRAM variables set:
       * Newest builds of Lilu(v1.4.6+) and VirtualSMC(v1.1.5+) don't need this boot-arg
     * ~~`-disablegfxfirmware`~~
       * Newer builds of WhateverGreen(v1.4.1+) resolves this
+	  
+If you're unsure what version of OpenCore you're using, you can run the following in terminal:
+
+```sh
+nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
+```
 
 ### Known issues
 
