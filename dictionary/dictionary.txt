@@ -208,6 +208,7 @@ DVMT-prealloc
 Decluttering
 Dev
 DeviceManager
+DevicePath
 DeviceProperty
 DhinakG
 DiskUtility
