@@ -877,6 +877,7 @@ osxaptiofix2drv.efi
 passthrough
 patcher
 pathing
+pathing.
 pentiums
 plist
 plist-only
