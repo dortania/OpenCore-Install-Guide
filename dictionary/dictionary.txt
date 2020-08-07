@@ -736,6 +736,7 @@ bootcamp
 bootloader
 bootloaders
 borked
+breakless
 bugtracker
 busID
 busId
@@ -848,6 +849,7 @@ kext
 kext(\.)?
 kextd
 kexts
+laggy
 lapic
 lappie
 licensor

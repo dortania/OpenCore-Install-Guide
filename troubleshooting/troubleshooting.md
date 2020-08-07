@@ -612,6 +612,8 @@ For those running Comet lake motherboards with the i225-V NIC, you may experienc
 * [Broken iMessage and Siri](#broken-imessage-and-siri)
 * [No on-board audio](#no-on-board-audio)
 * [BIOS reset or sent into Safemode after reboot/shutdown?](#bios-reset-or-sent-into-safemode-after-rebootshutdown)
+* [Synaptics PS2 based trackpad doesn't work](#synaptics-ps2-based-trackpad-doesnt-work)
+* [Fix for Dell breakless PS2 keyboard keys](#fix-for-dell-breakless-ps2-keyboard-keys)
 * [macOS GPU acceleration missing on AMD X570](#macos-gpu-acceleration-missing-on-amd-x570)
 * [DRM Broken](#drm-broken)
 * ["Memory Modules Misconfigured" on MacPro7,1](#memory-modules-misconfigured-on-macpro71)
@@ -639,15 +641,56 @@ Issue with AppleRTC, quite a simple fix:
 
 * config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
 
-**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
+**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges.
 
-The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
+For a more in-depth guide, see here:
+
+* [Fixing RTC/CMOS Resets](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html)
+
+## Synaptics PS2 based trackpad doesn't work
+
+You can try to use the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl).
+First, you have to open DeviceManager, and head to the following:
 
 ```
-rtcfx_exclude=00-FF
+Device Manager -> Mice and other pointing devices -> Properties -> Details > BIOS device name
 ```
 
-If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on
+Then grab the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
+By default, this uses PCI0.LPCB.PS2K for the pathing. you'll want to rename accordingly.
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package()  <- Rename this
+
+```
+
+* Note: Although this will work for some case, [the trackpad may be laggy and you can't use the physical buttons](https://github.com/acidanthera/bugtracker/issues/890). If you can't live without the trackpad, this may be better:
+
+You have to find the path of your mouse just like the first solution. We then grab [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). By default, this uses PCI0.LPCB.PS2K so you have to rename that to make sure that the SSDT work:
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package() <- Rename this
+```
+
+## Fix for Dell breakless PS2 keyboard keys
+
+First of all, you need to find the path to your ACPI keyboard object in the Device Manager:
+
+```
+Device Manager -> Keyboards -> Properties -> Details > BIOS device name
+```
+
+After this, you would like to grab the [SSDT-KEY-DELL-WN09.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-KEY-DELL-WN09.dsl) and fix some small things in the SSDT:
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+
+    Method(_SB.PCI0.LPCB.PS2K._DSM, 4) <- Rename this
+```
 
 ## macOS GPU acceleration missing on AMD X570
 
