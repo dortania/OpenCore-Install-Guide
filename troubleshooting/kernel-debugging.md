@@ -14,7 +14,7 @@ This section will go a bit deeper into the troubleshooting rabbit hole, specific
 
 For most part, there's fairly minimal changes required. Main things we recommend are DEBUG version of **OpenCore** and all your **kexts**. This can help ensure you get all the necessary data, see here for more details on OpenCore debugging: [OpenCore debugging](./debug.md)
 
-Besides just using DEBUg variants of OpenCore and kexts, these tools can also help out greatly:
+Besides just using DEBUG variants of OpenCore and kexts, these tools can also help out greatly:
 
 * [DebugEnhancer.kext](https://github.com/acidanthera/DebugEnhancer/releases)
   * Helps greatly with kernel debugging
