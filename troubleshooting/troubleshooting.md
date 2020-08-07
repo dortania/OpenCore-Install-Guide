@@ -735,6 +735,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * [No temperature/fan sensor output](#no-temperaturefan-sensor-output)
 * [Can't find Windows/BootCamp drive in picker](#cant-find-windowsbootcamp-drive-in-picker)
 * ["You can't change the startup disk to the selected disk" error](#you-cant-change-the-startup-disk-to-the-selected-disk-error)
+* [Selecting Startup Disk doesn't apply correctly](#selecting-startup-disk-doesnt-apply-correctly)
 * [Booting Windows results in BlueScreen or Linux crashes](#booting-windows-results-in-bluescreen-or-linux-crashes)
 * [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed---already-started)
 * [macOS waking up with the wrong time](#macos-waking-up-with-wrong-time)
@@ -823,6 +824,10 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 * `PlatformInfo -> Generic -> AdviseWindows -> True`
 
 ![](../images/troubleshooting/troubleshooting-md/error.png)
+
+## Selecting Startup Disk doesn't apply correctly
+
+If you're having issues with Start Up disk correctly applying your new boot entry, this is most likely caused by a missing DevicePathsSupported in your I/O Registry. To resolve this, ensure you are using `PlatformInfo -> Automatic -> True`
 
 ## Booting Windows results in BlueScreen or Linux crashes
 
