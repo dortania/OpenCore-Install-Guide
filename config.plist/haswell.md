@@ -587,6 +587,7 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+* Disable All Serial and Parallel Ports (**Fixes Sleep**)
 
 ### Enable
 
