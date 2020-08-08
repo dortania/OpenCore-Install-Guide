@@ -656,7 +656,7 @@ First, you have to open Device Manager, and head to the following:
 Device Manager -> Mice and other pointing devices -> Double click on your trackpad -> Properties -> Details > BIOS device name
 ```
 
-Then grab the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
+Then grab [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
 By default, this uses PCI0.LPCB.PS2K for the pathing. you'll want to rename accordingly.
 
 ```
