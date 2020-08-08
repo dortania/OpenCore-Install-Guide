@@ -534,6 +534,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 * Fast Boot
 * Secure Boot
+* Serial/COM Port
+* Parallel Port
 * Compatibility Support Module (CSM)(**Must be off, GPU errors like `gIO` are common when this option in enabled**)
 
 ### Enable

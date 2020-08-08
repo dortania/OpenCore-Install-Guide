@@ -657,6 +657,8 @@ These are the main options to check for, if you can't find it or an equivalent f
 
 * Fast Boot
 * Secure Boot
+* Serial/COM Port
+* Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
 * CSM (or Legacy Support, or Hybrid Boot)
 * Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly, if available)
