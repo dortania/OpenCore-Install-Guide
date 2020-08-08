@@ -662,6 +662,7 @@ VoodooI2C
 VoodooI2CServices
 VoodooInput
 VoodooPS2
+VoodooPS2's
 VoodooPS2Controller
 VoodooTSCSync
 VoodooTsc
