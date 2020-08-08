@@ -684,7 +684,7 @@ First of all, you need to find the path to your ACPI keyboard object in the Devi
 Device Manager -> Keyboards -> Double click on your keyboard -> Properties -> Details > BIOS device name
 ```
 
-After this, you would like to grab the [SSDT-KEY-DELL-WN09.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-KEY-DELL-WN09.dsl) and fix some small things in the SSDT:
+After this, grab [SSDT-KEY-DELL-WN09.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-KEY-DELL-WN09.dsl) and change the ACPI path to the one found above as needed:
 
 ```
 External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
