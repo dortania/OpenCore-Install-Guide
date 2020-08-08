@@ -653,7 +653,7 @@ You can try to use the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidan
 First, you have to open DeviceManager, and head to the following:
 
 ```
-Device Manager -> Mice and other pointing devices -> Properties -> Details > BIOS device name
+Device Manager -> Mice and other pointing devices -> Double click on your trackpad -> Properties -> Details > BIOS device name
 ```
 
 Then grab the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
