@@ -668,7 +668,7 @@ External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
 
 * Note: Although this will work for some case, [the trackpad may be laggy and you can't use the physical buttons](https://github.com/acidanthera/bugtracker/issues/890). If you can't live without the trackpad, this may be better:
 
-You have to find the path of your mouse just like the first solution. We then grab [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). By default, this uses PCI0.LPCB.PS2K so you have to rename that to make sure that the SSDT work:
+Find the ACPI path of your mouse (see above), then grab [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). By default, this uses PCI0.LPCB.PS2K so you have to change that to your ACPI path if necessary:
 
 ```
 External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
