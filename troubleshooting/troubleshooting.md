@@ -680,6 +680,8 @@ External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
 
 ## Fix for Dell breakless PS2 keyboard keys
 
+For those with issues surrounding key presses not releasing(ie. pressing infinitely), you'll want to enable VoodooPS2's Dell profile.
+
 First of all, you need to find the path to your ACPI keyboard object in the Device Manager:
 
 ```
