@@ -870,7 +870,7 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 
 ## Selecting Startup Disk doesn't apply correctly
 
-If you're having issues with Start Up disk correctly applying your new boot entry, this is most likely caused by a missing DevicePathsSupported in your I/O Registry. To resolve this, ensure you are using `PlatformInfo -> Automatic -> True`
+If you're having issues with Startup Disk correctly applying your new boot entry, this is most likely caused by a missing `DevicePathsSupported` in your I/O Registry. To resolve this, ensure you are using `PlatformInfo -> Automatic -> True`
 
 Example of missing `DevicePathsSupported`:
 
