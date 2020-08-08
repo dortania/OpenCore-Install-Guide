@@ -649,7 +649,7 @@ For a more in-depth guide, see here:
 
 ## Synaptics PS2 based trackpad doesn't work
 
-You can try to use the [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl).
+You can try to use [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl).
 First, you have to open Device Manager, and head to the following:
 
 ```
