@@ -668,7 +668,7 @@ External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
 
 Then compile with MaciASL, copy to your OC/ACPI folder, and add it to your config, and you should be good to go.
 
-* Note: Although this will work for some case, [the trackpad may be laggy and you can't use the physical buttons](https://github.com/acidanthera/bugtracker/issues/890). If you can't live without the trackpad, this may be better:
+* Note: Although this will work for most cases, the trackpad may be laggy and you may not be able to use the physical buttons ([more details](https://github.com/acidanthera/bugtracker/issues/890)). If you can live without the trackpad, this may be better:
 
 Find the ACPI path of your mouse (see above), then grab [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). By default, this uses PCI0.LPCB.PS2K so you have to change that to your ACPI path if necessary:
 
