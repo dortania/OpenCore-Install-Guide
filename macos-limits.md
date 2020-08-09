@@ -70,7 +70,7 @@ For the most part, all motherboards are supported as long as the CPU is. Previou
 
 * [~~AMD's B550 boards~~](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
 
-However thanks to recent developments, B550 boards are now bootable with the addition of SSDt-CPUR. More info will be provided in both [Gathering Files](./ktext.md) and [Zen's config.plist section](./AMD/zen.md)
+However thanks to recent developments, B550 boards are now bootable with the addition of SSDT-CPUR. More info will be provided in both [Gathering Files](./ktext.md) and [Zen's config.plist section](./AMD/zen.md)
 
 ## Storage Support
 
