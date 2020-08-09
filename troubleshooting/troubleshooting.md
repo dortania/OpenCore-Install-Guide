@@ -322,6 +322,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 # macOS booting
 
 * [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
+* [Stuck at ACPI Table loading on B550](#stuck-at-acpi-table-loading-on-b550)
 * ["Waiting for Root Device" or Prohibited Sign error](#waiting-for-root-device-or-prohibited-sign-error)
 * [macOS installer in Russian](#macos-installer-in-russian)
 * [macOS Installer being damaged](#macos-installer-being-damaged)
@@ -383,6 +384,16 @@ The main places to check:
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 
 ![](../images/troubleshooting/troubleshooting-md/rtc.png)
+
+## Stuck at ACPI table loading on B550
+
+![](../images/troubleshooting/troubleshooting-md/OC_catalina.jpg)
+
+If you're getting stuck at or near ACPI table loading with an AMD B550 motherboard, add the following SSDT:
+
+* [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml)
+
+And please remember to add this SSDT to both EFI/OC/ACPI **and** your config.plist under ACPI -> Add(ProperTree's snapshot function can do this for you)
 
 ## "Waiting for Root Device" or Prohibited Sign error
 

@@ -72,11 +72,12 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
-| Quirk | Enabled |
-| :--- | :--- |
-| EnableWriteUnprotector | NO |
-| RebuildAppleMemoryMap | YES |
-| SyncRuntimePermissions | YES |
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| EnableWriteUnprotector | NO | |
+| RebuildAppleMemoryMap | YES | |
+| SetupVirtualMap | YES | Note B550 boards should disable this |
+| SyncRuntimePermissions | YES | |
 :::
 
 ::: details More in-depth Info
@@ -89,6 +90,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
+  * B550 boards should disable this quirk
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 :::
