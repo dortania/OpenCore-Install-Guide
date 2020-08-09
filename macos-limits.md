@@ -66,11 +66,11 @@ And an important note for **Laptops with discrete GPUs**:
 
 ## Motherboard Support
 
-For the most part, all motherboards are supported as long as the CPU is. The sole exception being:
+For the most part, all motherboards are supported as long as the CPU is. Previously, B550 boards had issues:
 
-* [AMD's B550 boards](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
+* [~~AMD's B550 boards~~](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
 
-There are currently no fixes for the boards besides running in a KVM(Virtual Machine), similar to AMD's 3rd gen ThreadRipper CPUs.
+However thanks to recent developments, B550 boards are now bootable with the addition of SSDT-CPUR. More info will be provided in both [Gathering Files](./ktext.md) and [Zen's config.plist section](./AMD/zen.md)
 
 ## Storage Support
 

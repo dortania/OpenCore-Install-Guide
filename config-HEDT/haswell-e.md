@@ -526,6 +526,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 * Fast Boot
 * Secure Boot
+* Serial/COM Port
+* Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
 * CSM
 * Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)

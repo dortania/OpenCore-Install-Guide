@@ -37,6 +37,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 motherboards, **do not use** if you don't have an AMD B550 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
 
  Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -71,11 +72,12 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
-| Quirk | Enabled |
-| :--- | :--- |
-| EnableWriteUnprotector | NO |
-| RebuildAppleMemoryMap | YES |
-| SyncRuntimePermissions | YES |
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| EnableWriteUnprotector | NO | |
+| RebuildAppleMemoryMap | YES | |
+| SetupVirtualMap | YES | Note B550 boards should disable this |
+| SyncRuntimePermissions | YES | |
 :::
 
 ::: details More in-depth Info
@@ -88,6 +90,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
+  * B550 boards should disable this quirk
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 :::
@@ -545,6 +548,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 * Fast Boot
 * Secure Boot
+* Serial/COM Port
+* Parallel Port
 * Compatibility Support Module (CSM)(**Must be off, GPU errors like `gIO` are common when this option in enabled**)
 
 ### Enable

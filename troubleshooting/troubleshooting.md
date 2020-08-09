@@ -119,7 +119,7 @@ This can happen when the preboot volume isn't properly updated, to fix this you'
 
 1. Enable JumpstartHotplug under UEFI -> APFS(Recovery may not boot on macOS Big Sur without this option)
 2. Boot into recovery
-3. Open terminal, and run the following:
+3. Open the terminal, and run the following:
 
 ```bash
 # First, find your preboot volume
@@ -322,6 +322,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 # macOS booting
 
 * [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
+* [Stuck at ACPI Table loading on B550](#stuck-at-acpi-table-loading-on-b550)
 * ["Waiting for Root Device" or Prohibited Sign error](#waiting-for-root-device-or-prohibited-sign-error)
 * [macOS installer in Russian](#macos-installer-in-russian)
 * [macOS Installer being damaged](#macos-installer-being-damaged)
@@ -362,9 +363,9 @@ The main places to check:
 * **PCI allocation issue**:
   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
+    * Some Gigabyte X299 boards(ie. GA-X299-UD4) may require both npci and Above4G
     * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**. This rule does not apply to X99
   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
-
 * **NVMe or SATA issue**:
   * Sometimes if either a bad SATA controller or an unsupported NVMe drive are used, you can commonly get stuck here. Things you can check:
     * Not using either a Samsung PM981 or Micron 2200S NVMe SSD
@@ -383,6 +384,16 @@ The main places to check:
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 
 ![](../images/troubleshooting/troubleshooting-md/rtc.png)
+
+## Stuck at ACPI table loading on B550
+
+![](../images/troubleshooting/troubleshooting-md/OC_catalina.jpg)
+
+If you're getting stuck at or near ACPI table loading with an AMD B550 motherboard, add the following SSDT:
+
+* [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml)
+
+And please remember to add this SSDT to both EFI/OC/ACPI **and** your config.plist under ACPI -> Add(ProperTree's snapshot function can do this for you)
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
@@ -612,6 +623,8 @@ For those running Comet lake motherboards with the i225-V NIC, you may experienc
 * [Broken iMessage and Siri](#broken-imessage-and-siri)
 * [No on-board audio](#no-on-board-audio)
 * [BIOS reset or sent into Safemode after reboot/shutdown?](#bios-reset-or-sent-into-safemode-after-rebootshutdown)
+* [Synaptics PS2 based trackpad doesn't work](#synaptics-ps2-based-trackpad-doesnt-work)
+* [Fix for Dell breakless PS2 keyboard keys](#fix-for-dell-breakless-ps2-keyboard-keys)
 * [macOS GPU acceleration missing on AMD X570](#macos-gpu-acceleration-missing-on-amd-x570)
 * [DRM Broken](#drm-broken)
 * ["Memory Modules Misconfigured" on MacPro7,1](#memory-modules-misconfigured-on-macpro71)
@@ -639,15 +652,60 @@ Issue with AppleRTC, quite a simple fix:
 
 * config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
 
-**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
+**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges.
 
-The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
+For a more in-depth guide, see here:
+
+* [Fixing RTC/CMOS Resets](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html)
+
+## Synaptics PS2 based trackpad doesn't work
+
+You can try to use [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl).
+First, you have to open Device Manager, and head to the following:
 
 ```
-rtcfx_exclude=00-FF
+Device Manager -> Mice and other pointing devices -> Double click on your trackpad -> Properties -> Details > BIOS device name
 ```
 
-If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on
+Then grab [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
+By default, this uses PCI0.LPCB.PS2K for the pathing. you'll want to rename accordingly.
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package()  <- Rename this
+
+```
+
+Then compile with MaciASL, copy to your OC/ACPI folder, and add it to your config, and you should be good to go.
+
+* Note: Although this will work for most cases, the trackpad may be laggy and you may not be able to use the physical buttons ([more details](https://github.com/acidanthera/bugtracker/issues/890)). If you can live without the trackpad, this may be better:
+
+Find the ACPI path of your mouse (see above), then grab [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). By default, this uses PCI0.LPCB.PS2K so you have to change that to your ACPI path if necessary:
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package() <- Rename this
+```
+
+## Fix for Dell breakless PS2 keyboard keys
+
+For those with issues surrounding key presses not releasing(ie. pressing infinitely), you'll want to enable VoodooPS2's Dell profile.
+
+First of all, you need to find the path to your ACPI keyboard object in the Device Manager:
+
+```
+Device Manager -> Keyboards -> Double click on your keyboard -> Properties -> Details > BIOS device name
+```
+
+After this, grab [SSDT-KEY-DELL-WN09.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-KEY-DELL-WN09.dsl) and change the ACPI path to the one found above as needed:
+
+```
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+
+    Method(_SB.PCI0.LPCB.PS2K._DSM, 4) <- Rename this
+```
 
 ## macOS GPU acceleration missing on AMD X570
 
@@ -735,6 +793,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * [No temperature/fan sensor output](#no-temperaturefan-sensor-output)
 * [Can't find Windows/BootCamp drive in picker](#cant-find-windowsbootcamp-drive-in-picker)
 * ["You can't change the startup disk to the selected disk" error](#you-cant-change-the-startup-disk-to-the-selected-disk-error)
+* [Selecting Startup Disk doesn't apply correctly](#selecting-startup-disk-doesnt-apply-correctly)
 * [Booting Windows results in BlueScreen or Linux crashes](#booting-windows-results-in-bluescreen-or-linux-crashes)
 * [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed---already-started)
 * [macOS waking up with the wrong time](#macos-waking-up-with-wrong-time)
@@ -824,6 +883,14 @@ This is commonly caused by irregular partition setup of the Windows drive, speci
 
 ![](../images/troubleshooting/troubleshooting-md/error.png)
 
+## Selecting Startup Disk doesn't apply correctly
+
+If you're having issues with Startup Disk correctly applying your new boot entry, this is most likely caused by a missing `DevicePathsSupported` in your I/O Registry. To resolve this, ensure you are using `PlatformInfo -> Automatic -> True`
+
+Example of missing `DevicePathsSupported`:
+
+* [Default DevicePath match failure due to different PciRoot #664](https://github.com/acidanthera/bugtracker/issues/664#issuecomment-663873846)
+
 ## Booting Windows results in BlueScreen or Linux crashes
 
 This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
@@ -878,7 +945,7 @@ Oddly enough, macOS has locked down digital audio from having control. To bring 
 
 ## Disabling SIP
 
-SIP or proper known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
+SIP or more properly known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
 
 You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you, and note that they go under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
 

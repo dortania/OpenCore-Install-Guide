@@ -208,6 +208,7 @@ DVMT-prealloc
 Decluttering
 Dev
 DeviceManager
+DevicePath
 DeviceProperty
 DhinakG
 DiskUtility
@@ -274,6 +275,7 @@ Framebuffer
 FredWst
 FwRuntimeServices
 G6
+GA-X299-UD4
 GBE1
 GCN
 GFX
@@ -595,6 +597,7 @@ StopSign-fixv5
 Subreddit
 Sur
 Sur's
+Synaptics
 Syrah
 SystemAudioVolume
 SystemParameters
@@ -660,6 +663,7 @@ VoodooI2C
 VoodooI2CServices
 VoodooInput
 VoodooPS2
+VoodooPS2's
 VoodooPS2Controller
 VoodooTSCSync
 VoodooTsc
@@ -735,6 +739,7 @@ bootcamp
 bootloader
 bootloaders
 borked
+breakless
 bugtracker
 busID
 busId
@@ -847,6 +852,7 @@ kext
 kext(\.)?
 kextd
 kexts
+laggy
 lapic
 lappie
 licensor
@@ -873,6 +879,7 @@ osxaptiofix2drv.efi
 passthrough
 patcher
 pathing
+pathing.
 pentiums
 plist
 plist-only
