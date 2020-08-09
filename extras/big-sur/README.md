@@ -89,6 +89,8 @@ If you're unsure what version of OpenCore you're using, you can run the followin
 nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 ```
 
+* Note: The about command will require you to include bit `0x2` in `Misc -> Security -> ExposeSensitiveData`, recommended values for ExposeSensitiveData is `0x6` which includes bits `0x2` and `0x4`.
+
 ### Known issues
 
 With Big Sur, quite a bit broke. Mainly the following:
