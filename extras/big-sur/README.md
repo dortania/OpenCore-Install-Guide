@@ -140,9 +140,7 @@ Select the number for the Big Sur beta to start downloading it.
 
 ![](../../images/extras/big-sur/readme/big-sur-download.png)
 
-Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS
-
-Downloads/developer/XXX-XXXXX - Install macOS Beta`folder. This package from Apple will create`Install macOS Big Sur Beta.app`in your`/Applications` folder.
+Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Big Sur Beta.app` in your `/Applications` folder.
 
 ![](../../images/extras/big-sur/readme/final-download.png)
 
