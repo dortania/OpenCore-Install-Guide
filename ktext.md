@@ -80,7 +80,7 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for measuring battery readouts on laptops, **desktops can ignore**
   * Do not use until battery has been properly patched, can cause issues otherwise
 * SMCDellSensors.kext
-  * Allows for finer monitoring and control of the fans on Dell
+  * Allows for finer monitoring and control of the fans on Dell machines
   * **Do not use if you do not have a supported Dell machine**
 
 ### Graphics
