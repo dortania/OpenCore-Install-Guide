@@ -362,9 +362,9 @@ The main places to check:
 * **PCI allocation issue**:
   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
+    * Some Gigabyte X299 boards(ie. GA-X299-UD4) may require both npci and Above4G
     * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**. This rule does not apply to X99
   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
-
 * **NVMe or SATA issue**:
   * Sometimes if either a bad SATA controller or an unsupported NVMe drive are used, you can commonly get stuck here. Things you can check:
     * Not using either a Samsung PM981 or Micron 2200S NVMe SSD

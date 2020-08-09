@@ -275,6 +275,7 @@ Framebuffer
 FredWst
 FwRuntimeServices
 G6
+GA-X299-UD4
 GBE1
 GCN
 GFX
