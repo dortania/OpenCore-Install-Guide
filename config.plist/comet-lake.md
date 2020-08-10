@@ -137,7 +137,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 :::
 
-::: tip PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
+::: tip PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0,0x0)
 
 This entry relates to Intel's i225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's i225LM driver into supporting our i225-V network controller:
 

@@ -121,60 +121,42 @@ Sets device properties from a map.
 
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
-* **Device-id**
-  * The actual Device ID used by the graphics drivers to figure out if it's an iGPU. If your iGPU isn't natively supported, you can add `device-id` to fake it as a native iGPU  
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Stolen Memory**
-  * The minimum amount of iGPU memory required for the framebuffer to work correctly
-* **Port Count + Connectors**
-  * The number of displays and what types are supported
+* **Port Count**
+  * The number of displays supported
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to set device-id as well
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different AAPL,ig-platform-id values add stolenmem patches or even add a device-id
 
-Note that highlighted entries with a star(*) are the recommended entries to use:
-
-| iGPU | device-id | AAPL,ig-platform-id | Port Count | Total Stolen Memory | Connectors |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Intel HD Graphics 530 | 19120000 | 00001219 | 3 | 56MB |  DUMMY1 DPx2 |
-| **Intel HD Graphics 520** * | 19160000 | 00001619 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 520 | 19160000 | 02001619 | 3 | 58MB |  LVDSx1 DPx2 |
-| **Intel HD Graphics 530** * | 191B0000 | 00001B19 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 530 | 191B0000 | 06001B19 | 1 | 39MB |  LVDSx1 |
-| Intel HD Graphics 515 | 191E0000 | 00001E19 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 515 | 191E0000 | 03001E19 | 3 | 41MB |  LVDSx1 DPx2 |
-| **Intel Iris Graphics 540** * | 19260000 | 00002619 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel Iris Graphics 540 | 19260000 | 02002619 | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel Iris Graphics 540 | 19260000 | 04002619 | 3 | 35MB |  LVDSx1 DPx2 |
-| Intel Iris Graphics 540 | 19260000 | 07002619 | 3 | 35MB |  LVDSx1 DPx2 |
-| Intel Iris Graphics 550 | 19270000 | 00002719 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel Iris Graphics 550 | 19270000 | 04002719 | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel Iris Pro Graphics 580 | 193B0000 | 00003B19 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel Iris Pro Graphics 580 | 193B0000 | 05003B19 | 4 | 35MB |  LVDSx1 DPx3 |
+| AAPL,ig-platform-id | Port Count | Comment |
+| ------------------- | ---------- | ------- |
+| 00001619 | 3 | Recommended value for HD515, HD520, HD530, HD540, HD550 and P530 |
+| 00001B19 | 3 | Recommended value for HD510 |
 
 #### Configuration Notes
 
-* For HD515, HD520, HD530 and HD540, you do not need to set `device-id` as they are natively recognized.
-  * We recommend not setting `AAPL,ig-platform-id` at all by commenting/removing its entry in the config. If you need to set one, start with `00001619`.
-* For HD510 you may need to use the following values:
-  * `device-id`=`19020000` to fake its device-id.
-  * `AAPL,ig-platform-id`=`00001B19` or `00001619`
-* For HD550 and P530 (and potentially all HD P-series iGPUs), you may need to use `device-id`=`19160000`(recommended), `19120000`, `19260000` or `191b0000`
-  * The choice of device-id may help with usable screen on boot up and on wake. Some examples:
-    * Lenovo ThinkPad P50 with Xeon CPU will only properly work with `19160000`.
-    * Dell Precision 7710 with i7 CPUs have issues when set to `19160000`. Using `191b000` or other value may help.
-  * For Xeon iGPUs, it's recommended to use `26190000` with Xeon iGPUs.
-  * You should pair these iGPUs with `AAPL,ig-platform-id`=`00001619`(recommended), `00001219`, `00002619` or `00001b19`
+* For HD510 you will need to use a device-id spoof:
+  
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 19020000 |
+
+* For HD550 and P530 (and potentially all HD P-series iGPUs), you may need to use `device-id`=`19160000`:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 19160000 |
+
 * In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| `framebuffer-patch-enable` | Number | `1` |
-| `framebuffer-stolenmem` | Data | `00003001` |
-| `framebuffer-fbmem` | Data | `00009000` |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
+| framebuffer-fbmem | Data | 00009000 |
 
 :::
 

@@ -123,34 +123,22 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
-* **Device-id**
-  * The actual Device ID used by the graphics drivers to figure out if it's an iGPU. If your iGPU isn't natively supported, you can add `device-id` to fake it as a native iGPU  
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Stolen Memory**
-  * The minimum amount of iGPU memory required for the framebuffer to work correctly
-* **Port Count + Connectors**
-  * The number of displays and what types are supported
+* **Port Count**
+  * The number of displays supported
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to set device-id as well
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different AAPL,ig-platform-id values add stolenmem patches or even add a device-id
 
-Note that highlighted entries with a star(*) are the recommended entries to use:
+ß
 
-| iGPU | device-id | AAPL,ig-platform-id | Port Count | Total Stolen Memory | Connectors |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Intel HD Graphics 620** * | 59160000 | 00001659 | 3 | 35MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 620 | 59160000 | 09001659 | 3 | 39MB |  LVDSx1 DPx2 |
-| **Intel HD Graphics 630** * | 591B0000 | 00001B59 | 3 | 39MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 630 | 591B0000 | 06001B59 | 1 | 39MB |  LVDSx1 |
-| Intel HD Graphics 615 | 591E0000 | 00001E59 | 3 | 35MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 615 | 591E0000 | 01001E59 | 3 | 39MB |  LVDSx1 DPx2 |
-| Intel Iris Plus Graphics 650 | 59270000 | 04002759 | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel Iris Plus Graphics 650 | 59270000 | 09002759 | 3 | 39MB |  LVDSx1 DPx2 |
-| **Intel UHD Graphics 617** * | 87C00000 | 0000C087 | 3 | 35MB |  LVDSx1 DPx2 |
-| Intel UHD Graphics 617 | 87C00000 | 0500C087 | 3 | 58MB |  LVDSx1 DPx2 |
+| AAPL,ig-platform-id | Port Count | Comment |
+| ------------------- | ---------- | ------- |
+| 00001B59 | 3 | Recommended for HD615, HD630, HD640 and HD650 |
+| 0000C087 | 3 | Recommended for Kaby Lake's UHD 617 and Amber lake's UHD620 |
 
 #### Configuration Notes
 

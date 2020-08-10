@@ -133,42 +133,35 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
-* **Device-id**
-  * The actual Device ID used by the graphics drivers to figure out if it's an iGPU. If your iGPU isn't natively supported, you can add `device-id` to fake it as a native iGPU  
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Stolen Memory**
-  * The minimum amount of iGPU memory required for the framebuffer to work correctly
-* **Port Count + Connectors**
-  * The number of displays and what types are supported
+* **Port Count**
+  * The number of displays supported
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to set device-id as well
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different AAPL,ig-platform-id values add stolenmem patches or even add a device-id
 
-Note that highlighted entries with a star(*) are the recommended entries to use:
-
-| iGPU | device-id | AAPL,ig-platform-id | Port Count | Total Stolen Memory | Connectors |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Intel UHD Graphics 630 | 3E000000 | 0000003E | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel UHD Graphics 630 | 3E920000 | 0000923E | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel UHD Graphics 630 | 3E920000 | 0900923E | 3 | 58MB |  LVDSx1 DUMMYx2 |
-| **Intel UHD Graphics 630** * | 3E9B0000 | 00009B3E | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel UHD Graphics 630 | 3E9B0000 | 06009B3E | 1 | 39MB |  LVDSx1 DUMMYx2 |
-| Intel UHD Graphics 630 | 3E9B0000 | 09009B3E | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel Iris Plus Graphics 655 | 3EA50000 | 0000A53E | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel Iris Plus Graphics 655 | 3EA50000 | 0400A53E | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel UHD Graphics 630 | 3EA50000 | 0500A53E | 3 | 58MB |  LVDSx1 DPx2 |
-| Intel Iris Plus Graphics 655 | 3EA50000 | 0900A53E | 3 | 58MB |  LVDSx1 DPx2 |
+| AAPL,ig-platform-id | Port Count | Comment |
+| ------------------- | ---------- | ------- |
+| 0900A53E | 3 | Recommended value for Coffee Lake(9th gen) UHD630 |
+| 00009B3E | 3 | Recommended value for Comet Lake(10th gen) UHD620 |
 
 #### Configuration Notes
 
-* For `UHD630` you likely do not need to fake the `device-id` as it is already `8086:3E9B`. If it's anything else, you may use `device-id`=`3E9B0000`
+* For `UHD630` you likely do not need to fake the `device-id` as it is already `8086:3E9B`. If it's anything else, you may use `device-id`=`3E9B0000`:
   * You can check under Device Manager in Windows by bring up the iGPU, opening properties, selecting details, and clicking Hardware IDs.
-* An `UHD620` in a Comet Lake CPU **requires**:
-  * `device-id`=`3E9B0000`
-  * `AAPL,ig-platform-id`=`00009B3E`
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 9B3E0000 |
+  
+* An `UHD620` in a Comet Lake CPU **requires** `device-id`=`3E9B0000`:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 9B3E0000 |
 
 :::
 

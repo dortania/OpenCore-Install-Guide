@@ -132,32 +132,29 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
-* **Device-id**
-  * The actual Device ID used by the graphics drivers to figure out if it's an iGPU. If your iGPU isn't natively supported, you can add `device-id` to fake it as a native iGPU  
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Stolen Memory**
-  * The minimum amount of iGPU memory required for the framebuffer to work correctly
-* **Port Count + Connectors**
-  * The number of displays and what types are supported
+* **Port Count**
+  * The number of displays supported
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to set device-id as well
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different AAPL,ig-platform-id values add stolenmem patches or even add a device-id
 
-Note that highlighted entries with a star(*) are the recommended entries to use:
-
-| iGPU | device-id | AAPL,ig-platform-id | Port Count | Total Stolen Memory | Connectors |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Iris Plus | 8A510000 | 0000518A | 6 | 193MB |  LVDSx1 DPx5 |
-| Iris Plus | 8A5C0000 | 00005C8A | 6 | 193MB |  LVDSx1 DPx5 |
-| **Iris Plus** * | 8A520000 | 0000528A | 6 | 193MB |  LVDSx1 DPx5 |
-| Iris Plus | 8A5A0000 | 00005A8A | 6 | 193MB |  LVDSx1 DPx5 |
+| AAPL,ig-platform-id | Port Count | Comment |
+| ------------------- | ---------- | ------- |
+| 0000528A | 6 | Recommended G4/G7 value |
 
 #### Configuration Notes
 
-* `8A520000` is the recommended ig-platform-id value, note that info on setting up Icelake iGPUs is still limited
+* In some cases where you cannot set the DVMT-prealloc of these cards to 256MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| `framebuffer-patch-enable` | Number | `1` |
+| `framebuffer-stolenmem` | Data | `00003001` |
+| `framebuffer-fbmem` | Data | `00009000` |
 
 :::
 
@@ -635,7 +632,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 64MB
+* DVMT Pre-Allocated(iGPU Memory): 256MB
 * SATA Mode: AHCI
 
 ## Now with all this done, head to the [Installation Page](../installation/installation-process.md)
