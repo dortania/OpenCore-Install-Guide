@@ -125,7 +125,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
-|  06002616 | 3 | Recommended value for Broadwell |
+| **06002616** | 3 | Recommended value for Broadwell |
 
 ##### Configuration Notes
 
@@ -133,7 +133,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | data | 16260000
+| device-id | data | 26160000
 
 * In some cases where you cannot set the DVMT-prealloc of these cards to 96MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 

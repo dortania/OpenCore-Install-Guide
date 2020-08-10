@@ -133,8 +133,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
-| 00001619 | 3 | Recommended value for HD515, HD520, HD530, HD540, HD550 and P530 |
-| 00001B19 | 3 | Recommended value for HD510 |
+| **00001619** | 3 | Recommended value for HD515, HD520, HD530, HD540, HD550 and P530 |
+| **00001B19** | 3 | Recommended value for HD510 |
 
 #### Configuration Notes
 
@@ -142,13 +142,13 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
   
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 19020000 |
+| device-id | Data | 02190000 |
 
-* For HD550 and P530 (and potentially all HD P-series iGPUs), you may need to use `device-id`=`19160000`:
+* For HD550 and P530 (and potentially all HD P-series iGPUs), you may need to use `device-id`=`16190000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 19160000 |
+| device-id | Data | 16190000 |
 
 * In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 

@@ -145,8 +145,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
-| 0900A53E | 3 | Recommended value for Coffee Lake(9th gen) UHD630 |
-| 00009B3E | 3 | Recommended value for Comet Lake(10th gen) UHD620 |
+| **0900A53E** | 3 | Recommended value for Coffee Lake(9th gen) UHD630 |
+| **00009B3E** | 3 | Recommended value for Comet Lake(10th gen) UHD620 |
 
 #### Configuration Notes
 

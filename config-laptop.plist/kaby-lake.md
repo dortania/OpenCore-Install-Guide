@@ -137,8 +137,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
-| 00001B59 | 3 | Recommended for HD615, HD630, HD640 and HD650 |
-| 0000C087 | 3 | Recommended for Kaby Lake's UHD 617 and Amber lake's UHD620 |
+| **00001B59** | 3 | Recommended for HD615, HD630, HD640 and HD650 |
+| **0000C087** | 3 | Recommended for Kaby Lake's UHD 617 and Amber lake's UHD620 |
 
 #### Configuration Notes
 

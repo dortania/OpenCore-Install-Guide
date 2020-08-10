@@ -144,7 +144,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
-| 0000528A | 6 | Recommended G4/G7 value |
+| **0000528A** | 6 | Recommended G4/G7 value |
 
 #### Configuration Notes
 

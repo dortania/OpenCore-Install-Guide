@@ -152,9 +152,9 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
-| 03006601 | 4 | To be used with **1366 by 768** displays or lower |
-| 04006601 | 1 | To be used with **1600 by 900** displays or higher, see below for addition patches |
-| 09006601 | 3 | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
+| **03006601** | 4 | To be used with **1366 by 768** displays or lower |
+| **04006601** | 1 | To be used with **1600 by 900** displays or higher, see below for addition patches |
+| **09006601** | 3 | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
 
 #### Configuration Notes
 
