@@ -145,7 +145,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 16590000 |  
+| device-id | Data | 16590000 |
 
 * For all HD6\*\* (`UHD` users are not concerned), there are some small issues with output where plugging anything would cause a lock up (kernel panic), here are some patches to mitigate that (credit Rehabman):
   * 0306 to 0105 (will probably explain what it does one day)
