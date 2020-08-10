@@ -133,44 +133,42 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
 2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different AAPL,ig-platform-id values add stolenmem patches or even add a device-id
 
-ß
-
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
 | **00001B59** | 3 | Recommended for HD615, HD630, HD640 and HD650 |
-| **0000C087** | 3 | Recommended for Kaby Lake's UHD 617 and Amber lake's UHD620 |
+| **00001659** | 3 | Alternative value to 00001B59 if you have acceleration issues |
+| **0000C087** | 3 | Recommended for Amber lake's UHD 617 and Kaby lake R's UHD620 |
 
 #### Configuration Notes
 
-* **Note:** `UHD630` ***IS NOT*** KabyLake, it's CoffeeLake (check next section).
-* For `HD615`, `HD630`, `HD640` and `HD650` it is not needed to use a `device-id`. However, due to many issues with different setups it is recommended to use:
-  * `device-id`=`591b0000` or `59160000`
-  * `AAPL,ig-platform-id`=`00001659` or `00001b59` (you can try whichever works the best, some even try to cross the device-id and the ig-platform-id)
-* For `UHD620` users we recommend the following values:
-  * `device-id`=`59160000`
-  * `AAPL,ig-platform-id`=`0000C087`
+* For `UHD620` users(Kaby lake R), you'll need a device-id spoof:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 16590000 |  
+
 * For all HD6\*\* (`UHD` users are not concerned), there are some small issues with output where plugging anything would cause a lock up (kernel panic), here are some patches to mitigate that (credit Rehabman):
   * 0306 to 0105 (will probably explain what it does one day)
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| `framebuffer-con1-enable` | Number | `1` |
-| `framebuffer-con1-alldata` | Data | `01050A00 00080000 87010000 02040A00 00080000 87010000 FF000000 01000000 20000000` |
+| framebuffer-con1-enable | Data | 01000000 |
+| framebuffer-con1-alldata | Data | 01050A00 00080000 87010000 02040A00 00080000 87010000 FF000000 01000000 20000000 |
 
 * 0204 to 0105 (will probably explain what it does one day)
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| `framebuffer-con1-enable` | Number | `1` |
-| `framebuffer-con1-alldata` | Data | `01050A00 00080000 87010000 03060A00 00040000 87010000 FF000000 01000000 20000000` |
+| framebuffer-con1-enable | Data | 01000000 |
+| framebuffer-con1-alldata | Data | 01050A00 00080000 87010000 03060A00 00040000 87010000 FF000000 01000000 20000000 |
 
 * In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| `framebuffer-patch-enable` | Number | `1` |
-| `framebuffer-stolenmem` | Data | `00003001` |
-| `framebuffer-fbmem` | Data | `00009000` |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
+| framebuffer-fbmem | Data | 00009000 |
 
 :::
 
