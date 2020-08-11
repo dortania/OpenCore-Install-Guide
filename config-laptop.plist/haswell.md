@@ -130,7 +130,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 #### Configuration Notes
 
-In addition to the AAPL,ig-platform-id, you'll want to add the cursor byte size patchfrom 6MB (00006000) to 9MB because of some glitches:
+In addition to the AAPL,ig-platform-id, you'll want to add the cursor byte size patch from 6MB (00006000) to 9MB because of some glitches:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
