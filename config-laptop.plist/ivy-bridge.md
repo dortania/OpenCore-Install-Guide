@@ -148,7 +148,7 @@ When setting up your iGPU, the table below should help with finding the right va
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different AAPL,ig-platform-id values add stolenmem patches or even add a device-id
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
@@ -178,7 +178,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 **Sandy/IvyBridge Hybrids:**
 
-Some laptops from this era came with a mixed chipset setup, using Ivy Bridge CPUs with Sandy Bridge chipsets which creates issues with macOS since it expects a certain IMEI ID that it doesn't find and would get stuck at boot, to fix this we need to fake the IMEI's IDs in these models
+Some laptops from this era came with a mixed chipset setup, using Ivy Bridge CPUs with Sandy Bridge chipsets which creates issues with macOS since it expects a certain [IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID that it doesn't find and would get stuck at boot(As Apple's iGPU drivers require an [IMEI device](https://en.wikipedia.org/wiki/Intel_Management_Engine)), to fix this we need to fake the IMEI's IDs in these models
 
 * To know if you're affected check if your CPU is an Intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M) through tools like AIDA64.
 * In your config add a new PciRoot device named `PciRoot(0x0)/Pci(0x16,0x0)`

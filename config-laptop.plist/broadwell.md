@@ -121,7 +121,7 @@ When setting up your iGPU, the table below should help with finding the right va
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different AAPL,ig-platform-id values add stolenmem patches or even add a device-id
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
