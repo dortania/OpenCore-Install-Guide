@@ -113,46 +113,35 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
-* **Device-id**
-  * The actual Device ID used by the graphics drivers to figure out if it's an iGPU. If your iGPU isn't natively supported, you can add `device-id` to fake it as a native iGPU  
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Stolen Memory**
-  * The minimum amount of iGPU memory required for the framebuffer to work correctly
-* **Port Count + Connectors**
-  * The number of displays and what types are supported
+* **Port Count**
+  * The number of displays supported
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to set device-id as well
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
-Note that highlighted entries with a star(*) are the recommended entries to use:
-
-| iGPU | device-id | AAPL,ig-platform-id | Port Count | Total Stolen Memory | Connectors |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Intel HD Graphics 5600 | 16120000 | 03001216 | 4 | 56MB |  LVDSx1 DPx2 HDMIx1 |
-| Intel HD Graphics 5500 | 16160000 | 02001616 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 5300 | 161E0000 | 01001E16 | 3 | 60MB |  LVDSx1 DPx2 |
-| Intel Iris Pro Graphics 6200 | 16220000 | 02002216 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 6000 | 16260000 | 02002616 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel HD Graphics 6000 | 16260000 | 05002616 | 3 | 56MB |  LVDSx1 DPx2 |
-| **Intel HD Graphics 6000** * | 16260000 | 06002616 | 3 | 56MB |  LVDSx1 DPx2 |
-| Intel Iris Graphics 6100 | 162B0000 | 02002B16 | 3 | 56MB |  LVDSx1 DPx2 |
+| AAPL,ig-platform-id | Port Count | Comment |
+| ------------------- | ---------- | ------- |
+| **06002616** | 3 | Recommended value for Broadwell |
 
 ##### Configuration Notes
 
-* For HD5300, HD5500 and HD6000, you do not have to specify any `device-id`
+* For HD5600 you need `device-id` faked to `16260000`:
 
-* For HD5600 you need `device-id` faked to `16260000`
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | data | 26160000
 
 * In some cases where you cannot set the DVMT-prealloc of these cards to 96MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| `framebuffer-patch-enable` | Number | `1` |
-| `framebuffer-stolenmem` | Data | `00003001` |
-| `framebuffer-fbmem` | Data | `00009000` |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
+| framebuffer-fbmem | Data | 00009000 |
 
 :::
 

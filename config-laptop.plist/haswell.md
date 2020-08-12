@@ -113,43 +113,37 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
-* **Device-id**
-  * The actual Device ID used by the graphics drivers to figure out if it's an iGPU. If your iGPU isn't natively supported, you can add `device-id` to fake it as a native iGPU  
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Stolen Memory**
-  * The minimum amount of iGPU memory required for the framebuffer to work correctly
-* **Port Count + Connectors**
-  * The number of displays and what types are supported
+* **Port Count**
+  * The number of displays supported
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to set device-id as well
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
-Note that highlighted entries with a star(*) are the recommended entries to use:
-
-| iGPU | device-id | AAPL,ig-platform-id | Port Count | Total Stolen Memory | Connectors |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Intel HD Graphics 4400 | 0A160000 | 0C00160A | 3 | 99MB |  LVDSx1 DPx2 |
-| **Intel HD Graphics 5000 <sup>1</sup>** * | 0A260000 | 0500260A | 3 | 52MB |  LVDSx1 DPx2 |
-| **Intel HD Graphics 5000 <sup>2</sup>** * | 0A260000 | 0600260A | 3 | 52MB |  LVDSx1 DPx2 |
-| Intel Iris Graphics 5100 | 0A2E0000 | 08002E0A | 3 | 99MB |  LVDSx1 DPx2 |
-| Intel Iris Pro Graphics 5200 | 0D260000 | 0700260D | 4 | 99MB |  LVDSx1 DPx2 HDMIx1 |
-| Intel Iris Pro Graphics 5200 | 0D260000 | 0900260D | 1 | 99MB |  LVDSx1 |
-| Intel Iris Pro Graphics 5200 | 0D260000 | 0E00260D | 4 | 131MB |  LVDSx1 DPx2 HDMIx1 |
-| Intel Iris Pro Graphics 5200 | 0D260000 | 0F00260D | 1 | 131MB |  LVDSx1 |
+| AAPL,ig-platform-id | Port Count | Comment |
+| ------------------- | ---------- | ------- |
+| **0500260A** | 3 | To be used usually with HD5000, HD5100 and HD5200 |
+| **0600260A** | 3 | To be used usually with HD4200, HD4400 and HD4600, you **must** use a `device-id`(see below) |
 
 #### Configuration Notes
 
-* <sup>1</sup>: to be used usually with HD5000, HD5100 and HD5200
-  * The device-id of these devices *should* be supported already by the native macOS drivers.
-* <sup>2</sup>: to be used usually with HD4200, HD4400 and HD4600.
-  * You **must** use `device-id` = `12040000`
-* It is **recommended** to set the cursor byte size for **all iGPUs** as many will experience graphical glitches otherwise:
-  * `framebuffer-patch-enable` = `1` (as a Number)
-  * `framebuffer-cursor` = `00009000` (as Data)
-    * We change the cursor byte from 6MB (00006000) to 9MB because of some glitches.
+In addition to the AAPL,ig-platform-id, you'll want to add the cursor byte size patch from 6MB (00006000) to 9MB because of some glitches:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-cursor | Data | 00009000 |
+
+**Special note for HD4200, HD4400 and HD4600**:
+
+You will also require a device-id spoof to be supported:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 12040000 |
 
 :::
 

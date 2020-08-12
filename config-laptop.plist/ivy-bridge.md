@@ -140,37 +140,23 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
-* **Device-id**
-  * The actual Device ID used by the graphics drivers to figure out if it's an iGPU. If your iGPU isn't natively supported, you can add `device-id` to fake it as a native iGPU  
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Stolen Memory**
-  * The minimum amount of iGPU memory required for the framebuffer to work correctly
-* **Port Count + Connectors**
-  * The number of displays and what types are supported
+* **Port Count**
+  * The number of displays supported
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to set device-id as well
+2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
-Note that highlighted entries with a star(*) are the recommended entries to use:
-
-| iGPU | device-id | AAPL,ig-platform-id | Port Count | Total Stolen Memory | Connectors |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Intel HD Graphics 4000 <sup>1</sup>** * | 01660000 | 03006601 | 4 | 16MB |  LVDSx1 DPx3 |
-| **Intel HD Graphics 4000 <sup>2</sup>** * | 01660000 | 04006601 | 1 | 16MB |  LVDSx1 |
-| **Intel HD Graphics 4000 <sup>3</sup>** * | 01660000 | 09006601 | 3 | 16MB |  LVDSx1 DPx2 |
+| AAPL,ig-platform-id | Port Count | Comment |
+| ------------------- | ---------- | ------- |
+| **03006601** | 4 | To be used with **1366 by 768** displays or lower |
+| **04006601** | 1 | To be used with **1600 by 900** displays or higher, see below for addition patches |
+| **09006601** | 3 | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
 
 #### Configuration Notes
-
-* For these cards, no `device-id` property is required.
-
-* <sup>1</sup> : to be used with **1366 by 768** displays or lower (main)
-
-* <sup>2</sup> : to be used with **1600 by 900** displays or higher (main)
-
-* <sup>3</sup> : to be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with <sup>1</sup> and <sup>2</sup> first before trying this.
 
 * VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)
 
@@ -186,15 +172,20 @@ Note that highlighted entries with a star(*) are the recommended entries to use:
 | `framebuffer-con1-enable`  | Number | `1`                                                          | This will enable patching on *connector1* of the driver. (Which is the second connector after con0, which is the eDP/LVDS one) |
 | `framebuffer-con1-alldata` | Data   | `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000` | When using `all data` with a connector, either you give all information of that connector (port-bused-type-flag) or that port and the ones following it, like in this case.<br />In this case, the ports in `04` are limited to `1`:<br />`05030000 02000000 30020000` (which corresponds to port 5, which is LVDS)<br />However on `03` there are 3 extra ports:<br />`05030000 02000000 30000000` (LVDS, con0, like `04`)<br/>`02050000 00040000 07040000` (DP, con1)<br/>`03040000 00040000 81000000` (DP, con2)<br/>`04060000 00040000 81000000` (DP, con3)<br />Since we changed the number of PortCount to `4` in a platform that has only 1, that means we need to define the 3 others (and we that starting with con1 to the end).<br /> |
 
+:::
+
+::: tip PciRoot(0x0)/Pci(0x16,0x0)
+
 **Sandy/IvyBridge Hybrids:**
 
-* Some laptops from this era came with a mixed chipset setup, using Ivy Bridge CPUs with Sandy Bridge chipsets which creates issues with macOS since it expects a certain IMEI ID that it doesn't find and would get stuck at boot, to fix this we need to fake the IMEI's IDs in these models
+Some laptops from this era came with a mixed chipset setup, using Ivy Bridge CPUs with Sandy Bridge chipsets which creates issues with macOS since it expects a certain [IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID that it doesn't find and would get stuck at boot(As Apple's iGPU drivers require an [IMEI device](https://en.wikipedia.org/wiki/Intel_Management_Engine)), to fix this we need to fake the IMEI's IDs in these models
 
-  * To know if you're affected check if your CPU is an Intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M) through tools like AIDA64.
-  * In your config add a new PciRoot device named `PciRoot(0x0)/Pci(0x16,0x0)`
-    * Key: `device-id`
-    * Type: Data
-    * Value: `3A1E0000`
+* To know if you're affected check if your CPU is an Intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M) through tools like AIDA64.
+* In your config add a new PciRoot device named `PciRoot(0x0)/Pci(0x16,0x0)`
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 3A1E0000 |
 
 :::
 
