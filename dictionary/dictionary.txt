@@ -18,6 +18,7 @@
 0x2
 0x4
 0x60000000
+0xB
 0xE2
 0xFE000000
 0xFEC00000
@@ -159,6 +160,8 @@ CFG-Lock
 CLKT
 CMOS
 CONFIGURATORS
+CP2102
+CP2102-based
 CP21202-based
 CPU0
 CPUFriend
@@ -284,6 +287,7 @@ GFX
 GFX0
 GMA
 GMA950
+GND
 GPIO
 GPT
 GPT.
@@ -764,6 +768,7 @@ csrstat
 dGPU
 dGPUs
 debug=0x100
+debug=0x12a
 debug=0x8
 decompile
 decrypt
@@ -847,8 +852,10 @@ ie
 ie\.
 ig-platform-id
 ig-platform-id's
+igdebug=0xff
 igfxfw
 img
+io=0xff
 ix-3xxx
 jailbroken
 keepsyms=1
@@ -871,6 +878,7 @@ macserial
 markdownlint-cli
 midi1996
 mini-explainer
+msgbuf=1048576
 msi
 multiboot
 natively
@@ -950,7 +958,3 @@ xcpm
 Как
 завести
 сервисы
-CP2102
-GND
-msgbuf=1048576
-io=0xff
