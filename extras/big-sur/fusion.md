@@ -12,7 +12,7 @@
 
 VMware cannot directly use a raw disk image, so we'll create a linked VMDK, which will allow you to use it as a virtual hard drive in VMware Fusion.
 
-Download raw2vmdk from [here](../../extra-files/raw2vmdk.jar), and put it in the same directory as the `.img` file. Then, run the following command:
+Download raw2vmdk from [here](https://github.com/dortania/OpenCore-Install-Guide/raw/master/extra-files/raw2vmdk.jar), and put it in the same directory as the `.img` file. Then, run the following command:
 
 ```bash
 ### Change "Install macOS Big Sur Beta" if the name of the .img file differs
@@ -33,6 +33,7 @@ You have two options here: pass through a raw disk, or pass through an entire US
     diskutil list
     # locate the external disk that matches, and replace /dev/disk3 below with the device path.
     sudo /Applications/VMware\ Fusion.app/Contents/Library/vmware-rawdiskCreator create /dev/disk3 fullDevice RawHDD ide
+    sudo chown `whoami` RawHDD.vmdk
     ```
 
 2. Next, start VMware Fusion. You should see the homepage. If not, close any window that opened and select `File` > `New` from the menu bar.
