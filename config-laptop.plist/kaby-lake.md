@@ -90,9 +90,9 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 | Quirk | Enabled |
 | :--- | :--- |
-| EnableWriteUnprotector | NO |
-| RebuildAppleMemoryMap | YES |
-| SyncRuntimePermissions | YES |
+| EnableWriteUnprotector | YES |
+| RebuildAppleMemoryMap | NO |
+| SyncRuntimePermissions | NO |
 :::
 
 ::: details More in-depth Info
@@ -101,11 +101,11 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **EnableWriteUnprotector**: NO
   * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
-* **RebuildAppleMemoryMap**: YES
+* **RebuildAppleMemoryMap**: NO
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
-* **SyncRuntimePermissions**: YES
+* **SyncRuntimePermissions**: NO
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 :::
 
