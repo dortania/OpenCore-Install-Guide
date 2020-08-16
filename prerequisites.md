@@ -14,7 +14,33 @@ Before we can jump head first into making an OpenCore based system, we need to g
    * Your **Ethernet chipset**
    * Your WLAN/Bluetooth chipset
 3. _**[CRUCIAL]**_ **A BASIC KNOWLEDGE OF COMMAND LINES AND HOW TO USE A TERMINAL/COMMAND PROMPT**
-   * This is not just [CRUCIAL], this is the basis of this whole guide. We can't help you if you don't know how to `cd` to a directory or delete a file.
+   * This is not just [CRUCIAL], this is the basis of this whole guide. We can't help you if you don't know how to `cd` to a directory or delete a file.  
+#### A Little UNIX
+If you don't know the basic UNIX commands, now is the time to read up as they will be important tools to have in your back pocket, and you'll need to know them to succeed. Here's a primer that should help get you started.  
+
+   * [How to Use Basic UNIX Commands to Work in Terminal on Your Mac](https://www.dummies.com/computers/macs/mac-operating-systems/how-to-use-basic-unix-commands-to-work-in-terminal-on-your-mac/)
+
+All of the UNIX commands used in this guide are to be executed in a shell, and assume you are running them on macOS. For access to an OS shell in macOS, launch the Terminal app. The following table will help you know when to run a command with your user or with root.
+
+| Command Prompt | Run as |
+| :--- | :--- |
+| $ | Your normal user account |
+| \# | Run as root.  Become root with command: _sudo -s_ |
+#### Some more knowledge about GIT won't hurt
+
+Many of the instructions in the guide point you to Github and possibly other sites to download software or scripts from a repository. If the site offers a release package, that's what you want to download. If it doesn't however you will need to know enough about git to clone the contents of the repository to your computer. In order to install git, you will need to add some command line tools to your Hack. Here's how you install those.
+```text
+xcode-select --install
+```
+Once the installation completes you will have the ability to run the 'git' command. This command allows you to interact with software repositories. To clone a repository to your computer, go to the site with the repository you want to clone and click the green clone or download button, then select https. Copy the URI path in the box and add it to the end of a git clone command like this.  
+Example:
+```text
+git clone https://github.com/corpnewt/USBMap
+```
+Once it's cloned, you will be able to enter the directory and make use of the projects resources.  
+If you'd like a little more advanced git knowledge, here are some resources to get you started!  
+   * [Resources to learn Git @ Github](https://try.github.io)  
+
 4. _**[CRUCIAL]**_ A machine that is compatible as seen in the _**Compatibility**_ section.
    * [Hardware Limitations page](macos-limits.md)
 5. _**[CRUCIAL]**_ A minimum of:
