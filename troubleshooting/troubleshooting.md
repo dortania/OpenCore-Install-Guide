@@ -800,6 +800,7 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * [iASL warning, # unresolved](#iasl-warning--unresolved)
 * [No Volume/Brightness control on external monitors](#no-volumebrightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
+* [Can't boot/hackintosh working crazy after replacing your hardware](#Can't-boot/hackintosh-working-crazy-after-replacing-your-hardware)
 
 ## Can't run `acpidump.efi`
 
@@ -981,3 +982,50 @@ Full credit and command links provided by [ASentientBot](https://forums.macrumor
 
 * [MacRumors Thread](https://forums.macrumors.com/threads/macos-11-big-sur-on-unsupported-macs-thread.2242172/post-28603788)
 * [eGPU.io thread](https://egpu.io/forums/postid/82119/)
+
+## Can't boot/hackintosh working crazy after replacing your hardware
+After you try to replacing something in your PC (include Wi-Fi card,...), You can't boot or your hackintosh work weirdly although it used to be great. The fix is really simple, sometimes changing your hardward may cause a reset in the BIOS so you'll have to set them again:
+
+### Intel BIOS settings
+
+#### Disable
+
+* Fast Boot
+* Secure Boot
+* Serial/COM Port
+* Parallel Port
+* VT-d (can be enabled if you set `DisableIoMapper` to YES)
+* CSM
+* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
+* Intel SGX
+* Intel Platform Trust
+* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+
+#### Enable
+
+* VT-x
+* Above 4G decoding
+* Hyper-Threading
+* Execute Disable Bit
+* EHCI/XHCI Hand-off
+* OS type: Windows 8.1/10 UEFI Mode
+* DVMT Pre-Allocated(iGPU Memory): 64MB
+* SATA Mode: AHCI
+
+### AMD BIOS Settings
+
+#### Disable
+
+* Fast Boot
+* Secure Boot
+* Serial/COM Port
+* Parallel Port
+* Compatibility Support Module (CSM)(**Must be off, GPU errors like `gIO` are common when this option in enabled**)
+
+#### Enable
+
+* Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x2000` to boot-args. Do not have both this option and npci enabled at the same time**)
+* EHCI/XHCI Hand-off
+* OS type: Windows 8.1/10 UEFI Mode
+* SATA Mode: AHCI
+
