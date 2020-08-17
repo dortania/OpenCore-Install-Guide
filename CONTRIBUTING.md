@@ -81,7 +81,7 @@ If you have any questions or concerns with either translations or hosting, feel 
 
 Current known translations:
 
-* [UselessBanana](https://github.com/UselessBanana/OpenCore-Install-Guide)(Spanish)
+* [InyextcionES](https://github.com/InyextcionES/OpenCore-Install-Guide)(Spanish)
 * [macOS86](https://macos86.gitbook.io/guida-opencore/)(Italian)
 * [Technopat](https://www.technopat.net/sosyal/konu/opencore-ile-macos-kurulum-rehberi.963661/)(Turkish)
 
