@@ -14,6 +14,9 @@ To start we'll want to grab ourselves a copy of macOS, you can skip this and hea
 
 For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra and older), follow the [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md) guide
 
+**Note for Window users**
+If you doesn't have a MacOS/hackintosh for doing this (waiting about an hour every times is too long for you). You can read a small guide about creating a MacOS VM [here](https://github.com/dortania/macOS-VMware-Guide)
+
 ## Downloading macOS
 
 From a  macOS machine that meets the requirements of the OS version you want to install, go directly to the AppStore and download the desired OS release the continue and continue to [**Setting up the installer**](#setting-up-the-installer)
