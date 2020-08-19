@@ -38,6 +38,30 @@ For CPU support, we have the following breakdown:
 
 **For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
+::: details Intel CPU Support Chart
+
+| CPU Generation | Initial support | Last supported version | Notes | CPUID |
+| :--- | :--- | :--- | :--- | :--- |
+| Yonah | 10.4.5 | 10.6.8 | 32Bit | 0x0006E6 |
+| Conroe, Merom | 10.4.10 | 10.11.6 | No SSE4 | 0x0006F2 |
+| Penryn | 10.4.11 | 10.13.6 | No SSE4.2 | 0x010676 |
+| Nehalem | 10.5.6 | Current | N/A | 0x0106A2 |
+| Lynnfield, Clarksfield | 10.6.3 | Current | No iGPU support 10.14+ | 0x0106E0 |
+| Westmere, Clarkdale, Arrandale | 10.6.4 | Current | No iGPU support 10.14+ | 0x0206C0 |
+| Sandy Bridge | 10.6.7 | Current | No iGPU support 10.14+ | 0x0206A0(M/H) |
+| Ivy Bridge | 10.7.3 | Current | No iGPU support 11+ | 0x0306A0(M/H/G) |
+| Ivy Bridge-E5 | 10.9.2 | Current | N/A | 0x0306E0(U/Y/S) |
+| Haswell | 10.8.5 | Current | N/A | 0x0306C0(S) |
+| Broadwell | 10.10.0 | Current | N/A | 0x0306D4(U/Y) |
+| Skylake | 10.11.1 | Current | N/A | 0x0506e3(H/S) 0x0406E3(U/Y) |
+| Kaby Lake | 10.12.6 | Current | N/A | 0x0906E9(H/S/G) 0x0806E9(U/Y) |
+| Coffee Lake | 10.13.2 | Current | iGPU supported added in 10.13.6 | 0x0906EA(S/H/E) 0x0806EA(U)|
+| Amber/Whiskey/Comet Lake | 10.14.1 | Current | N/A | 0x0806E0(U/Y) |
+| Comet Lake | 10.15.4 | Current | N/A | 0x0906E0(S/H)|
+| Ice Lake | 10.15.4 | Current | N/A | 0x0706E5(U) |
+
+:::
+
 ## GPU Support
 
 GPU support becomes much more complicated due to the near-infinite amount of GPUs on the market, but the general breakdown is as follows:
@@ -63,6 +87,39 @@ And an important note for **Laptops with discrete GPUs**:
 * However, there are some laptops that rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually cause issues.
 
 **For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)**
+
+::: details AMD GPU Support Chart
+
+| GPU Generation | Initial support | Last supported version | Notes |
+| :--- | :--- | :--- | :--- |
+| X800 | 10.3.x | 10.7.5 | Requires 32bit kernel |
+| X1000 | 10.4.x | 10.7.5 | Requires 32bit kernel |
+| Terasacle | 10.5.x | 10.13.6 | N/A |
+| Terascale 2/3 | 10.6.x | 10.13.6 | N/A |
+| GCN 1 | 10.8.3 | Current | N/A |
+| GCN 2/3 | 10.10.x | Current | N/A |
+| Polaris 10/20 | 10.12.1 | Current | N/A |
+| Vega 10 | 10.12.6 | Current | N/A |
+| Vega 20 | 10.14.5 | Current | N/A |
+| Navi 10 | 10.15.1 | Current | Requires `agdpmod=pikera` in boot-args |
+
+:::
+
+::: details Nvidia GPU Support Chart
+
+| GPU Generation | Initial support | Last supported version | Notes |
+| :--- | :--- | :--- | :--- |
+| GeForce 6 | 10.2.x | 10.7.5 | Requires 32bit kernel |
+| GeForce 7 | 10.4.x | 10.7.5 | Requires 32bit kernel |
+| Tesla | 10.4.x | 10.13.6 | N/A |
+| Tesla V2 | 10.5.x | 10.13.6 | N/A |
+| Fermi | 10.7.x | 10.13.6 | N/A |
+| Kepler Gen 1/2 | 10.8.x | Current | N/A |
+| Maxwell | 10.10.x | 10.13.6 | Requires webdrivers |
+| Pascal | 10.12.4 | 10.13.6 | Requires webdrivers |
+| Turing | N/A | N/A | N/A |
+
+:::
 
 ## Motherboard Support
 
