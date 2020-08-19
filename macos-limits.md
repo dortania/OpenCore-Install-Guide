@@ -41,7 +41,7 @@ For CPU support, we have the following breakdown:
 
 | CPU Generation | Initial support | Last supported version | Notes | CPUID |
 | :--- | :--- | :--- | :--- | :--- |
-| [Pentium 4]() | 10.4.0 | 10.5.8 | Only used in dev kits | 0x0F41 |
+| [Pentium 4](https://en.wikipedia.org/wiki/Pentium_4) | 10.4.0 | 10.5.8 | Only used in dev kits | 0x0F41 |
 | [Yonah](https://en.wikipedia.org/wiki/Yonah_(microprocessor)) | 10.4.5 | 10.6.8 | 32Bit | 0x0006E6 |
 | [Conroe](https://en.wikipedia.org/wiki/Conroe_(microprocessor)), [Merom](https://en.wikipedia.org/wiki/Merom_(microprocessor)) | 10.4.10 | 10.11.6 | No SSE4 | 0x0006F2 |
 | [Penryn](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 10.4.11 | 10.13.6 | No SSE4.2 | 0x010676 |
