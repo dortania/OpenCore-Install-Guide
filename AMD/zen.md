@@ -65,7 +65,21 @@ This section is dedicated to quirks relating to boot.efi patching with OpenRunti
 
 ### MmioWhitelist
 
-This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`. For TRx40 users, we **highly** encourage you to fill this section out with the following properties:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Address | Number | 2987393024 |
+| Comment | String | MMIO devirt 0xB2100000 (0x81 pages, 0x8000000000000001) |
+| Enabled | Boolean | True |
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Address | Number | 3004694528 |
+| Comment | String | MMIO devirt 0xB3180000 (0x81 pages, 0x8000000000000001) |
+| Enabled | Boolean | True |
+
+**Reminder**: Only TRx40 boards require this, **NOT** TR4 with 1st or 2nd gen ThreadRipper
 
 ### Quirks
 
@@ -74,9 +88,10 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
+| DevirtualizeMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| SetupVirtualMap | YES | Note B550 boards should disable this |
+| SetupVirtualMap | YES | Note B550 and TRx40 boards should disable this |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -90,7 +105,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
-  * B550 boards should disable this quirk
+  * B550 and TRx40 boards should disable this quirk
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 :::
@@ -551,6 +566,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * Serial/COM Port
 * Parallel Port
 * Compatibility Support Module (CSM)(**Must be off, GPU errors like `gIO` are common when this option in enabled**)
+
+**Special note for 3990X users**: macOS currently does not support more than 64 threads in the kernel, and so will kernel panic if it sees more. The 3990X CPU has 128 threads total and so requires half of that disabled. We recommend disabling hyperthreading in the BIOS for these situations.
 
 ### Enable
 
