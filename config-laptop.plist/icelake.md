@@ -23,7 +23,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/config-laptop.plist/coffeelake-plus/acpi.png)
+![ACPI](../images/config/config-laptop.plist/icelake/acpi.png)
 
 ### Add
 

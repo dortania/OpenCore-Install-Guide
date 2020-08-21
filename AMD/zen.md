@@ -37,7 +37,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 motherboards, **do not use** if you don't have an AMD B550 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
+| **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 and A520 motherboards, **do not use** if you don't have an AMD B550 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
 
  Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -59,7 +59,7 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](../images/config/config-universal/aptio-v-booter.png)
+![Booter](../images/config/config-universal/amd-zen-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -67,12 +67,13 @@ This section is dedicated to quirks relating to boot.efi patching with OpenRunti
 
 This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`. For TRx40 users, we **highly** encourage you to fill this section out with the following properties:
 
+Entry 1:
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | Address | Number | 2987393024 |
 | Comment | String | MMIO devirt 0xB2100000 (0x81 pages, 0x8000000000000001) |
 | Enabled | Boolean | True |
-
+Entry 2:
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | Address | Number | 3004694528 |

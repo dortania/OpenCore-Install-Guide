@@ -23,7 +23,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/config-universal/aptio-v-acpi.png)
+![ACPI](../images/config/config.plist/coffeelake/acpi.png)
 
 ### Add
 
