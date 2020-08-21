@@ -51,7 +51,7 @@ And there's also some special notes with SMBIOS:
 
 * iMacPro1,1 and MacPro7,1 are the only 2 SMBIOS that will allow for dGPU to handle all the workload including background rendering and other tasks that the iGPU would handle
   * We only recommend this SMBIOS if you require this, however you'll likely need to fix power management as sleep may break if your hardware isn't of this class(ie. HEDT/Server): [Fixing Power management](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html)
-* iMac20,2 is a custom SMBIOS meant only for Apple's custom i9-10910 CPU, so unless you have a i9-10900K we recommend using iMac20,1
+* iMac20,2 is a custom SMBIOS meant only for Apple's custom i9-10910 CPU, so unless you have an i9-10900K we recommend using iMac20,1
 * MacMini SMBIOS should be avoided unless you're running mobile hardware without a built-in display
   * Intel NUC are the ideal hardware for this SMBIOS
 * iGPU-less CPUs **MUST** pay very close attention when selecting a SMBIOS, as Apple always assumes the iGPU is present on the iMac SMBIOS, so you will need to find a SMBIOS without this requirement like iMac Pro or Mac Pro.
