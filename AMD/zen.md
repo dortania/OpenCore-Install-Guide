@@ -567,7 +567,7 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * Parallel Port
 * Compatibility Support Module (CSM)(**Must be off, GPU errors like `gIO` are common when this option in enabled**)
 
-**Special note for 3990X users**: macOS currently does not support more than 64 threads in the kernel, and so will kernel panic if it sees more. The 3990X CPU has 128 threads total and so requires half of that disabled. We recommend disabling hyperthreading in the BIOS for these situations.
+**Special note for 3990X users**: macOS currently does not support more than 64 threads in the kernel, and so will kernel panic if it sees more. The 3990X CPU has 128 threads total and so requires half of that disabled. We recommend disabling hyper threading in the BIOS for these situations.
 
 ### Enable
 
