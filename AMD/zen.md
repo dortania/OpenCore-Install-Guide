@@ -80,7 +80,7 @@ Entry 2:
 | Comment | String | MMIO devirt 0xB3180000 (0x81 pages, 0x8000000000000001) |
 | Enabled | Boolean | True |
 
-**Reminder**: Only TRx40 boards require this, **NOT** TR4 with 1st or 2nd gen ThreadRipper
+**Reminder**: Only TRx40 boards require this, **NOT** TR4 with 1st or 2nd gen Threadripper or Ryzen motherboards
 
 ### Quirks
 
