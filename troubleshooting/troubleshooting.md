@@ -593,6 +593,7 @@ So this is due to some issue around the `Booter -> Quirks` you set, main things 
       * Intel's Ice Lake series
       * Intel's Comet Lake series
       * AMD's B550
+      * AMD's A520
       * AMD's TRx40
       * VMs like QEMU
   
