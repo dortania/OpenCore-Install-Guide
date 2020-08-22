@@ -20,7 +20,7 @@ The main things to consider when selecting your SMBIOS:
   * Mainly relevant for older hardware, as macOS may still have support for the CPU however no longer supports SMBIOS from that era
     * Arrandale CPUs are a great example, as they still have OS support even in macOS 11, Big Sur(however no iGPU support past 10.13.6)
 * USB Devices
-  * Certain SMBIOS will have their own USB ma which may attach to your hardware causing USB issues.
+  * Certain SMBIOS will have their own USB map which may attach to your hardware causing USB issues.
     * See here for more info: [USB Mapping](https://dortania.github.io/OpenCore-Post-Install/usb/)
   * Also to note, Skylake+ SMBIOS will also require a [USBX device](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl#L54L79) to fix USB current output
     * See here for more info: [Fixing USB Power](https://dortania.github.io/OpenCore-Post-Install/usb/misc/power.html)
