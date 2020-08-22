@@ -55,6 +55,7 @@
 7XX
 7zip
 970EvoPlus
+A520
 AAPL
 ACPIBatteryManager
 AGPM

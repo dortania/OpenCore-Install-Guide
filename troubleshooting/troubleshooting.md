@@ -100,7 +100,7 @@ OCABC: MAT support is 1
     * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
       * Intel's Comet Lake series
-      * AMD's B550
+      * AMD's B550 and A520
       * AMD's TRx40
       * VMs like QEMU
 
@@ -423,7 +423,7 @@ Example of what a disabled RTC with no way to enable looks like(note that there 
 
 ![](../images/troubleshooting/troubleshooting-md/OC_catalina.jpg)
 
-If you're getting stuck at or near ACPI table loading with an AMD B550 motherboard, add the following SSDT:
+If you're getting stuck at or near ACPI table loading with an AMD B550 or A520 motherboard, add the following SSDT:
 
 * [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml)
 
