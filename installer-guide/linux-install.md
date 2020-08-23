@@ -23,7 +23,7 @@ This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Download
 
 ![](../images/installer-guide/linux-install-md/3-gib-finished.png)
 
-## Making the installer
+## Setting up the USB Installer Drive
 
 This section will target making the necessary partitions in the USB device. You can use your favorite program be it `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `gdisk` as it's nice and can change the partition type later on, as we need it so that macOS Recovery HD can boot. (the distro used here is Ubuntu 18.04, other versions or distros may work)
 
@@ -116,4 +116,4 @@ In terminal:
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
       ![](../images/installer-guide/linux-install-md/unknown-21.png)
 
-## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
+## Now head to [Adding the Base OpenCore Files](../installer-guide/opencore-efi.md)

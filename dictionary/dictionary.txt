@@ -343,8 +343,6 @@ IGPU
 IM
 IMEI
 IMEI's
-InyextcionES
-InyextcionES'
 IOHDACodecDevice
 IOIIIO
 IOKit
@@ -368,6 +366,8 @@ InstallMacOSX
 Insyde
 IntelMausi
 IntelMausiEthernet
+InyextcionES
+InyextcionES'
 IvyBridge
 JDK
 JRE
@@ -439,6 +439,7 @@ MonitorControl
 MountEFI
 MultiBeast
 Multiboot
+MyVolume
 NIC
 NICs
 NOOPT
@@ -486,6 +487,7 @@ OcQuirks
 OpenCanopy
 OpenCore
 OpenCore's
+OpenCore-Install-Guide
 OpenCorePkg
 OpenCorePkg's
 OpenRuntime
@@ -807,6 +809,7 @@ hacky
 heroImage
 heroText
 hotplug
+http
 i210
 i211
 i218
@@ -859,6 +862,7 @@ lapic
 lappie
 licensor
 linter
+localhost:8080
 lsblk
 macOS
 macOS's
@@ -876,6 +880,7 @@ nms42
 non-UEFI
 non-latin
 npci
+npm
 nvda_drv=1
 osxaptiofix2drv.efi
 passthrough
@@ -920,6 +925,7 @@ spacebar
 spellchecker-cli
 ssdtPRGen
 ssdtPRgen
+stolenmem
 subreddit
 sudo
 sysctl
@@ -949,4 +955,3 @@ xcpm
 Как
 завести
 сервисы
-stolenmem

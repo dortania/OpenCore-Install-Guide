@@ -6,7 +6,7 @@ This section is a brief rundown as to why the community has been transitioning o
 
 ## OpenCore features
 
-* On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
+* OpenCore systems boot somewhat faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
   * AMD OSX Patches not needing to update with every minor security update
@@ -31,9 +31,9 @@ The biggest reason someone may want to switch from other boot loaders is actuall
 * [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore):
   * Have AMD based hardware? Well the kernel patches required to boot macOS no longer support Clover, only OpenCore
 
-## Kext Injection
+## Kext Injection in Clover
 
-So to better understand OpenCore's kext injection system, we should first look at how Clover works:
+To better understand the advantages of OpenCore, we should first look at how Clover works. To do its job, Clover:
 
 1. Patches SIP open
 2. Patches to enable XNU's zombie code for kext injection
@@ -41,22 +41,23 @@ So to better understand OpenCore's kext injection system, we should first look a
 4. Injects kexts
 5. Patches SIP back in
 
-Things to note with Clover's method is:
+Notable problems with Clover's method:
 
-* Calling XNU's zombie code that hasn't been used since 10.7, it's seriously impressive Apple hasn't removed this code yet
-  * OS updates commonly break this patch, like recently with 10.14.4 and 10.15
-* Disables SIP and attempts to re-enable it, don't think much needs to be said
+* Calls XNU's zombie code that Apple hasn't been used since 10.7, it's seriously impressive that Apple hasn't removed this code yet. OS updates commonly break this patch, like recently with 10.14.4 and 10.15
+* Disabling and re-enabling SIP is prone to cause problems.
 * Likely to break with 10.16
-* Supports OS X all the way back to 10.5
+* But supports OS X all the way back to 10.5, if that's an important concern.
 
-So now lets take a look at OpenCore's method:
+## Kext Injection in OpenCore
+
+As an alternative, lets take a look at OpenCore's method:
 
 1. Takes existing prelinked kernel and kexts ready to inject
 2. Rebuilds the cache in the EFI environment with the new kexts
-3. Adds this new cache in
+3. Adds in these new cached files
 
-Things to note with OpenCore's method is:
+OpenCore's method is:
 
-* OS Agnostic as the prelinked kernel format as stayed the same since  10.6, far harder to break support.
-  * This also means proper support starts at 10.7, though 10.6 can be used as well so long as it's already installed(10.6's installer doesn't have a prelinked kernel)
-* Far better stability as far less patching
+* OS Agnostic - the prelinked kernel format has stayed the same since macOS 10.6, so it's less likely to lose support.
+This also means proper support starts at 10.7, though 10.6 can be used as well so long as it's already installed (10.6's installer doesn't have a prelinked kernel)
+* More stable because there is far less patching

@@ -23,7 +23,7 @@ This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Download
 
 ![](../images/installer-guide/winblows-install-md/gib-done.png)
 
-## Making the installer
+## Setting up the USB Installer Drive
 
 Next open `MakeInstall.bat` as Admin and select your drive with option O for OpenCore( ex: 1O).
 
@@ -41,4 +41,4 @@ MakeInstall will finish up by installing OpenCore to your USB's EFI System Parti
 
 ![](../images/installer-guide/winblows-install-md/EFI-base.png)
 
-## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
+## Now head to [Adding the Base OpenCore Files](../installer-guide/opencore-efi.md)
