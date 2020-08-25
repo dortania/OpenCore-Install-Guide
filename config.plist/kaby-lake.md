@@ -82,14 +82,14 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **EnableWriteUnprotector**: NO
-  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
+* **EnableWriteUnprotector**: YES
+  * Required to resolve CR0 write protections, else early kernel panics
 * **RebuildAppleMemoryMap**: NO
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
 * **SyncRuntimePermissions**: NO
-  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Coffee Lake and newer
 :::
 
 ## DeviceProperties
