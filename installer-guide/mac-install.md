@@ -9,20 +9,16 @@ To start we'll want to grab ourselves a copy of macOS, you can skip this and hea
 
 **Note for legacy users**
 
-1. First follow the [Legacy Install](../extras/legacy.md) section
-2. Once completed, continue the guide at the **[Downloading macOS](#downloading-macos)** section
-
-For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra and older), follow the [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md) guide
+> For those needing macOS versions no longer hosted on Apple's catalog (ie. Sierra and older), follow the [Legacy macOS install guide](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md)
+>
+> 1. First follow the [Legacy Install](../extras/legacy.md) section
+> 2. Once completed, continue the guide at the **[Downloading macOS](#downloading-macos)** section
 
 ## Downloading macOS
 
-From a  macOS machine that meets the requirements of the OS version you want to install, go directly to the AppStore and download the desired OS release the continue and continue to [**Setting up the installer**](#setting-up-the-installer)
+**If your Mac meets the requirements of the OS version you want to install,** go directly to the AppStore and download the desired OS release. Then continue to [**Setting up the installer**](#setting-up-the-installer) (below)
 
-For machines that need a specific OS release or can't download from the AppStore, you can use the GibMacOS utility.
-
-Now lets grab [GibMacOS](https://github.com/corpnewt/gibMacOS), unzip on a local directory.
-
-Next run the `gibMacOS.command`:
+**If your Mac can't download that version from the AppStore,** use the GibMacOS utility. To do this, grab [GibMacOS](https://github.com/corpnewt/gibMacOS), and unzip it in a local directory. Next run the `gibMacOS.command`:
 
 ![](../images/installer-guide/mac-install-md/gib.png)
 
@@ -46,32 +42,38 @@ Move the newly created image to Applications folder, this will simplify the next
 
 ![](../images/installer-guide/mac-install-md/gib-done.png)
 
-## Setting up the installer
+## Setting up the USB Installer Drive
 
-Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended(HFS+) with a GUID partition map. What this will do is create 2 partitions. The main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
+Now format the USB drive (minimum capacity of 16GB) to hold both the macOS installer and OpenCore software.
 
-* Note by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices(Alternatively you can press the view button)
+To do this, erase the entire USB drive using **Mac OS Extended (Journaled)** format and the **GUID Partition Map** scheme. Give it the name **MyVolume**. (This name will be updated in an upcoming step.)
+
+This creates the main `MyVolume` and a second (hidden) volume named `EFI` that holds the boot files.
+
+* Note by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices. (Alternatively you can press the View button.)
 
 ![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
 
-Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372), note that the command is made for USB's formatted with the name `MyVolume`:
+Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372) to copy the macOS installer from `/Applications` to a USB drive with the name `MyVolume`. Copy/paste the command below: adjust the command if you used different locations in the procedure above.
 
 ```
 sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-This will take some time so may want to grab a coffee or continue reading the guide(to be fair you really shouldn't be following this guide step by step without reading the whole thing first)
-
-You can also replace the `createinstallmedia` path with that of where your installer's located, same idea with the drive name.
+This will take some time so may want to grab a coffee or continue reading the guide (to be fair you really shouldn't be following this guide step by step without reading the whole thing first.)
 
 ## Setting up OpenCore's EFI environment
 
-Setting up OpenCore's EFI environment is simple, all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [MountEFI](https://github.com/corpnewt/MountEFI) comes in:
+Setting up OpenCore's EFI environment is simple, all you need to do is mount our EFI system partition. This partition was automatically created when formatting with GUID but it is unmounted by default.
 
+Grab [MountEFI](https://github.com/corpnewt/MountEFI), unzip on a local directory.
+
+Next run the `MountEFI.command`. You should see the window below. Enter the number of the drive that you intend to use for the install, then Quit.
 ![MountEFI](../images/installer-guide/mac-install-md/mount-efi-usb.png)
+You may not see the EFI partition listed in a Finder window. If this happens, look at Finder -> Preferences and make sure that Hard disks and External Disks are checked in *both* the General and Sidebar tabs. If the EFI partition still isn't visible, uncheck those boxes, close Finder Preferences, and then check them again.
 
 You'll notice that once we open the EFI partition, it's empty. This is where the fun begins.
 
 ![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
 
-## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
+## Now head to [Adding the Base OpenCore Files](../installer-guide/opencore-efi.md)

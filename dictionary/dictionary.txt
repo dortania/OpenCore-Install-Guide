@@ -439,6 +439,7 @@ MonitorControl
 MountEFI
 MultiBeast
 Multiboot
+MyVolume
 NIC
 NICs
 NOOPT
@@ -932,6 +933,7 @@ trackpads
 trashOS
 ubuntu
 unallocated
+uncheck
 unbootable
 unmount
 untrusted
