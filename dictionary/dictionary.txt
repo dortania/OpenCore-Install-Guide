@@ -786,6 +786,7 @@ distro
 distro's
 distros
 dmg
+dmg's
 dortania
 eMMC
 endian

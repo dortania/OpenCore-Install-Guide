@@ -308,7 +308,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 * **SecureBootModel**: Disabled
   * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note leaving this unchanged will require a network install for full installers as macOS must verify your install.
-    * And pre-installed systems will now require a reboot into recovery to verify, and macOS will not boot until verified.
+    * And preinstalled systems will now require a reboot into recovery to verify, and macOS will not boot until verified.
 
 :::
 
