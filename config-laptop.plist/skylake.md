@@ -253,6 +253,10 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 :::
 
+### Scheme
+
+Settings related to legacy booting(ie. 10.4-10.6), for us we leave the default values unless you plan to boot legacy OSes(which won't be covered in this guide).
+
 ## Misc
 
 ![Misc](../images/config/config-universal/misc.png)

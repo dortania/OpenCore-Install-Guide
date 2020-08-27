@@ -217,6 +217,10 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://dortania.github.io/OpenCore-Post-Install/usb/)
 :::
 
+### Scheme
+
+Settings related to legacy booting(ie. 10.4-10.6), for us we leave the default values unless you plan to boot legacy OSes(which won't be covered in this guide).
+
 ## Misc
 
 ![Misc](../images/config/config-universal/misc.png)
