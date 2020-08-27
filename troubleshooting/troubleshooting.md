@@ -377,6 +377,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
 * [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
 * [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
+* [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -675,6 +676,12 @@ To resolve, we have a few options:
   * LegacyEnable -> YES
   * LegacyOverwrite -> YES
   * WriteFlash -> YES
+
+## Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop
+
+![](../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
+
+To resolve this kernel panic, ensure you have -igfxcdc in your boot-args.
 
 # macOS post-install
 

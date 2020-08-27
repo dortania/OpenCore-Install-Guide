@@ -855,6 +855,7 @@ iMac17
 iMac18
 iMac19
 iMac20
+iMac6
 iMacPro1
 iMessage
 iServices
@@ -864,6 +865,7 @@ ie
 ie\.
 ig-platform-id
 ig-platform-id's
+igfxcdc
 igfxfw
 img
 ix-3xxx

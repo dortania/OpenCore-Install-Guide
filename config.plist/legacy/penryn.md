@@ -1,7 +1,7 @@
 # Penryn(Core2 Series)
 
 * Note: A 64bit CPU with SSE3(or higher) will be a requirement for 10.8 and newer
-  * 10.6 and 10.7 are bootable with 32bit based systems, however will require the appropriate SMBIOS
+  * 10.6 and 10.7 are bootable with 32 bit based systems, however will require the appropriate SMBIOS
 
 **Overall**:
 
