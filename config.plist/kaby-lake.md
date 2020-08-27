@@ -279,6 +279,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
+| DmgLoading | Any | This is a word and is case-sensitive |
 | ScanPolicy | 0 | |
 | SecureBootModel | Disabled |  This is a word and is case-sensitive |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
@@ -294,10 +295,10 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Used for netting personalized secure-boot identifiers, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-* **BootProtect**: None
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
-* **DmgLoading**: Signed
-  * Set load policy for dmg's in OpenCore, Signed is recommended for good security.
+* **BootProtect**: Bootstrap
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
+* **DmgLoading**: Any
+  * Ensures all dmg's load with OpenCore correctly
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
@@ -307,8 +308,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
 * **SecureBootModel**: Disabled
   * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
-  * Note leaving this unchanged will require a network install for full installers as macOS must verify your install.
-    * And preinstalled systems will now require a reboot into recovery to verify, and macOS will not boot until verified.
 
 :::
 
