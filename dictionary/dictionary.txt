@@ -18,6 +18,10 @@
 0x2
 0x4
 0x60000000
+0x8000000000000001
+0x81
+0xB2100000
+0xB3180000
 0xE2
 0xFE000000
 0xFEC00000
@@ -38,6 +42,7 @@
 32MB
 3700X
 390X
+3990X
 3D
 4G
 5700XT
@@ -50,6 +55,7 @@
 7XX
 7zip
 970EvoPlus
+A520
 AAPL
 ACPIBatteryManager
 AGPM
@@ -117,6 +123,7 @@ Aptio
 AptioMemoryFix
 Architected
 Arg
+Arrandale
 Arrendale
 AsMedia
 AsRock
@@ -248,6 +255,7 @@ EndRandomSeed
 Endian
 Endianness
 Esc
+EveryMac
 Evo
 ExitBootServices
 Explainer
@@ -343,8 +351,6 @@ IGPU
 IM
 IMEI
 IMEI's
-InyextcionES
-InyextcionES'
 IOHDACodecDevice
 IOIIIO
 IOKit
@@ -368,6 +374,8 @@ InstallMacOSX
 Insyde
 IntelMausi
 IntelMausiEthernet
+InyextcionES
+InyextcionES'
 IvyBridge
 JDK
 JRE
@@ -418,6 +426,7 @@ MacBookPro13
 MacBookPro14
 MacBookPro[0-9]+
 MacInfoPkg
+MacMini
 MacMini6
 MacOS
 MacPro5
@@ -445,6 +454,7 @@ NICs
 NOOPT
 NPM
 NTFS
+NUC
 NVCAP
 NVCAP-settings
 NVMe
@@ -533,6 +543,7 @@ ProperTree's
 QE/CI
 QEMU
 Qlogic
+Quicklook
 R5/R7
 R9
 RDRAND
@@ -608,7 +619,9 @@ T2
 TDP
 TIMR
 TMR
+TR4
 TRX40
+TRx40
 TSC
 TSCAdjustReset
 Technopat
@@ -707,6 +720,7 @@ XXX-XXXXX
 Xcode
 Xeon
 Xeons
+Xserve
 Z270
 Z370
 Z390
@@ -819,11 +833,14 @@ i3-3110M
 i7
 i7-9700T
 i9
+i9-10900K
+i9-10910
 i9-9900K
 iASL
 iCloud
 iGPU
 iGPU's
+iGPU-less
 iGPU-only
 iGPUs
 iMac
@@ -837,6 +854,7 @@ iMac16
 iMac17
 iMac18
 iMac19
+iMac20
 iMacPro1
 iMessage
 iServices
@@ -921,6 +939,7 @@ spacebar
 spellchecker-cli
 ssdtPRGen
 ssdtPRgen
+stolenmem
 subreddit
 sudo
 sysctl
@@ -951,4 +970,3 @@ xcpm
 Как
 завести
 сервисы
-stolenmem

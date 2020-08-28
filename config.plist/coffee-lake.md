@@ -23,7 +23,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/config-universal/aptio-v-acpi.png)
+![ACPI](../images/config/config.plist/coffeelake/acpi.png)
 
 ### Add
 
@@ -300,8 +300,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-* **BlacklistAppleUpdate**: True
-  * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
+
 * **BootProtect**: None
   * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
