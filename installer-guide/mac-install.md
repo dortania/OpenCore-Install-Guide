@@ -11,8 +11,8 @@ However, many users prefer having a fresh copy for their boot manager upgrades. 
 >
 > Some people want to use older hardware or macOS versions. OpenCore can handle these "legacy" situations:
 >
-> - **Legacy Hardware:** If your computer cannot boot from UEFI drives, the [Legacy Hardware](../extras/legacy.html) page shows how to emulate the UEFI environment.
-> - **Legacy Software:** For those needing macOS versions no longer hosted on Apple's store (ie. Sierra and older), follow the [Legacy macOS Software Guide,](./legacy-mac-install.md) Then continue at the **[Downloading macOS](#downloading-macos)** section (below).
+> * **Legacy Hardware:** If your computer cannot boot from UEFI drives, the [Legacy Hardware](../extras/legacy.html) page shows how to emulate the UEFI environment.
+> * **Legacy Software:** For those needing macOS versions no longer hosted on Apple's store (ie. Sierra and older), follow the [Legacy macOS Software Guide,](./legacy-mac-install.md) Then continue at the **[Downloading macOS](#downloading-macos)** section (below).
 
 ## Downloading macOS
 
@@ -34,7 +34,7 @@ When the download completes, gibMacOS displays the path to the download folder f
 
 ```
 Files saved to:
-  /Users/user/github/gibMacOS/macOS Downloads/publicrelease/###-#### - 10.15.# macOS Catalina 
+  /Users/user/github/gibMacOS/macOS Downloads/publicrelease/###-#### - 10.15.# macOS Catalina
 ```
 
 **Building the full macOS Installer**
@@ -45,9 +45,9 @@ Now run the `BuildmacOSInstallApp.command`. This assembles the downloaded files 
 
 You will be prompted for the path to the download folder where GibMacOS saved the files.
 
-You can copy/paste the path displayed above, or from the Finder, drill down to the folder containing the downloaded files and drag it to the command line. 
+You can copy/paste the path displayed above, or from the Finder, drill down to the folder containing the downloaded files and drag it to the command line.
 
-Once the task is completed, exit the utility. 
+Once the task is completed, exit the utility.
 
 The full macOS Installer file is in the download folder. Move it to Applications folder: this will simplify the next section.
 
