@@ -37,7 +37,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 | Required_SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 motherboards, **do not use** if you don't have an AMD B550 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
+| **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 and A520 motherboards, **do not use** if you don't have an AMD B550 or A520 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
 
  Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -59,13 +59,28 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](../images/config/config-universal/aptio-v-booter.png)
+![Booter](../images/config/config-universal/amd-zen-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
 ### MmioWhitelist
 
-This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`. For TRx40 users, we **highly** encourage you to fill this section out with the following properties:
+
+Entry 1:
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Address | Number | 2987393024 |
+| Comment | String | MMIO devirt 0xB2100000 (0x81 pages, 0x8000000000000001) |
+| Enabled | Boolean | True |
+Entry 2:
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Address | Number | 3004694528 |
+| Comment | String | MMIO devirt 0xB3180000 (0x81 pages, 0x8000000000000001) |
+| Enabled | Boolean | True |
+
+**Reminder**: Only TRx40 boards require this, **NOT** TR4 with 1st or 2nd gen Threadripper or Ryzen motherboards
 
 ### Quirks
 
@@ -74,9 +89,10 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
+| DevirtualizeMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| SetupVirtualMap | YES | Note B550 boards should disable this |
+| SetupVirtualMap | YES | Note B550, A520 and TRx40 boards should disable this |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -90,7 +106,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
-  * B550 boards should disable this quirk
+  * B550, A520 and TRx40 boards should disable this quirk
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 :::
@@ -269,8 +285,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-* **BlacklistAppleUpdate**: True
-  * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
+
 * **BootProtect**: None
   * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
@@ -551,6 +566,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * Serial/COM Port
 * Parallel Port
 * Compatibility Support Module (CSM)(**Must be off, GPU errors like `gIO` are common when this option in enabled**)
+
+**Special note for 3990X users**: macOS currently does not support more than 64 threads in the kernel, and so will kernel panic if it sees more. The 3990X CPU has 128 threads total and so requires half of that disabled. We recommend disabling hyper threading in the BIOS for these situations.
 
 ### Enable
 

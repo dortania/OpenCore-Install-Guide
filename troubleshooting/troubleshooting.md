@@ -83,9 +83,6 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 
 **Booter Issues:**
 
-* `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](../extras/kaslr-fix.md#using-devirtualisemmio)
-* `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
-  * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
 * `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
 
 To verify whether your board has MATs, check the logs for something like this:
@@ -93,6 +90,39 @@ To verify whether your board has MATs, check the logs for something like this:
 ```
 OCABC: MAT support is 1
 ```
+
+* `DevirtualiseMmio`
+  * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright.
+  * More info here: [Using DevirtualiseMmio](../extras/kaslr-fix.md#using-devirtualisemmio)
+
+* `SetupVirtualMap`
+  * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
+    * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
+      * Intel's Ice Lake series
+      * Intel's Comet Lake series
+      * AMD's B550 and A520
+      * AMD's TRx40
+      * VMs like QEMU
+
+* `EnableWriteUnprotector`
+
+  * Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
+    * If your firmware supports MATs(2018+ firmwares):
+      * EnableWriteUnprotector -> False
+      * RebuildAppleMemoryMap -> True
+      * SyncRuntimePermissions -> True
+    * For older firmwares:
+      * EnableWriteUnprotector -> True
+      * RebuildAppleMemoryMap -> False
+      * SyncRuntimePermissions -> False
+
+Regarding MATs support, firmwares built against EDK 2018 will support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has updated the firmware, you can check the OpenCore logs whether yours supports it:
+
+```
+OCABC: MAT support is 1
+```
+
+Note: `1` means it supports MATs, while `0` means it does not.
 
 **Kernel Issues:**
 
@@ -275,12 +305,15 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 And reminder, the following SMBIOS require newer versions of macOS:
 
-* iMac19,x       10.14.4 (18E226)
-* MacPro7,1      10.15.0 (19A583)
-* MacBookAir9,1  10.15.4 (19E287)
-* MacBookPro16,1 10.15.1 (19B2093)
-* MacBookPro16,2 10.15.4 (19E2269)
-* MacBookPro16,3 10.15.4 (19E2269)
+| SMBIOS | Initial Support | Kernel support |
+| :--- | :--- | :--- |
+| iMac19,x       | 10.14.4  | 18E226 |
+| iMac20,x       | 10.15.6  | 19G2005 |
+| MacPro7,1      | 10.15.0  | 19A583 |
+| MacBookAir9,1  | 10.15.4  | 19E287 |
+| MacBookPro16,1 | 10.15.1  | 19B2093 |
+| MacBookPro16,2 | 10.15.4  | 19E2269 |
+| MacBookPro16,3 | 10.15.4  | 19E2269 |
 
 ## `Couldn't allocate runtime area` errors
 
@@ -343,6 +376,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [DiskUtility failing to erase](#diskutility-failing-to-erase)
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
 * [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
+* [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -389,7 +423,7 @@ Example of what a disabled RTC with no way to enable looks like(note that there 
 
 ![](../images/troubleshooting/troubleshooting-md/OC_catalina.jpg)
 
-If you're getting stuck at or near ACPI table loading with an AMD B550 motherboard, add the following SSDT:
+If you're getting stuck at or near ACPI table loading with an AMD B550 or A520 motherboard, add the following SSDT:
 
 * [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml)
 
@@ -551,10 +585,17 @@ So this is due to some issue around the `Booter -> Quirks` you set, main things 
 
 * `DevirtualiseMmio`
   * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright
+  * More info here: [Using DevirtualiseMmio](../extras/kaslr-fix.md#using-devirtualisemmio)
+
 * `SetupVirtualMap`
-  * required for firmwares that need virtual memory address to be corrected, this is commonly found on laptops and Gigabyte systems
-  * Note that Icelake and Comet Lake's memory protections break this quirk so avoid it
-  * VMs like QEMU also require this quirk disabled
+  * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
+    * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
+      * Intel's Ice Lake series
+      * Intel's Comet Lake series
+      * AMD's B550
+      * AMD's A520
+      * AMD's TRx40
+      * VMs like QEMU
   
 Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
 
@@ -617,6 +658,23 @@ For those running Comet lake motherboards with the i225-V NIC, you may experienc
 ## SATA Drives Not Shown in DiskUtility
 
 * Make sure SATA Mode is AHCI in bios
+* Certain SATA controllers may not be officially supported by macOS, for these cases you'll want to grab [CtlnaAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
+  * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) may be more suitable.
+
+## Stuck at 2 minutes remaining
+
+![](../images/troubleshooting/troubleshooting-md/2-min-remaining.jpeg)
+
+This error is directly related to the stage at which macOS will write certain NVRAM variables for your system to boot next, and so when there's issues revolving around NVRAM it'll stall here.
+
+To resolve, we have a few options:
+
+* 300 series Intel Fix(ie. Z390):
+  * [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)
+* Others can set the following in their config.plist:
+  * LegacyEnable -> YES
+  * LegacyOverwrite -> YES
+  * WriteFlash -> YES
 
 # macOS post-install
 

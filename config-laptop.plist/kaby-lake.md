@@ -99,14 +99,14 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **EnableWriteUnprotector**: NO
-  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
+* **EnableWriteUnprotector**: YES
+  * Required to resolve CR0 write protections, else early kernel panics
 * **RebuildAppleMemoryMap**: NO
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
 * **SyncRuntimePermissions**: NO
-  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
+  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Coffee Lake and newer
 :::
 
 ## DeviceProperties
@@ -333,8 +333,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-* **BlacklistAppleUpdate**: True
-  * Ignores Apple's firmware updater, recommended to enable as to avoid issues with installs and updates
+
 * **BootProtect**: None
   * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
 * **ExposeSensitiveData**: `6`
