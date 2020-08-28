@@ -58,5 +58,5 @@ So now lets take a look at OpenCore's method:
 Things to note with OpenCore's method is:
 
 * OS Agnostic as the prelinked kernel format as stayed the same since  10.6, far harder to break support.
-  * This also means proper support starts at 10.7, though 10.6 can be used as well so long as it's already installed(10.6's installer doesn't have a prelinked kernel)
+  * OpenCore also supports cacheless, Mkext and KernelCollections meaning it also has proper support for all Intel versions of OS X/macOS. However proper support has been added at 10.6 and newer.
 * Far better stability as far less patching
