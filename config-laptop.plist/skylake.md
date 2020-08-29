@@ -460,9 +460,9 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
- #               MacBookPro13,1 SMBIOS Info                  #
+ #               MacBookPro13,1 SMBIOS Info            #
 #######################################################
 
 Type:         MacBookPro13,1

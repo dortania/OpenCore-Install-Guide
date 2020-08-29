@@ -165,7 +165,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| AppleXcpmExtraMsrs | YES |
+| AppleXcpmExtraMsrs | YES | |
 | DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
@@ -394,7 +394,7 @@ For this Haswell-E example, we'll choose the iMacPro1,1 SMBIOS.
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
  #              iMacPro1,1 SMBIOS Info                 #
 #######################################################

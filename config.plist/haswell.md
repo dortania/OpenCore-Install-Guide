@@ -449,7 +449,7 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
  #               iMac15,1 SMBIOS Info                  #
 #######################################################

@@ -457,9 +457,9 @@ For this IceLake example, we chose the MacBookAir9,1 SMBIOS - this is done inten
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
- #               MacBookAir9,1 SMBIOS Info                  #
+ #               MacBookAir9,1 SMBIOS Info             #
 #######################################################
 
 Type:         MacBookAir9,1

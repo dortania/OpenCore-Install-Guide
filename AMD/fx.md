@@ -404,7 +404,7 @@ For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with c
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
  #              iMacPro1,1 SMBIOS Info                 #
 #######################################################

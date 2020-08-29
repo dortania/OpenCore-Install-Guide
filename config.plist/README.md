@@ -56,6 +56,7 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
+| [Sandy Bridge](../config.plist/sandy-bridge.md) | 2XXX | 2011 era |
 | [Ivy Bridge](../config.plist/ivy-bridge.md) | 3XXX | 2012 era |
 | [Haswell](../config.plist/haswell.md) | 4XXX | 2013-2014 era |
 | [Skylake](../config.plist/skylake.md) | 6XXX | 2015-2016 era |
@@ -67,6 +68,7 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
+| [Sandy Bridge](../config-laptop.plist/sandy-bridge.md) | 2XXX | 2011 era |
 | [Ivy Bridge](../config-laptop.plist/ivy-bridge.md) | 3XXX | 2012 era |
 | [Haswell](../config-laptop.plist/haswell.md) | 4XXX | 2013-2014 era |
 | [Skylake](../config-laptop.plist/skylake.md) | 6XXX | 2015-2016 era |
@@ -81,6 +83,7 @@ This section includes both enthusiast and server based hardware.
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
+| [Sandy/Ivy Bridge-E](../config-HEDT/ivy-bridge-e.md) | 3XXX, 4XXX | 2011-2013 era |
 | [Haswell-E](../config-HEDT/haswell-e.md) | 5XXX | 2014 era |
 | [Broadwell-E](../config-HEDT/broadwell-e.md) | 6XXX | 2016 era |
 | [Skylake/Cascade Lake-X/W](../config-HEDT/skylake-x.md) | 7XXX, 9XXX, 10XXX | 2017-2019 era |
@@ -103,5 +106,3 @@ Note that these are only guidelines and will not be full-featured guides like th
 | :--- | :--- | :--- |
 | [Penryn](../config.plist/legacy/penryn.md) | [Too many](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2008-2010 |
 | [Nehalem and Westmere](../config.plist/legacy/nehalem.md) | 7XX, 8XX, 9XX | 2008-2010 |
-| [Sandy Bridge](../config.plist/legacy/sandy-bridge.md) | 2XXX | 2011 |
-| [Sandy and Ivy bridge-E](../config.plist/legacy/sandy-bridge-e.md) | 2XXX, 3XXX | 2011-2013 |

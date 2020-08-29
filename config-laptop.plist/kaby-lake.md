@@ -471,9 +471,9 @@ For this Kaby Lake example, we'll chose the MacBookPro14,1 SMBIOS - this is done
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
- #               MacBookPro14,1 SMBIOS Info                  #
+ #               MacBookPro14,1 SMBIOS Info            #
 #######################################################
 
 Type:         MacBookPro14,1

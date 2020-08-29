@@ -448,7 +448,7 @@ For this Coffee Lake example, we'll chose the iMac19,1 SMBIOS - this is done int
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
  #               iMac19,1 SMBIOS Info                  #
 #######################################################

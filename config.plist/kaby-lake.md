@@ -435,7 +435,7 @@ For this Kaby Lake example, we'll chose the iMac18,1 SMBIOS - this is done inten
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
  #               iMac18,1 SMBIOS Info                  #
 #######################################################

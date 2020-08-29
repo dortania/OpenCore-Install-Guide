@@ -449,9 +449,9 @@ For this Broadwell example, we chose the MacBookPro12,1 SMBIOS. The typical brea
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
- #               MacBookPro12,1 SMBIOS Info                  #
+ #               MacBookPro12,1 SMBIOS Info            #
 #######################################################
 
 Type:         MacBookPro12,1

@@ -489,9 +489,9 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
- #               MacBookPro10,2 SMBIOS Info                  #
+ #               MacBookPro10,2 SMBIOS Info            #
 #######################################################
 
 Type:         MacBookPro10,2
