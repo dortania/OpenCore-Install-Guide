@@ -1,6 +1,6 @@
 # Desktop Ivy Bridge
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 * Note that Ivy Bridge's iGPU is only supported up-to macOS 10.15, Catalina. Hacks for running later versions will not be covered
 
 ## Starting Point

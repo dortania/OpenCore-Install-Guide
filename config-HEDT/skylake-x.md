@@ -1,6 +1,6 @@
 # Skylake-X/W and Cascade Lake-X/W
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 ## Starting Point
 

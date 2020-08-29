@@ -1,6 +1,6 @@
 # Desktop Comet Lake
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 * **Note**: This guide only supports Comet Lake on 10.15.5 or newer
 
 ## Starting Point

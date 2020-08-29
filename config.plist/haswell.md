@@ -1,6 +1,6 @@
 # Desktop Haswell and Broadwell
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 ## Starting Point
 

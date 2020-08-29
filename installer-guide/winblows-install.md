@@ -1,6 +1,6 @@
 # Making the installer in Windows
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
