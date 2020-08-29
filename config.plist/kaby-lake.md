@@ -1,6 +1,9 @@
 # Desktop Kaby Lake
 
-* Supported version: 0.6.1
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | macOS 10.12, Sierra |
 
 ## Starting Point
 

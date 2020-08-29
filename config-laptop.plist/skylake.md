@@ -1,6 +1,9 @@
 # Laptop Skylake
 
-* Supported version: 0.6.1
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | OS X 10.11, El Capitan |
 
 ## Starting Point
 

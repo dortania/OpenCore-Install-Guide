@@ -205,6 +205,7 @@ DACs
 DBG
 DC7900
 DMAR
+DMGs
 DRM
 DSDT
 DSDTs
@@ -355,6 +356,7 @@ IOHDACodecDevice
 IOIIIO
 IOKit
 IONVMe
+IONetworkingFamily
 IOPCIFamily
 IOReg
 IORegistryExplorer
@@ -751,6 +753,7 @@ base64
 bitmask
 boot-arg
 boot-args
+boot-args.
 bootable
 bootcamp
 bootloader

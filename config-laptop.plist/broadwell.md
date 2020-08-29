@@ -1,6 +1,9 @@
 # Laptop Broadwell
 
-* Supported version: 0.6.1
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | OS X 10.10, Yosemite |
 
 ## Starting Point
 

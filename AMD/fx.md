@@ -1,6 +1,9 @@
 # Bulldozer(15h) and Jaguar(16h)
 
-* Supported version: 0.6.1
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | macOS 10.13, High Sierra |
 
 ## Starting Point
 

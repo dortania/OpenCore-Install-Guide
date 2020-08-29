@@ -1,7 +1,10 @@
 # Laptop Ivy Bridge
 
-* Supported version: 0.6.1
-* Note that Ivy Bridge's iGPU is only supported up-to macOS 10.15, Catalina. Hacks for running later versions will not be covered
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | OS X 10.7, Lion |
+| Notes | Ivy Bridge's iGPU is only officially supported up-to macOS 10.15 |
 
 ## Starting Point
 

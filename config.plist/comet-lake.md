@@ -1,7 +1,9 @@
 # Desktop Comet Lake
 
-* Supported version: 0.6.1
-* **Note**: This guide only supports Comet Lake on 10.15.5 or newer
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | macOS 10.15, Catalina |
 
 ## Starting Point
 

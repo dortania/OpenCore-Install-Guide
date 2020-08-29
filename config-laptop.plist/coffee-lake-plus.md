@@ -1,6 +1,10 @@
 # Laptop Coffee Lake Plus and Comet Lake
 
-* Supported version: 0.6.1
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support(CFL) | macOS 10.13, High Sierra |
+| Initial macOS Support(CML) | macOS 10.15, Catalina |
 
 ## Starting Point
 

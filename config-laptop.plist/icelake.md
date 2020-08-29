@@ -1,6 +1,9 @@
 # Laptop Icelake
 
-* Supported version: 0.6.1
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | macOS 10.15, Catalina |
 
 ## Starting Point
 

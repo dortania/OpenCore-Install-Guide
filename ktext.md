@@ -63,7 +63,8 @@ Without the below 2, no system is bootable:
   * Emulates the SMC chip found on real macs, without this macOS will not boot
   * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
 * [Lilu](https://github.com/acidanthera/Lilu/releases)
-  * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work
+  * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
+  * Note that Lilu and plugins requires OS X 10.8 or newer to function
 
 ### VirtualSMC Plugins
 
