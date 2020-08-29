@@ -65,22 +65,7 @@ This section is dedicated to quirks relating to boot.efi patching with OpenRunti
 
 ### MmioWhitelist
 
-This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`. For TRx40 users, we **highly** encourage you to fill this section out with the following properties:
-
-Entry 1:
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| Address | Number | 2987393024 |
-| Comment | String | MMIO devirt 0xB2100000 (0x81 pages, 0x8000000000000001) |
-| Enabled | Boolean | True |
-Entry 2:
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| Address | Number | 3004694528 |
-| Comment | String | MMIO devirt 0xB3180000 (0x81 pages, 0x8000000000000001) |
-| Enabled | Boolean | True |
-
-**Reminder**: Only TRx40 boards require this, **NOT** TR4 with 1st or 2nd gen Threadripper or Ryzen motherboards
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 ### Quirks
 
@@ -154,6 +139,12 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't r
 
 * **CpuidMask**: Leave this blank
 * **CpuidData**: Leave this blank
+
+### Force
+
+Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+
+For us, we can ignore.
 
 ### Block
 
@@ -276,7 +267,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
-| DmgLoading | Any | This is a word and is case-sensitive |
 | ScanPolicy | 0 | |
 | SecureBootModel | Disabled |  This is a word and is case-sensitive |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
@@ -289,13 +279,13 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **ApECID**: 0
-  * Used for netting personalized secure-boot identifiers, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
 * **BootProtect**: Bootstrap
   * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
-* **DmgLoading**: Any
-  * Ensures all dmg's load with OpenCore correctly
+* **DmgLoading**: Signed
+  * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
