@@ -34,6 +34,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 
 **Drivers provided/merged into OpenCore and so are no longer needed:**
 
+* APFS.efi
 * ApfsDriverLoader.efi
 * AppleEvent.efi
 * AppleGenericInput.efi

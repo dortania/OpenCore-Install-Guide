@@ -407,6 +407,7 @@ LPC0
 LPCB
 LPM
 LVDS
+LegacyBoot
 Lenovo
 Lexa
 Lilu
@@ -528,6 +529,8 @@ PR00
 PRs
 PS2
 PXSX
+PartitionDxe
+PartitionDxeLegacy
 Patch1
 Pathname
 Pci
@@ -594,6 +597,7 @@ SSE3
 SSE4
 STAS
 Safemode
+SandyBridge
 SetVirtualAddresses
 Shannee
 SharedSupport
@@ -940,6 +944,7 @@ shikigva
 slavs
 slowgeek
 smcread
+snb-platform-id
 socketed
 soooooo
 spacebar
