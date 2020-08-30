@@ -187,7 +187,6 @@ module.exports = {
 		                children: [
 		                    ['/config.plist/legacy/penryn', 'Penryn'],
 							['/config.plist/legacy/nehalem', 'Nehalem'],
-							['/config.plist/legacy/sandy-bridge-e', 'Sandy/Ivy Bridge-E'],
 		                ]
 		            },
                 ]

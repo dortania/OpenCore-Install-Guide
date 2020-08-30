@@ -227,7 +227,8 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 | Platforms | **CPU** | **EC** | **AWAC** |
 | :-------: | :-----: | :----: | :------: |
-| Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A |
+| Nehalem and Westmere | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A |
+| Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ |
 | Haswell-E | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ |
 | Broadwell-E | ^^ | ^^ | ^^ |
 | Skylake-X | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) |
@@ -235,16 +236,16 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 ### Laptop
 
 | Platforms | **CPU** | **EC** | **Backlight** | **I2C Trackpad** | **AWAC** | **USB** | **IRQ** | **NVRAM** |
-| :-------: | :-----: | :----: | :-----------: | :--------------: | :------: | :-----: | :-----: | :-----: |
+| :-------: | :-----: | :----: | :-----------: | :--------------: | :------: | :-----: | :-----: | :-------: |
 | SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | [SSDT-GPI0](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html) | N/A | N/A | [IRQ SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) | N/A |
 | Ivy Bridge | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ | ^^ | N/A | ^^ |
 | Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF-CFL](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF-CFL](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | ^^ | ^^ | ^^ | ^^ | N/A |
 | Coffee Lake (9th Gen) | ^^ | ^^ | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ | ^^ | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) |
-| Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | N/A |
 | Ice Lake | ^^ | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) | ^^ | ^^ |
 
 # Now with all this done, head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
