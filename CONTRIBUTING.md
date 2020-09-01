@@ -56,11 +56,13 @@ Simple step-by-steps:
   * `npm test`
   * `npm run lint` and `npm run spellcheck` (to run them individually)
   * `npm run fix-lint` (To fix any potential issues)
+  * If you adding some technical words (such as MacOS,...) and fail at the spellcheck section, you can add that word in dictionary/dictionary.txt
 
 ### Tips
 
 Some tools that make contributing a bit easier:
 
+* [Visual Studio Code](https://code.visualstudio.com)
 * [Typora](https://typora.io) for real time markdown rendering.
 * [TextMate](https://macromates.com) for easy and powerful mass find/replace.
 * [Github Desktop](https://desktop.github.com) for more user friendly GUI.
