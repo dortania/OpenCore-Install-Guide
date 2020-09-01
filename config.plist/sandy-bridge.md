@@ -153,7 +153,7 @@ And finally, you should have something like this:
 
 ::: tip PciRoot(0x0)/Pci(0x16,0x0)
 
-This is needed if you're pairing an Sandy Bridge CPU with a 7 series motherboard(ie. B75, Q75, Z75, H77, Q77, Z77), specifically needed to spoof your IMEI device into being supported.
+This is needed if you're pairing an Sandy Bridge CPU with a 7 series motherboard(ie. B75, Q75, Z75, H77, Q77, Z77), specifically needed to spoof your IMEI device into being supported. Note this property is still required with or without SSDT-IMEI.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |

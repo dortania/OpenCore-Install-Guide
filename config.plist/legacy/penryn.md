@@ -40,4 +40,4 @@
 * Desktop(64 Bit):
   * iMac10,1 Snow Leopard(10.6) to High Sierra(10.13)
   * iMac13,2 for Mojave(10.14) and Catalina(10.15)
-  * iMac15,1 for Big Sur(11)
+  * MacPro6,1 for Big Sur(11)
