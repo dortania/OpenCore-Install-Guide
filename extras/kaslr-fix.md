@@ -42,13 +42,13 @@ The real fix to this is quite simple actually, the process is both the same for 
 * **Clover users**:
   * Clover Shell(most users already have this included, usually called shell64.efi or some variation)
     * This will be found under `EFI/CLOVER/tools`
-    * If you're missing this, you can grab it from the [CLOVER.zip](https://github.com/CloverHackyColor/CloverBootloader/releases)
-  * [OcQuirks](https://github.com/ReddestDream/OcQuirks/releases)(Don't mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide)
+    * If you're missing this, you can grab it from the [CLOVERV2-xxxx.zip](https://github.com/CloverHackyColor/CloverBootloader/releases)
+  * [OcQuirks](https://github.com/CloverHackyColor/CloverBootloader/releases/latest) since Clover v5210 by downloading the .zip CloverV2-xxxx.zip it is included under /CloverV2/EFI/CLOVER/drivers/off/UEFI/MemoryFix/OcQuirks.efi, this needs to be coupled with OpenRuntime.efi which is provided in the same path
+(Don't mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide)
     * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
-  * OpenRuntime.efi(Bundled with OcQuirks)
+  * OpenRuntime.efi(Bundled with CloverV2)
     * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
-  * OcQuirks.plist(Bundled with OcQuirks)
-    * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
+  * ~~OcQuirks.plist~~(Bundled in Clover's config.plist, in last section after `SystemParameters` ). To change OpenRuntime quirks, check the end of the config-sample.plist from CloverV2-xxxx.zip, since Slice merged ReddestDream's OcQuirks.plist in Clover's config.pist
 
 * **OpenCore users**:
   * [OpenRuntime](https://github.com/acidanthera/OpenCorePkg/releases)
