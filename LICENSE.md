@@ -1,6 +1,6 @@
 # Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
-Note: This is a human-readable version, to find the full license see here: [Legal Code](LICENSE-FULL.txt)
+Note: This is a human-readable version, to find the full license see here: [Legal Code](https://github.com/dortania/OpenCore-Install-Guide/blob/master/LICENSE-FULL.txt)
 
 **You are free to:**
 
