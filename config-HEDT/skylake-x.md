@@ -80,6 +80,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualiseMmio | YES |
 | EnableWriteUnprotector | NO |
 | RebuildAppleMemoryMap | YES |
+| SetupVirtualMap | YES | Note newer Asus BIOS(v3006+) will not boot with this quirk enabled |
 | SyncRuntimePermissions | YES |
 :::
 
@@ -95,6 +96,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+  * Note newer Asus BIOS(v3006+) will not boot with this quirk enabled
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
