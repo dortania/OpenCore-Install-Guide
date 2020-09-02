@@ -83,7 +83,7 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 
 **Booter Issues:**
 
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. 
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware.
   * If your firmware doesn't have MATs:
     * Disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
   * If your firmware supports MATs:
@@ -107,7 +107,7 @@ OCABC: MAT support is 1
       * AMD's B550 and A520
       * AMD's TRx40
       * VMs like QEMU
-	  * Asus's X299 v3006+ BIOS updates(This may apply to other X299 boards)
+      * Asus's X299 v3006+ BIOS updates(This may apply to other X299 boards)
 
 * `EnableWriteUnprotector`
 
