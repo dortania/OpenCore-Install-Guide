@@ -320,7 +320,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Disabled |  This is a word and is case-sensitive |
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 :::
 
@@ -399,6 +399,8 @@ System Integrity Protection bitmask
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
 | **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
 | **-igfxcdc** | Resolves Clock ID based kernel panics on Icelake CPUs, recommended for all users |
+| **-igfxdvmt** | Similar to the above, resolves issue with some firmwares having 60MB reserved for iGPU memory which can cause kernel panics |
+
 
 * **GPU-Specific boot-args**:
 

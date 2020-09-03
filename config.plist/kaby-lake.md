@@ -289,7 +289,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Disabled |  This is a word and is case-sensitive |
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 :::
 

@@ -80,7 +80,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualizeMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| SetupVirtualMap | YES | Note B550, A520 and TRx40 boards should disable this |
+| SetupVirtualMap | YES | Note B550, A520 and TRx40 boards should disable this. Newer BIOS versions of X570 also require this off |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -271,7 +271,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Disabled |  This is a word and is case-sensitive |
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 :::
 
