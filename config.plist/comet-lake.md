@@ -443,24 +443,29 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Comet Lake example, we'll chose the iMac19,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Comet Lake:
+For this Comet Lake example, we'll chose the iMac20,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Comet Lake:
 
-* `iMac19,1` - For Mojave and newer
-* `iMac18,3` - For High Sierra and older
-  * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOS with Web Drivers
+* `iMac20,1` - i7-10700K and lower
+* `iMac20,2` - i9-10850K and higher
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
   #######################################################
- #               iMac19,1 SMBIOS Info                  #
+ #               iMac20,1 SMBIOS Info                  #
 #######################################################
 
-Type:         iMac19,1
+Type:         iMac20,1
 Serial:       C02XG0FDH7JY
 Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 ```
+
+* **Note**: GenSMBIOS has not been updated to reflect the new repo of MacSerial, to resolve issues with generating iMac20,x, you'll need to do the following:
+  * Downloaded the latest release of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases/)
+  * Navigate to `Utiltiies/macserial/` folder and grab either the macserial or macserial.exe file(.exe is for Windows)
+  * Run `chmod +x /path/to/macserial` if you're in a Unix environment, otherwise GenSMBIOS will throw a permissions error
+  * Place this macserial executable under GenSMBIOS's Scripts folder 
 
 The `Type` part gets copied to Generic -> SystemProductName.
 
