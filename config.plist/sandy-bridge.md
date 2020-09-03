@@ -463,9 +463,8 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Sandy Bridge example, we'll chose the iMac12,2 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Sandy Bridge:
 
-* `Macmini5,3` - When only using the iGPU for output
-* `iMac12,2` - When using a dGPU for output
-  * If you plan to later run macOS 10.14, Mojave, MacPro6,1 will be the recommended SMBIOS and the iGPU must be disabled in the BIOS due to no longer being supported
+* `iMac12,2` - Default Sandy Bridge SMBIOS
+  * If you plan to later run macOS 10.14, Mojave or newer, MacPro6,1 will be the recommended SMBIOS and the iGPU must be disabled in the BIOS due to no longer being supported
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
