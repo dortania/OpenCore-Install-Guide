@@ -104,10 +104,10 @@ OCABC: MAT support is 1
     * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
       * Intel's Comet Lake series
-      * AMD's B550 and A520
+      * AMD's B550 and A520(Latest BIOS on X570 are also included now)
       * AMD's TRx40
       * VMs like QEMU
-      * Asus's X299 v3006+ BIOS updates(This may apply to other X299 boards)
+      * Asus's X299 v3006+ BIOS updates(This also applies to other X299 boards on the latest BIOS)
 
 * `EnableWriteUnprotector`
 
