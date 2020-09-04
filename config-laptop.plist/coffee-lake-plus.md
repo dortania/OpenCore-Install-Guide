@@ -480,7 +480,7 @@ SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
   * Downloaded the latest release of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases/)
   * Navigate to `Utiltiies/macserial/` folder and grab either the macserial or macserial.exe file(.exe is for Windows)
   * Run `chmod +x /path/to/macserial` if you're in a Unix environment, otherwise GenSMBIOS will throw a permissions error
-  * Place this macserial executable under GenSMBIOS's Scripts folder 
+  * Place this macserial executable under GenSMBIOS's Scripts folder
 
 The `Type` part gets copied to Generic -> SystemProductName.
 

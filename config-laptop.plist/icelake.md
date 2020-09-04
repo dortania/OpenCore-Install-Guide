@@ -401,7 +401,6 @@ System Integrity Protection bitmask
 | **-igfxcdc** | Resolves Clock ID based kernel panics on Icelake CPUs, recommended for all users |
 | **-igfxdvmt** | Similar to the above, resolves issue with some firmwares having 60MB reserved for iGPU memory which can cause kernel panics |
 
-
 * **GPU-Specific boot-args**:
 
 | boot-args | Description |

@@ -546,7 +546,7 @@ Add your .efi drivers here.
 
 Only drivers present here should be:
 
-* HfsPlus.efi
+* HfsPlusLegacy.efi
 * OpenRuntime.efi
 
 ### APFS
