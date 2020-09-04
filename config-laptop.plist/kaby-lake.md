@@ -89,27 +89,17 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
-
-| Quirk | Enabled |
-| :--- | :--- |
-| EnableWriteUnprotector | YES |
-| RebuildAppleMemoryMap | NO |
-| SyncRuntimePermissions | NO |
+Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
 :::
-
 ::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **EnableWriteUnprotector**: YES
-  * Required to resolve CR0 write protections, else early kernel panics
-* **RebuildAppleMemoryMap**: NO
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+  * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses
-* **SyncRuntimePermissions**: NO
-  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Coffee Lake and newer
+  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
+  
 :::
 
 ## DeviceProperties
@@ -555,26 +545,7 @@ Related to AudioDxe settings, for us we'll be ignoring(leave as default). This i
 
 ### Input
 
-Related to boot.efi keyboard pass-through used for FileVault and Hotkey support.
-
-* **KeyFiltering**: NO
-  * Verifies and discards uninitialized data, mainly prevalent on 7 series Gigabyte boards
-* **KeyForgetThreshold**: `5`
-  * The delay between each key input when holding a key down, for best results use `5` milliseconds
-* **KeyMergeThreshold**: `2`
-  * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
-* **KeySupport**: `YES`
-  * Enables OpenCore's built in key support and **required for boot picker selection**, do not use with OpenUsbKbDxe.efi
-* **KeySupportMode**: `Auto`
-  * Keyboard translation for OpenCore
-* **KeySwap**: `NO`
-  * Swaps `Option` and `Cmd` key
-* **PointerSupport**: `NO`
-  * Used for fixing broken pointer support, commonly used for Z87 Asus boards
-* **PointerSupportMode**:
-  * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
-* **TimerResolution**: `50000`
-  * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 

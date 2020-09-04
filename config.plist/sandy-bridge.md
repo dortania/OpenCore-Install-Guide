@@ -525,7 +525,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
+![Uefi Sandy Desktop](../images/config/config-legacy/uefi-sandy-desktop.png)
 
 **ConnectDrivers**: YES
 
@@ -539,6 +539,7 @@ Only drivers present here should be:
 
 * HfsPlusLegacy.efi
 * OpenRuntime.efi
+* OpenUsbKbDxe.efi(If your firmware does not support UEFI)
 
 ### APFS
 
@@ -552,7 +553,14 @@ Related to AudioDxe settings, for us we'll be ignoring(leave as default). This i
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+::: tip Info
+
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default besides:
+
+| Quirk | Value | Comment |
+| KeySupport | NO | Enable if your BIOS supports UEFI |
+
+:::
 
 ### Output
 

@@ -115,7 +115,7 @@ Sets device properties from a map.
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties. **If you have a `-F` series CPU, you can ignore this section as you do not have an iGPU.**
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 

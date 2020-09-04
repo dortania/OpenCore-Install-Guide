@@ -29,7 +29,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/AMD/acpi.png)
+![ACPI](../images/config/AMD/acpi-fx.png)
 
 ### Add
 

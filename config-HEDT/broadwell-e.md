@@ -61,35 +61,28 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](../images/config/config-universal/aptio-iv-booter-hedt.png)
+![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
 ### MmioWhitelist
 
-This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
-
-| Quirk | Enabled |
-| :--- | :--- |
-| DevirtualiseMmio | YES |
+Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
 :::
-
 ::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **DevirtualiseMmio**: YES
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and generally useful especially on HEDT and Xeon systems
 * **EnableWriteUnprotector**: YES
   * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
-
+  
 :::
 
 ## DeviceProperties
@@ -368,7 +361,19 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 
 ### Delete
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+::: tip Info
+
+Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. Due to NVRAM issues on X99, we'll be changing the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| LegacyEnable | YES |
+| LegacyOverwrite | YES |
+| WriteFlash | NO |
+
+:::
+
+::: details More in-depth Info
 
 * **LegacyEnable**: YES
   * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM like X99
@@ -381,6 +386,8 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 * **WriteFlash**: NO
   * Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
+
+:::
 
 ## PlatformInfo
 

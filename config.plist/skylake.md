@@ -72,27 +72,17 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
-
-| Quirk | Enabled |
-| :--- | :--- |
-| EnableWriteUnprotector | YES |
-| RebuildAppleMemoryMap | NO |
-| SyncRuntimePermissions | NO |
+Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
 :::
-
 ::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **EnableWriteUnprotector**: YES
-  * Required to resolve CR0 write protections, else early kernel panics
-* **RebuildAppleMemoryMap**: NO
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+  * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses
-* **SyncRuntimePermissions**: NO
-  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Coffee Lake and newer
+  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
+  
 :::
 
 ## DeviceProperties

@@ -68,7 +68,7 @@ This section is dedicated to quirks relating to boot.efi patching with OpenRunti
 
 ### MmioWhitelist
 
-This section is allowing spaces to be pass-through to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 ### Quirks
 
@@ -290,7 +290,7 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ## NVRAM
 
-![NVRAM](../images/config/config-HEDT/broadwell-e/nvram.png)
+![NVRAM](../images/config/config-universal/nvram.png)
 
 ### Add
 
@@ -325,7 +325,6 @@ System Integrity Protection bitmask
 | **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
 | **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **npci=0x2000** | This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci= 0x3000` which disables debugging related to `gIOPCITunnelledKey` in addition. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes. [Source](https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html) |
 | **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
 
 * **GPU-Specific boot-args**:
@@ -353,19 +352,31 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 
 ### Delete
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+::: tip Info
 
-* **LegacyEnable**: YES
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM like X99
+Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
 
-* **LegacyOverwrite**: YES
-  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM like X99
+| Quirk | Enabled |
+| :--- | :--- |
+| WriteFlash | YES |
+
+:::
+
+::: details More in-depth Info
+
+* **LegacyEnable**: NO
+  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
+
+* **LegacyOverwrite**: NO
+  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
 
 * **LegacySchema**
   * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
-* **WriteFlash**: NO
-  * Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
+* **WriteFlash**: YES
+  * Enables writing to flash memory for all added variables.
+
+:::
 
 ## PlatformInfo
 

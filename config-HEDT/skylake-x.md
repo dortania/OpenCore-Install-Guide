@@ -75,13 +75,13 @@ This section is allowing devices to be passthrough to macOS that are generally i
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
-| Quirk | Enabled |
-| :--- | :--- |
-| DevirtualiseMmio | YES |
-| EnableWriteUnprotector | NO |
-| RebuildAppleMemoryMap | YES |
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| DevirtualiseMmio | YES | |
+| EnableWriteUnprotector | NO | |
+| RebuildAppleMemoryMap | YES | |
 | SetupVirtualMap | YES | Note newer Asus BIOS(v3006+) will not boot with this quirk enabled |
-| SyncRuntimePermissions | YES |
+| SyncRuntimePermissions | YES | |
 :::
 
 ::: details More in-depth Info
