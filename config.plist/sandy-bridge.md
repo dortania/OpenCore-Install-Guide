@@ -525,7 +525,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![Uefi Sandy Desktop](../images/config/config-legacy/uefi-sandy-desktop.png)
+![](../images/config/config-legacy/uefi-sandy-desktop.png)
 
 **ConnectDrivers**: YES
 

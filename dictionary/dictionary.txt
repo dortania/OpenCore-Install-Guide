@@ -854,6 +854,7 @@ iGPU
 iGPU's
 iGPU-less
 iGPU-only
+iGPU.
 iGPUs
 iMac
 iMac10
