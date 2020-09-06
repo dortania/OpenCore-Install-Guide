@@ -547,7 +547,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
+![UEFI](../images/config/config-universal/aptio-iv-uefi-laptop.png)
 
 **ConnectDrivers**: YES
 
