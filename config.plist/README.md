@@ -74,7 +74,7 @@ Now comes the important part, selecting the configuration path. Each platform ha
 | [Skylake](../config-laptop.plist/skylake.md) | 6XXX | 2015-2016 era |
 | [Kaby Lake and Amber Lake](../config-laptop.plist/kaby-lake.md) | 7XXX | 2017 era |
 | [Coffee Lake and Whiskey Lake](../config-laptop.plist/coffee-lake.md) | 8XXX | 2017-2018 era |
-| [Coffee Lake Plus and Comet Lake](../config-laptop.plist/coffee-lake.md) | 9XXX-10XXX | 2019-2020 era |
+| [Coffee Lake Plus and Comet Lake](../config-laptop.plist/coffee-lake-plus.md) | 9XXX-10XXX | 2019-2020 era |
 | [Ice Lake](../config-laptop.plist/icelake.md) | 10XXX | 2019-2020 era |
 
 ### Intel HEDT

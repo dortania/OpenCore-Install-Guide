@@ -180,6 +180,7 @@ Celeron
 Celerons
 Chipsets
 Clarkdale
+CloverV2
 Cmd
 Codec
 Codecs
@@ -447,6 +448,7 @@ MakeInstall
 MasterBootRecord
 MediaKit
 Mellanox
+MemoryFix
 MinMultiplier
 Misconfigured
 MonitorControl
@@ -567,6 +569,7 @@ Ramus
 Realtek
 Realtek's
 RealtekRTL8111
+ReddestDream's
 RehabMan's
 Rehabman
 Rehabman's
@@ -972,6 +975,7 @@ unbootable
 unmount
 untrusted
 v3006
+v5210
 vSMC
 ver
 vit9696
