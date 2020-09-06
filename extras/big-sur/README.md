@@ -70,8 +70,9 @@ And a special note for MSI Navi users, you no longer require the `ATY,rom`/`-weg
 
 Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here:
 
-* [Kext Repo](http://kexts.goldfish64.com/)
-* [Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/).
+* [Dortania's Kext & Driver build repo](https://dortania.github.io/builds): updated immediately at every commit, contains DEBUG and RELEASE versions)
+* [Goldfish64 Kext Repo](http://kexts.goldfish64.com/): contains various builds including acidanthera's, but they're only "DEBUG" version
+* [Goldfish64 Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/): same as above, these are only DEBUG builds.
 
 You will also need to ensure you have a few NVRAM variables set:
 
