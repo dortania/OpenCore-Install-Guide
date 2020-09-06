@@ -194,7 +194,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * Required for systems with PS2 keyboards and trackpads
-  * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)(This must come before VoodooPS2 in your config.plist)
+  * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)
 * [VoodooI2C](https://github.com/alexandred/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
   * To be paired with a plugin:
