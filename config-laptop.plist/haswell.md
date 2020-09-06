@@ -325,7 +325,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
 * **BootProtect**: Bootstrap
   * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
-* **DmgLoading**: Signedß
+* **DmgLoading**: Signed
   * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
@@ -521,7 +521,7 @@ Add your .efi drivers here.
 
 Only drivers present here should be:
 
-* HfsPlus.efiß
+* HfsPlus.efi
 * OpenRuntime.efi
 
 ### APFS
