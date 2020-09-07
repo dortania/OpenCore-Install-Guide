@@ -1,6 +1,6 @@
 # Clover Firmware driver conversion
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on OpenCore, firmware drivers are a bit different.
 
@@ -34,6 +34,7 @@ Main thing to note is that you must specify your kexts and firmware drivers in y
 
 **Drivers provided/merged into OpenCore and so are no longer needed:**
 
+* APFS.efi
 * ApfsDriverLoader.efi
 * AppleEvent.efi
 * AppleGenericInput.efi
