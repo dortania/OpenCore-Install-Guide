@@ -14,7 +14,7 @@
    "scripts": {
       "dev": "vuepress dev",
       "build": "vuepress build",
-      "beta": "npm run test && npm run dev"
+      "beta": "npm run test && npm run dev",
       "fix-lint": "run-script-os",
       "fix-lint:default": "(echo Attempting to fix lint... && markdownlint '**/*.md' -f && echo Fixed successfully, please commit.) || (echo Fix failed! && exit 1)",
       "fix-lint:win32": "(echo Attempting to fix lint... && markdownlint **/*.md -f && echo Fixed successfully, please commit.) || (echo Fix failed! && exit 1)",
