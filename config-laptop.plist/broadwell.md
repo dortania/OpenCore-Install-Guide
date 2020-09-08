@@ -1,6 +1,9 @@
 # Laptop Broadwell
 
-* Supported version: 0.6.0
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | OS X 10.10, Yosemite |
 
 ## Starting Point
 
@@ -187,6 +190,12 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons
 * **CpuidMask**: Leave this blank
 * **CpuidData**: Leave this blank
 
+### Force
+
+Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+
+For us, we can ignore.
+
 ### Block
 
 Blocks certain kexts from loading. Not relevant for us.
@@ -237,6 +246,10 @@ Settings relating to the kernel, for us we'll be enabling the following:
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
 :::
+
+### Scheme
+
+Settings related to legacy booting(ie. 10.4-10.6), for us we leave the default values unless you plan to boot legacy OSes(which won't be covered in this guide).
 
 ## Misc
 
@@ -293,9 +306,9 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 | ScanPolicy | 0 | |
-
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 :::
 
 ::: details More in-depth Info
@@ -304,11 +317,14 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+* **ApECID**: 0
+  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-
-* **BootProtect**: None
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
+* **BootProtect**: Bootstrap
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
+* **DmgLoading**: Signed
+  * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
@@ -316,6 +332,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+* **SecureBootModel**: Default
+  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
 
 :::
 
@@ -431,9 +449,9 @@ For this Broadwell example, we chose the MacBookPro12,1 SMBIOS. The typical brea
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
- #               MacBookPro12,1 SMBIOS Info                  #
+ #               MacBookPro12,1 SMBIOS Info            #
 #######################################################
 
 Type:         MacBookPro12,1
@@ -488,7 +506,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
+![UEFI](../images/config/config-universal/aptio-iv-uefi-laptop.png)
 
 **ConnectDrivers**: YES
 
@@ -515,26 +533,7 @@ Related to AudioDxe settings, for us we'll be ignoring(leave as default). This i
 
 ### Input
 
-Related to boot.efi keyboard pass-through used for FileVault and Hotkey support.
-
-* **KeyFiltering**: NO
-  * Verifies and discards uninitialized data, mainly prevalent on 7 series Gigabyte boards
-* **KeyForgetThreshold**: `5`
-  * The delay between each key input when holding a key down, for best results use `5` milliseconds
-* **KeyMergeThreshold**: `2`
-  * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
-* **KeySupport**: `YES`
-  * Enables OpenCore's built in key support and **required for boot picker selection**, do not use with OpenUsbKbDxe.efi
-* **KeySupportMode**: `Auto`
-  * Keyboard translation for OpenCore
-* **KeySwap**: `NO`
-  * Swaps `Option` and `Cmd` key
-* **PointerSupport**: `NO`
-  * Used for fixing broken pointer support, commonly used for Z87 Asus boards
-* **PointerSupportMode**:
-  * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
-* **TimerResolution**: `50000`
-  * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 

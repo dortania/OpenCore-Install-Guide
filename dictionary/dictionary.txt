@@ -206,6 +206,7 @@ DACs
 DBG
 DC7900
 DMAR
+DMGs
 DRM
 DSDT
 DSDTs
@@ -301,6 +302,7 @@ GT2
 GTX
 GUID
 GenSMBIOS
+GenSMBIOS's
 GibMacOS
 GitBook
 Github
@@ -356,6 +358,7 @@ IOHDACodecDevice
 IOIIIO
 IOKit
 IONVMe
+IONetworkingFamily
 IOPCIFamily
 IOReg
 IORegistryExplorer
@@ -406,6 +409,7 @@ LPC0
 LPCB
 LPM
 LVDS
+LegacyBoot
 Lenovo
 Lexa
 Lilu
@@ -415,6 +419,7 @@ MADT
 MBR
 MEI
 MEID
+MKext
 MMIO
 MSI
 MSR
@@ -527,6 +532,8 @@ PR00
 PRs
 PS2
 PXSX
+PartitionDxe
+PartitionDxeLegacy
 Patch1
 Pathname
 Pci
@@ -594,6 +601,7 @@ SSE3
 SSE4
 STAS
 Safemode
+SandyBridge
 SetVirtualAddresses
 Shannee
 SharedSupport
@@ -753,6 +761,7 @@ base64
 bitmask
 boot-arg
 boot-args
+boot-args.
 bootable
 bootcamp
 bootloader
@@ -765,6 +774,7 @@ busId
 busid
 busid=00
 busids
+cacheless
 chipset
 chipset's
 chipsets
@@ -789,6 +799,7 @@ distro
 distro's
 distros
 dmg
+dmg's
 dortania
 eMMC
 endian
@@ -833,8 +844,10 @@ i225-V
 i225LM
 i3-3110M
 i7
+i7-10700K
 i7-9700T
 i9
+i9-10850K
 i9-10900K
 i9-10910
 i9-9900K
@@ -844,6 +857,7 @@ iGPU
 iGPU's
 iGPU-less
 iGPU-only
+iGPU.
 iGPUs
 iMac
 iMac10
@@ -857,6 +871,7 @@ iMac17
 iMac18
 iMac19
 iMac20
+iMac6
 iMacPro1
 iMessage
 iServices
@@ -866,6 +881,7 @@ ie
 ie\.
 ig-platform-id
 ig-platform-id's
+igfxcdc
 igfxfw
 img
 ix-3xxx
@@ -935,6 +951,7 @@ shikigva
 slavs
 slowgeek
 smcread
+snb-platform-id
 socketed
 soooooo
 spacebar
@@ -957,6 +974,7 @@ unallocated
 unbootable
 unmount
 untrusted
+v3006
 v5210
 vSMC
 ver
@@ -968,6 +986,7 @@ vmxf
 webserver
 wifi
 x10
+x86
 xcpm
 Как
 завести

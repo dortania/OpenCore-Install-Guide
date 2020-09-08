@@ -38,5 +38,6 @@ Before we can jump head first into making an OpenCore based system, we need to g
 * SMBIOS data, ACPI patches and DSDT/SSDTs are applied to all operating systems. Adjust your SSDTs with `If (_OSI ("Darwin")) {}`
   * Note that all SSDTs mentioned in this guide have been updated accordingly and should not affect booting
 * Some systems require pure UEFI mode to boot. (This setting is commonly called "Windows 8.1/10 UEFI Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
-* OpenCore requires a version of macOS that supports either a Prelinked Kernel or Kernel Collections, this means any install of OS X 10.7 Lion or newer are supported.
+* OpenCore requires a version of macOS that supports either MKext, cacheless, Prelinked Kernel or Kernel Collections, this means support goes as far back as 10.4.
+  * Proper support has been introduced in 10.6 however.
 * Those having issues converting can refer to the [Clover Conversion](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion) page

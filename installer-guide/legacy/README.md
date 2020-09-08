@@ -2,6 +2,8 @@
 
 Page more to prove it's possible to install legacy versions of macOS/OS X with OpenCore, all there OSes were installed on one machine all with the same version of OpenCore(0.5.8):
 
+![](../../images/installer-guide/legacy-mac-install-md/dumpster/10.6-Snow-Loepard.png)
+
 ![Ignore the unsupported GPU, too lazy to swap out my GT 710 for my GT 220 so this will have to do](../../images/installer-guide/legacy-mac-install-md/dumpster/10.7-Lion.png)
 
 ![](../../images/installer-guide/legacy-mac-install-md/dumpster/10.8-MountainLion.png)
