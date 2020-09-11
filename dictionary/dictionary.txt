@@ -235,6 +235,8 @@ EDID
 EDK
 EFI
 EFI's
+EFI32
+EFI64
 EH01
 EH02
 EHC1
@@ -602,6 +604,7 @@ SSE4
 STAS
 Safemode
 SandyBridge
+SecureBootModel
 SetVirtualAddresses
 Shannee
 SharedSupport
@@ -783,6 +786,7 @@ codec
 codecs
 con0
 config
+config's
 configurator
 configurators
 csr-active-config
