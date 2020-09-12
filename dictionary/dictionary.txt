@@ -28,10 +28,13 @@
 0xFED00000
 0xFEE00000
 0xFF000000
+100MBe
 100MHz
 1024x768
 120Hz
 144Hz
+14F1
+14e4
 16XX
 18G103
 18G95
@@ -44,7 +47,9 @@
 390X
 3990X
 3D
+43a0
 4G
+50F4
 5700XT
 64MB
 64bit
@@ -111,6 +116,7 @@ AppleIntelCPUPowerManagment
 AppleIntelI210Ethernet
 AppleIntelPchSeriesAHCI
 AppleIntelPowerManagement
+AppleIntele1000e
 AppleLPC
 AppleLife
 AppleMCEReporter
@@ -139,6 +145,8 @@ B0D3
 B360
 B550
 B75
+BCM5722
+BCM5722D
 BCM94331CD
 BCM94352Z
 BGRT
@@ -178,6 +186,7 @@ Capitan
 Carcraftz
 Celeron
 Celerons
+Chipset
 Chipsets
 Clarkdale
 CloverV2
@@ -426,6 +435,7 @@ MMIO
 MSI
 MSR
 MSR_FLEX_RATIO
+MT2
 MacBook
 MacBook7
 MacBook8
@@ -570,6 +580,7 @@ Radeon-Denit-SSDT
 Ramus
 Realtek
 Realtek's
+RealtekRTL8100
 RealtekRTL8111
 ReddestDream's
 RehabMan's
@@ -589,9 +600,12 @@ SGX
 SHA-1
 SL01
 SMBUS
+SMBus
+SMBus-based
 SMC
 SMCAMDProcessor
 SMCBatteryManager
+SMM
 SSD
 SSDT
 SSDT-.*
@@ -651,6 +665,7 @@ Threadripper
 TimeMachine
 Touchbase
 Trackpad
+Trackpads
 TransMac
 Typora
 UEFIExtrac
@@ -694,6 +709,7 @@ VoodooInput
 VoodooPS2
 VoodooPS2's
 VoodooPS2Controller
+VoodooRMI
 VoodooTSCSync
 VoodooTsc
 VuePress
@@ -923,6 +939,7 @@ passthrough
 patcher
 pathing
 pathing.
+pci
 pentiums
 plist
 plist-only
@@ -936,6 +953,7 @@ pre-existing
 pre-hex
 pre-made
 preboot
+prebuilt
 precompiled
 prelinked
 prelinkedkernel
@@ -972,6 +990,7 @@ touchpad
 touchpads
 trackpad
 trackpads
+trackpoints
 trashOS
 ubuntu
 unallocated

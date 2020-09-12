@@ -36,20 +36,56 @@ Due to the easier to use GUI, we recommend downloading AIDA64 and running this a
 
 * Note: Intel SOC based CPUs will have the chipset and other features already on the same die instead of being dedicated chips. This means trying to detect the exact chipset is a bit more difficult
 
-### Keyboard Connection Type
+### Keyboard, Trackpad and Touchscreen Connection Type
 
-| AIDA64 | DeviceManager|
+| DeviceManager |
+| :--- |
+| ![](./images/finding-hardware-md/trackpad-model-devicemanager.png) |
+
+AIDA64 unfortunately doesn't provide any useful info regarding pointer devices, so we recommend using DeviceManager for this.
+
+* You can find these devices under the following:
+  * `Human Interface Devices`
+  * `Keyboards`
+  * `Mice and other Pointer Devices`
+
+* To view the exact connection type of the device, select the pointer device then enter `View -> Device by Connection`. This will clarify whether it's over PS2, I2C, SMBus, USB, etc
+
+#### Edge Cases
+
+Depending on the device, it may show up under multiple names and connections. The main ones to keep an eye on:
+
+* SMBus
+  * These will show up under both PS2 under `Synaptics PS2 device` and PCI as `Synaptic SMBus Driver`
+* ELAN
+  * TO-DO
+* USB
+  * These will show up as a PS2 Compliant Trackpad
+  
+::: details SMBus Example
+
+![](./images/finding-hardware-md/Windows-SMBus-Device.png)
+
+As you can see, we get 2 Synaptics devices, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus provides much functionality and precision with [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI).
+
+:::
+
+::: details ELAN Example
+
+TO-DO
+
+:::
+
+::: details USB Example
+
+| Device by Type | Device by Connection |
 | :--- | :--- |
-| ![](./images/finding-hardware-md/keyboard-type-aida64.png) | ![](./images/finding-hardware-md/keyboard-type-devicemanager.png) |
+| ![](./images/finding-hardware-md/USB-trackpad-normal.png) | ![](./images/finding-hardware-md/USB-trackpad-by-connection.png)
 
-### Trackpad Connection Type
+As you can, our trackpad actually shows up under the USB bus when we switch our connection view to `Device by Connection`
 
-| AIDA64 | DeviceManager|
-| :--- | :--- |
-|  | ![](./images/finding-hardware-md/trackpad-model-devicemanager.png) |
-
-### Touchscreen Connection Type
-
+:::
+  
 ### Audio Codec
 
 | AIDA64 | DeviceManager|
@@ -99,7 +135,7 @@ lspci | grep -i --color 'vga\|3d\|2d'
 ### Chipset Model
 
 ```sh
-
+dmidecode -t baseboard
 ```
 
 ### Keyboard, Trackpad and  Touchscreen Connection Type
@@ -116,12 +152,14 @@ lspci | grep -i 'audio'
 
 ### Network Controller models
 
-Basic info: 
+Basic info:
+
 ```sh
 lspci | grep -i 'network'
 ```
 
 More in-depth info:
+
 ```sh
 lshw -class network
 ```
@@ -131,5 +169,3 @@ lshw -class network
 ```sh
 lshw -class disk -class storage
 ```
-
-

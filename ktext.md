@@ -90,9 +90,9 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops, **desktops can ignore**
-  * Do not use until battery has been properly patched, can cause issues otherwise
+  * Do not use until battery has been properly patched, can cause issues otherwise. So for initial setup, please omit this kext. After install you can follow this page for setup: [Fixing Battery Read-outs](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
 * SMCDellSensors.kext
-  * Allows for finer monitoring and control of the fans on Dell machines
+  * Allows for finer monitoring and control of the fans on Dell machines supporting SMM
   * **Do not use if you do not have a supported Dell machine**
 
 ### Graphics
@@ -100,11 +100,14 @@ The below plugins are not required to boot, and merely add extra functionality t
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
   * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
   * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
+  * Requires OS X 10.8 or newer
 
 ### Audio
 
 * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
-  * Used for AppleHDA patching, used for giving you onboard audio. AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
+  * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
+  * AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
+  * Requires OS X 10.8 or newer
 
 ### Ethernet
 
@@ -113,16 +116,37 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
+  * Requires OS X 10.9 or newer
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
+  * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
+  * Requires OS X 10.8 or newer
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
+  * Requires OS X 10.11 or newer with v2.2.1+
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
   * For Realtek's 2.5Gb Ethernet
+  * Requires macOS 10.15 or newer
 * For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
+  * Requires macOS 10.15 or newer
+
+::: details Legacy Ethernet Kexts
+
+Relevant for either legacy macOS installs or older PC hardware.
+
+* [AppleIntele1000e](https://github.com/chris1111/AppleIntelE1000e)
+  * Mainly relevant for 10/100MBe based Intel Ethernet controllers
+* [RealtekRTL8100](https://www.insanelymac.com/forum/files/file/259-realtekrtl8100-binary/)
+  * Mainly relevant for 10/100MBe based Realtek Ethernet controllers
+  * Requires macOS 10.12 or newer with v2.0.0+
+* [BCM5722D](https://github.com/chris1111/BCM5722D)
+  * Mainly relevant for BCM5722 based Broadcom Ethernet controllers
+  * Requires OS X 10.6 or newer
+
+:::
 
 ### USB
 
@@ -130,6 +154,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
   * Not needed on Skylake and newer(AsRock is dumb and does need this)
   * Does not work on AMD CPUs **at all**
+  * Requires OS X 10.11 or newer
 
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
   * Needed for non-native USB controllers
@@ -147,6 +172,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
+  * Requires OS X 10.8 or newer
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
@@ -162,10 +188,9 @@ The order in `Kernel -> Add` should be:
 
 ### AMD CPU Specific kexts
 
-* [~~NullCPUPowerManagment~~](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-  * We have a much better solution known as `DummyPowerManagement` found under `Kernel -> Quirks` in your config.plist, this will be covered in a later page
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
   * USB fix for AMD FX systems, not recommended for Ryzen
+  * Requires macOS 10.13 or newer
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
 
@@ -177,14 +202,18 @@ The order in `Kernel -> Add` should be:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
+  * Requires macOS 10.15 or newer
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead
   * **Does not work on AMD CPUs**
+  * Requires OS X 10.8 or newer
 * [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)
   * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
   * **Does not work on AMD CPUs**
+  * Requires macOS 10.12 or newer
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
-  * Used for fixing power management and initialization on non-Apple NVMe, requires macOS 10.14 or newer
+  * Used for fixing power management and initialization on non-Apple NVMe
+  * Requires macOS 10.14 or newer
 
 ### Laptop Specifics
 
@@ -193,10 +222,14 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 #### Input drivers
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
-  * Required for systems with PS2 keyboards and trackpads
-  * Trackpad users should also pair this with [VoodooInput](https://github.com/acidanthera/VoodooInput/releases)
-* [VoodooI2C](https://github.com/alexandred/VoodooI2C/releases)
+  * For systems with PS2 Keyboards, Mice and Trackpads
+  * Requires OS X 10.11 or newer for MT2 functions
+* [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
+  * For systems with Synaptics SMBus-based devices, mainly for trackpads and trackpoints
+  * Requires OS X 10.11 or newer for MT2 functions
+* [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
+  * Requires OS X 10.11 or newer for MT2 functions
   * To be paired with a plugin:
     * VoodooI2CHID - Implements the Microsoft HID device specification.
     * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
@@ -208,6 +241,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 
 * [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
   * Recommended for MacBook SMBIOS that include a TouchID sensor to fix auth issues, generally 2016 and newer SMBIOS will require this
+  * Requires macOS 10.13 or newer
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
