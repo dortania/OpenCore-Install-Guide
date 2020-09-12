@@ -41,3 +41,8 @@ For some reason people kept using these flags into Clover which had no effect, a
 **IGPEnabler=Yes/No**
 
 * Same idea as GraphicsEnabler, Clover equivalent is InjectIntel so feature parity would be [WhateverGreen's Framebuffer patching](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+
+**-f**
+
+* Enables cacheless booting on Chameleon and Clover, OpenCore has a slightly different option under `Kernel -> Scheme -> KernelCache` and set the entry to `Cacheless`
+  * Currently cacheless booting is only supported on 64-bit kernels from OS X 10.6 to 10.9

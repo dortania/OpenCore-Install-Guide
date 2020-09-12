@@ -53,7 +53,7 @@ For CPU support, we have the following breakdown:
 | [Ivy Bridge-E5](https://en.wikipedia.org/wiki/Ivy_Bridge_(microarchitecture)) | 10.9.2 | Current | N/A | 0x0306E0 |
 | [Haswell](https://en.wikipedia.org/wiki/Haswell_(microarchitecture)) | 10.8.5 | Current | N/A | 0x0306C0(S) |
 | [Broadwell](https://en.wikipedia.org/wiki/Broadwell_(microarchitecture)) | 10.10.0 | Current | N/A | 0x0306D4(U/Y) |
-| [Skylake](https://en.wikipedia.org/wiki/Skylake_(microarchitecture)) | 10.11.1 | Current | N/A | 0x0506e3(H/S) 0x0406E3(U/Y) |
+| [Skylake](https://en.wikipedia.org/wiki/Skylake_(microarchitecture)) | 10.11.0 | Current | N/A | 0x0506e3(H/S) 0x0406E3(U/Y) |
 | [Kaby Lake](https://en.wikipedia.org/wiki/Kaby_Lake) | 10.12.4 | Current | N/A | 0x0906E9(H/S/G) 0x0806E9(U/Y) |
 | [Coffee Lake](https://en.wikipedia.org/wiki/Coffee_Lake) | 10.12.6 | Current | iGPU supported added in 10.13.6 | 0x0906EA(S/H/E) 0x0806EA(U)|
 | [Amber](https://en.wikipedia.org/wiki/Kaby_Lake#List_of_8th_generation_Amber_Lake_Y_processors), [Whiskey](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture)), [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.14.1 | Current | N/A | 0x0806E0(U/Y) |
@@ -74,7 +74,8 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
 * Nvidia's GPU support is complicated:
   * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
   * [Nvidia's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
-  * Nvidia's [Kepler(6XX, 7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS(Including macOS 11: Big Sur)
+  * [Nvidia's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
+  * [Nvidia's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS(Including macOS 11: Big Sur)
     * This is due to Apple still supporting a few [MacBook Pros with Nvidia GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html)
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
@@ -88,13 +89,32 @@ And an important note for **Laptops with discrete GPUs**:
 
 **For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)**
 
+::: details Intel GPU Support Chart
+
+| GPU Generation | Initial support | Last supported version | Notes |
+| :--- | :--- | :--- | :--- |
+| [3rd Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Third_generation) | 10.4.1 | 10.7.5 | Requires 32-bit kernel |
+| [4th Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen4) | 10.5.0 | 10.7.5 | Requires 32-bit kernel |
+| [Arrendale(HD Graphics)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen5) | 10.6.4 | 10.13.6 | N/A |
+| [Sandy Bridge(HD 3000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen6) | 10.6.7 | 10.13.6 | N/A |
+| [Ivy Bridge(HD 4000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen7) | 10.7.3 | 10.15.6 | N/A |
+| [Haswell(HD 4XXX, 5XXX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen7) | 10.8.5 | Current | N/A |
+| [Broadwell(5XXX, 6XXX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen8) | 10.10.0 | Current | N/A |
+| [Skylake(HD 5XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.11.0 | Current | N/A |
+| [Kaby Lake(HD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.12.4 | Current | N/A |
+| [Coffee Lake(UHD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.13.6 | Current | N/A |
+| [Comet Lake(UHD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.15.4 | Current | N/A |
+| [Ice Lake(Gx)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen11) | 10.15.4 | Current | Requires `-igfxcdc` and `-igfxdvmt` in boot-args |
+
+:::
+
 ::: details AMD GPU Support Chart
 
 | GPU Generation | Initial support | Last supported version | Notes |
 | :--- | :--- | :--- | :--- |
 | [X800](https://en.wikipedia.org/wiki/Radeon_X800_series) | 10.3.x | 10.7.5 | Requires 32 bit kernel |
-| [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | 10.7.5 | Requires 32 bit kernel |
-| [Terascale](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.5.x | 10.13.6 | N/A |
+| [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | 10.7.5 | N/A |
+| [Terascale](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.4.x | 10.13.6 | N/A |
 | [Terascale 2/3](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.6.x | 10.13.6 | N/A |
 | [GCN 1](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.8.3 | Current | N/A |
 | [GCN 2/3](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.10.x | Current | N/A |
@@ -110,7 +130,7 @@ And an important note for **Laptops with discrete GPUs**:
 | GPU Generation | Initial support | Last supported version | Notes |
 | :--- | :--- | :--- | :--- |
 | [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | Requires 32 bit kernel |
-| [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | 10.7.5 | Requires 32 bit kernel |
+| [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | 10.7.5 | N/A |
 | [Tesla](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)) | 10.4.x | 10.13.6 | N/A |
 | [Tesla V2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | 10.13.6 | N/A |
 | [Fermi](https://en.wikipedia.org/wiki/Fermi_(microarchitecture)) | 10.7.x | 10.13.6 | N/A |
