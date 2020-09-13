@@ -121,7 +121,7 @@ Due to how certain OEMs present device names, the most accurate info you can get
 
 ### Drive Model
 
-| AIDA64 | DeviceManager|
+| AIDA64 | Device Manager|
 | :--- | :--- |
 | ![](./images/finding-hardware-md/disk-model-aida64.png) | ![](./images/finding-hardware-md/disk-model-devicemanager.png) |
 
