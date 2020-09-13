@@ -125,7 +125,7 @@ Due to how certain OEMs present device names, the most accurate info you can get
 | :--- | :--- |
 | ![](./images/finding-hardware-md/disk-model-aida64.png) | ![](./images/finding-hardware-md/disk-model-devicemanager.png) |
 
-Due to OEMs not providing much details about the drive, you'll need to google a bit which drive matches up with the displayed name.
+Due to OEMs not providing much details about the drive, you'll need to Google a bit which drive matches up with the displayed name.
 
 ## Finding Hardware using Linux
 
