@@ -93,7 +93,7 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for measuring battery readouts on laptops, **desktops can ignore**
   * Do not use until battery has been properly patched, can cause issues otherwise. So for initial setup, please omit this kext. After install you can follow this page for setup: [Fixing Battery Read-outs](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
 * SMCDellSensors.kext
-  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM) 
+  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM)
   * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
 
 ### Graphics
@@ -236,8 +236,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
     * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
     * VoodooI2CSynaptics - Implements support for Synaptic's proprietary devices.
     * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
-    * VoodooI2CUPDDEngine - Implements Touchbase driver support.
-	* VoodooI2CAtmelMXT - Implements Atmel Multitouch Protocol
+    * VoodooI2CAtmelMXT - Implements Atmel Multitouch Protocol
 * [AlpsT4USB](https://github.com/blankmac/AlpsT4USB)
   * Used for USB ALPS devices, **note** this does not work with I2C based devices.
 

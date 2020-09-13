@@ -58,7 +58,7 @@ Depending on the device, it may show up under multiple names and connections. Th
 * SMBus
   * These will show up under both PS2 under `Synaptics PS2 device` and PCI as `Synaptic SMBus Driver`
     * ie. `Synaptics Pointer device` and `Synaptic SMBus Driver`
-	* ie. `ELAN Pointer device` and `ELAN SMBus Driver`
+    * ie. `ELAN Pointer device` and `ELAN SMBus Driver`
 * USB
   * These will show up as a PS2 Compliant Trackpad
 * I2C Connection Type
@@ -96,10 +96,14 @@ Currently VoodooI2C supports these flavours of touch-pads:
 | ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
 | Synaptic's Proprietary | VoodooI2CSynaptics | Synaptic F12 protocol require VoodooI2CHID instead |
 | FTE1001 touchpad | VoodooI2CFTE | |
-| Touchbase Driver | VoodooI2CUPDDEngine | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
 
-To determine which plugin to use, see here
+To determine which plugin to use, we recommend the following strategy:
+
+* Determine the driver used by your I2C device
+* Match up the driver to the above table
+  * When it only says Microsoft HID Compliant, we recommend using VoodooI2CHID
+* Once installed in macOS, you can play around more with plugins
 
 :::
   
