@@ -91,6 +91,7 @@ AirportBrcmFixup
 AlGrey
 Aleksander
 Aleksander's
+AlpsT4USB
 AmazonBasics
 Andrey's
 Andrey1970AppleLife
@@ -138,6 +139,7 @@ Asus
 Asus's
 Atheros
 AtherosE2200Ethernet
+Atmel
 Attribution-NonCommercial-ShareAlike
 AudioDxe
 Auth
@@ -467,6 +469,7 @@ MonitorControl
 MountEFI
 MultiBeast
 Multiboot
+Multitouch
 NIC
 NICs
 NOOPT
@@ -704,6 +707,7 @@ VoiceOver
 VoodooGPIO
 VoodooHDA
 VoodooI2C
+VoodooI2CHID
 VoodooI2CServices
 VoodooInput
 VoodooPS2

@@ -62,7 +62,7 @@ Depending on the device, it may show up under multiple names and connections. Th
 * USB
   * These will show up as a PS2 Compliant Trackpad
 * I2C Connection Type
-  * Currently there's many flavours of I2C Touch-pads, so finding your exact connection type can be a bit difficult.
+  * Currently there's many flavors of I2C Touch-pads, so finding your exact connection type can be a bit difficult.
   
 ::: details SMBus Example
 
@@ -88,7 +88,7 @@ As you can, our trackpad actually shows up under the USB bus when we switch our 
 
 ::: details I2C Connection Type
 
-Currently VoodooI2C supports these flavours of touch-pads:
+Currently VoodooI2C supports these flavors of touch-pads:
 
 | Connection type | Plugin | Notes |
 | :--- | :--- | :--- |
