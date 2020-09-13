@@ -135,7 +135,7 @@ For finding hardware using Linux, we'll be using a few tools:
 * `pciutils`
 * `dmidecode`
 
-Below you'll find a list of commands to run in the terminal, thankfully most Linux distros will come with these tools already installed.
+Below you'll find a list of commands to run in the terminal, thankfully most Linux distros will come with these tools already installed. If not, you will likely find them in your distro's package manager.
 
 ### CPU Model
 
