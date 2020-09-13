@@ -1,6 +1,6 @@
 # Finding your hardware
 
-This section is mostly a mini-guide on how to find what hardware you're currently running, this is mainly relevant for laptop and prebuilt users as hardware specs are a bit more difficult to obtain. You can skip this page if you already know what hardware you have.
+This section is mostly a mini-guide on how to find what hardware you're currently running, this is mainly relevant for laptop and prebuilt users as hardware specs are a bit more difficult to obtain. You can skip this page  and head to [Creating the USB](./installer-guide/) if you already know what hardware you have.
 
 For this we'll assume you have Windows or Linux installed:
 
@@ -57,22 +57,22 @@ Depending on the device, it may show up under multiple names and connections. Th
 
 * SMBus
   * These will show up under both PS2 under `Synaptics PS2 device` and PCI as `Synaptic SMBus Driver`
-* ELAN
-  * TO-DO
+    * ie. `Synaptics Pointer device` and `Synaptic SMBus Driver`
+	* ie. `ELAN Pointer device` and `ELAN SMBus Driver`
 * USB
   * These will show up as a PS2 Compliant Trackpad
+* I2C Connection Type
+  * Currently there's many flavours of I2C Touch-pads, so finding your exact connection type can be a bit difficult.
   
 ::: details SMBus Example
 
-![](./images/finding-hardware-md/Windows-SMBus-Device.png)
+| Synaptics Example | ELAN Example |
+| :--- | :--- |
+| ![](./images/finding-hardware-md/Windows-SMBus-Device.png) | ![](./images/finding-hardware-md/ELAN-SMBus-DeviceManager.png) |
 
-As you can see, we get 2 Synaptics devices, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus provides much functionality and precision with [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI).
+As you can see, we get 2 Synaptics devices in the left image, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus provides much functionality and precision with [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI). Same idea applies to ELAN devices
 
-:::
-
-::: details ELAN Example
-
-TO-DO
+* Note not all Synaptics and ELAN devices support SMBus
 
 :::
 
@@ -83,6 +83,23 @@ TO-DO
 | ![](./images/finding-hardware-md/USB-trackpad-normal.png) | ![](./images/finding-hardware-md/USB-trackpad-by-connection.png)
 
 As you can, our trackpad actually shows up under the USB bus when we switch our connection view to `Device by Connection`
+
+:::
+
+::: details I2C Connection Type
+
+Currently VoodooI2C supports these flavours of touch-pads:
+
+| Connection type | Plugin | Notes |
+| :--- | :--- | :--- |
+| Microsoft HID | VoodooI2CHID | |
+| ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
+| Synaptic's Proprietary | VoodooI2CSynaptics | Synaptic F12 protocol require VoodooI2CHID instead |
+| FTE1001 touchpad | VoodooI2CFTE | |
+| Touchbase Driver | VoodooI2CUPDDEngine | |
+| Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
+
+To determine which plugin to use, see here
 
 :::
   
@@ -118,7 +135,7 @@ For finding hardware using Linux, we'll be using a few tools:
 * `pciutils`
 * `dmidecode`
 
-Thankfully most Linux distros will come with these tools already installed
+Below you'll find a list of commands to run in the terminal, thankfully most Linux distros will come with these tools already installed.
 
 ### CPU Model
 

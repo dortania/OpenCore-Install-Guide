@@ -174,17 +174,17 @@ Removes device properties from the map, for us we can ignore this.
 
 ### Add
 
-Here's where we specific which kexts to load, in what specific order and what architectures this kext is meant for. The main thing you need to keep in mind is:
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. The main thing you need to keep in mind is:
 
 * Load order
-  * Remember that any plugins should load *after* the master
+  * Remember that any plugins should load *after* its dependencies
   * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
 
 A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
 * **Arch**
   * Architectures supported by this kext
-  * Currently supported values are `Any`, `i386`(32-bit), `x86_64`(64-bit)
+  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
 * **BundlePath**
   * Name of the kext
   * ex: `Lilu.kext`
@@ -413,7 +413,7 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 * **nvda\_drv**: <>
   * For enabling Nvidia Web Drivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD, Intel and Kepler GPU users should delete this section.**
 * **run-efi-updater**: `No`
-  * this is used to prevent Apple's firmware update packages from installing, this is very important especially with PC hardware as these firmware updates will crash on updates.
+  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
 
 * **prev-lang:kbd**: <>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):

@@ -42,6 +42,7 @@ In addition to the above, if your hardware doesn't support UEFI(2011 and older e
   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older
+  * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
 
 These files will go in your Drivers folder in your EFI
 
@@ -92,8 +93,8 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for measuring battery readouts on laptops, **desktops can ignore**
   * Do not use until battery has been properly patched, can cause issues otherwise. So for initial setup, please omit this kext. After install you can follow this page for setup: [Fixing Battery Read-outs](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
 * SMCDellSensors.kext
-  * Allows for finer monitoring and control of the fans on Dell machines supporting SMM
-  * **Do not use if you do not have a supported Dell machine**
+  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM) 
+  * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
 
 ### Graphics
 
@@ -225,7 +226,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
   * For systems with PS2 Keyboards, Mice and Trackpads
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
-  * For systems with Synaptics SMBus-based devices, mainly for trackpads and trackpoints
+  * For systems with SMBus-based devices, mainly for trackpads and trackpoints. Commonly found on ELAN and Synaptics devices.
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
@@ -236,6 +237,9 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
     * VoodooI2CSynaptics - Implements support for Synaptic's proprietary devices.
     * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
     * VoodooI2CUPDDEngine - Implements Touchbase driver support.
+	* VoodooI2CAtmelMXT - Implements Atmel Multitouch Protocol
+* [AlpsT4USB](https://github.com/blankmac/AlpsT4USB)
+  * Used for USB ALPS devices, **note** this does not work with I2C based devices.
 
 #### Misc
 

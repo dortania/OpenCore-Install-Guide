@@ -99,6 +99,7 @@ module.exports = {
 				'macos-limits',
                 'terminology',
                 'why-oc',
+                'find-hardware',
             ]
 
         },
@@ -118,7 +119,6 @@ module.exports = {
                 ],
             },
                 '/installer-guide/opencore-efi',
-                'find-hardware',
                 'ktext',
             ['https://dortania.github.io/Getting-Started-With-ACPI/', 'Getting started with ACPI'],
                 '/config.plist/',
