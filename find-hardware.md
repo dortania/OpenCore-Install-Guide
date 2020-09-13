@@ -9,7 +9,7 @@ For this, we'll assume you have Windows or Linux installed:
 
 ## Finding Hardware using Windows
 
-For this we have mainly 2 options:
+For this we mainly have 2 options:
 
 * Windows' built-in Device Manager
 * [AIDA64](https://www.aida64.com/downloads)
