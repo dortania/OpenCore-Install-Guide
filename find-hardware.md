@@ -2,7 +2,7 @@
 
 This section is mostly a mini-guide on how to find what hardware you're currently running; this is mainly relevant for laptop and prebuilt users as hardware specs are a bit more difficult to obtain. You can skip this page and head to [Creating the USB](./installer-guide/) if you already know what hardware you have.
 
-For this we'll assume you have Windows or Linux installed:
+For this, we'll assume you have Windows or Linux installed:
 
 * [Finding hardware using Windows](#finding-hardware-using-windows)
 * [Finding hardware using Linux](#finding-hardware-using-linux)
