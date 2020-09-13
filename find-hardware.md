@@ -11,7 +11,7 @@ For this, we'll assume you have Windows or Linux installed:
 
 For this we have mainly 2 options:
 
-* Windows' Built-in DeviceManager
+* Windows' built-in Device Manager
 * [AIDA64](https://www.aida64.com/downloads)
 
 Due to the easier to use GUI, we recommend downloading AIDA64 and running this as it's much easier to grab specs. However we'll show you both methods for obtaining hardware specs.
