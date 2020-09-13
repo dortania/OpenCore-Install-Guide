@@ -113,7 +113,7 @@ Due to how certain OEMs present device names, the most accurate info you can get
 
 ### Network Controller models
 
-| AIDA64 | DeviceManager|
+| AIDA64 | Device Manager|
 | :--- | :--- |
 | ![](./images/finding-hardware-md/nic-model-aida64.png) | ![](./images/finding-hardware-md/nic-model-devicemanager.png) |
 
