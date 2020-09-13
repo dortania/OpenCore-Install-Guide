@@ -182,6 +182,22 @@ diskutil apfs updatePreboot /volume/disk5s2
 
 Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
 
+## Stuck on `OCB: LoadImage failed - Security Violation`
+
+```
+OCSB: No suitable signature - Security Violation
+OCB: Apple Secure Boot prohibits this boot entry, enforcing!
+OCB: LoadImage failed - Security Violation
+```
+
+This is due to missing outdated Apple Secure Boot manifests present on your preboot volume resulting is a failure to load if you have SecureBootModel set, reason for these files being missing is actually a bug in macOS.
+
+To resolve this you can do one of the following:
+
+* Disable SecureBootModel(ie. set `Misc -> Secuirty -> SecureBootModel -> Disabled`)
+* Reinstall macOS with the latest version
+* Or copy over the Secure Boot manifests from `/usr/standalone/i386` to `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
+
 ## Can't see macOS partitions
 
 Main things to check:
@@ -542,7 +558,11 @@ Commonly due to systems running AWAC clocks, please see the [Getting started wit
 
 ## Kernel Panic `Cannot perform kext summary`
 
-Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don't.
+Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that:
+
+* Your kexts are in the correct order(master then plugins, Lilu always before the plugins)
+* Kexts with executables have them and plist only kexts don't(ie. USBmap.kext, XHCI-unspported.kext, etc does not contain an executable)
+* Don't include multiple of the same kexts in your config.plist(ie. including multiple copies of VoodooInput from multiple kexts, we recommend choosing the first kext in your config's array and disable the rest)
 
 ## Kernel Panic `AppleIntelMCEReporter`
 
