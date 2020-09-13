@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify things.
 
@@ -11,24 +11,25 @@ While still a work in progress, laptop users wanting to convert an existing Clov
 # OpenCore booting
 
 * [Stuck on `no vault provided!`](#stuck-on-no-vault-provided)
+* [Stuck on `OC: Invalid Vault mode`](#stuck-on-oc-invalid-vault-mode)
 * [Stuck on EndRandomSeed](#stuck-on-endrandomseed)
-* [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eblogexitbsstart)
+* [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
 * [Stuck on [EB|LD:OFS] Err(0xE) when booting preboot volume](#stuck-on-eb-ld-ofs-err-0xe-when-booting-preboot-volume)
-* [Can't see macOS partitions](#cant-see-macos-partitions)
+* [Can't see macOS partitions](#can-t-see-macos-partitions)
 * [Black screen after picker](#black-screen-after-picker)
-* [Stuck on `OC: OcAppleGenericInput... - Success`](#stuck-on-oc-ocapplegenericinput---success)
-* [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](#stuck-on-ocb-ocscanforbootentries-failure---not-found)
+* [Stuck on `OC: OcAppleGenericInput... - Success`](#stuck-on-oc-ocapplegenericinput-success)
+* [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](#stuck-on-ocb-ocscanforbootentries-failure-not-found)
 * [Stuck on `OCB: failed to match a default boot option`](#stuck-on-ocb-failed-to-match-a-default-boot-option)
-* [Stuck on `OCABC: Memory pool allocation failure - Not Found`](#stuck-on-ocabc-memory-pool-allocation-failure---not-found)
+* [Stuck on `OCABC: Memory pool allocation failure - Not Found`](#stuck-on-ocabc-memory-pool-allocation-failure-not-found)
 * [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
-* [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](#stuck-on-oc-driver-xxxefi-at-0-cannot-be-found)
+* [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](#stuck-on-oc-driver-xxx-efi-at-0-cannot-be-found)
 * [Stuck on `Buffer Too Small`](#stuck-on-buffer-too-small)
 * [Stuck on `Plist only kext has CFBundleExecutable key`](#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
 * [Receiving `Failed to parse real field of type 1`](#receiving-failed-to-parse-real-field-of-type-1)
 * [Stuck after selection macOS partition on OpenCore](#stuck-after-selection-macos-partition-on-opencore)
-* [Can't select anything in the picker](#cant-select-anything-in-the-picker)
+* [Can't select anything in the picker](#can-t-select-anything-in-the-picker)
 * [Stuck on `This version of Mac OS X is not supported: Reason Mac...`](#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac)
-* [`Couldn't allocate runtime area` errors?](#couldnt-allocate-runtime-area-errors)
+* [`Couldn't allocate runtime area` errors?](#couldn-t-allocate-runtime-area-errors)
 * [SSDTs not being added](#ssdts-not-being-added)
 * [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios)
 * [OCABC: Incompatible OpenRuntime r4, require r10](#ocabc-incompatible-openruntime-r4-require-r10)
@@ -83,7 +84,11 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 
 **Booter Issues:**
 
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware.
+  * If your firmware doesn't have MATs:
+    * Disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+  * If your firmware supports MATs:
+    * Enable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then disable `EnableWriteUnprotector`.
 
 To verify whether your board has MATs, check the logs for something like this:
 
@@ -100,9 +105,10 @@ OCABC: MAT support is 1
     * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
       * Intel's Comet Lake series
-      * AMD's B550 and A520
+      * AMD's B550 and A520(Latest BIOS on X570 are also included now)
       * AMD's TRx40
       * VMs like QEMU
+      * Asus's X299 v3006+ BIOS updates(This also applies to other X299 boards on the latest BIOS)
 
 * `EnableWriteUnprotector`
 
@@ -137,7 +143,7 @@ Note: `1` means it supports MATs, while `0` means it does not.
 * `ProvideConsoleGop` is likely missing as this is needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
 * `IgnoreInvalidFlexRatio` missing, this is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
-### Stuck on `[EB|LD:OFS] Err(0xE)` when booting preboot volume
+## Stuck on `[EB|LD:OFS] Err(0xE)` when booting preboot volume
 
 Full error:
 
@@ -175,6 +181,22 @@ diskutil apfs updatePreboot /volume/disk5s2
 ```
 
 Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
+
+## Stuck on `OCB: LoadImage failed - Security Violation`
+
+```
+OCSB: No suitable signature - Security Violation
+OCB: Apple Secure Boot prohibits this boot entry, enforcing!
+OCB: LoadImage failed - Security Violation
+```
+
+This is due to missing outdated Apple Secure Boot manifests present on your preboot volume resulting is a failure to load if you have SecureBootModel set, reason for these files being missing is actually a bug in macOS.
+
+To resolve this you can do one of the following:
+
+* Disable SecureBootModel(ie. set `Misc -> Secuirty -> SecureBootModel -> Disabled`)
+* Reinstall macOS with the latest version
+* Or copy over the Secure Boot manifests from `/usr/standalone/i386` to `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
 
 ## Can't see macOS partitions
 
@@ -359,24 +381,25 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * ["Waiting for Root Device" or Prohibited Sign error](#waiting-for-root-device-or-prohibited-sign-error)
 * [macOS installer in Russian](#macos-installer-in-russian)
 * [macOS Installer being damaged](#macos-installer-being-damaged)
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlockgiolockstate-3)
+* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
 * [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [300 series Intel stalling on `apfs_module_start...`](#300-series-intel-stalling-on-apfsmodulestart)
+* [300 series Intel stalling on `apfs_module_start...`](#_300-series-intel-stalling-on-apfs-module-start)
 * [Kernel Panic `Cannot perform kext summary`](#kernel-panic-cannot-perform-kext-summary)
 * [Kernel Panic `AppleIntelMCEReporter`](#kernel-panic-appleintelmcereporter)
 * [Kernel Panic `AppleIntelCPUPowerManagement`](#kernel-panic-appleintelcpupowermanagement)
 * [Frozen in the macOS installer after 30 seconds](#frozen-in-the-macos-installer-after-30-seconds)
-* [15h/16h CPU reboot after Data & Privacy screen](#15h16h-cpu-reboot-after-data--privacy-screen)
+* [15h/16h CPU reboot after Data & Privacy screen](#_15h-16h-cpu-reboot-after-data-privacy-screen)
 * [Keyboard works but trackpad does not](#keyboard-works-but-trackpad-does-not)
 * [Sleep crashing on AMD](#sleep-crashing-on-amd)
 * [Kernel Panic on `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)
-* [`kextd stall[0]: AppleACPICPU`](#kextd-stall0-appleacpicpu)
+* [`kextd stall[0]: AppleACPICPU`](#kextd-stall-0-appleacpicpu)
 * [MediaKit reports not enough space](#mediakit-reports-not-enough-space)
 * [DiskUtility failing to erase](#diskutility-failing-to-erase)
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
 * [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
 * [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
+* [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -535,7 +558,11 @@ Commonly due to systems running AWAC clocks, please see the [Getting started wit
 
 ## Kernel Panic `Cannot perform kext summary`
 
-Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don't.
+Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that:
+
+* Your kexts are in the correct order(master then plugins, Lilu always before the plugins)
+* Kexts with executables have them and plist only kexts don't(ie. USBmap.kext, XHCI-unspported.kext, etc does not contain an executable)
+* Don't include multiple of the same kexts in your config.plist(ie. including multiple copies of VoodooInput from multiple kexts, we recommend choosing the first kext in your config's array and disable the rest)
 
 ## Kernel Panic `AppleIntelMCEReporter`
 
@@ -676,16 +703,22 @@ To resolve, we have a few options:
   * LegacyOverwrite -> YES
   * WriteFlash -> YES
 
+## Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop
+
+![](../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
+
+To resolve this kernel panic, ensure you have -igfxcdc in your boot-args.
+
 # macOS post-install
 
 * [Broken iMessage and Siri](#broken-imessage-and-siri)
 * [No on-board audio](#no-on-board-audio)
-* [BIOS reset or sent into Safemode after reboot/shutdown?](#bios-reset-or-sent-into-safemode-after-rebootshutdown)
-* [Synaptics PS2 based trackpad doesn't work](#synaptics-ps2-based-trackpad-doesnt-work)
+* [BIOS reset or sent into Safemode after reboot/shutdown?](#bios-reset-or-sent-into-safemode-after-reboot-shutdown)
+* [Synaptics PS2 based trackpad doesn't work](#synaptics-ps2-based-trackpad-doesn-t-work)
 * [Fix for Dell breakless PS2 keyboard keys](#fix-for-dell-breakless-ps2-keyboard-keys)
 * [macOS GPU acceleration missing on AMD X570](#macos-gpu-acceleration-missing-on-amd-x570)
 * [DRM Broken](#drm-broken)
-* ["Memory Modules Misconfigured" on MacPro7,1](#memory-modules-misconfigured-on-macpro71)
+* ["Memory Modules Misconfigured" on MacPro7,1](#memory-modules-misconfigured-on-macpro7-1)
 * [Apps crashing on AMD](#apps-crashing-on-amd)
 * [AssetCache Content Caching unavailable in virtual machine](#assetcache-content-caching-unavailable-in-virtual-machine)
 * [Coffee Lake systems failing to wake](#coffee-lake-systems-failing-to-wake)
@@ -843,20 +876,20 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 
 # Other issues
 
-* [Can't run `acpidump.efi`](#cant-run-acpidumpefi)
+* [Can't run `acpidump.efi`](#can-t-run-acpidump-efi)
 * [Fixing SSDTTime: `Could not locate or download iasl!`](#fixing-ssdttime-could-not-locate-or-download-iasl)
 * [Fix Python: `Python is not installed or not found on PATH`](#fix-python-python-is-not-installed-or-not-found-on-path)
-* [Windows Startup Disk can't see APFS drives](#windows-startup-disk-cant-see-apfs-drives)
+* [Windows Startup Disk can't see APFS drives](#windows-startup-disk-can-t-see-apfs-drives)
 * [Incorrect resolution with OpenCore](#incorrect-resolution-with-opencore)
-* [No temperature/fan sensor output](#no-temperaturefan-sensor-output)
-* [Can't find Windows/BootCamp drive in picker](#cant-find-windowsbootcamp-drive-in-picker)
-* ["You can't change the startup disk to the selected disk" error](#you-cant-change-the-startup-disk-to-the-selected-disk-error)
-* [Selecting Startup Disk doesn't apply correctly](#selecting-startup-disk-doesnt-apply-correctly)
+* [No temperature/fan sensor output](#no-temperature-fan-sensor-output)
+* [Can't find Windows/BootCamp drive in picker](#can-t-find-windows-bootcamp-drive-in-picker)
+* ["You can't change the startup disk to the selected disk" error](#you-can-t-change-the-startup-disk-to-the-selected-disk-error)
+* [Selecting Startup Disk doesn't apply correctly](#selecting-startup-disk-doesn-t-apply-correctly)
 * [Booting Windows results in BlueScreen or Linux crashes](#booting-windows-results-in-bluescreen-or-linux-crashes)
-* [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed---already-started)
-* [macOS waking up with the wrong time](#macos-waking-up-with-wrong-time)
-* [iASL warning, # unresolved](#iasl-warning--unresolved)
-* [No Volume/Brightness control on external monitors](#no-volumebrightness-control-on-external-monitors)
+* [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed-already-started)
+* [macOS waking up with the wrong time](#macos-waking-up-with-the-wrong-time)
+* [iASL warning, # unresolved](#iasl-warning-unresolved)
+* [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
 
 ## Can't run `acpidump.efi`
