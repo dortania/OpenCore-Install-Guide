@@ -10,7 +10,28 @@
 02000A00
 02xx0A00
 0x0
+0x0006E6
+0x0006F2
+0x010676
+0x0106A2
+0x0106E0
+0x0206A0
+0x0206C0
+0x0306A0
+0x0306C0
+0x0306D4
+0x0306E0
+0x0406E3
+0x0506e3
 0x06
+0x0706E5
+0x0806E0
+0x0806E9
+0x0806EA
+0x0906E0
+0x0906E9
+0x0906EA
+0x0F41
 0x1
 0x16
 0x1C
@@ -163,6 +184,7 @@ Bootable
 BrcmBluetoothInjector
 BrcmFirmwareData
 BrcmPatchRAM[0-3]?
+Bridge-E5
 Broadcom
 Broadwell
 Broadwell-E
@@ -191,6 +213,7 @@ Celerons
 Chipset
 Chipsets
 Clarkdale
+Clarksfield
 CloverV2
 Cmd
 Codec
@@ -360,6 +383,7 @@ I211
 I211-AT
 I2C
 I7,
+IA32
 IDER
 IGPEnabler
 IGPEnabler=Yes
@@ -428,6 +452,7 @@ Lexa
 Lilu
 LoadVBIOS
 LucyRTL8125Ethernet
+Lynnfield
 MADT
 MBR
 MEI
@@ -463,6 +488,7 @@ MasterBootRecord
 MediaKit
 Mellanox
 MemoryFix
+Merom
 MinMultiplier
 Misconfigured
 MonitorControl
@@ -732,6 +758,7 @@ X3100
 X520
 X540
 X570
+X64
 X79
 X86
 X86PlatformPlugin
@@ -754,6 +781,7 @@ Xcode
 Xeon
 Xeons
 Xserve
+Yonah
 Z270
 Z370
 Z390
@@ -816,6 +844,7 @@ dGPUs
 debug=0x100
 decompile
 decrypt
+dev
 devirt
 diskXsY
 diskutil
@@ -911,6 +940,7 @@ img
 ix-3xxx
 jailbroken
 kernelcache
+kernelspace
 kext
 kext(\.)?
 kextd
@@ -1001,6 +1031,7 @@ unallocated
 unbootable
 unmount
 untrusted
+userspace
 v3006
 v5210
 vSMC

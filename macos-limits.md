@@ -26,25 +26,64 @@ And for more detailed guides on the subject, see here:
 For CPU support, we have the following breakdown:
 
 * Intel's Desktop CPUs are supported.
-  * Ivy Bridge through Comet Lake are supported by this guide.
+  * Sandy Bridge through Comet Lake are supported by this guide.
 * Intel's High-End Desktops and Server CPUs.
-  * Haswell-E through Cascade Lake X are supported by this guide.
+  * Ivy Bridge-E through Cascade Lake X are supported by this guide.
 * Intel's Core "i" and Xeon series laptop CPUs
-  * Ivy Bridge through Ice Lake are supported by this guide.
+  * Sandy Bridge through Ice Lake are supported by this guide.
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer(15h), Jaguar(16h) and Ryzen(17h) CPUs
   * Laptop CPUs are **not** supported
 
 **For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
+::: details CPU Requirements
+
+Architecture Requirements
+
+* 32-Bit CPUs are supported from 10.4.1 to 10.6.8
+  * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs
+* 64-bit CPUs are supported from 10.4.1 to current
+
+SEE Requirements:
+
+* SSE3 is required for all Intel versions of OS X/macOS
+* SSE4 is required for macOS 10.12 and newer
+* SSE4.2 is required for macOS 10.14 and newer
+
+Firmware Requirements:
+
+* OS X 10.4.1 through 10.4.7 require EFI32(ie. IA32(32-bit) version of OpenCore)
+  * OS X 10.4.8 through 10.7.5 support both EFI32 and EFI64
+* OS X 10.8 and newer require EFI64(ie. X64(64-bit) version of OpenCore)
+* OS X 10.7 through 10.9 require PartitionDxe.efi to boot the Recovery Partition
+
+Kernel Requirements:
+
+* OS X 10.4 and 10.5 require 32-bit Kexts due to only supporting 32-bit kernelspace
+  * OS X 10.6 and 10.7 support both 32 and 64-bit kernelspace
+* OS X 10.8 and newer require 64-bit Kexts due to only supporting 64-bit kernelspace
+  * Run `lipo -archs` to know what architectures your kext supports(remember to run this on the binary itself and not the .kext bundle)
+
+Special Notes:
+
+* Lilu and plugins require 10.8 or newer to operate
+  * We recommend running FakeSMC for older versions of OS X
+* OS X 10.6 and older require RebuildAppleMemoryMap enabled
+  * This is to resolve an early kernel
+
+:::
+
 ::: details Intel CPU Support Chart
+
+Support based off of Vanilla Kernels(ie. no modifications):
 
 | CPU Generation | Initial support | Last supported version | Notes | CPUID |
 | :--- | :--- | :--- | :--- | :--- |
 | [Pentium 4](https://en.wikipedia.org/wiki/Pentium_4) | 10.4.1 | 10.5.8 | Only used in dev kits | 0x0F41 |
-| [Yonah](https://en.wikipedia.org/wiki/Yonah_(microprocessor)) | 10.4.4 | 10.6.8 | 32Bit | 0x0006E6 |
+| [Yonah](https://en.wikipedia.org/wiki/Yonah_(microprocessor)) | 10.4.4 | 10.6.8 | 32-Bit | 0x0006E6 |
 | [Conroe](https://en.wikipedia.org/wiki/Conroe_(microprocessor)), [Merom](https://en.wikipedia.org/wiki/Merom_(microprocessor)) | 10.4.7 | 10.11.6 | No SSE4 | 0x0006F2 |
-| [Penryn](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 10.4.8 | 10.13.6 | No SSE4.2 | 0x010676 |
+| [Penryn](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 10.4.10 | 10.13.6 | No SSE4.2 | 0x010676 |
 | [Nehalem](https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)) | 10.5.6 | Current | N/A | 0x0106A2 |
 | [Lynnfield](https://en.wikipedia.org/wiki/Lynnfield_(microprocessor)), [Clarksfield](https://en.wikipedia.org/wiki/Clarksfield_(microprocessor)) | 10.6.3 | Current | No iGPU support 10.14+ | 0x0106E0 |
 | [Westmere, Clarkdale, Arrandale](https://en.wikipedia.org/wiki/Westmere_(microarchitecture)) | 10.6.4 | Current | No iGPU support 10.14+ | 0x0206C0 |
@@ -132,7 +171,7 @@ And an important note for **Laptops with discrete GPUs**:
 | [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | Requires 32 bit kernel |
 | [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | 10.7.5 | N/A |
 | [Tesla](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)) | 10.4.x | 10.13.6 | N/A |
-| [Tesla V2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | 10.13.6 | N/A |
+| [Tesla V2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.4.10 | 10.13.6 | 9 series+ require 10.5.x |
 | [Fermi](https://en.wikipedia.org/wiki/Fermi_(microarchitecture)) | 10.7.x | 10.13.6 | N/A |
 | [Kepler Gen 1/2](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.8.x | Current | N/A |
 | [Maxwell](https://en.wikipedia.org/wiki/Maxwell_(microarchitecture)) | 10.10.x | 10.13.6 | [Requires webdrivers](https://www.nvidia.com/download/driverResults.aspx/149652/) |
