@@ -41,10 +41,10 @@ For CPU support, we have the following breakdown:
 
 | CPU Generation | Initial support | Last supported version | Notes | CPUID |
 | :--- | :--- | :--- | :--- | :--- |
-| [Pentium 4](https://en.wikipedia.org/wiki/Pentium_4) | 10.4.0 | 10.5.8 | Only used in dev kits | 0x0F41 |
-| [Yonah](https://en.wikipedia.org/wiki/Yonah_(microprocessor)) | 10.4.5 | 10.6.8 | 32Bit | 0x0006E6 |
-| [Conroe](https://en.wikipedia.org/wiki/Conroe_(microprocessor)), [Merom](https://en.wikipedia.org/wiki/Merom_(microprocessor)) | 10.4.10 | 10.11.6 | No SSE4 | 0x0006F2 |
-| [Penryn](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 10.4.11 | 10.13.6 | No SSE4.2 | 0x010676 |
+| [Pentium 4](https://en.wikipedia.org/wiki/Pentium_4) | 10.4.1 | 10.5.8 | Only used in dev kits | 0x0F41 |
+| [Yonah](https://en.wikipedia.org/wiki/Yonah_(microprocessor)) | 10.4.4 | 10.6.8 | 32Bit | 0x0006E6 |
+| [Conroe](https://en.wikipedia.org/wiki/Conroe_(microprocessor)), [Merom](https://en.wikipedia.org/wiki/Merom_(microprocessor)) | 10.4.7 | 10.11.6 | No SSE4 | 0x0006F2 |
+| [Penryn](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 10.4.8 | 10.13.6 | No SSE4.2 | 0x010676 |
 | [Nehalem](https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)) | 10.5.6 | Current | N/A | 0x0106A2 |
 | [Lynnfield](https://en.wikipedia.org/wiki/Lynnfield_(microprocessor)), [Clarksfield](https://en.wikipedia.org/wiki/Clarksfield_(microprocessor)) | 10.6.3 | Current | No iGPU support 10.14+ | 0x0106E0 |
 | [Westmere, Clarkdale, Arrandale](https://en.wikipedia.org/wiki/Westmere_(microarchitecture)) | 10.6.4 | Current | No iGPU support 10.14+ | 0x0206C0 |
@@ -54,8 +54,8 @@ For CPU support, we have the following breakdown:
 | [Haswell](https://en.wikipedia.org/wiki/Haswell_(microarchitecture)) | 10.8.5 | Current | N/A | 0x0306C0(S) |
 | [Broadwell](https://en.wikipedia.org/wiki/Broadwell_(microarchitecture)) | 10.10.0 | Current | N/A | 0x0306D4(U/Y) |
 | [Skylake](https://en.wikipedia.org/wiki/Skylake_(microarchitecture)) | 10.11.1 | Current | N/A | 0x0506e3(H/S) 0x0406E3(U/Y) |
-| [Kaby Lake](https://en.wikipedia.org/wiki/Kaby_Lake) | 10.12.6 | Current | N/A | 0x0906E9(H/S/G) 0x0806E9(U/Y) |
-| [Coffee Lake](https://en.wikipedia.org/wiki/Coffee_Lake) | 10.13.2 | Current | iGPU supported added in 10.13.6 | 0x0906EA(S/H/E) 0x0806EA(U)|
+| [Kaby Lake](https://en.wikipedia.org/wiki/Kaby_Lake) | 10.12.4 | Current | N/A | 0x0906E9(H/S/G) 0x0806E9(U/Y) |
+| [Coffee Lake](https://en.wikipedia.org/wiki/Coffee_Lake) | 10.12.6 | Current | iGPU supported added in 10.13.6 | 0x0906EA(S/H/E) 0x0806EA(U)|
 | [Amber](https://en.wikipedia.org/wiki/Kaby_Lake#List_of_8th_generation_Amber_Lake_Y_processors), [Whiskey](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture)), [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.14.1 | Current | N/A | 0x0806E0(U/Y) |
 | [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.15.4 | Current | N/A | 0x0906E0(S/H)|
 | [Ice Lake](https://en.wikipedia.org/wiki/Ice_Lake_(microprocessor)) | 10.15.4 | Current | N/A | 0x0706E5(U) |
@@ -92,8 +92,8 @@ And an important note for **Laptops with discrete GPUs**:
 
 | GPU Generation | Initial support | Last supported version | Notes |
 | :--- | :--- | :--- | :--- |
-| [X800](https://en.wikipedia.org/wiki/Radeon_X800_series) | 10.3.x | 10.7.5 | Requires 32bit kernel |
-| [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | 10.7.5 | Requires 32bit kernel |
+| [X800](https://en.wikipedia.org/wiki/Radeon_X800_series) | 10.3.x | 10.7.5 | Requires 32 bit kernel |
+| [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | 10.7.5 | Requires 32 bit kernel |
 | [Terascale](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.5.x | 10.13.6 | N/A |
 | [Terascale 2/3](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.6.x | 10.13.6 | N/A |
 | [GCN 1](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.8.3 | Current | N/A |
@@ -109,15 +109,16 @@ And an important note for **Laptops with discrete GPUs**:
 
 | GPU Generation | Initial support | Last supported version | Notes |
 | :--- | :--- | :--- | :--- |
-| [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | Requires 32bit kernel |
-| [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | 10.7.5 | Requires 32bit kernel |
+| [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | Requires 32 bit kernel |
+| [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | 10.7.5 | Requires 32 bit kernel |
 | [Tesla](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)) | 10.4.x | 10.13.6 | N/A |
 | [Tesla V2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | 10.13.6 | N/A |
 | [Fermi](https://en.wikipedia.org/wiki/Fermi_(microarchitecture)) | 10.7.x | 10.13.6 | N/A |
 | [Kepler Gen 1/2](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.8.x | Current | N/A |
-| [Maxwell](https://en.wikipedia.org/wiki/Maxwell_(microarchitecture)) | 10.10.x | 10.13.6 | Requires webdrivers |
-| [Pascal](https://en.wikipedia.org/wiki/Pascal_(microarchitecture)) | 10.12.4 | 10.13.6 | Requires webdrivers |
-| [Turing](https://en.wikipedia.org/wiki/Turing_(microarchitecture)) | N/A | N/A | N/A |
+| [Maxwell](https://en.wikipedia.org/wiki/Maxwell_(microarchitecture)) | 10.10.x | 10.13.6 | [Requires webdrivers](https://www.nvidia.com/download/driverResults.aspx/149652/) |
+| [Pascal](https://en.wikipedia.org/wiki/Pascal_(microarchitecture)) | 10.12.4 | 10.13.6 | [Requires webdrivers](https://www.nvidia.com/download/driverResults.aspx/149652/) |
+| [Turing](https://en.wikipedia.org/wiki/Turing_(microarchitecture)) | N/A | N/A | No drivers available |
+| [Ampere](https://en.wikipedia.org/wiki/Ampere_(microarchitecture)) | N/A | N/A | No drivers available |
 
 :::
 

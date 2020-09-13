@@ -1,6 +1,6 @@
 # GPU Patching
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 This little section is for those who need more than what is provided by simple framebuffer patching and WhateverGreen's auto-patches:
 
@@ -21,7 +21,7 @@ So to get started I'll assume you've already done basic framebuffer patches in y
 
 * **Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 
-Now that we're prepped, we can start looking into busID patching. Checking the dumps on [InsanelyMac](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/) shows us this for the `3E9B0007` ID(Desktop UHD 630):
+Now that we're prepped, we can start looking into busID patching. Checking the dumps at the official [WhateverGreen repository](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) shows us this for the `3E9B0007` ID(Desktop UHD 630):
 
 ```
 ID: 3E9B0007, STOLEN: 57 MB, FBMEM: 0 bytes, VRAM: 1536 MB, Flags: 0x00801302
