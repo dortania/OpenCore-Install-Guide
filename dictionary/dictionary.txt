@@ -644,6 +644,7 @@ SSDTs
 SSDs
 SSE3
 SSE4
+SSSE3
 STAS
 Safemode
 SandyBridge
