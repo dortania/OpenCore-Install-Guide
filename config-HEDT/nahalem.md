@@ -1,11 +1,9 @@
-# Laptop Sandy Bridge
+# Nehalem and Westmere
 
 | Support | Version |
 | :--- | :--- |
 | Supported OpenCore version | 0.6.1 |
-| Initial macOS Support | OS X 10.6.7, Snow Leopard |
-| Note 1 | Sandy Bridge's iGPU is only officially supported up-to macOS 10.13 |
-| Note 2 | Most Sandy bridge boards do not support UEFI |
+| Initial macOS Support | OS X 10.5.6, Leopard |
 
 ## Starting Point
 
@@ -28,25 +26,22 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/config-laptop.plist/ivy-bridge/acpi.png)
+![ACPI](../images/config/config-universal/aptio-iv-acpi.png)
 
 ### Add
 
 ::: tip Info
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **its even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
+| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
-| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Sandy Bridge CPU with 7 series motherboards |
 
-Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
+ Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
@@ -54,52 +49,11 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 ### Delete
 
-::: tip Info
-
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support Sandy Bridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://dortania.github.io/OpenCore-Post-Install/) and drop the old tables:
-
-Removing CpuPm:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| All | Boolean | YES |
-| Comment | String | Delete CpuPm |
-| Enabled | Boolean | YES |
-| OemTableId | Data | 437075506d000000 |
-| TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
-
-Removing Cpu0Ist:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| All | Boolean | YES |
-| Comment | String | Delete Cpu0Ist |
-| Enabled | Boolean | YES |
-| OemTableId | Data | 4370753049737400 |
-| TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
-
-:::
+This blocks certain ACPI tables from loading, for us we can ignore this.
 
 ### Patch
 
-::: tip Info
-
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
-
-* OSI rename
-  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT**
-
-| Comment | String | Change _OSI to XOSI |
-| :--- | :--- | :--- |
-| Enabled | Boolean | YES |
-| Count | Number | 0 |
-| Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
-
-:::
+This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
 
 ### Quirks
 
@@ -113,7 +67,7 @@ This section is dedicated to quirks relating to boot.efi patching with OpenRunti
 
 ### MmioWhitelist
 
-This section is allowing spaces to be pass-through to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 ### Quirks
 
@@ -133,62 +87,15 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 ## DeviceProperties
 
-![](../images/config/config-legacy/laptop-sandy-igpu.png)
+![DeviceProperties](../images/config/config-universal/DP-no-igpu.png)
 
 ### Add
 
 Sets device properties from a map.
 
-::: tip PciRoot(0x0)/Pci(0x2,0x0)
+By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
-
-When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
-
-* **AAPL,snb-platform-id**
-  * This is used internally for setting up the iGPU
-* **Port Count**
-  * The number of displays supported
-
-Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
-
-1. When initially setting up your config.plist, only set AAPL,snb-platform-id - this is normally enough
-
-| AAPL,snb-platform-id | Port Count | Comment |
-| ------------------- | ---------- | ------- |
-| **00000100** | 4 | Note that HD 2000 iGPUs **are not supported** |
-
-#### Configuration Notes
-
-* VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)
-
-:::
-
-::: tip PciRoot(0x0)/Pci(0x16,0x0)
-
-**Sandy/IvyBridge Hybrids:**
-
-Some laptops from this era came with a mixed chipset setup, using Sandy Bridge CPUs with Ivy Bridge chipsets which creates issues with macOS since it expects a certain [IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID that it doesn't find and would get stuck at boot(As Apple's iGPU drivers require an [IMEI device](https://en.wikipedia.org/wiki/Intel_Management_Engine)), to fix this we need to fake the IMEI's IDs in these models
-
-* To know if you're affected check if your CPU is an Intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M) through tools like AIDA64.
-* In your config add a new PciRoot device named `PciRoot(0x0)/Pci(0x16,0x0)`
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| device-id | Data | 3A1E0000 |
-
-:::
-
-::: tip PciRoot(0x0)/Pci(0x1b,0x0)
-
-`layout-id`
-
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
-
-For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
-
-:::
+TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ### Delete
 
@@ -196,7 +103,7 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](../images/config/config-universal/kernel.png)
+![Kernel](../images/config/config-HEDT/haswell-e/kernel.png)
 
 ### Add
 
@@ -225,10 +132,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
-
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+Needed for spoofing unsupported CPUs, thankfully Ivy bridge E is officially supported so no patching pessary.
 
 ### Force
 
@@ -254,6 +158,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
+| AppleXcpmExtraMsrs | YES | |
 | DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
@@ -268,12 +173,16 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
 * **AppleXcpmCfgLock**: YES
   * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
+* **AppleXcpmExtraMsrs**: YES
+  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower
 * **CustomSMBIOSGuid**: NO
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
+* **IncreasePciBarSize**: NO
+  * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES
@@ -430,14 +339,13 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
+| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
 
 * **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
 
-csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#disabling-sip)
+csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/troubleshooting.md#disabling-sip)
 
-* **nvda\_drv**: <>
-  * For enabling Nvidia Web Drivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD, Intel and Kepler GPU users should delete this section.**
 * **run-efi-updater**: `No`
   * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
 
@@ -455,7 +363,17 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 
 ### Delete
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+::: tip Info
+
+Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
+
+| Quirk | Enabled |
+| :--- | :--- |
+| WriteFlash | YES |
+
+:::
+
+::: details More in-depth Info
 
 * **LegacyEnable**: NO
   * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
@@ -463,41 +381,35 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 * **LegacyOverwrite**: NO
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
 
-* **LegacySchema**:
+* **LegacySchema**
   * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
 * **WriteFlash**: YES
   * Enables writing to flash memory for all added variables.
 
+:::
+
 ## PlatformInfo
 
-![PlatformInfo](../images/config/config-laptop.plist/ivy-bridge/smbios.png)
+![PlatformInfo](../images/config/config-universal/iMacPro-smbios.png)
 
 ::: tip Info
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Sandy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
-
-| SMBIOS | CPU Type | GPU Type | Display Size |
-| :--- | :--- | :--- | :--- |
-| MacBookAir4,1 | Dual Core 17w | iGPU: HD 3000 | 11" |
-| MacBookAir4,2 | Dual Core 17w | iGPU: HD 3000 | 13" |
-| MacBookPro8,1 | Dual Core 35w | iGPU: HD 3000 | 13" |
-| MacBookPro8,2 | Quad Core 45w(High End) | iGPU: HD 3000 + 6490M | 15" |
-| MacBookPro8,3 | Quad Core 45w(High End) | iGPU: HD 3000 + 6750M | 17" |
+For this Ivy Bridge-E example, we'll choose the MacPro6,1 SMBIOS.
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
   #######################################################
- #                MacBookPro8,2 SMBIOS Info            #
+ #               MacPro6,1 SMBIOS Info                 #
 #######################################################
 
-Type:         MacBookPro8,2
-Serial:       C02KCYZLDNCW
-Board Serial: C02309301QXF2FRJC
-SmUUID:       A154B586-874B-4E57-A1FF-9D6E503E4580
+Type:         MacPro6,1
+Serial:       C02YX0TZHX87
+Board Serial: C029269024NJG36CB
+SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
 ```
 
 The `Type` part gets copied to Generic -> SystemProductName.
@@ -508,9 +420,9 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-##### Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"
+**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
 [Apple Check Coverage page](https://checkcoverage.apple.com)
 
@@ -546,7 +458,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![](../images/config/config-legacy/uefi-legacy-laptop.png)
+![UEFI](../images/config/config-universal/aptio-iv-uefi.png)
 
 **ConnectDrivers**: YES
 
@@ -558,9 +470,8 @@ Add your .efi drivers here.
 
 Only drivers present here should be:
 
-* HfsPlusLegacy.efi
+* HfsPlus.efi
 * OpenRuntime.efi
-* OpenUsbKbDxe.efi(If your firmware does not support UEFI)
 
 ### APFS
 
@@ -574,14 +485,7 @@ Related to AudioDxe settings, for us we'll be ignoring(leave as default). This i
 
 ### Input
 
-::: tip Info
-
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default besides:
-
-| Quirk | Value | Comment |
-| KeySupport | NO | Enable if your BIOS supports UEFI |
-
-:::
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 
@@ -599,7 +503,6 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | IgnoreInvalidFlexRatio | YES | |
-| ReleaseUsbOwnership | YES | |
 | UnblockFsConnect | NO | Needed mainly by HP motherboards |
 
 :::
@@ -611,14 +514,13 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 * **IgnoreInvalidFlexRatio**: YES
   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
-* **ReleaseUsbOwnership**: YES
-  * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Most laptops have garbage firmwares so we'll need this as well
+
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
-
+  
 :::
 
 ### ReservedMemory
@@ -629,7 +531,7 @@ Used for exempting certain memory regions from OSes to use, mainly relevant for 
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
@@ -638,17 +540,11 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
 
-### Config reminders
+* [**Sanity Checker**](https://opencore.slowgeek.com)
 
-**HP Users**:
-
-* Kernel -> Quirks -> LapicKernelPanic -> True
-  * You will get a kernel panic on LAPIC otherwise
-* UEFI -> Quirks -> UnblockFsConnect -> True
+Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
 ## Intel BIOS settings
-
-These are the main options to check for, if you can't find it or an equivalent for it, just skip it.
 
 ### Disable
 
@@ -657,21 +553,20 @@ These are the main options to check for, if you can't find it or an equivalent f
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* CSM (or Legacy Support, or Hybrid Boot)
-* Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly, if available)
+* CSM
+* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
 
 ### Enable
 
-* VT-x (Virtualization Support)
+* VT-x
 * Above 4G decoding
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 32MB
 * SATA Mode: AHCI
 
-## Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Now with all this done, head to the [Installation Page](../installation/installation-process.md)

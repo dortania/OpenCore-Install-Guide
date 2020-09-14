@@ -1,11 +1,11 @@
-# Laptop Sandy Bridge
+# Laptop Clarksfield and Arrandale
 
 | Support | Version |
 | :--- | :--- |
 | Supported OpenCore version | 0.6.1 |
-| Initial macOS Support | OS X 10.6.7, Snow Leopard |
-| Note 1 | Sandy Bridge's iGPU is only officially supported up-to macOS 10.13 |
-| Note 2 | Most Sandy bridge boards do not support UEFI |
+| Initial macOS Support | OS X 10.6.3, Snow Leopard |
+| Note 1 | Clarksfield and Arrandale's iGPU is only officially supported up-to macOS 10.13 |
+| Note 2 | Most Clarksfield and Arrandale boards do not support UEFI |
 
 ## Starting Point
 

@@ -132,6 +132,8 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
+                    ['/config.plist/penryn', 'Penryn'],
+                    ['/config.plist/clarkdale', 'Clarkdale'],
                     ['/config.plist/sandy-bridge', 'Sandy Bridge'],
                     ['/config.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config.plist/haswell', 'Haswell'],
@@ -146,6 +148,8 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
+                    ['/config-laptop.plist/penryn', 'Penryn'],
+                    ['/config-laptop.plist/arrandale', 'Arrandale'],
                     ['/config-laptop.plist/sandy-bridge', 'Sandy Bridge'],
                     ['/config-laptop.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config-laptop.plist/haswell', 'Haswell'],
@@ -162,6 +166,7 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
+                    '/config-HEDT/nahalem',
                     '/config-HEDT/ivy-bridge-e',
                     '/config-HEDT/haswell-e',
                     '/config-HEDT/broadwell-e',
