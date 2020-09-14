@@ -48,8 +48,12 @@ Architecture Requirements
 SEE Requirements:
 
 * SSE3 is required for all Intel versions of OS X/macOS
+* SSSE3 is required for all 64-bit versions of OS X/macOS
+  * For CPUs missing SSSE3(ie. certain 64-bit Pentiums), we recommend running 32-bit userspace(`i386-user32`)
 * SSE4 is required for macOS 10.12 and newer
 * SSE4.2 is required for macOS 10.14 and newer
+  * SSE4.1 CPUs are supported with [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/post-28447707)
+  * Newer AMD drivers also require SSE4.2, to resolve this see here: [MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
 
 Firmware Requirements:
 

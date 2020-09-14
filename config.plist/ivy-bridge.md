@@ -143,7 +143,7 @@ This is needed if you're pairing an Ivy Bridge CPU with a 6 series motherboard(i
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 3A1C0000 |
+| device-id | Data | 3A1E0000 |
 
 **Note**: This is not needed if you have a 7 series motherboard(ie. B75, Q75, Z75, H77, Q77, Z77)
 
