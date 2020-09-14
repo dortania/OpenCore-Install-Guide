@@ -157,8 +157,17 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. The main thing you need to keep in mind is:
 
+* Load order
+  * Remember that any plugins should load *after* its dependencies
+  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
+
+A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+
+* **Arch**
+  * Architectures supported by this kext
+  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
 * **BundlePath**
   * Name of the kext
   * ex: `Lilu.kext`
@@ -385,6 +394,9 @@ System Integrity Protection bitmask
 * **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
 
 csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/troubleshooting.md#disabling-sip)
+
+* **run-efi-updater**: `No`
+  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
 
 * **prev-lang:kbd**: <>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
