@@ -1,19 +1,24 @@
-# Desktop Penryn
+# Desktop Yonah, Conroe and Penryn
 
 | Support | Version |
 | :--- | :--- |
 | Supported OpenCore version | 0.6.1 |
-| Initial macOS Support | OS X 10.4.10, Tiger |
-| Note 1 | Penryn's iGPU is only officially supported up-to OS X 10.7 |
-| Note 2 | Most Penryn boards do not support UEFI |
+| Initial macOS Support: Penryn | OS X 10.4.10, Tiger |
+| Last Supported OS: Penryn | macOS 10.13.6 High Sierra |
+| Note | iGPU support will not be covered in this guide, see here: [GMA950](https://www.applelife.ru/threads/intel-gma950-32bit-only.22726/), [GMA X3100](https://www.applelife.ru/threads/intel-gma950-32bit-only.22726/) |
+| Note 2 | SSE4 is required to boot macOS 10.12, Sierra and newer, so Conroe and older are unsupported |
 
 TO-DO:
 
 * Fix ACPI
+  * Images
 * Fix Booter
+  * Image
+  * Description(ie. disable all quirks)
 * Fix DeviceProperties
-
-*
+  * Just insert generic X299 section
+* Fix SMBIOS
+  * Add proper info for which SMBIOS to use
 
 ## Starting Point
 
@@ -70,7 +75,9 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](../images/config/config-universal/aptio-iv-booter.png)
+| Legacy | UEFI
+| :--- | :--- |
+| ![](../images/config/config-legacy/booter-duetpkg.png) | ![](../images/config/config-universal/aptio-iv-booter.png) |
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -81,68 +88,55 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us we have 2
+Settings relating to boot.efi patching and firmware fixes, depending where your board has UEFI, you have 2 options depending what your motherboard supports:
+
+#### Legacy Settings
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| AvoidRuntimeDefrag | No | Big Sur may require this quirk enabled |
+| EnableSafeModeSlide | No | |
+| EnableWriteUnprotector | No | |
+| ProvideCustomSlide | No | |
+| RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
+| SetupVirtualMap | No | |
+
+#### UEFI Settings
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
+
 :::
 ::: details More in-depth Info
 
-* **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+* **AvoidRuntimeDefrag**: NO
+  * Fixes UEFI runtime services like date, time, NVRAM, power control on UEFI Boards
+  * macOS Big Sur however requires the APIC table present, otherwise causing early kernel panics so this quirk is recommended for those users.
+* **EnableSafeModeSlide**: NO
+  * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms
+* **EnableWriteUnprotector**: NO
+  * Needed to remove write protection from CR0 register on UEFI platforms
+* **ProvideCustomSlide**: NO
+  * Used for Slide variable calculation on UEFI platforms
+* **RebuildAppleMemoryMap**: YES
+  * Resolves early memory kernel panics on 10.6 and below
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
-  
+  * Fixes SetVirtualAddresses calls to virtual addresses on UEFI boards
+
 :::
 
 ## DeviceProperties
 
-![](../images/config/config-legacy/desktop-sandy-dgpu.png)
+![DeviceProperties](../images/config/config-universal/DP-no-igpu.png)
 
 ### Add
 
 Sets device properties from a map.
 
-::: tip PciRoot(0x0)/Pci(0x2,0x0)
+By default, the Sample.plist has this section set for iGPU and Audio. We won't be covering iGPU so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
-
-The `AAPL,snb-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
-
-| AAPL,snb-platform-id | Comment |
-| :--- | :--- |
-| 10000300 | Used when the Desktop iGPU is used to drive a display |
-| 00000500 | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
-
-We also have the issue of requiring a supported device-id, just like with the above table you'll want to match up to your hardware configuration:
-
-| device-id | Comment |
-| :--- | :--- |
-| 26010000 | Used when the Desktop iGPU is used to drive a display |
-| 02010000 | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
-
-And finally, you should have something like this:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| AAPL,snb-platform-id | Data | 00000500 |
-| device-id | Data | 26010000 |
-
-(This is an example for a desktop HD 3000 with a dGPU used as the output)
-
-:::
-
-
-
-::: tip PciRoot(0x0)/Pci(0x1b,0x0)
-
-`layout-id`
-
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
-
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
-
-:::
+TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ### Delete
 
@@ -206,22 +200,19 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
-| AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
 | DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
-| PanicNoKextDump | YES | |
-| PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | |
+| PanicNoKextDump | YES | Not required for 10.12 and older |
+| PowerTimeoutKernelPanic | YES | Not required for 10.14 and older |
 
 :::
 
 ::: details More in-depth Info
 
-* **AppleCpuPmCfgLock**: YES
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
-* **AppleXcpmCfgLock**: YES
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. **Please verify you can disable CFG-Lock, most systems won't boot with it on so requiring use of this quirk**
+* **AppleCpuPmCfgLock**: NO
+  * CFG-Lock is not present on Penryn so no need for this quirk
+* **AppleXcpmCfgLock**: NO
+  * CFG-Lock is not present on Penryn so no need for this quirk
 * **CustomSMBIOSGuid**: NO
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES
@@ -234,10 +225,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Allows for reading kernel panics logs when kernel panics occur
 * **PowerTimeoutKernelPanic**: YES
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
-* **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
-
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+* **XhciPortLimit**: NO
+  * This is actually the 15 port limit patch, however only relevant for systems with XHCI controllers
 
 :::
 
@@ -384,9 +373,7 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
-| **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra, Sierra and older can use `nvda_drv=1` |
 
 * **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
 
@@ -443,21 +430,25 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Clarkdale example, we'll chose the iMac12,2 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Sandy Bridge:
+For this Penryn example, we'll chose the iMac10,1 SMBIOS - this is done intentionally for compatibility's sake. There are 4 main SMBIOS used for legacy hardware:
 
-* `iMac11,1` - Lynnfield SMBIOS
-* `iMac11,2` - Clarkdale SMBIOS
-* `MacPro6,1`- Mojave and newer SMBIOS
-  * If you plan to later run macOS 10.14, Mojave or newer, MacPro6,1 will be the recommended SMBIOS and the iGPU must be disabled in the BIOS due to no longer being supported
+| SMBIOS | Hardware | OS Support |
+| :--- | :--- | :--- |
+| iMac4,1 | Yonah SMBIOS(32-bit) | 10.4 to 10.6.8 |
+| iMac7,1 | Conroe SMBIOS(64-Bit, SSE3) | 10.4. to 10.11.6 |
+| iMac10,1 | Penryn SMBIOS(64-Bit, SSE4) | 10.6 to 10.13.6 |
+| MacPro6, | Mojave and newer SMBIOS | 10.9 to current |
+
+* If you plan to later run macOS 10.14, Mojave or newer, MacPro6,1 will be the recommended SMBIOS. However please note you will need [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/page-4?post=28447707#post-28447707) to resolve install issues
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
   #######################################################
- #               iMac11,2 SMBIOS Info                  #
+ #               iMac10,1 SMBIOS Info                  #
 #######################################################
 
-Type:         iMac11,2
+Type:         iMac10,1
 Serial:       C02KCYZLDNCW
 Board Serial: C02309301QXF2FRJC
 SmUUID:       A154B586-874B-4E57-A1FF-9D6E503E4580
@@ -561,7 +552,7 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| IgnoreInvalidFlexRatio | YES | |
+| IgnoreInvalidFlexRatio | NO | Enable this if you have a UEFI BIOS |
 | UnblockFsConnect | NO | Needed mainly by HP motherboards |
 
 :::
@@ -571,8 +562,9 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 * **DeduplicateBootOrder**: YES
   * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 
-* **IgnoreInvalidFlexRatio**: YES
+* **IgnoreInvalidFlexRatio**: NO
   * Fix for when MSR\_FLEX\_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
+  * Only relevant on UEFI BIOS
 
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC\_VENDOR\_VARIABLE\_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.

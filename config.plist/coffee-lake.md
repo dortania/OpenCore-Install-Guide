@@ -454,9 +454,12 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Coffee Lake example, we'll chose the iMac19,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Coffee Lake:
 
-* `iMac19,1` - For Mojave and newer
-* `iMac18,3` - For High Sierra and older
-  * You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOS with Web Drivers
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac19,1 | For Mojave and newer |
+| iMac18,3 | For High Sierra and older |
+
+* You'll use 18,3 when you have a Pascal or Maxwell dGPU and are limited to versions of macOS with Web Drivers
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

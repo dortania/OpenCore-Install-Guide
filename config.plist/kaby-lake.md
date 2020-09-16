@@ -432,8 +432,10 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Kaby Lake example, we'll chose the iMac18,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Kaby Lake:
 
-* `iMac18,1` - this is used for computers utilizing the iGPU for displaying.
-* `iMac18,3` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac18,1 | Used for computers utilizing the iGPU for displaying |
+| iMac18,3 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

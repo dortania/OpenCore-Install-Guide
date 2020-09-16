@@ -459,11 +459,15 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Ivy Bridge:
+For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done intentionally for compatibility's sake. There are 3 main SMBIOS used for Ivy Bridge:
 
-* `iMac13,1` - this is used for computers utilizing the iGPU for displaying.
-* `iMac13,2` - this is used for computers using a dGPU for displaying, and an iGPU for computing tasks only.
-  * If you plan to later run macOS 11, Big Sur, MacPro6,1 will be the recommended SMBIOS and the iGPU must be disabled in the BIOS due to no longer being supported
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac13,1 | Used for computers utilizing the iGPU for displaying |
+| iMac13,2 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
+| MacPro6,1 | Big Sur and newer SMBIOS |
+
+* If you plan to later run macOS 11, Big Sur, MacPro6,1 will be the recommended SMBIOS and the iGPU must be disabled in the BIOS due to no longer being supported
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

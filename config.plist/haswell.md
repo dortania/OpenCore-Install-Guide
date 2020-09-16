@@ -448,16 +448,11 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
 
-* Haswell with only iGPU
-  * iMac14,1
-    * If you plan to later run macOS 11, Big Sur, iMac14,4 will be the recommended SMBIOS
-* Haswell with dGPU
-  * iMac14,2
-    * If you plan to later run macOS 11, Big Sur, iMac15,1 will be the recommended SMBIOS
-* Haswell Refresh (Devil's Canyon)
-  * iMac15,1
-* Broadwell
-  * iMac16,1
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac14,4 | Haswell with only iGPU |
+| iMac15,1 | Haswell with dGPU |
+| iMac16,1 | Broadwell |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

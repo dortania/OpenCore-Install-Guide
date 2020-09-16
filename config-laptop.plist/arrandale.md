@@ -40,11 +40,9 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
 | **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Sandy Bridge CPU with 7 series motherboards |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -54,33 +52,7 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 ### Delete
 
-::: tip Info
-
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support Sandy Bridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://dortania.github.io/OpenCore-Post-Install/) and drop the old tables:
-
-Removing CpuPm:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| All | Boolean | YES |
-| Comment | String | Delete CpuPm |
-| Enabled | Boolean | YES |
-| OemTableId | Data | 437075506d000000 |
-| TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
-
-Removing Cpu0Ist:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| All | Boolean | YES |
-| Comment | String | Delete Cpu0Ist |
-| Enabled | Boolean | YES |
-| OemTableId | Data | 4370753049737400 |
-| TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
-
-:::
+This blocks certain ACPI tables from loading, for us we can ignore this.
 
 ### Patch
 
@@ -89,7 +61,7 @@ Removing Cpu0Ist:
 This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
 
 * OSI rename
-  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT**
+  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT, **this is not needed if you're using SSDT-GPIO**
 
 | Comment | String | Change _OSI to XOSI |
 | :--- | :--- | :--- |
@@ -107,28 +79,55 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](../images/config/config-universal/aptio-iv-booter.png)
+| Legacy | UEFI
+| :--- | :--- |
+| ![](../images/config/config-legacy/booter-duetpkg.png) | ![](../images/config/config-universal/aptio-iv-booter.png) |
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
 ### MmioWhitelist
 
-This section is allowing spaces to be pass-through to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+Settings relating to boot.efi patching and firmware fixes, depending where your board has UEFI, you have 2 options depending what your motherboard supports:
+
+#### Legacy Settings
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| AvoidRuntimeDefrag | No | Big Sur may require this quirk enabled |
+| EnableSafeModeSlide | No | |
+| EnableWriteUnprotector | No | |
+| ProvideCustomSlide | No | |
+| RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
+| SetupVirtualMap | No | |
+
+#### UEFI Settings
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
+
 :::
 ::: details More in-depth Info
 
-* **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+* **AvoidRuntimeDefrag**: NO
+  * Fixes UEFI runtime services like date, time, NVRAM, power control on UEFI Boards
+  * macOS Big Sur however requires the APIC table present, otherwise causing early kernel panics so this quirk is recommended for those users.
+* **EnableSafeModeSlide**: NO
+  * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms
+* **EnableWriteUnprotector**: NO
+  * Needed to remove write protection from CR0 register on UEFI platforms
+* **ProvideCustomSlide**: NO
+  * Used for Slide variable calculation on UEFI platforms
+* **RebuildAppleMemoryMap**: YES
+  * Resolves early memory kernel panics on 10.6 and below
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
-  
+  * Fixes SetVirtualAddresses calls to virtual addresses on UEFI boards
+
 :::
 
 ## DeviceProperties

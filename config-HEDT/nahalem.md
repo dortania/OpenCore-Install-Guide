@@ -38,7 +38,6 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
  Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
@@ -61,7 +60,9 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](../images/config/config-universal/aptio-iv-booter.png)
+| Legacy | UEFI
+| :--- | :--- |
+| ![](../images/config/config-legacy/booter-duetpkg.png) | ![](../images/config/config-universal/aptio-iv-booter.png) |
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -72,17 +73,42 @@ This section is allowing spaces to be passthrough to macOS that are generally ig
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+Settings relating to boot.efi patching and firmware fixes, depending where your board has UEFI, you have 2 options depending what your motherboard supports:
+
+#### Legacy Settings
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| AvoidRuntimeDefrag | No | Big Sur may require this quirk enabled |
+| EnableSafeModeSlide | No | |
+| EnableWriteUnprotector | No | |
+| ProvideCustomSlide | No | |
+| RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
+| SetupVirtualMap | No | |
+
+#### UEFI Settings
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
+
 :::
 ::: details More in-depth Info
 
-* **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
-* **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+* **AvoidRuntimeDefrag**: NO
+  * Fixes UEFI runtime services like date, time, NVRAM, power control on UEFI Boards
+  * macOS Big Sur however requires the APIC table present, otherwise causing early kernel panics so this quirk is recommended for those users.
+* **EnableSafeModeSlide**: NO
+  * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms
+* **EnableWriteUnprotector**: NO
+  * Needed to remove write protection from CR0 register on UEFI platforms
+* **ProvideCustomSlide**: NO
+  * Used for Slide variable calculation on UEFI platforms
+* **RebuildAppleMemoryMap**: YES
+  * Resolves early memory kernel panics on 10.6 and below
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
-  
+  * Fixes SetVirtualAddresses calls to virtual addresses on UEFI boards
+
 :::
 
 ## DeviceProperties
@@ -397,16 +423,21 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Ivy Bridge-E example, we'll choose the MacPro6,1 SMBIOS.
+For this Nahalem example, we have a few SMBIOS to choose from:
+
+| SMBIOS | Hardware |
+| :--- | :--- |
+| MacPro5,1 | Mojave and older |
+| MacPro6,1 | Catalina and newer |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
   #######################################################
- #               MacPro6,1 SMBIOS Info                 #
+ #               MacPro5,1 SMBIOS Info                 #
 #######################################################
 
-Type:         MacPro6,1
+Type:         MacPro5,1
 Serial:       C02YX0TZHX87
 Board Serial: C029269024NJG36CB
 SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3

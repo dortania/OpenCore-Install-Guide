@@ -56,6 +56,8 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
+| [Yonah, Conroe and Penryn](../config.plist/penryn.md) | E8XXX, Q9XXX, [etc 1](https://en.wikipedia.org/wiki/Yonah_(microprocessor)), [etc 2](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2006-2009 era |
+| [Lynnfield and Clarkdale](../config.plist/clarkdale.md) | 5XX-8XX | 2010 era |
 | [Sandy Bridge](../config.plist/sandy-bridge.md) | 2XXX | 2011 era |
 | [Ivy Bridge](../config.plist/ivy-bridge.md) | 3XXX | 2012 era |
 | [Haswell](../config.plist/haswell.md) | 4XXX | 2013-2014 era |
@@ -68,6 +70,8 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
+| [Yonah, Merom and Penryn](../config-laptop.plist/penryn.md) | E8XXX, Q9XXX, [etc 1](https://en.wikipedia.org/wiki/Yonah_(microprocessor)), [etc 2](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2006-2009 |
+| [Clarksfield and Arrandale](../config-laptop.plist/arrandale.md) | 3XX-9XX | 2010 era |
 | [Sandy Bridge](../config-laptop.plist/sandy-bridge.md) | 2XXX | 2011 era |
 | [Ivy Bridge](../config-laptop.plist/ivy-bridge.md) | 3XXX | 2012 era |
 | [Haswell](../config-laptop.plist/haswell.md) | 4XXX | 2013-2014 era |
@@ -83,6 +87,7 @@ This section includes both enthusiast and server based hardware.
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
+| [Nehalem and Westmere](../config-HEDT/nehalem.md) | 9XX, X3XXX, X5XXX, [etc 1](https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)), [2](https://en.wikipedia.org/wiki/Westmere_(microarchitecture)) | 2008-2010 era |
 | [Sandy/Ivy Bridge-E](../config-HEDT/ivy-bridge-e.md) | 3XXX, 4XXX | 2011-2013 era |
 | [Haswell-E](../config-HEDT/haswell-e.md) | 5XXX | 2014 era |
 | [Broadwell-E](../config-HEDT/broadwell-e.md) | 6XXX | 2016 era |
@@ -97,12 +102,3 @@ This section includes both enthusiast and server based hardware.
 
 * Note: ~~Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported~~
   * Latest BIOS and OpenCore version has resolved this issue, all Threadripper platforms are now supported
-
-### Legacy
-
-Note that these are only guidelines and will not be full-featured guides like the other generations. This is mainly due to not enough testing, verifiable information, and overall community support as this hardware become less and less used.
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Penryn](../config.plist/legacy/penryn.md) | [Too many](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2008-2010 |
-| [Nehalem and Westmere](../config.plist/legacy/nehalem.md) | 7XX, 8XX, 9XX | 2008-2010 |

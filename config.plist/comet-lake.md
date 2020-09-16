@@ -457,8 +457,10 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Comet Lake example, we'll chose the iMac20,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Comet Lake:
 
-* `iMac20,1` - i7-10700K and lower
-* `iMac20,2` - i9-10850K and higher
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac20,1 | i7-10700K and lower |
+| iMac20,2 | i9-10850K and higher |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
