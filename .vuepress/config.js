@@ -99,6 +99,7 @@ module.exports = {
 				'macos-limits',
                 'terminology',
                 'why-oc',
+                'find-hardware',
             ]
 
         },
