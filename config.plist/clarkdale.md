@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.1 |
+| Supported OpenCore version | 0.6.2 |
 | Initial macOS Support | OS X 10.6.3, Snow Leopard |
 | Note 1 | Clarkdale's iGPU is only officially supported up-to macOS 10.13 |
 | Note 2 | Most Lynnfield and Clarkdale boards do not support UEFI |

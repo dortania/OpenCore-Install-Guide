@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.1 |
+| Supported OpenCore version | 0.6.2 |
 | Initial macOS Support: Penryn | OS X 10.4.10, Tiger |
 | Last Supported OS: Penryn | macOS 10.13.6 High Sierra |
 | Note | iGPU support will not be covered in this guide, see here: [GMA950](https://www.applelife.ru/threads/intel-gma950-32bit-only.22726/), [GMA X3100](https://www.applelife.ru/threads/intel-gma950-32bit-only.22726/) |
