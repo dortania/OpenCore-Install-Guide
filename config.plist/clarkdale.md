@@ -4,14 +4,8 @@
 | :--- | :--- |
 | Supported OpenCore version | 0.6.2 |
 | Initial macOS Support | OS X 10.6.3, Snow Leopard |
-| Note 1 | Clarkdale's iGPU is only officially supported up-to macOS 10.13 |
+| Note 1 | Apple does not support desktop Iron Lake iGPUs |
 | Note 2 | Most Lynnfield and Clarkdale boards do not support UEFI |
-
-TO-DO:
-
-* Fix ACPI
-* Fix Booter
-* Fix DeviceProperties
 
 ## Starting Point
 
@@ -34,7 +28,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/config.plist/ivy-bridge/acpi.png)
+![](../images/config/config-legacy/penryn-acpi.png)
 
 ### Add
 
@@ -70,7 +64,7 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 | Legacy | UEFI
 | :--- | :--- |
-| ![](../images/config/config-legacy/booter-duetpkg.png) | ![](../images/config/config-universal/aptio-iv-booter.png) |
+| ![](../images/config/config-legacy/booter-duetpkg.png) | ![](../images/config/config-universal/aptio-iv-booter-sl.png) |
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -121,51 +115,15 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 ## DeviceProperties
 
-![](../images/config/config-legacy/desktop-sandy-dgpu.png)
+![DeviceProperties](../images/config/config-universal/DP-no-igpu.png)
 
 ### Add
 
 Sets device properties from a map.
 
-::: tip PciRoot(0x0)/Pci(0x2,0x0)
+By default, the Sample.plist has this section set for iGPU and Audio. Apple's Iron lake iGPU drivers do not support desktop hardware so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
-
-The `AAPL,snb-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
-
-| AAPL,snb-platform-id | Comment |
-| :--- | :--- |
-| 10000300 | Used when the Desktop iGPU is used to drive a display |
-| 00000500 | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
-
-We also have the issue of requiring a supported device-id, just like with the above table you'll want to match up to your hardware configuration:
-
-| device-id | Comment |
-| :--- | :--- |
-| 26010000 | Used when the Desktop iGPU is used to drive a display |
-| 02010000 | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
-
-And finally, you should have something like this:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| AAPL,snb-platform-id | Data | 00000500 |
-| device-id | Data | 26010000 |
-
-(This is an example for a desktop HD 3000 with a dGPU used as the output)
-
-:::
-
-::: tip PciRoot(0x0)/Pci(0x1b,0x0)
-
-`layout-id`
-
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
-
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
-
-:::
+TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ### Delete
 
@@ -173,7 +131,7 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](../images/config/config-universal/kernel.png)
+![Kernel](../images/config/config-universal/kernel-sandy-usb.png)
 
 ### Add
 
@@ -235,7 +193,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | |
+| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable |
 
 :::
 
@@ -249,6 +207,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DisableLinkeditJettison**: YES
+  * Allows Lilu and others to have stable performance in macOS 11, Big Sur without the keepsyms=1 quirk
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
 * **LapicKernelPanic**: NO
@@ -390,6 +350,20 @@ Booter Path, mainly used for UI Scaling
 
 :::
 
+::: tip 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
+
+OpenCore's NVRAM GUID, mainly relevant for boot path and
+
+:::
+
+::: details More in-depth Info
+
+* **rtc-blacklist**: <>
+  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
+  * Most users can ignore this section
+
+:::
+
 ::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
 System Integrity Protection bitmask
@@ -409,11 +383,10 @@ System Integrity Protection bitmask
 | :--- | :--- |
 | **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
 | **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
-| **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
-* **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
-
-csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/troubleshooting.md#disabling-sip)
+* **csr-active-config**: `00000000`
+  * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
+  * csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#disabling-sip)
 
 * **run-efi-updater**: `No`
   * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
@@ -568,6 +541,7 @@ Related to AudioDxe settings, for us we'll be ignoring(leave as default). This i
 Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default besides:
 
 | Quirk | Value | Comment |
+| :--- | :--- | :--- |
 | KeySupport | NO | Enable if your BIOS supports UEFI |
 
 :::

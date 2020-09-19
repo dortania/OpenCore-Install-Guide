@@ -26,7 +26,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/config-universal/aptio-iv-acpi.png)
+![](../images/config/config-legacy/penryn-acpi.png)
 
 ### Add
 
@@ -40,7 +40,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | :--- | :--- |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
- Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
+Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
 For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
 
@@ -129,7 +129,7 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](../images/config/config-HEDT/haswell-e/kernel.png)
+![Kernel](../images/config/config-universal/kernel-sandy-usb.png)
 
 ### Add
 
@@ -189,7 +189,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | |
+| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable |
 
 :::
 
@@ -205,6 +205,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DisableLinkeditJettison**: YES
+  * Allows Lilu and others to have stable performance in macOS 11, Big Sur without the keepsyms=1 quirk
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
 * **IncreasePciBarSize**: NO
@@ -348,6 +350,20 @@ Booter Path, mainly used for UI Scaling
 
 :::
 
+::: tip 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
+
+OpenCore's NVRAM GUID, mainly relevant for boot path and
+
+:::
+
+::: details More in-depth Info
+
+* **rtc-blacklist**: <>
+  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
+  * Most users can ignore this section
+
+:::
+
 ::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
 System Integrity Protection bitmask
@@ -368,9 +384,9 @@ System Integrity Protection bitmask
 | **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
 | **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
 
-* **csr-active-config**: Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
-
-csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/troubleshooting.md#disabling-sip)
+* **csr-active-config**: `00000000`
+  * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
+  * csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html#disabling-sip)
 
 * **run-efi-updater**: `No`
   * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.

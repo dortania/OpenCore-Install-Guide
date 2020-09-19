@@ -94,6 +94,7 @@ ALC3601
 ALZA
 ANS1
 ANS2
+APIC
 APTIO
 APUs
 ARPT
@@ -827,6 +828,7 @@ busid
 busid=00
 busids
 cacheless
+checksums
 chipset
 chipset's
 chipsets
@@ -855,6 +857,7 @@ distros
 dmg
 dmg's
 dortania
+eDP
 eMMC
 endian
 erroring
@@ -940,6 +943,7 @@ igfxfw
 img
 ix-3xxx
 jailbroken
+keepsyms=1
 kernelcache
 kernelspace
 kext

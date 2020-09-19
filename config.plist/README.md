@@ -70,7 +70,6 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
-| [Yonah, Merom and Penryn](../config-laptop.plist/penryn.md) | E8XXX, Q9XXX, [etc 1](https://en.wikipedia.org/wiki/Yonah_(microprocessor)), [etc 2](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2006-2009 |
 | [Clarksfield and Arrandale](../config-laptop.plist/arrandale.md) | 3XX-9XX | 2010 era |
 | [Sandy Bridge](../config-laptop.plist/sandy-bridge.md) | 2XXX | 2011 era |
 | [Ivy Bridge](../config-laptop.plist/ivy-bridge.md) | 3XXX | 2012 era |

@@ -148,7 +148,6 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
-                    ['/config-laptop.plist/penryn', 'Penryn'],
                     ['/config-laptop.plist/arrandale', 'Arrandale'],
                     ['/config-laptop.plist/sandy-bridge', 'Sandy Bridge'],
                     ['/config-laptop.plist/ivy-bridge', 'Ivy Bridge'],
@@ -182,21 +181,6 @@ module.exports = {
                     '/AMD/zen',
                 ]
             },
-            {
-                title: 'Intel Legacy config.plist',
-                collapsable: true,
-                children: [
-                    '/config.plist/legacy',
-		            {
-		                title: 'Legacy Generation',
-		                collapsable: false,
-		                children: [
-		                    ['/config.plist/legacy/penryn', 'Penryn'],
-							['/config.plist/legacy/nehalem', 'Nehalem'],
-		                ]
-		            },
-                ]
-            },
             ]
         },
         {
@@ -209,7 +193,7 @@ module.exports = {
         },
         {
             title: 'Troubleshooting',
-            collapsable: true,
+            collapsable: false,
             children: [
                 '/troubleshooting/troubleshooting',
                 '/troubleshooting/debug',
