@@ -439,7 +439,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Nahalem example, we have a few SMBIOS to choose from:
+For this Nehalem example, we have a few SMBIOS to choose from:
 
 | SMBIOS | Hardware |
 | :--- | :--- |
