@@ -98,6 +98,7 @@ APIC
 APTIO
 APUs
 ARPT
+ASR
 ASUS
 ASentientBot
 AWAC
@@ -110,6 +111,7 @@ Acpi
 AcpiSamples
 AirportAtheros40
 AirportBrcmFixup
+AirportItlwm
 AlGrey
 Aleksander
 Aleksander's
@@ -167,6 +169,7 @@ AudioDxe
 Auth
 B0D3
 B360
+B460
 B550
 B75
 BCM5722
@@ -182,6 +185,7 @@ BlueScreen
 BootCamp
 BootInstall
 Bootable
+Bootcamp
 BrcmBluetoothInjector
 BrcmFirmwareData
 BrcmPatchRAM[0-3]?
@@ -310,6 +314,7 @@ Factor-Aut
 Factor-Auth
 FairPlay
 FakeSMC
+FakeSMC-32
 FakeSMC3_with_plugins
 Fenvi
 FileVault
@@ -347,6 +352,7 @@ Goldfish64
 Goldfish64's
 GraphicsEnabler
 GraphicsEnabler=Yes
+Greenwhich
 GuC
 Gui
 H310
@@ -377,6 +383,8 @@ Haswell
 Haswell-E
 Hfs
 HfsPlus
+HfsPlus32
+HfsPlusLegacy
 HiDPI
 HoRNDIS
 Hx6x
@@ -392,6 +400,7 @@ IGPU
 IM
 IMEI
 IMEI's
+IO80211Family
 IOHDACodecDevice
 IOIIIO
 IOKit
@@ -414,6 +423,7 @@ InjectIntel
 InsanelyMac
 InstallMacOSX
 Insyde
+IntelBluetoothFirmware
 IntelMausi
 IntelMausiEthernet
 InyextcionES
@@ -479,6 +489,7 @@ MacPro5
 MacPro6
 MacPro7
 MacProMemoryNotificationDisabler
+MacRecovery's
 MacRumors
 MacSerial
 MaciASL
@@ -517,8 +528,6 @@ NullCPUPowerManagement
 NullCPUPowerManagment
 Nvidia
 Nvidia's
-Greenwhich
-Bootcamp
 OC
 OC's
 OC/
@@ -577,6 +586,7 @@ PRs
 PS2
 PXSX
 PartitionDxe
+PartitionDxe32
 PartitionDxeLegacy
 Patch1
 Pathname
@@ -614,6 +624,7 @@ Realtek
 Realtek's
 RealtekRTL8100
 RealtekRTL8111
+RecoveryImage
 ReddestDream's
 RehabMan's
 Rehabman
@@ -842,6 +853,7 @@ config
 config's
 configurator
 configurators
+createinstallmedia
 csr-active-config
 csrstat
 dGPU

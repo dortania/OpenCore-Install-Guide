@@ -111,7 +111,7 @@ module.exports = {
                 title: 'Creating the USB',
                 collapsable: true,
                 path: '/installer-guide/',
-                sidebarDepth: 2,
+                sidebarDepth: 1,
                 children: [
                     '/installer-guide/mac-install',
                     '/installer-guide/winblows-install',

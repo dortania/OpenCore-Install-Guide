@@ -25,12 +25,14 @@ And for more detailed guides on the subject, see here:
 
 For CPU support, we have the following breakdown:
 
+* Both 32 and 64-Bit CPUs are supported
+  * This however requires the OS to support your architecture, see CPU Requirements section below
 * Intel's Desktop CPUs are supported.
-  * Sandy Bridge through Comet Lake are supported by this guide.
+  * Yonah through Comet Lake are supported by this guide.
 * Intel's High-End Desktops and Server CPUs.
-  * Ivy Bridge-E through Cascade Lake X are supported by this guide.
+  * Nehalem through Cascade Lake X are supported by this guide.
 * Intel's Core "i" and Xeon series laptop CPUs
-  * Sandy Bridge through Ice Lake are supported by this guide.
+  * Arrendale through Ice Lake are supported by this guide.
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer(15h), Jaguar(16h) and Ryzen(17h) CPUs
   * Laptop CPUs are **not** supported
@@ -42,7 +44,7 @@ For CPU support, we have the following breakdown:
 Architecture Requirements
 
 * 32-Bit CPUs are supported from 10.4.1 to 10.6.8
-  * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs
+  * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs to 10.6
 * 64-bit CPUs are supported from 10.4.1 to current
 
 SEE Requirements:
@@ -53,7 +55,7 @@ SEE Requirements:
 * SSE4 is required for macOS 10.12 and newer
 * SSE4.2 is required for macOS 10.14 and newer
   * SSE4.1 CPUs are supported with [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/post-28447707)
-  * Newer AMD drivers also require SSE4.2, to resolve this see here: [MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
+  * Newer AMD drivers also require SSE4.2 for Metal support, to resolve this see here: [MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
 
 Firmware Requirements:
 

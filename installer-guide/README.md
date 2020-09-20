@@ -15,6 +15,8 @@ Requirements:
 Depending on which OS you're on, see your specific section on making the USB:
 
 * [macOS users](../installer-guide/mac-install.md)
-  * For Sierra and older, see [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md)
+  * Supports OS X 10.4 to current
 * [Windows users](../installer-guide/winblows-install.md)
+  * Supports OS X 10.7 to current
 * [Linux users](../installer-guide/linux-install.md)
+  * Supports OS X 10.7 to current

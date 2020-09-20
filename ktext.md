@@ -10,14 +10,7 @@ See the [**Hardware Limitations page**](macos-limits.md) for some better insight
 
 > What are some ways to figure out what hardware I have?
 
-Generally the product's spec page has all the info you need, but if you're still having troubles there are a few options:
-
-* **Windows**:
-  * [Speccy](https://www.ccleaner.com/speccy)
-  * [AIDA64](https://www.aida64.com/downloads)
-  * DeviceManager
-* **Linux**:
-  * Run `hwinfo` in terminal
+See the page before: [Finding your hardware](./find-hardware.md)
 
 ## Firmware Drivers
 
@@ -43,17 +36,21 @@ In addition to the above, if your hardware doesn't support UEFI(2011 and older e
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older
   * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
+* [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
+  * Required to boot recovery on OS X 10.7 through 10.9
+  * For Sandy Bridge and older, you'll want to use [PartitionDxeLegacy](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxeLegacy.efi) due to missing RDRAND instruction.
+  * Not required for OS X 10.10, Yosemite and newer
 
 These files will go in your Drivers folder in your EFI
 
-::: details Legacy macOS installs
+::: details 32-Bit specifics
 
-If you plan to boot older versions of macOS/OS X, you'll find these drivers useful:
+For those with 32-Bit CPUs, you'll want to grab these drivers as well
 
-* [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
-  * Required to boot recovery on 10.7 through 10.9, otherwise you'll return a `LoadImage - error`
-  * For Sandy Bridge and older, you'll want to use [PartitionDxeLegacy](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxeLegacy.efi) due to missing RDRAND instruction.
-  * Note 10.10, Yosemite and newer do not require PartitionDxe at all.
+* [HfsPlus32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus32.efi)
+  * Alternative to HfsPlusLegacy but for 32-bit CPUs, don't mix this with other HFS .efi drivers
+* [PartitionDxe32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe32.efi)
+  * Alternative to PartitionDxeLegacy but for 32-bit CPUs, don't mix this with other PartitionDxe .efi drivers
 
 :::
 
@@ -77,6 +74,19 @@ Without the below 2, no system is bootable:
 * [Lilu](https://github.com/acidanthera/Lilu/releases)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
   * Note that Lilu and plugins requires OS X 10.8 or newer to function
+  
+::: details Legacy "Must haves" kexts
+
+For those planning to boot OS X 10.7 and older, you'll want to opt for these kexts instead:
+
+* [FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/)
+  * Used as our SMC emulator predating VirtualSMC with support for older OSes
+  * We recommend setting the `MaxKernel` to 11.9.9 so it'll only inject in 10.7 and older allowing you to use VirtualSMC in newer OSes. Same idea applies to VirtualSMC, set the `MinKernel` to 12.0.0 so i won't interfere with older OSes
+  * For 32-bit users, you can use [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true) instead, note OS X 10.4 and 10.5 have 32-bit kernel space so 64-bit CPUs will require it as well.
+
+Reminder if you don't plan to boot these older OSes, you can ignore these kexts.
+
+:::
 
 ### VirtualSMC Plugins
 
@@ -140,6 +150,7 @@ Relevant for either legacy macOS installs or older PC hardware.
 
 * [AppleIntele1000e](https://github.com/chris1111/AppleIntelE1000e)
   * Mainly relevant for 10/100MBe based Intel Ethernet controllers
+  * Requires 10.6 or newer
 * [RealtekRTL8100](https://www.insanelymac.com/forum/files/file/259-realtekrtl8100-binary/)
   * Mainly relevant for 10/100MBe based Realtek Ethernet controllers
   * Requires macOS 10.12 or newer with v2.0.0+
@@ -153,7 +164,9 @@ Relevant for either legacy macOS installs or older PC hardware.
 
 * [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases)
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
-  * Not needed on Skylake and newer(AsRock is dumb and does need this)
+  * Shouldn't be needed on Desktop Skylake and newer
+    * AsRock is dumb and does need this
+    * Coffee Lake and older laptops are however recommended to use this kext
   * Does not work on AMD CPUs **at all**
   * Requires OS X 10.11 or newer
 
@@ -167,9 +180,33 @@ Relevant for either legacy macOS installs or older PC hardware.
     * Z390(Not needed on Mojave and newer)
     * X79
     * X99
-    * AsRock boards(On Intel motherboards specifically, Z490 boards do not need it however)
+    * AsRock boards(On Intel motherboards specifically, B460/Z490+ boards do not need it however)
 
 ### WiFi and Bluetooth
+
+#### Intel
+
+* [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
+  * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
+  * Note sleep issues are common with this kext, requires macOS 10.15 or newer and requires Apple's Secure Boot to function correctly
+* [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
+  * Adds Bluetooth support to macOS when paired with an Intel wireless card
+  * Note that similar to AirportItlwm, sleep can break with this kext
+
+::: details More info on enabling AirportItlwm
+
+To enable AirportItlwm support with OpenCore, you'll need to either:
+
+* Enable `Misc -> Security -> SecureBootModel` by either setting it as `Default` or some other valid value
+  * This is discussed both later on in this guide and in the post-install guide: [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html)
+* If you cannot enable SecureBootModel, you can still force inject IO80211Family(**Highly discouraged**)
+  * Set the following under `Kernel -> Force` in your config.plist(discussed later in this guide):
+  
+![](./images/ktext-md/force-io80211.png)
+
+:::
+
+#### Broadcom
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
@@ -181,11 +218,17 @@ Relevant for either legacy macOS installs or older PC hardware.
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.10 or older
 
+::: details BrcmPatchRAM Load order
+
 The order in `Kernel -> Add` should be:
 
 1. BrcmBluetoothInjector
 2. BrcmFirmwareData
 3. BrcmPatchRAM3
+
+However ProperTree will handle this for you, so you need not concern yourself
+
+:::
 
 ### AMD CPU Specific kexts
 
@@ -194,6 +237,7 @@ The order in `Kernel -> Add` should be:
   * Requires macOS 10.13 or newer
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
+  * Requires OS X 10.6 or newer
 
 ### Extras
 
@@ -205,20 +249,16 @@ The order in `Kernel -> Add` should be:
     * iMacPro1,1
   * Requires macOS 10.15 or newer
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
-  * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead
+  * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable.
   * **Does not work on AMD CPUs**
   * Requires OS X 10.8 or newer
-* [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)
-  * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
-  * **Does not work on AMD CPUs**
-  * Requires macOS 10.12 or newer
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
   * Used for fixing power management and initialization on non-Apple NVMe
   * Requires macOS 10.14 or newer
 
 ### Laptop Specifics
 
-To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg |grep input` in Linux
+To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep input` in Linux
 
 #### Input drivers
 
@@ -226,7 +266,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
   * For systems with PS2 Keyboards, Mice and Trackpads
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
-  * For systems with SMBus-based devices, mainly for trackpads and trackpoints. Commonly found on ELAN and Synaptics devices.
+  * For systems with SMBus-based devices, mainly for trackpads and trackpoints. Commonly found on Synaptics devices.
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines

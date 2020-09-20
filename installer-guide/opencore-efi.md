@@ -2,18 +2,26 @@
 
 * Supported version: 0.6.2
 
-To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/). Regarding DEBUG versus RELEASE version:
+To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/). Note that they will be under either the IA32 or X64 folders, the former for 32-bit Firmwares and the latter for 64-bit Firmwares:
 
-* **DEBUG**: Can greatly help with debugging boot issues, however can add some noticeable delay to boot times. Once installed you can easily transition to RELEASE
+![](../images/installer-guide/opencore-efi-md/ia32-x64.png)
+
+Regarding DEBUG versus RELEASE version:
+
+* **DEBUG**: Can greatly help with debugging boot issues, however can add some noticeable delay to boot times(ie. 3-5 seconds to get to the picker). Once installed you can easily transition to RELEASE
 * **RELEASE**: Much snappier boot times, however virtually no useful DEBUG info is provided in OpenCore making troubleshooting much more difficult.
 
-And once downloaded, place the EFI folder(from OpenCorePkg) on the root of your EFI partition.
+And once downloaded, place the EFI folder(from OpenCorePkg) on the root of your EFI partition:
+
+![](../images/installer-guide/opencore-efi-md/efi-moved.png)
 
 **Note**:
 
 * Windows users: This will already be done on the `BOOT` USB drive created by MakeInstall
 * Linux users: This is the `OPENCORE` partition we created earlier
   * Note that Method 1 only creates 1 partition, while Method 2 creates 2 partitions
+
+Now lets open up our EFI folder and see what's inside:
 
 ![base EFI folder](../images/installer-guide/opencore-efi-md/base-efi.png)
 
