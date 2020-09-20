@@ -319,6 +319,7 @@ FakeSMC3_with_plugins
 Fenvi
 FileVault
 FireWire
+Firmwares
 FixHPET
 FixShutdown-USB-SSDT
 Fn
