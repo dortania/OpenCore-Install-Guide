@@ -58,7 +58,6 @@ Depending on the device, it may show up under multiple names and connections. Th
 * SMBus
   * These will show up under both PS2 under `Synaptics PS2 device` and PCI as `Synaptic SMBus Driver`
     * ie. `Synaptics Pointer device` and `Synaptic SMBus Driver`
-    * ie. `ELAN Pointer device` and `ELAN SMBus Driver`
 * USB
   * These will show up as a PS2 Compliant Trackpad
 * I2C Connection Type
@@ -66,13 +65,11 @@ Depending on the device, it may show up under multiple names and connections. Th
   
 ::: details SMBus Example
 
-| Synaptics Example | ELAN Example |
-| :--- | :--- |
-| ![](./images/finding-hardware-md/Windows-SMBus-Device.png) | ![](./images/finding-hardware-md/ELAN-SMBus-DeviceManager.png) |
+![](./images/finding-hardware-md/Windows-SMBus-Device.png)
 
-As you can see, we get 2 Synaptics devices in the left image, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus provides much functionality and precision with [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI). Same idea applies to ELAN devices
+As you can see, we get 2 Synaptics devices in the left image, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus provides much functionality and precision with [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI).
 
-* Note not all Synaptics and ELAN devices support SMBus
+* Note not all Synaptics devices support SMBus
 
 :::
 

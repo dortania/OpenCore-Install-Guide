@@ -165,7 +165,7 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
-                    '/config-HEDT/nahalem',
+                    '/config-HEDT/nehalem',
                     '/config-HEDT/ivy-bridge-e',
                     '/config-HEDT/haswell-e',
                     '/config-HEDT/broadwell-e',
