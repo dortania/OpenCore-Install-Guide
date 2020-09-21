@@ -9,7 +9,9 @@ To start you'll need the following:
 * 4GB USB Stick
 * [GibMacOS](https://github.com/corpnewt/gibMacOS)
 
-## Downloading macOS
+## Downloading macOS: Modern
+
+* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
 
 To start, open gibMacOS.bat as Admin and select `Toggle Recovery-Only`:
 
@@ -40,5 +42,61 @@ MakeInstall will finish up by installing OpenCore to your USB's EFI System Parti
 ![](../images/installer-guide/winblows-install-md/make-install-done.png)
 
 ![](../images/installer-guide/winblows-install-md/EFI-base.png)
+
+## Downloading macOS: Legacy OS
+
+* This method allows you to download much older versions of OS X, currently supporting OS X 10.7 to current
+
+::: details Legacy macOS setup
+
+To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next copy the folder path:
+
+![](../images/installer-guide/winblows-install-md/file-path.jpg)
+
+From here, you'll want to open up a CMD Prompt and cd into the macrecovery folder that we copied earlier:
+
+```sh
+cd Paste_Folder_Path
+```
+
+Now run one of the following depending on what version of macOS you want(Note these scripts rely on [Python](https://www.python.org/downloads/) support, please install if you haven't already):
+
+```sh
+# Lion(10.7):
+macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
+macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
+
+# Mountain Lion(10.8):
+macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
+
+# Mavericks(10.9):
+macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
+
+# Yosemite(10.10):
+macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
+
+# El Capitan(10.11):
+macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
+
+# Sierra(10.12):
+macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
+```
+
+This will take some time, however once you're finished you should get either BaseSystem or RecoveryImage files:
+
+![](../images/installer-guide/winblows-install-md/macrecovery-done.jpg)
+![](../images/installer-guide/winblows-install-md/macrecovery-after.jpg)
+
+Now with our installer downloaded, we'll next want to format out USB.
+
+Open Disk Management and format your USB drive as FAT32:
+
+![](../images/installer-guide/winblows-install-md/DiskManagement.jpg)
+
+Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
+
+![](../images/installer-guide/winblows-install-md/com-recovery.png)
+
+:::
 
 ## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work

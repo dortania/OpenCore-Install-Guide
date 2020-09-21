@@ -1,6 +1,8 @@
 (15|16)h
 (No)?TouchID
 .aml
+.chunklist
+.dmg
 .dsl
 .kext
 .plist
@@ -200,6 +202,7 @@ CAVS
 CFG
 CFG-Lock
 CLKT
+CMD
 CMOS
 CONFIGURATORS
 CPU0
@@ -842,6 +845,7 @@ busid
 busid=00
 busids
 cacheless
+cd
 checksums
 chipset
 chipset's

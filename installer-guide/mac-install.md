@@ -16,7 +16,7 @@ For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra 
 
 ## Downloading macOS: Modern OS
 
-* This method allows you to download macOS 10.13 and newer
+* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
 
 From a  macOS machine that meets the requirements of the OS version you want to install, go directly to the AppStore and download the desired OS release the continue and continue to [**Setting up the installer**](#setting-up-the-installer)
 
@@ -50,7 +50,7 @@ Move the newly created image to Applications folder, this will simplify the next
 
 ## Downloading macOS: Legacy OS
 
-* This method allows you to download OS X 10.7 and newer
+* This method allows you to download much older versions of OS X, currently supporting all Intel versions of OS X(10.4 to current)
 
 ::: details Grabbing legacy versions of macOS: Offline method(10.10-10.12 Supported)
 
@@ -185,7 +185,7 @@ From here, you can skip to [Setting up OpenCore's EFI environment](#setting-up-o
 
 ### Legacy macOS: Disk Images
 
-This method instead relies on hosted images either from Apple or Acidanthera, and restoring onto your drive
+This method instead relies on hosted images either from Apple or Acidanthera, and restoring onto your drive.
 
 #### Acidanthera Images
 
@@ -197,7 +197,7 @@ This method instead relies on hosted images either from Apple or Acidanthera, an
 
 #### Apple Images
 
-Note that these images require you to have an Apple Developers account to access.
+Note that these images require you to have an Apple Developer account to access.
 
 * [OS X 10.5 Golden Master(9a581)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_v10.5_leopard_9a581/leopard_9a581_userdvd.dmg)
 
