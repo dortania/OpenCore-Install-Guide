@@ -1,6 +1,9 @@
 # Laptop Skylake
 
-* Supported version: 0.6.0
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | OS X 10.11, El Capitan |
 
 ## Starting Point
 
@@ -75,7 +78,7 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ## Booter
 
-![Booter](../images/config/config-universal/aptio-v-booter.png)
+![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
@@ -86,27 +89,17 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
-
-| Quirk | Enabled |
-| :--- | :--- |
-| EnableWriteUnprotector | YES |
-| RebuildAppleMemoryMap | NO |
-| SyncRuntimePermissions | NO |
+Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
 :::
-
 ::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
 * **EnableWriteUnprotector**: YES
-  * Required to resolve CR0 write protections, else early kernel panics
-* **RebuildAppleMemoryMap**: NO
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+  * Needed to remove write protection from CR0 register.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses
-* **SyncRuntimePermissions**: NO
-  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Coffee Lake and newer
+  * Fixes SetVirtualAddresses calls to virtual addresses, not needed on Skylake and newer
+  
 :::
 
 ## DeviceProperties
@@ -181,8 +174,17 @@ Removes device properties from the map, for us we can ignore this.
 
 ### Add
 
-Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. The main thing you need to keep in mind is:
 
+* Load order
+  * Remember that any plugins should load *after* its dependencies
+  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
+
+A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+
+* **Arch**
+  * Architectures supported by this kext
+  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
 * **BundlePath**
   * Name of the kext
   * ex: `Lilu.kext`
@@ -201,6 +203,12 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
 * **CpuidMask**: Leave this blank
 * **CpuidData**: Leave this blank
+
+### Force
+
+Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+
+For us, we can ignore.
 
 ### Block
 
@@ -252,6 +260,10 @@ Settings relating to the kernel, for us we'll be enabling the following:
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
 :::
+
+### Scheme
+
+Settings related to legacy booting(ie. 10.4-10.6), for us we leave the default values unless you plan to boot legacy OSes(which won't be covered in this guide).
 
 ## Misc
 
@@ -308,9 +320,9 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 | ScanPolicy | 0 | |
-
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 :::
 
 ::: details More in-depth Info
@@ -319,11 +331,14 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+* **ApECID**: 0
+  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-
-* **BootProtect**: None
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
+* **BootProtect**: Bootstrap
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
+* **DmgLoading**: Signed
+  * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
@@ -331,6 +346,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+* **SecureBootModel**: Default
+  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
 
 :::
 
@@ -395,6 +412,9 @@ csr-active-config by default is set to `00000000` which enables System Integrity
 
 * **nvda\_drv**: <>
   * For enabling Nvidia Web Drivers, set to 31 if running a [Maxwell or Pascal GPU](https://github.com/khronokernel/Catalina-GPU-Buyers-Guide/blob/master/README.md#Unsupported-nVidia-GPUs). This is the same as setting nvda\_drv=1 but instead we translate it from [text to hex](https://www.browserling.com/tools/hex-to-text), Clover equivalent is `NvidiaWeb`. **AMD, Intel and Kepler GPU users should delete this section.**
+* **run-efi-updater**: `No`
+  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
+
 * **prev-lang:kbd**: <>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
   * American: `en-US:0`(`656e2d55533a30` in HEX)
@@ -442,9 +462,9 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
- #               MacBookPro13,1 SMBIOS Info                  #
+ #               MacBookPro13,1 SMBIOS Info            #
 #######################################################
 
 Type:         MacBookPro13,1
@@ -499,7 +519,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ## UEFI
 
-![UEFI](../images/config/config-universal/aptio-v-uefi.png)
+![UEFI](../images/config/config-universal/aptio-v-uefi-laptop.png)
 
 **ConnectDrivers**: YES
 
@@ -526,26 +546,7 @@ Related to AudioDxe settings, for us we'll be ignoring(leave as default). This i
 
 ### Input
 
-Related to boot.efi keyboard pass-through used for FileVault and Hotkey support.
-
-* **KeyFiltering**: NO
-  * Verifies and discards uninitialized data, mainly prevalent on 7 series Gigabyte boards
-* **KeyForgetThreshold**: `5`
-  * The delay between each key input when holding a key down, for best results use `5` milliseconds
-* **KeyMergeThreshold**: `2`
-  * The length of time that a key will be registered before resetting, for best results use `2` milliseconds
-* **KeySupport**: `YES`
-  * Enables OpenCore's built in key support and **required for boot picker selection**, do not use with OpenUsbKbDxe.efi
-* **KeySupportMode**: `Auto`
-  * Keyboard translation for OpenCore
-* **KeySwap**: `NO`
-  * Swaps `Option` and `Cmd` key
-* **PointerSupport**: `NO`
-  * Used for fixing broken pointer support, commonly used for Z87 Asus boards
-* **PointerSupportMode**:
-  * Specifies OEM protocol, currently only supports Z87 and Z97 ASUS boards so leave blank
-* **TimerResolution**: `50000`
-  * Set architecture timer resolution, Asus Z87 boards use `60000` for the interface. Settings to `0` can also work for some
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
 
 ### Output
 

@@ -6,6 +6,8 @@ It's that time of year again and with it, and a new macOS beta has been dropped.
 
 **This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
 
+**And note that macOS 11, Big Sur will require macOS already installed on some machine to create the installer. Windows and Linux users will need to use a macOS VM to create the installer.**
+
 ## Backstory
 
 More a mini-explainer as to why this release is a bit more painful than average macOS releases, the main culprits are as follows:
@@ -57,8 +59,8 @@ Not much hardware has been dropped, though the few that have:
   * Note, while AirPortBrcm4360.kext has been removed in Big Sur, support for the 4360 series cards have been moved into AirPortBrcmNIC.kext, which still exists.
 * Certain SATA controllers dropped
   * For some reason, Apple removed the AppleIntelPchSeriesAHCI class from AppleAHCIPort.kext. Due to the outright removal of the class, trying to spoof to another ID (generally done by SATA-unsupported.kext) can fail for many and create instability for others.
-  * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleAHCIPort.kext](https://github.comß/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
-  * This will work in both Catalina and Big Sur so you can remove SATA-unsupported if you want.
+  * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
+  * This will work in both Catalina and Big Sur so you can remove SATA-unsupported if you want. However we recommend setting the MinKernel value to 20.0.0 to avoid any potential issues.
 
 Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them:
 
@@ -116,6 +118,9 @@ With Big Sur, quite a bit broke. Mainly the following:
 * Intel HEDT hackintoshes failing to boot
   * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
   * OpenCorePkg includes a sample SSDT that goes in-depth: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
+* SATA Support broken
+  * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
+  * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
 
 And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/troubleshooting.md#disabling-sip)
 

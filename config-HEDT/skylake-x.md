@@ -1,6 +1,9 @@
 # Skylake-X/W and Cascade Lake-X/W
 
-* Supported version: 0.6.0
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | macOS 10.13, High Sierra |
 
 ## Starting Point
 
@@ -72,12 +75,13 @@ This section is allowing devices to be passthrough to macOS that are generally i
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
-| Quirk | Enabled |
-| :--- | :--- |
-| DevirtualiseMmio | YES |
-| EnableWriteUnprotector | NO |
-| RebuildAppleMemoryMap | YES |
-| SyncRuntimePermissions | YES |
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| DevirtualiseMmio | YES | |
+| EnableWriteUnprotector | NO | |
+| RebuildAppleMemoryMap | YES | |
+| SetupVirtualMap | YES | Note newer Asus BIOS(v3006+) will not boot with this quirk enabled |
+| SyncRuntimePermissions | YES | |
 :::
 
 ::: details More in-depth Info
@@ -92,6 +96,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+  * Note newer Asus BIOS(v3006+) will not boot with this quirk enabled
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for Skylake and newer
 
@@ -119,8 +124,17 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. The main thing you need to keep in mind is:
 
+* Load order
+  * Remember that any plugins should load *after* its dependencies
+  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
+
+A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+
+* **Arch**
+  * Architectures supported by this kext
+  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
 * **BundlePath**
   * Name of the kext
   * ex: `Lilu.kext`
@@ -136,6 +150,12 @@ Here's where you specify which kexts to load, order matters here so make sure Li
 ### Emulate
 
 Needed for spoofing unsupported CPUs, thankfully both Skylake-X and Cascade Lake-X have the same CPU ID as Xeon W chips which ship in the iMac Pro. So here we'll leave it blank
+
+### Force
+
+Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+
+For us, we can ignore.
 
 ### Block
 
@@ -187,6 +207,10 @@ Settings relating to the kernel, for us we'll be enabling the following:
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
 :::
+
+### Scheme
+
+Settings related to legacy booting(ie. 10.4-10.6), for us we leave the default values unless you plan to boot legacy OSes(which won't be covered in this guide).
 
 ## Misc
 
@@ -243,9 +267,9 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 | ScanPolicy | 0 | |
-
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 :::
 
 ::: details More in-depth Info
@@ -254,11 +278,14 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+* **ApECID**: 0
+  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-
-* **BootProtect**: None
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
+* **BootProtect**: Bootstrap
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
+* **DmgLoading**: Signed
+  * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
@@ -266,6 +293,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+* **SecureBootModel**: Default
+  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
 
 :::
 
@@ -329,6 +358,9 @@ System Integrity Protection bitmask
 
 csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/troubleshooting.md#disabling-sip)
 
+* **run-efi-updater**: `No`
+  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
+
 * **prev-lang:kbd**: <>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
   * American: `en-US:0`(`656e2d55533a30` in HEX)
@@ -381,7 +413,7 @@ For this Skylake-X example, we'll choose the iMacPro1,1 SMBIOS.
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
  #              iMacPro1,1 SMBIOS Info                 #
 #######################################################

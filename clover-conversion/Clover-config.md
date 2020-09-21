@@ -1,6 +1,6 @@
 # Converting common properties from Clover to OpenCore
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -307,6 +307,8 @@ DUMMY                   <01 00 00 00>
 
 * `DeviceProperties -> Add -> PciRoot... -> device-id`
 * `DeviceProperties -> Add -> PciRoot... -> Family`
+* `DeviceProperties -> Add -> PciRoot... -> NVCAP`
+  * For more info on calculations, see here: [NVCAP.bt](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/NVCAP.bt)
 
 **FakeIntel**:
 
@@ -341,7 +343,8 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 **NVCAP**
 
 * `DeviceProperties -> Add -> PciRoot... -> NVCAP`
-* See [NVCAP-settings](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/NVCAP-settings.png) for more details, image courtesy of Clover manual
+  * See [NVCAP-settings](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/NVCAP-settings.png) for more details, image courtesy of Clover manual
+  * For more info on calculations, see here: [NVCAP.bt](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/NVCAP.bt)
 
 **display-cfg**:
 
@@ -376,7 +379,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 **RadeonDeInit**:
 
 * [Radeon-Denit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
-* Do note that this is meant for GFX0, adjust for your system
+  * Do note that this is meant for GFX0, adjust for your system
 
 # Kernel and Kext Patches
 
@@ -408,8 +411,7 @@ An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't rea
 
 **ForceKextsToLoad**:
 
-* Not a great solution but injecting the kext "works"
-* See here for more info: [Add ForceKextsToLoad feature to OpenCore #681](https://github.com/acidanthera/bugtracker/issues/681)
+* `Kernel -> Force`
 
 **Kernel LAPIC**:
 

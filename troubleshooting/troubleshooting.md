@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify things.
 
@@ -84,7 +84,11 @@ This is actually the exact same error as `EndRandomSeed` so all the same fixes a
 
 **Booter Issues:**
 
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware.
+  * If your firmware doesn't have MATs:
+    * Disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+  * If your firmware supports MATs:
+    * Enable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then disable `EnableWriteUnprotector`.
 
 To verify whether your board has MATs, check the logs for something like this:
 
@@ -101,9 +105,10 @@ OCABC: MAT support is 1
     * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
       * Intel's Comet Lake series
-      * AMD's B550 and A520
+      * AMD's B550 and A520(Latest BIOS on X570 are also included now)
       * AMD's TRx40
       * VMs like QEMU
+      * Asus's X299 v3006+ BIOS updates(This also applies to other X299 boards on the latest BIOS)
 
 * `EnableWriteUnprotector`
 
@@ -176,6 +181,22 @@ diskutil apfs updatePreboot /volume/disk5s2
 ```
 
 Then finally reboot, note you may need to disable JumpstartHotplug to boot normally again.
+
+## Stuck on `OCB: LoadImage failed - Security Violation`
+
+```
+OCSB: No suitable signature - Security Violation
+OCB: Apple Secure Boot prohibits this boot entry, enforcing!
+OCB: LoadImage failed - Security Violation
+```
+
+This is due to missing outdated Apple Secure Boot manifests present on your preboot volume resulting is a failure to load if you have SecureBootModel set, reason for these files being missing is actually a bug in macOS.
+
+To resolve this you can do one of the following:
+
+* Disable SecureBootModel(ie. set `Misc -> Secuirty -> SecureBootModel -> Disabled`)
+* Reinstall macOS with the latest version
+* Or copy over the Secure Boot manifests from `/usr/standalone/i386` to `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
 
 ## Can't see macOS partitions
 
@@ -378,6 +399,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
 * [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
 * [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
+* [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake)
 
 ## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
@@ -536,7 +558,11 @@ Commonly due to systems running AWAC clocks, please see the [Getting started wit
 
 ## Kernel Panic `Cannot perform kext summary`
 
-Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that your kexts are in the correct order(master then plugins, Lilu always being first) and that kexts with executables have them and plist only kexts don't.
+Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that:
+
+* Your kexts are in the correct order(master then plugins, Lilu always before the plugins)
+* Kexts with executables have them and plist only kexts don't(ie. USBmap.kext, XHCI-unspported.kext, etc does not contain an executable)
+* Don't include multiple of the same kexts in your config.plist(ie. including multiple copies of VoodooInput from multiple kexts, we recommend choosing the first kext in your config's array and disable the rest)
 
 ## Kernel Panic `AppleIntelMCEReporter`
 
@@ -676,6 +702,12 @@ To resolve, we have a few options:
   * LegacyEnable -> YES
   * LegacyOverwrite -> YES
   * WriteFlash -> YES
+
+## Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop
+
+![](../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
+
+To resolve this kernel panic, ensure you have -igfxcdc in your boot-args.
 
 # macOS post-install
 

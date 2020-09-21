@@ -1,6 +1,9 @@
 # Ryzen and Threadripper(17h)
 
-* Supported version: 0.6.0
+| Support | Version |
+| :--- | :--- |
+| Supported OpenCore version | 0.6.1 |
+| Initial macOS Support | macOS 10.13, High Sierra |
 
 ## Starting Point
 
@@ -65,22 +68,7 @@ This section is dedicated to quirks relating to boot.efi patching with OpenRunti
 
 ### MmioWhitelist
 
-This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`. For TRx40 users, we **highly** encourage you to fill this section out with the following properties:
-
-Entry 1:
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| Address | Number | 2987393024 |
-| Comment | String | MMIO devirt 0xB2100000 (0x81 pages, 0x8000000000000001) |
-| Enabled | Boolean | True |
-Entry 2:
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| Address | Number | 3004694528 |
-| Comment | String | MMIO devirt 0xB3180000 (0x81 pages, 0x8000000000000001) |
-| Enabled | Boolean | True |
-
-**Reminder**: Only TRx40 boards require this, **NOT** TR4 with 1st or 2nd gen Threadripper or Ryzen motherboards
+This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 ### Quirks
 
@@ -92,7 +80,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualizeMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| SetupVirtualMap | YES | Note B550, A520 and TRx40 boards should disable this |
+| SetupVirtualMap | YES | Note B550, A520 and TRx40 boards should disable this. Newer BIOS versions of X570 also require this off |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -134,8 +122,17 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where you specify which kexts to load, order matters here so make sure Lilu.kext is always first! Other higher priority kexts come after Lilu such as VirtualSMC, AppleALC, WhateverGreen, etc. A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. The main thing you need to keep in mind is:
 
+* Load order
+  * Remember that any plugins should load *after* its dependencies
+  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
+
+A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+
+* **Arch**
+  * Architectures supported by this kext
+  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
 * **BundlePath**
   * Name of the kext
   * ex: `Lilu.kext`
@@ -154,6 +151,12 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't r
 
 * **CpuidMask**: Leave this blank
 * **CpuidData**: Leave this blank
+
+### Force
+
+Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+
+For us, we can ignore.
 
 ### Block
 
@@ -217,6 +220,10 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://dortania.github.io/OpenCore-Post-Install/usb/)
 :::
 
+### Scheme
+
+Settings related to legacy booting(ie. 10.4-10.6), for us we leave the default values unless you plan to boot legacy OSes(which won't be covered in this guide).
+
 ## Misc
 
 ![Misc](../images/config/config-universal/misc.png)
@@ -272,9 +279,9 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | :--- | :--- | :--- |
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 | ScanPolicy | 0 | |
-
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 :::
 
 ::: details More in-depth Info
@@ -283,11 +290,14 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+* **ApECID**: 0
+  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-
-* **BootProtect**: None
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is not be covered in this guide
+* **BootProtect**: Bootstrap
+  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#preparation)
+* **DmgLoading**: Signed
+  * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
   * Shows more debug information, requires debug version of OpenCore
 * **Vault**: `Optional`
@@ -295,6 +305,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+* **SecureBootModel**: Default
+  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
 
 :::
 
@@ -359,6 +371,9 @@ System Integrity Protection bitmask
 
 csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/troubleshooting.md#disabling-sip)
 
+* **run-efi-updater**: `No`
+  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
+
 * **prev-lang:kbd**: <>
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
   * American: `en-US:0`(`656e2d55533a30` in HEX)
@@ -416,7 +431,7 @@ For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with c
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
-```
+```sh
   #######################################################
  #              iMacPro1,1 SMBIOS Info                 #
 #######################################################

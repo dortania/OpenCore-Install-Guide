@@ -1,6 +1,6 @@
 # Credits
 
-* Supported version: 0.6.0
+* Supported version: 0.6.1
 
 No good guide is made by one man, here's credit to those who've helped out:
 
@@ -42,7 +42,7 @@ Guides linked or those that inspired this guide:
 * [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)
 * [All-in-one Vanilla AMD Hackintosh Guide](https://github.com/doesprintfwork/All-in-one-Vanilla-AMD-Hackintosh-Guide)
 * [USB Map Guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
-* [Intel Framebuffer Patching](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271)
+* [Intel Framebuffer Patching](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
 * [gfxutil](https://github.com/acidanthera/gfxutil/releases)
 

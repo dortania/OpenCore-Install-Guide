@@ -6,5 +6,3 @@ Note that critical thinking and google will be required, as I won't be holding y
 
 * [Penryn(Core2 Series)](../config.plist/legacy/penryn.md)
 * [Nehalem (First Gen i-series)](../config.plist/legacy/nehalem.md)
-* [Sandy Bridge(Second Gen i-series)](../config.plist/legacy/sandy-bridge.md)
-* [Sandy and Ivy Bridge-E(HEDT)](../config.plist/legacy/sandy-bridge-e.md)
