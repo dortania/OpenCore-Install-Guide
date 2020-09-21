@@ -57,7 +57,7 @@ Not much hardware has been dropped, though the few that have:
   * Note, while AirPortBrcm4360.kext has been removed in Big Sur, support for the 4360 series cards have been moved into AirPortBrcmNIC.kext, which still exists.
 * Certain SATA controllers dropped
   * For some reason, Apple removed the AppleIntelPchSeriesAHCI class from AppleAHCIPort.kext. Due to the outright removal of the class, trying to spoof to another ID (generally done by SATA-unsupported.kext) can fail for many and create instability for others.
-  * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
+  * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleAHCIPort.kext](https://github.comß/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
   * This will work in both Catalina and Big Sur so you can remove SATA-unsupported if you want.
 
 Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them:
@@ -70,9 +70,12 @@ And a special note for MSI Navi users, you no longer require the `ATY,rom`/`-weg
 
 Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here:
 
-* [Dortania's Kext & Driver build repo](https://dortania.github.io/builds): updated immediately at every commit, contains DEBUG and RELEASE versions)
-* [Goldfish64 Kext Repo](http://kexts.goldfish64.com/): contains various builds including acidanthera's, but they're only "DEBUG" version
-* [Goldfish64 Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/): same as above, these are only DEBUG builds.
+* [Dortania's Kext & Driver build repo](https://dortania.github.io/builds)
+  * Updated immediately at every commit, contains DEBUG and RELEASE versions
+* [Goldfish64 Kext Repo](http://kexts.goldfish64.com/):
+  * Contains various builds including Acidanthera's, but they're only "RELEASE" version
+* [Goldfish64 UEFI Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/):
+  * Same as above, these are only RELEASE builds.
 
 You will also need to ensure you have a few NVRAM variables set:
 
