@@ -54,9 +54,9 @@ Simple step-by-steps:
     * Can be found at `http://localhost:8080`
 * Check linting and spellcheck:
   * `npm test`
-  * `npm run lint` and `npm run spellcheck` (to run them individually)
+  * `npm run lint` and `npm run spellcheck` (to run the tests individually)
   * `npm run fix-lint` (To fix any potential issues)
-  * If you adding some technical words (such as MacOS,...) and fail at the spellcheck section, you can add that word in dictionary/dictionary.txt
+  * For words not supported by the default spellcheck, please add them to the [dictionary.txt](./dictionary/dictionary.txt) and run `npm run sort-dict`
 
 ### Tips
 
