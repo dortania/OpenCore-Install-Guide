@@ -459,6 +459,7 @@ Generally seen as a USB error, couple ways to fix:
 * If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
 * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quirks -> ReleaseUsbOwnership` in your config.plist
   * Enabling XHCI Handoff in the BIOS can fix this as well
+* Sometimes, if the USB is plugged into a 3.x port, plugging it into a 2.0 port can fix this error.
 
 * For 15h and 16h AMD CPUs, you may need to add the following:
   * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
