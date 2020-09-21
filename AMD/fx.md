@@ -189,7 +189,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
 * **AppleXcpmExtraMsrs**: NO
   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO
-  * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops. To be used in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
+  * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
+  * Enabling this quirk with UpdateSMBIOSMode Custom mode can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk. To be used in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
 * **DisableIoMapper**: NO
   * AMD doesn't have DMAR or VT-D support so irrelevant
 * **DisableLinkeditJettison**: YES
