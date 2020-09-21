@@ -335,7 +335,7 @@ Booter Path, mainly used for UI Scaling
 
 ::: tip 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
 
-OpenCore's NVRAM GUID, mainly relevant for boot path and
+OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
 
 :::
 
