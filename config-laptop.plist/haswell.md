@@ -138,7 +138,7 @@ In addition to the AAPL,ig-platform-id, you'll want to add the cursor byte size 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-cursor | Data | 00009000 |
+| framebuffer-cursormem | Data | 00009000 |
 
 **Special note for HD4200, HD4400 and HD4600**:
 
