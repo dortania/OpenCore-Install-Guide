@@ -459,7 +459,7 @@ For this Penryn example, we'll chose the iMac10,1 SMBIOS - this is done intentio
 | iMac4,1 | Yonah SMBIOS(32-bit) | 10.4 to 10.6.8 |
 | iMac7,1 | Conroe SMBIOS(64-Bit, SSE3) | 10.4. to 10.11.6 |
 | iMac10,1 | Penryn SMBIOS(64-Bit, SSE4) | 10.6 to 10.13.6 |
-| MacPro6, | Mojave and newer SMBIOS | 10.9 to current |
+| MacPro6,1 | Mojave and newer SMBIOS | 10.9 to current |
 
 * If you plan to later run macOS 10.14, Mojave or newer, MacPro6,1 will be the recommended SMBIOS. However please note you will need [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/page-4?post=28447707#post-28447707) to resolve install issues
 
@@ -500,11 +500,14 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ::: details More in-depth Info
 
-* **SpoofVendor**: YES
-  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
-
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
+  
+* **ProcessorType**: `0`
+  * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
+
+* **SpoofVendor**: YES
+  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
 
 * **UpdateDataHub**: YES
   * Update Data Hub fields
@@ -516,7 +519,8 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
   * Updates SMBIOS fields
 
 * **UpdateSMBIOSMode**: Create
-  * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
+  * Replace the tables with newly allocated EfiReservedMemoryType, use `Custom` on Dell laptops requiring `CustomSMBIOSGuid` quirk
+  * Setting to `Custom` with `CustomSMBIOSGuid` quirk enabled can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
 
 :::
 

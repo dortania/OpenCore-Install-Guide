@@ -510,11 +510,14 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ::: details More in-depth Info
 
-* **SpoofVendor**: YES
-  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
-
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
+  
+* **ProcessorType**: `0`
+  * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
+
+* **SpoofVendor**: YES
+  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
 
 * **UpdateDataHub**: YES
   * Update Data Hub fields
@@ -526,7 +529,8 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
   * Updates SMBIOS fields
 
 * **UpdateSMBIOSMode**: Create
-  * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
+  * Replace the tables with newly allocated EfiReservedMemoryType, use `Custom` on Dell laptops requiring `CustomSMBIOSGuid` quirk
+  * Setting to `Custom` with `CustomSMBIOSGuid` quirk enabled can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
 
 :::
 
