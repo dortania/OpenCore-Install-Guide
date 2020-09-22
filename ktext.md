@@ -125,6 +125,18 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
   * AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
   * Requires OS X 10.8 or newer
+  
+::: details Legacy Audio Kext
+
+For those who plan to boot 10.7 and older may want to opt for these kexts instead:
+
+* [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
+  * Requires OS X 10.6 or newer
+  
+* [VoodooHDA-FAT](https://github.com/khronokernel/Legacy-Kexts/blob/master/FAT/Zip/VoodooHDA.kext.zip)
+  * Similar to the above, however supports 32 and 64-Bit kernels so perfect for OS X 10.4-5 booting and 32-Bit CPUs
+
+:::
 
 ### Ethernet
 
@@ -133,7 +145,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
-  * Requires OS X 10.9 or newer
+  * Requires OS X 10.9 or newer, 10.8-10.8 users can use the IntelSnowMausi instead for older OSes
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
@@ -143,7 +155,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Requires OS X 10.8 or newer
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
-  * Requires OS X 10.11 or newer with v2.2.1+
+  * Requires OS X 10.8-11(2.2.0), 10.12-13(v2.2.2), 10.14+(2.3.0)
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
@@ -198,6 +210,7 @@ Relevant for either legacy macOS installs or older PC hardware.
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * Adds Bluetooth support to macOS when paired with an Intel wireless card
   * Note that similar to AirportItlwm, sleep can break with this kext
+  * Requires macOS 10.13 or newer
 
 ::: details More info on enabling AirportItlwm
 
@@ -218,11 +231,11 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
   * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
   * Requires OS X 10.8 or newer
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
+  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/non-Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
     * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
-    * BrcmPatchRAM for 10.10 or older
+    * BrcmPatchRAM for 10.8-10.10
 
 ::: details BrcmPatchRAM Load order
 
