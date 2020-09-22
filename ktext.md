@@ -20,12 +20,16 @@ Firmware drivers are drivers used by OpenCore in the UEFI environment. They're m
 
 ### Universal
 
+::: tip Required Drivers
+
 For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
 
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
+
+:::
 
 ### Legacy users
 
@@ -66,31 +70,33 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 ### Must haves
 
+::: tip Required Kexts
+
 Without the below 2, no system is bootable:
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
   * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
+  * Requires OS X 10.6 or newer
 * [Lilu](https://github.com/acidanthera/Lilu/releases)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
   * Note that Lilu and plugins requires OS X 10.8 or newer to function
   
 ::: details Legacy "Must haves" kexts
 
-For those planning to boot OS X 10.7 and older, you'll want to opt for these kexts instead:
+For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want to use the below instead of VirtualSMC:
 
-* [FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/)
-  * Used as our SMC emulator predating VirtualSMC with support for older OSes
-  * We recommend setting the `MaxKernel` to 11.9.9 so it'll only inject in 10.7 and older allowing you to use VirtualSMC in newer OSes. Same idea applies to VirtualSMC, set the `MinKernel` to 12.0.0 so i won't interfere with older OSes
-  * For 32-bit users, you can use [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true) instead, note OS X 10.4 and 10.5 have 32-bit kernel space so 64-bit CPUs will require it as well.
+* [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
 
 Reminder if you don't plan to boot these older OSes, you can ignore these kexts.
+
+* **OS X 10.4 and 10.5 note**: Even on 64 bit CPUs, OS X's kernel space is still 32-Bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
 
 :::
 
 ### VirtualSMC Plugins
 
-The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring:
+The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring(Note while VirtualSMC supports 10.6, plugins may require 10.8+):
 
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**

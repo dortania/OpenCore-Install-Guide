@@ -183,7 +183,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Type**:
 
-* `PlatformInfo -> SMBIOS -> ProcessorType`
+* `PlatformInfo -> Generic -> ProcessorType`
 * See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for all supported values
 
 **HWPEnable**: Better alternative is to properly manage `MSR 0x770` with [HWPEnable](https://github.com/headkaze/HWPEnable)

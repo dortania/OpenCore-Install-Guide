@@ -243,6 +243,7 @@ Crohn's
 CsrDecode
 Ctrl
 Cupertino
+CustomSMBIOSMode
 DAC
 DACs
 DBG
@@ -318,6 +319,7 @@ Factor-Auth
 FairPlay
 FakeSMC
 FakeSMC-32
+FakeSMC-32's
 FakeSMC3_with_plugins
 Fenvi
 FileVault
@@ -606,6 +608,7 @@ Pre-Allocated
 Prelinked
 ProperTree
 ProperTree's
+Psystar
 QE/CI
 QEMU
 Qlogic
@@ -699,6 +702,7 @@ TRX40
 TRx40
 TSC
 TSCAdjustReset
+Takedowns
 Technopat
 Telemetrap
 TetherMe
@@ -904,6 +908,7 @@ gibMacOS's
 gitbook
 gitbook-cli
 google-fu
+grey
 hackintosh
 hackintoshes
 hackintoshing

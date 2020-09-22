@@ -141,7 +141,11 @@ Fun Fact: The reason the byte order is swapped is because most modern processors
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. The main thing you need to keep in mind is:
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however 32-Bit CPUs please see below:
+
+::: details More in-depth Info
+
+The main thing you need to keep in mind is:
 
 * Load order
   * Remember that any plugins should load *after* its dependencies
@@ -160,9 +164,35 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 * **ExecutablePath**
   * Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
   * ex: `Contents/MacOS/Lilu`
+* **MinKernel**
+  * Lowest kernel version your kext will be injected into, see below table for possible values
+  * ex. `12.0.0` for OS X 10.8
+* **MaxKernel**
+  * Highest kernel version your kext will be injected into, see below table for possible values
+  * ex. `11.9.9` for OS X 10.7
 * **PlistPath**
   * Path to the `info.plist` hidden within the kext
   * ex: `Contents/Info.plist`
+  
+::: details Kernel Support Table
+
+| OS X Version | MinKernel | MaxKernel |
+| :--- | :--- | :--- |
+| 10.4 | 8.0.0 | 8.9.9 |
+| 10.5 | 9.0.0 | 9.9.9 |
+| 10.6 | 10.0.0 | 10.9.9 |
+| 10.7 | 11.0.0 | 11.9.9 |
+| 10.8 | 12.0.0 | 12.9.9 |
+| 10.9 | 13.0.0 | 13.9.9 |
+| 10.10 | 14.0.0 | 14.9.9 |
+| 10.11 | 15.0.0 | 15.9.9 |
+| 10.12 | 16.0.0 | 16.9.9 |
+| 10.13 | 17.0.0 | 17.9.9 |
+| 10.14 | 18.0.0 | 18.9.9 |
+| 10.15 | 19.0.0 | 19.9.9 |
+| 11 | 20.0.0 | 20.9.9 |
+
+:::
 
 ### Emulate
 
@@ -233,7 +263,26 @@ The reason being is that UsbInjectAll reimplements builtin macOS functionality w
 
 ### Scheme
 
-Settings related to legacy booting(ie. 10.4-10.6), for us we leave the default values unless you plan to boot legacy OSes(which won't be covered in this guide).
+Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip however for those planning to boot legacy OSes you can see below:
+
+::: details More in-depth Info
+
+* **FuzzyMatch**: True
+  * Used for ignoring checksums with kernelcache, instead opting for the latest cache available. Can help improve boot performance on many machines in 10.6
+* **KernelArch**: x86_64
+  * Set the kernel's arch type, you can choose between `Any`, `i386` (32-bit), and `x86_64` (64-bit).
+  * If you're booting older OSes which require a 32-bit kernel(ie. 10.4 and 10.5) we recommend to set this to `Any` and let macOS decide based on your SMBIOS. See below table for supported values:
+    * 10.4-10.5 — `i386` or `i386-user32`
+      * Note `user32` refers 32-bit userspace, so 32-bit CPUs must use this(or CPUs missing SSSE3)
+    * 10.6 — `i386`, `i386-user32`, or `x86_64`
+    * 10.7 — `i386` or `x86_64`
+    * 10.8 or newer — `x86_64`
+
+* **KernelCache**: Auto
+  * Set kernel cache type, mainly useful for debugging and so we recommend `Auto` for best support
+  * Supported values:
+
+:::
 
 ## Misc
 
