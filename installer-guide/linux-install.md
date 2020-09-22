@@ -50,6 +50,17 @@ Instructions for running are quite simple, choose from one of the below commands
 
 # Sierra(10.12):
 ./macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
+
+# High Sierra(10.13)
+./macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
+./macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
+
+# Mojave(10.14)
+./macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
+
+# Latest version
+# ie. Catalina(10.15)
+./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:

@@ -199,10 +199,10 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
   * ex: `Contents/MacOS/Lilu`
 * **MinKernel**
   * Lowest kernel version your kext will be injected into, see below table for possible values
-  * ex. `12.0.0` for OS X 10.8
+  * ex. `12.00.00` for OS X 10.8
 * **MaxKernel**
   * Highest kernel version your kext will be injected into, see below table for possible values
-  * ex. `11.9.9` for OS X 10.7
+  * ex. `11.99.99` for OS X 10.7
 * **PlistPath**
   * Path to the `info.plist` hidden within the kext
   * ex: `Contents/Info.plist`
@@ -211,19 +211,19 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 | OS X Version | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
-| 10.4 | 8.0.0 | 8.9.9 |
-| 10.5 | 9.0.0 | 9.9.9 |
-| 10.6 | 10.0.0 | 10.9.9 |
-| 10.7 | 11.0.0 | 11.9.9 |
-| 10.8 | 12.0.0 | 12.9.9 |
-| 10.9 | 13.0.0 | 13.9.9 |
-| 10.10 | 14.0.0 | 14.9.9 |
-| 10.11 | 15.0.0 | 15.9.9 |
-| 10.12 | 16.0.0 | 16.9.9 |
-| 10.13 | 17.0.0 | 17.9.9 |
-| 10.14 | 18.0.0 | 18.9.9 |
-| 10.15 | 19.0.0 | 19.9.9 |
-| 11 | 20.0.0 | 20.9.9 |
+| 10.4 | 8.00.00 | 8.99.99 |
+| 10.5 | 9.00.00 | 9.99.99 |
+| 10.6 | 10.00.00 | 10.99.99 |
+| 10.7 | 11.00.00 | 11.99.99 |
+| 10.8 | 12.00.00 | 12.99.99 |
+| 10.9 | 13.00.00 | 13.99.99 |
+| 10.10 | 14.00.00 | 14.99.99 |
+| 10.11 | 15.00.00 | 15.99.99 |
+| 10.12 | 16.00.00 | 16.99.99 |
+| 10.13 | 17.00.00 | 17.99.99 |
+| 10.14 | 18.00.00 | 18.99.99 |
+| 10.15 | 19.00.00 | 19.99.99 |
+| 11 | 20.00.00 | 20.99.99 |
 
 :::
 
@@ -303,17 +303,17 @@ Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip how
 * **FuzzyMatch**: True
   * Used for ignoring checksums with kernelcache, instead opting for the latest cache available. Can help improve boot performance on many machines in 10.6
 * **KernelArch**: x86_64
-  * Set the kernel's arch type, you can choose between `Any`, `i386` (32-bit), and `x86_64` (64-bit).
-  * If you're booting older OSes which require a 32-bit kernel(ie. 10.4 and 10.5) we recommend to set this to `Any` and let macOS decide based on your SMBIOS. See below table for supported values:
-    * 10.4-10.5 — `i386` or `i386-user32`
-      * Note `user32` refers 32-bit userspace, so 32-bit CPUs must use this(or CPUs missing SSSE3)
+  * Set the kernel's arch type, you can choose between `Auto`, `i386` (32-bit), and `x86_64` (64-bit).
+  * If you're booting older OSes which require a 32-bit kernel(ie. 10.4 and 10.5) we recommend to set this to `Auto` and let macOS decide based on your SMBIOS. See below table for supported values:
+    * 10.4-10.5 — `x86_64`, `i386` or `i386-user32`
+      * `i386-user32` refers 32-bit userspace, so 32-bit CPUs must use this(or CPUs missing SSSE3)
+      * `x86_64` will still have a 32-bit kernelspace however will ensure 64-bit userspace in 10.4/5
     * 10.6 — `i386`, `i386-user32`, or `x86_64`
     * 10.7 — `i386` or `x86_64`
     * 10.8 or newer — `x86_64`
 
 * **KernelCache**: Auto
   * Set kernel cache type, mainly useful for debugging and so we recommend `Auto` for best support
-  * Supported values:
 
 :::
 
@@ -375,6 +375,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | ScanPolicy | 0 | |
 | SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+
 :::
 
 ::: details More in-depth Info
