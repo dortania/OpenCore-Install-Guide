@@ -396,6 +396,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
 * **SecureBootModel**: Default
   * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+  * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/troubleshooting.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
 

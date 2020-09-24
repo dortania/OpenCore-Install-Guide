@@ -205,7 +205,7 @@ This is actually the part at where macOS will seal the system volume, and where 
 
 As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you'll need to look at your RTC device and see which regions are missing. For more information, see here: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
-#### Stuck on `ramrod`(^^^^^^^^^^^^^)
+### Stuck on `ramrod`(^^^^^^^^^^^^^)
 
 ![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
 
