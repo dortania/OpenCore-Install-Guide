@@ -50,20 +50,41 @@ This is likely a spelling mistake, options in OpenCore are case-sensitive so mak
 
 ## Stuck on EndRandomSeed
 
-Couple problems:
+Couple main places to check:
 
-**Booter Issues:**
+* `DevirtualiseMmio`
+  * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright.
+  * More info here: [Using DevirtualiseMmio](../extras/kaslr-fix.md#using-devirtualisemmio)
 
-* `DevirtualiseMmio` may be taking precious areas in memory that are needed for other uses, you may need to disable this quirk or whitelist the bad regions: [Using DevirtualiseMmio](../extras/kaslr-fix.md#using-devirtualisemmio)
-* `SetupVirtualMap` may be needed depending on the firmware, generally this quirk should be avoided but most Gigabyte users and older hardware(Broadwell and older) will need this quirk to boot.
-  * Z490 boards are known to fail with `SetupVirtualMap` enabled, especially on Asus and AsRock boards.
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware. If your firmware doesn't have MATs, disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
+* `SetupVirtualMap`
+  * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
+    * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
+      * Intel's Ice Lake series
+      * Intel's Comet Lake series
+      * AMD's B550 and A520(Latest BIOS on X570 are also included now)
+      * AMD's TRx40
+      * VMs like QEMU
+      * Asus's X299 v3006+ BIOS updates(This also applies to other X299 boards on the latest BIOS)
 
-To verify whether your board has MATs, check the logs for something like this:
+* `EnableWriteUnprotector`
+
+  * Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
+    * If your firmware supports MATs(2018+ firmwares):
+      * EnableWriteUnprotector -> False
+      * RebuildAppleMemoryMap -> True
+      * SyncRuntimePermissions -> True
+    * For older firmwares:
+      * EnableWriteUnprotector -> True
+      * RebuildAppleMemoryMap -> False
+      * SyncRuntimePermissions -> False
+
+Regarding MATs support, firmwares built against EDK 2018 will support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has updated the firmware, you can check the OpenCore logs whether yours supports it:
 
 ```
 OCABC: MAT support is 1
 ```
+
+Note: `1` means it supports MATs, while `0` means it does not.
 
 **Kernel Issues:**
 
@@ -81,20 +102,6 @@ OCABC: MAT support is 1
 ## Stuck on `[EB|#LOG:EXITBS:START]`
 
 This is actually the exact same error as `EndRandomSeed` so all the same fixes apply(10.15.4 and newer changed the debug protocol for those curious):
-
-**Booter Issues:**
-
-* `RebuildAppleMemoryMap` may not be a fan of your firmware, use of this quirk is dependent on having `EnableWriteUnprotector` disabled and `SyncRuntimePermissions` enabled with the addition of having a `Memory Attribute Table` in your firmware.
-  * If your firmware doesn't have MATs:
-    * Disable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then enable `EnableWriteUnprotector`.
-  * If your firmware supports MATs:
-    * Enable both `RebuildAppleMemoryMap` and `SyncRuntimePermissions` then disable `EnableWriteUnprotector`.
-
-To verify whether your board has MATs, check the logs for something like this:
-
-```
-OCABC: MAT support is 1
-```
 
 * `DevirtualiseMmio`
   * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright.
@@ -263,7 +270,7 @@ This is due to either using a Clover config with OpenCore or using a configurato
 
 ## Stuck on `OC: Driver XXX.efi at 0 cannot be found`
 
-Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFI -> Drivers
+Verify that your EFI/OC/Drivers matches up with your config.plist -> UEFI -> Drivers, if not please adjust them accordingly such as re-running ProperTree's snapshot tool.
 
 Note that the entries are case-sensitive.
 
@@ -273,30 +280,24 @@ Note that the entries are case-sensitive.
 
 ## Stuck on `Plist only kext has CFBundleExecutable key`
 
-Missing or incorrect `Executable path`
+Missing or incorrect `Executable path`, this should be resolved by re-running ProperTree's snapshot tool.
 
 ## Receiving "Failed to parse real field of type 1"
 
 * A value is set as `real` when it's not supposed to be, generally being that Xcode converted `HaltLevel` by accident:
 
-  ```
-  <key>HaltLevel</key>
-  ```
+```xml
+<key>HaltLevel</key>
+ <real>2147483648</real>
+```
 
-  ```
-  <real>2147483648</real>
-  ```
+To fix, swap `real` for `integer`:
 
-  To fix, swap `real` for `integer`:
+```xml
+<key>HaltLevel</key>
+ <integer>2147483648</integer>
+```
 
-  ```
-  <key>HaltLevel</key>
-  ```
-
-  ```
-  <integer>2147483648</integer>
-  ```
-  
 ## Stuck after selection macOS partition on OpenCore
 
 * CFG-Lock not off(Intel Users only), couple solutions:
@@ -316,26 +317,31 @@ Missing or incorrect `Executable path`
 
 ## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 
-This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. Reminder of supported SMBIOS in macOS 10.15 Catalina:
+This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. For a full list of supported SMBIOS and their OSes, see here: [Choosing the right SMBIOS](../extras/smbios-support.md)
+
+::: details Supported SMBIOS in macOS 10.15 Catalina
 
 * iMac13,x+
 * iMacPro1,1
 * MacPro6,1+
+* Macmini6,x+
 * MacBook8,1+
 * MacBookAir5,x+
 * MacBookPro9,x+
 
-And reminder, the following SMBIOS require newer versions of macOS:
+:::
 
-| SMBIOS | Initial Support | Kernel support |
-| :--- | :--- | :--- |
-| iMac19,x       | 10.14.4  | 18E226 |
-| iMac20,x       | 10.15.6  | 19G2005 |
-| MacPro7,1      | 10.15.0  | 19A583 |
-| MacBookAir9,1  | 10.15.4  | 19E287 |
-| MacBookPro16,1 | 10.15.1  | 19B2093 |
-| MacBookPro16,2 | 10.15.4  | 19E2269 |
-| MacBookPro16,3 | 10.15.4  | 19E2269 |
+::: details Supported SMBIOS in macOS 11, Big Sur
+
+* iMac14,4+
+* iMacPro1,1
+* MacPro6,1+
+* Macmini7,1+
+* MacBook8,1+
+* MacBookAir6,x+
+* MacBookPro11,x+
+
+:::
 
 ## `Couldn't allocate runtime area` errors
 
@@ -413,7 +419,7 @@ Well this general area is where a lot of PCI devices are first setup and configu
 The main places to check:
 
 * **Missing EC patch**:
-  * For desktops, make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
+  * Make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
   * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
 * **IRQ conflict**:
   * Most common on older laptops and pre-builts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
@@ -435,7 +441,7 @@ The main places to check:
     * HEDT: See [Emulating NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
 
 * **RTC Missing**:
-  * Commonly found on 300 series and X299/Cascade Lake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
+  * Commonly found on Intel's 300+ series(ie. Z370, Z490) and X299/Cascade Lake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
   * Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
 
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
@@ -454,21 +460,29 @@ And please remember to add this SSDT to both EFI/OC/ACPI **and** your config.pli
 
 ## "Waiting for Root Device" or Prohibited Sign error
 
-Generally seen as a USB error, couple ways to fix:
+Generally seen as a USB or SATA error, couple ways to fix:
 
-* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://github.com/corpnewt/USBMap). CorpNewt also has a guide for this: [USBmap Guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
+### USB Issues
+
+This assumes you're only booting the installer USB and not macOS itself.
+
+* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://dortania.github.io/OpenCore-Post-Install/usb/)
+
 * Another issue can be that certain firmware won't pass USB ownership to macOS, to fix this we can enable `UEFI -> Quirks -> ReleaseUsbOwnership` in your config.plist
   * Enabling XHCI Handoff in the BIOS can fix this as well
 
-* For 15h and 16h AMD CPUs, you may need to add the following:
+* For AMD's 15h and 16h CPUs, you may need to add the following:
   * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
 
 * If XLNCUSBFix still doesn't work, then try the following:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
   
-Another possible issue is missing USB ports in your DSDT, macOS isn't great at finding hardware and needs things explicitly defined to it for many things. This means if a USB port is not defined, macOS won't be able to find it. To fix this we use [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases) to fix booting, note that this **only works on Intel USB Chipsets** and should only be required on Broadwell and older systems(with some newer AsRock boards also needing it)
-
-For AMD users with missing ports in DSDT, you're gonna have to try all the ports in your system and pray, generally 3.1 AsMedia ports work without issue.
+* Missing USB ports in ACPI
+  * For Intel's Coffee Lake and older, we recommend using [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
+  * For Intel's Ice Lake and Comet Lake, we recommend [SSDT-RHUB](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
+  * For AMD, we recommend using 3rd party USB controllers such as 3.2 AsMedia USB ports
+  
+### SATA Issues
 
 On rare occasions(mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
 
@@ -707,7 +721,7 @@ To resolve, we have a few options:
 
 ![](../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
 
-To resolve this kernel panic, ensure you have -igfxcdc in your boot-args.
+To resolve this kernel panic, ensure you have `-igfxcdc` in your boot-args.
 
 # macOS post-install
 
@@ -725,13 +739,7 @@ To resolve this kernel panic, ensure you have -igfxcdc in your boot-args.
 
 ## Broken iMessage and Siri
 
-* En0 device not setup as `Built-in`, couple ways to fix:
-  * Find PCI path for your NIC with [gfxutil](https://github.com/acidanthera/gfxutil/releases)(ie: `ethernet`, GBE1, ). Then via DeviceProperties in your config.plist, apply the property of `built-in` with the value of `01` and type `Data`. Hackintool can also grab the PciRoot path if you're having issues with gfxutil. **Recommended method**
-  * [NullEthernet.kext](https://bitbucket.org/RehabMan/os-x-null-ethernet/downloads/) + [SSDT-RMNE](https://github.com/RehabMan/OS-X-Null-Ethernet/blob/master/ssdt-rmne.aml). **Only recommended when first solution doesn't work**
-
-![](../images/troubleshooting/troubleshooting-md/en0-built-in.png)
-
-If these fixes do not work, see the [Fixing iServices page](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) for more in-depth guide.
+Refer to [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) section
 
 ## No on-board audio
 
@@ -739,15 +747,7 @@ Refer to [Fixing Audio with AppleALC](https://dortania.github.io/OpenCore-Post-I
 
 ## BIOS reset or sent into Safemode after reboot/shutdown
 
-Issue with AppleRTC, quite a simple fix:
-
-* config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
-
-**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges.
-
-For a more in-depth guide, see here:
-
-* [Fixing RTC/CMOS Resets](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html)
+Refer to [Fixing RTC/CMOS Resets](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html) section
 
 ## Synaptics PS2 based trackpad doesn't work
 
@@ -808,11 +808,13 @@ Verify the following:
 
 ## DRM Broken
 
-See [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html) page
+Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html) section
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
 Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and `Kernel -> Add`. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.
+
+* Note: This kext is known to create instability, if you receive random crashes and freezes please remove this kext.
 
 ## Apps crashing on AMD
 
@@ -829,8 +831,6 @@ So with AMD, whenever Apple calls CPU specific functions the app will either not
   * Parallels 13.1.0 and older are known to work as well
 * Docker broken
   * Docker toolbox is the only solution as it's based off of VirtualBox, many features are unavailable with this version
-* Xcode Apple Watch simulator is broken in Catalina
-  * Mojave works fine
 * IDA Pro won't install
   * There's an Intel specific check in the installer, app itself is likely fine
 * 15/16h CPU web pages crashing

@@ -65,6 +65,8 @@
 19h
 20XX
 2200S
+2B-i
+2B-iii
 32MB
 3700X
 390X
@@ -276,6 +278,7 @@ EC0
 ECDV
 EDID
 EDK
+EDKII
 EFI
 EFI's
 EFI32
@@ -432,6 +435,7 @@ Insyde
 IntelBluetoothFirmware
 IntelMausi
 IntelMausiEthernet
+IntelSnowMausi
 InyextcionES
 InyextcionES'
 IvyBridge
@@ -467,6 +471,7 @@ LegacyBoot
 Lenovo
 Lexa
 Lilu
+LoadImage
 LoadVBIOS
 LucyRTL8125Ethernet
 Lynnfield
@@ -501,6 +506,8 @@ MacSerial
 MaciASL
 Mackie
 Mackie's
+Macmini6
+Macmini7
 MakeInstall
 MasterBootRecord
 MediaKit
@@ -538,6 +545,7 @@ OC
 OC's
 OC/
 OCABC
+OCB
 OCConfigCompare
 OCSCAN_ALLOW_DEVICE
 OCSCAN_ALLOW_FS
@@ -755,6 +763,7 @@ VmAssetCacheEnable
 VoiceOver
 VoodooGPIO
 VoodooHDA
+VoodooHDA-FAT
 VoodooI2C
 VoodooI2CHID
 VoodooI2CServices
@@ -993,6 +1002,7 @@ msi
 multiboot
 natively
 nms42
+non-Fenvi
 non-UEFI
 non-latin
 npci
