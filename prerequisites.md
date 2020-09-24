@@ -119,7 +119,7 @@ While the EULA states that macOS should only be installed on real Macs([section 
 
 * **Note**: We are not official legal advisors, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
 
-### macOS does not support Nvidia GPUs
+### Does macOS support Nvidia GPUs
 
 Due to issues revolving around Nvidia support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported Nvidia GPUs and don't at this point. However, Apple actually still maintains and supports Macs with Nvidia GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
 
