@@ -54,13 +54,15 @@ Simple step-by-steps:
     * Can be found at `http://localhost:8080`
 * Check linting and spellcheck:
   * `npm test`
-  * `npm run lint` and `npm run spellcheck` (to run them individually)
+  * `npm run lint` and `npm run spellcheck` (to run the tests individually)
   * `npm run fix-lint` (To fix any potential issues)
+  * For words not supported by the default spellcheck, please add them to the [dictionary.txt](./dictionary/dictionary.txt) and run `npm run sort-dict`
 
 ### Tips
 
 Some tools that make contributing a bit easier:
 
+* [Visual Studio Code](https://code.visualstudio.com)
 * [Typora](https://typora.io) for real time markdown rendering.
 * [TextMate](https://macromates.com) for easy and powerful mass find/replace.
 * [Github Desktop](https://desktop.github.com) for more user friendly GUI.
