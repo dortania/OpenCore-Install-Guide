@@ -61,7 +61,7 @@ By default, OpenCore will assume that all OSes should be treated equally in rega
 
 However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
 
-### Does OpenCore requires a fresh install
+### Does OpenCore require a fresh install
 
 Not at all in the event you have a "Vanilla" installation, what this refers to is whether the OS has tampered in any way such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues
 
