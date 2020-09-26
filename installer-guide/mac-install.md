@@ -200,9 +200,9 @@ This method instead relies on hosted images either from Apple or Acidanthera, an
 
 #### Acidanthera Images
 
-* [OS X 10.4.10(Placeholder)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug)
+* [OS X 10.4.10(8R4088)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug)
 
-* [OS X 10.5.6(Placeholder)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug)
+* [OS X 10.5.7(9J3050)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug)
 
 * [OS X 10.6.7(10J4139)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug/file/ioQkTagI)
 
@@ -210,9 +210,9 @@ This method instead relies on hosted images either from Apple or Acidanthera, an
 
 Note that these images require you to have an Apple Developer account to access.
 
-* [OS X 10.5 Golden Master(9a581)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_v10.5_leopard_9a581/leopard_9a581_userdvd.dmg)
+* [OS X 10.5.0 Golden Master(9a581)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_v10.5_leopard_9a581/leopard_9a581_userdvd.dmg)
 
-* [OS X 10.6 Golden Master(10a432)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_version_10.6_snow_leopard_build_10a432/mac_os_x_v10.6_build_10a432_user_dvd.dmg)
+* [OS X 10.6.0 Golden Master(10a432)](https://download.developer.apple.com/Mac_OS_X/mac_os_x_version_10.6_snow_leopard_build_10a432/mac_os_x_v10.6_build_10a432_user_dvd.dmg)
 
 ### Restoring the drive
 
@@ -222,7 +222,7 @@ Now comes the fun part, you'll first want to open the dmg you just downloaded an
 
 Next we have 2 options to follow:
 
-* [ASR Restore](#asr)
+* [ASR Restore](#asr)(Apple Software Restore)
   * Terminal based, works with SIP enabled
 * [Disk Utility Restore](#disk-utility)
   * May require SIP disabled in newer OSes

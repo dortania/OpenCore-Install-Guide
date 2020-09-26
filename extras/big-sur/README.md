@@ -42,7 +42,8 @@ If your SMBIOS was supported in Catalina and isn't included above, you're good t
 
 For those wanting a simple translation for their Ivy and Haswell Machines:
 
-* iMac13,2, iMac14,2 and iMac14,3 should transition over to using iMac15,1
+* iMac13,2 should transition over to using MacPro6,1
+* iMac14,2 and iMac14,3 should transition over to using iMac15,1
 * iMac14,1 should transition over to iMac14,4
 
 ### Supported hardware
@@ -54,7 +55,7 @@ Not much hardware has been dropped, though the few that have:
   * Ivy Bridge-E CPUs are still supported thanks to being in MacPro6,1
 * Ivy Bridge iGPUs.
   * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
-* BCM94331CD based Wifi cards.
+* BCM94331 based Wifi cards.
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
   * Note, while AirPortBrcm4360.kext has been removed in Big Sur, support for the 4360 series cards have been moved into AirPortBrcmNIC.kext, which still exists.
 * Certain SATA controllers dropped
