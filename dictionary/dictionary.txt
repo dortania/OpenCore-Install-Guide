@@ -176,6 +176,7 @@ B360
 B460
 B550
 B75
+B8
 BCM5722
 BCM5722D
 BCM94331
@@ -200,6 +201,7 @@ Broadwell
 Broadwell-E
 Bugtracker
 BusID
+C3
 C7030000
 CAVS
 CFG
@@ -412,6 +414,7 @@ IMEI
 IMEI's
 IO80211Family
 IOHDACodecDevice
+IOHIDFamily
 IOIIIO
 IOKit
 IONVMe
@@ -618,6 +621,7 @@ Prelinked
 ProperTree
 ProperTree's
 Psystar
+Q8300
 QE/CI
 QEMU
 Qlogic
@@ -993,6 +997,7 @@ lsblk
 macOS
 macOS's
 macOS(\.)?
+macOS-only
 macOS86
 macrecovery
 macserial

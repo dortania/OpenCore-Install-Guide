@@ -198,7 +198,7 @@ For the last one, if you get a kernel panic with Lilu we highly recommend you to
 
 ## Troubleshooting
 
-#### Stuck at `Forcing CS_RUNTIME for entitlement`
+### Stuck at `Forcing CS_RUNTIME for entitlement`
 
 ![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
@@ -230,6 +230,75 @@ With Big Sur, macOS has become much pickier with devices being present in ACPI. 
 If no property is found, you'll need to create an SSDT that provides the full pathing as you likely have a PCI Bridge that is not documented in your ACPI tables. An example of this can be found here: [SSDT-BRG0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-BRG0.dsl)
 
 * **Note**: This issue may also pop up in older versions of macOS, however Big Sur is most likely to have issues.
+
+### Keyboard and Mouse broken
+
+For certain legacy systems, you may notice that while the USB ports work your HID-based devices such as the keyboard and mouse may be broken. To resolve this, add the following patch:
+
+::: details IOHIDFamily Patch
+
+config.plist -> Kernel -> Patch:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Base | String | _isSingleUser |
+| Count | Integer | 1 |
+| Enabled | Boolean | True |
+| Find | Data | |
+| Identifier | String | com.apple.iokit.IOHIDFamily |
+| Limit | Integer | 0 |
+| Mask | Data | |
+| MaxKernel | String | |
+| MinKernel | String | 20.0.0 |
+| Replace | Data | B801000000C3 |
+| ReplaceMask | Data | |
+| Skip | Integer | 0 |
+
+[Source](https://applelife.ru/threads/ustanovka-macos-big-sur-11-0-beta-na-intel-pc-old.2944999/page-81#post-884400)
+
+:::
+
+### Early Kernel Panic on `max_cpus_from_firmware not yet initialized`
+
+If you receive an early kernel panic on `max_cpus_from_firmware not yet initialized`, this is due to the new `acpi_count_enabled_logical_processors` method added in macOS Big Sur's kernel. To resolve, please ensure you'er on OpenCore 0.6.0 or newer with the `AvoidRuntimeDefrag` Quirk enabled.
+
+* **Note**: Due to how early this kernel panic happens, you may only be able to log it either via serial or rebooting in a known working install of macOS and checking your panic logged in NVRAM.
+  * Most users will see this panic simply as `[EB|#LOG:EXITBS:START]`
+
+::: details Example Kernel Panic
+
+On-screen:
+
+![](../../images/extras/big-sur/readme/onscreen-panic.png)
+
+Via serial logging or NVRAM:
+
+![](../../images/extras/big-sur/readme/apic-panic.png)
+
+:::
+
+::: details Legacy Edge Case
+
+On certain hardware, mainly the HP DC7900, the kernel still can't determine exactly how many threads your hardware supports. This will result in the aforementioned kernel panic and so we need to hard code the CPU core's value.
+
+To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 with the amount of CPU threads your hardware supports):
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Base | String | _acpi_count_enabled_logical_processors |
+| Count | Integer | 1 |
+| Enabled | Boolean | True |
+| Find | Data | |
+| Identifier | String | Kernel |
+| Limit | Integer | 0 |
+| Mask | Data | |
+| MaxKernel | String | |
+| MinKernel | String | 20.0.0 |
+| Replace | Data | B804000000C3 |
+| ReplaceMask | Data | |
+| Skip | Integer | 0 |
+
+:::
 
 ### Some kexts may not be compatible with Big Sur yet
 
