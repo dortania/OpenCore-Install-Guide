@@ -232,7 +232,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
   * For systems with Synaptic SMBus-based devices, mainly for trackpads and trackpoints.
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus)
-  * For systems with Elans SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with ELANs SMBus-based devices, mainly for trackpads and trackpoints.
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
