@@ -225,7 +225,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * For systems with PS2 Keyboards, Mice and Trackpads
   * Requires OS X 10.11 or newer for MT2 functions
-* [VoodooPS2-Rehabman](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
+* [Rehabman's VoodooPS2](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
   * For older systems with PS2 keyboards, Mice and Trackpads
   * For if you need to use VoodooPS2 for 10.6-10.11, or otherwise don't want to use VoodooInput for MT2 functions
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
