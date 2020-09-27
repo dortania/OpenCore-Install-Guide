@@ -223,16 +223,16 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 #### Input drivers
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
-  * For systems with PS2 Keyboards, Mice and Trackpads
-  * Requires OS X 10.11 or newer for MT2 functions
-* [Rehabman's VoodooPS2](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
-  * For older systems with PS2 keyboards, Mice and Trackpads
-  * For if you need to use VoodooPS2 for 10.6-10.11, or otherwise don't want to use VoodooInput for MT2 functions
+  * For systems with PS2 keyboards, mice, and trackpads
+  * Requires OS X 10.11 or newer for MT2 (Magic Trackpad 2) functions
+* [RehabMan's VoodooPS2](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
+  * For older systems with PS2 keyboards, mice, and trackpads
+  * Use if you need OS X 10.6+ support, or otherwise don't want to use VoodooInput for MT2 functions
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
-  * For systems with Synaptic SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with Synaptics' SMBus-based devices, mainly for trackpads and trackpoints.
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus)
-  * For systems with ELANs SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with ELAN's SMBus-based devices, mainly for trackpads and trackpoints.
   * Requires OS X 10.11 or newer for MT2 functions
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
