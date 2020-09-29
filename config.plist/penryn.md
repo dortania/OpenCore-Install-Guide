@@ -491,7 +491,7 @@ For this Penryn example, we'll chose the iMac10,1 SMBIOS - this is done intentio
 | SMBIOS | Hardware | OS Support |
 | :--- | :--- | :--- |
 | iMac4,1 | Yonah SMBIOS(32-bit) | 10.4 to 10.6.8 |
-| iMac7,1 | Conroe SMBIOS(64-Bit, SSE3) | 10.4. to 10.11.6 |
+| iMac7,1 | Conroe SMBIOS(64-Bit, SSE3) | 10.4 to 10.11.6 |
 | iMac10,1 | Penryn SMBIOS(64-Bit, SSE4) | 10.6 to 10.13.6 |
 | MacPro6,1 | Mojave and newer SMBIOS | 10.9 to current |
 
@@ -536,6 +536,9 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
+
+* **SystemMemoryStatus**: Auto
+  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
   
 * **ProcessorType**: `0`
   * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values

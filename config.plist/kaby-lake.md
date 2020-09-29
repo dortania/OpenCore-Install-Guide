@@ -547,6 +547,9 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
 
+* **SystemMemoryStatus**: Auto
+  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
+
 * **UpdateDataHub**: YES
   * Update Data Hub fields
 
