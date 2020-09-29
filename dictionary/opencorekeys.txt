@@ -41,6 +41,7 @@ BoardRevision
 BoardSerialNumber
 BoardType
 BoardVersion
+Boot1f32
 BootProtect
 Booter
 BundlePath
@@ -194,3 +195,6 @@ Vault
 VolumeAmplifier
 WriteFlash
 XhciPortLimit
+boot0
+bootia32
+bootx64

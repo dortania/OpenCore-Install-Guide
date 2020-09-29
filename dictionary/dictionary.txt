@@ -590,6 +590,7 @@ OsxAptioFixDrvX
 OtherOS
 P50
 P530
+PBR
 PC00
 PCI
 PCIO

@@ -7,13 +7,6 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
 
 To start we'll want to grab ourselves a copy of macOS, you can skip this and head to formatting the USB if you're just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the App Store or with gibMacOS
 
-**Note for legacy users**
-
-1. If your hardware does not support UEFI, follow the [Legacy Install](../extras/legacy.md) section
-2. Once completed, continue the guide at the **[Downloading macOS](#downloading-macos)** section
-
-For those needing macOS versions no longer hosted on Apple's catalog(ie. Sierra and older), follow the [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md) guide
-
 ## Downloading macOS: Modern OS
 
 * This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
@@ -304,6 +297,41 @@ sudo /Applications/Install\ OS\ X\ Yosemite.app/Contents/Resources/createinstall
 # Mavericks
 sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ Mavericks.app --nointeraction
 ```
+
+:::
+
+## Legacy Setup
+
+For systems not supporting UEFI boot, see below:
+
+::: details Setting up Legacy Boot
+
+To start, you need the following:
+
+* BootInstall_IA32.tool or BootInstall_X64.tool
+  * This can be found in OpenCorePkg under `/Utilties/LegacyBoot/`
+* Install USB(Created above)
+
+Within your OpenCore build folder, navigate to `Utilities/LegacyBoot`. Here you'll find a file called `BootInstall.command`. What this does is install DuetPkg to your desired drive.
+
+![BootInstall Location](../images/extras/legacy-md/download.png)
+
+Now run this tool in terminal **with sudo**(This tool will likely fail otherwise):
+
+```sh
+# Replace X64 with IA32 if you have a 32-Bit CPU
+sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
+```
+
+![Disk Selection/writing new MBR](../images/extras/legacy-md/boot-disk.png)
+
+This will give you a list of available disks, choose yours and you will be prompted to write a new MBR. Choose yes`[y]` and you'll be finished.
+
+![Finished Installer](../images/extras/legacy-md/boot-done.png)
+
+![Base EFI](../images/extras/legacy-md/efi-base.png)
+
+This will provide you with an EFI partition with either a **bootia32** or **bootx64** file
 
 :::
 

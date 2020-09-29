@@ -273,7 +273,6 @@ module.exports = {
             collapsable: false,
 			sidebarDepth: 2,
             children: [
-                '/extras/legacy',
                 '/extras/gpu-patches',
                 '/extras/kaslr-fix',
                 '/extras/spoof',
