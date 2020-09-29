@@ -123,7 +123,7 @@ With Big Sur, quite a bit broke. Mainly the following:
   * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
   * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
 
-And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/troubleshooting.md#disabling-sip)
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/extended/post-issues.md#disabling-sip)
 
 ## Installation
 

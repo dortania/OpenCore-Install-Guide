@@ -196,6 +196,18 @@ module.exports = {
             collapsable: false,
             children: [
                 '/troubleshooting/troubleshooting',
+				{
+            		title: '',
+            		collapsable: false,
+		            children: [
+		                '/troubleshooting/extended/opencore-issues',
+						'/troubleshooting/extended/kernel-issues',
+						'/troubleshooting/extended/userspace-issues',
+						'/troubleshooting/extended/post-issues',
+						'/troubleshooting/extended/misc-issues',
+
+		            ]
+				},
                 '/troubleshooting/debug',
                 '/troubleshooting/boot',
             ]

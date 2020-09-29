@@ -183,6 +183,7 @@ BCM94331
 BCM94331CD
 BCM94352Z
 BGRT
+BOOTICE
 BT
 BaseSystem
 BeyondCompare
@@ -303,6 +304,7 @@ El
 El Capitan
 EmuVariableUEFI
 En0
+EnableWriteUnprotected
 Enclos
 EndRandomSeed
 Endian
@@ -434,6 +436,7 @@ InjectAMD
 InjectAti
 InjectIntel
 InsanelyMac
+Inspiron
 InstallMacOSX
 Insyde
 IntelBluetoothFirmware
@@ -457,6 +460,7 @@ Kabylake
 KernelAndKextPatches
 KernelCollections
 KernelPM
+Kernelspace
 Kext
 KextBeast
 Kexts
@@ -564,6 +568,7 @@ OC_SCAN_ALLOW_FS_APFS
 OC_SCAN_DEVICE_LOCK
 OC_SCAN_FILE_SYSTEM_LOCK
 OEM
+OEM's
 OEMs
 OPENCORE
 OSI
@@ -617,6 +622,7 @@ Plist
 Plists
 PowerProperties
 Pre-Allocated
+Preboot
 Prelinked
 ProperTree
 ProperTree's
@@ -748,6 +754,7 @@ UniBeast
 Universal-IFR-Extractor
 UsbInjectAll
 UselessBanana
+Userspace
 VBIOS
 VDADecoderChecker
 VDI
@@ -845,6 +852,7 @@ args
 arse
 auth
 automagically
+backports
 base64
 bitmask
 boot-arg
@@ -874,6 +882,7 @@ codecs
 con0
 config
 config's
+configs
 configurator
 configurators
 createinstallmedia
@@ -1006,6 +1015,7 @@ midi1996
 mini-explainer
 msi
 multiboot
+multibooting
 natively
 nms42
 non-Fenvi
