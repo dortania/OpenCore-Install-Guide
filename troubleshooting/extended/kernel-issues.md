@@ -52,11 +52,11 @@ The main culprits to watch for in the Booter section are:
     * Mainly Z390 and older require this quirk enabled
     * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
-      * Intel's Comet Lake series
+      * Intel's Comet Lake series(B460, H470, Z490, etc)
       * AMD's B550 and A520(Latest BIOS on X570 are also included now)
       * AMD's TRx40
       * VMs like QEMU
-      * Asus's X299 v3006+ BIOS updates(This also applies to other X299 boards on the latest BIOS)
+      * X299 2020+ BIOS updates(This applies to other X299 boards on the latest BIOS that released either in late 2019 or 2020+)
 
 * **EnableWriteUnprotector**
 
