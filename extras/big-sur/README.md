@@ -221,6 +221,10 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
+### X79 and X99 Kernel Panic on IOPCIFamily
+
+Due to some rewriting of IOPCIFamily, many X79 and X99 machines will now kernel panic on said kext. Currently there are no known working solutions.
+
 ### DeviceProperties injection failing
 
 With Big Sur, macOS has become much pickier with devices being present in ACPI. Especially if you're injecting important properties for WhateverGreen or AppleALC, you may find they're no longer applying. To verify whether your ACPI defines your hardware, check for the `acpi-path` property in [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone/blob/master/ioreg-210.zip):

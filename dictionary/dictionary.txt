@@ -452,6 +452,7 @@ JackFix
 Journaled
 KASLR
 KBL-R
+KDK
 KVM
 KVMs
 Kaby

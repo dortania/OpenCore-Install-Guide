@@ -256,10 +256,39 @@ With macOS Catalina and newer, Apple split the OS and user data into 2 volumes w
 
 1. [Disable SIP](#disabling-sip)
 2. Mount drive as writable (See below link for command)
-3. Create a new snapshot after the changes (See below link for command)
-4. Tag this snapshot for next boot (See below link for command)
 
-Full credit and command links provided by [ASentientBot](https://forums.macrumors.com/threads/macos-11-big-sur-on-unsupported-macs-thread.2242172/post-28603788) and [@mac_editor](https://egpu.io/forums/profile/mac_editor/):
+* Note: Due to how OS updates work in macOS Big Sur and newer, changing the system volume can in fact break OS updates. Please edit with caution
 
-* [MacRumors Thread](https://forums.macrumors.com/threads/macos-11-big-sur-on-unsupported-macs-thread.2242172/post-28603788)
-* [eGPU.io thread](https://egpu.io/forums/postid/82119/)
+Commands based off of Apple's KDK documents:
+
+```bash
+# First, create a mount point for your drive
+mkdir ~/livemount
+
+# Next, find your System volume
+diskutil list
+
+# From the below list, we can see our System volume is disk5s5
+/dev/disk5 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +255.7 GB   disk5
+                                 Physical Store disk4s2
+   1:                APFS Volume ⁨Big Sur HD - Data⁩       122.5 GB   disk5s1
+   2:                APFS Volume ⁨Preboot⁩                 309.4 MB   disk5s2
+   3:                APFS Volume ⁨Recovery⁩                887.8 MB   disk5s3
+   4:                APFS Volume ⁨VM⁩                      1.1 MB     disk5s4
+   5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
+   6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
+
+# Mount the drive(ie. disk5s5)
+sudo mount -o nobrowse -t apfs  /dev/disk5s5 ~/livemount
+
+# Now you can freely make any edits to the System volume
+
+# If you edited either the S*/L*/Kernel, S*/L*/Extensions or L*/Extensions,
+# you will need to rebuild the kernel cache
+sudo kmutil install --volume-root ~/livemount --update-all
+
+# Finally, once done editing the system volume we'll want to create a new snapshot
+sudo bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
+```

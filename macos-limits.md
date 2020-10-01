@@ -2,7 +2,7 @@
 
 With macOS, there's numerous hardware limitation you need to be aware of before stepping foot into an installation. This is due to the limited amount of hardware Apple supports, and so we're either limited by what Apple or what patches the community has created.
 
-The main hardware section to be verified are:
+The main hardware sections to verify are:
 
 * [CPU](#cpu-support)
 * [GPU](#gpu-support)
