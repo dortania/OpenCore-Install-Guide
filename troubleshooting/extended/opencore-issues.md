@@ -8,6 +8,7 @@ Issues surrounding from initial booting the USB itself to right before you choos
 * [Stuck on `OC: Invalid Vault mode`](#stuck-on-oc-invalid-vault-mode)
 * [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](#stuck-on-ocb-ocscanforbootentries-failure-not-found)
 * [Stuck on `OCB: failed to match a default boot option`](#stuck-on-ocb-failed-to-match-a-default-boot-option)
+* [Stuck on `OCB: System has no boot entries`](#stuck-on-ocb-system-has-no-boot-entries)
 * [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
 * [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](#stuck-on-oc-driver-xxx-efi-at-0-cannot-be-found)
 * [Receiving `Failed to parse real field of type 1`](#receiving-failed-to-parse-real-field-of-type-1)
@@ -54,6 +55,12 @@ This is due to OpenCore being unable to find any drives with the current ScanPol
 ## Stuck on `OCB: failed to match a default boot option`
 
 Same fix as `OCB: OcScanForBootEntries failure - Not Found`, OpenCore is unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
+
+* `Misc -> Security -> ScanPolicy -> 0`
+
+## Stuck on `OCB: System has no boot entries`
+
+Same fix as the above 2:
 
 * `Misc -> Security -> ScanPolicy -> 0`
 
