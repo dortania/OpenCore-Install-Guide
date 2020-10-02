@@ -276,6 +276,7 @@ EH02
 EHC1
 EHC2
 EHCI
+ELANs
 ELAN1200
 EPP
 ETH0
@@ -741,6 +742,7 @@ VoodooPS2
 VoodooPS2's
 VoodooPS2Controller
 VoodooRMI
+VoodooSMBus
 VoodooTSCSync
 VoodooTsc
 VuePress
