@@ -448,7 +448,25 @@ With macOS Catalina, dual socket support is broken, and a fun fact about AMD fir
 
 ## Kernel Panic `AppleIntelCPUPowerManagement`
 
-This is likely due to faulty or outright missing NullCPUPowerManagement. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Quirks`
+This is likely due to faulty or outright missing NullCPUPowerManagement. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Emulate`
+
+* **Note**: On older Intel CPUs(ie. Penryn and older), it may be due to IRQ conflicts or the HPET device being disabled. To resolve, you have 2 options:
+  * [SSDTTime's FixHPET Option](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
+  * Forcing the HPET Device on
+  
+::: details Forcing the HPET Device on
+
+Under ACPI -> Patch:
+
+| Comment | String | Force HPET Online |
+| :--- | :--- | :--- |
+| Enabled | Boolean | YES |
+| Count | Number | 0 |
+| Limit | Number | 0 |
+| Find | Data | A010934F53464C00 |
+| Replace | Data | A40A0FA3A3A3A3A3 |
+
+:::
 
 ## macOS frozen right before login
 

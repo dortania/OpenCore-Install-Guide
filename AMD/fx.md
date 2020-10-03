@@ -103,8 +103,9 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](../images/config/AMD/kernel.png)
-![](../images/config/AMD/kernel-patch.png)
+| Kernel | Kernel Patches |
+| :--- | :--- |
+| ![Kernel](../images/config/AMD/kernel.png) | ![](../images/config/AMD/kernel-patch.png) |
 
 ### Add
 
@@ -145,28 +146,68 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 | OS X Version | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
-| 10.4 | 8.00.00 | 8.99.99 |
-| 10.5 | 9.00.00 | 9.99.99 |
-| 10.6 | 10.00.00 | 10.99.99 |
-| 10.7 | 11.00.00 | 11.99.99 |
-| 10.8 | 12.00.00 | 12.99.99 |
-| 10.9 | 13.00.00 | 13.99.99 |
-| 10.10 | 14.00.00 | 14.99.99 |
-| 10.11 | 15.00.00 | 15.99.99 |
-| 10.12 | 16.00.00 | 16.99.99 |
-| 10.13 | 17.00.00 | 17.99.99 |
-| 10.14 | 18.00.00 | 18.99.99 |
-| 10.15 | 19.00.00 | 19.99.99 |
-| 11 | 20.00.00 | 20.99.99 |
+| 10.4 | 8.0.0 | 8.99.99 |
+| 10.5 | 9.0.0 | 9.99.99 |
+| 10.6 | 10.0.0 | 10.99.99 |
+| 10.7 | 11.0.0 | 11.99.99 |
+| 10.8 | 12.0.0 | 12.99.99 |
+| 10.9 | 13.0.0 | 13.99.99 |
+| 10.10 | 14.0.0 | 14.99.99 |
+| 10.11 | 15.0.0 | 15.99.99 |
+| 10.12 | 16.0.0 | 16.99.99 |
+| 10.13 | 17.0.0 | 17.99.99 |
+| 10.14 | 18.0.0 | 18.99.99 |
+| 10.15 | 19.0.0 | 19.99.99 |
+| 11 | 20.0.0 | 20.99.99 |
 
 :::
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons(AMD CPUs don't require this)
+::: tip Info
+
+Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable CPU Power management on Unsupported CPU(such as AMD CPUs)
+
+| Quirk | Enabled |
+| :--- | :--- |
+| DummyPowerManagement | YES |
+
+:::
+
+::: details More in-depth Info
 
 * **CpuidMask**: Leave this blank
+  * Mask for fake CPUID
 * **CpuidData**: Leave this blank
+  * Fake CPUID entry
+* **DummyPowerManagement**: YES
+  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
+* **MinKernel**: Leave this blank
+  * Lowest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
+  * ex. `12.00.00` for OS X 10.8
+* **MaxKernel**: Leave this blank
+  * Highest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
+  * ex. `11.99.99` for OS X 10.7
+
+::: details Kernel Support Table
+
+| OS X Version | MinKernel | MaxKernel |
+| :--- | :--- | :--- |
+| 10.4 | 8.0.0 | 8.99.99 |
+| 10.5 | 9.0.0 | 9.99.99 |
+| 10.6 | 10.0.0 | 10.99.99 |
+| 10.7 | 11.0.0 | 11.99.99 |
+| 10.8 | 12.0.0 | 12.99.99 |
+| 10.9 | 13.0.0 | 13.99.99 |
+| 10.10 | 14.0.0 | 14.99.99 |
+| 10.11 | 15.0.0 | 15.99.99 |
+| 10.12 | 16.0.0 | 16.99.99 |
+| 10.13 | 17.0.0 | 17.99.99 |
+| 10.14 | 18.0.0 | 18.99.99 |
+| 10.15 | 19.0.0 | 19.99.99 |
+| 11 | 20.0.0 | 20.99.99 |
+
+:::
 
 ### Force
 
@@ -227,8 +268,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Allows Lilu and others to have stable performance in macOS 11, Big Sur without the keepsyms=1 quirk
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
-* **DummyPowerManagement**: YES
-  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
+* **ExtendBTFeatureFlags** NO
+  * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **PanicNoKextDump**: YES

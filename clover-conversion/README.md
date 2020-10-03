@@ -7,7 +7,7 @@ So you see the new fancy OpenCore bootloader and just dying to try it out, well 
 To get started, we have some resources that will aid you:
 
 * [Config.plist conversion](../clover-conversion/Clover-config.md)
-* [Firmware driver conversion(.efi)](../clover-conversion/clover-efi.md)
+* [Kexts and Firmware driver conversion(.kext, .efi)](../clover-conversion/clover-efi.md)
 * [Boot Argument conversion](../clover-conversion/Clover-boot-arg.md)
 * [Common Kernel and Kext patch conversions](../clover-conversion/clover-patch.md)
 

@@ -314,6 +314,7 @@ EveryMac
 Evo
 ExitBootServices
 Explainer
+ExtendBTFeatureFlags
 F10
 F12
 FAT32

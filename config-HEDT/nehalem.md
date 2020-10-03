@@ -170,19 +170,19 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 | OS X Version | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
-| 10.4 | 8.00.00 | 8.99.99 |
-| 10.5 | 9.00.00 | 9.99.99 |
-| 10.6 | 10.00.00 | 10.99.99 |
-| 10.7 | 11.00.00 | 11.99.99 |
-| 10.8 | 12.00.00 | 12.99.99 |
-| 10.9 | 13.00.00 | 13.99.99 |
-| 10.10 | 14.00.00 | 14.99.99 |
-| 10.11 | 15.00.00 | 15.99.99 |
-| 10.12 | 16.00.00 | 16.99.99 |
-| 10.13 | 17.00.00 | 17.99.99 |
-| 10.14 | 18.00.00 | 18.99.99 |
-| 10.15 | 19.00.00 | 19.99.99 |
-| 11 | 20.00.00 | 20.99.99 |
+| 10.4 | 8.0.0 | 8.99.99 |
+| 10.5 | 9.0.0 | 9.99.99 |
+| 10.6 | 10.0.0 | 10.99.99 |
+| 10.7 | 11.0.0 | 11.99.99 |
+| 10.8 | 12.0.0 | 12.99.99 |
+| 10.9 | 13.0.0 | 13.99.99 |
+| 10.10 | 14.0.0 | 14.99.99 |
+| 10.11 | 15.0.0 | 15.99.99 |
+| 10.12 | 16.0.0 | 16.99.99 |
+| 10.13 | 17.0.0 | 17.99.99 |
+| 10.14 | 18.0.0 | 18.99.99 |
+| 10.15 | 19.0.0 | 19.99.99 |
+| 11 | 20.0.0 | 20.99.99 |
 
 :::
 
@@ -240,6 +240,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Allows Lilu and others to have stable performance in macOS 11, Big Sur without the keepsyms=1 quirk
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
+* **ExtendBTFeatureFlags** NO
+  * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
 * **IncreasePciBarSize**: NO
   * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
 * **LapicKernelPanic**: NO
