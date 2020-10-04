@@ -276,8 +276,8 @@ EH02
 EHC1
 EHC2
 EHCI
-ELANs
 ELAN1200
+ELANs
 EPP
 ETH0
 EUSB
@@ -1047,7 +1047,9 @@ vmxf
 webserver
 wifi
 x10
+x64
 x86
+x86-based
 xcpm
 Как
 завести
