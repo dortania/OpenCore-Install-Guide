@@ -275,6 +275,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
+* **LegacyCommpage**: NO
+  * Resolves SSSE3 requirement for 64 Bit CPUs in macOS, mainly relevant for 64-Bit Pentium 4 CPUs(ie. Prescott)
 * **PanicNoKextDump**: YES
   * Allows for reading kernel panics logs when kernel panics occur
 * **PowerTimeoutKernelPanic**: YES

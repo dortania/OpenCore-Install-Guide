@@ -108,6 +108,7 @@ LapicKernelPanic
 LegacyEnable
 LegacyOverwrite
 LegacySchema
+Lifewire
 MLB
 MaxKernel
 MemoryFormFactor
@@ -198,3 +199,4 @@ XhciPortLimit
 boot0
 bootia32
 bootx64
+snapshotted

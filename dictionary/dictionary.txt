@@ -292,8 +292,8 @@ EH02
 EHC1
 EHC2
 EHCI
-ELANs
 ELAN1200
+ELANs
 EPP
 ETH0
 EUSB
@@ -479,6 +479,7 @@ LPCB
 LPM
 LVDS
 LegacyBoot
+LegacyCommpage
 Lenovo
 Lexa
 Lilu

@@ -20,6 +20,7 @@ Issues revolving around macOS once properly installed.
 * [macOS waking up with the wrong time](#macos-waking-up-with-the-wrong-time)
 * [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
+* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshot)
 
 ## Broken iMessage and Siri
 
@@ -292,3 +293,13 @@ sudo kmutil install --volume-root ~/livemount --update-all
 # Finally, once done editing the system volume we'll want to create a new snapshot
 sudo bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
 ```
+
+## Rolling back APFS Snapshots
+
+With macOS Big Sur, the system volume is now snapshotted allowing you to roll back in case of issues with system updates breaking due to a broken seal. Thanks to new snapshots being created with every OS update, we've got quite a bit to roll back too.
+
+To roll back, you'll first need to reboot into Recovery partition then select "Restore From Time Machine Backup":
+
+![](./../../images/troubleshooting/troubleshooting-md/snapshots.jpg)
+
+* [Credit to Lifewire for image](https://www.lifewire.com/roll-back-apfs-snapshots-4154969)
