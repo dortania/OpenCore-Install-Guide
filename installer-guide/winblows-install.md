@@ -84,7 +84,7 @@ format fs=fat32 quick
 ASSIGN LETTER=E
 ```
 
-Next, open File Explorer and head to this newly formatted and create a folder called `com.apple.recovery.boot` on the root of the drive.
+Next, open File Explorer and head to this newly formatted drive and create a folder called `com.apple.recovery.boot` on the root of the drive.
 
 Again in File Explorer, find the .pkg downloaded by gibMacOS under macOS Downloads in the gibMacOS folder. Open the .pkg by right clicking and going under 7-Zip -> Open Archive:
 
