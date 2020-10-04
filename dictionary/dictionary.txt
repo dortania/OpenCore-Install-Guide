@@ -764,6 +764,7 @@ X570
 X64
 X79
 X86
+X86-based
 X86PlatformPlugin
 X86PlatformShim
 X99
