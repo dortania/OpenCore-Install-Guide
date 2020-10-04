@@ -1,8 +1,8 @@
 # Hardware Limitations
 
-With macOS, there's numerous hardware limitation you need to be aware of before stepping foot into an installation. This is due to the limited amount of hardware Apple supports, and so we're either limited by what Apple or what patches the community has created.
+With macOS, there are numerous hardware limitations you need to be aware of before stepping foot into an installation. This is due to the limited amount of hardware Apple supports, so we're either limited by Apple or what patches the community has created.
 
-The main hardware section to be verified are:
+The main hardware sections to be verified are:
 
 * [CPU](#cpu-support)
 * [GPU](#gpu-support)
@@ -32,7 +32,7 @@ For CPU support, we have the following breakdown:
 * Intel's Core "i" and Xeon series laptop CPUs
   * Sandy Bridge through Ice Lake are supported by this guide.
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
-* AMD's Desktop Bulldozer(15h), Jaguar(16h) and Ryzen(17h) CPUs
+* AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
   * Laptop CPUs are **not** supported
 
 **For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
@@ -41,7 +41,7 @@ For CPU support, we have the following breakdown:
 
 Architecture Requirements
 
-* 32-Bit CPUs are supported from 10.4.1 to 10.6.8
+* 32-bit CPUs are supported from 10.4.1 to 10.6.8
   * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs
 * 64-bit CPUs are supported from 10.4.1 to current
 
@@ -49,25 +49,25 @@ SEE Requirements:
 
 * SSE3 is required for all Intel versions of OS X/macOS
 * SSSE3 is required for all 64-bit versions of OS X/macOS
-  * For CPUs missing SSSE3(ie. certain 64-bit Pentiums), we recommend running 32-bit userspace(`i386-user32`)
+  * For CPUs missing SSSE3 (i.e. certain 64-bit Pentiums), we recommend running 32-bit userspace (`i386-user32`)
 * SSE4 is required for macOS 10.12 and newer
 * SSE4.2 is required for macOS 10.14 and newer
   * SSE4.1 CPUs are supported with [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/post-28447707)
-  * Newer AMD drivers also require SSE4.2, to resolve this see here: [MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
+  * Newer AMD drivers also require SSE4.2. To resolve this, see here: [MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
 
 Firmware Requirements:
 
-* OS X 10.4.1 through 10.4.7 require EFI32(ie. IA32(32-bit) version of OpenCore)
+* OS X 10.4.1 through 10.4.7 require EFI32 (i.e. IA32 (32-bit) version of OpenCore)
   * OS X 10.4.8 through 10.7.5 support both EFI32 and EFI64
-* OS X 10.8 and newer require EFI64(ie. X64(64-bit) version of OpenCore)
-* OS X 10.7 through 10.9 require PartitionDxe.efi to boot the Recovery Partition
+* OS X 10.8 and newer require EFI64 (i.e. x64 (64-bit) version of OpenCore)
+* OS X 10.7 through 10.9 require PartitionDxe.efi to boot the Recovery partition
 
 Kernel Requirements:
 
-* OS X 10.4 and 10.5 require 32-bit Kexts due to only supporting 32-bit kernelspace
+* OS X 10.4 and 10.5 require 32-bit kexts due to only supporting 32-bit kernelspace
   * OS X 10.6 and 10.7 support both 32 and 64-bit kernelspace
-* OS X 10.8 and newer require 64-bit Kexts due to only supporting 64-bit kernelspace
-  * Run `lipo -archs` to know what architectures your kext supports(remember to run this on the binary itself and not the .kext bundle)
+* OS X 10.8 and newer require 64-bit kexts due to only supporting 64-bit kernelspace
+  * Run `lipo -archs` to know what architectures your kext supports (remember to run this on the binary itself and not the .kext bundle)
 
 Special Notes:
 
@@ -80,7 +80,7 @@ Special Notes:
 
 ::: details Intel CPU Support Chart
 
-Support based off of Vanilla Kernels(ie. no modifications):
+Support based off of Vanilla Kernels (i.e. no modifications):
 
 | CPU Generation | Initial support | Last supported version | Notes | CPUID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -113,12 +113,12 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
   * AMD APUs are not supported however
   * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
   * Special note for MSI Navi users: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
-    * This issue is no longer present in macOS 11, Big Sur.
+    * This issue is no longer present in macOS 11 (Big Sur).
 * Nvidia's GPU support is complicated:
   * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
   * [Nvidia's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
   * [Nvidia's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
-  * [Nvidia's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS(Including macOS 11: Big Sur)
+  * [Nvidia's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS (including macOS 11 Big Sur)
     * This is due to Apple still supporting a few [MacBook Pros with Nvidia GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html)
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
@@ -126,7 +126,7 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
 
 And an important note for **Laptops with discrete GPUs**:
 
-* 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these discrete GPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide.)
+* 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these discrete GPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide).
 * However, in some cases, the discrete GPU powers any external outputs (HDMI, mini DisplayPort, etc.), which may or may not work; in the case that it will work, you will have to keep the card on and running.
 * However, there are some laptops that rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually cause issues.
 
@@ -195,7 +195,7 @@ However thanks to recent developments, B550 boards are now bootable with the add
 
 ## Storage Support
 
-For the most part, all SATA based drives are supported and the majority of NVMe drives as well. The few exceptions:
+For the most part, all SATA based drives are supported and the majority of NVMe drives as well. There are only a few exceptions:
 
 * **Samsung PM981, PM991 and Micron 2200S NVMe SSDs**
   * These SSDs are not compatible out of the box (causing kernel panics) and therefore require [NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases) to fix these kernel panics. Note that these drives may still cause boot issues even with NVMeFix.kext.
@@ -222,14 +222,14 @@ The best option is getting a supported Broadcom card; see the [WiFi Buyer's Guid
 ## Miscellaneous
 
 * **Fingerprint sensors**
-  * There is no way to emulate the Touch ID sensor as of currently, so fingerprint sensors will not work.
+  * There is currently no way to emulate the Touch ID sensor, so fingerprint sensors will not work.
 * **Windows Hello Face Recognition**
   * Some laptops come with WHFR that is I2C connected (and used through your iGPU), those will not work.
-  * Some laptops come with WHFR that is USB-Connected, if you're lucky, you may get the camera functionality, but nothing else.
+  * Some laptops come with WHFR that is USB connected, if you're lucky, you may get camera functionality, but nothing else.
 * **Intel Smart Sound Technology**
   * Laptops with Intel SST will not have anything connected through them (usually internal mic) work, as it is not supported. You can check with Device Manager on Windows.
 * **Headphone Jack Combo**
-  * Some laptops with a combo headphone jack may not get Audio Input through them and will have to either use the built-in microphone or an external Audio Input device through USB.
+  * Some laptops with a combo headphone jack may not get audio input through them and will have to either use the built-in microphone or an external audio input device through USB.
 * **Thunderbolt USB-C ports**
   * (Hackintosh) Thunderbolt support is currently still iffy in macOS, even more so with Alpine Ridge controllers, which most current laptops have. There have been attempts to keep the controller powered on, which allows Thunderbolt and USB-C hotplug to work, but it comes at the cost of kernel panics and/or USB-C breaking after sleep. If you want to use the USB-C side of the port and be able to sleep, you must plug it in at boot and keep it plugged in.
   * Note: This does not apply to USB-C only ports - only Thunderbolt 3 and USB-C combined ports.
