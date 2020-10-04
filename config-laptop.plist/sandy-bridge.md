@@ -726,6 +726,8 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 
 ## Intel BIOS settings
 
+* Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
+
 These are the main options to check for, if you can't find it or an equivalent for it, just skip it.
 
 ### Disable

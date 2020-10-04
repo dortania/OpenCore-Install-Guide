@@ -689,6 +689,8 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 
 ## Intel BIOS settings
 
+* Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
+
 ### Disable
 
 * Fast Boot
