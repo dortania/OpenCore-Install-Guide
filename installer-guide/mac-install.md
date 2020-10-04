@@ -1,3 +1,4 @@
+
 # Making the installer in macOS
 
 * Supported version: 0.6.1
@@ -73,4 +74,4 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
 
-## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
+## Now with all of this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
