@@ -16,7 +16,7 @@ OpenCore is what we refer to as a "boot loader" – this is a complex piece of s
 
 This guide specifically focuses on two main things:
 
-* Installing macOS on an x86-based PC
+* Installing macOS on an X86-based PC
 * Teaching you what makes your Hack work
 
 Because of this, you will be expected to read, learn and even use Google. This is not a simple one-click install setup.
