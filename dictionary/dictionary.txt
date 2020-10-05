@@ -812,7 +812,6 @@ X570
 X64
 X79
 X86
-X86-based
 X86PlatformPlugin
 X86PlatformShim
 X99
@@ -1014,6 +1013,7 @@ lsblk
 macOS
 macOS's
 macOS(\.)?
+macOS-limited
 macOS-only
 macOS86
 macrecovery
@@ -1082,6 +1082,7 @@ stolenmem
 subreddit
 sudo
 sysctl
+takedowns
 tbh
 threadripper
 touchpad
@@ -1096,6 +1097,7 @@ unbootable
 unmount
 untrusted
 userspace
+v1
 v3006
 v5210
 vSMC
@@ -1108,9 +1110,7 @@ vmxf
 webserver
 wifi
 x10
-x64
 x86
-x86-based
 xcpm
 Как
 завести
