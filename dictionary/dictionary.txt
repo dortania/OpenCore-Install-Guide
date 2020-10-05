@@ -812,6 +812,7 @@ X570
 X64
 X79
 X86
+X86-based
 X86PlatformPlugin
 X86PlatformShim
 X99
@@ -1110,7 +1111,9 @@ vmxf
 webserver
 wifi
 x10
+x64
 x86
+x86-based
 xcpm
 Как
 завести
