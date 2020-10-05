@@ -74,6 +74,7 @@ Now comes the important part, selecting the configuration path. Each platform ha
 | [Sandy Bridge](../config-laptop.plist/sandy-bridge.md) | 2XXX | 2011 era |
 | [Ivy Bridge](../config-laptop.plist/ivy-bridge.md) | 3XXX | 2012 era |
 | [Haswell](../config-laptop.plist/haswell.md) | 4XXX | 2013-2014 era |
+| [Broadwell](../config-laptop.plist/broadwell.md) | 5XXX | 2014-2015 era |
 | [Skylake](../config-laptop.plist/skylake.md) | 6XXX | 2015-2016 era |
 | [Kaby Lake and Amber Lake](../config-laptop.plist/kaby-lake.md) | 7XXX | 2017 era |
 | [Coffee Lake and Whiskey Lake](../config-laptop.plist/coffee-lake.md) | 8XXX | 2017-2018 era |
