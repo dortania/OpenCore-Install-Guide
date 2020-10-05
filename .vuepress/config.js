@@ -111,7 +111,7 @@ module.exports = {
                 title: 'Creating the USB',
                 collapsable: true,
                 path: '/installer-guide/',
-                sidebarDepth: 2,
+                sidebarDepth: 1,
                 children: [
                     '/installer-guide/mac-install',
                     '/installer-guide/winblows-install',
@@ -132,6 +132,8 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
+                    ['/config.plist/penryn', 'Penryn'],
+                    ['/config.plist/clarkdale', 'Clarkdale'],
                     ['/config.plist/sandy-bridge', 'Sandy Bridge'],
                     ['/config.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config.plist/haswell', 'Haswell'],
@@ -146,6 +148,7 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
+                    ['/config-laptop.plist/arrandale', 'Arrandale'],
                     ['/config-laptop.plist/sandy-bridge', 'Sandy Bridge'],
                     ['/config-laptop.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config-laptop.plist/haswell', 'Haswell'],
@@ -162,6 +165,7 @@ module.exports = {
                 collapsable: true,
 				sidebarDepth: 1,
                 children: [
+                    '/config-HEDT/nehalem',
                     '/config-HEDT/ivy-bridge-e',
                     '/config-HEDT/haswell-e',
                     '/config-HEDT/broadwell-e',
@@ -177,21 +181,6 @@ module.exports = {
                     '/AMD/zen',
                 ]
             },
-            {
-                title: 'Intel Legacy config.plist',
-                collapsable: true,
-                children: [
-                    '/config.plist/legacy',
-		            {
-		                title: 'Legacy Generation',
-		                collapsable: false,
-		                children: [
-		                    ['/config.plist/legacy/penryn', 'Penryn'],
-							['/config.plist/legacy/nehalem', 'Nehalem'],
-		                ]
-		            },
-                ]
-            },
             ]
         },
         {
@@ -204,9 +193,21 @@ module.exports = {
         },
         {
             title: 'Troubleshooting',
-            collapsable: true,
+            collapsable: false,
             children: [
                 '/troubleshooting/troubleshooting',
+				{
+            		title: '',
+            		collapsable: false,
+		            children: [
+		                '/troubleshooting/extended/opencore-issues',
+						'/troubleshooting/extended/kernel-issues',
+						'/troubleshooting/extended/userspace-issues',
+						'/troubleshooting/extended/post-issues',
+						'/troubleshooting/extended/misc-issues',
+
+		            ]
+				},
                 '/troubleshooting/debug',
                 '/troubleshooting/boot',
             ]
@@ -272,7 +273,6 @@ module.exports = {
             collapsable: false,
 			sidebarDepth: 2,
             children: [
-                '/extras/legacy',
                 '/extras/gpu-patches',
                 '/extras/kaslr-fix',
                 '/extras/spoof',

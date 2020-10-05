@@ -42,7 +42,8 @@ If your SMBIOS was supported in Catalina and isn't included above, you're good t
 
 For those wanting a simple translation for their Ivy and Haswell Machines:
 
-* iMac13,2, iMac14,2 and iMac14,3 should transition over to using iMac15,1
+* iMac13,2 should transition over to using MacPro6,1
+* iMac14,2 and iMac14,3 should transition over to using iMac15,1
 * iMac14,1 should transition over to iMac14,4
 
 ### Supported hardware
@@ -54,7 +55,7 @@ Not much hardware has been dropped, though the few that have:
   * Ivy Bridge-E CPUs are still supported thanks to being in MacPro6,1
 * Ivy Bridge iGPUs.
   * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
-* BCM94331CD based Wifi cards.
+* BCM94331 based Wifi cards.
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
   * Note, while AirPortBrcm4360.kext has been removed in Big Sur, support for the 4360 series cards have been moved into AirPortBrcmNIC.kext, which still exists.
 * Certain SATA controllers dropped
@@ -122,7 +123,7 @@ With Big Sur, quite a bit broke. Mainly the following:
   * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
   * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
 
-And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/troubleshooting.md#disabling-sip)
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/extended/post-issues.md#disabling-sip)
 
 ## Installation
 
@@ -197,7 +198,7 @@ For the last one, if you get a kernel panic with Lilu we highly recommend you to
 
 ## Troubleshooting
 
-#### Stuck at `Forcing CS_RUNTIME for entitlement`
+### Stuck at `Forcing CS_RUNTIME for entitlement`
 
 ![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
@@ -209,7 +210,7 @@ This is actually the part at where macOS will seal the system volume, and where 
 
 As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you'll need to look at your RTC device and see which regions are missing. For more information, see here: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 
-#### Stuck on `ramrod`(^^^^^^^^^^^^^)
+### Stuck on `ramrod`(^^^^^^^^^^^^^)
 
 ![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
 
@@ -220,6 +221,10 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
+### X79 and X99 Kernel Panic on IOPCIFamily
+
+Due to some rewriting of IOPCIFamily, many X79 and X99 machines will now kernel panic on said kext. Currently there are no known working solutions.
+
 ### DeviceProperties injection failing
 
 With Big Sur, macOS has become much pickier with devices being present in ACPI. Especially if you're injecting important properties for WhateverGreen or AppleALC, you may find they're no longer applying. To verify whether your ACPI defines your hardware, check for the `acpi-path` property in [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone/blob/master/ioreg-210.zip):
@@ -229,6 +234,75 @@ With Big Sur, macOS has become much pickier with devices being present in ACPI. 
 If no property is found, you'll need to create an SSDT that provides the full pathing as you likely have a PCI Bridge that is not documented in your ACPI tables. An example of this can be found here: [SSDT-BRG0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-BRG0.dsl)
 
 * **Note**: This issue may also pop up in older versions of macOS, however Big Sur is most likely to have issues.
+
+### Keyboard and Mouse broken
+
+For certain legacy systems, you may notice that while the USB ports work your HID-based devices such as the keyboard and mouse may be broken. To resolve this, add the following patch:
+
+::: details IOHIDFamily Patch
+
+config.plist -> Kernel -> Patch:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Base | String | _isSingleUser |
+| Count | Integer | 1 |
+| Enabled | Boolean | True |
+| Find | Data | |
+| Identifier | String | com.apple.iokit.IOHIDFamily |
+| Limit | Integer | 0 |
+| Mask | Data | |
+| MaxKernel | String | |
+| MinKernel | String | 20.0.0 |
+| Replace | Data | B801000000C3 |
+| ReplaceMask | Data | |
+| Skip | Integer | 0 |
+
+[Source](https://applelife.ru/threads/ustanovka-macos-big-sur-11-0-beta-na-intel-pc-old.2944999/page-81#post-884400)
+
+:::
+
+### Early Kernel Panic on `max_cpus_from_firmware not yet initialized`
+
+If you receive an early kernel panic on `max_cpus_from_firmware not yet initialized`, this is due to the new `acpi_count_enabled_logical_processors` method added in macOS Big Sur's kernel. To resolve, please ensure you'er on OpenCore 0.6.0 or newer with the `AvoidRuntimeDefrag` Quirk enabled.
+
+* **Note**: Due to how early this kernel panic happens, you may only be able to log it either via serial or rebooting in a known working install of macOS and checking your panic logged in NVRAM.
+  * Most users will see this panic simply as `[EB|#LOG:EXITBS:START]`
+
+::: details Example Kernel Panic
+
+On-screen:
+
+![](../../images/extras/big-sur/readme/onscreen-panic.png)
+
+Via serial logging or NVRAM:
+
+![](../../images/extras/big-sur/readme/apic-panic.png)
+
+:::
+
+::: details Legacy Edge Case
+
+On certain hardware, mainly the HP DC7900, the kernel still can't determine exactly how many threads your hardware supports. This will result in the aforementioned kernel panic and so we need to hard code the CPU core's value.
+
+To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 with the amount of CPU threads your hardware supports):
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Base | String | _acpi_count_enabled_logical_processors |
+| Count | Integer | 1 |
+| Enabled | Boolean | True |
+| Find | Data | |
+| Identifier | String | Kernel |
+| Limit | Integer | 0 |
+| Mask | Data | |
+| MaxKernel | String | |
+| MinKernel | String | 20.0.0 |
+| Replace | Data | B804000000C3 |
+| ReplaceMask | Data | |
+| Skip | Integer | 0 |
+
+:::
 
 ### Some kexts may not be compatible with Big Sur yet
 

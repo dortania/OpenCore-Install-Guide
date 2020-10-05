@@ -1,13 +1,13 @@
 # Converting from Clover to OpenCore
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 So you see the new fancy OpenCore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with OpenCore but many do not, here we'll be going over what you can bring over and what you cannot.
 
 To get started, we have some resources that will aid you:
 
 * [Config.plist conversion](../clover-conversion/Clover-config.md)
-* [Firmware driver conversion(.efi)](../clover-conversion/clover-efi.md)
+* [Kexts and Firmware driver conversion(.kext, .efi)](../clover-conversion/clover-efi.md)
 * [Boot Argument conversion](../clover-conversion/Clover-boot-arg.md)
 * [Common Kernel and Kext patch conversions](../clover-conversion/clover-patch.md)
 
@@ -68,3 +68,17 @@ In you config.plist:
 * `Misc -> Security -> AllowNvramReset -> True`
 
 And on your initial boot of OpenCore, select `ClearNvram` boot option. This will wipe everything and reboot the system when finished.
+
+## Optional: Avoiding SMBIOS injection into other OSes
+
+By default OpenCore will inject SMBIOS data into all OSes, the reason for this is 2 parts:
+
+* This allows for proper multiboot support like with [BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* Avoids edge cases where info is injected several times, commonly seen with Clover
+
+However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS limited by patching where macOS reads SMBIOS info from. These quirks can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable avoid
+
+To enable macOS-only SMBIOS injection:
+
+* Kernel -> Quirks -> CustomSMBIOSGuid -> True
+* Platforminfo -> CustomSMBIOSMode -> Custom

@@ -1,6 +1,6 @@
 # OpenCore Debugging
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 Needing to figure out why you're getting issues or stalling? Well, you've come to the right place:
 
@@ -75,18 +75,18 @@ So we can set `Misc` -> `Debug` -> `Target` -> `83`
 
 | Value | Comment |
 | :--- | :--- |
-| `0x00000002` | DEBUG\_WARN in DEBUG, NOOPT, RELEASE. |
-| `0x00000040` | DEBUG\_INFO in DEBUG, NOOPT. |
-| `0x00400000` | DEBUG\_VERBOSE in custom builds. |
-| `0x80000000` | DEBUG\_ERROR in DEBUG, NOOPT, RELEASE. |
+| `0x00000002` | DEBUG_WARN in DEBUG, NOOPT, RELEASE. |
+| `0x00000040` | DEBUG_INFO in DEBUG, NOOPT. |
+| `0x00400000` | DEBUG_VERBOSE in custom builds. |
+| `0x80000000` | DEBUG_ERROR in DEBUG, NOOPT, RELEASE. |
 
   A full list can be found in [DebugLib.h](https://github.com/tianocore/edk2/blob/UDK2018/MdePkg/Include/Library/DebugLib.h).
 
 For us we just want the following:
 
-* `0x00000002` — DEBUG\_WARN in DEBUG, NOOPT, RELEASE.
-* `0x00000040` — DEBUG\_INFO in DEBUG, NOOPT.
-* `0x80000000` — DEBUG\_ERROR in DEBUG, NOOPT, RELEASE.
+* `0x00000002` — DEBUG_WARN in DEBUG, NOOPT, RELEASE.
+* `0x00000040` — DEBUG_INFO in DEBUG, NOOPT.
+* `0x80000000` — DEBUG_ERROR in DEBUG, NOOPT, RELEASE.
 
 Just like with `Target`, we use a HEX calculator then convert to decimal:
 

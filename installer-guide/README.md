@@ -1,6 +1,6 @@
 # Creating the USB
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 Requirements:
 
@@ -15,6 +15,11 @@ Requirements:
 Depending on which OS you're on, see your specific section on making the USB:
 
 * [macOS users](../installer-guide/mac-install.md)
-  * For Sierra and older, see [Legacy macOS install](https://github.com/dortania/OpenCore-Install-Guide/blob/master/installer-guide/legacy-mac-install.md)
+  * Supports OS X 10.4 to current
+  * Supports both legacy and UEFI installs
 * [Windows users](../installer-guide/winblows-install.md)
-* [Linux users](../installer-guide/linux-install.md)
+  * Supports OS X 10.7 to current
+  * Supports both legacy and UEFI installs
+* [Linux users(UEFI)](../installer-guide/linux-install.md)
+  * Supports OS X 10.7 to current
+  * Meant for machines supporting UEFI Boot

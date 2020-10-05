@@ -1,6 +1,6 @@
 # Understanding the macOS Boot Process
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 So with troubleshooting a hackintosh, it can be a bit difficult to really understand *where* you're getting stuck as the exact keyword you're trying to search for may not match anything on google. While this page won't solve all your issues, it should at least help better understand where in the macOS boot-process you're getting stuck and hopefully give some ideas as to why you're stuck.
 
@@ -21,14 +21,14 @@ This section will be brief, as OpenCore boot issues are fairly rare and usually 
 
 If you're having issues booting at this point, main things to check for:
 
-* [Stuck on `no vault provided!`](../troubleshooting/troubleshooting.md#stuck-on-no-vault-provided)
-* [Can't see macOS partitions](../troubleshooting/troubleshooting.md#cant-see-macos-partitions)
-* [Black screen after picker](../troubleshooting/troubleshooting.md#black-screen-after-picker)
-* [Booting OpenCore reboots to BIOS](../troubleshooting/troubleshooting.md#booting-opencore-reboots-to-bios)
+* [Stuck on `no vault provided!`](../troubleshooting/extended/opencore-issues.md#stuck-on-no-vault-provided)
+* [Can't see macOS partitions](../troubleshooting/extended/opencore-issues.md#cant-see-macos-partitions)
+* [Black screen after picker](../troubleshooting/extended/opencore-issues.md#black-screen-after-picker)
+* [Booting OpenCore reboots to BIOS](../troubleshooting/extended/opencore-issues.md#booting-opencore-reboots-to-bios)
 
 For the rest of the possible issues, see here:
 
-* [OpenCore booting issues](../troubleshooting/troubleshooting.md#opencore-booting)
+* [OpenCore booting issues](../troubleshooting/extended/opencore-issues.md)
 
 ## boot.efi Handoff
 
@@ -36,13 +36,13 @@ For the rest of the possible issues, see here:
 
 This is where macOS's bootloader(boot.efi) comes onto the scene, specifically what it does is prep the environment for the kernel to load and where OpenCore injects kexts. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
 
-* [Stuck on EndRandomSeed](../troubleshooting/troubleshooting.md#stuck-on-endrandomseed)
-* [Stuck on `[EB|#LOG:EXITBS:START]`](../troubleshooting/troubleshooting.md#stuck-on-eblogexitbsstart)
-* [`Couldn't allocate runtime area` errors](../troubleshooting/troubleshooting.md#couldnt-allocate-runtime-area-errors)
+* [Stuck on EndRandomSeed](../troubleshooting/extended/kernel-issues.md#stuck-on-endrandomseed)
+* [Stuck on `[EB|#LOG:EXITBS:START]`](../troubleshooting/extended/kernel-issues.md#stuck-on-eblogexitbsstart)
+* [`Couldn't allocate runtime area` errors](../troubleshooting/extended/kernel-issues.md#couldnt-allocate-runtime-area-errors)
 
 For the rest of the possible issues, see here:
 
-* [OpenCore booting issues](../troubleshooting/troubleshooting.md#opencore-booting)
+* [Kernel Issues](../troubleshooting/extended/kernel-issues.md)
 
 **Note**: In macOS 10.15.4, Apple changed the boot.efi debugging protocol, so things will look quite a bit different from before but all the same rules still apply
 
@@ -60,8 +60,8 @@ This section is where SMBIOS data is verified, ACPI tables/Kexts are loaded and 
 
 See here for more troubleshooting info:
 
-* [Kernel Panic `Cannot perform kext summary`](../troubleshooting/troubleshooting.md#kernel-panic-cannot-perform-kext-summary)
-* [Kernel Panic on `Invalid frame pointer`](../troubleshooting/troubleshooting.md#kernel-panic-on-invalid-frame-pointer)
+* [Kernel Panic `Cannot perform kext summary`](../troubleshooting/extended/kernel.md#kernel-panic-cannot-perform-kext-summary)
+* [Kernel Panic on `Invalid frame pointer`](../troubleshooting/extended/kernel.md#kernel-panic-on-invalid-frame-pointer)
 
 ![](../images/troubleshooting/boot-md/5-apfs-module.png)
 
@@ -78,19 +78,19 @@ The main things that are tested here:
 
 For more specific info on how to get around this area, see here:
 
-* [Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](../troubleshooting/troubleshooting.md#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
+* [Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](../troubleshooting/extended/kernel.md#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
 
 ![](../images/troubleshooting/boot-md/6-USB-setup.png)
 
 This is where the 15 port limit and USB mapping comes into play, and where the infamous "Waiting for Root Device" errors pops in, main things to check for:
 
-* ["Waiting for Root Device" or Prohibited Sign error](../troubleshooting/troubleshooting.md#waiting-for-root-device-or-prohibited-sign-error)
+* ["Waiting for Root Device" or Prohibited Sign error](../troubleshooting/extended/kernel.md#waiting-for-root-device-or-prohibited-sign-error)
 
 ![](../images/troubleshooting/boot-md/8-dsmos-arrived.png)
 
 This is where our FakeSMC/VirtualSMC come into the scene and do their magic, DSMOS itself is a kext that verifies if your system has an SMC and will request a key. If this key is missing, then DSMOS will not decrypt the rest of the binaries and you'll get stuck here. You may also get stuck at AppleACPICPU which is just the same error.
 
-* [kextd stall[0]: AppleACPICPU](../troubleshooting/troubleshooting.md#kextd-stall0-appleacpicpu)
+* [kextd stall[0]: AppleACPICPU](../troubleshooting/extended/kernel.md#kextd-stall0-appleacpicpu)
 
 ```
 Your karma check for today:
@@ -113,8 +113,8 @@ This is where Apple's audio driver comes in, and where AppleALC shines. Generall
 
 And here we get to the GPU driver initialization, and where WhateverGreen also does its magic. Generally errors here are due to the GPU and not WhateverGreen itself, main culprits:
 
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](../troubleshooting/troubleshooting.md#stuck-on-or-near-ioconsolessers-gioscreenlock)
-* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](../troubleshooting/troubleshooting.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
+* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](../troubleshooting/extended/kernel.md#stuck-on-or-near-ioconsolessers-gioscreenlock)
+* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](../troubleshooting/extended/kernel.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 
 ## macOS Handoff
 
@@ -122,6 +122,6 @@ And here we get to the GPU driver initialization, and where WhateverGreen also d
 
 And you've finally got past all that verbose! If you're getting stuck at the Apple logo after all that verbose, then there's a couple things to check for:
 
-* [macOS frozen right before login](../troubleshooting/troubleshooting.md#macos-frozen-right-before-login)
-* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](../troubleshooting/troubleshooting.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [Frozen in the macOS installer after 30 seconds](../troubleshooting/troubleshooting.md#frozen-in-macos-installer-after-30-seconds)
+* [macOS frozen right before login](../troubleshooting/extended/kernel-issues.md#macos-frozen-right-before-login)
+* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](../troubleshooting/extended/kernel-issues.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
+* [Frozen in the macOS installer after 30 seconds](../troubleshooting/extended/userspace-issues.md#frozen-in-macos-installer-after-30-seconds)

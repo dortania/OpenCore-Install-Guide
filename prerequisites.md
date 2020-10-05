@@ -31,13 +31,4 @@ Before we can jump head first into making an OpenCore based system, we need to g
      * Linux (with Python 2.7 or later), make sure it's clean and properly functioning.
    * For Windows or Linux users, **15GB** of free space on the drive you're working on. On Windows, your OS disk (C:) must have 15GB free at least.
    * For macOS users, **30GB** of free space on the system's drive.
-
-## Other OpenCore Tips
-
-* Kernel extensions are loaded in the order specified in your config file, so you must load an extension's dependencies before you load the extension itself. For example, Lilu must be loaded before WhateverGreen or VirtualSMC.
-* SMBIOS data, ACPI patches and DSDT/SSDTs are applied to all operating systems. Adjust your SSDTs with `If (_OSI ("Darwin")) {}`
-  * Note that all SSDTs mentioned in this guide have been updated accordingly and should not affect booting
-* Some systems require pure UEFI mode to boot. (This setting is commonly called "Windows 8.1/10 UEFI Mode" by motherboard manufacturers. See also on [flashing a UEFI ROM onto older GPUs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.Radeon.en.md))
-* OpenCore requires a version of macOS that supports either MKext, cacheless, Prelinked Kernel or Kernel Collections, this means support goes as far back as 10.4.
-  * Proper support has been introduced in 10.6 however.
-* Those having issues converting can refer to the [Clover Conversion](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion) page
+   * Most tools used in this guide will also require [Python installed](https://www.python.org/downloads/)

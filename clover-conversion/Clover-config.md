@@ -1,6 +1,6 @@
 # Converting common properties from Clover to OpenCore
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
@@ -183,7 +183,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Type**:
 
-* `PlatformInfo -> SMBIOS -> ProcessorType`
+* `PlatformInfo -> Generic -> ProcessorType`
 * See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for all supported values
 
 **HWPEnable**: Better alternative is to properly manage `MSR 0x770` with [HWPEnable](https://github.com/headkaze/HWPEnable)
