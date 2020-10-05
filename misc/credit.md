@@ -1,6 +1,6 @@
 # Credits
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 No good guide is made by one man, here's credit to those who've helped out:
 

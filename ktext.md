@@ -1,6 +1,6 @@
 # Gathering files
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -10,14 +10,7 @@ See the [**Hardware Limitations page**](macos-limits.md) for some better insight
 
 > What are some ways to figure out what hardware I have?
 
-Generally the product's spec page has all the info you need, but if you're still having troubles there are a few options:
-
-* **Windows**:
-  * [Speccy](https://www.ccleaner.com/speccy)
-  * [AIDA64](https://www.aida64.com/downloads)
-  * DeviceManager
-* **Linux**:
-  * Run `hwinfo` in terminal
+See the page before: [Finding your hardware](./find-hardware.md)
 
 ## Firmware Drivers
 
@@ -27,12 +20,16 @@ Firmware drivers are drivers used by OpenCore in the UEFI environment. They're m
 
 ### Universal
 
+::: tip Required Drivers
+
 For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
 
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
+
+:::
 
 ### Legacy users
 
@@ -43,17 +40,21 @@ In addition to the above, if your hardware doesn't support UEFI(2011 and older e
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older
   * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
+* [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
+  * Required to boot recovery on OS X 10.7 through 10.9
+  * For Sandy Bridge and older, you'll want to use [PartitionDxeLegacy](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxeLegacy.efi) due to missing RDRAND instruction.
+  * Not required for OS X 10.10, Yosemite and newer
 
 These files will go in your Drivers folder in your EFI
 
-::: details Legacy macOS installs
+::: details 32-Bit specifics
 
-If you plan to boot older versions of macOS/OS X, you'll find these drivers useful:
+For those with 32-Bit CPUs, you'll want to grab these drivers as well
 
-* [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
-  * Required to boot recovery on 10.7 through 10.9, otherwise you'll return a `LoadImage - error`
-  * For Sandy Bridge and older, you'll want to use [PartitionDxeLegacy](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxeLegacy.efi) due to missing RDRAND instruction.
-  * Note 10.10, Yosemite and newer do not require PartitionDxe at all.
+* [HfsPlus32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus32.efi)
+  * Alternative to HfsPlusLegacy but for 32-bit CPUs, don't mix this with other HFS .efi drivers
+* [PartitionDxe32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe32.efi)
+  * Alternative to PartitionDxeLegacy but for 32-bit CPUs, don't mix this with other PartitionDxe .efi drivers
 
 :::
 
@@ -69,18 +70,33 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 ### Must haves
 
+::: tip Required Kexts
+
 Without the below 2, no system is bootable:
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
   * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
+  * Requires OS X 10.6 or newer
 * [Lilu](https://github.com/acidanthera/Lilu/releases)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
   * Note that Lilu and plugins requires OS X 10.8 or newer to function
+  
+::: details Legacy "Must haves" kexts
+
+For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want to use the below instead of VirtualSMC:
+
+* [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
+
+Reminder if you don't plan to boot these older OSes, you can ignore these kexts.
+
+* **OS X 10.4 and 10.5 note**: Even on 64-bit CPUs, OS X's kernel space is still 32-bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
+
+:::
 
 ### VirtualSMC Plugins
 
-The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring:
+The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring(Note while VirtualSMC supports 10.6, plugins may require 10.8+):
 
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
@@ -109,6 +125,18 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
   * AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
   * Requires OS X 10.8 or newer
+  
+::: details Legacy Audio Kext
+
+For those who plan to boot 10.7 and older may want to opt for these kexts instead:
+
+* [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
+  * Requires OS X 10.6 or newer
+  
+* [VoodooHDA-FAT](https://github.com/khronokernel/Legacy-Kexts/blob/master/FAT/Zip/VoodooHDA.kext.zip)
+  * Similar to the above, however supports 32 and 64-Bit kernels so perfect for OS X 10.4-5 booting and 32-Bit CPUs
+
+:::
 
 ### Ethernet
 
@@ -117,7 +145,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
-  * Requires OS X 10.9 or newer
+  * Requires OS X 10.9 or newer, 10.8-10.8 users can use the IntelSnowMausi instead for older OSes
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
@@ -127,7 +155,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Requires OS X 10.8 or newer
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
-  * Requires OS X 10.11 or newer with v2.2.1+
+  * Requires OS X 10.8-11(2.2.0), 10.12-13(v2.2.2), 10.14+(2.3.0)
 * [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
@@ -140,6 +168,7 @@ Relevant for either legacy macOS installs or older PC hardware.
 
 * [AppleIntele1000e](https://github.com/chris1111/AppleIntelE1000e)
   * Mainly relevant for 10/100MBe based Intel Ethernet controllers
+  * Requires 10.6 or newer
 * [RealtekRTL8100](https://www.insanelymac.com/forum/files/file/259-realtekrtl8100-binary/)
   * Mainly relevant for 10/100MBe based Realtek Ethernet controllers
   * Requires macOS 10.12 or newer with v2.0.0+
@@ -153,7 +182,9 @@ Relevant for either legacy macOS installs or older PC hardware.
 
 * [USBInjectAll](https://github.com/Sniki/OS-X-USB-Inject-All/releases)
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
-  * Not needed on Skylake and newer(AsRock is dumb and does need this)
+  * Shouldn't be needed on Desktop Skylake and newer
+    * AsRock is dumb and does need this
+    * Coffee Lake and older laptops are however recommended to use this kext
   * Does not work on AMD CPUs **at all**
   * Requires OS X 10.11 or newer
 
@@ -167,25 +198,56 @@ Relevant for either legacy macOS installs or older PC hardware.
     * Z390(Not needed on Mojave and newer)
     * X79
     * X99
-    * AsRock boards(On Intel motherboards specifically, Z490 boards do not need it however)
+    * AsRock boards(On Intel motherboards specifically, B460/Z490+ boards do not need it however)
 
 ### WiFi and Bluetooth
 
+#### Intel
+
+* [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
+  * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
+  * Note sleep issues are common with this kext, requires macOS 10.15 or newer and requires Apple's Secure Boot to function correctly
+* [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
+  * Adds Bluetooth support to macOS when paired with an Intel wireless card
+  * Note that similar to AirportItlwm, sleep can break with this kext
+  * Requires macOS 10.13 or newer
+
+::: details More info on enabling AirportItlwm
+
+To enable AirportItlwm support with OpenCore, you'll need to either:
+
+* Enable `Misc -> Security -> SecureBootModel` by either setting it as `Default` or some other valid value
+  * This is discussed both later on in this guide and in the post-install guide: [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html)
+* If you cannot enable SecureBootModel, you can still force inject IO80211Family(**Highly discouraged**)
+  * Set the following under `Kernel -> Force` in your config.plist(discussed later in this guide):
+  
+![](./images/ktext-md/force-io80211.png)
+
+:::
+
+#### Broadcom
+
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
-  * Used for patching non-Apple Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
+  * Used for patching non-Apple/non-Fenvi Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
   * Requires OS X 10.8 or newer
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/Fenvi Airport cards.
+  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/non-Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
     * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
-    * BrcmPatchRAM for 10.10 or older
+    * BrcmPatchRAM for 10.8-10.10
+
+::: details BrcmPatchRAM Load order
 
 The order in `Kernel -> Add` should be:
 
 1. BrcmBluetoothInjector
 2. BrcmFirmwareData
 3. BrcmPatchRAM3
+
+However ProperTree will handle this for you, so you need not concern yourself
+
+:::
 
 ### AMD CPU Specific kexts
 
@@ -194,6 +256,7 @@ The order in `Kernel -> Add` should be:
   * Requires macOS 10.13 or newer
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
+  * Requires OS X 10.6 or newer
 
 ### Extras
 
@@ -205,20 +268,16 @@ The order in `Kernel -> Add` should be:
     * iMacPro1,1
   * Requires macOS 10.15 or newer
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
-  * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable. Skylake-X should use TSCAdjustReset instead
+  * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable.
   * **Does not work on AMD CPUs**
   * Requires OS X 10.8 or newer
-* [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)
-  * On Skylake-X, many firmwares including Asus and EVGA won't write the TSC to all cores. So we'll need to reset the TSC on cold boot and wake. Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
-  * **Does not work on AMD CPUs**
-  * Requires macOS 10.12 or newer
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
   * Used for fixing power management and initialization on non-Apple NVMe
   * Requires macOS 10.14 or newer
 
 ### Laptop Specifics
 
-To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg |grep input` in Linux
+To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep input` in Linux
 
 #### Input drivers
 
@@ -266,8 +325,10 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 | Platforms | **CPU** | **EC** | **AWAC** | **NVRAM** | **USB** |
 | :-------: | :-----: | :----: | :------: | :-------: | :-----: |
-| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A | N/A |
-| Ivy Bridge | ^^ | ^^ | N/A | N/A | N/A |
+| Penryn | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A | N/A |
+| Lynnfield and Clarkdale | ^^ | ^^ | ^^ | ^^ | ^^ |
+| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | ^^ | ^^ | ^^ | ^^ |
+| Ivy Bridge | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ | ^^ |
 | Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ |
@@ -275,7 +336,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
 | AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
-| AMD (17h) | [SSDT-CPUR for B550](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | N/A | ^^ | N/A |
+| AMD (17h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | N/A | ^^ | N/A |
 
 ### High End Desktop
 
@@ -291,7 +352,8 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 | Platforms | **CPU** | **EC** | **Backlight** | **I2C Trackpad** | **AWAC** | **USB** | **IRQ** |
 | :-------: | :-----: | :----: | :-----------: | :--------------: | :------: | :-----: | :-----: |
-| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | N/A | N/A | N/A | [IRQ SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) |
+| Clarksfield and Arrandale | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | N/A | N/A | N/A | [IRQ SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) |
+| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Ivy Bridge | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | [SSDT-GPI0](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html) | ^^ | ^^ | ^^ |
 | Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
@@ -306,7 +368,8 @@ Continuing:
 
 | Platforms | **NVRAM** | **IMEI** |
 | :-------: | :-------: | :------: |
-| Sandy Bridge | N/A | [SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/imei.html) |
+|  Clarksfield and Arrandale | N/A | N/A |
+| Sandy Bridge | ^^| [SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/imei.html) |
 | Ivy Bridge | ^^ | ^^ |
 | Haswell | ^^ | N/A |
 | Broadwell | ^^ | ^^ |

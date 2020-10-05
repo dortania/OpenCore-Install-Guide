@@ -1,6 +1,8 @@
 (15|16)h
 (No)?TouchID
 .aml
+.chunklist
+.dmg
 .dsl
 .kext
 .plist
@@ -63,6 +65,8 @@
 19h
 20XX
 2200S
+2B-i
+2B-iii
 32MB
 3700X
 390X
@@ -94,9 +98,11 @@ ALC3601
 ALZA
 ANS1
 ANS2
+APIC
 APTIO
 APUs
 ARPT
+ASR
 ASUS
 ASentientBot
 AWAC
@@ -109,6 +115,7 @@ Acpi
 AcpiSamples
 AirportAtheros40
 AirportBrcmFixup
+AirportItlwm
 AlGrey
 Aleksander
 Aleksander's
@@ -166,13 +173,17 @@ AudioDxe
 Auth
 B0D3
 B360
+B460
 B550
 B75
+B8
 BCM5722
 BCM5722D
+BCM94331
 BCM94331CD
 BCM94352Z
 BGRT
+BOOTICE
 BT
 BaseSystem
 BeyondCompare
@@ -181,6 +192,7 @@ BlueScreen
 BootCamp
 BootInstall
 Bootable
+Bootcamp
 BrcmBluetoothInjector
 BrcmFirmwareData
 BrcmPatchRAM[0-3]?
@@ -190,11 +202,13 @@ Broadwell
 Broadwell-E
 Bugtracker
 BusID
+C3
 C7030000
 CAVS
 CFG
 CFG-Lock
 CLKT
+CMD
 CMOS
 CONFIGURATORS
 CPU0
@@ -235,6 +249,7 @@ Crohn's
 CsrDecode
 Ctrl
 Cupertino
+CustomSMBIOSMode
 DAC
 DACs
 DBG
@@ -267,6 +282,7 @@ EC0
 ECDV
 EDID
 EDK
+EDKII
 EFI
 EFI's
 EFI32
@@ -276,8 +292,8 @@ EH02
 EHC1
 EHC2
 EHCI
-ELANs
 ELAN1200
+ELANs
 EPP
 ETH0
 EUSB
@@ -289,6 +305,7 @@ El
 El Capitan
 EmuVariableUEFI
 En0
+EnableWriteUnprotected
 Enclos
 EndRandomSeed
 Endian
@@ -298,6 +315,7 @@ EveryMac
 Evo
 ExitBootServices
 Explainer
+ExtendBTFeatureFlags
 F10
 F12
 FAT32
@@ -310,10 +328,13 @@ Factor-Aut
 Factor-Auth
 FairPlay
 FakeSMC
+FakeSMC-32
+FakeSMC-32's
 FakeSMC3_with_plugins
 Fenvi
 FileVault
 FireWire
+Firmwares
 FixHPET
 FixShutdown-USB-SSDT
 Fn
@@ -347,6 +368,7 @@ Goldfish64
 Goldfish64's
 GraphicsEnabler
 GraphicsEnabler=Yes
+Greenwhich
 GuC
 Gui
 H310
@@ -377,6 +399,8 @@ Haswell
 Haswell-E
 Hfs
 HfsPlus
+HfsPlus32
+HfsPlusLegacy
 HiDPI
 HoRNDIS
 Hx6x
@@ -392,7 +416,9 @@ IGPU
 IM
 IMEI
 IMEI's
+IO80211Family
 IOHDACodecDevice
+IOHIDFamily
 IOIIIO
 IOKit
 IONVMe
@@ -412,10 +438,13 @@ InjectAMD
 InjectAti
 InjectIntel
 InsanelyMac
+Inspiron
 InstallMacOSX
 Insyde
+IntelBluetoothFirmware
 IntelMausi
 IntelMausiEthernet
+IntelSnowMausi
 InyextcionES
 InyextcionES'
 IvyBridge
@@ -425,6 +454,7 @@ JackFix
 Journaled
 KASLR
 KBL-R
+KDK
 KVM
 KVMs
 Kaby
@@ -433,6 +463,7 @@ Kabylake
 KernelAndKextPatches
 KernelCollections
 KernelPM
+Kernelspace
 Kext
 KextBeast
 Kexts
@@ -448,9 +479,11 @@ LPCB
 LPM
 LVDS
 LegacyBoot
+LegacyCommpage
 Lenovo
 Lexa
 Lilu
+LoadImage
 LoadVBIOS
 LucyRTL8125Ethernet
 Lynnfield
@@ -479,11 +512,14 @@ MacPro5
 MacPro6
 MacPro7
 MacProMemoryNotificationDisabler
+MacRecovery's
 MacRumors
 MacSerial
 MaciASL
 Mackie
 Mackie's
+Macmini6
+Macmini7
 MakeInstall
 MasterBootRecord
 MediaKit
@@ -521,6 +557,7 @@ OC
 OC's
 OC/
 OCABC
+OCB
 OCConfigCompare
 OCSCAN_ALLOW_DEVICE
 OCSCAN_ALLOW_FS
@@ -535,6 +572,7 @@ OC_SCAN_ALLOW_FS_APFS
 OC_SCAN_DEVICE_LOCK
 OC_SCAN_FILE_SYSTEM_LOCK
 OEM
+OEM's
 OEMs
 OPENCORE
 OSI
@@ -556,6 +594,7 @@ OsxAptioFixDrvX
 OtherOS
 P50
 P530
+PBR
 PC00
 PCI
 PCIO
@@ -575,6 +614,7 @@ PRs
 PS2
 PXSX
 PartitionDxe
+PartitionDxe32
 PartitionDxeLegacy
 Patch1
 Pathname
@@ -587,9 +627,12 @@ Plist
 Plists
 PowerProperties
 Pre-Allocated
+Preboot
 Prelinked
 ProperTree
 ProperTree's
+Psystar
+Q8300
 QE/CI
 QEMU
 Qlogic
@@ -612,6 +655,7 @@ Realtek
 Realtek's
 RealtekRTL8100
 RealtekRTL8111
+RecoveryImage
 ReddestDream's
 RehabMan's
 Rehabman
@@ -682,6 +726,7 @@ TRX40
 TRx40
 TSC
 TSCAdjustReset
+Takedowns
 Technopat
 Telemetrap
 TetherMe
@@ -714,6 +759,8 @@ UniBeast
 Universal-IFR-Extractor
 UsbInjectAll
 UselessBanana
+Userspace
+V1
 VBIOS
 VDADecoderChecker
 VDI
@@ -734,6 +781,7 @@ VmAssetCacheEnable
 VoiceOver
 VoodooGPIO
 VoodooHDA
+VoodooHDA-FAT
 VoodooI2C
 VoodooI2CHID
 VoodooI2CServices
@@ -811,6 +859,7 @@ args
 arse
 auth
 automagically
+backports
 base64
 bitmask
 boot-arg
@@ -829,6 +878,8 @@ busid
 busid=00
 busids
 cacheless
+cd
+checksums
 chipset
 chipset's
 chipsets
@@ -838,8 +889,10 @@ codecs
 con0
 config
 config's
+configs
 configurator
 configurators
+createinstallmedia
 csr-active-config
 csrstat
 dGPU
@@ -857,6 +910,7 @@ distros
 dmg
 dmg's
 dortania
+eDP
 eMMC
 endian
 erroring
@@ -884,6 +938,7 @@ gibMacOS's
 gitbook
 gitbook-cli
 google-fu
+grey
 hackintosh
 hackintoshes
 hackintoshing
@@ -942,6 +997,7 @@ igfxfw
 img
 ix-3xxx
 jailbroken
+keepsyms=1
 kernelcache
 kernelspace
 kext
@@ -957,6 +1013,7 @@ lsblk
 macOS
 macOS's
 macOS(\.)?
+macOS-only
 macOS86
 macrecovery
 macserial
@@ -965,8 +1022,10 @@ midi1996
 mini-explainer
 msi
 multiboot
+multibooting
 natively
 nms42
+non-Fenvi
 non-UEFI
 non-latin
 npci
@@ -1004,6 +1063,7 @@ rebranded
 reimplements
 renderer
 repo
+repos
 savvamitrofanov
 shiki
 shikigva

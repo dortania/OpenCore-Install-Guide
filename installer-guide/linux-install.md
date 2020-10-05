@@ -1,6 +1,6 @@
 # Making the installer in Linux
 
-* Supported version: 0.6.1
+* Supported version: 0.6.2
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
@@ -22,6 +22,54 @@ Now search through for your desired version of macOS, for this example we'll cho
 This will download the RecoveryHDMetaDmg.pkg to `\gibmacos-master\macOS Downloads\publicrelease\xxx-xxxxx - 10.x.x macOS xxx`
 
 ![](../images/installer-guide/linux-install-md/3-gib-finished.png)
+
+::: details Grabbing legacy versions of macOS
+
+If you're wanting to grab older versions of macOS, you'll want to use macrecovery.py instead. This tool is actually already bundled in OpenCorePkg:
+
+![](../images/installer-guide/legacy-mac-install-md/macrecovery.png)
+
+Instructions for running are quite simple, choose from one of the below commands depending on which OS you want to download:
+
+```sh
+# Lion(10.7):
+./macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
+./macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
+
+# Mountain Lion(10.8):
+./macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
+
+# Mavericks(10.9):
+./macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
+
+# Yosemite(10.10):
+./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
+
+# El Capitan(10.11):
+./macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
+
+# Sierra(10.12):
+./macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
+
+# High Sierra(10.13)
+./macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
+./macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
+
+# Mojave(10.14)
+./macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
+
+# Latest version
+# ie. Catalina(10.15)
+./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
+```
+
+From here, run one of those commands in terminal and once finished you'll get an output similar to this:
+
+![](../images/installer-guide/legacy-mac-install-md/download-done.png)
+
+* **Note**: Depending on the OS, you'll either get BaseSystem or RecoveryImage files. They both act in the same manner so when we reference BaseSystem the same info apples to RecoveryImage
+
+:::
 
 ## Making the installer
 
@@ -55,14 +103,14 @@ In terminal:
    6. Close `gdisk` by sending `q` (normally it should quit on its own)
 3. Use `lsblk` to determine your partition's identifiers
 4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your USB partition block>` to format your USB to FAT32 and named OPENCORE
-5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file
+5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file(Or in MacRecovery's folder))
    ![](../images/installer-guide/linux-install-md/unknown-10.png)
-   1. download `p7zip-full` \(depending on your distro tools\)
+   1. download `p7zip-full` (depending on your distro tools, skip for MacRecovery.py users)
       * for Ubuntu/Ubuntu-based run `sudo apt install p7zip-full`
       * for arch/arch-based run `sudo pacman -S p7zip`
       * for the rest of you, you should know
       * for all distros: **make sure you're using bash for 7zip to work**.
-   2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` to extract `BaseSystem.dmg` and `BaseSystem.chunklist`
+   2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` to extract `BaseSystem.dmg` and `BaseSystem.chunklist`(Skip for MacRecovery.py users)
    3. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your USB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your USB partition block> /where/your/mount/stuff`, sudo is required)
    4. `cd` to your USB driver and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
    5. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
@@ -103,12 +151,12 @@ In terminal:
 4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your 200MB partition block>` to format the 200MB partition to FAT32, named OPENCORE
 5. then `cd` to `gibmacos-master/macOS\ Downloads/publicrelease/xxx-xxxxx - 10.x.x macOS xxx` and you should get to a `pkg` file
    ![](../images/installer-guide/linux-install-md/unknown-19.png)
-   1. download `p7zip-full` \(depending on your distro tools\)
+   1. download `p7zip-full` (depending on your distro tools, skip for MacRecovery.py users)
       * for Ubuntu/Ubuntu-based run `sudo apt install p7zip-full`
       * for arch/arch-based run `sudo pacman -S p7zip`
       * for the rest of you, you should know
       * for all distros: **make sure you're using bash for 7zip to work**.
-   2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` this will extract the recovery from the pkg through extracting the recovery update package then extracting the recovery dmg then the HFS image from it (BaseSystem.dmg).
+   2. run this `7z e -txar *.pkg *.dmg; 7z e *.dmg */Base*` this will extract the recovery from the pkg through extracting the recovery update package then extracting the recovery dmg then the HFS image from it (BaseSystem.dmg).(Skip for MacRecovery.py users)
    3. download `dmg2img` (available on most distros)
    4. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
       ![](../images/installer-guide/linux-install-md/unknown-20.png)

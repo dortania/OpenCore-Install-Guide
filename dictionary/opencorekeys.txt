@@ -1,4 +1,5 @@
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
+4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
 7C436110-AB2A-4BBB-A880-FE41995C9F82
 ACPI
 APFS
@@ -40,6 +41,7 @@ BoardRevision
 BoardSerialNumber
 BoardType
 BoardVersion
+Boot1f32
 BootProtect
 Booter
 BundlePath
@@ -106,6 +108,7 @@ LapicKernelPanic
 LegacyEnable
 LegacyOverwrite
 LegacySchema
+Lifewire
 MLB
 MaxKernel
 MemoryFormFactor
@@ -168,6 +171,7 @@ SyncRuntimePermissions
 SysReport
 SystemFamily
 SystemManufacturer
+SystemMemoryStatus
 SystemProductName
 SystemSKUNumber
 SystemSerialNumber
@@ -192,3 +196,7 @@ Vault
 VolumeAmplifier
 WriteFlash
 XhciPortLimit
+boot0
+bootia32
+bootx64
+snapshotted
