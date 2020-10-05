@@ -71,13 +71,13 @@ Now let's take a look at OpenCore's method:
 
 Things to note with OpenCore's method:
 
-* OS Agnostic as the prelinked kernel format has stayed the same since 10.6 (v2), far harder to break support.
+* OS agnostic as the prelinked kernel format has stayed the same since 10.6 (v2), far harder to break support.
   * OpenCore also supports prelinked kernel (v1, found in 10.4 and 10.5), cacheless, Mkext and KernelCollections, meaning it also has proper support for all Intel versions of OS X/macOS
 * Far better stability as there is far less patching involved
 
 # Common Myths
 
-## Is OpenCore unstable as it's a beta?
+## Is OpenCore unstable as it's a beta
 
 Short Answer: No
 
@@ -97,7 +97,7 @@ Current road map:
 
 So please do not see the version number as a hindrance, instead as something to look forward to.
 
-## Does OpenCore always inject SMBIOS and ACPI data into other OSes?
+## Does OpenCore always inject SMBIOS and ACPI data into other OSes
 
 By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking consists of three parts:
 
@@ -108,13 +108,13 @@ By default, OpenCore will assume that all OSes should be treated equally in rega
 
 However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS-limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
 
-## Does OpenCore require a fresh install?
+## Does OpenCore require a fresh install
 
 Not at all in the event you have a "Vanilla" installation – what this refers to is whether the OS has tampered in any way, such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered with, either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues.
 
 Special note for Clover users: please reset your NVRAM when installing with OpenCore. Many of Clover variables can conflict with OpenCore and macOS.
 
-## Does OpenCore only support limited versions of macOS?
+## Does OpenCore only support limited versions of macOS
 
 As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all the way back to OS X 10.4! Proper support however will depend on your hardware, so please verify yourself: [Hardware Limitations](macos-limits.md)
 
@@ -146,13 +146,13 @@ Acidanthera has tested many versions, and I myself have run many versions of OS 
 
 :::
 
-## Does OpenCore support older hardware?
+## Does OpenCore support older hardware
 
 As of right now, the majority of Intel hardware is supported so long as the OS itself does! However please refer to the [Hardware Limitations page](macos-limits.md) for more info on what hardware is supported in what versions of OS X/macOS.
 
 Currently, Intel's Yonah and newer series CPUs have been tested properly with OpenCore.
 
-## Does OpenCore support Windows/Linux booting?
+## Does OpenCore support Windows/Linux booting
 
 OpenCore works in the same fashion as any other boot loader, so it respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
 
@@ -168,7 +168,7 @@ While the EULA states that macOS should only be installed on real Macs([section 
 
 * **Note**: We are not official legal advisors, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
 
-## Does macOS support Nvidia GPUs?
+## Does macOS support Nvidia GPUs
 
 Due to issues revolving around Nvidia support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported Nvidia GPUs and don't at this point. However, Apple actually still maintains and supports Macs with Nvidia GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
 
