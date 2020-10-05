@@ -25,7 +25,7 @@ And for more detailed guides on the subject, see here:
 
 For CPU support, we have the following breakdown:
 
-* Both 32 and 64-Bit CPUs are supported
+Both 32 and 64-bit CPUs are supported
   * This however requires the OS to support your architecture, see CPU Requirements section below
 * Intel's Desktop CPUs are supported.
   * Yonah through Comet Lake are supported by this guide.

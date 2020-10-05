@@ -87,7 +87,7 @@ OpenCore's version number does not represent the quality of the project. Instead
 
 For example, OpenCore goes through proper security audits to ensure it complies with UEFI Secure Boot, and is the only Hackintosh bootloader to undergo these rigorous reviews and have such support.
 
-Version 0.6.1 was originally designed to be the official release of OpenCore as it would have proper UEFI/Apple Secure Boot, and would be the 1 year anniversary of OpenCore's release as a public tool. However, due to circumstances around macOS Big Sur and the rewriting of OpenCore's prelinker to support it, it was decided to push of 1.0.0 for another year.
+Version 0.6.1 was originally designed to be the official release of OpenCore as it would have proper UEFI/Apple Secure Boot, and would be the 1 year anniversary of OpenCore's release as a public tool. However, due to circumstances around macOS Big Sur and the rewriting of OpenCore's prelinker to support it, it was decided to push off 1.0.0 for another year.
 
 Current road map:
 
@@ -120,7 +120,7 @@ As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all th
 
 ::: details macOS Install Gallery
 
-We've tested many versions here at Acidanthera, and I myself have run many versions of OS X on my old HP DC 7900(Core2 Quad Q8300). Here's just a small gallery of what I've tested:
+Acidanthera has tested many versions, and I myself have run many versions of OS X on my old HP DC 7900(Core2 Quad Q8300). Here's just a small gallery of what I've tested:
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.4-Tiger.png)
 
@@ -148,7 +148,7 @@ We've tested many versions here at Acidanthera, and I myself have run many versi
 
 ## Does OpenCore support older hardware
 
-As of right now, the majority of Intel hardware is supported so long as the OS itself does! However please refer to the [Hardware Limitations](macos-limits.md) for more info on what hardware is supported in what versions of OS X/macOS.
+As of right now, the majority of Intel hardware is supported so long as the OS itself does! However please refer to the [Hardware Limitations page](macos-limits.md) for more info on what hardware is supported in what versions of OS X/macOS.
 
 Currently, Intel's Yonah and newer series CPUs have been tested properly with OpenCore.
 

@@ -90,7 +90,7 @@ For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want t
 
 Reminder if you don't plan to boot these older OSes, you can ignore these kexts.
 
-* **OS X 10.4 and 10.5 note**: Even on 64 bit CPUs, OS X's kernel space is still 32-Bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
+* **OS X 10.4 and 10.5 note**: Even on 64-bit CPUs, OS X's kernel space is still 32-bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
 
 :::
 

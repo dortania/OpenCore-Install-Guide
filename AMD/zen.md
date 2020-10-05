@@ -124,7 +124,7 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however 32-Bit CPUs please see below:
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
 
 ::: details More in-depth Info
 
@@ -181,7 +181,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ::: tip Info
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable CPU Power management on Unsupported CPU(such as AMD CPUs)
+Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable CPU power management on unsupported CPUs (such as AMD CPUs)
 
 | Quirk | Enabled |
 | :--- | :--- |
@@ -275,12 +275,12 @@ Settings relating to the kernel, for us we'll be enabling the following:
 * **AppleXcpmExtraMsrs**: NO
   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO
-  * Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops
-  * Enabling this quirk with UpdateSMBIOSMode Custom mode can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk. To be used in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom`
+  * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
+  * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
 * **DisableIoMapper**: NO
   * AMD doesn't have DMAR or VT-D support so irrelevant
 * **DisableLinkeditJettison**: YES
-  * Allows Lilu and others to have stable performance in macOS 11, Big Sur without the keepsyms=1 quirk
+  * Allows Lilu and others to have more reliable performance without `keepsyms=1`
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
 * **ExtendBTFeatureFlags** NO
