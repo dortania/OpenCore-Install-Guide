@@ -4,6 +4,7 @@
 
 Issues surrounding from initial booting the USB itself to right before you choose to boot the macOS installer
 
+* [Stuck on a black screen before picker or always restart](#stuck-on-a-black-screen-before-picker)
 * [Stuck on `no vault provided!`](#stuck-on-no-vault-provided)
 * [Stuck on `OC: Invalid Vault mode`](#stuck-on-oc-invalid-vault-mode)
 * [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](#stuck-on-ocb-ocscanforbootentries-failure-not-found)
@@ -16,6 +17,9 @@ Issues surrounding from initial booting the USB itself to right before you choos
 * [SSDTs not being added](#ssdts-not-being-added)
 * [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios)
 * [OCABC: Incompatible OpenRuntime r4, require r10](#ocabc-incompatible-openruntime-r4-require-r10)
+
+## Stuck on a black screen before picker
+Try to use [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi) instead of [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi) (Ivy bridge i3 and older)
 
 ## Stuck on `no vault provided!`
 
