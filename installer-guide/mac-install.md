@@ -193,9 +193,9 @@ This method instead relies on hosted images either from Apple or Acidanthera, an
 
 #### Acidanthera Images
 
-* [OS X 10.4.10(8R4088)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug)
+* [OS X 10.4.10(8R4088)](https://mega.nz/folder/D3ASzLzA#7sjYXE2X09f6aGjol_C7dg)
 
-* [OS X 10.5.7(9J3050)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug)
+* [OS X 10.5.7(9J3050)](https://mega.nz/folder/inRBTarD#zanf7fUbviwz3WHBU5xpCg)
 
 * [OS X 10.6.7(10J4139)](https://mega.nz/folder/z5YUhYTb#gA_IRY5KMuYpnNCg7kR3ug/file/ioQkTagI)
 

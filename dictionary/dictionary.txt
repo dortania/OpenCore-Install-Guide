@@ -399,9 +399,11 @@ Haswell
 Haswell-E
 Hfs
 HfsPlus
+HfsPlus's
 HfsPlus32
 HfsPlusLegacy
 HiDPI
+HiiDatabase
 HoRNDIS
 Hx6x
 I211
@@ -954,6 +956,7 @@ i219
 i225
 i225-V
 i225LM
+i3
 i3-3110M
 i7
 i7-10700K

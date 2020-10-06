@@ -1,9 +1,10 @@
-# Laptop Coffee Lake
+# Laptop Coffee Lake and Whiskey Lake
 
 | Support | Version |
 | :--- | :--- |
 | Supported OpenCore version | 0.6.2 |
-| Initial macOS Support | macOS 10.13, High Sierra |
+| Initial macOS Support ([Coffee Lake](https://en.wikipedia.org/wiki/Coffee_Lake)) | macOS 10.13, High Sierra |
+| Initial macOS Support ([Whiskey Lake](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture))) | macOS 10.14.1, Mojave |
 
 ## Starting Point
 
