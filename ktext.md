@@ -25,7 +25,9 @@ Firmware drivers are drivers used by OpenCore in the UEFI environment. They're m
 For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
 
 * [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
-  * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
+  * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). 
+  * if your CPU don't support Intel® AES New Instructions(third generation i3 and below), try to use [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi), oherwise, it will always restart or stuck on a black screen.
+  * **Do not mix other HFS drivers**
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
 
@@ -38,7 +40,7 @@ In addition to the above, if your hardware doesn't support UEFI(2011 and older e
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
-  * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older
+  * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Ivy Bridge(i3 or Celeron) and older
   * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
 * [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
   * Required to boot recovery on OS X 10.7 through 10.9
