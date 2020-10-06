@@ -2,17 +2,17 @@
 
 * Supported version: 0.6.2
 
-This section is a brief rundown as to why the community has been transitioning over to OpenCore, and dispel a few common myths in the community. For those who just want a macOS machine can skip this page.
+This section contains a brief rundown as to why the community has been transitioning over to OpenCore, and aims to dispel a few common myths in the community. Those who just want a macOS machine can skip this page.
 
 * [Why OpenCore over Clover and others](#why-opencore-over-clover-and-others)
   * OpenCore features
-  * Software Support
-  * Kext Injection
+  * Software support
+  * Kext injection
 * [Common Myths](#common-myths)
-  * Is OpenCore unstable as it's a beta
-  * Does OpenCore always inject SMBIOS and ACPI data into other OSes
-  * Does OpenCore require a fresh install
-  * Does OpenCore only support limited versions of macOS
+  * Is OpenCore unstable as it's a beta?
+  * Does OpenCore always inject SMBIOS and ACPI data into other OSes?
+  * Does OpenCore require a fresh install?
+  * Does OpenCore only support limited versions of macOS?
 
 ## OpenCore features
 
@@ -22,14 +22,14 @@ This section is a brief rundown as to why the community has been transitioning o
 * On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
-  * AMD OSX Patches not needing to update with every minor security update
+  * AMD OSX patches not needing to update with every minor security update
 * Better overall security in many forms:
-  * No need to disable System Integrity Protection(SIP)
+  * No need to disable System Integrity Protection (SIP)
   * Built-in FileVault 2 support
   * [Vaulting](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault) allowing to create EFI snapshots preventing unwanted modifications
   * True secure-boot support
     * Both UEFI and Apple's variant
-* BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk just like a real mac.
+* BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk, just like a real Mac.
 * Supports boot hotkey via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.
 
 ## Software Support
@@ -37,17 +37,17 @@ This section is a brief rundown as to why the community has been transitioning o
 The biggest reason someone may want to switch from other boot loaders is actually software support:
 
 * Kexts no longer testing for Clover:
-  * Got a bug with a kext? Many developers including the organization [Acidanthera](https://github.com/acidanthera)(maker of most of your favorite kexts) won't provide support unless on OpenCore
-* Many Firmware drivers being merged into OpenCore:
+  * Got a bug with a kext? Many developers including the organization [Acidanthera](https://github.com/acidanthera) (maker of most of your favorite kexts) won't provide support unless on OpenCore
+* Many firmware drivers being merged into OpenCore:
   * [APFS Support](https://github.com/acidanthera/AppleSupportPkg)
   * [FileVault support](https://github.com/acidanthera/AppleSupportPkg)
   * [Firmware patches](https://github.com/acidanthera/AptioFixPkg)
 * [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore):
-  * Have AMD based hardware? Well the kernel patches required to boot macOS no longer support Clover, only OpenCore
+  * Have AMD-based hardware? The kernel patches required to boot macOS no longer support Clover – they now only support OpenCore.
 
 ## Kext Injection
 
-So to better understand OpenCore's kext injection system, we should first look at how Clover works:
+To better understand OpenCore's kext injection system, we should first look at how Clover works:
 
 1. Patches SIP open
 2. Patches to enable XNU's zombie code for kext injection
@@ -55,25 +55,25 @@ So to better understand OpenCore's kext injection system, we should first look a
 4. Injects kexts
 5. Patches SIP back in
 
-Things to note with Clover's method is:
+Things to note with Clover's method:
 
 * Calling XNU's zombie code that hasn't been used since 10.7, it's seriously impressive Apple hasn't removed this code yet
   * OS updates commonly break this patch, like recently with 10.14.4 and 10.15
 * Disables SIP and attempts to re-enable it, don't think much needs to be said
-* Likely to break with 10.16
+* Likely to break with macOS 11.0 (Big Sur)
 * Supports OS X all the way back to 10.5
 
-So now lets take a look at OpenCore's method:
+Now let's take a look at OpenCore's method:
 
 1. Takes existing prelinked kernel and kexts ready to inject
 2. Rebuilds the cache in the EFI environment with the new kexts
 3. Adds this new cache in
 
-Things to note with OpenCore's method is:
+Things to note with OpenCore's method:
 
-* OS Agnostic as the prelinked kernel format as stayed the same since 10.6(V2), far harder to break support.
-  * OpenCore also supports prelinked kernel(V1, found in 10.4 and 10.5), cacheless, Mkext and KernelCollections meaning it also has proper support for all Intel versions of OS X/macOS
-* Far better stability as far less patching
+* OS agnostic as the prelinked kernel format has stayed the same since 10.6 (v2), far harder to break support.
+  * OpenCore also supports prelinked kernel (v1, found in 10.4 and 10.5), cacheless, Mkext and KernelCollections, meaning it also has proper support for all Intel versions of OS X/macOS
+* Far better stability as there is far less patching involved
 
 # Common Myths
 
@@ -99,20 +99,20 @@ So please do not see the version number as a hindrance, instead as something to 
 
 ## Does OpenCore always inject SMBIOS and ACPI data into other OSes
 
-By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking is 3 parts:
+By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking consists of three parts:
 
-* This allows for proper multiboot support like with [BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* This allows for proper multiboot support, like with [BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * Avoids poorly made DSDTs and encourages proper ACPI practices
 * Avoids edge cases where info is injected several times, commonly seen with Clover
-  * ie. How would you handle SMBIOS and ACPI data injection once you booted boot.efi, but then get kicked out? The changes are already in memory and so trying to undo them can be quite dangerous. This is why Clover's method is frowned upon
+  * i.e. How would you handle SMBIOS and ACPI data injection once you booted boot.efi, but then get kicked out? The changes are already in memory and so trying to undo them can be quite dangerous. This is why Clover's method is frowned upon.
 
-However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
+However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS-limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
 
 ## Does OpenCore require a fresh install
 
-Not at all in the event you have a "Vanilla" installation, what this refers to is whether the OS has tampered in any way such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues
+Not at all in the event you have a "Vanilla" installation – what this refers to is whether the OS has tampered in any way, such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered with, either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues.
 
-Special note for Clover users, please reset your NVRAM when installing with OpenCore. Many of Clover variables can conflict with OpenCore and macOS.
+Special note for Clover users: please reset your NVRAM when installing with OpenCore. Many of Clover variables can conflict with OpenCore and macOS.
 
 ## Does OpenCore only support limited versions of macOS
 
@@ -120,7 +120,7 @@ As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all th
 
 ::: details macOS Install Gallery
 
-Acidanthera has tested many versions, and I myself have run many versions of OS X on my old HP DC 7900(Core2 Quad Q8300). Here's just a small gallery of what I've tested:
+Acidanthera has tested many versions, and I myself have run many versions of OS X on my old HP DC 7900 (Core2 Quad Q8300). Here's just a small gallery of what I've tested:
 
 ![](./images/installer-guide/legacy-mac-install-md/dumpster/10.4-Tiger.png)
 
@@ -154,7 +154,7 @@ Currently, Intel's Yonah and newer series CPUs have been tested properly with Op
 
 ## Does OpenCore support Windows/Linux booting
 
-OpenCore works in the same fashion as any other boot loader and so respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
+OpenCore works in the same fashion as any other boot loader, so it respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
 
 ## Legality of Hackintoshing
 
@@ -164,7 +164,7 @@ Where hackintoshing sits is in a legal grey area, mainly that while this is not 
 * We are doing this as a non-profit origination for teaching and personal use
   * People who plan to use their Hackintosh for work or want to resell them should refer to the [Psystar case](https://en.wikipedia.org/wiki/Psystar_Corporation) and their regional laws
 
-While the EULA states that macOS should only be installed on real Macs([section 2B-i](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)) or virtual machines running on genuine Macs([section 2B-iii](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)), there is no enforceable law that outright bans this. However, sites that repackage and modify macOS installers do potentially risk the issue of [DMCA Takedowns](https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act) and such.
+While the EULA states that macOS should only be installed on real Macs([section 2B-i](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)) or virtual machines running on genuine Macs([section 2B-iii](https://www.apple.com/legal/sla/docs/macOSCatalina.pdf)), there is no enforceable law that outright bans this. However, sites that repackage and modify macOS installers do potentially risk the issue of [DMCA takedowns](https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act) and such.
 
 * **Note**: We are not official legal advisors, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
 
@@ -172,6 +172,6 @@ While the EULA states that macOS should only be installed on real Macs([section 
 
 Due to issues revolving around Nvidia support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported Nvidia GPUs and don't at this point. However, Apple actually still maintains and supports Macs with Nvidia GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
 
-The main issue is around any newer Nvidia GPUs, as Apple stopped ship machines with them and thus never had official OS support from Apple instead users had to rely on Nvidia for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus Nvidia couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
+The main issue has to do with any newer Nvidia GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on Nvidia for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus Nvidia couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
 
 For more info on OS support, see here: [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
