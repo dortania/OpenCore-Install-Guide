@@ -4,6 +4,7 @@
 
 Issues surrounding from initial booting the USB itself to right before you choose to boot the macOS installer
 
+* [Stuck on a black screen before picker or always restart](#stuck-on-a-black-screen-before-picker)
 * [Stuck on `no vault provided!`](#stuck-on-no-vault-provided)
 * [Stuck on `OC: Invalid Vault mode`](#stuck-on-oc-invalid-vault-mode)
 * [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](#stuck-on-ocb-ocscanforbootentries-failure-not-found)
@@ -16,6 +17,30 @@ Issues surrounding from initial booting the USB itself to right before you choos
 * [SSDTs not being added](#ssdts-not-being-added)
 * [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios)
 * [OCABC: Incompatible OpenRuntime r4, require r10](#ocabc-incompatible-openruntime-r4-require-r10)
+
+## Stuck on a black screen before picker
+
+This is likely some error either on your firmware or OpenCore, specifically it's having troubles loading all the drivers and presenting the menu. The best way to diagnose it is via [OpenCore's DEBUG Build](./../debug.md) and checking the logs whether OpenCore actually loaded, and if so what is it getting stuck on.
+
+**Situations where OpenCore did not load**:
+
+* If there are no logs present even after setting up the DEBUG version of OpenCore with Target set to 67, there's likely an issue either with:
+  * Incorrect USB Folder Structure
+    * See [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios) for more info
+  * Firmware does not support UEFI
+    * You'll need to setup DuetPkg, this is covered in both the [macOS](../../installer-guide/mac-install.md) and [Windows](../../installer-guide/winblows-install.md) install pages
+
+**Situations where OpenCore did load**:
+
+* Check the last line printed in your logs, there will likely be either a .efi driver that's been loaded or some form of ASSERT
+  * For ASSERT's, you'll want to actually inform the developers about this issue here: [Acidanthera's Bugtracker](https://github.com/acidanthera/bugtracker)
+  * For .efi drivers getting stuck, check over the following:
+    * **HfsPlus.efi load issues:**
+      * Try using [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi) instead
+      * This is recommended for CPUs that do not support RDRAND, mainly relevant for 3rd gen Ivy bridge i3 and older
+      * [VBoxHfs.efi](https://github.com/acidanthera/AppleSupportPkg/releases/tag/2.1.7) is another option however is much slower than HfsPlus's version
+    * **HiiDatabase.efi load issues:**
+      * Likely your firmware already supports HiiDatabase, so the driver is conflicting. Simply remove the driver as you don't need it.
 
 ## Stuck on `no vault provided!`
 
