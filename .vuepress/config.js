@@ -155,8 +155,8 @@ module.exports = {
 					['/config-laptop.plist/broadwell', 'Broadwell'],
                     ['/config-laptop.plist/skylake', 'Skylake'],
                     ['/config-laptop.plist/kaby-lake', 'Kaby Lake'],
-                    ['/config-laptop.plist/coffee-lake', 'Coffee Lake'],
-					['/config-laptop.plist/coffee-lake-plus', 'Coffee Lake Plus'],
+                    ['/config-laptop.plist/coffee-lake', 'Coffee Lake and Whiskey Lake'],
+					['/config-laptop.plist/coffee-lake-plus', 'Coffee Lake Plus and Comet Lake'],
                     ['/config-laptop.plist/icelake', 'Ice Lake'],
                 ]
             },
