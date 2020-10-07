@@ -524,7 +524,7 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
 | :--- | :--- |
 | iMac14,4 | Haswell with only iGPU |
 | iMac15,1 | Haswell with dGPU |
-| iMac16,1 | Broadwell |
+| iMac16,2 | Broadwell |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
