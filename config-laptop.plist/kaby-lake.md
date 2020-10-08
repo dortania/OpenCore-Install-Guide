@@ -40,8 +40,8 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead |
-| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead. Note that Intel NUCs do not need this |
+| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. Note that Intel NUCs do not need this |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -118,23 +118,26 @@ When setting up your iGPU, the table below should help with finding the right va
 
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Port Count**
-  * The number of displays supported
+* **Type**
+  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
 2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
-| AAPL,ig-platform-id | Port Count | Comment |
-| ------------------- | ---------- | ------- |
-| **00001B59** | 3 | Recommended for HD615, HD630, HD640 and HD650 |
-| **00001659** | 3 | Alternative value to 00001B59 if you have acceleration issues |
-| **0000C087** | 3 | Recommended for Amber lake's UHD 617 and Kaby lake R's UHD620 |
+| AAPL,ig-platform-id | Type | Comment |
+| ------------------- | ---- | ------- |
+| **00001B59** | Laptop | Recommended for HD615, HD620, HD630, HD640 and HD650 |
+| **00001659** | Laptop | Alternative value to 00001B59 if you have acceleration issues, and recommended for all HD and UHD620 NUCs |
+| **0000C087** | Laptop | Recommended for Amber lake's UHD 617 and Kaby lake R's UHD620 |
+| **00001E59** | NUC | Recommended for HD615 |
+| **00001B59** | NUC | Recommended for HD630 |
+| **02002659** | NUC | Recommended for HD640/650 |
 
 #### Configuration Notes
 
-* For `UHD620` users (Kaby Lake-R), you'll need a device-id spoof:
+* For all `UHD620` users (Kaby Lake-R), you'll need a device-id spoof:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -540,6 +543,7 @@ For this Kaby Lake example, we'll chose the MacBookPro14,1 SMBIOS - this is done
 | MacBookPro14,1 | Dual Core 15w(Low End) | iGPU: Iris Plus 640 | 13" | No |
 | MacBookPro14,2 | Dual Core 15w(High End) | iGPU: Iris Plus 650 | 13" | Yes |
 | MacBookPro14,3 | Quad Core 45w | iGPU: HD 630 + dGPU: RP555/560 | 15" | Yes |
+| iMac18,1 | NUC Systems | iGPU: Iris Plus 640 |  N/A | No |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

@@ -42,7 +42,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
-| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. Note that Intel NUCs do not need this |
 | **[SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Ivy Bridge CPU with 6 series motherboards |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
@@ -146,19 +146,20 @@ When setting up your iGPU, the table below should help with finding the right va
 
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Port Count**
-  * The number of displays supported
+* **Type**
+  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
 2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
-| AAPL,ig-platform-id | Port Count | Comment |
-| ------------------- | ---------- | ------- |
-| **03006601** | 4 | To be used with **1366 by 768** displays or lower |
-| **04006601** | 1 | To be used with **1600 by 900** displays or higher, see below for addition patches |
-| **09006601** | 3 | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
+| AAPL,ig-platform-id | Type | Comment |
+| ------------------- | ---- | ------- |
+| **03006601** | Laptop | To be used with **1366 by 768** displays or lower |
+| **04006601** | Laptop | To be used with **1600 by 900** displays or higher, see below for addition patches |
+| **09006601** | Laptop | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
+| **0b006601** | NUC | To be used with Intel NUCs |
 
 #### Configuration Notes
 
@@ -569,6 +570,8 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 | MacBookAir5,2 | Dual Core 17w | iGPU: HD 4000 | 13" |
 | MacBookPro10,1 | Quad Core 45w | iGPU: HD 4000 + dGPU: GT650M | 15" |
 | MacBookPro10,2 | Dual Core 35w(High End) | iGPU: HD 4000 | 13" |
+| Macmini6,1 | Dual Core NUC | iGPU: HD 4000 | N/A |
+| Macmini6,2 | Quad Core NUC | iGPU: HD 4000 | N/A |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

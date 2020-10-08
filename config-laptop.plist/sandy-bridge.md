@@ -43,7 +43,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
-| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. Note that Intel NUCs do not need this |
 | **[SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Sandy Bridge CPU with 7 series motherboards |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
@@ -147,20 +147,22 @@ When setting up your iGPU, the table below should help with finding the right va
 
 * **AAPL,snb-platform-id**
   * This is used internally for setting up the iGPU
-* **Port Count**
-  * The number of displays supported
+* **Type**
+  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,snb-platform-id - this is normally enough
 
-| AAPL,snb-platform-id | Port Count | Comment |
-| ------------------- | ---------- | ------- |
-| **00000100** | 4 | Note that HD 2000 iGPUs **are not supported** |
+| AAPL,snb-platform-id | Type | Comment |
+| ------------------- | ---- | ------- |
+| **00000100** | Laptop | To be used with laptops |
+| **10000300** | NUC | To be used with Intel NUCs |
 
 #### Configuration Notes
 
 * VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)
+* HD 2000 series are unsupported as well
 
 :::
 
@@ -556,6 +558,8 @@ For this Sandy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done in
 | MacBookPro8,1 | Dual Core 35w | iGPU: HD 3000 | 13" |
 | MacBookPro8,2 | Quad Core 45w(High End) | iGPU: HD 3000 + 6490M | 15" |
 | MacBookPro8,3 | Quad Core 45w(High End) | iGPU: HD 3000 + 6750M | 17" |
+| Macmini5,1 | Dual Core NUC | iGPU: HD 3000 | N/A |
+| Macmini5,3 | Quad Core NUC | iGPU: HD 3000 | N/A |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

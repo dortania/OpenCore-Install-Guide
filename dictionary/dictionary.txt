@@ -85,6 +85,7 @@
 7XX
 7zip
 970EvoPlus
+A320
 A520
 AAPL
 ACPIBatteryManager
@@ -173,6 +174,7 @@ AudioDxe
 Auth
 B0D3
 B360
+B450
 B460
 B550
 B75
@@ -541,6 +543,7 @@ NOOPT
 NPM
 NTFS
 NUC
+NUCs
 NVCAP
 NVCAP-settings
 NVMe

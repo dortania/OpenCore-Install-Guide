@@ -40,8 +40,8 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl.zip)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead |
-| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl.zip)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead. Note that Intel NUCs do not need this |
+| **[SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. Note that Intel NUCs do not need this |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -118,18 +118,19 @@ When setting up your iGPU, the table below should help with finding the right va
 
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Port Count**
-  * The number of displays supported
+* **Type**
+  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
 2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
-| AAPL,ig-platform-id | Port Count | Comment |
-| ------------------- | ---------- | ------- |
-| **0500260A** | 3 | To be used usually with HD5000, HD5100 and HD5200 |
-| **0600260A** | 3 | To be used usually with HD4200, HD4400 and HD4600, you **must** use a `device-id`(see below) |
+| AAPL,ig-platform-id | Type | Comment |
+| ------------------- | ---- | ------- |
+| **0500260A** | Laptop | To be used usually with HD5000, HD5100 and HD5200 |
+| **0600260A** | Laptop | To be used usually with HD4200, HD4400 and HD4600, you **must** use a `device-id`(see below) |
+| **0300220D** | NUC | To be used usually with all Haswell NUCs, HD4200/4400/4600 **must** use a `device-id`(see below) |
 
 #### Configuration Notes
 
@@ -529,8 +530,7 @@ For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakd
 | MacBookPro11,3 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
 | MacBookPro11,4 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
 | MacBookPro11,5 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
-
-**Note**: Mobile users should refer to the SMBIOS page on which to choose: [Mobile SMBIOS](https://github.com/dortania/Opencore-Install-Guide/blob/master/extras/smbios.md)
+| Macmini7,1 | NUC Systems | HD 5000/Iris 5100 | N/A |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

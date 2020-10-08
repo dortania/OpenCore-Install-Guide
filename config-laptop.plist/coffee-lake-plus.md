@@ -41,8 +41,8 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead |
-| **[SSDT-PNLF-CFL](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead. Note that Intel NUCs do not need this |
+| **[SSDT-PNLF-CFL](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. Note that Intel NUCs do not need this |
 | **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) page. |
 | **[SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. **Note that 10th gen CPUs do not need this**. See [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
@@ -140,18 +140,20 @@ When setting up your iGPU, the table below should help with finding the right va
 
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
-* **Port Count**
-  * The number of displays supported
+* **Type**
+  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
 1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
 2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
 
-| AAPL,ig-platform-id | Port Count | Comment |
-| ------------------- | ---------- | ------- |
-| **0900A53E** | 3 | Recommended value for Coffee Lake(9th gen) UHD630 |
-| **00009B3E** | 3 | Recommended value for Comet Lake(10th gen) UHD620 |
+| AAPL,ig-platform-id | Type | Comment |
+| ------------------- | ---- | ------- |
+| **0900A53E** | Laptop | Recommended value for Coffee Lake(8th gen) UHD630 |
+| **00009B3E** | Laptop | Recommended value for Comet Lake(10th gen) UHD620 |
+| **07009B3E** | NUC | Recommended value for UHD 620/630 |
+| **0000A53E** | NUC | Recommended value for UHD 655 |
 
 #### Configuration Notes
 
@@ -545,6 +547,7 @@ For this Coffee Lake Plus example, we'll chose the MacBookPro16,1 SMBIOS - this 
 | MacBookPro16,1 | Hexa/Octa Core 45w | iGPU: UHD 630 + dGPU: 5300/5500M | 15" | Yes |
 | MacBookPro16,3 | Quad Core 15w | iGPU: Iris 645 | 13" | Yes |
 | MacBookPro16,4 | Hexa/Octa Core 45w | iGPU: UHD 630 + dGPU: 5600M | 15" | Yes |
+| Macmini8,1 | NUC Systems | HD 6000/Iris Pro 6200 |  N/A | No |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
