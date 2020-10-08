@@ -229,8 +229,29 @@ diskutil list
 # Now mount the Preboot volume
 diskutil mount disk5s2
 
+# CD into your Preboot volume
+# Note the actual volume is under /System/Volumes/Preboot
+cd /System/Volumes/Preboot
+
+# Grab your UUID
+ls
+ 46923F6E-968E-46E9-AC6D-9E6141DF52FD
+ CD844C38-1A25-48D5-9388-5D62AA46CFB8
+
+# If multiple show up(ie. you dual boot multiple versions of macOS), you will
+# need to determine which UUID is correct.
+# Easiest way to determine is printing the value of .disk_label.contentDetails
+# of each volume.
+cat ./46923F6E-968E-46E9-AC6D-9E6141DF52FD/System/Library/CoreServices/.disk_label.contentDetails
+ Big Sur HD%
+
+cat ./CD844C38-1A25-48D5-9388-5D62AA46CFB8/System/Library/CoreServices/.disk_label.contentDetails
+ Catalina HD%
+
 # Next lets copy over the secure boot files
-sudo cp -a /usr/standalone/i386/. /Volumes/Preboot
+# Replace CD844C38-1A25-48D5-9388-5D62AA46CFB8 with your UUID value
+cd ~
+sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-9388-5D62AA46CFB8/System/Library/CoreServices
 ```
 
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
@@ -510,9 +531,39 @@ For those running Comet lake motherboards with the i225-V NIC, you may experienc
   * By default, this is what Asus and Gigabyte motherboards use
 * PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
   * Some OEMs may use this instead
+  
+For those who can to your PciRoot manually, you'll want to install macOS fully and run the following with [gfxutil](https://github.com/acidanthera/gfxutil/releases):
+
+```
+/path/to/gfxutil | grep -i "8086:15f3"
+```
+
+This should spit out something like this:
+
+```
+00:1f.6 8086:15f3 /PC00@0/GBE1@1F,6 = PciRoot(0x0)/Pci(0x1F,0x6)
+```
+
+The ending `PciRoot(0x0)/Pci(0x1F,0x6)` is what you want to add in your config.plist with device-id of `F2150000`
 
 ## Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop
 
 ![](../../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
 
 To resolve this kernel panic, ensure you have `-igfxcdc` in your boot-args.
+
+## Kernel panic on "cckprng_int_gen"
+
+Full panic:
+
+```
+"cckprng_int_gen: generator has already been sealed"
+```
+
+This is likely to be 1 of 2 things:
+
+* Missing SMC Emulator(ie. no VirtualSMC in your config.plist or EFI)
+  * Add [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases) to your config.plist and EFI
+* Incorrect SSDT usage with SSDT-CPUR
+
+For the latter, ensure you're only using SSDT-CPUR with **B550 and A520**. Do not use on X570 or older hardware(ie. B450 or A320)

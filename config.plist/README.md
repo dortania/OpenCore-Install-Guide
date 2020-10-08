@@ -54,6 +54,8 @@ Now comes the important part, selecting the configuration path. Each platform ha
 
 ### Intel Desktop
 
+* Note: Intel's NUC series are considered mobile hardware, for these situations we recommend following the [Intel Laptop Section](#intel-laptop)
+
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
 | [Yonah, Conroe and Penryn](../config.plist/penryn.md) | E8XXX, Q9XXX, [etc 1](https://en.wikipedia.org/wiki/Yonah_(microprocessor)), [etc 2](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2006-2009 era |
