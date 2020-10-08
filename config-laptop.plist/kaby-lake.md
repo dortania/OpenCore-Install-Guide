@@ -128,7 +128,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **00001B59** | Laptop | Recommended for HD615, HD630, HD640 and HD650 |
+| **00001B59** | Laptop | Recommended for HD615, HD620, HD630, HD640 and HD650 |
 | **00001659** | Laptop | Alternative value to 00001B59 if you have acceleration issues, and recommended for all HD and UHD620 NUCs |
 | **0000C087** | Laptop | Recommended for Amber lake's UHD 617 and Kaby lake R's UHD620 |
 | **00001E59** | NUC | Recommended for HD615 |
