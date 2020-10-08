@@ -14,13 +14,13 @@ More a mini-explainer as to why this release is a bit more painful than average 
 
 ### AvoidRuntimeDefrag
 
-With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpu_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now ensure this table is made accessible to the kernel. Users will however need a build of OpenCore 0.6.0 with commit [`bb12f5f`](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4) or newer to resolve this issue.
+With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpu_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now ensure this table is made accessible to the kernel. Users will however need OpenCore 0.6.0 or newer to fix this issue.
 
 ### Kernel Collections vs prelinkedkernel
 
 Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting.
 
-Due to the hard work of [@acidanthera](https://github.com/acidanthera), OpenCore gained experimental support for this new format in roughly 2 weeks, and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.
+Due to the hard work of [@acidanthera](https://github.com/acidanthera), OpenCore gained experimental support for this new format in roughly 2 weeks (starting with OpenCore 0.6.0), and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.
 
 ## Prerequisites
 
@@ -71,14 +71,7 @@ And a special note for MSI Navi users, you no longer require the `ATY,rom`/`-weg
 
 ### Up-to-date kexts, bootloader and config.plist
 
-Ensure you've updated to the latest builds (not releases) of OpenCore and all your kexts, as to avoid any odd incompatibility issues. You can find the latest builds of kexts and OpenCore here:
-
-* [Dortania's Kext & Driver build repo](https://dortania.github.io/builds)
-  * Updated immediately at every commit, contains DEBUG and RELEASE versions
-* [Goldfish64 Kext Repo](http://kexts.goldfish64.com/):
-  * Contains various builds including Acidanthera's, but they're only "RELEASE" version
-* [Goldfish64 UEFI Driver Repo (contains OpenCore builds too)](http://drivers.goldfish64.com/):
-  * Same as above, these are only RELEASE builds.
+Ensure that you have the latest version of OpenCore, kexts and config.plist so it won't have any odd compatibility issues.
 
 You will also need to ensure you have a few NVRAM variables set:
 
@@ -114,7 +107,7 @@ With Big Sur, quite a bit broke. Mainly the following:
   * Resolved with VirtualSMC v1.1.5+
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
-  * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
+    * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
   * Setting MaxKernel to 19.9.9 for AirPortBrcm4360_Injector.kext may help. More information [from the repo](https://github.com/acidanthera/AirportBrcmFixup/blob/master/README.md#please-pay-attention)
 * Intel HEDT hackintoshes failing to boot
   * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
@@ -136,7 +129,7 @@ For the installation, you'll need a few things:
 
 ### Grabbing the installer
 
-To grab the Big Sur installer, download the beta profile from Apple's developer portal, then check for updates in System Preferences. If you don't have a developer account, you can use gibMacOS to download it:
+To grab the Big Sur installer, download the beta profile from Apple's developer portal or the Apple's public beta profile, then check for updates in System Preferences. If you don't have a developer account and want to use the developer beta, you can use gibMacOS to download it:
 
 Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
 
@@ -146,7 +139,7 @@ Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalo
 
 ![](../../images/extras/big-sur/readme/10-16-ver.png)
 
-Press `C` to change the catalog, then select the number for the developer catalog.
+Press `C` to change the catalog, then select the number for the developer (for developer beta) or catalog.
 
 ![](../../images/extras/big-sur/readme/dev-cat.png)
 
@@ -182,7 +175,7 @@ Once this is done, run the following command:
 sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-This will take some time so you may want to grab a coffee, once done your USB should be good to boot!(Assuming you updated OpenCore and co earlier)
+This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you updated OpenCore and co earlier)
 
 ### Installing
 
