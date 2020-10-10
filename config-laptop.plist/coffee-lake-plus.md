@@ -150,8 +150,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **0900A53E** | Laptop | Recommended value for Coffee Lake(8th gen) UHD630 |
-| **00009B3E** | Laptop | Recommended value for Comet Lake(10th gen) UHD620 |
+| **0900A53E** | Laptop | Recommended value for UHD630 |
+| **00009B3E** | Laptop | Recommended value for UHD620 |
 | **07009B3E** | NUC | Recommended value for UHD 620/630 |
 | **0000A53E** | NUC | Recommended value for UHD 655 |
 

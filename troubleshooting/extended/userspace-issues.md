@@ -16,6 +16,7 @@ Issues regarding once you've booted the installer and the GUI has loaded.
 * [DiskUtility failing to erase](#diskutility-failing-to-erase)
 * [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
 * [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
+* [The recovery server cannot get contacted](#the-recovery-server-cannot-get-contacted)
 
 ## macOS installer in Russian
 
@@ -150,3 +151,22 @@ To resolve, we have a few options:
   * LegacyEnable -> YES
   * LegacyOverwrite -> YES
   * WriteFlash -> YES
+  
+## The recovery server cannot get contacted
+
+If you made your installer in Windows or Linux, then this means your USB installer is recovery based. What this means is that only a small portion of the macOS installer is on disk while the rest must be downloaded from Apple servers in the installer. And reason we do not include full installer guides is due to unstable HFS drivers and other utilities that commonly end up with data corruption.
+
+To resolve the error, you have a few options:
+
+* Ensure you have a working Ethernet or Wifi connection
+  * Open `Network Utility` under `Utilties` header in the installer and see if your Network Card shows up
+    * If you network card **doesn't** show up, it's likely you're missing the right Network kext
+      * Please refer here: [Ethernet Kexts](../../ktext.md#ethernet) and [Finding your hardware](../../find-hardware.md)
+    * If the network card **does** show up, next run `ping -c3 www.google.com` in the installer's terminal to ensure your network connection is working
+      * If nothing shows, either your network or kexts are acting up
+        * We recommend trying older variants of kexts in cases where newer builds have weird bugs with your hardware
+      * If it does return something, then the issue is on Apple's end. You'll simply need to try to install again another time unfortunately
+
+| Check NIC | Ping |
+| :--- | :--- |
+| ![](../../images/troubleshooting/troubleshooting-md/check-network.png) | ![Ping](../../images/troubleshooting/troubleshooting-md/ping.png) |

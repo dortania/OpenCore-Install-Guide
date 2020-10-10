@@ -312,7 +312,7 @@ To start, you need the following:
   * This can be found in OpenCorePkg under `/Utilties/LegacyBoot/`
 * Install USB(Created above)
 
-Within your OpenCore build folder, navigate to `Utilities/LegacyBoot`. Here you'll find a file called `BootInstall.command`. What this does is install DuetPkg to your desired drive.
+Within your OpenCore build folder, navigate to `Utilities/LegacyBoot`. Here you'll find a file called `BootInstall_ARCH.tool`. What this does is install DuetPkg to your desired drive.
 
 ![BootInstall Location](../images/extras/legacy-md/download.png)
 

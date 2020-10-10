@@ -106,6 +106,7 @@ ARPT
 ASR
 ASUS
 ASentientBot
+ATH9KFixup
 AWAC
 AZAL
 Above4G
@@ -166,6 +167,9 @@ AsRock
 AssetCache
 Asus
 Asus's
+Ath3kBT
+Ath3kBTInjector
+AthBluetoothFirmware
 Atheros
 AtherosE2200Ethernet
 Atmel
