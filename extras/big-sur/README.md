@@ -69,6 +69,32 @@ Also note that AMD OSX has updated their patches, but they are experimental and 
 
 And a special note for MSI Navi users, you no longer require the `ATY,rom`/`-wegnoegpu` patch to boot the installer!
 
+::: details BCM94331 work around
+While AirPortBrcm4360.kext has been removed from macOS, AirPortBrcmNIC.kext actually still supports the 4331 family if you spoof the model to a supported card(ie. BCM94360 PCI ID)
+
+To do this, grab [gfxutil](https://github.com/acidanthera/gfxutil/releases) and run the following:
+
+```sh
+/path/to/gfxutil | grep -i "14e4:4331"
+```
+
+This should spit out something like this:
+
+```
+00:1f.6 14e4:4331 /PC00@0/PXSX@1F,6 = PciRoot(0x0)/Pci(0x1F,0x6)
+```
+
+The ending `PciRoot(0x0)/Pci(0x1F,0x6)` is what you want to add in your config.plist under `DeviceProperties -> Add` with the following properties:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| compatible | String | "pcie14e4,43ba" |
+| device-id  | Data | BA430000 |
+
+![](../../images/troubleshooting/troubleshooting-md/bcm4331-fix.png)
+
+:::
+
 ### Up-to-date kexts, bootloader and config.plist
 
 Ensure that you have the latest version of OpenCore, kexts and config.plist so it won't have any odd compatibility issues.
@@ -296,6 +322,41 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 | Skip | Integer | 0 |
 
 :::
+
+### Cannot update to newer versions of Big Sur
+
+With Apple's new snapshotting for the system drive, they now depend heavily on this for OS updates to apply correctly. So when a drove's seal is broken, macOS will refuse to update the drive.
+
+To verify yourself, check that `Snapshot Sealed` returns as YES:
+
+```bash
+# List all APFS volumes
+diskutil list apfs
+
+# Look for your system volume
+Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
+        ---------------------------------------------------
+        APFS Volume Disk (Role):   disk1s8 (System)
+        Name:                      Big Sur HD (Case-insensitive)
+        Mount Point:               Not Mounted
+        Capacity Consumed:         15113809920 B (15.1 GB)
+        Sealed:                    Broken
+        FileVault:                 No
+        |
+        Snapshot:                  4202EBE5-288B-4701-BA1E-B6EC8AD6397D
+        Snapshot Disk:             disk1s8s1
+        Snapshot Mount Point:      /
+        Snapshot Sealed:           Yes
+```
+
+If it returns as `Snapshot Sealed: Yes` or `Snapshot Sealed: Broken`, then you'll want to go through the following:
+
+* Disable Apple Secure Boot
+  * `Misc -> Security -> SecureBootModel -> Disabled`
+  * This is due to a bug on real Macs with secure boot enabled as well
+* Revert to older snapshots
+  * Mainly for those who have tampered with the system volume
+  * See here how to revert: [Rolling back APFS Snapshots](../../troubleshooting/extended/post-issues.md#rolling-back-apfs-snapshot)
 
 ### Some kexts may not be compatible with Big Sur yet
 
