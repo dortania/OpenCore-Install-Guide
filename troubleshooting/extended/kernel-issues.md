@@ -18,6 +18,7 @@ Issues surrounding from initial booting the macOS installer to right before the 
 * [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
 * [Stuck at ACPI Table loading on B550](#stuck-at-acpi-table-loading-on-b550)
 * ["Waiting for Root Device" or Prohibited Sign error](#waiting-for-root-device-or-prohibited-sign-error)
+* [Kernel panic with IOPCIFamily on X99](#kernel-panic-with-iopcifamily-on-x99)
 * [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
 * [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
@@ -69,7 +70,7 @@ The main culprits to watch for in the Booter section are:
       * EnableWriteUnprotector -> True
       * RebuildAppleMemoryMap -> False
       * SyncRuntimePermissions -> False
-    * Note: Some laptops(ex. Dell Inspiron 5370) even with MATs support will halt on boot up, in these cases you'll be required to boot with the old firmware combo(ie. With EnableWriteUnprotected)
+    * Note: Some laptops(ex. Dell Inspiron 5370) even with MATs support will halt on boot up, in these cases you'll be required to boot with the old firmware combo(ie. With EnableWriteUnprotector)
 
 Regarding MATs support, firmwares built against EDK 2018 will support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has updated the firmware, you can check the OpenCore logs whether yours supports it([See here how to get a log](../debug.html)):
 
@@ -337,7 +338,8 @@ The main places to check:
     * HEDT(ie. X99): See [Emulating NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
 
 * **RTC Missing**:
-  * Commonly found on Intel's 300+ series(ie. Z370, Z490) and X299/Cascade Lake-X refresh motherboards, caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
+  * Commonly found on Intel's 300+ series(ie. Z370, Z490), caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
+  * X99 and X299 have broken RTC devices, so will need to be fixed with SSDT-RTC0-RANGE. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating said file
   * Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it, for users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with:
 
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
@@ -402,6 +404,17 @@ On rare occasions(mainly laptops), the SATA controller isn't officially supporte
   * For users running macOS 11, Big Sur and having issues. This backports the known working Catalina kext, SATA-unsupported is not needed with this kext
 
 Note that you will only experience this issue after installing macOS onto the drive, booting the macOS installer will not error out due to SATA issues.
+
+## Kernel panic with IOPCIFamily on X99
+
+For those running the X99 platform from Intel, please go over the following:
+
+* The following kernel patches are enabled:
+  * AppleCpuPmCfgLock
+  * AppleXcpmCfgLock
+  * AppleXcpmExtraMsrs
+* You have the following SSDTs:
+  * SSDT-UNC(if not, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating said file)
 
 ## Stuck on or near `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
 

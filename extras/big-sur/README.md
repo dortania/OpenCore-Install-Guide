@@ -135,7 +135,7 @@ With Big Sur, quite a bit broke. Mainly the following:
   * Forcing a specific driver to load with `brcmfx-driver=` may help
     * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
   * Setting MaxKernel to 19.9.9 for AirPortBrcm4360_Injector.kext may help. More information [from the repo](https://github.com/acidanthera/AirportBrcmFixup/blob/master/README.md#please-pay-attention)
-* Intel HEDT hackintoshes failing to boot
+* Intel X99 and X299 hackintoshes failing to boot
   * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
   * OpenCorePkg includes a sample SSDT that goes in-depth: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 * SATA Support broken
@@ -223,7 +223,7 @@ For the last one, if you get a kernel panic with Lilu we highly recommend you to
 
 This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
 
-### Stuck at `PCI Configuration Begins` for Intel's HEDT boards
+### Stuck at `PCI Configuration Begins` for Intel's X99 and X299 boards
 
 ![](../../images/extras/big-sur/readme/rtc-error.jpg)
 
@@ -240,9 +240,9 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
-### X79 and X99 Kernel Panic on IOPCIFamily
+### X99 Kernel Panic on IOPCIFamily
 
-Due to some rewriting of IOPCIFamily, many X79 and X99 machines will now kernel panic on said kext. Currently there are no known working solutions.
+This is due to a unused uncore PCI Bridges being enabled in ACPI, and so IOPCIFamily will kernel panic when probing unknown devices. To resolve, you'll need to add [SSDT-UNC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-UNC.dsl) to your system
 
 ### DeviceProperties injection failing
 

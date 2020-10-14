@@ -354,13 +354,13 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 ### High End Desktop
 
-| Platforms | **CPU** | **EC** | **AWAC** |
-| :-------: | :-----: | :----: | :------: |
-| Nehalem and Westmere | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A |
-| Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ |
-| Haswell-E | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ |
-| Broadwell-E | ^^ | ^^ | ^^ |
-| Skylake-X | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) |
+| Platforms | **CPU** | **EC** | **RTC** | **PCI** |
+| :-------: | :-----: | :----: | :-----: | :-----: |
+| Nehalem and Westmere | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A |
+| Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ |
+| Haswell-E | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-RTC0-RANGE](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/) |
+| Broadwell-E | ^^ | ^^ | ^^ | ^^ |
+| Skylake-X | ^^ | ^^ | ^^ | N/A |
 
 ### Laptop
 
