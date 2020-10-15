@@ -160,6 +160,14 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | :--- | :--- | :--- |
 | device-id | Data | 9B3E0000 |
 
+* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| framebuffer-patch-enable | Data | 01000000 |
+| framebuffer-stolenmem | Data | 00003001 |
+| framebuffer-fbmem | Data | 00009000 |
+
 :::
 
 ::: tip PciRoot(0x0)/Pci(0x1b,0x0)

@@ -395,7 +395,7 @@ On rare occasions(mainly laptops), the SATA controller isn't officially supporte
 * Set SATA to AHCI mode in the BIOS
   * macOS doesn't support hardware RAID or IDE mode properly.
   * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accessible in macOS.
-* [SATA-unsupported.kext](https://github.com/RehabMan/hack-tools/tree/master/kexts/SATA-unsupported.kext)
+* [SATA-unsupported.kext](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * Adds support to obscure SATA controllers, commonly being laptops.
   * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) may be more suitable.
 * [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)

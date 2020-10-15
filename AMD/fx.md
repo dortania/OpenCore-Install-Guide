@@ -244,7 +244,6 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 | Quirk | Enabled |
 | :--- | :--- |
-| DummyPowerManagement | YES |
 | PanicNoKextDump | YES |
 | PowerTimeoutKernelPanic | YES |
 | XhciPortLimit | YES |

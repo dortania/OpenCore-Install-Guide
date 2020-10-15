@@ -48,6 +48,7 @@
 0xE2
 0xFE000000
 0xFEC00000
+BCM94360
 0xFED00000
 0xFEE00000
 0xFF000000
@@ -91,6 +92,7 @@ AAPL
 ACPIBatteryManager
 AGPM
 AHCI
+AHCIPortInjector
 AIDA64
 AIOs
 ALC
@@ -106,6 +108,8 @@ ARPT
 ASR
 ASUS
 ASentientBot
+ATA
+ATAPortInjector
 ATH9KFixup
 AWAC
 AZAL
@@ -253,6 +257,7 @@ CpuTscSync
 Crohn
 Crohn's
 CsrDecode
+CtlnaAHCIPort
 Ctrl
 Cupertino
 CustomSMBIOSMode
@@ -678,6 +683,7 @@ SAS
 SAT0
 SAT1
 SATA
+SATA-Unsupported
 SATA-unsupported
 SGX
 SHA-1
@@ -1082,6 +1088,7 @@ shikigva
 slavs
 slowgeek
 smcread
+snapshotting
 snb-platform-id
 socketed
 soooooo

@@ -276,6 +276,18 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
   * Used for fixing power management and initialization on non-Apple NVMe
   * Requires macOS 10.14 or newer
+* [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
+  * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
+  * macOS Big Sur Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
+
+::: details Legacy SATA Kexts
+
+* [AHCIPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/AHCIPortInjector.kext.zip)
+  * Legacy SATA/AHCI injector, mainly relevant for older machines of the Penryn era
+* [ATAPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/ATAPortInjector.kext.zip)
+  * Legacy ATA injector, mainly relevant for IDE and ATA devices(ie. when no AHCI option is present in the BIOS)
+  
+:::
 
 ### Laptop Specifics
 
