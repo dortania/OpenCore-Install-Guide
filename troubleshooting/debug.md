@@ -102,6 +102,6 @@ To remove all file logging, and debug messages, simply swap out all your OpenCor
 
 Lastly, to remove writing to disk set the following:
 
-* AppleDebug = `0`
-* ApplePanic = `0`
+* AppleDebug = `NO`
+* ApplePanic = `NO`
 * Target = `0`
