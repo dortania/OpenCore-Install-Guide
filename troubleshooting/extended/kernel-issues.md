@@ -30,6 +30,8 @@ Issues surrounding from initial booting the macOS installer to right before the 
 * [`kextd stall[0]: AppleACPICPU`](#kextd-stall-0-appleacpicpu)
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
 * [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake)
+* [Stuck at `Forcing CS_RUNTIME for entitlement` in Big Sur](#stuck-at-forcing-cs-runtime-for-entitlement-in-big-sur)
+* [Stuck on `ramrod`(^^^^^^^^^^^^^)](#stuck-on-ramrod)
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
 
@@ -96,7 +98,43 @@ This section will be split between Intel and AMD users:
   * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 * **AppleXcpmExtraMsrs**
   * May also be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS.
-  
+
+#### Legacy Intel users
+
+For macOS Big Sur, many firmwares have issues determining the CPU core count and thus will kernel panic too early for screen printing. Via serial, you can see the following panic:
+
+```
+max_cpus_from_firmware not yet initialized
+```
+
+To resolve:
+
+* Enable `AvoidRuntimeDefrag` under Booter -> Quirks
+  * This should work for most firmwares
+
+However on certain machines like the HP Compaq DC 7900, the firmware will still panic so we need to force a CPU core count value. Only use the below patch if AvoidRuntimeDefrag didn't work:
+
+::: details Legacy CPU Core patch
+
+To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 with the amount of CPU threads your hardware supports):
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Base | String | _acpi_count_enabled_logical_processors |
+| Count | Integer | 1 |
+| Enabled | Boolean | True |
+| Find | Data | |
+| Identifier | String | Kernel |
+| Limit | Integer | 0 |
+| Mask | Data | |
+| MaxKernel | String | |
+| MinKernel | String | 20.0.0 |
+| Replace | Data | B804000000C3 |
+| ReplaceMask | Data | |
+| Skip | Integer | 0 |
+
+:::
+
 ### UEFI Issues
 
 * **ProvideConsoleGop**
@@ -580,3 +618,20 @@ This is likely to be 1 of 2 things:
 * Incorrect SSDT usage with SSDT-CPUR
 
 For the latter, ensure you're only using SSDT-CPUR with **B550 and A520**. Do not use on X570 or older hardware(ie. B450 or A320)
+
+## Stuck at `Forcing CS_RUNTIME for entitlement` in Big Sur
+
+![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
+
+This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
+
+## Stuck on `ramrod`(^^^^^^^^^^^^^)
+
+![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
+
+If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
+
+* Ensure you're using the latest builds of VirtualSMC and Lilu, with the `vsmcgen=1` boot-arg
+* Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/) (you can use the `MinKernel`/`MaxKernel` trick mentioned above to restrict FakeSMC to Big Sur and up
+
+And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.

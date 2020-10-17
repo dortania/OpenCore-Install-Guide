@@ -242,7 +242,7 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 
 ### X99 Kernel Panic on IOPCIFamily
 
-This is due to a unused uncore PCI Bridges being enabled in ACPI, and so IOPCIFamily will kernel panic when probing unknown devices. To resolve, you'll need to add [SSDT-UNC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-UNC.dsl) to your system
+This is due to an unused uncore PCI Bridges being enabled in ACPI, and so IOPCIFamily will kernel panic when probing unknown devices. To resolve, you'll need to add [SSDT-UNC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-UNC.dsl) to your system
 
 ### DeviceProperties injection failing
 
