@@ -48,7 +48,6 @@
 0xE2
 0xFE000000
 0xFEC00000
-BCM94360
 0xFED00000
 0xFEE00000
 0xFF000000
@@ -192,6 +191,7 @@ BCM5722D
 BCM94331
 BCM94331CD
 BCM94352Z
+BCM94360
 BGRT
 BOOTICE
 BT
@@ -274,6 +274,7 @@ DSMOS
 DVI
 DVMT
 DVMT-prealloc
+DaVinci
 Decluttering
 Dev
 DeviceManager
@@ -537,6 +538,7 @@ MakeInstall
 MasterBootRecord
 MediaKit
 Mellanox
+Memfast
 MemoryFix
 Merom
 MinMultiplier
@@ -781,6 +783,7 @@ VDADecoderChecker
 VDI
 VM
 VMDK
+VMWare
 VMs
 VMware
 VPN
@@ -1112,6 +1115,7 @@ trashOS
 ubuntu
 unallocated
 unbootable
+uncore
 unmount
 untrusted
 userspace

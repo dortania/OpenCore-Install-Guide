@@ -17,6 +17,7 @@ Issues regarding once you've booted the installer and the GUI has loaded.
 * [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
 * [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
 * [The recovery server cannot get contacted](#the-recovery-server-cannot-get-contacted)
+* [Keyboard and Mouse broken in Big Sur](#keyboard-and-mouse-broken-in-big-sur)
 
 ## macOS installer in Russian
 
@@ -170,3 +171,30 @@ To resolve the error, you have a few options:
 | Check NIC | Ping |
 | :--- | :--- |
 | ![](../../images/troubleshooting/troubleshooting-md/check-network.png) | ![Ping](../../images/troubleshooting/troubleshooting-md/ping.png) |
+
+## Keyboard and Mouse broken in Big Sur
+
+For certain legacy systems(ie. Core2 Duo/2010 and older), you may notice that while the USB ports work your HID-based devices such as the keyboard and mouse may be broken. To resolve this, add the following patch:
+
+::: details IOHIDFamily Patch
+
+config.plist -> Kernel -> Patch:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Base | String | _isSingleUser |
+| Count | Integer | 1 |
+| Enabled | Boolean | True |
+| Find | Data | |
+| Identifier | String | com.apple.iokit.IOHIDFamily |
+| Limit | Integer | 0 |
+| Mask | Data | |
+| MaxKernel | String | |
+| MinKernel | String | 20.0.0 |
+| Replace | Data | B801000000C3 |
+| ReplaceMask | Data | |
+| Skip | Integer | 0 |
+
+[Source](https://applelife.ru/threads/ustanovka-macos-big-sur-11-0-beta-na-intel-pc-old.2944999/page-81#post-884400)
+
+:::

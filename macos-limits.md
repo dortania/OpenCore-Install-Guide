@@ -36,6 +36,7 @@ For CPU support, we have the following breakdown:
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
   * Laptop CPUs are **not** supported
+  * Note not all features of macOS are supported with AMD, see below
 
 **For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
@@ -104,6 +105,26 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 | [Amber](https://en.wikipedia.org/wiki/Kaby_Lake#List_of_8th_generation_Amber_Lake_Y_processors), [Whiskey](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture)), [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.14.1 | Current | N/A | 0x0806E0(U/Y) |
 | [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.15.4 | Current | N/A | 0x0906E0(S/H)|
 | [Ice Lake](https://en.wikipedia.org/wiki/Ice_Lake_(microprocessor)) | 10.15.4 | Current | N/A | 0x0706E5(U) |
+
+:::
+
+::: details AMD CPU Limitations in macOS
+
+Unfortunately many features in macOS are outright unsupported with AMD and many others being partially broken. These include:
+
+* Virtual Machines relying on AppleHV
+  * This includes VMWare, Parallels, Docker, Android Studios, etc
+  * VirtualBox is the sole exception as they have their own hypervisor
+  * VMware 10 and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
+* Adobe Support
+  * Most of Adobe's suite relies on Intel's Memfast instruction set, resulting in crashes with AMD CPUs
+  * You can disable functionality like RAW support to avoid the crashing: [Adobe Fixes](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
+* 32-Bit support
+  * For those still relying on 32-Bit software in Mojave and below, note that the Vanilla patches do not support 32-bit instructions
+  * A work-around is to install a [custom kernel](https://amd-osx.com/download/kernel.html), however you lose iMessage support
+* Stability issues on many apps
+  * Audio-based apps are the most prone to issues, ie. Logic Pro
+  * DaVinci Resolve has been known to have sporadic issues as well
 
 :::
 
