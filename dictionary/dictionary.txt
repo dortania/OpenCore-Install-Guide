@@ -538,6 +538,7 @@ MakeInstall
 MasterBootRecord
 MediaKit
 Mellanox
+Memfast
 MemoryFix
 Merom
 MinMultiplier
