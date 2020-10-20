@@ -15,9 +15,12 @@ From a macOS machine that meets the requirements of the OS version you want to i
 
 For machines that need a specific OS release or can't download from the App Store, you can use the gibMacOS utility.
 
-Now let's grab [gibMacOS](https://github.com/corpnewt/gibMacOS), then unzip it into a local directory.
+Now let's grab [gibMacOS](https://github.com/corpnewt/gibMacOS):
 
-Next run the `gibMacOS.command`:
+1. [Download the zip](https://github.com/corpnewt/gibMacOS/archive/master.zip)
+1. Unzip `gibMacOS-master.zip` 
+1. Assuming you've downloaded and extracted to your downloads, change the directory `cd ~/Downloads/gibMacOS-master`
+1. Run it `python gibMacOS.command`
 
 ![](../images/installer-guide/mac-install-md/gib.png)
 
