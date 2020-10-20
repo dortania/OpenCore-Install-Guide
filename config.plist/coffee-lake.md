@@ -123,9 +123,10 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
 | 07009B3E | Used when the Desktop iGPU is used to drive a display |
+| 00009B3E | Alternative to 07009B3E if it doesn't work |
 | 0300913E | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
 
-**Note**: With macOS 10.15.5, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
+* **Note**: With macOS 10.15.5 and newer, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 

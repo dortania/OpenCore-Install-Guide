@@ -451,6 +451,7 @@ Icelake's
 InjectAMD
 InjectAti
 InjectIntel
+InjectNvidia
 InsanelyMac
 Inspiron
 InstallMacOSX
@@ -503,6 +504,7 @@ LucyRTL8125Ethernet
 Lynnfield
 MADT
 MBR
+MBR-based
 MEI
 MEID
 MKext
@@ -614,6 +616,7 @@ PBR
 PC00
 PCI
 PCIO
+PCIRoot
 PCIRootUID
 PCIRootUID=Value
 PCIe
@@ -761,10 +764,12 @@ Trackpad
 Trackpads
 TransMac
 Typora
+UEFI-based
 UEFIExtrac
 UEFITool
 UHD
 UI
+UID
 USBE
 USBInjectAll
 USBX
