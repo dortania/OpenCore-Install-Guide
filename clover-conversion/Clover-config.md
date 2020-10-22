@@ -281,9 +281,7 @@ Just don't add your drivers to `UEFI -> Drivers`
 
 **InjectIntel**:
 
-* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> device-id`
-  * ie. `66010003` for the HD 4000
-* `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0) -> vendor-id -> <86800000>`
+* [GMA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 
 **InjectAti**:
 
@@ -305,10 +303,7 @@ DUMMY                   <01 00 00 00>
 
 **InjectNvidia**:
 
-* `DeviceProperties -> Add -> PciRoot... -> device-id`
-* `DeviceProperties -> Add -> PciRoot... -> Family`
-* `DeviceProperties -> Add -> PciRoot... -> NVCAP`
-  * For more info on calculations, see here: [NVCAP.bt](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/NVCAP.bt)
+* [Nvidia Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 
 **FakeIntel**:
 
@@ -342,9 +337,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **NVCAP**
 
-* `DeviceProperties -> Add -> PciRoot... -> NVCAP`
-  * See [NVCAP-settings](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/NVCAP-settings.png) for more details, image courtesy of Clover manual
-  * For more info on calculations, see here: [NVCAP.bt](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/NVCAP.bt)
+* [Nvidia Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 
 **display-cfg**:
 
@@ -572,6 +565,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 * Boot Graphics
 * Disable Drivers
+* KernelAndKextPatches
 * RTVariables
 * SMBIOS
 * SystemParameters
@@ -581,8 +575,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 * Acpi
 * Boot
 * CPU
-* Devices
-* KernelAndKextPatches
+* Device
 
 **Section missing**:
 

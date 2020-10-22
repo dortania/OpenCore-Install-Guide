@@ -8,6 +8,7 @@ This section contains a brief rundown as to why the community has been transitio
   * OpenCore features
   * Software support
   * Kext injection
+* [OpenCore's shortcomings](#opencores-shortcomings)
 * [Common Myths](#common-myths)
   * Is OpenCore unstable as it's a beta?
   * Does OpenCore always inject SMBIOS and ACPI data into other OSes?
@@ -74,6 +75,31 @@ Things to note with OpenCore's method:
 * OS agnostic as the prelinked kernel format has stayed the same since 10.6 (v2), far harder to break support.
   * OpenCore also supports prelinked kernel (v1, found in 10.4 and 10.5), cacheless, Mkext and KernelCollections, meaning it also has proper support for all Intel versions of OS X/macOS
 * Far better stability as there is far less patching involved
+
+# OpenCore's shortcomings
+
+The majority of Clover's functionality is actually supported in OpenCore in the form of some quirk, however when transitioning you should pay close attention to OpenCore's missing features as this may or may not affect yourself:
+
+* Does not support booting MBR-based operating systems
+  * Work around is to chain-load rEFInd once in OpenCore
+* Does not support UEFI-based VBIOS patching
+  * This can be done in macOS however
+* Does not support automatic DeviceProperty injection for legacy GPUs
+  * ie. InjectIntel, InjectNvidia and InjectAti
+  * This can be done manually however: [GPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* Does not support IRQ conflict patching
+  * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
+* Does not support P and C state generation for older CPUs
+* Does not support Target Bridge ACPI patching
+* Does not support Hardware UUID Injection
+* Does not support auto-detection for many Linux bootloader
+  * Can be resolved by adding an entry in `BlessOverride`
+* Does not support many of Clover's XCPM patches
+  * ie. Ivy Bridge XCPM patches
+* Does not support hiding specific drives
+* Does not support changing settings within OpenCore's menu
+* Does not patch PCIRoot UID value
+* Does not support macOS-only ACPI injection and patching
 
 # Common Myths
 
