@@ -250,4 +250,4 @@ Once this is done, head back to your USB and do 1 final thing. Grab either the *
 
 :::
 
-## Now with all this done, head to [Setting up the EFI](../installer-guide/opencore-efi.md) to finish up your work
+## Now with all this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
