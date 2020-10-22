@@ -67,7 +67,7 @@ In you config.plist:
 
 * `Misc -> Security -> AllowNvramReset -> True`
 
-And on your initial boot of OpenCore, select `ClearNvram` boot option. This will wipe everything and reboot the system when finished.
+And on your initial boot of OpenCore, select `Reset NVRAM` boot option. This will wipe everything and reboot the system when finished.
 
 ## Optional: Avoiding SMBIOS injection into other OSes
 
