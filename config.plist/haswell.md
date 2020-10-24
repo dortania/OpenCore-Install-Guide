@@ -153,7 +153,7 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![Kernel](../images/config/config-universal/kernel.png)
+![Kernel](../images/config/config-universal/kernel-legacy-XCPM.png)
 
 ### Add
 
