@@ -95,6 +95,9 @@ This section will be split between Intel and AMD users:
 
 * **AppleXcpmCfgLock** and **AppleCpuPmCfgLock**
   * Missing CFG or XCPM patches, please enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`
+    * Haswell and newer only need AppleXcpmCfgLock
+    * Ivy Bridge and older only need AppleCpuPmCfgLock
+      * Broadwell and older need AppleCpuPmCfgLock if running 10.10 or older
   * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 * **AppleXcpmExtraMsrs**
   * May also be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS.

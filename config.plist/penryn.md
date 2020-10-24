@@ -675,10 +675,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
 * CSM
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
 
 ### Enable
 
