@@ -188,7 +188,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
+| AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
 | AppleXcpmExtraMsrs | YES | |
 | DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
@@ -201,7 +201,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 ::: details More in-depth Info
 
-* **AppleCpuPmCfgLock**: YES
+* **AppleCpuPmCfgLock**: NO
   * Only needed when CFG-Lock can't be disabled in BIOS
   * Only applicable for Ivy Bridge and older
     * Note: Broadwell and older require this when running 10.10 or older
@@ -644,7 +644,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+  * For 10.10 and older, you'll need to enable AppleCpuPmCfgLock as well
 
 ### Enable
 
