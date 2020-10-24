@@ -283,7 +283,6 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS|
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
 | DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
@@ -295,7 +294,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 ::: details More in-depth Info
 
-* **AppleCpuPmCfgLock**: YES
+* **AppleCpuPmCfgLock**: NO
   * Only needed when CFG-Lock can't be disabled in BIOS
   * Only applicable for Ivy Bridge and older
     * Note: Broadwell and older require this when running 10.10 or older
@@ -744,7 +743,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 * Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable both `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
 
 ### Enable
 
