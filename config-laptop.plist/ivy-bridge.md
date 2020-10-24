@@ -310,11 +310,11 @@ Settings relating to the kernel, for us we'll be enabling the following:
 ::: details More in-depth Info
 
 * **AppleCpuPmCfgLock**: YES
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM
+  * Only needed when CFG-Lock can't be disabled in BIOS
   * Only applicable for Ivy Bridge and older
     * Note: Broadwell and older require this when running 10.10 or older
 * **AppleXcpmCfgLock**: YES
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM
+  * Only needed when CFG-Lock can't be disabled in BIOS
   * Only applicable for Haswell and newer
     * Note: Ivy Bridge-E is also included as it's XCPM capable
 * **CustomSMBIOSGuid**: NO

@@ -253,9 +253,9 @@ Settings relating to the kernel, for us we'll be enabling the following:
 ::: details More in-depth Info
 
 * **AppleCpuPmCfgLock**: NO
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be AppleIntelCPUPM. AMD users can ignore
+  * Only needed when CFG-Lock can't be disabled in BIOS. AMD users can ignore
 * **AppleXcpmCfgLock**: NO
-  * Only needed when CFG-Lock can't be disabled in BIOS, Clover counterpart would be KernelPM. AMD users can ignore
+  * Only needed when CFG-Lock can't be disabled in BIOS. AMD users can ignore
 * **AppleXcpmExtraMsrs**: NO
   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO
