@@ -127,13 +127,18 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 The `AAPL,ig-platform-id` we use is as follows:
 
-* `0A006601` - this is the standard hex for the ig-platform-id
+| AAPL,ig-platform-id | Comment |
+| :--- | :--- |
+| 0A006601 | Used when the iGPU is used to drive a display |
+| 07006201 | Used when the iGPU is only used for computing tasks and doesn't drive a display |
+
+Example setup:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | AAPL,ig-platform-id | Data | 0A006601 |
 
-(This is an example for a desktop HD 4000)
+(This is an example for a desktop HD 4000 without a dGPU)
 
 :::
 
