@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: '0'
+          persist-credentials: false 
       - name: Install
         run: npm install
       - name: Build
