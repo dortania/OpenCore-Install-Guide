@@ -41,8 +41,10 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
     * Used for Haswell and older when no NVMe driver is built into the firmware
   * XhciDxe.efi
     * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+    * Only needed if you're using a USB 3.0 expansion card in an older machine
   * HiiDatabase.efi
     * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
+    * Not required for booting
   * OpenCanopy.efi
     * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
   * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi

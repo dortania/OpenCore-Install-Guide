@@ -1,0 +1,62 @@
+name: Build/Test/Deploy
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+  workflow_dispatch:
+  pull_request:
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+          persist-credentials: false 
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: .vuepress/dist/
+          CLEAN: true
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Install
+        run: npm install
+      - name: Lint
+        run: npm run lint-ci
+  spellcheck:
+    name: Spellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Install
+        run: npm install
+      - name: Spellcheck
+        run: npm run spellcheck
