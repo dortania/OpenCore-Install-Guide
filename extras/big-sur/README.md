@@ -46,6 +46,8 @@ For those wanting a simple translation for their Ivy and Haswell Machines:
 * iMac14,2 and iMac14,3 should transition over to using iMac15,1
 * iMac14,1 should transition over to iMac14,4
 
+For those using iMac14,2 for AMD CPU and Nvidia GPU should transition over to using MacPro7,1
+
 ### Supported hardware
 
 Not much hardware has been dropped, though the few that have:
@@ -123,7 +125,7 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 With Big Sur, quite a bit broke. Mainly the following:
 
 * Lilu
-  * Mainly user-space patching has severely broke, meaning certain patches like DRM don't work
+  * Mainly user-space patching has severely broke, meaning certain patches (like DRM) and kexts (like MacProMemoryNotificationDisabler) don't work
   * Kernel-space should be working correctly with v1.4.6, but plugins may require updates due to a complete rewrite of the patcher for Kernel Collection support.
 * VirtualSMC
   * ~~Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.~~
@@ -201,7 +203,7 @@ Once this is done, run the following command:
 sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you updated OpenCore and co earlier)
+This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you've finished setting up your new EFI)
 
 ### Installing
 
@@ -210,10 +212,10 @@ Installing macOS 11: Big Sur on a Hackintosh is fairly similar to how previous v
 * KernelCollections over prelinkedkernel (discussed above)
 * Installation being much longer
   * This is due to the new snapshot feature of the OS
-* Certain kexts breaking
+* Certain kexts and patches breaking
   * Mainly Lilu and plugins, though quite obvious when they break
   
-For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright.
+For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright (so that means you have to remove or disable all kexts that relies on Lilu and replace them with Lilu-independent ones).
 
 ## Troubleshooting
 
@@ -221,7 +223,7 @@ For the last one, if you get a kernel panic with Lilu we highly recommend you to
 
 ![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
-This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
+This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete, otherwise you'll break your installation.
 
 ### Stuck at `PCI Configuration Begins` for Intel's X99 and X299 boards
 
@@ -283,7 +285,7 @@ config.plist -> Kernel -> Patch:
 
 ### Early Kernel Panic on `max_cpus_from_firmware not yet initialized`
 
-If you receive an early kernel panic on `max_cpus_from_firmware not yet initialized`, this is due to the new `acpi_count_enabled_logical_processors` method added in macOS Big Sur's kernel. To resolve, please ensure you'er on OpenCore 0.6.0 or newer with the `AvoidRuntimeDefrag` Quirk enabled.
+If you receive an early kernel panic on `max_cpus_from_firmware not yet initialized`, this is due to the new `acpi_count_enabled_logical_processors` method added in macOS Big Sur's kernel. To resolve, please ensure you're on OpenCore 0.6.0 or newer with the `AvoidRuntimeDefrag` Quirk enabled.
 
 * **Note**: Due to how early this kernel panic happens, you may only be able to log it either via serial or rebooting in a known working install of macOS and checking your panic logged in NVRAM.
   * Most users will see this panic simply as `[EB|#LOG:EXITBS:START]`
@@ -349,7 +351,7 @@ Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
         Snapshot Sealed:           Yes
 ```
 
-If it returns as `Snapshot Sealed: Yes` or `Snapshot Sealed: Broken`, then you'll want to go through the following:
+If it returns `Snapshot Sealed: Broken`, then you'll want to go through the following:
 
 * Disable Apple Secure Boot
   * `Misc -> Security -> SecureBootModel -> Disabled`
@@ -366,7 +368,7 @@ There are a lot of kexts out there, and Big Sur is still pretty new. Not all kex
 
 If you're still facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor.
 
-Note: If you have an AMD CPU, this method isn't going to work.
+**Note**: If you have an AMD CPU, this method isn't going to work.
 
 ### Building the Installation Media
 
