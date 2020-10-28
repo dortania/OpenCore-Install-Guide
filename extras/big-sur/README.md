@@ -139,6 +139,8 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 
 * Note: The about command will require you to include bit `0x2` in `Misc -> Security -> ExposeSensitiveData`, recommended values for ExposeSensitiveData is `0x6` which includes bits `0x2` and `0x4`.
 
+* Note 2: Beta 10+ will now kernel panic with SecureBootModel, to avoid this please set `Misc -> Secuirty -> SecureBootModel` to `Disabled`
+
 #### AMD Note
 
 **Reminder for AMD Users**: Don't forget to update your kernel patches with those provided by AMD OS X, otherwise you'll be unable to boot Big Sur:
