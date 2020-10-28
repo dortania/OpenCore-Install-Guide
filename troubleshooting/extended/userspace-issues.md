@@ -18,6 +18,7 @@ Issues regarding once you've booted the installer and the GUI has loaded.
 * [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
 * [The recovery server cannot get contacted](#the-recovery-server-cannot-get-contacted)
 * [Keyboard and Mouse broken in Big Sur](#keyboard-and-mouse-broken-in-big-sur)
+* [Stuck on `Your Mac needs a firmware update in order to install to this volume`](#stuck-on-your-mac-needs-a-firmware-update-in-order-to-install-to-this-volume)
 
 ## macOS installer in Russian
 
@@ -198,3 +199,14 @@ config.plist -> Kernel -> Patch:
 [Source](https://applelife.ru/threads/ustanovka-macos-big-sur-11-0-beta-na-intel-pc-old.2944999/page-81#post-884400)
 
 :::
+
+## Stuck on `Your Mac needs a firmware update in order to install to this volume`
+
+If you're being prompted to update your firmware to install with an APFS volume, this likely indicates an outdated SMBIOS table. First, verify the following:
+
+* You have `PlatformInfo -> Automatic` enabled
+* Using a SMBIOS supported in this version of macOS
+  * ie. you're not using `-no_compat_check`
+* You're using the latest version of OpenCore
+
+If you still receive this error, then there's likely some outdated SMBIOS info in OpenCore itself. We recommend changing to a similar SMBIOS and see if this is resolved. For a full list of SMBIOS, see here: [Choosing the right SMBIOS](../../extras/smbios-support.html)
