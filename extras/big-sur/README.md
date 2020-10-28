@@ -2,25 +2,65 @@
 
 It's that time of year again and with it, and a new macOS beta has been dropped. Here's all the info you need to get started.
 
-**Reminder that Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
+::: tip Reminder
 
-**This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
+**Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
 
-**And note that macOS 11, Big Sur will require macOS already installed on some machine to create the installer. Windows and Linux users will need to use a macOS VM to create the installer.**
+**This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until Big Sur has been officially released with proper documentation.**
+
+:::
+
+**Note**: macOS 11, Big Sur will require macOS already installed on some machine to create the installer. Windows and Linux users will need to use a macOS VM to create the installer, this is due to the re-architecting of the software catalog
+
+## Table of Contents
+
+* [Backstory](#backstory)
+* [Prerequisites](#prerequisites)
+  * [A supported SMBIOS](#a-supported-smbios)
+  * [Supported hardware](#supported-hardware)
+  * [Up-to-date kexts, bootloader and config.plist](#up-to-date-kexts-bootloader-and-config-plist)
+  * [Known issues](#known-issues)
+* [Installation](#installation)
+  * [Grabbing the installer](#grabbing-the-installer)
+  * [Creating the installer](#creating-the-installer)
+  * [Installing](#installing)
+* [Troubleshooting](#troubleshooting)
+  * [Stuck at Forcing CS_RUNTIME for entitlement](#stuck-at-forcing-cs-runtime-for-entitlement)
+  * [Stuck at PCI Configuration Begins for Intel's X99 and X299 boards](#stuck-at-pci-configuration-begins-for-intel-s-x99-and-x299-boards)
+  * [Stuck on ramrod(^^^^^^^^^^^^^)](##stuck-on-ramrod)
+  * [X99 Kernel Panic on IOPCIFamily](#x99-kernel-panic-on-iopcifamily)
+  * [DeviceProperties injection failing](#deviceproperties-injection-failing)
+  * [Keyboard and Mouse broken](#keyboard-and-mouse-broken)
+  * [Early Kernel Panic on max_cpus_from_firmware not yet initialized](#early-kernel-panic-on-max-cpus-from-firmware-not-yet-initialized)
+  * [Cannot update to newer versions of Big Sur](#cannot-update-to-newer-versions-of-big-sur)
+  * [Kernel Panic on Rooting from the live fs](#kernel-panic-on-rooting-from-the-live-fs)
 
 ## Backstory
 
 More a mini-explainer as to why this release is a bit more painful than average macOS releases, the main culprits are as follows:
 
+* AvoidRuntimeDefrag
+* Kernel Collections vs prelinkedkernel
+
+::: details AvoidRuntimeDefrag issues
+
 ### AvoidRuntimeDefrag
 
-With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpu_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now ensure this table is made accessible to the kernel. Users will however need OpenCore 0.6.0 or newer to fix this issue.
+With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpu_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now ensure this table is made accessible to the kernel. This was resolved in 0.6.0 with commit [`bb12f5f`](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4)
+
+Note for certain Core2 Duo machines(ex. HP DC7900), you may still get a kernel panic with AvoidRuntimeDefrag enabled. For these odd legacy machine, see here: [Early Kernel Panic on `max_cpus_from_firmware not yet initialized`](#early-kernel-panic-on-max-cpus-from-firmware-not-yet-initialized)
+
+:::
+
+::: details Kernel Collections vs prelinkedkernel
 
 ### Kernel Collections vs prelinkedkernel
 
 Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting.
 
 Due to the hard work of [@acidanthera](https://github.com/acidanthera), OpenCore gained experimental support for this new format in roughly 2 weeks (starting with OpenCore 0.6.0), and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.
+
+:::
 
 ## Prerequisites
 
@@ -40,10 +80,27 @@ Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see bel
 
 If your SMBIOS was supported in Catalina and isn't included above, you're good to go!
 
-For those wanting a simple translation for their Ivy and Haswell Machines:
+::: details Supported SMBIOS
+
+SMBIOS still supported in macOS Big Sur:
+
+* iMac14,4 and newer
+* MacPro6,1 and newer
+* iMacPro1,1 and newer
+* MacMini7,1 and newer
+* MacBook8,1 and newer
+* MacBookAir6,x and newer
+* MacBookPro11,x and newer
+
+For full list of supported SMBIOS including OS support, see here: [Choosing the right SMBIOS](../smbios-support.md)
+
+:::
+
+For those wanting a simple translation for their Machines:
 
 * iMac13,2 should transition over to using MacPro6,1
 * iMac14,2 and iMac14,3 should transition over to using iMac15,1
+  * Note: AMD CPU users with Nvidia GPUs may find MacPro7,1 more suitable
 * iMac14,1 should transition over to iMac14,4
 
 ### Supported hardware
@@ -55,60 +112,24 @@ Not much hardware has been dropped, though the few that have:
   * Ivy Bridge-E CPUs are still supported thanks to being in MacPro6,1
 * Ivy Bridge iGPUs.
   * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
-* BCM94331 based Wifi cards.
+  * As of Beta 10, these drivers are still present
+* BCM4331 and BCM43224 based Wifi cards.
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
-  * Note, while AirPortBrcm4360.kext has been removed in Big Sur, support for the 4360 series cards have been moved into AirPortBrcmNIC.kext, which still exists.
+  * Potential work-around is to inject a patched IO80211Family, see here for more details: [IO80211 Patches](https://github.com/khronokernel/IO80211-Patches)
 * Certain SATA controllers dropped
   * For some reason, Apple removed the AppleIntelPchSeriesAHCI class from AppleAHCIPort.kext. Due to the outright removal of the class, trying to spoof to another ID (generally done by SATA-unsupported.kext) can fail for many and create instability for others.
   * A partial fix is to block Big Sur's AppleAHCIPort.kext and inject Catalina's version with any conflicting symbols being patched. You can find a sample kext here: [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
   * This will work in both Catalina and Big Sur so you can remove SATA-unsupported if you want. However we recommend setting the MinKernel value to 20.0.0 to avoid any potential issues.
 
-Also note that AMD OSX has updated their patches, but they are experimental and unsupported and you will not obtain support for them:
+Other notable changes:
 
-* [Experimental Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/experimental-opencore)
-
-And a special note for MSI Navi users, you no longer require the `ATY,rom`/`-wegnoegpu` patch to boot the installer!
-
-::: details BCM94331 work around
-While AirPortBrcm4360.kext has been removed from macOS, AirPortBrcmNIC.kext actually still supports the 4331 family if you spoof the model to a supported card(ie. BCM94360 PCI ID)
-
-To do this, grab [gfxutil](https://github.com/acidanthera/gfxutil/releases) and run the following:
-
-```sh
-/path/to/gfxutil | grep -i "14e4:4331"
-```
-
-This should spit out something like this:
-
-```
-00:1f.6 14e4:4331 /PC00@0/PXSX@1F,6 = PciRoot(0x0)/Pci(0x1F,0x6)
-```
-
-The ending `PciRoot(0x0)/Pci(0x1F,0x6)` is what you want to add in your config.plist under `DeviceProperties -> Add` with the following properties:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| compatible | String | "pcie14e4,43ba" |
-| device-id  | Data | BA430000 |
-
-![](../../images/troubleshooting/troubleshooting-md/bcm4331-fix.png)
-
-:::
+* MSI Navi users no longer require the `ATY,rom`/`-wegnoegpu` patch to boot the installer
 
 ### Up-to-date kexts, bootloader and config.plist
 
-Ensure that you have the latest version of OpenCore, kexts and config.plist so it won't have any odd compatibility issues.
+Ensure that you have the latest version of OpenCore, kexts and config.plist so it won't have any odd compatibility issues. With beta 10, OpenCore 0.6.3 is required for optimal booting, this will need to be either manually compiled or grabbed from our build-repo:
 
-You will also need to ensure you have a few NVRAM variables set:
-
-* **`NVRAM` -> `Add` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82`**:
-  * `boot-args`:
-    * ~~`-lilubetaall`~~
-      * Newest builds of Lilu(v1.4.6+) and most plugins do not require this boot-arg
-    * ~~`vsmcgen=1`~~
-      * Newest builds of Lilu(v1.4.6+) and VirtualSMC(v1.1.5+) don't need this boot-arg
-    * ~~`-disablegfxfirmware`~~
-      * Newer builds of WhateverGreen(v1.4.1+) resolves this
+* [Dortania's Build Repo](https://dortania.github.io/builds/)
 
 If you're unsure what version of OpenCore you're using, you can run the following in terminal:
 
@@ -118,26 +139,45 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 
 * Note: The about command will require you to include bit `0x2` in `Misc -> Security -> ExposeSensitiveData`, recommended values for ExposeSensitiveData is `0x6` which includes bits `0x2` and `0x4`.
 
+#### AMD Note
+
+**Reminder for AMD Users**: Don't forget to update your kernel patches with those provided by AMD OS X, otherwise you'll be unable to boot Big Sur:
+
+* [Experimental Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/experimental-opencore)
+
+#### Intel HEDT Note
+
+For X79, X99 and X299 users, pay close attention to the below. Big Sur has added new requirements for ACPI, so you'll need to grab some new SSDTs:
+
+* X79
+  * [SSDT-UNC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-UNC.dsl)
+* X99
+  * [SSDT-UNC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-UNC.dsl)
+  * [SSDT-RTC0-RANGE](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
+* X299
+  * [SSDT-RTC0-RANGE](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
+
+For those who'd like precompiled files, see here:
+
+* [Getting started with ACPI: Prebuilt SSDTs](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-prebuilt.html)
+
 ### Known issues
 
 With Big Sur, quite a bit broke. Mainly the following:
 
 * Lilu
-  * Mainly user-space patching has severely broke, meaning certain patches like DRM don't work
-  * Kernel-space should be working correctly with v1.4.6, but plugins may require updates due to a complete rewrite of the patcher for Kernel Collection support.
-* VirtualSMC
-  * ~~Some users may notice that even with `vsmcgen=1` in boot-args, you'll still have VirtualSMC failing. To work around this, you may need to use FakeSMC till vSMC and Lilu issues are resolved.~~
-  * Resolved with v1.1.5+
-* Battery status
-  * ~~Currently RehabMan's [ACPIBatteryManager](https://bitbucket.org/RehabMan/os-x-acpi-battery-driver/downloads/) is the only working kext for battery status.~~
-  * Resolved with VirtualSMC v1.1.5+
+  * Mainly user-space patching has severely broke, meaning certain functionality may have broken
+  * These include:
+    * DiskArbitrationFixup
+    * MacProMemoryNotificationDisabler
+    * SidecarEnabler
+    * SystemProfilerMemoryFixup
+    * NoTouchID
+    * WhateverGreen's DRM and -cdfon patches
 * AirportBrcmFixup
   * Forcing a specific driver to load with `brcmfx-driver=` may help
     * BCM94352Z users for example may need `brcmfx-driver=2` in boot-args to resolve this, other chipsets will need other variables.
   * Setting MaxKernel to 19.9.9 for AirPortBrcm4360_Injector.kext may help. More information [from the repo](https://github.com/acidanthera/AirportBrcmFixup/blob/master/README.md#please-pay-attention)
-* Intel X99 and X299 hackintoshes failing to boot
-  * This is due to Asus and many other OEMs excluding certain regions from your RTC device, to resolve this we can create a new RTC device with the proper regions.
-  * OpenCorePkg includes a sample SSDT that goes in-depth: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-RTC0-RANGE.dsl)
 * SATA Support broken
   * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
   * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
@@ -201,7 +241,7 @@ Once this is done, run the following command:
 sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you updated OpenCore and co earlier)
+This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you've finished setting up your new EFI)
 
 ### Installing
 
@@ -210,10 +250,10 @@ Installing macOS 11: Big Sur on a Hackintosh is fairly similar to how previous v
 * KernelCollections over prelinkedkernel (discussed above)
 * Installation being much longer
   * This is due to the new snapshot feature of the OS
-* Certain kexts breaking
+* Certain kexts and patches breaking
   * Mainly Lilu and plugins, though quite obvious when they break
   
-For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright.
+For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright (so that means you have to remove or disable all kexts that relies on Lilu and replace them with Lilu-independent ones).
 
 ## Troubleshooting
 
@@ -221,7 +261,7 @@ For the last one, if you get a kernel panic with Lilu we highly recommend you to
 
 ![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
-This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
+This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete, otherwise you'll break your installation.
 
 ### Stuck at `PCI Configuration Begins` for Intel's X99 and X299 boards
 
@@ -283,7 +323,7 @@ config.plist -> Kernel -> Patch:
 
 ### Early Kernel Panic on `max_cpus_from_firmware not yet initialized`
 
-If you receive an early kernel panic on `max_cpus_from_firmware not yet initialized`, this is due to the new `acpi_count_enabled_logical_processors` method added in macOS Big Sur's kernel. To resolve, please ensure you'er on OpenCore 0.6.0 or newer with the `AvoidRuntimeDefrag` Quirk enabled.
+If you receive an early kernel panic on `max_cpus_from_firmware not yet initialized`, this is due to the new `acpi_count_enabled_logical_processors` method added in macOS Big Sur's kernel. To resolve, please ensure you're on OpenCore 0.6.0 or newer with the `AvoidRuntimeDefrag` Quirk enabled.
 
 * **Note**: Due to how early this kernel panic happens, you may only be able to log it either via serial or rebooting in a known working install of macOS and checking your panic logged in NVRAM.
   * Most users will see this panic simply as `[EB|#LOG:EXITBS:START]`
@@ -349,7 +389,7 @@ Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
         Snapshot Sealed:           Yes
 ```
 
-If it returns as `Snapshot Sealed: Yes` or `Snapshot Sealed: Broken`, then you'll want to go through the following:
+If it returns `Snapshot Sealed: Broken`, then you'll want to go through the following:
 
 * Disable Apple Secure Boot
   * `Misc -> Security -> SecureBootModel -> Disabled`
@@ -358,15 +398,21 @@ If it returns as `Snapshot Sealed: Yes` or `Snapshot Sealed: Broken`, then you'l
   * Mainly for those who have tampered with the system volume
   * See here how to revert: [Rolling back APFS Snapshots](../../troubleshooting/extended/post-issues.md#rolling-back-apfs-snapshot)
 
-### Some kexts may not be compatible with Big Sur yet
+### Kernel Panic on `Rooting from the live fs`
 
-There are a lot of kexts out there, and Big Sur is still pretty new. Not all kexts are working yet, so if you're experiencing a weird kernel panic, one thing you can try is booting with only the essential kexts (Lilu, VirtualSMC/FakeSMC, WhateverGreen) and seeing if it works. If so, you can enable kexts one by one to try to narrow down the issue.
+Full error:
+
+```
+Rooting from the live fs of a sealed volume is not allowed on a RELEASE build
+```
+
+This is due to issues around Secure Boot boot being enabled in Beta 10, currently unknown whether this is an intentional bug on Apple's end. To resolve, set `SecureBootModel` to `Disabled`
 
 ## Virtual Machine Route
 
 If you're still facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor.
 
-Note: If you have an AMD CPU, this method isn't going to work.
+**Note**: If you have an AMD CPU, this method isn't going to work.
 
 ### Building the Installation Media
 
