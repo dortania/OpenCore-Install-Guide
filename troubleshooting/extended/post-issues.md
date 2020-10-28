@@ -21,6 +21,7 @@ Issues revolving around macOS once properly installed.
 * [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
 * [Rolling back APFS Snapshots](#rolling-back-apfs-snapshot)
+* [Apple Watch Unlock Issues](#apple-watch-unlock-issues)
 
 ## Broken iMessage and Siri
 
@@ -303,3 +304,18 @@ To roll back, you'll first need to reboot into Recovery partition then select "R
 ![](./../../images/troubleshooting/troubleshooting-md/snapshots.jpg)
 
 * [Credit to Lifewire for image](https://www.lifewire.com/roll-back-apfs-snapshots-4154969)
+
+## Apple Watch Unlock issues
+
+For those with Apple Watch Unlock issues, verify the following:
+
+* You have a supported Apple Wireless card with Bluetooth Low Energy(4.0+)
+* Your watch and Mac are signed in with the same account
+* iServices working correctly(ie. iMessage)
+* There's an option to Unlock with Apple Watch under Security and Privacy setting in System Preferences
+
+![](../../images/troubleshooting/troubleshooting-md/watch-unlock.png)
+
+If the above are met, and you still have unlock issues we recommend running through the below guide:
+
+* [Fixing Auto Unlock](https://forums.macrumors.com/threads/watchos-7-beta-5-unlock-mac-doesnt-work.2250819/page-2?post=28904426#post-28904426)
