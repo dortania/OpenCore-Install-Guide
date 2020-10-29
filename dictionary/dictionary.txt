@@ -42,24 +42,6 @@
 0x4
 0x60000000
 0x8000000000000001
-re-architecting
-
-max_cpus_from_firmware
-
-MacMini7
-
-BCM4331
-
-BCM43224
-
-IO80211
-build-repo
-Prebuilt
-DiskArbitrationFixup
-SidecarEnabler
-SystemProfilerMemoryFixup
-cdfon
-Lilu-independent
 0x81
 0xB2100000
 0xB3180000
@@ -204,6 +186,8 @@ B460
 B550
 B75
 B8
+BCM43224
+BCM4331
 BCM5722
 BCM5722D
 BCM94331
@@ -299,6 +283,7 @@ DeviceManager
 DevicePath
 DeviceProperty
 DhinakG
+DiskArbitrationFixup
 DiskUtility
 DisplayPort
 Dont
@@ -448,6 +433,7 @@ IGPU
 IM
 IMEI
 IMEI's
+IO80211
 IO80211Family
 IOHDACodecDevice
 IOHIDFamily
@@ -516,6 +502,7 @@ LegacyCommpage
 Lenovo
 Lexa
 Lilu
+Lilu-independent
 LoadImage
 LoadVBIOS
 LucyRTL8125Ethernet
@@ -541,6 +528,7 @@ MacBookPro[0-9]+
 MacInfoPkg
 MacMini
 MacMini6
+MacMini7
 MacOS
 MacPro5
 MacPro6
@@ -665,6 +653,7 @@ Plists
 PowerProperties
 Pre-Allocated
 Preboot
+Prebuilt
 Prelinked
 ProperTree
 ProperTree's
@@ -737,6 +726,7 @@ Shannee
 SharedSupport
 Shiki
 ShowPackageContents
+SidecarEnabler
 Siri
 Skylake
 Skylake-SP
@@ -755,6 +745,7 @@ Synaptics
 Syrah
 SystemAudioVolume
 SystemParameters
+SystemProfilerMemoryFixup
 T2
 TDP
 TIMR
@@ -914,6 +905,7 @@ bootloaders
 borked
 breakless
 bugtracker
+build-repo
 busID
 busId
 busid
@@ -921,6 +913,7 @@ busid=00
 busids
 cacheless
 cd
+cdfon
 checksums
 chipset
 chipset's
@@ -1062,6 +1055,7 @@ macOS86
 macrecovery
 macserial
 markdownlint-cli
+max_cpus_from_firmware
 midi1996
 mini-explainer
 msi
@@ -1103,6 +1097,7 @@ r10
 r4
 rEFInd
 raw2vmdk
+re-architecting
 rebranded
 reimplements
 renderer
@@ -1139,6 +1134,7 @@ ubuntu
 unallocated
 unbootable
 uncore
+unenroll
 unmount
 untrusted
 userspace

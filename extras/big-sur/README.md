@@ -367,6 +367,34 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 
 ### Cannot update to newer versions of Big Sur
 
+Generally there's 2 main culprits:
+
+* [Broken Update Utility](#broken-update-utility)
+  * Most common error, try this first
+* [Broken Seal](#broken-seal)
+
+#### Broken Update Utility
+
+Generally seen with every beta cycle, simply unenroll and enroll again:
+
+```sh
+# Unenroll from beta catalog
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil unenroll
+# Enroll back in
+sudo /System/Library/PrivateFrameworks/Seeding.framework/Resources/seedutil enroll DeveloperSeed
+```
+
+Then check back with settings, and it should pop up. If not, run the following:
+
+```sh
+# List software updates via terminal
+softwareupdate -l
+```
+
+This should help kick the update utility back into gear. If you still have issues, check the [Broken Seal](#broken-seal) section.
+
+#### Broken Seal
+
 With Apple's new snapshotting for the system drive, they now depend heavily on this for OS updates to apply correctly. So when a drove's seal is broken, macOS will refuse to update the drive.
 
 To verify yourself, check that `Snapshot Sealed` returns as YES:
