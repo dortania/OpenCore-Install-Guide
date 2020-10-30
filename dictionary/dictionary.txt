@@ -1161,3 +1161,5 @@ xcpm
 ARhackintosh
 arhackintosh
 ARhackintosh-هاكنتوش بالعربي
+ARhackintosh-هاكنتوش
+بالعربي
