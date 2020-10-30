@@ -694,6 +694,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 **Sanity check**:
 
 So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
+- [Sanity Check](https://opencore.slowgeek.com/)
 
 ### Config reminders
 
