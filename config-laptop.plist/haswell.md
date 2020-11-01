@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.2 |
+| Supported OpenCore version | 0.6.3 |
 | Initial macOS Support | OS X 10.8, Mountain Lion |
 
 ## Starting Point
@@ -685,6 +685,10 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 **Sanity check**:
 
 So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
+
+* [**Sanity Checker**](https://opencore.slowgeek.com)
+
+Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
 ### Config reminders
 

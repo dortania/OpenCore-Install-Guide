@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.2 |
+| Supported OpenCore version | 0.6.3 |
 | Initial macOS Support | macOS 10.15, Catalina |
 
 ## Starting Point

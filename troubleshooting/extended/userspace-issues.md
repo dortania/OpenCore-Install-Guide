@@ -1,6 +1,6 @@
 # Userspace Issues
 
-* Supported version: 0.6.2
+* Supported version: 0.6.3
 
 Issues regarding once you've booted the installer and the GUI has loaded.
 
