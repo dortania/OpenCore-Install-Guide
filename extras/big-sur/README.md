@@ -139,7 +139,8 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 
 * Note: The about command will require you to include bit `0x2` in `Misc -> Security -> ExposeSensitiveData`, recommended values for ExposeSensitiveData is `0x6` which includes bits `0x2` and `0x4`.
 
-* Note 2: Beta 10+ will now kernel panic with SecureBootModel, to avoid this please set `Misc -> Secuirty -> SecureBootModel` to `Disabled`
+* Note 2: Beta 10+ will now kernel panic with SecureBootModel, to avoid this you'll need OpenCore 0.6.3+
+  * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer
 
 #### AMD Note
 
@@ -421,9 +422,8 @@ Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
 
 If it returns `Snapshot Sealed: Broken`, then you'll want to go through the following:
 
-* Disable Apple Secure Boot
-  * `Misc -> Security -> SecureBootModel -> Disabled`
-  * This is due to a bug on real Macs with secure boot enabled as well
+* Update to OpenCore 0.6.3 or newer
+  * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 * Revert to older snapshots
   * Mainly for those who have tampered with the system volume
   * See here how to revert: [Rolling back APFS Snapshots](../../troubleshooting/extended/post-issues.md#rolling-back-apfs-snapshot)
@@ -436,7 +436,9 @@ Full error:
 Rooting from the live fs of a sealed volume is not allowed on a RELEASE build
 ```
 
-This is due to issues around Secure Boot boot being enabled in Beta 10, currently unknown whether this is an intentional bug on Apple's end. To resolve, set `SecureBootModel` to `Disabled`
+This is due to issues around Secure Boot boot being enabled in Beta 10 with older versions of OpenCore. Simply update to 0.6.3 to resolve
+
+* Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 
 ## Virtual Machine Route
 

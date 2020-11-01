@@ -108,14 +108,23 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 
 * **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`
 
+And extra note for P530 users, your iGPU is not natively supported so you will need to add the following property:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 1B190000 |
+
+Once you're done, you should have something similar:
+
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | AAPL,ig-platform-id | Data | 00001219 |
 | framebuffer-patch-enable | Data | 01000000 |
 | framebuffer-stolenmem | Data | 00003001 |
 | framebuffer-fbmem | Data | 00009000 |
+| device-id | Data | 1B190000 |
 
-(This is an example for a desktop HD 530 without a dGPU and no BIOS options for iGPU memory)
+(This is an example for a desktop HD P530 without a dGPU and no BIOS options for iGPU memory)
 
 :::
 
