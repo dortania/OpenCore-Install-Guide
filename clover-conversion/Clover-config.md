@@ -518,7 +518,9 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **Memory**:
 
-* No way to currently map memory slots
+* `PlatformInfo -> CustomMemory -> True`
+* `PlatformInfo -> Memory`
+  * See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 
 **Slots AAPL Injection**:
 
