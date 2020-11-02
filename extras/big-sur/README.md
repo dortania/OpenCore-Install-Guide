@@ -98,7 +98,8 @@ For full list of supported SMBIOS including OS support, see here: [Choosing the 
 
 For those wanting a simple translation for their Machines:
 
-* iMac13,2 should transition over to using MacPro6,1
+* iMac13,1 should transition over to using iMac14,4
+* iMac13,2 should transition over to using iMac15,1
 * iMac14,2 and iMac14,3 should transition over to using iMac15,1
   * Note: AMD CPU users with Nvidia GPUs may find MacPro7,1 more suitable
 * iMac14,1 should transition over to iMac14,4
@@ -110,9 +111,8 @@ Not much hardware has been dropped, though the few that have:
 * Official Ivy Bridge U, H and S CPUs.
   * These CPUs will still boot without much issue, but note that no Macs are supported with consumer Ivy Bridge in Big Sur.
   * Ivy Bridge-E CPUs are still supported thanks to being in MacPro6,1
-* Ivy Bridge iGPUs.
-  * HD 4000 and HD 2500, initial developer beta forgot to remove drivers but more than likely to be removed in later updates.
-  * As of Beta 10, these drivers are still present
+* Ivy Bridge iGPUs slated for removal
+  * HD 4000 and HD 2500, however currently these drivers are still present in 11.0.1
 * BCM4331 and BCM43224 based Wifi cards.
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
   * Potential work-around is to inject a patched IO80211Family, see here for more details: [IO80211 Patches](https://github.com/khronokernel/IO80211-Patches)

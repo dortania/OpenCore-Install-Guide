@@ -2,9 +2,8 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.2 |
+| Supported OpenCore version | 0.6.3 |
 | Initial macOS Support | OS X 10.7, Lion |
-| Notes | Ivy Bridge's iGPU is only officially supported up-to macOS 10.15 |
 
 ## Starting Point
 
@@ -576,6 +575,25 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 | Macmini6,1 | Dual Core NUC | iGPU: HD 4000 | N/A |
 | Macmini6,2 | Quad Core NUC | iGPU: HD 4000 | N/A |
 
+**Note**: The following SMBIOS are only supported up-to and including macOS 10.15, Catalina. For cases where you must boot Big Sur, see below:
+
+::: details Big Sur SMBIOS table
+
+Note choosing a SMBIOS from the list below for Catalina or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+
+| SMBIOS | CPU Type | Display Size |
+| :--- | :--- | :--- |
+| MacBookAir6,1 | Dual Core 15w | 11" |
+| MacBookAir6,2 | Dual Core 15w | 13" |
+| MacBookPro11,1 | Dual Core 28w | 13" |
+| MacBookPro11,2 | Quad Core 45w | 15" |
+| MacBookPro11,3 | Quad Core 45w | 15" |
+| MacBookPro11,4 | Quad Core 45w | 15" |
+| MacBookPro11,5 | Quad Core 45w | 15" |
+| Macmini7,1 | NUC Systems | N/A |
+
+:::
+
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
@@ -725,6 +743,10 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 **Sanity check**:
 
 So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
+
+* [**Sanity Checker**](https://opencore.slowgeek.com)
+
+Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
 ### Config reminders
 

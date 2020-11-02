@@ -2,9 +2,8 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.2 |
+| Supported OpenCore version | 0.6.3 |
 | Initial macOS Support | OS X 10.7, Lion |
-| Notes | Ivy Bridge's iGPU is only officially supported up-to macOS 10.15 |
 
 ## Starting Point
 
@@ -545,9 +544,19 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 | :--- | :--- |
 | iMac13,1 | Used for computers utilizing the iGPU for displaying |
 | iMac13,2 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
-| MacPro6,1 | Big Sur and newer SMBIOS |
 
-* If you plan to later run macOS 11, Big Sur, MacPro6,1 will be the recommended SMBIOS and the iGPU must be disabled in the BIOS due to no longer being supported
+**Note**: The following SMBIOS are only supported up-to and including macOS 10.15, Catalina. For cases where you must boot Big Sur, see below:
+
+::: details Big Sur SMBIOS table
+
+Note choosing a SMBIOS from the list below for Catalina or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac14,4 | Used for computers utilizing the iGPU for displaying |
+| iMac15,1 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
+
+:::
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
