@@ -29,6 +29,7 @@ For the majority of systems, you'll only need 2 `.efi` drivers to get up and run
   * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons), see the legacy section below
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
+  * Reminder this was bundled in OpenCorePkg we downloaded earlier
 
 :::
 
