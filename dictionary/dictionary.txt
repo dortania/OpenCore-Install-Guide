@@ -292,6 +292,7 @@ Dortania's
 DriveDroid
 DuetPkg
 E2
+E2500
 EB
 EC0
 ECDV
@@ -795,6 +796,7 @@ V1
 VBIOS
 VDADecoderChecker
 VDI
+VIAO
 VM
 VMDK
 VMWare

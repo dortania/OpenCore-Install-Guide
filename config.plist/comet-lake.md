@@ -540,8 +540,8 @@ For this Comet Lake example, we'll chose the iMac20,1 SMBIOS - this is done inte
 
 | SMBIOS | Hardware |
 | :--- | :--- |
-| iMac20,1 | i7-10700K and lower |
-| iMac20,2 | i9-10850K and higher |
+| iMac20,1 | i7-10700K and lower(ie. 8 core and lower) |
+| iMac20,2 | i9-10850K and higher(ie. 10 core) |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
@@ -561,6 +561,7 @@ SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
   * Navigate to `Utiltiies/macserial/` folder and grab either the macserial or macserial.exe file(.exe is for Windows)
   * Run `chmod +x /path/to/macserial` if you're in a Unix environment, otherwise GenSMBIOS will throw a permissions error
   * Place this macserial executable under GenSMBIOS's Scripts folder
+    * Please note that macserial currently does not support Linux, so you must grab a Windows or macOS machine to generate the values
 
 The `Type` part gets copied to Generic -> SystemProductName.
 

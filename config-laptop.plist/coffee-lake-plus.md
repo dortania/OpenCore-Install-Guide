@@ -578,6 +578,7 @@ SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
   * Navigate to `Utiltiies/macserial/` folder and grab either the macserial or macserial.exe file(.exe is for Windows)
   * Run `chmod +x /path/to/macserial` if you're in a Unix environment, otherwise GenSMBIOS will throw a permissions error
   * Place this macserial executable under GenSMBIOS's Scripts folder
+    * Please note that macserial currently does not support Linux, so you must grab a Windows or macOS machine to generate the values
 
 The `Type` part gets copied to Generic -> SystemProductName.
 
