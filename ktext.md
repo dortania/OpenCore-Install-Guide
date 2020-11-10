@@ -155,7 +155,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
   * Requires OS X 10.8 or newer
-  * Note: Atheros Killer E2500 models are actually Realtek based, for these systems please use RealtekRTL8111](<https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)> instead
+  * Note: Atheros Killer E2500 models are actually Realtek based, for these systems please use [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) instead
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
   * Requires OS X 10.8-11(2.2.0), 10.12-13(v2.2.2), 10.14+(2.3.0)
@@ -179,6 +179,60 @@ Relevant for either legacy macOS installs or older PC hardware.
 * [BCM5722D](https://github.com/chris1111/BCM5722D)
   * Mainly relevant for BCM5722 based Broadcom Ethernet controllers
   * Requires OS X 10.6 or newer
+
+:::
+
+And also keep in mind certain NICs are actually natively supported in macOS:
+
+::: details Native Ethernet Controllers
+
+#### Aquantia Series
+
+```md
+# AppleEthernetAquantiaAqtion.kext
+pci1d6a,1    = Aquantia AQC107
+pci1d6a,d107 = Aquantia AQC107
+pci1d6a,7b1  = Aquantia AQC107
+pci1d6a,80b1 = Aquantia AQC107
+pci1d6a,87b1 = Aquantia AQC107
+pci1d6a,88b1 = Aquantia AQC107
+pci1d6a,89b1 = Aquantia AQC107
+pci1d6a,91b1 = Aquantia AQC107
+pci1d6a,92b1 = Aquantia AQC107
+pci1d6a,c0   = Aquantia AQC113
+pci1d6a,4c0  = Aquantia AQC113
+```
+
+**Note**: Due to some outdated firmware shipped on many Aquantia NICs, you may need to update the firmware in Linux/Windows to ensure its macOS-compatible.
+
+#### Intel Series
+
+```md
+# AppleIntel8254XEthernet.kext
+pci8086,1096 = Intel 80003ES2LAN
+pci8086,100f = Intel 82545EM
+pci8086,105e = Intel 82571EB/82571GB
+
+# AppleIntelI210Ethernet.kext
+pci8086,1533 = Intel I210
+pci8086,15f2 = Intel I225LM (Added in macOS 10.15)
+
+# Intel82574L.kext
+pci8086,104b = Intel 82566DC
+pci8086,10f6 = Intel 82574L
+
+```
+
+#### Broadcom Series
+
+```md
+# AppleBCM5701Ethernet.kext
+pci14e4,1684 = Broadcom BCM5764M
+pci14e4,16b0 = Broadcom BCM57761
+pci14e4,16b4 = Broadcom BCM57765
+pci14e4,1682 = Broadcom BCM57762
+pci14e4,1686 = Broadcom BCM57766
+```
 
 :::
 
@@ -359,7 +413,8 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Platforms | **CPU** | **EC** | **RTC** | **PCI** |
 | :-------: | :-----: | :----: | :-----: | :-----: |
 | Nehalem and Westmere | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A |
-| Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | [SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/unc0) |
+| Sandy Bridge-E | ^^ | ^^ | ^^ | [SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/unc0) |
+| Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ |
 | Haswell-E | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-RTC0-RANGE](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ |
 | Broadwell-E | ^^ | ^^ | ^^ | ^^ |
 | Skylake-X | ^^ | ^^ | ^^ | N/A |

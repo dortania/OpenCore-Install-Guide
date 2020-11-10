@@ -161,6 +161,7 @@ AppleSupportPkg
 AppleTV
 Aptio
 AptioMemoryFix
+Aquantia
 Architected
 Arg
 Arrandale
@@ -1052,6 +1053,7 @@ lsblk
 macOS
 macOS's
 macOS(\.)?
+macOS-compatible
 macOS-limited
 macOS-only
 macOS86

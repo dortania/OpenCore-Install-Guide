@@ -241,7 +241,7 @@ To create the USB is quite simple, grab your USB drive and open Disk Utility in 
 Once this is done, run the following command:
 
 ```
-sudo /Applications/Install\ macOS\ Big\ Sur\ Beta.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
 This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you've finished setting up your new EFI)
