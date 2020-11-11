@@ -37,9 +37,10 @@ Issues surrounding from initial booting the macOS installer to right before the 
 
 This section will be split into 3 parts, so pay close attention:
 
-* [Booter issues](#booter-issues)
-* [Kernel Patch issues](#kernel-patch-issues)
+* [Booter Issues](#booter-issues)
+* [Kernel Patch Issues](#kernel-patch-issues)
 * [UEFI Issues](#uefi-issues)
+* [Virtual Machine Issues](#virtual-machine-issues)
 
 ### Booter Issues
 
@@ -638,3 +639,7 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 * Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/) (you can use the `MinKernel`/`MaxKernel` trick mentioned above to restrict FakeSMC to Big Sur and up
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
+
+### Virtual Machine Issues
+
+* VMWare 15 is known to get stuck on `[EB|#LOG:EXITBS:START]`. VMWare 16 resolves the problem.
