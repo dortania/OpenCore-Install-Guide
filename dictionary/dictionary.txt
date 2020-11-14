@@ -237,6 +237,7 @@ Capitan
 Carcraftz
 Celeron
 Celerons
+Changelog
 Chipset
 Chipsets
 Clarkdale
@@ -509,6 +510,7 @@ LoadImage
 LoadVBIOS
 LucyRTL8125Ethernet
 Lynnfield
+M1
 MADT
 MBR
 MBR-based
