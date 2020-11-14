@@ -17,9 +17,8 @@ And once downloaded, place the EFI folder(from OpenCorePkg) on the root of your 
 
 **Note**:
 
-* Windows users: This will already be done on the `BOOT` USB drive created by MakeInstall
-  * macrecovery.py users will want to place the EFI folder on the root of the USB drive you made earlier
-* Linux users: This is the `OPENCORE` partition we created earlier
+* **Windows users:** you'll want to place the EFI folder on the root of the USB drive you made earlier
+* **Linux users:** This is the `OPENCORE` partition we created earlier
   * Note that Method 1 only creates 1 partition, while Method 2 creates 2 partitions
 
 Now lets open up our EFI folder and see what's inside:
