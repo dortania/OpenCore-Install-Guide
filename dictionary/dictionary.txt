@@ -25,6 +25,10 @@
 0x0306E0
 0x0406E3
 0x0506e3
+macrecovery's
+InstallAssistant
+diskpart
+pre-2012
 0x06
 0x0706E5
 0x0806E0

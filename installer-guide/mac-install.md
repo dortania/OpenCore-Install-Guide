@@ -27,7 +27,32 @@ As you can see, we get a nice list of macOS installers. If you need beta version
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
-Once finished, we'll next want to run the `BuildmacOSInstallApp.command`:
+Once finished, we have to either extract the installer or build it:
+
+* [Extracting the installer](#extracting-the-installer)
+  * For macOS 11+
+* [Building the installer](#building-the-installer)
+  * For 10.15 and older
+
+### Extracting the installer
+
+For macOS 11 and newer, Apple now packages up the installer into the InstallAssistant package. This will be located under `gibMacOS/macOS Downloads/`:
+
+![](../images/extras/big-sur/readme/final-download.png)
+
+Run the InstallAssistant.pkg and point this to whichever drive you're booting off of, this is where the Install.app will be dropped:
+
+![](../images/extras/big-sur/readme/install-pkg.png)
+
+Once done, you should find it located in your Applications folder:
+
+![](../images/extras/big-sur/readme/done.png)
+
+From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work.
+
+### Building the installer
+
+For macOS 10.15 and older, the installer will be downloaded in pieces and will need to be built. Here we'll want to run the `BuildmacOSInstallApp.command`:
 
 ![](../images/installer-guide/mac-install-md/gib-location.png)
 
@@ -40,6 +65,8 @@ Once the task is completed, exit the utility. You will find the Install file in 
 Move the newly created image to the Applications folder – this will simplify the next section.
 
 ![](../images/installer-guide/mac-install-md/gib-done.png)
+
+From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work.
 
 ## Downloading macOS: Legacy OS
 
@@ -164,9 +191,12 @@ Instructions for running are quite simple, choose from one of the below commands
 # Mojave(10.14)
 ./macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
+# Catalina(10.15)
+./macrecovery.py -b Mac-27AD2F918AE68F61 -m 00000000000K7GF00 download
+
 # Latest version
-# ie. Catalina(10.15)
-./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
+# ie. Big Sur(11)
+./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 -os latest download
 ```
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:
