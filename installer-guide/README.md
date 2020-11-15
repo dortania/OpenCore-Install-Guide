@@ -19,7 +19,7 @@ Offline installers have a complete copy of macOS, while online installers are on
   * Can be made in macOS/Linux/Windows
   * Requires a working internet connection via a macOS supported network adapter on the target machine
 
-### Making the installer
+### Making the Installer
 
 Depending on which OS you're on, see your specific section on making the USB:
 
