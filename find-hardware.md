@@ -143,7 +143,7 @@ dmesg |grep -i 'input'
 ### Audio Codec
 
 ```sh
-lspci | grep -i 'audio'
+aplay -l
 ```
 
 ### Network Controller models
