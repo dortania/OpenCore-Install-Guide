@@ -371,7 +371,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 | :--- | :--- | :--- |
 | Microsoft HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
 | ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
-| Synaptic's Proprietary | VoodooI2CSynaptics | Synaptic F12 protocol require VoodooI2CHID instead |
+| Synaptics Proprietary | VoodooI2CSynaptics | Synaptics F12 protocol require VoodooI2CHID instead |
 | ^^ | VoodooRMI | Supports Synaptics protocols F12/F3A - These generally support Microsoft's HID standard so you should attempt using VoodooI2CHID first |
 | FTE1001 touchpad | VoodooI2CFTE | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
