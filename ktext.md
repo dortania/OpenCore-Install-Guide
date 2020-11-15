@@ -358,10 +358,10 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
   * Supports macOS 10.6+ support
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
-  * For systems with Synaptics' SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with Synaptics SMBus-based devices, mainly for trackpads and trackpoints.
   * Requires macOS 10.11 or newer for MT2 functions
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus)
-  * For systems with ELAN's SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with ELAN SMBus-based devices, mainly for trackpads and trackpoints.
   * Supports macOS 10.14 or newer currently
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
