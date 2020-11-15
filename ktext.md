@@ -353,25 +353,29 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * For systems with PS2 keyboards, mice, and trackpads
-  * Requires OS X 10.11 or newer for MT2 (Magic Trackpad 2) functions
+  * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
 * [RehabMan's VoodooPS2](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
-  * For older systems with PS2 keyboards, mice, and trackpads
-  * Use if you need OS X 10.6+ support, or otherwise don't want to use VoodooInput for MT2 functions
+  * For older systems with PS2 keyboards, mice, and trackpads; or when you don't want to use VoodooInput
+  * Supports macOS 10.6+ support
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
   * For systems with Synaptics' SMBus-based devices, mainly for trackpads and trackpoints.
-  * Requires OS X 10.11 or newer for MT2 functions
+  * Requires macOS 10.11 or newer for MT2 functions
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus)
   * For systems with ELAN's SMBus-based devices, mainly for trackpads and trackpoints.
-  * Requires OS X 10.11 or newer for MT2 functions
+  * Supports macOS 10.14 or newer currently
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
-  * Requires OS X 10.11 or newer for MT2 functions
-  * To be paired with a plugin:
-    * VoodooI2CHID - Implements the Microsoft HID device specification.
-    * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
-    * VoodooI2CSynaptics - Implements support for Synaptic's proprietary devices.
-    * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
-    * VoodooI2CAtmelMXT - Implements Atmel Multitouch Protocol
+  * Requires macOS 10.11 or newer for MT2 functions
+::: details VoodooI2C Plugins
+| Connection type | Plugin | Notes |
+| :--- | :--- | :--- |
+| Microsoft HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
+| ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
+| Synaptic's Proprietary | VoodooI2CSynaptics | Synaptic F12 protocol require VoodooI2CHID instead |
+| ^^ | VoodooRMI | Supports Synaptic Protocols F12/F3A - These generally support Microsoft's HID standard, and should attempt using VoodooI2CHID first |
+| FTE1001 touchpad | VoodooI2CFTE | |
+| Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
+:::
 * [AlpsT4USB](https://github.com/blankmac/AlpsT4USB)
   * Used for USB ALPS devices, **note** this does not work with I2C based devices.
 
