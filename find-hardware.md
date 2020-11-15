@@ -55,13 +55,13 @@ Depending on the device, it may show up under multiple names and connections. Th
   
 ::: details SMBus
   
-These will show up as a straight PCI device such as `Synaptics SMBus Driver` or `Elans SMBus Driver`
+These will show up as a straight PCI device such as `Synaptics SMBus Driver` or `ELAN SMBus Driver`
 
-* Synaptic devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptic SMBus Driver`
+* Synaptics devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptics SMBus Driver`
 
 ![](./images/finding-hardware-md/Windows-SMBus-Device.png)
 
-As you can see, we get 2 Synaptics devices in the left image, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus generally provides better gesture support and accuracy
+As you can see, we get 2 Synaptics devices in the left image, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus generally provides better gesture support and accuracy.
 
 :::
 
@@ -71,7 +71,7 @@ As you can see, we get 2 Synaptics devices in the left image, however if we take
 | :--- | :--- |
 | ![](./images/finding-hardware-md/USB-trackpad-normal.png) | ![](./images/finding-hardware-md/USB-trackpad-by-connection.png)
 
-These will show up as a PS2 Compliant Trackpad, as well under USB when we switch our connection view to `Device by Connection`
+These will show up as a `PS2 Compliant Trackpad`, as well under USB when we switch our connection view to `Device by Connection`
 
 :::
 

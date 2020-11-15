@@ -355,7 +355,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
   * For systems with PS2 keyboards, mice, and trackpads
   * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
 * [RehabMan's VoodooPS2](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
-  * For older systems with PS2 keyboards, mice, and trackpads; or when you don't want to use VoodooInput
+  * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
   * Supports macOS 10.6+ support
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
   * For systems with Synaptics' SMBus-based devices, mainly for trackpads and trackpoints.
@@ -372,7 +372,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 | Microsoft HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
 | ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
 | Synaptic's Proprietary | VoodooI2CSynaptics | Synaptic F12 protocol require VoodooI2CHID instead |
-| ^^ | VoodooRMI | Supports Synaptic Protocols F12/F3A - These generally support Microsoft's HID standard, and should attempt using VoodooI2CHID first |
+| ^^ | VoodooRMI | Supports Synaptics protocols F12/F3A - These generally support Microsoft's HID standard so you should attempt using VoodooI2CHID first |
 | FTE1001 touchpad | VoodooI2CFTE | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
 :::
