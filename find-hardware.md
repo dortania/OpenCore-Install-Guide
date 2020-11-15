@@ -77,6 +77,7 @@ These will show up as a PS2 Compliant Trackpad, as well under USB when we switch
 
 ::: details I2C
 
+![](./images/finding-hardware-md/i2c-trackpad.png)
 These will almost always show up as a Microsoft HID device, though can appear as other trackpads as well. They will always show up under I2C though.
 
 :::
