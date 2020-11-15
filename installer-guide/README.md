@@ -10,7 +10,7 @@ Requirements:
 
 ### Online vs Offline Installer
 
-Offline installers have a complete copy of macOS, while Online installers are only a recovery image which then download macOS from Apple servers once booted.
+Offline installers have a complete copy of macOS, while Online installers are only a recovery image (~500MB) which then download macOS from Apple servers once booted.
 
 * Offline
   * Can only be made in macOS

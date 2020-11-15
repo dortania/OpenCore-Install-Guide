@@ -56,7 +56,8 @@ Depending on the device, it may show up under multiple names and connections. Th
 ::: details SMBus
   
 These will show up as a straight PCI device such as `Synaptics SMBus Driver` or `Elans SMBus Driver`
-  * Synaptic devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptic SMBus Driver`
+
+* Synaptic devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptic SMBus Driver`
 
 ![](./images/finding-hardware-md/Windows-SMBus-Device.png)
 
