@@ -203,7 +203,7 @@ pci1d6a,c0   = Aquantia AQC113
 pci1d6a,4c0  = Aquantia AQC113
 ```
 
-**Note**: Due to some outdated firmware shipped on many Aquantia NICs, you may need to update the firmware in Linux/Windows to ensure its macOS-compatible.
+**Note**: Due to some outdated firmware shipped on many Aquantia NICs, you may need to update the firmware in Linux/Windows to ensure it's macOS-compatible.
 
 #### Intel Series
 
@@ -264,10 +264,9 @@ pci14e4,1686 = Broadcom BCM57766
 
 * [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
   * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
-  * Note sleep issues are common with this kext, requires macOS 10.15 or newer and requires Apple's Secure Boot to function correctly
+  * Requires macOS 10.13 or newer and requires Apple's Secure Boot to function correctly
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * Adds Bluetooth support to macOS when paired with an Intel wireless card
-  * Note that similar to AirportItlwm, sleep can break with this kext
   * Requires macOS 10.13 or newer
 
 ::: details More info on enabling AirportItlwm
@@ -335,6 +334,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
   * macOS Big Sur Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
+    * Catalina and older need not concern
 
 ::: details Legacy SATA Kexts
 
@@ -353,25 +353,29 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * For systems with PS2 keyboards, mice, and trackpads
-  * Requires OS X 10.11 or newer for MT2 (Magic Trackpad 2) functions
+  * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
 * [RehabMan's VoodooPS2](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
-  * For older systems with PS2 keyboards, mice, and trackpads
-  * Use if you need OS X 10.6+ support, or otherwise don't want to use VoodooInput for MT2 functions
+  * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
+  * Supports macOS 10.6+ support
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
-  * For systems with Synaptics' SMBus-based devices, mainly for trackpads and trackpoints.
-  * Requires OS X 10.11 or newer for MT2 functions
+  * For systems with Synaptics SMBus-based devices, mainly for trackpads and trackpoints.
+  * Requires macOS 10.11 or newer for MT2 functions
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus)
-  * For systems with ELAN's SMBus-based devices, mainly for trackpads and trackpoints.
-  * Requires OS X 10.11 or newer for MT2 functions
+  * For systems with ELAN SMBus-based devices, mainly for trackpads and trackpoints.
+  * Supports macOS 10.14 or newer currently
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
-  * Requires OS X 10.11 or newer for MT2 functions
-  * To be paired with a plugin:
-    * VoodooI2CHID - Implements the Microsoft HID device specification.
-    * VoodooI2CElan - Implements support for Elan proprietary devices. (does not work on ELAN1200+, use the HID instead)
-    * VoodooI2CSynaptics - Implements support for Synaptic's proprietary devices.
-    * VoodooI2CFTE - Implements support for the FTE1001 touchpad.
-    * VoodooI2CAtmelMXT - Implements Atmel Multitouch Protocol
+  * Requires macOS 10.11 or newer for MT2 functions
+::: details VoodooI2C Plugins
+| Connection type | Plugin | Notes |
+| :--- | :--- | :--- |
+| Microsoft HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
+| ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
+| Synaptics Proprietary | VoodooI2CSynaptics | Synaptics F12 protocol require VoodooI2CHID instead |
+| ^^ | VoodooRMI | Supports Synaptics protocols F12/F3A - These generally support Microsoft's HID standard so you should attempt using VoodooI2CHID first |
+| FTE1001 touchpad | VoodooI2CFTE | |
+| Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
+:::
 * [AlpsT4USB](https://github.com/blankmac/AlpsT4USB)
   * Used for USB ALPS devices, **note** this does not work with I2C based devices.
 

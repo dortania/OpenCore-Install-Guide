@@ -340,6 +340,7 @@ Explainer
 ExtendBTFeatureFlags
 F10
 F12
+F3A
 FAT32
 FPU
 FSB
@@ -823,9 +824,7 @@ VoiceOver
 VoodooGPIO
 VoodooHDA
 VoodooHDA-FAT
-VoodooI2C
-VoodooI2CHID
-VoodooI2CServices
+VoodooI2C.*
 VoodooInput
 VoodooPS2
 VoodooPS2's

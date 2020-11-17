@@ -94,12 +94,17 @@ module.exports = {
             collapsable: false,
             sidebarDepth: 1,
             children: [
-                '',
-				['prerequisites', 'Getting started with OpenCore'],
-				'macos-limits',
+				'prerequisites',
+				{
+                    title: 'Hardware Limitations',
+                    collapsable: true,
+                    path: 'macos-limits',
+                    children: [
+                        'find-hardware'
+                    ]
+                },
                 'terminology',
                 'why-oc',
-                'find-hardware',
             ]
 
         },
