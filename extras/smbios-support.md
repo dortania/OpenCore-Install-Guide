@@ -271,10 +271,10 @@ All models listed below are not supported by OpenCore however are documented her
 
 | SMBIOS | CPU Family | Secure Enclave Identifier | Initial Support |
 | :--- | :--- | :--- | :--- |
-| MacBookAir10,1 | M1 | J293 | 11.0.0 |
+| MacBookAir10,1 | M1 | J313 | 11.0.0 |
 
 #### MacBook Pro - Apple Silicon
 
 | SMBIOS | CPU Family | Secure Enclave Identifier | Initial Support |
 | :--- | :--- | :--- | :--- |
-| MacBookPro17,1 | M1 | J313 | 11.0.0 |
+| MacBookPro17,1 | M1 | J293 | 11.0.0 |
