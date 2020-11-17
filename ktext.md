@@ -203,7 +203,7 @@ pci1d6a,c0   = Aquantia AQC113
 pci1d6a,4c0  = Aquantia AQC113
 ```
 
-**Note**: Due to some outdated firmware shipped on many Aquantia NICs, you may need to update the firmware in Linux/Windows to ensure its macOS-compatible.
+**Note**: Due to some outdated firmware shipped on many Aquantia NICs, you may need to update the firmware in Linux/Windows to ensure it's macOS-compatible.
 
 #### Intel Series
 
@@ -264,10 +264,9 @@ pci14e4,1686 = Broadcom BCM57766
 
 * [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
   * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
-  * Note sleep issues are common with this kext, requires macOS 10.15 or newer and requires Apple's Secure Boot to function correctly
+  * Requires macOS 10.13 or newer and requires Apple's Secure Boot to function correctly
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * Adds Bluetooth support to macOS when paired with an Intel wireless card
-  * Note that similar to AirportItlwm, sleep can break with this kext
   * Requires macOS 10.13 or newer
 
 ::: details More info on enabling AirportItlwm
@@ -335,6 +334,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
   * macOS Big Sur Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
+    * Catalina and older need not concern
 
 ::: details Legacy SATA Kexts
 
