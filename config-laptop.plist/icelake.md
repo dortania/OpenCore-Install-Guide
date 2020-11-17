@@ -99,6 +99,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | EnableWriteUnprotector | NO |
 | ProtectUefiServices | YES |
 | RebuildAppleMemoryMap | YES |
+| SetupVirtualMap | NO |
 | SyncRuntimePermissions | YES |
 :::
 
@@ -116,8 +117,8 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * If on Z390, **enable this quirk**
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
-* **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+* **SetupVirtualMap**: NO
+  * Fixes SetVirtualAddresses calls to virtual addresses, can cause early kernel panics on Ice Lake machines
 * **SyncRuntimePermissions**: YES
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for RebuildAppleMemoryMap users
 

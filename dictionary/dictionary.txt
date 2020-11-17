@@ -25,6 +25,10 @@
 0x0306E0
 0x0406E3
 0x0506e3
+macrecovery's
+InstallAssistant
+diskpart
+pre-2012
 0x06
 0x0706E5
 0x0806E0
@@ -237,6 +241,7 @@ Capitan
 Carcraftz
 Celeron
 Celerons
+Changelog
 Chipset
 Chipsets
 Clarkdale
@@ -335,6 +340,7 @@ Explainer
 ExtendBTFeatureFlags
 F10
 F12
+F3A
 FAT32
 FPU
 FSB
@@ -509,6 +515,7 @@ LoadImage
 LoadVBIOS
 LucyRTL8125Ethernet
 Lynnfield
+M1
 MADT
 MBR
 MBR-based
@@ -817,9 +824,7 @@ VoiceOver
 VoodooGPIO
 VoodooHDA
 VoodooHDA-FAT
-VoodooI2C
-VoodooI2CHID
-VoodooI2CServices
+VoodooI2C.*
 VoodooInput
 VoodooPS2
 VoodooPS2's
