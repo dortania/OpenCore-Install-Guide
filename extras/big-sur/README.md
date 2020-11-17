@@ -255,7 +255,7 @@ Installing macOS 11: Big Sur on a Hackintosh is fairly similar to how previous v
   * This is due to the new snapshot feature of the OS
 * Certain kexts and patches breaking
   * Mainly Lilu and plugins, though quite obvious when they break
-  
+
 For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright (so that means you have to remove or disable all kexts that relies on Lilu and replace them with Lilu-independent ones).
 
 ## Troubleshooting
@@ -402,7 +402,7 @@ To verify yourself, check that `Snapshot Sealed` returns as YES:
 
 ```bash
 # List all APFS volumes
-diskutil list apfs
+diskutil apfs list
 
 # Look for your system volume
 Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
