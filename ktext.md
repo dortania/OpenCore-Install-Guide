@@ -160,7 +160,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * For Realtek's Gigabit Ethernet
   * Requires OS X 10.8-11(2.2.0), 10.12-13(v2.2.2), 10.14+(2.3.0)
   * **NOTE: Sometimes Realtek's Gigabit Ethernet may not work correctly if you have RealtekRTL8111 v2.3.0. If you see this issue, try reverting to version 2.2.2**
-* [LucyRTL8125Ethernet](https://github.com/Mieze/LucyRTL8125Ethernet)
+* [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
 * For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
@@ -170,13 +170,13 @@ Here we're going to assume you know what ethernet card your system has, reminder
 
 Relevant for either legacy macOS installs or older PC hardware.
 
-* [AppleIntele1000e](https://github.com/chris1111/AppleIntelE1000e)
+* [AppleIntele1000e](https://github.com/chris1111/AppleIntelE1000e/releases)
   * Mainly relevant for 10/100MBe based Intel Ethernet controllers
   * Requires 10.6 or newer
 * [RealtekRTL8100](https://www.insanelymac.com/forum/files/file/259-realtekrtl8100-binary/)
   * Mainly relevant for 10/100MBe based Realtek Ethernet controllers
   * Requires macOS 10.12 or newer with v2.0.0+
-* [BCM5722D](https://github.com/chris1111/BCM5722D)
+* [BCM5722D](https://github.com/chris1111/BCM5722D/releases)
   * Mainly relevant for BCM5722 based Broadcom Ethernet controllers
   * Requires OS X 10.6 or newer
 
@@ -324,7 +324,7 @@ However ProperTree will handle this for you, so you need not concern yourself
     * MacPro7,1
     * iMacPro1,1
   * Requires macOS 10.15 or newer
-* [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
+* [CpuTscSync](https://github.com/lvs1974/CpuTscSync/releases)
   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable.
   * **Does not work on AMD CPUs**
   * Requires OS X 10.8 or newer
@@ -354,13 +354,13 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * For systems with PS2 keyboards, mice, and trackpads
   * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
-* [RehabMan's VoodooPS2](https://github.com/RehabMan/OS-X-Voodoo-PS2-Controller)
+* [RehabMan's VoodooPS2](https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller/downloads/)
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
   * Supports macOS 10.6+ support
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
   * For systems with Synaptics SMBus-based devices, mainly for trackpads and trackpoints.
   * Requires macOS 10.11 or newer for MT2 functions
-* [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus)
+* [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus/releases)
   * For systems with ELAN SMBus-based devices, mainly for trackpads and trackpoints.
   * Supports macOS 10.14 or newer currently
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
@@ -376,14 +376,8 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 | FTE1001 touchpad | VoodooI2CFTE | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
 :::
-* [AlpsT4USB](https://github.com/blankmac/AlpsT4USB)
-  * Used for USB ALPS devices, **note** this does not work with I2C based devices.
 
 #### Misc
-
-* [NoTouchID](https://github.com/al3xtjames/NoTouchID/releases)
-  * Recommended for MacBook SMBIOS that include a TouchID sensor to fix auth issues, generally 2016 and newer SMBIOS will require this
-  * Requires macOS 10.13 or newer
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
