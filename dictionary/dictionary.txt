@@ -25,10 +25,6 @@
 0x0306E0
 0x0406E3
 0x0506e3
-macrecovery's
-InstallAssistant
-diskpart
-pre-2012
 0x06
 0x0706E5
 0x0806E0
@@ -466,6 +462,7 @@ InjectIntel
 InjectNvidia
 InsanelyMac
 Inspiron
+InstallAssistant
 InstallMacOSX
 Insyde
 IntelBluetoothFirmware
@@ -947,6 +944,7 @@ decrypt
 dev
 devirt
 diskXsY
+diskpart
 diskutil
 distro
 distro's
@@ -1030,6 +1028,8 @@ iMac20
 iMac6
 iMacPro1
 iMessage
+iPad8
+iPadOS
 iServices
 iStat
 iasl
@@ -1063,6 +1063,7 @@ macOS-limited
 macOS-only
 macOS86
 macrecovery
+macrecovery's
 macserial
 markdownlint-cli
 max_cpus_from_firmware
@@ -1089,6 +1090,7 @@ plist
 plist-only
 plists
 pre-
+pre-2012
 pre-Skylake
 pre-built
 pre-builts
