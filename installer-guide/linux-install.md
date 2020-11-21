@@ -50,7 +50,7 @@ Next, run one of the following commands depending on the OS you'd like to boot:
 ./macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
 # Catalina(10.15)
-./macrecovery.py -b Mac-27AD2F918AE68F61 -m 00000000000K3F700 download
+./macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
 # Latest version
 # ie. Big Sur(11)
