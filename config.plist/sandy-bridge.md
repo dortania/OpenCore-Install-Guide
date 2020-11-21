@@ -159,7 +159,7 @@ This is needed if you're pairing an Sandy Bridge CPU with a 7 series motherboard
 | :--- | :--- | :--- |
 | device-id | Data | 3A1C0000 |
 
-**Note**: This is not needed if you have a 7 series motherboard(ie. H61, B65, Q65, P67, H67, Q67, Z68)
+**Note**: This is not needed if you have a 6 series motherboard(ie. H61, B65, Q65, P67, H67, Q67, Z68)
 
 :::
 
