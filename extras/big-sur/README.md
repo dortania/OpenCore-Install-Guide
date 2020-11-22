@@ -113,7 +113,7 @@ Not much hardware has been dropped, though the few that have:
   * Ivy Bridge-E CPUs are still supported thanks to being in MacPro6,1
 * Ivy Bridge iGPUs slated for removal
   * HD 4000 and HD 2500, however currently these drivers are still present in 11.0.1
-* BCM4331 and BCM43224 based Wifi cards.
+* BCM4331 and BCM43224 based WiFi cards.
   * See [Wireless Buyers guide](https://dortania.github.io/Wireless-Buyers-Guide/) for potential cards to upgrade to.
   * Potential work-around is to inject a patched IO80211Family, see here for more details: [IO80211 Patches](https://github.com/khronokernel/IO80211-Patches)
 * Certain SATA controllers dropped

@@ -41,7 +41,7 @@ If you've download macOS before October 2019, you likely have an expired macOS I
 
 For the latter:
 
-* Disconnect all networking devices(Ethernet, disable Wifi)
+* Disconnect all networking devices(Ethernet, disable WiFi)
 * In the recovery terminal set to September 1st, 2019:
 
 ```
@@ -153,14 +153,14 @@ To resolve, we have a few options:
   * LegacyEnable -> YES
   * LegacyOverwrite -> YES
   * WriteFlash -> YES
-  
+
 ## The recovery server cannot get contacted
 
 If you made your installer in Windows or Linux, then this means your USB installer is recovery based. What this means is that only a small portion of the macOS installer is on disk while the rest must be downloaded from Apple servers in the installer. And reason we do not include full installer guides is due to unstable HFS drivers and other utilities that commonly end up with data corruption.
 
 To resolve the error, you have a few options:
 
-* Ensure you have a working Ethernet or Wifi connection
+* Ensure you have a working Ethernet or WiFi connection
   * Open `Network Utility` under `Utilties` header in the installer and see if your Network Card shows up
     * If you network card **doesn't** show up, it's likely you're missing the right Network kext
       * Please refer here: [Ethernet Kexts](../../ktext.md#ethernet) and [Finding your hardware](../../find-hardware.md)
