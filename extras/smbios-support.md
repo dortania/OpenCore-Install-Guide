@@ -268,7 +268,7 @@ Extra information regarding Apple's CPUs:
 #### Developer Transition Kit
 
 | SMBIOS | Year | CPU Family | Secure Enclave Identifier | Initial Support |
-| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- |
 | ADP2,1 | Mid 2005 | Intel Prescott | N/A | 10.4.1 (8B1025) |
 | ADP3,2 | Mid 2020 | Apple A12Z | J273 | 11.0.0 (20A5299w) |
 
