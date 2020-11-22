@@ -4,63 +4,32 @@ It's that time of year again and with it, and a new macOS beta has been dropped.
 
 ::: tip Reminder
 
-**Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
+**This page will be a small discussion on exactly what you need to prepare for Big Sur, a more in depth look into what's changed on Big Sur can be found here:**
 
-**This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until Big Sur has been officially released with proper documentation.**
+* [What's new in macOS 11, Big Sur!](https://dortania.github.io/hackintosh/updates/2020/11/12/bigsur-new.html)
 
 :::
 
-**Note**: macOS 11, Big Sur will require macOS already installed on some machine to create the installer. Windows and Linux users will need to use a macOS VM to create the installer, this is due to the re-architecting of the software catalog
-
 ## Table of Contents
 
-* [Backstory](#backstory)
 * [Prerequisites](#prerequisites)
   * [A supported SMBIOS](#a-supported-smbios)
   * [Supported hardware](#supported-hardware)
   * [Up-to-date kexts, bootloader and config.plist](#up-to-date-kexts-bootloader-and-config-plist)
   * [Known issues](#known-issues)
 * [Installation](#installation)
-  * [Grabbing the installer](#grabbing-the-installer)
-  * [Creating the installer](#creating-the-installer)
-  * [Installing](#installing)
 * [Troubleshooting](#troubleshooting)
   * [Stuck at Forcing CS_RUNTIME for entitlement](#stuck-at-forcing-cs-runtime-for-entitlement)
   * [Stuck at PCI Configuration Begins for Intel's X99 and X299 boards](#stuck-at-pci-configuration-begins-for-intel-s-x99-and-x299-boards)
   * [Stuck on ramrod(^^^^^^^^^^^^^)](##stuck-on-ramrod)
-  * [X99 Kernel Panic on IOPCIFamily](#x99-kernel-panic-on-iopcifamily)
+  * [X79 and X99 Kernel Panic on IOPCIFamily](#x79-and-x99-kernel-panic-on-iopcifamily)
   * [DeviceProperties injection failing](#deviceproperties-injection-failing)
   * [Keyboard and Mouse broken](#keyboard-and-mouse-broken)
   * [Early Kernel Panic on max_cpus_from_firmware not yet initialized](#early-kernel-panic-on-max-cpus-from-firmware-not-yet-initialized)
   * [Cannot update to newer versions of Big Sur](#cannot-update-to-newer-versions-of-big-sur)
   * [Kernel Panic on Rooting from the live fs](#kernel-panic-on-rooting-from-the-live-fs)
-
-## Backstory
-
-More a mini-explainer as to why this release is a bit more painful than average macOS releases, the main culprits are as follows:
-
-* AvoidRuntimeDefrag
-* Kernel Collections vs prelinkedkernel
-
-::: details AvoidRuntimeDefrag issues
-
-### AvoidRuntimeDefrag
-
-With macOS Big Sur, the `AvoidRuntimeDefrag` Booter quirk in OpenCore broke. Because of this, the macOS kernel will fall flat when trying to boot. Reason for this is due to `cpu_count_enabled_logical_processors` requiring the MADT (APIC) table, and so OpenCore will now ensure this table is made accessible to the kernel. This was resolved in 0.6.0 with commit [`bb12f5f`](https://github.com/acidanthera/OpenCorePkg/commit/9f59339e7eb8c213e84551df0fdbf9905cd98ca4)
-
-Note for certain Core2 Duo machines(ex. HP DC7900), you may still get a kernel panic with AvoidRuntimeDefrag enabled. For these odd legacy machine, see here: [Early Kernel Panic on `max_cpus_from_firmware not yet initialized`](#early-kernel-panic-on-max-cpus-from-firmware-not-yet-initialized)
-
-:::
-
-::: details Kernel Collections vs prelinkedkernel
-
-### Kernel Collections vs prelinkedkernel
-
-Since 10.7, the prelinkedkernel has been the default way for real macs to boot. This contained a very minimal amount of kexts to get a mac booted. This same bundle is what OpenCore uses to inject kexts, and was hoped to last quite some time. With macOS Big Sur, a huge change happened in where Apple no longer makes it the default form of booting.
-
-Due to the hard work of [@acidanthera](https://github.com/acidanthera), OpenCore gained experimental support for this new format in roughly 2 weeks (starting with OpenCore 0.6.0), and we can now attempt to boot Big Sur on our hackintoshes without a Mac or VM - although you will likely run into some issues along the way.
-
-:::
+  * [Asus Z97 failing Stage 2 Installation](#asus-z97-failing-stage-2-installation)
+  * [Laptops kernel panicking on cannot perform kext scan](#laptops-kernel-panicking-on-cannot-perform-kext-scan)
 
 ## Prerequisites
 
@@ -124,12 +93,14 @@ Not much hardware has been dropped, though the few that have:
 Other notable changes:
 
 * MSI Navi users no longer require the `ATY,rom`/`-wegnoegpu` patch to boot the installer
+* Asus 9 series requiring working NVRAM(ie. Z97)
+  * For more info, see here: [Haswell ASUS Z97 Big Sur Update Thread](https://www.reddit.com/r/hackintosh/comments/jw7qf1/haswell_asus_z97_big_sur_update_and_installation/)
 
 ### Up-to-date kexts, bootloader and config.plist
 
-Ensure that you have the latest version of OpenCore, kexts and config.plist so it won't have any odd compatibility issues. With beta 10, OpenCore 0.6.3 is required for optimal booting, this will need to be either manually compiled or grabbed from our build-repo:
+Ensure that you have the latest version of OpenCore, kexts and config.plist so it won't have any odd compatibility issues. You can simply download and update OpenCore and kexts as mentioned here:
 
-* [Dortania's Build Repo](https://dortania.github.io/builds/)
+* [Updating OpenCore and macOS](https://dortania.github.io/OpenCore-Post-Install/universal/update.html)
 
 If you're unsure what version of OpenCore you're using, you can run the following in terminal:
 
@@ -139,14 +110,11 @@ nvram 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:opencore-version
 
 * Note: The about command will require you to include bit `0x2` in `Misc -> Security -> ExposeSensitiveData`, recommended values for ExposeSensitiveData is `0x6` which includes bits `0x2` and `0x4`.
 
-* Note 2: Beta 10+ will now kernel panic with SecureBootModel, to avoid this you'll need OpenCore 0.6.3+
-  * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer
-
 #### AMD Note
 
 **Reminder for AMD Users**: Don't forget to update your kernel patches with those provided by AMD OS X, otherwise you'll be unable to boot Big Sur:
 
-* [Experimental Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/experimental-opencore)
+* [AMD OSX Patches](https://github.com/AMD-OSX/AMD_Vanilla/)
 
 #### Intel HEDT Note
 
@@ -189,74 +157,11 @@ And while not an issue, SIP has now gained a new bit so to properly disable SIP 
 
 ## Installation
 
-For the installation, you'll need a few things:
+Guides have been updated to accommodate Big Sur, see the applicable OS environment for you:
 
-* macOS Big Sur installer
-* 12GB+ USB drive
-* A Mac, hack, or pre-existing VM to download the installer and create install media
-* Latest builds of OpenCore and kexts (see above)
-
-### Grabbing the installer
-
-To grab the Big Sur installer, download the beta profile from Apple's developer portal or the Apple's public beta profile, then check for updates in System Preferences. If you don't have a developer account and want to use the developer beta, you can use gibMacOS to download it:
-
-Download [gibMacOS](https://github.com/corpnewt/gibMacOS) and open `gibMacOS.command`:
-
-![](../../images/extras/big-sur/readme/gib-default.png)
-
-Press `M` to change the Max OS, then enter `10.16` to switch the (update) catalog to the Big Sur one.
-
-![](../../images/extras/big-sur/readme/10-16-ver.png)
-
-Press `C` to change the catalog, then select the number for the developer (for developer beta) or catalog.
-
-![](../../images/extras/big-sur/readme/dev-cat.png)
-
-Select the number for the Big Sur beta to start downloading it.
-
-![](../../images/extras/big-sur/readme/big-sur-download.png)
-
-Once finished, open the InstallAssistant.pkg that was downloaded - it will be located in the `gibMacOS/macOS Downloads/developer/XXX-XXXXX - Install macOS Beta` folder. This package from Apple will create `Install macOS Big Sur Beta.app` in your `/Applications` folder.
-
-![](../../images/extras/big-sur/readme/final-download.png)
-
-Run the InstallAssistant.pkg and point this to whichever drive you're booting off of, this is where the Install.app will be dropped:
-
-![](../../images/extras/big-sur/readme/install-pkg.png)
-
-Once done, you should find it located in your Applications folder:
-
-![](../../images/extras/big-sur/readme/done.png)
-
-### Creating the installer
-
-To create the USB is quite simple, grab your USB drive and open Disk Utility in macOS. Next format as follows:
-
-* Name:   MyVolume
-* Format: macOS Journaled
-* Scheme: GUID Partition Map
-
-![](../../images/installer-guide/mac-install-md/format-usb.png)
-
-Once this is done, run the following command:
-
-```
-sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
-```
-
-This will take some time so you may want to grab a coffee, once done your USB should be good to boot! (Assuming you've finished setting up your new EFI)
-
-### Installing
-
-Installing macOS 11: Big Sur on a Hackintosh is fairly similar to how previous version of macOS were installed, with the main issues being:
-
-* KernelCollections over prelinkedkernel (discussed above)
-* Installation being much longer
-  * This is due to the new snapshot feature of the OS
-* Certain kexts and patches breaking
-  * Mainly Lilu and plugins, though quite obvious when they break
-
-For the last one, if you get a kernel panic with Lilu we highly recommend you to update to the latest version with links we provided above. If errors are still not resolved, you may need to disable Lilu outright (so that means you have to remove or disable all kexts that relies on Lilu and replace them with Lilu-independent ones).
+* [macOS users](./../installer-guide/mac-install.md)
+* [Windows users](./../installer-guide/winblows-install.md)
+* [Linux users](./../installer-guide/linux-install.md)
 
 ## Troubleshooting
 
@@ -283,7 +188,7 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
-### X99 Kernel Panic on IOPCIFamily
+### X79 and X99 Kernel Panic on IOPCIFamily
 
 This is due to an unused uncore PCI Bridges being enabled in ACPI, and so IOPCIFamily will kernel panic when probing unknown devices. To resolve, you'll need to add [SSDT-UNC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-UNC.dsl) to your system
 
@@ -371,7 +276,7 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 Generally there's 2 main culprits:
 
 * [Broken Update Utility](#broken-update-utility)
-  * Most common error, try this first
+  * Most common error if running a beta, try this first
 * [Broken Seal](#broken-seal)
 
 #### Broken Update Utility
@@ -440,71 +345,17 @@ This is due to issues around Secure Boot boot being enabled in Beta 10 with olde
 
 * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 
-## Virtual Machine Route
+### Asus Z97 failing Stage 2 Installation
 
-If you're still facing issues, or if with a new beta things break, you can try the virtual machine route to install on a disk and then transfer it over to your hack. Follow the following instructions to build install media and then install in a hypervisor.
+With Big Sur, there's a higher reliance on native NVRAM for installation otherwise the installer will get stuck in a reboot loop. To resolve this you'll need to either:
 
-**Note**: If you have an AMD CPU, this method isn't going to work.
+* Install Big Sur on another machine, then transfer the drive
+* Fix the motherboard's NVRAM
 
-### Building the Installation Media
+For the latter, see here: [Haswell ASUS Z97 Big Sur Update Thread](https://www.reddit.com/r/hackintosh/comments/jw7qf1/haswell_asus_z97_big_sur_update_and_installation/)
 
-Requirements:
+### Laptops kernel panicking on `cannot perform kext scan`
 
-* A computer or VM running macOS
-* The desired macOS installation software installed to /Applications
+This is due to multiple copies of the same kext being in your kernel cache, and to be more specific having multiple copies of VoodooInput. Look over your `Kernel -> Add` and verify you only have 1 copy of VoodooInput enabled.
 
-Once you have the installation software installed to /Applications you will need to create a VDI of the installation media that will be used to install macOS in your VM. The instructions below are intended to be cut and pasted without editing unless specified.
-
-First, set the IMAGE variable to the name of the installation you are installing. The example defines the image for Big Sur.
-
-```bash
-export IMAGE="Install macOS Big Sur Beta"
-```
-
-Next, create an empty 16GB image to host the media.
-
-```bash
-mkfile -n 16g "${IMAGE}.img"
-```
-
-Verify that you have a 16GB file named "Install macOS Beta.img" before continuing.  After that, attach it to your macOS system as a virtual disk using the variable you created earlier.
-
-```bash
-export DISK=$(hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount "${IMAGE}.img"| awk '{printf $1}')
-```
-
-Run diskutil list and verify that you have a disk attached that is type "disk image".
-
-```bash
-diskutil list
-<snip>
-/dev/disk4 (disk image):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:                                                   +16.8 GB    disk4
-```
-
-Now that the image is mounted, format it to Journaled HFS+.
-
-```bash
-diskutil eraseDisk JHFS+ "${IMAGE}" ${DISK}
-```
-
-Once the image is formatted, create the installation media.
-
-```bash
-sudo "/Applications/${IMAGE}.app/Contents/Resources/createinstallmedia" --nointeraction --volume "/Volumes/${IMAGE}"
-```
-
-Now detach or eject the virtual disk.
-
-```bash
-### Eject all of the sub volumes first.
-for VDISK in $(hdiutil info 2>&1 | awk '/disk[0-9]/ {print $1}'); do hdiutil eject ${VDISK} 2>/dev/null; done
-### Next eject the virtual disk itself
-hdiutil eject ${DISK}
-```
-
-You now have a raw image of the installer. Follow the appropriate page for the hypervisor you'll be choosing:
-
-* [VirtualBox](virtualbox.md)
-* [VMware Fusion](fusion.md)
+* Note: Both VoodooI2C and VoodooPS2 have a bundled copy of VoodooInput, which you disable is up to personal preference

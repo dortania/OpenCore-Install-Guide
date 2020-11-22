@@ -25,6 +25,10 @@ As you can see, we get a nice list of macOS installers. If you need beta version
 
 ![](../images/installer-guide/mac-install-md/gib-process.png)
 
+* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
+  * For first time users, we recommend macOS 10.15, Catalina
+* **Nvidia GPU Note**: Reminder to verify whether your hardware support newer OSes, see [Hardware Limitations](../macos-limits.md)
+
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
 Once finished, we have to either extract the installer or build it:
