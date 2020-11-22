@@ -54,7 +54,7 @@ Next, run one of the following commands depending on the OS you'd like to boot:
 
 # Latest version
 # ie. Big Sur(11)
-./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 -os latest download
+./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:

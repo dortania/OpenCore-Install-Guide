@@ -58,7 +58,7 @@ macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
 # Latest version
 # ie. Big Sur(11)
-macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 -os latest download
+macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
 This will take some time, however once you're finished you should get either BaseSystem or RecoveryImage files:
