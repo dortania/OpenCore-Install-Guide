@@ -656,6 +656,8 @@ Penryn
 Penyrn
 Plist
 Plists
+PowerBook
+PowerMac
 PowerProperties
 Pre-Allocated
 Preboot
@@ -954,6 +956,7 @@ dmg's
 dortania
 eDP
 eMMC
+eMac
 endian
 erroring
 ethernet
@@ -1006,6 +1009,7 @@ i9-10900K
 i9-10910
 i9-9900K
 iASL
+iBook
 iCloud
 iGPU
 iGPU's
