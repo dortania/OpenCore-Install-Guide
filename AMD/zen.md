@@ -1,4 +1,4 @@
-# Ryzen and Threadripper(17h)
+# Ryzen and Threadripper(17h and 19h)
 
 | Support | Version |
 | :--- | :--- |
@@ -23,7 +23,7 @@ Now with all that, a quick reminder of the tools we need
   * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
 * [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
   * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
-  * [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (Supports 10.13, 10.14, and 10.15)
+  * [Ryzen/Threadripper(17h and 19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h_19h) (Supports 10.13, 10.14, and 10.15)
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
@@ -240,7 +240,7 @@ This is where the AMD kernel patching magic happens. Please do note that `Kernel
 
 Kernel patches:
 
-* [Ryzen/Threadripper(17h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h) (10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h and 19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h_19h) (10.13, 10.14, and 10.15)
 
 To merge:
 
