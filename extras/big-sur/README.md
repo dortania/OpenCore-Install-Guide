@@ -28,7 +28,7 @@ It's that time of year again and with it, and a new macOS beta has been dropped.
   * [Early Kernel Panic on max_cpus_from_firmware not yet initialized](#early-kernel-panic-on-max-cpus-from-firmware-not-yet-initialized)
   * [Cannot update to newer versions of Big Sur](#cannot-update-to-newer-versions-of-big-sur)
   * [Kernel Panic on Rooting from the live fs](#kernel-panic-on-rooting-from-the-live-fs)
-  * [Asus Z97 failing Stage 2 Installation](#asus-z97-failing-stage-2-installation)
+  * [Asus Z97 and HEDT(ie. X99 and X299) failing Stage 2 Installation](#asus-z97-and-hedt-ie-x99-and-x299-failing-stage-2-installation)
   * [Laptops kernel panicking on cannot perform kext scan](#laptops-kernel-panicking-on-cannot-perform-kext-scan)
 
 ## Prerequisites
@@ -93,8 +93,9 @@ Not much hardware has been dropped, though the few that have:
 Other notable changes:
 
 * MSI Navi users no longer require the `ATY,rom`/`-wegnoegpu` patch to boot the installer
-* Asus 9 series requiring working NVRAM(ie. Z97)
-  * For more info, see here: [Haswell ASUS Z97 Big Sur Update Thread](https://www.reddit.com/r/hackintosh/comments/jw7qf1/haswell_asus_z97_big_sur_update_and_installation/)
+* Stage 2 installation requiring working NVRAM
+  * Asus 9 series: For more info, see here: [Haswell ASUS Z97 Big Sur Update Thread](https://www.reddit.com/r/hackintosh/comments/jw7qf1/haswell_asus_z97_big_sur_update_and_installation/)
+  * X99 and X299 users with broken NVRAM will need to install on another machine and move the SSD when done
 
 ### Up-to-date kexts, bootloader and config.plist
 
@@ -345,12 +346,13 @@ This is due to issues around Secure Boot boot being enabled in Beta 10 with olde
 
 * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 
-### Asus Z97 failing Stage 2 Installation
+### Asus Z97 and HEDT(ie. X99 and X299) failing Stage 2 Installation
 
 With Big Sur, there's a higher reliance on native NVRAM for installation otherwise the installer will get stuck in a reboot loop. To resolve this you'll need to either:
 
 * Install Big Sur on another machine, then transfer the drive
 * Fix the motherboard's NVRAM
+  * mainly applicable with Asus's Z97 series
 
 For the latter, see here: [Haswell ASUS Z97 Big Sur Update Thread](https://www.reddit.com/r/hackintosh/comments/jw7qf1/haswell_asus_z97_big_sur_update_and_installation/)
 
