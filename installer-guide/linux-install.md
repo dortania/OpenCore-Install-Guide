@@ -93,20 +93,25 @@ In terminal:
 
 6. umount the USB device `sudo umount /dev/xxx?*`
 
-7. Now lests wipe hour USB device with `sudo sgdisk --zap-all /dev/xxx && partprobe` partprobe will let the kernel know changes was made to the partitions so no need to reboot. 
+7. Now lests wipe hour USB device with `sudo sgdisk --zap-all /dev/xxx && partprobe`   
+partprobe will let the kernel know changes was made to the partitions so no need to reboot. 
 
-8. Make a Fat32 partition of 300MiB this is where we will put our OC EFI latter on, run `sudo sgdisk /dev/xxx --new=0:0:+300MiB -t 0:ef00 && partprobe` replace `xxx` with your USB device block.
+8. Make a Fat32 partition of 300MiB this is where we will put our OC EFI latter on,  
+run `sudo sgdisk /dev/xxx --new=0:0:+300MiB -t 0:ef00 && partprobe` replace `xxx` with your USB device block.
 
-9. Make a HFS+ partition for our BaseSystem, run `sudo sgdisk -e /dev/xxx --new=0:0: -t 0:af00 && partprobe` 
+9. Make a HFS+ partition for our BaseSystem,   
+run `sudo sgdisk -e /dev/xxx --new=0:0: -t 0:af00 && partprobe` 
    ![](../images/installer-guide/linux-install-md/brolynew.png)
 
-10. Copy the BaseSystem to the HFS+ partition,run `sudo dd bs=8M if=base.hfs of=/dev/xxx2 status=progress oflag=sync` 
+10. Copy the BaseSystem to the HFS+ partition,  
+run `sudo dd bs=8M if=base.hfs of=/dev/xxx2 status=progress oflag=sync` 
    ![](../images/installer-guide/linux-install-md/broly5.png)
 
 11. Format the the Fat32 partition, run `mkfs.fat -F32 -n OPENCORE /dev/xxx1`
    ![](../images/installer-guide/linux-install-md/broly6.png)
 
-12. mount the EFI partition in the /mnt `sudo mount -t vfat /dev/xxx1 /mnt/ -o rw,umask=000` this is where you will add your OC EFI folder.
+12. mount the EFI partition in the /mnt `sudo mount -t vfat /dev/xxx1 /mnt/ -o rw,umask=000`   
+this is where you will add your OC EFI folder.
 
 13. Open Disks and the end result should look like this
    ![](../images/installer-guide/linux-install-md/broly7.png)
