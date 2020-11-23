@@ -98,7 +98,7 @@ In terminal:
 8. Make a Fat32 partition of 300MiB this is where we will put our OC EFI latter on, run `sudo sgdisk /dev/xxx --new=0:0:+300MiB -t 0:ef00 && partprobe` replace `xxx` with your USB device block.
 
 9. Make a HFS+ partition for our BaseSystem, run `sudo sgdisk -e /dev/xxx --new=0:0: -t 0:af00 && partprobe` 
-   ![](../images/installer-guide/linux-install-md/broly4.png)
+   ![](../images/installer-guide/linux-install-md/brolynew.png)
 
 10. Copy the BaseSystem to the HFS+ partition,run `sudo dd bs=8M if=base.hfs of=/dev/xxx2 status=progress oflag=sync` 
    ![](../images/installer-guide/linux-install-md/broly5.png)
