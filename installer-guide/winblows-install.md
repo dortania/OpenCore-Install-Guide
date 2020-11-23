@@ -28,37 +28,37 @@ Now run one of the following depending on what version of macOS you want(Note th
 
 ```sh
 # Lion(10.7):
-macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
-macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
+python macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
+python macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
 
 # Mountain Lion(10.8):
-macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
+python macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
 
 # Mavericks(10.9):
-macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
+python macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
 
 # Yosemite(10.10):
-macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
+python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
 
 # El Capitan(10.11):
-macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
+python macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
 
 # Sierra(10.12):
-macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
+python macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
 
 # High Sierra(10.13)
-macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
-macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
+python macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
+python macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
 
 # Mojave(10.14)
-macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
+python macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
 # Catalina(10.15)
-macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
+python macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
 # Latest version
 # ie. Big Sur(11)
-macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
+python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
 * **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
