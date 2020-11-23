@@ -69,40 +69,47 @@ From here, run one of those commands in terminal and once finished you'll get an
 
 ## Making the installer
 
-This section will target making the necessary partitions in the USB device. You can use your favorite program be it `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `gdisk` as it's nice and can change the partition type later on, as we need it so that macOS Recovery HD can boot. (the distro used here is Ubuntu 18.04, other versions or distros may work)
+This section will target making the necessary partitions in the USB device. This guide will focus on `p7zip`and  `sgdisk` as we need do extract the Recovery and change the partition type later on, as we need it so that macOS Recovery HD can boot. (the distro used here is Ubuntu 18.04, other versions or distros may work)
 
 Credit to [midi1996](https://github.com/midi1996) for his work on the [Internet Install Guide](https://midi1996.github.io/hackintosh-internet-install-gitbook/) guide which this is based off of.
-
+and to [Broly1](https://github.com/Broly1) for his work on the [Internet Install Guide](https://github.com/Broly1/Hackintosh-linux-Installer).
 ### Method 1
 
 In terminal:
 
-1. run `lsblk` and determine your USB device block
-  ![lsblk](../images/installer-guide/linux-install-md/unknown-5.png)
-2. run `sudo gdisk /dev/<your USB block>`
-   1. if you're asked what partition table to use, select GPT.
-      ![Select GPT](../images/installer-guide/linux-install-md/unknown-6.png)
-   2. send `p` to print your block's partitions \(and verify it's the one needed\)
-      ![](../images/installer-guide/linux-install-md/unknown-13.png)
-   3. send `o` to clear the partition table and make a new GPT one (if not empty)
-      1. confirm with `y`
-         ![](../images/installer-guide/linux-install-md/unknown-8.png)
-   4. send `n`
-      1. `partition number`: keep blank for default
-      2. `first sector`: keep blank for default
-      3. `last sector`: keep blank for whole disk
-      4. `Hex code or GUID`: `0700` for Microsoft basic data partition type
-   5. send `w`
-      * Confirm with `y`
-      ![](../images/installer-guide/linux-install-md/unknown-9.png)
-      * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
-   6. Close `gdisk` by sending `q` (normally it should quit on its own)
-3. Use `lsblk` to determine your partition's identifiers
-4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your USB partition block>` to format your USB to FAT32 and named OPENCORE
-5. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-   1. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your USB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your USB partition block> /where/your/mount/stuff`, sudo is required)
-   2. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
-   3. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
+1. run `ls` to make sure you have the `BaseSystem.dmg`
+   ![](../images/installer-guide/linux-install-md/broly1.png)
+
+2. Install p7zip on Ubuntu `apt install p7zip-full` Arch `pacman -Sy p7zip` Fedora `dnf install p7zip-plugins`
+
+
+3. Extract the `.hfs` with `7z e -tdmg BaseSystem.dmg *.hfs`
+   ![](../images/installer-guide/linux-install-md/broly2.png)
+
+4. Rename the `.hfs` file to `base.hfs`, run `mv *.hfs base.hfs`, renaming isn't necessary but it makes life easier as `dd command` doesn't accept autocompletition and different versions of macOS has different file names with same file extension.
+
+5. run `lsblk` and determine your USB device block
+   ![](../images/installer-guide/linux-install-md/broly3.png)
+
+6. umount the USB device `sudo umount /dev/xxx?*`
+
+7. Now lests wipe hour USB device with `sudo sgdisk --zap-all /dev/xxx && partprobe` partprobe will let the kernel know changes was made to the partitions so no need to reboot. 
+
+8. Make a Fat32 partition of 300MiB this is where we will put our OC EFI latter on, run `sudo sgdisk /dev/xxx --new=0:0:+300MiB -t 0:ef00 && partprobe` replace `xxx` with your USB device block.
+
+9. Make a HFS+ partition for our BaseSystem, run `sudo sgdisk -e /dev/xxx --new=0:0: -t 0:af00 && partprobe` 
+   ![](../images/installer-guide/linux-install-md/broly4.png)
+
+10. Copy the BaseSystem to the HFS+ partition,run `sudo dd bs=8M if=base.hfs of=/dev/xxx2 status=progress oflag=sync` 
+   ![](../images/installer-guide/linux-install-md/broly5.png)
+
+11. Format the the Fat32 partition, run `mkfs.fat -F32 -n OPENCORE /dev/xxx1`
+   ![](../images/installer-guide/linux-install-md/broly6.png)
+
+12. mount the EFI partition in the /mnt `sudo mount -t vfat /dev/xxx1 /mnt/ -o rw,umask=000` this is where you will add your OC EFI folder.
+
+13. Open Disks and the end result should look like this
+   ![](../images/installer-guide/linux-install-md/broly7.png)
 
 ### Method 2 (in case 1 didn't work)
 
