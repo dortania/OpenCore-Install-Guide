@@ -69,7 +69,7 @@ From here, run one of those commands in terminal and once finished you'll get an
 
 ## Making the installer
 
-This section will target making the necessary partitions in the USB device. You can use your favorite program be it `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `gdisk` as it's nice and can change the partition type later on, as we need it so that macOS Recovery HD can boot. (the distro used here is Ubuntu 18.04, other versions or distros may work)
+This section will target making the necessary partitions in the USB device. You can use your favorite program be it `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `sgdisk` as it's nice and can change the partition type later on, Ubuntu 18.04, other versions or distros may work)
 
 Credit to [midi1996](https://github.com/midi1996) for his work on the [Internet Install Guide](https://midi1996.github.io/hackintosh-internet-install-gitbook/) guide which this is based off of.
 
@@ -78,74 +78,51 @@ Credit to [midi1996](https://github.com/midi1996) for his work on the [Internet 
 In terminal:
 
 1. run `lsblk` and determine your USB device block
-  ![lsblk](../images/installer-guide/linux-install-md/unknown-5.png)
-2. run `sudo gdisk /dev/<your USB block>`
-   1. if you're asked what partition table to use, select GPT.
-      ![Select GPT](../images/installer-guide/linux-install-md/unknown-6.png)
-   2. send `p` to print your block's partitions \(and verify it's the one needed\)
-      ![](../images/installer-guide/linux-install-md/unknown-13.png)
-   3. send `o` to clear the partition table and make a new GPT one (if not empty)
-      1. confirm with `y`
-         ![](../images/installer-guide/linux-install-md/unknown-8.png)
-   4. send `n`
-      1. `partition number`: keep blank for default
-      2. `first sector`: keep blank for default
-      3. `last sector`: keep blank for whole disk
-      4. `Hex code or GUID`: `0700` for Microsoft basic data partition type
-   5. send `w`
-      * Confirm with `y`
-      ![](../images/installer-guide/linux-install-md/unknown-9.png)
-      * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
-   6. Close `gdisk` by sending `q` (normally it should quit on its own)
-3. Use `lsblk` to determine your partition's identifiers
-4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your USB partition block>` to format your USB to FAT32 and named OPENCORE
+  ![lsblk](../images/installer-guide/linux-install-md/broly1.png)
+2. run `sudo umount /dev/xxx?*` replace `/xxx` with your USB block 
+
+   0. run `sudo sgdisk --zap-all /dev/xxx && partprobe` to remove all partitions on the drive  
+
+   1. run `sudo sgdisk /dev/xxx -o` to clear the partition table and make a new GPT one  
+  
+   2. run `sudo sgdisk /dev/xxx --new=0:0: -t 0:0700 && partprobe` to create a Microsoft basic data partition type   
+
+   3. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/xxx1` to format your USB to FAT32 and named OPENCORE
+     
+4. Use `lsblk` to determine your partition's identifiers
+
 5. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-   1. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your USB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your USB partition block> /where/your/mount/stuff`, sudo is required)
+   1. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
+ or with `mount` (`sudo mount /xxx1 /where/your/mount/stuff`, sudo is required)
    2. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
    3. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
-
+   ![lsblk](../images/installer-guide/linux-install-md/broly3.png)
 ### Method 2 (in case 1 didn't work)
 
 In terminal:
 
 1. run `lsblk` and determine your USB device block
-   ![](../images/installer-guide/linux-install-md/unknown-11.png)
-2. run `sudo gdisk /dev/<your USB block>`
-   1. if you're asked what partition table to use, select GPT.
-      ![](../images/installer-guide/linux-install-md/unknown-12.png)
-   2. send `p` to print your block's partitions \(and verify it's the one needed\)
-      ![](../images/installer-guide/linux-install-md/unknown-13.png)
-   3. send `o` to clear the partition table and make a new GPT one (if not empty)
-      1. confirm with `y`
-         ![](../images/installer-guide/linux-install-md/unknown-14.png)
-   4. send `n`
-      1. partition number: keep blank for default
-      2. first sector: keep blank for default
-      3. last sector: `+200M` to create a 200MB partition that will be named later on OPENCORE
-      4. Hex code or GUID: `0700` for Microsoft basic data partition type
-      ![](../images/installer-guide/linux-install-md/unknown-15.png)
-   5. send `n`
-      1. partition number: keep blank for default
-      2. first sector: keep blank for default
-      3. last sector: keep black for default \(or you can make it `+3G` if you want to partition further the rest of the USB\)
-      4. Hex code or GUID: `af00` for Apple HFS/HFS+ partition type
-      ![](../images/installer-guide/linux-install-md/unknown-16.png)
-   6. send `w`
-      * Confirm with `y`
-      ![](../images/installer-guide/linux-install-md/unknown-17.png)
-      * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
-   7. Close `gdisk` by sending `q` (normally it should quit on its own)
-3. Use `lsblk` again to determine the 200MB drive and the other partition
-   ![](../images/installer-guide/linux-install-md/unknown-18.png)
-4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your 200MB partition block>` to format the 200MB partition to FAT32, named OPENCORE
+   ![lsblk](../images/installer-guide/linux-install-md/broly1.png)
+2. run `sudo umount /dev/xxx?*` to umount the USB device
+   1. run `sudo sgdisk --zap-all /dev/xxx && partprobe` to remove all partitions on the drive  
+   2. run `sudo sgdisk /dev/xxx -o` to clear the partition table and make a new GPT one
+   3. run `sudo sgdisk /dev/xxx --new=0:0:+300MiB -t 0:ef00 && partprobe` to create a 300MB partition that will be named later on OPENCORE  
+   4. run `sudo sgdisk -e /dev/xxx --new=0:0: -t 0:af00 && partprobe` for Apple HFS/HFS+ partition type  
+   5. 
+
+3. Use `lsblk` again to determine the 300MB drive and the other partition
+   ![](../images/installer-guide/linux-install-md/broly6.png)
+4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/xxx1` to format the 300MB partition to FAT32, named OPENCORE
 5. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-   1. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your USB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your USB partition block> /where/your/mount/stuff`, sudo is required)
-   2. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
-   3. download `dmg2img` (available on most distros)
-   4. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
-      ![](../images/installer-guide/linux-install-md/unknown-20.png)
-   5. run `dmg2img -p <the partition number> -i BaseSystem.dmg -o <your 3GB+ partition block>` to extract and write the recovery image to the partition disk
+   ![lsblk](../images/installer-guide/linux-install-md/broly3.png)
+   1. download `dmg2img` (available on most distros)
+   2. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
+      ![](../images/installer-guide/linux-install-md/broly8.png)
+   3. run `dmg2img -p <the partition number> -i BaseSystem.dmg -o <your HFS+ partition block>` to extract and write the recovery image  
+ to the partition disk
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
-      ![](../images/installer-guide/linux-install-md/unknown-21.png)
+    ![lsblk](../images/installer-guide/linux-install-md/broly9.png)
+   4.  mount the Fat32 partition `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
+ or with `mount` (`sudo mount /xxx1 /where/your/mount/stuff`, sudo is required) this is where you will drop your OC EFI folder.
 
 ## Now with all this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
