@@ -131,6 +131,6 @@ In terminal:
        ![lsblk](../images/installer-guide/linux-install-md/broly9.png)
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
    14.  mount the Fat32 partition `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
- or with `mount` (`sudo mount /xxx1 /where/your/mount/stuff`, sudo is required) this is where you will drop your OC EFI folder.
+ or with `mount` (`sudo mount /dev/xxx1 /where/your/mount/stuff`, sudo is required) this is where you will drop your OC EFI folder.
 
 ## Now with all this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
