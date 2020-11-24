@@ -242,6 +242,7 @@ pci14e4,1686 = Broadcom BCM57766
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
   * Shouldn't be needed on Desktop Skylake and newer
     * AsRock is dumb and does need this
+    * Might still be needed to make Bluetooth work when its icon doesn't appear in Settings
     * Coffee Lake and older laptops are however recommended to use this kext
   * Does not work on AMD CPUs **at all**
   * Requires OS X 10.11 or newer
