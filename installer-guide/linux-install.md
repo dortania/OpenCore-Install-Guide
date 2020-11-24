@@ -91,12 +91,10 @@ In terminal:
      
    7. Use `lsblk` to determine your partition's identifiers
 
-   8. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-
-   9. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
+   8. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
  or with `mount` (`sudo mount /xxx1 /where/your/mount/stuff`, sudo is required)
-   10. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
-   11. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
+   9. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
+   10. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
    ![lsblk](../images/installer-guide/linux-install-md/broly3.png)
 ### Method 2 (in case 1 didn't work)
 
