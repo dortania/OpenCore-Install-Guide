@@ -69,7 +69,7 @@ From here, run one of those commands in terminal and once finished you'll get an
 
 ## Making the installer
 
-This section will target making the necessary partitions in the USB device. You can use your favorite program be it `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `sgdisk` as it's nice and can change the partition type later on, Ubuntu 18.04, other versions or distros may work)
+This section will target making the necessary partitions in the USB device. You can use your favorite program be it `sgdisk` `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `sgdisk` as it's fast and simple, (the distro used here is Ubuntu 18.04, other versions or distros may work)
 
 Credit to [midi1996](https://github.com/midi1996) for his work on the [Internet Install Guide](https://midi1996.github.io/hackintosh-internet-install-gitbook/) guide which this is based off of.
 
