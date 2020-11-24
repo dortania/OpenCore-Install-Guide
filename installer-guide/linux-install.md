@@ -130,9 +130,8 @@ In terminal:
 
    13. run `dmg2img -p <the partition number> -i BaseSystem.dmg -o <your HFS+ partition block>`   
  to extract and write the recovery image to the partition disk
-
+       ![lsblk](../images/installer-guide/linux-install-md/broly9.png)
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
-    ![lsblk](../images/installer-guide/linux-install-md/broly9.png)
    14.  mount the Fat32 partition `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
  or with `mount` (`sudo mount /xxx1 /where/your/mount/stuff`, sudo is required) this is where you will drop your OC EFI folder.
 
