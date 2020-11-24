@@ -121,7 +121,7 @@ In terminal:
    9. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/xxx1` to format the 300MB partition to FAT32, named OPENCORE
 
    10. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-   ![lsblk](../images/installer-guide/linux-install-md/broly3.png)
+   ![lsblk](../images/installer-guide/linux-install-md/broly5.png)
 
    11. download `dmg2img` (available on most distros)
 
