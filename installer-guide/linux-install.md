@@ -92,7 +92,7 @@ In terminal:
    7. Use `lsblk` to determine your partition's identifiers
 
    8. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
- or with `mount` (`sudo mount /xxx1 /where/your/mount/stuff`, sudo is required)
+ or with `mount` (`sudo mount /dev/xxx1 /where/your/mount/stuff`, sudo is required)
    9. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
    10. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
    ![lsblk](../images/installer-guide/linux-install-md/broly3.png)
