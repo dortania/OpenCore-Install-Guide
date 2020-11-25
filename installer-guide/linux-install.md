@@ -87,13 +87,13 @@ In terminal:
   
    5. run `sudo sgdisk /dev/xxx --new=0:0: -t 0:0700 && partprobe` to create a Microsoft basic data partition type
 
-   6. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/xxx1` to format your USB to FAT32 and named OPENCORE
+   6. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/xxx1` to format your USB to ``Fat32`` and named OPENCORE
 
    7. Use `lsblk` to determine your partition's identifiers
 
    8. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
  or with `mount` (`sudo mount /dev/xxx1 /where/your/mount/stuff`, sudo is required)
-   9. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
+   9. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your `Fat32` USB partition
    10. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
    ![lsblk](../images/installer-guide/linux-install-md/broly3.png)
 
@@ -117,7 +117,7 @@ In terminal:
    7. Use `lsblk` again to determine the 300MB drive and the other partition
    ![alt text](../images/installer-guide/linux-install-md/broly6.png)
 
-   8. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/xxx1` to format the 300MB partition to FAT32, named OPENCORE
+   8. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/xxx1` to format the 300MB partition to `Fat32`, named OPENCORE
 
    9. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
    ![lsblk](../images/installer-guide/linux-install-md/broly5.png)
