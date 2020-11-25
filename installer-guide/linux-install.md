@@ -79,7 +79,7 @@ In terminal:
 
    1. run `lsblk` and determine your USB device block
    ![lsblk](../images/installer-guide/linux-install-md/broly1.png)
-   2. run `sudo umount /dev/xxx?*` replace `/xxx` with your USB block
+   2. run ``sudo umount /dev/xxx?*`` replace `/xxx` with your USB block
 
    3. run `sudo sgdisk --zap-all /dev/xxx && partprobe` to remove all partitions on the drive  
 
@@ -104,7 +104,7 @@ In terminal:
    1. run `lsblk` and determine your USB device block
    ![lsblk](../images/installer-guide/linux-install-md/broly1.png)
 
-   2. run `sudo umount /dev/xxx?*` to umount the USB device
+   2. run ``sudo umount /dev/xxx?*`` to umount the USB device
 
    3. run `sudo sgdisk --zap-all /dev/xxx && partprobe` to remove all partitions on the drive
 
@@ -131,7 +131,7 @@ In terminal:
  to extract and write the recovery image to the partition disk
        ![lsblk](../images/installer-guide/linux-install-md/broly9.png)
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
-   13. mount the Fat32 partition `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
+   13. mount the FAT32 partition `udisksctl` (`udisksctl mount -b /dev/xxx1`, no sudo required in most cases)  
  or with `mount` (`sudo mount /dev/xxx1 /where/your/mount/stuff`, sudo is required) this is where you will drop your OC EFI folder.
 
 ## Now with all this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
