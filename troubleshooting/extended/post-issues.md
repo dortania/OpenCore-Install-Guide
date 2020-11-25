@@ -98,9 +98,9 @@ Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
-Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and `Kernel -> Add`. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.
+Follow guide listed here:
 
-* Note: This kext is known to create instability, if you receive random crashes and freezes please remove this kext.
+* [Fixing MacPro7,1 Memory Errors](http://localhost:8080/OpenCore-Post-Install/universal/memory.html)
 
 ## Apps crashing on AMD
 
