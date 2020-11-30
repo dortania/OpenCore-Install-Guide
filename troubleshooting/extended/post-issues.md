@@ -100,7 +100,7 @@ Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal
 
 Follow guide listed here:
 
-* [Fixing MacPro7,1 Memory Errors](http://localhost:8080/OpenCore-Post-Install/universal/memory.html)
+* [Fixing MacPro7,1 Memory Errors](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
 
 ## Apps crashing on AMD
 

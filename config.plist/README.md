@@ -100,7 +100,7 @@ This section includes both enthusiast and server based hardware.
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
 | [Bulldozer/Jaguar](../AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) |
-| [Zen](../AMD/zen.md) | 1XXX, 2XXX, 3XXX | 2017-2020 era |
+| [Zen](../AMD/zen.md) | 1XXX, 2XXX, 3XXX, 5XXX | 2017-2020 era |
 
 * Note: ~~Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported~~
   * Latest BIOS and OpenCore version has resolved this issue, all Threadripper platforms are now supported
