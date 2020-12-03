@@ -1,6 +1,6 @@
 # OpenCore and macOS 11: Big Sur
 
-It's that time of year again and with it, and a new macOS beta has been dropped. Here's all the info you need to get started.
+macOS 11: Big Sur is out walking around on Apple's site and a lot of Macs and Hackintoshes alike. Here's all the info you need to get started.
 
 ::: tip Reminder
 
