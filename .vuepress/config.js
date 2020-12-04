@@ -3,7 +3,7 @@ const {
 } = require('../package')
 
 module.exports = {
-    title: 'OpenCore Install Guide',
+    title: 'Wiki - r/the_new_ps3_homebrew',
     head: [
         ['meta', {
             name: 'theme-color',
@@ -22,7 +22,7 @@ module.exports = {
             href: "/styles/website.css"
         },]
     ],
-    base: '/OpenCore-Install-Guide/',
+    base: '/tnpsh-wiki/',
 	
 	watch: {
 	    $page(newPage, oldPage) {

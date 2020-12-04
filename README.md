@@ -1,7 +1,7 @@
 ---
 home: true
-heroImage: /dortania-logo-clear.png
-heroText: Dortania's OpenCore Install Guide
+heroImage: /reddit-logo.png
+heroText: The New PS3 Homebrew Wiki
 actionText: Getting Started→
 actionLink: prerequisites.md
 
