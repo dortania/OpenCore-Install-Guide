@@ -1,6 +1,6 @@
 # OpenCore Boot Issues
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 Issues surrounding from initial booting the USB itself to right before you choose to boot the macOS installer
 

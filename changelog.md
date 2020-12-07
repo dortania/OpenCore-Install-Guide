@@ -2,7 +2,7 @@
 
 ==================
 
-#### 0.6.3
+#### 0.6.4
 
 * Add M1 series Apple Silicon SMBIOS
 * Rewrite Windows and Linux guide to use macrecovery.py

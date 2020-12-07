@@ -1,6 +1,6 @@
 # Post-Install Issues
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 Issues revolving around macOS once properly installed.
 
@@ -20,7 +20,7 @@ Issues revolving around macOS once properly installed.
 * [macOS waking up with the wrong time](#macos-waking-up-with-the-wrong-time)
 * [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
 * [Disabling SIP](#disabling-sip)
-* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshot)
+* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshots)
 * [Apple Watch Unlock Issues](#apple-watch-unlock-issues)
 
 ## Broken iMessage and Siri
