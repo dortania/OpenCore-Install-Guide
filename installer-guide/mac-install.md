@@ -82,13 +82,11 @@ From here, jump to [Setting up the installer](#setting-up-the-installer) to fini
 
 This method allows us to download full installers from Apple, however is limited to 10.10, Yosemite, so older OSes will need to be grabbed via the "Online Method" mentioned below.
 
-To start, head to one of the following links:
+To start, go to the following link:
 
-* [How to upgrade to OS X Yosemite](https://support.apple.com/en-ca/HT210717)
-* [How to upgrade to OS X El Capitan](https://support.apple.com/en-us/HT206886)
-* [How to upgrade to macOS Sierra](https://support.apple.com/en-us/HT208202)
+* [How to get old versions of macOS](https://support.apple.com/en-us/HT211683)
 
-On step 4, you'll see either `InstallOS.dmg` for Sierra or `InstallMacOSX.dmg` for El Capitan and older. Download your desired version and a .pkg file should be provided.
+Download your desired version and a .pkg file should be provided.
 
 Depending on what OS you're on, you can run this script and head to [Setting up the installer](#setting-up-the-installer) however if you receive this error:
 
