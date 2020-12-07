@@ -1,6 +1,6 @@
 # Clover Kexts and Firmware driver conversion(.kext, .efi)
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on OpenCore, however many have been deprecated with better variants being integrated into OpenCore. Firmware drivers are a bit different as they can in-fact break booting.
 

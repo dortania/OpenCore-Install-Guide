@@ -1,6 +1,6 @@
 # Post-Install Issues
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 Issues revolving around macOS once properly installed.
 

@@ -1,6 +1,6 @@
 # Miscellaneous Issues
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 Miscellaneous issues not revolving around macOS itself such as multibooting.
 

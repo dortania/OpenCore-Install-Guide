@@ -1,6 +1,6 @@
 # General Troubleshooting
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify things.
 

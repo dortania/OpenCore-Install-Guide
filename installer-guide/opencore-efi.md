@@ -1,6 +1,6 @@
 # Adding The Base OpenCore Files
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/). Note that they will be under either the IA32 or X64 folders, the former for 32-bit Firmwares and the latter for 64-bit Firmwares:
 

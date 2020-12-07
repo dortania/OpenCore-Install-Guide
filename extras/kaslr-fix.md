@@ -1,6 +1,6 @@
 # Fixing KASLR slide values
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.
 
