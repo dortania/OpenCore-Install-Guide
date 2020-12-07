@@ -155,8 +155,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| framebuffer-con1-enable | Data | 01000000 |
-| framebuffer-con1-alldata | Data | 01050A00 00080000 87010000 03060A00 00040000 87010000 FF000000 01000000 20000000 |
+| framebuffer-con2-enable | Data | 01000000 |
+| framebuffer-con2-alldata | Data | 01050A00 00080000 87010000 03060A00 00040000 87010000 FF000000 01000000 20000000 |
 
 * In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 
