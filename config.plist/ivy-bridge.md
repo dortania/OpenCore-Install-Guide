@@ -592,7 +592,6 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
 
-:::
 
 ### Generic
 
