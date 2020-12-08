@@ -700,7 +700,7 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 ### Enable
 
 * VT-x
-* Above 4G decoding
+* Above 4G decoding (Dell might need to disable)
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
