@@ -776,6 +776,7 @@ ThinkPad
 Thinkpad
 ThreadRipper
 Threadripper
+ThrRip
 TimeMachine
 Touchbase
 Trackpad
