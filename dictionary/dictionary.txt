@@ -119,6 +119,7 @@ Acidanthera
 Acidanthera's
 Acpi
 AcpiSamples
+AirPortBrcm4360
 AirportAtheros40
 AirportBrcmFixup
 AirportItlwm
@@ -776,6 +777,7 @@ ThinkPad
 Thinkpad
 ThreadRipper
 Threadripper
+ThrRip
 TimeMachine
 Touchbase
 Trackpad

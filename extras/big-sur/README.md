@@ -160,9 +160,9 @@ And while not an issue, SIP has now gained a new bit so to properly disable SIP 
 
 Guides have been updated to accommodate Big Sur, see the applicable OS environment for you:
 
-* [macOS users](./../installer-guide/mac-install.md)
-* [Windows users](./../installer-guide/winblows-install.md)
-* [Linux users](./../installer-guide/linux-install.md)
+* [macOS users](../../installer-guide/mac-install.md)
+* [Windows users](../../installer-guide/winblows-install.md)
+* [Linux users](../../installer-guide/linux-install.md)
 
 ## Troubleshooting
 
