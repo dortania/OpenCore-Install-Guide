@@ -306,6 +306,11 @@ Next run the `createinstallmedia` command provided by [Apple](https://support.ap
 sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
+## For Big Sur the command is:
+```sh
+sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+```
+
 This will take some time so you may want to grab a coffee or continue reading the guide (to be fair you really shouldn't be following this guide step by step without reading the whole thing first).
 
 You can also replace the `createinstallmedia` path with that of where your installer's located (same idea with the drive name).
