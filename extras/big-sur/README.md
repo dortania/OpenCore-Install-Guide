@@ -328,7 +328,7 @@ Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
 
 If it returns `Snapshot Sealed: Broken`, then you'll want to go through the following:
 
-* Update to OpenCore 0.6.3 or newer
+* Update to OpenCore 0.6.4 or newer
   * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 * Revert to older snapshots
   * Mainly for those who have tampered with the system volume
@@ -342,7 +342,7 @@ Full error:
 Rooting from the live fs of a sealed volume is not allowed on a RELEASE build
 ```
 
-This is due to issues around Secure Boot boot being enabled in Beta 10 with older versions of OpenCore. Simply update to 0.6.3 to resolve
+This is due to issues around Secure Boot boot being enabled in Beta 10 with older versions of OpenCore. Simply update to 0.6.4 to resolve
 
 * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 

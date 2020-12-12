@@ -1,6 +1,6 @@
 # Gathering files
 
-* Supported version: 0.6.3
+* Supported version: 0.6.4
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -291,7 +291,7 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/non-Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
-    * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
+    * BrcmPatchRAM3 for 10.15+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.8-10.10
 
