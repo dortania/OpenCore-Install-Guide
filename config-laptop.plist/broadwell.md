@@ -131,7 +131,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | **06002616** | Laptop | Recommended value for Broadwell laptops |
 | **02001616** | NUC | Recommended value for Broadwell NUCs|
 
-##### Configuration Notes
+#### Configuration Notes
 
 * For HD5600 you need `device-id` faked to `16260000`:
 
