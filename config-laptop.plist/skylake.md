@@ -112,6 +112,8 @@ Sets device properties from a map.
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
+This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
 * **AAPL,ig-platform-id**
