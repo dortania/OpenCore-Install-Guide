@@ -768,4 +768,4 @@ These are the main options to check for, if you can't find it or an equivalent f
 * DVMT Pre-Allocated(iGPU Memory): 32MB
 * SATA Mode: AHCI
 
-## Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
