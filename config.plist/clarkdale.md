@@ -2,8 +2,8 @@
 
 | Support | Version |
 | :--- | :--- |
-| Initial macOS Support | OS X 10.6.3, Snow Leopard |
 | Supported OpenCore version | 0.6.4 |
+| Initial macOS Support | OS X 10.6.3, Snow Leopard |
 | Note 1 | Apple does not support desktop Iron Lake iGPUs |
 | Note 2 | Most Lynnfield and Clarkdale boards do not support UEFI |
 
