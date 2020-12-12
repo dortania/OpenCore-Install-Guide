@@ -442,7 +442,7 @@ Booter Path, mainly used for UI Scaling
   * `01`: Standard resolution
   * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
 
-* **DefaultBackgroundColor**: Background color used by boot.ef
+* **DefaultBackgroundColor**: Background color used by boot.efi
   * `00000000`: Syrah Black
   * `BFBFBF00`: Light Gray
 
