@@ -173,7 +173,7 @@ For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this.
 
 ### Delete
 
-Removes device properties from the map, for us we can ignore this.
+Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
