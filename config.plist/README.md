@@ -99,7 +99,7 @@ This section includes both enthusiast and server based hardware.
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
-| [Bulldozer/Jaguar](../AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) |
+| [Bulldozer/Jaguar](../AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) |
 | [Zen](../AMD/zen.md) | 1XXX, 2XXX, 3XXX, 5XXX | 2017-2020 era |
 
 * Note: ~~Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported~~
