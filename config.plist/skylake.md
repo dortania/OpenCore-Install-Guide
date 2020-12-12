@@ -108,6 +108,8 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 
 * **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`
 
+* **Note**: On some gigabyte motherboard you have to set platform-id to "00003B19", other wise it will boot with a black screen. And if you are using VGA as output then you have to set this.
+
 And extra note for P530 users, your iGPU is not natively supported so you will need to add the following property:
 
 | Key | Type | Value |
