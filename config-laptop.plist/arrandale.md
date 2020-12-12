@@ -536,13 +536,13 @@ Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selectin
 
 ```sh
   #######################################################
- #                MacBookPro8,2 SMBIOS Info            #
+ #             MacBookPro6,1 SMBIOS Info               #
 #######################################################
 
-Type:         MacBookPro8,2
-Serial:       C02KCYZLDNCW
-Board Serial: C02309301QXF2FRJC
-SmUUID:       A154B586-874B-4E57-A1FF-9D6E503E4580
+Type:         MacBookPro6,1
+Serial:       C02G3ZYFDC79
+Board Serial: C021291014NDCMVCB
+SmUUID:       C8A54C45-8E99-440A-9A52-1B62A0074FA5
 ```
 
 The `Type` part gets copied to Generic -> SystemProductName.
