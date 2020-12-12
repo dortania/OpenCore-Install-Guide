@@ -147,7 +147,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
-  * Requires OS X 10.9 or newer, 10.8-10.8 users can use the IntelSnowMausi instead for older OSes
+  * Requires OS X 10.9 or newer, 10.6-10.8 users can use the IntelSnowMausi instead for older OSes
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
