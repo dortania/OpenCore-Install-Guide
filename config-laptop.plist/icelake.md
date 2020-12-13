@@ -560,6 +560,8 @@ Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 ```
 
+* **Note**: MacSerial currently does not support Linux, so you must grab a Windows or macOS machine to generate the `MacBookPro16,2` values
+
 The `Type` part gets copied to Generic -> SystemProductName.
 
 The `Serial` part gets copied to Generic -> SystemSerialNumber.
