@@ -520,7 +520,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 * **LegacyOverwrite**: NO
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
 
-* **LegacySchema**:
+* **LegacySchema**
   * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
 * **WriteFlash**: YES
