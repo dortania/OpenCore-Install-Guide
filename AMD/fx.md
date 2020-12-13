@@ -677,7 +677,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 
 Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
-# AMD BIOS Settings
+## AMD BIOS Settings
 
 * Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
 
