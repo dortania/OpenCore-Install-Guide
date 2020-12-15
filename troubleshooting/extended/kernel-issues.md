@@ -6,7 +6,7 @@ Issues surrounding from initial booting the macOS installer to right before the 
 
 * [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
 * [Stuck on EndRandomSeed](#stuck-on-endrandomseed)
-* [Stuck after selecting macOS partition in OpenCore](#stuck-after-selecting-macOS-partition-in-opencore)
+* [Stuck after selecting macOS partition in OpenCore](#stuck-after-selecting-macos-partition-in-opencore)
 * [Kernel Panic on `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)
 * [Stuck on [EB|LD:OFS] Err(0xE) when booting preboot volume](#stuck-on-eb-ld-ofs-err-0xe-when-booting-preboot-volume)
 * [Stuck on `OCB: LoadImage failed - Security Violation`](#stuck-on-ocb-loadimage-failed-security-violation)
@@ -29,7 +29,7 @@ Issues surrounding from initial booting the macOS installer to right before the 
 * [Kernel Panic on `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)
 * [`kextd stall[0]: AppleACPICPU`](#kextd-stall-0-appleacpicpu)
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
-* [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake)
+* [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake-laptop)
 * [Stuck at `Forcing CS_RUNTIME for entitlement` in Big Sur](#stuck-at-forcing-cs-runtime-for-entitlement-in-big-sur)
 * [Stuck on `ramrod`(^^^^^^^^^^^^^)](#stuck-on-ramrod)
 
