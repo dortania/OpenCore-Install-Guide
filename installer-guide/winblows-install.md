@@ -2,6 +2,8 @@
 
 * Supported version: 0.6.4
 
+## Please note that the following procedure may take up 2 minutes to boot macOS Recovery. Be patient
+
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
 To start you'll need the following:
