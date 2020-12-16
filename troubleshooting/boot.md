@@ -23,7 +23,6 @@ If you're having issues booting at this point, main things to check for:
 
 * [Stuck on `no vault provided!`](./extended/opencore-issues.md#stuck-on-no-vault-provided)
 * [Can't see macOS partitions](./extended/opencore-issues.md#can-t-see-macos-partitions)
-* [Black screen after picker](./extended/opencore-issues.md#black-screen-after-picker)
 * [Booting OpenCore reboots to BIOS](./extended/opencore-issues.md#booting-opencore-reboots-to-bios)
 
 For the rest of the possible issues, see here:
