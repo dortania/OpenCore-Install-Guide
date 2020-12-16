@@ -22,8 +22,7 @@ This section will be brief, as OpenCore boot issues are fairly rare and usually 
 If you're having issues booting at this point, main things to check for:
 
 * [Stuck on `no vault provided!`](./extended/opencore-issues.md#stuck-on-no-vault-provided)
-* [Can't see macOS partitions](./extended/opencore-issues.md#cant-see-macos-partitions)
-* [Black screen after picker](./extended/opencore-issues.md#black-screen-after-picker)
+* [Can't see macOS partitions](./extended/opencore-issues.md#can-t-see-macos-partitions)
 * [Booting OpenCore reboots to BIOS](./extended/opencore-issues.md#booting-opencore-reboots-to-bios)
 
 For the rest of the possible issues, see here:
@@ -37,8 +36,8 @@ For the rest of the possible issues, see here:
 This is where macOS's bootloader(boot.efi) comes onto the scene, specifically what it does is prep the environment for the kernel to load and where OpenCore injects kexts. If you're getting stuck at this point, there's likely an issue with loading the kernel, main culprits:
 
 * [Stuck on EndRandomSeed](./extended/kernel-issues.md#stuck-on-endrandomseed)
-* [Stuck on `[EB|#LOG:EXITBS:START]`](./extended/kernel-issues.md#stuck-on-eblogexitbsstart)
-* [`Couldn't allocate runtime area` errors](./extended/kernel-issues.md#couldnt-allocate-runtime-area-errors)
+* [Stuck on `[EB|#LOG:EXITBS:START]`](./extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
+* [`Couldn't allocate runtime area` errors](./extended/kernel-issues.md#couldn-t-allocate-runtime-area-errors)
 
 For the rest of the possible issues, see here:
 
@@ -90,7 +89,7 @@ This is where the 15 port limit and USB mapping comes into play, and where the i
 
 This is where our FakeSMC/VirtualSMC come into the scene and do their magic, DSMOS itself is a kext that verifies if your system has an SMC and will request a key. If this key is missing, then DSMOS will not decrypt the rest of the binaries and you'll get stuck here. You may also get stuck at AppleACPICPU which is just the same error.
 
-* [kextd stall[0]: AppleACPICPU](./extended/kernel-issues.md#kextd-stall0-appleacpicpu)
+* [kextd stall[0]: AppleACPICPU](./extended/kernel-issues.md#kextd-stall-0-appleacpicpu)
 
 ```
 Your karma check for today:
@@ -113,7 +112,7 @@ This is where Apple's audio driver comes in, and where AppleALC shines. Generall
 
 And here we get to the GPU driver initialization, and where WhateverGreen also does its magic. Generally errors here are due to the GPU and not WhateverGreen itself, main culprits:
 
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](./extended/kernel-issues.md#stuck-on-or-near-ioconsolessers-gioscreenlock)
+* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](./extended/kernel-issues.md#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](./extended/kernel-issues.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 
 ## macOS Handoff
@@ -124,4 +123,4 @@ And you've finally got past all that verbose! If you're getting stuck at the App
 
 * [macOS frozen right before login](./extended/kernel-issues.md#macos-frozen-right-before-login)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](./extended/kernel-issues.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [Frozen in the macOS installer after 30 seconds](./extended/userspace-issues.md#frozen-in-macos-installer-after-30-seconds)
+* [Frozen in the macOS installer after 30 seconds](./extended/userspace-issues.md#frozen-in-the-macos-installer-after-30-seconds)

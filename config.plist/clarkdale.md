@@ -2,8 +2,8 @@
 
 | Support | Version |
 | :--- | :--- |
-| Initial macOS Support | OS X 10.6.3, Snow Leopard |
 | Supported OpenCore version | 0.6.4 |
+| Initial macOS Support | OS X 10.6.3, Snow Leopard |
 | Note 1 | Apple does not support desktop Iron Lake iGPUs |
 | Note 2 | Most Lynnfield and Clarkdale boards do not support UEFI |
 
@@ -40,7 +40,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details.) |
+| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
