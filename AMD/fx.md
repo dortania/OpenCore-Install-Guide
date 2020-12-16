@@ -260,7 +260,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO
   * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
-  * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
+  * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom` will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
 * **DisableIoMapper**: NO
   * AMD doesn't have DMAR or VT-D support so irrelevant
 * **DisableLinkeditJettison**: YES
@@ -677,7 +677,7 @@ So thanks to the efforts of Ramus, we also have an amazing tool to help verify y
 
 Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
-# AMD BIOS Settings
+## AMD BIOS Settings
 
 * Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
 

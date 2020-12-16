@@ -188,7 +188,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs, thankfully Ivy bridge E is officially supported so no patching pessary.
+Needed for spoofing unsupported CPUs, thankfully Nehalem is officially supported so no patching pessary.
 
 ### Force
 

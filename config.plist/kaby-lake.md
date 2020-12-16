@@ -347,7 +347,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
-| BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
 | SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
@@ -364,8 +363,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
 * **AuthRestart**: NO
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
-* **BlacklistAppleUpdate**: YES
-  * Used for blocking firmware updates, used as extra level of protection as macOS Big Sur no longer uses `run-efi-updater` variable
 * **BlacklistAppleUpdate**: YES
   * Used for blocking firmware updates, used as extra level of protection as macOS Big Sur no longer uses `run-efi-updater` variable
 * **BootProtect**: None
@@ -555,13 +552,16 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ::: details More in-depth Info
 
-* **SpoofVendor**: YES
-  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
 
 * **SystemMemoryStatus**: Auto
   * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
+* **ProcessorType**: `0`
+  * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
+  
+* **SpoofVendor**: YES
+  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
 
 * **UpdateDataHub**: YES
   * Update Data Hub fields
@@ -574,6 +574,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 * **UpdateSMBIOSMode**: Create
   * Replace the tables with newly allocated EfiReservedMemoryType, use Custom on Dell laptops requiring CustomSMBIOSGuid quirk
+  * Setting to `Custom` with `CustomSMBIOSGuid` quirk enabled can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
 
 :::
 
