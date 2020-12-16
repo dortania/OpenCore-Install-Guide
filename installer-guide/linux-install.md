@@ -8,6 +8,7 @@ To start you'll need the following:
 
 * 4GB USB Stick
 * [macrecovery.py](https://github.com/acidanthera/OpenCorePkg/releases)
+  * Note: 0.6.4 and older's macrecovery.py build is broken, you'll want to [download master's copy](https://github.com/acidanthera/OpenCorePkg/archive/master.zip) and use the one located under `Utilities/macrecovery/`
 
 ## Downloading macOS
 

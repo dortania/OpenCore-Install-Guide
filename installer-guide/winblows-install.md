@@ -14,6 +14,8 @@ To start you'll need the following:
 
 To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next copy the folder path for the macrecovery folder:
 
+* Note: 0.6.4 and older's macrecovery.py build is broken, you'll want to [download master's copy](https://github.com/acidanthera/OpenCorePkg/archive/master.zip) and use the one located under `Utilities/macrecovery/`
+
 ![](../images/installer-guide/winblows-install-md/file-path.png)
 
 From here, you'll want to open up a Command Prompt and cd into the macrecovery folder that we copied earlier:

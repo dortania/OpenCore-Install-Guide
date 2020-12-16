@@ -166,6 +166,8 @@ To start, you'll want to use macrecovery.py instead. This tool is actually alrea
 
 Instructions for running are quite simple, choose from one of the below commands depending on which OS you want to download:
 
+* Note: 0.6.4 and older's macrecovery.py build is broken, you'll want to [download master's copy](https://github.com/acidanthera/OpenCorePkg/archive/master.zip) and use the one located under `Utilities/macrecovery/`
+
 ```sh
 # Lion(10.7):
 python ./macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
