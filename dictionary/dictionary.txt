@@ -130,6 +130,7 @@ AlpsT4USB
 AmazonBasics
 Andrey's
 Andrey1970AppleLife
+Aorus
 ApfsDriverLoader
 Apianti
 Apianti's
