@@ -82,13 +82,11 @@ From here, jump to [Setting up the installer](#setting-up-the-installer) to fini
 
 This method allows us to download full installers from Apple, however is limited to 10.10, Yosemite, so older OSes will need to be grabbed via the "Online Method" mentioned below.
 
-To start, head to one of the following links:
+To start, go to the following link:
 
-* [How to upgrade to OS X Yosemite](https://support.apple.com/en-ca/HT210717)
-* [How to upgrade to OS X El Capitan](https://support.apple.com/en-us/HT206886)
-* [How to upgrade to macOS Sierra](https://support.apple.com/en-us/HT208202)
+* [How to get old versions of macOS](https://support.apple.com/en-us/HT211683)
 
-On step 4, you'll see either `InstallOS.dmg` for Sierra or `InstallMacOSX.dmg` for El Capitan and older. Download your desired version and a .pkg file should be provided.
+Download your desired version and a .pkg file should be provided.
 
 Depending on what OS you're on, you can run this script and head to [Setting up the installer](#setting-up-the-installer) however if you receive this error:
 
@@ -167,6 +165,8 @@ To start, you'll want to use macrecovery.py instead. This tool is actually alrea
 ![](../images/installer-guide/legacy-mac-install-md/macrecovery.png)
 
 Instructions for running are quite simple, choose from one of the below commands depending on which OS you want to download:
+
+* Note: 0.6.4 and older's macrecovery.py build is broken, you'll want to [download master's copy](https://github.com/acidanthera/OpenCorePkg/archive/master.zip) and use the one located under `Utilities/macrecovery/`
 
 ```sh
 # Lion(10.7):
@@ -303,7 +303,7 @@ Now we'll be formatting the USB to prep for both the macOS installer and OpenCor
 Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372). Note that the command is made for USB's formatted with the name `MyVolume`:
 
 ```sh
-sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
 This will take some time so you may want to grab a coffee or continue reading the guide (to be fair you really shouldn't be following this guide step by step without reading the whole thing first).
@@ -315,6 +315,9 @@ You can also replace the `createinstallmedia` path with that of where your insta
 Pulled from Apple's own site: [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
 
 ```sh
+# Catalina
+sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+
 # Mojave
 sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 
