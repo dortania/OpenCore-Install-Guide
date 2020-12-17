@@ -75,6 +75,7 @@
 3D
 43a0
 4G
+4K
 50F4
 5700XT
 64MB
@@ -776,9 +777,9 @@ TextMode
 TgtBridge
 ThinkPad
 Thinkpad
+ThrRip
 ThreadRipper
 Threadripper
-ThrRip
 TimeMachine
 Touchbase
 Trackpad
