@@ -90,7 +90,7 @@ For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want t
 
 * [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
 
-Reminder if you don't plan to boot these older OSes, you can ignore these kexts.
+Reminder if you don't plan to boot these older OSes, you can ignore this kext.
 
 * **OS X 10.4 and 10.5 note**: Even on 64-bit CPUs, OS X's kernel space is still 32-bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
 
@@ -147,7 +147,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
-  * Requires OS X 10.9 or newer, 10.8-10.8 users can use the IntelSnowMausi instead for older OSes
+  * Requires OS X 10.9 or newer, 10.6-10.8 users can use the IntelSnowMausi instead for older OSes
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
@@ -287,6 +287,7 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * Used for patching non-Apple/non-Fenvi Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
   * Requires OS X 10.10 or newer
+  * For Big Sur see [Big Sur Known Issues](./extras/big-sur#known-issues) for extra steps regarding AirPortBrcm4360 drivers.
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/non-Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext

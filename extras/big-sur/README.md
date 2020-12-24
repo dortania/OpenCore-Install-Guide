@@ -21,7 +21,7 @@ It's that time of year again and with it, and a new macOS beta has been dropped.
 * [Troubleshooting](#troubleshooting)
   * [Stuck at Forcing CS_RUNTIME for entitlement](#stuck-at-forcing-cs-runtime-for-entitlement)
   * [Stuck at PCI Configuration Begins for Intel's X99 and X299 boards](#stuck-at-pci-configuration-begins-for-intel-s-x99-and-x299-boards)
-  * [Stuck on ramrod(^^^^^^^^^^^^^)](##stuck-on-ramrod)
+  * [Stuck on ramrod(^^^^^^^^^^^^^)](#stuck-on-ramrod)
   * [X79 and X99 Kernel Panic on IOPCIFamily](#x79-and-x99-kernel-panic-on-iopcifamily)
   * [DeviceProperties injection failing](#deviceproperties-injection-failing)
   * [Keyboard and Mouse broken](#keyboard-and-mouse-broken)
@@ -160,9 +160,9 @@ And while not an issue, SIP has now gained a new bit so to properly disable SIP 
 
 Guides have been updated to accommodate Big Sur, see the applicable OS environment for you:
 
-* [macOS users](./../installer-guide/mac-install.md)
-* [Windows users](./../installer-guide/winblows-install.md)
-* [Linux users](./../installer-guide/linux-install.md)
+* [macOS users](../../installer-guide/mac-install.md)
+* [Windows users](../../installer-guide/winblows-install.md)
+* [Linux users](../../installer-guide/linux-install.md)
 
 ## Troubleshooting
 

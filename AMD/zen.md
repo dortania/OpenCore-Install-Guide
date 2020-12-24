@@ -35,7 +35,7 @@ Now with all that, a quick reminder of the tools we need
 
 ::: tip Info
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 | Required_SSDTs | Description |
 | :--- | :--- |
@@ -275,7 +275,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
 * **CustomSMBIOSGuid**: NO
   * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
-  * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
+  * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom` will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
 * **DisableIoMapper**: NO
   * AMD doesn't have DMAR or VT-D support so irrelevant
 * **DisableLinkeditJettison**: YES
@@ -710,7 +710,8 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 ### Enable
 
-* Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x2000` to boot-args. Do not have both this option and npci enabled at the same time**)
+* Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x2000` to boot-args. Do not have both this option and npci enabled at the same time.**)
+  * If you are on a Gigabyte/Aorus or an AsRock motherboard, enabling this option may break certain drivers(ie. Ethernet) and/or boot failures on other OSes, if it does happen then disable this option and opt for npci instead
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
 * SATA Mode: AHCI

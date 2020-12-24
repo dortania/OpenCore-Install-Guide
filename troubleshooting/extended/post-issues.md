@@ -22,6 +22,7 @@ Issues revolving around macOS once properly installed.
 * [Disabling SIP](#disabling-sip)
 * [Rolling back APFS Snapshots](#rolling-back-apfs-snapshots)
 * [Apple Watch Unlock Issues](#apple-watch-unlock-issues)
+* [4K iGPU output issues over HDMI](#4k-igpu-output-issues-over-hdmi)
 
 ## Broken iMessage and Siri
 
@@ -319,3 +320,18 @@ For those with Apple Watch Unlock issues, verify the following:
 If the above are met, and you still have unlock issues we recommend running through the below guide:
 
 * [Fixing Auto Unlock](https://forums.macrumors.com/threads/watchos-7-beta-5-unlock-mac-doesnt-work.2250819/page-2?post=28904426#post-28904426)
+
+## 4K iGPU output issues over HDMI
+
+For machines with HDMI 2.0 capable ports with resolutuion issues, verify the following:
+
+* 4k output works correctly in Windows
+* Monitor is set explicitly to HDMI 2.0
+  * If using an HDMI to DisplayPort converter, ensure the monitor is set to DisplayPort1.2 or higher
+* Ensure enough iGPU memory has been allocated
+  * For Broadwell and newer, 64MB is expected to be allocated
+  * Machines relying on WhateverGreen's `framebuffer-stolenmem` property should know this can cause 4k output issues. Please ensure you can set the iGPU's memory to 64MB allowing you to remove these properties
+* Laptops and many desktop users may need this boot-arg:
+  * `-cdfon`
+
+For all other troubleshooting, please reference [WhateverGreen's Intel docs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)

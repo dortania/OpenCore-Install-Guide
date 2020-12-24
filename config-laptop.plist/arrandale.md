@@ -2,6 +2,8 @@
 
 | Support | Version |
 | :--- | :--- |
+| Supported OpenCore version | 0.6.4 |
+| Initial macOS Support | OS X 10.6.3, Snow Leopard |
 | Note 1 | Arrandale's iGPU is only officially supported up-to macOS 10.13 |
 | Note 2 | Most Clarksfield and Arrandale boards do not support UEFI |
 
@@ -32,7 +34,7 @@ Now with all that, a quick reminder of the tools we need
 
 ::: tip Info
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
@@ -511,7 +513,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 * **LegacyOverwrite**: NO
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
 
-* **LegacySchema**:
+* **LegacySchema**
   * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
 * **WriteFlash**: YES
@@ -525,7 +527,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this Sandy Bridge example, we'll chose the MacBookPro6,1 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
+For this Arrandale example, we'll chose the MacBookPro6,1 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
 
 | SMBIOS | CPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
@@ -536,13 +538,13 @@ Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selectin
 
 ```sh
   #######################################################
- #                MacBookPro8,2 SMBIOS Info            #
+ #             MacBookPro6,1 SMBIOS Info               #
 #######################################################
 
-Type:         MacBookPro8,2
-Serial:       C02KCYZLDNCW
-Board Serial: C02309301QXF2FRJC
-SmUUID:       A154B586-874B-4E57-A1FF-9D6E503E4580
+Type:         MacBookPro6,1
+Serial:       C02G3ZYFDC79
+Board Serial: C021291014NDCMVCB
+SmUUID:       C8A54C45-8E99-440A-9A52-1B62A0074FA5
 ```
 
 The `Type` part gets copied to Generic -> SystemProductName.
@@ -553,9 +555,9 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-##### Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"
+**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
 [Apple Check Coverage page](https://checkcoverage.apple.com)
 
@@ -682,7 +684,7 @@ Used for exempting certain memory regions from OSes to use, mainly relevant for 
 
 And now you're ready to save and place it into your EFI under EFI/OC.
 
-For those having booting issues, please make sure to read the [Troubleshooting section](https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/troubleshooting.html) first and if your questions are still unanswered we have plenty of resources at your disposal:
+For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
@@ -733,4 +735,4 @@ These are the main options to check for, if you can't find it or an equivalent f
 * DVMT Pre-Allocated(iGPU Memory): 32MB
 * SATA Mode: AHCI
 
-## Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Now with all this done, head to the [Installation Page](../installation/installation-process.md)

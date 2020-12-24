@@ -75,6 +75,7 @@
 3D
 43a0
 4G
+4K
 50F4
 5700XT
 64MB
@@ -119,6 +120,7 @@ Acidanthera
 Acidanthera's
 Acpi
 AcpiSamples
+AirPortBrcm4360
 AirportAtheros40
 AirportBrcmFixup
 AirportItlwm
@@ -129,6 +131,7 @@ AlpsT4USB
 AmazonBasics
 Andrey's
 Andrey1970AppleLife
+Aorus
 ApfsDriverLoader
 Apianti
 Apianti's
@@ -774,6 +777,7 @@ TextMode
 TgtBridge
 ThinkPad
 Thinkpad
+ThrRip
 ThreadRipper
 Threadripper
 TimeMachine
