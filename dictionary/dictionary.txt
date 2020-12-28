@@ -76,6 +76,7 @@
 43a0
 4G
 4K
+4k
 50F4
 5700XT
 64MB
@@ -850,6 +851,7 @@ WhateverGreen's
 Wifi
 X299
 X3100
+X470
 X520
 X540
 X570
@@ -1124,6 +1126,7 @@ reimplements
 renderer
 repo
 repos
+resolutuion
 savvamitrofanov
 shiki
 shikigva

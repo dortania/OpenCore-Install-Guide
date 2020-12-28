@@ -54,10 +54,11 @@ The main culprits to watch for in the Booter section are:
 * **SetupVirtualMap**
   * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
     * Mainly Z390 and older require this quirk enabled
-    * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
+    * However, certain firmwares(mainly 2020+) do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
       * Intel's Comet Lake series(B460, H470, Z490, etc)
       * AMD's B550 and A520(Latest BIOS on X570 are also included now)
+	    * Many B450 and X470 boards with late 2020 BIOS updates are also included
       * AMD's TRx40
       * VMs like QEMU
       * X299 2020+ BIOS updates(This applies to other X299 boards on the latest BIOS that released either in late 2019 or 2020+)
