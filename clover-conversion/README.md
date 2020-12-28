@@ -69,6 +69,8 @@ In you config.plist:
 
 And on your initial boot of OpenCore, select `Reset NVRAM` boot option. This will wipe everything and reboot the system when finished.
 
+* Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
+
 ## Optional: Avoiding SMBIOS injection into other OSes
 
 By default OpenCore will inject SMBIOS data into all OSes, the reason for this is 2 parts:
