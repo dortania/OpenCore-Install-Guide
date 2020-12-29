@@ -17,7 +17,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: '0'
-          persist-credentials: false 
+          persist-credentials: false
+          submodules: 'recursive'
       - name: Install
         run: npm install
       - name: Build
