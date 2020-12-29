@@ -2,10 +2,10 @@
 
 ## Requirements
 
-- VirtualBox
-- A computer running macOS
-- The desired macOS installation software installed to /Applications
-- A USB attached hard disk or SSD
+* VirtualBox
+* A computer running macOS
+* The desired macOS installation software installed to /Applications
+* A USB attached hard disk or SSD
 
 ## Converting Installation Media
 
@@ -34,12 +34,12 @@ Next, start VirtualBox as root and create a new macOS virtual machine.
 sudo VirtualBox
 ```
 
-- Name: Big Sur
-- Type: MacOS 64bit
+* Name: Big Sur
+* Type: MacOS 64bit
 
-- 2-4 CPU cores
-- 4-8 GB RAM
-- Do not create a virtual disk.
+* 2-4 CPU cores
+* 4-8 GB RAM
+* Do not create a virtual disk.
 
 Attach the disks that you've created in previous steps as shown:
 

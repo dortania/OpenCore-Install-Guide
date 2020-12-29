@@ -1,0 +1,3 @@
+[submodule "shared"]
+	path = shared
+	url = https://github.com/dortania/build-files.git
