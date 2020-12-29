@@ -41,7 +41,7 @@ Once you boot the USB, you'll likely be greeted to the following boot options:
 3. OpenShell.efi
 4. Reset NVRAM
 
-For use, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"** if created in Linux or Windows and **"Install macOS Catalina (External)"** if created in macOS.
+For us, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"** if created in Linux or Windows and **"Install macOS Catalina (External)"** if created in macOS.
 
 ## macOS Installer
 
