@@ -80,7 +80,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualizeMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| SetupVirtualMap | YES | Note B550, A520 and TRx40 boards should disable this. Newer BIOS versions of X570 also require this off |
+| SetupVirtualMap | YES | - Note B550, A520 and TRx40 boards should disable this. Newer BIOS versions of X570 also require this off<br/>- X470 and B450 with late 2020 BIOS updates also require this disabled |
 | SyncRuntimePermissions | YES | |
 :::
 
