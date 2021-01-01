@@ -192,7 +192,7 @@ Note: Apple has kept Ivy Bridge's iGPU drivers present in macOS 11, Big Sur, how
 | [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
 | [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
 | [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | Requires `agdpmod=pikera` in boot-args |
-| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.1 | ^^ | ^^ |
+| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.2? | ^^ | Current drivers do not function |
 
 :::
 
