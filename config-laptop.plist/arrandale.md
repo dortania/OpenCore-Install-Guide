@@ -661,7 +661,8 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 ::: details More in-depth Info
 
-￿
+* **DeduplicateBootOrder**: YES
+  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 
 * **IgnoreInvalidFlexRatio**: YES
   * Fix for when MSR_FLEX_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems
