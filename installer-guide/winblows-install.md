@@ -7,6 +7,9 @@ While you don't need a fresh install of macOS to use OpenCore, some users prefer
 To start you'll need the following:
 
 * 4GB USB Stick
+
+* For USB larger than 16 GB to format in FAT32 use [Rufus method](#rufus-method)
+
 * [macrecovery.py](https://github.com/acidanthera/OpenCorePkg/releases)
   * This will require [Python installed](https://www.python.org/downloads/)
 
@@ -87,9 +90,12 @@ Here we'll be formatting our USB and adding macOS onto it, we have 2 options:
 * [Disk Management method](#disk-management-method)
   * GUI Based, simplest way
   * Only UEFI systems are supported(ex. 2012+)
+* [Rufus method](#rufus-method)
+  * GUI Based, simplest way
+  * For larger USB drives(16GB+)
 * [diskpart method](#diskpart-method)
   * Command line based, little more work
-  * Required for legacy systems(ie. non-UEFI, pre-2012)
+  * Required for legacy systems(ie. non-UEFI, pre-2012
 
 ### Disk Management method
 
@@ -104,6 +110,28 @@ Simply open up Disk Management, and format your USB as FAT32:
 * Otherwise, right click the partition on the USB and click Format and set it to FAT32.
 
 ![](../images/installer-guide/winblows-install-md/DiskManagement.jpg)
+
+Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
+
+![](../images/installer-guide/winblows-install-md/com-recovery.png)
+
+Now grab OpenCorePkg you downloaded earlier and open it:
+
+![](../images/installer-guide/winblows-install-md/base-oc-folder.png)
+
+Here we see both IA32(32 Bit CPUs) and X64(64 Bit CPUs) folders, choose the one that's most appropriate to your hardware and open it. Next grab the EFI folder inside and place this on the root of the USB drive along side com.apple.recovery.boot. Once done it should look like this:
+
+![](../images/installer-guide/winblows-install-md/com-efi-done.png)
+
+### Rufus method
+
+1. Download Rufus(https://rufus.ie/)
+2. Set the BOOT selection as not bootable
+3. Set File System as Large FAT32
+4. Click Start
+5. Delete all file autorun in USB Drive partition
+
+![](../images/installer-guide/winblows-install-md/format-usb-rufus.png)
 
 Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
 
