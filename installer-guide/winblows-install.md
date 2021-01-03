@@ -125,7 +125,7 @@ Here we see both IA32(32 Bit CPUs) and X64(64 Bit CPUs) folders, choose the one 
 
 ### Rufus method
 
-1. Download Rufus(https://rufus.ie/)
+1. Download [Rufus](https://rufus.ie/)
 2. Set the BOOT selection as not bootable
 3. Set File System as Large FAT32
 4. Click Start
