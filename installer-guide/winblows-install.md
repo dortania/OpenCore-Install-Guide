@@ -1,6 +1,6 @@
 # Making the installer in Windows
 
-* Supported version: 0.6.4
+* Supported version: 0.6.5
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
@@ -13,8 +13,6 @@ To start you'll need the following:
 ## Downloading macOS
 
 To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next copy the folder path for the macrecovery folder:
-
-* Note: 0.6.4 and older's macrecovery.py build is broken, you'll want to [download master's copy](https://github.com/acidanthera/OpenCorePkg/archive/master.zip) and use the one located under `Utilities/macrecovery/`
 
 ![](../images/installer-guide/winblows-install-md/file-path.png)
 

@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.4 |
+| Supported OpenCore version | 0.6.5 |
 | Initial macOS Support | macOS 10.12, Sierra |
 
 ## Starting Point
