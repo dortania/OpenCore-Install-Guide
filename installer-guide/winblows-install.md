@@ -95,7 +95,7 @@ Here we'll be formatting our USB and adding macOS onto it, we have 2 options:
   * For larger USB drives(16GB+)
 * [diskpart method](#diskpart-method)
   * Command line based, little more work
-  * Required for legacy systems(ie. non-UEFI, pre-2012
+  * Required for legacy systems(ie. non-UEFI, pre-2012)
 
 ### Disk Management method
 
