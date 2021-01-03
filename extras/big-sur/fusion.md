@@ -2,11 +2,11 @@
 
 ## Requirements
 
-- VMware Fusion
-- Java (both the JRE and JDK work)
-- A computer running macOS
-- The desired macOS installation software installed to /Applications
-- A USB attached hard disk or SSD, or an internal disk that can be passed through entirely
+* VMware Fusion
+* Java (both the JRE and JDK work)
+* A computer running macOS
+* The desired macOS installation software installed to /Applications
+* A USB attached hard disk or SSD, or an internal disk that can be passed through entirely
 
 ## Converting Installation Media
 
@@ -77,9 +77,9 @@ You have two options here: pass through a raw disk, or pass through an entire US
 
 14. Select "Virtual Machine" > "Power On To Firmware" from the menu bar, so that we can boot to the VM BIOS.
 
-    - (For raw disk passthrough) If you get prompted for your password when you do this, enter it. Even though the prompt mentions Boot Camp disks, it is still working normally.
+    * (For raw disk passthrough) If you get prompted for your password when you do this, enter it. Even though the prompt mentions Boot Camp disks, it is still working normally.
 
-    - If you get an error that the resource is busy like below, run the following in Terminal and try again:
+    * If you get an error that the resource is busy like below, run the following in Terminal and try again:
 
     ```bash
     diskutil list

@@ -26,6 +26,8 @@ Default sample config is in Russian because slavs rule the Hackintosh world, che
 
 You may also need to reset NVRAM in the boot picker as well
 
+* Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
+
 Still didn't work? Well time for the big guns. We'll force remove that exact property and let OpenCore rebuild it:
 
 `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`

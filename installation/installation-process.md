@@ -3,7 +3,7 @@
 Now that you've finished setting up OpenCore, you're finally able to boot, main things to keep in mind:
 
 * Enable BIOS settings optimal for macOS
-* Read up on the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/)
+* Read up on the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) and look at [Multiboot](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html#prerequisites) specific quirks
   * Mainly relevant for those running a single drive for multiple OSes
 * And a copy of the [General Troubleshooting](../troubleshooting/troubleshooting.md) page
 * Read up on the [macOS Boot Process](../troubleshooting/boot.md)
@@ -41,7 +41,7 @@ Once you boot the USB, you'll likely be greeted to the following boot options:
 3. OpenShell.efi
 4. Reset NVRAM
 
-For use, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"** if created in Linux or Windows and **"Install macOS Catalina (External)"** if created in macOS.
+For us, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"** if created in Linux or Windows and **"Install macOS Catalina (External)"** if created in macOS.
 
 ## macOS Installer
 
