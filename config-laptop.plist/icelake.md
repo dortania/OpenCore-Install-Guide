@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.4 |
+| Supported OpenCore version | 0.6.5 |
 | Initial macOS Support | macOS 10.15, Catalina |
 
 ## Starting Point
@@ -665,9 +665,6 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 :::
 
 ::: details More in-depth Info
-
-* **DeduplicateBootOrder**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 
 * **ReleaseUsbOwnership**: YES
   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Most laptops have garbage firmwares so we'll need this as well

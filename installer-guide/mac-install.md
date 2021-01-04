@@ -1,7 +1,7 @@
 
 # Making the installer in macOS
 
-* Supported version: 0.6.4
+* Supported version: 0.6.5
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
@@ -165,8 +165,6 @@ To start, you'll want to use macrecovery.py instead. This tool is actually alrea
 ![](../images/installer-guide/legacy-mac-install-md/macrecovery.png)
 
 Instructions for running are quite simple, choose from one of the below commands depending on which OS you want to download:
-
-* Note: 0.6.4 and older's macrecovery.py build is broken, you'll want to [download master's copy](https://github.com/acidanthera/OpenCorePkg/archive/master.zip) and use the one located under `Utilities/macrecovery/`
 
 ```sh
 # Lion(10.7):
