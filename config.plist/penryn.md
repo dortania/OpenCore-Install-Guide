@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.4 |
+| Supported OpenCore version | 0.6.5 |
 | Initial macOS Support: Penryn | OS X 10.4.10, Tiger |
 | Last Supported OS: Penryn | macOS 10.13.6 High Sierra |
 | Note | iGPU support will not be covered in this guide, see here: [GMA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)|
@@ -629,9 +629,6 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 :::
 
 ::: details More in-depth Info
-
-* **DeduplicateBootOrder**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 
 * **IgnoreInvalidFlexRatio**: NO
   * Fix for when MSR_FLEX_RATIO (0x194) can't be disabled in the BIOS, required for all pre-Skylake based systems

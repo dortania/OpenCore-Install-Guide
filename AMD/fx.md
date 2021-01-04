@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.4 |
+| Supported OpenCore version | 0.6.5 |
 | Initial macOS Support | macOS 10.13, High Sierra |
 
 ## Starting Point
@@ -644,9 +644,6 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 :::
 
 ::: details More in-depth Info
-
-* **DeduplicateBootOrder**: YES
-  * Request fallback of some Boot prefixed variables from `OC_VENDOR_VARIABLE_GUID` to `EFI_GLOBAL_VARIABLE_GUID`. Used for fixing boot options.
 
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC_VENDOR_VARIABLE_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
