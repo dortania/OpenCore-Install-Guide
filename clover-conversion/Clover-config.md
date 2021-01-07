@@ -442,7 +442,7 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 
 **External Icons Patch**:
 
-* `kernel -> Quirks -> ExternalDiskIcons -> YES`
+* `Kernel -> Quirks -> ExternalDiskIcons -> YES`
 * Used for when you internal disk are seen as external on macOS
 
 **AppleRTC**
