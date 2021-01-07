@@ -14,7 +14,7 @@ See [Kexts and Firmware drivers](https://github.com/dortania/OpenCore-Install-Gu
 
 So with the transition from Clover to OpenCore we should start removing unneeded patches you may have carried along for some time:
 
-* EHCI Patches: Recommended to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
+* EHCI Patches: Recommended to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
   * change EHC1 to EH01
   * change EHC2 to EH02
 * XHCI Patches: Not needed once an [Injector kext](https://github.com/corpnewt/USBMap) is made
@@ -54,7 +54,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * Airport/WiFi Patches: [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
   * change PXSX to ARPT
 * Other purely cosmetic patches:
-  * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)
+  * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)
   * change PC00 to PCIO
   * change FPU to MATH
   * change TMR to TIMR
@@ -81,7 +81,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
 * **FixSBUS**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl)
 
 * **FixShutdown**:
   * [FixShutdown-USB-SSDT](https://github.com/dortania/OpenCore-Post-Install/blob/master/extra-files/FixShutdown-USB-SSDT.dsl)
@@ -110,11 +110,11 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * **AddPNLF**:
   * See [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html)
 * **AddMCHC**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl)
 * **AddIMEI**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl)
   * WhateverGreen will also handle fixing IMEI naming
-  * For Sandy Bridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
+  * For Sandy Bridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-IMEI.dsl)
 * **FakeLPC**:
   * `DeviceProperties -> Add -> PciRoot... -> device-id`
   * You'll want to spoof it to a supported LPC controller already in AppleLPC
