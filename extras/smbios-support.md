@@ -23,7 +23,7 @@ The main things to consider when selecting your SMBIOS:
 * USB Devices
   * Certain SMBIOS will have their own USB map which may attach to your hardware causing USB issues.
     * See here for more info: [USB Mapping](https://dortania.github.io/OpenCore-Post-Install/usb/)
-  * Also to note, Skylake+ SMBIOS will also require a [USBX device](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EC-USBX.dsl#L54L79) to fix USB current output
+  * Also to note, Skylake+ SMBIOS will also require a [USBX device](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-EC-USBX.dsl#L54L79) to fix USB current output
     * See here for more info: [Fixing USB Power](https://dortania.github.io/OpenCore-Post-Install/usb/misc/power.html)
 
 ::: details XCPM Supported SMBIOS
