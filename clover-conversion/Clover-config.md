@@ -179,7 +179,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * 1 -> `<01>`
   * 2 -> `<02>`
 
-# Cpu
+# CPU
 
 **Type**:
 
