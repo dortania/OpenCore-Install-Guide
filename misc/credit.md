@@ -30,7 +30,7 @@ And to the rest who've helped out as well, thank you!
 
 * [al3xtjames](https://github.com/al3xtjames)
 * [Andrey1970AppleLife](https://github.com/Andrey1970AppleLife)
-* [Download-Fritz](https://github.com/Download-Fritz)
+* [mhaeuser (formerly Download-Fritz)](https://github.com/mhaeuser)
 * [Goldfish64](https://github.com/Goldfish64)
 * [nms42](https://github.com/nms42)
 * [PMHeart](https://github.com/PMHeart)
