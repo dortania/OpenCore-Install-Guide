@@ -5,7 +5,7 @@
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
-To start we'll want to grab ourselves a copy of macOS. You can skip this and head to formatting the USB if you're just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the App Store or with gibMacOS.
+To start we'll want to grab ourselves a copy of macOS. You can skip this and head to formatting the USB if you're just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the App Store or with Munki's script.
 
 ## Downloading macOS: Modern OS
 
@@ -13,17 +13,19 @@ To start we'll want to grab ourselves a copy of macOS. You can skip this and hea
 
 From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
 
-For machines that need a specific OS release or can't download from the App Store, you can use the gibMacOS utility.
+For machines that need a specific OS release or can't download from the App Store, you can use the Munki's InstallInstallMacOS utility.
 
-Now let's grab [gibMacOS](https://github.com/corpnewt/gibMacOS), then unzip it into a local directory.
+In order to run it, just copy and paste the below command in a terminal window:
 
-Next run the `gibMacOS.command`:
+```sh
+mkdir ~/macOS-installer && cd ~/macOS-installer && curl -O https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py && sudo python installinstallmacos.py
+```
 
-![](../images/installer-guide/mac-install-md/gib.png)
+![](../images/installer-guide/mac-install-md/munki.png)
 
-As you can see, we get a nice list of macOS installers. If you need beta versions of macOS, you can select `C. Change Catalog`. For this example we'll choose 1:
+As you can see, we get a nice list of macOS installers. If you need a particular versions of macOS, you can select it by typing the number next to it. For this example we'll choose 10:
 
-![](../images/installer-guide/mac-install-md/gib-process.png)
+![](../images/installer-guide/mac-install-md/munki-process.png)
 
 * **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
   * For first time users, we recommend macOS 10.15, Catalina
@@ -31,44 +33,14 @@ As you can see, we get a nice list of macOS installers. If you need beta version
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
-Once finished, we have to either extract the installer or build it:
+Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called like `Install_macOS_11.1-20C69.dmg`. Mount it and you'll find the installer application.
 
-* [Extracting the installer](#extracting-the-installer)
-  * For macOS 11+
-* [Building the installer](#building-the-installer)
-  * For 10.15 and older
+* Note: We recommend to move the Install macOS.app into the `/Applications` folder, as we'll be executing commands from there.
+* Note 2: Running Cmd+Shift+G in Finder will allow you to easily jump to `~/macOS-installer`
 
-### Extracting the installer
+![](../images/installer-guide/mac-install-md/munki-done.png)
 
-For macOS 11 and newer, Apple now packages up the installer into the InstallAssistant package. This will be located under `gibMacOS/macOS Downloads/`:
-
-![](../images/extras/big-sur/readme/final-download.png)
-
-Run the InstallAssistant.pkg and point this to whichever drive you're booting off of, this is where the Install.app will be dropped:
-
-![](../images/extras/big-sur/readme/install-pkg.png)
-
-Once done, you should find it located in your Applications folder:
-
-![](../images/extras/big-sur/readme/done.png)
-
-From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work.
-
-### Building the installer
-
-For macOS 10.15 and older, the installer will be downloaded in pieces and will need to be built. Here we'll want to run the `BuildmacOSInstallApp.command`:
-
-![](../images/installer-guide/mac-install-md/gib-location.png)
-
-You will be prompted for the macOS installer files which were downloaded to `macOS Downloads` folder in the gibMacOS directory.
-
-From the Finder, drill down to the folder containing the downloaded files and either drag it to the command line or "Cmd+C" and paste it to the terminal.
-
-Once the task is completed, exit the utility. You will find the Install file in the directory.
-
-Move the newly created image to the Applications folder – this will simplify the next section.
-
-![](../images/installer-guide/mac-install-md/gib-done.png)
+![](../images/installer-guide/mac-install-md/munki-dmg.png)
 
 From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work.
 
@@ -316,6 +288,9 @@ You can also replace the `createinstallmedia` path with that of where your insta
 Pulled from Apple's own site: [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
 
 ```sh
+# Big Sur
+sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+
 # Catalina
 sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 
