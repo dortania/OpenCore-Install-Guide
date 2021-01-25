@@ -33,7 +33,7 @@ As you can see, we get a nice list of macOS installers. If you need a particular
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
-Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called like `Install_macOS_11.1-20C69.dmg`. Mount it and you'll find the installer application.
+Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called `Install_macOS_11.1-20C69.dmg` for example. Mount it and you'll find the installer application.
 
 * Note: We recommend to move the Install macOS.app into the `/Applications` folder, as we'll be executing commands from there.
 * Note 2: Running Cmd+Shift+G in Finder will allow you to easily jump to `~/macOS-installer`
