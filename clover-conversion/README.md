@@ -83,4 +83,4 @@ However, there are quirks in OpenCore that allow for SMBIOS injection to be macO
 To enable macOS-only SMBIOS injection:
 
 * Kernel -> Quirks -> CustomSMBIOSGuid -> True
-* Platforminfo -> CustomSMBIOSMode -> Custom
+* PlatformInfo -> UpdateSMBIOSMode -> Custom
