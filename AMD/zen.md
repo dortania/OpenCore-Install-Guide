@@ -708,6 +708,7 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 ### Enable
 
 * Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x2000` to boot-args. Do not have both this option and npci enabled at the same time.**)
+* On lastest firmwares on Asus' motherboards, enabling "Above 4G Decoding" will make an option called "BAR Resize" appear and setted to AUTO. This will prevent macOS from booting. Set it to Disable.
   * If you are on a Gigabyte/Aorus or an AsRock motherboard, enabling this option may break certain drivers(ie. Ethernet) and/or boot failures on other OSes, if it does happen then disable this option and opt for npci instead
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
