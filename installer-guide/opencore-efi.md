@@ -27,31 +27,39 @@ Now lets open up our EFI folder and see what's inside:
 
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
-* **Remove from Drivers:**
-  * AudioDxe.efi
-    * Unrelated to Audio support in macOS
-  * CrScreenshotDxe.efi
-    * Used for taking screenshots in UEFI, not needed by us
-  * OpenUsbKbDxe.efi
-    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
-  * UsbMouseDxe.efi
-    * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
-  * NvmExpressDxe.efi
-    * Used for Haswell and older when no NVMe driver is built into the firmware
-  * XhciDxe.efi
-    * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
-    * Only needed if you're using a USB 3.0 expansion card in an older machine
-  * HiiDatabase.efi
-    * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
-    * Not required for booting
-  * OpenCanopy.efi
-    * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
-  * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
-    * Pretty obvious when you need this, USB keyboard and mouse users don't need it
-    * Reminder: PS2 ≠ USB
+* **Remove everything from Drivers (except OpenRuntime.efi):**
 
-* **Remove everything from Tools:**
-  * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
+::: details More info on provided drivers
+
+* AudioDxe.efi
+  * Unrelated to Audio support in macOS
+* CrScreenshotDxe.efi
+  * Used for taking screenshots in UEFI, not needed by us
+* HiiDatabase.efi
+  * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
+  * Not required for booting
+* NvmExpressDxe.efi
+  * Used for Haswell and older when no NVMe driver is built into the firmware
+  * Don't use unless you know what you're doing
+* OpenCanopy.efi
+  * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
+* OpenHfsPlus.efi
+  * Open sourced HFS Plus driver, quite slow so we recommend not using unless you know what you're doing.
+* OpenUsbKbDxe.efi
+  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+* Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
+  * Pretty obvious when you need this, USB keyboard and mouse users don't need it
+  * Reminder: PS2 ≠ USB
+* UsbMouseDxe.efi
+  * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
+* XhciDxe.efi
+  * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+  * Only needed if you're using a USB 3.0 expansion card in an older machine
+
+:::
+
+* **Remove everything from Tools (except OpenShell.efi):**
+  * Way to many to list them all, but we recommend keeping OpenShell.efi for troubleshooting purposes
 
 A cleaned up EFI:
 
