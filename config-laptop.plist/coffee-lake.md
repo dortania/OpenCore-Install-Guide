@@ -312,6 +312,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Allows for reading kernel panics logs when kernel panics occur
 * **PowerTimeoutKernelPanic**: YES
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
+* **SetApfsTrimTimeout**: `-1`
+  * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
 
@@ -595,14 +597,17 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
 
-* **SystemMemoryStatus**: Auto
-  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
-  
+* **MaxBIOSVersion**: NO
+  * Sets BIOS version to Max to avoid firmware updates in Big Sur+, mainly applicable for genuine Macs.
+
 * **ProcessorType**: `0`
   * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
 
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+
+* **SystemMemoryStatus**: Auto
+  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
 
 * **UpdateDataHub**: YES
   * Update Data Hub fields
@@ -674,6 +679,10 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 * **ReleaseUsbOwnership**: YES
   * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Most laptops have garbage firmwares so we'll need this as well
+* **DisableSecurityPolicy**: NO
+  * Disables platform security policy in firmware, recommended for buggy firmwares where disabling Secure Boot does not allow 3rd party firmware drivers to load.
+  * If running a Microsoft Surface device, recommended to enable this option
+
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC_VENDOR_VARIABLE_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
 
