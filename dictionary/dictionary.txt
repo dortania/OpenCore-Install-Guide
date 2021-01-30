@@ -700,6 +700,7 @@ Rehabman's
 Reinstalls
 Rename-SSDT
 Repo
+Resizable
 Ryzen
 S3
 SAS

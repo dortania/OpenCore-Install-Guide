@@ -714,6 +714,7 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 * VT-x
 * Above 4G decoding
+  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure this is **Disabled** instead of set to Auto.
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
