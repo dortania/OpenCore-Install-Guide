@@ -27,7 +27,7 @@ Now lets open up our EFI folder and see what's inside:
 
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
-* **Keep the followingfrom Drivers**(if applicable):
+* **Keep the following from Drivers**(if applicable):
 
 | Driver | Status | Description |
 | :--- | :--- | :--- |
@@ -53,7 +53,7 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
   * Open sourced HFS Plus driver, quite slow so we recommend not using unless you know what you're doing.
 * OpenPartitionDxe.efi
   * Required to boot recovery on OS X 10.7 through 10.9
-	* Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
+    * Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
 * OpenUsbKbDxe.efi
   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi

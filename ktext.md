@@ -45,7 +45,7 @@ In addition to the above, if your hardware doesn't support UEFI(2011 and older e
 * [OpenPartitionDxe](https://github.com/acidanthera/OpenCorePkg/releases)
   * Required to boot recovery on OS X 10.7 through 10.9
     * This file is bundled with OpenCorePkg under EFI/OC/Drivers
-	* Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
+    * Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
   * Not required for OS X 10.10, Yosemite and newer
 
 These files will go in your Drivers folder in your EFI

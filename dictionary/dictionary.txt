@@ -195,6 +195,7 @@ C602
 C612
 C7030000
 CAVS
+CFBundleIdentifiers
 CFG
 CFG-Lock
 CLKT
@@ -610,6 +611,8 @@ OpenCore
 OpenCore's
 OpenCorePkg
 OpenCorePkg's
+OpenDuet
+OpenPartitionDxe
 OpenRuntime
 OpenShell
 OpenUsbKbDxe
