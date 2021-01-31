@@ -79,10 +79,14 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | DevirtualiseMmio | YES | |
+| EnableSafeModeSlide | NO | Look for `All slides are usable` in OpenCore boot log. If you find a match disable the quirk |
 | EnableWriteUnprotector | NO | |
 | ProtectUefiServices | YES | Needed on Z390 system |
+| ProvideCustomSlide | NO | Look for `All slides are usable` in OpenCore boot log. If you find a match disable the quirk |
 | RebuildAppleMemoryMap | YES | |
 | SyncRuntimePermissions | YES | |
+
+
 :::
 
 ::: details More in-depth Info
