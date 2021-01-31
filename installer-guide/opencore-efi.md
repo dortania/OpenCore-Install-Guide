@@ -27,7 +27,13 @@ Now lets open up our EFI folder and see what's inside:
 
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
-* **Remove everything from Drivers (except OpenRuntime.efi):**
+* **Keep the followingfrom Drivers**(if applicable):
+
+| Driver | Status | Description |
+| :--- | :--- | :--- |
+| OpenUsbKbDxe.efi | <span style="color:#30BCD5"> Optional </span> | Required for non-UEFI systems(pre-2012) |
+| OpenPartitionDxe.efi | ^^ | Required to boot macOS 10.7-10.9 recovery |
+| OpenRuntime.efi | <span style="color:red"> Required </span> | Required for proper operation |
 
 ::: details More info on provided drivers
 
@@ -45,6 +51,9 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
   * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
 * OpenHfsPlus.efi
   * Open sourced HFS Plus driver, quite slow so we recommend not using unless you know what you're doing.
+* OpenPartitionDxe.efi
+  * Required to boot recovery on OS X 10.7 through 10.9
+	* Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
 * OpenUsbKbDxe.efi
   * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
@@ -58,8 +67,11 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
 
 :::
 
-* **Remove everything from Tools (except OpenShell.efi):**
-  * Way to many to list them all, but we recommend keeping OpenShell.efi for troubleshooting purposes
+* **Keep the following from Tools:**
+
+| Tool | Status | Description |
+| :--- | :--- | :--- |
+| OpenShell.efi | <span style="color:#30BCD5"> Optional </span> | Recommended for easier debugging |
 
 A cleaned up EFI:
 
