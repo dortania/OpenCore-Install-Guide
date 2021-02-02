@@ -18,7 +18,7 @@ Before we can jump head first into making an OpenCore based system, we need to g
 4. <span style="color:red">_**[CRUCIAL]**_</span> A machine that is compatible as seen in the _**Compatibility**_ section.
    * [Hardware Limitations page](macos-limits.md)
 5. <span style="color:red">_**[CRUCIAL]**_</span> A minimum of:
-   * 12GB USB if you're going to use macOS to create the USB
+   * 16GB USB if you're going to use macOS to create the USB
    * 4GB USB if you're going to use Windows or Linux for USB creation
 6. <span style="color:red">_**[CRUCIAL]**_</span> An **Ethernet connection** (no WiFi dongles, Ethernet USB adapter may work depending on macOS support) and you must know your LAN card's model
    * You must either have a physical Ethernet port, or a compatible macOS Ethernet dongle/adapter. In case you have a [compatible WiFi card](https://dortania.github.io/Wireless-Buyers-Guide/), you can also use that.

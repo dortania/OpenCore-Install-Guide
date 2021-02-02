@@ -65,6 +65,7 @@ DirectGopCacheMode
 DirectGopRendering
 DisableIoMapper
 DisableRtcChecksum
+DisableSecurityPolicy
 DisableSingleUser
 DisableVariableWrite
 DisableWatchDog
@@ -110,6 +111,7 @@ LegacyOverwrite
 LegacySchema
 Lifewire
 MLB
+MaxBIOSVersion
 MaxKernel
 MemoryFormFactor
 MinDate
@@ -158,6 +160,7 @@ SMBIOS
 SanitiseClearScreen
 ScanPolicy
 SerialInit
+SetApfsTrimTimeout
 SetupVirtualMap
 ShowPicker
 SignalAppleOS

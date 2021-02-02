@@ -63,7 +63,7 @@ Firmware Requirements:
 * OS X 10.4.1 through 10.4.7 require EFI32 (i.e. IA32 (32-bit) version of OpenCore)
   * OS X 10.4.8 through 10.7.5 support both EFI32 and EFI64
 * OS X 10.8 and newer require EFI64 (i.e. x64 (64-bit) version of OpenCore)
-* OS X 10.7 through 10.9 require PartitionDxe.efi to boot the Recovery partition
+* OS X 10.7 through 10.9 require OpenPartitionDxe.efi to boot the Recovery partition
 
 Kernel Requirements:
 

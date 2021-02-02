@@ -1,6 +1,6 @@
 # Gathering files
 
-* Supported version: 0.6.5
+* Supported version: 0.6.6
 
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
@@ -24,10 +24,10 @@ Firmware drivers are drivers used by OpenCore in the UEFI environment. They're m
 
 For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
 
-* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
+* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:red">Required</span>)
   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
   * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons), see the legacy section below
-* [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+* [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)(<span style="color:red">Required</span>)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
   * Reminder this was bundled in OpenCorePkg we downloaded earlier
 
@@ -42,9 +42,10 @@ In addition to the above, if your hardware doesn't support UEFI(2011 and older e
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons))
   * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
-* [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
+* [OpenPartitionDxe](https://github.com/acidanthera/OpenCorePkg/releases)
   * Required to boot recovery on OS X 10.7 through 10.9
-  * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons)), you'll want to use [PartitionDxeLegacy](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxeLegacy.efi) due to missing RDRAND instruction.
+    * This file is bundled with OpenCorePkg under EFI/OC/Drivers
+    * Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
   * Not required for OS X 10.10, Yosemite and newer
 
 These files will go in your Drivers folder in your EFI
@@ -55,8 +56,6 @@ For those with 32-Bit CPUs, you'll want to grab these drivers as well
 
 * [HfsPlus32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus32.efi)
   * Alternative to HfsPlusLegacy but for 32-bit CPUs, don't mix this with other HFS .efi drivers
-* [PartitionDxe32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe32.efi)
-  * Alternative to PartitionDxeLegacy but for 32-bit CPUs, don't mix this with other PartitionDxe .efi drivers
 
 :::
 
@@ -76,11 +75,11 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 Without the below 2, no system is bootable:
 
-* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
+* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
   * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
   * Requires OS X 10.6 or newer
-* [Lilu](https://github.com/acidanthera/Lilu/releases)
+* [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">Required</span>)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
   * Note that Lilu and plugins requires OS X 10.8 or newer to function
   
@@ -116,7 +115,7 @@ The below plugins are not required to boot, and merely add extra functionality t
 
 ### Graphics
 
-* [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
+* [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
   * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
   * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
   * Requires OS X 10.8 or newer

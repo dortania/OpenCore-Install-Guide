@@ -1,6 +1,6 @@
 # Adding The Base OpenCore Files
 
-* Supported version: 0.6.5
+* Supported version: 0.6.6
 
 To setup OpenCore’s folder structure, you’ll want to grab the EFI folder found in [OpenCorePkg's releases](https://github.com/acidanthera/OpenCorePkg/releases/). Note that they will be under either the IA32 or X64 folders, the former for 32-bit Firmwares and the latter for 64-bit Firmwares:
 
@@ -27,31 +27,51 @@ Now lets open up our EFI folder and see what's inside:
 
 Now something you'll notice is that it comes with a bunch of files in `Drivers` and `Tools` folder, we don't want most of these:
 
-* **Remove from Drivers:**
-  * AudioDxe.efi
-    * Unrelated to Audio support in macOS
-  * CrScreenshotDxe.efi
-    * Used for taking screenshots in UEFI, not needed by us
-  * OpenUsbKbDxe.efi
-    * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
-  * UsbMouseDxe.efi
-    * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
-  * NvmExpressDxe.efi
-    * Used for Haswell and older when no NVMe driver is built into the firmware
-  * XhciDxe.efi
-    * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
-    * Only needed if you're using a USB 3.0 expansion card in an older machine
-  * HiiDatabase.efi
-    * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
-    * Not required for booting
-  * OpenCanopy.efi
-    * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
-  * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
-    * Pretty obvious when you need this, USB keyboard and mouse users don't need it
-    * Reminder: PS2 ≠ USB
+* **Keep the following from Drivers**(if applicable):
 
-* **Remove everything from Tools:**
-  * Way to many to list them all, but I recommend keeping OpenShell.efi for troubleshooting purposes
+| Driver | Status | Description |
+| :--- | :--- | :--- |
+| OpenUsbKbDxe.efi | <span style="color:#30BCD5"> Optional </span> | Required for non-UEFI systems(pre-2012) |
+| OpenPartitionDxe.efi | ^^ | Required to boot macOS 10.7-10.9 recovery |
+| OpenRuntime.efi | <span style="color:red"> Required </span> | Required for proper operation |
+
+::: details More info on provided drivers
+
+* AudioDxe.efi
+  * Unrelated to Audio support in macOS
+* CrScreenshotDxe.efi
+  * Used for taking screenshots in UEFI, not needed by us
+* HiiDatabase.efi
+  * Used for fixing GUI support like OpenShell.efi on Sandy Bridge and older
+  * Not required for booting
+* NvmExpressDxe.efi
+  * Used for Haswell and older when no NVMe driver is built into the firmware
+  * Don't use unless you know what you're doing
+* OpenCanopy.efi
+  * This is OpenCore's optional GUI, we'll be going over how to set this up in [Post Install](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) so remove this for now
+* OpenHfsPlus.efi
+  * Open sourced HFS Plus driver, quite slow so we recommend not using unless you know what you're doing.
+* OpenPartitionDxe.efi
+  * Required to boot recovery on OS X 10.7 through 10.9
+    * Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
+* OpenUsbKbDxe.efi
+  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on Ivy Bridge and newer](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+* Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
+  * Pretty obvious when you need this, USB keyboard and mouse users don't need it
+  * Reminder: PS2 ≠ USB
+* UsbMouseDxe.efi
+  * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
+* XhciDxe.efi
+  * Used for Sandy Bridge and older when no XHCI driver is built into the firmware
+  * Only needed if you're using a USB 3.0 expansion card in an older machine
+
+:::
+
+* **Keep the following from Tools:**
+
+| Tool | Status | Description |
+| :--- | :--- | :--- |
+| OpenShell.efi | <span style="color:#30BCD5"> Optional </span> | Recommended for easier debugging |
 
 A cleaned up EFI:
 

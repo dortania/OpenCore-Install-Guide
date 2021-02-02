@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.5 |
+| Supported OpenCore version | 0.6.6 |
 | Initial macOS Support | macOS 10.13, High Sierra |
 
 ## Starting Point
@@ -285,6 +285,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Allows for reading kernel panics logs when kernel panics occur
 * **PowerTimeoutKernelPanic**: YES
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
+* **SetApfsTrimTimeout**: `-1`
+  * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
 
@@ -389,8 +391,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
 * **BlacklistAppleUpdate**: YES
   * Used for blocking firmware updates, used as extra level of protection as macOS Big Sur no longer uses `run-efi-updater` variable
-* **BootProtect**: None
-  * Allows the use of Bootstrap.efi inside EFI/OC/Bootstrap instead of BOOTx64.efi, useful for those wanting to either boot with rEFInd or avoid BOOTx64.efi overwrites from Windows. Proper use of this quirks is covered here: [Using Bootstrap.efi](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap.html)
+
 * **DmgLoading**: Signed
   * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
@@ -581,14 +582,17 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 * **AdviseWindows**: NO
   * Used for when the EFI partition isn't first on the Windows drive
 
-* **SystemMemoryStatus**: Auto
-  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
-  
+* **MaxBIOSVersion**: NO
+  * Sets BIOS version to Max to avoid firmware updates in Big Sur+, mainly applicable for genuine Macs.
+
 * **ProcessorType**: `0`
   * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
 
 * **SpoofVendor**: YES
   * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+
+* **SystemMemoryStatus**: Auto
+  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
 
 * **UpdateDataHub**: YES
   * Update Data Hub fields
@@ -656,6 +660,10 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 :::
 
 ::: details More in-depth Info
+
+* **DisableSecurityPolicy**: NO
+  * Disables platform security policy in firmware, recommended for buggy firmwares where disabling Secure Boot does not allow 3rd party firmware drivers to load.
+  * If running a Microsoft Surface device, recommended to enable this option
 
 * **RequestBootVarRouting**: YES
   * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC_VENDOR_VARIABLE_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
