@@ -18,6 +18,7 @@ Issues surrounding from initial booting the USB itself to right before you choos
 * [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios)
 * [OCABC: Incompatible OpenRuntime r4, require r10](#ocabc-incompatible-openruntime-r4-require-r10)
 * [Failed to open OpenCore image - Access Denied](#failed-to-open-opencore-image-access-denied)
+* [OC: Failed to find SB model disable halting on critical error](#oc-failed-to-find-sb-model-disable-halting-on-critical-error)
 
 ## Stuck on a black screen before picker
 
@@ -174,3 +175,7 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 ## Failed to open OpenCore image - Access Denied
 
 On newer Microsoft Surface device firmwares, loading OpenCore will now result in a security violation even when Secure Boot is disabled. To resolve this, enable `UEFI -> Quirks -> DisableSecurityPolicy` in your config.plist. See here for more info: [Failed to open OpenCore image - Access Denied #1446](https://github.com/acidanthera/bugtracker/issues/1446)
+
+## OC: Failed to find SB model disable halting on critical error
+
+This is a typo, ensure that in your config.plist `Misc -> Secuirty -> SecureBootModel` is set to Disable**d**
