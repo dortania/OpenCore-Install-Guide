@@ -1,7 +1,7 @@
 
 # Making the installer in macOS
 
-* Supported version: 0.6.5
+* Supported version: 0.6.6
 
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
@@ -17,8 +17,9 @@ For machines that need a specific OS release or can't download from the App Stor
 
 In order to run it, just copy and paste the below command in a terminal window:
 
-`curl -O https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py && sudo /usr/bin/python installinstallmacos.py`
-
+```sh
+mkdir ~/macOS-installer && cd ~/macOS-installer && curl -O https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py && sudo python installinstallmacos.py
+```
 
 ![](../images/installer-guide/mac-install-md/munki.png)
 
@@ -32,13 +33,17 @@ As you can see, we get a nice list of macOS installers. If you need a particular
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
-Once finished, you'll find in your `Users` folder a DMG containing the macOS Installer, called like `Install_macOS_11.1-20C69.dmg`. Mount it and you'll find the installer application.
+Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called `Install_macOS_11.1-20C69.dmg` for example. Mount it and you'll find the installer application.
+
+* Note: We recommend to move the Install macOS.app into the `/Applications` folder, as we'll be executing commands from there.
+* Note 2: Running Cmd+Shift+G in Finder will allow you to easily jump to `~/macOS-installer`
 
 ![](../images/installer-guide/mac-install-md/munki-done.png)
 
 ![](../images/installer-guide/mac-install-md/munki-dmg.png)
 
 From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work.
+
 ## Downloading macOS: Legacy OS
 
 * This method allows you to download much older versions of OS X, currently supporting all Intel versions of OS X(10.4 to current)
@@ -166,9 +171,6 @@ python ./macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 # Latest version
 # ie. Big Sur(11)
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
-
-# Note, Apple has temporarily removed Big Sur from the Recovery Catalog
-# Expect Apple to resolve this sometime after the holidays
 ```
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:
@@ -283,7 +285,6 @@ You can also replace the `createinstallmedia` path with that of where your insta
 Pulled from Apple's own site: [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
 
 ```sh
-
 # Big Sur
 sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 

@@ -1,6 +1,6 @@
 # Fixing KASLR slide values
 
-* Supported version: 0.6.5
+* Supported version: 0.6.6
 
 This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.
 
@@ -77,6 +77,7 @@ The reason we need to reset the memory map is we want it to be more deterministi
 * Clear CMOS
 * Enable much needed BIOS settings:
   * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on some X99, X299 so recommended to test with and without.
+    * Note: On BIOS supporting Resizable BAR Support, enabling Above4G will unlock this option. Ensure BAR support is disabled if the option presents itself.
   * `Boot Options -> Windows8.1/10 mode`: This will make sure no old legacy garbage is loaded. Fun fact, `other OS` is only designed for booting older versions of Windows and not for other OS.
 * Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:
   * `CSM`: For legacy support, adds a bunch of garbage we don't want. This also can break the shell so you can't boot into it.
