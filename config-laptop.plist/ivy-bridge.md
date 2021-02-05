@@ -122,8 +122,12 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+* **EnableSafeModeSlide**: NO
+  * Enables slide variables to be used in safe mode.
 * **EnableWriteUnprotector**: YES
   * Needed to remove write protection from CR0 register.
+* **ProvideCustomSlide**: NO
+  * Used for Slide variable calculation on UEFI platforms. The necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message is present, this option is to be enabled as well as `EnableSafeModeSlide`.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics
   
