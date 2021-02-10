@@ -523,10 +523,12 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
 
-* iMacPro1,1: AMD RX Polaris and Vega
-* MacPro7,1: AMD RX Polaris, Vega and Navi(Note that MacPro7,1 is also a Catalina exclusive)
+* iMacPro1,1: AMD RX Polaris and newer
+* MacPro7,1: AMD RX Polaris and newer
+  * Note that MacPro7,1 is exclusive to macOS 10.15, Catalina and newer
 * MacPro6,1: AMD R5/R7/R9 and older
 * iMac14,2: Nvidia Kepler and newer
+  * Note: iMac14,2 is only supported to macOS 10.8-10.15, for macOS 11, Big Sur and newer please use MacPro7,1
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
