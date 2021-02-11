@@ -225,7 +225,7 @@ Next we have 2 options to follow:
   * Terminal based, works with SIP enabled
 * [Disk Utility Restore](#disk-utility)
   * May require SIP disabled in newer OSes
-  
+
 #### ASR
 
 Here you'll simply want to open terminal and run the following:
@@ -239,7 +239,7 @@ sudo asr restore -source /Volumes/Mac\ OS\ X\ Install\ DVD  -target /Volumes/MyV
   * Change `/Volumes/MyVolume` to what your USB is called
 
 This will take some time but once you're finished, you can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
-  
+
 #### Disk Utility
 
 Due to some pesky issues with Disk Utility, many restores can fail if SIP is enabled. If you have issues we recommend either using the [ASR Method](#asr) or disable SIP.
@@ -298,7 +298,7 @@ sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallme
 sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 
 # Sierra
-sudo /Applications/Install\ macOS\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+sudo /Applications/Install\ macOS\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ macOS\ Sierra.app
 
 # El Capitan
 sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app
