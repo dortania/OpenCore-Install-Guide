@@ -99,14 +99,7 @@ module.exports = {
             sidebarDepth: 1,
             children: [
 				'prerequisites',
-				{
-                    title: 'Hardware Limitations',
-                    collapsable: true,
-                    path: 'macos-limits',
-                    children: [
-                        'find-hardware'
-                    ]
-                },
+				'find-hardware'
                 'terminology',
                 'why-oc',
             ]
