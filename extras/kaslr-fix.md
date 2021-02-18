@@ -2,7 +2,9 @@
 
 * Supported version: 0.6.6
 
-This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299. This section will also support Clover as the info is also useful for them.
+This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299.
+
+* Note: OpenCore is required, Clover is no longer supported in this guide
 
 ## So what is KASLR
 
@@ -37,24 +39,13 @@ Fun Fact: It takes around 31 ms to find an area to operate in, manually setting 
 
 ## So how do I fix this
 
-The real fix to this is quite simple actually, the process is both the same for Clover and OpenCore users. What you'll need:
-
-* **Clover users**:
-  * Clover Shell(most users already have this included, usually called shell64.efi or some variation)
-    * This will be found under `EFI/CLOVER/tools`
-    * If you're missing this, you can grab it from the [CLOVERV2-xxxx.zip](https://github.com/CloverHackyColor/CloverBootloader/releases)
-  * [OcQuirks](https://github.com/CloverHackyColor/CloverBootloader/releases/latest) since Clover v5120 by downloading the .zip CloverV2-xxxx.zip it is included under /CloverV2/EFI/CLOVER/drivers/off/UEFI/MemoryFix/OcQuirks.efi, this needs to be coupled with OpenRuntime.efi which is provided in the same path
-(Don't mix Aptio fixes together or use OsxAptioFixDrvX, AptioMemoryFix, only OcQuirks is supported in this guide)
-    * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
-  * OpenRuntime.efi(Bundled with CloverV2)
-    * Make sure this is inside `EFI/CLOVER/drivers/UEFI`
-  * ~~OcQuirks.plist~~(Bundled in Clover's config.plist, in last section after `SystemParameters` ). To change OpenRuntime quirks, check the end of the config-sample.plist from CloverV2-xxxx.zip, since Slice merged ReddestDream's OcQuirks.plist in Clover's config.plist
+The real fix to this is quite simple actually. What you'll need:
 
 * **OpenCore users**:
   * [OpenRuntime](https://github.com/acidanthera/OpenCorePkg/releases)
   * [OpenShell](https://github.com/acidanthera/OpenCorePkg/releases)(Don't forget to enable this under `Root -> Misc -> Tools`)
 
-And we'll also need to configure our config.plist -> Booter(for OpenCore) or OcQuirks.plist(for Clover):
+And we'll also need to configure our config.plist -> Booter:
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
