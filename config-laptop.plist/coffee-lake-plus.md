@@ -118,7 +118,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
   * If on Z390, **enable this quirk**
 * **ProvideCustomSlide**: NO
-  * Used for Slide variable calculation on UEFI platforms. The necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message is present, this option is to be enabled as well as `EnableSafeModeSlide`.
+  * Used for Slide variable calculation. The necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message is present, this option is to be enabled as well as `EnableSafeModeSlide`.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **SetupVirtualMap**: YES

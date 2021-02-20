@@ -98,18 +98,18 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 ::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: NO
-  * Fixes UEFI runtime services like date, time, NVRAM, power control on UEFI Boards
+  * Fixes UEFI runtime services like date, time, NVRAM, power control;
   * macOS Big Sur however requires the APIC table present, otherwise causing early kernel panics so this quirk is recommended for those users.
 * **EnableSafeModeSlide**: NO
-  * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms
+  * Enables slide variables to be used in safe mode.
 * **EnableWriteUnprotector**: NO
-  * Needed to remove write protection from CR0 register on UEFI platforms
+  * Needed to remove write protection from CR0 register.
 * **ProvideCustomSlide**: NO
-  * Used for Slide variable calculation on UEFI platforms
+  * Used for Slide variable calculation. However The necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message is present, this option is to be enabled as well as `EnableSafeModeSlide`.
 * **RebuildAppleMemoryMap**: YES
-  * Resolves early memory kernel panics on 10.6 and below
+  * Resolves early memory kernel panics on 10.6 and below.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses on UEFI boards
+  * Fixes SetVirtualAddresses calls to virtual addresses.
 
 :::
 
