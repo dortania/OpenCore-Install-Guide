@@ -24,8 +24,8 @@ Firmware drivers are drivers used by OpenCore in the UEFI environment. They're m
 
 For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
 
-* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:red">Required</span>)
-  * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
+* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:#30BCD5">Optional</span>)
+  * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). If you use Big Sur online installer you won't need this. **Do not mix other HFS drivers**
   * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons), see the legacy section below
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)(<span style="color:red">Required</span>)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
