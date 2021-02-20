@@ -75,6 +75,10 @@ module.exports = {
                 link: 'https://dortania.github.io/OpenCore-Post-Install/'
             },
             {
+                text: 'OpenCore Multiboot',
+                link: 'https://dortania.github.io/OpenCore-Multiboot/'
+            },
+            {
                 text: 'GPU Buyers Guide',
                 link: 'https://dortania.github.io/GPU-Buyers-Guide/'
             },
@@ -95,14 +99,8 @@ module.exports = {
             sidebarDepth: 1,
             children: [
 				'prerequisites',
-				{
-                    title: 'Hardware Limitations',
-                    collapsable: true,
-                    path: 'macos-limits',
-                    children: [
-                        'find-hardware'
-                    ]
-                },
+				'macos-limits',
+				'find-hardware',
                 'terminology',
                 'why-oc',
             ]
@@ -258,7 +256,8 @@ module.exports = {
                     title: 'Multiboot',
                     collapsable: true,
                     children: [
-                        ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up Bootstrap.efi'],
+						['https://dortania.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
+                        ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up LauncherOption'],
                         ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
                     ]
                 },

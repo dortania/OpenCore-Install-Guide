@@ -106,6 +106,7 @@ KeySupport
 KeySupportMode
 KeySwap
 LapicKernelPanic
+LauncherOption
 LegacyEnable
 LegacyOverwrite
 LegacySchema
