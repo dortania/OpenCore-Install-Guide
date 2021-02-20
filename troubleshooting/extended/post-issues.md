@@ -232,6 +232,9 @@ This is due to macOS using Universal Time while Windows relies on Greenwhich tim
 
 SIP or more properly known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
 
+* <span style="color:red">WARNING:</span> Disabling SIP can break OS functionality such as software updates in macOS 11, Big Sur and newer. Please be careful to only disable specific SIP values instead of disabling SIP outright to avoid these issues.
+  * Enabling `CSR_ALLOW_UNAUTHENTICATED_ROOT` and `CSR_ALLOW_APPLE_INTERNAL` are common options that can break OS updates for users
+
 You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you, and note that they go under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
 
 * `00000000` - SIP completely enabled (0x0).
@@ -249,6 +252,8 @@ You can choose different values to enable or disable certain flags of SIP. Some 
 ## Writing to the macOS system partition
 
 With macOS Catalina and newer, Apple split the OS and user data into 2 volumes where the system volume is read-only by default. To make these drives writable we'll need to do a few things:
+
+* Note: Users of `SecureBootModel` may end up in a RecoveryOS boot loop if the system partition has been modified. To resolve this, Reset NVRAM and set `SecureBootModel` to `Disabled`
 
 **macOS Catalina**
 

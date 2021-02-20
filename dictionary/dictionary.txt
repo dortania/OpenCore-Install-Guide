@@ -696,6 +696,7 @@ Realtek's
 RealtekRTL8100
 RealtekRTL8111
 RecoveryImage
+RecoveryOS
 ReddestDream's
 RehabMan's
 Rehabman
