@@ -332,7 +332,7 @@ For machines with HDMI 2.0 capable ports with resolutuion issues, verify the fol
 
 * 4k output works correctly in Windows
 * Monitor is set explicitly to HDMI 2.0
-  * If using an HDMI to DisplayPort converter, ensure the monitor is set to DisplayPort1.2 or higher
+  * If using an HDMI to DisplayPort converter, ensure the monitor is set to DisplayPort 1.2 or higher
 * Ensure enough iGPU memory has been allocated
   * For Broadwell and newer, 64MB is expected to be allocated
   * Machines relying on WhateverGreen's `framebuffer-stolenmem` property should know this can cause 4k output issues. Please ensure you can set the iGPU's memory to 64MB allowing you to remove these properties
