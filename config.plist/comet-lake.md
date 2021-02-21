@@ -92,7 +92,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc.
 * **DevirtualiseMmio**: YES
   * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues , requires `ProtectUefiServices` as well for Z490.
-* **EnableSafeModeSlide**: NO
+* **EnableSafeModeSlide**: YES
   * Enables slide variables to be used in safe mode.
 * **EnableWriteUnprotector**: NO
   * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
@@ -100,7 +100,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 * **ProtectUefiServices**: YES
   * Protects UEFI services from being overridden by the firmware, required for Z490.
 * **ProvideCustomSlide**: YES
-  * Used for Slide variable calculation on UEFI platforms. However The necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message is present, this option is to be enabled as well as `EnableSafeModeSlide`.
+  * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disabled `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this.
 * **SetupVirtualMap**: NO
