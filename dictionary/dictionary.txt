@@ -42,6 +42,7 @@
 4k
 50F4
 5700XT
+600p
 64MB
 64bit
 6970M
@@ -696,6 +697,7 @@ Realtek's
 RealtekRTL8100
 RealtekRTL8111
 RecoveryImage
+RecoveryOS
 ReddestDream's
 RehabMan's
 Rehabman

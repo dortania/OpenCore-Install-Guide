@@ -8,6 +8,7 @@ Issues regarding once you've booted the installer and the GUI has loaded.
 * [macOS Installer being damaged](#macos-installer-being-damaged)
 * [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
 * [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
+* [Black screen after `IOConsoleUsers: gIOScreenLock...` on laptops and AIOs](#black-screen-after-ioconsoleusers-gioscreenlock-on-laptops-and-aios)
 * [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 * [Frozen in the macOS installer after 30 seconds](#frozen-in-the-macos-installer-after-30-seconds)
 * [15h/16h CPU reboot after Data & Privacy screen](#_15h-16h-cpu-reboot-after-data-privacy-screen)
@@ -66,6 +67,17 @@ This is right before the GPU is properly initialized, verify the following:
 ## Scrambled Screen on laptops
 
 Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
+
+## Black screen after `IOConsoleUsers: gIOScreenLock...` on laptops and AIOs
+
+Verify the following:
+
+* SSDT-PNLF is installed(ie. EFI/OC/ACPI as well as config.plist -> ACPI -> Add)
+* iGPU properties were setup correctly under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`
+* Coffee Lake and newer laptops, add `-igfxblr` to your boot-args
+  * Alternatively, add `enable-backlight-registers-fix | Data | 01000000` to `PciRoot(0x0)/Pci(0x2,0x0)`
+
+Additionally, verify issues mentioned in [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
 
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 

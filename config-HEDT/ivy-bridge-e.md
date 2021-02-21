@@ -27,7 +27,7 @@ Now with all that, a quick reminder of the tools we need
 
 ## ACPI
 
-![ACPI](../images/config/config-universal/aptio-iv-acpi.png)
+![](../images/config/config-legacy/penryn-acpi.png)
 
 ### Add
 
@@ -39,7 +39,6 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 
 | Required_SSDTs | Description |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Ivy Bridge-E and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. **Not supported on Sandy Bridge-E** |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Required for all Big Sur users to ensure their UNC devices are compatible, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
@@ -105,7 +104,7 @@ Removes device properties from the map, for us we can ignore this
 
 ## Kernel
 
-![](../images/config/config-universal/kernel-legacy-XCPM-HEDT.png)
+![](../images/config/config-universal/kernel-legacy-HEDT.png)
 
 ### Add
 
@@ -164,7 +163,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs, thankfully Ivy bridge E is officially supported so no patching pessary.
+Needed for spoofing unsupported CPUs, thankfully Sandy and Ivy bridge E are officially supported so no patching necessary.
 
 ### Force
 
@@ -188,26 +187,25 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS, **also required for Sandy Bridge-E** |
-| AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| AppleXcpmExtraMsrs | YES | |
+| AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
 | DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | |
+| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable |
 
 :::
 
 ::: details More in-depth Info
 
-* **AppleCpuPmCfgLock**: NO
+* **AppleCpuPmCfgLock**: YES
   * Only needed when CFG-Lock can't be disabled in BIOS
-  * Only applicable for Sandy Bridge-E and older
+  * Only applicable for Ivy Bridge and older
     * Note: Broadwell and older require this when running 10.10 or older
-* **AppleXcpmCfgLock**: YES
+* **AppleXcpmCfgLock**: NO
   * Only needed when CFG-Lock can't be disabled in BIOS
-  * Only applicable for Ivy Bridge-E and newer
+  * Only applicable for Haswell and newer
+    * Note: Ivy Bridge-E is also included as it's XCPM capable
 * **AppleXcpmExtraMsrs**: YES
   * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower
 * **CustomSMBIOSGuid**: NO
