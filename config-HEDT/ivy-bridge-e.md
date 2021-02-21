@@ -84,7 +84,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 * **EnableWriteUnprotector**: YES
   * Needed to remove write protection from CR0 register.
 * **ProvideCustomSlide**: YES
-  * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disabled `ProvideCustomSlide`.
+  * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics
   

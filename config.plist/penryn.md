@@ -106,7 +106,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 * **EnableWriteUnprotector**: NO
   * Needed to remove write protection from CR0 register on UEFI platforms.
 * **ProvideCustomSlide**: YES
-  * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disabled `ProvideCustomSlide`.
+  * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * Resolves early memory kernel panics on 10.6 and below.
 * **SetupVirtualMap**: YES
