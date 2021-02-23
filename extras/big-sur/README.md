@@ -153,6 +153,7 @@ With Big Sur, quite a bit broke. Mainly the following:
 * SATA Support broken
   * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
   * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
+* `XhciPortLimit` is broken since 11.3 Beta 2 (20E5186d), users are encouraged to follow the [USB Map guide](https://dortania.github.io/OpenCore-Post-Install/usb/) first using macOS 11.3 Beta 1 or [lower](https://archive.org/details/base-system_202102)).
 
 And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/extended/post-issues.md#disabling-sip)
 
