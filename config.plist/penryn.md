@@ -122,7 +122,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 Sets device properties from a map.
 
-By default, the Sample.plist has this section set for iGPU and Audio. We won't be covering iGPU so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
+By default, the Sample.plist has this section set for Audio. We'll be setting Audio the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
 
 TL;DR, delete all the PciRoot's here as we won't be using this section.
 
