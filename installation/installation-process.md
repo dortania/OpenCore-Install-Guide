@@ -1,3 +1,36 @@
+# Cleaning up
+
+And now you're ready to save and place it into your EFI under EFI/OC.
+
+For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+
+* [AMD OS X Discord](https://discord.gg/QuUWg7)
+* [r/Hackintosh Discord (Intel only)](https://discord.gg/2QYd7ZT)
+* [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
+
+**Sanity check**:
+
+So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
+
+* [**Sanity Checker**](https://opencore.slowgeek.com)
+
+Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
+
+### Config reminders
+
+**HP Laptop Users**:
+
+* Kernel -> Quirks -> LapicKernelPanic -> True
+  * You will get a kernel panic on LAPIC otherwise
+* UEFI -> Quirks -> UnblockFsConnect -> True
+
+**Dell Laptop Users**:
+
+ For Skylake and newer:
+
+* Kernel -> Quirk -> CustomSMBIOSGuid -> True
+* PlatformInfo -> UpdateSMBIOSMode -> Custom
+
 # Installation Process
 
 Now that you've finished setting up OpenCore, you're finally able to boot, main things to keep in mind:
@@ -25,10 +58,6 @@ Removed unneeded Tools(.efi) | Leaves default Tools
 All files in the Kexts folder end in .kext | Includes source code and folders
 config.plist found under EFI/OC | Neither renamed or placed the .plist in right location
 Only uses kexts that are needed | Downloaded every kext listed
-
-And a reminder that slowgeek site is your friend:
-
-* [**Sanity Checker**](https://opencore.slowgeek.com)
 
 ## Booting the OpenCore USB
 
