@@ -27,6 +27,7 @@
 19H
 19h
 1Revenger1
+20E5186d
 20XX
 2200S
 2B-i
@@ -42,6 +43,7 @@
 4k
 50F4
 5700XT
+CP2102-based
 600p
 64MB
 64bit
@@ -85,6 +87,7 @@ Acidanthera
 Acidanthera's
 Acpi
 AcpiSamples
+AddressSanitizer
 AirPortBrcm4360
 AirportAtheros40
 AirportBrcmFixup
@@ -97,6 +100,7 @@ AmazonBasics
 Andrey's
 Andrey1970AppleLife
 Aorus
+ApECID
 ApfsDriverLoader
 Apianti
 Apianti's
@@ -175,6 +179,7 @@ BOOTICE
 BT
 Backlight
 BaseSystem
+Baudrate
 BeyondCompare
 Big
 BlueScreen
@@ -203,6 +208,7 @@ CLKT
 CMD
 CMOS
 CONFIGURATORS
+CP21202-based
 CPU0
 CPUFriend
 CPUFriendDataProvider
@@ -230,6 +236,7 @@ Config
 Configurator
 ConsoleControl
 ConsoleGOP
+CoolTerm
 Core2
 CorpNewt
 CorpNewt's
@@ -247,6 +254,7 @@ CustomSMBIOSMode
 D3
 DAC
 DACs
+DB9
 DBG
 DC7900
 DMAR
@@ -354,6 +362,7 @@ GFX
 GFX0
 GMA
 GMA950
+GND
 GPEN
 GPHD
 GPI0
@@ -467,9 +476,11 @@ JDK
 JRE
 JackFix
 Journaled
+KASAN
 KASLR
 KBL-R
 KDK
+KDKs
 KVM
 KVMs
 Kaby
@@ -619,6 +630,7 @@ OpenShell
 OpenUsbKbDxe
 Optane
 Optimus
+Optiplex
 OsxAptioFixDrvX
 OtherOS
 P50
@@ -715,6 +727,7 @@ SATA
 SATA-Unsupported
 SATA-unsupported
 SBRG
+SFF
 SGX
 SHA-1
 SL01
@@ -758,6 +771,7 @@ Speccy
 Stompy
 StopSign-fixv
 StopSign-fixv5
+Strix
 Subreddit
 Sur
 Sur's
@@ -794,6 +808,7 @@ Trackpad
 Trackpads
 TransMac
 Typora
+UART
 UEFI-based
 UEFIExtrac
 UEFITool
@@ -858,6 +873,7 @@ WhateverGreen
 WhateverGreen's
 Wifi
 X299
+X299-E
 X3100
 X470
 X520
@@ -903,6 +919,8 @@ Z97
 [0-9]+XXX
 \.efi
 acidanthera
+acpi_layer=0x8
+acpi_level=0x2
 acpica
 actionLink
 actionText
@@ -910,6 +928,7 @@ al3xtjames
 alcid
 algrey
 architected
+arg
 args
 arse
 auth
@@ -958,6 +977,7 @@ csrstat
 dGPU
 dGPUs
 debug=0x100
+debug=0x12a
 decompile
 decompiled
 decompiling
@@ -1062,11 +1082,14 @@ ie
 ie\.
 ig-platform-id
 ig-platform-id's
+igdebug=0xff
 igfxcdc
 igfxfw
 img
+io=0xff
 ix-3xxx
 jailbroken
+kcsuffix
 keepsyms=1
 kernelcache
 kernelspace
@@ -1095,6 +1118,7 @@ max_cpus_from_firmware
 mhaeuser
 midi1996
 mini-explainer
+msgbuf=1048576
 msi
 multiboot
 multibooting

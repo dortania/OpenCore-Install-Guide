@@ -213,6 +213,7 @@ module.exports = {
 				},
                 '/troubleshooting/debug',
                 '/troubleshooting/boot',
+				'/troubleshooting/kernel-debugging',
             ]
         },
         {
