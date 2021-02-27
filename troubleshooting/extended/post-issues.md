@@ -103,6 +103,8 @@ Follow guide listed here:
 
 * [Fixing MacPro7,1 Memory Errors](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
 
+For those who simply want to disable the notification(not the error itself) is more than enough. For these users, we recommend installing [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)
+
 ## Apps crashing on AMD
 
 ~~Easy fix, buy Intel~~
