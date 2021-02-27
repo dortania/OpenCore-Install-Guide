@@ -25,6 +25,7 @@ Issues surrounding from initial booting the macOS installer to right before the 
 * [Kernel Panic `Cannot perform kext summary`](#kernel-panic-cannot-perform-kext-summary)
 * [Kernel Panic `AppleIntelMCEReporter`](#kernel-panic-appleintelmcereporter)
 * [Kernel Panic `AppleIntelCPUPowerManagement`](#kernel-panic-appleintelcpupowermanagement)
+* [Kernel Panic `AppleACPIPlatform` in 10.13](#kernel-panic-appleacpiplatform-in-10-13)
 * [Keyboard works but trackpad does not](#keyboard-works-but-trackpad-does-not)
 * [`kextd stall[0]: AppleACPICPU`](#kextd-stall-0-appleacpicpu)
 * [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
@@ -548,6 +549,12 @@ Under ACPI -> Patch:
 | Replace | Data | A40A0FA3A3A3A3A3 |
 
 :::
+
+## Kernel Panic `AppleACPIPlatform` in 10.13
+
+![](../../images/troubleshooting/troubleshooting-md/KA5UOGV.png)
+
+On macOS 10.13, High Sierra the OS is much stricter with ACPI tables, [specifically a bug with how headers were handled](https://alextjam.es/debugging-appleacpiplatform/). To resolve, enable `NormalizeHeaders` under ACPI -> Quirks in your config.plist
 
 ## macOS frozen right before login
 
