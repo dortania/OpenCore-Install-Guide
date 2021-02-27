@@ -119,9 +119,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 Sets device properties from a map.
 
-By default, the Sample.plist has this section set for Audio. We'll be setting the Audio layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
-
-TL;DR, delete all the PciRoot's here as we won't be using this section.
+By default, the Sample.plist has this section set for Audio. We'll be setting Audio the layout in the boot-args section, for us we can ignore this
 
 ### Delete
 
