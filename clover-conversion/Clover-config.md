@@ -213,7 +213,7 @@ path/to/gfxutil -f HDEF
 * Inject: `DeviceProperties -> Add -> PciRoot... -> layout-id`
 * AFGLowPowerState: `DeviceProperties -> Add -> PciRoot... -> AFGLowPowerState -> <01000000>`
 * ResetHDA: `UEFI -> Audio -> ResetTrafficClass`
-  * Optionally there's also [JackFix](https://github.com/fewtarius/jackfix)(well to be specific it's `jackfix.sh`)
+  * Optionally there's also AppleALC's `alctsel=1` boot-arg or [JackFix](https://github.com/fewtarius/jackfix)
 
 **Add Properties**:
 
