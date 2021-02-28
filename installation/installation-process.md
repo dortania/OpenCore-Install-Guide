@@ -4,7 +4,7 @@ And now you're ready to save and place it into your EFI under EFI/OC.
 
 For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
 
-* [AMD OS X Discord](https://discord.gg/QuUWg7)
+* [AMD OS X Discord](https://discord.com/invite/EfCYAJW)
 * [r/Hackintosh Discord (Intel only)](https://discord.gg/2QYd7ZT)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 
