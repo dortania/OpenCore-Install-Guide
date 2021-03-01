@@ -276,7 +276,7 @@ device_type: XHCI
 
 # Disable Drivers
 
-Just don't add your drivers to `UEFI -> Drivers`, alternatively add `#` in-front of the driver in your config.plist for OpenCOre to skip it.
+Just don't add your drivers to `UEFI -> Drivers`, alternatively add `#` in-front of the driver in your config.plist for OpenCore to skip it.
 
 # Gui
 
@@ -392,7 +392,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **DellSMBIOSPatch**:
 
-An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't really know either)
+An odd quirk for Dell systems running APTIO V
 
 * `Kernel -> Quirks -> CustomSMBIOSGuid -> YES`
 * `PlatformInfo -> UpdateSMBIOSMode -> Custom`
