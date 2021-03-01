@@ -270,9 +270,13 @@ device_type: XHCI
 * `AAPL,current-in-sleep`
 * `built-in`
 
+**ForceHPET**:
+
+* `UEFI -> Quirks -> ActivateHpetSupport`
+
 # Disable Drivers
 
-Just don't add your drivers to `UEFI -> Drivers`
+Just don't add your drivers to `UEFI -> Drivers`, alternatively add `#` in-front of the driver in your config.plist for OpenCOre to skip it.
 
 # Gui
 
