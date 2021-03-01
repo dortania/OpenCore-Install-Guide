@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.6 |
+| Supported OpenCore version | 0.6.7 |
 | Initial macOS Support ([Coffee Lake](https://en.wikipedia.org/wiki/Coffee_Lake)) | macOS 10.13, High Sierra |
 | Initial macOS Support ([Whiskey Lake](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture))) | macOS 10.14.1, Mojave |
 

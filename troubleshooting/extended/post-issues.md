@@ -1,6 +1,6 @@
 # Post-Install Issues
 
-* Supported version: 0.6.6
+* Supported version: 0.6.7
 
 Issues revolving around macOS once properly installed.
 
@@ -102,6 +102,8 @@ Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal
 Follow guide listed here:
 
 * [Fixing MacPro7,1 Memory Errors](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
+
+For those who simply want to disable the notification(not the error itself) is more than enough. For these users, we recommend installing [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)
 
 ## Apps crashing on AMD
 

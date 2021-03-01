@@ -43,7 +43,6 @@
 4k
 50F4
 5700XT
-CP2102-based
 600p
 64MB
 64bit
@@ -208,6 +207,7 @@ CLKT
 CMD
 CMOS
 CONFIGURATORS
+CP2102-based
 CP21202-based
 CPU0
 CPUFriend
@@ -718,6 +718,7 @@ Reinstalls
 Rename-SSDT
 Repo
 Resizable
+RestrictEvents
 Ryzen
 S3
 SAS
