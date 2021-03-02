@@ -18,13 +18,13 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 
 ### Config reminders
 
-**HP Laptop Users**:
+**HP Users**:
 
 * Kernel -> Quirks -> LapicKernelPanic -> True
   * You will get a kernel panic on LAPIC otherwise
 * UEFI -> Quirks -> UnblockFsConnect -> True
 
-**Dell Laptop Users**:
+**Dell Users**:
 
  For Skylake and newer:
 
