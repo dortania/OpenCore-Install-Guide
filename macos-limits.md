@@ -252,6 +252,8 @@ Most WiFi cards that come with laptops are not supported as they are usually Int
 
 The best option is getting a supported Broadcom card; see the [WiFi Buyer's Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for recommendations.
 
+Note: Intel WiFi is unofficially (3rd party driver) supported on macOS, check [WiFi Buyer's Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for more information about the drivers and supported cards.
+
 ## Miscellaneous
 
 * **Fingerprint sensors**
