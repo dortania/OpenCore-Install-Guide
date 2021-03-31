@@ -239,10 +239,13 @@ For the most part, all SATA based drives are supported and the majority of NVMe 
 
 Virtually all wired network adapters have some form of support in macOS, either by the built-in drivers or community made kexts. The main exceptions:
 
-* Intel's 2.5GBe i225 networking
+* Intel I225 2.5GBe NIC
   * Found on high-end Desktop Comet Lake boards
-  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](../config.plist/comet-lake.md#deviceproperties)
-* Intel's server NICs
+  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](config.plist/comet-lake.md#deviceproperties)
+* Intel I350 1GBe server NIC
+  * Normally found on Intel and Supermicro server boards of various generations
+  * [Workaround](config-HEDT/ivy-bridge-e.md#deviceproperties)
+* Intel 10GBe server NICs
   * Workarounds are possible for [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
 * Mellanox and Qlogic server NICs
 

@@ -162,8 +162,10 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
-* For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
+* For Intel's i225-V NICs, patches are mentioned in the desktop [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) section. No kext is required.
   * Requires macOS 10.15 or newer
+* For Intel's I350 NIcs, patches are mentioned in the HEDT [Sandy and Ivy-Bride-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) section. No kext is required.
+  * Requires OS X 10.10 or newer
 
 ::: details Legacy Ethernet Kexts
 
