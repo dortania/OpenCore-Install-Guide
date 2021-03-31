@@ -137,7 +137,7 @@ dmidecode -t baseboard
 ### Keyboard, Trackpad and  Touchscreen Connection Type
 
 ```sh
-dmesg |grep -i 'input'
+dmesg | grep input
 ```
 
 ### Audio Codec
