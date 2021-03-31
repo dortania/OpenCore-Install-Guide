@@ -102,7 +102,7 @@ By default, the Sample.plist has this section set for iGPU and Audio. We have no
 
 ::: tip PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)
 
-This entry relates to Intel's I350 1GBe controller found on many Intel and Supermicro server boards, and some Intel Server PCIe adapters. What we'll be doing here is tricking Apple's I210 driver into supporting our I350 network controller:
+This entry relates to Intel's I350 controller found on many Intel and Supermicro server boards, and some Intel Server PCIe adapters. What we'll be doing here is tricking Apple's I210 driver into supporting our I350 network controller:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
