@@ -8,7 +8,7 @@ This section contains a brief rundown as to why the community has been transitio
   * OpenCore features
   * Software support
   * Kext injection
-* [OpenCore's shortcomings](#opencores-shortcomings)
+* [OpenCore's shortcomings](#opencore-s-shortcomings)
 * [Common Myths](#common-myths)
   * Is OpenCore unstable as it's a beta?
   * Does OpenCore always inject SMBIOS and ACPI data into other OSes?
