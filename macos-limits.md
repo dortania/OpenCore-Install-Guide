@@ -72,6 +72,11 @@ Kernel Requirements:
 * OS X 10.8 and newer require 64-bit kexts due to only supporting 64-bit kernelspace
   * Run `lipo -archs` to know what architectures your kext supports (remember to run this on the binary itself and not the .kext bundle)
 
+Core/Thread Count Limits:
+* OS X 10.10 and below may not boot with more than 24 threads (evident by a `mp_cpus_call_wait() timeout` panic)
+* OS X 10.11 and newer have a 64 thread limit
+* `cpus=` boot argument can be used as a workaround, or disabling hyperthreading
+
 Special Notes:
 
 * Lilu and plugins require 10.8 or newer to operate
