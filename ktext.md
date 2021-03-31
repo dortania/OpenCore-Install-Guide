@@ -164,7 +164,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Requires macOS 10.15 or newer
 * For Intel's I225-V NICs, patches are mentioned in the desktop [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) section. No kext is required.
   * Requires macOS 10.15 or newer
-* For Intel's I350 NICs, patches are mentioned in the HEDT [Sandy and Ivy-Bride-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) section. No kext is required.
+* For Intel's I350 NICs, patches are mentioned in the HEDT [Sandy and Ivy Bridge-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) section. No kext is required.
   * Requires OS X 10.10 or newer
 
 ::: details Legacy Ethernet Kexts
