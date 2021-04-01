@@ -423,8 +423,15 @@ HiDPI
 HiiDatabase
 HoRNDIS
 Hx6x
+I210
 I211
 I211-AT
+I218
+I219
+I225
+I225-V
+I225LM
+I350
 I2C
 I7,
 IA32
@@ -774,6 +781,7 @@ StopSign-fixv
 StopSign-fixv5
 Strix
 Subreddit
+Supermicro
 Sur
 Sur's
 Synaptics
@@ -916,6 +924,7 @@ Z87
 Z87-Pro
 Z97
 [0-9]+GB
+[0-9]+Gb
 [0-9]+MB
 [0-9]+XXX
 \.efi
@@ -1032,13 +1041,7 @@ hacky
 heroImage
 heroText
 hotplug
-i210
-i211
-i218
-i219
-i225
-i225-V
-i225LM
+hyperthreading
 i3
 i3-3110M
 i7
