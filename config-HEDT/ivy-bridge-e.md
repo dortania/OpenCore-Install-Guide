@@ -100,6 +100,19 @@ Sets device properties from a map.
 
 By default, the Sample.plist has this section set for Audio. We'll be setting Audio the layout in the boot-args section, for us we can ignore this
 
+::: tip PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)
+
+This entry relates to Intel's I350 controller found on many Intel and Supermicro server boards, and some Intel Server PCIe adapters. What we'll be doing here is tricking Apple's I210 driver into supporting our I350 network controller:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | 33150000 |
+
+* **Note**: If your board doesn't have an onboard I350 NIC, there's no reason to add this entry.
+* **Note 2**: If you get a kernel panic on the AppleIntelI210Ethernet kext, or not all of the adapters are showing up, you may need to edit or add additional PciRoot properties for each adapter.
+
+:::
+
 ### Delete
 
 Removes device properties from the map, for us we can ignore this

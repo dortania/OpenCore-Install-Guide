@@ -592,7 +592,7 @@ This is due to either a missing SMC emulator or broken one, make sure of the fol
 
 ## Kernel Panic on AppleIntelI210Ethernet
 
-For those running Comet lake motherboards with the i225-V NIC, you may experience a kernel panic on boot due to the i210 kext. To resolve this, make sure you have the correct PciRoot for your Ethernet. This commonly being either:
+For those running Comet lake motherboards with the I225-V NIC, you may experience a kernel panic on boot due to the I210 kext. To resolve this, make sure you have the correct PciRoot for your Ethernet. This commonly being either:
 
 * PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
   * By default, this is what Asus and Gigabyte motherboards use
