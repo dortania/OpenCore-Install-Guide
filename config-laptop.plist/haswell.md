@@ -535,14 +535,18 @@ For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakd
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookAir6,1 | Dual Core 15w | iGPU: HD 5000 | 11" |
-| MacBookAir6,2 | Dual Core 15w | iGPU: HD 5000 | 13" |
-| MacBookPro11,1 | Dual Core 28w | iGPU: Iris 5100 | 13" |
-| MacBookPro11,2 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,3 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
-| MacBookPro11,4 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,5 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
+| MacBookAir6,1 | Dual Core 15w | iGPU only | 11" |
+| MacBookAir6,2 | Dual Core 15w | iGPU only | 13" |
+| MacBookPro11,1 | Dual Core 28w | iGPU only* | 13" |
+| MacBookPro11,2 | Quad Core 45w | iGPU only* | 15" |
+| MacBookPro11,3 | Quad Core 45w | iGPU + dGPU (if your external outputs are dGPU driven) | 15" |
+| MacBookPro11,4 | Quad Core 45w | iGPU only* | 15" |
+| MacBookPro11,5 | Quad Core 45w | iGPU + dGPU (if your external outputs are dGPU driven) | 15" |
 | Macmini7,1 | NUC Systems | HD 5000/Iris 5100 | N/A |
+
+\* : Use these if you have an Iris Haswell iGPU. SMBIOS suited for any Haswell iGPU with external outputs driven by the iGPU.
+
+Your SMBIOS choice should follow your laptop's **CPU type, TDP and GPUs configuration** (it does not need to be the same iGPU as in a Mac).
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
