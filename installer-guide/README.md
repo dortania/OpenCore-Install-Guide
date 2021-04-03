@@ -4,9 +4,9 @@
 
 Requirements:
 
-* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info
+* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info.
 * [ProperTree](https://github.com/corpnewt/ProperTree) to edit .plist files (OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. **Please avoid these kinds of tools at all costs!**).
-* You must remove Clover from your system entirely if you wish to use OpenCore as your main boot-loader. Keep a backup of your Clover based EFI. See here on what needs to be cleaned: [Clover Conversion](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion)
+* You must remove Clover from your system entirely if you wish to use OpenCore as your main boot-loader. Keep a backup of your Clover based EFI. See here on what needs to be cleaned: [Clover Conversion](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion).
 
 ### Online vs Offline Installer
 

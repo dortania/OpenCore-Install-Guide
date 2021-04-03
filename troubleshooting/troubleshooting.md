@@ -8,7 +8,7 @@ This section is for those having issues booting either OpenCore, macOS or having
 
 ## Table of Contents
 
-If you're unsure where you're currently stuck, please see here: [Understanding the macOS Boot Process](../troubleshooting/boot.md)
+If you're unsure where you're currently stuck, please see here: [Understanding the macOS Boot Process](../troubleshooting/boot.md).
 
 * [OpenCore Boot Issues](./extended/opencore-issues.md)
   * This section refers to booting the actual USB and getting to OpenCore's picker. Anything after the picker, like booting macOS, should see below

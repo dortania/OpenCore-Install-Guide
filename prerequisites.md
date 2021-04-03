@@ -31,4 +31,4 @@ Before we can jump head first into making an OpenCore based system, we need to g
      * Linux (Clean and properly functioning, with Python 2.7 or later)
    * For Windows or Linux users, **15GB** of free space on the drive you're working on. On Windows, your OS disk (C:) must have at least **15GB** of free space.
    * For macOS users, **30GB** of free space on the system's drive.
-   * Most tools used in this guide will also require [Python installed](https://www.python.org/downloads/)
+   * Most tools used in this guide will also require [Python installed](https://www.python.org/downloads/).

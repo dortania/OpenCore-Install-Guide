@@ -27,12 +27,12 @@ For CPU support, we have the following breakdown:
 
 * Both 32 and 64-bit CPUs are supported
   * This however requires the OS to support your architecture, see CPU Requirements section below
-* Intel's Desktop CPUs are supported.
-  * Yonah through Comet Lake are supported by this guide.
-* Intel's High-End Desktops and Server CPUs.
-  * Nehalem through Cascade Lake X are supported by this guide.
+* Intel's Desktop CPUs are supported
+  * Yonah through Comet Lake are supported by this guide
+* Intel's High-End Desktops and Server CPUs
+  * Nehalem through Cascade Lake X are supported by this guide
 * Intel's Core "i" and Xeon series laptop CPUs
-  * Arrendale through Ice Lake are supported by this guide.
+  * Arrendale through Ice Lake are supported by this guide
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
   * Laptop CPUs are **not** supported
@@ -111,7 +111,6 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 | [Amber](https://en.wikipedia.org/wiki/Kaby_Lake#List_of_8th_generation_Amber_Lake_Y_processors), [Whiskey](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture)), [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.14.1 | ^^ | ^^ | 0x0806E0(U/Y) |
 | [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.15.4 | ^^ | ^^ | 0x0906E0(S/H)|
 | [Ice Lake](https://en.wikipedia.org/wiki/Ice_Lake_(microprocessor)) | ^^ | ^^ | ^^ | 0x0706E5(U) |
-| [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | ^^ | ^^ | Requires Comet Lake CPUID | 0x0A0671 |
 | [Tiger Lake](https://en.wikipedia.org/wiki/Tiger_Lake_(microprocessor)) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> Untested </span> | 0x0806C0(U) |
 
 :::
@@ -121,7 +120,7 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 Unfortunately many features in macOS are outright unsupported with AMD and many others being partially broken. These include:
 
 * Virtual Machines relying on AppleHV
-  * This includes VMWare, Parallels, Docker, Android Studios, etc
+  * This includes VMWare, Parallels, Docker, Android Studios, etc.
   * VirtualBox is the sole exception as they have their own hypervisor
   * VMware 10 and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
 * Adobe Support
@@ -144,9 +143,9 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
   * AMD APUs are not supported however
   * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
   * Special note for MSI Navi users: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
-    * This issue is no longer present in macOS 11 (Big Sur).
+    * This issue is no longer present in macOS 11, Big Sur
 * Nvidia's GPU support is complicated:
-  * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
+  * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13, High Sierra
   * [Nvidia's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
   * [Nvidia's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
   * [Nvidia's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS (including macOS 11 Big Sur)
@@ -181,7 +180,6 @@ And an important note for **Laptops with discrete GPUs**:
 | [Comet Lake(UHD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.15.4 | ^^ | ^^ |
 | [Ice Lake(Gx)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen11) | 10.15.4 | ^^ | Requires `-igfxcdc` and `-igfxdvmt` in boot-args |
 | [Tiger Lake(Xe)](https://en.wikipedia.org/wiki/Intel_Xe) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
-| [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
 
 Note: Apple has kept Ivy Bridge's iGPU drivers present in macOS 11, Big Sur, however they are slated for removal. Please be aware they may be removed at a later time.
 
@@ -229,7 +227,7 @@ For the most part, all motherboards are supported as long as the CPU is. Previou
 
 * [~~AMD's B550 boards~~](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
 
-However thanks to recent developments, B550 boards are now bootable with the addition of [SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl). More info will be provided in both [Gathering Files](./ktext.md) and [Zen's config.plist section](./AMD/zen.md)
+However thanks to recent developments, B550 boards are now bootable with the addition of [SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl). More info will be provided in both [Gathering Files](./ktext.md) and [Zen's config.plist section](./AMD/zen.md).
 
 ## Storage Support
 

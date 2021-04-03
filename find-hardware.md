@@ -34,7 +34,7 @@ Due to the easier to use GUI, we recommend downloading AIDA64 and running this a
 | :--- | :--- |
 | ![](./images/finding-hardware-md/chipset-model-aida64.png) | ![](./images/finding-hardware-md/chipset-model-devicemanager.png) |
 
-* Note: Intel SOC based CPUs will have the chipset and other features already on the same die instead of being dedicated chips. This means trying to detect the exact chipset is a bit more difficult
+* Note: Intel SOC based CPUs will have the chipset and other features already on the same die instead of being dedicated chips. This means trying to detect the exact chipset is a bit more difficult.
 
 ### Keyboard, Trackpad and Touchscreen Connection Type
 
@@ -55,9 +55,9 @@ Depending on the device, it may show up under multiple names and connections. Th
   
 ::: details SMBus
   
-These will show up as a straight PCI device such as `Synaptics SMBus Driver` or `ELAN SMBus Driver`
+These will show up as a straight PCI device such as `Synaptics SMBus Driver` or `ELAN SMBus Driver`.
 
-* Synaptics devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptics SMBus Driver`
+* Synaptics devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptics SMBus Driver`.
 
 ![](./images/finding-hardware-md/Windows-SMBus-Device.png)
 
@@ -71,7 +71,7 @@ As you can see, we get 2 Synaptics devices in the left image, however if we take
 | :--- | :--- |
 | ![](./images/finding-hardware-md/USB-trackpad-normal.png) | ![](./images/finding-hardware-md/USB-trackpad-by-connection.png)
 
-These will show up as a `PS2 Compliant Trackpad`, as well under USB when we switch our connection view to `Device by Connection`
+These will show up as a `PS2 Compliant Trackpad`, as well under USB when we switch our connection view to `Device by Connection`.
 
 :::
 

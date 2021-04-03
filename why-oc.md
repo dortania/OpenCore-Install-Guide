@@ -8,22 +8,26 @@ This section contains a brief rundown as to why the community has been transitio
   * OpenCore features
   * Software support
   * Kext injection
-* [OpenCore's shortcomings](#opencore-s-shortcomings)
+* [OpenCore's shortcomings](#opencores-shortcomings)
 * [Common Myths](#common-myths)
   * Is OpenCore unstable as it's a beta?
   * Does OpenCore always inject SMBIOS and ACPI data into other OSes?
   * Does OpenCore require a fresh install?
   * Does OpenCore only support limited versions of macOS?
+  * Does OpenCore support older hardware?
+  * Does OpenCore support Windows/Linux booting?
+  * Legality of Hackintoshing
+  * Does macOS support Nvidia GPUs?
 
 ## OpenCore features
 
 * More OS Support!
-  * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
+  * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement.
   * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 11, Big Sur!
-* On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
+* On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done.
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
-  * AMD OSX patches not needing to update with every minor security update
+  * AMD OSX patches not needing to update with every minor security update.
 * Better overall security in many forms:
   * No need to disable System Integrity Protection (SIP)
   * Built-in FileVault 2 support
@@ -38,7 +42,7 @@ This section contains a brief rundown as to why the community has been transitio
 The biggest reason someone may want to switch from other boot loaders is actually software support:
 
 * Kexts no longer testing for Clover:
-  * Got a bug with a kext? Many developers including the organization [Acidanthera](https://github.com/acidanthera) (maker of most of your favorite kexts) won't provide support unless on OpenCore
+  * Got a bug with a kext? Many developers including the organization [Acidanthera](https://github.com/acidanthera) (maker of most of your favorite kexts) won't provide support unless on OpenCore.
 * Many firmware drivers being merged into OpenCore:
   * [APFS Support](https://github.com/acidanthera/AppleSupportPkg)
   * [FileVault support](https://github.com/acidanthera/AppleSupportPkg)
@@ -85,7 +89,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support UEFI-based VBIOS patching
   * This can be done in macOS however
 * Does not support automatic DeviceProperty injection for legacy GPUs
-  * ie. InjectIntel, InjectNvidia and InjectAti
+  * i.e. InjectIntel, InjectNvidia and InjectAti
   * This can be done manually however: [GPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 * Does not support IRQ conflict patching
   * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
@@ -95,7 +99,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support auto-detection for many Linux bootloader
   * Can be resolved by adding an entry in `BlessOverride`
 * Does not support many of Clover's XCPM patches
-  * ie. Ivy Bridge XCPM patches
+  * i.e. Ivy Bridge XCPM patches
 * Does not support hiding specific drives
 * Does not support changing settings within OpenCore's menu
 * Does not patch PCIRoot UID value
@@ -103,11 +107,11 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 
 # Common Myths
 
-## Is OpenCore unstable as it's a beta
+## Is OpenCore unstable as it's a beta?
 
-Short Answer: No
+Short Answer: No.
 
-Long Answer: No
+Long Answer: No.
 
 OpenCore's version number does not represent the quality of the project. Instead, it's more of a way to see the stepping stones of the project. Acidanthera still has much they'd like to do with the project including overall refinement and more feature support.
 
@@ -123,7 +127,7 @@ Current road map:
 
 So please do not see the version number as a hindrance, instead as something to look forward to.
 
-## Does OpenCore always inject SMBIOS and ACPI data into other OSes
+## Does OpenCore always inject SMBIOS and ACPI data into other OSes?
 
 By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking consists of three parts:
 
@@ -134,7 +138,7 @@ By default, OpenCore will assume that all OSes should be treated equally in rega
 
 However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS-limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
 
-## Does OpenCore require a fresh install
+## Does OpenCore require a fresh install?
 
 Not at all in the event you have a "Vanilla" installation – what this refers to is whether the OS has tampered in any way, such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered with, either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues.
 
@@ -142,7 +146,7 @@ Special note for Clover users: please reset your NVRAM when installing with Open
 
 * Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
 
-## Does OpenCore only support limited versions of macOS
+## Does OpenCore only support limited versions of macOS?
 
 As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all the way back to OS X 10.4! Proper support however will depend on your hardware, so please verify yourself: [Hardware Limitations](macos-limits.md)
 
@@ -174,13 +178,13 @@ Acidanthera has tested many versions, and I myself have run many versions of OS 
 
 :::
 
-## Does OpenCore support older hardware
+## Does OpenCore support older hardware?
 
 As of right now, the majority of Intel hardware is supported so long as the OS itself does! However please refer to the [Hardware Limitations page](macos-limits.md) for more info on what hardware is supported in what versions of OS X/macOS.
 
 Currently, Intel's Yonah and newer series CPUs have been tested properly with OpenCore.
 
-## Does OpenCore support Windows/Linux booting
+## Does OpenCore support Windows/Linux booting?
 
 OpenCore works in the same fashion as any other boot loader, so it respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
 
@@ -196,10 +200,10 @@ While the EULA states that macOS should only be installed on real Macs([section 
 
 * **Note**: We are not official legal advisors, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
 
-## Does macOS support Nvidia GPUs
+## Does macOS support Nvidia GPUs?
 
 Due to issues revolving around Nvidia support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported Nvidia GPUs and don't at this point. However, Apple actually still maintains and supports Macs with Nvidia GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
 
 The main issue has to do with any newer Nvidia GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on Nvidia for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus Nvidia couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
 
-For more info on OS support, see here: [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
+For more info on OS support, see here: [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/).

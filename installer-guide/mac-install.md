@@ -9,7 +9,7 @@ To start we'll want to grab ourselves a copy of macOS. You can skip this and hea
 
 ## Downloading macOS: Modern OS
 
-* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
+* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os).
 
 From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
 
@@ -27,16 +27,16 @@ As you can see, we get a nice list of macOS installers. If you need a particular
 
 ![](../images/installer-guide/mac-install-md/munki-process.png)
 
-* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
-  * For first time users, we recommend macOS 10.15, Catalina
-* **Nvidia GPU Note**: Reminder to verify whether your hardware support newer OSes, see [Hardware Limitations](../macos-limits.md)
+* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md).
+  * For first time users, we recommend macOS 10.15, Catalina.
+* **Nvidia GPU Note**: Reminder to verify whether your hardware support newer OSes, see [Hardware Limitations](../macos-limits.md).
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
-Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called `Install_macOS_11.1-20C69.dmg` for example. Mount it and you'll find the installer application.
+Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called `Install_macOS_11.1-20C69.dmg`, for example. Mount it and you'll find the installer application.
 
-* Note: We recommend to move the Install macOS.app into the `/Applications` folder, as we'll be executing commands from there.
-* Note 2: Running Cmd+Shift+G in Finder will allow you to easily jump to `~/macOS-installer`
+* **Note**: We recommend to move the Install_macOS.app into the `/Applications` folder, as we'll be executing commands from there.
+* **Note 2**: Running Cmd+Shift+G in Finder will allow you to easily jump to `~/macOS-installer`.
 
 ![](../images/installer-guide/mac-install-md/munki-done.png)
 
@@ -59,8 +59,8 @@ From here, jump to [Setting up the installer](#setting-up-the-installer) to fini
 
 Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
 
-* Note: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
-* Note 2: Users following "Legacy macOS: Online method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+* **Note**: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button).
+* **Note 2**: Users following "Legacy macOS: Online method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment).
 
 ![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
 
@@ -125,7 +125,7 @@ Within your OpenCore build folder, navigate to `Utilities/LegacyBoot`. Here you'
 Now run this tool in terminal **with sudo**(This tool will likely fail otherwise):
 
 ```sh
-# Replace X64 with IA32 if you have a 32-Bit CPU
+# Replace X64 with IA32 if you have a 32-bit CPU
 sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
 ```
 

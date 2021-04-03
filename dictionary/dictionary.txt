@@ -431,8 +431,8 @@ I219
 I225
 I225-V
 I225LM
-I350
 I2C
+I350
 I7,
 IA32
 IDER
@@ -716,6 +716,7 @@ Realtek's
 RealtekRTL8100
 RealtekRTL8111
 RecoveryImage
+RecoveryImage.
 RecoveryOS
 ReddestDream's
 RehabMan's
@@ -1177,6 +1178,7 @@ shiki
 shikigva
 slavs
 slowgeek
+slowgeek's
 smcread
 snapshotting
 snb-platform-id
