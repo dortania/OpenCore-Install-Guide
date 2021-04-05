@@ -188,7 +188,7 @@ OpenCore works in the same fashion as any other boot loader, so it respects othe
 
 Where hackintoshing sits is in a legal grey area, mainly that while this is not illegal we are in fact breaking the EULA. The reason this is not illegal:
 
-* We are downloading macOS from [Apple's servers directly](https://github.com/corpnewt/gibMacOS/blob/master/gibMacOS.command#L84)
+* We are downloading macOS from [Apple's servers directly](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/macrecovery/macrecovery.py#L125)
 * We are doing this as a non-profit origination for teaching and personal use
   * People who plan to use their Hackintosh for work or want to resell them should refer to the [Psystar case](https://en.wikipedia.org/wiki/Psystar_Corporation) and their regional laws
 
