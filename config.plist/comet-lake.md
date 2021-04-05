@@ -251,6 +251,25 @@ Blocks certain kexts from loading. Not relevant for us.
 
 Patches both the kernel and kexts.
 
+::: tip Fixing I225-V controllers
+
+This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's I225LM driver into supporting our I225-V network controller.
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| Base | String | __Z18e1000_set_mac_typeP8e1000_hw |
+| Comment | String | I225-V patch |
+| Enabled | Boolean | True |
+| Find | Data | `F2150000` |
+| Identifier | String | com.apple.driver.AppleIntelI210Ethernet |
+| MinKernel | String | 19.0.0 |
+| Replace | Data | `F3150000` |
+
+* **Note 1**: If your board didn't ship with the Intel I225 NIC, there's no reason to add this entry.
+* **Note 2**: Leave all other keys at their default values
+
+:::
+
 ### Quirks
 
 ::: tip Info
