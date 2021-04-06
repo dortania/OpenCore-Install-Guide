@@ -1,6 +1,6 @@
 # Kernel Issues
 
-* Supported version: 0.6.7
+* Supported version: 0.6.8
 
 Issues surrounding from initial booting the macOS installer to right before the install GUI pops up.
 
