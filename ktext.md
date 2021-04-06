@@ -158,7 +158,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
   * Requires OS X 10.8-11(2.2.0), 10.12-13(v2.2.2), 10.14+(2.4.0)
-  * **NOTE: Sometimes Realtek's Gigabit Ethernet may not work correctly if you have RealtekRTL8111 v2.4.0. If you see this issue, try reverting to version 2.2.2**
+  * **NOTE: Sometimes Realtek's Gigabit Ethernet may not work correctly if you have RealtekRTL8111 v2.4.0. If you see this issue, try reverting to version 2.2.2 or 2.3.0**
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
