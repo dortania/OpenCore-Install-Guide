@@ -23,31 +23,31 @@ module.exports = {
         },]
     ],
     base: '/OpenCore-Install-Guide/',
-	
-	watch: {
-	    $page(newPage, oldPage) {
-	      if (newPage.key !== oldPage.key) {
-	        requestAnimationFrame(() => {
-	          if (this.$route.hash) {
-	            const element = document.getElementById(this.$route.hash.slice(1));
 
-	            if (element && element.scrollIntoView) {
-	              element.scrollIntoView();
-	            }
-	          }
-	        });
-	      }
-	    }
-	  },
-	
-	markdown: {
-		extendMarkdown: md => {
-			md.use(require('markdown-it-multimd-table'), {
-				rowspan: true,
-			});
-		}
-	},
-	
+    watch: {
+        $page(newPage, oldPage) {
+            if (newPage.key !== oldPage.key) {
+                requestAnimationFrame(() => {
+                    if (this.$route.hash) {
+                        const element = document.getElementById(this.$route.hash.slice(1));
+
+                        if (element && element.scrollIntoView) {
+                            element.scrollIntoView();
+                        }
+                    }
+                });
+            }
+        }
+    },
+
+    markdown: {
+        extendMarkdown: md => {
+            md.use(require('markdown-it-multimd-table'), {
+                rowspan: true,
+            });
+        }
+    },
+
     theme: 'vuepress-theme-succinct',
     globalUIComponents: [
         'ThemeManager'
@@ -56,8 +56,8 @@ module.exports = {
     themeConfig: {
         lastUpdated: true,
         repo: 'https://github.com/dortania/OpenCore-Install-Guide',
-		editLinks: true,
-		editLinkText: 'Help us improve this page!',
+        editLinks: true,
+        editLinkText: 'Help us improve this page!',
         logo: 'homepage.png',
         nav: [{
             text: 'Dortania Guides',
@@ -98,9 +98,9 @@ module.exports = {
             collapsable: false,
             sidebarDepth: 1,
             children: [
-				'prerequisites',
-				'macos-limits',
-				'find-hardware',
+                'prerequisites',
+                'macos-limits',
+                'find-hardware',
                 'terminology',
                 'why-oc',
             ]
@@ -133,7 +133,7 @@ module.exports = {
             children: [{
                 title: 'Intel Desktop config.plist',
                 collapsable: true,
-				sidebarDepth: 1,
+                sidebarDepth: 1,
                 children: [
                     ['/config.plist/penryn', 'Penryn'],
                     ['/config.plist/clarkdale', 'Clarkdale'],
@@ -149,24 +149,24 @@ module.exports = {
             {
                 title: 'Intel Laptop config.plist',
                 collapsable: true,
-				sidebarDepth: 1,
+                sidebarDepth: 1,
                 children: [
                     ['/config-laptop.plist/arrandale', 'Arrandale'],
                     ['/config-laptop.plist/sandy-bridge', 'Sandy Bridge'],
                     ['/config-laptop.plist/ivy-bridge', 'Ivy Bridge'],
                     ['/config-laptop.plist/haswell', 'Haswell'],
-					['/config-laptop.plist/broadwell', 'Broadwell'],
+                    ['/config-laptop.plist/broadwell', 'Broadwell'],
                     ['/config-laptop.plist/skylake', 'Skylake'],
                     ['/config-laptop.plist/kaby-lake', 'Kaby Lake'],
                     ['/config-laptop.plist/coffee-lake', 'Coffee Lake and Whiskey Lake'],
-					['/config-laptop.plist/coffee-lake-plus', 'Coffee Lake Plus and Comet Lake'],
+                    ['/config-laptop.plist/coffee-lake-plus', 'Coffee Lake Plus and Comet Lake'],
                     ['/config-laptop.plist/icelake', 'Ice Lake'],
                 ]
             },
             {
                 title: 'Intel HEDT config.plist',
                 collapsable: true,
-				sidebarDepth: 1,
+                sidebarDepth: 1,
                 children: [
                     '/config-HEDT/nehalem',
                     '/config-HEDT/ivy-bridge-e',
@@ -178,7 +178,7 @@ module.exports = {
             {
                 title: 'AMD Desktop config.plist',
                 collapsable: true,
-				sidebarDepth: 1,
+                sidebarDepth: 1,
                 children: [
                     '/AMD/fx',
                     '/AMD/zen',
@@ -199,21 +199,21 @@ module.exports = {
             collapsable: false,
             children: [
                 '/troubleshooting/troubleshooting',
-				{
-            		title: '',
-            		collapsable: false,
-		            children: [
-		                '/troubleshooting/extended/opencore-issues',
-						'/troubleshooting/extended/kernel-issues',
-						'/troubleshooting/extended/userspace-issues',
-						'/troubleshooting/extended/post-issues',
-						'/troubleshooting/extended/misc-issues',
+                {
+                    title: '',
+                    collapsable: false,
+                    children: [
+                        '/troubleshooting/extended/opencore-issues',
+                        '/troubleshooting/extended/kernel-issues',
+                        '/troubleshooting/extended/userspace-issues',
+                        '/troubleshooting/extended/post-issues',
+                        '/troubleshooting/extended/misc-issues',
 
-		            ]
-				},
+                    ]
+                },
                 '/troubleshooting/debug',
                 '/troubleshooting/boot',
-				'/troubleshooting/kernel-debugging',
+                '/troubleshooting/kernel-debugging',
             ]
         },
         {
@@ -257,7 +257,7 @@ module.exports = {
                     title: 'Multiboot',
                     collapsable: true,
                     children: [
-						['https://dortania.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
+                        ['https://dortania.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
                         ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up LauncherOption'],
                         ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
                     ]
@@ -276,12 +276,28 @@ module.exports = {
         {
             title: 'Extras',
             collapsable: false,
-			sidebarDepth: 2,
+            sidebarDepth: 2,
             children: [
                 '/extras/kaslr-fix',
                 '/extras/spoof',
                 '/extras/big-sur/',
-                ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
+                {
+                    title: 'Clover Conversions',
+                    collapsable: false,
+                    children: [
+                        ['clover-conversion/', 'Conversioni da Clover a OpenCore'],
+                        {
+                            title: 'Universal',
+                            collapsable: true,
+                            sidebarDepth: 1,
+                            children: [
+                                ['', ''],
+                                ['', ''],
+                                ['', ''],
+                            ]
+                        }
+                    ]
+                },
                 '/extras/smbios-support.md',
             ]
         },
