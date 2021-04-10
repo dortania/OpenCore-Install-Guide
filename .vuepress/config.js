@@ -276,12 +276,23 @@ module.exports = {
         {
             title: 'Extras',
             collapsable: false,
-			sidebarDepth: 2,
+            sidebarDepth: 2,
             children: [
                 '/extras/kaslr-fix',
                 '/extras/spoof',
                 '/extras/big-sur/',
-                ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
+                {
+                    title: 'Clover Conversions',
+                    collapsable: true,
+                    sidebarDepth: 1,
+                    path: '/clover-conversion/',
+                    children: [
+                        '/clover-conversion/Clover-config',
+                        '/clover-conversion/clover-efi',
+                        '/clover-conversion/Clover-boot-arg',
+                        '/clover-conversion/clover-patch',
+                    ]
+                },
                 '/extras/smbios-support.md',
             ]
         },
