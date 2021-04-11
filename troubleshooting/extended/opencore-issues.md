@@ -19,6 +19,7 @@ Issues surrounding from initial booting the USB itself to right before you choos
 * [OCABC: Incompatible OpenRuntime r4, require r10](#ocabc-incompatible-openruntime-r4-require-r10)
 * [Failed to open OpenCore image - Access Denied](#failed-to-open-opencore-image-access-denied)
 * [OC: Failed to find SB model disable halting on critical error](#oc-failed-to-find-sb-model-disable-halting-on-critical-error)
+* [OCB: LoadImage failed - Unsupported](#ocb-loadimage-failed-unsupported)
 
 ## Stuck on a black screen before picker
 
@@ -105,6 +106,13 @@ This is due to an entry being in your config.plist, however not present in your 
   * If not, please run Cmd/Ctrl+R with OpenCore to re-snapshot your config.plist
 
 Note that the entries are case-sensitive.
+
+## Stuck on `OCB: LoadImage failed - Unsupported`
+
+This is due to either no BaseSystem.dmg file found or BaseSystem.dmg is corrupt. To resolve:
+
+* Redownload BaseSystem.dmg
+  * Note that you need to delete the old BaseSystem.dmg file.
 
 ## Receiving "Failed to parse real field of type 1"
 
