@@ -57,7 +57,7 @@ touch /Library/Extensions /System/Library/Extensions​
 kextcache -i /​
 ```
 
-* **Note**, macOS Catalina and newer will need the `mount -uw /` command to mount the system drive as Read/Write
+* **Note**, macOS Catalina will need the `mount -uw /` command to mount the system drive as Read/Write.
 
 ## Cleaning the Clover Junk in your hardware
 
