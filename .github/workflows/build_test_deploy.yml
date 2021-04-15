@@ -36,8 +36,6 @@ jobs:
         with:
           fetch-depth: '0'
           submodules: 'recursive'
-      - name: Setup Node
-        uses: actions/setup-node@v2
       - name: Lint
         uses: gaurav-nelson/github-action-markdown-link-check@v1
   spellcheck:
@@ -51,5 +49,7 @@ jobs:
           submodules: 'recursive'
       - name: Setup Node
         uses: actions/setup-node@v2
+      - name: Install
+        run: npm install
       - name: Spellcheck
         run: npm run spellcheck
