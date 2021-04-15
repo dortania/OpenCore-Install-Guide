@@ -61,7 +61,7 @@ kextcache -i /​
 
 ## Cleaning the Clover Junk in your hardware
 
-The other thing that Clover may have hidden from you is NVRAM variables, this is bad as OpenCore won't overwrite variables unless explicitly told via the `Block` feature found under `NVRAM -> Block`. To fix this, we'll need to clear then via OpenCore's `ClearNvram` feature.
+The other thing that Clover may have hidden from you is NVRAM variables, this is bad as OpenCore won't overwrite variables unless explicitly told via the `Delete` feature found under `NVRAM -> Delete`. To fix this, we'll need to clear then via OpenCore's `ClearNvram` feature.
 
 In you config.plist:
 
