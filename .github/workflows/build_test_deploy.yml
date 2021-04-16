@@ -37,7 +37,13 @@ jobs:
           fetch-depth: '0'
           submodules: 'recursive'
       - name: Lint
+        uses: avto-dev/markdown-lint@v1
+        with:
+          args: './'
+      - name: Lint (URLs)
         uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
   spellcheck:
     name: Spellcheck
     runs-on: ubuntu-latest
