@@ -2,7 +2,7 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.7 |
+| Supported OpenCore version | 0.6.8 |
 | Initial macOS Support | OS X 10.9, Mavericks |
 | Notes | Sandy Bridge-E also applies |
 
