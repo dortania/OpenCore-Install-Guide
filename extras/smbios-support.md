@@ -261,6 +261,7 @@ All models listed below are not supported by OpenCore however are documented her
   * [Mac Mini](#mac-mini-apple-silicon)
   * [MacBook Air](#macbook-air-apple-silicon)
   * [MacBook Pro](#macbook-pro-apple-silicon)
+  * [iMac](#imac-apple-silicon)
 * PowerPC
   * [PowerBook](#powerbook-powerpc)
   * [iBook](#ibook-powerpc)
@@ -306,6 +307,15 @@ Extra information regarding Apple's CPUs:
 | SMBIOS | Year | CPU Family | Secure Enclave Identifier | Initial Support |
 | :--- | :--- | :--- | :--- | :--- |
 | MacBookPro17,1 | Late 2020 | Apple M1 | J293 | 11.0.0 (20A2411) |
+<!-- | MacBookPro18,1 | Late 2021 | Apple M1X(?) | J314 | Unknown | -->
+<!-- | MacBookPro18,2 | Late 2021 | Apple M1X(?) | J316 | Unknown | -->
+
+#### iMac - Apple Silicon
+
+| SMBIOS | Year | CPU Family | Secure Enclave Identifier | Initial Support |
+| :--- | :--- | :--- | :--- | :--- |
+| iMac21,1 | Mid 2021 | Apple M1 | J256 | 11.3 (20E232?) |
+| iMac21,2 | Mid 2021 | Apple M1 | J257 | 11.3 (20E232?) |
 
 ::: details Power PC SMBIOS Table
 
