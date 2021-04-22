@@ -4,9 +4,7 @@
 
 Want to help support the guide? Well there's some ways you can help!
 
-* [Contributing via Issues](#contributing-via-issues)
-* [Contributing via PRs](#contributing-via-prs)
-* [Contributing via Translations](#contributing-via-translations)
+[[toc]]
 
 Note: For those wanting to contribute financially, we seriously appreciate it but we're a non-profit organization. We do this to teach, not to make money. If you have some money left over we highly recommend donating it to a charity. [Crohn's and Colitis Canada](https://crohnsandcolitis.donorportal.ca/Donation/DonationDetails.aspx?L=en-CA&G=159&F=1097&T=GENER) is one we recommend if you have none on mind.
 

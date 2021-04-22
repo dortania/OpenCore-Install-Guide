@@ -4,34 +4,7 @@
 
 Issues surrounding from initial booting the macOS installer to right before the install GUI pops up.
 
-* [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
-* [Stuck on EndRandomSeed](#stuck-on-endrandomseed)
-* [Stuck after selecting macOS partition in OpenCore](#stuck-after-selecting-macos-partition-in-opencore)
-* [Kernel Panic on `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)
-* [Stuck on [EB|LD:OFS] Err(0xE) when booting preboot volume](#stuck-on-eb-ld-ofs-err-0xe-when-booting-preboot-volume)
-* [Stuck on `OCB: LoadImage failed - Security Violation`](#stuck-on-ocb-loadimage-failed-security-violation)
-* [Stuck on `OCABC: Memory pool allocation failure - Not Found`](#stuck-on-ocabc-memory-pool-allocation-failure-not-found)
-* [Stuck on `Buffer Too Small`](#stuck-on-buffer-too-small)
-* [Stuck on `Plist only kext has CFBundleExecutable key`](#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
-* [Stuck on `This version of Mac OS X is not supported: Reason Mac...`](#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac)
-* [`Couldn't allocate runtime area` errors?](#couldn-t-allocate-runtime-area-errors)
-* [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
-* [Stuck at ACPI Table loading on B550](#stuck-at-acpi-table-loading-on-b550)
-* ["Waiting for Root Device" or Prohibited Sign error](#waiting-for-root-device-or-prohibited-sign-error)
-* [Kernel panic with IOPCIFamily on X99](#kernel-panic-with-iopcifamily-on-x99)
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
-* [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
-* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [Kernel Panic `Cannot perform kext summary`](#kernel-panic-cannot-perform-kext-summary)
-* [Kernel Panic `AppleIntelMCEReporter`](#kernel-panic-appleintelmcereporter)
-* [Kernel Panic `AppleIntelCPUPowerManagement`](#kernel-panic-appleintelcpupowermanagement)
-* [Kernel Panic `AppleACPIPlatform` in 10.13](#kernel-panic-appleacpiplatform-in-10-13)
-* [Keyboard works but trackpad does not](#keyboard-works-but-trackpad-does-not)
-* [`kextd stall[0]: AppleACPICPU`](#kextd-stall-0-appleacpicpu)
-* [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
-* [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake-laptop)
-* [Stuck at `Forcing CS_RUNTIME for entitlement` in Big Sur](#stuck-at-forcing-cs-runtime-for-entitlement-in-big-sur)
-* [Stuck on `ramrod`(^^^^^^^^^^^^^)](#stuck-on-ramrod)
+[[toc]]
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
 
