@@ -63,9 +63,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Patches**
 
-* TgtBridge patches: No feature parity in OpenCore, see comments(TgtBridge was very buggy in Clover):
-  * [Vit's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2682158)
-  * [Andrey's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2678273)
+* TgtBridge patches:
+  * `ACPI -> Patch -> ... -> Base`
 
 * DisableASPM:
   * `DeviceProperties -> Add -> PciRoot... -> pci-aspm-default | Data | <00>`
@@ -376,7 +375,9 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **RadeonDeInit**:
 
-* [Radeon-Denit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
+In most cases it is advisable to use WhateverGreen, which handles this automatically. This SSDT is not needed if WhateverGreen is used.
+
+* [Radeon-DeInit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-DeInit-SSDT.dsl)
   * Do note that this is meant for GFX0, adjust for your system
 
 # Kernel and Kext Patches
