@@ -4,16 +4,7 @@
 
 Miscellaneous issues not revolving around macOS itself such as multibooting.
 
-* [Can't run `acpidump.efi`](#can-t-run-acpidump-efi)
-* [Fixing SSDTTime: `Could not locate or download iasl!`](#fixing-ssdttime-could-not-locate-or-download-iasl)
-* [Fix Python: `Python is not installed or not found on PATH`](#fix-python-python-is-not-installed-or-not-found-on-path)
-* [Windows Startup Disk can't see APFS drives](#windows-startup-disk-can-t-see-apfs-drives)
-* [Incorrect resolution with OpenCore](#incorrect-resolution-with-opencore)
-* [Can't find Windows/BootCamp drive in picker](#can-t-find-windows-bootcamp-drive-in-picker)
-* [Selecting Startup Disk doesn't apply correctly](#selecting-startup-disk-doesn-t-apply-correctly)
-* [Booting Windows results in BlueScreen or Linux crashes](#booting-windows-results-in-bluescreen-or-linux-crashes)
-* [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed-already-started)
-* [iASL warning, # unresolved](#iasl-warning-unresolved)
+[[toc]]
 
 ## Can't run `acpidump.efi`
 

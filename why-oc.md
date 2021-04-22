@@ -4,16 +4,7 @@
 
 This section contains a brief rundown as to why the community has been transitioning over to OpenCore, and aims to dispel a few common myths in the community. Those who just want a macOS machine can skip this page.
 
-* [Why OpenCore over Clover and others](#why-opencore-over-clover-and-others)
-  * OpenCore features
-  * Software support
-  * Kext injection
-* [OpenCore's shortcomings](#opencore-s-shortcomings)
-* [Common Myths](#common-myths)
-  * Is OpenCore unstable as it's a beta?
-  * Does OpenCore always inject SMBIOS and ACPI data into other OSes?
-  * Does OpenCore require a fresh install?
-  * Does OpenCore only support limited versions of macOS?
+[[toc]]
 
 ## OpenCore features
 

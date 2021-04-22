@@ -4,9 +4,7 @@
 
 Needing to figure out why you're getting issues or stalling? Well, you've come to the right place:
 
-* [File Swap](#file-swaps)
-* [Config Changes](#config-changes)
-* [Disabling all logging](#disabling-all-logging)
+[[toc]]
 
 ## File Swaps
 
