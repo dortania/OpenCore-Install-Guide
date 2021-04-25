@@ -167,7 +167,7 @@ To start, we'll first need a minimum of a [free developer account](https://devel
 To determine which KDK build you need with beta builds, run the following in terminal:
 
 ```sh
-sw_vers | grep "BuildVersion"
+sw_vers | grep BuildVersion
 ```
 
 For this, I will be downloading Kernel Debug Kit 11.3 build 20E5186d. Once downloaded, mount the disk image and you'll find the KDK installer. By default, the KDK will only install itself for "Performing Two-Machine Debugging" and will provide zero extra benefit on the host machine for kernel debugging by default.
