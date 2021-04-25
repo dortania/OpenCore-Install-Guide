@@ -1,6 +1,6 @@
 {
    "name": "OpenCore-Install-Guide",
-   "version": "0.6.6",
+   "version": "0.6.8",
    "description": "Guide to put macOS on unsupported devices",
    "main": "",
    "author": {
@@ -33,19 +33,19 @@
    },
    "license": "CC-BY-NC-SA-4.0",
    "devDependencies": {
-      "@vuepress/plugin-back-to-top": "^1.7.1",
-      "markdown-it-multimd-table": "^4.0.3",
-      "markdown-link-check": "^3.8.5",
-      "markdownlint-cli": "^0.26.0",
-      "run-script-os": "^1.1.4",
+      "@vuepress/plugin-back-to-top": "^1.8.2",
+      "markdown-it-multimd-table": "^4.1.0",
+      "markdown-link-check": "^3.8.7",
+      "markdownlint-cli": "^0.27.1",
+      "run-script-os": "^1.1.6",
       "spellchecker-cli": "^4.4.0",
-      "vuepress": "^1.7.1",
+      "vuepress": "^1.8.2",
       "vuepress-plugin-medium-zoom": "^1.1.9",
       "vuepress-plugin-zooming": "^1.1.8",
       "vuepress-theme-book": "0.0.5",
       "vuepress-theme-dark-new": "^0.1.2",
-      "vuepress-theme-succinct": "^1.6.4",
-      "vuepress-theme-yuu": "^2.3.0"
+      "vuepress-theme-succinct": "^1.7.2",
+      "vuepress-theme-yuu": "^3.0.1"
    },
    "homepage": "https://dortania.github.io/OpenCore-Install-Guide/"
 }

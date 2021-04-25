@@ -384,7 +384,6 @@ Goldfish64
 Goldfish64's
 GraphicsEnabler
 GraphicsEnabler=Yes
-Greenwhich
 GuC
 Gui
 H310
@@ -431,8 +430,8 @@ I219
 I225
 I225-V
 I225LM
-I350
 I2C
+I350
 I7,
 IA32
 IDER
@@ -709,7 +708,7 @@ RTCMemoryFixup
 RTVariables
 R[5|7]
 Radeon
-Radeon-Denit-SSDT
+Radeon-DeInit-SSDT
 Ramus
 Realtek
 Realtek's
@@ -838,6 +837,7 @@ UsbInjectAll
 UselessBanana
 Userspace
 V1
+VAIO
 VBIOS
 VDADecoderChecker
 VDI
