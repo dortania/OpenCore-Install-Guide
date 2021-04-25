@@ -81,7 +81,7 @@ Common Windows error code:
 
 This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
 
-## iASL warning, # unresolved
+## iASL warning, only X unresolved
 
 If you try to decompile your DSDT and get an error similar to this:
 
@@ -97,7 +97,7 @@ iasl * [insert all ACPI files here]
 
 ## Time inconsistency between macOS and Windows
 
-This is due to macOS using Universal Time while Windows relies on Greenwhich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
+This is due to macOS using Universal Time while Windows relies on Greenwich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
 
 * [Install Bootcamp utilities](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * [Modify Windows' registry](https://superuser.com/q/494432)
