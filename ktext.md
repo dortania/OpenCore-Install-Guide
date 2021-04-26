@@ -154,7 +154,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
   * Requires OS X 10.8 or newer
-  * Note: Atheros Killer E2500 models are actually Realtek based, for these systems please use [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) instead
+  * Note: Atheros Killer E2500 and E3000 models are actually Realtek based, for E2500 please use [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) instead, for E3000 please use [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
   * Requires OS X 10.8 and up for versions v2.2.0 and below, macOS 10.12 and up for versions v2.2.2 through v2.3.0 (inclusive), macOS 10.14 and up for versions v2.4.0 and up
