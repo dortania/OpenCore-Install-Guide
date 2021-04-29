@@ -12,7 +12,7 @@
 
 VMware cannot directly use a raw disk image, so we'll create a linked VMDK, which will allow you to use it as a virtual hard drive in VMware Fusion.
 
-Download raw2vmdk from [here](../../extra-files/raw2vmdk.jar), and put it in the same directory as the `.img` file. Then, run the following command:
+Download raw2vmdk from [here](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/raw2vmdk.jar), and put it in the same directory as the `.img` file. Then, run the following command:
 
 ```bash
 ### Change "Install macOS Big Sur Beta" if the name of the .img file differs
