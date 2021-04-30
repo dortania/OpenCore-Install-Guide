@@ -3,7 +3,6 @@
 ## Requirements
 
 * VirtualBox
-* A USB attached hard disk or SSD
 
 ## Download the Installation Media
 
