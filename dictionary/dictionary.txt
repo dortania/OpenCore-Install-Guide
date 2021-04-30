@@ -845,6 +845,7 @@ VIAO
 VM
 VMDK
 VMWare
+VMX
 VMs
 VMware
 VPN
@@ -1160,6 +1161,8 @@ prelinked
 prelinkedkernel
 prelinker
 probs
+qemu
+qemu-img
 r10
 r4
 rEFInd

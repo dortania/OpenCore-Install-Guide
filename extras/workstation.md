@@ -9,12 +9,12 @@
 
 ## Download the Installation Media
 
-You can use [macrecovery](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/macrecovery) (see this [guide](../installer-guide/winblows-install.md#downloading-macos)) to optain the basesystem.dmg file.
+You can use [macrecovery](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/macrecovery) (see this [guide](../installer-guide/winblows-install.md#downloading-macos)) to obtain the basesystem.dmg file.
 
 ## Converting Installation Media
 
 VMware cannot directly use a dmg disk image, so we'll create a vmdk file, which will allow you to use it as a virtual disk drive in VMware Fusion.
-With some convertions, we can create our disk image:
+With some conversions, we can create our disk image:
 
 ```bash
 ### Change "BaseSystem" if the name of the .dmg file differs
@@ -32,7 +32,7 @@ You can use the classic settings that VMware offers, remember that macOS cannot 
 
 ## Edit the vmx file
 
-For booting macos, we have to add some strings to the vmx file that contains all the settings of our VM.
+For booting macOS, we have to add some strings to the vmx file that contains all the settings of our VM.
 
 ### VMX patch for Intel Processors
 
@@ -58,6 +58,7 @@ cpuid.1.ecx = "1000:0010:1001:1000:0010:0010:0000:0011"
 cpuid.1.edx = "0000:1111:1010:1011:1111:1011:1111:1111"
 featureCompat.enable = "FALSE"
 ```
+
 After that, you can boot up macOS without any problem!
 
 ## Install VMware tools
