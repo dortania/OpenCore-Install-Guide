@@ -54,9 +54,9 @@ In some cases you see that you have not graphic acceleration. We can fix this on
 
 * Close VMware Fusion. Locate the "macOS 10.15.vmwarevm" (or whatever you named the machine it when saving) folder in Finder, and right click > "Show Package Contents".
   The result should look like the image below.
-  ![](../../images/extras/big-sur/fusion/vm-folder.png)
+  ![](../images/extras/big-sur/fusion/vm-folder.png)
 * Open the vmx (not vmxf or vmx.lck folder) file in TextEdit. It should look something like this:
-  ![](../../images/extras/big-sur/fusion/vmx-initial.png)
+  ![](../images/extras/big-sur/fusion/vmx-initial.png)
 * Add the following lines to it ([based on](https://kb.vmware.com/s/article/81657)):
   ```
   appleGPU0.present = "True"
