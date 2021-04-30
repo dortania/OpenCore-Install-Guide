@@ -27,7 +27,7 @@ As you can see, we get a nice list of macOS installers. If you need a particular
 
 ![](../images/installer-guide/mac-install-md/munki-process.png)
 
-* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
+* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur.md)
   * For first time users, we recommend macOS 10.15, Catalina
 * **Nvidia GPU Note**: Reminder to verify whether your hardware support newer OSes, see [Hardware Limitations](../macos-limits.md)
 

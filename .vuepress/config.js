@@ -280,9 +280,18 @@ module.exports = {
             children: [
                 '/extras/kaslr-fix',
                 '/extras/spoof',
-                '/extras/big-sur/',
+                '/extras/big-sur',
+                {
+                    title: 'Virtual Machines',
+                    collapsable: false,
+                    children: [
+                        '/extras/virtualbox',
+                        '/extras/fusion',
+                        '/extras/workstation'
+                    ]
+                }
                 ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
-                '/extras/smbios-support.md',
+                '/extras/smbios-support.md'
             ]
         },
         {

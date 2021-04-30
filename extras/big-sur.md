@@ -154,33 +154,33 @@ With Big Sur, quite a bit broke. Mainly the following:
   * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
   * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
 
-And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/extended/post-issues.md#disabling-sip)
+And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../troubleshooting/extended/post-issues.md#disabling-sip)
 
 ## Installation
 
 Guides have been updated to accommodate Big Sur, see the applicable OS environment for you:
 
-* [macOS users](../../installer-guide/mac-install.md)
-* [Windows users](../../installer-guide/winblows-install.md)
-* [Linux users](../../installer-guide/linux-install.md)
+* [macOS users](../installer-guide/mac-install.md)
+* [Windows users](../installer-guide/winblows-install.md)
+* [Linux users](../installer-guide/linux-install.md)
 
 ## Troubleshooting
 
 ### Stuck at `Forcing CS_RUNTIME for entitlement`
 
-![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
+![Credit to Stompy for image](../images/extras/big-sur/cs-stuck.jpg)
 
 This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete, otherwise you'll break your installation.
 
 ### Stuck at `PCI Configuration Begins` for Intel's X99 and X299 boards
 
-![](../../images/extras/big-sur/readme/rtc-error.jpg)
+![](../images/extras/big-sur/rtc-error.jpg)
 
 As previously mentioned, Intel HEDT motherboards may have some issues revolving around their RTC device in ACPI. To resolve, you'll need to look at your RTC device and see which regions are missing. For more information, see here: [SSDT-RTC0-RANGE.dsl](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-RTC0-RANGE.dsl)
 
 ### Stuck on `ramrod`(^^^^^^^^^^^^^)
 
-![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
+![Credit to Notiflux for image](../images/extras/big-sur/ramrod.jpg)
 
 If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
 
@@ -197,7 +197,7 @@ This is due to an unused uncore PCI Bridges being enabled in ACPI, and so IOPCIF
 
 With Big Sur, macOS has become much pickier with devices being present in ACPI. Especially if you're injecting important properties for WhateverGreen or AppleALC, you may find they're no longer applying. To verify whether your ACPI defines your hardware, check for the `acpi-path` property in [IORegistryExplorer](https://github.com/khronokernel/IORegistryClone/blob/master/ioreg-210.zip):
 
-![](../../images/extras/big-sur/readme/acpi-path.png)
+![](../images/extras/big-sur/acpi-path.png)
 
 If no property is found, you'll need to create an SSDT that provides the full pathing as you likely have a PCI Bridge that is not documented in your ACPI tables. An example of this can be found here: [SSDT-BRG0](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-BRG0.dsl)
 
@@ -241,11 +241,11 @@ If you receive an early kernel panic on `max_cpus_from_firmware not yet initiali
 
 On-screen:
 
-![](../../images/extras/big-sur/readme/onscreen-panic.png)
+![](../images/extras/big-sur/onscreen-panic.png)
 
 Via serial logging or NVRAM:
 
-![](../../images/extras/big-sur/readme/apic-panic.png)
+![](../images/extras/big-sur/apic-panic.png)
 
 :::
 

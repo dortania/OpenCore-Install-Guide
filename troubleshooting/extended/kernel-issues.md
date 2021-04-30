@@ -637,13 +637,13 @@ For the latter, ensure you're only using SSDT-CPUR with **B550 and A520**. Do no
 
 ## Stuck at `Forcing CS_RUNTIME for entitlement` in Big Sur
 
-![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
+![Credit to Stompy for image](../../images/extras/big-sur/cs-stuck.jpg)
 
 This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
 
 ## Stuck on `ramrod`(^^^^^^^^^^^^^)
 
-![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
+![Credit to Notiflux for image](../../images/extras/big-sur/ramrod.jpg)
 
 If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
 

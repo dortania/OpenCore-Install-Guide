@@ -2,24 +2,24 @@
 
 ## Requirements
 
-* VMware Workstation or VMware Workstation Player
-* Java (both the JRE and JDK work)
-* A computer running macOS
-* The desired macOS installation software installed to /Applications
-* A USB attached hard disk or SSD, or an internal disk that can be passed through entirely
+* VMware Workstation or VMware Workstation Player (Linux or Windows)
+* qemu-img
+  * [Windows](https://cloudbase.it/qemu-img-windows/)
+  * Linux: it's automatically installed with qemu.
+
+## Download the Installation Media
+
+You can use [macrecovery](https://github.com/acidanthera/OpenCorePkg/tree/master/Utilities/macrecovery) (see this [guide](../installer-guide/winblows-install.md#downloading-macos)) to optain the basesystem.dmg file.
 
 ## Converting Installation Media
 
-VMware cannot directly use a raw disk image, so we'll create a linked VMDK, which will allow you to use it as a virtual hard drive in VMware Fusion.
-
-Download raw2vmdk from [here](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/raw2vmdk.jar), and put it in the same directory as the `.img` file. Then, run the following command:
+VMware cannot directly use a dmg disk image, so we'll create a vmdk file, which will allow you to use it as a virtual disk drive in VMware Fusion.
+With some convertions, we can create our disk image:
 
 ```bash
-### Change "Install macOS Big Sur Beta" if the name of the .img file differs
-java -jar raw2vmdk.jar "Install macOS Big Sur Beta.img" "Install macOS Big Sur Beta.vmdk"
+### Change "BaseSystem" if the name of the .dmg file differs
+./qemu-img convert BaseSystem.dmg -O vmdk BaseSystem.vmdk
 ```
-
-This will create a VMDK that references the `.img` file (the raw disk image) for VMware to use. If you're going to move this vmdk or transfer it to another computer, you must move the img file along with it.
 
 ## Unlock VMware
 
@@ -58,8 +58,7 @@ cpuid.1.ecx = "1000:0010:1001:1000:0010:0010:0000:0011"
 cpuid.1.edx = "0000:1111:1010:1011:1111:1011:1111:1111"
 featureCompat.enable = "FALSE"
 ```
-
-## Boot the machine and install macOS
+After that, you can boot up macOS without any problem!
 
 ## Install VMware tools
 
