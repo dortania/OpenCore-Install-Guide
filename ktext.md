@@ -108,7 +108,6 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops, **desktops can ignore**
-  * Do not use until battery has been properly patched, can cause issues otherwise. So for initial setup, please omit this kext. After install you can follow this page for setup: [Fixing Battery Read-outs](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
 * SMCDellSensors.kext
   * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM)
   * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
@@ -380,6 +379,10 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 :::
 
 #### Misc
+* [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
+  * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
+* [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
+  * Fixes brightness keys automatically
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
