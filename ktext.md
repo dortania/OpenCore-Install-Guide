@@ -379,6 +379,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 :::
 
 #### Misc
+
 * [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
   * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
 * [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
