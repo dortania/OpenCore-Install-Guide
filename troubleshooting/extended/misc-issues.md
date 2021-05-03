@@ -1,7 +1,5 @@
 # Miscellaneous Issues
 
-* Supported version: 0.6.8
-
 Miscellaneous issues not revolving around macOS itself such as multibooting.
 
 * [Can't run `acpidump.efi`](#can-t-run-acpidump-efi)

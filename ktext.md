@@ -1,7 +1,5 @@
 # Gathering files
 
-* Supported version: 0.6.8
-
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
 > What's the best way to figure out if my hardware is supported?
