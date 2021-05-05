@@ -19,7 +19,7 @@ This guide specifically focuses on two main things:
 * Installing macOS on an X86-based PC
 * Teaching you what makes your Hack work
 
-Because of this, you will be expected to read, learn and even use Google. This is not a simple one-click install setup.
+Because of this, you will be expected to read, learn and even use a search engine. This is not a simple one-click install setup.
 
 Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, it is still being frequently updated, so chunks of configuration change quite often (i.e. new quirks replacing old ones).
 
