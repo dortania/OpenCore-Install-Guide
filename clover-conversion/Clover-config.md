@@ -1,7 +1,5 @@
 # Converting common properties from Clover to OpenCore
 
-* Supported version: 0.6.8
-
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
 # Kexts and Firmware drivers
