@@ -1,7 +1,5 @@
 # Kernel Issues
 
-* Supported version: 0.6.8
-
 Issues surrounding from initial booting the macOS installer to right before the install GUI pops up.
 
 * [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
@@ -249,7 +247,7 @@ This is due to missing outdated Apple Secure Boot manifests present on your preb
 To resolve this you can do one of the following:
 
 * Disable SecureBootModel
-  * ie. set `Misc -> Secuirty -> SecureBootModel -> Disabled`
+  * ie. set `Misc -> Security -> SecureBootModel -> Disabled`
 * Reinstall macOS with the latest version
 * Or copy over the Secure Boot manifests from `/usr/standalone/i386` to `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
   * Note you will most likely need to do this via terminal as the Preboot volume isn't easily editable via the Finder
