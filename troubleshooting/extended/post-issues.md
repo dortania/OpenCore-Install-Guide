@@ -1,7 +1,5 @@
 # Post-Install Issues
 
-* Supported version: 0.6.8
-
 Issues revolving around macOS once properly installed.
 
 [[toc]]

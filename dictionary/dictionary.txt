@@ -190,6 +190,7 @@ BrcmBluetoothInjector
 BrcmFirmwareData
 BrcmPatchRAM[0-3]?
 Bridge-E5
+BrightnessKeys
 Broadcom
 Broadwell
 Broadwell-E
@@ -289,6 +290,7 @@ E2500
 EB
 EC0
 ECDV
+ECEnabler
 EDID
 EDK
 EDKII
