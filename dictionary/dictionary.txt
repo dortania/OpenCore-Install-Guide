@@ -1217,6 +1217,7 @@ v5120
 v5210
 vSMC
 ver
+viOpenCore
 vit9696
 vit9696's
 vmdk
