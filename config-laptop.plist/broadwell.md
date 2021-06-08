@@ -136,7 +136,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 #### Configuration Notes
 
-* For HD5600 you need `device-id` faked to `16260000`:
+* For HD5600 you need `device-id` faked to `26160000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
