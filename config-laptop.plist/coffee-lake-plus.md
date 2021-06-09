@@ -167,7 +167,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | :--- | :--- | :--- |
 | device-id | Data | 9B3E0000 |
   
-* An `UHD620` in a Comet Lake CPU **requires** `device-id`=`9B3E0000`:
+* `UHD620` in a Comet Lake CPU **requires** `device-id`=`9B3E0000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -188,7 +188,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 `layout-id`
 
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* You can delete this property outright as it's unused for us at this time.
 
 For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
 
@@ -259,14 +259,14 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
+Needed for spoofing unsupported CPUs like Pentiums and Celerons.
 
 * **CpuidMask**: Leave this blank
 * **CpuidData**: Leave this blank
 
 ### Force
 
-Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache (ie. IONetworkingFamily in 10.6).
 
 For us, we can ignore.
 
@@ -309,7 +309,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
   * Enabling this quirk with UpdateSMBIOSMode Custom mode can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
 * **DisableIoMapper**: YES
-  * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+  * Needed to get around VT-D if you are either unable to disable it in BIOS or if needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
 * **DisableLinkeditJettison**: YES
   * Allows Lilu and others to have more reliable performance without `keepsyms=1`
 * **DisableRtcChecksum**: NO
@@ -329,7 +329,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+The reason being is that USBInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
 :::
 
@@ -368,7 +368,7 @@ Settings for boot screen (Leave everything as default).
 
 ::: tip Info
 
-Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`):
+Helpful for debugging OpenCore boot issues (We'll be changing everything *but* `DisplayDelay`):
 
 | Quirk | Enabled |
 | :--- | :--- |
@@ -413,7 +413,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot (ie. you require Nvidia's Web Drivers) |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
