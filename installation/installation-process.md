@@ -26,9 +26,6 @@ All files in the Kexts folder end in .kext | Includes source code and folders
 config.plist found under EFI/OC | Neither renamed or placed the .plist in right location
 Only uses kexts that are needed | Downloaded every kext listed
 
-And a reminder that slowgeek site is your friend:
-
-* [**Sanity Checker**](https://opencore.slowgeek.com)
 
 ## Booting the OpenCore USB
 
