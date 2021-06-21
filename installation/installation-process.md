@@ -33,11 +33,12 @@ So you're now ready to finally put the USB stick into your computer and boot off
 Once you boot the USB, you'll likely be greeted to the following boot options:
 
 1. Windows
-2. macOS Base System (External) / Install macOS Big Sur (External) / *USB drive name* (External) 
+2. macOS Base System (External) / Install macOS Big Sur (External) / *USB drive name* (External)
 3. OpenShell.efi
 4. Reset NVRAM
 
 For us, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"**, **"Install macOS Big Sur (External)"** or **"*Your USB drive's name* (External)"**
+
 ## macOS Installer
 
 So you've finally got the installer booted, got through the verbose and hit the installer! Now that you've gotten this far,  the main things to keep in mind:
