@@ -101,7 +101,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 
 # Common Myths
 
-## Is OpenCore unstable as it's a beta
+## Is OpenCore unstable as it's a beta?
 
 Short Answer: No
 
@@ -121,7 +121,7 @@ Current road map:
 
 So please do not see the version number as a hindrance, instead as something to look forward to.
 
-## Does OpenCore always inject SMBIOS and ACPI data into other OSes
+## Does OpenCore always inject SMBIOS and ACPI data into other OSes?
 
 By default, OpenCore will assume that all OSes should be treated equally in regards to ACPI and SMBIOS information. The reason for this thinking consists of three parts:
 
@@ -132,7 +132,7 @@ By default, OpenCore will assume that all OSes should be treated equally in rega
 
 However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS-limited by patching where macOS reads SMBIOS info from. The `CustomSMIOSGuid` quirk with `CustomSMBIOSMode` set to `Custom` can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please disable these quirks.
 
-## Does OpenCore require a fresh install
+## Does OpenCore require a fresh install?
 
 Not at all in the event you have a "Vanilla" installation – what this refers to is whether the OS has tampered in any way, such as installing 3rd party kexts into the system volume or other unsupported modifications by Apple. When your system has been heavily tampered with, either by you or 3rd party utilities like Hackintool, we recommend a fresh install to avoid any potential issues.
 
@@ -140,7 +140,7 @@ Special note for Clover users: please reset your NVRAM when installing with Open
 
 * Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
 
-## Does OpenCore only support limited versions of macOS
+## Does OpenCore only support limited versions of macOS?
 
 As of OpenCore 0.6.2, you can now boot every Intel version of macOS going all the way back to OS X 10.4! Proper support however will depend on your hardware, so please verify yourself: [Hardware Limitations](macos-limits.md)
 
@@ -172,13 +172,13 @@ Acidanthera has tested many versions, and I myself have run many versions of OS 
 
 :::
 
-## Does OpenCore support older hardware
+## Does OpenCore support older hardware?
 
 As of right now, the majority of Intel hardware is supported so long as the OS itself does! However please refer to the [Hardware Limitations page](macos-limits.md) for more info on what hardware is supported in what versions of OS X/macOS.
 
 Currently, Intel's Yonah and newer series CPUs have been tested properly with OpenCore.
 
-## Does OpenCore support Windows/Linux booting
+## Does OpenCore support Windows/Linux booting?
 
 OpenCore works in the same fashion as any other boot loader, so it respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
 
@@ -187,7 +187,7 @@ OpenCore works in the same fashion as any other boot loader, so it respects othe
 Where hackintoshing sits is in a legal grey area, mainly that while this is not illegal we are in fact breaking the EULA. The reason this is not illegal:
 
 * We are downloading macOS from [Apple's servers directly](https://github.com/acidanthera/OpenCorePkg/blob/0.6.9/Utilities/macrecovery/macrecovery.py#L125)
-* We are doing this as a non-profit origination for teaching and personal use
+* We are doing this as a non-profit organization for teaching and personal use
   * People who plan to use their Hackintosh for work or want to resell them should refer to the [Psystar case](https://en.wikipedia.org/wiki/Psystar_Corporation) and their regional laws
 
 While the EULA states that macOS should only be installed on real Macs or virtual machines running on genuine Macs ([sections 2B-i and 2B-iii](https://www.apple.com/legal/sla/docs/macOSBigSur.pdf)), there is no enforceable law that outright bans this. However, sites that repackage and modify macOS installers do potentially risk the issue of [DMCA takedowns](https://en.wikipedia.org/wiki/Digital_Millennium_Copyright_Act) and such.

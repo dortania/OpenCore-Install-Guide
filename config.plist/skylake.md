@@ -666,14 +666,6 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
 
-**Sanity check**:
-
-So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
-
-* [**Sanity Checker**](https://opencore.slowgeek.com)
-
-Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
-
 ## Intel BIOS settings
 
 * Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS

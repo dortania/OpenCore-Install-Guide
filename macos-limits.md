@@ -121,7 +121,7 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 Unfortunately many features in macOS are outright unsupported with AMD and many others being partially broken. These include:
 
 * Virtual Machines relying on AppleHV
-  * This includes VMWare, Parallels, Docker, Android Studios, etc
+  * This includes VMWare, Parallels, Docker, Android Studio, etc
   * VirtualBox is the sole exception as they have their own hypervisor
   * VMware 10 and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
 * Adobe Support
@@ -129,7 +129,7 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
   * You can disable functionality like RAW support to avoid the crashing: [Adobe Fixes](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
 * 32-Bit support
   * For those still relying on 32-Bit software in Mojave and below, note that the Vanilla patches do not support 32-bit instructions
-  * A work-around is to install a [custom kernel](https://amd-osx.com/download/kernel.html), however you lose iMessage support
+  * A work-around is to install a [custom kernel](https://files.amd-osx.com/?dir=Kernels), however you lose iMessage support and no support is provided for these kernels
 * Stability issues on many apps
   * Audio-based apps are the most prone to issues, ie. Logic Pro
   * DaVinci Resolve has been known to have sporadic issues as well
@@ -201,7 +201,7 @@ Note: Apple has kept Ivy Bridge's iGPU drivers present in macOS 11, Big Sur, how
 | [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
 | [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
 | [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | Requires `agdpmod=pikera` in boot-args |
-| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> Current drivers do not function </span> |
+| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | <span style="color:yellow"> Currently only some Navi 21 models are working </span> |
 
 :::
 

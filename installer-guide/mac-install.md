@@ -16,7 +16,7 @@ For machines that need a specific OS release or can't download from the App Stor
 In order to run it, just copy and paste the below command in a terminal window:
 
 ```sh
-mkdir ~/macOS-installer && cd ~/macOS-installer && curl -O https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py && sudo python installinstallmacos.py
+mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py > installinstallmacos.py && sudo python installinstallmacos.py
 ```
 
 ![](../images/installer-guide/mac-install-md/munki.png)

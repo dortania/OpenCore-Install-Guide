@@ -77,7 +77,7 @@ Main things to keep in mind:
 * Forks must indicate they're translations of Dortania and are not official
 * Forks must also comply with our [License](LICENSE.md)
 
-If the above are met, you're free to host your translation without issue! Dortania's sites are built with [VuePress](https://vuepress.vuejs.org) using [Travis-CI](https://travis-ci.org) and finally hosted on [Github Pages](https://pages.github.com), so there is no cost to hosting your own translation.
+If the above are met, you're free to host your translation without issue! Dortania's sites are built with [VuePress](https://vuepress.vuejs.org) using [GitHub Actions](https://github.com/features/actions) and finally hosted on [Github Pages](https://pages.github.com), so there is no cost to hosting your own translation.
 
 If you have any questions or concerns with either translations or hosting, feel free to reach out on our [Bugtracker](https://github.com/dortania/bugtracker).
 
@@ -88,5 +88,6 @@ Current known translations:
 * [Technopat](https://www.technopat.net/sosyal/konu/opencore-ile-macos-kurulum-rehberi.963661/)(Turkish)
 * [ThrRip](https://github.com/ThrRip/OpenCore-Install-Guide)(Chinese)
 * [Shijuro](https://github.com/shijuro/OpenCore-Install-Guide)(Russian)
+* [viOpenCore](https://github.com/viOpenCore/OpenCore-Install-Guide)(Vietnamese)
 
 And note that these translations are subject to authors preferences, translation changes and human errors. Please keep this in mind when reading as they're no longer official Dortania guides.
