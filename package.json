@@ -38,14 +38,14 @@
       "markdown-link-check": "^3.8.7",
       "markdownlint-cli": "^0.27.1",
       "run-script-os": "^1.1.6",
-      "spellchecker-cli": "^4.4.0",
+      "spellchecker-cli": "^4.8.0",
       "vuepress": "^1.8.2",
       "vuepress-plugin-medium-zoom": "^1.1.9",
       "vuepress-plugin-zooming": "^1.1.8",
       "vuepress-theme-book": "0.0.5",
       "vuepress-theme-dark-new": "^0.1.2",
       "vuepress-theme-succinct": "^1.7.2",
-      "vuepress-theme-yuu": "^3.0.1"
+      "vuepress-theme-yuu": "^3.1.1"
    },
    "homepage": "https://dortania.github.io/OpenCore-Install-Guide/"
 }

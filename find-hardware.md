@@ -4,8 +4,7 @@ This section is mostly a mini-guide on how to find what hardware you're currentl
 
 For this, we'll assume you have Windows or Linux installed:
 
-* [Finding hardware using Windows](#finding-hardware-using-windows)
-* [Finding hardware using Linux](#finding-hardware-using-linux)
+[[toc]]
 
 ## Finding Hardware using Windows
 

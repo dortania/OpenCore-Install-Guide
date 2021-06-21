@@ -12,24 +12,7 @@ It's that time of year again and with it, and a new macOS beta has been dropped.
 
 ## Table of Contents
 
-* [Prerequisites](#prerequisites)
-  * [A supported SMBIOS](#a-supported-smbios)
-  * [Supported hardware](#supported-hardware)
-  * [Up-to-date kexts, bootloader and config.plist](#up-to-date-kexts-bootloader-and-config-plist)
-  * [Known issues](#known-issues)
-* [Installation](#installation)
-* [Troubleshooting](#troubleshooting)
-  * [Stuck at Forcing CS_RUNTIME for entitlement](#stuck-at-forcing-cs-runtime-for-entitlement)
-  * [Stuck at PCI Configuration Begins for Intel's X99 and X299 boards](#stuck-at-pci-configuration-begins-for-intel-s-x99-and-x299-boards)
-  * [Stuck on ramrod(^^^^^^^^^^^^^)](#stuck-on-ramrod)
-  * [X79 and X99 Kernel Panic on IOPCIFamily](#x79-and-x99-kernel-panic-on-iopcifamily)
-  * [DeviceProperties injection failing](#deviceproperties-injection-failing)
-  * [Keyboard and Mouse broken](#keyboard-and-mouse-broken)
-  * [Early Kernel Panic on max_cpus_from_firmware not yet initialized](#early-kernel-panic-on-max-cpus-from-firmware-not-yet-initialized)
-  * [Cannot update to newer versions of Big Sur](#cannot-update-to-newer-versions-of-big-sur)
-  * [Kernel Panic on Rooting from the live fs](#kernel-panic-on-rooting-from-the-live-fs)
-  * [Asus Z97 and HEDT(ie. X99 and X299) failing Stage 2 Installation](#asus-z97-and-hedt-ie-x99-and-x299-failing-stage-2-installation)
-  * [Laptops kernel panicking on cannot perform kext scan](#laptops-kernel-panicking-on-cannot-perform-kext-scan)
+[[toc]]
 
 ## Prerequisites
 

@@ -2,21 +2,7 @@
 
 Issues surrounding from initial booting the USB itself to right before you choose to boot the macOS installer
 
-* [Stuck on a black screen before picker or always restart](#stuck-on-a-black-screen-before-picker)
-* [Stuck on `no vault provided!`](#stuck-on-no-vault-provided)
-* [Stuck on `OC: Invalid Vault mode`](#stuck-on-oc-invalid-vault-mode)
-* [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](#stuck-on-ocb-ocscanforbootentries-failure-not-found)
-* [Stuck on `OCB: failed to match a default boot option`](#stuck-on-ocb-failed-to-match-a-default-boot-option)
-* [Stuck on `OCB: System has no boot entries`](#stuck-on-ocb-system-has-no-boot-entries)
-* [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
-* [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](#stuck-on-oc-driver-xxx-efi-at-0-cannot-be-found)
-* [Receiving `Failed to parse real field of type 1`](#receiving-failed-to-parse-real-field-of-type-1)
-* [Can't select anything in the picker](#can-t-select-anything-in-the-picker)
-* [SSDTs not being added](#ssdts-not-being-added)
-* [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios)
-* [OCABC: Incompatible OpenRuntime r4, require r10](#ocabc-incompatible-openruntime-r4-require-r10)
-* [Failed to open OpenCore image - Access Denied](#failed-to-open-opencore-image-access-denied)
-* [OC: Failed to find SB model disable halting on critical error](#oc-failed-to-find-sb-model-disable-halting-on-critical-error)
+[[toc]]
 
 ## Stuck on a black screen before picker
 

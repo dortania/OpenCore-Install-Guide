@@ -4,13 +4,7 @@ With macOS, there are numerous hardware limitations you need to be aware of befo
 
 The main hardware sections to verify are:
 
-* [CPU](#cpu-support)
-* [GPU](#gpu-support)
-* [Motherboard](#motherboard-support)
-* [Storage](#storage-support)
-* [Wired Networking](#wired-networking)
-* [Wireless Networking](#wireless-networking)
-* [Miscellaneous](#miscellaneous)
+[[toc]]
 
 And for more detailed guides on the subject, see here:
 

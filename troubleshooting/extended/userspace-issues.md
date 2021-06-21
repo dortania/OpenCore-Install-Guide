@@ -2,22 +2,7 @@
 
 Issues regarding once you've booted the installer and the GUI has loaded.
 
-* [macOS installer in Russian](#macos-installer-in-russian)
-* [macOS Installer being damaged](#macos-installer-being-damaged)
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
-* [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
-* [Black screen after `IOConsoleUsers: gIOScreenLock...` on laptops and AIOs](#black-screen-after-ioconsoleusers-gioscreenlock-on-laptops-and-aios)
-* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [Frozen in the macOS installer after 30 seconds](#frozen-in-the-macos-installer-after-30-seconds)
-* [15h/16h CPU reboot after Data & Privacy screen](#_15h-16h-cpu-reboot-after-data-privacy-screen)
-* [macOS frozen right before login](#macos-frozen-right-before-login)
-* [MediaKit reports not enough space](#mediakit-reports-not-enough-space)
-* [DiskUtility failing to erase](#diskutility-failing-to-erase)
-* [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
-* [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
-* [The recovery server cannot get contacted](#the-recovery-server-cannot-get-contacted)
-* [Keyboard and Mouse broken in Big Sur](#keyboard-and-mouse-broken-in-big-sur)
-* [Stuck on `Your Mac needs a firmware update in order to install to this volume`](#stuck-on-your-mac-needs-a-firmware-update-in-order-to-install-to-this-volume)
+[[toc]]
 
 ## macOS installer in Russian
 
@@ -218,7 +203,9 @@ If you're being prompted to update your firmware to install with an APFS volume,
 
 * You have `PlatformInfo -> Automatic` enabled
 * `UpdateSMBIOSMode` is set to `Create`
+  * Make sure `CustomSMBIOSGuid` is disabled
   * For Dell and VAIO machines, ensure that `CustomSMBIOSGuid` is enabled and `UpdateSMBIOSMode` is set to `Custom` instead
+    * `CustomSMBIOSGuid` and `UpdateSMBIOSMode` should always be in tandem with each other
 * Using a SMBIOS supported in this version of macOS
   * ie. you're not using `-no_compat_check`
 * You're using the latest version of OpenCore
