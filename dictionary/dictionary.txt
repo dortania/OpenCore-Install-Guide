@@ -1178,7 +1178,6 @@ savvamitrofanov
 shiki
 shikigva
 slavs
-slowgeek
 smcread
 snapshotting
 snb-platform-id

@@ -10,8 +10,6 @@ To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenC
 
 * EFI/BOOT/
   * `BOOTx64.efi`
-* EFI/OC/Bootstrap/
-  * `Bootstrap.efi`
 * EFI/OC/Drivers/
   * `OpenRuntime.efi`
   * `OpenCanopy.efi`(if you're using it)

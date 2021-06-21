@@ -158,7 +158,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | :--- | :--- | :--- |
 | device-id | Data | 9B3E0000 |
   
-* An `UHD620` in a Coffee Lake CPU **requires** `device-id`=`9B3E0000`:
+* A `UHD620` in a Coffee Lake CPU **requires** `device-id`=`9B3E0000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -705,14 +705,6 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
-
-**Sanity check**:
-
-So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
-
-* [**Sanity Checker**](https://opencore.slowgeek.com)
-
-Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
 ### Config reminders
 
