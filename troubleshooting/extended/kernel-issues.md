@@ -629,9 +629,8 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 
 ## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
 
-This is due to [XhciPortLimit breaking with macOS 11.3 Beta 2 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
 
-* Alternatively, you can boot macOS 11.2.2 or older to resolve
+* Alternatively, you can boot macOS 11.2.3 or older to resolve
   * For educational purposes, we've provided some images:
-    * [macOS 11.2.1 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.1-20-d-75)
-    * [macOS 11.2.1 RecoveryImage(Windows and Linux)](https://archive.org/details/base-system_202102)
+    * [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)

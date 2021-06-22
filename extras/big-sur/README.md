@@ -351,4 +351,4 @@ This is due to multiple copies of the same kext being in your kernel cache, and 
 
 ### Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
 
-This is due to [XhciPortLimit breaking with macOS 11.3 Beta 2 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
