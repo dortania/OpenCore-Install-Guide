@@ -115,7 +115,7 @@ The below plugins are not required to boot, and merely add extra functionality t
 ### Graphics
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
-  * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
+  * Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
   * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
   * Requires OS X 10.8 or newer
 

@@ -36,7 +36,7 @@ Now with all that, a quick reminder of the tools we need
 
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 and A520 motherboards, **do not use** if you don't have an AMD B550 or A520 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
@@ -76,7 +76,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| DevirtualizeMmio | NO | Note TRx40 requires this flag |
+| DevirtualiseMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
 | SetupVirtualMap | YES | - Note B550, A520 and TRx40 boards should disable this. Newer BIOS versions of X570 also require this off<br/>- X470 and B450 with late 2020 BIOS updates also require this disabled |
@@ -483,8 +483,8 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.

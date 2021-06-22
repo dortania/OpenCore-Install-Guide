@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -62,9 +62,9 @@ Removing CpuPm:
 | All | Boolean | YES |
 | Comment | String | Delete CpuPm |
 | Enabled | Boolean | YES |
-| OemTableId | Data | 437075506d000000 |
+| OemTableId | Data | `437075506d000000` |
 | TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
+| TableSignature | Data | `53534454` |
 
 Removing Cpu0Ist:
 
@@ -73,9 +73,9 @@ Removing Cpu0Ist:
 | All | Boolean | YES |
 | Comment | String | Delete Cpu0Ist |
 | Enabled | Boolean | YES |
-| OemTableId | Data | 4370753049737400 |
+| OemTableId | Data | `4370753049737400` |
 | TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
+| TableSignature | Data | `53534454` |
 
 :::
 
@@ -93,8 +93,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -158,10 +158,10 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **03006601** | Laptop | To be used with **1366 by 768** displays or lower |
-| **04006601** | Laptop | To be used with **1600 by 900** displays or higher, see below for addition patches |
-| **09006601** | Laptop | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
-| **0b006601** | NUC | To be used with Intel NUCs |
+| **`03006601`** | Laptop | To be used with **1366 by 768** displays or lower |
+| **`04006601`** | Laptop | To be used with **1600 by 900** displays or higher, see below for addition patches |
+| **`09006601`** | Laptop | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
+| **`0B006601`** | NUC | To be used with Intel NUCs |
 
 #### Configuration Notes
 
@@ -171,7 +171,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | Key | Type | Value | Explanation |
 | :--- | :--- | :--- | :--- |
-| `framebuffer-patch-enable` | Number | `1`                                                          | *enabling the semantic patches in principle* (from WEG manual) |
+| `framebuffer-patch-enable` | Number | `1`                                                          | *enabling the semantic patches in principle* (from the WhateverGreen manual) |
 | `framebuffer-memorycount`  | Number | `2`                                                          | Matching FBMemoryCount to the one on `03006601` (1 on `04` vs 2 on `03`) |
 | `framebuffer-pipecount`    | Number | `2`                                                          | Matching PipeCount to the one on `03006601` (3 on `04` vs 2 on `03`) |
 | `framebuffer-portcount`    | Number | `4`                                                          | Matching PortCount to the one on `03006601` (1 on `04` vs 4 on `03`) |
@@ -192,7 +192,7 @@ Some laptops from this era came with a mixed chipset setup, using Ivy Bridge CPU
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 3A1E0000 |
+| device-id | Data | `3A1E0000` |
 
 :::
 
@@ -300,7 +300,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -575,10 +575,10 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookAir5,1 | Dual Core 17w | iGPU: HD 4000 | 11" |
-| MacBookAir5,2 | Dual Core 17w | iGPU: HD 4000 | 13" |
-| MacBookPro10,1 | Quad Core 45w | iGPU: HD 4000 + dGPU: GT650M | 15" |
-| MacBookPro10,2 | Dual Core 35w(High End) | iGPU: HD 4000 | 13" |
+| MacBookAir5,1 | Dual Core 17W | iGPU: HD 4000 | 11" |
+| MacBookAir5,2 | Dual Core 17W | iGPU: HD 4000 | 13" |
+| MacBookPro10,1 | Quad Core 45W | iGPU: HD 4000 + dGPU: GT650M | 15" |
+| MacBookPro10,2 | Dual Core 35W(High End) | iGPU: HD 4000 | 13" |
 | Macmini6,1 | Dual Core NUC | iGPU: HD 4000 | N/A |
 | Macmini6,2 | Quad Core NUC | iGPU: HD 4000 | N/A |
 
@@ -590,13 +590,13 @@ Note choosing a SMBIOS from the list below for Catalina or older is not recommen
 
 | SMBIOS | CPU Type | Display Size |
 | :--- | :--- | :--- |
-| MacBookAir6,1 | Dual Core 15w | 11" |
-| MacBookAir6,2 | Dual Core 15w | 13" |
-| MacBookPro11,1 | Dual Core 28w | 13" |
-| MacBookPro11,2 | Quad Core 45w | 15" |
-| MacBookPro11,3 | Quad Core 45w | 15" |
-| MacBookPro11,4 | Quad Core 45w | 15" |
-| MacBookPro11,5 | Quad Core 45w | 15" |
+| MacBookAir6,1 | Dual Core 15W | 11" |
+| MacBookAir6,2 | Dual Core 15W | 13" |
+| MacBookPro11,1 | Dual Core 28W | 13" |
+| MacBookPro11,2 | Quad Core 45W | 15" |
+| MacBookPro11,3 | Quad Core 45W | 15" |
+| MacBookPro11,4 | Quad Core 45W | 15" |
+| MacBookPro11,5 | Quad Core 45W | 15" |
 | Macmini7,1 | NUC Systems | N/A |
 
 :::

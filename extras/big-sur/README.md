@@ -25,7 +25,7 @@ Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see bel
 * iMac14,3 and older
   * Note iMac14,4 is still supported
 * MacPro5,1 and older
-* MacMini6,x and older
+* Macmini6,x and older
 * MacBook7,1 and older
 * MacBookAir5,x and older
 * MacBookPro10,x and older
@@ -39,7 +39,7 @@ SMBIOS still supported in macOS Big Sur:
 * iMac14,4 and newer
 * MacPro6,1 and newer
 * iMacPro1,1 and newer
-* MacMini7,1 and newer
+* Macmini7,1 and newer
 * MacBook8,1 and newer
 * MacBookAir6,x and newer
 * MacBookPro11,x and newer
@@ -205,7 +205,7 @@ config.plist -> Kernel -> Patch:
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B801000000C3 |
+| Replace | Data | `B801000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 
@@ -249,7 +249,7 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B804000000C3 |
+| Replace | Data | `B804000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 
@@ -312,7 +312,7 @@ Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
 If it returns `Snapshot Sealed: Broken`, then you'll want to go through the following:
 
 * Update to OpenCore 0.6.4 or newer
-  * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
+  * Specifically commit [`ba10b5d`](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 * Revert to older snapshots
   * Mainly for those who have tampered with the system volume
   * See here how to revert: [Rolling back APFS Snapshots](../../troubleshooting/extended/post-issues.md#rolling-back-apfs-snapshot)
@@ -327,7 +327,7 @@ Rooting from the live fs of a sealed volume is not allowed on a RELEASE build
 
 This is due to issues around Secure Boot boot being enabled in Beta 10 with older versions of OpenCore. Simply update to 0.6.4 to resolve
 
-* Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
+* Specifically commit [`ba10b5d`](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 
 ### Asus Z97 and HEDT(ie. X99 and X299) failing Stage 2 Installation
 

@@ -36,7 +36,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Required for all Big Sur users to ensure their UNC devices are compatible, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -105,7 +105,7 @@ This entry relates to Intel's I350 controller found on many Intel and Supermicro
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 33150000 |
+| device-id | Data | `33150000` |
 
 * **Note**: If your board doesn't have an onboard I350 NIC, there's no reason to add this entry.
 * **Note 2**: If you get a kernel panic on the AppleIntelI210Ethernet kext, or not all of the adapters are showing up, you may need to edit or add additional PciRoot properties for each adapter.
@@ -202,7 +202,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -432,8 +432,8 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.

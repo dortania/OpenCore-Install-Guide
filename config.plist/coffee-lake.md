@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -125,9 +125,9 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
-| 07009B3E | Used when the Desktop iGPU is used to drive a display |
-| 00009B3E | Alternative to 07009B3E if it doesn't work |
-| 0300913E | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
+| **`07009B3E`** | Used when the Desktop iGPU is used to drive a display |
+| **`00009B3E`** | Alternative to 07009B3E if it doesn't work |
+| **`0300913E`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
 
 * **Note**: With macOS 10.15.5 and newer, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
 
@@ -139,9 +139,9 @@ For users with black screen issues after verbose on B360, B365, H310, H370, Z390
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | 07009B3E |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
+| AAPL,ig-platform-id | Data | `07009B3E` |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
 
 (This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
 
@@ -251,7 +251,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -477,8 +477,8 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`

@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -66,8 +66,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -131,9 +131,9 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **0500260A** | Laptop | To be used usually with HD5000, HD5100 and HD5200 |
-| **0600260A** | Laptop | To be used usually with HD4200, HD4400 and HD4600, you **must** use a `device-id`(see below) |
-| **0300220D** | NUC | To be used usually with all Haswell NUCs, HD4200/4400/4600 **must** use a `device-id`(see below) |
+| **`0500260A`** | Laptop | To be used usually with HD 5000, HD 5100 and HD 5200 |
+| **`0600260A`** | Laptop | To be used usually with HD 4200, HD 4400 and HD 4600, you **must** use a `device-id`(see below) |
+| **`0300220D`** | NUC | To be used usually with all Haswell NUCs, HD 4200/4400/4600 **must** use a `device-id`(see below) |
 
 #### Configuration Notes
 
@@ -141,16 +141,16 @@ In addition to the AAPL,ig-platform-id, you'll want to add the cursor byte size 
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-cursormem | Data | 00009000 |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-cursormem | Data | `00009000` |
 
-**Special note for HD4200, HD4400 and HD4600**:
+**Special note for HD 4200, HD 4400 and HD 4600**:
 
 You will also require a device-id spoof to be supported:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 12040000 |
+| device-id | Data | `12040000` |
 
 :::
 
@@ -259,7 +259,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -534,13 +534,13 @@ For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakd
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookAir6,1 | Dual Core 15w | iGPU: HD 5000 | 11" |
-| MacBookAir6,2 | Dual Core 15w | iGPU: HD 5000 | 13" |
-| MacBookPro11,1 | Dual Core 28w | iGPU: Iris 5100 | 13" |
-| MacBookPro11,2 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,3 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
-| MacBookPro11,4 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,5 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
+| MacBookAir6,1 | Dual Core 15W | iGPU: HD 5000 | 11" |
+| MacBookAir6,2 | Dual Core 15W | iGPU: HD 5000 | 13" |
+| MacBookPro11,1 | Dual Core 28W | iGPU: Iris 5100 | 13" |
+| MacBookPro11,2 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
+| MacBookPro11,3 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
+| MacBookPro11,4 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
+| MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
 | Macmini7,1 | NUC Systems | HD 5000/Iris 5100 | N/A |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:

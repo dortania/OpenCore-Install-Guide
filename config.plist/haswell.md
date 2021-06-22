@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -104,9 +104,9 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
-| 0300220D | Used when the Desktop Haswell iGPU is used to drive a display |
-| 04001204 | Used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display |
-| 07002216 | Used when the Desktop Broadwell iGPU |
+| **`0300220D`** | Used when the Desktop Haswell iGPU is used to drive a display |
+| **`04001204`** | Used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display |
+| **`07002216`** | Used when the Desktop Broadwell iGPU |
 
 I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
 
@@ -120,20 +120,20 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | 0300220D |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
-| device-id | Data | 12040000 |
+| AAPL,ig-platform-id | Data | `0300220D` |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
+| device-id | Data | `12040000` |
 
 (This is an example for a desktop HD 4400 without a dGPU and no BIOS options for iGPU memory)
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | 07002216 |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
+| AAPL,ig-platform-id | Data | `07002216` |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
 
 (This is an example for a desktop Iris Pro 6200 and no BIOS options for iGPU memory)
 
@@ -244,7 +244,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -470,8 +470,8 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`

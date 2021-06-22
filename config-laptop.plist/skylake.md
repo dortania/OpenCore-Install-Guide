@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -66,8 +66,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -131,35 +131,35 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **00001619** | Laptop | Recommended value for HD515, HD520, HD530, HD540, HD550 and P530 |
-| **00001E19** | Laptop | Alternative for HD 515 if you have issues with the above entry |
-| **00001B19** | Laptop | Recommended value for HD510 |
-| **00001E19** | NUC | Recommended for HD515 |
-| **02001619** | NUC | Recommended for HD520/530 |
-| **02002619** | NUC | Recommended for HD540/550 |
-| **05003B19** | NUC | Recommended for HD580 |
+| **`00001619`** | Laptop | Recommended value for HD 515, HD 520, HD 530, HD 540, HD 550 and P530 |
+| **`00001E19`** | Laptop | Alternative for HD 515 if you have issues with the above entry |
+| **`00001B19`** | Laptop | Recommended value for HD 510 |
+| **`00001E19`** | NUC | Recommended for HD 515 |
+| **`02001619`** | NUC | Recommended for HD 520/530 |
+| **`02002619`** | NUC | Recommended for HD 540/550 |
+| **`05003B19`** | NUC | Recommended for HD 580 |
 
 #### Configuration Notes
 
-* For HD510 you will need to use a device-id spoof:
+* For HD 510 you will need to use a device-id spoof:
   
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 02190000 |
+| device-id | Data | `02190000` |
 
-* For HD550 and P530 (and potentially all HD P-series iGPUs), you may need to use `device-id`=`16190000`:
+* For HD 550 and P530 (and potentially all HD P-series iGPUs), you may need to use `device-id`=`16190000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 16190000 |
+| device-id | Data | `16190000` |
 
 * In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
 
 :::
 
@@ -267,7 +267,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -542,10 +542,10 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 
 | SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |
-| MacBook9,1 | Dual Core 7w(Low End) | iGPU: HD 515 | 12" | No |
-| MacBookPro13,1 | Dual Core 15w(Low End) | iGPU: Iris 540 | 13" | No |
-| MacBookPro13,2 | Dual Core 15w(High End) | iGPU: Iris 550 | 13" | Yes |
-| MacBookPro13,3 | Quad Core 45w | iGPU: HD 530 + dGPU: RP450/455 | 15" | Yes |
+| MacBook9,1 | Dual Core 7W(Low End) | iGPU: HD 515 | 12" | No |
+| MacBookPro13,1 | Dual Core 15W(Low End) | iGPU: Iris 540 | 13" | No |
+| MacBookPro13,2 | Dual Core 15W(High End) | iGPU: Iris 550 | 13" | Yes |
+| MacBookPro13,3 | Quad Core 45W | iGPU: HD 530 + dGPU: RP450/455 | 15" | Yes |
 | iMac17,1 | NUC Systems | iGPU: HD 530 + R9 290 |  N/A | No |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:

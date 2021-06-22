@@ -32,6 +32,7 @@ BID
 BIOSReleaseDate
 BIOSVendor
 BIOSVersion
+BlacklistAppleUpdate
 BlessOverride
 BoardAssetTag
 BoardLocationInChassis
@@ -123,6 +124,7 @@ MmioWhitelist
 NormalizeHeaders
 OSInfo
 OemTableId
+PanicNoKextDump
 PickerAttributes
 PickerAudioAssist
 PickerMode

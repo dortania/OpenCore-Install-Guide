@@ -107,7 +107,7 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B804000000C3 |
+| Replace | Data | `B804000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 
@@ -516,8 +516,8 @@ Under ACPI -> Patch:
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | A010934F53464C00 |
-| Replace | Data | A40A0FA3A3A3A3A3 |
+| Find | Data | `A010934F53464C00` |
+| Replace | Data | `A40A0FA3A3A3A3A3` |
 
 :::
 

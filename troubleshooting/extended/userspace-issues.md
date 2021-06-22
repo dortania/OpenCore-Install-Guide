@@ -189,7 +189,7 @@ config.plist -> Kernel -> Patch:
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B801000000C3 |
+| Replace | Data | `B801000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 

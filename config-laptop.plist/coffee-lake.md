@@ -36,7 +36,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -68,8 +68,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -144,33 +144,33 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **0900A53E** | Laptop | Recommended value for UHD630 |
-| **00009B3E** | Laptop | Recommended value for UHD620 |
-| **07009B3E** | NUC | Recommended value for UHD 620/630 |
-| **0000A53E** | NUC | Recommended value for UHD 655 |
+| **`0900A53E`** | Laptop | Recommended value for UHD 630 |
+| **`00009B3E`** | Laptop | Recommended value for UHD 620 |
+| **`07009B3E`** | NUC | Recommended value for UHD 620/630 |
+| **`0000A53E`** | NUC | Recommended value for UHD 655 |
 
 #### Configuration Notes
 
-* For `UHD630` you likely do not need to fake the `device-id` as it is already `0x3E9B`. If it's anything else, you may use `device-id`=`9B3E0000`:
+* For UHD 630 you likely do not need to fake the `device-id` as it is already `0x3E9B`. If it's anything else, you may use `device-id`=`9B3E0000`:
   * You can check under Device Manager in Windows by bring up the iGPU, opening properties, selecting details, and clicking Hardware IDs.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 9B3E0000 |
+| device-id | Data | `9B3E0000` |
   
-* A `UHD620` in a Coffee Lake CPU **requires** `device-id`=`9B3E0000`:
+* A UHD 620 in a Coffee Lake CPU **requires** `device-id`=`9B3E0000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 9B3E0000 |
+| device-id | Data | `9B3E0000` |
 
 * In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
 
 :::
 
@@ -278,7 +278,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -553,10 +553,10 @@ For this Coffee Lake example, we'll chose the MacBookPro15,1 SMBIOS - this is do
 
 | SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |
-| MacBookPro15,1 | Hexa Core 45w | iGPU: UHD 630 + dGPU: RP555/560X | 15" | Yes |
-| MacBookPro15,2 | Quad Core 15w | iGPU: Iris 655 | 13" | Yes |
-| MacBookPro15,3 | Hexa Core 45w | iGPU: UHD 630 + dGPU: Vega16/20 | 15" | Yes |
-| MacBookPro15,4 | Quad Core 15w | iGPU: Iris 645 | 13" | Yes |
+| MacBookPro15,1 | Hexa Core 45W | iGPU: UHD 630 + dGPU: RP555/560X | 15" | Yes |
+| MacBookPro15,2 | Quad Core 15W | iGPU: Iris 655 | 13" | Yes |
+| MacBookPro15,3 | Hexa Core 45W | iGPU: UHD 630 + dGPU: Vega16/20 | 15" | Yes |
+| MacBookPro15,4 | Quad Core 15W | iGPU: Iris 645 | 13" | Yes |
 | Macmini8,1 | NUC Systems | HD 6000/Iris Pro 6200 |  N/A | No |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:

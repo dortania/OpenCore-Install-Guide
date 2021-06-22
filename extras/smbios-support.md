@@ -286,7 +286,7 @@ Extra information regarding Apple's CPUs:
 
 | SMBIOS | Year | CPU Family | Product Identifier | Initial Support |
 | :--- | :--- | :--- | :--- | :--- |
-| MacMini9,1 | Late 2020 |  Apple M1 | J274 | 11.0.0 (20A2411) |
+| Macmini9,1 | Late 2020 |  Apple M1 | J274 | 11.0.0 (20A2411) |
 
 #### MacBook Air - Apple Silicon
 

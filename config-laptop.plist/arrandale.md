@@ -37,7 +37,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
@@ -67,8 +67,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -145,8 +145,8 @@ When setting up your iGPU, simply add the vales below to the `PciRoot(0x0)/Pci(0
 
 | Property | Type | Value |
 | :--- | :--- | :--- |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-singlelink | Data | 01000000 |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-singlelink | Data | `01000000` |
 
 * **Note**: Apple's Iron Lake drivers only support LVDS displays and **not** eDP
 
@@ -256,7 +256,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -531,8 +531,8 @@ For this Arrandale example, we'll chose the MacBookPro6,1 SMBIOS - this is done 
 
 | SMBIOS | CPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookPro6,1 | Quad Core 45w(High End) | 17" |
-| MacBookPro6,2 | Quad Core 45w(Low End) | 15" |
+| MacBookPro6,1 | Quad Core 45W(High End) | 17" |
+| MacBookPro6,2 | Quad Core 45W(Low End) | 15" |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

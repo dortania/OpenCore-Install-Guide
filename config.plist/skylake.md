@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -104,8 +104,8 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
-| 00001219 | Used when the Desktop iGPU is used to drive a display |
-| 01001219 | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
+| **`00001219`** | Used when the Desktop iGPU is used to drive a display |
+| **`01001219`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
 
 We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`. The first enables patching via WhateverGreen.kext, the second sets the min stolen memory to 19MB and third sets the framebuffer memory to 9MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
@@ -115,17 +115,17 @@ And extra note for P530 users, your iGPU is not natively supported so you will n
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 1B190000 |
+| device-id | Data | `1B190000` |
 
 Once you're done, you should have something similar:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | 00001219 |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
-| device-id | Data | 1B190000 |
+| AAPL,ig-platform-id | Data | `00001219` |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
+| device-id | Data | `1B190000` |
 
 (This is an example for a desktop HD P530 without a dGPU and no BIOS options for iGPU memory)
 
@@ -235,7 +235,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -461,8 +461,8 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`

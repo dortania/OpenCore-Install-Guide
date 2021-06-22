@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -66,8 +66,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -131,12 +131,12 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **06002616** | Laptop | Recommended value for Broadwell laptops |
-| **02001616** | NUC | Recommended value for Broadwell NUCs|
+| **`06002616`** | Laptop | Recommended value for Broadwell laptops |
+| **`02001616`** | NUC | Recommended value for Broadwell NUCs|
 
 #### Configuration Notes
 
-* For HD5600 you need `device-id` faked to `26160000`:
+* For HD 5600 you need `device-id` faked to `26160000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -146,9 +146,9 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
 
 :::
 
@@ -257,7 +257,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -532,14 +532,14 @@ For this Broadwell example, we chose the MacBookPro12,1 SMBIOS. The typical brea
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBook8,1 | Dual Core 7w(Low End) | iGPU: HD 5300 | 12" |
-| MacBookAir7,1 | Dual Core 15w | iGPU: HD 6000 | 11" |
-| MacBookAir7,2 | Dual Core 15w | iGPU: HD 6000 | 13" |
-| MacBookPro12,1 | Dual Core 28w(High End) | iGPU: Iris 6100 | 13" |
-| MacBookPro11,2 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,3 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
-| MacBookPro11,4 | Quad Core 45w | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,5 | Quad Core 45w | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
+| MacBook8,1 | Dual Core 7W(Low End) | iGPU: HD 5300 | 12" |
+| MacBookAir7,1 | Dual Core 15W | iGPU: HD 6000 | 11" |
+| MacBookAir7,2 | Dual Core 15W | iGPU: HD 6000 | 13" |
+| MacBookPro12,1 | Dual Core 28W(High End) | iGPU: Iris 6100 | 13" |
+| MacBookPro11,2 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
+| MacBookPro11,3 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
+| MacBookPro11,4 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
+| MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
 | iMac16,1 | NUC Systems | HD 6000/Iris Pro 6200 |  N/A |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:

@@ -35,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -68,8 +68,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -153,7 +153,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
-| **0000528A** | 6 | Recommended G4/G7 value |
+| **`0000528A`** | 6 | Recommended G4/G7 value |
 
 #### Configuration Notes
 
@@ -271,7 +271,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -548,8 +548,8 @@ For this IceLake example, we chose the MacBookAir9,1 SMBIOS - this is done inten
 
 | SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |
-| MacBookAir9,1 | Dual/Quad Core 12w | iGPU: G4/G7 | 13" | Yes |
-| MacBookPro16,2 | Quad Core 28w | iGPU: G4/G7 | 13" | Yes |
+| MacBookAir9,1 | Dual/Quad Core 12W | iGPU: G4/G7 | 13" | Yes |
+| MacBookPro16,2 | Quad Core 28W | iGPU: G4/G7 | 13" | Yes |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
