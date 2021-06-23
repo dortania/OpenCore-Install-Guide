@@ -346,7 +346,7 @@ The main places to check:
 * **NVMe or SATA issue**:
   * Sometimes if either a bad SATA controller or an unsupported NVMe drive are used, you can commonly get stuck here. Things you can check:
     * Not using either a Samsung PM981 or Micron 2200S NVMe SSD
-    * Samsung 970EvoPlus running the latest firmware(older firmwares were known for instability and stalls, [see here for more info](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
+    * Samsung 970 EVO Plus running the latest firmware(older firmwares were known for instability and stalls, [see here for more info](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
     * SATA Hot-Plug is disabled in the BIOS(more commonly to cause issues on AMD CPU based systems)
     * Ensure NVMe drives are set as NVMe mode in BIOS(some BIOS have a bug where you can set NVMe drives as SATA)
 * **NVRAM Failing**:

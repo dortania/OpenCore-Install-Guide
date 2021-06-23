@@ -126,7 +126,7 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
 | **`07009B3E`** | Used when the Desktop iGPU is used to drive a display |
-| **`00009B3E`** | Alternative to 07009B3E if it doesn't work |
+| **`00009B3E`** | Alternative to `07009B3E` if it doesn't work |
 | **`0300913E`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
 
 * **Note**: With macOS 10.15.5 and newer, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`

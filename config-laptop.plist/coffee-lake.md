@@ -553,9 +553,9 @@ For this Coffee Lake example, we'll chose the MacBookPro15,1 SMBIOS - this is do
 
 | SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |
-| MacBookPro15,1 | Hexa Core 45W | iGPU: UHD 630 + dGPU: RP555/560X | 15" | Yes |
+| MacBookPro15,1 | Hexa Core 45W | iGPU: UHD 630 + dGPU: Radeon Pro 555X/560X | 15" | Yes |
 | MacBookPro15,2 | Quad Core 15W | iGPU: Iris 655 | 13" | Yes |
-| MacBookPro15,3 | Hexa Core 45W | iGPU: UHD 630 + dGPU: Vega16/20 | 15" | Yes |
+| MacBookPro15,3 | Hexa Core 45W | iGPU: UHD 630 + dGPU: Vega 16/20 | 15" | Yes |
 | MacBookPro15,4 | Quad Core 15W | iGPU: Iris 645 | 13" | Yes |
 | Macmini8,1 | NUC Systems | HD 6000/Iris Pro 6200 |  N/A | No |
 

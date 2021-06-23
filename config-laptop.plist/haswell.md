@@ -538,7 +538,7 @@ For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakd
 | MacBookAir6,2 | Dual Core 15W | iGPU: HD 5000 | 13" |
 | MacBookPro11,1 | Dual Core 28W | iGPU: Iris 5100 | 13" |
 | MacBookPro11,2 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,3 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
+| MacBookPro11,3 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: GT 750M | 15" |
 | MacBookPro11,4 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
 | MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
 | Macmini7,1 | NUC Systems | HD 5000/Iris 5100 | N/A |

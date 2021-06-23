@@ -537,7 +537,7 @@ For this Broadwell example, we chose the MacBookPro12,1 SMBIOS. The typical brea
 | MacBookAir7,2 | Dual Core 15W | iGPU: HD 6000 | 13" |
 | MacBookPro12,1 | Dual Core 28W(High End) | iGPU: Iris 6100 | 13" |
 | MacBookPro11,2 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
-| MacBookPro11,3 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: GT750M | 15" |
+| MacBookPro11,3 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: GT 750M | 15" |
 | MacBookPro11,4 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
 | MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
 | iMac16,1 | NUC Systems | HD 6000/Iris Pro 6200 |  N/A |

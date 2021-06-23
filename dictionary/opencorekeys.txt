@@ -11,6 +11,7 @@ AppleAudio
 AppleBootPolicy
 AppleCpuPmCfgLock
 AppleDebug
+boot1f32
 AppleDebugLog
 AppleEvent
 AppleImageConversion
@@ -42,7 +43,6 @@ BoardRevision
 BoardSerialNumber
 BoardType
 BoardVersion
-Boot1f32
 BootProtect
 Booter
 BundlePath

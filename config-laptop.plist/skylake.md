@@ -545,7 +545,7 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 | MacBook9,1 | Dual Core 7W(Low End) | iGPU: HD 515 | 12" | No |
 | MacBookPro13,1 | Dual Core 15W(Low End) | iGPU: Iris 540 | 13" | No |
 | MacBookPro13,2 | Dual Core 15W(High End) | iGPU: Iris 550 | 13" | Yes |
-| MacBookPro13,3 | Quad Core 45W | iGPU: HD 530 + dGPU: RP450/455 | 15" | Yes |
+| MacBookPro13,3 | Quad Core 45W | iGPU: HD 530 + dGPU: Radeon Pro 450/455 | 15" | Yes |
 | iMac17,1 | NUC Systems | iGPU: HD 530 + R9 290 |  N/A | No |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:

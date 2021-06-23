@@ -199,7 +199,7 @@ Next, enter "Process MBR" then select "Restore MBR" and select the **boot0** fil
 | :--- | :--- |
 | ![](../images/installer-guide/winblows-install-md/restore-mbr.png) | ![](../images/installer-guide/winblows-install-md/restore-mbr-file.png) |
 
-Then head back to the main screen and select "Process PBR" then "Restore PBR". From here, choose the **Boot1f32** file from `Utilities/LegacyBoot/` in OpenCorePkg:
+Then head back to the main screen and select "Process PBR" then "Restore PBR". From here, choose the **boot1f32** file from `Utilities/LegacyBoot/` in OpenCorePkg:
 
 | Restore PBR | Restore boot1f32 file |
 | :--- | :--- |

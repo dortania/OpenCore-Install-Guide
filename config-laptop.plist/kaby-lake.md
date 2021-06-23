@@ -132,8 +132,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
 | **`00001B59`** | Laptop | Recommended for HD 615, HD 620, HD 630, HD 640 and HD 650 |
-| **`00001659`** | Laptop | Alternative value to 00001B59 if you have acceleration issues, and recommended for all HD and UHD 620 NUCs |
-| **`0000C087`** | Laptop | Recommended for Amber lake's UHD 617 and Kaby lake R's UHD 620 |
+| **`00001659`** | Laptop | Alternative value to `00001B59` if you have acceleration issues, and recommended for all HD and UHD 620 NUCs |
+| **`0000C087`** | Laptop | Recommended for Amber Lake's UHD 617 and Kaby Lake-R's UHD 620 |
 | **`00001E59`** | NUC | Recommended for HD 615 |
 | **`00001B59`** | NUC | Recommended for HD 630 |
 | **`02002659`** | NUC | Recommended for HD 640/650 |
@@ -146,7 +146,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | :--- | :--- | :--- |
 | device-id | Data | `16590000` |
 
-* For all HD6\*\* (`UHD` users are not concerned), there are some small issues with output where plugging anything would cause a lock up (kernel panic); here are some patches to mitigate that (credit Rehabman):
+* For all HD 6\*\* (`UHD` users are not concerned), there are some small issues with output where plugging anything would cause a lock up (kernel panic); here are some patches to mitigate that (credit Rehabman):
   * 0306 to 0105 (will probably explain what it does one day)
 
 | Key | Type | Value |
@@ -552,7 +552,7 @@ For this Kaby Lake example, we'll chose the MacBookPro14,1 SMBIOS - this is done
 | :--- | :--- | :--- | :--- | :--- |
 | MacBookPro14,1 | Dual Core 15W(Low End) | iGPU: Iris Plus 640 | 13" | No |
 | MacBookPro14,2 | Dual Core 15W(High End) | iGPU: Iris Plus 650 | 13" | Yes |
-| MacBookPro14,3 | Quad Core 45W | iGPU: HD 630 + dGPU: RP555/560 | 15" | Yes |
+| MacBookPro14,3 | Quad Core 45W | iGPU: HD 630 + dGPU: Radeon Pro 555X/560X | 15" | Yes |
 | iMac18,1 | NUC Systems | iGPU: Iris Plus 640 |  N/A | No |
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:

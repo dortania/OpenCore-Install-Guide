@@ -176,7 +176,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | `framebuffer-pipecount`    | Number | `2`                                                          | Matching PipeCount to the one on `03006601` (3 on `04` vs 2 on `03`) |
 | `framebuffer-portcount`    | Number | `4`                                                          | Matching PortCount to the one on `03006601` (1 on `04` vs 4 on `03`) |
 | `framebuffer-stolenmem`    | Data   | `00000004`                                                   | Matching STOLEN memory to 64MB (0x04000000 from hex to base 10 in Bytes) to the one on `03006601`<br />Check [here](https://www.tonymacx86.com/threads/guide-alternative-to-the-minstolensize-patch-with-32mb-dvmt-prealloc.221506/) for more information. |
-| `framebuffer-con1-enable`  | Number | `1`                                                          | This will enable patching on *connector1* of the driver. (Which is the second connector after con0, which is the eDP/LVDS one) |
+| `framebuffer-con1-enable`  | Number | `1`                                                          | This will enable patching on *connector 1* of the driver. (Which is the second connector after con0, which is the eDP/LVDS one) |
 | `framebuffer-con1-alldata` | Data   | `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000` | When using `all data` with a connector, either you give all information of that connector (port-bused-type-flag) or that port and the ones following it, like in this case.<br />In this case, the ports in `04` are limited to `1`:<br />`05030000 02000000 30020000` (which corresponds to port 5, which is LVDS)<br />However on `03` there are 3 extra ports:<br />`05030000 02000000 30000000` (LVDS, con0, like `04`)<br/>`02050000 00040000 07040000` (DP, con1)<br/>`03040000 00040000 81000000` (DP, con2)<br/>`04060000 00040000 81000000` (DP, con3)<br />Since we changed the number of PortCount to `4` in a platform that has only 1, that means we need to define the 3 others (and we that starting with con1 to the end).<br /> |
 
 :::
@@ -577,7 +577,7 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 | :--- | :--- | :--- | :--- |
 | MacBookAir5,1 | Dual Core 17W | iGPU: HD 4000 | 11" |
 | MacBookAir5,2 | Dual Core 17W | iGPU: HD 4000 | 13" |
-| MacBookPro10,1 | Quad Core 45W | iGPU: HD 4000 + dGPU: GT650M | 15" |
+| MacBookPro10,1 | Quad Core 45W | iGPU: HD 4000 + dGPU: GT 650M | 15" |
 | MacBookPro10,2 | Dual Core 35W(High End) | iGPU: HD 4000 | 13" |
 | Macmini6,1 | Dual Core NUC | iGPU: HD 4000 | N/A |
 | Macmini6,2 | Quad Core NUC | iGPU: HD 4000 | N/A |
