@@ -27,6 +27,7 @@
 1Revenger1
 20E232
 20E5186d
+20D75
 20XX
 2200S
 2B-i
@@ -167,6 +168,7 @@ AppleSMBusPCI
 AppleSupport
 AppleSupportPkg
 AppleTV
+AppleUSBHostPort
 Aptio
 AptioMemoryFix
 Aquantia
@@ -1047,6 +1049,7 @@ configs
 configurator
 configurators
 cpuid_set_cpufamily
+createDevice
 createinstallmedia
 csr-active-config
 csrstat

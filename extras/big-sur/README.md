@@ -136,6 +136,10 @@ With Big Sur, quite a bit broke. Mainly the following:
 * SATA Support broken
   * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
   * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
+* XhciPortLimit broken in macOS 11.3 Beta 2 and newer
+  * With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). We advise users either install an older OS(ie. macOS 10.15, Catalina) or find a 11.2.3 or older Big Sur installer
+    * For education purposes, we have a copy provided here: [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issue
 
 And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/extended/post-issues.md#disabling-sip)
 
@@ -344,3 +348,7 @@ For the latter, see here: [Haswell ASUS Z97 Big Sur Update Thread](https://www.r
 This is due to multiple copies of the same kext being in your kernel cache, and to be more specific having multiple copies of VoodooInput. Look over your `Kernel -> Add` and verify you only have 1 copy of VoodooInput enabled.
 
 * Note: Both VoodooI2C and VoodooPS2 have a bundled copy of VoodooInput, which you disable is up to personal preference
+
+### Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
+
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.

@@ -623,6 +623,14 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
-### Virtual Machine Issues
+## Virtual Machine Issues
 
 * VMWare 15 is known to get stuck on `[EB|#LOG:EXITBS:START]`. VMWare 16 resolves the problem.
+
+## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
+
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
+
+* Alternatively, you can boot macOS 11.2.3 or older to resolve
+  * For educational purposes, we've provided some images:
+    * [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)
