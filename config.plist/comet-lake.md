@@ -252,16 +252,18 @@ Patches both the kernel and kexts.
 
 ::: tip Fixing I225-V controllers
 
-This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's I225LM driver into supporting our I225-V network controller.
+This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's I225LM driver into supporting our I225-V network controller. However, this is only needed on Catalina and Big Sur, up to 11.3.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | Base | String | __Z18e1000_set_mac_typeP8e1000_hw |
 | Comment | String | I225-V patch |
+| Count | Number | 1 |
 | Enabled | Boolean | True |
 | Find | Data | `F2150000` |
 | Identifier | String | com.apple.driver.AppleIntelI210Ethernet |
 | MinKernel | String | 19.0.0 |
+| MaxKernel | String | 20.4.0 |
 | Replace | Data | `F3150000` |
 
 * **Note 1**: If your board didn't ship with the Intel I225 NIC, there's no reason to add this entry.
@@ -500,6 +502,11 @@ System Integrity Protection bitmask
 | **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
 | **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
+
+* **Networking-Specific boot-args**:
+| boot-args | Description |
+| :--- | :--- |
+| **dk.e1000=0** | Disables `com.apple.DriverKit-AppleEthernetE1000` (Apple's DEXT driver) from matching to the Intel I225-V Ethernet controller found on higher end Comet Lake boards, causing Apple's I225 kext driver to load instead. Needed for proper I225-V support.<br/>Note that you don't need this if your board didn't ship with the I225-V NIC. |
 
 * **GPU-Specific boot-args**:
 
