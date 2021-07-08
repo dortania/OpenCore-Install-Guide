@@ -165,7 +165,7 @@ For iStat, you'll have to wait for an update. For AMD users, you can use either:
 
 This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:
 
-* `PlatformInfo -> Generic -> AdviseWindows -> True`
+* `PlatformInfo -> Generic -> AdviseFeatures -> True`
 
 ![](../../images/troubleshooting/troubleshooting-md/error.png)
 
