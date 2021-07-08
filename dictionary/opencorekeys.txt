@@ -4,7 +4,7 @@
 ACPI
 APFS
 ARTFrequency
-AdviseWindows
+AdviseFeatures
 AllowNvramReset
 AllowSetDefault
 AppleAudio
