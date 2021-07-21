@@ -143,6 +143,30 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * Add `igfxonln=1` to boot-args
 * Make sure you're using [WhateverGreen v1.3.8](https://github.com/acidanthera/WhateverGreen/releases) or newer
 
+## No brightness control on Dual GPU laptops
+
+In macOS 11.3, there were some changes made to backlight controlling mechanisms that defaults the backlight to be controlled by the dGPU on Dual GPU laptops with MUX enabled. Optimus-only laptops, however, are not affected, since you need to disable the dGPU anyways. Specifically, this problem only causes issues if you have a Dual GPU laptop with the internal screen from an iGPU output and external screens from dGPU outputs (`Hybrid Mode` on some Mobile Workstaions). To resolve this, you may disable either the iGPU or the dGPU, or do the following:
+
+* Verify SSDT-PNLF is installed(ie. EFI/OC/ACPI as well as config.plist -> ACPI -> Add)
+
+* Add below to `PciRoot(0x0)/Pci(0x2,0x0)`:
+
+`@0,backlight-control | Data | 01000000`
+
+`applbkl | Data | 01000000`
+
+`AAPL,backlight-control | Data | 01000000`
+
+`AAPL00,backlight-control | Data | 01000000`
+
+* Add below to your dGPU PCI address:
+
+`@0,backlight-control | Data | 00000000`
+
+`applbkl | Data | 00000000`
+
+`AAPL,backlight-control | Data | 00000000`
+
 ## No temperature/fan sensor output
 
 So couple things:
