@@ -2,7 +2,7 @@
 
 Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi), your USB should start to look something like this:
 
-![](../images/config/config-universal/almost-done.png)
+![Populated EFI folder](../images/installer-guide/opencore-efi-md/populated-efi.png)
 
 * **Note**: Your USB **will look different**, everyone's system will have different requirements.
 
@@ -45,6 +45,10 @@ After the config is opened, press **Cmd/Ctrl + Shift + R** and point it at your 
 Once done, you'll see your SSDTs, Kexts and firmware drivers populated in the config.plist:
 
 ![](../images/config/config-universal/after-snapshot.png)
+
+* **Note:** If you get a pop up "Disable the following kexts with Duplicate CFBundleIdentifiers?", press "Yes". This is to ensure you don't have duplicate kexts being injected, as some kexts may have some of the same plugins(ie. VoodooInput is in both VoodooPS2 and VoodooI2C's plugin folder)
+
+![](../images/config/config-universal/duplicate.png)
 
 If you wish to clean up the file a bit, you can remove the `#WARNING` entries. Though they cause no issues staying there, so up to personal preference.
 
@@ -99,8 +103,8 @@ This section includes both enthusiast and server based hardware.
 
 | Code Name | Series | Release |
 | :--- | :--- | :--- |
-| [Bulldozer/Jaguar](../AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/Advanced_Micro_Devices) |
-| [Zen](../AMD/zen.md) | 1XXX, 2XXX, 3XXX | 2017-2020 era |
+| [Bulldozer/Jaguar](../AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) |
+| [Zen](../AMD/zen.md) | 1XXX, 2XXX, 3XXX, 5XXX | 2017-2020 era |
 
 * Note: ~~Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported~~
   * Latest BIOS and OpenCore version has resolved this issue, all Threadripper platforms are now supported

@@ -1,12 +1,13 @@
 # Making the installer in Windows
 
-* Supported version: 0.6.3
-
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
 To start you'll need the following:
 
 * 4GB USB Stick
+
+* For USB larger than 16 GB to format in FAT32 use [Rufus method](#rufus-method)
+
 * [macrecovery.py](https://github.com/acidanthera/OpenCorePkg/releases)
   * This will require [Python installed](https://www.python.org/downloads/)
 
@@ -28,38 +29,45 @@ Now run one of the following depending on what version of macOS you want(Note th
 
 ```sh
 # Lion(10.7):
-macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
-macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
+python macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
+python macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
 
 # Mountain Lion(10.8):
-macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
+python macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
 
 # Mavericks(10.9):
-macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
+python macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
 
 # Yosemite(10.10):
-macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
+python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
 
 # El Capitan(10.11):
-macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
+python macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
 
 # Sierra(10.12):
-macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
+python macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
 
 # High Sierra(10.13)
-macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
-macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
+python macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
+python macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
 
 # Mojave(10.14)
-macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
+python macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
 # Catalina(10.15)
-macrecovery.py -b Mac-27AD2F918AE68F61 -m 00000000000K3F700 download
+python macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
 # Latest version
 # ie. Big Sur(11)
-macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 -os latest download
+python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
+
+* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
+  * For first time users, we recommend macOS 10.15, Catalina
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). We advise users either install an older OS(ie. macOS 10.15, Catalina) or find a 11.2.3 or older Big Sur installer
+    * For education purposes, we have a copy provided here: [macOS 11.2.1 20D75 Recovery Image](https://archive.org/details/base-system_202102)
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issue
+* **Nvidia GPU Note**: Reminder to verify whether your hardware support newer OSes, see [Hardware Limitations](../macos-limits.md)
 
 This will take some time, however once you're finished you should get either BaseSystem or RecoveryImage files:
 
@@ -78,6 +86,9 @@ Here we'll be formatting our USB and adding macOS onto it, we have 2 options:
 * [Disk Management method](#disk-management-method)
   * GUI Based, simplest way
   * Only UEFI systems are supported(ex. 2012+)
+* [Rufus method](#rufus-method)
+  * GUI Based, simplest way
+  * For larger USB drives(16GB+)
 * [diskpart method](#diskpart-method)
   * Command line based, little more work
   * Required for legacy systems(ie. non-UEFI, pre-2012)
@@ -95,6 +106,28 @@ Simply open up Disk Management, and format your USB as FAT32:
 * Otherwise, right click the partition on the USB and click Format and set it to FAT32.
 
 ![](../images/installer-guide/winblows-install-md/DiskManagement.jpg)
+
+Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
+
+![](../images/installer-guide/winblows-install-md/com-recovery.png)
+
+Now grab OpenCorePkg you downloaded earlier and open it:
+
+![](../images/installer-guide/winblows-install-md/base-oc-folder.png)
+
+Here we see both IA32(32 Bit CPUs) and X64(64 Bit CPUs) folders, choose the one that's most appropriate to your hardware and open it. Next grab the EFI folder inside and place this on the root of the USB drive along side com.apple.recovery.boot. Once done it should look like this:
+
+![](../images/installer-guide/winblows-install-md/com-efi-done.png)
+
+### Rufus method
+
+1. Download [Rufus](https://rufus.ie/)
+2. Set the BOOT selection as not bootable
+3. Set File System as Large FAT32
+4. Click Start
+5. Delete all file autorun in USB Drive partition
+
+![](../images/installer-guide/winblows-install-md/format-usb-rufus.png)
 
 Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
 
@@ -169,7 +202,7 @@ Next, enter "Process MBR" then select "Restore MBR" and select the **boot0** fil
 | :--- | :--- |
 | ![](../images/installer-guide/winblows-install-md/restore-mbr.png) | ![](../images/installer-guide/winblows-install-md/restore-mbr-file.png) |
 
-Then head back to the main screen and select "Process PBR" then "Restore PBR". From here, choose the **Boot1f32** file from `Utilities/LegacyBoot/` in OpenCorePkg:
+Then head back to the main screen and select "Process PBR" then "Restore PBR". From here, choose the **boot1f32** file from `Utilities/LegacyBoot/` in OpenCorePkg:
 
 | Restore PBR | Restore boot1f32 file |
 | :--- | :--- |

@@ -4,8 +4,7 @@ This section is mostly a mini-guide on how to find what hardware you're currentl
 
 For this, we'll assume you have Windows or Linux installed:
 
-* [Finding hardware using Windows](#finding-hardware-using-windows)
-* [Finding hardware using Linux](#finding-hardware-using-linux)
+[[toc]]
 
 ## Finding Hardware using Windows
 
@@ -119,13 +118,13 @@ Below you'll find a list of commands to run in the terminal, thankfully most Lin
 ### CPU Model
 
 ```sh
-cat /proc/cpuinfo | grep 'model name'
+cat /proc/cpuinfo | grep -i "model name"
 ```
 
 ### GPU Model
 
 ```sh
-lspci | grep -i --color 'vga\|3d\|2d'
+lspci | grep -i --color "vga\|3d\|2d"
 ```
 
 ### Chipset Model
@@ -137,7 +136,7 @@ dmidecode -t baseboard
 ### Keyboard, Trackpad and  Touchscreen Connection Type
 
 ```sh
-dmesg |grep -i 'input'
+dmesg | grep -i input
 ```
 
 ### Audio Codec
@@ -151,7 +150,7 @@ aplay -l
 Basic info:
 
 ```sh
-lspci | grep -i 'network'
+lspci | grep -i network
 ```
 
 More in-depth info:

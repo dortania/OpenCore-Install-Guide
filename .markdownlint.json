@@ -7,5 +7,8 @@
 	"no-duplicate-header": false,
 	"fenced-code-language": false,
 	"no-emphasis-as-heading": false,
-	"single-title": false
+	"single-title": false,
+	"ul-style": {
+		"style": "asterisk"
+	}
 }

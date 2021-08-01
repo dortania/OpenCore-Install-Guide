@@ -1,19 +1,8 @@
 # Miscellaneous Issues
 
-* Supported version: 0.6.3
-
 Miscellaneous issues not revolving around macOS itself such as multibooting.
 
-* [Can't run `acpidump.efi`](#can-t-run-acpidump-efi)
-* [Fixing SSDTTime: `Could not locate or download iasl!`](#fixing-ssdttime-could-not-locate-or-download-iasl)
-* [Fix Python: `Python is not installed or not found on PATH`](#fix-python-python-is-not-installed-or-not-found-on-path)
-* [Windows Startup Disk can't see APFS drives](#windows-startup-disk-can-t-see-apfs-drives)
-* [Incorrect resolution with OpenCore](#incorrect-resolution-with-opencore)
-* [Can't find Windows/BootCamp drive in picker](#can-t-find-windows-bootcamp-drive-in-picker)
-* [Selecting Startup Disk doesn't apply correctly](#selecting-startup-disk-doesn-t-apply-correctly)
-* [Booting Windows results in BlueScreen or Linux crashes](#booting-windows-results-in-bluescreen-or-linux-crashes)
-* [Booting Windows error: `OCB: StartImage failed - Already started`](#booting-windows-error-ocb-startimage-failed-already-started)
-* [iASL warning, # unresolved](#iasl-warning-unresolved)
+[[toc]]
 
 ## Can't run `acpidump.efi`
 
@@ -63,12 +52,12 @@ Make sure `Add Python to PATH`
 
 ## Can't find Windows/BootCamp drive in picker
 
-So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you'll have to find other means to make an installer(Google's your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you'll need to format the drive you want to install onto with DiskUtility. See the [Multiboot Guide](https://hackintosh-multiboot.gitbook.io/hackintosh-multiboot/) on best practices
+So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you'll have to find other means to make an installer(Google's your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you'll need to format the drive you want to install onto with DiskUtility. See the [Multiboot Guide](https://dortania.github.io/OpenCore-Multiboot/) on best practices
 
 Now to get onto troubleshooting:
 
 * Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
-* Enable `Misc -> Boot -> Hideself` is enabled when Windows bootloader is located on the same drive
+* Enable `Misc -> Boot -> Hideself` when Windows bootloader is located on the same drive
 
 ## Selecting Startup Disk doesn't apply correctly
 
@@ -90,7 +79,7 @@ Common Windows error code:
 
 This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
 
-## iASL warning, # unresolved
+## iASL warning, only X unresolved
 
 If you try to decompile your DSDT and get an error similar to this:
 
@@ -106,7 +95,7 @@ iasl * [insert all ACPI files here]
 
 ## Time inconsistency between macOS and Windows
 
-This is due to macOS using Universal Time while Windows relies on Greenwhich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
+This is due to macOS using Universal Time while Windows relies on Greenwich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
 
 * [Install Bootcamp utilities](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * [Modify Windows' registry](https://superuser.com/q/494432)

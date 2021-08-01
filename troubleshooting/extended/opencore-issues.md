@@ -1,22 +1,8 @@
 # OpenCore Boot Issues
 
-* Supported version: 0.6.3
-
 Issues surrounding from initial booting the USB itself to right before you choose to boot the macOS installer
 
-* [Stuck on a black screen before picker or always restart](#stuck-on-a-black-screen-before-picker)
-* [Stuck on `no vault provided!`](#stuck-on-no-vault-provided)
-* [Stuck on `OC: Invalid Vault mode`](#stuck-on-oc-invalid-vault-mode)
-* [Stuck on `OCB: OcScanForBootEntries failure - Not Found`](#stuck-on-ocb-ocscanforbootentries-failure-not-found)
-* [Stuck on `OCB: failed to match a default boot option`](#stuck-on-ocb-failed-to-match-a-default-boot-option)
-* [Stuck on `OCB: System has no boot entries`](#stuck-on-ocb-system-has-no-boot-entries)
-* [Stuck on `OCS: No schema for DSDT, KernelAndKextPatch, RtVariable, SMBIOS, SystemParameters...`](#stuck-on-ocs-no-schema-for-dsdt-kernelandkextpatch-rtvariable-smbios-systemparameters)
-* [Stuck on `OC: Driver XXX.efi at 0 cannot be found`](#stuck-on-oc-driver-xxx-efi-at-0-cannot-be-found)
-* [Receiving `Failed to parse real field of type 1`](#receiving-failed-to-parse-real-field-of-type-1)
-* [Can't select anything in the picker](#can-t-select-anything-in-the-picker)
-* [SSDTs not being added](#ssdts-not-being-added)
-* [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios)
-* [OCABC: Incompatible OpenRuntime r4, require r10](#ocabc-incompatible-openruntime-r4-require-r10)
+[[toc]]
 
 ## Stuck on a black screen before picker
 
@@ -169,3 +155,11 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime are **all from the same exact build**. Anything mismatched will break booting
 
 * **Note**: FwRuntimeServices has been renamed to OpenRuntime with 0.5.7 and newer
+
+## Failed to open OpenCore image - Access Denied
+
+On newer Microsoft Surface device firmwares, loading OpenCore will now result in a security violation even when Secure Boot is disabled. To resolve this, enable `UEFI -> Quirks -> DisableSecurityPolicy` in your config.plist. See here for more info: [Failed to open OpenCore image - Access Denied #1446](https://github.com/acidanthera/bugtracker/issues/1446)
+
+## OC: Failed to find SB model disable halting on critical error
+
+This is a typo, ensure that in your config.plist `Misc -> Secuirty -> SecureBootModel` is set to Disable**d**

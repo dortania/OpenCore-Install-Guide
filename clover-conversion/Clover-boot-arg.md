@@ -1,7 +1,5 @@
 # Clover Boot Arg Conversion
 
-* Supported version: 0.6.3
-
 This section is mainly used for explaining what boot-args are no longer relevant, it's quite common for users to be still carrying legacy args which have little to no real affect in newer versions of macOS or have little use in OpenCore
 
 This list is based of memory and an annoyed self with seeing these flags keep popping up, got other flags to add then I recommend [opening an issue](https://github.com/khronokernel/OpenCore-Vanilla-Desktop-Guide/issues). All help is welcomed!

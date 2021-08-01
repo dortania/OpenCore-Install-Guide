@@ -1,7 +1,5 @@
 # Gathering files
 
-* Supported version: 0.6.3
-
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
 > What's the best way to figure out if my hardware is supported?
@@ -11,6 +9,8 @@ See the [**Hardware Limitations page**](macos-limits.md) for some better insight
 > What are some ways to figure out what hardware I have?
 
 See the page before: [Finding your hardware](./find-hardware.md)
+
+[[toc]]
 
 ## Firmware Drivers
 
@@ -24,10 +24,10 @@ Firmware drivers are drivers used by OpenCore in the UEFI environment. They're m
 
 For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
 
-* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
+* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:red">Required</span>)
   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
   * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons), see the legacy section below
-* [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)
+* [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)(<span style="color:red">Required</span>)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
   * Reminder this was bundled in OpenCorePkg we downloaded earlier
 
@@ -42,9 +42,10 @@ In addition to the above, if your hardware doesn't support UEFI(2011 and older e
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons))
   * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
-* [PartitionDxe](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe.efi)
+* [OpenPartitionDxe](https://github.com/acidanthera/OpenCorePkg/releases)
   * Required to boot recovery on OS X 10.7 through 10.9
-  * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons)), you'll want to use [PartitionDxeLegacy](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxeLegacy.efi) due to missing RDRAND instruction.
+    * This file is bundled with OpenCorePkg under EFI/OC/Drivers
+    * Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
   * Not required for OS X 10.10, Yosemite and newer
 
 These files will go in your Drivers folder in your EFI
@@ -55,8 +56,6 @@ For those with 32-Bit CPUs, you'll want to grab these drivers as well
 
 * [HfsPlus32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus32.efi)
   * Alternative to HfsPlusLegacy but for 32-bit CPUs, don't mix this with other HFS .efi drivers
-* [PartitionDxe32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/PartitionDxe32.efi)
-  * Alternative to PartitionDxeLegacy but for 32-bit CPUs, don't mix this with other PartitionDxe .efi drivers
 
 :::
 
@@ -76,11 +75,11 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 Without the below 2, no system is bootable:
 
-* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
+* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
   * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
   * Requires OS X 10.6 or newer
-* [Lilu](https://github.com/acidanthera/Lilu/releases)
+* [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">Required</span>)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
   * Note that Lilu and plugins requires OS X 10.8 or newer to function
   
@@ -90,7 +89,7 @@ For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want t
 
 * [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
 
-Reminder if you don't plan to boot these older OSes, you can ignore these kexts.
+Reminder if you don't plan to boot these older OSes, you can ignore this kext.
 
 * **OS X 10.4 and 10.5 note**: Even on 64-bit CPUs, OS X's kernel space is still 32-bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
 
@@ -109,15 +108,14 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops, **desktops can ignore**
-  * Do not use until battery has been properly patched, can cause issues otherwise. So for initial setup, please omit this kext. After install you can follow this page for setup: [Fixing Battery Read-outs](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
 * SMCDellSensors.kext
   * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM)
   * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
 
 ### Graphics
 
-* [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)
-  * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
+* [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
+  * Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
   * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
   * Requires OS X 10.8 or newer
 
@@ -146,10 +144,10 @@ Here we're going to assume you know what ethernet card your system has, reminder
 
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
-  * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
-  * Requires OS X 10.9 or newer, 10.8-10.8 users can use the IntelSnowMausi instead for older OSes
+  * Intel's 82578, 82579, I217, I218 and I219 NICs are officially supported
+  * Requires OS X 10.9 or newer, 10.6-10.8 users can use the IntelSnowMausi instead for older OSes
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
+  * Required for I211 NICs, based off of the SmallTree kext but patched to support I211
   * Required for most AMD boards running Intel NICs
   * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
@@ -158,13 +156,15 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Note: Atheros Killer E2500 models are actually Realtek based, for these systems please use [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) instead
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
-  * Requires OS X 10.8-11(2.2.0), 10.12-13(v2.2.2), 10.14+(2.3.0)
-  * **NOTE: Sometimes Realtek's Gigabit Ethernet may not work correctly if you have RealtekRTL8111 v2.3.0. If you see this issue, try reverting to version 2.2.2**
+  * Requires OS X 10.8 and up for versions v2.2.0 and below, macOS 10.12 and up for versions v2.2.2 through v2.3.0 (inclusive), macOS 10.14 and up for versions v2.4.0 and up
+  * **NOTE:** Sometimes the latest version of the kext might not work properly with your Ethernet. If you see this issue, try older versions.
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
-* For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
+* For Intel's I225-V NICs, patches are mentioned in the desktop [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) section. No kext is required.
   * Requires macOS 10.15 or newer
+* For Intel's I350 NICs, patches are mentioned in the HEDT [Sandy and Ivy Bridge-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) section. No kext is required.
+  * Requires OS X 10.10 or newer
 
 ::: details Legacy Ethernet Kexts
 
@@ -287,10 +287,11 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * Used for patching non-Apple/non-Fenvi Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
   * Requires OS X 10.10 or newer
+  * For Big Sur see [Big Sur Known Issues](./extras/big-sur#known-issues) for extra steps regarding AirPortBrcm4360 drivers.
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/non-Fenvi Airport cards.
   * To be paired with BrcmFirmwareData.kext
-    * BrcmPatchRAM3 for 10.14+ (must be paired with BrcmBluetoothInjector)
+    * BrcmPatchRAM3 for 10.15+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.8-10.10
 
@@ -347,7 +348,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 
 ### Laptop Specifics
 
-To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep input` in Linux
+To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep -i input` in Linux
 
 #### Input drivers
 
@@ -379,6 +380,11 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 
 #### Misc
 
+* [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
+  * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
+* [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
+  * Fixes brightness keys automatically
+
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
 ## SSDTs
@@ -404,7 +410,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
 | AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
-| AMD (17h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
+| AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
 
 ### High End Desktop
 
@@ -412,8 +418,8 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | :-------: | :-----: | :----: | :-----: | :-----: |
 | Nehalem and Westmere | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A |
 | Sandy Bridge-E | ^^ | ^^ | ^^ | [SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/unc0) |
-| Ivy Bridge-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ |
-| Haswell-E | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-RTC0-RANGE](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ |
+| Ivy Bridge-E | ^^ | ^^ | ^^ | ^^ |
+| Haswell-E | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-RTC0-RANGE](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ |
 | Broadwell-E | ^^ | ^^ | ^^ | ^^ |
 | Skylake-X | ^^ | ^^ | ^^ | N/A |
 

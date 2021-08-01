@@ -58,7 +58,7 @@ module.exports = {
         repo: 'https://github.com/dortania/OpenCore-Install-Guide',
 		editLinks: true,
 		editLinkText: 'Help us improve this page!',
-        logo: 'homepage.png',
+        logo: '/homepage.png',
         nav: [{
             text: 'Dortania Guides',
             ariaLabel: 'Language Menu',
@@ -73,6 +73,10 @@ module.exports = {
             {
                 text: 'OpenCore Post-Install',
                 link: 'https://dortania.github.io/OpenCore-Post-Install/'
+            },
+            {
+                text: 'OpenCore Multiboot',
+                link: 'https://dortania.github.io/OpenCore-Multiboot/'
             },
             {
                 text: 'GPU Buyers Guide',
@@ -95,14 +99,8 @@ module.exports = {
             sidebarDepth: 1,
             children: [
 				'prerequisites',
-				{
-                    title: 'Hardware Limitations',
-                    collapsable: true,
-                    path: 'macos-limits',
-                    children: [
-                        'find-hardware'
-                    ]
-                },
+				'macos-limits',
+				'find-hardware',
                 'terminology',
                 'why-oc',
             ]
@@ -215,6 +213,7 @@ module.exports = {
 				},
                 '/troubleshooting/debug',
                 '/troubleshooting/boot',
+				'/troubleshooting/kernel-debugging',
             ]
         },
         {
@@ -258,7 +257,8 @@ module.exports = {
                     title: 'Multiboot',
                     collapsable: true,
                     children: [
-                        ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up Bootstrap.efi'],
+						['https://dortania.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
+                        ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up LauncherOption'],
                         ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
                     ]
                 },

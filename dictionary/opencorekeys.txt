@@ -4,13 +4,14 @@
 ACPI
 APFS
 ARTFrequency
-AdviseWindows
+AdviseFeatures
 AllowNvramReset
 AllowSetDefault
 AppleAudio
 AppleBootPolicy
 AppleCpuPmCfgLock
 AppleDebug
+boot1f32
 AppleDebugLog
 AppleEvent
 AppleImageConversion
@@ -32,6 +33,7 @@ BID
 BIOSReleaseDate
 BIOSVendor
 BIOSVersion
+BlacklistAppleUpdate
 BlessOverride
 BoardAssetTag
 BoardLocationInChassis
@@ -41,7 +43,6 @@ BoardRevision
 BoardSerialNumber
 BoardType
 BoardVersion
-Boot1f32
 BootProtect
 Booter
 BundlePath
@@ -65,6 +66,7 @@ DirectGopCacheMode
 DirectGopRendering
 DisableIoMapper
 DisableRtcChecksum
+DisableSecurityPolicy
 DisableSingleUser
 DisableVariableWrite
 DisableWatchDog
@@ -105,11 +107,13 @@ KeySupport
 KeySupportMode
 KeySwap
 LapicKernelPanic
+LauncherOption
 LegacyEnable
 LegacyOverwrite
 LegacySchema
 Lifewire
 MLB
+MaxBIOSVersion
 MaxKernel
 MemoryFormFactor
 MinDate
@@ -120,6 +124,7 @@ MmioWhitelist
 NormalizeHeaders
 OSInfo
 OemTableId
+PanicNoKextDump
 PickerAttributes
 PickerAudioAssist
 PickerMode
@@ -158,6 +163,7 @@ SMBIOS
 SanitiseClearScreen
 ScanPolicy
 SerialInit
+SetApfsTrimTimeout
 SetupVirtualMap
 ShowPicker
 SignalAppleOS

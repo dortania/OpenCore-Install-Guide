@@ -6,5 +6,5 @@
 /icons/
 /images/
 /styles/
-.travis.yml
+/.github/
 /.vuepress/

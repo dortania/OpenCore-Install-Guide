@@ -1,7 +1,5 @@
 # Converting common properties from Clover to OpenCore
 
-* Supported version: 0.6.3
-
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
 # Kexts and Firmware drivers
@@ -14,7 +12,7 @@ See [Kexts and Firmware drivers](https://github.com/dortania/OpenCore-Install-Gu
 
 So with the transition from Clover to OpenCore we should start removing unneeded patches you may have carried along for some time:
 
-* EHCI Patches: Recommended to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
+* EHCI Patches: Recommended to power off the controller with [SSDT-EHCx_OFF](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-EHCx_OFF.dsl). Skylake and newer users do not have an EHCI controller so no need for this.
   * change EHC1 to EH01
   * change EHC2 to EH02
 * XHCI Patches: Not needed once an [Injector kext](https://github.com/corpnewt/USBMap) is made
@@ -51,10 +49,10 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * NVMe patches: [NVMeFix](https://github.com/acidanthera/NVMeFix) fixes power management
   * change PXSX to ANS1
   * change PXSX to ANS2
-* Airport/Wifi Patches: [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
+* Airport/WiFi Patches: [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup)
   * change PXSX to ARPT
 * Other purely cosmetic patches:
-  * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)
+  * change LPC0 to LPCB(use [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl) for fixing SMBUS support)
   * change PC00 to PCIO
   * change FPU to MATH
   * change TMR to TIMR
@@ -63,9 +61,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Patches**
 
-* TgtBridge patches: No feature parity in OpenCore, see comments(TgtBridge was very buggy in Clover):
-  * [Vit's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2682158)
-  * [Andrey's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2678273)
+* TgtBridge patches:
+  * `ACPI -> Patch -> ... -> Base`
 
 * DisableASPM:
   * `DeviceProperties -> Add -> PciRoot... -> pci-aspm-default | Data | <00>`
@@ -81,7 +78,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * CorpNewt's [SSDTTime](https://github.com/corpnewt/SSDTTime) to make the proper SSDT, `FixHPET - Patch out IRQ Conflicts`
 
 * **FixSBUS**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl)
 
 * **FixShutdown**:
   * [FixShutdown-USB-SSDT](https://github.com/dortania/OpenCore-Post-Install/blob/master/extra-files/FixShutdown-USB-SSDT.dsl)
@@ -110,11 +107,11 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 * **AddPNLF**:
   * See [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html)
 * **AddMCHC**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl)
 * **AddIMEI**:
-  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-SBUS-MCHC.dsl)
+  * [SSDT-SBUS-MCHC](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-SBUS-MCHC.dsl)
   * WhateverGreen will also handle fixing IMEI naming
-  * For Sandy Bridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/SSDT-IMEI.dsl)
+  * For Sandy Bridge on Z77 or IvyBridge on Z67, the IMEI will need to be faked: [SSDT-IMEI](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-IMEI.dsl)
 * **FakeLPC**:
   * `DeviceProperties -> Add -> PciRoot... -> device-id`
   * You'll want to spoof it to a supported LPC controller already in AppleLPC
@@ -179,7 +176,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
   * 1 -> `<01>`
   * 2 -> `<02>`
 
-# Cpu
+# CPU
 
 **Type**:
 
@@ -212,7 +209,8 @@ path/to/gfxutil -f HDEF
 
 * Inject: `DeviceProperties -> Add -> PciRoot... -> layout-id`
 * AFGLowPowerState: `DeviceProperties -> Add -> PciRoot... -> AFGLowPowerState -> <01000000>`
-* ResetHDA: [JackFix](https://github.com/fewtarius/jackfix)(well to be specific it's `jackfix.sh`)
+* ResetHDA: `UEFI -> Audio -> ResetTrafficClass`
+  * Optionally there's also AppleALC's `alctsel=1` boot-arg or [JackFix](https://github.com/fewtarius/jackfix)
 
 **Add Properties**:
 
@@ -269,9 +267,13 @@ device_type: XHCI
 * `AAPL,current-in-sleep`
 * `built-in`
 
+**ForceHPET**:
+
+* `UEFI -> Quirks -> ActivateHpetSupport`
+
 # Disable Drivers
 
-Just don't add your drivers to `UEFI -> Drivers`
+Just don't add your drivers to `UEFI -> Drivers`, alternatively add `#` in-front of the driver in your config.plist for OpenCore to skip it.
 
 # Gui
 
@@ -371,7 +373,9 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **RadeonDeInit**:
 
-* [Radeon-Denit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
+In most cases it is advisable to use WhateverGreen, which handles this automatically. This SSDT is not needed if WhateverGreen is used.
+
+* [Radeon-DeInit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-DeInit-SSDT.dsl)
   * Do note that this is meant for GFX0, adjust for your system
 
 # Kernel and Kext Patches
@@ -387,7 +391,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **DellSMBIOSPatch**:
 
-An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't really know either)
+An odd quirk for Dell systems running APTIO V
 
 * `Kernel -> Quirks -> CustomSMBIOSGuid -> YES`
 * `PlatformInfo -> UpdateSMBIOSMode -> Custom`
@@ -414,7 +418,7 @@ An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't rea
 
 * `Kernel -> Quirks -> AppleXcpmExtraMsrs -> YES`
 
-For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.cpp). Some patches are not transferred over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.cpp#L1466-L1565) to OpenCore:
+For an extensive list of patches, please compare [OpenCore's `CommonPatches.c`](https://github.com/acidanthera/OpenCorePkg/blob/master/Library/OcAppleKernelLib/CommonPatches.c) with [Clover's kernel_patcher.c](https://github.com/CloverHackyColor/CloverBootloader/blob/master/rEFIt_UEFI/Platform/kernel_patcher.cpp). Some patches are not transferred over so if you're having issues this is the section to check, example is converting the [`KernelIvyBridgeXCPM()`](https://github.com/CloverHackyColor/CloverBootloader/tree/1a02f530db91fdfa6880295b6a8b3f096c29e7cc/rEFIt_UEFI/Platform/kernel_patcher.cpp#L1617-L1719) to OpenCore:
 
 ```
 Base: _xcpm_bootstrap
@@ -424,7 +428,7 @@ Enabled: YES
 Find: 8D43C43C22
 Identifier: kernel
 Limit: 0
-Mask: FFFF00FF
+Mask: FFFF00FFFF
 MinKernel: 19.
 MaxKernel: 19.99.99
 Replace: 8D43C63C22
@@ -442,7 +446,7 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 
 **External Icons Patch**:
 
-* `kernel -> Quirks -> ExternalDiskIcons -> YES`
+* `Kernel -> Quirks -> ExternalDiskIcons -> YES`
 * Used for when you internal disk are seen as external on macOS
 
 **AppleRTC**

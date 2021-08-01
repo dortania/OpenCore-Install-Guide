@@ -1,24 +1,8 @@
 # Userspace Issues
 
-* Supported version: 0.6.3
-
 Issues regarding once you've booted the installer and the GUI has loaded.
 
-* [macOS installer in Russian](#macos-installer-in-russian)
-* [macOS Installer being damaged](#macos-installer-being-damaged)
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
-* [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
-* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [Frozen in the macOS installer after 30 seconds](#frozen-in-the-macos-installer-after-30-seconds)
-* [15h/16h CPU reboot after Data & Privacy screen](#_15h-16h-cpu-reboot-after-data-privacy-screen)
-* [macOS frozen right before login](#macos-frozen-right-before-login)
-* [MediaKit reports not enough space](#mediakit-reports-not-enough-space)
-* [DiskUtility failing to erase](#diskutility-failing-to-erase)
-* [SATA Drives Not Shown in Disk Utility](#sata-drives-not-shown-in-diskutility)
-* [Stuck at 2 minutes remaining](#stuck-at-2-minutes-remaining)
-* [The recovery server cannot get contacted](#the-recovery-server-cannot-get-contacted)
-* [Keyboard and Mouse broken in Big Sur](#keyboard-and-mouse-broken-in-big-sur)
-* [Stuck on `Your Mac needs a firmware update in order to install to this volume`](#stuck-on-your-mac-needs-a-firmware-update-in-order-to-install-to-this-volume)
+[[toc]]
 
 ## macOS installer in Russian
 
@@ -26,9 +10,11 @@ Default sample config is in Russian because slavs rule the Hackintosh world, che
 
 You may also need to reset NVRAM in the boot picker as well
 
+* Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
+
 Still didn't work? Well time for the big guns. We'll force remove that exact property and let OpenCore rebuild it:
 
-`NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
+`NVRAM -> Delete -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
 
 ![](../../images/troubleshooting/troubleshooting-md/lang.png)
 
@@ -41,7 +27,7 @@ If you've download macOS before October 2019, you likely have an expired macOS I
 
 For the latter:
 
-* Disconnect all networking devices(Ethernet, disable Wifi)
+* Disconnect all networking devices(Ethernet, disable WiFi)
 * In the recovery terminal set to September 1st, 2019:
 
 ```
@@ -64,6 +50,17 @@ This is right before the GPU is properly initialized, verify the following:
 ## Scrambled Screen on laptops
 
 Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
+
+## Black screen after `IOConsoleUsers: gIOScreenLock...` on laptops and AIOs
+
+Verify the following:
+
+* SSDT-PNLF is installed(ie. EFI/OC/ACPI as well as config.plist -> ACPI -> Add)
+* iGPU properties were setup correctly under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`
+* Coffee Lake and newer laptops, add `-igfxblr` to your boot-args
+  * Alternatively, add `enable-backlight-registers-fix | Data | 01000000` to `PciRoot(0x0)/Pci(0x2,0x0)`
+
+Additionally, verify issues mentioned in [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
 
 ## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
 
@@ -153,14 +150,14 @@ To resolve, we have a few options:
   * LegacyEnable -> YES
   * LegacyOverwrite -> YES
   * WriteFlash -> YES
-  
+
 ## The recovery server cannot get contacted
 
 If you made your installer in Windows or Linux, then this means your USB installer is recovery based. What this means is that only a small portion of the macOS installer is on disk while the rest must be downloaded from Apple servers in the installer. And reason we do not include full installer guides is due to unstable HFS drivers and other utilities that commonly end up with data corruption.
 
 To resolve the error, you have a few options:
 
-* Ensure you have a working Ethernet or Wifi connection
+* Ensure you have a working Ethernet or WiFi connection
   * Open `Network Utility` under `Utilties` header in the installer and see if your Network Card shows up
     * If you network card **doesn't** show up, it's likely you're missing the right Network kext
       * Please refer here: [Ethernet Kexts](../../ktext.md#ethernet) and [Finding your hardware](../../find-hardware.md)
@@ -192,7 +189,7 @@ config.plist -> Kernel -> Patch:
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B801000000C3 |
+| Replace | Data | `B801000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 
@@ -206,7 +203,9 @@ If you're being prompted to update your firmware to install with an APFS volume,
 
 * You have `PlatformInfo -> Automatic` enabled
 * `UpdateSMBIOSMode` is set to `Create`
-  * For Dell and VIAO machines, ensure that `CustomSMBIOSGuid` is enabled and `UpdateSMBIOSMode` is set to `Custom` instead
+  * Make sure `CustomSMBIOSGuid` is disabled
+  * For Dell and VAIO machines, ensure that `CustomSMBIOSGuid` is enabled and `UpdateSMBIOSMode` is set to `Custom` instead
+    * `CustomSMBIOSGuid` and `UpdateSMBIOSMode` should always be in tandem with each other
 * Using a SMBIOS supported in this version of macOS
   * ie. you're not using `-no_compat_check`
 * You're using the latest version of OpenCore

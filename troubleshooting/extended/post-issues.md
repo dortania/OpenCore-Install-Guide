@@ -1,27 +1,8 @@
 # Post-Install Issues
 
-* Supported version: 0.6.3
-
 Issues revolving around macOS once properly installed.
 
-* [Broken iMessage and Siri](#broken-imessage-and-siri)
-* [No on-board audio](#no-on-board-audio)
-* [BIOS reset or sent into Safemode after reboot/shutdown?](#bios-reset-or-sent-into-safemode-after-reboot-shutdown)
-* [Synaptics PS2 based trackpad doesn't work](#synaptics-ps2-based-trackpad-doesn-t-work)
-* [Fix for Dell breakless PS2 keyboard keys](#fix-for-dell-breakless-ps2-keyboard-keys)
-* [macOS GPU acceleration missing on AMD X570](#macos-gpu-acceleration-missing-on-amd-x570)
-* [DRM Broken](#drm-broken)
-* ["Memory Modules Misconfigured" on MacPro7,1](#memory-modules-misconfigured-on-macpro7-1)
-* [Apps crashing on AMD](#apps-crashing-on-amd)
-* [AssetCache Content Caching unavailable in virtual machine](#assetcache-content-caching-unavailable-in-virtual-machine)
-* [Coffee Lake systems failing to wake](#coffee-lake-systems-failing-to-wake)
-* [No temperature/fan sensor output](#no-temperature-fan-sensor-output)
-* ["You can't change the startup disk to the selected disk" error](#you-can-t-change-the-startup-disk-to-the-selected-disk-error)
-* [macOS waking up with the wrong time](#macos-waking-up-with-the-wrong-time)
-* [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
-* [Disabling SIP](#disabling-sip)
-* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshot)
-* [Apple Watch Unlock Issues](#apple-watch-unlock-issues)
+[[toc]]
 
 ## Broken iMessage and Siri
 
@@ -98,9 +79,11 @@ Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal
 
 ## "Memory Modules Misconfigured" on MacPro7,1
 
-Add [MacProMemoryNotificationDisabler kext](https://github.com/IOIIIO/MacProMemoryNotificationDisabler/releases/) to EFI/OC/Kexts and `Kernel -> Add`. Note that this kext has an odd quirk here it requires WhateverGreen to function correctly.
+Follow guide listed here:
 
-* Note: This kext is known to create instability, if you receive random crashes and freezes please remove this kext.
+* [Fixing MacPro7,1 Memory Errors](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
+
+For those who simply want to disable the notification(not the error itself) is more than enough. For these users, we recommend installing [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)
 
 ## Apps crashing on AMD
 
@@ -127,7 +110,7 @@ So with AMD, whenever Apple calls CPU specific functions the app will either not
 This is generally seen on AMD who use the chipset's USB controller, specifically for the Ryzen series and newer. The main way to tell if you're having issues with this is checking logs after either sleeping or waking:
 
 * In terminal:
-  * `log show --last 1d | grep "Wake reason"` verify it
+  * `log show --last 1d | grep -i "Wake reason"`
 
 Should result in something like this:
 
@@ -182,7 +165,7 @@ For iStat, you'll have to wait for an update. For AMD users, you can use either:
 
 This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:
 
-* `PlatformInfo -> Generic -> AdviseWindows -> True`
+* `PlatformInfo -> Generic -> AdviseFeatures -> True`
 
 ![](../../images/troubleshooting/troubleshooting-md/error.png)
 
@@ -222,7 +205,7 @@ Oddly enough, macOS has locked down digital audio from having control. To bring 
 
 ## Time inconsistency between macOS and Windows
 
-This is due to macOS using Universal Time while Windows relies on Greenwhich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
+This is due to macOS using Universal Time while Windows relies on Greenwich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
 
 * [Install Bootcamp utilities](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * [Modify Windows' registry](https://superuser.com/q/494432)
@@ -230,6 +213,9 @@ This is due to macOS using Universal Time while Windows relies on Greenwhich tim
 ## Disabling SIP
 
 SIP or more properly known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
+
+* <span style="color:red">WARNING:</span> Disabling SIP can break OS functionality such as software updates in macOS 11, Big Sur and newer. Please be careful to only disable specific SIP values instead of disabling SIP outright to avoid these issues.
+  * Enabling `CSR_ALLOW_UNAUTHENTICATED_ROOT` and `CSR_ALLOW_APPLE_INTERNAL` are common options that can break OS updates for users
 
 You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you, and note that they go under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
 
@@ -241,13 +227,15 @@ You can choose different values to enable or disable certain flags of SIP. Some 
 
 **Note**: Disabling SIP with OpenCore is quite a bit different compared to Clover, specifically that NVRAM variables will not be overwritten unless explicitly told so under the `Delete` section. So if you've already set SIP once either via OpenCore or in macOS, you must override the variable:
 
-* `NVRAM -> Block -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
+* `NVRAM -> Delete -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
   
 ![](../../images/troubleshooting/troubleshooting-md/sip.png)
 
 ## Writing to the macOS system partition
 
 With macOS Catalina and newer, Apple split the OS and user data into 2 volumes where the system volume is read-only by default. To make these drives writable we'll need to do a few things:
+
+* Note: Users of `SecureBootModel` may end up in a RecoveryOS boot loop if the system partition has been modified. To resolve this, Reset NVRAM and set `SecureBootModel` to `Disabled`
 
 **macOS Catalina**
 
@@ -319,3 +307,18 @@ For those with Apple Watch Unlock issues, verify the following:
 If the above are met, and you still have unlock issues we recommend running through the below guide:
 
 * [Fixing Auto Unlock](https://forums.macrumors.com/threads/watchos-7-beta-5-unlock-mac-doesnt-work.2250819/page-2?post=28904426#post-28904426)
+
+## 4K iGPU output issues over HDMI
+
+For machines with HDMI 2.0 capable ports with resolutuion issues, verify the following:
+
+* 4k output works correctly in Windows
+* Monitor is set explicitly to HDMI 2.0
+  * If using an HDMI to DisplayPort converter, ensure the monitor is set to DisplayPort 1.2 or higher
+* Ensure enough iGPU memory has been allocated
+  * For Broadwell and newer, 64MB is expected to be allocated
+  * Machines relying on WhateverGreen's `framebuffer-stolenmem` property should know this can cause 4k output issues. Please ensure you can set the iGPU's memory to 64MB allowing you to remove these properties
+* Laptops and many desktop users may need this boot-arg:
+  * `-cdfon`
+
+For all other troubleshooting, please reference [WhateverGreen's Intel docs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
