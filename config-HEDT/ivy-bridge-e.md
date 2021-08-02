@@ -360,8 +360,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
-* **SecureBootModel**: Default
-  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+* **SecureBootModel**: Disabled
+  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
@@ -579,7 +579,27 @@ Only drivers present here should be:
 
 ### APFS
 
-Settings related to the APFS driver, leave everything here as default.
+::: tip Info
+Relating to APFS driver loader settings, for us we'll be changing the following:
+
+| Setting | Value | Comment |
+| :--- | :--- | :--- |
+| MinDate | `-1` | Not needed if not booting High Sierra - Catalina |
+| MinVersion | `-1` | Not needed if not booting High Sierra - Catalina |
+
+:::
+
+::: details More in-depth Info
+
+* **MinDate**: `-1`
+  * Sets the minimum date required for APFS drivers to load. The default in OpenCore is 2021-01-01, which limits booting High Sierra - Catalina.
+  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
+
+* **MinVersion**: YES
+  * Sets the minimum version required for APFS drivers to load. The default in OpenCore is versions from Big Sur and above, which limits booting High Sierra - Catalina.
+  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
+
+:::
 
 ### Audio
 
