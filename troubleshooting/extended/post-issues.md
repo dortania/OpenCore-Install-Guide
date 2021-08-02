@@ -310,7 +310,7 @@ If the above are met, and you still have unlock issues we recommend running thro
 
 ## 4K iGPU output issues over HDMI
 
-For machines with HDMI 2.0 capable ports with resolutuion issues, verify the following:
+For machines with HDMI 2.0 capable ports with resolution issues, verify the following:
 
 * 4k output works correctly in Windows
 * Monitor is set explicitly to HDMI 2.0

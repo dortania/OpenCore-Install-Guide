@@ -162,4 +162,4 @@ On newer Microsoft Surface device firmwares, loading OpenCore will now result in
 
 ## OC: Failed to find SB model disable halting on critical error
 
-This is a typo, ensure that in your config.plist `Misc -> Secuirty -> SecureBootModel` is set to Disable**d**
+This is a typo, ensure that in your config.plist `Misc -> Security -> SecureBootModel` is set to Disable**d**
