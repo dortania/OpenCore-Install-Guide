@@ -669,11 +669,11 @@ Relating to APFS driver loader settings, for us we'll be changing the following:
 ::: details More in-depth Info
 
 * **MinDate**: `-1`
-  * Sets the minimum date required for APFS drivers to load. The default in OpenCore is 2021-01-01, which limits booting High Sierra - Catalina.
+  * Sets the minimum date required for APFS drivers to load. The default in OpenCore is 2021-01-01, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
   * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
 
 * **MinVersion**: `-1`
-  * Sets the minimum version required for APFS drivers to load. The default in OpenCore is versions from Big Sur and above, which limits booting High Sierra - Catalina.
+  * Sets the minimum version required for APFS drivers to load. The default in OpenCore is versions from Big Sur and above, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
   * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
 
 :::
