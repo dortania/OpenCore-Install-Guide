@@ -95,7 +95,7 @@ Without the below 2, no system is bootable:
 ::: details Legacy "Must haves" kexts
 
 For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want to use the below instead of VirtualSMC:
-
+  * [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
 
 Reminder if you don't plan to boot these older OSes, you can ignore this kext.
 
