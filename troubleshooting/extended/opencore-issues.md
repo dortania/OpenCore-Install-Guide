@@ -160,6 +160,10 @@ Outdated OpenRuntime.efi, make sure BOOTx64.efi, OpenCore.efi and OpenRuntime ar
 
 On newer Microsoft Surface device firmwares, loading OpenCore will now result in a security violation even when Secure Boot is disabled. To resolve this, enable `UEFI -> Quirks -> DisableSecurityPolicy` in your config.plist. See here for more info: [Failed to open OpenCore image - Access Denied #1446](https://github.com/acidanthera/bugtracker/issues/1446)
 
-## OC: Failed to find SB model disable halting on critical error
+## OC: Failed to find SB model disable halting on critical error        & [EB|`LD:LKCFFP] Err(0x01A) @ SD:SBVK   [EB|#7] 0x01 0x41 6 0x0E  [EB|#REBOOT]  1
+It may appear in the second stage after restarting during installation
 
 This is a typo, ensure that in your config.plist `Misc -> Security -> SecureBootModel` is set to Disable**d**
+
+
+
