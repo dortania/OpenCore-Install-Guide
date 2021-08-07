@@ -24,12 +24,16 @@ Firmware drivers are drivers used by OpenCore in the UEFI environment. They're m
 
 For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
 
-* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:red">Required</span>)
+* [OpenHfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:red">Required</span>)
+  * Now(ver 0.7.2) it must be OpenHfsPlus.efi. HfsPlus.efi seems incompatible.
   * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
   * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons), see the legacy section below
 * [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)(<span style="color:red">Required</span>)
   * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
   * Reminder this was bundled in OpenCorePkg we downloaded earlier
+* In addition, you need to edit config.plist to confirm which .efi will be loaded. Those beginning with # will not be loaded
+  * ![efi](https://user-images.githubusercontent.com/16919103/128606409-5df6b129-17ec-489b-aa6c-09625028d275.PNG)
+
 
 :::
 
@@ -69,6 +73,11 @@ A kext is a **k**ernel **ext**ension, you can think of this as a driver for macO
 
 All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
 
+  * You must modify the config.plist file to confirm whether the .kext file is loaded.
+    ![kexts](https://user-images.githubusercontent.com/16919103/128606767-00235267-9e5c-40e0-a819-2b0fe10ceba6.PNG)
+
+
+
 ### Must haves
 
 ::: tip Required Kexts
@@ -87,7 +96,6 @@ Without the below 2, no system is bootable:
 
 For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want to use the below instead of VirtualSMC:
 
-* [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
 
 Reminder if you don't plan to boot these older OSes, you can ignore this kext.
 
