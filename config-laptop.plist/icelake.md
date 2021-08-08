@@ -495,13 +495,13 @@ System Integrity Protection bitmask
 | **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
 | **-igfxcdc** | Resolves Clock ID based kernel panics on Icelake CPUs, recommended for all users |
 | **-igfxdvmt** | Similar to the above, resolves issue with some firmwares having 60MB reserved for iGPU memory which can cause kernel panics |
+| **-igfxblr** | Used to fix backlight registers on CFL + platforms. |
 
 * **GPU-Specific boot-args**:
 
 | boot-args | Description |
 | :--- | :--- |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
-| **-igfxblr** | Used to fix backlight registers on CFL + platforms. |
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
