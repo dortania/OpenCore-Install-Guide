@@ -515,6 +515,7 @@ System Integrity Protection bitmask
 | boot-args | Description |
 | :--- | :--- |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
+| **-igfxblr** | Used to fix backlight registers on CFL + platforms. |
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
