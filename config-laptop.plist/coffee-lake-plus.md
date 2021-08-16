@@ -259,16 +259,16 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-::: tip info
-
 Needed for spoofing unsupported CPUs like Pentiums and Celerons.
 
-If using Comet Lake, please check your CPUID and if it is not 806EC(usually samsung laptops have A0660), then
+::: tip info
+
+If using Comet Lake i5-10210U, check your CPUID(in opencore log, the 5 letters after `OCCPU: Signature`) and if it is not 806EC(usually samsung laptops have A0660) you need cpuid spoofing.
 
 * **CpuidData**: `EC060800 00000000 00000000 00000000`
 * **CpuidMask**: `FFFFFFFF 00000000 00000000 00000000`
 
-if yours is 806EC then leave both blank.
+if your cpuid is 806EC or not using i5-10210U, then leave both blank.
 
 :::
 
