@@ -259,10 +259,18 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
+::: tip info
 
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+Needed for spoofing unsupported CPUs like Pentiums and Celerons.
+
+If using Comet Lake, please check your CPUID and if it is not 806EC(usually samsung laptops have A0660), then
+
+* **CpuidData**: `EC060800 00000000 00000000 00000000`
+* **CpuidMask**: `FFFFFFFF 00000000 00000000 00000000`
+
+if yours is 806EC then leave both blank.
+
+:::
 
 ### Force
 
