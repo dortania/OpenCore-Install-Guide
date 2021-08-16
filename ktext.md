@@ -124,6 +124,7 @@ The below plugins are not required to boot, and merely add extra functionality t
 * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
   * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
   * AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
+  * Note: AppleALCU.kext can be used for systems with digital-only audio.
   * Requires OS X 10.8 or newer
   
 ::: details Legacy Audio Kext
