@@ -217,8 +217,8 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+* **Cpuid1Mask**: Leave this blank
+* **Cpuid1Data**: Leave this blank
 
 ### Force
 

@@ -180,9 +180,9 @@ Needed for spoofing unsupported CPUs and enabling power management on Haswell-E 
 
 ::: details More in-depth Info
 
-* **CpuidData**: `C3060300 00000000 00000000 00000000`
+* **Cpuid1Data**: `C3060300 00000000 00000000 00000000`
   * Fake CPUID entry
-* **CpuidMask**: `FFFFFFFF 00000000 00000000 00000000`
+* **Cpuid1Mask**: `FFFFFFFF 00000000 00000000 00000000`
   * Mask for fake CPUID
 * **DummyPowerManagement**: No
   * Disables AppleIntelCPUPowerManagement, only required for AMD CPUs
