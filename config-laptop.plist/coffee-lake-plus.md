@@ -259,10 +259,30 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
+Needed for spoofing unsupported CPUs like Pentiums and Celerons. For those with Coffee Lake Plus you can skip this section, but for those with Comet Lake CPUs see below
 
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+::: details Comet Lake info
+
+Comet Lake U62 CPUs require a spoof to Comet Lake U42 as macOS does not support these CPUs. You can check Device Manager in Windows to see if you have a Comet Lake U62 CPU:
+
+1. Go to the "Processors" section
+2. Double click on one of the CPUs
+3. Click on the "Details" tab
+4. Click on the "Hardware ID" field
+5. If it says `ACPI\GenuineIntel_-_Intel64_Family_6_Model_166`, you need to spoof:
+
+* **Cpuid1Data**: `EC060800000000000000000000000000`
+* **Cpuid1Mask**: `FFFFFFFF000000000000000000000000`
+
+Another way to check is with the OpenCore debug log:
+
+> 00:023 00:005 OCCPU: Found Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
+>
+> 00:028 00:005 OCCPU: Signature A0660 Stepping 0 Model **A6** Family 6 Type 0 ExtModel A ExtFamily 0 uCode C6
+
+If the model is `A6`, you need to spoof.
+
+:::
 
 ### Force
 
