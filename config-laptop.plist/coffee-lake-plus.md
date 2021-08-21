@@ -274,6 +274,8 @@ Comet Lake U62 CPUs require a spoof to Comet Lake U42 as macOS does not support 
 * **Cpuid1Data**: `EC060800000000000000000000000000`
 * **Cpuid1Mask**: `FFFFFFFF000000000000000000000000`
 
+On Linux, you can use `lscpu | grep "Model:"`. If the model is `166`, you need to spoof.
+
 Another way to check is with the OpenCore debug log:
 
 > 00:023 00:005 OCCPU: Found Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
