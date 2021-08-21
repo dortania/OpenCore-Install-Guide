@@ -195,9 +195,9 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 
 ::: details More in-depth Info
 
-* **CpuidMask**: Leave this blank
+* **Cpuid1Mask**: Leave this blank
   * Mask for fake CPUID
-* **CpuidData**: Leave this blank
+* **Cpuid1Data**: Leave this blank
   * Fake CPUID entry
 * **DummyPowerManagement**: YES
   * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
