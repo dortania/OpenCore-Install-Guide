@@ -40,7 +40,7 @@ Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing 
 
 ![](../images/installer-guide/mac-install-md/munki-dmg.png)
 
-From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work. If you want to check the authenticity and the integrity of your download, you can check [this repository](https://github.com/notpeter/apple-installer-checksums).
+From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work. If you want to check the integrity of your download, you can check [this repository of checksums](https://github.com/notpeter/apple-installer-checksums), although do note that these are crowdsourced checksums and may not be a reliable way to check for authenticity.
 
 ## Downloading macOS: Legacy OS
 
