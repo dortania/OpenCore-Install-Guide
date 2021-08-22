@@ -162,6 +162,7 @@ This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet
 
 `layout-id`
 
+* The code `PciRoot(0x0)/Pci(0x1b,0x0)` indicate the device location of your audio card. However, it might not be the same location for anyone: e.g. some audio cards are located at `PciRoot(0x0)/Pci(0x1F,0x3)`. Use the gfxutil described in [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) to locate your audio card device and use the address correctly.
 * Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 * You can delete this property outright as it's unused for us at this time
 
