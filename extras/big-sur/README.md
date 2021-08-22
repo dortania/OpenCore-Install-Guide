@@ -12,24 +12,7 @@ It's that time of year again and with it, and a new macOS beta has been dropped.
 
 ## Table of Contents
 
-* [Prerequisites](#prerequisites)
-  * [A supported SMBIOS](#a-supported-smbios)
-  * [Supported hardware](#supported-hardware)
-  * [Up-to-date kexts, bootloader and config.plist](#up-to-date-kexts-bootloader-and-config-plist)
-  * [Known issues](#known-issues)
-* [Installation](#installation)
-* [Troubleshooting](#troubleshooting)
-  * [Stuck at Forcing CS_RUNTIME for entitlement](#stuck-at-forcing-cs-runtime-for-entitlement)
-  * [Stuck at PCI Configuration Begins for Intel's X99 and X299 boards](#stuck-at-pci-configuration-begins-for-intel-s-x99-and-x299-boards)
-  * [Stuck on ramrod(^^^^^^^^^^^^^)](#stuck-on-ramrod)
-  * [X79 and X99 Kernel Panic on IOPCIFamily](#x79-and-x99-kernel-panic-on-iopcifamily)
-  * [DeviceProperties injection failing](#deviceproperties-injection-failing)
-  * [Keyboard and Mouse broken](#keyboard-and-mouse-broken)
-  * [Early Kernel Panic on max_cpus_from_firmware not yet initialized](#early-kernel-panic-on-max-cpus-from-firmware-not-yet-initialized)
-  * [Cannot update to newer versions of Big Sur](#cannot-update-to-newer-versions-of-big-sur)
-  * [Kernel Panic on Rooting from the live fs](#kernel-panic-on-rooting-from-the-live-fs)
-  * [Asus Z97 and HEDT(ie. X99 and X299) failing Stage 2 Installation](#asus-z97-and-hedt-ie-x99-and-x299-failing-stage-2-installation)
-  * [Laptops kernel panicking on cannot perform kext scan](#laptops-kernel-panicking-on-cannot-perform-kext-scan)
+[[toc]]
 
 ## Prerequisites
 
@@ -42,7 +25,7 @@ Big Sur dropped a few Ivy Bridge and Haswell based SMBIOS from macOS, so see bel
 * iMac14,3 and older
   * Note iMac14,4 is still supported
 * MacPro5,1 and older
-* MacMini6,x and older
+* Macmini6,x and older
 * MacBook7,1 and older
 * MacBookAir5,x and older
 * MacBookPro10,x and older
@@ -56,7 +39,7 @@ SMBIOS still supported in macOS Big Sur:
 * iMac14,4 and newer
 * MacPro6,1 and newer
 * iMacPro1,1 and newer
-* MacMini7,1 and newer
+* Macmini7,1 and newer
 * MacBook8,1 and newer
 * MacBookAir6,x and newer
 * MacBookPro11,x and newer
@@ -153,6 +136,10 @@ With Big Sur, quite a bit broke. Mainly the following:
 * SATA Support broken
   * Due to Apple dropping the AppleIntelPchSeriesAHCI class in AppleAHCIPort.kext
   * To resolve, add [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) with the MinKernel set to 20.0.0
+* XhciPortLimit broken in macOS 11.3 Beta 2 and newer
+  * With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). We advise users either install an older OS(ie. macOS 10.15, Catalina) or find a 11.2.3 or older Big Sur installer
+    * For education purposes, we have a copy provided here: [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issue
 
 And while not an issue, SIP has now gained a new bit so to properly disable SIP you need to set `csr-active-config` to `FF0F0000`. See here for more info: [Disabling SIP](../../troubleshooting/extended/post-issues.md#disabling-sip)
 
@@ -222,7 +209,7 @@ config.plist -> Kernel -> Patch:
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B801000000C3 |
+| Replace | Data | `B801000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 
@@ -266,7 +253,7 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B804000000C3 |
+| Replace | Data | `B804000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 
@@ -329,7 +316,7 @@ Volume disk1s8 A604D636-3C54-4CAA-9A31-5E1A460DC5C0
 If it returns `Snapshot Sealed: Broken`, then you'll want to go through the following:
 
 * Update to OpenCore 0.6.4 or newer
-  * Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
+  * Specifically commit [`ba10b5d`](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 * Revert to older snapshots
   * Mainly for those who have tampered with the system volume
   * See here how to revert: [Rolling back APFS Snapshots](../../troubleshooting/extended/post-issues.md#rolling-back-apfs-snapshot)
@@ -344,7 +331,7 @@ Rooting from the live fs of a sealed volume is not allowed on a RELEASE build
 
 This is due to issues around Secure Boot boot being enabled in Beta 10 with older versions of OpenCore. Simply update to 0.6.4 to resolve
 
-* Specifically commit [ba10b5d](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
+* Specifically commit [`ba10b5d`](https://github.com/acidanthera/OpenCorePkg/commit/1b0041493d4693f9505aa6415d93079ea59f7ab0) or newer is required
 
 ### Asus Z97 and HEDT(ie. X99 and X299) failing Stage 2 Installation
 
@@ -361,3 +348,7 @@ For the latter, see here: [Haswell ASUS Z97 Big Sur Update Thread](https://www.r
 This is due to multiple copies of the same kext being in your kernel cache, and to be more specific having multiple copies of VoodooInput. Look over your `Kernel -> Add` and verify you only have 1 copy of VoodooInput enabled.
 
 * Note: Both VoodooI2C and VoodooPS2 have a bundled copy of VoodooInput, which you disable is up to personal preference
+
+### Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
+
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.

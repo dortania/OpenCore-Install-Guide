@@ -4,8 +4,7 @@ This section is mostly a mini-guide on how to find what hardware you're currentl
 
 For this, we'll assume you have Windows or Linux installed:
 
-* [Finding hardware using Windows](#finding-hardware-using-windows)
-* [Finding hardware using Linux](#finding-hardware-using-linux)
+[[toc]]
 
 ## Finding Hardware using Windows
 
@@ -110,7 +109,6 @@ Due to OEMs not providing much details about the drive, you'll need to Google a 
 
 For finding hardware using Linux, we'll be using a few tools:
 
-* `cat`
 * `pciutils`
 * `dmidecode`
 
@@ -119,7 +117,7 @@ Below you'll find a list of commands to run in the terminal, thankfully most Lin
 ### CPU Model
 
 ```sh
-cat /proc/cpuinfo | grep -i "model name"
+grep -i "model name" /proc/cpuinfo
 ```
 
 ### GPU Model

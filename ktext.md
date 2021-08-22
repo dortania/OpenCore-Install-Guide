@@ -10,6 +10,8 @@ See the [**Hardware Limitations page**](macos-limits.md) for some better insight
 
 See the page before: [Finding your hardware](./find-hardware.md)
 
+[[toc]]
+
 ## Firmware Drivers
 
 Firmware drivers are drivers used by OpenCore in the UEFI environment. They're mainly required to boot a machine, either by extending OpenCore's patching ability or showing you different types of drives in the OpenCore picker(ie. HFS drives).
@@ -113,7 +115,7 @@ The below plugins are not required to boot, and merely add extra functionality t
 ### Graphics
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
-  * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
+  * Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
   * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
   * Requires OS X 10.8 or newer
 
@@ -121,7 +123,8 @@ The below plugins are not required to boot, and merely add extra functionality t
 
 * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
   * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
-  * AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
+  * AppleALCU.kext is a pared down version of AppleALC that only supports digital audio - but you can still use AppleALC.kext on digital audio-only systems
+  * AMD 15h/16h may have issues with AppleALC and Ryzen/Threadripper systems rarely have mic support
   * Requires OS X 10.8 or newer
   
 ::: details Legacy Audio Kext

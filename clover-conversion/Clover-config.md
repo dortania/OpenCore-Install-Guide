@@ -468,9 +468,9 @@ If this works, slowly shorten the excluded area until you find the part macOS is
 **FakeCPUID**:
 
 * `Kernel -> Emulate`:
-  * `CpuidMask`: `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+  * `Cpuid1Mask`: `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
     * ex(`0x0306A9`): `A9060300 00000000 00000000 00000000`
-  * `CpuidData`(Swap `00` for `FF` if needing to swap with a longer value)
+  * `Cpuid1Data`(Swap `00` for `FF` if needing to swap with a longer value)
     * ex: `FFFFFFFF 00000000 00000000 00000000`
 
 Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, easiest way to find it is via Microsoft's [Intel microcode update notes](https://support.microsoft.com/en-ca/help/4093836/summary-of-intel-microcode-updates)

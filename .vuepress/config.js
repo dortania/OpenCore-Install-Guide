@@ -58,7 +58,7 @@ module.exports = {
         repo: 'https://github.com/dortania/OpenCore-Install-Guide',
 		editLinks: true,
 		editLinkText: 'Help us improve this page!',
-        logo: 'homepage.png',
+        logo: '/homepage.png',
         nav: [{
             text: 'Dortania Guides',
             ariaLabel: 'Language Menu',

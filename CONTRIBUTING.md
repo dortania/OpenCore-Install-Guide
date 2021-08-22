@@ -4,9 +4,7 @@
 
 Want to help support the guide? Well there's some ways you can help!
 
-* [Contributing via Issues](#contributing-via-issues)
-* [Contributing via PRs](#contributing-via-prs)
-* [Contributing via Translations](#contributing-via-translations)
+[[toc]]
 
 Note: For those wanting to contribute financially, we seriously appreciate it but we're a non-profit organization. We do this to teach, not to make money. If you have some money left over we highly recommend donating it to a charity. [Crohn's and Colitis Canada](https://crohnsandcolitis.donorportal.ca/Donation/DonationDetails.aspx?L=en-CA&G=159&F=1097&T=GENER) is one we recommend if you have none on mind.
 
@@ -65,7 +63,7 @@ Some tools that make contributing a bit easier:
 * [Visual Studio Code](https://code.visualstudio.com)
 * [Typora](https://typora.io) for real time markdown rendering.
 * [TextMate](https://macromates.com) for easy and powerful mass find/replace.
-* [Github Desktop](https://desktop.github.com) for more user friendly GUI.
+* [GitHub Desktop](https://desktop.github.com) for more user friendly GUI.
 
 ## Contributing via Translations
 
@@ -77,7 +75,7 @@ Main things to keep in mind:
 * Forks must indicate they're translations of Dortania and are not official
 * Forks must also comply with our [License](LICENSE.md)
 
-If the above are met, you're free to host your translation without issue! Dortania's sites are built with [VuePress](https://vuepress.vuejs.org) using [Travis-CI](https://travis-ci.org) and finally hosted on [Github Pages](https://pages.github.com), so there is no cost to hosting your own translation.
+If the above are met, you're free to host your translation without issue! Dortania's sites are built with [VuePress](https://vuepress.vuejs.org) using [GitHub Actions](https://github.com/features/actions) and finally hosted on [GitHub Pages](https://pages.github.com), so there is no cost to hosting your own translation.
 
 If you have any questions or concerns with either translations or hosting, feel free to reach out on our [Bugtracker](https://github.com/dortania/bugtracker).
 
@@ -88,5 +86,6 @@ Current known translations:
 * [Technopat](https://www.technopat.net/sosyal/konu/opencore-ile-macos-kurulum-rehberi.963661/)(Turkish)
 * [ThrRip](https://github.com/ThrRip/OpenCore-Install-Guide)(Chinese)
 * [Shijuro](https://github.com/shijuro/OpenCore-Install-Guide)(Russian)
+* [viOpenCore](https://github.com/viOpenCore/OpenCore-Install-Guide)(Vietnamese)
 
 And note that these translations are subject to authors preferences, translation changes and human errors. Please keep this in mind when reading as they're no longer official Dortania guides.

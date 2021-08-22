@@ -18,8 +18,8 @@ Now lets look at this example:
 | Disabled | Boolean | False |
 | MatchBuild | String | 18G95,18G103 |
 | MatchOS | String | 10.14.6 |
-| Find | Data | 31db803d4869980006755c |
-| Replace | Data | bbbc4fea78e95d00000090 |
+| Find | Data | `31db803d4869980006755c` |
+| Replace | Data | `bbbc4fea78e95d00000090` |
 
 So to convert this patch, see below:
 
@@ -42,8 +42,8 @@ So the above patch would become:
 | Enabled | Boolean | True |
 | MinKernel | String | 18.7.0 |
 | MaxKernel | String | 18.7.0 |
-| Find | Data | 31db803d4869980006755c |
-| Replace | Data | bbbc4fea78e95d00000090 |
+| Find | Data | `31db803d4869980006755c` |
+| Replace | Data | `bbbc4fea78e95d00000090` |
 | Identifier | String | kernel |
 | Limit | Number | 0 |
 | Count | Number | 0 |

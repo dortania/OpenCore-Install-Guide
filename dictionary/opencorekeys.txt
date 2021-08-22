@@ -4,13 +4,14 @@
 ACPI
 APFS
 ARTFrequency
-AdviseWindows
+AdviseFeatures
 AllowNvramReset
 AllowSetDefault
 AppleAudio
 AppleBootPolicy
 AppleCpuPmCfgLock
 AppleDebug
+boot1f32
 AppleDebugLog
 AppleEvent
 AppleImageConversion
@@ -32,6 +33,7 @@ BID
 BIOSReleaseDate
 BIOSVendor
 BIOSVersion
+BlacklistAppleUpdate
 BlessOverride
 BoardAssetTag
 BoardLocationInChassis
@@ -41,7 +43,6 @@ BoardRevision
 BoardSerialNumber
 BoardType
 BoardVersion
-Boot1f32
 BootProtect
 Booter
 BundlePath
@@ -123,6 +124,7 @@ MmioWhitelist
 NormalizeHeaders
 OSInfo
 OemTableId
+PanicNoKextDump
 PickerAttributes
 PickerAudioAssist
 PickerMode

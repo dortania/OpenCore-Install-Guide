@@ -26,10 +26,6 @@ All files in the Kexts folder end in .kext | Includes source code and folders
 config.plist found under EFI/OC | Neither renamed or placed the .plist in right location
 Only uses kexts that are needed | Downloaded every kext listed
 
-And a reminder that slowgeek site is your friend:
-
-* [**Sanity Checker**](https://opencore.slowgeek.com)
-
 ## Booting the OpenCore USB
 
 So you're now ready to finally put the USB stick into your computer and boot off of it. Remember that most laptops and some desktops will still default to the internal drive with Windows, and you'll need to manually select OpenCore in the BIOS boot options. You'll need to check in the user manual or use a bit of google to find out what Fn key accesses the BIOS and boot menu(ie. Esc, F2, F10 or F12)
@@ -37,11 +33,11 @@ So you're now ready to finally put the USB stick into your computer and boot off
 Once you boot the USB, you'll likely be greeted to the following boot options:
 
 1. Windows
-2. macOS Base System (External) / Install macOS Catalina (External)
+2. macOS Base System (External) / Install macOS Big Sur (External) / *USB drive name* (External)
 3. OpenShell.efi
 4. Reset NVRAM
 
-For us, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"** if created in Linux or Windows and **"Install macOS Catalina (External)"** if created in macOS.
+For us, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"**, **"Install macOS Big Sur (External)"** or **"*Your USB drive's name* (External)"**
 
 ## macOS Installer
 

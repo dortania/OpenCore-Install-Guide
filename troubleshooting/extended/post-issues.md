@@ -2,25 +2,7 @@
 
 Issues revolving around macOS once properly installed.
 
-* [Broken iMessage and Siri](#broken-imessage-and-siri)
-* [No on-board audio](#no-on-board-audio)
-* [BIOS reset or sent into Safemode after reboot/shutdown?](#bios-reset-or-sent-into-safemode-after-reboot-shutdown)
-* [Synaptics PS2 based trackpad doesn't work](#synaptics-ps2-based-trackpad-doesn-t-work)
-* [Fix for Dell breakless PS2 keyboard keys](#fix-for-dell-breakless-ps2-keyboard-keys)
-* [macOS GPU acceleration missing on AMD X570](#macos-gpu-acceleration-missing-on-amd-x570)
-* [DRM Broken](#drm-broken)
-* ["Memory Modules Misconfigured" on MacPro7,1](#memory-modules-misconfigured-on-macpro7-1)
-* [Apps crashing on AMD](#apps-crashing-on-amd)
-* [AssetCache Content Caching unavailable in virtual machine](#assetcache-content-caching-unavailable-in-virtual-machine)
-* [Coffee Lake systems failing to wake](#coffee-lake-systems-failing-to-wake)
-* [No temperature/fan sensor output](#no-temperature-fan-sensor-output)
-* ["You can't change the startup disk to the selected disk" error](#you-can-t-change-the-startup-disk-to-the-selected-disk-error)
-* [macOS waking up with the wrong time](#macos-waking-up-with-the-wrong-time)
-* [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
-* [Disabling SIP](#disabling-sip)
-* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshots)
-* [Apple Watch Unlock Issues](#apple-watch-unlock-issues)
-* [4K iGPU output issues over HDMI](#4k-igpu-output-issues-over-hdmi)
+[[toc]]
 
 ## Broken iMessage and Siri
 
@@ -183,7 +165,7 @@ For iStat, you'll have to wait for an update. For AMD users, you can use either:
 
 This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:
 
-* `PlatformInfo -> Generic -> AdviseWindows -> True`
+* `PlatformInfo -> Generic -> AdviseFeatures -> True`
 
 ![](../../images/troubleshooting/troubleshooting-md/error.png)
 
@@ -328,7 +310,7 @@ If the above are met, and you still have unlock issues we recommend running thro
 
 ## 4K iGPU output issues over HDMI
 
-For machines with HDMI 2.0 capable ports with resolutuion issues, verify the following:
+For machines with HDMI 2.0 capable ports with resolution issues, verify the following:
 
 * 4k output works correctly in Windows
 * Monitor is set explicitly to HDMI 2.0
