@@ -512,15 +512,15 @@ System Integrity Protection bitmask
 
 ### Delete
 
-::: tip Info
+This blocks certain display settings, for us we can ignore this.
+
+### WriteFlash
 
 Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
 
 | Quirk | Enabled |
 | :--- | :--- |
 | WriteFlash | YES |
-
-:::
 
 ::: details More in-depth Info
 
