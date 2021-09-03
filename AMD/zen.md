@@ -255,6 +255,21 @@ To merge:
 * Paste into where old patches were in config.plist
 
 ![](../images/config/AMD/kernel.gif)
+Now, find the three `algrey - Force cpuid_cores_per_package` patches and change the `Replace` value from `B8000000 0000`/`BA000000 0000`/`BA000000 0090` to `B8 <CoreCount> 0000 0000`/`BA <CoreCount> 0000 0000`/`BA <CoreCount> 0000 0090` where \<CoreCount> is the number of cores in your CPU in hexadecimal representation.
+
+::: details CoreCount hexadecimal conversion table
+
+| Number of cores | Hex value |
+| :-------------- | :-------- |
+| 4               | 04        |
+| 6               | 06        |
+| 8               | 08        |
+| 12              | 0C        |
+| 16              | 10        |
+| 24              | 18        |
+| 32              | 20        |
+
+:::
 
 ### Quirks
 
