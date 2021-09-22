@@ -61,7 +61,7 @@ Simple step-by-steps:
 Some tools that make contributing a bit easier:
 
 * [Visual Studio Code](https://code.visualstudio.com)
-* [Typora](https://typora.io) for real time markdown rendering.
+* [MakeText](https://maketext.app) for real time markdown rendering.
 * [TextMate](https://macromates.com) for easy and powerful mass find/replace.
 * [GitHub Desktop](https://desktop.github.com) for more user friendly GUI.
 
