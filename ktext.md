@@ -411,7 +411,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
 | AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
-| AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
+| AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/Compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
 
 ### High End Desktop
 
