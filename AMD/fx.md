@@ -238,6 +238,7 @@ To merge:
 * Delete the `Kernel -> Patch` section from config.plist
 * Copy the `Kernel -> Patch` section from patches.plist
 * Paste into where old patches were in config.plist
+* Make sure to **read the README** for the [kernel patches GitHub repository](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) as there are changes required to the `Replace` fields of some patches. Simply copying the patches into your config is not enough and will cause your installation to get stuck on preboot.
 
 ![](../images/config/AMD/kernel.gif)
 
