@@ -28,6 +28,7 @@ For CPU support, we have the following breakdown:
 * Intel's Core "i" and Xeon series laptop CPUs
   * Arrandale through Ice Lake are supported by this guide.
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
+  * RocketLake Lake CPUs and later are unsupported or have unsupported iGPUs 
 * AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
   * Laptop CPUs are **not** supported
   * Note not all features of macOS are supported with AMD, see below
