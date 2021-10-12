@@ -135,7 +135,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 * **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
 
-For users with black screen issues after verbose on B360, B365, H310, H370, Z390, please see the [BusID iGPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/) page
+For users with black screen issues after verbose on B360, B365, H310, H370, Z390, please see the [BusID iGPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/intel-patching/busid.html) page
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
