@@ -77,47 +77,39 @@ Without the below 2, no system is bootable:
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
-  * Requires OS X 10.6 or newer
+  * Requires Mac OS X 10.4 or newer
 * [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">Required</span>)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
-  * Note that Lilu and plugins requires OS X 10.8 or newer to function
-  
-::: details Legacy "Must haves" kexts
-
-For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want to use the below instead of VirtualSMC:
-
-* [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
-
-Reminder if you don't plan to boot these older OSes, you can ignore this kext.
-
-* **OS X 10.4 and 10.5 note**: Even on 64-bit CPUs, OS X's kernel space is still 32-bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
-
-:::
+  * Note that while Lilu supports as early as Mac OS X 10.4, many plugins only work on newer versions.
 
 ### VirtualSMC Plugins
 
-The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring(Note while VirtualSMC supports 10.6, plugins may require 10.8+):
+The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring (Note while VirtualSMC supports 10.4, plugins may require newer versions):
 
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
+  * Requires Mac OS X 10.7 or newer
 * SMCSuperIO.kext
   * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
+  * Requires Mac OS X 10.6 or newer
 * SMCLightSensor.kext
   * Used for the ambient light sensor on laptops, **desktops can ignore**
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
+  * Requires Mac OS X 10.6 or newer
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops, **desktops can ignore**
+  * Requires Mac OS X 10.4 or newer
 * SMCDellSensors.kext
   * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM)
   * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
+  * Requires Mac OS X 10.7 or newer
 
 ### Graphics
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
   * Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
   * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
-  * Requires OS X 10.8 or newer
+  * Requires Mac OS X 10.6 or newer
 
 ### Audio
 
