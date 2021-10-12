@@ -259,10 +259,32 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
+Needed for spoofing unsupported CPUs like Pentiums and Celerons. For those with Coffee Lake Plus you can skip this section, but for those with Comet Lake CPUs see below
 
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+::: details Comet Lake info
+
+Comet Lake U62 CPUs require a spoof to Comet Lake U42 as macOS does not support these CPUs. You can check Device Manager in Windows to see if you have a Comet Lake U62 CPU:
+
+1. Go to the "Processors" section
+2. Double click on one of the CPUs
+3. Click on the "Details" tab
+4. Click on the "Hardware ID" field
+5. If it says `ACPI\GenuineIntel_-_Intel64_Family_6_Model_166`, you need to spoof:
+
+* **Cpuid1Data**: `EC060800000000000000000000000000`
+* **Cpuid1Mask**: `FFFFFFFF000000000000000000000000`
+
+On Linux, you can use `lscpu | grep "Model:"`. If the model is `166`, you need to spoof.
+
+Another way to check is with the OpenCore debug log:
+
+> 00:023 00:005 OCCPU: Found Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
+>
+> 00:028 00:005 OCCPU: Signature A0660 Stepping 0 Model **A6** Family 6 Type 0 ExtModel A ExtFamily 0 uCode C6
+
+If the model is `A6`, you need to spoof.
+
+:::
 
 ### Force
 
@@ -441,8 +463,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
-* **SecureBootModel**: Default
-  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+* **SecureBootModel**: Disabled
+  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
@@ -656,7 +678,27 @@ Only drivers present here should be:
 
 ### APFS
 
-Settings related to the APFS driver, leave everything here as default.
+::: tip Info
+Relating to APFS driver loader settings, for us we'll be changing the following:
+
+| Setting | Value | Comment |
+| :--- | :--- | :--- |
+| MinDate | `-1` | Not needed if not booting High Sierra - Catalina |
+| MinVersion | `-1` | Not needed if not booting High Sierra - Catalina |
+
+:::
+
+::: details More in-depth Info
+
+* **MinDate**: `-1`
+  * Sets the minimum date required for APFS drivers to load. The default in OpenCore is 2021-01-01, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
+  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
+
+* **MinVersion**: `-1`
+  * Sets the minimum version required for APFS drivers to load. The default in OpenCore is versions from Big Sur and above, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
+  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
+
+:::
 
 ### Audio
 

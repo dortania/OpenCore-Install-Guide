@@ -47,19 +47,19 @@ jobs:
         run: npm install
       - name: Lint
         run: npm run lint-ci
-  spellcheck:
-    name: Spellcheck
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: '12'
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
-          submodules: 'recursive'
-      - name: Install
-        run: npm install
-      - name: Spellcheck
-        run: npm run spellcheck
+  # spellcheck:
+  #   name: Spellcheck
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: '12'
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: '0'
+  #         submodules: 'recursive'
+  #     - name: Install
+  #       run: npm install
+  #     - name: Spellcheck
+  #       run: npm run spellcheck

@@ -1231,7 +1231,6 @@ reimplements
 renderer
 repo
 repos
-resolutuion
 rottenpants466
 savvamitrofanov
 se

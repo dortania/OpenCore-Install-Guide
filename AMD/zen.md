@@ -20,9 +20,9 @@ Now with all that, a quick reminder of the tools we need
   * For generating our SMBIOS data
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
-* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)
+* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/master)
   * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
-  * [Ryzen/Threadripper(17h and 19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h_19h) (Supports 10.13, 10.14, and 10.15)
+  * Supporting AMD Family 15h, 16h, 17h and 19h
 
 **And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
 
@@ -177,6 +177,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 10.14 | 18.0.0 | 18.99.99 |
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
+| 12 | 21.0.0 | 21.99.99 |
 
 :::
 
@@ -194,9 +195,9 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 
 ::: details More in-depth Info
 
-* **CpuidMask**: Leave this blank
+* **Cpuid1Mask**: Leave this blank
   * Mask for fake CPUID
-* **CpuidData**: Leave this blank
+* **Cpuid1Data**: Leave this blank
   * Fake CPUID entry
 * **DummyPowerManagement**: YES
   * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
@@ -224,6 +225,7 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 | 10.14 | 18.0.0 | 18.99.99 |
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
+| 12 | 21.0.0 | 21.99.99 |
 
 :::
 
@@ -243,7 +245,7 @@ This is where the AMD kernel patching magic happens. Please do note that `Kernel
 
 Kernel patches:
 
-* [Ryzen/Threadripper(17h and 19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore/17h_19h) (10.13, 10.14, and 10.15)
+* [Ryzen/Threadripper(17h/19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) (10.13, 10.14, 10.15, 11.x and 12.x)
 
 To merge:
 
@@ -264,6 +266,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | :--- | :--- |
 | PanicNoKextDump | YES |
 | PowerTimeoutKernelPanic | YES |
+| ProvideCurrentCpuInfo | YES |
 | XhciPortLimit | YES |
 
 :::
@@ -296,6 +299,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Allows for reading kernel panics logs when kernel panics occur
 * **PowerTimeoutKernelPanic**: YES
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
+* **ProvideCurrentCpuInfo**: YES
+  * Provides the kernel with CPU frequency values for AMD.
 * **SetApfsTrimTimeout**: `-1`
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
@@ -409,8 +414,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
-* **SecureBootModel**: Default
-  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+* **SecureBootModel**: Disabled
+  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::

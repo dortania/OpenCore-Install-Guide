@@ -14,7 +14,7 @@ Term | Description
 --- | ---
 **OpenCore**   | The new hotness on the Hackintosh scene, made with security in mind by the [Acidanthera team](https://github.com/acidanthera), has faster booting and lighter weight than Clover. It is a lot more work to set up but also supports many things a lot more natively than Clover (like Hibernation, FileVault 2, Boot HotKeys...).
 **Clover**  | A bootloader now considered legacy with the release of OpenCore. This guide will not be covering uses of this software.
-**ACPI**  | The Advanced Configuration and Power Interface (ACPI) provides an open standard that operating systems can use to discover and configure computer hardware components, more of this will be discussed later in the guide
+**ACPI**  | The Advanced Configuration and Power Interface (ACPI) provides an open standard that operating systems can use to discover and configure computer hardware components, more of this will be discussed later in the guide.
 **DSDT/SSDT** | Tables in your ACPI that describe the devices and how the OS should interact with them e.g. putting the computer to sleep, wake, switching GPUs, USB ports.
 **.AML** | The compiled file format of ACPI, and what your PC will execute. `.DAT` is another extension with the exact same use.
 **.DSL** | The source code for ACPI – this is what you edit and compile for your computer. **DO NOT** mix this file format up with `.ASL`.
