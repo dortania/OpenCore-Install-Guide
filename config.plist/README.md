@@ -1,4 +1,22 @@
-# config.plist Setup
+# Config.plist Setup
+
+So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+
+* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
+* **The Sample.plist cannot be used As-Is**, you must configure it to your system
+* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+
+Now with all that, these are the tools that will be used to configure your config.plist.
+
+* [ProperTree](https://github.com/corpnewt/ProperTree)
+  * Universal plist editor
+* [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
+  * For generating our SMBIOS data
+* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/master)
+  * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
+  * Supporting AMD Family 15h, 16h, 17h and 19h
+
+**You may want to read this page more than once to make sure you don't miss anything. Do note that the images may not be up to date. The text below the images are more likely to be updated.**
 
 Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi), your USB should start to look something like this:
 
@@ -18,14 +36,9 @@ Next lets move it onto our USB's EFI partition(will be called BOOT on Windows) u
 
 ## Adding your SSDTs, Kexts and Firmware Drivers
 
-For the rest of this guide, you're gonna need some form of plist editing. And for our guide, we'll be using ProperTree and GenSMBIOS to help automate some of the tedious work:
+For the rest of this guide, you're gonna need some form of plist editer. This guide assumes that you are using ProperTree and GenSMBIOS, which can help automate some of the tedious work:
 
-* [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
-* [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
-
-Next, let's open ProperTree and edit our config.plist:
+To open ProperTree and edit our config.plist, run the below:
 
 * `ProperTree.command`
   * For macOS
@@ -50,61 +63,10 @@ Once done, you'll see your SSDTs, Kexts and firmware drivers populated in the co
 
 ![](../images/config/config-universal/duplicate.png)
 
-If you wish to clean up the file a bit, you can remove the `#WARNING` entries. Though they cause no issues staying there, so up to personal preference.
+If you wish to clean up the file a bit, you can remove the `#WARNING` entries. These cause no issues if left in, so it is up to personal preference.
 
-## Selecting your platform
+::: danger
+The config.plist **must** match the contents of the EFI folder. If you delete a file but leave it listed in the Config.plist, OpenCore will error and stop booting. If you make any modifications, you can use the OC snapshot tool (**Cmd/Ctrl + R**) in ProperTree to update the config.plist.
+:::
 
-Now comes the important part, selecting the configuration path. Each platform has their own unique quirks that you need to account for so knowing your hardware is super important. See below for what to follow:
-
-### Intel Desktop
-
-* Note: Intel's NUC series are considered mobile hardware, for these situations we recommend following the [Intel Laptop Section](#intel-laptop)
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Yonah, Conroe and Penryn](../config.plist/penryn.md) | E8XXX, Q9XXX, [etc 1](https://en.wikipedia.org/wiki/Yonah_(microprocessor)), [etc 2](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2006-2009 era |
-| [Lynnfield and Clarkdale](../config.plist/clarkdale.md) | 5XX-8XX | 2010 era |
-| [Sandy Bridge](../config.plist/sandy-bridge.md) | 2XXX | 2011 era |
-| [Ivy Bridge](../config.plist/ivy-bridge.md) | 3XXX | 2012 era |
-| [Haswell](../config.plist/haswell.md) | 4XXX | 2013-2014 era |
-| [Skylake](../config.plist/skylake.md) | 6XXX | 2015-2016 era |
-| [Kaby Lake](../config.plist/kaby-lake.md) | 7XXX | 2017 era |
-| [Coffee Lake](../config.plist/coffee-lake.md) | 8XXX-9XXX | 2017-2019 era |
-| [Comet Lake](../config.plist/comet-lake.md) | 10XXX | 2020 era |
-
-### Intel Laptop
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Clarksfield and Arrandale](../config-laptop.plist/arrandale.md) | 3XX-9XX | 2010 era |
-| [Sandy Bridge](../config-laptop.plist/sandy-bridge.md) | 2XXX | 2011 era |
-| [Ivy Bridge](../config-laptop.plist/ivy-bridge.md) | 3XXX | 2012 era |
-| [Haswell](../config-laptop.plist/haswell.md) | 4XXX | 2013-2014 era |
-| [Broadwell](../config-laptop.plist/broadwell.md) | 5XXX | 2014-2015 era |
-| [Skylake](../config-laptop.plist/skylake.md) | 6XXX | 2015-2016 era |
-| [Kaby Lake and Amber Lake](../config-laptop.plist/kaby-lake.md) | 7XXX | 2017 era |
-| [Coffee Lake and Whiskey Lake](../config-laptop.plist/coffee-lake.md) | 8XXX | 2017-2018 era |
-| [Coffee Lake Plus and Comet Lake](../config-laptop.plist/coffee-lake-plus.md) | 9XXX-10XXX | 2019-2020 era |
-| [Ice Lake](../config-laptop.plist/icelake.md) | 10XXX | 2019-2020 era |
-
-### Intel HEDT
-
-This section includes both enthusiast and server based hardware.
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Nehalem and Westmere](../config-HEDT/nehalem.md) | 9XX, X3XXX, X5XXX, [etc 1](https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)), [2](https://en.wikipedia.org/wiki/Westmere_(microarchitecture)) | 2008-2010 era |
-| [Sandy/Ivy Bridge-E](../config-HEDT/ivy-bridge-e.md) | 3XXX, 4XXX | 2011-2013 era |
-| [Haswell-E](../config-HEDT/haswell-e.md) | 5XXX | 2014 era |
-| [Broadwell-E](../config-HEDT/broadwell-e.md) | 6XXX | 2016 era |
-| [Skylake/Cascade Lake-X/W](../config-HEDT/skylake-x.md) | 7XXX, 9XXX, 10XXX | 2017-2019 era |
-
-### AMD
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Bulldozer/Jaguar](../AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) |
-| [Zen](../AMD/zen.md) | 1XXX, 2XXX, 3XXX, 5XXX | 2017-2020 era |
-
-* Note: ~~Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported~~
-  * Latest BIOS and OpenCore version has resolved this issue, all Threadripper platforms are now supported
+Once you are done adding with the snapshot, you will want to [start configuring your Config.plist here.](./global.md)

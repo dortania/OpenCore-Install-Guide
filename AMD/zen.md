@@ -4,28 +4,6 @@
 | :--- | :--- |
 | Initial macOS Support | macOS 10.13, High Sierra |
 
-## Starting Point
-
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
-
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
-
-Now with all that, a quick reminder of the tools we need
-
-* [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
-* [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
-* [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
-* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/master)
-  * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
-  * Supporting AMD Family 15h, 16h, 17h and 19h
-
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
-
 ## ACPI
 
 ![ACPI](../images/config/AMD/acpi.png)
@@ -34,40 +12,18 @@ Now with all that, a quick reminder of the tools we need
 
 ::: tip Info
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
-
 | Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 and A520 motherboards, **do not use** if you don't have an AMD B550 or A520 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
 
- Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
-
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
-
 :::
-
-### Delete
-
-This blocks certain ACPI tables from loading, for us we can ignore this.
-
-### Patch
-
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
-
-### Quirks
-
-Settings relating to ACPI, leave everything here as default as we have no use for these quirks.
 
 ## Booter
 
 ![Booter](../images/config/config-universal/amd-zen-booter.png)
 
 This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
-
-### MmioWhitelist
-
-This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
 
 ### Quirks
 
@@ -103,83 +59,11 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for RebuildAppleMemoryMap users
 :::
 
-## DeviceProperties
-
-![DeviceProperties](../images/config/config-universal/DP-no-igpu.png)
-
-### Add
-
-Sets device properties from a map.
-
-By default, the Sample.plist has this section set for iGPU and Audio. We have no iGPU so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
-
-TL;DR, delete all the PciRoot's here as we won't be using this section.
-
-### Delete
-
-Removes device properties from the map, for us we can ignore this
-
 ## Kernel
 
 | Kernel | Kernel Patches |
 | :--- | :--- |
 | ![Kernel](../images/config/AMD/kernel.png) | ![](../images/config/AMD/kernel-patch.png) |
-
-### Add
-
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
-
-::: details More in-depth Info
-
-The main thing you need to keep in mind is:
-
-* Load order
-  * Remember that any plugins should load *after* its dependencies
-  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
-
-A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
-
-* **Arch**
-  * Architectures supported by this kext
-  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
-* **BundlePath**
-  * Name of the kext
-  * ex: `Lilu.kext`
-* **Enabled**
-  * Self-explanatory, either enables or disables the kext
-* **ExecutablePath**
-  * Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
-  * ex: `Contents/MacOS/Lilu`
-* **MinKernel**
-  * Lowest kernel version your kext will be injected into, see below table for possible values
-  * ex. `12.00.00` for OS X 10.8
-* **MaxKernel**
-  * Highest kernel version your kext will be injected into, see below table for possible values
-  * ex. `11.99.99` for OS X 10.7
-* **PlistPath**
-  * Path to the `info.plist` hidden within the kext
-  * ex: `Contents/Info.plist`
-  
-::: details Kernel Support Table
-
-| OS X Version | MinKernel | MaxKernel |
-| :--- | :--- | :--- |
-| 10.4 | 8.0.0 | 8.99.99 |
-| 10.5 | 9.0.0 | 9.99.99 |
-| 10.6 | 10.0.0 | 10.99.99 |
-| 10.7 | 11.0.0 | 11.99.99 |
-| 10.8 | 12.0.0 | 12.99.99 |
-| 10.9 | 13.0.0 | 13.99.99 |
-| 10.10 | 14.0.0 | 14.99.99 |
-| 10.11 | 15.0.0 | 15.99.99 |
-| 10.12 | 16.0.0 | 16.99.99 |
-| 10.13 | 17.0.0 | 17.99.99 |
-| 10.14 | 18.0.0 | 18.99.99 |
-| 10.15 | 19.0.0 | 19.99.99 |
-| 11 | 20.0.0 | 20.99.99 |
-| 12 | 21.0.0 | 21.99.99 |
-
-:::
 
 ### Emulate
 
@@ -229,16 +113,6 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 
 :::
 
-### Force
-
-Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
-
-For us, we can ignore.
-
-### Block
-
-Blocks certain kexts from loading. Not relevant for us.
-
 ### Patch
 
 This is where the AMD kernel patching magic happens. Please do note that `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore, you can find pre-made patches by [AlGrey](https://amd-osx.com/forum/memberlist.php?mode=viewprofile&u=10918&sid=e0feb8a14a97be482d2fd68dbc268f97)(algrey#9303).
@@ -255,6 +129,33 @@ To merge:
 * Paste into where old patches were in config.plist
 
 ![](../images/config/AMD/kernel.gif)
+
+You will also need to modify three patches, all named `algrey - Force cpuid_cores_per_package`. You only need to change the `Replace` value only. You should change:
+
+* `B8000000 0000` => `B8 <core count> 0000 0000`
+* `BA000000 0000` => `BA <core count> 0000 0000`
+* `BA000000 0090` => `BA <core count> 0000 0000`
+ 
+Where `<core count>` is replaced with the physical core count of your CPU in hexadecimal. For example, an 8-Core 5800X would have the new Replace value be:
+
+* `B8 08 0000 0000`
+* `BA 08 0000 0000`
+* `BA 08 0000 0090`
+
+::: details Core Count => Hexadecimal Table
+
+| Core Count | Hexadecimal |
+| :--------- | :---------- |
+| 4 Core | `04` |
+| 6 Core | `06` |
+| 8 Core | `08` |
+| 12 Core | `0C` |
+| 16 Core | `10` |
+| 24 Core | `18` |
+| 32 Core | `20` |
+| 64 Core | `40` |
+
+:::
 
 ### Quirks
 
@@ -692,15 +593,6 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide
 
-## Cleaning up
-
-And now you're ready to save and place it into your EFI under EFI/OC.
-
-For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
-
-* [AMD OS X Discord](https://discord.gg/EfCYAJW)
-* [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
-
 ## AMD BIOS Settings
 
 * Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
@@ -724,4 +616,4 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * OS type: Windows 8.1/10 UEFI Mode
 * SATA Mode: AHCI
 
-# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Now with all this done, head to the [cleaning up Config.plist page](/config.plist/secureboot.md)

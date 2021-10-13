@@ -124,13 +124,15 @@ module.exports = {
                 '/installer-guide/opencore-efi',
                 'ktext',
             ['https://dortania.github.io/Getting-Started-With-ACPI/', 'Getting started with ACPI'],
-                '/config.plist/',
             ]
         },
         {
             title: 'Configs',
             collapsable: false,
-            children: [{
+            children: [
+            '/config.plist/',
+            ['/config.plist/global', 'Global Config.plist Setup'],
+            {
                 title: 'Intel Desktop config.plist',
                 collapsable: true,
 				sidebarDepth: 1,
@@ -184,6 +186,7 @@ module.exports = {
                     '/AMD/zen',
                 ]
             },
+            ['/config.plist/secureboot.md', 'Final Config.plist Edits'],
             ]
         },
         {
