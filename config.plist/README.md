@@ -66,7 +66,9 @@ Once done, you'll see your SSDTs, Kexts and firmware drivers populated in the co
 If you wish to clean up the file a bit, you can remove the `#WARNING` entries. These cause no issues if left in, so it is up to personal preference.
 
 ::: danger
-The config.plist **must** match the contents of the EFI folder. If you delete a file but leave it listed in the Config.plist, OpenCore will error and stop booting. If you make any modifications, you can use the OC snapshot tool (**Cmd/Ctrl + R**) in ProperTree to update the config.plist.
+The config.plist **must** match the contents of the EFI folder. If you delete a file but leave it listed in the Config.plist, OpenCore will error and stop booting.
+
+If you make any modifications, you can use the OC snapshot tool (**Cmd/Ctrl + R**) in ProperTree to update the config.plist.
 :::
 
 Once you are done adding with the snapshot, you will want to [start configuring your Config.plist here.](./global.md)

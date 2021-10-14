@@ -1,6 +1,6 @@
 # All Systems Configuration
 
-We'll first configure some values which are the same across all systems. The values you select below may differ depending on which macOS version you want to boot. This section will go over the general structure of the plist as well. Any sections which are skipped can be left alone. If you want to know more about what these options do, refer to the [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
+We'll first configure some values which are similar across most systems. The values you select below may differ depending on which macOS version you want to boot. This section will go over the general structure of the plist as well. Any sections which are skipped can be left alone. If you want to know more about what these options do, refer to the [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
 
 ## ACPI
 
@@ -11,10 +11,6 @@ We'll first configure some values which are the same across all systems. The val
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. This should be populated already by ProperTree.
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. If you see your `DSDT.aml` here, remove it in your `config.plist` and under EFI/OC/ACPI.
-
-Also note that compiled SSDTs have a .aml extension to them. Do not rename .dsl files into .aml files.
-
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.**
 
 :::
 
@@ -67,7 +63,7 @@ Below has more info about how each kext is defined:
   * Path to the `info.plist` hidden within the kext
   * ex: `Contents/Info.plist`
   
-::: details Kernel Support Table
+::: details Kernel Versions Table
 
 | OS X Version | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
@@ -115,11 +111,15 @@ Settings for booting macOS versions `10.4-10.6`. If you are booting any later ma
 
 ### APFS
 
-::: tip Info
 macOS High Sierra and newer use APFS instead of HFS Plus for their drive partitions. OpenCore loads the APFS driver
-from macOS, though it will only load APFS drivers from Big Sur and newer due to the default minimum version set.
+from macOS, though it will only load APFS drivers from Big Sur and newer due to the default version set.
 
-If you are booting macOS High Sierra - Catalina, you can instead any of the below values:
+If you are booting macOS Sierra or earlier, you can skip this section.  
+If you are booting macOS High Sierra - Catalina, you can use one of the values below:
+
+::: tip APFS Versions
+
+Both MinVersion and MinDate need to be set if changing the minimum version.
 
 | macOS Version | Min Version | Min Date |
 | :------------ | :---------- | :------- |
@@ -128,19 +128,6 @@ If you are booting macOS High Sierra - Catalina, you can instead any of the belo
 | Catalina (`10.15.4`) | `1412101001000000` | `20200306` |
 | No restriction | `-1` | `-1` |
 
-If you are booting macOS Sierra or earlier, you can skip this section.
-
-:::
-
-::: details More in-depth Info
-
-* **MinDate**: `-1`
-  * Sets the minimum date required for APFS drivers to load. The default in OpenCore is 2021-01-01, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
-  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
-
-* **MinVersion**: `-1`
-  * Sets the minimum version required for APFS drivers to load. The default in OpenCore is versions from Big Sur and above, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
-  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
 
 :::
 
@@ -148,7 +135,7 @@ If you are booting macOS Sierra or earlier, you can skip this section.
 
 ::: tip Info
 
-Helpful for debugging OpenCore boot issues (We'll be changing everything *but* `DisplayDelay`):
+These settings tell OpenCore whether to dump logs or not. You'll want to start out with the settings below:
 
 | Quirk | Enabled |
 | :--- | :--- |
@@ -185,7 +172,7 @@ These values are based of those calculated in [OpenCore debugging](../troublesho
 
 Used for specifying irregular boot paths that can't be found naturally with OpenCore.
 
-Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info.
 
 ### Security
 
@@ -199,7 +186,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+| Vault | `Optional` | Do not omit this! OpenCore will refuse to boot without this being set to `Optional` |
 
 :::
 
@@ -236,26 +223,30 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 NVRAM is flash storage on your motherboard, which is used to store boot order and what devices there are too boot.
 macOS makes extensive use of NVRAM to store boot-args, display scaling in FileVault, background color, etc.
 
-::: details More info - Non-Native NVRAM
-
-* **LegacyEnable**: NO
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
-
-* **LegacyOverwrite**: NO
-  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
-
-* **LegacySchema**
-  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+::: details Extra Options
 
 * **WriteFlash**: YES
   * Enables writing to flash memory for all added variables.
+
+**Settings for Non-Native NVRAM**
+
+Some systems may not have native NVRAM support, instead requiring values to be stored in a plist. This is not needed on most systems.
+
+* **LegacyEnable**: NO
+  * Allows for NVRAM to be stored on nvram.plist
+
+* **LegacyOverwrite**: NO
+  * Permits overwriting firmware variables from nvram.plist
+
+* **LegacySchema**
+  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
 
 :::
 
 ### Add
 ::: tip 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
 
-Used for OpenCore's UI scaling, default will work for us. See in-depth section for more info
+Used for OpenCore's UI scaling, though the default is fine. See in-depth section for more info
 
 :::
 
@@ -289,11 +280,10 @@ OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
 
 ::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
-Apple's NVRAM GUID
+Apple's NVRAM GUID, this is where boot arguments and other settings are stored for macOS.
+Boot-args are seperated by spaces, and should looking something like `-v debug=0x100 keepsyms=1`.
 
-* **General Purpose boot-args**:
-
-Boot-args are seperated by spaces, they should looking something like `-v debug=0x100 keepsyms=1`.
+#### General Purpose boot-args:
 
 | boot-args | Description |
 | :-------- | :---------- |
@@ -306,7 +296,7 @@ Boot-args are seperated by spaces, they should looking something like `-v debug=
 
 | boot-args | Description |
 | :-------- | :---------- |
-| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
+| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs (RX 5000/6000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
 | **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
 
 * **AMD/HEDT-Specific boot-args**:
@@ -339,8 +329,8 @@ Boot-args are seperated by spaces, they should looking something like `-v debug=
 ### Delete
 
 Lets OpenCore know which NVRAM values to delete.
-Note that OpenCore will not overwrite any NVRAM variables already written, so for NVRAM variables to be overwritten,
-they need to be under Delete so they're removed.
+Note that OpenCore will not overwrite any NVRAM variables that are already written.
+If you need to overwrite any NVRAM variables, put them under `Delete`.
 
 ## UEFI
 
@@ -349,14 +339,30 @@ they need to be under Delete so they're removed.
 ### Drivers
 
 This should be populated by ProperTree already. You should have the below drivers:
-* A HFS Driver (`HFSPlus.efi`, `OpenHFSPlus.efi`, or `LegacyHFSPlus.efi`)
+* A HFS Driver (`HFSPlus.efi`, `LegacyHFSPlus.efi`, or `OpenHFSPlus.efi`)
 * OpenRuntime.efi
-* OpenUsbKbDxe.efi (If your computer does not support UEFI)
 
+If your computer does not support UEFI, you need:
+* OpenUsbKbDxe.efi
+
+::: details Add Format
+
+Starting with OpenCore 0.7.4, each driver now has multiple fields.
+
+* **Arguments**
+  * Arguments which are passed to the driver. Left blank most of the time, though may be useful with OpenLinuxBoot.efi
+* **Comment**
+  * A note which you can leave yourself, not used by OpenCore
+* **Enabled**
+  * Enable or disable the driver
+* **Path**
+  * The file name of the driver, including any folders if you put a folder within the Drivers folder.
+
+:::
 
 ### Audio
 
-Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
+AudioDxe settings for boot chime and voice over support. This is unrelated to audio support in macOS, and configuration of this section is not covered here.
 
 * For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
 
@@ -379,7 +385,6 @@ Relating to OpenCore's visual output,  leave everything here as default as we ha
 ### ProtocolOverrides
 
 Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
-
 
 ## Selecting your platform
 

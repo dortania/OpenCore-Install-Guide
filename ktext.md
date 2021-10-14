@@ -363,7 +363,7 @@ To figure out what kind of keyboard and trackpad you have, check Device Manager 
 ::: details VoodooI2C Plugins
 | Connection type | Plugin | Notes |
 | :--- | :--- | :--- |
-| Microsoft HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
+| Multitouch HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
 | ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
 | Synaptics HID | VoodooRMI | |
 | FTE1001 touchpad | VoodooI2CFTE | |
@@ -381,6 +381,13 @@ Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/maste
 
 ## SSDTs
 
-The next step is covered in the [Getting Started With ACPI guide](https://dortania.github.io/Getting-Started-With-ACPI/). This will give you a set of SSDTs and ACPI patches specific to your system, which will be needed for booting and fixing devices (such as an I2C trackpad).
+The next step is covered in the [Getting Started With ACPI guide](https://dortania.github.io/Getting-Started-With-ACPI/). This will give you a set of SSDTs and ACPI patches specific to your system, which will be needed for booting. These SSDTs can also disable unsupported GPUs, fix I2C trackpads, and map USB ports in macOS.
 
-Once you are done, you need to start [configuring your Config.plist](https://dortania.github.io/OpenCore-Install-Guide/config.plist/)
+::: danger
+
+Not including SSDTs may lead to an unbootable system. Do not skip the [Getting Started With ACPI guide](https://dortania.github.io/Getting-Started-With-ACPI/).  
+OpenCore only takes *compiled* SSDTs which have a .aml extension to them. Do not rename .dsl files into .aml files.
+
+:::
+
+Once you are done, head [here to grab a sample Config.plist](./config.plist/).
