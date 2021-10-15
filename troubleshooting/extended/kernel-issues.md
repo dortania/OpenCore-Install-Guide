@@ -387,7 +387,7 @@ This assumes you're only booting the installer USB and not macOS itself.
 
 * If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/)
   * `Kernel -> Quirks -> XhciPortLimit -> True`
-  * **Note for AMD Users:** This issue may actually be caused by having `XhciPortLimit` set to `True`, so in this case, disable it instead.
+  * **Note for AMD users:** This issue may actually be caused by having `XhciPortLimit` set to `True`, so in this case, disable it instead.
 
 * Another issue can be that certain firmware won't pass USB ownership to macOS
   * `UEFI -> Quirks -> ReleaseUsbOwnership -> True`
