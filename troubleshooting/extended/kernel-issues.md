@@ -65,7 +65,7 @@ These are the correct `UEFI -> Drivers` configurations for different versions of
 
 | 0.7.2 and below | 0.7.3 | 0.7.4 and above |
 | :--- | :--- | :--- |
-| ![](../../images/troubleshooting/troubleshooting-md/oc_driver_072.jpg) | ![](../../images/troubleshooting/troubleshooting-md/oc_driver_073.jpg) | ![](../../images/troubleshooting/troubleshooting-md/oc_driver_074.jpg) |
+| ![](../../images/troubleshooting/troubleshooting-md/oc_driver_072.png) | ![](../../images/troubleshooting/troubleshooting-md/oc_driver_073.png) | ![](../../images/troubleshooting/troubleshooting-md/oc_driver_074.png) |
 
 Please note that you may have different drivers than the ones shown.
 If your `UEFI -> Drivers` section does not match what is shown above for your OpenCore version, update ProperTree and perform an OC Snapshot. (Ctrl/Cmd+R)
