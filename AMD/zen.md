@@ -267,7 +267,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | PanicNoKextDump | YES |
 | PowerTimeoutKernelPanic | YES |
 | ProvideCurrentCpuInfo | YES |
-| XhciPortLimit | YES |
+| XhciPortLimit | NO |
 
 :::
 
@@ -304,7 +304,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 * **SetApfsTrimTimeout**: `-1`
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. A more proper solution for AMD can be found here: [AMD USB Mapping](https://dortania.github.io/OpenCore-Post-Install/usb/)
+  * This is actually the 15 port limit patch, don't rely on it as it doesn't have any effect on AMD. Enabling it may cause issues such as `Waiting for root device` or the prohibited sign error.
 :::
 
 ### Scheme

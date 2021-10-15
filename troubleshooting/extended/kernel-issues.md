@@ -385,8 +385,9 @@ This is generally seen as a USB or SATA error, couple ways to fix:
 
 This assumes you're only booting the installer USB and not macOS itself.
 
-* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://dortania.github.io/OpenCore-Post-Install/usb/)
+* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/)
   * `Kernel -> Quirks -> XhciPortLimit -> True`
+  * **Note for AMD Users:** This issue may actually be caused by having `XhciPortLimit` set to `True`, so in this case, disable it instead.
 
 * Another issue can be that certain firmware won't pass USB ownership to macOS
   * `UEFI -> Quirks -> ReleaseUsbOwnership -> True`
