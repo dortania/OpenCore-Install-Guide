@@ -57,6 +57,19 @@ OCABC: MAT support is 1
 
 * Note: `1` means it supports MATs, while `0` means it does not.
 
+### `UEFI -> Drivers`
+
+After updating OpenCore, or if you have an outdated version of ProperTree, the driver entries in your config may not be compatible with your current version of OpenCore.
+
+These are the correct `UEFI -> Drivers` configurations for different versions of OpenCore:
+
+| 0.7.2 and below | 0.7.3 | 0.7.4 and above |
+| :--- | :--- | :--- |
+| ![](../../images/troubleshooting/troubleshooting-md/oc_driver_072.jpg) | ![](../../images/troubleshooting/troubleshooting-md/oc_driver_073.jpg) | ![](../../images/troubleshooting/troubleshooting-md/oc_driver_074.jpg) |
+
+Please note that you may have different drivers than the ones shown.
+If your `UEFI -> Drivers` section does not match what is shown above for your OpenCore version, update ProperTree and perform an OC Snapshot. (Ctrl/Cmd+R)
+
 ### Kernel Patch Issues
 
 This section will be split between Intel and AMD users:
