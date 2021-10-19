@@ -7,14 +7,17 @@ These settings in your config.plist can restrict which macOS versions OpenCore w
 ### Security -> SecureBootModel
 
 OpenCore by default has [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) enabled.
-This enables security features such as verification of macOS' `boot.efi`, though also has the side effect of restricting which macOS versions OpenCore will boot.
+This enables security features such as the verification of macOS' `boot.efi`, with the side effect of restricting which macOS versions OpenCore will boot.
 
-* Big Sur and Above (11.0+): The recommended value is `Default`
+* Big Sur and Above (11.0+): The recommended value is `Default`.
 * High Sierra-Catalina (10.13-10.15):
-  * If your model is not listed below, set to `Disabled`
-  * If running Nvidia Web Drivers, set to `Disabled`
+  * If your model is not listed below, set to `Disabled`.
+  * If running Nvidia Web Drivers, set to `Disabled`.
   * If your model is listed, compare the minimum version with the version your installing. Disable if your installer is below the minimum version listed for your SMBIOS.
-* Sierra and Below (10.4-10.12): Set to `Disabled`
+* Sierra and Below (10.4-10.12): This setting has no affect.
+* If booting multiple versions, you may need to set the value to `Disabled`.
+  * For example, a non-T2 SMBIOS booting High Sierra and Big Sur would need this disabled.
+  * A T2 SMBIOS would be limited by the minimum version listed below.
 
 ::: details T2 Mac Models
 

@@ -398,7 +398,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default |  Leave this `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting |
+| SecureBootModel | Default | Leave this as `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
