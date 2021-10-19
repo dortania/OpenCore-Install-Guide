@@ -41,4 +41,4 @@ Term | Description
 **RHUB** | Root USB Hub, where USB ports are defined. If certain definitions are missing here, USB ports may not work in macOS
 **IMEI** | Intel Management Engine Interface, handles misc tasks. In macOS, Apple relies on the IMEI for Intel GPU acceleration. If using an unknown ID like using a 7 series chipset with Sandy Bridge, macOS will be unable to find it for GPU acceleration.
 **UNC** | Uncore Bridge, similar to a North Bridge it handles many cache related functions. Many times OEMs will have this device defined but non-functional, macOS is unable to handle these situations.
-**SMBS** | System Management Bus, used to allow devices to easily communicate between each other.
+**SMBus** | System Management Bus, used to allow devices to easily communicate between each other.

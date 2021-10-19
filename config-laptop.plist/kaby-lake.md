@@ -402,7 +402,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| SecureBootModel | Default |  Leave this `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
@@ -642,25 +642,21 @@ Only drivers present here should be:
 
 ### APFS
 
-::: tip Info
-Relating to APFS driver loader settings, for us we'll be changing the following:
+By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
+Not setting this can result in OpenCore not finding your macOS partition!
 
-| Setting | Value | Comment |
-| :--- | :--- | :--- |
-| MinDate | `-1` | Not needed if not booting High Sierra - Catalina |
-| MinVersion | `-1` | Not needed if not booting High Sierra - Catalina |
+macOS Sierra and earlier use HFS instead of APFS. You can skip this section if booting older versions of macOS.
 
-:::
+::: tip APFS Versions
 
-::: details More in-depth Info
+Both MinVersion and MinDate need to be set if changing the minimum version.
 
-* **MinDate**: `-1`
-  * Sets the minimum date required for APFS drivers to load. The default in OpenCore is 2021-01-01, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
-  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
-
-* **MinVersion**: `-1`
-  * Sets the minimum version required for APFS drivers to load. The default in OpenCore is versions from Big Sur and above, which limits booting High Sierra - Catalina when you don't have an APFS driver that satisifes the requirements (aka having Big Sur installed).
-  * If you'd like to boot High Sierra - Catalina, set this to `-1`, otherwise you don't need to change it
+| macOS Version | Min Version | Min Date |
+| :------------ | :---------- | :------- |
+| High Sierra (`10.13.6`) | `748077008000000` | `20180621` |
+| Mojave (`10.14.6`) | `945275007000000` | `20190820` |
+| Catalina (`10.15.4`) | `1412101001000000` | `20200306` |
+| No restriction | `-1` | `-1` |
 
 :::
 
@@ -766,4 +762,4 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 * SATA Mode: AHCI
 
-# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)

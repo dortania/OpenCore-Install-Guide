@@ -339,36 +339,54 @@ However ProperTree will handle this for you, so you need not concern yourself
   
 :::
 
-### Laptop Specifics
+### Laptop Input
 
 To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep -i input` in Linux
 
-#### Input drivers
+::: warning
+
+Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have an I2C, USB, or SMBus trackpad.
+
+:::
+
+#### PS2 Keyboards/Trackpads
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
-  * For systems with PS2 keyboards, mice, and trackpads
+  * Works with various PS2 keyboards, mice, and trackpads
   * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
 * [RehabMan's VoodooPS2](https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller/downloads/)
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
   * Supports macOS 10.6+ support
+
+#### SMBus Trackpads
+
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
-  * For systems with Synaptics SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with Synaptics SMBus trackpads
   * Requires macOS 10.11 or newer for MT2 functions
+  * Depends on Acidanthera's VoodooPS2
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus/releases)
-  * For systems with ELAN SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with ELAN SMBus Trackpads
   * Supports macOS 10.14 or newer currently
+
+#### I2C/USB HID Devices
+
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
-  * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
-  * Requires macOS 10.11 or newer for MT2 functions
-::: details VoodooI2C Plugins
+  * Supports macOS 10.11+
+  * Attaches to I2C controllers to allow plugins to talk to I2C trackpads
+  * USB devices using the below plugins still need VoodooI2C
+  * Must be paired with one or more plugins shown below:
+
+::: tip VoodooI2C Plugins
+
 | Connection type | Plugin | Notes |
 | :--- | :--- | :--- |
-| Microsoft HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
+| Multitouch HID | VoodooI2CHID | Can be used with I2C/USB Touchscreens and Trackpads |
 | ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
-| Synaptics Proprietary | VoodooI2CSynaptics | Synaptics F12 protocol require VoodooI2CHID instead |
-| ^^ | VoodooRMI | Supports Synaptics protocols F12/F3A - These generally support Microsoft's HID standard so you should attempt using VoodooI2CHID first |
 | FTE1001 touchpad | VoodooI2CFTE | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
+| Synaptics HID | [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/) | I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode) |
+| Alps HID | [AlpsHID](https://github.com/blankmac/AlpsHID/releases) | Can be used with USB or I2C Alps trackpads. Mostly seen on Dell laptops |
+
 :::
 
 #### Misc
@@ -427,7 +445,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ | ^^ | N/A |
 | Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF-CFL](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ | ^^ |
+| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ | ^^ |
 | Coffee Lake (9th Gen) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Ice Lake | ^^ | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) | ^^ |
