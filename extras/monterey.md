@@ -6,7 +6,7 @@
 
 ## Prerequisites
 
-### Supported SMBIOSes:
+### Supported SMBIOS
 
 SMBIOS dropped in Monterey:
 
@@ -35,9 +35,10 @@ If your SMBIOS was supported in Big Sur and is not included above, you're good t
 ### Supported hardware
 
 Dropped GPU Hardware:
+
 * Ivy Bridge (HD 4000 and HD 2500)
 * Nvidia Kepler (GTX 6xx/7xx Cards)
-* You can use [OpenCore-Legacy-Patcher]() to add back support
+* You can use [OpenCore-Legacy-Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/) to add back support
   * No support is provided for Hackintoshes using OCLP!
   * You will lose access to non-full updates (Small 1-3GB updates)
   * Requires SIP, Apple Secure Boot, and AMFI disabled.
@@ -60,6 +61,7 @@ With Monterey, Apple has completely rewritten the bluetooth stack. As of writing
   * If you still boot Big Sur or older, you can set the `MinKernel` field to `21.00.0` to prevent BlueToolFixup loading on older OSes.
 
 See the below issues for more details:
+
 * [BlueToolFixup PR](https://github.com/acidanthera/BrcmPatchRAM/pull/12)
 * [Monterey Beta 5+ issues](https://github.com/acidanthera/bugtracker/issues/1821)
 
@@ -95,16 +97,20 @@ Starting with Monterey, updates are not delivered to T2 Macs which don't have Se
 #### No Updates
 
 Make sure that SIP is enabled. Two bits in SIP specifically cause issues:
+
 * CSR_ALLOW_APPLE_INTERNAL (Bit 4 = 0x10)
   * Prevents updates appearing at all
 * CSR_ALLOW_UNAUTHENTICATED_ROOT (Bit 11 = 0x800)
   * Prevents incremental OTA updates
 
 If you want to still have SIP disabled, use either:
+
 * `csrutil disable --no-internal` in Recovery
 * A SIP value which does not include the two flags above
 
-To enable SIP, either:
-* Use `csrutil enable`
+To enable SIP:
+
 * Set `csr-active-config` to `<00 00 00 00>` in your config.plist
-  * You may need to reset NVRAM or add `csr-active-config` to NVRAM->Delete in your config.plist.
+* Use `csrutil clear` in Recovery
+  * Can instead add `csr-active-config` to NVRAM->Delete or reset NVRAM
+  
