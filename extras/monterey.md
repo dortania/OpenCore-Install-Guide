@@ -47,7 +47,8 @@ Dropped GPU Hardware:
   * You will lose access to non-full updates (Small 1-3GB updates)
   * Requires SIP, Apple Secure Boot, and AMFI disabled.
 
-Because Apple still supports the Macmini7,1, Haswell drivers are still supported in Monterey.
+Haswell iGPUs are still supported in Monterey
+  * Macmini7,1 uses these drivers
 
 ### Bluetooth
 
@@ -71,7 +72,7 @@ See the below issues for more details:
 
 ### OTA Updates
 
-Starting with Monterey, updates are not delivered to T2 Macs which don't have Secure Boot enabled. This means that Hackintoshes which use a T2 SMBIOS **MUST** have SecureBootModel set to `Default`. If your SMBIOS does not have a T2, then either `Default` or `Disabled` is ok.
+Starting with Monterey, updates are not delivered to T2 Macs which don't have Secure Boot enabled. Hackintoshes which use a T2 SMBIOS **MUST** have OpenCore 0.7.4+ with SecureBootModel set to `Default`. If your SMBIOS does not have a T2 chip, then either `Default` or `Disabled` is ok.
 
 ::: tip T2 SMBIOS List
 
@@ -95,6 +96,8 @@ Starting with Monterey, updates are not delivered to T2 Macs which don't have Se
 | iMac20,2 (August 2020)                              | 10.15.6 (19G2005)     |
 
 :::
+
+Note: You do not need the `-revsbvmm` boot argument from RestrictEvents. Use OpenCore 0.7.4 or later.
 
 ### Troubleshooting
 
