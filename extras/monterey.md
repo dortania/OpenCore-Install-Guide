@@ -48,7 +48,8 @@ Dropped GPU Hardware:
   * Requires SIP, Apple Secure Boot, and AMFI disabled.
 
 Haswell iGPUs are still supported in Monterey
-  * Macmini7,1 uses these drivers
+
+* Macmini7,1 uses these drivers
 
 ### Bluetooth
 
