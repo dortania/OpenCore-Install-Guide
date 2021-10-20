@@ -14,7 +14,7 @@ This enables security features such as the verification of macOS' `boot.efi`, wi
   * If your model is not listed below, set to `Disabled`.
   * If running Nvidia Web Drivers, set to `Disabled`.
   * If your model is listed, compare the minimum version with the version your installing. Disable if your installer is below the minimum version listed for your SMBIOS.
-* Sierra and Below (10.4-10.12): This setting has no affect.
+* Sierra and Below (10.4-10.12): This setting has no effect.
 * If booting multiple versions, you may need to set the value to `Disabled`.
   * For example, a non-T2 SMBIOS booting High Sierra and Big Sur would need this disabled.
   * A T2 SMBIOS would be limited by the minimum version listed below.
