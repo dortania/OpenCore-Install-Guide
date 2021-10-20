@@ -92,7 +92,7 @@ Starting with Monterey, updates are not delivered to T2 Macs which don't have Se
 
 ### Troubleshooting
 
-#### No Updates and Large Updates
+#### No Updates
 
 Make sure that SIP is enabled. Two bits in SIP specifically cause issues:
 * CSR_ALLOW_APPLE_INTERNAL (Bit 4 = 0x10)
