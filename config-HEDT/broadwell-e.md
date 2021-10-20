@@ -369,7 +369,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| SecureBootModel | Default | Leave this as `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
@@ -618,7 +618,23 @@ Only drivers present here should be:
 
 ### APFS
 
-Settings related to the APFS driver, leave everything here as default.
+By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
+Not setting this can result in OpenCore not finding your macOS partition!
+
+macOS Sierra and earlier use HFS instead of APFS. You can skip this section if booting older versions of macOS.
+
+::: tip APFS Versions
+
+Both MinVersion and MinDate need to be set if changing the minimum version.
+
+| macOS Version | Min Version | Min Date |
+| :------------ | :---------- | :------- |
+| High Sierra (`10.13.6`) | `748077008000000` | `20180621` |
+| Mojave (`10.14.6`) | `945275007000000` | `20190820` |
+| Catalina (`10.15.4`) | `1412101001000000` | `20200306` |
+| No restriction | `-1` | `-1` |
+
+:::
 
 ### Audio
 
@@ -708,4 +724,4 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * OS type: Windows 8.1/10 UEFI Mode
 * SATA Mode: AHCI
 
-# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)
