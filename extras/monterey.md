@@ -1,5 +1,9 @@
 # macOS 12: Monterey
 
+**Reminder that Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
+**This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
+**And note that macOS 12, Monterey will require macOS already installed on some machine to create the installer. Windows and Linux users will need to use a macOS VM to create the installer.**
+
 ## Table of Contents
 
 [[toc]]
@@ -113,4 +117,3 @@ To enable SIP:
 * Set `csr-active-config` to `<00 00 00 00>` in your config.plist
 * Use `csrutil clear` in Recovery
   * Can instead add `csr-active-config` to NVRAM->Delete or reset NVRAM
-  
