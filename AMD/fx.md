@@ -245,7 +245,7 @@ You will also need to modify three patches, all named `algrey - Force cpuid_core
 
 * `B8000000 0000` => `B8 <core count> 0000 0000`
 * `BA000000 0000` => `BA <core count> 0000 0000`
-* `BA000000 0090` => `BA <core count> 0000 0000`
+* `BA000000 0090` => `BA <core count> 0000 0090`
 
 Where `<core count>` is replaced with the physical core count of your CPU in hexadecimal. For example, an 8-Core 5800X would have the new Replace value be:
 
