@@ -152,6 +152,14 @@ You will also require a device-id spoof to be supported:
 | :--- | :--- | :--- |
 | device-id | Data | `12040000` |
 
+for those who have problem getting full resolution like 4K @ 60 Hz should make these changes:
+
+#### HDMI in UHD resolution with 60FPS
+
+Add the enable-max-pixel-clock-override property to IGPU or use the -igfxmpc boot-arg instead to raise the max pixel clock limit. This is needed for 4K@60Hz on laptops like ThinkPad P71 or XPS 15, otherwise you will get a black screen. It can also be used for 4K@60Hz over HDMI 2.0.
+
+![DeviceProperties](https://raw.githubusercontent.com/acidanthera/WhateverGreen/master/Manual/Img/max-pixel-clock.png)
+
 :::
 
 ::: tip PciRoot(0x0)/Pci(0x1b,0x0)
