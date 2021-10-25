@@ -32,7 +32,7 @@ If your SMBIOS was supported in Big Sur and is not included above, you're good t
 * MacBookAir7,1 and newer
 * MacBookPro11,4 and newer
 
-[Click here](../smbios-support.md) for a full list of supported SMBIOS.
+[Click here](./smbios-support.md) for a full list of supported SMBIOS.
 
 :::
 

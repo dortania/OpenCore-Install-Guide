@@ -321,7 +321,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 * iMac16,1+
 * iMacPro1,1
 * MacPro6,1+
-* MacMini7,1+
+* Macmini7,1+
 * MacBook8,1+
 * MacBookAir7,1+
 * MacBookPro11,3+
