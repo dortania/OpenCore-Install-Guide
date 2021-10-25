@@ -49,6 +49,7 @@
 560X
 5700XT
 570X
+5800X
 580X
 5XX
 5XX-8XX
@@ -84,6 +85,7 @@
 A12Z
 A320
 A520
+A6
 AAPL
 ACPIBatteryManager
 ACPI_NVS
@@ -126,6 +128,7 @@ AirportItlwm
 AlGrey
 Aleksander
 Aleksander's
+AlpsHID
 AlpsT4USB
 AmazonBasics
 Andrey's
@@ -231,6 +234,7 @@ Broadwell-E
 Bugtracker
 BusID
 C3
+C6
 C602
 C612
 C7030000
@@ -368,6 +372,8 @@ EveryMac
 Evo
 ExitBootServices
 Explainer
+ExtFamily
+ExtModel
 ExtendBTFeatureFlags
 F10
 F12
@@ -791,10 +797,8 @@ SGX
 SHA-1
 SL01
 SLOTID
-SMBS
 SMBUS
 SMBus
-SMBus-based
 SMC
 SMCAMDProcessor
 SMCBatteryManager
@@ -872,6 +876,8 @@ Trackpad
 Trackpads
 TransMac
 Typora
+U42
+U62
 UART
 UEFI-based
 UEFIExtrac
@@ -1052,6 +1058,7 @@ configurators
 cpuid_set_cpufamily
 createDevice
 createinstallmedia
+crowdsourced
 csr-active-config
 csrstat
 dGPU
@@ -1113,6 +1120,7 @@ hotplug
 hyperthreading
 i3
 i3-3110M
+i5-*
 i7
 i7-10700K
 i7-9700T
@@ -1259,6 +1267,7 @@ trackpad
 trackpads
 trackpoints
 trashOS
+uCode
 ubuntu
 unallocated
 unbootable

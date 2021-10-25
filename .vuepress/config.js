@@ -184,6 +184,7 @@ module.exports = {
                     '/AMD/zen',
                 ]
             },
+            ['/config.plist/security', 'Apple Secure Boot']
             ]
         },
         {

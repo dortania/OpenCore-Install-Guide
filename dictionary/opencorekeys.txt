@@ -1,6 +1,7 @@
 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
 7C436110-AB2A-4BBB-A880-FE41995C9F82
+A0660
 ACPI
 APFS
 ARTFrequency
@@ -11,7 +12,6 @@ AppleAudio
 AppleBootPolicy
 AppleCpuPmCfgLock
 AppleDebug
-boot1f32
 AppleDebugLog
 AppleEvent
 AppleImageConversion
@@ -113,6 +113,7 @@ LegacyOverwrite
 LegacySchema
 Lifewire
 MLB
+MUX
 MaxBIOSVersion
 MaxKernel
 MemoryFormFactor
@@ -122,6 +123,7 @@ MinVersion
 MinimumVolume
 MmioWhitelist
 NormalizeHeaders
+OCCPU
 OSInfo
 OemTableId
 PanicNoKextDump
@@ -144,6 +146,7 @@ ProtectSecureBoot
 ProtectUefiServices
 ProtocolOverrides
 ProvideConsoleGop
+ProvideCurrentCpuInfo
 ProvideCustomSlide
 Quirks
 ROM
@@ -203,6 +206,8 @@ VolumeAmplifier
 WriteFlash
 XhciPortLimit
 boot0
+boot1f32
 bootia32
 bootx64
+i5-10210U
 snapshotted
