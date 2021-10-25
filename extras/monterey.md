@@ -53,6 +53,14 @@ Haswell iGPUs are still supported in Monterey
 
 ### Bluetooth
 
+::: warning
+
+Note that all cards have not been fixed yet, and that bluetooth support is being worked on still.
+
+Do not be suprised if your card does not work, and please be patient!
+
+:::
+
 With Monterey, Apple has completely rewritten the bluetooth stack. As of writing, many bluetooth devices do not work (legacy Broadcom and Intel). With the rewrite, injector kexts break bluetooth support in Monterey, though firmware uploader kexts are still needed. Make sure that you:
 
 * Disable injector kexts
