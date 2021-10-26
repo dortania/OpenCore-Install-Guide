@@ -538,6 +538,21 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
 | iMac15,1 | Haswell with dGPU |
 | iMac16,2 | Broadwell |
 
+**Note**: The following SMBIOS are only supported up-to macOS 11, Big Sur. For cases where you must boot Monterey, see below:
+
+::: details Monterey SMBIOS table
+
+Note choosing a SMBIOS from the list below for Big Sur or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+
+Monterey table:
+
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac16,2 | Broadwell with only iGPU |
+| iMac17,1 | Broadwell with dGPU |
+
+:::
+
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh

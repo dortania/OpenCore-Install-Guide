@@ -36,6 +36,13 @@ If your SMBIOS was supported in Big Sur and is not included above, you're good t
 
 :::
 
+For those on Haswell or Ivy Bridge, here are some simple conversions:
+
+* Ivy Bridge desktops with dGPU should use MacPro6,1
+* Haswell desktops with dGPU should use iMac17,1
+* Haswell desktops with only an iGPU should use iMac16,2
+* Haswell laptops should use MacBookPro11,4 or MacBookPro11,5
+
 ### Supported hardware
 
 Dropped GPU Hardware:
