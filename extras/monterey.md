@@ -32,9 +32,16 @@ If your SMBIOS was supported in Big Sur and is not included above, you're good t
 * MacBookAir7,1 and newer
 * MacBookPro11,4 and newer
 
-[Click here](../smbios-support.md) for a full list of supported SMBIOS.
+[Click here](./smbios-support.md) for a full list of supported SMBIOS.
 
 :::
+
+For those on Haswell or Ivy Bridge, here are some simple conversions:
+
+* Ivy Bridge desktops with dGPU should use MacPro6,1
+* Haswell desktops with dGPU should use iMac17,1
+* Haswell desktops with only an iGPU should use iMac16,2
+* Haswell laptops should use MacBookPro11,4 or MacBookPro11,5
 
 ### Supported hardware
 
@@ -52,6 +59,14 @@ Haswell iGPUs are still supported in Monterey
 * Macmini7,1 uses these drivers
 
 ### Bluetooth
+
+::: warning
+
+Note that all cards have not been fixed yet, and that bluetooth support is being worked on still.
+
+Do not be suprised if your card does not work, and please be patient!
+
+:::
 
 With Monterey, Apple has completely rewritten the bluetooth stack. As of writing, many bluetooth devices do not work (legacy Broadcom and Intel). With the rewrite, injector kexts break bluetooth support in Monterey, though firmware uploader kexts are still needed. Make sure that you:
 

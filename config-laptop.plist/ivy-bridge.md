@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.7, Lion |
+| Note 1 | Ivy Bridge iGPUs are only supported up-to macOS 11 |
 
 ## Starting Point
 

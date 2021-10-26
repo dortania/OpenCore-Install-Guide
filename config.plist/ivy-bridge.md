@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.7, Lion |
+| Note 1 | Ivy Bridge iGPUs are only supported up-to macOS 11 |
 
 ## Starting Point
 
@@ -553,16 +554,24 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 | iMac13,1 | Used for computers utilizing the iGPU for displaying |
 | iMac13,2 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
 
-**Note**: The following SMBIOS are only supported up-to and including macOS 10.15, Catalina. For cases where you must boot Big Sur, see below:
+**Note**: The following SMBIOS are only supported up-to and including macOS 10.15, Catalina. For cases where you must boot Big Sur or Monterey, see below:
 
-::: details Big Sur SMBIOS table
+::: details Big Sur/Monterey SMBIOS table
 
 Note choosing a SMBIOS from the list below for Catalina or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+
+Big Sur table:
 
 | SMBIOS | Hardware |
 | :--- | :--- |
 | iMac14,4 | Used for computers utilizing the iGPU for displaying |
 | iMac15,1 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
+
+Monterey table:
+
+| SMBIOS | Hardware |
+| :--- | :--- |
+| MacPro6,1 | As Monterey does not include iGPU drivers, you will want to use MacPro6,1 and a supported dGPU |
 
 :::
 

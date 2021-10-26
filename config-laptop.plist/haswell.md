@@ -544,6 +544,18 @@ For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakd
 | MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
 | Macmini7,1 | NUC Systems | HD 5000/Iris 5100 | N/A |
 
+**Note**: For macOS Monterey, only the following SMBIOS are supported
+
+::: details Monterey SMBIOS table
+
+| SMBIOS | Hardware |
+| :--- | :--- |
+| MacBookPro11,4 | Quad Core 45W | iGPU: Iris Pro 5200 | 15" |
+| MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
+| Macmini7,1 | NUC Systems | HD 5000/Iris 5100 | N/A |
+
+:::
+
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
