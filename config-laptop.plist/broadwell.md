@@ -543,6 +543,8 @@ For this Broadwell example, we chose the MacBookPro12,1 SMBIOS. The typical brea
 | MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
 | iMac16,1 | NUC Systems | HD 6000/Iris Pro 6200 |  N/A |
 
+**Note**: MacBook8,1 was dropped in macOS Monterey. If running macOS Monterey, select another model.
+
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
