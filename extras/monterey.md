@@ -2,7 +2,6 @@
 
 **Reminder that Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
 **This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
-**And note that macOS 12, Monterey will require macOS already installed on some machine to create the installer. Windows and Linux users will need to use a macOS VM to create the installer.**
 
 ## Table of Contents
 
@@ -58,6 +57,37 @@ Dropped GPU Hardware:
 Haswell iGPUs are still supported in Monterey
 
 * Macmini7,1 uses these drivers
+
+### AMD Patches
+
+For those on AMD CPUs, make sure to update your [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla) for Monterey.
+Don't forget to update your patches as well with the core count of your CPU.
+The patches which need to be edited are all named `algrey - Force cpuid_cores_per_package`, and you only need to change the `Replace` value. You should change:
+
+* `B8000000 0000` => `B8 <core count> 0000 0000`
+* `BA000000 0000` => `BA <core count> 0000 0000`
+* `BA000000 0090` => `BA <core count> 0000 0090`
+
+Where `<core count>` is replaced with the physical core count of your CPU in hexadecimal. For example, an 8-Core 5800X would have the new Replace value be:
+
+* `B8 08 0000 0000`
+* `BA 08 0000 0000`
+* `BA 08 0000 0090`
+
+::: details Core Count => Hexadecimal Table
+
+| Core Count | Hexadecimal |
+| :--------- | :---------- |
+| 4 Core | `04` |
+| 6 Core | `06` |
+| 8 Core | `08` |
+| 12 Core | `0C` |
+| 16 Core | `10` |
+| 24 Core | `18` |
+| 32 Core | `20` |
+| 64 Core | `40` |
+
+:::
 
 ### Bluetooth
 
