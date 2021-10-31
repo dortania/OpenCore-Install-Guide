@@ -132,7 +132,7 @@ $ sudo AssetCacheManagerUtil activate
 AssetCacheManagerUtil[] Failed to activate content caching: Error Domain=ACSMErrorDomain Code=5 "virtual machine"...
 ```
 
-arise due to `VMM` flag being exposed by sysctl, in addition to `kern.hv_vmm_present`, the latter only in mac OS Big sur 11.3 and higher mac OS versions.
+arise due to either the `VMM` flag being exposed by sysctl, or `kern.hv_vmm_present` in macOS Big Sur 11.3 and newer.
 
 Apply [VmAssetCacheEnable](https://github.com/ofawx/VmAssetCacheEnable) kernel patch to disguise the flag and allow normal operation.
 
