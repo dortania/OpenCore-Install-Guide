@@ -73,6 +73,12 @@ Verify the following:
 * CSM is off in the BIOS
 * Forcing PCIe 3.0 link speed
 
+## Sluggish performance, graphics glitching, or macOS GPU acceleration missing
+
+This is often an issue with your GPU's device configuration in your `config.plist`. Refer to [this error](../../troubleshooting/extended/kernel-issues.html#black-screen-or-no-video-output-but-computer-stays-on).
+
+HINT: For Intel iGPU users, click the apple logo -> About This Mac -> Overview -> Graphics. If your iGPU says a smaller number like 7MB or 14MB instead of a larger number like 1536MB, this is a good sign that GPU acceleration isn't working. Trying a different `AAPL,ig-platform-id` as suggested above may help.
+
 ## DRM Broken
 
 Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html) section
