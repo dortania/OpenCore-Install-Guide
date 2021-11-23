@@ -210,4 +210,4 @@ If you're being prompted to update your firmware to install with an APFS volume,
   * ie. you're not using `-no_compat_check`
 * You're using the latest version of OpenCore
 
-If you still receive this error, then there's likely some outdated SMBIOS info in OpenCore itself. We recommend changing to a similar SMBIOS and see if this is resolved. For a full list of SMBIOS, see here: [Choosing the right SMBIOS](../../extras/smbios-support.html)
+If you still receive this error, then there's likely some outdated SMBIOS info in OpenCore itself. We recommend changing to a similar SMBIOS and see if this is resolved. For a full list of SMBIOS, see here: [Choosing the right SMBIOS](../../extras/smbios-support.md)

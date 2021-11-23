@@ -18,7 +18,7 @@ SMBIOS dropped in Monterey:
 * MacBook8,1 and older
 * MacBookAir6,x and older
 * MacBookPro11,3 and older
-  * MacBookPro11,4 and 11,4 are still supported
+  * MacBookPro11,4 and 11,5 are still supported
 
 If your SMBIOS was supported in Big Sur and is not included above, you're good to go!
 
