@@ -37,9 +37,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| name | Data | `23646973706C6179` |
-| IOName | string | #display |
-| class-code | Data | `FFFFFFFF` |
+| disable-gpu | Boolean | `True` |
 
 ![](../images/extras/spoof-md/config-gpu.png)
 
