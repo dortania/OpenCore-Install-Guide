@@ -8,7 +8,7 @@ This section contains a brief rundown as to why the community has been transitio
 
 * More OS Support!
   * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 11, Big Sur!
+  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 12, Monterey!
 * On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
@@ -82,7 +82,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support Target Bridge ACPI patching
 * Does not support Hardware UUID Injection
 * Does not support auto-detection for many Linux bootloader
-  * Can be resolved by adding an entry in `BlessOverride`
+  * Can be resolved by adding an entry in `BlessOverride` or `OpenLinuxBoot` driver
 * Does not support many of Clover's XCPM patches
   * ie. Ivy Bridge XCPM patches
 * Does not support hiding specific drives
@@ -172,6 +172,7 @@ Currently, Intel's Yonah and newer series CPUs have been tested properly with Op
 ### Does OpenCore support Windows/Linux booting?
 
 OpenCore works in the same fashion as any other boot loader, so it respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
+Linux booting is made easier thanks to OpenLinuxBoot which can detect Linux distrubutions from OpenCore, without chainloading via GRUB.
 
 ### Legality of Hackintoshing
 
