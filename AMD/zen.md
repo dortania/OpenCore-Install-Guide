@@ -127,7 +127,7 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. Make sure that AMDRyzenCPUPowerManagement comes *before* SMCAMDProcessor if you choose to use them, as SMCAMDProcessor depends on it. Otherwise, we recommend leaving what ProperTree has done by default, however for 32-bit CPUs please see below:
 
 ::: details More in-depth Info
 
