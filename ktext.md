@@ -89,6 +89,8 @@ The below plugins are not required to boot, and merely add extra functionality t
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
   * Requires Mac OS X 10.7 or newer
+* SMCAMDProcessor
+  * Used for monitoring CPU temperature on AMD CPU based systems, **depends on AMDRyzenCPUPowerManagement.kext**
 * SMCSuperIO.kext
   * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
   * Requires Mac OS X 10.6 or newer
