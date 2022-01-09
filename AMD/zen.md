@@ -135,7 +135,7 @@ The main thing you need to keep in mind is:
 
 * Load order
   * Remember that any plugins should load *after* its dependencies
-  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, AMDRyzenCPUPowerManagement before SMCAMDProcessor, etc
+  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, the kext AMDRyzenCPUPowerManagement before SMCAMDProcessor (if you included them), etc
 
 A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
 
