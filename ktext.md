@@ -311,7 +311,7 @@ However ProperTree will handle this for you, so you need not concern yourself
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
   * Requires OS X 10.6 or newer
 * [AMDRyzenCPUPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor/releases/)
-  * CPU temperature monitoring and control for AMD Zen systems, not designed for AMD FX
+  * Optional CPU temperature monitoring and control for AMD Zen systems, not designed for AMD FX
   * In early development and potentially unstable, not recommeneded for critical systems
   * Most monitoring software requires SMCAMDProcessor (see [VirtualSMC Plugins](ktext.md#virtualsmc-plugins))
 
