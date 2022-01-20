@@ -39,7 +39,7 @@ For CPU support, we have the following breakdown:
 Architecture Requirements
 
 * 32-bit CPUs are supported from 10.4.1 to 10.6.8
-  * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs to 10.6
+  * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs to 10.6 officially. Although, it is possible to run certain versions of 10.7.x on 32-bit processors via various patches.
 * 64-bit CPUs are supported from 10.4.1 to current
 
 SEE Requirements:
