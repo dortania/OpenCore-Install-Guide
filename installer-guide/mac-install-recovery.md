@@ -56,9 +56,9 @@ From here, run one of those commands in terminal and once finished you'll get an
 
 ![](../images/installer-guide/legacy-mac-install-md/download-done.png)
 
-Once this is done, format your USB as FAT32 with GUID Partition Scheme:
+Once this is done, format your USB as "Mac OS Extended (Journaled)" with GUID Partition Scheme:
 
-![](../images/installer-guide/legacy-mac-install-md/fat32-erase.png)
+![]<img width="1066" alt="hfs-erase" src="https://user-images.githubusercontent.com/98128203/150429988-788598a4-080c-4434-a001-dc7b235802fd.png">
 
 And finally, create folder on the root of this drive called `com.apple.recovery.boot` and place the newly downloaded BaseSystem/RecoveryImage files in:
 
