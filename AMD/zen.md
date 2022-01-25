@@ -580,6 +580,9 @@ For this example, we'll choose the MacPro7,1 SMBIOS but some SMBIOS play with ce
   * Note that MacPro7,1 is exclusive to macOS 10.15, Catalina and newer
 * iMacPro1,1: NVIDIA Maxwell and Pascal or AMD RX Polaris and newer
   * Use if you need High Sierra or Mojave, otherwise use MacPro7,1
+* iMac14,2: NVIDIA Maxwell and Pascal
+  * Use if you get black screens on iMacPro1,1 after installing Web Drivers with an NVIDIA GPU
+* MacPro6,1: AMD GCN GPUs
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
