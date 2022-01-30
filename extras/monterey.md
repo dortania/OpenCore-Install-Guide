@@ -95,7 +95,7 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 
 Note that all cards have not been fixed yet, and that bluetooth support is being worked on still.
 
-Do not be suprised if your card does not work, and please be patient!
+Do not be surprised if your card does not work, and please be patient!
 
 :::
 
@@ -116,6 +116,16 @@ See the below issues for more details:
 
 * [BlueToolFixup PR](https://github.com/acidanthera/BrcmPatchRAM/pull/12)
 * [Monterey Beta 5+ issues](https://github.com/acidanthera/bugtracker/issues/1821)
+
+### Ethernet
+
+Intel I211 chipset (typical for some AMD boards i.e. B450) no longer works with SmallTreeIntel82576 kext (network remains in `Cable Unplugged` status).
+
+[AppleIGB](https://github.com/Shaneee/AppleIGB) might work on some systems but it has a known issue to drop connections (primarily after wake-up).
+
+See the below issues for more details:
+
+* [Kext no longer working with MacOS 12.0](https://github.com/khronokernel/SmallTree-I211-AT-patch/issues/3)
 
 ### OTA Updates
 
