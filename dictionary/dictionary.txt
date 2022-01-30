@@ -153,6 +153,7 @@ AppleHDAInput
 AppleHV
 AppleHV's
 AppleID
+AppleIGB
 AppleIntelCPUPM
 AppleIntelCPUPowerManagement
 AppleIntelCPUPowerManagment
@@ -218,6 +219,7 @@ Baudrate
 BeyondCompare
 Big
 BlueScreen
+BlueToolFixup
 BootCamp
 BootInstall
 Bootable
@@ -258,6 +260,8 @@ CPUID's
 CPUs
 CR0
 CSM
+CSR_ALLOW_APPLE_INTERNAL
+CSR_ALLOW_UNAUTHENTICATED_ROOT
 Capitan
 Carcraftz
 Celeron
@@ -1023,6 +1027,7 @@ backlight
 backports
 base64
 bitmask
+bluetooth
 boot-arg
 boot-args
 boot-args.
@@ -1277,6 +1282,7 @@ unenroll
 unmount
 unoptimized
 untrusted
+uploader
 userspace
 v1
 v2
