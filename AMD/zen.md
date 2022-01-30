@@ -574,26 +574,28 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
+For this example, we'll choose the MacPro7,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
 
-* iMacPro1,1: AMD RX Polaris and newer
 * MacPro7,1: AMD RX Polaris and newer
   * Note that MacPro7,1 is exclusive to macOS 10.15, Catalina and newer
-* MacPro6,1: AMD R5/R7/R9 and older
-* iMac14,2: Nvidia Kepler and newer
-  * Note: iMac14,2 is only supported to macOS 10.8-10.15, for macOS 11, Big Sur and newer please use MacPro7,1
+* iMacPro1,1: NVIDIA Maxwell and Pascal or AMD RX Polaris and newer
+  * Use if you need High Sierra or Mojave, otherwise use MacPro7,1
+* iMac14,2: NVIDIA Maxwell and Pascal
+  * Use if you get black screens on iMacPro1,1 after installing Web Drivers with an NVIDIA GPU
+* MacPro6,1: AMD GCN GPUs
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
   #######################################################
- #              iMacPro1,1 SMBIOS Info                 #
+ #               MacPro7,1 SMBIOS Info                 #
 #######################################################
 
-Type:         iMacPro1,1
-Serial:       C02YX0TZHX87
-Board Serial: C029269024NJG36CB
-SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
+Type:         MacPro7,1
+Serial:       F5KZV0JVP7QM
+Board Serial: F5K9518024NK3F7JC
+SmUUID:       535B897C-55F7-4D65-A8F4-40F4B96ED394
+Apple ROM:    001D4F0D5E22
 ```
 
 The order is `Product | Serial | Board Serial (MLB)`
@@ -606,7 +608,7 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
+The `Apple ROM` part gets copied to Generic -> ROM.
 
 **Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
