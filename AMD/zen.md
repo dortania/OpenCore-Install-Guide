@@ -279,7 +279,6 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 | 16 Core | `10` |
 | 24 Core | `18` |
 | 32 Core | `20` |
-| 64 Core | `40` |
 
 :::
 
