@@ -81,6 +81,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | EnableWriteUnprotector | NO |
 | ProtectUefiServices | YES |
 | RebuildAppleMemoryMap | YES |
+| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable Bar Support), set this to `0` |
 | SetupVirtualMap | NO |
 | SyncRuntimePermissions | YES |
 :::
@@ -102,6 +103,10 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this.
+* **ResizeAppleGpuBars**: -1
+  * Will reduce the size of GPU PCI Bars if set to zero when booting macOS.
+  * Setting other PCI Bar values is possible with this quirk, though can cause instabilities
+  * This quirk being set to zero is only necessary if Resizable GPU Bar Support is enabled in your firmware.
 * **SetupVirtualMap**: NO
   * Fixes SetVirtualAddresses calls to virtual addresses, however broken due to Comet Lake's memory protections. ASUS, Gigabyte and AsRock boards will not boot with this on.
 * **SyncRuntimePermissions**: YES
@@ -760,7 +765,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * VT-x
 * Above 4G decoding
-  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure this is **Disabled** instead of set to Auto.
+  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off

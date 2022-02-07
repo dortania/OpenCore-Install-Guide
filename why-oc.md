@@ -8,7 +8,7 @@ This section contains a brief rundown as to why the community has been transitio
 
 * More OS Support!
   * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 11, Big Sur!
+  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 12, Monterey!
 * On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
@@ -32,38 +32,6 @@ The biggest reason someone may want to switch from other boot loaders is actuall
   * [APFS Support](https://github.com/acidanthera/AppleSupportPkg)
   * [FileVault support](https://github.com/acidanthera/AppleSupportPkg)
   * [Firmware patches](https://github.com/acidanthera/AptioFixPkg)
-* [AMD OSX patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore):
-  * Have AMD-based hardware? The kernel patches required to boot macOS no longer support Clover – they now only support OpenCore.
-
-### Kext Injection
-
-To better understand OpenCore's kext injection system, we should first look at how Clover works:
-
-1. Patches SIP open
-2. Patches to enable XNU's zombie code for kext injection
-3. Patches race condition with kext injection
-4. Injects kexts
-5. Patches SIP back in
-
-Things to note with Clover's method:
-
-* Calling XNU's zombie code that hasn't been used since 10.7, it's seriously impressive Apple hasn't removed this code yet
-  * OS updates commonly break this patch, like recently with 10.14.4 and 10.15
-* Disables SIP and attempts to re-enable it, don't think much needs to be said
-* Likely to break with macOS 11.0 (Big Sur)
-* Supports OS X all the way back to 10.5
-
-Now let's take a look at OpenCore's method:
-
-1. Takes existing prelinked kernel and kexts ready to inject
-2. Rebuilds the cache in the EFI environment with the new kexts
-3. Adds this new cache in
-
-Things to note with OpenCore's method:
-
-* OS agnostic as the prelinked kernel format has stayed the same since 10.6 (v2), far harder to break support.
-  * OpenCore also supports prelinked kernel (v1, found in 10.4 and 10.5), cacheless, Mkext and KernelCollections, meaning it also has proper support for all Intel versions of OS X/macOS
-* Far better stability as there is far less patching involved
 
 ## OpenCore's shortcomings
 
@@ -79,7 +47,6 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support IRQ conflict patching
   * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
 * Does not support P and C state generation for older CPUs
-* Does not support Target Bridge ACPI patching
 * Does not support Hardware UUID Injection
 * Does not support auto-detection for many Linux bootloader
   * Can be resolved by adding an entry in `BlessOverride`
@@ -171,7 +138,7 @@ Currently, Intel's Yonah and newer series CPUs have been tested properly with Op
 
 ### Does OpenCore support Windows/Linux booting?
 
-OpenCore works in the same fashion as any other boot loader, so it respects other OSes the same way. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
+OpenCore will automatically detect Windows without any additional configuration. With OpenCore 0.7.3, OpenLinuxBoot was added to OpenCore as an EFI driver, which will automatically detect Linux partitions. This requires either [ext4_x64.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/ext4_x64.efi) or [btrfs_x64.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/btrfs_x64.efi) depending on which format it used in your distro. For any OSes where their bootloader has an irregular path or name, you can simply add it to the BlessOverride section.
 
 ### Legality of Hackintoshing
 
