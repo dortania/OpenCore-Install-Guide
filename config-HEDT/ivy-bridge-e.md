@@ -594,6 +594,7 @@ Both MinVersion and MinDate need to be set if changing the minimum version.
 | High Sierra (`10.13.6`) | `748077008000000` | `20180621` |
 | Mojave (`10.14.6`) | `945275007000000` | `20190820` |
 | Catalina (`10.15.4`) | `1412101001000000` | `20200306` |
+| Big Sur (`11.4`) | `1677120009000000` | `20210508` |
 | No restriction | `-1` | `-1` |
 
 :::
