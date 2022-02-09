@@ -353,7 +353,7 @@ The main places to check:
   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
     * Some X99 and X299 boards(ie. GA-X299-UD4) may require both npci boot-arg and Above4G enabled
     * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
-    * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure this is **Disabled** instead of set to Auto.
+    * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
 * **NVMe or SATA issue**:
   * Sometimes if either a bad SATA controller or an unsupported NVMe drive are used, you can commonly get stuck here. Things you can check:

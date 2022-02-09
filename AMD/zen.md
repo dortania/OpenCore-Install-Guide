@@ -79,6 +79,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualiseMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
+| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable Bar Support), set this to `0` |
 | SetupVirtualMap | YES | - Note B550, A520 and TRx40 boards should disable this. Newer BIOS versions of X570 also require this off<br/>- X470 and B450 with late 2020 BIOS updates also require this disabled |
 | SyncRuntimePermissions | YES | |
 :::
@@ -96,6 +97,10 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+* **ResizeAppleGpuBars**: -1
+  * Will reduce the size of GPU PCI Bars if set to zero when booting macOS.
+  * Setting other PCI Bar values is possible with this quirk, though can cause instabilities
+  * This quirk being set to zero is only necessary if Resizable GPU Bar Support is enabled in your firmware.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
   * B550, A520 and TRx40 boards should disable this quirk
@@ -574,26 +579,28 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
-For this example, we'll choose the iMacPro1,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
+For this example, we'll choose the MacPro7,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
 
-* iMacPro1,1: AMD RX Polaris and newer
 * MacPro7,1: AMD RX Polaris and newer
   * Note that MacPro7,1 is exclusive to macOS 10.15, Catalina and newer
-* MacPro6,1: AMD R5/R7/R9 and older
-* iMac14,2: Nvidia Kepler and newer
-  * Note: iMac14,2 is only supported to macOS 10.8-10.15, for macOS 11, Big Sur and newer please use MacPro7,1
+* iMacPro1,1: NVIDIA Maxwell and Pascal or AMD RX Polaris and newer
+  * Use if you need High Sierra or Mojave, otherwise use MacPro7,1
+* iMac14,2: NVIDIA Maxwell and Pascal
+  * Use if you get black screens on iMacPro1,1 after installing Web Drivers with an NVIDIA GPU
+* MacPro6,1: AMD GCN GPUs
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
   #######################################################
- #              iMacPro1,1 SMBIOS Info                 #
+ #               MacPro7,1 SMBIOS Info                 #
 #######################################################
 
-Type:         iMacPro1,1
-Serial:       C02YX0TZHX87
-Board Serial: C029269024NJG36CB
-SmUUID:       DEA17B2D-2F9F-4955-B266-A74C47678AD3
+Type:         MacPro7,1
+Serial:       F5KZV0JVP7QM
+Board Serial: F5K9518024NK3F7JC
+SmUUID:       535B897C-55F7-4D65-A8F4-40F4B96ED394
+Apple ROM:    001D4F0D5E22
 ```
 
 The order is `Product | Serial | Board Serial (MLB)`
@@ -606,7 +613,7 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
+The `Apple ROM` part gets copied to Generic -> ROM.
 
 **Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
 
@@ -763,7 +770,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x2000` to boot-args. Do not have both this option and npci enabled at the same time.**)
   * If you are on a Gigabyte/Aorus or an AsRock motherboard, enabling this option may break certain drivers(ie. Ethernet) and/or boot failures on other OSes, if it does happen then disable this option and opt for npci instead
-  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some X570 and newer motherboards. Please ensure this is **Disabled** instead of set to Auto.
+  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some X570 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
 * SATA Mode: AHCI

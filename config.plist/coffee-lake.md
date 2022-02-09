@@ -218,6 +218,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 10.14 | 18.0.0 | 18.99.99 |
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
+| 12 | 21.0.0 | 21.99.99 |
 
 :::
 
