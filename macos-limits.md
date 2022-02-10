@@ -77,7 +77,7 @@ Special Notes:
 * Lilu and plugins require 10.8 or newer to operate
   * We recommend running FakeSMC for older versions of OS X
 * OS X 10.6 and older require RebuildAppleMemoryMap enabled
-  * This is to resolve an early kernel
+  * This is to resolve an early kernel panic
 
 :::
 
@@ -134,23 +134,23 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
 
 GPU support becomes much more complicated due to the near-infinite amount of GPUs on the market, but the general breakdown is as follows:
 
-* AMD's GCN based GPUs are supported in the latest versions of macOS
+* AMD's GCN based GPUs and later are supported in the latest versions of macOS
   * AMD APUs are not supported however
   * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
   * Special note for MSI Navi users: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
-    * This issue is no longer present in macOS 11 (Big Sur).
-* Nvidia's GPU support is complicated:
+    * This issue is no longer present in macOS 11 (Big Sur) and later.
+* NVIDIA's GPU support is complicated:
   * [Maxwell (900 series)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal (10 series)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
   * [Turing (20 series,](https://en.wikipedia.org/wiki/GeForce_20_series)[16 series)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
   * [Ampere (30 series)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
-  * [Kepler(600 and majority of 700 series](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported up to macOS 11: Big Sur
+  * [Kepler (600 series](https://en.wikipedia.org/wiki/GeForce_600_series), [700 series)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported up to macOS 11: Big Sur
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
     * Info on GMA series iGPUs can be found here: [GMA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
   * Note GT2 refers to the tier of iGPU, low-end GT1 iGPUs found on Pentiums, Celerons and Atoms are not supported in macOS
 * Intel's Rocket Lake and Alder Lake iGPUs are not supported
 
-And an important note for **Laptops with discrete GPUs**:
+And an important note for **laptops with discrete GPUs**:
 
 * 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these discrete GPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide).
 * However, in some cases, the discrete GPU powers any external outputs (HDMI, mini DisplayPort, etc.), which may or may not work; in the case that it will work, you will have to keep the card on and running.
@@ -188,14 +188,16 @@ And an important note for **Laptops with discrete GPUs**:
 | [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | ^^ | N/A |
 | [TeraScale](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.4.x | 10.13.6 | ^^ |
 | [TeraScale 2/3](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.6.x | ^^ | ^^ |
-| [GCN 1](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.8.3 | <span style="color:green"> Current </span> | ^^ |
+| [GCN 1](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.8.3 | <span style="color:green">Current</span> | ^^ |
 | [GCN 2/3](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.10.x | ^^ | ^^ |
 | [Polaris 10](https://en.wikipedia.org/wiki/Radeon_RX_400_series), [20](https://en.wikipedia.org/wiki/Radeon_RX_500_series) | 10.12.1 | ^^ | ^^ |
 | [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
 | [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
 | [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | Requires `agdpmod=pikera` in boot-args |
 | [Navi 21](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | N/A |
-| [Navi 23](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 12.1 | ^^ | Only the RX 6600 XT is officially supported, RX 6600 users may or may not be successful |
+| [Navi 22](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | None | None | This GPU is used only in the RX 6700 XT. |
+| [Navi 23](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 12.1 | <span style="color:green">Current</span> | N/A |
+| [Navi 24](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | None | None | This GPU is used only in the RX 6500 XT. |
 
 :::
 
