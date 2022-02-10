@@ -22,15 +22,15 @@ For CPU support, we have the following breakdown:
 * Both 32 and 64-bit CPUs are supported
   * This however requires the OS to support your architecture, see CPU Requirements section below
 * Intel's Desktop CPUs are supported.
-  * Yonah through Comet Lake are supported by this guide.
+  * Yonah through Comet Lake and Alder Lake are supported by this guide.
 * Intel's High-End Desktops and Server CPUs.
   * Nehalem through Cascade Lake X are supported by this guide.
 * Intel's Core "i" and Xeon series laptop CPUs
   * Arrandale through Ice Lake are supported by this guide.
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
-  * Laptop CPUs are **not** supported
-  * Note not all features of macOS are supported with AMD, see below
+  * Laptops are **not** supported
+  * Note: not all features of macOS are supported with AMD, see below
 
 **For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
@@ -140,14 +140,15 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
   * Special note for MSI Navi users: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
     * This issue is no longer present in macOS 11 (Big Sur).
 * Nvidia's GPU support is complicated:
-  * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
-  * [Nvidia's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
-  * [Nvidia's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
-  * [Nvidia's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported up to macOS 11: Big Sur
+  * [Maxwell (900 series)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal (10 series)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
+  * [Turing (20 series,](https://en.wikipedia.org/wiki/GeForce_20_series)[16 series)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
+  * [Ampere (30 series)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
+  * [Kepler(600 and majority of 700 series](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported up to macOS 11: Big Sur
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
     * Info on GMA series iGPUs can be found here: [GMA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
   * Note GT2 refers to the tier of iGPU, low-end GT1 iGPUs found on Pentiums, Celerons and Atoms are not supported in macOS
+* Intel's Rocket Lake and Alder Lake iGPUs are not supported
 
 And an important note for **Laptops with discrete GPUs**:
 
@@ -175,6 +176,7 @@ And an important note for **Laptops with discrete GPUs**:
 | [Ice Lake(Gx)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen11) | 10.15.4 | ^^ | Requires `-igfxcdc` and `-igfxdvmt` in boot-args |
 | [Tiger Lake(Xe)](https://en.wikipedia.org/wiki/Intel_Xe) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
 | [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
+| [Alder Lake](https://en.wikipedia.org/wiki/Alder_Lake_(microprocessor)) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
 
 :::
 
@@ -192,7 +194,8 @@ And an important note for **Laptops with discrete GPUs**:
 | [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
 | [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
 | [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | Requires `agdpmod=pikera` in boot-args |
-| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | <span style="color:yellow"> Currently only some Navi 21 models are working </span> |
+| [Navi 21](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | N/A |
+| [Navi 23](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 12.1 | ^^ | Only the RX 6600 XT is officially supported, RX 6600 users may or may not be successful |
 
 :::
 

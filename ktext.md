@@ -67,8 +67,6 @@ A kext is a **k**ernel **ext**ension, you can think of this as a driver for macO
   * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.
 * **Location Note**: These files **must** be placed under `EFI/OC/Kexts/`.
 
-All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
-
 ### Must haves
 
 ::: tip Required Kexts
@@ -143,7 +141,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Required for I211 NICs, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet)
 )
   * Required for most AMD boards running Intel NICs
-  * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
+  * Requires OS X 10.9-12 (v1.0.6), macOS 10.13-14 (v1.2.5), macOS 10.15+ (v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
   * Required for Atheros and Killer NICs
   * Requires OS X 10.8 or newer
@@ -232,6 +230,10 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### USB
 
+* [USBWakeFixup](https://github.com/osy/USBWakeFixup/releases/)
+  * Needed on Rocket Lake and Alder Lake
+  * Requires SSDT-USBW, see [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
+
 * [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
   * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
   * Shouldn't be needed on Desktop Skylake and newer
@@ -247,21 +249,26 @@ pci14e4,1686 = Broadcom BCM57766
     * H370
     * B360
     * H310
-    * Z390(Not needed on Mojave and newer)
+    * Z390 (Not needed on Mojave and newer)
     * X79
     * X99
-    * AsRock boards(On Intel motherboards specifically, B460/Z490+ boards do not need it however)
+    * AsRock boards (On Intel motherboards specifically, B460/Z490+ boards do not need it however)
 
-### WiFi and Bluetooth
+### Wi-Fi and Bluetooth
 
 #### Intel
 
-* [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
+* [AirportItlwm and itlwm](https://github.com/OpenIntelWireless/itlwm/releases)
   * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
   * Requires macOS 10.13 or newer and requires Apple's Secure Boot to function correctly
+
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * Adds Bluetooth support to macOS when paired with an Intel wireless card
   * Requires macOS 10.13 or newer
+  * Do not add IntelBluetoothInjector if using macOS Monterey
+
+* [BlueToolFixup](https://github.com/acidanthera/BrcmPatchRAM/releases/)
+  * Needed on macOS Monterey for Bluetooth
 
 ::: details More info on enabling AirportItlwm
 
@@ -269,7 +276,7 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
 
 * Enable `Misc -> Security -> SecureBootModel` by either setting it as `Default` or some other valid value
   * This is discussed both later on in this guide and in the post-install guide: [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html)
-* If you cannot enable SecureBootModel, you can still force inject IO80211Family(**Highly discouraged**)
+* If you cannot enable SecureBootModel, you can still force inject IO80211Family (**Highly discouraged**)
   * Set the following under `Kernel -> Force` in your config.plist(discussed later in this guide):
   
 ![](./images/ktext-md/force-io80211.png)
@@ -297,13 +304,13 @@ The order in `Kernel -> Add` should be:
 2. BrcmFirmwareData
 3. BrcmPatchRAM3
 
-However ProperTree will handle this for you, so you need not concern yourself
+However ProperTree will handle this for you, so you need not concern yourself.
 
 :::
 
-### AMD CPU Specific kexts
+### AMD CPU-specific kexts
 
-* [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
+* [XLNCUSBFix](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
   * USB fix for AMD FX systems, not recommended for Ryzen
   * Requires macOS 10.13 or newer
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
@@ -311,6 +318,10 @@ However ProperTree will handle this for you, so you need not concern yourself
   * Requires OS X 10.6 or newer
 
 ### Extras
+
+* [CpuTopologyRebuild](https://github.com/b00t0x/CpuTopologyRebuild/releases/)
+  * Used on Alder Lake for potential slight performance improvements at the cost of a slight increase in power consumption
+  * Still undergoing testing, use at your own risk
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
   * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
@@ -324,9 +335,9 @@ However ProperTree will handle this for you, so you need not concern yourself
   * **Does not work on AMD CPUs**
   * Requires OS X 10.8 or newer
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
-  * Used for fixing power management and initialization on non-Apple NVMe
+  * Used for fixing power management and initialization on non-Apple NVMe drives
   * Requires macOS 10.14 or newer
-* [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
+* [SATA-unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
   * macOS Big Sur Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
     * Catalina and older need not concern
@@ -421,6 +432,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
+| Alder Lake | [SSDT-PLUG-ALT](PLACEHOLDER) | ^^ | ^^ | ^^ | [SSDT-USBW](PLACEHOLDER) |
 | AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
 | AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
 
