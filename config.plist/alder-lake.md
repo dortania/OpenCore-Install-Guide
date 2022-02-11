@@ -776,6 +776,8 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection) (**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG Lock enabled**)
+* iGPU
+  * You may have sleep or DRM issues if you do not disable this since Alder Lake iGPUs are not supported in macOS.
 
 ### Enable
 
