@@ -416,7 +416,7 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 
 [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) has an extended section on SSDTs including compiling them on different platforms.
 
-A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
+A quick TL;DR of needed SSDTs (This is source code, you will have to compile them into a .aml file):
 
 ### Desktop
 
@@ -432,7 +432,8 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
-| Alder Lake | [SSDT-PLUG-ALT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug-alt.html) | ^^ | ^^ | ^^ | [SSDT-USBW](https://dortania.github.io/Getting-Started-With-ACPI/Universal/usbw.html) |
+| Rocket Lake | ^^ | ^^ | ^^ | ^^ | [SSDT-USBW](https://dortania.github.io/Getting-Started-With-ACPI/Universal/usbw.html) |
+| Alder Lake | [SSDT-PLUG-ALT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug-alt.html) | ^^ | ^^ | ^^ | ^^ |
 | AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
 | AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
 
