@@ -288,7 +288,7 @@ Settings for the OpenCore picker.
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :---|
-| HideAuxiliary | No | This quirk hides entries from the picker considered to be 'auxiliary', such as macOS recovery, tools, and Time Machine drives. If you would like to hide these entries from the picker, enable this quirk, however please be aware that you will need to press the spacebar in the OpenCore picker to get the macOS installer to show up. |
+| HideAuxiliary | Yes | This quirk hides entries from the picker considered to be 'auxiliary.' This includes macOS recovery, tools, Reset NVRAM, etc. This means that you will need to press space in the OpenCore picker in order for the macOS installer to show up. If you can't rely on yourself remembering this, or if you don't want these entries to be hidden, then disable this quirk. |
 
 :::
 
