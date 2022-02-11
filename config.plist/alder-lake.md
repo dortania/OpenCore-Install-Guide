@@ -39,9 +39,10 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | :--- | :--- |
 | **[SSDT-PLUG-ALT](https://dortania.github.io/Getting-Started-With-ACPI/)** | Adds ACPI `Processor` objects since macOS does not support `Device` objects used on newer boards, see [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This the 300 and 600 series RTC patch, required for all B660 and Z690 boards. The alternative is SSDT-RTC0 or SSDT-AWAC, depending on the ACPI definitions in your DSDT, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-SBUS-MCHC](https://dortania.github.io/Getting-Started-With-ACPI/)** | May not be needed for everyone. Fixes AppleSMBus support, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-USBW](https://dortania.github.io/Getting-Started-With-ACPI/)** | Companion to the USBWakeFixup kext, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This the 300 and 600 series RTC patch, required for all B660 and Z690 boards. The alternative is SSDT-RTC0 or SSDT-AWAC-DISABLE, depending on the ACPI definitions in your DSDT, see [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-SBUS-MCHC](https://dortania.github.io/Getting-Started-With-ACPI/)** | May not be needed for everyone. Fixes AppleSMBus support, see [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-BRG0](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed on some systems to restore missing devices to your ACPI tables, which fixes DeviceProperties injection issues. See [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI) for more details.
+| **[SSDT-USBW](https://dortania.github.io/Getting-Started-With-ACPI/)** | Companion to the USBWakeFixup kext, see [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
