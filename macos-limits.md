@@ -42,7 +42,7 @@ Architecture Requirements
   * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs to 10.6
 * 64-bit CPUs are supported from 10.4.1 to current
 
-SEE Requirements:
+SSE Requirements:
 
 * SSE3 is required for all Intel versions of OS X/macOS
 * SSSE3 is required for all 64-bit versions of OS X/macOS

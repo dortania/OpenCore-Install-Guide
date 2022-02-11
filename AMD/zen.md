@@ -79,6 +79,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualiseMmio | NO | Note TRx40 requires this flag |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
+| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable Bar Support), set this to `0` |
 | SetupVirtualMap | YES | - Note B550, A520 and TRx40 boards should disable this. Newer BIOS versions of X570 also require this off<br/>- X470 and B450 with late 2020 BIOS updates also require this disabled |
 | SyncRuntimePermissions | YES | |
 :::
@@ -96,6 +97,10 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+* **ResizeAppleGpuBars**: -1
+  * Will reduce the size of GPU PCI Bars if set to zero when booting macOS.
+  * Setting other PCI Bar values is possible with this quirk, though can cause instabilities
+  * This quirk being set to zero is only necessary if Resizable GPU Bar Support is enabled in your firmware.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
   * B550, A520 and TRx40 boards should disable this quirk
@@ -773,7 +778,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x2000` to boot-args. Do not have both this option and npci enabled at the same time.**)
   * If you are on a Gigabyte/Aorus or an AsRock motherboard, enabling this option may break certain drivers(ie. Ethernet) and/or boot failures on other OSes, if it does happen then disable this option and opt for npci instead
-  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some X570 and newer motherboards. Please ensure this is **Disabled** instead of set to Auto.
+  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some X570 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode
 * SATA Mode: AHCI
