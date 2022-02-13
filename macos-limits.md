@@ -22,7 +22,7 @@ For CPU support, we have the following breakdown:
 * Both 32 and 64-bit CPUs are supported
   * This however requires the OS to support your architecture, see CPU Requirements section below
 * Intel's Desktop CPUs are supported.
-  * Yonah through Comet Lake and Alder Lake are supported by this guide.
+  * Yonah through Alder Lake are supported by this guide.
 * Intel's High-End Desktops and Server CPUs.
   * Nehalem through Cascade Lake X are supported by this guide.
 * Intel's Core "i" and Xeon series laptop CPUs
