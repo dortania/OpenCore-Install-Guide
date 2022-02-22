@@ -38,7 +38,7 @@ For the majority of systems, you'll only need 2 `.efi` drivers to get up and run
 In addition to the above, if your hardware doesn't support UEFI(2011 and older era) then you'll need the following. Pay close attention to each entry as you may not need all 4:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI (Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
   * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons))
   * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
@@ -66,6 +66,8 @@ A kext is a **k**ernel **ext**ension, you can think of this as a driver for macO
 * **Windows and Linux note**: Kexts will look like normal folders in your OS, **double check** that the folder you are installing has a .kext extension visible(and do not add one manually if it's missing).
   * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.
 * **Location Note**: These files **must** be placed under `EFI/OC/Kexts/`.
+
+All kexts listed below can be found pre-compiled either from the GitHub links we provide below, or from the [Dortania Build Repo](https://dortania.github.io/builds/).
 
 ### Must haves
 
@@ -106,7 +108,7 @@ The below plugins are not required to boot, and merely add extra functionality t
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
   * Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
-  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
+  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting Started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
   * Requires Mac OS X 10.6 or newer
 
 ### Audio
@@ -339,7 +341,7 @@ However ProperTree will handle this for you, so you need not concern yourself.
   * Requires macOS 10.14 or newer
 * [SATA-unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
-  * macOS Big Sur Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
+  * Note for macOS Big Sur and newer: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
     * Catalina and older need not concern
 
 ::: details Legacy SATA Kexts
