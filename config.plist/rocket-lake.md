@@ -92,7 +92,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc.
 * **DevirtualiseMmio**: YES
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues , requires `ProtectUefiServices` as well for Z490.
+  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues , requires `ProtectUefiServices` as well for Z490, Z590, and Z690.
 * **EnableSafeModeSlide**: YES
   * Enables slide variables to be used in safe mode.
 * **EnableWriteUnprotector**: NO
