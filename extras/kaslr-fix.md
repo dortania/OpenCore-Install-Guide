@@ -128,6 +128,8 @@ And just to make it a bit clearer on the formula:
 
 `0x100000` + (Slide Value in HEX * `0x200000`) = Your original HEX value(if not then add +1 to your slide value)
 
+With this formula in mind, the highest Start value you would be able to use to give you a low enough slide value would be 0x20100000.
+
 Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`). If this value still gives you errors then you may proceed to the second-largest `Start` value and so on.
 
 Sometimes you may find that when you calculate slide that you receive super small vales like `slide=-0.379150390625`, when this happens round this to `slide=0`.
