@@ -260,7 +260,7 @@ pci14e4,1686 = Broadcom BCM57766
 
 #### Intel
 
-* [AirportItlwm and itlwm](https://github.com/OpenIntelWireless/itlwm/releases)
+* [itlwm/AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
   * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
   * Requires macOS 10.13 or newer and requires Apple's Secure Boot to function correctly
 
