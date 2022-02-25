@@ -144,7 +144,7 @@ Fun Fact: The reason the byte order is swapped is because most modern processors
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
+Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done.
 
 ::: details More in-depth Info
 
