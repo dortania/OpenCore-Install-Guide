@@ -66,7 +66,7 @@ The reason we need to reset the memory map is we want it to be more deterministi
 * Clear CMOS
 * Enable much needed BIOS settings:
   * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on some X99, X299 so recommended to test with and without.
-    * Note: On BIOS supporting Resizable BAR Support, enabling Above4G will unlock this option. Ensure BAR support is disabled if the option presents itself.
+    * Note: On BIOS supporting Resizable BAR Support, enabling Above4G will unlock this option. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
   * `Boot Options -> Windows8.1/10 mode`: This will make sure no old legacy garbage is loaded. Fun fact, `other OS` is only designed for booting older versions of Windows and not for other OS.
 * Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:
   * `CSM`: For legacy support, adds a bunch of garbage we don't want. This also can break the shell so you can't boot into it.
@@ -127,6 +127,8 @@ And just to make it a bit clearer on the formula:
 (HEX - `0x100000`)/`0x200000` = Slide Value in HEX
 
 `0x100000` + (Slide Value in HEX * `0x200000`) = Your original HEX value(if not then add +1 to your slide value)
+
+With this formula in mind, the highest Start value you would be able to use to give you a low enough slide value would be 0x20100000.
 
 Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`). If this value still gives you errors then you may proceed to the second-largest `Start` value and so on.
 
