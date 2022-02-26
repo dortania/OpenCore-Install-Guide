@@ -121,7 +121,7 @@ See the below issues for more details:
 
 Intel I211 chipset (typical for some AMD boards i.e. B450) no longer works with SmallTreeIntel82576 kext (network remains in `Cable Unplugged` status).
 
-[AppleIGB](https://github.com/Shaneee/AppleIGB) might work on some systems but it has a known issue to drop connections (primarily after wake-up).
+[AppleIGB](https://github.com/donatengit/AppleIGB/releases) confirmed working on I211 @ B450, but NICs on other boards might experience issues (please [report](https://github.com/donatengit/AppleIGB/issues) if any)
 
 See the below issues for more details:
 
