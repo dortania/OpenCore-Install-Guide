@@ -28,6 +28,10 @@ This is likely some error either on your firmware or OpenCore, specifically it's
     * **HiiDatabase.efi load issues:**
       * Likely your firmware already supports HiiDatabase, so the driver is conflicting. Simply remove the driver as you don't need it.
 
+## Stuck on `BOOT MISMATCH! BOOT FAIL!`
+
+Try to make the USB installer drive to be the first BOOT device in BIOS/UEFI settings.
+
 ## Stuck on `no vault provided!`
 
 Turn off Vaulting in your config.plist under `Misc -> Security -> Vault` by setting it to:
