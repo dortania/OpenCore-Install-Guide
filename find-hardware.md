@@ -16,7 +16,8 @@ For this we mainly have 2 options:
 Due to the easier to use GUI, we recommend downloading AIDA64 and running this as it's much easier to grab specs. However we'll show you both methods for obtaining hardware specs.
 
 ### CPU Model
-
+Use Powershell:
+<code>Get-WmiObject win32_processor|Select-Object -ExpandProperty name</code>
 | AIDA64 | Device Manager|
 | :--- | :--- |
 | ![](./images/finding-hardware-md/cpu-model-aida64.png) | ![](./images/finding-hardware-md/cpu-model-devicemanager.png) |
