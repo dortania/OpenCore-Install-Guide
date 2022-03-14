@@ -312,7 +312,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 ### Extras
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-  * Required in macOS 12.3 and above on dual-socket systems, AMD systems, and VMs. Do not use if on macOS 12.2 or below.
+  * Required in macOS 12.3 and above on AMD systems and dual-socket systems. Do not use if on macOS 12.2.1 or below.
   * Affected SMBIOSes:
     * MacPro6,1
     * MacPro7,1
