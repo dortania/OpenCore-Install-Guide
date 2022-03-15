@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
+          node-version: '16'
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: '0'
+          fetch-depth: '1'
           persist-credentials: false
           submodules: 'recursive'
       - name: Install
@@ -37,11 +37,11 @@ jobs:
     steps:
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
+          node-version: '16'
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: '0'
+          fetch-depth: '1'
           submodules: 'recursive'
       - name: Install
         run: npm install
@@ -53,7 +53,7 @@ jobs:
   #   steps:
   #     - uses: actions/setup-node@v2-beta
   #       with:
-  #         node-version: '12'
+  #         node-version: '16'
   #     - name: Checkout Repository
   #       uses: actions/checkout@v2
   #       with:
