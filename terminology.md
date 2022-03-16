@@ -32,7 +32,7 @@ Term | Description
 Term | Description
 --- | ---
 **EC** | Embedded Controller. Communicates between the main board and embedded peripherals such as hotkeys, ports, or battery.
-**PLUG** | Allows for XCPM, Apple XNU power management, to attach allowing for better overall CPU control. Only supported on Haswell and newer.
+**PLUG** | Allows for XCPM, Apple XNU (OS kernel) power management, to attach allowing for better overall CPU control. Only supported on Haswell and newer.
 **AWAC** | ACPI Wake Alarm Counter Clock, the board's internal clock. Contrast with the Real-Time Clock (RTC). macOS cannot communicate with AWAC clocks, so they must be patched.
 **PMC** | Power Management Controller, on B360, B365, H310, H370, Z390 motherboards OEMs forgot to map this region and so need SSDT-PMC to avoid page-faults
 **PNLF** | Internal backlight display, macOS uses this PNLF device to send and receive info for brightness control
