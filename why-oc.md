@@ -75,7 +75,8 @@ Current road map:
 
 * 2019: Year of Beta
 * 2020: Year of Secure Boot
-* 2021: Year of Refinement
+* 2021,
+* 2022: Years of Refinement
 
 So please do not see the version number as a hindrance, instead as something to look forward to.
 
