@@ -1,7 +1,5 @@
 # Disabling GPU
 
-* Supported version: 0.6.6
-
 So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
 
 * Boot Flag
@@ -39,9 +37,7 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| name | data | 23646973706C6179 |
-| IOName | string | #display |
-| class-code | data | FFFFFFFF |
+| disable-gpu | Boolean | `True` |
 
 ![](../images/extras/spoof-md/config-gpu.png)
 

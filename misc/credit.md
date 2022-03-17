@@ -1,7 +1,5 @@
 # Credits
 
-* Supported version: 0.6.6
-
 No good guide is made by one man, here's credit to those who've helped out:
 
 * [vit9696](https://github.com/vit9696)

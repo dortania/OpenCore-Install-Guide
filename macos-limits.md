@@ -4,13 +4,7 @@ With macOS, there are numerous hardware limitations you need to be aware of befo
 
 The main hardware sections to verify are:
 
-* [CPU](#cpu-support)
-* [GPU](#gpu-support)
-* [Motherboard](#motherboard-support)
-* [Storage](#storage-support)
-* [Wired Networking](#wired-networking)
-* [Wireless Networking](#wireless-networking)
-* [Miscellaneous](#miscellaneous)
+[[toc]]
 
 And for more detailed guides on the subject, see here:
 
@@ -32,7 +26,7 @@ For CPU support, we have the following breakdown:
 * Intel's High-End Desktops and Server CPUs.
   * Nehalem through Cascade Lake X are supported by this guide.
 * Intel's Core "i" and Xeon series laptop CPUs
-  * Arrendale through Ice Lake are supported by this guide.
+  * Arrandale through Ice Lake are supported by this guide.
   * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
 * AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
   * Laptop CPUs are **not** supported
@@ -48,7 +42,7 @@ Architecture Requirements
   * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs to 10.6
 * 64-bit CPUs are supported from 10.4.1 to current
 
-SEE Requirements:
+SSE Requirements:
 
 * SSE3 is required for all Intel versions of OS X/macOS
 * SSSE3 is required for all 64-bit versions of OS X/macOS
@@ -71,6 +65,12 @@ Kernel Requirements:
   * OS X 10.6 and 10.7 support both 32 and 64-bit kernelspace
 * OS X 10.8 and newer require 64-bit kexts due to only supporting 64-bit kernelspace
   * Run `lipo -archs` to know what architectures your kext supports (remember to run this on the binary itself and not the .kext bundle)
+
+Core/Thread Count Limits:
+
+* OS X 10.10 and below may not boot with more than 24 threads (evident by a `mp_cpus_call_wait() timeout` panic)
+* OS X 10.11 and newer have a 64 thread limit
+* `cpus=` boot argument can be used as a workaround, or disabling hyperthreading
 
 Special Notes:
 
@@ -95,7 +95,7 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 | [Lynnfield](https://en.wikipedia.org/wiki/Lynnfield_(microprocessor)), [Clarksfield](https://en.wikipedia.org/wiki/Clarksfield_(microprocessor)) | 10.6.3 | ^^ | No iGPU support 10.14+ | 0x0106E0 |
 | [Westmere, Clarkdale, Arrandale](https://en.wikipedia.org/wiki/Westmere_(microarchitecture)) | 10.6.4 | ^^ | ^^ | 0x0206C0 |
 | [Sandy Bridge](https://en.wikipedia.org/wiki/Sandy_Bridge) | 10.6.7 | ^^ | ^^ | 0x0206A0(M/H) |
-| [Ivy Bridge](https://en.wikipedia.org/wiki/Ivy_Bridge_(microarchitecture)) | 10.7.3 | ^^ | No iGPU support 11+ | 0x0306A0(M/H/G) |
+| [Ivy Bridge](https://en.wikipedia.org/wiki/Ivy_Bridge_(microarchitecture)) | 10.7.3 | ^^ | No iGPU support 12+ | 0x0306A0(M/H/G) |
 | [Ivy Bridge-E5](https://en.wikipedia.org/wiki/Ivy_Bridge_(microarchitecture)) | 10.9.2 | ^^ | N/A | 0x0306E0 |
 | [Haswell](https://en.wikipedia.org/wiki/Haswell_(microarchitecture)) | 10.8.5 | ^^ | ^^ | 0x0306C0(S) |
 | [Broadwell](https://en.wikipedia.org/wiki/Broadwell_(microarchitecture)) | 10.10.0 | ^^ | ^^ | 0x0306D4(U/Y) |
@@ -105,6 +105,7 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 | [Amber](https://en.wikipedia.org/wiki/Kaby_Lake#List_of_8th_generation_Amber_Lake_Y_processors), [Whiskey](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture)), [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.14.1 | ^^ | ^^ | 0x0806E0(U/Y) |
 | [Comet Lake](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor)) | 10.15.4 | ^^ | ^^ | 0x0906E0(S/H)|
 | [Ice Lake](https://en.wikipedia.org/wiki/Ice_Lake_(microprocessor)) | ^^ | ^^ | ^^ | 0x0706E5(U) |
+| [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | ^^ | ^^ | Requires Comet Lake CPUID | 0x0A0671 |
 | [Tiger Lake](https://en.wikipedia.org/wiki/Tiger_Lake_(microprocessor)) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> Untested </span> | 0x0806C0(U) |
 
 :::
@@ -114,7 +115,7 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 Unfortunately many features in macOS are outright unsupported with AMD and many others being partially broken. These include:
 
 * Virtual Machines relying on AppleHV
-  * This includes VMWare, Parallels, Docker, Android Studios, etc
+  * This includes VMWare, Parallels, Docker, Android Studio, etc
   * VirtualBox is the sole exception as they have their own hypervisor
   * VMware 10 and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
 * Adobe Support
@@ -122,7 +123,7 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
   * You can disable functionality like RAW support to avoid the crashing: [Adobe Fixes](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
 * 32-Bit support
   * For those still relying on 32-Bit software in Mojave and below, note that the Vanilla patches do not support 32-bit instructions
-  * A work-around is to install a [custom kernel](https://amd-osx.com/download/kernel.html), however you lose iMessage support
+  * A work-around is to install a [custom kernel](https://files.amd-osx.com/?dir=Kernels), however you lose iMessage support and no support is provided for these kernels
 * Stability issues on many apps
   * Audio-based apps are the most prone to issues, ie. Logic Pro
   * DaVinci Resolve has been known to have sporadic issues as well
@@ -142,8 +143,7 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
   * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
   * [Nvidia's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
   * [Nvidia's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
-  * [Nvidia's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported in the latest versions of macOS (including macOS 11 Big Sur)
-    * This is due to Apple still supporting a few [MacBook Pros with Nvidia GPUs](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/nvidia-gpu.html)
+  * [Nvidia's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported up to macOS 11: Big Sur
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
     * Info on GMA series iGPUs can be found here: [GMA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
@@ -163,9 +163,9 @@ And an important note for **Laptops with discrete GPUs**:
 | :--- | :--- | :--- | :--- |
 | [3rd Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Third_generation) | 10.4.1 | 10.7.5 | [Requires 32-bit kernel and patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/) |
 | [4th Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen4) | 10.5.0 | ^^ | ^^ |
-| [Arrendale(HD Graphics)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen5) | 10.6.4 | 10.13.6 | Only LVDS is supported, eDP and external outputs are not |
+| [Arrandale(HD Graphics)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen5) | 10.6.4 | 10.13.6 | Only LVDS is supported, eDP and external outputs are not |
 | [Sandy Bridge(HD 3000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen6) | 10.6.7 | ^^ | N/A |
-| [Ivy Bridge(HD 4000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen7) | 10.7.3 | 10.15.7 | ^^ |
+| [Ivy Bridge(HD 4000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen7) | 10.7.3 | 11.6.1 | ^^ |
 | [Haswell(HD 4XXX, 5XXX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen7) | 10.8.5 | <span style="color:green"> Current </span> | ^^ |
 | [Broadwell(5XXX, 6XXX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen8) | 10.10.0 | ^^ | ^^ |
 | [Skylake(HD 5XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.11.0 | ^^ | ^^ |
@@ -174,8 +174,7 @@ And an important note for **Laptops with discrete GPUs**:
 | [Comet Lake(UHD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.15.4 | ^^ | ^^ |
 | [Ice Lake(Gx)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen11) | 10.15.4 | ^^ | Requires `-igfxcdc` and `-igfxdvmt` in boot-args |
 | [Tiger Lake(Xe)](https://en.wikipedia.org/wiki/Intel_Xe) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
-
-Note: Apple has kept Ivy Bridge's iGPU drivers present in macOS 11, Big Sur, however they are slated for removal. Please be aware they may be removed at a later time.
+| [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
 
 :::
 
@@ -185,15 +184,15 @@ Note: Apple has kept Ivy Bridge's iGPU drivers present in macOS 11, Big Sur, how
 | :--- | :--- | :--- | :--- |
 | [X800](https://en.wikipedia.org/wiki/Radeon_X800_series) | 10.3.x | 10.7.5 | Requires 32 bit kernel |
 | [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | ^^ | N/A |
-| [Terascale](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.4.x | 10.13.6 | ^^ |
-| [Terascale 2/3](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.6.x | ^^ | ^^ |
+| [TeraScale](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.4.x | 10.13.6 | ^^ |
+| [TeraScale 2/3](https://en.wikipedia.org/wiki/TeraScale_(microarchitecture)) | 10.6.x | ^^ | ^^ |
 | [GCN 1](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.8.3 | <span style="color:green"> Current </span> | ^^ |
 | [GCN 2/3](https://en.wikipedia.org/wiki/Graphics_Core_Next) | 10.10.x | ^^ | ^^ |
 | [Polaris 10](https://en.wikipedia.org/wiki/Radeon_RX_400_series), [20](https://en.wikipedia.org/wiki/Radeon_RX_500_series) | 10.12.1 | ^^ | ^^ |
 | [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
 | [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
 | [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | Requires `agdpmod=pikera` in boot-args |
-| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> Current drivers do not function </span> |
+| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | <span style="color:yellow"> Currently only some Navi 21 models are working </span> |
 
 :::
 
@@ -204,11 +203,11 @@ Note: Apple has kept Ivy Bridge's iGPU drivers present in macOS 11, Big Sur, how
 | [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | Requires 32 bit kernel and [NVCAP patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) |
 | [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | ^^ | [Requires NVCAP patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) |
 | [Tesla](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)) | 10.4.x | 10.13.6 | ^^ |
-| [Tesla V2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | ^^ | ^^ |
+| [Tesla v2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | ^^ | ^^ |
 | [Fermi](https://en.wikipedia.org/wiki/Fermi_(microarchitecture)) | 10.7.x | ^^ | ^^ |
-| [Kepler](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.7.x | <span style="color:green"> Current </span> | N/A |
-| [Kepler V2](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.8.x | ^^ | ^^ |
-| [Maxwell](https://en.wikipedia.org/wiki/Maxwell_(microarchitecture)) | 10.10.x | 10.13.6 | [Requires webdrivers](https://www.nvidia.com/download/driverResults.aspx/149652/) |
+| [Kepler](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.7.x | 11.6.1 | N/A |
+| [Kepler v2](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.8.x | ^^ | ^^ |
+| [Maxwell](https://en.wikipedia.org/wiki/Maxwell_(microarchitecture)) | 10.10.x | 10.13.6 | [Requires NVIDIA Web Drivers](https://www.nvidia.com/download/driverResults.aspx/149652/) |
 | [Pascal](https://en.wikipedia.org/wiki/Pascal_(microarchitecture)) | 10.12.4 | ^^ | ^^ |
 | [Turing](https://en.wikipedia.org/wiki/Turing_(microarchitecture)) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
 | [Ampere](https://en.wikipedia.org/wiki/Ampere_(microarchitecture)) | ^^ | ^^ | ^^ |
@@ -239,10 +238,13 @@ For the most part, all SATA based drives are supported and the majority of NVMe 
 
 Virtually all wired network adapters have some form of support in macOS, either by the built-in drivers or community made kexts. The main exceptions:
 
-* Intel's 2.5GBe i225 networking
+* Intel I225 2.5Gb NIC
   * Found on high-end Desktop Comet Lake boards
-  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](../config.plist/comet-lake.md#deviceproperties)
-* Intel's server NICs
+  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](config.plist/comet-lake.md#deviceproperties)
+* Intel I350 1Gb server NIC
+  * Normally found on Intel and Supermicro server boards of various generations
+  * [Workaround](config-HEDT/ivy-bridge-e.md#deviceproperties)
+* Intel 10Gb server NICs
   * Workarounds are possible for [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
 * Mellanox and Qlogic server NICs
 
@@ -251,6 +253,8 @@ Virtually all wired network adapters have some form of support in macOS, either 
 Most WiFi cards that come with laptops are not supported as they are usually Intel/Qualcomm. If you are lucky, you may have a supported Atheros card, but support only runs up to High Sierra.
 
 The best option is getting a supported Broadcom card; see the [WiFi Buyer's Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for recommendations.
+
+Note: Intel WiFi is unofficially (3rd party driver) supported on macOS, check [WiFi Buyer's Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for more information about the drivers and supported cards.
 
 ## Miscellaneous
 

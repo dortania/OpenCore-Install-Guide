@@ -1,7 +1,5 @@
 # Gathering files
 
-* Supported version: 0.6.6
-
 This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
 
 > What's the best way to figure out if my hardware is supported?
@@ -11,6 +9,8 @@ See the [**Hardware Limitations page**](macos-limits.md) for some better insight
 > What are some ways to figure out what hardware I have?
 
 See the page before: [Finding your hardware](./find-hardware.md)
+
+[[toc]]
 
 ## Firmware Drivers
 
@@ -77,54 +77,46 @@ Without the below 2, no system is bootable:
 
 * [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
   * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Alternative is FakeSMC which can have better or worse support, most commonly used on legacy hardware.
-  * Requires OS X 10.6 or newer
+  * Requires Mac OS X 10.4 or newer
 * [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">Required</span>)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
-  * Note that Lilu and plugins requires OS X 10.8 or newer to function
-  
-::: details Legacy "Must haves" kexts
-
-For those planning to boot OS X 10.7 and older on 32 bit hardware, you'll want to use the below instead of VirtualSMC:
-
-* [FakeSMC-32](https://github.com/khronokernel/Legacy-Kexts/blob/master/32Bit-only/Zip/FakeSMC-32.kext.zip?raw=true)
-
-Reminder if you don't plan to boot these older OSes, you can ignore this kext.
-
-* **OS X 10.4 and 10.5 note**: Even on 64-bit CPUs, OS X's kernel space is still 32-bit. So we recommend using FakeSMC-32 in tandem with VirtualSMC, specifically by setting FakeSMC-32's `Arch` entry to `i386` and VirtualSMC's to `x86_64`. This is discussed further on in the guide.
-
-:::
+  * Note that while Lilu supports as early as Mac OS X 10.4, many plugins only work on newer versions.
 
 ### VirtualSMC Plugins
 
-The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring(Note while VirtualSMC supports 10.6, plugins may require 10.8+):
+The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring (Note while VirtualSMC supports 10.4, plugins may require newer versions):
 
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
+  * Requires Mac OS X 10.7 or newer
 * SMCSuperIO.kext
   * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
+  * Requires Mac OS X 10.6 or newer
 * SMCLightSensor.kext
   * Used for the ambient light sensor on laptops, **desktops can ignore**
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
+  * Requires Mac OS X 10.6 or newer
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops, **desktops can ignore**
-  * Do not use until battery has been properly patched, can cause issues otherwise. So for initial setup, please omit this kext. After install you can follow this page for setup: [Fixing Battery Read-outs](https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery.html)
+  * Requires Mac OS X 10.4 or newer
 * SMCDellSensors.kext
   * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM)
   * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
+  * Requires Mac OS X 10.7 or newer
 
 ### Graphics
 
 * [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
-  * Used for graphics patching DRM, boardID, framebuffer fixes, etc, all GPUs benefit from this kext.
+  * Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
   * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
-  * Requires OS X 10.8 or newer
+  * Requires Mac OS X 10.6 or newer
 
 ### Audio
 
 * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
   * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
-  * AMD 15h/16h may have issues with this and Ryzen/Threadripper systems rarely have mic support
+  * AppleALCU.kext is a pared down version of AppleALC that only supports digital audio - but you can still use AppleALC.kext on digital audio-only systems
+  * AMD 15h/16h may have issues with AppleALC and Ryzen/Threadripper systems rarely have mic support
   * Requires OS X 10.8 or newer
   
 ::: details Legacy Audio Kext
@@ -145,10 +137,11 @@ Here we're going to assume you know what ethernet card your system has, reminder
 
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
-  * Intel's 82578, 82579, i217, i218 and i219 NICs are officially supported
+  * Intel's 82578, 82579, I217, I218 and I219 NICs are officially supported
   * Requires OS X 10.9 or newer, 10.6-10.8 users can use the IntelSnowMausi instead for older OSes
 * [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for i211 NICs, based off of the SmallTree kext but patched to support I211
+  * Required for I211 NICs, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet)
+)
   * Required for most AMD boards running Intel NICs
   * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
@@ -157,13 +150,15 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Note: Atheros Killer E2500 models are actually Realtek based, for these systems please use [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) instead
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
-  * Requires OS X 10.8-11(2.2.0), 10.12-13(v2.2.2), 10.14+(2.3.0)
-  * **NOTE: Sometimes Realtek's Gigabit Ethernet may not work correctly if you have RealtekRTL8111 v2.3.0. If you see this issue, try reverting to version 2.2.2**
+  * Requires OS X 10.8 and up for versions v2.2.0 and below, macOS 10.12 and up for versions v2.2.2 through v2.3.0 (inclusive), macOS 10.14 and up for versions v2.4.0 and up
+  * **NOTE:** Sometimes the latest version of the kext might not work properly with your Ethernet. If you see this issue, try older versions.
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
-* For Intel's i225-V NICs, patches are mentioned in the desktop Comet Lake DeviceProperty section. No kext is required.
+* For Intel's I225-V NICs, patches are mentioned in the desktop [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) section. No kext is required.
   * Requires macOS 10.15 or newer
+* For Intel's I350 NICs, patches are mentioned in the HEDT [Sandy and Ivy Bridge-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) section. No kext is required.
+  * Requires OS X 10.10 or newer
 
 ::: details Legacy Ethernet Kexts
 
@@ -345,39 +340,62 @@ However ProperTree will handle this for you, so you need not concern yourself
   
 :::
 
-### Laptop Specifics
+### Laptop Input
 
-To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep input` in Linux
+To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep -i input` in Linux
 
-#### Input drivers
+::: warning
+
+Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have an I2C, USB, or SMBus trackpad.
+
+:::
+
+#### PS2 Keyboards/Trackpads
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
-  * For systems with PS2 keyboards, mice, and trackpads
+  * Works with various PS2 keyboards, mice, and trackpads
   * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
 * [RehabMan's VoodooPS2](https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller/downloads/)
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
   * Supports macOS 10.6+ support
+
+#### SMBus Trackpads
+
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
-  * For systems with Synaptics SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with Synaptics SMBus trackpads
   * Requires macOS 10.11 or newer for MT2 functions
+  * Depends on Acidanthera's VoodooPS2
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus/releases)
-  * For systems with ELAN SMBus-based devices, mainly for trackpads and trackpoints.
+  * For systems with ELAN SMBus Trackpads
   * Supports macOS 10.14 or newer currently
+
+#### I2C/USB HID Devices
+
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
-  * Used for fixing I2C devices, found with some fancier touchpads and touchscreen machines
-  * Requires macOS 10.11 or newer for MT2 functions
-::: details VoodooI2C Plugins
+  * Supports macOS 10.11+
+  * Attaches to I2C controllers to allow plugins to talk to I2C trackpads
+  * USB devices using the below plugins still need VoodooI2C
+  * Must be paired with one or more plugins shown below:
+
+::: tip VoodooI2C Plugins
+
 | Connection type | Plugin | Notes |
 | :--- | :--- | :--- |
-| Microsoft HID | VoodooI2CHID | Can be used to support some USB touchscreens as well |
+| Multitouch HID | VoodooI2CHID | Can be used with I2C/USB Touchscreens and Trackpads |
 | ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
-| Synaptics Proprietary | VoodooI2CSynaptics | Synaptics F12 protocol require VoodooI2CHID instead |
-| ^^ | VoodooRMI | Supports Synaptics protocols F12/F3A - These generally support Microsoft's HID standard so you should attempt using VoodooI2CHID first |
 | FTE1001 touchpad | VoodooI2CFTE | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
+| Synaptics HID | [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/) | I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode) |
+| Alps HID | [AlpsHID](https://github.com/blankmac/AlpsHID/releases) | Can be used with USB or I2C Alps trackpads. Mostly seen on Dell laptops |
+
 :::
 
 #### Misc
+
+* [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
+  * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
+* [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
+  * Fixes brightness keys automatically
 
 Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
 
@@ -428,7 +446,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ | ^^ | N/A |
 | Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF-CFL](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ | ^^ |
+| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ | ^^ |
 | Coffee Lake (9th Gen) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Ice Lake | ^^ | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) | ^^ |

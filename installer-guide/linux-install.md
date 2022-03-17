@@ -1,7 +1,5 @@
 # Making the installer in Linux
 
-* Supported version: 0.6.6
-
 While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
 
 To start you'll need the following:
@@ -23,37 +21,40 @@ cd ~/Downloads/OpenCore-0/Utilities/macrecovery/
 Next, run one of the following commands depending on the OS you'd like to boot:
 
 ```sh
-# Lion(10.7):
+# Lion (10.7):
 python ./macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
 python ./macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
 
-# Mountain Lion(10.8):
+# Mountain Lion (10.8):
 python ./macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
 
-# Mavericks(10.9):
+# Mavericks (10.9):
 python ./macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
 
-# Yosemite(10.10):
+# Yosemite (10.10):
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
 
-# El Capitan(10.11):
+# El Capitan (10.11):
 python ./macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
 
-# Sierra(10.12):
+# Sierra (10.12):
 python ./macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
 
-# High Sierra(10.13)
+# High Sierra (10.13)
 python ./macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
 python ./macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
 
-# Mojave(10.14)
+# Mojave (10.14)
 python ./macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
-# Catalina(10.15)
+# Catalina (10.15)
 python ./macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
+# Big Sur (11)
+python ./macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
+
 # Latest version
-# ie. Big Sur(11)
+# ie. Monterey (12)
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
@@ -61,11 +62,13 @@ From here, run one of those commands in terminal and once finished you'll get an
 
 ![](../images/installer-guide/legacy-mac-install-md/download-done.png)
 
-* **Note**: Depending on the OS, you'll either get BaseSystem or RecoveryImage files. They both act in the same manner so when we reference BaseSystem the same info apples to RecoveryImage
+* **Note**: Depending on the OS, you'll either get BaseSystem or RecoveryImage files. They both act in the same manner so when we reference BaseSystem the same info applies to RecoveryImage
 
-* **macOS 11, Big Sur Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [OpenCore and macOS 11: Big Sur](../extras/big-sur/README.md)
-  * For first time users, we recommend macOS 10.15, Catalina
-* **Nvidia GPU Note**: Reminder to verify whether your hardware support newer OSes, see [Hardware Limitations](../macos-limits.md)
+* **macOS 12, Monterey Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [macOS 12: Monterey](../extras/monterey.md)
+  * For first time users, we recommend macOS Catalina (10.15) or Big Sur (11)
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). We advise users either install an older OS(ie. macOS 10.15, Catalina) or find a 11.2.3 or older Big Sur installer
+    * For education purposes, we have a copy provided here: [macOS 11.2.1 20D75 Recovery Image](https://archive.org/details/base-system_202102)
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issue
 
 ## Making the installer
 

@@ -2,7 +2,6 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.6 |
 | Initial macOS Support | OS X 10.8, Mountain Lion |
 
 ## Starting Point
@@ -36,7 +35,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -86,7 +85,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics.
-  
+
 :::
 
 ## DeviceProperties
@@ -105,9 +104,9 @@ This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://
 
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
-| 0300220D | Used when the Desktop Haswell iGPU is used to drive a display |
-| 04001204 | Used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display |
-| 07002216 | Used when the Desktop Broadwell iGPU |
+| **`0300220D`** | Used when the Desktop Haswell iGPU is used to drive a display |
+| **`04001204`** | Used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display |
+| **`07002216`** | Used when the Desktop Broadwell iGPU |
 
 I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
 
@@ -121,20 +120,20 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | 0300220D |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
-| device-id | Data | 12040000 |
+| AAPL,ig-platform-id | Data | `0300220D` |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
+| device-id | Data | `12040000` |
 
 (This is an example for a desktop HD 4400 without a dGPU and no BIOS options for iGPU memory)
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| AAPL,ig-platform-id | Data | 07002216 |
-| framebuffer-patch-enable | Data | 01000000 |
-| framebuffer-stolenmem | Data | 00003001 |
-| framebuffer-fbmem | Data | 00009000 |
+| AAPL,ig-platform-id | Data | `07002216` |
+| framebuffer-patch-enable | Data | `01000000` |
+| framebuffer-stolenmem | Data | `00003001` |
+| framebuffer-fbmem | Data | `00009000` |
 
 (This is an example for a desktop Iris Pro 6200 and no BIOS options for iGPU memory)
 
@@ -193,7 +192,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 * **PlistPath**
   * Path to the `info.plist` hidden within the kext
   * ex: `Contents/Info.plist`
-  
+
 ::: details Kernel Support Table
 
 | OS X Version | MinKernel | MaxKernel |
@@ -211,6 +210,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 10.14 | 18.0.0 | 18.99.99 |
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
+| 12 | 21.0.0 | 21.99.99 |
 
 :::
 
@@ -218,8 +218,8 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+* **Cpuid1Mask**: Leave this blank
+* **Cpuid1Data**: Leave this blank
 
 ### Force
 
@@ -245,11 +245,11 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
 | AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | |
+| XhciPortLimit | YES | Disable if running macOS 11.3+ |
 
 :::
 
@@ -286,6 +286,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
+  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
@@ -371,7 +372,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| SecureBootModel | Default | Leave this as `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
@@ -398,8 +399,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
-* **SecureBootModel**: Default
-  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+* **SecureBootModel**: Disabled
+  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
@@ -471,8 +472,8 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling boardID on Navi GPUs(RX 5000 series), without this you'll get a black screen. **Don't use if you don't have Navi**(ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and HighSierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
+| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`
@@ -538,6 +539,21 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
 | iMac15,1 | Haswell with dGPU |
 | iMac16,2 | Broadwell |
 
+**Note**: The following SMBIOS are only supported up-to macOS 11, Big Sur. For cases where you must boot Monterey, see below:
+
+::: details Monterey SMBIOS table
+
+Note choosing a SMBIOS from the list below for Big Sur or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+
+Monterey table:
+
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac16,2 | Broadwell with only iGPU |
+| iMac17,1 | Broadwell with dGPU |
+
+:::
+
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
@@ -575,7 +591,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ::: details More in-depth Info
 
-* **AdviseWindows**: NO
+* **AdviseFeatures**: NO
   * Used for when the EFI partition isn't first on the Windows drive
 
 * **MaxBIOSVersion**: NO
@@ -624,7 +640,23 @@ Only drivers present here should be:
 
 ### APFS
 
-Settings related to the APFS driver, leave everything here as default.
+By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
+Not setting this can result in OpenCore not finding your macOS partition!
+
+macOS Sierra and earlier use HFS instead of APFS. You can skip this section if booting older versions of macOS.
+
+::: tip APFS Versions
+
+Both MinVersion and MinDate need to be set if changing the minimum version.
+
+| macOS Version | Min Version | Min Date |
+| :------------ | :---------- | :------- |
+| High Sierra (`10.13.6`) | `748077008000000` | `20180621` |
+| Mojave (`10.14.6`) | `945275007000000` | `20190820` |
+| Catalina (`10.15.4`) | `1412101001000000` | `20200306` |
+| No restriction | `-1` | `-1` |
+
+:::
 
 ### Audio
 
@@ -670,7 +702,7 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 * **UnblockFsConnect**: NO
   * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
-  
+
 :::
 
 ### ReservedMemory
@@ -685,14 +717,6 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
-
-**Sanity check**:
-
-So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
-
-* [**Sanity Checker**](https://opencore.slowgeek.com)
-
-Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
 
 ## Intel BIOS settings
 
@@ -723,4 +747,4 @@ Note that this tool is neither made nor maintained by Dortania, any and all issu
 * DVMT Pre-Allocated(iGPU Memory): 64MB
 * SATA Mode: AHCI
 
-# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)

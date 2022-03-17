@@ -2,7 +2,6 @@
 
 | Support | Version |
 | :--- | :--- |
-| Supported OpenCore version | 0.6.6 |
 | Initial macOS Support | OS X 10.6.7, Snow Leopard |
 | Note 1 | Sandy Bridge's iGPU is only officially supported up-to macOS 10.13 |
 | Note 2 | Most Sandy bridge boards do not support UEFI |
@@ -38,7 +37,7 @@ This is where you'll add SSDTs for your system, these are very important to **bo
 
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
-| Required_SSDTs | Description |
+| Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://dortania.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes the embedded controller, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -65,9 +64,9 @@ Removing CpuPm:
 | All | Boolean | YES |
 | Comment | String | Delete CpuPm |
 | Enabled | Boolean | YES |
-| OemTableId | Data | 437075506d000000 |
+| OemTableId | Data | `437075506d000000` |
 | TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
+| TableSignature | Data | `53534454` |
 
 Removing Cpu0Ist:
 
@@ -76,9 +75,9 @@ Removing Cpu0Ist:
 | All | Boolean | YES |
 | Comment | String | Delete Cpu0Ist |
 | Enabled | Boolean | YES |
-| OemTableId | Data | 4370753049737400 |
+| OemTableId | Data | `4370753049737400` |
 | TableLength | Number | 0 |
-| TableSignature | Data | 53534454 |
+| TableSignature | Data | `53534454` |
 
 :::
 
@@ -96,8 +95,8 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | 5f4f5349 |
-| Replace | Data | 584f5349 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
 
 :::
 
@@ -160,8 +159,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,snb-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **00000100** | Laptop | To be used with laptops |
-| **10000300** | NUC | To be used with Intel NUCs |
+| **`00000100`** | Laptop | To be used with laptops |
+| **`10000300`** | NUC | To be used with Intel NUCs |
 
 #### Configuration Notes
 
@@ -181,7 +180,7 @@ Some laptops from this era came with a mixed chipset setup, using Sandy Bridge C
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| device-id | Data | 3A1C0000 |
+| device-id | Data | `3A1C0000` |
 
 :::
 
@@ -256,6 +255,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 10.14 | 18.0.0 | 18.99.99 |
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
+| 12 | 21.0.0 | 21.99.99 |
 
 :::
 
@@ -263,8 +263,8 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 Needed for spoofing unsupported CPUs like Pentiums and Celerons
 
-* **CpuidMask**: Leave this blank
-* **CpuidData**: Leave this blank
+* **Cpuid1Mask**: Leave this blank
+* **Cpuid1Data**: Leave this blank
 
 ### Force
 
@@ -289,7 +289,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
 | AppleCpuPmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIOMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
+| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
@@ -330,6 +330,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
+  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
 
 The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
 
@@ -415,7 +416,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default |  This is a word and is case-sensitive, set to `Disabled` if you do not want secure boot(ie. you require Nvidia's Web Drivers) |
+| SecureBootModel | Default | Leave this as `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
@@ -442,8 +443,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
-* **SecureBootModel**: Default
-  * Enables Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+* **SecureBootModel**: Disabled
+  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
@@ -564,11 +565,11 @@ For this Sandy Bridge example, we'll chose the MacBookPro8,1 SMBIOS - this is do
 
 | SMBIOS | CPU Type | GPU Type | Display Size |
 | :--- | :--- | :--- | :--- |
-| MacBookAir4,1 | Dual Core 17w | iGPU: HD 3000 | 11" |
-| MacBookAir4,2 | Dual Core 17w | iGPU: HD 3000 | 13" |
-| MacBookPro8,1 | Dual Core 35w | iGPU: HD 3000 | 13" |
-| MacBookPro8,2 | Quad Core 45w(High End) | iGPU: HD 3000 + 6490M | 15" |
-| MacBookPro8,3 | Quad Core 45w(High End) | iGPU: HD 3000 + 6750M | 17" |
+| MacBookAir4,1 | Dual Core 17W | iGPU: HD 3000 | 11" |
+| MacBookAir4,2 | Dual Core 17W | iGPU: HD 3000 | 13" |
+| MacBookPro8,1 | Dual Core 35W | iGPU: HD 3000 | 13" |
+| MacBookPro8,2 | Quad Core 45W(High End) | iGPU: HD 3000 + 6490M | 15" |
+| MacBookPro8,3 | Quad Core 45W(High End) | iGPU: HD 3000 + 6750M | 17" |
 | Macmini5,1 | Dual Core NUC | iGPU: HD 3000 | N/A |
 | Macmini5,3 | Quad Core NUC | iGPU: HD 3000 | N/A |
 
@@ -609,7 +610,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ::: details More in-depth Info
 
-* **AdviseWindows**: NO
+* **AdviseFeatures**: NO
   * Used for when the EFI partition isn't first on the Windows drive
 
 * **MaxBIOSVersion**: NO
@@ -659,7 +660,23 @@ Only drivers present here should be:
 
 ### APFS
 
-Settings related to the APFS driver, leave everything here as default.
+By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
+Not setting this can result in OpenCore not finding your macOS partition!
+
+macOS Sierra and earlier use HFS instead of APFS. You can skip this section if booting older versions of macOS.
+
+::: tip APFS Versions
+
+Both MinVersion and MinDate need to be set if changing the minimum version.
+
+| macOS Version | Min Version | Min Date |
+| :------------ | :---------- | :------- |
+| High Sierra (`10.13.6`) | `748077008000000` | `20180621` |
+| Mojave (`10.14.6`) | `945275007000000` | `20190820` |
+| Catalina (`10.15.4`) | `1412101001000000` | `20200306` |
+| No restriction | `-1` | `-1` |
+
+:::
 
 ### Audio
 
@@ -731,14 +748,6 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
 
-**Sanity check**:
-
-So thanks to the efforts of Ramus, we also have an amazing tool to help verify your config for those who may have missed something:
-
-* [**Sanity Checker**](https://opencore.slowgeek.com)
-
-Note that this tool is neither made nor maintained by Dortania, any and all issues with this site should be sent here: [Sanity Checker Repo](https://github.com/rlerdorf/OCSanity)
-
 ### Config reminders
 
 **HP Users**:
@@ -777,4 +786,4 @@ These are the main options to check for, if you can't find it or an equivalent f
 * DVMT Pre-Allocated(iGPU Memory): 32MB
 * SATA Mode: AHCI
 
-# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)

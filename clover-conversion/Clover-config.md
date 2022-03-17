@@ -1,7 +1,5 @@
 # Converting common properties from Clover to OpenCore
 
-* Supported version: 0.6.6
-
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
 
 # Kexts and Firmware drivers
@@ -63,9 +61,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **Patches**
 
-* TgtBridge patches: No feature parity in OpenCore, see comments(TgtBridge was very buggy in Clover):
-  * [Vit's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2682158)
-  * [Andrey's Comment](https://www.insanelymac.com/forum/topic/338516-opencore-discussion/?do=findComment&comment=2678273)
+* TgtBridge patches:
+  * `ACPI -> Patch -> ... -> Base`
 
 * DisableASPM:
   * `DeviceProperties -> Add -> PciRoot... -> pci-aspm-default | Data | <00>`
@@ -132,8 +129,8 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **SSDT**:
 
 * **PluginType**:
-  * [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)
-  * See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) for more details
+  * [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html)
+  * See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more details
 
 * **Generate P States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For Sandy Bridge and IvyBridge)
 * **Generate C States**: [ssdtPRGen.sh](https://github.com/Piker-Alpha/ssdtPRGen.sh)(For Sandy Bridge and IvyBridge)
@@ -212,7 +209,8 @@ path/to/gfxutil -f HDEF
 
 * Inject: `DeviceProperties -> Add -> PciRoot... -> layout-id`
 * AFGLowPowerState: `DeviceProperties -> Add -> PciRoot... -> AFGLowPowerState -> <01000000>`
-* ResetHDA: [JackFix](https://github.com/fewtarius/jackfix)(well to be specific it's `jackfix.sh`)
+* ResetHDA: `UEFI -> Audio -> ResetTrafficClass`
+  * Optionally there's also AppleALC's `alctsel=1` boot-arg or [JackFix](https://github.com/fewtarius/jackfix)
 
 **Add Properties**:
 
@@ -269,9 +267,13 @@ device_type: XHCI
 * `AAPL,current-in-sleep`
 * `built-in`
 
+**ForceHPET**:
+
+* `UEFI -> Quirks -> ActivateHpetSupport`
+
 # Disable Drivers
 
-Just don't add your drivers to `UEFI -> Drivers`
+Just don't add your drivers to `UEFI -> Drivers`, alternatively add `#` in-front of the driver in your config.plist for OpenCore to skip it.
 
 # Gui
 
@@ -371,7 +373,9 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **RadeonDeInit**:
 
-* [Radeon-Denit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-Deinit-SSDT.dsl)
+In most cases it is advisable to use WhateverGreen, which handles this automatically. This SSDT is not needed if WhateverGreen is used.
+
+* [Radeon-DeInit-SSDT](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Radeon-DeInit-SSDT.dsl)
   * Do note that this is meant for GFX0, adjust for your system
 
 # Kernel and Kext Patches
@@ -387,7 +391,7 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **DellSMBIOSPatch**:
 
-An odd quirk for Dell systems running APTIO V(or just Skylake, Slice doesn't really know either)
+An odd quirk for Dell systems running APTIO V
 
 * `Kernel -> Quirks -> CustomSMBIOSGuid -> YES`
 * `PlatformInfo -> UpdateSMBIOSMode -> Custom`
@@ -464,9 +468,9 @@ If this works, slowly shorten the excluded area until you find the part macOS is
 **FakeCPUID**:
 
 * `Kernel -> Emulate`:
-  * `CpuidMask`: `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
+  * `Cpuid1Mask`: `<Clover_FCPUID_Extended_to_4_bytes_Swapped_Bytes> | 00 00 00 00 | 00 00 00 00 | 00 00 00 00`
     * ex(`0x0306A9`): `A9060300 00000000 00000000 00000000`
-  * `CpuidData`(Swap `00` for `FF` if needing to swap with a longer value)
+  * `Cpuid1Data`(Swap `00` for `FF` if needing to swap with a longer value)
     * ex: `FFFFFFFF 00000000 00000000 00000000`
 
 Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, easiest way to find it is via Microsoft's [Intel microcode update notes](https://support.microsoft.com/en-ca/help/4093836/summary-of-intel-microcode-updates)

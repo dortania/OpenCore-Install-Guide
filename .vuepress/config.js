@@ -58,7 +58,7 @@ module.exports = {
         repo: 'https://github.com/dortania/OpenCore-Install-Guide',
 		editLinks: true,
 		editLinkText: 'Help us improve this page!',
-        logo: 'homepage.png',
+        logo: '/homepage.png',
         nav: [{
             text: 'Dortania Guides',
             ariaLabel: 'Language Menu',
@@ -184,6 +184,7 @@ module.exports = {
                     '/AMD/zen',
                 ]
             },
+            ['/config.plist/security', 'Apple Secure Boot']
             ]
         },
         {
@@ -213,6 +214,7 @@ module.exports = {
 				},
                 '/troubleshooting/debug',
                 '/troubleshooting/boot',
+				'/troubleshooting/kernel-debugging',
             ]
         },
         {
@@ -279,7 +281,7 @@ module.exports = {
             children: [
                 '/extras/kaslr-fix',
                 '/extras/spoof',
-                '/extras/big-sur/',
+                '/extras/monterey',
                 ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
                 '/extras/smbios-support.md',
             ]

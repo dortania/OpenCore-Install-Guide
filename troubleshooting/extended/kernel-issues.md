@@ -1,36 +1,8 @@
 # Kernel Issues
 
-* Supported version: 0.6.6
-
 Issues surrounding from initial booting the macOS installer to right before the install GUI pops up.
 
-* [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
-* [Stuck on EndRandomSeed](#stuck-on-endrandomseed)
-* [Stuck after selecting macOS partition in OpenCore](#stuck-after-selecting-macos-partition-in-opencore)
-* [Kernel Panic on `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)
-* [Stuck on [EB|LD:OFS] Err(0xE) when booting preboot volume](#stuck-on-eb-ld-ofs-err-0xe-when-booting-preboot-volume)
-* [Stuck on `OCB: LoadImage failed - Security Violation`](#stuck-on-ocb-loadimage-failed-security-violation)
-* [Stuck on `OCABC: Memory pool allocation failure - Not Found`](#stuck-on-ocabc-memory-pool-allocation-failure-not-found)
-* [Stuck on `Buffer Too Small`](#stuck-on-buffer-too-small)
-* [Stuck on `Plist only kext has CFBundleExecutable key`](#stuck-on-plist-only-kext-has-cfbundleexecutable-key)
-* [Stuck on `This version of Mac OS X is not supported: Reason Mac...`](#stuck-on-this-version-of-mac-os-x-is-not-supported-reason-mac)
-* [`Couldn't allocate runtime area` errors?](#couldn-t-allocate-runtime-area-errors)
-* [Stuck on `RTC...`, `PCI ConfigurationBegins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`](#stuck-on-rtc-pci-configuration-begins-previous-shutdown-hpet-hid-legacy)
-* [Stuck at ACPI Table loading on B550](#stuck-at-acpi-table-loading-on-b550)
-* ["Waiting for Root Device" or Prohibited Sign error](#waiting-for-root-device-or-prohibited-sign-error)
-* [Kernel panic with IOPCIFamily on X99](#kernel-panic-with-iopcifamily-on-x99)
-* [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
-* [Scrambled Screen on laptops](#scrambled-screen-on-laptops)
-* [Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi](#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
-* [Kernel Panic `Cannot perform kext summary`](#kernel-panic-cannot-perform-kext-summary)
-* [Kernel Panic `AppleIntelMCEReporter`](#kernel-panic-appleintelmcereporter)
-* [Kernel Panic `AppleIntelCPUPowerManagement`](#kernel-panic-appleintelcpupowermanagement)
-* [Keyboard works but trackpad does not](#keyboard-works-but-trackpad-does-not)
-* [`kextd stall[0]: AppleACPICPU`](#kextd-stall-0-appleacpicpu)
-* [Kernel Panic on AppleIntelI210Ethernet](#kernel-panic-on-appleinteli210ethernet)
-* [Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop](#kernel-panic-on-wrong-cd-clock-frequency-with-icelake-laptop)
-* [Stuck at `Forcing CS_RUNTIME for entitlement` in Big Sur](#stuck-at-forcing-cs-runtime-for-entitlement-in-big-sur)
-* [Stuck on `ramrod`(^^^^^^^^^^^^^)](#stuck-on-ramrod)
+[[toc]]
 
 ## Stuck on `[EB|#LOG:EXITBS:START]`
 
@@ -135,7 +107,7 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 | Mask | Data | |
 | MaxKernel | String | |
 | MinKernel | String | 20.0.0 |
-| Replace | Data | B804000000C3 |
+| Replace | Data | `B804000000C3` |
 | ReplaceMask | Data | |
 | Skip | Integer | 0 |
 
@@ -248,7 +220,7 @@ This is due to missing outdated Apple Secure Boot manifests present on your preb
 To resolve this you can do one of the following:
 
 * Disable SecureBootModel
-  * ie. set `Misc -> Secuirty -> SecureBootModel -> Disabled`
+  * ie. set `Misc -> Security -> SecureBootModel -> Disabled`
 * Reinstall macOS with the latest version
 * Or copy over the Secure Boot manifests from `/usr/standalone/i386` to `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
   * Note you will most likely need to do this via terminal as the Preboot volume isn't easily editable via the Finder
@@ -344,6 +316,18 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 :::
 
+::: details Supported SMBIOS in macOS 12, Monterey
+
+* iMac16,1+
+* iMacPro1,1
+* MacPro6,1+
+* Macmini7,1+
+* MacBook9,1+
+* MacBookAir7,1+
+* MacBookPro11,3+
+
+:::
+
 ## `Couldn't allocate runtime area` errors
 
 See [Fixing KASLR slide values](../../extras/kaslr-fix.md)
@@ -369,12 +353,12 @@ The main places to check:
   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
     * Some X99 and X299 boards(ie. GA-X299-UD4) may require both npci boot-arg and Above4G enabled
     * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
-    * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure this is **Disabled** instead of set to Auto.
+    * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
 * **NVMe or SATA issue**:
   * Sometimes if either a bad SATA controller or an unsupported NVMe drive are used, you can commonly get stuck here. Things you can check:
     * Not using either a Samsung PM981 or Micron 2200S NVMe SSD
-    * Samsung 970EvoPlus running the latest firmware(older firmwares were known for instability and stalls, [see here for more info](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
+    * Samsung 970 EVO Plus running the latest firmware(older firmwares were known for instability and stalls, [see here for more info](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
     * SATA Hot-Plug is disabled in the BIOS(more commonly to cause issues on AMD CPU based systems)
     * Ensure NVMe drives are set as NVMe mode in BIOS(some BIOS have a bug where you can set NVMe drives as SATA)
 * **NVRAM Failing**:
@@ -544,10 +528,16 @@ Under ACPI -> Patch:
 | Enabled | Boolean | YES |
 | Count | Number | 0 |
 | Limit | Number | 0 |
-| Find | Data | A010934F53464C00 |
-| Replace | Data | A40A0FA3A3A3A3A3 |
+| Find | Data | `A010934F53464C00` |
+| Replace | Data | `A40A0FA3A3A3A3A3` |
 
 :::
+
+## Kernel Panic `AppleACPIPlatform` in 10.13
+
+![](../../images/troubleshooting/troubleshooting-md/KA5UOGV.png)
+
+On macOS 10.13, High Sierra the OS is much stricter with ACPI tables, [specifically a bug with how headers were handled](https://alextjam.es/debugging-appleacpiplatform/). To resolve, enable `NormalizeHeaders` under ACPI -> Quirks in your config.plist
 
 ## macOS frozen right before login
 
@@ -585,7 +575,7 @@ This is due to either a missing SMC emulator or broken one, make sure of the fol
 
 ## Kernel Panic on AppleIntelI210Ethernet
 
-For those running Comet lake motherboards with the i225-V NIC, you may experience a kernel panic on boot due to the i210 kext. To resolve this, make sure you have the correct PciRoot for your Ethernet. This commonly being either:
+For those running Comet lake motherboards with the I225-V NIC, you may experience a kernel panic on boot due to the I210 kext. To resolve this, make sure you have the correct PciRoot for your Ethernet. This commonly being either:
 
 * PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
   * By default, this is what Asus and Gigabyte motherboards use
@@ -645,6 +635,14 @@ If you get stuck around the `ramrod` section (specifically, it boots, hits this 
 
 And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
 
-### Virtual Machine Issues
+## Virtual Machine Issues
 
 * VMWare 15 is known to get stuck on `[EB|#LOG:EXITBS:START]`. VMWare 16 resolves the problem.
+
+## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
+
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
+
+* Alternatively, you can boot macOS 11.2.3 or older to resolve
+  * For educational purposes, we've provided some images:
+    * [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)

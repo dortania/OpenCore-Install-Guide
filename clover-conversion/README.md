@@ -1,7 +1,5 @@
 # Converting from Clover to OpenCore
 
-* Supported version: 0.6.6
-
 So you see the new fancy OpenCore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with OpenCore but many do not, here we'll be going over what you can bring over and what you cannot.
 
 To get started, we have some resources that will aid you:
@@ -57,11 +55,11 @@ touch /Library/Extensions /System/Library/Extensions​
 kextcache -i /​
 ```
 
-* **Note**, macOS Catalina and newer will need the `mount -uw /` command to mount the system drive as Read/Write
+* **Note**, macOS Catalina will need the `mount -uw /` command to mount the system drive as Read/Write
 
 ## Cleaning the Clover Junk in your hardware
 
-The other thing that Clover may have hidden from you is NVRAM variables, this is bad as OpenCore won't overwrite variables unless explicitly told via the `Block` feature found under `NVRAM -> Block`. To fix this, we'll need to clear then via OpenCore's `ClearNvram` feature.
+The other thing that Clover may have hidden from you is NVRAM variables, this is bad as OpenCore won't overwrite variables unless explicitly told via the `Delete` feature found under `NVRAM -> Delete`. To fix this, we'll need to clear then via OpenCore's `ClearNvram` feature.
 
 In you config.plist:
 

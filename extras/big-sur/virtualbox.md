@@ -35,7 +35,7 @@ sudo VirtualBox
 ```
 
 * Name: Big Sur
-* Type: MacOS 64bit
+* Type: macOS 64bit
 
 * 2-4 CPU cores
 * 4-8 GB RAM

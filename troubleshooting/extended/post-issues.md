@@ -1,28 +1,8 @@
 # Post-Install Issues
 
-* Supported version: 0.6.6
-
 Issues revolving around macOS once properly installed.
 
-* [Broken iMessage and Siri](#broken-imessage-and-siri)
-* [No on-board audio](#no-on-board-audio)
-* [BIOS reset or sent into Safemode after reboot/shutdown?](#bios-reset-or-sent-into-safemode-after-reboot-shutdown)
-* [Synaptics PS2 based trackpad doesn't work](#synaptics-ps2-based-trackpad-doesn-t-work)
-* [Fix for Dell breakless PS2 keyboard keys](#fix-for-dell-breakless-ps2-keyboard-keys)
-* [macOS GPU acceleration missing on AMD X570](#macos-gpu-acceleration-missing-on-amd-x570)
-* [DRM Broken](#drm-broken)
-* ["Memory Modules Misconfigured" on MacPro7,1](#memory-modules-misconfigured-on-macpro7-1)
-* [Apps crashing on AMD](#apps-crashing-on-amd)
-* [AssetCache Content Caching unavailable in virtual machine](#assetcache-content-caching-unavailable-in-virtual-machine)
-* [Coffee Lake systems failing to wake](#coffee-lake-systems-failing-to-wake)
-* [No temperature/fan sensor output](#no-temperature-fan-sensor-output)
-* ["You can't change the startup disk to the selected disk" error](#you-can-t-change-the-startup-disk-to-the-selected-disk-error)
-* [macOS waking up with the wrong time](#macos-waking-up-with-the-wrong-time)
-* [No Volume/Brightness control on external monitors](#no-volume-brightness-control-on-external-monitors)
-* [Disabling SIP](#disabling-sip)
-* [Rolling back APFS Snapshots](#rolling-back-apfs-snapshots)
-* [Apple Watch Unlock Issues](#apple-watch-unlock-issues)
-* [4K iGPU output issues over HDMI](#4k-igpu-output-issues-over-hdmi)
+[[toc]]
 
 ## Broken iMessage and Siri
 
@@ -103,6 +83,8 @@ Follow guide listed here:
 
 * [Fixing MacPro7,1 Memory Errors](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
 
+For those who simply want to disable the notification(not the error itself) is more than enough. For these users, we recommend installing [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)
+
 ## Apps crashing on AMD
 
 ~~Easy fix, buy Intel~~
@@ -128,7 +110,7 @@ So with AMD, whenever Apple calls CPU specific functions the app will either not
 This is generally seen on AMD who use the chipset's USB controller, specifically for the Ryzen series and newer. The main way to tell if you're having issues with this is checking logs after either sleeping or waking:
 
 * In terminal:
-  * `log show --last 1d | grep "Wake reason"` verify it
+  * `log show --last 1d | grep -i "Wake reason"`
 
 Should result in something like this:
 
@@ -161,6 +143,30 @@ In macOS 10.15.4, there were some changes made to AGPM that can cause wake issue
 * Add `igfxonln=1` to boot-args
 * Make sure you're using [WhateverGreen v1.3.8](https://github.com/acidanthera/WhateverGreen/releases) or newer
 
+## No brightness control on Dual GPU laptops
+
+In macOS 11.3, there were some changes made to backlight controlling mechanisms that defaults the backlight to be controlled by the dGPU on Dual GPU laptops with MUX enabled. Optimus only laptops, however, are not affected, since you need to disable the dGPU anyways. Specifically, this problem only causes issues if you have a Dual GPU laptop with the internal screen from an iGPU output and external screens from dGPU outputs (`Hybrid Mode` on some Mobile Workstations). To resolve this, you may disable either the iGPU or the dGPU, or do the following:
+
+* Verify SSDT-PNLF is installed(ie. EFI/OC/ACPI as well as config.plist -> ACPI -> Add)
+
+* Add below to `PciRoot(0x0)/Pci(0x2,0x0)`:
+
+`@0,backlight-control | Data | 01000000`
+
+`applbkl | Data | 01000000`
+
+`AAPL,backlight-control | Data | 01000000`
+
+`AAPL00,backlight-control | Data | 01000000`
+
+* Add below to your dGPU PCI address:
+
+`@0,backlight-control | Data | 00000000`
+
+`applbkl | Data | 00000000`
+
+`AAPL,backlight-control | Data | 00000000`
+
 ## No temperature/fan sensor output
 
 So couple things:
@@ -183,7 +189,7 @@ For iStat, you'll have to wait for an update. For AMD users, you can use either:
 
 This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:
 
-* `PlatformInfo -> Generic -> AdviseWindows -> True`
+* `PlatformInfo -> Generic -> AdviseFeatures -> True`
 
 ![](../../images/troubleshooting/troubleshooting-md/error.png)
 
@@ -223,7 +229,7 @@ Oddly enough, macOS has locked down digital audio from having control. To bring 
 
 ## Time inconsistency between macOS and Windows
 
-This is due to macOS using Universal Time while Windows relies on Greenwhich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
+This is due to macOS using Universal Time while Windows relies on Greenwich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
 
 * [Install Bootcamp utilities](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * [Modify Windows' registry](https://superuser.com/q/494432)
@@ -328,7 +334,7 @@ If the above are met, and you still have unlock issues we recommend running thro
 
 ## 4K iGPU output issues over HDMI
 
-For machines with HDMI 2.0 capable ports with resolutuion issues, verify the following:
+For machines with HDMI 2.0 capable ports with resolution issues, verify the following:
 
 * 4k output works correctly in Windows
 * Monitor is set explicitly to HDMI 2.0
