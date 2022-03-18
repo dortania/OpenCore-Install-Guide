@@ -26,7 +26,7 @@ To overcome the issue, we recommend to install `Command Line Tools for Xcode` by
 After that you can run the same command below but with `python3` instead of just `python`:
 
 ```sh
- mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py > installinstallmacos.py && sudo python3 installinstallmacos.py
+mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py > installinstallmacos.py && sudo python3 installinstallmacos.py
 ```
   
 :::
