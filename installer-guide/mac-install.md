@@ -16,9 +16,11 @@ For machines that need a specific OS release or can't download from the App Stor
 ::: details Note for users running macOS Monterey 12.3 or above
 
 Starting from macOS Monterey 12.3, Apple removed support for `python2.7` which was the default python version who was shipped within every macOS version. When running the following command on macOS Monterey 12.3 or newer, please note that it will throw the following error: 
+
 ```
 This tool requires the Python xattr module. Perhaps run 'pip install xattr to install it.
 ```
+
 To overcome the issue, we recommend to install `Command Line Tools for Xcode` by running `xcode-select --install` in a Terminal and then run `pip3 install xattr`
 
 After that you can run the same command below but with `python3` instead of just `python`:
