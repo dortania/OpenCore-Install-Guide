@@ -357,7 +357,7 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
   * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
 * [RehabMan's VoodooPS2](https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller/downloads/)
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
-  * Supports macOS 10.6+ support
+  * Supports macOS 10.6+
 
 #### SMBus Trackpads
 
