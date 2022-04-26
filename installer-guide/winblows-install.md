@@ -71,7 +71,7 @@ This will take some time, however once you're finished you should get either Bas
 | :--- | :--- |
 |![](../images/installer-guide/winblows-install-md/basesystem-example.png) | ![](../images/installer-guide/winblows-install-md/macrecovery-after.jpg) |
 
-Now with our installer downloaded, we'll next want to format out USB.
+Now with our installer downloaded, we'll next want to format our USB.
 
 ## Making the installer
 
