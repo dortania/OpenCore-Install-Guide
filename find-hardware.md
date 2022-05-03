@@ -228,7 +228,7 @@ Credit for providing image: [Mahas](https://github.com/Mahas1)
 ![](./images/finding-hardware-md/id-ps2-ocsysinfo.png)
 Trackpad: `PS/2` <br /> Keyboard: `PS/2`
 
-Credit for providing image: [TastyOrTasteless](https://github.com/TastyOrTasteless)
+Credit for providing image: [Tasty0](https://github.com/Tasty0)
 :::
 
 ::: danger
