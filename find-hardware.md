@@ -17,28 +17,28 @@ Due to the easier to use GUI, we recommend downloading AIDA64 and running this a
 
 ### CPU Model
 
-| AIDA64 | Device Manager|
-| :--- | :--- |
+| AIDA64                                                 | Device Manager                                                |
+|:-------------------------------------------------------|:--------------------------------------------------------------|
 | ![](./images/finding-hardware-md/cpu-model-aida64.png) | ![](./images/finding-hardware-md/cpu-model-devicemanager.png) |
 
 ### GPU Model
 
-| AIDA64 | DeviceManager|
-| :--- | :--- |
+| AIDA64                                                 | DeviceManager                                                 |
+|:-------------------------------------------------------|:--------------------------------------------------------------|
 | ![](./images/finding-hardware-md/GPU-model-aida64.png) | ![](./images/finding-hardware-md/GPU-model-devicemanager.png) |
 
 ### Chipset Model
 
-| AIDA64 | DeviceManager|
-| :--- | :--- |
+| AIDA64                                                     | DeviceManager                                                     |
+|:-----------------------------------------------------------|:------------------------------------------------------------------|
 | ![](./images/finding-hardware-md/chipset-model-aida64.png) | ![](./images/finding-hardware-md/chipset-model-devicemanager.png) |
 
 * Note: Intel SOC based CPUs will have the chipset and other features already on the same die instead of being dedicated chips. This means trying to detect the exact chipset is a bit more difficult
 
 ### Keyboard, Trackpad and Touchscreen Connection Type
 
-| DeviceManager |
-| :--- |
+| DeviceManager                                                      |
+|:-------------------------------------------------------------------|
 | ![](./images/finding-hardware-md/trackpad-model-devicemanager.png) |
 
 AIDA64 unfortunately doesn't provide any useful info regarding pointer devices, so we recommend using DeviceManager for this.
@@ -83,24 +83,24 @@ These will almost always show up as a Microsoft HID device, though can appear as
   
 ### Audio Codec
 
-| AIDA64 | DeviceManager|
-| :--- | :--- |
+| AIDA64                                                        | DeviceManager                                                     |
+|:--------------------------------------------------------------|:------------------------------------------------------------------|
 | ![](./images/finding-hardware-md/audio-controller-aida64.png) | ![](./images/finding-hardware-md/audio-controller-aida64.png.png) |
 
 Due to how certain OEMs present device names, the most accurate info you can get with DeviceManager is via the PCI ID(ie. pci 14F1,50F4). This means you'll need to google the ID and figure out the exact device ID, however AIDA64 can present the name properly which is quite a bit easier on the end user.
 
 ### Network Controller models
 
-| AIDA64 | Device Manager|
-| :--- | :--- |
+| AIDA64                                                 | Device Manager                                                |
+|:-------------------------------------------------------|:--------------------------------------------------------------|
 | ![](./images/finding-hardware-md/nic-model-aida64.png) | ![](./images/finding-hardware-md/nic-model-devicemanager.png) |
 
 Due to how certain OEMs present device names, the most accurate info you can get with Device Manager is via the PCI ID (ie. `PCI\VEN_14E4&DEV_43A0` corresponds to a vendor ID of `14E4` and a device ID of `43A0`). This means you'll need to Google the ID and figure out the exact device ID; however, AIDA64 can present the name properly which can be quite a bit easier.
 
 ### Drive Model
 
-| AIDA64 | Device Manager|
-| :--- | :--- |
+| AIDA64                                                  | Device Manager                                                 |
+|:--------------------------------------------------------|:---------------------------------------------------------------|
 | ![](./images/finding-hardware-md/disk-model-aida64.png) | ![](./images/finding-hardware-md/disk-model-devicemanager.png) |
 
 Due to OEMs not providing much details about the drive, you'll need to Google a bit which drive matches up with the displayed name.
@@ -163,3 +163,86 @@ lshw -class network
 ```sh
 lshw -class disk -class storage
 ```
+
+## Finding Hardware using OCSysInfo
+
+There are 2 methods of obtaining and running OCSysInfo:
+
+* [Precompiled binaries](https://github.com/kernelBPD/OCSysInfo/releases)
+* Manually cloning the [repository](https://github.com/kernelBPD/OCSysInfo)
+
+::: warning
+OCSysInfo requires __Python 3.9__ or later installed in order to run properly. <br />
+You can check out the [mini-guide](https://github.com/kernelBPD/OCSysInfo/tree/main/mini-guide) to find out how to set up OCSysInfo and more. 
+:::
+
+### Discovering hardware
+
+After you've successfully installed and ran the application, you should be greeted with the following screen:
+
+![](./images/finding-hardware-md/ocsysinfo-example.png)
+
+From here, you can type in `d` and press `ENTER`/`RETURN`, after, you should be greeted with a similar-looking screen:
+
+![](./images/finding-hardware-md/ocsysinfo-hwdisc.png)
+
+### CPU Model
+
+![](./images/finding-hardware-md/cpu-model-ocsysinfo.png)
+
+Besides the CPU model, it also lists the CPU's codename, highest SSE version supported and SSSE3 availability.
+
+### GPU Model
+
+![](./images/finding-hardware-md/gpu-model-ocsysinfo.png)
+
+In this case, the machine has two GPUs:
+
+* iGPU (Intel UHD Graphics 630)
+* dGPU (AMD Radeon R9 390X)
+
+Besides the model names, it also lists the GPUs' codename, ACPI & PCI path, which you may soon find useful as you progress in your hackintosh journey.
+
+### Keyboard and Trackpad Connection Type
+
+::: warning
+On some machines, in Windows, due to the limitations of `WMI`, OCSysInfo is unable to provide 100% accurate information regarding I2C devices. <br />
+For the time being, we encourage you to ensure your connector types using the previous method — [Finding Hardware using Windows](#finding-hardware-using-windows) — until further notice.
+:::
+
+::: details SMBus Trackpad
+![](./images/finding-hardware-md/id-smbus-ocsysinfo.png)
+Trackpad: `SMBus` <br /> Keyboard: `PS/2` 
+
+Credit for providing image: [ThatCopy](https://github.com/ThatCopy)
+:::
+
+::: details I2C Trackpad
+![](./images/finding-hardware-md/id-i2c-ocsysinfo.png)
+Trackpad: `I2C` <br /> Keyboard: `PS/2`
+
+Credit for providing image: [Mahas](https://github.com/Mahas1)
+:::
+
+::: details PS/2 Trackpad
+![](./images/finding-hardware-md/id-ps2-ocsysinfo.png)
+Trackpad: `PS/2` <br /> Keyboard: `PS/2`
+
+Credit for providing image: [TastyOrTasteless](https://github.com/TastyOrTasteless)
+:::
+
+::: danger
+Despite OCSysInfo detecting trackpad as `USB` in the I2C example, it is actually `I2C`.
+:::
+
+### Audio codec
+
+![](./images/finding-hardware-md/audio-codec-ocsysinfo.png)
+
+### Network models
+
+![](./images/finding-hardware-md/network-model-ocsysinfo.png)
+
+### Drive model
+
+![](./images/finding-hardware-md/drive-model-ocsysinfo.png)
