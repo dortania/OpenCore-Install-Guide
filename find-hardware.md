@@ -178,6 +178,10 @@ You can check out the [mini-guide](https://github.com/kernelBPD/OCSysInfo/tree/m
 
 ### Discovering hardware
 
+::: warning
+Laptop users: before we start, we advise you to disconnect any external USB devices, as this may lead to ambiguous or unnecessary information collected which may confuse you.
+:::
+
 After you've successfully installed and ran the application, you should be greeted with the following screen:
 
 ![](./images/finding-hardware-md/ocsysinfo-example.png)
