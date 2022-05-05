@@ -171,9 +171,10 @@ There are 2 methods of obtaining and running OCSysInfo:
 * [Precompiled binaries](https://github.com/kernelBPD/OCSysInfo/releases)
 * Manually cloning the [repository](https://github.com/kernelBPD/OCSysInfo)
 
-::: warning
-OCSysInfo requires __Python 3.9__ or later installed in order to run properly. <br />
-You can check out the [mini-guide](https://github.com/kernelBPD/OCSysInfo/tree/main/mini-guide) to find out how to set up OCSysInfo and more. 
+::: tip
+We recommend you download [the binaries](https://github.com/kernelBPD/OCSysInfo/releases), as it is the simplest and easiest method.
+
+If you want to learn more about manually cloning the repository, you can check out the OCSysInfo [mini-guide](https://github.com/kernelBPD/OCSysInfo/tree/main/mini-guide).
 :::
 
 ### Discovering hardware
