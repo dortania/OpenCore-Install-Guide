@@ -168,13 +168,13 @@ lshw -class disk -class storage
 
 There are 2 methods of obtaining and running OCSysInfo:
 
-* [Precompiled binaries](https://github.com/kernelBPD/OCSysInfo/releases)
-* Manually cloning the [repository](https://github.com/kernelBPD/OCSysInfo)
+* [Precompiled binaries](https://github.com/KernelWanderers/OCSysInfo/releases)
+* Manually cloning the [repository](https://github.com/KernelWanderers/OCSysInfo)
 
 ::: tip
-We recommend you download [the binaries](https://github.com/kernelBPD/OCSysInfo/releases), as it is the simplest and easiest method.
+We recommend you download [the binaries](https://github.com/KernelWanderers/OCSysInfo/releases), as it is the simplest and easiest method.
 
-If you want to learn more about manually cloning the repository, you can check out the OCSysInfo [mini-guide](https://github.com/kernelBPD/OCSysInfo/tree/main/mini-guide).
+If you want to learn more about manually cloning the repository, you can check out the OCSysInfo [mini-guide](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide).
 :::
 
 ### Discovering hardware
