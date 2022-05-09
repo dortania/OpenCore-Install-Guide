@@ -210,11 +210,6 @@ Besides the model names, it also lists the GPUs' codename, ACPI & PCI path, whic
 
 ### Keyboard and Trackpad Connection Type
 
-::: warning
-On some machines, in Windows, due to the limitations of `WMI`, OCSysInfo is unable to provide 100% accurate information regarding I2C devices. <br />
-For the time being, we encourage you to ensure your connector types using the previous method — [Finding Hardware using Windows](#finding-hardware-using-windows) — until further notice.
-:::
-
 ::: details SMBus Trackpad
 ![](./images/finding-hardware-md/id-smbus-ocsysinfo.png)
 Trackpad: `SMBus` <br /> Keyboard: `PS/2` 
@@ -234,10 +229,6 @@ Credit for providing image: [Mahas](https://github.com/Mahas1)
 Trackpad: `PS/2` <br /> Keyboard: `PS/2`
 
 Credit for providing image: [Tasty0](https://github.com/Tasty0)
-:::
-
-::: danger
-Despite OCSysInfo detecting trackpad as `USB` in the I2C example, it is actually `I2C`.
 :::
 
 ### Audio codec
