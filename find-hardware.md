@@ -212,7 +212,7 @@ Besides the model names, it also lists the GPUs' codename, ACPI & PCI path, whic
 
 ::: details SMBus Trackpad
 ![](./images/finding-hardware-md/id-smbus-ocsysinfo.png)
-Trackpad: `SMBus` <br /> Keyboard: `PS/2` 
+Trackpad: `SMBus` <br /> Keyboard: `PS/2`
 
 Credit for providing image: [ThatCopy](https://github.com/ThatCopy)
 :::
