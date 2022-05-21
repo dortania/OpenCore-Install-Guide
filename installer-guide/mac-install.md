@@ -13,6 +13,24 @@ From a macOS machine that meets the requirements of the OS version you want to i
 
 For machines that need a specific OS release or can't download from the App Store, you can use the Munki's InstallInstallMacOS utility.
 
+::: details Note for users running macOS Monterey 12.3 or above
+
+Starting from macOS Monterey 12.3, Apple removed support for `python2.7`, so without it `installinstallmacos.py` will throw the following error:
+
+```
+This tool requires the Python xattr module. Perhaps run 'pip install xattr' to install it.
+```
+
+To overcome the issue, we recommend to install `Command Line Tools for Xcode` by running `xcode-select --install` in a Terminal and then run `pip3 install xattr`
+
+After that you can run the same command below but with `python3` instead of just `python`:
+
+```sh
+mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py > installinstallmacos.py && sudo python3 installinstallmacos.py
+```
+  
+:::
+
 In order to run it, just copy and paste the below command in a terminal window:
 
 ```sh
