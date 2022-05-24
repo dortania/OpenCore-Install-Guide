@@ -26,7 +26,7 @@ For serial setup, OpenCore actually makes this quite straight forward.
 
 ### Misc
 
-* **SerialInt**: YES
+* **SerialInit**: YES
   * Performs serial port initialization
 * **Target**: `67`
   * Enables debug output with OpenCore
