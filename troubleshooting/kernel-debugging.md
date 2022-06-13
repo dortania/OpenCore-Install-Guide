@@ -49,8 +49,8 @@ Now lets go over what each arg does:
   * Enables verbose output
 * **keepsyms=1**
   * Ensures symbols are kept during kernel panics, which are greatly helpful for troubleshooting
-* **debug=0x12a**
-  * Combination of `DB_KPRT`(0x8), `DB_KDP_BP_DIS`(0x32), `DB_KDP_GETC_ENA(0x200)`
+"* **debug=0x12a** (How do you calculate 0x12a from those 3 combination below)
+  * Combination of `DB_KPRT`(0x8), `DB_KDP_BP_DIS`(0x32) Is this not 0x80?, `DB_KDP_GETC_ENA(0x200)`"
   * A full list of values can be found here: [debug.h](https://github.com/apple/darwin-xnu/blob/master/osfmk/kern/debug.h#L419L447)
 * **msgbuf=1048576**
   * Sets the kernel's message buffer size, this helps with getting proper logs during boot
