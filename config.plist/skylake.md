@@ -38,7 +38,7 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | Required SSDTs | Description |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** or [SSDT-EC + SSDT-USB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-methods/ssdttime.html) | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -516,6 +516,8 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ## PlatformInfo
 
+### Generic
+
 ![PlatformInfo](../images/config/config.plist/skylake/smbios.png)
 
 ::: tip Info
@@ -554,10 +556,6 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 **Automatic**: YES
 
 * Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
-
-:::
-
-### Generic
 
 ::: details More in-depth Info
 
