@@ -26,8 +26,6 @@ For serial setup, OpenCore actually makes this quite straight forward.
 
 ### Misc
 
-* **SerialInit**: YES
-  * Performs serial port initialization
 * **Target**: `67`
   * Enables debug output with OpenCore
   * Target = 75 adds the additional serial output flag(0x08) if you [plan to use serial](#serial-setup-optional)
