@@ -383,6 +383,8 @@ Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip how
 * **HideAuxiliary**: YES
   * Hiding auxiliary entries may increase boot performance on multi-disk systems.
 
+:::
+
 ### Debug
 
 ::: tip Info
