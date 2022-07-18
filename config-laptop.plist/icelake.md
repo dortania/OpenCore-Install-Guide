@@ -394,7 +394,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| AllowNvramReset | YES | |
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
@@ -405,8 +404,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 
 ::: details More in-depth Info
 
-* **AllowNvramReset**: YES
-  * Allows for NVRAM reset both in the boot picker and when pressing `Cmd+Opt+P+R`
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
 * **ApECID**: 0
