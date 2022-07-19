@@ -55,7 +55,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support hiding specific drives
 * Does not support changing settings within OpenCore's menu
 * Does not patch PCIRoot UID value
-* Does not support macOS-only ACPI injection and patching
+* Does not support macOS-only ACPI hex patching
 
 ## Common Myths
 
