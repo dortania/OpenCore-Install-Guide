@@ -409,7 +409,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 
 Used for serial debugging (Leave everything as default).
 
-
 ### Tools
 
 Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you.
