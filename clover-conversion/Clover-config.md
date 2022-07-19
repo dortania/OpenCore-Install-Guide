@@ -172,7 +172,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **UIScale**:
 
-* `UEFI -> Quirks -> UIScale | Integer | `
+* `UEFI -> Quirks -> UIScale | Integer |`
   * `1` —> 1x scaling, corresponds to normal displays.
   * `2` —> 2x scaling, corresponds to HiDPI displays.
   * `-1` —> leaves the current variable unchanged.
@@ -196,7 +196,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **USB**:
 
 * FixOwnership: `UEFI -> Quirk -> ReleaseUsbOwnership`
-  - It is highly recommended to enable `XHCI Hand-off` in your BIOS. More details [here](https://https://dortania.github.io/OpenCore-Post-Install/misc/xhci-handoff.html)
+  * It is highly recommended to enable `XHCI Hand-off` in your BIOS. More details [here](https://https://dortania.github.io/OpenCore-Post-Install/misc/xhci-handoff.html)
 * ClockID: `DeviceProperties -> Add -> PciRoot... -> AAPL,clock-id`
 * HighCurrent: `DeviceProperties -> Add -> PciRoot... -> AAPL, HighCurrent`
   * Irrelevant for OS X 10.11 and newer
@@ -491,7 +491,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **BooterConfig**:
 
-* `UEFI -> Quirks -> UIScale | Integer | `
+* `UEFI -> Quirks -> UIScale | Integer |`
   * `1` —> 1x scaling, corresponds to normal displays.
   * `2` —> 2x scaling, corresponds to HiDPI displays.
   * `-1` —> leaves the current variable unchanged.
