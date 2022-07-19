@@ -172,9 +172,11 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **UIScale**:
 
-* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale | Data | <>`
-  * 1 -> `<01>`
-  * 2 -> `<02>`
+* `UEFI -> Quirks -> UIScale | Integer | `
+  * `1` —> 1x scaling, corresponds to normal displays.
+  * `2` —> 2x scaling, corresponds to HiDPI displays.
+  * `-1` —> leaves the current variable unchanged.
+  * `0` —> automatically chooses scaling based on the current resolution.
 
 # CPU
 
@@ -194,6 +196,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **USB**:
 
 * FixOwnership: `UEFI -> Quirk -> ReleaseUsbOwnership`
+  - It is highly recommended to enable `XHCI Hand-off` in your BIOS. More details [here](https://https://dortania.github.io/OpenCore-Post-Install/misc/xhci-handoff.html)
 * ClockID: `DeviceProperties -> Add -> PciRoot... -> AAPL,clock-id`
 * HighCurrent: `DeviceProperties -> Add -> PciRoot... -> AAPL, HighCurrent`
   * Irrelevant for OS X 10.11 and newer
@@ -463,7 +466,7 @@ The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup)
 rtcfx_exclude=00-FF
 ```
 
-If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on
+If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on. More details available [here](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html)
 
 **FakeCPUID**:
 
@@ -488,10 +491,11 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **BooterConfig**:
 
-* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`:
-
-  * 0x28: `Data | <01>`
-  * 0x2A: `Data | <02>`
+* `UEFI -> Quirks -> UIScale | Integer | `
+  * `1` —> 1x scaling, corresponds to normal displays.
+  * `2` —> 2x scaling, corresponds to HiDPI displays.
+  * `-1` —> leaves the current variable unchanged.
+  * `0` —> automatically chooses scaling based on the current resolution.
 
 **CsrActiveConfig**:
 
