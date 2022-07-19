@@ -239,6 +239,15 @@ pci14e4,1686 = Broadcom BCM57766
     * Coffee Lake and older laptops are however recommended to use this kext
   * Does not work on AMD CPUs **at all**
   * Requires OS X 10.11 or newer
+  * This is not recommended anymore as there is better and updated ways to take care of the USB ports and even pre-mapping them.
+
+* USBToolBox ([Tool](https://github.com/USBToolBox/tool) & [Kext](https://github.com/USBToolBox/kext))
+  * USBToolBox Tool is a USB mapping tool supporting Windows and macOS.
+  * Features
+    * Supports mapping from Windows and macOS, no eta on linux yet.
+    * Can build a map using either the USBToolBox kext or native Apple kexts (AppleUSBHostMergeProperties)
+    * Supports multiple ways of matching
+    * Supports companion ports (on Windows)
 
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
   * Needed for non-native USB controllers

@@ -17,9 +17,11 @@ No good guide is made by one man, here's credit to those who've helped out:
   * For the original AMD Vanilla Guide
   * Corrections to AMD portion of the guide
 * [DhinakG](https://github.com/dhinakg)
-  * Random guide related stuff
+  * Random guide related stuff and information from USBToolBox's README file
 * [Khronokernel](https://github.com/khronokernel)
   * For both writing and maintaining the guide
+* [kernel](https://github.com/kernel-dev)
+  * For the tool OCSysInfo
 * [and the rest of the dortania team](https://github.com/dortania) for helping out
   
 And to the rest who've helped out as well, thank you!
