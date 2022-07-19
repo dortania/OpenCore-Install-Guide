@@ -337,6 +337,8 @@ However ProperTree will handle this for you, so you need not concern yourself
   * Legacy SATA/AHCI injector, mainly relevant for older machines of the Penryn era
 * [ATAPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/ATAPortInjector.kext.zip)
   * Legacy ATA injector, mainly relevant for IDE and ATA devices(ie. when no AHCI option is present in the BIOS)
+* [AppleIntelPIIXATA](https://github.com/ummwhite/AppleIntelPIIXATA.kext)
+  * Even more legacy ATA injector, mainly relevant if no other options work.
   
 :::
 
