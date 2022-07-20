@@ -67,7 +67,7 @@ From here, jump to [Setting up the installer](#setting-up-the-installer) to fini
 * This method allows you to download much older versions of OS X, currently supporting all Intel versions of OS X(10.4 to current)
 
   * [Legacy macOS: Offline method](./mac-install-pkg.md)
-    * 10.10-10.12 Supported
+    * 10.7-10.12 Supported, excluding 10.9
   * [Legacy macOS: Online method(10.7-10.15 Supported)](./mac-install-recovery.md)
     * 10.7-11 Supported
   * [Legacy macOS: Disk Images](./mac-install-dmg.md)

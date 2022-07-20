@@ -1,10 +1,20 @@
 # Legacy macOS: Offline method
 
-This method allows us to download full installers from Apple, however is limited to 10.10, Yosemite, so older OSes will need to be grabbed via the "Online Method" mentioned below.
+This method allows us to download full installers from Apple, however is limited to the macOS versions listed below:
 
-To start, go to the following link:
+* 10.7 Lion
+* 10.8 Mountain Lion
+* 10.10 Yosemite
+* 10.11 El Capitan
+* 10.12 Sierra
 
-* [How to get old versions of macOS](https://support.apple.com/en-us/HT211683)
+Note that OS X 10.9 Mavericks is not available from Apple yet. It will need to be grabbed via the "Online Method" mentioned below.
+
+To start, go to one of the following links:
+
+* [Mac OS X Lion Installer](https://support.apple.com/kb/DL2077?locale=en_US)
+* [Mac OS X Mountain Lion Installer](https://support.apple.com/kb/DL2076?locale=en_US)
+* [How to get old versions of macOS](https://support.apple.com/en-us/HT211683) (for 10.10 - 10.12 installers)
 
 Download your desired version and a .pkg file should be provided.
 
@@ -42,6 +52,24 @@ xar -xf /Volumes/Install\ macOS/InstallOS.pkg
 ```
 
 Next, run the following(one at a time):
+
+* Lion:
+
+```sh
+cd InstallMacOSX.pkg
+tar xvzf Payload
+mv InstallESD.dmg Install\ Mac\ OS\ X\ Lion.app/Contents/SharedSupport/
+mv Install\ Mac\ OS\ X\ Lion.app /Applications
+```
+
+* Mountain Lion:
+
+```sh
+cd InstallMacOSX.pkg
+tar xvzf Payload
+mv InstallESD.dmg Install\ Mac\ OS\ X\ Mountain\ Lion.app/Contents/SharedSupport/
+mv Install\ Mac\ OS\ X\ Mountain\ Lion.app /Applications
+```
 
 * Yosemite:
 
