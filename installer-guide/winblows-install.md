@@ -13,17 +13,9 @@ To start you'll need the following:
 
 ## Downloading macOS
 
-To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next copy the folder path for the macrecovery folder:
+To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next, click next to the current folder path and type `cmd` to open a Command Prompt in the current directory:
 
-![](../images/installer-guide/winblows-install-md/file-path.png)
-
-From here, you'll want to open up a Command Prompt and cd into the macrecovery folder that we copied earlier:
-
-```sh
-cd Paste_Folder_Path
-```
-
-![](../images/installer-guide/winblows-install-md/command-prompt.png)
+![](../images/installer-guide/winblows-install-md/open-cmd-current-folder.gif)
 
 Now run one of the following depending on what version of macOS you want(Note these scripts rely on [Python](https://www.python.org/downloads/) support, please install if you haven't already):
 
@@ -79,7 +71,7 @@ This will take some time, however once you're finished you should get either Bas
 | :--- | :--- |
 |![](../images/installer-guide/winblows-install-md/basesystem-example.png) | ![](../images/installer-guide/winblows-install-md/macrecovery-after.jpg) |
 
-Now with our installer downloaded, we'll next want to format out USB.
+Now with our installer downloaded, we'll next want to format our USB.
 
 ## Making the installer
 
