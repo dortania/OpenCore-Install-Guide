@@ -232,13 +232,13 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### USB
 
-* ~~[USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)~~
-  * ~~Used for injecting Intel USB controllers on systems without defined USB ports in ACPI~~
-  * ~~Shouldn't be needed on Desktop Skylake and newer~~
-    * ~~AsRock is dumb and does need this~~
-    * ~~Coffee Lake and older laptops are however recommended to use this kext~~
-  * ~~Does not work on AMD CPUs **at all**~~
-  * ~~Requires OS X 10.11 or newer~~
+* [~USBInjectAll~](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
+  * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
+  * Shouldn't be needed on Desktop Skylake and newer
+    * AsRock is dumb and does need this
+    * Coffee Lake and older laptops are however recommended to use this kext
+  * Does not work on AMD CPUs **at all**
+  * Requires OS X 10.11 or newer
   * This is not recommended anymore as there is better and updated ways to take care of the USB ports and even pre-mapping them.
 
 * USBToolBox ([Tool](https://github.com/USBToolBox/tool) & [Kext](https://github.com/USBToolBox/kext))
@@ -322,12 +322,11 @@ However ProperTree will handle this for you, so you need not concern yourself
 ### Extras
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-  * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
-  * Affected SMBIOS:
+  * Required on macOS 12.3 and later on AMD systems, and on macOS 10.15 and later on dual-socket Intel systems.
+  * Affected SMBIOSes:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
-  * Requires macOS 10.15 or newer
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync/releases)
   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable.
   * **Does not work on AMD CPUs**
