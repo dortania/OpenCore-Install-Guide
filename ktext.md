@@ -322,12 +322,11 @@ However ProperTree will handle this for you, so you need not concern yourself
 ### Extras
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-  * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
-  * Affected SMBIOS:
+  * Required on macOS 12.3 and later on AMD systems, and on macOS 10.15 and later on dual-socket Intel systems.
+  * Affected SMBIOSes:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
-  * Requires macOS 10.15 or newer
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync/releases)
   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable.
   * **Does not work on AMD CPUs**
