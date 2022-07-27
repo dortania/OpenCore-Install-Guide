@@ -8,7 +8,7 @@ This section contains a brief rundown as to why the community has been transitio
 
 * More OS Support!
   * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 12, Monterey!
+  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 13, Ventura!
 * On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
