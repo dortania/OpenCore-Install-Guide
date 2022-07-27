@@ -89,6 +89,11 @@ The below plugins are not required to boot, and merely add extra functionality t
 * SMCProcessor.kext
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
   * Requires Mac OS X 10.7 or newer
+* [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor)
+  * USed for monitoring CPU temperature on AMD Zen-based systems
+  * **Under active development, potentially unstable**
+  * Requires AMDCPURyzenPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
+  * Requires macOS 10.13 or newer
 * SMCSuperIO.kext
   * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
   * Requires Mac OS X 10.6 or newer
@@ -100,7 +105,7 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for measuring battery readouts on laptops, **desktops can ignore**
   * Requires Mac OS X 10.4 or newer
 * SMCDellSensors.kext
-  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM)
+  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode (SMM)
   * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
   * Requires Mac OS X 10.7 or newer
 
@@ -309,6 +314,10 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
   * Requires OS X 10.6 or newer
+* [AMDCPURyzenPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
+  * CPU power management for Ryzen systems
+  * **Under active development, potentially unstable**
+  * Requires macOS 10.13 or newer
 
 ### Extras
 

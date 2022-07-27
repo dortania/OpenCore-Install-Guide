@@ -1,4 +1,4 @@
-# Legacy macOS: Online method
+# Legacy macOS: Online Method
 
 This method allows us to download legacy versions of macOS including 10.7 to current, however these are only recovery installers so require an internet connection inside the installer itself
 

@@ -66,19 +66,19 @@ From here, jump to [Setting up the installer](#setting-up-the-installer) to fini
 
 * This method allows you to download much older versions of OS X, currently supporting all Intel versions of OS X(10.4 to current)
 
-  * [Legacy macOS: Offline method](./mac-install-pkg.md)
-    * 10.10-10.12 Supported
-  * [Legacy macOS: Online method(10.7-10.15 Supported)](./mac-install-recovery.md)
-    * 10.7-11 Supported
+  * [Legacy macOS: Offline Method](./mac-install-pkg.md)
+    * 10.7 - 10.12 supported, excluding 10.9
+  * [Legacy macOS: Online Method](./mac-install-recovery.md)
+    * 10.7 - 11 supported
   * [Legacy macOS: Disk Images](./mac-install-dmg.md)
-    * 10.4-10.6 Supported
+    * 10.4 - 10.6 supported
 
 ## Setting up the installer
 
 Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
 
 * Note: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
-* Note 2: Users following "Legacy macOS: Online method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+* Note 2: Users following "Legacy macOS: Online Method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
 
 ![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
 
