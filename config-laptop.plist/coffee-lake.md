@@ -360,14 +360,14 @@ Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip how
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| HideAuxiliary | YES | Press space to show external macOS recovery media and other auxiliary entries |
+| HideAuxiliary | YES | Press space to show macOS recovery and other auxiliary entries |
 
 :::
 
 ::: details More in-depth Info
 
 * **HideAuxiliary**: YES
-  * This option will hide supplementary entries in the picker. Hiding auxiliary entries may increase boot performance on multi-disk systems.
+  * This option will hide supplementary entries, such as macOS recovery and tools, in the picker. Hiding auxiliary entries may increase boot performance on multi-disk systems. You can press space at the picker to show these entries
 
 :::
 
