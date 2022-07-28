@@ -26,10 +26,18 @@ For serial setup, OpenCore actually makes this quite straight forward.
 
 ### Misc
 
+#### Serial
+
+* **Init**: YES
+  * Initializes the serial port from OpenCore
+  * Needed for sending OpenCore logging to the serial port
+
+#### Debug
+
 * **Target**: `67`
   * Enables debug output with OpenCore
-  * Target = 75 adds the additional serial output flag(0x08) if you [plan to use serial](#serial-setup-optional)
-  * You can calculate your own vale here: [OpenCore debugging](./debug.md)
+  * `Target` = `75` adds the additional serial output flag(`0x08`) if you [plan to use serial](#serial-setup-optional)
+  * You can calculate your own value here: [OpenCore debugging](./debug.md)
   
 ### NVRAM
 
@@ -255,7 +263,7 @@ Now we install our KDK into the system:
 # For 10.15 and older, swap livemount with /Volumes/<Target Volume>
 sudo ditto /Library/Developer/KDKs/<KDK Version>/System ~/livemount/System
 
-# Rebuild the kernel cache(Big Sur and newer)
+# Rebuild Truethe kernel cache(Big Sur and newer)
 sudo kmutil install --volume-root ~/livemount --update-all
 
 # Rebuild the kernel cache(Catalina and older)
