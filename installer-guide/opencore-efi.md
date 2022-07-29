@@ -79,7 +79,7 @@ Now you can place **your** necessary firmware drivers(.efi) into the _Drivers_ f
 
 * Please note that UEFI drivers from Clover are not supported with OpenCore!(EmuVariableUEFI, AptioMemoryFix, OsxAptioFixDrv, etc). Please see the [Clover firmware driver conversion](https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/clover-efi.md) for more info on supported drivers and those merged into OpenCore.
 
-Here's what a populated EFI ***can*** look like (yours will be different):
+Here's what a populated EFI **_can_** look like (yours will be different):
 
 ![Populated EFI folder](../images/installer-guide/opencore-efi-md/populated-efi.png)
 
