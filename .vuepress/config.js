@@ -143,8 +143,6 @@ module.exports = {
                     ['/config.plist/kaby-lake', 'Kaby Lake'],
                     ['/config.plist/coffee-lake', 'Coffee Lake'],
                     ['/config.plist/comet-lake', 'Comet Lake'],
-                    ['/config.plist/rocket-lake', 'Rocket Lake'],
-                    ['/config.plist/alder-lake', 'Alder Lake'],
                 ]
             },
             {
