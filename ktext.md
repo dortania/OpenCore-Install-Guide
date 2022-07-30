@@ -349,6 +349,8 @@ However ProperTree will handle this for you, so you need not concern yourself
     * Catalina and older need not concern
 * [CPUTopology](https://github.com/b00t0x/CpuTopologyRebuild)
   * An experimental Lilu plugin that optimizes Alder Lake's heterogeneous core configuration. Required only on Alder Lake CPUs
+* [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
+  * Lilu plugin that blocks unwanted processes causing compatibility issues on different hardware and unlocks the support for certain features restricted to other hardware. This is useful if you are using a MacPro (or something different that triggers compatibility issues) SMBIOS on a different system as it will change the About this Mac ui and disable some warnings about the hardware installed.
 
 ::: details Legacy SATA Kexts
 
