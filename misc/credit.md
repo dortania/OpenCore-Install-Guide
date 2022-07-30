@@ -22,6 +22,14 @@ No good guide is made by one man, here's credit to those who've helped out:
   * For both writing and maintaining the guide
 * [kernel](https://github.com/kernel-dev)
   * For the tool OCSysInfo
+* [Yuichiro](https://github.com/YuiiiPTChan)
+  * For the starting on updating the guides.
+* [ben](https://github.com/thegermanguyben)
+  * For helping with updating the Guides
+* [Krazy-Killa](https://github.com/Krazy-Killa)
+  * For helping with updating the guides.
+* [dreamwhite](https://github.com/dreamwhite)
+  * For updating most of the initial parts of the guide and checking out the troubleshooting.
 * [and the rest of the dortania team](https://github.com/dortania) for helping out
   
 And to the rest who've helped out as well, thank you!
