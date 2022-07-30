@@ -47,7 +47,7 @@ python3 ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
 * **macOS 12 and above note**: As newer macOS introduces new issues with USBs we are required to do an early USB map for proper functionality in Big Sur 11.3 and above. This could be achieved by using USBToolBox in Windows and Windows PE.
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). 
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
     * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issue
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:
