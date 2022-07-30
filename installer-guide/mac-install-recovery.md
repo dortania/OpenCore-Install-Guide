@@ -46,10 +46,8 @@ python3 ./macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
 python3 ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
-* **macOS 12, Monterey Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [macOS 12: Monterey](../extras/monterey.md)
-  * For first time users, we recommend macOS Catalina (10.15) or Big Sur (11)
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). We advise users either install an older OS(ie. macOS 10.15, Catalina) or find a 11.2.3 or older Big Sur installer
-    * For education purposes, we have a copy provided here: [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)
+* **macOS 12 and above note**: As newer macOS introduces new issues with USBs we are required to do an early USB map for proper functionality in Big Sur 11.3 and above. This could be achieved by using USBToolBox in Windows and Windows PE.
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). 
     * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issue
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:
