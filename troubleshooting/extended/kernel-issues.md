@@ -131,6 +131,24 @@ Same issues above, see here for more details: [Stuck on `[EB|#LOG:EXITBS:START]`
 
 * Note: Enabling [DEBUG OpenCore](../debug.html) can help shed some light as well
 
+## Getting the error X64 Exception Type... on AMD FX systems
+
+This error can have multiple causes:
+
+- Compatibility Support Module (CSM) being enabled in your BIOS:
+
+ Might also be called Legacy Boot Support, Load Legacy Option ROMs/OPROMs
+
+- The ProvideCurrentCpuInfo quirk (required by the unified patches) being incompatible with your firmware:
+
+ This means you are gonna have to use an [older version of the patches](https://github.com/AMD-OSX/AMD_Vanilla/blob/06a9a7f30d139fa3ae897ed2469222c92e99fcad/15h_16h/patches.plist) and that meaning you are also gonna have to use macOS 11 Big Sur or older.
+ 
+ After downloading the older patches linked above, merge them into your config.plist the same way as the new ones (make sure to also remove those aswell) and you are good to go, no need for changing any keys like Replace.
+
+An example:
+
+![](../../images/troubleshooting/troubleshooting-md/x64exception-amdfx.png)
+
 ## Kernel Panic on `Invalid frame pointer`
 
 So this is due to some issue around the `Booter -> Quirks` you set, main things to check for:
