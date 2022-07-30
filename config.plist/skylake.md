@@ -203,6 +203,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
 | 12 | 21.0.0 | 21.99.99 |
+| 13 | 22.0.0 | 22.99.99 |
 
 :::
 
@@ -520,6 +521,19 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
 For this Skylake example, we'll choose the iMac17,1 SMBIOS.
+
+**Note**: iMac17,1 SMBIOS is only supported up-to and including macOS 12, Monterey. For cases where you must boot Ventura, see below:
+
+::: details Ventura SMBIOS table
+
+For Skylake, it is recommended to use iMac18,1 for compatibility sake.  The typical breakdown is as follows:
+
+| SMBIOS | Hardware |
+| :--- | :--- |
+| iMac18,1 | Used for computers utilizing the iGPU for displaying |
+| iMac18,3 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
+
+:::
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

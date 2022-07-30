@@ -560,6 +560,8 @@ For Skylake, it is recommended to use MacBookPro14,1 SMBIOS.  The typical breakd
 | MacBookPro14,3 | Quad Core 45W | iGPU: HD 630 + dGPU: Radeon Pro 555X/560X | 15" | Yes |
 | iMac18,1 | NUC Systems | iGPU: Iris Plus 640 |  N/A | No |
 
+:::
+
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
