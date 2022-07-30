@@ -509,7 +509,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM like X99
 
 * **LegacySchema**
-  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+  * Used for assigning NVRAM variables.
 
 * **WriteFlash**: NO
   * Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
