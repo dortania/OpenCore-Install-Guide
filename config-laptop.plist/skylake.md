@@ -547,6 +547,19 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 | MacBookPro13,3 | Quad Core 45W | iGPU: HD 530 + dGPU: Radeon Pro 450/455 | 15" | Yes |
 | iMac17,1 | NUC Systems | iGPU: HD 530 + R9 290 |  N/A | No |
 
+**Note**: The following SMBIOS are only supported up-to and including macOS 12, Monterey. For cases where you must boot Ventura, see below:
+
+::: details Ventura SMBIOS table
+
+For Skylake, it is recommended to use MacBookPro14,1 SMBIOS.  The typical breakdown is as follows:
+
+| SMBIOS | CPU Type | GPU Type | Display Size | Touch ID |
+| :--- | :--- | :--- | :--- | :--- |
+| MacBookPro14,1 | Dual Core 15W(Low End) | iGPU: Iris Plus 640 | 13" | No |
+| MacBookPro14,2 | Dual Core 15W(High End) | iGPU: Iris Plus 650 | 13" | Yes |
+| MacBookPro14,3 | Quad Core 45W | iGPU: HD 630 + dGPU: Radeon Pro 555X/560X | 15" | Yes |
+| iMac18,1 | NUC Systems | iGPU: Iris Plus 640 |  N/A | No |
+
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
