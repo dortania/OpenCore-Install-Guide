@@ -532,9 +532,6 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ::: details More in-depth Info
 
-* **LegacyEnable**: NO
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
-
 * **LegacyOverwrite**: NO
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
 

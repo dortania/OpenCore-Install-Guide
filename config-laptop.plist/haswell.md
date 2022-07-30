@@ -509,9 +509,6 @@ System Integrity Protection bitmask
 
 Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
-* **LegacyEnable**: NO
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
-
 * **LegacyOverwrite**: NO
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
 
