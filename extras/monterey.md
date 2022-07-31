@@ -48,7 +48,7 @@ For those on Haswell or Ivy Bridge, here are some simple conversions:
 Dropped GPU Hardware:
 
 * Ivy Bridge (HD 4000 and HD 2500)
-* Nvidia Kepler (GTX 6xx/7xx Cards)
+* NVIDIA Kepler (GTX 6xx/7xx Cards)
 * You can use [OpenCore-Legacy-Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/) to add back support
   * No support is provided for Hackintoshes using OCLP!
   * You will lose access to non-full updates (Small 1-3GB updates)

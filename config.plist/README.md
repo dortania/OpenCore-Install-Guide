@@ -77,6 +77,8 @@ Now comes the important part, selecting the configuration path. Each platform ha
 | [Kaby Lake](../config.plist/kaby-lake.md) | 7XXX | 2017 era |
 | [Coffee Lake](../config.plist/coffee-lake.md) | 8XXX-9XXX | 2017-2019 era |
 | [Comet Lake](../config.plist/comet-lake.md) | 10XXX | 2020 era |
+| [Rocket Lake](../config.plist/rocket-lake.md) | 11XXX | 2021 era |
+| [Alder Lake](../config.plist/alder-lake.md) | 12XXX | 2021-2022 era |
 
 ### Intel Laptop
 
