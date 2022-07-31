@@ -11,7 +11,7 @@ So making a config.plist may seem hard, it's not. It just takes some time but th
 * **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
 * **The Sample.plist cannot be used As-Is**, you must configure it to your system
 * **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
-* **MAKE SURE YOUR BIOS IS UP TO DATE!*, macOS will not work correctly (and might not even boot) on day 0 BIOS versions. We recommending updating your BIOS to the latest one. (AMD 15h/16h BIOSes are discontinued anyways, no reason to not have it on the latest version.)
+* **MAKE SURE YOUR BIOS IS UP TO DATE!**, macOS will not work correctly (and might not even boot) on day 0 BIOS versions. We recommending updating your BIOS to the latest one. (AMD 15h/16h BIOSes are discontinued anyways, no reason to not have it on the latest version.)
 
 Now with all that, a quick reminder of the tools we need
 
@@ -593,9 +593,7 @@ The `Apple ROM` part gets copied to Generic -> ROM.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-**Reminder that you need an invalid serial, you need to get a message back like: "Invalid Serial" when inputting your Serial Number in the [Apple Check Coverage page](https://checkcoverage.apple.com)**
-
-[Apple Check Coverage page](https://checkcoverage.apple.com)
+**Reminder that you need an invalid serial, you need to get a message back like: "Cannot check coverage for this serial..." when inputting your Serial Number in the [Apple Check Coverage page](https://checkcoverage.apple.com)**
 
 **Automatic**: YES
 
