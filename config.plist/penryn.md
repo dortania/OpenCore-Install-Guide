@@ -121,9 +121,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 Sets device properties from a map.
 
-By default, the Sample.plist has this section set for iGPU and Audio. We won't be covering iGPU so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
-
-TL;DR, delete all the PciRoot's here as we won't be using this section.
+By default, the Sample.plist has this section set for audio which we'll be setting up by setting the layout ID in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from the `Add` section. On other platforms this section is also used for iGPU setup, on Penryn too however it is covered in [another guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/).
 
 ### Delete
 
@@ -254,7 +252,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 * **SetApfsTrimTimeout**: `-1`
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: NO
-  * This is actually the 15 port limit patch, however only relevant for systems with XHCI controllers
+  * This patch removes macOS' 15 ports per controller limit, using this instead of a proper USB map is absolutely not recommended, a quick guide for USB mapping, even under Windows (not Linux though), can be found here, in USBToolBox's README: [USBToolBox](https://github.com/USBToolBox/tool#usage)
 
 :::
 
@@ -526,9 +524,7 @@ The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
-
-[Apple Check Coverage page](https://checkcoverage.apple.com)
+**Reminder that you need an invalid serial, you need to get a message back like: "Cannot check coverage for this serial..." when inputting your Serial Number in the [Apple Check Coverage page](https://checkcoverage.apple.com)**
 
 **Automatic**: YES
 
