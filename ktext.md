@@ -328,6 +328,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
   * Requires OS X 10.6 or newer
+  * Using this kext on macOS 11.3 and above is not recommended as you need to modify the macOS filesystem and disable SIP
 * [AMDRyzenCPUPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
   * CPU power management for Ryzen systems
   * **Under active development, potentially unstable**
