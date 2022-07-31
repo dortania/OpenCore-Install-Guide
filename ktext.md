@@ -92,7 +92,7 @@ The below plugins are not required to boot, and merely add extra functionality t
 * [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor)
   * Used for monitoring CPU temperature on AMD Zen-based systems
   * **Under active development, potentially unstable**
-  * Requires AMDCPURyzenPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
+  * Requires AMDRyzenCPUPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
   * Requires macOS 10.13 or newer
 * [SMCRadeonGPU](https://github.com/aluveitie/RadeonSensor)
   * Used for monitoring GPU temperature on AMD GPU systems
@@ -328,7 +328,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
   * Requires OS X 10.6 or newer
-* [AMDCPURyzenPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
+* [AMDRyzenCPUPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
   * CPU power management for Ryzen systems
   * **Under active development, potentially unstable**
   * Requires macOS 10.13 or newer
