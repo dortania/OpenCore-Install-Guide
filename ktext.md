@@ -87,22 +87,30 @@ Without the below 2, no system is bootable:
 The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring (Note while VirtualSMC supports 10.4, plugins may require newer versions):
 
 * SMCProcessor.kext
-  * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
+  * Used for monitoring Intel CPU temperature
+  * **Do not use on AMD CPU based systems**
   * Requires Mac OS X 10.7 or newer
 * [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor)
-  * USed for monitoring CPU temperature on AMD Zen-based systems
+  * Used for monitoring CPU temperature on AMD Zen-based systems
   * **Under active development, potentially unstable**
-  * Requires AMDCPURyzenPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
+  * Requires AMDRyzenCPUPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
   * Requires macOS 10.13 or newer
+* [SMCRadeonGPU](https://github.com/aluveitie/RadeonSensor)
+  * Used for monitoring GPU temperature on AMD GPU systems
+  * Requires RadeonSensor from the same repository
+  * Requires macOS 11 or newer
 * SMCSuperIO.kext
-  * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
+  * Used for monitoring fan speed
+  * **Do not use on AMD CPU based systems**
   * Requires Mac OS X 10.6 or newer
 * SMCLightSensor.kext
-  * Used for the ambient light sensor on laptops, **desktops can ignore**
+  * Used for the ambient light sensor on laptops
+  * **Do not use on desktops!**
   * Do not use if you don't have an ambient light sensor, can cause issues otherwise
   * Requires Mac OS X 10.6 or newer
 * SMCBatteryManager.kext
-  * Used for measuring battery readouts on laptops, **desktops can ignore**
+  * Used for measuring battery readouts on laptops
+  * **Do not use on desktops! (Unless you have an UPS?)**
   * Requires Mac OS X 10.4 or newer
 * SMCDellSensors.kext
   * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode (SMM)
@@ -122,7 +130,7 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
   * AppleALCU.kext is a pared down version of AppleALC that only supports digital audio - but you can still use AppleALC.kext on digital audio-only systems
   * AMD 15h/16h may have issues with AppleALC and Ryzen/Threadripper systems rarely have mic support
-  * Requires OS X 10.8 or newer
+  * Requires OS X 10.4 or newer
   
 ::: details Legacy Audio Kext
 
@@ -144,9 +152,13 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, I217, I218 and I219 NICs are officially supported
   * Requires OS X 10.9 or newer, 10.6-10.8 users can use the IntelSnowMausi instead for older OSes
-* [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for I211 NICs, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet)
-)
+* [SmallTreeIntel82576](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
+  * Required for I211 NICs running on macOS Monterey and above
+  * Might have instability issues on some NICs, recommended to stay on Big Sur and use SmallTree
+  * Required for most AMD boards running Intel NICs
+  * Requires macOS 12 and above
+* [AppleIGB](https://github.com/donatengit/AppleIGB/releases/tag/v0.4-eee-stall)
+  * Required for I211 NICs running on macOS versions up to Big Sur, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet))
   * Required for most AMD boards running Intel NICs
   * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
@@ -237,13 +249,23 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### USB
 
-* [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-  * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
-  * Shouldn't be needed on Desktop Skylake and newer
-    * AsRock is dumb and does need this
-    * Coffee Lake and older laptops are however recommended to use this kext
-  * Does not work on AMD CPUs **at all**
-  * Requires OS X 10.11 or newer
+* ~~[USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)~~
+  * ~~Used for injecting Intel USB controllers on systems without defined USB ports in ACPI~~
+  * ~~Shouldn't be needed on Desktop Skylake and newer~~
+    * ~~AsRock is dumb and does need this~~
+    * ~~Coffee Lake and older laptops are however recommended to use this kext~~
+  * ~~Does not work on AMD CPUs **at all**~~
+  * ~~Requires OS X 10.11 or newer~~
+  * This is not recommended anymore as there is better and updated ways to take care of the USB ports and even pre-mapping them.
+
+* USBToolBox ([Tool](https://github.com/USBToolBox/tool) & [Kext](https://github.com/USBToolBox/kext))
+  * USBToolBox is a USB mapping tool supporting Windows and macOS.
+  * Please do create an USB map using this tool prior to installing macOS. There's a mini guide on its github README.md file. Accompany your USB map kext with the kext from the kext repository and you should be good to go.
+  * Features
+    * Supports mapping from Windows and macOS, no eta on linux yet.
+    * Can build a map using either the USBToolBox kext or native Apple kexts (AppleUSBHostMergeProperties)
+    * Supports multiple ways of matching
+    * Supports companion ports (on Windows)
 
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
   * Needed for non-native USB controllers
@@ -264,9 +286,22 @@ pci14e4,1686 = Broadcom BCM57766
 * [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
   * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
   * Requires macOS 10.13 or newer and requires Apple's Secure Boot to function correctly
+* [Itlwm](https://github.com/OpenIntelWireless/itlwm/releases)
+  * Alternative to AirportItlwm for systems where Apple's Secure Boot cannot be enabled
+  * Requires [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases/tag/v1.4.1)
+  * It will be treated as an Ethernet card, and you will have to connect to Wi-Fi via Heliport
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * Adds Bluetooth support to macOS when paired with an Intel wireless card
   * Requires macOS 10.13 or newer
+* [IntelBluetoothInjector](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
+  * Included in the same zip as [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
+  * Adds Bluetooth support to macOS when paired with an Intel wireless card
+  * Supports macOS 10.13 up to 11
+  * Do not use on macOS 12 and above
+* [BlueFixupTool](https://github.com/acidanthera/BrcmPatchRAM/releases)
+  * Included in the BrcmPatchRAM zip
+  * Alternative to IntelBluetoothInjector for macOS 12 and above
+  * Do not use on macOS 11 and earlier
 
 ::: details More info on enabling AirportItlwm
 
@@ -293,12 +328,14 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
     * BrcmPatchRAM3 for 10.15+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.8-10.10
+  * For macOS 11 and earlier use BrcmBluetoothInjector
+  * For macOS 12 and later use BlueFixupTool
 
 ::: details BrcmPatchRAM Load order
 
 The order in `Kernel -> Add` should be:
 
-1. BrcmBluetoothInjector
+1. BrcmBluetoothInjector or BlueFixupTool
 2. BrcmFirmwareData
 3. BrcmPatchRAM3
 
@@ -314,7 +351,8 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
   * Requires OS X 10.6 or newer
-* [AMDCPURyzenPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
+  * Using this kext on macOS 11.3 and above is not recommended as you need to modify the macOS filesystem and disable SIP
+* [AMDRyzenCPUPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
   * CPU power management for Ryzen systems
   * **Under active development, potentially unstable**
   * Requires macOS 10.13 or newer
@@ -336,8 +374,12 @@ However ProperTree will handle this for you, so you need not concern yourself
   * Requires macOS 10.14 or newer
 * [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
-  * macOS Big Sur Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
+  * macOS Big Sur and above Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
     * Catalina and older need not concern
+* [CPUTopologyRebuild](https://github.com/b00t0x/CpuTopologyRebuild)
+  * An experimental Lilu plugin that optimizes Alder Lake's heterogeneous core configuration. Required only on Alder Lake CPUs
+* [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
+  * Lilu plugin that blocks unwanted processes causing compatibility issues on different hardware and unlocks the support for certain features restricted to other hardware. This is useful if you are using a Mac Pro (or something different that triggers compatibility issues) SMBIOS on a different system as it will change the About this Mac ui and disable some warnings about the hardware installed.
 
 ::: details Legacy SATA Kexts
 
@@ -402,6 +444,7 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
 
 * [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
   * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
+  * Supports OS X 10.7 and above
 * [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
   * Fixes brightness keys automatically
 
@@ -417,20 +460,20 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 ### Desktop
 
-| Platforms | **CPU** | **EC** | **AWAC** | **NVRAM** | **USB** |
-| :-------: | :-----: | :----: | :------: | :-------: | :-----: |
-| Penryn | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A | N/A |
-| Lynnfield and Clarkdale | ^^ | ^^ | ^^ | ^^ | ^^ |
-| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | ^^ | ^^ | ^^ | ^^ |
-| Ivy Bridge | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ | ^^ |
-| Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ |
-| Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) | ^^ |
-| Comet Lake | ^^ | ^^ | ^^ | N/A | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) |
-| AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
-| AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
+| Platforms | **CPU** | **EC** | **AWAC** | **NVRAM** |
+| :-------: | :-----: | :----: | :------: | :-------: |
+| Penryn | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A |
+| Lynnfield and Clarkdale | ^^ | ^^ | ^^ | ^^ |
+| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | ^^ | ^^ | ^^ |
+| Ivy Bridge | ^^ | ^^ | ^^ | ^^ |
+| Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ |
+| Broadwell | ^^ | ^^ | ^^ | ^^ |
+| Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ |
+| Kaby Lake | ^^ | ^^ | ^^ | ^^ |
+| Coffee Lake | ^^ | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/nvram.html) |
+| Comet Lake | ^^ | ^^ | ^^ | N/A |
+| AMD (15/16h) | N/A | ^^ | N/A | ^^ |
+| AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ |
 
 ### High End Desktop
 
@@ -445,19 +488,19 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 
 ### Laptop
 
-| Platforms | **CPU** | **EC** | **Backlight** | **I2C Trackpad** | **AWAC** | **USB** | **IRQ** |
-| :-------: | :-----: | :----: | :-----------: | :--------------: | :------: | :-----: | :-----: |
-| Clarksfield and Arrandale | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | N/A | N/A | N/A | [IRQ SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) |
-| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Ivy Bridge | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | [SSDT-GPI0](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html) | ^^ | ^^ | ^^ |
-| Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ | ^^ | N/A |
-| Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ | ^^ |
-| Coffee Lake (9th Gen) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
-| Ice Lake | ^^ | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) | ^^ |
+| Platforms | **CPU** | **EC** | **Backlight** | **I2C Trackpad** | **AWAC** | **IRQ** |
+| :-------: | :-----: | :----: | :-----------: | :--------------: | :------: | :-----: |
+| Clarksfield and Arrandale | N/A | [SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | N/A | N/A | [IRQ SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Universal/irq.html) |
+| SandyBridge | [CPU-PM](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Ivy Bridge | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Haswell | [SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | [SSDT-GPI0](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html) | ^^ | ^^ |
+| Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Skylake | ^^ | [SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | ^^ | ^^ | ^^ | ^^  |
+| Kaby Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Coffee Lake (8th Gen) and Whiskey Lake | ^^ | ^^ | [SSDT-PNLF](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/backlight.html) | ^^ | [SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/awac.html) | ^^ |
+| Coffee Lake (9th Gen) | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
+| Ice Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 
 Continuing:
 

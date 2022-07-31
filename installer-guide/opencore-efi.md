@@ -31,6 +31,7 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
 | :--- | :--- | :--- |
 | OpenUsbKbDxe.efi | <span style="color:#30BCD5"> Optional </span> | Required for non-UEFI systems(pre-2012) |
 | OpenPartitionDxe.efi | ^^ | Required to boot macOS 10.7-10.9 recovery |
+| AllowNvramReset.efi | ^^ | Required to reset the system's NVRAM |
 | OpenRuntime.efi | <span style="color:red"> Required </span> | Required for proper operation |
 
 ::: details More info on provided drivers
@@ -57,6 +58,8 @@ Now something you'll notice is that it comes with a bunch of files in `Drivers` 
 * Ps2KeyboardDxe.efi + Ps2MouseDxe.efi
   * Pretty obvious when you need this, USB keyboard and mouse users don't need it
   * Reminder: PS2 ≠ USB
+* ResetNvramEntry.efi
+  * OpenCore plugin implementing OC_BOOT_ENTRY_PROTOCOL to add a configurable Reset NVRAM entry to the boot picker menu.
 * UsbMouseDxe.efi
   * similar idea to OpenUsbKbDxe, should only be needed on legacy systems using DuetPkg
 * XhciDxe.efi

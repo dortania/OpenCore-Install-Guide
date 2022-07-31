@@ -13,6 +13,7 @@ So making a config.plist may seem hard, it's not. It just takes some time but th
 * **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
 * **The Sample.plist cannot be used As-Is**, you must configure it to your system
 * **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **MAKE SURE YOUR BIOS IS UP TO DATE!**, macOS will not work correctly (and might not even boot) on day 0 BIOS versions. We recommending updating your BIOS to the latest one.
 
 Now with all that, a quick reminder of the tools we need
 
@@ -128,6 +129,8 @@ Sets device properties from a map.
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+
+By default the Sample.plist only has a section for audio and not iGPU here meaning you will either have to replace that audio section or add a second section for iGPU.
 
 The `AAPL,snb-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 
@@ -276,8 +279,6 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable |
-
 :::
 
 ::: details More in-depth Info
@@ -311,11 +312,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
 * **SetApfsTrimTimeout**: `-1`
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
-* **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
-  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
-
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+* **XhciPortLimit**: NO
+  * This patch removes macOS' 15 ports per controller limit, using this instead of a proper USB map is absolutely not recommended, a quick guide for USB mapping, even under Windows (not Linux though), can be found here, in USBToolBox's README: [USBToolBox](https://github.com/USBToolBox/tool#usage)
 
 :::
 
@@ -511,8 +509,11 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
+| **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
+| **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
+| **unfairvga=1** | Used for fixing hardware DRM support on supported AMD GPUs |
+| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in macOS Sierra and High Sierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`
@@ -552,7 +553,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
 
 * **LegacySchema**
-  * Used for assigning NVRAM variables, only needed for systems without native NVRAM
+  * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
 
 * **WriteFlash**: YES
   * Enables writing to flash memory for all added variables.
@@ -599,9 +600,7 @@ The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
-
-[Apple Check Coverage page](https://checkcoverage.apple.com)
+**Reminder that you need an invalid serial, you need to get a message back like: "Cannot check coverage for this serial..." when inputting your Serial Number in the [Apple Check Coverage page](https://checkcoverage.apple.com)**
 
 **Automatic**: YES
 
@@ -755,13 +754,12 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 ### Disable
 
-* Fast Boot
 * Secure Boot
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* CSM
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
+* Compatibility Support Module (CSM)(**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option in enabled**)
+* Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleCpuPmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
@@ -773,8 +771,8 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 32MB
+* OS type: Other OS
+* DVMT Pre-Allocated(iGPU Memory): 32MB or above
 * SATA Mode: AHCI
 
 # Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)
