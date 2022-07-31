@@ -306,9 +306,9 @@ HDMI                    <00 08 00 00>
 DUMMY                   <01 00 00 00>
 ```
 
-**InjectNvidia**:
+**InjectNVIDIA**:
 
-* [Nvidia Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* [NVIDIA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 
 **FakeIntel**:
 
@@ -342,12 +342,12 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **NVCAP**
 
-* [Nvidia Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* [NVIDIA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 
 **display-cfg**:
 
 * `DeviceProperties -> Add -> PciRoot... -> @0,display-cfg`
-* See fassl's post on the matter: [Nvidia injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
+* See fassl's post on the matter: [NVIDIA injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
 
 **LoadVBios**:
 
@@ -355,13 +355,13 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **PatchVBios**: See LoadVBIOS
 
-**NvidiaGeneric**:
+**NVIDIAGeneric**:
 
 * `DeviceProperties -> Add -> PciRoot... -> model | string | Add the GPU name`
 
-**NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/)
+**NVIDIASingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/)
 
-**NvidiaNoEFI**:
+**NVIDIANoEFI**:
 
 * `DeviceProperties -> Add -> PciRoot... -> NVDA,noEFI | Boolean | True`
 * See FredWst' comment for more info: [GT 640 scramble](https://www.insanelymac.com/forum/topic/306156-clover-problems-and-solutions/?do=findComment&comment=2443062)
@@ -564,7 +564,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 * Just add your SMBIOS properties under `PlatformInfo`
 * Confusing quirk tbh, it's not even mentioned in more recent versions of the Clover docs on AppleLife
 
-**NvidiaWeb**:
+**NVIDIAWeb**:
 
 * What this does is apply ```sudo nvram nvda_drv=1``` on every boot. To get a similar effect you can find it under the following path:
 * `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> nvda_drv: <31>`
