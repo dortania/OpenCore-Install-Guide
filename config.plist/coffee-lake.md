@@ -11,6 +11,7 @@ So making a config.plist may seem hard, it's not. It just takes some time but th
 * **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
 * **The Sample.plist cannot be used As-Is**, you must configure it to your system
 * **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **MAKE SURE YOUR BIOS IS UP TO DATE!**, macOS will not work correctly (and might not even boot) on day 0 BIOS versions. We recommending updating your BIOS to the latest one.
 
 Now with all that, a quick reminder of the tools we need
 
@@ -41,6 +42,9 @@ For us we'll need a couple of SSDTs to bring back functionality that Clover prov
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) page. |
 | **[SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. See [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-BRG0](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/AcpiSamples/Source/SSDT-BRG0.dsl)** | Use in case you need to spoof your GPU and it's connected with a PCI bridge (check if the ACPI path has a bogus PCI(0000) in Device Manager. There is no prebuilt available for this SSDT. |
+| **[SSDT-SBUS-MCHC](https://dortania.github.io/Getting-Started-With-ACPI/Universal/smbus.html)** | Fixes AppleSMBus support, this should be done in post-install. |
+ Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
 Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
 
@@ -81,6 +85,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | EnableWriteUnprotector | NO | |
 | ProtectUefiServices | YES | Needed on Z390 system |
 | RebuildAppleMemoryMap | YES | |
+| ResizeAppleGpuBars | 0 | If your firmware supports increasing GPU Bar sizes (ie Resizable Bar Support), set this to `0` |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -475,8 +480,11 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
-| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra |
+| **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
+| **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
+| **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
+| **unfairvga=1** | Used for fixing hardware DRM support on supported AMD GPUs |
+| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in macOS Sierra and High Sierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`
@@ -707,13 +715,12 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 ### Disable
 
-* Fast Boot
 * Secure Boot
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* CSM
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
+* Compatibility Support Module (CSM)(**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option in enabled**)
+* Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
@@ -725,8 +732,8 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 64MB
+* OS type: Other OS
+* DVMT Pre-Allocated(iGPU Memory): 64MB or above
 * SATA Mode: AHCI
 
 # Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)
