@@ -44,8 +44,8 @@ As you can see, we get a nice list of macOS installers. If you need a particular
 ![](../images/installer-guide/mac-install-md/munki-process.png)
 
 * **macOS 12 and above note**: As newer macOS introduces new issues with USBs we are required to do an early USB map for proper functionality in Big Sur 11.3 and above. This could be achieved by using USBToolBox in Windows or Windows PE.
-   * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). 
-     * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
