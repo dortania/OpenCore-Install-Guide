@@ -120,9 +120,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 Sets device properties from a map.
 
-By default, the Sample.plist has this section set for iGPU and Audio. Apple's Iron lake iGPU drivers do not support desktop hardware so PciRoot `PciRoot(0x0)/Pci(0x2,0x0)` can be removed from `Add` section. For audio we'll be setting the layout in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from both `Add` and `Block` sections
-
-TL;DR, delete all the PciRoot's here as we won't be using this section.
+By default, the Sample.plist has this section set for audio which we'll be setting up by setting the layout ID in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from the `Add` section. On other platforms this section would also be used for iGPU setup however not on Clarkdale/Lynnfield as the desktop iGPUs are unsupported on those platforms.
 
 ### Delete
 
@@ -223,7 +221,6 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable |
 
 :::
 
@@ -258,11 +255,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
 * **SetApfsTrimTimeout**: `-1`
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
-* **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
-  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
-
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+* **XhciPortLimit**: NO
+  * This patch removes macOS' 15 ports per controller limit, using this instead of a proper USB map is absolutely not recommended, a quick guide for USB mapping, even under Windows (not Linux though), can be found here, in USBToolBox's README: [USBToolBox](https://github.com/USBToolBox/tool#usage)
 
 :::
 
@@ -534,9 +528,7 @@ The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
-
-[Apple Check Coverage page](https://checkcoverage.apple.com)
+**Reminder that you need an invalid serial, you need to get a message back like: "Cannot check coverage for this serial..." when inputting your Serial Number in the [Apple Check Coverage page](https://checkcoverage.apple.com)**
 
 **Automatic**: YES
 
