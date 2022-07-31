@@ -514,7 +514,6 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 | Quirk | Enabled |
 | :--- | :--- |
-| LegacyEnable | YES |
 | LegacyOverwrite | YES |
 | WriteFlash | NO |
 
@@ -522,14 +521,11 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ::: details More in-depth Info
 
-* **LegacyEnable**: YES
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM like X99
-
 * **LegacyOverwrite**: YES
   * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM like X99
 
 * **LegacySchema**
-  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+  * Used for assigning NVRAM variables, only needed for systems without native NVRAM
 
 * **WriteFlash**: NO
   * Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
