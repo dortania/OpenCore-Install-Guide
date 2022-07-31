@@ -568,7 +568,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ## PlatformInfo
 
-![PlatformInfo](../images/config/config.plist/haswell/smbios.png)
+![PlatformInfo](../images/config/config.plist/cometlake/smbios.png)
 
 ::: tip Info
 

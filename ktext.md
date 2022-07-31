@@ -252,6 +252,7 @@ pci14e4,1686 = Broadcom BCM57766
 
 * USBToolBox ([Tool](https://github.com/USBToolBox/tool) & [Kext](https://github.com/USBToolBox/kext))
   * USBToolBox is a USB mapping tool supporting Windows and macOS.
+  * Please do create an USB map using this tool prior to installing macOS. There's a mini guide on its github README.md file. Accompany your USB map kext with the kext from the kext repository and you should be good to go.
   * Features
     * Supports mapping from Windows and macOS, no eta on linux yet.
     * Can build a map using either the USBToolBox kext or native Apple kexts (AppleUSBHostMergeProperties)
