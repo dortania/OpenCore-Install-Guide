@@ -42,7 +42,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support UEFI-based VBIOS patching
   * This can be done in macOS however
 * Does not support automatic DeviceProperty injection for legacy GPUs
-  * ie. InjectIntel, InjectNvidia and InjectAti
+  * ie. InjectIntel, InjectNVIDIA and InjectAti
   * This can be done manually however: [GPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 * Does not support IRQ conflict patching
   * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
@@ -152,10 +152,10 @@ While the EULA states that macOS should only be installed on real Macs or virtua
 
 * **Note**: This is not legal advice, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
 
-### Does macOS support Nvidia GPUs?
+### Does macOS support NVIDIA GPUs?
 
-Due to issues revolving around Nvidia support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported Nvidia GPUs and don't at this point. However, Apple actually still maintains and supports Macs with Nvidia GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
+Due to issues revolving around NVIDIA support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported NVIDIA GPUs and don't at this point. However, Apple actually still maintains and supports Macs with NVIDIA GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
 
-The main issue has to do with any newer Nvidia GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on Nvidia for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus Nvidia couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
+The main issue has to do with any newer NVIDIA GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on NVIDIA for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus NVIDIA couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
 
 For more info on OS support, see here: [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)

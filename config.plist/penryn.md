@@ -434,7 +434,7 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
-| **nvda_drv_vrl=1** | Used for enabling Nvidia's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra, Sierra and older can use `nvda_drv=1` |
+| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in Sierra and High Sierra, Sierra and older can use `nvda_drv=1` |
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.

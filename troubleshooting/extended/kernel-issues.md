@@ -115,9 +115,6 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 
 ### UEFI Issues
 
-* **ProvideConsoleGop**
-  * Needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
-  * Note as of 0.5.6, this quirk is enabled by default in the sample.plist
 * **IgnoreInvalidFlexRatio**
   * This is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
@@ -413,19 +410,18 @@ This is generally seen as a USB or SATA error, couple ways to fix:
 
 This assumes you're only booting the installer USB and not macOS itself.
 
-* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://dortania.github.io/OpenCore-Post-Install/usb/)
-  * `Kernel -> Quirks -> XhciPortLimit -> True`
+* If you're hitting the 15 port limit, you need to make an [USB Map](https://github.com/USBToolBox/tool)
 
 * Another issue can be that certain firmware won't pass USB ownership to macOS
   * `UEFI -> Quirks -> ReleaseUsbOwnership -> True`
-  * Enabling XHCI Handoff in the BIOS can fix this as well
+  * Enabling EHCI/XHCI Handoff in the BIOS can fix this as well
 
-* Sometimes, if the USB is plugged into a 3.x port, plugging it into a 2.0 port can fix this error.
+* Sometimes, if the USB is plugged into a 3.x port, plugging it into a 2.0 port can fix this error and vice versa.
 
 * For AMD's 15h and 16h CPUs, you may need to add the following:
   * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
 
-* If XLNCUSBFix still doesn't work, then try the following:
+* If XLNCUSBFix still doesn't work, then try the following alongside XLNCUSBFix:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
 
 * X299 Users: Enable Above4G Decoding
@@ -587,7 +583,7 @@ This is due to either a missing SMC emulator or broken one, make sure of the fol
 
 * Lilu and VirtualSMC are both in EFI/OC/kexts and in your config.plist
 * Lilu is before VirtualSMC in the kext list
-* Last resort is to try FakeSMC instead, **do not have both VirtualSMC and FakeSMC enabled**
+* Last resort is to try [FakeSMC](https://github.com/CloverHackyColor/FakeSMC3_with_plugins) instead, **do not have both VirtualSMC and FakeSMC enabled**
 
 ## Kernel Panic on AppleIntelI210Ethernet
 
@@ -657,8 +653,4 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 
 ## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
 
-This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
-
-* Alternatively, you can boot macOS 11.2.3 or older to resolve
-  * For educational purposes, we've provided some images:
-    * [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve this, you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://github.com/USBToolBox/tool) before doing so.

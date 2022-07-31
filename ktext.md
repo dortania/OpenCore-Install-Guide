@@ -90,9 +90,13 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
   * Requires Mac OS X 10.7 or newer
 * [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor)
-  * USed for monitoring CPU temperature on AMD Zen-based systems
+  * Used for monitoring CPU temperature on AMD Zen-based systems
   * **Under active development, potentially unstable**
   * Requires AMDCPURyzenPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
+  * Requires macOS 10.13 or newer
+* [SMCRadeonGPU](https://github.com/aluveitie/RadeonSensor)
+  * Used for monitoring GPU temperature on AMD GPU systems
+  * Requires RadeonSensor from the same repository
   * Requires macOS 10.13 or newer
 * SMCSuperIO.kext
   * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
