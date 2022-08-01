@@ -39,8 +39,6 @@ Read this guide more than once before setting up OpenCore and make sure you have
 
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
-**Warning**: You **must** know your laptop's chipset.  Not knowing this information can cause issues down the road, mainly with the iGPU.
-
 For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
 
 | Required SSDTs | Description |
