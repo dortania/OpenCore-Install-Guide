@@ -587,6 +587,16 @@ Only drivers present here should be:
 * HfsPlus.efi
 * OpenRuntime.efi
 
+::: details More in-depth Info
+
+| Key | Type | Description |
+| :--- | :--- | :--- |
+| Path | String | Path of the file from `OC/Drivers` directory |
+| LoadEarly | Boolean | Load the driver early before NVRAM setup, should only be enabled for `OpenRuntime.efi` and `OpenVariableRuntimeDxe.efi` if using legacy NVRAM |
+| Arguments | String | Some drivers accept additional arguments which are specified here. |
+
+:::
+
 ### APFS
 
 By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.

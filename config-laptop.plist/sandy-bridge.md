@@ -666,15 +666,15 @@ Only drivers present here should be:
 * OpenRuntime.efi
 * OpenUsbKbDxe.efi(If your firmware does not support UEFI)
 
-There are several keys within this section, and you should be aware of what they are.
+::: details More in-depth Info
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| Comment | String | A user-readable reference of an entry |
-| Enabled | Boolean | If set to `False` the entry will be ignored. |
 | Path | String | Path of the file from `OC/Drivers` directory |
-| LoadEarly | Boolean | Load the driver early before NVRAM setup.  This should only be enabled for `OpenRuntime.efi` and `OpenVariableRuntimeDxe.efi` |
-| Arguments | String | Some OpenCore plugins accept additional arguments which are specified here. |
+| LoadEarly | Boolean | Load the driver early before NVRAM setup, should only be enabled for `OpenRuntime.efi` and `OpenVariableRuntimeDxe.efi` if using legacy NVRAM |
+| Arguments | String | Some drivers accept additional arguments which are specified here. |
+
+:::
 
 ### APFS
 
