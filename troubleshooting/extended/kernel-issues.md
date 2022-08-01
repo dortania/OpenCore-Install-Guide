@@ -134,11 +134,11 @@ This error can have multiple causes:
 
 * Compatibility Support Module (CSM) being enabled in your BIOS:
 
- Might also be called Legacy Boot Support, Load Legacy Option ROMs/OPROMs
+  Might also be called Legacy Boot Support, Load Legacy Option ROMs/OPROMs
 
 * The ProvideCurrentCpuInfo quirk (required by the unified patches) being incompatible with your firmware:
 
- This means you are gonna have to use an [older version of the patches](https://github.com/AMD-OSX/AMD_Vanilla/blob/06a9a7f30d139fa3ae897ed2469222c92e99fcad/15h_16h/patches.plist) and macOS 11 Big Sur or older. After downloading the older patches linked above, merge them into your config.plist the same way as the new ones (make sure to remove those aswell) and you are good to go, no need for changing any keys like Replace.
+  This means you need to use an [older version of the patches](https://github.com/AMD-OSX/AMD_Vanilla/blob/06a9a7f30d139fa3ae897ed2469222c92e99fcad/15h_16h/patches.plist) and Big Sur or older. After downloading the older patches linked above, merge them into your config.plist (making sure to remove the old patches first).
 
 An example:
 
