@@ -221,6 +221,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | Not required for 10.12 and older |
 | PowerTimeoutKernelPanic | YES | Not required for 10.14 and older |
+| XhciPortLimit | YES | Disable if running macOS 11.3+ |
 
 :::
 
@@ -251,8 +252,9 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
 * **SetApfsTrimTimeout**: `-1`
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
-* **XhciPortLimit**: NO
-  * This patch removes macOS' 15 ports per controller limit, using this instead of a proper USB map is absolutely not recommended, a quick guide for USB mapping, even under Windows (not Linux though), can be found here, in USBToolBox's README: [USBToolBox](https://github.com/USBToolBox/tool#usage)
+* **XhciPortLimit**: YES
+  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
+  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
 
 :::
 
