@@ -448,10 +448,6 @@ Used for OpenCore's UI scaling, default will work for us. See in-depth section f
 
 Booter Path, mainly used for UI Scaling
 
-* **UIScale**:
-  * `01`: Standard resolution
-  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
-
 * **DefaultBackgroundColor**: Background color used by boot.efi
   * `00000000`: Syrah Black
   * `BFBFBF00`: Light Gray
@@ -663,7 +659,15 @@ Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, 
 
 ### Output
 
-Relating to OpenCore's visual output,  leave everything here as default as we have no use for these quirks.
+Relating to OpenCore's visual output, leave everything here as default as we have no use for these quirks.
+
+::: details More in-depth Info
+
+| Output | Value | Comment |
+| :--- | :--- | :--- |
+| UIScale | `0` | `0` will automatically set based on resolution<br/>`-1` will leave it unchanged<br/>`1` for 1x scaling, for normal displays<br/>`2` for 2x scaling, for HiDPI displays |
+
+:::
 
 ### ProtocolOverrides
 
