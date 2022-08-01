@@ -535,19 +535,6 @@ For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.
 
 For this Skylake example, we'll choose the iMac17,1 SMBIOS.
 
-**Note**: iMac17,1 SMBIOS is only supported up-to and including macOS 12, Monterey. For cases where you must boot Ventura, see below:
-
-::: details Ventura SMBIOS table
-
-For Skylake, it is recommended to use iMac18,1 for compatibility sake.  The typical breakdown is as follows:
-
-| SMBIOS | Hardware |
-| :--- | :--- |
-| iMac18,1 | Used for computers utilizing the iGPU for displaying |
-| iMac18,3 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
-
-:::
-
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
 ```sh
