@@ -212,7 +212,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 | LapicKernelPanic | NO | HP Machines will require this quirk |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable |
+| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable<br/>Disable if running macOS 11.3+ |
 
 :::
 
