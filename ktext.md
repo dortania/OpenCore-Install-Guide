@@ -249,15 +249,6 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### USB
 
-* ~~[USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)~~
-  * ~~Used for injecting Intel USB controllers on systems without defined USB ports in ACPI~~
-  * ~~Shouldn't be needed on Desktop Skylake and newer~~
-    * ~~AsRock is dumb and does need this~~
-    * ~~Coffee Lake and older laptops are however recommended to use this kext~~
-  * ~~Does not work on AMD CPUs **at all**~~
-  * ~~Requires OS X 10.11 or newer~~
-  * This is not recommended anymore as there is better and updated ways to take care of the USB ports and even pre-mapping them.
-
 * USBToolBox ([Tool](https://github.com/USBToolBox/tool) & [Kext](https://github.com/USBToolBox/kext))
   * USBToolBox is a USB mapping tool supporting Windows and macOS.
   * Please do create an USB map using this tool prior to installing macOS. There's a mini guide on its github README.md file. Accompany your USB map kext with the kext from the kext repository and you should be good to go.
