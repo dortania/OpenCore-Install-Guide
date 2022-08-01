@@ -83,7 +83,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | DevirtualiseMmio | NO | If you have a TRx40 system, enable this and follow the instructions here: <https://dortania.github.io/OpenCore-Install-Guide/extras/kaslr-fix.html> |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| ResizeAppleGpuBars | 0 | If your firmware supports increasing GPU Bar sizes (ie Resizable Bar Support), set this to `0` |
+| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable BAR Support), set this to `0` |
 | SetupVirtualMap | YES | - Note X570, B550, A520 and TRx40 boards might need this disabled<br/>- X470 and B450 with late 2020 BIOS updates might also require this disabled |
 | SyncRuntimePermissions | YES | |
 :::
@@ -102,9 +102,9 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
 * **ResizeAppleGpuBars**: -1
-  * Will reduce the size of GPU PCI Bars if set to zero when booting macOS.
+  * Will reduce the size of GPU PCI Bars if set to `0` when booting macOS, set to `-1` to disable
   * Setting other PCI Bar values is possible with this quirk, though can cause instabilities
-  * This quirk being set to zero is only necessary if Resizable GPU Bar Support is enabled in your firmware.
+  * This quirk being set to zero is only necessary if Resizable BAR Support is enabled in your firmware.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses
   * B550, A520 and TRx40 boards should disable this quirk

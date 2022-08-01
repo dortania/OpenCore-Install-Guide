@@ -85,7 +85,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | EnableWriteUnprotector | NO | |
 | ProtectUefiServices | YES | Needed on Z390 system |
 | RebuildAppleMemoryMap | YES | |
-| ResizeAppleGpuBars | 0 | If your firmware supports increasing GPU Bar sizes (ie Resizable Bar Support), set this to `0` |
+| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable BAR Support), set this to `0` |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -107,6 +107,10 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this.
+* **ResizeAppleGpuBars**: -1
+  * Will reduce the size of GPU PCI Bars if set to `0` when booting macOS, set to `-1` to disable
+  * Setting other PCI Bar values is possible with this quirk, though can cause instabilities
+  * This quirk being set to zero is only necessary if Resizable BAR Support is enabled in your firmware.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this.
 * **SyncRuntimePermissions**: YES
