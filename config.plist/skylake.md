@@ -437,7 +437,7 @@ Used for OpenCore's UI scaling, default will work for us. See in-depth section f
 
 ::: details More in-depth Info
 
-Booter Path, mainly used for UI Scaling
+Booter Path, mainly used for UI modification
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
   * `00000000`: Syrah Black
