@@ -761,11 +761,12 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 ### Disable
 
+* Fast Boot
 * Secure Boot
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* Compatibility Support Module (CSM)(**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
+* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
 * Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
@@ -774,12 +775,12 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 ### Enable
 
 * VT-x
-* Above 4G decoding
+* Above 4G Decoding
   * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Other OS
+* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
 * DVMT Pre-Allocated(iGPU Memory): 64MB or above
 * SATA Mode: AHCI
 

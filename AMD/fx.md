@@ -746,18 +746,19 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 ### Disable
 
+* Fast Boot
 * Secure Boot
 * Serial/COM Port
 * Parallel Port
-* Compatibility Support Module (CSM)(**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
+* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
+* AMD SVM Mode (Virtualization)
+* IOMMU
 
 ### Enable
 
-* Above 4G decoding(**This must be on, if you can't find the option then add `npci=0x3000` to boot-args. Do not have both this option and npci enabled at the same time.**)
-* XHCI Hand-off
-* OS type: Other OS
+* Above 4G Decoding (**This must be on, if you can't find the option then add `npci=0x3000` to boot-args. Do not have both this option and npci enabled at the same time.**)
+* EHCI/XHCI Hand-off
+* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
 * SATA Mode: AHCI
-* AMD SVM Mode (Virtualization)
-* IOMMU
 
 # Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)

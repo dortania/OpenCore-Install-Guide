@@ -694,22 +694,23 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 ### Disable
 
+* Fast Boot
 * Secure Boot
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* Compatibility Support Module (CSM)(**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
+* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
 * Intel SGX
 * Intel Platform Trust
 
 ### Enable
 
 * VT-x
-* Above 4G decoding
+* Above 4G Decoding
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Other OS
+* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
 * DVMT Pre-Allocated(iGPU Memory): 32MB or above
 * SATA Mode: AHCI
 

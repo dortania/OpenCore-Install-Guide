@@ -787,7 +787,7 @@ These are the main options to check for, if you can't find it or an equivalent f
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* CSM (or Legacy Support, or Hybrid Boot)
+* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**) (or Legacy Support, or Hybrid Boot)
 * Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly, if available)
 * Intel SGX
 * Intel Platform Trust
@@ -796,11 +796,11 @@ These are the main options to check for, if you can't find it or an equivalent f
 ### Enable
 
 * VT-x (Virtualization Support)
-* Above 4G decoding
+* Above 4G Decoding
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode
+* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
 * DVMT Pre-Allocated(iGPU Memory): 32MB
 * SATA Mode: AHCI
 
