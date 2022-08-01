@@ -125,7 +125,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 Sets device properties from a map.
 
-By default, the Sample.plist has this section set for audio which we'll be setting up by setting the layout ID in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from the `Add` section. On other platforms this section is also used for iGPU setup, on Penryn too however it is covered in [another guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/).
+By default, the Sample.plist has this section set for audio which we'll be setting up by setting the layout ID in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from the `Add` section. On other platforms this section is also used for iGPU setup, on Penryn however it is covered in [another guide](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/).
 
 ### Delete
 

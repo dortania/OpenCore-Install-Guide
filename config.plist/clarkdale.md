@@ -124,7 +124,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 Sets device properties from a map.
 
-By default, the Sample.plist has this section set for audio which we'll be setting up by setting the layout ID in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from the `Add` section. On other platforms this section would also be used for iGPU setup however not on Clarkdale/Lynnfield as the desktop iGPUs are unsupported on those platforms.
+By default, the Sample.plist has this section set for audio which we'll be setting up by setting the layout ID in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from the `Add` section.
 
 ### Delete
 
