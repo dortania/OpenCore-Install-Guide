@@ -509,9 +509,6 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ::: details More in-depth Info
 
-* **LegacyOverwrite**: NO
-  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
-
 * **LegacySchema**
   * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
 
