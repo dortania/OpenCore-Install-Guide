@@ -749,7 +749,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Secure Boot
 * Serial/COM Port
 * Parallel Port
-* Compatibility Support Module (CSM)(**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option in enabled**)
+* Compatibility Support Module (CSM)(**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
 
 ### Enable
 
