@@ -450,6 +450,7 @@ System Integrity Protection bitmask
 
 | boot-args | Description |
 | :--- | :--- |
+| **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
 | **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
 | **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
 | **unfairvga=1** | Used for fixing hardware DRM support on supported AMD GPUs |
