@@ -831,7 +831,7 @@ These are the main options to check for, if you can't find it or an equivalent f
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
-* DVMT Pre-Allocated(iGPU Memory): 32MB
+* DVMT Pre-Allocated(iGPU Memory): 32MB or higher
 * SATA Mode: AHCI
 
 # Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)

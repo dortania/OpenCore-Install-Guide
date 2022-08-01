@@ -822,7 +822,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
-* DVMT Pre-Allocated(iGPU Memory): 64MB
+* DVMT Pre-Allocated(iGPU Memory): 64MB or higher
 * SATA Mode: AHCI
 
 # Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)
