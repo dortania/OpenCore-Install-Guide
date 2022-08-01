@@ -132,7 +132,7 @@ Sets device properties from a map.
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
 
-By default the Sample.plist only has a section for audio and not iGPU here meaning you will either have to replace that audio section or add a second section for iGPU.
+The config.plist doesn't already have a section for this so you will have to create it manually.
 
 The `AAPL,ig-platform-id` we use is as follows:
 

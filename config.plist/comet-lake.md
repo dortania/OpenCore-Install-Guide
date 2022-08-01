@@ -130,7 +130,7 @@ Sets device properties from a map.
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties. **If you have a `-F` series CPU, you can ignore this section as you do not have an iGPU.**
 
-By default the Sample.plist only has a section for audio and not iGPU here meaning you will either have to replace that audio section or add a second section for iGPU.
+The config.plist doesn't already have a section for this so you will have to create it manually.
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and two values choose between are as follows:
 

@@ -145,7 +145,9 @@ Sets device properties from a map.
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
 
-When setting up your iGPU, simply add the vales below to the `PciRoot(0x0)/Pci(0x2,0x0)` entry:
+The config.plist doesn't already have a section for this so you will have to create it manually.
+
+When setting up your iGPU, simply add the values below to the `PciRoot(0x0)/Pci(0x2,0x0)` entry:
 
 | Property | Type | Value |
 | :--- | :--- | :--- |

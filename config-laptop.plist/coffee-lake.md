@@ -134,6 +134,8 @@ Sets device properties from a map.
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
 
+The config.plist doesn't already have a section for this so you will have to create it manually.
+
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
 * **AAPL,ig-platform-id**
