@@ -24,7 +24,11 @@ Now with all that, a quick reminder of the tools we need
   * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
   * Supporting AMD Family 15h, 16h, 17h and 19h
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+::: warning
+
+Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
+
+:::
 
 ## ACPI
 
