@@ -154,7 +154,7 @@ While the EULA states that macOS should only be installed on real Macs or virtua
 
 ### Does macOS support NVIDIA GPUs?
 
-Due to issues revolving around NVIDIA support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported NVIDIA GPUs and don't at this point. Apple did still maintain and support Macs with NVIDIA GPUs like the 2013 MacBook Pro with a Kepler dGPU until they released Monterey. macOS Monterey beta 7 officially removed support for Kepler and so all NVIDIA GPUs, while there are community-made patches to bring back support, they require SIP, System Integrity Protection which is, like the name suggests, a big part of security in macOS, partially disabled which might not be ideal for everyone.
+Due to issues revolving around NVIDIA support in newer versions of macOS, many users come to the conclusion that macOS never supported NVIDIA GPUs. Apple supported Macs with NVIDIA GPUs (such as the 2013 MacBook Pro with a Kepler dGPU) until the release of Monterey Beta 7. While there are community-made patches to bring back support, they require SIP (System Integrity Protection) to be disabled, disabling important security features in macOS.
 
 The other issue has to do with any newer NVIDIA GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on NVIDIA for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus NVIDIA couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
 
