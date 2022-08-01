@@ -196,7 +196,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **USB**:
 
 * FixOwnership: `UEFI -> Quirk -> ReleaseUsbOwnership`
-  * It is highly recommended to enable `XHCI Hand-off` in your BIOS. More details [here](https://https://dortania.github.io/OpenCore-Post-Install/misc/xhci-handoff.html)
+  * You should also enable `XHCI Hand-off` in your BIOS
 * ClockID: `DeviceProperties -> Add -> PciRoot... -> AAPL,clock-id`
 * HighCurrent: `DeviceProperties -> Add -> PciRoot... -> AAPL, HighCurrent`
   * Irrelevant for OS X 10.11 and newer
@@ -458,15 +458,7 @@ Issue with AppleRTC, quite a simple fix:
 
 * config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
 
-**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
-
-The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
-
-```
-rtcfx_exclude=00-FF
-```
-
-If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on. More details available [here](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html)
+**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329), and [here](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html) for a guide.
 
 **FakeCPUID**:
 
