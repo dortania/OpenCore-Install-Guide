@@ -625,7 +625,7 @@ The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 The `Apple ROM` part gets copied to Generic -> ROM.
 
-**Reminder that you need an invalid serial, you need to get a message back like: "Cannot check coverage for this serial..." when inputting your Serial Number in the [Apple Check Coverage page](https://checkcoverage.apple.com)**
+**Reminder that you need an invalid serial, you need to get a message back like: "unable to check coverage for this serial number." when inputting your Serial Number in the [Apple Check Coverage page](https://checkcoverage.apple.com)**
 
 **Automatic**: YES
 
