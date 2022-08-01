@@ -115,6 +115,9 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 
 ### UEFI Issues
 
+* **ProvideConsoleGop**
+  * Needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
+  * Note as of 0.5.6, this quirk is enabled by default in the sample.plist
 * **IgnoreInvalidFlexRatio**
   * This is needed for Broadwell and older. **Not for AMD and Skylake or newer**
 
