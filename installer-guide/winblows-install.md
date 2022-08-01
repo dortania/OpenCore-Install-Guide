@@ -57,6 +57,10 @@ python macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
+* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
+
 This will take some time, however once you're finished you should get either BaseSystem or RecoveryImage files:
 
 ![](../images/installer-guide/winblows-install-md/macrecovery-done.png)
