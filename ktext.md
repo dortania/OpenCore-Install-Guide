@@ -117,7 +117,7 @@ While VirtualSMC supports 10.4, plugins may require newer versions.
   * Requires Mac OS X 10.6 or newer
 * SMCBatteryManager.kext
   * Used for measuring battery readouts on laptops
-  * **Do not use on desktops! (Unless you have an UPS?)**
+  * **Do not use on desktops**
   * Requires Mac OS X 10.4 or newer
 * SMCDellSensors.kext
   * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode (SMM)
@@ -443,7 +443,7 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
 
 * [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
   * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
-  * Supports OS X 10.7 and above
+  * Supports OS X 10.7 and above (not needed on 10.4 - 10.6)
 * [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
   * Fixes brightness keys automatically
 
