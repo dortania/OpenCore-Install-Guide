@@ -20,7 +20,7 @@ Now with all that, a quick reminder of the tools we need
   * For generating our SMBIOS data
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
-* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/master)
+* [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla)
   * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
   * Supporting AMD Family 15h, 16h, 17h and 19h
 
@@ -248,11 +248,11 @@ Blocks certain kexts from loading. Not relevant for us.
 
 ### Patch
 
-This is where the AMD kernel patching magic happens. Please do note that if coming from Clover, `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore. The latest AMD kernel patches can always be found on the [AMD Vanilla GitHub Repository](https://github.com/AMD-OSX/AMD_Vanilla/tree/master).
+This is where the AMD kernel patching magic happens. Please do note that if coming from Clover, `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore. The latest AMD kernel patches can always be found on the [AMD Vanilla GitHub Repository](https://github.com/AMD-OSX/AMD_Vanilla).
 
 Kernel patches:
 
-* [Bulldozer/Jaguar(15h/16h) + Ryzen/Threadripper(17h/19h)](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) (10.13, 10.14, 10.15, 11.x, 12.x and 13.x)
+* [Ryzen/Threadripper (17h/19h)](https://github.com/AMD-OSX/AMD_Vanilla) (10.13 - 12.x)
 
 To merge:
 
