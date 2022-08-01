@@ -112,7 +112,6 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| AvoidRuntimeDefrag | Yes |
 | RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
 
 :::
