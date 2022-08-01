@@ -410,7 +410,7 @@ This is generally seen as a USB or SATA error, couple ways to fix:
 
 This assumes you're only booting the installer USB and not macOS itself.
 
-* If you're hitting the 15 port limit, you need to make an [USB Map](https://github.com/USBToolBox/tool)
+* If you're hitting the 15 port limit, you need to make an [USB Map](https://dortania.github.io/OpenCore-Post-Install/usb/)
 
 * Another issue can be that certain firmware won't pass USB ownership to macOS
   * `UEFI -> Quirks -> ReleaseUsbOwnership -> True`
@@ -653,4 +653,4 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 
 ## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
 
-This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve this, you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://github.com/USBToolBox/tool) before doing so.
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve this, you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
