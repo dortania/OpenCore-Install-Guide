@@ -67,7 +67,7 @@ A kext is a **k**ernel **ext**ension, you can think of this as a driver for macO
   * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.
 * **Location Note**: These files **must** be placed under `EFI/OC/Kexts/`.
 
-All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
+Most kexts listed below can be found **pre-compiled** in the [build repo](http://dortania.github.io/builds/). Kexts here are compiled each time there's a new commit.
 
 ### Must haves
 
