@@ -92,20 +92,20 @@ Source: CorpNewt
 
 Depending on your setup, you may find that Windows renders games or applications using an undesired GPU.
 
-Many users only have two GPUs. Nvidia and the Intel HD/UHD IGPU. Since Nvidia no longer works on macOS, they may have the monitor plugged into the motherboards HDMI/DP connection for convenience. As a result, Windows will render all games and applications through the IGPU. You can reroute a specific game or application to a different GPU by going to: Settings > System > Display > Graphics settings
+Many users only have two GPUs. NVIDIA and the Intel HD/UHD IGPU. Since NVIDIA no longer works on macOS, they may have the monitor plugged into the motherboards HDMI/DP connection for convenience. As a result, Windows will render all games and applications through the IGPU. You can reroute a specific game or application to a different GPU by going to: Settings > System > Display > Graphics settings
 
 ![Credit to CorpNewt for image](../images/extras/spoof-md/corp-windows.png)
 
 The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides:
 
 * GSync will no longer work.
-* Nvidia settings can no longer be opened. This requires the display to be connected to the GPU
+* NVIDIA settings can no longer be opened. This requires the display to be connected to the GPU
 * Decreased frame rate.
 * Increased input latency.
 * Refresh rate cap.
 
-If your motherboard only has an HDMI connector for the IGPU, the maximum refresh rate for spec 2.1 is [120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). This assumes your board and monitor are of the same spec. This means your 144Hz monitor is only seeing a maximum of 120Hz as determined by the hardware. This limitation *does not* apply if your board has a DP connector for the IGPU.
+If your motherboard only has an HDMI connector for the iGPU, the maximum refresh rate for spec 2.1 is [120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). This assumes your board and monitor are of the same spec. This means your 144Hz monitor is only seeing a maximum of 120Hz as determined by the hardware. This limitation *does not* apply if your board has a DP connector for the IGPU.
 
-If you have more than two GPUs (AMD, Nvidia and Intel), this setting is limited. A monitor connected to the AMD GPU means Windows will only allow you to select the AMD GPU or the Intel IGPU. The Nvidia GPU will not show. In a future version of Windows, this [limitation is removed](https://pureinfotech.com/windows-10-21h1-new-features/#:~:text=Graphics%20settings).
+If you have more than two GPUs (AMD, NVIDIA and Intel), this setting is limited. A monitor connected to the AMD GPU means Windows will only allow you to select the AMD GPU or the Intel IGPU. The NVIDIA GPU will not show. In a future version of Windows, this [limitation is removed](https://pureinfotech.com/windows-10-21h1-new-features/#:~:text=Graphics%20settings).
 
 As a recommendation, if you use both operating systems equally and prefer no downsides, your best option is an HDMI or DP switch.

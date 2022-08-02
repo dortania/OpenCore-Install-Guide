@@ -26,12 +26,18 @@ For serial setup, OpenCore actually makes this quite straight forward.
 
 ### Misc
 
-* **SerialInit**: YES
-  * Performs serial port initialization
+#### Serial
+
+* **Init**: YES
+  * Initializes the serial port from OpenCore
+  * Needed for sending OpenCore logging to the serial port
+
+#### Debug
+
 * **Target**: `67`
   * Enables debug output with OpenCore
-  * Target = 75 adds the additional serial output flag(0x08) if you [plan to use serial](#serial-setup-optional)
-  * You can calculate your own vale here: [OpenCore debugging](./debug.md)
+  * `Target` = `75` adds the additional serial output flag(`0x08`) if you [plan to use serial](#serial-setup-optional)
+  * You can calculate your own value here: [OpenCore debugging](./debug.md)
   
 ### NVRAM
 
@@ -50,8 +56,8 @@ Now lets go over what each arg does:
 * **keepsyms=1**
   * Ensures symbols are kept during kernel panics, which are greatly helpful for troubleshooting
 * **debug=0x12a**
-  * Combination of `DB_KPRT`(0x8), `DB_KDP_BP_DIS`(0x32), `DB_KDP_GETC_ENA(0x200)`
-  * A full list of values can be found here: [debug.h](https://github.com/apple/darwin-xnu/blob/master/osfmk/kern/debug.h#L419L447)
+  * Combination of `DB_PRT` (0x2), `DB_KPRT` (0x8), `DB_SLOG` (0x20), and `DB_LOG_PI_SCRN` (0x100)
+  * A full list of values for the latest version of XNU can be found here: [debug.h](https://github.com/apple-oss-distributions/xnu/blob/master/osfmk/kern/debug.h)
 * **msgbuf=1048576**
   * Sets the kernel's message buffer size, this helps with getting proper logs during boot
   * 1048576 is 1MB(/1024^2), can be larger if required
@@ -257,7 +263,7 @@ Now we install our KDK into the system:
 # For 10.15 and older, swap livemount with /Volumes/<Target Volume>
 sudo ditto /Library/Developer/KDKs/<KDK Version>/System ~/livemount/System
 
-# Rebuild the kernel cache(Big Sur and newer)
+# Rebuild Truethe kernel cache(Big Sur and newer)
 sudo kmutil install --volume-root ~/livemount --update-all
 
 # Rebuild the kernel cache(Catalina and older)

@@ -5,61 +5,41 @@ on:
       - gh-pages
   workflow_dispatch:
   pull_request:
+
 jobs:
   build:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16
       - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: '1'
-          persist-credentials: false
-          submodules: 'recursive'
+        uses: actions/checkout@v3
+        # with:
+        #   persist-credentials: false
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: .vuepress/dist/
-          CLEAN: true
+          token: ${{ secrets.ACCESS_TOKEN }}
+          folder: .vuepress/dist/
+          clean: true
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16
       - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: '1'
-          submodules: 'recursive'
+        uses: actions/checkout@v3
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Lint
         run: npm run lint-ci
-  # spellcheck:
-  #   name: Spellcheck
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: '16'
-  #     - name: Checkout Repository
-  #       uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: '0'
-  #         submodules: 'recursive'
-  #     - name: Install
-  #       run: npm install
-  #     - name: Spellcheck
-  #       run: npm run spellcheck

@@ -37,7 +37,11 @@ Once you boot the USB, you'll likely be greeted to the following boot options:
 3. OpenShell.efi
 4. Reset NVRAM
 
-**Note**: You might need to press space in order to see the installer, as in later versions of OpenCore `HideAuxiliary` is enabled by default
+::: warning
+
+You might need to press space in order to see the installer, as in later versions of OpenCore `HideAuxiliary` is enabled by default.
+
+:::
 
 For us, **Option 2.** is the one we want. Depending how the installer was made, it may report as either **"macOS Base System (External)"**, **"Install macOS Big Sur (External)"** or **"*Your USB drive's name* (External)"**
 

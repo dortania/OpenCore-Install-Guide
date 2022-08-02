@@ -132,7 +132,7 @@ With this formula in mind, the highest Start value you would be able to use to g
 
 Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`). If this value still gives you errors then you may proceed to the second-largest `Start` value and so on.
 
-Sometimes you may find that when you calculate slide that you receive super small vales like `slide=-0.379150390625`, when this happens round this to `slide=0`.
+Sometimes you may find that when you calculate slide that you receive super small values like `slide=-0.379150390625`, when this happens round this to `slide=0`.
 
 And for users who are having issues finding their slide value can also type `$slide [insert largest #Pages value]` in the #Sandbox channel on the [r/Hackintosh Discord](https://discord.gg/u8V7N5C)
 

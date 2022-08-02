@@ -8,7 +8,7 @@ This section contains a brief rundown as to why the community has been transitio
 
 * More OS Support!
   * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 12, Monterey!
+  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 13, Ventura!
 * On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
@@ -42,7 +42,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support UEFI-based VBIOS patching
   * This can be done in macOS however
 * Does not support automatic DeviceProperty injection for legacy GPUs
-  * ie. InjectIntel, InjectNvidia and InjectAti
+  * ie. InjectIntel, InjectNVIDIA and InjectAti
   * This can be done manually however: [GPU patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 * Does not support IRQ conflict patching
   * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
@@ -55,7 +55,7 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support hiding specific drives
 * Does not support changing settings within OpenCore's menu
 * Does not patch PCIRoot UID value
-* Does not support macOS-only ACPI injection and patching
+* Does not support macOS-only ACPI patching
 
 ## Common Myths
 
@@ -152,10 +152,10 @@ While the EULA states that macOS should only be installed on real Macs or virtua
 
 * **Note**: This is not legal advice, so please make the proper assessments yourself and discuss with your lawyers if you have any concerns.
 
-### Does macOS support Nvidia GPUs?
+### Does macOS support NVIDIA GPUs?
 
-Due to issues revolving around Nvidia support in newer versions of macOS, many users have somehow come to the conclusion that macOS never supported Nvidia GPUs and don't at this point. However, Apple actually still maintains and supports Macs with Nvidia GPUs in their latest OS, like the 2013 MacBook Pro models with Kepler GPUs.
+Due to issues revolving around NVIDIA support in newer versions of macOS, many users come to the conclusion that macOS never supported NVIDIA GPUs. Apple supported Macs with NVIDIA GPUs (such as the 2013 MacBook Pro with a Kepler dGPU) until the release of Monterey Beta 7. While there are community-made patches to bring back support, they require SIP (System Integrity Protection) to be disabled, disabling important security features in macOS.
 
-The main issue has to do with any newer Nvidia GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on Nvidia for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus Nvidia couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
+The other issue has to do with any newer NVIDIA GPUs, as Apple stopped shipping machines with them and thus they never had official OS support from Apple. Instead, users had to rely on NVIDIA for 3rd party drivers. Due to issues with Apple's newly introduced Secure Boot, they could no longer support the Web Drivers and thus NVIDIA couldn't publish them for newer platforms limiting them to mac OS 10.13, High Sierra.
 
 For more info on OS support, see here: [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)

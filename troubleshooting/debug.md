@@ -22,9 +22,9 @@ To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenC
 
 ## Config Changes
 
-Next, head to your config.plist and locate the `Misc` section, we have a couple entries we'll want to play with here:
+Next, head to your config.plist and locate the `Misc` > `Debug` section, we have a couple entries we'll want to play with here:
 
-### Misc
+### Misc > Debug
 
 Here we'll want to enable the following:
 
@@ -37,7 +37,7 @@ Here we'll want to enable the following:
 * **DisableWatchdog**: YES
   * Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
 
-* **Target**: `67`(or calculate one below)
+* **Target**: `67` (or calculate one below)
   * Used for enabling different levels of debugging
 
 | Value | Comment |
@@ -50,21 +50,20 @@ Here we'll want to enable the following:
 | `0x20` | Enable non-volatile UEFI variable logging. |
 | `0x40` | Enable logging to file. |
 
-To calculate the target, we can use a HEX calculator and then convert it to decimal. For us we want to have our values on stored onto a .txt file for later viewing:
+To calculate the target, we can use a hex calculator and then convert it to decimal. For us we want to have our values on stored onto a .txt file for later viewing:
 
 * `0x01` — Enable Logging
-* `0x02` — Enable Onscreen debug
+* `0x02` — Enable on-screen debug
   * Note this can heavily increase boot times on firmwares with poor GOP implementations
-* `0x10` — Enable UEFI variable logging.
-* `0x40` — Enable logging to file.
+* `0x40` — Enable logging to file
 
-`0x01` + `0x02` + `0x10` + `0x40` = `0x53`
+`0x01` + `0x02` + `0x40` = `0x43`
 
-`0x53` converted to decimal becomes `83`
+`0x53` converted to decimal becomes `67`
 
-So we can set `Misc` -> `Debug` -> `Target` -> `83`
+So we can set `Misc` -> `Debug` -> `Target` -> `67`
 
-* **DisplayLevel**: `2147483714`(or calculate one below)
+* **DisplayLevel**: `2147483714` (or calculate one below)
   * Used for setting what is logged
 
 | Value | Comment |
@@ -82,9 +81,11 @@ For us we just want the following:
 * `0x00000040` — DEBUG_INFO in DEBUG, NOOPT.
 * `0x80000000` — DEBUG_ERROR in DEBUG, NOOPT, RELEASE.
 
-Just like with `Target`, we use a HEX calculator then convert to decimal:
+Just like with `Target`, we use a hex calculator then convert to decimal:
 
-`0x80000042` Converted to decimal `Misc` -> `Debug` -> `DisplayLevel` -> `2147483714`
+`0x80000042` Converted to decimal becomes `2147483714`
+
+`Misc` -> `Debug` -> `DisplayLevel` -> `2147483714`
 
 Once done, your config.plist should look like this:
 

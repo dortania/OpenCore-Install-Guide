@@ -21,7 +21,11 @@ Now with all that, a quick reminder of the tools we need
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+::: warning
+
+Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
+
+:::
 
 ## ACPI
 
@@ -81,7 +85,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | EnableWriteUnprotector | NO |
 | ProtectUefiServices | YES |
 | RebuildAppleMemoryMap | YES |
-| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable Bar Support), set this to `0` |
+| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable BAR Support), set this to `0` |
 | SetupVirtualMap | NO |
 | SyncRuntimePermissions | YES |
 :::
@@ -104,9 +108,9 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 * **RebuildAppleMemoryMap**: YES
   * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this.
 * **ResizeAppleGpuBars**: -1
-  * Will reduce the size of GPU PCI Bars if set to zero when booting macOS.
+  * Will reduce the size of GPU PCI Bars if set to `0` when booting macOS, set to `-1` to disable
   * Setting other PCI Bar values is possible with this quirk, though can cause instabilities
-  * This quirk being set to zero is only necessary if Resizable GPU Bar Support is enabled in your firmware.
+  * This quirk being set to zero is only necessary if Resizable BAR Support is enabled in your firmware.
 * **SetupVirtualMap**: NO
   * Fixes SetVirtualAddresses calls to virtual addresses, however broken due to Comet Lake's memory protections. ASUS, Gigabyte and AsRock boards will not boot with this on.
 * **SyncRuntimePermissions**: YES
@@ -125,6 +129,8 @@ Sets device properties from a map.
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties. **If you have a `-F` series CPU, you can ignore this section as you do not have an iGPU.**
+
+The config.plist doesn't already have a section for this so you will have to create it manually.
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and two values choose between are as follows:
 
@@ -235,6 +241,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
 | 12 | 21.0.0 | 21.99.99 |
+| 13 | 22.0.0 | 22.99.99 |
 
 :::
 
@@ -329,8 +336,6 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
   * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
-
 :::
 
 ### Scheme
@@ -362,7 +367,20 @@ Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip how
 
 ### Boot
 
-Settings for boot screen (Leave everything as default).
+::: tip Info
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| HideAuxiliary | YES | Press space to show macOS recovery and other auxiliary entries |
+
+:::
+
+::: details More in-depth Info
+
+* **HideAuxiliary**: YES
+  * This option will hide supplementary entries, such as macOS recovery and tools, in the picker. Hiding auxiliary entries may increase boot performance on multi-disk systems. You can press space at the picker to show these entries
+
+:::
 
 ### Debug
 
@@ -389,8 +407,6 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
   * Disables the UEFI watchdog, can help with early boot issues
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
-* **SerialInit**: NO
-  * Needed for setting up serial output with OpenCore
 * **SysReport**: NO
   * Helpful for debugging such as dumping ACPI tables
   * Note that this is limited to DEBUG versions of OpenCore
@@ -412,7 +428,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default | Leave this as `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting. |
+| SecureBootModel | Default | Leave this as `Default` for OpenCore to automatically set the correct value corresponding to your SMBIOS. The next page goes into more detail about this setting. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
@@ -437,11 +453,15 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
-* **SecureBootModel**: Disabled
+* **SecureBootModel**: Default
   * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
+
+### Serial
+
+Used for serial debugging (Leave everything as default).
 
 ### Tools
 
@@ -467,11 +487,7 @@ Used for OpenCore's UI scaling, default will work for us. See in-depth section f
 
 ::: details More in-depth Info
 
-Booter Path, mainly used for UI Scaling
-
-* **UIScale**:
-  * `01`: Standard resolution
-  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
+Booter Path, mainly used for UI modification
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
   * `00000000`: Syrah Black
@@ -509,13 +525,17 @@ System Integrity Protection bitmask
 * **Networking-Specific boot-args**:
 | boot-args | Description |
 | :--- | :--- |
-| **dk.e1000=0** | Disables `com.apple.DriverKit-AppleEthernetE1000` (Apple's DEXT driver) from matching to the Intel I225-V Ethernet controller found on higher end Comet Lake boards, causing Apple's I225 kext driver to load instead.<br/>This boot argument is optional on most boards as they are compatible with the DEXT driver. However, it is required on Gigabyte and several other boards, which can only use the kext driver, as the DEXT driver causes hangs.<br/>You don't need this if your board didn't ship with the I225-V NIC. |
+| **e1000=0** | Disables `com.apple.DriverKit-AppleEthernetE1000` (Apple's DEXT driver) from matching to the Intel I225-V Ethernet controller found on higher end Comet Lake boards, causing Apple's I225 kext driver to load instead.<br/>This boot argument is optional on most boards as they are compatible with the DEXT driver. However, it is required on Gigabyte and several other boards, which can only use the kext driver, as the DEXT driver causes hangs.<br/>You don't need this if your board didn't ship with the I225-V NIC.<br/><br/>On macOS 12.2.1 and below, use `dk.e1000=0` instead |
 
 * **GPU-Specific boot-args**:
 
 | boot-args | Description |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling board ID checks on Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
+| **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
+| **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
+| **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
+| **unfairvga=1** | Used for fixing hardware DRM support on supported AMD GPUs |
+| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in macOS Sierra and High Sierra |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`
@@ -530,6 +550,7 @@ System Integrity Protection bitmask
   * American: `en-US:0`(`656e2d55533a30` in HEX)
   * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
   * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
+  * Hint 2: `prev-lang:kbd` can be set to a blank variable (eg. `<>`) which will force the Language Picker to appear instead at first boot up.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -551,14 +572,8 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ::: details More in-depth Info
 
-* **LegacyEnable**: NO
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
-
-* **LegacyOverwrite**: NO
-  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
-
 * **LegacySchema**
-  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+  * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
 
 * **WriteFlash**: YES
   * Enables writing to flash memory for all added variables.
@@ -567,7 +582,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ## PlatformInfo
 
-![PlatformInfo](../images/config/config.plist/haswell/smbios.png)
+![PlatformInfo](../images/config/config.plist/cometlake/smbios.png)
 
 ::: tip Info
 
@@ -605,9 +620,7 @@ The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
-
-[Apple Check Coverage page](https://checkcoverage.apple.com)
+**Reminder that you need an invalid serial! When inputting your serial number in [Apple's Check Coverage Page](https://checkcoverage.apple.com), you should get a message such as "Unable to check coverage for this serial number."**
 
 **Automatic**: YES
 
@@ -666,6 +679,16 @@ Only drivers present here should be:
 * HfsPlus.efi
 * OpenRuntime.efi
 
+::: details More in-depth Info
+
+| Key | Type | Description |
+| :--- | :--- | :--- |
+| Path | String | Path of the file from `OC/Drivers` directory |
+| LoadEarly | Boolean | Load the driver early before NVRAM setup, should only be enabled for `OpenRuntime.efi` and `OpenVariableRuntimeDxe.efi` if using legacy NVRAM |
+| Arguments | String | Some drivers accept additional arguments which are specified here. |
+
+:::
+
 ### APFS
 
 By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
@@ -698,7 +721,15 @@ Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, 
 
 ### Output
 
-Relating to OpenCore's visual output,  leave everything here as default as we have no use for these quirks.
+Relating to OpenCore's visual output, leave everything here as default as we have no use for these quirks.
+
+::: details More in-depth Info
+
+| Output | Value | Comment |
+| :--- | :--- | :--- |
+| UIScale | `0` | `0` will automatically set based on resolution<br/>`-1` will leave it unchanged<br/>`1` for 1x scaling, for normal displays<br/>`2` for 2x scaling, for HiDPI displays |
+
+:::
 
 ### ProtocolOverrides
 
@@ -753,8 +784,8 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* CSM
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
+* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
+* Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
@@ -762,13 +793,13 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 ### Enable
 
 * VT-x
-* Above 4G decoding
+* Above 4G Decoding
   * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 64MB
+* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
+* DVMT Pre-Allocated(iGPU Memory): 64MB or higher
 * SATA Mode: AHCI
 
 # Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)
