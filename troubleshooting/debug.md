@@ -59,7 +59,7 @@ To calculate the target, we can use a hex calculator and then convert it to deci
 
 `0x01` + `0x02` + `0x40` = `0x43`
 
-`0x53` converted to decimal becomes `67`
+`0x43` converted to decimal becomes `67`
 
 So we can set `Misc` -> `Debug` -> `Target` -> `67`
 
