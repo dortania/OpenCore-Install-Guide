@@ -773,11 +773,11 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Serial/COM Port
 * Parallel Port
 * Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
-* AMD SVM Mode (Virtualization)
 * IOMMU
 
 ### Enable
 
+* AMD SVM Mode (Virtualization)
 * Above 4G Decoding (**This must be on, if you can't find the option then add `npci=0x3000` to boot-args. Do not have both this option and npci enabled at the same time.**)
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
