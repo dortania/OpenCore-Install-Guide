@@ -32,3 +32,7 @@ Before we can jump head first into making an OpenCore based system, we need to g
    * For Windows or Linux users, **15GB** of free space on the drive you're working on. On Windows, your OS disk (C:) must have at least **15GB** of free space.
    * For macOS users, **30GB** of free space on the system's drive.
    * Most tools used in this guide will also require [Python installed](https://www.python.org/downloads/)
+8. <span style="color:red">_**[CRUCIAL]**_</span> **A modern BIOS**
+   * Having an old BIOS version brings problems for a lot of users, especially AMD system users.
+   * We recommend upgrading your BIOS to the latest one available
+   * An exception to this are AMD MSI motherboards, read more at [Motherboard Support](https://extremegrief1.github.io/OpenCore-Install-Guide/macos-limits.html#motherboard-support)
