@@ -220,8 +220,6 @@ For the most part, all motherboards are supported as long as the CPU is. Excepti
 These MSI motherboards will NOT boot macOS Monterey after the BIOS update that adds support for Ryzen 5000 series. If you have an earlier series CPU, you can downgrade the BIOS, but keep in mind that stuff like networking will still be broken.
 We recommended installing macOS Big Sur or earlier on these motherboards.
 
-However thanks to recent developments, B550 boards are now bootable with the addition of [SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl). More info will be provided in both [Gathering Files](./ktext.md) and [Zen's config.plist section](./AMD/zen.md)
-
 ## Storage Support
 
 For the most part, all SATA based drives are supported and the majority of NVMe drives as well. There are only a few exceptions:
