@@ -80,7 +80,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
 | Quirk | Enabled | Comment |
-| :--- | :--- | |
+| :--- | :--- | :--- |
 | DevirtualiseMmio | YES | |
 | EnableWriteUnprotector | NO | |
 | ProtectUefiServices | YES | |
