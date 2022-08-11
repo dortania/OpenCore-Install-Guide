@@ -205,7 +205,7 @@ And an important note for **Laptops with discrete GPUs**:
 | [Tesla](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)) | 10.4.x | 10.13.6 | ^^ |
 | [Tesla v2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | ^^ | ^^ |
 | [Fermi](https://en.wikipedia.org/wiki/Fermi_(microarchitecture)) | 10.7.x | ^^ | ^^ |
-| [Kepler](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.7.x | 11.6.1 | N/A |
+| [Kepler](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.7.x | 11.6.8 | N/A |
 | [Kepler v2](https://en.wikipedia.org/wiki/Kepler_(microarchitecture)) | 10.8.x | ^^ | ^^ |
 | [Maxwell](https://en.wikipedia.org/wiki/Maxwell_(microarchitecture)) | 10.10.x | 10.13.6 | [Requires NVIDIA Web Drivers](https://www.nvidia.com/download/driverResults.aspx/149652/) |
 | [Pascal](https://en.wikipedia.org/wiki/Pascal_(microarchitecture)) | 10.12.4 | ^^ | ^^ |
@@ -216,9 +216,9 @@ And an important note for **Laptops with discrete GPUs**:
 
 ## Motherboard Support
 
-For the most part, all motherboards are supported as long as the CPU is. Previously, B550 boards had issues:
-
-* [~~AMD's B550 boards~~](https://en.wikipedia.org/wiki/List_of_AMD_chipsets)
+For the most part, all motherboards are supported as long as the CPU is. Exceptions are the MSI 500-series AMD motherboards (A520, B550 and X570) on macOS Monterey and above.
+These MSI motherboards will NOT boot macOS Monterey after the BIOS update that adds support for Ryzen 5000 series. If you have an earlier series CPU, you can downgrade the BIOS, but keep in mind that stuff like networking will still be broken.
+We recommended installing macOS Big Sur or earlier on these motherboards.
 
 However thanks to recent developments, B550 boards are now bootable with the addition of [SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl). More info will be provided in both [Gathering Files](./ktext.md) and [Zen's config.plist section](./AMD/zen.md)
 
@@ -233,6 +233,7 @@ For the most part, all SATA based drives are supported and the majority of NVMe 
   
 * **Intel 600p**
   * While not unbootable, please be aware this model can cause numerous problems. [Any fix for Intel 600p NVMe Drive? #1286](https://github.com/acidanthera/bugtracker/issues/1286)
+  * Note: The Intel 660p series SSDs will work fine.
 
 ## Wired Networking
 
