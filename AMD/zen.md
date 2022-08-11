@@ -210,7 +210,7 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 * **Cpuid1Data**: Leave this blank
   * Fake CPUID entry
 * **DummyPowerManagement**: YES
-  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
+  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management.
 * **MinKernel**: Leave this blank
   * Lowest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
   * ex. `12.00.00` for OS X 10.8
@@ -256,7 +256,7 @@ This is where the AMD kernel patching magic happens. Please do note that if comi
 
 Kernel patches:
 
-* [Ryzen/Threadripper (17h/19h)](https://github.com/AMD-OSX/AMD_Vanilla) (10.13 - 12.x)
+* [Ryzen/Threadripper (17h/19h)](https://github.com/AMD-OSX/AMD_Vanilla) (10.13 - 13.x)
 
 To merge:
 
@@ -329,7 +329,6 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
 * **ExtendBTFeatureFlags** NO
   * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
-
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **LegacyCommpage**: NO
@@ -344,7 +343,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
   * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
-  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
+  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool).
 
 :::
 
@@ -415,8 +414,12 @@ Helpful for debugging OpenCore boot issues:
   * Attempts to log kernel panics to disk
 * **DisableWatchDog**: YES
   * Disables the UEFI watchdog, can help with early boot issues
+* **DisplayDelay**: `0`
+  * Delay in microseconds after every verbose line.
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
+* **LogModules**: `*`
+  * Filter log entries by module, let it as `*`
 * **SysReport**: NO
   * Helpful for debugging such as dumping ACPI tables
   * Note that this is limited to DEBUG versions of OpenCore
@@ -453,7 +456,6 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
 * **BlacklistAppleUpdate**: YES
   * Used for blocking firmware updates, used as extra level of protection as macOS Big Sur no longer uses `run-efi-updater` variable
-
 * **DmgLoading**: Signed
   * Ensures only signed DMGs load
 * **ExposeSensitiveData**: `6`
@@ -540,7 +542,7 @@ System Integrity Protection bitmask
 | **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
 | **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
 | **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
-| **unfairvga=1** | Used for fixing hardware DRM support on supported AMD GPUs |
+| **unfairgva=1** | Used for fixing hardware DRM support on supported AMD GPUs |
 | **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in macOS Sierra and High Sierra |
 
 * **csr-active-config**: `00000000`
