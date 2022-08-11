@@ -79,15 +79,15 @@ This section is allowing devices to be passthrough to macOS that are generally i
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
-| Quirk | Enabled |
-| :--- | :--- |
-| DevirtualiseMmio | YES |
-| EnableWriteUnprotector | NO |
-| ProtectUefiServices | YES |
-| RebuildAppleMemoryMap | YES |
+| Quirk | Enabled | Comment |
+| :--- | :--- | |
+| DevirtualiseMmio | YES | |
+| EnableWriteUnprotector | NO | |
+| ProtectUefiServices | YES | |
+| RebuildAppleMemoryMap | YES | |
 | ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable BAR Support), set this to `0` |
-| SetupVirtualMap | NO |
-| SyncRuntimePermissions | YES |
+| SetupVirtualMap | NO | |
+| SyncRuntimePermissions | YES | |
 :::
 
 ::: details More in-depth Info
