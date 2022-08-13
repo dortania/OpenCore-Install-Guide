@@ -75,12 +75,12 @@ Most kexts listed below can be found **pre-compiled** in the [build repo](http:/
 
 Without the below 2, no system is bootable:
 
-* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
-  * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Requires Mac OS X 10.4 or newer
 * [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">Required</span>)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
   * Note that while Lilu supports as early as Mac OS X 10.4, many plugins only work on newer versions.
+* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
+  * Emulates the SMC chip found on real macs, without this macOS will not boot
+  * Requires Mac OS X 10.4 or newer
 
 :::
 
