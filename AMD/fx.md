@@ -190,7 +190,7 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 * **Cpuid1Data**: Leave this blank
   * Fake CPUID entry
 * **DummyPowerManagement**: YES
-  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
+  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management.
 * **MinKernel**: Leave this blank
   * Lowest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
   * ex. `12.00.00` for OS X 10.8
@@ -773,7 +773,6 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Serial/COM Port
 * Parallel Port
 * Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
-* AMD SVM Mode (Virtualization)
 * IOMMU
 
 ### Enable

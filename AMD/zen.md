@@ -210,7 +210,7 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 * **Cpuid1Data**: Leave this blank
   * Fake CPUID entry
 * **DummyPowerManagement**: YES
-  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management. Intel can ignore
+  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management.
 * **MinKernel**: Leave this blank
   * Lowest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
   * ex. `12.00.00` for OS X 10.8
@@ -329,7 +329,6 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
 * **ExtendBTFeatureFlags** NO
   * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
-
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
 * **LegacyCommpage**: NO
@@ -793,7 +792,6 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Serial/COM Port
 * Parallel Port
 * Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
-* AMD SVM Mode (Virtualization)
 * IOMMU
 
 **Special note for 3990X users**: macOS currently does not support more than 64 threads in the kernel, and so will kernel panic if it sees more. The 3990X CPU has 128 threads total and so requires half of that disabled. We recommend disabling hyper threading in the BIOS for these situations.

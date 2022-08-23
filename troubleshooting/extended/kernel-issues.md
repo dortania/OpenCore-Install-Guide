@@ -366,7 +366,7 @@ The main places to check:
   * Most common on older laptops and pre-builts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
 * **PCI allocation issue**:
   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
-  * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
+  * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` or `npci=0x3000` (try both one at a time) to boot args.
     * Some X99 and X299 boards(ie. GA-X299-UD4) may require both npci boot-arg and Above4G enabled
     * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
     * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
