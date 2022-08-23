@@ -48,8 +48,6 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
   * Can be resolved with [SSDTTime](https://github.com/corpnewt/SSDTTime)
 * Does not support P and C state generation for older CPUs
 * Does not support Hardware UUID Injection
-* Does not support auto-detection for many Linux bootloader
-  * Can be resolved by adding an entry in `BlessOverride`
 * Does not support many of Clover's XCPM patches
   * ie. Ivy Bridge XCPM patches
 * Does not support hiding specific drives
