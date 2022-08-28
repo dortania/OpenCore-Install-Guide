@@ -7,9 +7,48 @@ To start we'll want to grab ourselves a copy of macOS. You can skip this and hea
 
 ## Downloading macOS: Modern OS
 
-* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
+There are three methods to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
+
+* [Using App Store](#using-app-store)
+* [Command Line Software Update Utility,](#command-line-software-update-utility)
+* [Munki's InstallInstallMacOS utility](#munkis-installinstallmacos-utility)
+
+
+
+## Using App Store
 
 From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
+
+For machines that need a specific OS release or can't download from the App Store, you can use Command Line Software Update Utility or Munki's InstallInstallMacOS utility.
+
+
+
+## Command Line Software Update Utility
+
+Open a terminal window then copy and paste the below command:
+```sh
+softwareupdate --list-full-installers
+```
+
+This gives you a list of available releases you can choose from.
+![](../images/installer-guide/mac-install-md/softwareupdate.png)
+
+To download the latest version, just copy and paste the below command:
+```sh
+softwareupdate --fetch-full-installer
+```
+Or if you need a specific release, then copy and paste the following code and edit the number at the end of the command to your desired version:
+```sh
+softwareupdate --fetch-full-installer --full-installer-version 11.6.8
+```
+![](../images/installer-guide/mac-install-md/softwareupdate-process.png)
+
+Once downloaded it will be saved in your Applications folder.
+You can continue to [**Setting up the installer**](#setting-up-the-installer).
+
+
+
+## Munki's InstallInstallMacOS utility
 
 For machines that need a specific OS release or can't download from the App Store, you can use the Munki's InstallInstallMacOS utility.
 
