@@ -279,10 +279,11 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### WiFi and Bluetooth
 
-#### All Bluetooth Cards
+#### Non-Native Bluetooth Cards
 
 * [BlueToolFixup](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * Patches the macOS 12+ Bluetooth stack to support third-party cards
+  * Needed for all non-native (non-Apple Broadcom, Intel, etc) Bluetooth cards
   * Included in the [BrcmPatchRAM](#broadcom) zip
   * **Do not use on macOS 11 and earlier**
 
@@ -298,6 +299,7 @@ pci14e4,1686 = Broadcom BCM57766
   * **Does not work in macOS recovery**
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * Adds Bluetooth support to macOS when paired with an Intel wireless card
+  * Use IntelBTPatcher (included) in addition to patch bugs in macOS
   * Requires macOS 10.13 or newer
   * On macOS 10.13 through 11, you also need IntelBluetoothInjector (included)
 
