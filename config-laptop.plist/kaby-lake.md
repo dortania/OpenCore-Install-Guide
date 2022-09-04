@@ -160,7 +160,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | :--- | :--- | :--- |
 | device-id | Data | `16590000` |
 
-* For all HD 6xx (UHD 6xx users are not concerned), there are some small issues with output where plugging anything would cause a lock up (kernel panic); here are some patches to mitigate that (credit Rehabman):
+* HD 6xx users (UHD 6xx users are not concerned) may have some issues with output where plugging in a display out would cause a lock up (kernel panic); here are some patches to mitigate that (credit RehabMan). If you're having these lock ups, try the following sets of patches (try both, but only one set at a time):
   * con1 as 105, con2 as 204, both HDMI
 
     | Key | Type | Value |
@@ -175,7 +175,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
     | Key | Type | Value |
     | :--- | :--- | :--- |
     | framebuffer-con1-enable | Data | `01000000` |
-    | framebuffer-con1-alldata | Data | `03060A00 00040000 87010000` |
+    | framebuffer-con1-alldata | Data | `01050A00 00080000 87010000` |
     | framebuffer-con2-enable | Data | `01000000` |
     | framebuffer-con2-alldata | Data | `03060A00 00040000 87010000` |
 
@@ -194,7 +194,7 @@ Let's take in consideration these 2 usual framebuffers:
   03060A00 00040000 87010000
   ```
 
-* and `00001659` which has following BusID information:
+* and `00001659` which has the following BusID information:
 
   ```
   [0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
@@ -231,12 +231,12 @@ For either framebuffer, the first port (port 00) is ConnectorLVDS (meaning the i
 
 The patches above have these effects:
 
-* Patch 1:
-  * Convert second connector of the ports to 0105 with HDMI property
+* Patchset 1:
+  * Convert second connector of the ports to 0105 with HDMI connector type
   * Convert third connector of the ports to 0204 with HDMI property
-* Patch 2:
-  * Convert second connector of the ports to 0105 with HDMI property
-  * Convert third connector of the ports to 0306 with DP property
+* Patchset 2:
+  * Convert second connector of the ports to 0105 with HDMI connector type
+  * Convert third connector of the ports to 0306 with DP connector type
 
 Depending on your real hardware setup, you might want to switch things up, but usually for most laptops, one of the two patches **might** be required, in case your outputs work out-of-the-box with no issues or crashes, you do not need these patches then.
 
