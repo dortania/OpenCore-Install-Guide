@@ -128,7 +128,7 @@ When setting up your iGPU, the table below should help with finding the right va
 * **AAPL,ig-platform-id**
   * This is used internally for setting up the iGPU
 * **Type**
-  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
+  * Whether the entry is recommended for laptops (ie. with built-in displays) or for Intel NUCs (ie. standalone boxes)
 
 Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
 
@@ -146,34 +146,113 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 #### Configuration Notes
 
-* For all UHD 620 users (Kaby Lake-R), you'll need a device-id spoof:
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| device-id | Data | `16590000` |
-
-* For all HD 6\*\* (`UHD` users are not concerned), there are some small issues with output where plugging anything would cause a lock up (kernel panic); here are some patches to mitigate that (credit Rehabman):
-  * 0306 to 0105 (will probably explain what it does one day)
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| framebuffer-con1-enable | Data | `01000000` |
-| framebuffer-con1-alldata | Data | `01050A00 00080000 87010000 02040A00 00080000 87010000 FF000000 01000000 20000000` |
-
-* 0204 to 0105 (will probably explain what it does one day)
-
-| Key | Type | Value |
-| :--- | :--- | :--- |
-| framebuffer-con2-enable | Data | `01000000` |
-| framebuffer-con2-alldata | Data | `01050A00 00080000 87010000 03060A00 00040000 87010000 FF000000 01000000 20000000` |
-
-* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB or higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case add these values to the iGPU properties:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | framebuffer-patch-enable | Data | `01000000` |
 | framebuffer-stolenmem | Data | `00003001` |
 | framebuffer-fbmem | Data | `00009000` |
+
+* For all UHD 620 users (Kaby Lake-R), you'll need a device-id spoof:
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | `16590000` |
+
+* HD 6xx users (UHD 6xx users are not concerned) may have some issues with output where plugging in a display out would cause a lock up (kernel panic); here are some patches to mitigate that (credit RehabMan). If you're having these lock ups, try the following sets of patches (try both, but only one set at a time):
+  * con1 as 105, con2 as 204, both HDMI
+
+    | Key | Type | Value |
+    | :--- | :--- | :--- |
+    | framebuffer-con1-enable | Data | `01000000` |
+    | framebuffer-con1-alldata | Data | `01050A00 00080000 87010000` |
+    | framebuffer-con2-enable | Data | `01000000` |
+    | framebuffer-con2-alldata | Data | `02040A00 00080000 87010000` |
+
+  * con1 as 105, con2 as 306, HDMI and DP
+
+    | Key | Type | Value |
+    | :--- | :--- | :--- |
+    | framebuffer-con1-enable | Data | `01000000` |
+    | framebuffer-con1-alldata | Data | `01050A00 00080000 87010000` |
+    | framebuffer-con2-enable | Data | `01000000` |
+    | framebuffer-con2-alldata | Data | `03060A00 00040000 87010000` |
+
+::: details Explanation
+
+Let's take in consideration these 2 usual framebuffers:
+
+* `00001B59` which has the following BusID information:
+
+  ```
+  [0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
+  [2] busId: 0x04, pipe: 10, type: 0x00000800, flags: 0x00000187 - ConnectorHDMI
+  [3] busId: 0x06, pipe: 10, type: 0x00000400, flags: 0x00000187 - ConnectorDP
+  00000800 02000000 98000000
+  02040A00 00080000 87010000
+  03060A00 00040000 87010000
+  ```
+
+* and `00001659` which has the following BusID information:
+
+  ```
+  [0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
+  [1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x00000187 - ConnectorDP
+  [2] busId: 0x04, pipe: 10, type: 0x00000800, flags: 0x00000187 - ConnectorHDMI
+  00000800 02000000 98000000
+  01050900 00040000 87010000
+  02040A00 00080000 87010000
+  ```
+
+Which look similar at first glance, until you see the small details like the Port ID (the first 2 digits of each hex line). Both of the framebuffers are valid, but not all OEMs ship the same port configuration on all laptops (some have eDP for internal display, some have HDMI instead of DP ports, some have VGA and so on...).
+
+For either framebuffer, the first port (port 00) is ConnectorLVDS (meaning the internal display), which is the same on both configurations, that's how you get a display out for macOS. The differences come to the 2 other ports:
+
+* `00001B59`
+
+```
+02040A00 00080000 87010000 -->
+[2] busId: 0x04, pipe: 10, type: 0x00000800, flags: 0x00000187 - ConnectorHDMI
+
+03060A00 00040000 87010000 -->
+[3] busId: 0x06, pipe: 10, type: 0x00000400, flags: 0x00000187 - ConnectorDP
+```
+
+* `00001659`
+
+```
+01050900 00040000 87010000 -->
+[1] busId: 0x05, pipe: 9, type: 0x00000400, flags: 0x00000187 - ConnectorDP
+
+02040A00 00080000 87010000 -->
+[2] busId: 0x04, pipe: 10, type: 0x00000800, flags: 0x00000187 - ConnectorHDMI
+```
+
+The patches above have these effects:
+
+* Patchset 1:
+  * Convert second connector of the ports to 0105 with HDMI connector type
+  * Convert third connector of the ports to 0204 with HDMI connector type
+* Patchset 2:
+  * Convert second connector of the ports to 0105 with HDMI connector type
+  * Convert third connector of the ports to 0306 with DP connector type
+
+Depending on your real hardware setup, you might want to switch things up, but usually for most laptops, one of the two patches **might** be required, in case your outputs work out-of-the-box with no issues or crashes, you do not need these patches then.
+
+::: details How to read the BusID
+
+The bits in the hex string are read as following:
+
+(taking `01050900 00040000 87010000` as example)
+
+| Bit | Name | Value |
+| :--- | :--- | :--- |
+| Bit 1 | Port | `01` |
+| Bit 2 | Bus ID | `05` |
+| Bit 3-4 | Pipe Number | `0900` |
+| Bit 5-8 | Connector Type | `00040000` |
+| Bit 9-12 | Flags | `87010000` |
 
 :::
 
