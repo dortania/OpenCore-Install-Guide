@@ -233,7 +233,7 @@ The patches above have these effects:
 
 * Patchset 1:
   * Convert second connector of the ports to 0105 with HDMI connector type
-  * Convert third connector of the ports to 0204 with HDMI property
+  * Convert third connector of the ports to 0204 with HDMI connector type
 * Patchset 2:
   * Convert second connector of the ports to 0105 with HDMI connector type
   * Convert third connector of the ports to 0306 with DP connector type
