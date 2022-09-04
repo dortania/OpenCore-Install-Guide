@@ -146,7 +146,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 #### Configuration Notes
 
-* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB or higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case add these values to the iGPU properties:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
