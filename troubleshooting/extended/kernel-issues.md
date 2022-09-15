@@ -63,7 +63,7 @@ This section will be split between Intel and AMD users:
 
 #### AMD Users
 
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
   * Note outdated kernel patches will also have the same effect please ensure you're using the latest patches from AMD OS X
 
 #### Intel Users
