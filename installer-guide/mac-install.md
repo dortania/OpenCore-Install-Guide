@@ -88,21 +88,14 @@ sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstall
 
 ::: details Note for users on Apple Silicon installing macOS older than Big Sur
 
-If the `createinstallmedia` fails with `zsh: killed` or `Killed: 9` then it's most likely an issue with the `createinstallmedia` script signature. To fix this, you can run the following command:
+If the `createinstallmedia` fails with `zsh: killed` or `Killed: 9` then it's most likely an issue with the installer's code signature. To fix this, you can run the following command:
 
 ```sh
 cd /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/
-codesign -s - -f createinstallmedia
+codesign -s - -f --deep /Applications/Install\ macOS\ Big\ Sur.app
 ```
 
-If it still errors, you can try to codesign *every* file in `Contents/Resources/`
-
-```sh
-cd /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/
-find . -type f -exec codesign -s - -f "{}" \;
-```
-
-You might also have to install the XCode command line tools if `codesign` doesn't work.
+You will need the command line tools for Xcode installed:
 
 ```sh
 xcode-select --install
