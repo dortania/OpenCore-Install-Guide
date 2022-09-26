@@ -86,6 +86,23 @@ Next run the `createinstallmedia` command provided by [Apple](https://support.ap
 sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
+::: details Note for users on Apple Silicon installing macOS older than Big Sur
+
+If the `createinstallmedia` fails with `zsh: killed` or `Killed: 9` then it's most likely an issue with the installer's code signature. To fix this, you can run the following command:
+
+```sh
+cd /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/
+codesign -s - -f --deep /Applications/Install\ macOS\ Big\ Sur.app
+```
+
+You will need the command line tools for Xcode installed:
+
+```sh
+xcode-select --install
+```
+
+:::
+
 This will take some time so you may want to grab a coffee or continue reading the guide (to be fair you really shouldn't be following this guide step by step without reading the whole thing first).
 
 You can also replace the `createinstallmedia` path with that of where your installer's located (same idea with the drive name).
