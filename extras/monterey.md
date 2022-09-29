@@ -48,7 +48,7 @@ For those on Haswell or Ivy Bridge, here are some simple conversions:
 Dropped GPU Hardware:
 
 * Ivy Bridge (HD 4000 and HD 2500)
-* Nvidia Kepler (GTX 6xx/7xx Cards)
+* NVIDIA Kepler (GTX 6xx/7xx Cards)
 * You can use [OpenCore-Legacy-Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/) to add back support
   * No support is provided for Hackintoshes using OCLP!
   * You will lose access to non-full updates (Small 1-3GB updates)
@@ -121,11 +121,13 @@ See the below issues for more details:
 
 Intel I211 chipset (typical for some AMD boards i.e. B450) no longer works with SmallTreeIntel82576 kext (network remains in `Cable Unplugged` status).
 
-[AppleIGB](https://github.com/Shaneee/AppleIGB) might work on some systems but it has a known issue to drop connections (primarily after wake-up).
+[AppleIGB](https://github.com/donatengit/AppleIGB/releases) confirmed working on I211 @ B450, but NICs on other boards might experience issues (please [report](https://github.com/donatengit/AppleIGB/issues) if any)
 
 See the below issues for more details:
 
 * [Kext no longer working with MacOS 12.0](https://github.com/khronokernel/SmallTree-I211-AT-patch/issues/3)
+
+The boot-arg for enabling Intel I225-V ethernet controller has changed since macOS Monterey 12.3. Use `e1000=0` instead of `dk.e1000=0`.
 
 ### OTA Updates
 

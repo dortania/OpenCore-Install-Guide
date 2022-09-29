@@ -104,7 +104,6 @@ module.exports = {
                 'terminology',
                 'why-oc',
             ]
-
         },
         {
             title: 'USB Creation',

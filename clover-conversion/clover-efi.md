@@ -20,8 +20,8 @@ For the most part, all kexts are supported in OpenCore. However there are a few 
 
 **Supported ones:**
 
-* AudioDxe.efi(Make sure this is from [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) and **not** Goldfish64's or Clover's repo)
-* CsmVideoDxe.efi(Note that [BiosVideo.efi](https://github.com/acidanthera/DuetPkg) may be preferred)
+* AudioDxe.efi (Make sure this is from [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) and **not** Goldfish64's or Clover's repo)
+* CsmVideoDxe.efi (Note that [BiosVideo.efi](https://github.com/acidanthera/DuetPkg) may be preferred)
 * EnhancedFatDxe.efi
 * ExFatDxeLegacy.efi
 * ExFatDxe.efi

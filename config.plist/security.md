@@ -12,7 +12,7 @@ This enables security features such as the verification of macOS' `boot.efi`, wi
 * Big Sur and Above (11.0+): The recommended value is `Default`.
 * High Sierra-Catalina (10.13-10.15):
   * If your model is not listed below, set to `Disabled`.
-  * If running Nvidia Web Drivers, set to `Disabled`.
+  * If running NVIDIA Web Drivers, set to `Disabled`.
   * If your model is listed, compare the minimum version with the version your installing. Disable if your installer is below the minimum version listed for your SMBIOS.
 * Sierra and Below (10.4-10.12): This setting has no effect.
 * If booting multiple versions, you may need to set the value to `Disabled`.
