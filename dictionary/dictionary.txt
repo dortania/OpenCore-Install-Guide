@@ -522,7 +522,7 @@ Icelake's
 InjectAMD
 InjectAti
 InjectIntel
-InjectNvidia
+InjectNVIDIA
 InsanelyMac
 Inspiron
 InstallAssistant
@@ -654,8 +654,8 @@ NoOne
 Notiflux
 NullCPUPowerManagement
 NullCPUPowerManagment
-Nvidia
-Nvidia's
+NVIDIA
+NVIDIA's
 OC
 OC's
 OC/

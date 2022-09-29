@@ -8,7 +8,7 @@ Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi),
 
 ## Creating your config.plist
 
-First we'll want to grab the sample.plist from the [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), this will be located under the `Docs` folder:
+First we'll want to grab the `Sample.plist` from the [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), this will be located under the `Docs` folder:
 
 ![](../images/config/config-universal/sample-location.png)
 

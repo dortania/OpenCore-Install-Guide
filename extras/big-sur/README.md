@@ -53,7 +53,7 @@ For those wanting a simple translation for their Machines:
 * iMac13,1 should transition over to using iMac14,4
 * iMac13,2 should transition over to using iMac15,1
 * iMac14,2 and iMac14,3 should transition over to using iMac15,1
-  * Note: AMD CPU users with Nvidia GPUs may find MacPro7,1 more suitable
+  * Note: AMD CPU users with NVIDIA GPUs may find MacPro7,1 more suitable
 * iMac14,1 should transition over to iMac14,4
 
 ### Supported hardware

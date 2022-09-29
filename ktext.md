@@ -67,7 +67,7 @@ A kext is a **k**ernel **ext**ension, you can think of this as a driver for macO
   * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.
 * **Location Note**: These files **must** be placed under `EFI/OC/Kexts/`.
 
-All kext listed below can be found **pre-compiled** in the [Kext Repo](http://kexts.goldfish64.com/). Kexts here are compiled each time there's a new commit.
+Most kexts listed below can be found **pre-compiled** in the [build repo](http://dortania.github.io/builds/). Kexts here are compiled each time there's a new commit.
 
 ### Must haves
 
@@ -75,32 +75,52 @@ All kext listed below can be found **pre-compiled** in the [Kext Repo](http://ke
 
 Without the below 2, no system is bootable:
 
-* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
-  * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Requires Mac OS X 10.4 or newer
 * [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">Required</span>)
   * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
   * Note that while Lilu supports as early as Mac OS X 10.4, many plugins only work on newer versions.
+* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
+  * Emulates the SMC chip found on real macs, without this macOS will not boot
+  * Requires Mac OS X 10.4 or newer
+
+:::
 
 ### VirtualSMC Plugins
 
-The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring (Note while VirtualSMC supports 10.4, plugins may require newer versions):
+The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring. Unless otherwise specified, these plugins come with VirtualSMC
+
+::: tip
+
+While VirtualSMC supports 10.4, plugins may require newer versions.
+
+:::
 
 * SMCProcessor.kext
-  * Used for monitoring CPU temperature, **doesn't work on AMD CPU based systems**
+  * Used for monitoring Intel CPU temperature
+  * Not for AMD CPU based systems
   * Requires Mac OS X 10.7 or newer
+* [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor)
+  * Used for monitoring CPU temperature on AMD Zen-based systems
+  * **Under active development, potentially unstable**
+  * Requires AMDRyzenCPUPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
+  * Requires macOS 10.13 or newer
+* [SMCRadeonGPU](https://github.com/aluveitie/RadeonSensor)
+  * Used for monitoring GPU temperature on AMD GPU systems
+  * Requires RadeonSensor from the same repository
+  * Requires macOS 11 or newer
 * SMCSuperIO.kext
-  * Used for monitoring fan speed, **doesn't work on AMD CPU based systems**
+  * Used for monitoring fan speed
+  * Not for AMD CPU based systems
   * Requires Mac OS X 10.6 or newer
 * SMCLightSensor.kext
-  * Used for the ambient light sensor on laptops, **desktops can ignore**
-  * Do not use if you don't have an ambient light sensor, can cause issues otherwise
+  * Used for the ambient light sensor on laptops
+  * **Do not use if you don't have an ambient light sensor (ie. desktops), can cause issues otherwise**
   * Requires Mac OS X 10.6 or newer
 * SMCBatteryManager.kext
-  * Used for measuring battery readouts on laptops, **desktops can ignore**
+  * Used for measuring battery readouts on laptops
+  * **Do not use on desktops**
   * Requires Mac OS X 10.4 or newer
 * SMCDellSensors.kext
-  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode(SMM)
+  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode (SMM)
   * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
   * Requires Mac OS X 10.7 or newer
 
@@ -117,7 +137,7 @@ The below plugins are not required to boot, and merely add extra functionality t
   * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
   * AppleALCU.kext is a pared down version of AppleALC that only supports digital audio - but you can still use AppleALC.kext on digital audio-only systems
   * AMD 15h/16h may have issues with AppleALC and Ryzen/Threadripper systems rarely have mic support
-  * Requires OS X 10.8 or newer
+  * Requires OS X 10.4 or newer
   
 ::: details Legacy Audio Kext
 
@@ -138,10 +158,14 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, I217, I218 and I219 NICs are officially supported
-  * Requires OS X 10.9 or newer, 10.6-10.8 users can use the IntelSnowMausi instead for older OSes
-* [SmallTreeIntel82576 kext](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for I211 NICs, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet)
-)
+  * Requires OS X 10.9 or newer, 10.6-10.8 users can use IntelSnowMausi instead for older OSes
+* [AppleIGB](https://github.com/donatengit/AppleIGB/releases)
+  * Required for I211 NICs running on macOS Monterey and above
+  * Might have instability issues on some NICs, recommended to stay on Big Sur and use SmallTree
+  * Required for most AMD boards running Intel NICs
+  * Requires macOS 12 and above
+* [SmallTreeIntel82576](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
+  * Required for I211 NICs running on macOS versions up to Big Sur, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet))
   * Required for most AMD boards running Intel NICs
   * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
@@ -150,7 +174,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Note: Atheros Killer E2500 models are actually Realtek based, for these systems please use [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) instead
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
   * For Realtek's Gigabit Ethernet
-  * Requires OS X 10.8 and up for versions v2.2.0 and below, macOS 10.12 and up for versions v2.2.2 through v2.3.0 (inclusive), macOS 10.14 and up for versions v2.4.0 and up
+  * Requires OS X 10.8 and up for versions v2.2.0 and below, macOS 10.12 and up for version v2.2.2, macOS 10.14 and up for versions v2.3.0 and up
   * **NOTE:** Sometimes the latest version of the kext might not work properly with your Ethernet. If you see this issue, try older versions.
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * For Realtek's 2.5Gb Ethernet
@@ -232,13 +256,14 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### USB
 
-* [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-  * Used for injecting Intel USB controllers on systems without defined USB ports in ACPI
-  * Shouldn't be needed on Desktop Skylake and newer
-    * AsRock is dumb and does need this
-    * Coffee Lake and older laptops are however recommended to use this kext
-  * Does not work on AMD CPUs **at all**
-  * Requires OS X 10.11 or newer
+* USBToolBox ([tool](https://github.com/USBToolBox/tool) and [kext](https://github.com/USBToolBox/kext))
+  * USB mapping tool for Windows and macOS.
+  * It is highly advisable to map your USB ports before you install macOS to avoid any port limit issues
+  * Features
+    * Supports mapping from Windows and macOS (Linux support in progress)
+    * Can build a map using either the USBToolBox kext or native Apple kexts (AppleUSBHostMergeProperties)
+    * Supports multiple ways of matching
+    * Supports companion ports (on Windows)
 
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
   * Needed for non-native USB controllers
@@ -247,21 +272,36 @@ pci14e4,1686 = Broadcom BCM57766
     * H370
     * B360
     * H310
-    * Z390(Not needed on Mojave and newer)
+    * Z390 (not needed on Mojave and newer)
     * X79
     * X99
-    * AsRock boards(On Intel motherboards specifically, B460/Z490+ boards do not need it however)
+    * ASRock Intel boards (B460/Z490+ boards do not need it however)
 
 ### WiFi and Bluetooth
+
+#### Non-Native Bluetooth Cards
+
+* [BlueToolFixup](https://github.com/acidanthera/BrcmPatchRAM/releases)
+  * Patches the macOS 12+ Bluetooth stack to support third-party cards
+  * Needed for all non-native (non-Apple Broadcom, Intel, etc) Bluetooth cards
+  * Included in the [BrcmPatchRAM](#broadcom) zip
+  * **Do not use on macOS 11 and earlier**
 
 #### Intel
 
 * [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
   * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
   * Requires macOS 10.13 or newer and requires Apple's Secure Boot to function correctly
+* [Itlwm](https://github.com/OpenIntelWireless/itlwm/releases)
+  * Alternative to AirportItlwm for systems where Apple's Secure Boot cannot be enabled
+  * Requires [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases)
+  * It will be treated as an Ethernet card, and you will have to connect to Wi-Fi via Heliport
+  * **Does not work in macOS recovery**
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
   * Adds Bluetooth support to macOS when paired with an Intel wireless card
+  * Use IntelBTPatcher (included) in addition to patch bugs in macOS
   * Requires macOS 10.13 or newer
+  * On macOS 10.13 through 11, you also need IntelBluetoothInjector (included)
 
 ::: details More info on enabling AirportItlwm
 
@@ -269,8 +309,8 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
 
 * Enable `Misc -> Security -> SecureBootModel` by either setting it as `Default` or some other valid value
   * This is discussed both later on in this guide and in the post-install guide: [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html)
-* If you cannot enable SecureBootModel, you can still force inject IO80211Family(**Highly discouraged**)
-  * Set the following under `Kernel -> Force` in your config.plist(discussed later in this guide):
+* If you cannot enable SecureBootModel, you can still force inject IO80211Family (**highly discouraged**)
+  * Set the following under `Kernel -> Force` in your config.plist (discussed later in this guide):
   
 ![](./images/ktext-md/force-io80211.png)
 
@@ -288,14 +328,17 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
     * BrcmPatchRAM3 for 10.15+ (must be paired with BrcmBluetoothInjector)
     * BrcmPatchRAM2 for 10.11-10.14
     * BrcmPatchRAM for 10.8-10.10
+  * On macOS 10.11 through macOS 11, you also need BrcmBluetoothInjector (included)
 
 ::: details BrcmPatchRAM Load order
 
 The order in `Kernel -> Add` should be:
 
-1. BrcmBluetoothInjector
+1. BrcmBluetoothInjector (if needed)
 2. BrcmFirmwareData
-3. BrcmPatchRAM3
+3. BrcmPatchRAM3 (or BrcmPatchRAM2/BrcmPatchRAM)
+
+BlueToolFixup can be anywhere after Lilu.
 
 However ProperTree will handle this for you, so you need not concern yourself
 
@@ -309,16 +352,20 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
   * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
   * Requires OS X 10.6 or newer
+  * Using this kext on macOS 11.3 and above is not recommended as you need to modify the macOS filesystem and disable SIP
+* [AMDRyzenCPUPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
+  * CPU power management for Ryzen systems
+  * **Under active development, potentially unstable**
+  * Requires macOS 10.13 or newer
 
 ### Extras
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-  * Useful starting with Catalina to disable the AppleMCEReporter kext which will cause kernel panics on AMD CPUs and dual-socket systems
-  * Affected SMBIOS:
+  * Required on macOS 12.3 and later on AMD systems, and on macOS 10.15 and later on dual-socket Intel systems.
+  * Affected SMBIOSes:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
-  * Requires macOS 10.15 or newer
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync/releases)
   * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable.
   * **Does not work on AMD CPUs**
@@ -328,8 +375,12 @@ However ProperTree will handle this for you, so you need not concern yourself
   * Requires macOS 10.14 or newer
 * [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
-  * macOS Big Sur Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
+  * Big Sur+ Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
     * Catalina and older need not concern
+* [CPUTopologyRebuild](https://github.com/b00t0x/CpuTopologyRebuild)
+  * An experimental Lilu plugin that optimizes Alder Lake's heterogeneous core configuration. **Only for Alder Lake CPUs**
+* [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
+  * Patch various functions of macOS, see [the README](https://github.com/acidanthera/RestrictEvents#boot-arguments) for more info
 
 ::: details Legacy SATA Kexts
 
@@ -357,11 +408,11 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
   * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
 * [RehabMan's VoodooPS2](https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller/downloads/)
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
-  * Supports macOS 10.6+ support
+  * Supports macOS 10.6+
 
 #### SMBus Trackpads
 
-* [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/)
+* [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases)
   * For systems with Synaptics SMBus trackpads
   * Requires macOS 10.11 or newer for MT2 functions
   * Depends on Acidanthera's VoodooPS2
@@ -385,8 +436,8 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
 | ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
 | FTE1001 touchpad | VoodooI2CFTE | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
-| Synaptics HID | [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases/) | I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode) |
-| Alps HID | [AlpsHID](https://github.com/blankmac/AlpsHID/releases) | Can be used with USB or I2C Alps trackpads. Mostly seen on Dell laptops |
+| Synaptics HID | [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases) | I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode) |
+| Alps HID | [AlpsHID](https://github.com/blankmac/AlpsHID/releases) | Can be used with USB or I2C Alps trackpads. Mostly seen on Dell laptops and some HP EliteBook models |
 
 :::
 
@@ -394,6 +445,7 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
 
 * [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
   * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
+  * Supports OS X 10.7 and above (not needed on 10.4 - 10.6)
 * [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
   * Fixes brightness keys automatically
 
@@ -455,7 +507,7 @@ Continuing:
 
 | Platforms | **NVRAM** | **IMEI** |
 | :-------: | :-------: | :------: |
-|  Clarksfield and Arrandale | N/A | N/A |
+| Clarksfield and Arrandale | N/A | N/A |
 | Sandy Bridge | ^^| [SSDT-IMEI](https://dortania.github.io/Getting-Started-With-ACPI/Universal/imei.html) |
 | Ivy Bridge | ^^ | ^^ |
 | Haswell | ^^ | N/A |

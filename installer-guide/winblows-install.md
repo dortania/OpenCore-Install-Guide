@@ -13,17 +13,9 @@ To start you'll need the following:
 
 ## Downloading macOS
 
-To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next copy the folder path for the macrecovery folder:
+To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next, click next to the current folder path and type `cmd` to open a Command Prompt in the current directory:
 
-![](../images/installer-guide/winblows-install-md/file-path.png)
-
-From here, you'll want to open up a Command Prompt and cd into the macrecovery folder that we copied earlier:
-
-```sh
-cd Paste_Folder_Path
-```
-
-![](../images/installer-guide/winblows-install-md/command-prompt.png)
+![](../images/installer-guide/winblows-install-md/open-cmd-current-folder.gif)
 
 Now run one of the following depending on what version of macOS you want(Note these scripts rely on [Python](https://www.python.org/downloads/) support, please install if you haven't already):
 
@@ -65,11 +57,9 @@ python macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
 python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 ```
 
-* **macOS 12, Monterey Note**: As this OS is quite new, there's still some issues with certain systems to resolve. For more information, see here: [macOS 12: Monterey](../extras/monterey.md)
-  * For first time users, we recommend macOS Catalina (10.15) or Big Sur (11)
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162). We advise users either install an older OS(ie. macOS 10.15, Catalina) or find a 11.2.3 or older Big Sur installer
-    * For education purposes, we have a copy provided here: [macOS 11.2.1 20D75 Recovery Image](https://archive.org/details/base-system_202102)
-    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issue
+* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
 
 This will take some time, however once you're finished you should get either BaseSystem or RecoveryImage files:
 
@@ -79,7 +69,7 @@ This will take some time, however once you're finished you should get either Bas
 | :--- | :--- |
 |![](../images/installer-guide/winblows-install-md/basesystem-example.png) | ![](../images/installer-guide/winblows-install-md/macrecovery-after.jpg) |
 
-Now with our installer downloaded, we'll next want to format out USB.
+Now with our installer downloaded, we'll next want to format our USB.
 
 ## Making the installer
 
