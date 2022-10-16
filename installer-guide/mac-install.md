@@ -18,7 +18,7 @@ There are three ways to download macOS.
 From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store:
 * [Using App Store](#using-app-store)
 
-For machines that need a specific OS release or can't download from the App Store, you can use the Munki's InstallInstallMacOS utility.
+For machines that need a specific OS release or can't download from the App Store:
 * [Command Line Software Update Utility,](#command-line-software-update-utility)
 * [Munki's InstallInstallMacOS utility](#munkis-installinstallmacos-utility)
 
