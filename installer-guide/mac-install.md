@@ -27,9 +27,6 @@ For machines that need a specific OS release or can't download from the App Stor
 
 From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
 
-For machines that need a specific OS release or can't download from the App Store, you can use Command Line Software Update Utility or Munki's InstallInstallMacOS utility.
-
-
 ## Command Line Software Update Utility
 
 Open a terminal window then copy and paste the below command:
