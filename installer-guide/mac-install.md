@@ -9,9 +9,42 @@ To start we'll want to grab ourselves a copy of macOS. You can skip this and hea
 
 * This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
 
-From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
+* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
+
+There are three ways to download macOS.
+
+From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store:
+* [Using App Store](#using-app-store)
 
 For machines that need a specific OS release or can't download from the App Store, you can use the Munki's InstallInstallMacOS utility.
+* [Command Line Software Update Utility,](#command-line-software-update-utility)
+* [Munki's InstallInstallMacOS utility](#munkis-installinstallmacos-utility)
+
+
+## Using App Store
+
+From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
+
+For machines that need a specific OS release or can't download from the App Store, you can use Command Line Software Update Utility or Munki's InstallInstallMacOS utility.
+
+
+## Command Line Software Update Utility
+
+Open a terminal window then copy and paste the below command:
+```sh
+softwareupdate --list-full-installers;echo;echo "Please enter version number you wish to download (default is the latest version):";read;softwareupdate --fetch-full-installer $(if [ -n "$REPLY" ]; then; echo --full-installer-version; fi) $REPLY;
+```
+
+![](../images/installer-guide/mac-install-md/commandlinesoftwareupdateutility.png)
+
+This gives you a list of available releases you can choose from.
+Once downloaded it will be saved in your Applications folder.
+You can continue to [**Setting up the installer**](#setting-up-the-installer).
+
+
+## Munki's InstallInstallMacOS utility
 
 ::: details Note for users running macOS Monterey 12.3 or above
 
@@ -42,10 +75,6 @@ mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubuse
 As you can see, we get a nice list of macOS installers. If you need a particular versions of macOS, you can select it by typing the number next to it. For this example we'll choose 10:
 
 ![](../images/installer-guide/mac-install-md/munki-process.png)
-
-* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
-    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
 
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
