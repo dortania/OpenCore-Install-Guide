@@ -31,7 +31,7 @@ From a macOS machine that meets the requirements of the OS version you want to i
 
 Open a terminal window then copy and paste the below command:
 ```sh
-softwareupdate --list-full-installers;echo;echo "Please enter version number you wish to download (default is the latest version):";read;softwareupdate --fetch-full-installer $(if [ -n "$REPLY" ]; then; echo "--full-installer-version "$REPLY; fi);
+softwareupdate --list-full-installers;echo;echo "Please enter version number you wish to download:";read;$(if [ -n "$REPLY" ]; then; echo "softwareupdate --fetch-full-installer --full-installer-version "$REPLY; fi);
 ```
 
 ![](../images/installer-guide/mac-install-md/commandlinesoftwareupdateutility.png)
