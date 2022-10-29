@@ -1,9 +1,5 @@
 # macOS 13: Ventura
 
-**Reminder that Dortania and any tools mentioned in this guide are neither responsible for any corruption, data loss, or other ill effects that may arise from this guide, including ones caused by typos. You, the end user, must understand this is beta software on unsupported machines so do not pester developers for fixes. Dortania will not be accepting issues regarding this mini-guide except for typos and/or errors.**
-
-**This guide expects you to have a basic understanding of hackintoshing. If you are not familiar with it, we highly recommend you to wait until there is an easier and more straight-forward solution available.**
-
 ## Table of Contents
 
 [[toc]]
@@ -37,16 +33,16 @@ If your SMBIOS was supported in Monterey and is not included above, you're good 
 
 :::
 
-<!-- FIXTHIS
 
-For those on Haswell or Ivy Bridge, here are some simple conversions:
 
-* Ivy Bridge desktops with dGPU should use MacPro6,1
-* Haswell desktops with dGPU should use iMac17,1
-* Haswell desktops with only an iGPU should use iMac16,2
-* Haswell laptops should use MacBookPro11,4 or MacBookPro11,5
+For those on architectures no longer supported by Ventura:
 
--->
+* All desktops with dGPUs should use iMac18,2, MacPro7,1 or iMacPro1,1. Unsupported GPUs still require OCLP, while supported GPUs do not.
+* All desktops with unsupported iGPUs should use iMac18,1.
+* All unsupported laptops (Ivy Bridge, Haswell, Broadwell, Skylake) should use MacBookPro14,1.
+* Ivy Bridge desktops and laptops can no longer install Ventura without swapping cryptex files with ones used by Rosetta 2, as the hardware lacks AVX2. This includes Ivy Bridge-EPs found in the MacPro6,1.
+
+
 
 ### Supported hardware
 
@@ -58,15 +54,14 @@ Dropped GPU Hardware:
   * Skylake can be spoofed as Kaby Lake with WhateverGreen v1.6.1 and up
   * Change your `device-id` and `AAPL,ig-platform-id` to the most similar Kaby Lake model
   * If using the same EFI to boot Monterey and below, add `-igfxsklaskbl` to your boot args
-<!--
 
-OCLP is not supported yet
+
 
 * You can use [OpenCore-Legacy-Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/) to add back support
   * No support is provided for Hackintoshes using OCLP!
   * You will lose access to non-full updates (Small 1-3GB updates)
   * Requires SIP, Apple Secure Boot, and AMFI disabled.
--->
+
 
 ### AMD Patches
 
