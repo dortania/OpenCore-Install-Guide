@@ -458,6 +458,10 @@ Issue with AppleRTC, quite a simple fix:
 
 * config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
 
+For some versions of MacOS (e.g. Catalina) also the boot.efi might write to the RTC, so you might need to block this as well:
+
+* config.plist -> NVRAM -> Add -> 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:rtc-blacklist  = `<58 59>`
+
 **Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329), and [here](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html) for a guide.
 
 **FakeCPUID**:
