@@ -129,6 +129,7 @@ module.exports = {
         {
             title: 'Building your config.plist',
             collapsable: false,
+            sidebarDepth: 1,
             children: [
                     '/config.plist/acpi',
                     '/config.plist/booter',
