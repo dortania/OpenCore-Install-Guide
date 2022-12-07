@@ -137,16 +137,15 @@ module.exports = {
                     '/config.plist/misc',
                     '/config.plist/nvram',
                     '/config.plist/platform-info',
-                    '/config.plist/uefi'
-                ]
-            ['/config.plist/security', 'Apple Secure Boot']
+                    '/config.plist/uefi',
+                    '/config.plist/security'
+                ],
         },
         {
             title: 'Installation',
             collapsable: false,
             children: [
                 '/installation/installation-process',
-
             ]
         },
         {
