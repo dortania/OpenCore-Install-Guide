@@ -130,14 +130,14 @@ module.exports = {
             title: 'Building your config.plist',
             collapsable: false,
             children: [
-                    ['/config.plist/acpi', 'ACPI']
-                    ['/config.plist/booter', 'Booter'],
-                    ['/config.plist/device-properties', 'DeviceProperties'],
-                    ['/config.plist/kernel', 'Kernel'],
-                    ['/config.plist/misc', 'Misc'],
-                    ['/config.plist/nvram', 'NVRAM'],
-                    ['/config.plist/platforminfo', 'PlatformInfo'],
-                    ['/config.plist/uefi', 'UEFI'],
+                    '/config.plist/acpi',
+                    '/config.plist/booter',
+                    '/config.plist/device-properties',
+                    '/config.plist/kernel',
+                    '/config.plist/misc',
+                    '/config.plist/nvram',
+                    '/config.plist/platforminfo',
+                    '/config.plist/uefi'
                 ]
             ['/config.plist/security', 'Apple Secure Boot']
         },
