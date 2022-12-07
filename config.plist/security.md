@@ -2,9 +2,9 @@
 
 These settings in your config.plist can restrict which macOS versions OpenCore will boot. You will want to check these really quick before booting your USB.
 
-### Misc
+## Misc
 
-#### Security -> SecureBootModel
+### Security -> SecureBootModel
 
 OpenCore by default has [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) enabled.
 This enables security features such as the verification of macOS' `boot.efi`, with the side effect of restricting which macOS versions OpenCore will boot.
