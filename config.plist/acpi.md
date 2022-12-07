@@ -14,6 +14,7 @@ ACPI changes apply globally (to every operating system) with the following effec
 Applying the changes globally resolves the problems of incorrect operating system detection (consistent with the ACPI specification, not possible before the operating system boots), operating system chainloading, and difficult ACPI debugging. Hence, more attention may be required when writing changes to `_OSI`.
 
 Applying the patches early makes it possible to write so called “proxy” patches, where the original method is patched in the original table and is implemented in the patched table.
+
 ## Add
 
 ::: tip Info
@@ -28,7 +29,6 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 :::
 
- the following SSDT for your CPU
 ### AMD Bulldozer (15h), Jaguar (16h), Ryzen and Threadripper (17h and 19h)
 
 | Required SSDTs | Description |
