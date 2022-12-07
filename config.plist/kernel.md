@@ -1,4 +1,4 @@
-# What is OpenCore and who is this guide for
+# Kernel
 
 OpenCore is what we refer to as a "boot loader" – it is a complex piece of software that we use to prepare our systems for macOS – specifically by injecting new data for macOS such as SMBIOS, ACPI tables and kexts. How this tool differs from others like Clover is that it has been designed with security and quality in mind, allowing us to use many security features found on real Macs, such as [System Integrity Protection](https://support.apple.com/en-ca/HT204899) and [FileVault](https://support.apple.com/en-ca/HT204837). A more in-depth look can be found here: [Why OpenCore over Clover and others](why-oc.md)
 
