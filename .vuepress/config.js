@@ -136,7 +136,7 @@ module.exports = {
                     '/config.plist/kernel',
                     '/config.plist/misc',
                     '/config.plist/nvram',
-                    '/config.plist/platforminfo',
+                    '/config.plist/platform-info',
                     '/config.plist/uefi'
                 ]
             ['/config.plist/security', 'Apple Secure Boot']
