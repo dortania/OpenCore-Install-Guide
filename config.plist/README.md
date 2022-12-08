@@ -1,116 +1,45 @@
-# config.plist Setup
+# Apple Secure Boot
 
-Now that we've got all our Kexts(.kext), SSDTs(.aml) and firmware drivers(.efi), your USB should start to look something like this:
+These settings in your config.plist can restrict which macOS versions OpenCore will boot. You will want to check these really quick before booting your USB.
 
-![Populated EFI folder](../images/installer-guide/opencore-efi-md/populated-efi.png)
+## Misc
 
-* **Note**: Your USB **will look different**, everyone's system will have different requirements.
+### Security -> SecureBootModel
 
-## Creating your config.plist
+OpenCore by default has [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) enabled.
+This enables security features such as the verification of macOS' `boot.efi`, with the side effect of restricting which macOS versions OpenCore will boot.
 
-First we'll want to grab the `Sample.plist` from the [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), this will be located under the `Docs` folder:
+* Big Sur and Above (11.0+): The recommended value is `Default`.
+* High Sierra-Catalina (10.13-10.15):
+  * If your model is not listed below, set to `Disabled`.
+  * If running NVIDIA Web Drivers, set to `Disabled`.
+  * If your model is listed, compare the minimum version with the version your installing. Disable if your installer is below the minimum version listed for your SMBIOS.
+* Sierra and Below (10.4-10.12): This setting has no effect.
+* If booting multiple versions, you may need to set the value to `Disabled`.
+  * For example, a non-T2 SMBIOS booting High Sierra and Big Sur would need this disabled.
+  * A T2 SMBIOS would be limited by the minimum version listed below.
 
-![](../images/config/config-universal/sample-location.png)
+::: details T2 Mac Models
 
-Next lets move it onto our USB's EFI partition(will be called BOOT on Windows) under `EFI/OC/`, and rename it to config.plist:
+| SMBIOS                                              | Minimum macOS Version |
+| :---                                                | :---                  |
+| iMacPro1,1 (December 2017)                          | 10.13.2 (17C2111)     |
+| MacBookPro15,1 (July 2018)                          | 10.13.6 (17G2112)     |
+| MacBookPro15,2 (July 2018)                          | 10.13.6 (17G2112)     |
+| Macmini8,1 (October 2018)                           | 10.14 (18A2063)       |
+| MacBookAir8,1 (October 2018)                        | 10.14.1 (18B2084)     |
+| MacBookPro15,3 (May 2019)                           | 10.14.5 (18F132)      |
+| MacBookPro15,4 (July 2019)                          | 10.14.5 (18F2058)     |
+| MacBookAir8,2 (July 2019)                           | 10.14.5 (18F2058)     |
+| MacBookPro16,1 (November 2019)                      | 10.15.1 (19B2093)     |
+| MacPro7,1 (December 2019)                           | 10.15.1 (19B88)       |
+| MacBookAir9,1 (March 2020)                          | 10.15.3 (19D2064)     |
+| MacBookPro16,2 (May 2020)                           | 10.15.4 (19E2269)     |
+| MacBookPro16,3 (May 2020)                           | 10.15.4 (19E2265)     |
+| MacBookPro16,4 (June 2020)                          | 10.15.5 (19F96)       |
+| iMac20,1 (August 2020)                              | 10.15.6 (19G2005)     |
+| iMac20,2 (August 2020)                              | 10.15.6 (19G2005)     |
 
-![](../images/config/config-universal/renamed.png)
-
-## Adding your SSDTs, Kexts and Firmware Drivers
-
-For the rest of this guide, you're gonna need some form of plist editing. And for our guide, we'll be using ProperTree and GenSMBIOS to help automate some of the tedious work:
-
-* [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
-* [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
-
-Next, let's open ProperTree and edit our config.plist:
-
-* `ProperTree.command`
-  * For macOS
-  * Pro tip: there's a `buildapp.command` utility in the `Scripts` folder that lets you turn ProperTree into a dedicated app in macOS
-* `ProperTree.bat`
-  * For Windows
-
-Once ProperTree is running, open your config.plist by pressing **Cmd/Ctrl + O** and selecting the `config.plist` file on your USB.
-
-After the config is opened, press **Cmd/Ctrl + Shift + R** and point it at your EFI/OC folder to perform a "Clean Snapshot":
-
-* This will remove all the entries from the config.plist and then adds all your SSDTs, Kexts and Firmware drivers to the config
-* **Cmd/Ctrl + R** is another option that will add all your files as well but will leave entries disabled if they were set like that before, useful for when you're troubleshooting but for us not needed right now
-
-![](../images/config/config-universal/before-snapshot.png)
-
-Once done, you'll see your SSDTs, Kexts and firmware drivers populated in the config.plist:
-
-![](../images/config/config-universal/after-snapshot.png)
-
-* **Note:** If you get a pop up "Disable the following kexts with Duplicate CFBundleIdentifiers?", press "Yes". This is to ensure you don't have duplicate kexts being injected, as some kexts may have some of the same plugins(ie. VoodooInput is in both VoodooPS2 and VoodooI2C's plugin folder)
-
-![](../images/config/config-universal/duplicate.png)
-
-If you wish to clean up the file a bit, you can remove the `#WARNING` entries. Though they cause no issues staying there, so up to personal preference.
-
-::: danger
-The config.plist **must** match the contents of the EFI folder. If you delete a file but leave it listed in the Config.plist, OpenCore will error and stop booting.
-
-If you make any modifications, you can use the OC snapshot tool (**Cmd/Ctrl + R**) in ProperTree to update the config.plist.
 :::
 
-## Selecting your platform
-
-Now comes the important part, selecting the configuration path. Each platform has their own unique quirks that you need to account for so knowing your hardware is super important. See below for what to follow:
-
-### Intel Desktop
-
-* Note: Intel's NUC series are considered mobile hardware, for these situations we recommend following the [Intel Laptop Section](#intel-laptop)
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Yonah, Conroe and Penryn](../config.plist/penryn.md) | E8XXX, Q9XXX, [etc 1](https://en.wikipedia.org/wiki/Yonah_(microprocessor)), [etc 2](https://en.wikipedia.org/wiki/Penryn_(microarchitecture)) | 2006-2009 era |
-| [Lynnfield and Clarkdale](../config.plist/clarkdale.md) | 5XX-8XX | 2010 era |
-| [Sandy Bridge](../config.plist/sandy-bridge.md) | 2XXX | 2011 era |
-| [Ivy Bridge](../config.plist/ivy-bridge.md) | 3XXX | 2012 era |
-| [Haswell](../config.plist/haswell.md) | 4XXX | 2013-2014 era |
-| [Skylake](../config.plist/skylake.md) | 6XXX | 2015-2016 era |
-| [Kaby Lake](../config.plist/kaby-lake.md) | 7XXX | 2017 era |
-| [Coffee Lake](../config.plist/coffee-lake.md) | 8XXX-9XXX | 2017-2019 era |
-| [Comet Lake](../config.plist/comet-lake.md) | 10XXX | 2020 era |
-
-### Intel Laptop
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Clarksfield and Arrandale](../config-laptop.plist/arrandale.md) | 3XX-9XX | 2010 era |
-| [Sandy Bridge](../config-laptop.plist/sandy-bridge.md) | 2XXX | 2011 era |
-| [Ivy Bridge](../config-laptop.plist/ivy-bridge.md) | 3XXX | 2012 era |
-| [Haswell](../config-laptop.plist/haswell.md) | 4XXX | 2013-2014 era |
-| [Broadwell](../config-laptop.plist/broadwell.md) | 5XXX | 2014-2015 era |
-| [Skylake](../config-laptop.plist/skylake.md) | 6XXX | 2015-2016 era |
-| [Kaby Lake and Amber Lake](../config-laptop.plist/kaby-lake.md) | 7XXX | 2017 era |
-| [Coffee Lake and Whiskey Lake](../config-laptop.plist/coffee-lake.md) | 8XXX | 2017-2018 era |
-| [Coffee Lake Plus and Comet Lake](../config-laptop.plist/coffee-lake-plus.md) | 9XXX-10XXX | 2019-2020 era |
-| [Ice Lake](../config-laptop.plist/icelake.md) | 10XXX | 2019-2020 era |
-
-### Intel HEDT
-
-This section includes both enthusiast and server based hardware.
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Nehalem and Westmere](../config-HEDT/nehalem.md) | 9XX, X3XXX, X5XXX, [etc 1](https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)), [2](https://en.wikipedia.org/wiki/Westmere_(microarchitecture)) | 2008-2010 era |
-| [Sandy/Ivy Bridge-E](../config-HEDT/ivy-bridge-e.md) | 3XXX, 4XXX | 2011-2013 era |
-| [Haswell-E](../config-HEDT/haswell-e.md) | 5XXX | 2014 era |
-| [Broadwell-E](../config-HEDT/broadwell-e.md) | 6XXX | 2016 era |
-| [Skylake/Cascade Lake-X/W](../config-HEDT/skylake-x.md) | 7XXX, 9XXX, 10XXX | 2017-2019 era |
-
-### AMD
-
-| Code Name | Series | Release |
-| :--- | :--- | :--- |
-| [Bulldozer/Jaguar](../AMD/fx.md) | [It's weird](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) | [AMD was really bad with naming back then](https://en.wikipedia.org/wiki/List_of_AMD_processors#Bulldozer_architecture;_Bulldozer,_Piledriver,_Steamroller,_Excavator_(2011%E2%80%932017)) |
-| [Zen](../AMD/zen.md) | 1XXX, 2XXX, 3XXX, 5XXX | 2017-2020 era |
-
-* Note: ~~Threadripper 3rd gen(39XX) are not supported, 1st and 2nd gen however are supported~~
-  * Latest BIOS and OpenCore version has resolved this issue, all Threadripper platforms are now supported
+# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
