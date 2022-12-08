@@ -259,7 +259,22 @@ This blocks certain ACPI tables from loading, for us we can ignore this.
 
 # Patch
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
+This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore.
+
+::: tip Info
+
+* OSI rename
+  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT, **this is not needed if you're using `SSDT-GPIO`**
+
+| Comment | String | Change _OSI to XOSI |
+| :--- | :--- | :--- |
+| Enabled | Boolean | YES |
+| Count | Number | 0 |
+| Limit | Number | 0 |
+| Find | Data | `5f4f5349` |
+| Replace | Data | `584f5349` |
+
+:::
 
 # Quirks
 
