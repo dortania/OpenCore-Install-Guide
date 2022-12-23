@@ -13,6 +13,7 @@ macOS Ventura drops support for pre-Haswell CPUs. Much of userspace now requires
 Apple has left a dyld cache that does not use AVX2 instructions in Ventura to support Rosetta on Apple Silicon machines, but this cache is not installed by default. You can use [CryptexFixup](https://github.com/acidanthera/CryptexFixup) to force this dyld cache to be installed, but:
 
 * Apple may remove this cache at any time in the future if they add AVX2 support to Rosetta
+* Delta updates (small 1-3GB updates) will no longer be available and you must install the full update (12GB), as delta updates only contain the non-AVX2 cache on Apple Silicon machines
 * Polaris GPUs remain unsupported on machines without AVX2
 
 Because of these caveats, Dortania will no longer be supporting pre-Haswell CPUs for Ventura and above. The pages for these CPUs will remain updated for Monterey.
