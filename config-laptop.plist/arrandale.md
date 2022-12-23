@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.6.3, Snow Leopard |
+| Last Supported OS | [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
 | Note 1 | Arrandale's iGPU is only officially supported up-to macOS 10.13 |
 | Note 2 | Most Clarksfield and Arrandale boards do not support UEFI |
 

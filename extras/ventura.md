@@ -6,6 +6,17 @@
 
 ## Prerequisites
 
+### Dropped CPU Support
+
+macOS Ventura drops support for pre-Haswell CPUs. Much of userspace now requires AVX2 support, along with AMD Polaris GPU drivers and some instances of AVX2 instructions in some kexts. Although the kexts can be [patched](https://forums.macrumors.com/threads/monterand-probably-the-start-of-an-ongoing-saga.2320479/post-31125212) or [downgraded](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/92ff4244ae78de715977d9f8d054cdf9bdce4011/payloads/Kexts/Misc/NoAVXFSCompressionTypeZlib-AVXpel-v12.6.zip), the Polaris GPU drivers and most of userspace rely on AVX2 too much to be able to be patched.
+
+Apple has left a dyld cache that does not use AVX2 instructions in Ventura to support Rosetta on Apple Silicon machines, but this cache is not installed by default. You can use [CryptexFixup](https://github.com/acidanthera/CryptexFixup) to force this dyld cache to be installed, but:
+
+* Apple may remove this cache at any time in the future if they add AVX2 support to Rosetta
+* Polaris GPUs remain unsupported on machines without AVX2
+
+Because of these caveats, Dortania will no longer be supporting pre-Haswell CPUs for Ventura and above. The pages for these CPUs will remain updated for Monterey.
+
 ### Supported SMBIOS
 
 SMBIOS dropped in Ventura:
