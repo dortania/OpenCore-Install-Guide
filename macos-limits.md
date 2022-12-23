@@ -216,14 +216,20 @@ And an important note for **Laptops with discrete GPUs**:
 
 ## Motherboard Support
 
-For the most part, all motherboards are supported as long as the CPU is. ~~The exception is MSI 500-series AMD motherboards (A520, B550, and X570). These motherboards have issues with macOS Monterey and above:~~
+For the most part, all motherboards are supported as long as the CPU is.
 
-~~* PCIe devices are not always enumerated properly~~
-~~* The BIOS update for Zen 3 support breaks boot~~
+::: details MSI 500-series AMD motherboards note
+
+~~The exception is MSI 500-series AMD motherboards (A520, B550, and X570). These motherboards have issues with macOS Monterey and above:~~
+
+* ~~PCIe devices are not always enumerated properly~~
+* ~~The BIOS update for Zen 3 support breaks boot~~
 
 ~~macOS Big Sur or earlier is recommended for these motherboards.~~
 
 Thanks to CaseySJ, this has been fixed in the latest version of the AMD vanilla patches!
+
+:::
 
 ## Storage Support
 

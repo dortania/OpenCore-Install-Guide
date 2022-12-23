@@ -44,16 +44,11 @@ If your SMBIOS was supported in Monterey and is not included above, you're good 
 
 :::
 
-
-
 For those on architectures no longer supported by Ventura:
 
 * All desktops with dGPUs should use iMac18,2, MacPro7,1 or iMacPro1,1. Unsupported GPUs still require OCLP, while supported GPUs do not.
 * All desktops with unsupported iGPUs should use iMac18,1.
-* All unsupported laptops (Ivy Bridge, Haswell, Broadwell, Skylake) should use MacBookPro14,1.
-* Ivy Bridge desktops and laptops can no longer install Ventura without swapping cryptex files with ones used by Rosetta 2, as the hardware lacks AVX2. This includes Ivy Bridge-EPs found in the MacPro6,1.
-
-
+* All unsupported laptops (Haswell, Broadwell, Skylake) should use MacBookPro14,1.
 
 ### Supported hardware
 
@@ -66,13 +61,10 @@ Dropped GPU Hardware:
   * Change your `device-id` and `AAPL,ig-platform-id` to the most similar Kaby Lake model
   * If using the same EFI to boot Monterey and below, add `-igfxsklaskbl` to your boot args
 
-
-
 * You can use [OpenCore-Legacy-Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/) to add back support
   * No support is provided for Hackintoshes using OCLP!
   * You will lose access to non-full updates (Small 1-3GB updates)
   * Requires SIP, Apple Secure Boot, and AMFI disabled.
-
 
 ### AMD Patches
 
