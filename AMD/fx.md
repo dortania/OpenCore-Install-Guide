@@ -3,7 +3,8 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | macOS 10.13, High Sierra |
-| Last Supported OS | [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
+| Last Supported OS | macOS 12 Monterey |
+| Note | For Ventura information, see [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
 
 ## Starting Point
 
