@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.8, Mountain Lion |
+| Note 1 | Haswell iGPUs are only supported up-to macOS 12 |
 
 ## Starting Point
 
