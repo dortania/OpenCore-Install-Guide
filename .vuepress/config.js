@@ -116,7 +116,7 @@ module.exports = {
                 sidebarDepth: 1,
                 children: [
                     '/installer-guide/mac-install',
-                    '/installer-guide/winblows-install',
+                    '/installer-guide/windows-install',
                     '/installer-guide/linux-install',
                 ],
             },
