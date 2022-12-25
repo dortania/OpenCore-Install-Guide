@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.11, El Capitan |
+| Note | Skylake's iGPU is only officially supported up to macOS 12 |
 
 ## Starting Point
 
