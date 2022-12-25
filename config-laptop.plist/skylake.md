@@ -145,6 +145,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | **`02002619`** | NUC | Recommended for HD 540/550 |
 | **`05003B19`** | NUC | Recommended for HD 580 |
 
+**Note**: If booting macOS Ventura, you need to [spoof your iGPU](../extras/ventura.md#supported-hardware) as the closest Kaby Lake model.
+
 #### Configuration Notes
 
 * For HD 510 you will need to use a device-id spoof:
