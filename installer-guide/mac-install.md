@@ -75,8 +75,9 @@ From here, jump to [Setting up the installer](#setting-up-the-installer) to fini
 
 Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
 
-* Note: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
-* Note 2: Users following "Legacy macOS: Online Method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+* Note: The `EFI` partition created by deleting the volume is hidden until you mount it. For the tool to mount it, see [Setting up OpenCore's EFI environment](#setting-up-opencores-efi-environment)
+* Note 2: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
+* Note 3: Users following "Legacy macOS: Online Method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencores-efi-environment)
 
 ![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
 
