@@ -116,7 +116,7 @@ module.exports = {
                 sidebarDepth: 1,
                 children: [
                     '/installer-guide/mac-install',
-                    '/installer-guide/winblows-install',
+                    '/installer-guide/windows-install',
                     '/installer-guide/linux-install',
                 ],
             },
@@ -280,7 +280,7 @@ module.exports = {
             children: [
                 '/extras/kaslr-fix',
                 '/extras/spoof',
-                '/extras/monterey',
+                '/extras/ventura',
                 ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
                 '/extras/smbios-support.md',
             ]
