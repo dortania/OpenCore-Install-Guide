@@ -241,7 +241,7 @@ SIP or more properly known as System Integrity Protection, is a security technol
 * <span style="color:red">WARNING:</span> Disabling SIP can break OS functionality such as software updates in macOS 11, Big Sur and newer. Please be careful to only disable specific SIP values instead of disabling SIP outright to avoid these issues.
   * Enabling `CSR_ALLOW_UNAUTHENTICATED_ROOT` and `CSR_ALLOW_APPLE_INTERNAL` are common options that can break OS updates for users
 
-You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [CsrDecode](https://github.com/corpnewt/CsrDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you, and note that they go under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
+You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [BitmaskDecode](https://github.com/corpnewt/BitmaskDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you, and note that they go under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
 
 * `00000000` - SIP completely enabled (0x0).
 * `03000000` - Disable kext signing (0x1) and filesystem protections (0x2).
