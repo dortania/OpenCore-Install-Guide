@@ -296,9 +296,10 @@ module.exports = {
         ],
     },
     plugins: [
-        '@vuepress/plugin-back-to-top',
+        '@vuepress/back-to-top',
         'vuepress-plugin-smooth-scroll',
-        ['vuepress-plugin-medium-zoom',
+		'vuepress-plugin-fulltext-search',
+        ['@vuepress/medium-zoom',
             {
                 selector: "img",
                 options: {
