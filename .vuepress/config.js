@@ -298,10 +298,10 @@ module.exports = {
     plugins: [
         '@vuepress/back-to-top',
         'vuepress-plugin-smooth-scroll',
-		'vuepress-plugin-fulltext-search',
+        'vuepress-plugin-fulltext-search',
         ['@vuepress/medium-zoom',
             {
-                selector: "img",
+                selector: ".theme-succinct-content :not(a) > img",
                 options: {
                     background: 'var(--bodyBgColor)'
                 }
