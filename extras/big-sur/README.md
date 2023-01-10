@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # OpenCore and macOS 11: Big Sur
 
 It's that time of year again and with it, and a new macOS beta has been dropped. Here's all the info you need to get started.
@@ -148,7 +152,7 @@ And while not an issue, SIP has now gained a new bit so to properly disable SIP 
 Guides have been updated to accommodate Big Sur, see the applicable OS environment for you:
 
 * [macOS users](../../installer-guide/mac-install.md)
-* [Windows users](../../installer-guide/winblows-install.md)
+* [Windows users](../../installer-guide/windows-install.md)
 * [Linux users](../../installer-guide/linux-install.md)
 
 ## Troubleshooting

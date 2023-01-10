@@ -1,1 +1,5 @@
+---
+search: false
+---
+
 # Soon™

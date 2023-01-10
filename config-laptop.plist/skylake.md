@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.11, El Capitan |
+| Note | Skylake's iGPU is only officially supported up to macOS 12 |
 
 ## Starting Point
 
@@ -144,6 +145,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | **`02001619`** | NUC | Recommended for HD 520/530 |
 | **`02002619`** | NUC | Recommended for HD 540/550 |
 | **`05003B19`** | NUC | Recommended for HD 580 |
+
+**Note**: If booting macOS Ventura, you need to [spoof your iGPU](../extras/ventura.md#supported-hardware) as the closest Kaby Lake model.
 
 #### Configuration Notes
 
@@ -559,6 +562,8 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 | MacBookPro13,2 | Dual Core 15W(High End) | iGPU: Iris 550 | 13" | Yes |
 | MacBookPro13,3 | Quad Core 45W | iGPU: HD 530 + dGPU: Radeon Pro 450/455 | 15" | Yes |
 | iMac17,1 | NUC Systems | iGPU: HD 530 + R9 290 |  N/A | No |
+
+**Note 2**: All of these SMBIOSes were dropped in macOS Ventura. If running macOS Ventura, [use a Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # Clover Boot Arg Conversion
 
 This section is mainly used for explaining what boot-args are no longer relevant, it's quite common for users to be still carrying legacy args which have little to no real affect in newer versions of macOS or have little use in OpenCore

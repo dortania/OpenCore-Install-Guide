@@ -113,6 +113,8 @@ The config.plist doesn't already have a section for this so you will have to cre
 | **`00001219`** | Used when the Desktop iGPU is used to drive a display |
 | **`01001219`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
 
+**Note**: If booting macOS Ventura, you need to [spoof your iGPU](../extras/ventura.md#supported-hardware) as the closest Kaby Lake model.
+
 We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`. The first enables patching via WhateverGreen.kext, the second sets the min stolen memory to 19MB and third sets the framebuffer memory to 9MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
 * **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`
@@ -534,6 +536,8 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
 For this Skylake example, we'll choose the iMac17,1 SMBIOS.
+
+**Note 2**: iMac17,1 was dropped in macOS Ventura. If running macOS Ventura, [use a Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

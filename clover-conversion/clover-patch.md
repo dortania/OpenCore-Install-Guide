@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # Converting common Kernel and Kext patches
 
 ## Manually converting a patch
