@@ -61,7 +61,6 @@ module.exports = {
         logo: '/homepage.png',
         nav: [{
             text: 'Dortania Guides',
-            ariaLabel: 'Language Menu',
             items: [{
                 text: 'Home Site',
                 link: 'https://dortania.github.io/'
