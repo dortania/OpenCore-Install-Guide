@@ -7,39 +7,6 @@ on:
   pull_request:
 
 jobs:
-  build:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        # with:
-        #   persist-credentials: false
-      - name: Install
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.4.0
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
-        with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          folder: .vuepress/dist/
-          clean: true
-
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Install
-        run: npm ci
-      - name: Lint
-        run: npm run lint-ci
+  build-lint:
+    uses: dortania/shared-tooling/.github/workflows/build-guide.yml@main
+    secrets: inherit
