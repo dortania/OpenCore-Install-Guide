@@ -10,17 +10,17 @@ meta:
   content: Current supported version 0.8.8
 ---
 
-# What is OpenCore and who is this guide for
+# OpenCore是什么?这个指南是为谁准备的
 
-OpenCore is what we refer to as a "boot loader" – it is a complex piece of software that we use to prepare our systems for macOS – specifically by injecting new data for macOS such as SMBIOS, ACPI tables and kexts. How this tool differs from others like Clover is that it has been designed with security and quality in mind, allowing us to use many security features found on real Macs, such as [System Integrity Protection](https://support.apple.com/en-ca/HT204899) and [FileVault](https://support.apple.com/en-ca/HT204837). A more in-depth look can be found here: [Why OpenCore over Clover and others](why-oc.md)
+OpenCore是我们所说的“引导加载程序”——它是一个复杂的软件，我们用它来为macOS准备系统——特别是通过为macOS注入新数据，如SMBIOS、ACPI表和kext。 这个工具与其他工具(如Clover)的不同之处在于，它在设计时考虑了安全性和质量，允许我们使用在真实mac上发现的许多安全功能，如 [系统完整性保护](https://support.apple.com/en-ca/HT204899) 和 [FileVault](https://support.apple.com/en-ca/HT204837).可以在这里找到更深入的了解:[为什么OpenCore优于Clover和其他](why-oc.md)
 
-This guide specifically focuses on two main things:
+本指南主要关注以下两点:
 
-* Installing macOS on an X86-based PC
-* Teaching you what makes your Hack work
+* 在x86电脑上安装macOS
+* 教你如何让你的Hack工作
 
-Because of this, you will be expected to read, learn and even use Google. This is not a simple one-click install setup.
+因此，您需要阅读、学习甚至使用谷歌。这不是一个简单的一键安装
 
-Please remember that OpenCore is still new and currently in beta. While quite stable, and arguably much more stable than Clover in pretty much every way, it is still being frequently updated, so chunks of configuration change quite often (i.e. new quirks replacing old ones).
+请记住，OpenCore仍然是新产品，目前处于测试阶段。虽然它相当稳定，而且可以说在各个方面都比Clover稳定得多，但它仍然经常更新，所以配置块经常改变(即新特性取代旧特性)。
 
-Lastly, those having issues can visit both the [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) and [r/Hackintosh Discord](https://discord.gg/u8V7N5C) for more help.
+最后，那些有问题的人可以访问 [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) 和 [r/Hackintosh Discord](https://discord.gg/u8V7N5C) 以获得更多帮助。
