@@ -55,39 +55,39 @@ module.exports = {
 
     themeConfig: {
         lastUpdated: true,
-        repo: 'https://github.com/dortania/OpenCore-Install-Guide',
+        repo: 'https://github.com/sumingyd/OpenCore-Install-Guide',
         editLinks: true,
         editLinkText: 'Help us improve this page!',
         logo: '/homepage.png',
         nav: [{
-            text: 'Dortania Guides',
+            text: 'sumingyd Guides',
             items: [{
                 text: 'Home Site',
-                link: 'https://dortania.github.io/'
+                link: 'https://sumingyd.github.io/'
             },
             {
                 text: 'Getting Started With ACPI',
-                link: 'https://dortania.github.io/Getting-Started-With-ACPI/'
+                link: 'https://sumingyd.github.io/Getting-Started-With-ACPI/'
             },
             {
                 text: 'OpenCore Post-Install',
-                link: 'https://dortania.github.io/OpenCore-Post-Install/'
+                link: 'https://sumingyd.github.io/OpenCore-Post-Install/'
             },
             {
                 text: 'OpenCore Multiboot',
-                link: 'https://dortania.github.io/OpenCore-Multiboot/'
+                link: 'https://sumingyd.github.io/OpenCore-Multiboot/'
             },
             {
                 text: 'GPU Buyers Guide',
-                link: 'https://dortania.github.io/GPU-Buyers-Guide/'
+                link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
             },
             {
                 text: 'Wireless Buyers Guide',
-                link: 'https://dortania.github.io/Wireless-Buyers-Guide/'
+                link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
             },
             {
                 text: 'Anti Buyers Guide',
-                link: 'https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/'
+                link: 'https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/'
             },
             ]
         },
@@ -121,7 +121,7 @@ module.exports = {
             },
                 '/installer-guide/opencore-efi',
                 'ktext',
-            ['https://dortania.github.io/Getting-Started-With-ACPI/', 'Getting started with ACPI'],
+            ['https://sumingyd.github.io/Getting-Started-With-ACPI/', 'Getting started with ACPI'],
                 '/config.plist/',
             ]
         },
@@ -219,28 +219,28 @@ module.exports = {
             title: 'Post Install',
             collapsable: false,
             children: [
-                ['https://dortania.github.io/OpenCore-Post-Install/', 'Post-Install'],
+                ['https://sumingyd.github.io/OpenCore-Post-Install/', 'Post-Install'],
                 {
                     title: 'Universal',
                     collapsable: true,
                     sidebarDepth: 1,
                     children: [
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/security', 'Security and FileVault'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/audio', 'Fixing Audio'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/oc2hdd', 'Booting without USB'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/update', 'Updating OpenCore, kexts and macOS'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/drm', 'Fixing DRM'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/iservices', 'Fixing iServices'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/pm', 'Fixing Power Management'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/universal/sleep', 'Fixing Sleep'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/usb/', 'Fixing USB'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/security', 'Security and FileVault'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/audio', 'Fixing Audio'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/oc2hdd', 'Booting without USB'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/update', 'Updating OpenCore, kexts and macOS'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/drm', 'Fixing DRM'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices', 'Fixing iServices'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/pm', 'Fixing Power Management'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/universal/sleep', 'Fixing Sleep'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/usb/', 'Fixing USB'],
                     ]
                 },
                 {
                     title: 'Laptop Specifics',
                     collapsable: true,
                     children: [
-                        ['https://dortania.github.io/OpenCore-Post-Install/laptop-specific/battery', 'Fixing Battery Read-outs'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/laptop-specific/battery', 'Fixing Battery Read-outs'],
 
                     ]
                 },
@@ -248,26 +248,26 @@ module.exports = {
                     title: 'Cosmetics',
                     collapsable: true,
                     children: [
-                        ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose', 'Fixing Resolution and Verbose'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui', 'Add GUI and Boot-chime'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/verbose', 'Fixing Resolution and Verbose'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/gui', 'Add GUI and Boot-chime'],
                     ]
                 },
                 {
                     title: 'Multiboot',
                     collapsable: true,
                     children: [
-                        ['https://dortania.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up LauncherOption'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
+                        ['https://sumingyd.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up LauncherOption'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
                     ]
                 },
                 {
                     title: 'Miscellaneous',
                     collapsable: true,
                     children: [
-                        ['https://dortania.github.io/OpenCore-Post-Install/misc/rtc', 'Fixing RTC'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock', 'Fixing CFG Lock'],
-                        ['https://dortania.github.io/OpenCore-Post-Install/misc/nvram', 'Emulated NVRAM'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc', 'Fixing RTC'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/misc/msr-lock', 'Fixing CFG Lock'],
+                        ['https://sumingyd.github.io/OpenCore-Post-Install/misc/nvram', 'Emulated NVRAM'],
                     ]
                 },
             ]
@@ -280,7 +280,7 @@ module.exports = {
                 '/extras/kaslr-fix',
                 '/extras/spoof',
                 '/extras/ventura',
-                ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
+                ['https://github.com/sumingyd/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
                 '/extras/smbios-support.md',
             ]
         },
