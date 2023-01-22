@@ -320,7 +320,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Allows Lilu and others to have more reliable performance without `keepsyms=1`
 * **DisableRtcChecksum**: NO
   * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
-* **ExtendBTFeatureFlags** NO
+* **ExtendBTFeatureFlags**: NO
   * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
 * **LapicKernelPanic**: NO
   * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
