@@ -34,7 +34,7 @@
 
 **欲了解更多深入信息，请参阅这里: [反硬件买家指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
-:::  详细的CPU要求
+:::details  详细的CPU要求
 
 架构需求
 
@@ -81,7 +81,7 @@ SSE要求:
 
 :::
 
-::: 详细的英特尔CPU支持图表
+:::details 详细的英特尔CPU支持图表
 
 基于普通内核的支持(即没有修改):
 
@@ -110,7 +110,7 @@ SSE要求:
 
 :::
 
-::: 详细说明macOS中AMD CPU的限制
+:::details 详细说明macOS中AMD CPU的限制
 
 不幸的是，AMD完全不支持macOS中的许多功能，还有许多功能是部分损坏的。这些包括:
 
@@ -157,7 +157,7 @@ SSE要求:
 
 **For a full list of supported GPUs, see the [GPU Buyers Guide](https://sumingyd.github.io/GPU-Buyers-Guide/)**
 
-::: 详细说明Intel GPU支持图表
+:::details 详细说明Intel GPU支持图表
 
 | GPU Generation | 初始版本 | 最后支持版本 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -178,7 +178,7 @@ SSE要求:
 
 :::
 
-::: 详细的AMD GPU支持图表
+:::details 详细的AMD GPU支持图表
 
 | GPU Generation | 初始支持 | 最后支持版本 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -196,7 +196,7 @@ SSE要求:
 
 :::
 
-::: 详细的NVIDIA GPU支持图表
+:::details 详细的NVIDIA GPU支持图表
 
 | GPU Generation | 初始支持 | 最后支持版本 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -218,7 +218,7 @@ SSE要求:
 
 在大多数情况下，只要CPU支持，所有主板都支持。
 
-::: MSI AMD 500 -系列主板注意细节
+:::details MSI AMD 500 -系列主板注意细节
 
 ~~MSI 500系列AMD主板(A520, B550和X570)是个例外。这些主板与macOS Monterey和以上有问题:~~
 
