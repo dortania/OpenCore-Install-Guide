@@ -1,39 +1,39 @@
-# Why OpenCore over Clover and others
+# 为什么OpenCore超过Clover和其他公司
 
-This section contains a brief rundown as to why the community has been transitioning over to OpenCore, and aims to dispel a few common myths in the community. Those who just want a macOS machine can skip this page.
+本节简要介绍了为什么社区已经过渡到OpenCore，并旨在消除社区中常见的一些误解。那些只是想要一台macOS机器的人可以跳过这一页。
 
 [[toc]]
 
-## OpenCore features
+## OpenCore特性
 
-* More OS Support!
-  * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 13, Ventura!
-* On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
-* Better overall stability as patches can be much more precise:
-  * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
-  * AMD OSX patches not needing to update with every minor security update
-* Better overall security in many forms:
-  * No need to disable System Integrity Protection (SIP)
-  * Built-in FileVault 2 support
-  * [Vaulting](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault) allowing to create EFI snapshots preventing unwanted modifications
-  * True secure-boot support
-    * Both UEFI and Apple's variant
-* BootCamp switching and boot device selection are supported by reading NVRAM variables set by Startup Disk, just like a real Mac.
-* Supports boot hotkey via `boot.efi` - hold `Option` or `ESC` at startup to choose a boot device, `Cmd+R` to enter Recovery or `Cmd+Opt+P+R` to reset NVRAM.
+* 更多的操作系统支持!
+  * OpenCore现在支持更多版本的OS X和macOS，而无需Clover和Chameleon必须实现的痛苦hack
+  * 这包括早在10.4、Tiger的操作系统，甚至是13的最新版本Ventura!
+* 平均而言，OpenCore系统的启动速度比使用Clover的系统要快，因为不必要的补丁要少
+* 更好的整体稳定性，补丁可以更精确:
+  * [macOS 10.15.4 更新](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
+  * AMD OSX补丁不需要在每个小的安全更新中更新
+* 以多种形式提高整体安全性:
+  * 不需要禁用系统完整性保护(SIP)
+  * 内置FileVault 2支持
+  * [Vaulting](https://dortania.github.io/OpenCore-Post-Install/universal/security.html#Vault) 允许创建EFI快照防止不必要的修改
+  * 真正的安全引导支持
+    * 包括UEFI和苹果的变种
+* BootCamp切换和启动设备选择通过读取启动盘设置的NVRAM变量来支持，就像真正的Mac一样。
+* 通过引导支持引导热键。efi - hold启动时选择启动设备的选项或ESC, Cmd+R进入恢复或Cmd+Opt+P+R复位NVRAM。
 
-### Software Support
+### 软件支持
 
-The biggest reason someone may want to switch from other boot loaders is actually software support:
+一些人想要从其他引导加载程序转换的最大原因实际上是软件支持:
 
-* Kexts no longer testing for Clover:
-  * Got a bug with a kext? Many developers including the organization [Acidanthera](https://github.com/acidanthera) (maker of most of your favorite kexts) won't provide support unless on OpenCore
-* Many firmware drivers being merged into OpenCore:
-  * [APFS Support](https://github.com/acidanthera/AppleSupportPkg)
-  * [FileVault support](https://github.com/acidanthera/AppleSupportPkg)
-  * [Firmware patches](https://github.com/acidanthera/AptioFixPkg)
+* Kexts不再测试Clover:
+  * kext出问题了? 许多开发人员，包括 [Acidanthera](https://github.com/acidanthera) (您最喜欢的大多数kext的制造商) 除非在OpenCore上，否则不会提供支持
+* 许多固件驱动程序被合并到OpenCore:
+  * [APFS 支持](https://github.com/acidanthera/AppleSupportPkg)
+  * [FileVault 支持](https://github.com/acidanthera/AppleSupportPkg)
+  * [Firmware 补丁](https://github.com/acidanthera/AptioFixPkg)
 
-## OpenCore's shortcomings
+## OpenCore的缺点
 
 The majority of Clover's functionality is actually supported in OpenCore in the form of some quirk, however when transitioning you should pay close attention to OpenCore's missing features as this may or may not affect yourself:
 
