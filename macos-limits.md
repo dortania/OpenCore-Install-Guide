@@ -1,91 +1,91 @@
-# Hardware Limitations
+# 硬件限制
 
-With macOS, there are numerous hardware limitations you need to be aware of before stepping foot into an installation. This is due to the limited amount of hardware Apple supports, so we're either limited by Apple or what patches the community has created.
+在开始安装macOS之前，有许多硬件限制需要您了解。这是因为苹果支持的硬件数量有限，所以我们要么受到苹果的限制，要么受到社区创建的补丁的限制。
 
-The main hardware sections to verify are:
+需要验证的主要硬件部分有:
 
 [[toc]]
 
-And for more detailed guides on the subject, see here:
+有关这个主题的更多详细指南，请参阅:
 
-* [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)
-  * Check if your GPU is supported and which macOS version you can run.
-* [Wireless Buyers Guide](https://dortania.github.io/Wireless-Buyers-Guide/)
-  * Check if your WiFi card is supported.
-* [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)
-  * Overall guide on what to avoid and what pitfalls your hardware may hit.
+* [GPU 购买指南](https://sumingyd.github.io/GPU-Buyers-Guide/)
+  * 检查您的GPU是否得到支持，以及您可以运行哪个macOS版本。
+* [无线购买指南](https://sumingyd.github.io/Wireless-Buyers-Guide/)
+  * 检查是否支持你的WiFi卡。
+* [反硬件购买指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)
+  * 关于应该避免什么以及你的硬件可能会遇到什么陷阱的总体指南。
 
-## CPU Support
+## CPU 支持
 
-For CPU support, we have the following breakdown:
+对于CPU支持，我们有以下细分:
 
-* Both 32 and 64-bit CPUs are supported
-  * This however requires the OS to support your architecture, see CPU Requirements section below
-* Intel's Desktop CPUs are supported.
-  * Yonah through Comet Lake are supported by this guide.
-* Intel's High-End Desktops and Server CPUs.
-  * Nehalem through Cascade Lake X are supported by this guide.
-* Intel's Core "i" and Xeon series laptop CPUs
-  * Arrandale through Ice Lake are supported by this guide.
-  * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
-* AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
-  * Laptop CPUs are **not** supported
-  * Note not all features of macOS are supported with AMD, see below
+* 32和64位cpu都支持
+  * 但这需要操作系统支持你的架构，请参阅下面的CPU要求部分
+* 支持英特尔的桌面cpu。
+  * Yonah 到 Comet Lake 得到了本指南的支持。
+* 英特尔高端台式机和服务器的cpu
+  * Nehalem到Cascade Lake X得到了本指南的支持。
+* 英特尔酷睿“i”和至强系列笔记本电脑cpu
+  * Arrandale 到 Ice Lake 得到了本指南的支持。
+  * 请注意，不支持Mobile Atoms、赛扬和奔腾cpu
+* AMD的桌面推土机(15h)、捷豹(16h)和Ryzen (17h) cpu
+  * 笔记本电脑cpu **不**支持
+  * 注意，AMD并不支持macOS的所有功能，请参见下文
 
-**For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
+**欲了解更多深入信息，请参阅这里: [反硬件买家指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
-::: details CPU Requirements
+::: 详细的CPU要求
 
-Architecture Requirements
+架构需求
 
-* 32-bit CPUs are supported from 10.4.1 to 10.6.8
-  * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs to 10.6
-* 64-bit CPUs are supported from 10.4.1 to current
+* 32位cpu支持10.4.1至10.6.8
+  * 注意10.7.x需要64位用户空间，将32位cpu限制为10.6
+* 从10.4.1到当前支持64位cpu
 
-SSE Requirements:
+SSE要求:
 
-* SSE3 is required for all Intel versions of OS X/macOS
-* SSSE3 is required for all 64-bit versions of OS X/macOS
-  * For CPUs missing SSSE3 (i.e. certain 64-bit Pentiums), we recommend running 32-bit userspace (`i386-user32`)
-* SSE4 is required for macOS 10.12 and newer
-* SSE4.2 is required for macOS 10.14 and newer
-  * SSE4.1 CPUs are supported with [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/post-28447707)
-  * Newer AMD drivers also require SSE4.2 for Metal support. To resolve this, see here: [MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
+* 所有Intel版本的OS X/macOS都需要SSE3
+* 所有64位版本的OS X/macOS都需要SSSE3
+  * F对于缺少SSSE3的cpu(例如某些64位奔腾)，我们建议运行32位用户空间 (`i386-user32`)
+* macOS 10.12及更新版本需要SSE4
+* macOS 10.14和更新版本需要SSE4.2
+  * SSE4.1 cpu支持 [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/post-28447707)
+  * 较新的AMD驱动程序也需要SSE4.2的金属支持。要解决这个问题，请参阅这里:[MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
 
-Firmware Requirements:
+固件要求:
 
-* OS X 10.4.1 through 10.4.7 require EFI32 (i.e. IA32 (32-bit) version of OpenCore)
-  * OS X 10.4.8 through 10.7.5 support both EFI32 and EFI64
-* OS X 10.8 and newer require EFI64 (i.e. x64 (64-bit) version of OpenCore)
-* OS X 10.7 through 10.9 require OpenPartitionDxe.efi to boot the Recovery partition
+* OS X 10.4.1到10.4.7需要EFI32(即IA32(32位)版本的OpenCore)
+  * OS X 10.4.8到10.7.5支持EFI32和EFI64
+* OS X 10.8及更新版本需要EFI64(即x64(64位)版本的OpenCore)
+* OS X 10.7到10.9需要OpenPartitionDxe.efi启动恢复分区
 
-Kernel Requirements:
+内核要求:
 
-* OS X 10.4 and 10.5 require 32-bit kexts due to only supporting 32-bit kernelspace
-  * OS X 10.6 and 10.7 support both 32 and 64-bit kernelspace
-* OS X 10.8 and newer require 64-bit kexts due to only supporting 64-bit kernelspace
-  * Run `lipo -archs` to know what architectures your kext supports (remember to run this on the binary itself and not the .kext bundle)
+* 由于只支持32位内核空间，OS X 10.4和10.5需要32位kext
+  * OS X 10.6和10.7同时支持32位和64位内核空间
+* OS X 10.8及更新版本由于只支持64位内核空间，因此需要64位kext
+  * 运行`lipo -archs` 以了解您的kext支持的体系结构(请记住在二进制文件本身而不是.kext包上运行)
 
-Core/Thread Count Limits:
+核心/线程数限制:
 
-* OS X 10.10 and below may not boot with more than 24 threads (evident by a `mp_cpus_call_wait() timeout` panic)
-* OS X 10.11 and newer have a 64 thread limit
-* `cpus=` boot argument can be used as a workaround, or disabling hyperthreading
+* OS X 10.10及以下版本可能无法以超过24个线程启动 (明显表现为`mp_cpus_call_wait() timeout` panic)
+* OS X 10.11及更新版本有64线程限制
+* `cpus=` 引导参数可以作为一个解决方案，或者禁用超线程
 
-Special Notes:
+特别注意事项:
 
-* Lilu and plugins require 10.8 or newer to operate
-  * We recommend running FakeSMC for older versions of OS X
-* OS X 10.6 and older require RebuildAppleMemoryMap enabled
-  * This is to resolve an early kernel
+* Lilu和插件需要10.8或更新才能运行
+  * 我们建议在OS X的老版本中运行FakeSMC
+* OS X 10.6及更早版本要求启用RebuildAppleMemoryMap
+  * 这是为了解决早期内核问题
 
 :::
 
-::: details Intel CPU Support Chart
+::: 详细的英特尔CPU支持图表
 
-Support based off of Vanilla Kernels (i.e. no modifications):
+基于普通内核的支持(即没有修改):
 
-| CPU Generation | Initial support | Last supported version | Notes | CPUID |
+| CPU Generation | 初始支持 | 最后支持版本 | Notes | CPUID |
 | :--- | :--- | :--- | :--- | :--- |
 | [Pentium 4](https://en.wikipedia.org/wiki/Pentium_4) | 10.4.1 | 10.5.8 | Only used in dev kits | 0x0F41 |
 | [Yonah](https://en.wikipedia.org/wiki/Yonah_(microprocessor)) | 10.4.4 | 10.6.8 | 32-Bit | 0x0006E6 |
@@ -110,58 +110,58 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 
 :::
 
-::: details AMD CPU Limitations in macOS
+::: 详细说明macOS中AMD CPU的限制
 
-Unfortunately many features in macOS are outright unsupported with AMD and many others being partially broken. These include:
+不幸的是，AMD完全不支持macOS中的许多功能，还有许多功能是部分损坏的。这些包括:
 
-* Virtual Machines relying on AppleHV
-  * This includes VMWare, Parallels, Docker, Android Studio, etc
-  * VirtualBox is the sole exception as they have their own hypervisor
-  * VMware 10 and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
-* Adobe Support
-  * Most of Adobe's suite relies on Intel's Memfast instruction set, resulting in crashes with AMD CPUs
-  * You can disable functionality like RAW support to avoid the crashing: [Adobe Fixes](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
-* 32-Bit support
-  * For those still relying on 32-Bit software in Mojave and below, note that the Vanilla patches do not support 32-bit instructions
-  * A work-around is to install a [custom kernel](https://files.amd-osx.com/?dir=Kernels), however you lose iMessage support and no support is provided for these kernels
-* Stability issues on many apps
-  * Audio-based apps are the most prone to issues, ie. Logic Pro
-  * DaVinci Resolve has been known to have sporadic issues as well
+* 依赖AppleHV的虚拟机
+  * 这包括VMWare、Parallels、Docker、Android Studio等
+  * VirtualBox是唯一的例外，因为它们有自己的虚拟机管理程序
+  * VMware 10和Parallels 13.1.0确实支持自己的虚拟机管理程序，但是使用这种过时的虚拟机软件会带来很大的安全威胁
+* Adobe支持
+  * 大多数Adobe套件依赖于英特尔的Memfast指令集，在使用AMD cpu时会导致崩溃
+  * 你可以禁用功能，如RAW支持，以避免崩溃:[Adobe 修复](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
+* 32位支持
+  * 对于那些仍然依赖于32位软件在Mojave和以下，注意香草补丁不支持32位指令
+  *解决方法是安装一个 [自定义内核](https://files.amd-osx.com/?dir=Kernels), 但是你失去了iMessage支持，这些内核没有提供支持
+* 许多应用程序的稳定性问题
+  * 基于音频的应用程序最容易出现问题，例如Logic Pro
+  * DaVinci Resolve也有零星的问题
 
 :::
 
-## GPU Support
+## GPU 支持
 
-GPU support becomes much more complicated due to the near-infinite amount of GPUs on the market, but the general breakdown is as follows:
+由于市场上GPU的数量几乎是无限的，GPU支持变得更加复杂，但总体划分如下:
 
-* AMD's GCN based GPUs are supported in the latest versions of macOS
-  * AMD APUs are not supported however
-  * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
-  * Special note for MSI Navi users: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
-    * This issue is no longer present in macOS 11 (Big Sur).
-* NVIDIA's GPU support is complicated:
-  * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
-  * [NVIDIA's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
-  * [NVIDIA's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
-  * [NVIDIA's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported up to macOS 11: Big Sur
-* Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
-  * Ivy Bridge through Ice Lake iGPU support is covered in this guide
-    * Info on GMA series iGPUs can be found here: [GMA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
-  * Note GT2 refers to the tier of iGPU, low-end GT1 iGPUs found on Pentiums, Celerons and Atoms are not supported in macOS
+* AMD基于GCN的gpu支持最新版本的macOS
+  * 但是不支持AMD apu
+  * AMD的[基于Lexa的核心](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) 从北极星系列也不支持
+  * 特别提醒MSI Navi用户:[安装程序不能与5700XT 一起工作 #901](https://github.com/acidanthera/bugtracker/issues/901)
+    * 此问题在macOS 11 (Big Sur)中不再存在。
+* NVIDIA的GPU支持很复杂:
+  * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) 和 [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) gpu仅限于macOS 10.13: High Sierra
+  * [英伟达的Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) gpu**在任何版本的macOS中都不支持**
+  * [英伟达的Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) gpu **在任何版本的macOS中都不支持**
+  * [英伟达的Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) gpu支持到macOS 11: Big Sur
+* 英特尔的 [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) 系列igpu
+  * 本指南涵盖了Ivy Bridge through Ice Lake iGPU support
+    *关于GMA系列iGPUs的信息可以在这里找到:[GMA Patching](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/)
+  * 注意:GT2指iGPU层，Pentiums、Celerons和Atoms上的低端GT1 iGPU在macOS中不支持
 
-And an important note for **Laptops with discrete GPUs**:
+对于**使用离散gpu的笔记本电脑**，有一个重要的注意事项:
 
-* 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these discrete GPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide).
-* However, in some cases, the discrete GPU powers any external outputs (HDMI, mini DisplayPort, etc.), which may or may not work; in the case that it will work, you will have to keep the card on and running.
-* However, there are some laptops that rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually cause issues.
+* 90%的离散gpu无法工作，因为它们连接在macOS不支持的配置中(可切换图形)。使用NVIDIA离散gpu，这通常被称为Optimus。由于无法使用这些离散的gpu进行内部显示，因此通常建议禁用它们并关闭它们(将在本指南的后面介绍)。
+* 然而，在某些情况下，离散GPU为任何外部输出(HDMI、mini DisplayPort等)供电，这些输出可能工作，也可能不工作;如果它会工作,你将不得不让卡运行。
+* 然而，有些笔记本电脑很少没有可切换的图形，因此可以使用离散卡(如果macOS支持)，但连接和设置通常会导致问题。
 
-**For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/)**
+**For a full list of supported GPUs, see the [GPU Buyers Guide](https://sumingyd.github.io/GPU-Buyers-Guide/)**
 
-::: details Intel GPU Support Chart
+::: 详细说明Intel GPU支持图表
 
-| GPU Generation | Initial support | Last supported version | Notes |
+| GPU Generation | 初始版本 | 最后支持版本 | 备注 |
 | :--- | :--- | :--- | :--- |
-| [3rd Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Third_generation) | 10.4.1 | 10.7.5 | [Requires 32-bit kernel and patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/) |
+| [3rd Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Third_generation) | 10.4.1 | 10.7.5 | [Requires 32-bit kernel and patches](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/) |
 | [4th Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen4) | 10.5.0 | ^^ | ^^ |
 | [Arrandale(HD Graphics)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen5) | 10.6.4 | 10.13.6 | Only LVDS is supported, eDP and external outputs are not |
 | [Sandy Bridge(HD 3000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen6) | 10.6.7 | ^^ | N/A |
@@ -178,9 +178,9 @@ And an important note for **Laptops with discrete GPUs**:
 
 :::
 
-::: details AMD GPU Support Chart
+::: 详细的AMD GPU支持图表
 
-| GPU Generation | Initial support | Last supported version | Notes |
+| GPU Generation | 初始支持 | 最后支持版本 | 备注 |
 | :--- | :--- | :--- | :--- |
 | [X800](https://en.wikipedia.org/wiki/Radeon_X800_series) | 10.3.x | 10.7.5 | Requires 32 bit kernel |
 | [X1000](https://en.wikipedia.org/wiki/Radeon_X1000_series) | 10.4.x | ^^ | N/A |
@@ -196,12 +196,12 @@ And an important note for **Laptops with discrete GPUs**:
 
 :::
 
-::: details NVIDIA GPU Support Chart
+::: 详细的NVIDIA GPU支持图表
 
-| GPU Generation | Initial support | Last supported version | Notes |
+| GPU Generation | 初始支持 | 最后支持版本 | 备注 |
 | :--- | :--- | :--- | :--- |
-| [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | Requires 32 bit kernel and [NVCAP patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) |
-| [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | ^^ | [Requires NVCAP patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) |
+| [GeForce 6](https://en.wikipedia.org/wiki/GeForce_6_series) | 10.2.x | 10.7.5 | Requires 32 bit kernel and [NVCAP patching](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) |
+| [GeForce 7](https://en.wikipedia.org/wiki/GeForce_7_series) | 10.4.x | ^^ | [Requires NVCAP patching](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/nvidia-patching/) |
 | [Tesla](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)) | 10.4.x | 10.13.6 | ^^ |
 | [Tesla v2](https://en.wikipedia.org/wiki/Tesla_(microarchitecture)#Tesla_2.0) | 10.5.x | ^^ | ^^ |
 | [Fermi](https://en.wikipedia.org/wiki/Fermi_(microarchitecture)) | 10.7.x | ^^ | ^^ |
@@ -214,71 +214,71 @@ And an important note for **Laptops with discrete GPUs**:
 
 :::
 
-## Motherboard Support
+## 主板支持
 
-For the most part, all motherboards are supported as long as the CPU is.
+在大多数情况下，只要CPU支持，所有主板都支持。
 
-::: details MSI 500-series AMD motherboards note
+::: MSI AMD 500 -系列主板注意细节
 
-~~The exception is MSI 500-series AMD motherboards (A520, B550, and X570). These motherboards have issues with macOS Monterey and above:~~
+~~MSI 500系列AMD主板(A520, B550和X570)是个例外。这些主板与macOS Monterey和以上有问题:~~
 
-* ~~PCIe devices are not always enumerated properly~~
-* ~~The BIOS update for Zen 3 support breaks boot~~
+* ~~PCIe设备不总是正确枚举~~
+* ~~Zen 3支持的BIOS更新中断引导~~
 
-~~macOS Big Sur or earlier is recommended for these motherboards.~~
+~~这些主板推荐使用macOS Big Sur或更早的.~~
 
-Thanks to CaseySJ, this has been fixed in the latest version of the AMD vanilla patches!
+感谢CaseySJ，这已经在最新版本的AMD香草补丁中修复了!
 
 :::
 
-## Storage Support
+## 存储支持
 
-For the most part, all SATA based drives are supported and the majority of NVMe drives as well. There are only a few exceptions:
+在大多数情况下，它支持所有SATA驱动器和大多数NVMe驱动器。只有少数例外:
 
-* **Samsung PM981, PM991 and Micron 2200S NVMe SSDs**
-  * These SSDs are not compatible out of the box (causing kernel panics) and therefore require [NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases) to fix these kernel panics. Note that these drives may still cause boot issues even with NVMeFix.kext.
-  * On a related note, Samsung 970 EVO Plus NVMe SSDs also had the same problem but it was fixed in a firmware update; get the update (Windows via Samsung Magician or bootable ISO) [here](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/).
-  * Also to note, laptops that use [Intel Optane Memory](https://www.intel.com/content/www/us/en/architecture-and-technology/optane-memory.html) or [Micron 3D XPoint](https://www.micron.com/products/advanced-solutions/3d-xpoint-technology) for HDD acceleration are unsupported in macOS. Some users have reported success in Catalina with even read and write support but we highly recommend removing the drive to prevent any potential boot issues.
-    * Note that Intel Optane Memory H10/H20 models are compatible if the Optane part is disabled in macOS. More information can be found [here](https://blog.csdn.net/weixin_46341175/article/details/126626808) ([original Chinese source](https://zhuanlan.zhihu.com/p/429073173)).
+* **三星 PM981, PM991 和 美光 2200S NVMe SSDs**
+  * 这些ssd不兼容(导致内核恐慌)，因此需要[NVMeFix.kext](https://github.com/acidanthera/NVMeFix/releases) 来修复这些内核恐慌。注意，即使使用NVMeFix.kext，这些驱动器仍然可能导致引导问题。
+  * 一个相关的说明，三星970 EVO Plus NVMe ssd也有同样的问题，但它在固件更新中得到了修复;获得更新(Windows通过三星魔术师或启动ISO) [这里](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/).
+  * 还要注意，在macOS中不支持使用[Intel Optane Memory](https://www.intel.com/content/www/us/en/architecture-and-technology/optane-memory.html) 或 [Micron 3D XPoint](https://www.micron.com/products/advanced-solutions/3d-xpoint-technology) 进行硬盘加速的笔记本电脑。一些用户报告说，Catalina在读写支持方面取得了成功，但我们强烈建议删除驱动器，以防止任何潜在的引导问题。
+    * 请注意，如果在macOS中禁用了Optane部分，则英特尔Optane内存H10/H20型号是兼容的。更多信息可以在[这里](https://blog.csdn.net/weixin_46341175/article/details/126626808) ([中文原文](https://zhuanlan.zhihu.com/p/429073173))找到.
   
 * **Intel 600p**
-  * While not unbootable, please be aware this model can cause numerous problems. [Any fix for Intel 600p NVMe Drive? #1286](https://github.com/acidanthera/bugtracker/issues/1286)
-  * The 660p model is fine
+  * 虽然不是不可启动的，但请注意此模型可能会导致许多问题。 [Intel 600p NVMe硬盘有修复吗? #1286](https://github.com/acidanthera/bugtracker/issues/1286)
+  * 660p的型号很好
 
-## Wired Networking
+## 有线网络
 
-Virtually all wired network adapters have some form of support in macOS, either by the built-in drivers or community made kexts. The main exceptions:
+在macOS中，几乎所有有线网络适配器都有某种形式的支持，要么是内置驱动程序，要么是社区制作的kext。主要的例外:
 
 * Intel I225 2.5Gb NIC
-  * Found on high-end Desktop Comet Lake boards
-  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](config.plist/comet-lake.md#deviceproperties)
+  * 在高端桌面彗星湖板上发现
+  * 有可能的解决方法: [来源](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) 和 [示例](config.plist/comet-lake.md#deviceproperties)
 * Intel I350 1Gb server NIC
-  * Normally found on Intel and Supermicro server boards of various generations
-  * [Workaround](config-HEDT/ivy-bridge-e.md#deviceproperties)
+  * 通常在Intel和Supermicro不同年代的服务器板上找到
+  * [方法](config-HEDT/ivy-bridge-e.md#deviceproperties)
 * Intel 10Gb server NICs
-  * Workarounds are possible for [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
-* Mellanox and Qlogic server NICs
+  * 解决方案是 [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
+* Mellanox和Qlogic server网卡
 
-## Wireless Networking
+## 无线网络
 
-Most WiFi cards that come with laptops are not supported as they are usually Intel/Qualcomm. If you are lucky, you may have a supported Atheros card, but support only runs up to High Sierra.
+大多数笔记本电脑自带的WiFi卡不支持，因为它们通常是英特尔/高通的。如果你幸运，你可能有一个支持Atheros卡，但支持只运行到 High Sierra.
 
-The best option is getting a supported Broadcom card; see the [WiFi Buyer's Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for recommendations.
+最好的选择是获得支持的博通卡;请参阅[WiFi购买指南](https://sumingyd.github.io/Wireless-Buyers-Guide/) 获得建议。
 
-Note: Intel WiFi is unofficially (3rd party driver) supported on macOS, check [WiFi Buyer's Guide](https://dortania.github.io/Wireless-Buyers-Guide/) for more information about the drivers and supported cards.
+注意:在macOS上英特尔WiFi是非官方的(第三方驱动)支持，请查看[WiFi购买指南](https://sumingyd.github.io/Wireless-Buyers-Guide/) 了解更多关于驱动程序和支持卡的信息。
 
-## Miscellaneous
+## 其他
 
-* **Fingerprint sensors**
-  * There is currently no way to emulate the Touch ID sensor, so fingerprint sensors will not work.
-* **Windows Hello Face Recognition**
-  * Some laptops come with WHFR that is I2C connected (and used through your iGPU), those will not work.
-  * Some laptops come with WHFR that is USB connected, if you're lucky, you may get camera functionality, but nothing else.
-* **Intel Smart Sound Technology**
-  * Laptops with Intel SST will not have anything connected through them (usually internal mic) work, as it is not supported. You can check with Device Manager on Windows.
-* **Headphone Jack Combo**
-  * Some laptops with a combo headphone jack may not get audio input through them and will have to either use the built-in microphone or an external audio input device through USB.
-* **Thunderbolt USB-C ports**
-  * (Hackintosh) Thunderbolt support is currently still iffy in macOS, even more so with Alpine Ridge controllers, which most current laptops have. There have been attempts to keep the controller powered on, which allows Thunderbolt and USB-C hotplug to work, but it comes at the cost of kernel panics and/or USB-C breaking after sleep. If you want to use the USB-C side of the port and be able to sleep, you must plug it in at boot and keep it plugged in.
-  * Note: This does not apply to USB-C only ports - only Thunderbolt 3 and USB-C combined ports.
-  * Disabling Thunderbolt in the BIOS will also resolve this.
+* **指纹传感器**
+  * 目前还没有办法模拟Touch ID传感器，因此指纹传感器将无法工作。
+* **Windows Hello人脸识别**
+  * 一些笔记本电脑自带的WHFR是I2C连接的(并通过iGPU使用)，这些将不起作用。
+  * 一些笔记本电脑配备了USB连接的WHFR，如果你幸运的话，你可能会有相机功能，但没有其他功能。
+* **英特尔智能声音技术**
+  * 使用英特尔SST的笔记本电脑将不会有任何通过它们(通常是内部麦克风)连接的工作，因为它不支持。你可以在Windows的设备管理器中查看。
+* **耳机接口组合**
+  * 一些带有combo耳机插孔的笔记本电脑可能无法通过它们进行音频输入，必须使用内置麦克风或通过USB接口的外部音频输入设备。
+* **Thunderbolt USB-C 接口**
+  * (Hackintosh)目前在macOS中对Thunderbolt的支持仍然不确定，尤其是在Alpine Ridge控制器上，这是目前大多数笔记本电脑都拥有的。有人试图保持控制器上电，这允许Thunderbolt和USB-C热插拔工作，但代价是内核崩溃 和/或 USB-C在睡眠后中断。如果你想使用端口的USB-C端并能够休眠，你必须在启动时插入它并保持插入状态。
+  * 注意:这不适用于仅USB-C端口-仅Thunderbolt 3和USB-C组合端口。
+  * 在BIOS中禁用Thunderbolt也会解决这个问题。
