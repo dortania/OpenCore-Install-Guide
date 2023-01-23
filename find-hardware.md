@@ -1,150 +1,150 @@
-# Finding your hardware
+# 查找你的硬件
 
-This section is mostly a mini-guide on how to find what hardware you're currently running; this is mainly relevant for laptop and prebuilt users as hardware specs are a bit more difficult to obtain. You can skip this page and head to [Creating the USB](./installer-guide/) if you already know what hardware you have.
+本节主要是一个关于如何找到当前运行的硬件的迷你指南;这主要与笔记本电脑和预构建用户有关，因为硬件规格有点难以获得。如果你已经知道你有什么硬件，你可以跳过这一页，转到[创建USB](./installer-guide/).
 
-For this, we'll assume you have Windows or Linux installed:
+假设你已经安装了Windows或Linux:
 
 [[toc]]
 
-## Finding Hardware using Windows
+## 使用Windows查找硬件
 
-For this we mainly have 2 options:
+我们主要有两个选择:
 
-* Windows' built-in Device Manager
+* Windows内置的设备管理器
 * [AIDA64](https://www.aida64.com/downloads)
 
-Due to the easier to use GUI, we recommend downloading AIDA64 and running this as it's much easier to grab specs. However we'll show you both methods for obtaining hardware specs.
+由于使用GUI更容易，我们建议下载AIDA64并运行它，因为它更容易获取规格。然而我们将向你展示这两种方法获取的硬件规格。
 
-### CPU Model
+### CPU 型号
 
-| AIDA64                                                 | Device Manager                                                |
+| AIDA64                                                 | 设备管理器                                                |
 |:-------------------------------------------------------|:--------------------------------------------------------------|
 | ![](./images/finding-hardware-md/cpu-model-aida64.png) | ![](./images/finding-hardware-md/cpu-model-devicemanager.png) |
 
-### GPU Model
+### GPU 型号
 
-| AIDA64                                                 | DeviceManager                                                 |
+| AIDA64                                                 | 设备管理器                                                  |
 |:-------------------------------------------------------|:--------------------------------------------------------------|
 | ![](./images/finding-hardware-md/GPU-model-aida64.png) | ![](./images/finding-hardware-md/GPU-model-devicemanager.png) |
 
-### Chipset Model
+### 芯片组 型号
 
-| AIDA64                                                     | DeviceManager                                                     |
+| AIDA64                                                     | 设备管理器                                                      |
 |:-----------------------------------------------------------|:------------------------------------------------------------------|
 | ![](./images/finding-hardware-md/chipset-model-aida64.png) | ![](./images/finding-hardware-md/chipset-model-devicemanager.png) |
 
-* Note: Intel SOC based CPUs will have the chipset and other features already on the same die instead of being dedicated chips. This means trying to detect the exact chipset is a bit more difficult
+* 注意:英特尔基于SOC的cpu将在同一个芯片上拥有芯片组和其他功能，而不是专用芯片。这意味着试图检测准确的芯片组有点困难
 
-### Keyboard, Trackpad and Touchscreen Connection Type
+### 键盘、触控板和触摸屏连接类型
 
-| DeviceManager                                                      |
+| 设备管理器                                                      |
 |:-------------------------------------------------------------------|
 | ![](./images/finding-hardware-md/trackpad-model-devicemanager.png) |
 
-AIDA64 unfortunately doesn't provide any useful info regarding pointer devices, so we recommend using DeviceManager for this.
+不幸的是，AIDA64没有提供任何关于指针设备的有用信息，因此我们建议使用DeviceManager。
 
-* You can find these devices under the following:
-  * `Human Interface Devices`
-  * `Keyboards`
-  * `Mice and other Pointer Devices`
+* 你可以找到以下这些设备:
+  * `人机界面设备`
+  * `键盘`
+  * `鼠标和其他指针设备`
 
-* To view the exact connection type of the device, select the pointer device then enter `View -> Device by Connection`. This will clarify whether it's over PS2, I2C, SMBus, USB, etc
+* 要查看设备的确切连接类型，请选择指针设备，然后输入` view -> device by connection `。这将明确它是否通过PS2, I2C, SMBus, USB等
 
-Depending on the device, it may show up under multiple names and connections. The main ones to keep an eye on:
+根据设备的不同，它可能会在多个名称和连接下显示。主要需要关注的是:
   
-::: details SMBus
+::: SMBus细节
   
-These will show up as a straight PCI device such as `Synaptics SMBus Driver` or `ELAN SMBus Driver`
+这些将显示为直接PCI设备，如 `Synaptics SMBus Driver` 或 `ELAN SMBus Driver`
 
-* Synaptics devices will show up under both PS2 under `Synaptics PS2 device`/`Synaptics Pointing Device` and PCI as `Synaptics SMBus Driver`
+* 触摸设备将显示在PS2下的`Synaptics PS2 device`/`Synaptics Pointing Device` 和 PCI的 `Synaptics SMBus Driver`
 
 ![](./images/finding-hardware-md/Windows-SMBus-Device.png)
 
-As you can see, we get 2 Synaptics devices in the left image, however if we take a closer look we'll see the top device is PS2, while the bottom one is SMBus. While you can use the trackpad in either mode, SMBus generally provides better gesture support and accuracy.
+正如你所看到的，我们在左边的图像中有两个Synaptics设备，但是如果我们仔细看，我们会看到顶部的设备是PS2，而底部的是SMBus。虽然你可以在任何一种模式下使用触控板，但SMBus通常提供更好的手势支持和准确性。
 
 :::
 
-::: details USB
+::: USB细节
 
 | Device by Type | Device by Connection |
 | :--- | :--- |
 | ![](./images/finding-hardware-md/USB-trackpad-normal.png) | ![](./images/finding-hardware-md/USB-trackpad-by-connection.png)
 
-These will show up as a `PS2 Compliant Trackpad`, as well under USB when we switch our connection view to `Device by Connection`
+当我们将连接视图切换到`按连接设备`时，这些会显示为“`PS2兼容的触摸板`”，在USB下也会显示为`按连接设备`
 
 :::
 
-::: details I2C
+::: I2C细节
 
 ![](./images/finding-hardware-md/i2c-trackpad.png)
-These will almost always show up as a Microsoft HID device, though can appear as other trackpads as well. They will always show up under I2C though.
+它们几乎总是以微软的HID设备的形式显示，不过也可以以其他触控板的形式显示。但它们总是在I2C下显示。
 
 :::
   
-### Audio Codec
+### 音频编解码器
 
-| AIDA64                                                        | DeviceManager                                                     |
+| AIDA64                                                        | 设备管理器                                                     |
 |:--------------------------------------------------------------|:------------------------------------------------------------------|
 | ![](./images/finding-hardware-md/audio-controller-aida64.png) | ![](./images/finding-hardware-md/audio-controller-aida64.png.png) |
 
-Due to how certain OEMs present device names, the most accurate info you can get with DeviceManager is via the PCI ID(ie. pci 14F1,50F4). This means you'll need to google the ID and figure out the exact device ID, however AIDA64 can present the name properly which is quite a bit easier on the end user.
+由于某些oem呈现设备名称的方式，您可以通过DeviceManager获得的最准确的信息是通过PCI ID(例如PCI 14F1,50F4)。这意味着您需要谷歌ID并计算出确切的设备ID，然而AIDA64可以正确地显示名称，这对终端用户来说更容易。
 
-### Network Controller models
+### 网络控制器型号
 
-| AIDA64                                                 | Device Manager                                                |
+| AIDA64                                                 | 设备管理器                                                |
 |:-------------------------------------------------------|:--------------------------------------------------------------|
 | ![](./images/finding-hardware-md/nic-model-aida64.png) | ![](./images/finding-hardware-md/nic-model-devicemanager.png) |
 
-Due to how certain OEMs present device names, the most accurate info you can get with Device Manager is via the PCI ID (ie. `PCI\VEN_14E4&DEV_43A0` corresponds to a vendor ID of `14E4` and a device ID of `43A0`). This means you'll need to Google the ID and figure out the exact device ID; however, AIDA64 can present the name properly which can be quite a bit easier.
+由于某些oem提供设备名称的方式，您可以通过设备管理器获得的最准确信息是PCI ID(例如 `PCI\VEN_14E4&DEV_43A0` 对应于供应商ID为 `14E4` 和设备ID为 `43A0`). 这意味着你需要谷歌ID并弄清楚确切的设备ID;但是，AIDA64可以正确地显示名称，这要容易得多。
 
-### Drive Model
+### 硬盘型号
 
-| AIDA64                                                  | Device Manager                                                 |
+| AIDA64                                                  | 设备管理器                                                 |
 |:--------------------------------------------------------|:---------------------------------------------------------------|
 | ![](./images/finding-hardware-md/disk-model-aida64.png) | ![](./images/finding-hardware-md/disk-model-devicemanager.png) |
 
-Due to OEMs not providing much details about the drive, you'll need to Google a bit which drive matches up with the displayed name.
+由于oem没有提供关于驱动器的很多细节，您将需要谷歌来确定驱动器匹配显示的名称。
 
-## Finding Hardware using Linux
+## 使用Linux查找硬件
 
-For finding hardware using Linux, we'll be using a few tools:
+使用Linux查找硬件,我们将使用一些工具:
 
 * `pciutils`
 * `dmidecode`
 
-Below you'll find a list of commands to run in the terminal, thankfully most Linux distros will come with these tools already installed. If not, you will likely find them in your distro's package manager.
+下面是要在终端上运行的命令列表，幸运的是，大多数Linux发行版都已经安装了这些工具。如果没有，您可能会在您的发行版的包管理器中找到它们。
 
-### CPU Model
+### CPU 型号
 
 ```sh
 grep -i "model name" /proc/cpuinfo
 ```
 
-### GPU Model
+### GPU 型号
 
 ```sh
 lspci | grep -i --color "vga\|3d\|2d"
 ```
 
-### Chipset Model
+### 芯片组 型号
 
 ```sh
 dmidecode -t baseboard
 ```
 
-### Keyboard, Trackpad and  Touchscreen Connection Type
+### 键盘，触控板和触摸屏连接类型
 
 ```sh
 dmesg | grep -i input
 ```
 
-### Audio Codec
+### 音频编解码器
 
 ```sh
 aplay -l
 ```
 
-### Network Controller models
+### 网络控制器型号
 
 Basic info:
 
@@ -158,87 +158,87 @@ More in-depth info:
 lshw -class network
 ```
 
-### Drive Model
+### 硬盘型号
 
 ```sh
 lshw -class disk -class storage
 ```
 
-## Finding Hardware using OCSysInfo
+## 使用OCSysInfo查找硬件
 
-There are 2 methods of obtaining and running OCSysInfo:
+有两种获取和运行OCSysInfo的方法:
 
-* [Precompiled binaries](https://github.com/KernelWanderers/OCSysInfo/releases)
-* Manually cloning the [repository](https://github.com/KernelWanderers/OCSysInfo)
+* [预编译二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)
+* 手动克隆 [存储库](https://github.com/KernelWanderers/OCSysInfo)
 
-::: tip
-We recommend you download [the binaries](https://github.com/KernelWanderers/OCSysInfo/releases), as it is the simplest and easiest method.
+::: 提示
+我们建议您下载[二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)，因为这是最简单的方法。
 
-If you want to learn more about manually cloning the repository, you can check out the OCSysInfo [mini-guide](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide).
+如果您想了解关于手动克隆存储库的更多信息，可以查看OCSysInfo[迷你指南](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide).
 :::
 
-### Discovering hardware
+### 发现硬件
 
-::: warning
-Laptop users: before we start, we advise you to disconnect any external USB devices, as this may lead to ambiguous or unnecessary information collected which may confuse you.
+::: 警告
+笔记本电脑用户:在我们开始之前，我们建议您断开任何外部USB设备，因为这可能会导致收集的模棱两可或不必要的信息，可能会使您感到困惑。
 :::
 
-After you've successfully installed and ran the application, you should be greeted with the following screen:
+成功安装并运行应用程序后，你应该看到如下界面:
 
 ![](./images/finding-hardware-md/ocsysinfo-example.png)
 
-From here, you can type in `d` and press `ENTER`/`RETURN`, after, you should be greeted with a similar-looking screen:
+在这里，你可以输入`d`并按`ENTER`/`RETURN`，然后，你应该会看到一个类似的界面:
 
 ![](./images/finding-hardware-md/ocsysinfo-hwdisc.png)
 
-### CPU Model
+### CPU 型号
 
 ![](./images/finding-hardware-md/cpu-model-ocsysinfo.png)
 
-Besides the CPU model, it also lists the CPU's codename, highest SSE version supported and SSSE3 availability.
+除了CPU型号，它还列出了CPU的代号、支持的最高SSE版本和SSSE3可用性。
 
-### GPU Model
+### GPU 型号
 
 ![](./images/finding-hardware-md/gpu-model-ocsysinfo.png)
 
-In this case, the machine has two GPUs:
+在这种情况下,机器有两个gpu:
 
 * iGPU (Intel UHD Graphics 630)
 * dGPU (AMD Radeon R9 390X)
 
-Besides the model names, it also lists the GPUs' codename, ACPI & PCI path, which you may soon find useful as you progress in your hackintosh journey.
+除了模型名称，它还列出了gpu的代码，ACPI和PCI路径，随着你在hackintosh之旅的进展，你可能很快就会发现这些代码很有用。
 
-### Keyboard and Trackpad Connection Type
+### 键盘和触摸板连接类型
 
-::: details SMBus Trackpad
+::: SMBus触摸板细节
 ![](./images/finding-hardware-md/id-smbus-ocsysinfo.png)
-Trackpad: `SMBus` <br /> Keyboard: `PS/2`
+触摸板: `SMBus` <br /> 键盘: `PS/2`
 
-Credit for providing image: [ThatCopy](https://github.com/ThatCopy)
+图片来源:[ThatCopy](https://github.com/ThatCopy)
 :::
 
-::: details I2C Trackpad
+::: I2C触摸板细节
 ![](./images/finding-hardware-md/id-i2c-ocsysinfo.png)
-Trackpad: `I2C` <br /> Keyboard: `PS/2`
+触摸板: `I2C` <br /> 键盘: `PS/2`
 
-Credit for providing image: [Mahas](https://github.com/Mahas1)
+图片来源:[Mahas](https://github.com/Mahas1)
 :::
 
-::: details PS/2 Trackpad
+::: PS/2触摸板细节
 ![](./images/finding-hardware-md/id-ps2-ocsysinfo.png)
-Trackpad: `PS/2` <br /> Keyboard: `PS/2`
+触摸板: `PS/2` <br /> 键盘: `PS/2`
 
-Credit for providing image: [Tasty0](https://github.com/Tasty0)
+图片来源:[Tasty0](https://github.com/Tasty0)
 :::
 
-### Audio codec
+### 音频编解码器
 
 ![](./images/finding-hardware-md/audio-codec-ocsysinfo.png)
 
-### Network models
+### 网络控制器型号
 
 ![](./images/finding-hardware-md/network-model-ocsysinfo.png)
 
-### Drive model
+### 硬盘型号
 
 ![](./images/finding-hardware-md/drive-model-ocsysinfo.png)
