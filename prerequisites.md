@@ -6,7 +6,7 @@
 
 1. <span style="color:red">_**[关键的]**_</span> 时间和耐心。
    * 如果你有截止日期或重要的工作，不要开始做这件事。Hackintoshes不是你应该依靠作为工作的机器。
-2. <span style="color:red">_**[CRUCIAL]**_</span> **了解你的硬件**
+2. <span style="color:red">_**[关键的]**_</span> **了解你的硬件**
    * 你的CPU名称及其生成
    * 你的gpu
    * 你的存储设备(HDD/SSD, NVMe/AHCI/RAID/IDE配置)
