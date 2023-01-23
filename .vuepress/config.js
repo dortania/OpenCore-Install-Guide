@@ -60,10 +60,10 @@ module.exports = {
         editLinkText: '帮助我们改进此页面!',
         logo: '/homepage.png',
         nav: [{
-            text: 'Dortania Guides',
+            text: 'suming Guides',
             items: [{
                 text: 'Home Site',
-                link: 'https://sumingyd.github.io/'
+                link: 'https://sumingyd.github.io/OpenCore-Install-Guide/'
             },
             {
                 text: 'Getting Started With ACPI',
@@ -93,7 +93,7 @@ module.exports = {
         },
         ],
         sidebar: [{
-            title: 'Introduction',
+            title: '介绍',
             collapsable: false,
             sidebarDepth: 1,
             children: [
@@ -105,7 +105,7 @@ module.exports = {
             ]
         },
         {
-            title: 'USB Creation',
+            title: 'USB 创建',
             collapsable: false,
             sidebarDepth: 2,
             children: [{
@@ -126,7 +126,7 @@ module.exports = {
             ]
         },
         {
-            title: 'Configs',
+            title: '配置',
             collapsable: false,
             children: [{
                 title: 'Intel Desktop config.plist',
@@ -186,7 +186,7 @@ module.exports = {
             ]
         },
         {
-            title: 'Installation',
+            title: '安装',
             collapsable: false,
             children: [
                 '/installation/installation-process',
@@ -194,7 +194,7 @@ module.exports = {
             ]
         },
         {
-            title: 'Troubleshooting',
+            title: '故障排除',
             collapsable: false,
             children: [
                 '/troubleshooting/troubleshooting',
@@ -216,7 +216,7 @@ module.exports = {
             ]
         },
         {
-            title: 'Post Install',
+            title: '安装后',
             collapsable: false,
             children: [
                 ['https://sumingyd.github.io/OpenCore-Post-Install/', 'Post-Install'],
@@ -273,7 +273,7 @@ module.exports = {
             ]
         },
         {
-            title: 'Extras',
+            title: '额外',
             collapsable: false,
             sidebarDepth: 2,
             children: [
@@ -285,7 +285,7 @@ module.exports = {
             ]
         },
         {
-            title: 'Misc',
+            title: '杂项',
             collapsable: false,
             children: [
                 'CONTRIBUTING',
