@@ -34,7 +34,7 @@
 
 **欲了解更多深入信息，请参阅这里: [反硬件买家指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
-::: 详细的CPU要求
+:::  详细的CPU要求
 
 架构需求
 
