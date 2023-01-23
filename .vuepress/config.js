@@ -285,7 +285,7 @@ module.exports = {
             ]
         },
         {
-            title: '杂项',
+            title: '其他',
             collapsable: false,
             children: [
                 'CONTRIBUTING',
