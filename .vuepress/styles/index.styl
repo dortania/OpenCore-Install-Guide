@@ -25,7 +25,9 @@ div[class*="language-"]
     margin-top 0
 
 html {
-  overflow:   scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: unset;
 }
 ::-webkit-scrollbar {
     width 0px
@@ -64,3 +66,17 @@ tr
 
 .search-box .suggestion.focused a
   color: var(--navItemHoverColor) !important
+
+.theorem
+  margin 1rem 0
+  padding .1rem 1.5rem
+  border-radius 0.4rem
+  background-color #f0f4f8
+  .title
+    font-weight bold
+
+.custom-block
+  &.right
+    color transparentify($textColor, 0.4)
+    font-size 0.9rem
+    text-align right
