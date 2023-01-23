@@ -1,14 +1,14 @@
-# Gathering files
+# 收集文件
 
-This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
+本节是为引导macOS收集杂项文件，我们希望你在开始之前很好地了解你的硬件，并希望在此之前制作一个Hackintosh，因为我们不会在这里深入探讨。
 
-> What's the best way to figure out if my hardware is supported?
+> 知道我的硬件是否被支持的最好的方法是什么?
 
-See the [**Hardware Limitations page**](macos-limits.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
+请参阅 [**硬件限制页面**](macos-limits.md) ，以更好地了解macOS启动需要什么，Clover和OpenCore之间的硬件支持非常相似。
 
-> What are some ways to figure out what hardware I have?
+> 有什么方法可以找出我有什么硬件?
 
-See the page before: [Finding your hardware](./find-hardware.md)
+参见前一页:[查找硬件](./find-hardware.md)
 
 [[toc]]
 
