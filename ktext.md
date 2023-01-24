@@ -12,117 +12,116 @@
 
 [[toc]]
 
-## Firmware Drivers
+## 固件驱动
 
-Firmware drivers are drivers used by OpenCore in the UEFI environment. They're mainly required to boot a machine, either by extending OpenCore's patching ability or showing you different types of drives in the OpenCore picker(ie. HFS drives).
+固件驱动程序是OpenCore在UEFI环境中使用的驱动程序。它们主要是通过扩展OpenCore的补丁功能或在OpenCore选择器(例如HFS驱动器)中向您显示不同类型的驱动器来启动机器。
 
-* **Location Note**: These files **must** be placed under `EFI/OC/Drivers/`
+* **位置说明**: 这些文件 **必须** 放在 `EFI/OC/Drivers/`目录下
 
-### Universal
+### 通用
 
-::: tip Required Drivers
+::: tip 必需的驱动程序
 
-For the majority of systems, you'll only need 2 `.efi` drivers to get up and running:
+对于大多数系统，你只需要 2个 `.efi` 的驱动程序启动和运行:
 
-* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:red">Required</span>)
-  * Needed for seeing HFS volumes(ie. macOS Installers and Recovery partitions/images). **Do not mix other HFS drivers**
-  * For Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons), see the legacy section below
-* [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)(<span style="color:red">Required</span>)
-  * Replacement for [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), used as an extension for OpenCore to help with patching boot.efi for NVRAM fixes and better memory management.
-  * Reminder this was bundled in OpenCorePkg we downloaded earlier
+* [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)(<span style="color:red">必需</span>)
+  * 需要查看HFS卷(例如:macOS安装程序和恢复分区/映像). **不要混合使用其他HFS驱动**
+  * 对于Sandy Bridge和更老的(以及低端Ivy Bridge(i3和Celerons))，请参阅下面的传统部分
+* [OpenRuntime.efi](https://github.com/acidanthera/OpenCorePkg/releases)(<span style="color:red">必需</span>)
+  * 替代 [AptioMemoryFix.efi](https://github.com/acidanthera/AptioFixPkg), 用作OpenCore的扩展，以帮助修补boot.efi用于NVRAM修复和更好的内存管理。
+  * 提醒，这是捆绑在我们之前下载的OpenCorePkg中
 
 :::
 
-### Legacy users
+### 传统用户
 
-In addition to the above, if your hardware doesn't support UEFI(2011 and older era) then you'll need the following. Pay close attention to each entry as you may not need all 4:
+除上述外，如果您的硬件不支持UEFI(2011年和更早的时代)，那么您将需要以下内容。请密切关注每一个条目，因为你可能不需要全部使用这4个条目:
 
 * [OpenUsbKbDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Used for OpenCore picker on **legacy systems running DuetPkg**, [not recommended and even harmful on UEFI(Ivy Bridge and newer)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
+  * 用于在 **行DuetPkg的传统系统**,上的OpenCore picker， [不推荐，甚至在UEFI(Ivy Bridge和更新的)上有害)](https://applelife.ru/threads/opencore-obsuzhdenie-i-ustanovka.2944066/page-176#post-856653)
 * [HfsPlusLegacy.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlusLegacy.efi)
-  * Legacy variant of HfsPlus, used for systems that lack RDRAND instruction support. This is generally seen on Sandy Bridge and older(as well as low end Ivy Bridge(i3 and Celerons))
-  * Don't mix this with HfsPlus.efi, choose one or the other depending on your hardware
+  * HfsPlus的传统变体，用于缺乏RDRAND指令支持的系统。这通常见于Sandy Bridge和更老的(以及低端的Ivy Bridge(i3和Celerons))
+  * 不要将其与HfsPlus.efi混合使用，根据您的硬件选择其中之一
 * [OpenPartitionDxe](https://github.com/acidanthera/OpenCorePkg/releases)
-  * Required to boot recovery on OS X 10.7 through 10.9
-    * This file is bundled with OpenCorePkg under EFI/OC/Drivers
-    * Note: OpenDuet users(ie. without UEFI) will have this driver built-in, not requiring it
-  * Not required for OS X 10.10, Yosemite and newer
+  * 需要在OS X 10.7到10.9上引导恢复
+    * 此文件与OpenCorePkg捆绑在EFI/OC/Drivers下
+    * 注意:OpenDuet用户(例如:没有UEFI)将内置此驱动程序，不需要它
 
-These files will go in your Drivers folder in your EFI
+这些文件将放在EFI的Drivers文件夹中
 
-::: details 32-Bit specifics
+::: details 32位的详细信息
 
-For those with 32-Bit CPUs, you'll want to grab these drivers as well
+对于那些使用32位cpu的处理器，您也需要获取这些驱动程序
 
 * [HfsPlus32](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus32.efi)
-  * Alternative to HfsPlusLegacy but for 32-bit CPUs, don't mix this with other HFS .efi drivers
+  * 替代HfsPlusLegacy，但用于32位cpu，不要将其与其他HFS.efi驱动程序混合
 
 :::
 
 ## Kexts
 
-A kext is a **k**ernel **ext**ension, you can think of this as a driver for macOS, these files will go into the Kexts folder in your EFI.
+kext是**k**ernel**ext**ension,你可以把它想象成macOS的驱动程序，这些文件将进入你EFI中的Kexts文件夹。
 
-* **Windows and Linux note**: Kexts will look like normal folders in your OS, **double check** that the folder you are installing has a .kext extension visible(and do not add one manually if it's missing).
-  * If any kext also includes a `.dSYM` file, you can simply delete it. They're only for debugging purposes.
-* **Location Note**: These files **must** be placed under `EFI/OC/Kexts/`.
+* **Windows和Linux注意**: kext看起来就像操作系统中的普通文件夹，**仔细检查** 你正在安装的文件夹是否有可见的.kext扩展名(如果缺少，不要手动添加)。
+  * 如果任何kext还包含一个 `.dSYM` 文件，你可以简单地删除它。它们只用于调试目的。
+* **位置注意**: 这些文件 **必须** 放在 `EFI/OC/Kexts/` 目录下。
 
-Most kexts listed below can be found **pre-compiled** in the [build repo](http://dortania.github.io/builds/). Kexts here are compiled each time there's a new commit.
+下面列出的大多数kext都可以在[build repo](http://dortania.github.io/builds/)中**预编译**。这里的kext在每次有新的提交时都被编译。
 
-### Must haves
+### 必须拥有
 
-::: tip Required Kexts
+::: tip 必需的kext
 
-Without the below 2, no system is bootable:
+如果没有下面的2个，系统就无法启动:
 
-* [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">Required</span>)
-  * A kext to patch many processes, required for AppleALC, WhateverGreen, VirtualSMC and many other kexts. Without Lilu, they will not work.
-  * Note that while Lilu supports as early as Mac OS X 10.4, many plugins only work on newer versions.
-* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">Required</span>)
-  * Emulates the SMC chip found on real macs, without this macOS will not boot
-  * Requires Mac OS X 10.4 or newer
+* [Lilu](https://github.com/acidanthera/Lilu/releases)(<span style="color:red">必需</span>)
+  * 一个为许多进程打补丁的kext，这是AppleALC、WhateverGreen、VirtualSMC和许多其他kext所必需的。没有Lilu，他们就无法工作。
+  * 请注意，虽然Lilu早在Mac OS X 10.4版本就支持，但许多插件只能在较新的版本上使用。
+* [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)(<span style="color:red">必需</span>)
+  * 模拟真实mac上的SMC芯片，没有这个macOS将无法启动
+  * 要求Mac OS x10.4或更新版本
 
 :::
 
-### VirtualSMC Plugins
+### VirtualSMC插件
 
-The below plugins are not required to boot, and merely add extra functionality to the system like hardware monitoring. Unless otherwise specified, these plugins come with VirtualSMC
+以下插件不需要引导,仅仅添加额外的硬件监控等系统功能。除非另有说明，这些插件都是随VirtualSMC附带的
 
 ::: tip
 
-While VirtualSMC supports 10.4, plugins may require newer versions.
+虽然VirtualSMC支持10.4，但插件可能需要更新的版本。
 
 :::
 
 * SMCProcessor.kext
-  * Used for monitoring Intel CPU temperature
-  * Not for AMD CPU based systems
-  * Requires Mac OS X 10.7 or newer
+  * 用于监控Intel CPU温度
+  * 不适用于AMD CPU系统
+  * 要求Mac OS X 10.7或更新版本
 * [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor)
-  * Used for monitoring CPU temperature on AMD Zen-based systems
-  * **Under active development, potentially unstable**
-  * Requires AMDRyzenCPUPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
-  * Requires macOS 10.13 or newer
+  * 用于监控AMD zen系统的CPU温度
+  * **正在积极开发中，可能不稳定**
+  * 需要 AMDRyzenCPUPowerManagement (参见 [AMD CPU 专用的 Kexts](ktext.md#amd-cpu-specific-kexts))
+  * 需要macOS 10.13或更新版本
 * [SMCRadeonGPU](https://github.com/aluveitie/RadeonSensor)
-  * Used for monitoring GPU temperature on AMD GPU systems
-  * Requires RadeonSensor from the same repository
-  * Requires macOS 11 or newer
+  * 用于监控AMD GPU系统上的GPU温度
+  * 需要来自相同存储库的RadeonSensor
+  * 需要macOS 11或更新版本
 * SMCSuperIO.kext
-  * Used for monitoring fan speed
-  * Not for AMD CPU based systems
-  * Requires Mac OS X 10.6 or newer
+  * 用于监控风扇转速
+  * 不适用于基于AMD CPU的系统
+  * 需要Mac OS X 10.6或更新的版本
 * SMCLightSensor.kext
-  * Used for the ambient light sensor on laptops
-  * **Do not use if you don't have an ambient light sensor (ie. desktops), can cause issues otherwise**
-  * Requires Mac OS X 10.6 or newer
+  * 用于笔记本电脑的环境光传感器
+  * **如果你没有环境光传感器，请不要使用。 (例如台式电脑), 否则会导致问题**
+  * 需要Mac OS X 10.6或更新的版本
 * SMCBatteryManager.kext
-  * Used for measuring battery readouts on laptops
-  * **Do not use on desktops**
-  * Requires Mac OS X 10.4 or newer
+  * 用于测量笔记本电脑的电池读数
+  * **不要在台式机上使用**
+  * 需要Mac OS X 10.4或更新的版本
 * SMCDellSensors.kext
-  * Allows for finer monitoring and control of the fans on Dell machines supporting System Management Mode (SMM)
-  * **Do not use if you do not have a supported Dell machine**, mainly Dell laptops can benefit from this kext
-  * Requires Mac OS X 10.7 or newer
+  * 允许对支持系统管理模式(SMM)的戴尔机器的风扇进行更精细的监控和控制
+  * **如果你没有支持的Dell机器，请不要使用**, 主要是Dell笔记本电脑可以从这个kext中受益
+  * 需要Mac OS X 10.7或更新的版本
 
 ### Graphics
 
