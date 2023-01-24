@@ -320,7 +320,7 @@ pci14e4,1686 = Broadcom BCM57766
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
   * 用于为非apple /非fenvi Broadcom卡打补丁 **不能在Intel, Killer, Realtek等上工作**
   * 需要OS X 10.10或更新的版本
-  * 关于Big Sur参见[Big Sur 已知问题](./extras/big-sur#known-issues) 了解关于AirPortBrcm4360驱动器的额外步骤。 
+  * 关于Big Sur参见[Big Sur 已知问题](./extras/big-sur#known-issues) 了解关于AirPortBrcm4360驱动器的额外步骤。
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
   * 用于在Broadcom蓝牙芯片组上上传固件，所有非apple /非fenvi机场卡都需要。
   * 与BrcmFirmwareData.kext配对
@@ -392,7 +392,7 @@ BlueToolFixup可以在Lilu之后的任何地方使用。
 
 ### 笔记本电脑输入
 
-要弄清楚你使用的是什么样的键盘和触控板，请检查Windows中的设备管理器或Linux中的 `dmesg | grep -i input` 
+要弄清楚你使用的是什么样的键盘和触控板，请检查Windows中的设备管理器或Linux中的 `dmesg | grep -i input`
 
 ::: warning
 
