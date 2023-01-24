@@ -1,34 +1,34 @@
-# Creating the USB
+# 创建引导U盘
 
-Requirements:
+要求:
 
-* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), highly recommend running the debug version to show more info
-* [ProperTree](https://github.com/corpnewt/ProperTree) to edit .plist files (OpenCore Configurator is another tool but is heavily outdated and the Mackie version is known for corruption. **Please avoid these kinds of tools at all costs!**).
-* You must remove Clover from your system entirely if you wish to use OpenCore as your main boot-loader. Keep a backup of your Clover based EFI. See here on what needs to be cleaned: [Clover Conversion](https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion)
+* [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases), 强烈建议运行测试版本来显示更多的测试信息
+* [ProperTree](https://github.com/corpnewt/ProperTree) 编辑.plist文件(OpenCore Configurator是另一个工具，但已经严重过时，Mackie版本以腐败而闻名。**请尽量避免使用这些工具!**)
+* 如果您希望使用OpenCore作为主引导加载程序，则必须从系统中完全删除Clover。保留一个基于三叶草的EFI备份。请看这里需要清洁的东西:[三叶草转换](https://github.com/sumingyd/OpenCore-Install-Guide/tree/master/clover-conversion)
 
-### Online vs Offline Installer
+### 在线与离线安装程序
 
-Offline installers have a complete copy of macOS, while online installers are only a recovery image (~500MB) which then download macOS from Apple servers once booted.
+离线安装程序有一个完整的macOS副本，而在线安装程序只有一个恢复映像(~500MB)，一旦启动就从苹果服务器下载macOS。
 
-* Offline
-  * Can only be made in macOS
-  * Windows/Linux do not have the APFS/HFS drivers needed to assemble a full installer
-* Online
-  * Can be made in macOS/Linux/Windows
-  * Requires a working internet connection via a macOS supported network adapter on the target machine
+* 离线
+  * 只能在macOS中制作
+  * Windows/Linux没有安装完整安装程序所需的APFS/HFS驱动程序
+* 在线
+  * 可以在macOS/Linux/Windows中制作
+  * 需要通过目标机器上支持macOS的网络适配器来连接互联网
 
-### Making the Installer
+### 制作安装程序
 
-Depending on which OS you're on, see your specific section on making the USB:
+根据你使用的操作系统，请参阅有关制作USB引导的章节:
 
-* [macOS users](../installer-guide/mac-install.md)
-  * Supports OS X 10.4 to current
-  * Supports both legacy and UEFI installs
-* [Windows users](../installer-guide/windows-install.md)
-  * Supports OS X 10.7 to current
-  * Online installer only
-  * Supports both legacy and UEFI installs
-* [Linux users(UEFI)](../installer-guide/linux-install.md)
-  * Supports OS X 10.7 to current
-  * Online installer only
-  * Meant for machines supporting UEFI Boot
+* [macOS 用户](../installer-guide/mac-install.md)
+  * 支持OS x10.4到当前
+  * 支持传统和UEFI安装
+* [Windows 用户](../installer-guide/windows-install.md)
+  * 支持OS X 10.7到当前
+  * 仅限在线安装程序
+  * 支持传统和UEFI安装
+* [Linux 用户(UEFI)](../installer-guide/linux-install.md)
+  * 支持OS X 10.7到当前
+*仅限在线安装程序
+*适用于支持UEFI 启动的机器
