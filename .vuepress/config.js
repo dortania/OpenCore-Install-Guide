@@ -60,33 +60,33 @@ module.exports = {
         editLinkText: '帮助我们改进此页面!',
         logo: '/homepage.png',
         nav: [{
-            text: 'suming Guides',
+            text: '安装指南s',
             items: [{
-                text: 'Home Site',
+                text: '主页面',
                 link: 'https://sumingyd.github.io/OpenCore-Install-Guide/'
             },
             {
-                text: 'Getting Started With ACPI',
+                text: 'ACPI入门',
                 link: 'https://sumingyd.github.io/Getting-Started-With-ACPI/'
             },
             {
-                text: 'OpenCore Post-Install',
+                text: 'OpenCore安装后',
                 link: 'https://sumingyd.github.io/OpenCore-Post-Install/'
             },
             {
-                text: 'OpenCore Multiboot',
+                text: 'OpenCore多引导',
                 link: 'https://sumingyd.github.io/OpenCore-Multiboot/'
             },
             {
-                text: 'GPU Buyers Guide',
+                text: 'GPU购买指南',
                 link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
             },
             {
-                text: 'Wireless Buyers Guide',
+                text: '无限购买指南',
                 link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
             },
             {
-                text: 'Anti Buyers Guide',
+                text: '避免购买指南',
                 link: 'https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/'
             },
             ]
@@ -105,11 +105,11 @@ module.exports = {
             ]
         },
         {
-            title: 'USB 创建',
+            title: '创建USB引导',
             collapsable: false,
             sidebarDepth: 2,
             children: [{
-                title: 'Creating the USB',
+                title: '创建USB引导',
                 collapsable: true,
                 path: '/installer-guide/',
                 sidebarDepth: 1,
@@ -121,7 +121,7 @@ module.exports = {
             },
                 '/installer-guide/opencore-efi',
                 'ktext',
-            ['https://sumingyd.github.io/Getting-Started-With-ACPI/', 'Getting started with ACPI'],
+            ['https://sumingyd.github.io/Getting-Started-With-ACPI/', 'ACPI入门'],
                 '/config.plist/',
             ]
         },
@@ -129,7 +129,7 @@ module.exports = {
             title: '配置',
             collapsable: false,
             children: [{
-                title: 'Intel Desktop config.plist',
+                title: 'Intel 台式电脑配置文件',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
@@ -145,7 +145,7 @@ module.exports = {
                 ]
             },
             {
-                title: 'Intel Laptop config.plist',
+                title: 'Intel 笔记本电脑配置文件',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
@@ -162,7 +162,7 @@ module.exports = {
                 ]
             },
             {
-                title: 'Intel HEDT config.plist',
+                title: 'Intel HEDT配置文件',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
@@ -174,7 +174,7 @@ module.exports = {
                 ]
             },
             {
-                title: 'AMD Desktop config.plist',
+                title: 'AMD 台式电脑配置文件',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
@@ -221,7 +221,7 @@ module.exports = {
             children: [
                 ['https://sumingyd.github.io/OpenCore-Post-Install/', 'Post-Install'],
                 {
-                    title: 'Universal',
+                    title: '通用',
                     collapsable: true,
                     sidebarDepth: 1,
                     children: [
@@ -237,7 +237,7 @@ module.exports = {
                     ]
                 },
                 {
-                    title: 'Laptop Specifics',
+                    title: '笔记本电脑',
                     collapsable: true,
                     children: [
                         ['https://sumingyd.github.io/OpenCore-Post-Install/laptop-specific/battery', 'Fixing Battery Read-outs'],
@@ -245,7 +245,7 @@ module.exports = {
                     ]
                 },
                 {
-                    title: 'Cosmetics',
+                    title: '美化',
                     collapsable: true,
                     children: [
                         ['https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/verbose', 'Fixing Resolution and Verbose'],
@@ -253,7 +253,7 @@ module.exports = {
                     ]
                 },
                 {
-                    title: 'Multiboot',
+                    title: '多引导',
                     collapsable: true,
                     children: [
                         ['https://sumingyd.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
@@ -262,7 +262,7 @@ module.exports = {
                     ]
                 },
                 {
-                    title: 'Miscellaneous',
+                    title: '其他',
                     collapsable: true,
                     children: [
                         ['https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc', 'Fixing RTC'],
