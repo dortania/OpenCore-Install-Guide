@@ -123,87 +123,87 @@ kext是**k**ernel**ext**ension,你可以把它想象成macOS的驱动程序，�
   * **如果你没有支持的Dell机器，请不要使用**, 主要是Dell笔记本电脑可以从这个kext中受益
   * 需要Mac OS X 10.7或更新的版本
 
-### Graphics
+### 显示
 
-* [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">Required</span>)
-  * Used for graphics patching, DRM fixes, board ID checks, framebuffer fixes, etc; all GPUs benefit from this kext.
-  * Note the SSDT-PNLF.dsl file included is only required for laptops and AIOs, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) for more info
-  * Requires Mac OS X 10.6 or newer
+* [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases)(<span style="color:red">必需</span>)
+  * 用于图形补丁、DRM修复、板号检查、帧缓冲区修复等;所有gpu都受益于这个kext。
+  * 注意SSDT-PNLF.dsl文件只适用于笔记本电脑和AIOs，请参阅[开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) 以获取更多信息
+  * 需要Mac OS X 10.6或更新的版本
 
-### Audio
+### 声音
 
 * [AppleALC](https://github.com/acidanthera/AppleALC/releases)
-  * Used for AppleHDA patching, allowing support for the majority of on-board sound controllers
-  * AppleALCU.kext is a pared down version of AppleALC that only supports digital audio - but you can still use AppleALC.kext on digital audio-only systems
-  * AMD 15h/16h may have issues with AppleALC and Ryzen/Threadripper systems rarely have mic support
-  * Requires OS X 10.4 or newer
+  * 用于AppleHDA补丁，允许支持大多数集成的声音控制器
+  * AppleALCU.kext 是AppleALC的精简版，只支持数字音频，但你仍然可以使用 AppleALC.kext 在数字音频系统上
+  * AMD 15h/16h 可能使用AppleALC有问题。而 Ryzen/Threadripper 系统很少支持mic
+  * 需要OS X 10.4或更新版本
   
-::: details Legacy Audio Kext
+::: details 传统声音 Kext
 
-For those who plan to boot 10.7 and older may want to opt for these kexts instead:
+对于那些计划引导10.7或更老版本的用户，可以选择这些kext:
 
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
-  * Requires OS X 10.6 or newer
+  * 需要OS X 10.6或更新版本
   
 * [VoodooHDA-FAT](https://github.com/khronokernel/Legacy-Kexts/blob/master/FAT/Zip/VoodooHDA.kext.zip)
-  * Similar to the above, however supports 32 and 64-Bit kernels so perfect for OS X 10.4-5 booting and 32-Bit CPUs
+  * 与上述类似，但是支持32位和64位内核，因此非常适合OS X 10.4-5引导和32位的cpu
 
 :::
 
-### Ethernet
+### 网络适配器
 
-Here we're going to assume you know what ethernet card your system has, reminder that product spec pages will most likely list the type of network card.
+在这里，我们假设您知道系统有什么网卡，提醒您产品规格页面很可能会列出网卡的类型。
 
 * [IntelMausi](https://github.com/acidanthera/IntelMausi/releases)
-  * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
-  * Intel's 82578, 82579, I217, I218 and I219 NICs are officially supported
-  * Requires OS X 10.9 or newer, 10.6-10.8 users can use IntelSnowMausi instead for older OSes
+  * 对于大多数Intel网卡，基于I211的芯片组将需要SmallTreeIntel82576 kext
+  * Intel的82578、82579、I217、I218和I219网卡得到官方支持
+  * 需要OS X 10.9或更新版本，10.6-10.8旧的操作系统用户可以使用IntelSnowMausi代替
 * [AppleIGB](https://github.com/donatengit/AppleIGB/releases)
-  * Required for I211 NICs running on macOS Monterey and above
-  * Might have instability issues on some NICs, recommended to stay on Big Sur and use SmallTree
-  * Required for most AMD boards running Intel NICs
-  * Requires macOS 12 and above
+  * 需要在macOS Monterey及以上版本上运行I211网卡
+  * 可能在一些网卡上有不稳定的问题，建议留在Big Sur上并使用SmallTree
+  * 大多数运行Intel网卡的AMD主板都需要
+  * 需要macOS 12及以上版本
 * [SmallTreeIntel82576](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for I211 NICs running on macOS versions up to Big Sur, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet) or above)
-  * Required for most AMD boards running Intel NICs
-  * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
+  * 在macOS版本上运行到Big Sur的I211网卡需要，基于SmallTree kext，但补丁支持I211(在macOS 12 [Monterey](./extras/monterey.md#ethernet) 或以上不起作用)
+  * 大多数运行Intel网卡的AMD主板都需要
+  * 需要OS X 10.9-12(v1.0.6)， macOS 10.13-14(v1.2.5)， macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
-  * Required for Atheros and Killer NICs
-  * Requires OS X 10.8 or newer
-  * Note: Atheros Killer E2500 models are actually Realtek based, for these systems please use [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) instead
+  * 需要Atheros和Killer NICs
+  * 需要OS X 10.8或更新的版本
+  * 注意:Atheros Killer E2500模型实际上是基于Realtek的，对于这些系统，请使用[RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases) 代替
 * [RealtekRTL8111](https://github.com/Mieze/RTL8111_driver_for_OS_X/releases)
-  * For Realtek's Gigabit Ethernet
-  * Requires OS X 10.8 and up for versions v2.2.0 and below, macOS 10.12 and up for version v2.2.2, macOS 10.14 and up for versions v2.3.0 and up
-  * **NOTE:** Sometimes the latest version of the kext might not work properly with your Ethernet. If you see this issue, try older versions.
+  * 用于Realtek的千兆以太网
+  * v2.2.0及以下版本需要OS X 10.8及以上，v2.2.2版本需要macOS 10.12及以上，v2.3.0及以上版本需要macOS 10.14及以上
+  * **注意:** 有时最新版本的kext可能无法在让您的以太网正常工作。如果你看到这个问题，请尝试旧版本。
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
-  * For Realtek's 2.5Gb Ethernet
-  * Requires macOS 10.15 or newer
-* For Intel's I225-V NICs, patches are mentioned in the desktop [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) section. No kext is required.
-  * Requires macOS 10.15 or newer
-* For Intel's I350 NICs, patches are mentioned in the HEDT [Sandy and Ivy Bridge-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) section. No kext is required.
-  * Requires OS X 10.10 or newer
+  * 用于Realtek的2.5Gb以太网
+  * 需要macOS 10.15或更新的版本
+* 对于英特尔的I225-V网卡，补丁在桌面 [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) 部分中提到，不需要kext。
+  * 需要macOS 10.15或更新的版本
+* 对于英特尔的I350网卡，补丁在HEDT [Sandy and Ivy Bridge-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) 部分中提到，不需要kext。
+  * 需要OS X 10.10或更新的版本
 
-::: details Legacy Ethernet Kexts
+::: details 传统网络适配器的Kexts
 
-Relevant for either legacy macOS installs or older PC hardware.
+无论是传统的macOS安装还是旧的PC硬件。
 
 * [AppleIntele1000e](https://github.com/chris1111/AppleIntelE1000e/releases)
-  * Mainly relevant for 10/100MBe based Intel Ethernet controllers
-  * Requires 10.6 or newer
+  * 主要用于基于10/100MBe的Intel以太网控制器
+  * 需要10.6或更新的版本
 * [RealtekRTL8100](https://www.insanelymac.com/forum/files/file/259-realtekrtl8100-binary/)
-  * Mainly relevant for 10/100MBe based Realtek Ethernet controllers
-  * Requires macOS 10.12 or newer with v2.0.0+
+  * 主要用于基于10/100MBe的Realtek以太网控制器
+  * 需要macOS 10.12或更新的v2.0.0+
 * [BCM5722D](https://github.com/chris1111/BCM5722D/releases)
-  * Mainly relevant for BCM5722 based Broadcom Ethernet controllers
-  * Requires OS X 10.6 or newer
+  * 主要适用于基于BCM5722的Broadcom以太网控制器
+  * 需要OS X 10.6或更新的版本
 
 :::
 
-And also keep in mind certain NICs are actually natively supported in macOS:
+还请记住，某些网卡实际上在macOS中是原生支持的:
 
-::: details Native Ethernet Controllers
+::: details 原生网络适配器
 
-#### Aquantia Series
+#### Aquantia 系列
 
 ```md
 # AppleEthernetAquantiaAqtion.kext
@@ -220,9 +220,9 @@ pci1d6a,c0   = Aquantia AQC113
 pci1d6a,4c0  = Aquantia AQC113
 ```
 
-**Note**: Due to some outdated firmware shipped on many Aquantia NICs, you may need to update the firmware in Linux/Windows to ensure it's macOS-compatible.
+**注意**: 由于许多aquania NICs上有一些过时的固件，您可能需要在Linux/Windows中更新固件，以确保它与macos兼容。
 
-#### Intel Series
+#### Intel 系列
 
 ```md
 # AppleIntel8254XEthernet.kext
@@ -240,7 +240,7 @@ pci8086,10f6 = Intel 82574L
 
 ```
 
-#### Broadcom Series
+#### Broadcom 系列
 
 ```md
 # AppleBCM5701Ethernet.kext
@@ -276,7 +276,7 @@ pci14e4,1686 = Broadcom BCM57766
     * X99
     * ASRock Intel boards (B460/Z490+ boards do not need it however)
 
-### WiFi and Bluetooth
+### WiFi 和 蓝牙
 
 #### Non-Native Bluetooth Cards
 
@@ -343,7 +343,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 
 :::
 
-### AMD CPU Specific kexts
+### AMD CPU 专用 kexts
 
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
   * USB fix for AMD FX systems, not recommended for Ryzen
@@ -357,7 +357,7 @@ However ProperTree will handle this for you, so you need not concern yourself
   * **Under active development, potentially unstable**
   * Requires macOS 10.13 or newer
 
-### Extras
+### 额外
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
   * Required on macOS 12.3 and later on AMD systems, and on macOS 10.15 and later on dual-socket Intel systems.
@@ -390,7 +390,7 @@ However ProperTree will handle this for you, so you need not concern yourself
   
 :::
 
-### Laptop Input
+### 笔记本电脑输入
 
 To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep -i input` in Linux
 
@@ -400,7 +400,7 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
 
 :::
 
-#### PS2 Keyboards/Trackpads
+#### PS2键盘/触摸板
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
   * Works with various PS2 keyboards, mice, and trackpads
@@ -409,7 +409,7 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
   * Supports macOS 10.6+
 
-#### SMBus Trackpads
+#### SMBus 触摸板
 
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases)
   * For systems with Synaptics SMBus trackpads
@@ -419,7 +419,7 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
   * For systems with ELAN SMBus Trackpads
   * Supports macOS 10.14 or newer currently
 
-#### I2C/USB HID Devices
+#### I2C/USB HID 设备
 
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
   * Supports macOS 10.11+
@@ -458,7 +458,7 @@ So you see all those SSDTs in the AcpiSamples folder and wonder whether you need
 
 A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
 
-### Desktop
+### 台式电脑
 
 | Platforms | **CPU** | **EC** | **AWAC** | **NVRAM** | **USB** |
 | :-------: | :-----: | :----: | :------: | :-------: | :-----: |
@@ -475,7 +475,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | AMD (15/16h) | N/A | ^^ | N/A | ^^ | N/A |
 | AMD (17/19h) | [SSDT-CPUR for B550 and A520](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) | ^^ | ^^ | ^^ | ^^ |
 
-### High End Desktop
+### 高端台式电脑
 
 | Platforms | **CPU** | **EC** | **RTC** | **PCI** |
 | :-------: | :-----: | :----: | :-----: | :-----: |
@@ -486,7 +486,7 @@ A quick TL;DR of needed SSDTs(This is source code, you will have to compile them
 | Broadwell-E | ^^ | ^^ | ^^ | ^^ |
 | Skylake-X | ^^ | ^^ | ^^ | N/A |
 
-### Laptop
+### 笔记本电脑
 
 | Platforms | **CPU** | **EC** | **Backlight** | **I2C Trackpad** | **AWAC** | **USB** | **IRQ** |
 | :-------: | :-----: | :----: | :-----------: | :--------------: | :------: | :-----: | :-----: |
