@@ -232,7 +232,7 @@ pci8086,105e = Intel 82571EB/82571GB
 
 # AppleIntelI210Ethernet.kext
 pci8086,1533 = Intel I210
-pci8086,15f2 = Intel I225LM (Added in macOS 10.15)
+pci8086,15f2 = Intel I225LM (macOS 10.15新增)
 
 # Intel82574L.kext
 pci8086,104b = Intel 82566DC
@@ -255,61 +255,61 @@ pci14e4,1686 = Broadcom BCM57766
 
 ### USB
 
-* USBToolBox ([tool](https://github.com/USBToolBox/tool) and [kext](https://github.com/USBToolBox/kext))
-  * USB mapping tool for Windows and macOS.
-  * It is highly advisable to map your USB ports before you install macOS to avoid any port limit issues
-  * Features
-    * Supports mapping from Windows and macOS (Linux support in progress)
-    * Can build a map using either the USBToolBox kext or native Apple kexts (AppleUSBHostMergeProperties)
-    * Supports multiple ways of matching
-    * Supports companion ports (on Windows)
+* USBToolBox ([tool](https://github.com/USBToolBox/tool) 和 [kext](https://github.com/USBToolBox/kext))
+  * 用于Windows和macOS的USB映射工具。
+  * 强烈建议在安装macOS之前映射你的USB端口，以避免任何端口限制问题
+  * 功能
+    * 支持从Windows和macOS映射(Linux支持正在进行中)
+    * 可以使用USBToolBox kext或本地Apple kext构建一个地图(AppleUSBHostMergeProperties)
+    * 支持多种匹配方式
+    * 支持配套端口(Windows)
 
 * [XHCI-unsupported](https://github.com/RehabMan/OS-X-USB-Inject-All)
-  * Needed for non-native USB controllers
-  * AMD CPU based systems don't need this
-  * Common chipsets needing this:
+  * 非原生USB控制器需要
+  * 基于AMD CPU的系统不需要这个
+  * 需要这些的常见芯片组:
     * H370
     * B360
     * H310
-    * Z390 (not needed on Mojave and newer)
+    * Z390 (Mojave和更新版本不需要)
     * X79
     * X99
-    * ASRock Intel boards (B460/Z490+ boards do not need it however)
+    * ASRock Intel 主板 (B460/Z490+板不需要)
 
 ### WiFi 和 蓝牙
 
-#### Non-Native Bluetooth Cards
+#### 非原生蓝牙卡
 
 * [BlueToolFixup](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Patches the macOS 12+ Bluetooth stack to support third-party cards
-  * Needed for all non-native (non-Apple Broadcom, Intel, etc) Bluetooth cards
-  * Included in the [BrcmPatchRAM](#broadcom) zip
-  * **Do not use on macOS 11 and earlier**
+  * 为macOS 12+蓝牙协议栈打补丁以支持第三方卡
+  * 所有非原生(非苹果博通、英特尔等)蓝牙卡都需要
+  * 包含在[BrcmPatchRAM](#broadcom) zip文件中
+  * **不要在macOS 11和更早的版本使用**
 
 #### Intel
 
 * [AirportItlwm](https://github.com/OpenIntelWireless/itlwm/releases)
-  * Adds support for a large variety of Intel wireless cards and works natively in recovery thanks to IO80211Family integration
-  * Requires macOS 10.13 or newer and requires Apple's Secure Boot to function correctly
+  * 增加了对多种英特尔无线卡的支持，并通过IO80211Family集成在恢复中原生工作
+  * 需要macOS 10.13或更新版本，并且需要Apple的安全引导才能正常运行
 * [Itlwm](https://github.com/OpenIntelWireless/itlwm/releases)
-  * Alternative to AirportItlwm for systems where Apple's Secure Boot cannot be enabled
-  * Requires [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases)
-  * It will be treated as an Ethernet card, and you will have to connect to Wi-Fi via Heliport
-  * **Does not work in macOS recovery**
+  * 对于无法启用苹果安全引导的系统，可选择AirportItlwm
+  * 需要 [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases)
+  * 它将被视为以太网卡，你必须通过Heliport连接Wi-Fi
+  * **在macOS恢复中不起作用**
 * [IntelBluetoothFirmware](https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases)
-  * Adds Bluetooth support to macOS when paired with an Intel wireless card
-  * Use IntelBTPatcher (included) in addition to patch bugs in macOS
-  * Requires macOS 10.13 or newer
-  * On macOS 10.13 through 11, you also need IntelBluetoothInjector (included)
+  * 当与英特尔无线网卡配对时，为macOS添加蓝牙支持
+  * 除了修补macOS中的bug之外，还可以使用IntelBTPatcher(包含)
+  * 需要macOS 10.13或更新的版本
+  * 在macOS 10.13到11中，你还需要intelbluetooth oothinjector(包含)
 
-::: details More info on enabling AirportItlwm
+::: details 更多关于启用airportlwm的信息
 
-To enable AirportItlwm support with OpenCore, you'll need to either:
+要使用OpenCore启用AirportItlwm支持，你需要:
 
-* Enable `Misc -> Security -> SecureBootModel` by either setting it as `Default` or some other valid value
-  * This is discussed both later on in this guide and in the post-install guide: [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html)
-* If you cannot enable SecureBootModel, you can still force inject IO80211Family (**highly discouraged**)
-  * Set the following under `Kernel -> Force` in your config.plist (discussed later in this guide):
+* 启用 `Misc -> Security -> SecureBootModel` 将其设置为 `Default` 或其他有效值
+  * 这将在本指南后面和安装后指南中讨论: [Apple Secure Boot](https://sumingyd.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html)
+* 如果你不能启用SecureBootModel，你仍然可以强制注入IO80211Family(**非常不建议**)
+  * 在config.plist文件的 `Kernel -> Force` 下设置以下内容。  (本指南稍后将讨论):
   
 ![](./images/ktext-md/force-io80211.png)
 
@@ -318,44 +318,44 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
 #### Broadcom
 
 * [AirportBrcmFixup](https://github.com/acidanthera/AirportBrcmFixup/releases)
-  * Used for patching non-Apple/non-Fenvi Broadcom cards, **will not work on Intel, Killer, Realtek, etc**
-  * Requires OS X 10.10 or newer
-  * For Big Sur see [Big Sur Known Issues](./extras/big-sur#known-issues) for extra steps regarding AirPortBrcm4360 drivers.
+  * 用于为非apple /非fenvi Broadcom卡打补丁 **不能在Intel, Killer, Realtek等上工作**
+  * 需要OS X 10.10或更新的版本
+  * 关于Big Sur参见[Big Sur 已知问题](./extras/big-sur#known-issues) 了解关于AirPortBrcm4360驱动器的额外步骤。 
 * [BrcmPatchRAM](https://github.com/acidanthera/BrcmPatchRAM/releases)
-  * Used for uploading firmware on Broadcom Bluetooth chipset, required for all non-Apple/non-Fenvi Airport cards.
-  * To be paired with BrcmFirmwareData.kext
-    * BrcmPatchRAM3 for 10.15+ (must be paired with BrcmBluetoothInjector)
-    * BrcmPatchRAM2 for 10.11-10.14
-    * BrcmPatchRAM for 10.8-10.10
-  * On macOS 10.11 through macOS 11, you also need BrcmBluetoothInjector (included)
+  * 用于在Broadcom蓝牙芯片组上上传固件，所有非apple /非fenvi机场卡都需要。
+  * 与BrcmFirmwareData.kext配对
+    * BrcmPatchRAM3用于10.15+(必须与BrcmBluetoothInjector配对)
+    * BrcmPatchRAM2为10.11-10.14
+    * BrcmPatchRAM为10.8-10.10
+  * 在macOS 10.11到macOS 11中，你还需要brcmbluetooth oothinjector(包含)
 
-::: details BrcmPatchRAM Load order
+::: details BrcmPatchRAM加载顺序
 
-The order in `Kernel -> Add` should be:
+`Kernel -> Add`中的顺序应该是:
 
-1. BrcmBluetoothInjector (if needed)
+1. BrcmBluetoothInjector (如果需要)
 2. BrcmFirmwareData
-3. BrcmPatchRAM3 (or BrcmPatchRAM2/BrcmPatchRAM)
+3. BrcmPatchRAM3 (或 BrcmPatchRAM2/BrcmPatchRAM)
 
-BlueToolFixup can be anywhere after Lilu.
+BlueToolFixup可以在Lilu之后的任何地方使用。
 
-However ProperTree will handle this for you, so you need not concern yourself
+然而，ProperTree将为您处理此问题，因此您无需担心
 
 :::
 
 ### AMD CPU 专用 kexts
 
 * [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
-  * USB fix for AMD FX systems, not recommended for Ryzen
-  * Requires macOS 10.13 or newer
+  * AMD FX系统的USB修复，不建议Ryzen使用
+  * 需要macOS 10.13或更新的版本
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
-  * Audio for FX systems and front panel Mic+Audio support for Ryzen system, do not mix with AppleALC. Audio quality is noticeably worse than AppleALC on Zen CPUs
-  * Requires OS X 10.6 or newer
-  * Using this kext on macOS 11.3 and above is not recommended as you need to modify the macOS filesystem and disable SIP
+  * 用于FX系统和前面板Mic+ Ryzen系统的音频支持，不要与AppleALC混合。音频质量明显比Zen cpu上的AppleALC差
+  * 需要OS X 10.6或更新的版本
+  * 不建议在macOS 11.3或更高版本上使用此kext，因为您需要修改macOS文件系统并禁用SIP
 * [AMDRyzenCPUPowerManagement](https://github.com/trulyspinach/SMCAMDProcessor)
-  * CPU power management for Ryzen systems
-  * **Under active development, potentially unstable**
-  * Requires macOS 10.13 or newer
+  * Ryzen系统的CPU电源管理
+  * **正在积极开发中，可能不稳定**
+  * 需要macOS 10.13或更新的版本
 
 ### 额外
 
