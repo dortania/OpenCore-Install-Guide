@@ -52,7 +52,7 @@
 
 根据设备的不同，它可能会在多个名称和连接下显示。主要需要关注的是:
   
-:::details SMBus细节
+:::details SMBus
   
 这些将显示为直接PCI设备，如 `Synaptics SMBus Driver` 或 `ELAN SMBus Driver`
 
@@ -64,7 +64,7 @@
 
 :::
 
-:::details USB细节
+:::details USB
 
 | Device by Type | Device by Connection |
 | :--- | :--- |
@@ -74,7 +74,7 @@
 
 :::
 
-:::details I2C细节
+:::details I2C
 
 ![](./images/finding-hardware-md/i2c-trackpad.png)
 它们几乎总是以微软的HID设备的形式显示，不过也可以以其他触控板的形式显示。但它们总是在I2C下显示。
@@ -171,7 +171,7 @@ lshw -class disk -class storage
 * [预编译二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)
 * 手动克隆 [存储库](https://github.com/KernelWanderers/OCSysInfo)
 
-:::details 提示
+:::TIP
 我们建议您下载[二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)，因为这是最简单的方法。
 
 如果您想了解关于手动克隆存储库的更多信息，可以查看OCSysInfo[迷你指南](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide).
@@ -179,7 +179,7 @@ lshw -class disk -class storage
 
 ### 发现硬件
 
-:::details 警告
+:::WARING
 笔记本电脑用户:在我们开始之前，我们建议您断开任何外部USB设备，因为这可能会导致收集的模棱两可或不必要的信息，可能会使您感到困惑。
 :::
 
@@ -210,21 +210,21 @@ lshw -class disk -class storage
 
 ### 键盘和触摸板连接类型
 
-:::details SMBus触摸板细节
+:::details SMBus触摸板
 ![](./images/finding-hardware-md/id-smbus-ocsysinfo.png)
 触摸板: `SMBus` <br /> 键盘: `PS/2`
 
 图片来源:[ThatCopy](https://github.com/ThatCopy)
 :::
 
-:::details I2C触摸板细节
+:::details I2C触摸板
 ![](./images/finding-hardware-md/id-i2c-ocsysinfo.png)
 触摸板: `I2C` <br /> 键盘: `PS/2`
 
 图片来源:[Mahas](https://github.com/Mahas1)
 :::
 
-:::details PS/2触摸板细节
+:::details PS/2触摸板
 ![](./images/finding-hardware-md/id-ps2-ocsysinfo.png)
 触摸板: `PS/2` <br /> 键盘: `PS/2`
 
