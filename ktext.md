@@ -502,7 +502,7 @@ A quick TL;DR of needed SSDTs(这是源代码，你必须将它们编译到.aml�
 | Comet Lake | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Ice Lake | ^^ | ^^ | ^^ | ^^ | ^^ | [SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/Universal/rhub.html) | ^^ |
 
-Continuing:
+继续:
 
 | Platforms | **NVRAM** | **IMEI** |
 | :-------: | :-------: | :------: |
