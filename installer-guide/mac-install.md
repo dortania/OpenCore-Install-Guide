@@ -1,29 +1,29 @@
 
-# Making the installer in macOS
+# 在macOS中制作安装程序
 
-While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
+虽然你不需要重新安装macOS来使用OpenCore，但一些用户更喜欢使用全新的引导管理器升级。
 
-To start we'll want to grab ourselves a copy of macOS. You can skip this and head to formatting the USB if you're just making a bootable OpenCore stick and not an installer. For everyone else, you can either download macOS from the App Store or with Munki's script.
+首先，我们要找一个macOS的副本。如果你只是制作一个可引导的OpenCore U盘，而不是安装程序，你可以跳过这一步，直接格式化USB。对于其他人来说，你可以从App Store下载macOS，也可以使用Munki的脚本。
 
-## Downloading macOS: Modern OS
+## 下载macOS:现代OS
 
-* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
+* 此方法允许您下载macOS 10.13及更新版本，对于10.12及更旧的版本，请查看 [下载macOS: 传统OS](#downloading-macos-legacy-os)
 
-From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
+在符合你想要安装的操作系统版本要求的macOS机器上，直接进入App Store下载所需的操作系统版本，然后继续 [**设置安装程序**](#setting-up-the-installer).
 
-For machines that need a specific OS release or can't download from the App Store, you can use the Munki's InstallInstallMacOS utility.
+对于需要特定操作系统版本或无法从App Store下载的机器，可以使用Munki的InstallInstallMacOS实用程序。
 
-::: details Note for users running macOS Monterey 12.3 or above
+::: details 运行macOS Monterey 12.3或以上版本的用户请注意
 
-Starting from macOS Monterey 12.3, Apple removed support for `python2.7`, so without it `installinstallmacos.py` will throw the following error:
+从macOS Monterey 12.3开始，苹果删除了对`python2.7`的支持， 因此如果没有它，`installinstallmacos.py`将出现以下错误:
 
 ```
 This tool requires the Python xattr module. Perhaps run 'pip install xattr' to install it.
 ```
 
-To overcome the issue, we recommend to install `Command Line Tools for Xcode` by running `xcode-select --install` in a Terminal and then run `pip3 install xattr`
+为了解决这个问题，我们建议通过在终端中运行`Xcode -select——install`来安装`Xcode命令行工具`，然后运行`pip3 install xattr`
 
-After that you can run the same command below but with `python3` instead of just `python`:
+之后你可以使用`python3`而不是`python`来运行下面相同的命令:
 
 ```sh
 mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py > installinstallmacos.py && sudo python3 installinstallmacos.py
@@ -31,7 +31,7 @@ mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubuse
   
 :::
 
-In order to run it, just copy and paste the below command in a terminal window:
+为了运行它，只需要在终端窗口中复制并粘贴下面的命令:
 
 ```sh
 mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubusercontent.com/munki/macadmin-scripts/main/installinstallmacos.py > installinstallmacos.py && sudo python installinstallmacos.py
@@ -39,63 +39,63 @@ mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubuse
 
 ![](../images/installer-guide/mac-install-md/munki.png)
 
-As you can see, we get a nice list of macOS installers. If you need a particular versions of macOS, you can select it by typing the number next to it. For this example we'll choose 10:
+如你所见，我们得到了一个很好的macOS安装程序列表。如果你需要某个特定版本的macOS，可以通过在它旁边输入数字来选择它。在这个例子中，我们选择10:
 
 ![](../images/installer-guide/mac-install-md/munki-process.png)
 
-* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
-    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
+* **macOS 12及以上版本注意**: 由于最新版本的macOS对USB栈进行了更改，因此强烈建议您在安装macOS之前(使用USBToolBox)映射USB端口。
+  * <span style="color:red"> 注意: </span> 在macOS 11.3及更新版本中，[XhciPortLimit被破坏导致启动循环](https://github.com/dortania/bugtracker/issues/162).
+    * 如果你已经[映射了你的USB端口](https://dortania.github.io/OpenCore-Post-Install/usb/) 并且禁用了 `XhciPortLimit`, 那么你可以正常启动macOS 11.3+。
 
-This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
+这需要一段时间，因为我们正在下载整个8GB以上的macOS安装程序，所以强烈建议你在等待的时候阅读本指南的其余部分。
 
-Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called `Install_macOS_11.1-20C69.dmg` for example. Mount it and you'll find the installer application.
+完成后，你会发现在你的`~/macOS-Installer/`文件夹中有一个包含macOS安装程序的DMG，名为`Install_macOS_11.1-20C69.Dmg`。挂载它，你就会找到安装程序。
 
-* Note: We recommend to move the Install macOS.app into the `/Applications` folder, as we'll be executing commands from there.
-* Note 2: Running Cmd+Shift+G in Finder will allow you to easily jump to `~/macOS-installer`
+* 注意:我们建议移动安装 macOS.app 到 `/Applications` 文件夹，因为我们将从那里执行命令。
+* 注意 2:在Finder中运行Cmd+Shift+G可以让你轻松跳转到`~/macOS-installer`
 
 ![](../images/installer-guide/mac-install-md/munki-done.png)
 
 ![](../images/installer-guide/mac-install-md/munki-dmg.png)
 
-From here, jump to [Setting up the installer](#setting-up-the-installer) to finish your work. If you want to check the integrity of your download, you can check [this repository of checksums](https://github.com/notpeter/apple-installer-checksums), although do note that these are crowdsourced checksums and may not be a reliable way to check for authenticity.
+从这里，跳转到[设置安装程序](#setting-up-the-installer) 来完成你的工作。如果你想检查下载的完整性，你可以检查[这个校验存储库](https://github.com/notpeter/apple-installer-checksums), 不过请注意，这些校验和是众包的，可能不是检查真实性的可靠方法。
 
-## Downloading macOS: Legacy OS
+## 下载macOS:传统OS
 
-* This method allows you to download much older versions of OS X, currently supporting all Intel versions of OS X(10.4 to current)
+* 此方法允许您下载OS X的更老版本，目前支持所有OS X的英特尔版本(10.4到当前)
 
-  * [Legacy macOS: Offline Method](./mac-install-pkg.md)
-    * 10.7 - 10.12 supported, excluding 10.9
-  * [Legacy macOS: Online Method](./mac-install-recovery.md)
-    * 10.7 - 11 supported
-  * [Legacy macOS: Disk Images](./mac-install-dmg.md)
-    * 10.4 - 10.6 supported
+  * [传统macOS:离线方法](./mac-install-pkg.md)
+    * 10.7 - 10.12 支持，不包括 10.9
+  * [传统macOS:在线方法](./mac-install-recovery.md)
+    * 10.7 - 11 支持
+  * [传统macOS:磁盘映像](./mac-install-dmg.md)
+    * 10.4 - 10.6 支持
 
-## Setting up the installer
+## 设置安装程序
 
-Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
+现在我们将格式化USB为macOS安装程序和OpenCore做准备。我们希望使用带有GUID分区映射的macOS Extended (HFS+)。这将创建两个分区:主分区`MyVolume`和第二个名为`EFI`的分区，它用作引导分区，固件将在其中检查引导文件。
 
-* Note: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
-* Note 2: Users following "Legacy macOS: Online Method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+* 注意:默认情况下，磁盘实用程序只显示分区-按Cmd/Win+2显示所有设备(或者你可以按查看按钮)
+* 注意 2: 使用 "传统macOS:在线方法" 的用户可以跳转到[设置OpenCore的EFI环境](#setting-up-opencore-s-efi-environment)
 
-![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
+![格式化USB](../images/installer-guide/mac-install-md/format-usb.png)
 
-Next run the `createinstallmedia` command provided by [Apple](https://support.apple.com/en-us/HT201372). Note that the command is made for USB's formatted with the name `MyVolume`:
+接下来运行[苹果](https://support.apple.com/en-us/HT201372)提供的`createinstallmedia`命令。请注意，该命令是为名称为`MyVolume`的USB创建的:
 
 ```sh
 sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 ```
 
-::: details Note for users on Apple Silicon installing macOS older than Big Sur
+::: details Apple Silicon上安装macOS比Big Sur更早的用户请注意
 
-If the `createinstallmedia` fails with `zsh: killed` or `Killed: 9` then it's most likely an issue with the installer's code signature. To fix this, you can run the following command:
+如果`createinstallmedia`以`zsh:killed`或`killed:9`失败，那么很可能是安装程序的代码签名有问题。要解决这个问题，您可以运行以下命令:
 
 ```sh
 cd /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/
 codesign -s - -f --deep /Applications/Install\ macOS\ Big\ Sur.app
 ```
 
-You will need the command line tools for Xcode installed:
+你需要为Xcode安装命令行工具:
 
 ```sh
 xcode-select --install
@@ -103,13 +103,13 @@ xcode-select --install
 
 :::
 
-This will take some time so you may want to grab a coffee or continue reading the guide (to be fair you really shouldn't be following this guide step by step without reading the whole thing first).
+这需要一些时间，所以你可能想要喝杯咖啡或继续阅读本指南(公平地说，你真的不应该在没有阅读完整内容之前一步一步地遵循本指南)。
 
-You can also replace the `createinstallmedia` path with that of where your installer's located (same idea with the drive name).
+你也可以将`createinstallmedia`路径替换为安装程序所在的路径(与驱动器名称相同)。
 
-::: details Legacy createinstallmedia Commands
+::: details 传统 createinstallmedia 命令
 
-Pulled from Apple's own site: [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
+来自苹果自己的网站:[如何为macOS创建一个可引导安装程序](https://support.apple.com/en-us/HT201372)
 
 ```sh
 # Ventura
@@ -145,49 +145,49 @@ sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstal
 
 :::
 
-## Legacy Setup
+## 传统设置
 
-For systems not supporting UEFI boot, see below:
+对于不支持UEFI引导的系统，请参见以下内容:
 
-::: details Setting up Legacy Boot
+::: details 设置传统引导
 
-To start, you need the following:
+首先，你需要以下文件:
 
-* BootInstall_IA32.tool or BootInstall_X64.tool
-  * This can be found in OpenCorePkg under `/Utilties/LegacyBoot/`
-* Install USB(Created above)
+* BootInstall_IA32.tool 或 BootInstall_X64.tool
+  * 可以在OpenCorePkg的`/utilities/LegacyBoot/`目录下找到
+* 安装USB(上面创建的)
 
-Within your OpenCore build folder, navigate to `Utilities/LegacyBoot`. Here you'll find a file called `BootInstall_ARCH.tool`. What this does is install DuetPkg to your desired drive.
+在你的OpenCore build文件夹中，导航到`Utilities/LegacyBoot`。在这里你会找到一个名为`BootInstall_ARCH.tool`的文件。这样做的目的是将DuetPkg安装到所需的驱动器。
 
-![BootInstall Location](../images/extras/legacy-md/download.png)
+![BootInstall 位置](../images/extras/legacy-md/download.png)
 
-Now run this tool in terminal **with sudo**(This tool will likely fail otherwise):
+现在**使用sudo**在终端中运行此工具(否则此工具可能会失败):
 
 ```sh
 # Replace X64 with IA32 if you have a 32-Bit CPU
 sudo ~/Downloads/OpenCore/Utilities/legacyBoot/BootInstall_X64.tool
 ```
 
-![Disk Selection/writing new MBR](../images/extras/legacy-md/boot-disk.png)
+![磁盘选择/写入新MBR](../images/extras/legacy-md/boot-disk.png)
 
-This will give you a list of available disks, choose yours and you will be prompted to write a new MBR. Choose yes`[y]` and you'll be finished.
+这将给您一个可用磁盘的列表，选择您的磁盘，并提示您写入一个新的MBR。选择yes`[y]`，你就完成了。
 
-![Finished Installer](../images/extras/legacy-md/boot-done.png)
+![安装完毕](../images/extras/legacy-md/boot-done.png)
 
-![Base EFI](../images/extras/legacy-md/efi-base.png)
+![基础EFI](../images/extras/legacy-md/efi-base.png)
 
-This will provide you with an EFI partition with either a **bootia32** or **bootx64** file
+这将为你提供一个包含**bootia32**或**bootx64**文件的EFI分区
 
 :::
 
-## Setting up OpenCore's EFI environment
+## 设置OpenCore的EFI环境
 
-Setting up OpenCore's EFI environment is simple – all you need to do is mount our EFI system partition. This is automatically made when we format with GUID but is unmounted by default, this is where our friend [MountEFI](https://github.com/corpnewt/MountEFI) comes in:
+设置OpenCore的EFI环境很简单-你需要做的就是挂载我们的EFI系统分区。当我们使用GUID格式化时，这是自动生成的，但默认情况下是卸载的， 这就是我们的朋友[挂载EFI](https://github.com/corpnewt/MountEFI) 发挥作用的地方:
 
-![MountEFI](../images/installer-guide/mac-install-md/mount-efi-usb.png)
+![挂载EFI](../images/installer-guide/mac-install-md/mount-efi-usb.png)
 
-You'll notice that once we open the EFI partition, it's empty. This is where the fun begins.
+你会注意到，打开EFI分区后，它是空的。这就是乐趣的开始。
 
-![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
+![EEFI空分区](../images/installer-guide/mac-install-md/base-efi.png)
 
-## Now with all of this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
+## 现在所有这些都完成了，前往[设置EFI](./opencore-efi.md) 来完成你的工作
