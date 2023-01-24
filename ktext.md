@@ -360,103 +360,103 @@ BlueToolFixup可以在Lilu之后的任何地方使用。
 ### 额外
 
 * [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip)
-  * Required on macOS 12.3 and later on AMD systems, and on macOS 10.15 and later on dual-socket Intel systems.
-  * Affected SMBIOSes:
+  * 在macOS 12.3和更高版本的AMD系统上，以及macOS 10.15和更高版本的双插槽Intel系统上都需要安装。
+  * 受影响的smbios:
     * MacPro6,1
     * MacPro7,1
     * iMacPro1,1
 * [CpuTscSync](https://github.com/lvs1974/CpuTscSync/releases)
-  * Needed for syncing TSC on some of Intel's HEDT and server motherboards, without this macOS may be extremely slow or even unbootable.
-  * **Does not work on AMD CPUs**
-  * Requires OS X 10.8 or newer
+  * 需要同步TSC的英特尔HEDT和服务器主板,没有这个macOS可能非常慢甚至无法开机。
+  * **不能在AMD cpu上工作**
+  * 需要OS X 10.8或更新的版本
 * [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)
-  * Used for fixing power management and initialization on non-Apple NVMe
-  * Requires macOS 10.14 or newer
+  * 用于修复非apple NVMe上的电源管理和初始化
+  * 需要macOS 10.14或更新的版本
 * [SATA-Unsupported](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
-  * Adds support for a large variety of SATA controllers, mainly relevant for laptops which have issues seeing the SATA drive in macOS. We recommend testing without this first.
-  * Big Sur+ Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
-    * Catalina and older need not concern
+  * 增加了对大量SATA控制器的支持，主要适用于在macOS中遇到SATA驱动器问题的笔记本电脑。我们建议首先进行测试。
+  * Big Sur+ 注: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) 将需要使用，因为许多控制器被从二进制本身删除
+    * Catalina 和更老的则不必担心
 * [CPUTopologyRebuild](https://github.com/b00t0x/CpuTopologyRebuild)
-  * An experimental Lilu plugin that optimizes Alder Lake's heterogeneous core configuration. **Only for Alder Lake CPUs**
+  * 一个实验性的Lilu插件，用于优化Alder Lake的异构核心配置。 **只适用于Alder Lake cpu**
 * [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
-  * Patch various functions of macOS, see [the README](https://github.com/acidanthera/RestrictEvents#boot-arguments) for more info
+  * 为macOS的各种功能打补丁，请参阅[这个说明](https://github.com/acidanthera/RestrictEvents#boot-arguments) 了解更多信息
 
-::: details Legacy SATA Kexts
+::: details 传统SATA kext
 
 * [AHCIPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/AHCIPortInjector.kext.zip)
-  * Legacy SATA/AHCI injector, mainly relevant for older machines of the Penryn era
+  * 传统的SATA/AHCI注入器，主要适用于Penryn时代的老旧机器
 * [ATAPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/ATAPortInjector.kext.zip)
-  * Legacy ATA injector, mainly relevant for IDE and ATA devices(ie. when no AHCI option is present in the BIOS)
+  * 传统的ATA注入器，主要与IDE和ATA设备相关(例如:当BIOS中没有AHCI选项时)
   
 :::
 
 ### 笔记本电脑输入
 
-To figure out what kind of keyboard and trackpad you have, check Device Manager in Windows or `dmesg | grep -i input` in Linux
+要弄清楚你使用的是什么样的键盘和触控板，请检查Windows中的设备管理器或Linux中的 `dmesg | grep -i input` 
 
 ::: warning
 
-Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have an I2C, USB, or SMBus trackpad.
+大多数笔记本电脑的键盘是PS2 !即使你有I2C、USB或SMBus触控板，你也会想要使用VoodooPS2。
 
 :::
 
 #### PS2键盘/触摸板
 
 * [VoodooPS2](https://github.com/acidanthera/VoodooPS2/releases)
-  * Works with various PS2 keyboards, mice, and trackpads
-  * Requires macOS 10.11 or newer for MT2 (Magic Trackpad 2) functions
+  * 适用于各种PS2键盘，鼠标和触摸板
+  * 需要macOS 10.11或更新的MT2 (Magic Trackpad 2)功能
 * [RehabMan's VoodooPS2](https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller/downloads/)
-  * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
-  * Supports macOS 10.6+
+  * 适用于带有PS2键盘、鼠标和触控板的旧系统，或者当你不想使用VoodooInput时
+  * 支持macOS 10.6 +
 
 #### SMBus 触摸板
 
 * [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases)
-  * For systems with Synaptics SMBus trackpads
-  * Requires macOS 10.11 or newer for MT2 functions
-  * Depends on Acidanthera's VoodooPS2
+  * 用于带有Synaptics SMBus触控板的系统
+  * 需要macOS 10.11或更新版本的MT2功能
+  * 依赖于Acidanthera的VoodooPS2
 * [VoodooSMBus](https://github.com/VoodooSMBus/VoodooSMBus/releases)
-  * For systems with ELAN SMBus Trackpads
-  * Supports macOS 10.14 or newer currently
+  * 适用于带有ELAN SMBus触控板的系统
+  * 目前支持macOS 10.14或更新版本
 
 #### I2C/USB HID 设备
 
 * [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C/releases)
-  * Supports macOS 10.11+
-  * Attaches to I2C controllers to allow plugins to talk to I2C trackpads
-  * USB devices using the below plugins still need VoodooI2C
-  * Must be paired with one or more plugins shown below:
+  * 支持macOS 10.11 +
+  * 连接到I2C控制器，允许插件与I2C触摸板交谈
+  * 使用以下插件仍然需要VoodooI2C USB设备
+  * 必须与一个或多个插件配对，如下所示:
 
-::: tip VoodooI2C Plugins
+::: tip VoodooI2C 插件
 
-| Connection type | Plugin | Notes |
+| 连接类型 | 插件 | 说明 |
 | :--- | :--- | :--- |
-| Multitouch HID | VoodooI2CHID | Can be used with I2C/USB Touchscreens and Trackpads |
-| ELAN Proprietary | VoodooI2CElan | ELAN1200+ require VoodooI2CHID instead |
+| Multitouch HID | VoodooI2CHID | 可以与I2C/USB触摸屏和触摸板一起使用 |
+| ELAN Proprietary | VoodooI2CElan | ELAN1200+需要VoodooI2CHID代替 |
 | FTE1001 touchpad | VoodooI2CFTE | |
 | Atmel Multitouch Protocol | VoodooI2CAtmelMXT | |
-| Synaptics HID | [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases) | I2C Synaptic Trackpads (Requires VoodooI2C ONLY for I2C mode) |
-| Alps HID | [AlpsHID](https://github.com/blankmac/AlpsHID/releases) | Can be used with USB or I2C Alps trackpads. Mostly seen on Dell laptops and some HP EliteBook models |
+| Synaptics HID | [VoodooRMI](https://github.com/VoodooSMBus/VoodooRMI/releases) | I2C Synaptic触控板(只在I2C模式下需要VoodooI2C) |
+| Alps HID | [AlpsHID](https://github.com/blankmac/AlpsHID/releases) | 可与USB或I2C Alps触控板使用。主要出现在戴尔(Dell)笔记本电脑和惠普(HP)的一些EliteBook机型上 |
 
 :::
 
-#### Misc
+#### 杂项
 
 * [ECEnabler](https://github.com/1Revenger1/ECEnabler/releases)
-  * Fixes reading battery status on many devices (Allows reading EC fields over 8 bits long)
-  * Supports OS X 10.7 and above (not needed on 10.4 - 10.6)
+  * 修复在许多设备上读取电池状态(允许读取超过8位的EC字段)
+  * 支持OS X 10.7及以上版本(10.4 - 10.6版本不需要)
 * [BrightnessKeys](https://github.com/acidanthera/BrightnessKeys/releases)
-  * Fixes brightness keys automatically
+  * 自动修复亮度快捷键
 
-Please refer to [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) for a full list of supported kexts
+请参考 [Kexts.md](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Kexts.md) 获得支持的kext的完整列表
 
 ## SSDTs
 
-So you see all those SSDTs in the AcpiSamples folder and wonder whether you need any of them. For us, we will be going over what SSDTs you need in **your specific ACPI section of the config.plist**, as the SSDTs you need are platform specific. With some even system specific where they need to be configured and you can easily get lost if I give you a list of SSDTs to choose from now.
+你在AcpiSamples文件夹中看到所有的ssdt，想知道你是否需要它们。对于我们来说，我们将介绍**您在配置的特定ACPI部分中需要的ssdt.plist**，因为您需要的ssd是特定于平台的。有些甚至是特定于系统的，需要配置它们，如果我现在给您一个可供选择的ssd列表，您很容易就会迷失方向。
 
-[Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) has an extended section on SSDTs including compiling them on different platforms.
+[ACPI入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 有一个关于ssdt的扩展部分，包括在不同的平台上编译它们。
 
-A quick TL;DR of needed SSDTs(This is source code, you will have to compile them into a .aml file):
+A quick TL;DR of needed SSDTs(这是源代码，你必须将它们编译到.aml文件中):
 
 ### 台式电脑
 
@@ -518,4 +518,4 @@ Continuing:
 | Comet Lake | N/A | ^^ |
 | Ice Lake | ^^ | ^^ |
 
-# Now with all this done, head to [Getting Started With ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+# 现在，所有这些都完成了，前往 [ACPI入门](https://sumingyd.github.io/Getting-Started-With-ACPI/)
