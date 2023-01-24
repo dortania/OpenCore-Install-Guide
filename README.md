@@ -26,3 +26,5 @@ OpenCore是我们所说的“引导加载程序”——它是一个复杂的软
 最后，那些有问题的人可以访问 [r/Hackintosh subreddit](https://www.reddit.com/r/hackintosh/) 和 [r/Hackintosh Discord](https://discord.gg/u8V7N5C) 以获得更多帮助。。。
 
 中文翻译由[sumingyd](https://github.com/sumingyd)提供，此翻译并非是dortania官方翻译。
+
+黑果交流QQ群：796661960
