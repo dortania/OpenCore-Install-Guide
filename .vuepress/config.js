@@ -60,7 +60,7 @@ module.exports = {
         editLinkText: '帮助我们改进此页面!',
         logo: '/homepage.png',
         nav: [{
-            text: '安装指南s',
+            text: '安装指南',
             items: [{
                 text: '主页面',
                 link: 'https://sumingyd.github.io/OpenCore-Install-Guide/'
@@ -82,7 +82,7 @@ module.exports = {
                 link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
             },
             {
-                text: '无限购买指南',
+                text: '无线购买指南',
                 link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
             },
             {
