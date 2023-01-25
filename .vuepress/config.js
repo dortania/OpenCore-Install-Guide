@@ -78,11 +78,11 @@ module.exports = {
                 link: 'https://sumingyd.github.io/OpenCore-Multiboot/'
             },
             {
-                text: 'GPU购买指南',
+                text: '显卡购买指南',
                 link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
             },
             {
-                text: '无线购买指南',
+                text: '无线网卡购买指南',
                 link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
             },
             {
