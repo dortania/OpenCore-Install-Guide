@@ -1,19 +1,19 @@
 # 硬件限制
 
-在开始安装macOS之前，有许多硬件限制需要您了解。这是因为苹果支持的硬件数量有限，所以我们要么受到苹果的限制，要么受到社区创建的补丁的限制。
+在开始安装macOS之前，你需要了解许多硬件限制。这是因为苹果支持的硬件数量有限，所以我们要么受到苹果的限制，要么受到社区创建的补丁的限制。
 
 需要验证的主要硬件部分有:
 
 [[toc]]
 
-有关这个主题的更多详细指南，请参阅:
+有关该主题的更详细指南，请参见此处：
 
-* [GPU 购买指南](https://sumingyd.github.io/GPU-Buyers-Guide/)
-  * 检查您的GPU是否得到支持，以及您可以运行哪个macOS版本。
-* [无线购买指南](https://sumingyd.github.io/Wireless-Buyers-Guide/)
+* [显卡购买指南](https://sumingyd.github.io/GPU-Buyers-Guide/)
+  * 检查您的GPU是否得到支持，以及您可以运行哪个版本的macOS。
+* [无线网卡购买指南](https://sumingyd.github.io/Wireless-Buyers-Guide/)
   * 检查是否支持你的WiFi卡。
-* [反硬件购买指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)
-  * 关于应该避免什么以及你的硬件可能会遇到什么陷阱的总体指南。
+* [避免购买指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)
+  * 关于应该避免什么以及你的硬件可能会遇到什么陷阱的总体指南。（BTW. 这里是告诉你哪些硬件不被macOS支持且没有补丁可以被驱动）
 
 ## CPU 支持
 
@@ -21,18 +21,18 @@
 
 * 32和64位cpu都支持
   * 但这需要操作系统支持你的架构，请参阅下面的CPU要求部分
-* 支持英特尔的桌面cpu。
+* 支持 Intel 的桌面cpu。
   * Yonah 到 Comet Lake 得到了本指南的支持。
-* 英特尔高端台式机和服务器的cpu
+* Intel 高端台式机和服务器的cpu
   * Nehalem到Cascade Lake X得到了本指南的支持。
-* 英特尔酷睿“i”和至强系列笔记本电脑cpu
+* Intel Core “i” 和至强系列的笔记本电脑cpu
   * Arrandale 到 Ice Lake 得到了本指南的支持。
-  * 请注意，不支持Mobile Atoms、赛扬和奔腾cpu
-* AMD的桌面推土机(15h)、捷豹(16h)和Ryzen (17h) cpu
+  * 请注意，不支持Mobile Atoms  Celelron和 Pentum CPU
+* AMD的桌面Bulldozer(15H)，Jaguar（16H）和Ryzen(17h) CPU
   * 笔记本电脑cpu **不**支持
   * 注意，AMD并不支持macOS的所有功能，请参见下文
 
-**欲了解更多深入信息，请参阅这里: [反硬件买家指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)**
+**欲了解更多深入信息，请参阅这里: [避免购买指南](https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
 :::details  详细的CPU要求
 
@@ -81,7 +81,7 @@ SSE要求:
 
 :::
 
-:::details 详细的英特尔CPU支持图表
+:::details 详细的Intel CPU支持图表
 
 基于普通内核的支持(即没有修改):
 
@@ -157,7 +157,7 @@ SSE要求:
 
 **For a full list of supported GPUs, see the [GPU Buyers Guide](https://sumingyd.github.io/GPU-Buyers-Guide/)**
 
-:::details 详细说明Intel GPU支持图表
+:::details 详细的Intel GPU支持图表
 
 | GPU Generation | 初始版本 | 最后支持版本 | 备注 |
 | :--- | :--- | :--- | :--- |
