@@ -17,7 +17,7 @@
 
 ![](../images/installer-guide/windows-install-md/open-cmd-current-folder.gif)
 
-现在根据你想要的macOS版本运行以下其中之一(注意这些脚本依赖于[ Python 3](https://www.python.org/downloads/) 支持，如果你还没有安装请安装):
+现在根据你想要的macOS版本运行以下其中之一(注意这些脚本依赖于[Python 3](https://www.python.org/downloads/) 支持，如果你还没有安装请安装):
 
 ```sh
 # Lion (10.7):
