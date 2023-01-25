@@ -33,5 +33,5 @@ Before we can jump head first into making an OpenCore based system, we need to g
    * For macOS users, **30GB** of free space on the system's drive.
    * Most tools used in this guide will also require [Python installed](https://www.python.org/downloads/).
 8. <span style="color:red">_**[CRUCIAL]**_</span> **Latest BIOS installed**
-   * In most cases, updating your BIOS will provide the best support for macOS
-   * The exception to this are MSI 500-series AMD motherboards, read more at [Motherboard Support](macos-limits.md#motherboard-support)
+   * In most cases, updating your BIOS will provide the best support for macOS.
+   * The exception to this are MSI 500-series AMD motherboards, read more at [Motherboard Support](macos-limits.md#motherboard-support).
