@@ -7,12 +7,12 @@ Before we can jump head first into making an OpenCore based system, we need to g
 1. <span style="color:red">_**[CRUCIAL]**_</span> Time and patience.
    * Don't start working on this if you have deadlines or important work. Hackintoshes are not something you should be relying on as a work machine.
 2. <span style="color:red">_**[CRUCIAL]**_</span> **KNOW YOUR HARDWARE**
-   * Your CPU name and its generation
-   * Your GPUs
-   * Your storage devices (HDD/SSD, NVMe/AHCI/RAID/IDE configuration)
-   * Your laptop/desktop model if from an OEM
-   * Your **Ethernet chipset**
-   * Your WLAN/Bluetooth chipset
+   * Your CPU name and its generation.
+   * Your GPUs.
+   * Your storage devices (HDD/SSD, NVMe/AHCI/RAID/IDE configuration).
+   * Your laptop/desktop model if from an OEM.
+   * Your **Ethernet chipset**.
+   * Your WLAN/Bluetooth chipset.
 3. <span style="color:red">_**[CRUCIAL]**_</span> **A BASIC KNOWLEDGE OF COMMAND LINES AND HOW TO USE A TERMINAL/COMMAND PROMPT**
    * This is not just [CRUCIAL], this is the basis of this whole guide. We can't help you if you don't know how to `cd` to a directory or delete a file.
 4. <span style="color:red">_**[CRUCIAL]**_</span> A machine that is compatible as seen in the _**Compatibility**_ section.
