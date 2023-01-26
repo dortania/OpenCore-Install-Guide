@@ -192,7 +192,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 在这里，我们指定要加载哪些kext，以什么特定的顺序加载，以及每个kext适用于什么体系结构。默认情况下，我们建议保留ProperTree所做的操作，但对于32位cpu，请参见以下内容:
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 The main thing you need to keep in mind is:
 
@@ -223,9 +223,9 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
   * Path to the `info.plist` hidden within the kext
   * ex: `Contents/Info.plist`
 
-::: details Kernel Support Table
+::: details 内核支持表
 
-| OS X Version | MinKernel | MaxKernel |
+| OS X 版本 | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
 | 10.4 | 8.0.0 | 8.99.99 |
 | 10.5 | 9.0.0 | 9.99.99 |
@@ -263,11 +263,11 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 对内核和kext进行补丁。
 
-::: tip Fixing I225-V controllers
+::: tip 修复I225-V控制器
 
-This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's I225LM driver into supporting our I225-V network controller. However, this is only needed on Catalina and Big Sur, up to 11.3.
+此条目与在更高端的 Comet Lake 板上找到的英特尔 I225-V 2.5GBe 控制器相关，我们将在这里做的是欺骗 Apple 的 I225LM 驱动程序以支持我们的 I225-V 网络控制器。 但是，这仅在 Catalina 和 Big Sur 上需要，最高为 11.3。
 
-| Key | Type | Value |
+| 键 | 类型 | 值 |
 | :--- | :--- | :--- |
 | Base | String | __Z18e1000_set_mac_typeP8e1000_hw |
 | Comment | String | I225-V patch |
@@ -279,29 +279,29 @@ This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet
 | MaxKernel | String | 20.4.0 |
 | Replace | Data | `F3150000` |
 
-* **Note 1**: If your board didn't ship with the Intel I225 NIC, there's no reason to add this entry.
-* **Note 2**: Leave all other keys at their default values
+* **注 1**：如果您的主板未附带 Intel I225 NIC，则没有理由添加此条目。
+* **注 2**：保留所有其他键的默认值
 
 :::
 
 ### Quirks
 
-::: tip Info
+::: tip 信息
 
-Settings relating to the kernel, for us we'll be enabling the following:
+与内核相关的设置，我们将启用以下功能：
 
-| Quirk | Enabled | Comment |
+| 怪癖 | 启用| 注释 |
 | :--- | :--- | :--- |
-| AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
-| LapicKernelPanic | NO | HP Machines will require this quirk |
-| PanicNoKextDump | YES | |
-| PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | Disable if running macOS 11.3+ |
+| AppleXcpmCfgLock | 是 | 如果在 BIOS 中禁用了 `CFG-Lock`，则不需要 |
+| DisableIoMapper | 是 | 如果在 BIOS 中禁用了 `VT-D` 如果在 BIOS 中禁用了 |
+| LapicKernelPanic | 否 | 惠普机器将需要这个怪癖 |
+| PanicNoKextDump | 是 | |
+| PowerTimeoutKernelPanic | 是 | |
+| XhciPortLimit | 是 | 如果运行 macOS 11.3+ 则禁用 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AppleCpuPmCfgLock**: NO
   * Only needed when CFG-Lock can't be disabled in BIOS
@@ -342,7 +342,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 与传统引导(例如10.4-10.6)相关的设置，大多数情况下你可以跳过，但是对于那些计划引导传统操作系统的人，你可以查看以下内容:
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **FuzzyMatch**: True
   * Used for ignoring checksums with kernelcache, instead opting for the latest cache available. Can help improve boot performance on many machines in 10.6
@@ -367,15 +367,15 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 ### Boot
 
-::: tip Info
+::: tip 信息
 
-| Quirk | Enabled | Comment |
+| 怪癖 | 启用 | 注释 |
 | :--- | :--- | :--- |
-| HideAuxiliary | YES | Press space to show macOS recovery and other auxiliary entries |
+| HideAuxiliary | 是 | 按空格键显示 macOS 恢复和其他辅助条目 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **HideAuxiliary**: YES
   * This option will hide supplementary entries, such as macOS recovery and tools, in the picker. Hiding auxiliary entries may increase boot performance on multi-disk systems. You can press space at the picker to show these entries
@@ -384,20 +384,20 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 ### Debug
 
-::: tip Info
+::: tip 信息
 
-Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`):
+有助于调试 OpenCore 启动问题（我们将更改所有内容 *但* `显示会延迟`）：
 
-| Quirk | Enabled |
+| 怪癖 | 启用 |
 | :--- | :--- |
-| AppleDebug | YES |
-| ApplePanic | YES |
-| DisableWatchDog | YES |
+| AppleDebug | 是 |
+| ApplePanic | 是 |
+| DisableWatchDog | 是 |
 | Target | 67 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AppleDebug**: YES
   * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
@@ -419,21 +419,21 @@ These values are based of those calculated in [OpenCore debugging](../troublesho
 
 ### Security
 
-::: tip Info
+::: tip 信息
 
-Security is pretty self-explanatory, **do not skip**. We'll be changing the following:
+安全性是不言而喻的，**不要跳过**。我们将修改以下内容:
 
-| Quirk | Enabled | Comment |
+| 怪癖 | 启用 | 注释 |
 | :--- | :--- | :--- |
-| AllowSetDefault | YES | |
-| BlacklistAppleUpdate | YES | |
+| AllowSetDefault | 是 | |
+| BlacklistAppleUpdate | 是 | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default | Leave this as `Default` for OpenCore to automatically set the correct value corresponding to your SMBIOS. The next page goes into more detail about this setting. |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+| SecureBootModel | Default | 将此设置为`默认`，以便OpenCore自动设置与您的SMBIOS对应的正确值。下一页将详细介绍此设置。 |
+| Vault | Optional | 这是一个词,不是可选的省略此设置。如果您没有将其设置为Optional，您将后悔，请注意它是区分大小写的 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AllowSetDefault**: YES
   * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
@@ -461,17 +461,17 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 
 ### Serial
 
-Used for serial debugging (Leave everything as default).
+用于串行调试(一切都保留默认值)。
 
 ### Tools
 
-Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you.
+用于运行OC调试工具，如shell, ProperTree的快照功能将为您添加这些。
 
 ### Entries
 
-Used for specifying irregular boot paths that can't be found naturally with OpenCore.
+用于指定OpenCore无法自然找到的不规则引导路径。
 
-Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+这里不会介绍更多信息，请参阅[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 
 ## NVRAM
 
@@ -481,15 +481,15 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ::: tip 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
 
-Used for OpenCore's UI scaling, default will work for us. See in-depth section for more info
+用于OpenCore的UI缩放，default对我们有用。更多信息请参见深入部分
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
-Booter Path, mainly used for UI modification
+启动器路径，主要用于UI修改
 
-* **DefaultBackgroundColor**: Background color used by boot.efi
+* **DefaultBackgroundColor**: boot.efi使用的背景色
   * `00000000`: Syrah Black
   * `BFBFBF00`: Light Gray
 
@@ -497,11 +497,11 @@ Booter Path, mainly used for UI modification
 
 ::: tip 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
 
-OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
+OpenCore的NVRAM GUID，主要与RTCMemoryFixup用户相关
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **rtc-blacklist**: <>
   * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
@@ -511,7 +511,7 @@ OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
 
 ::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
-System Integrity Protection bitmask
+系统完整性保护位掩码
 
 * **General Purpose boot-args**:
 
@@ -560,17 +560,17 @@ System Integrity Protection bitmask
 
 ### Delete
 
-::: tip Info
+::: tip 信息
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
+强制重写NVRAM变量，请注意，`Add` **不会覆盖** NVRAM中已经存在的值，所以像`boot-args`这样的值应该保持不变。对我们来说，我们将更改以下内容:
 
-| Quirk | Enabled |
+| 怪癖 | 启用 |
 | :--- | :--- |
-| WriteFlash | YES |
+| WriteFlash | 是 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **LegacySchema**
   * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
@@ -584,18 +584,18 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ![PlatformInfo](../images/config/config.plist/cometlake/smbios.png)
 
-::: tip Info
+::: tip 信息
 
-For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
+为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Comet Lake example, we'll chose the iMac20,1 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Comet Lake:
+对于这个Comet Lake示例，我们将选择iMac20,1 SMBIOS—这是为了兼容性而特意这样做的。有两个主要的SMBIOS用于Comet Lake:
 
-| SMBIOS | Hardware |
+| SMBIOS | 硬件 |
 | :--- | :--- |
-| iMac20,1 | i7-10700K and lower(ie. 8 core and lower) |
-| iMac20,2 | i9-10850K and higher(ie. 10 core) |
+| iMac20,1 | i7 - 10700k及以下(即：8核心及以下) |
+| iMac20,2 | i9-10850K 和更高(即：10核心) |
 
-Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
+运行GenSMBIOS，选择选项1下载MacSerial，选择选项3选择SMBIOS。这会给我们一个类似下面的输出:
 
 ```sh
   #######################################################
@@ -608,29 +608,29 @@ Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 ```
 
-* **Note**: MacSerial currently does not support Linux, so you must grab a Windows or macOS machine to generate the values
+* **注意**:MacSerial目前不支持Linux，所以你必须使用Windows或macOS机器来生成值
 
-The `Type` part gets copied to Generic -> SystemProductName.
+`Type` 部分复制到 Generic -> SystemProductName.
 
-The `Serial` part gets copied to Generic -> SystemSerialNumber.
+`Serial` 部分复制到 Generic -> SystemSerialNumber.
 
-The `Board Serial` part gets copied to Generic -> MLB.
+`Board Serial` 部分复制到 Generic -> MLB.
 
-The `SmUUID` part gets copied to Generic -> SystemUUID.
+`SmUUID` 部分复制到 Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
+我们将Generic -> ROM设置为苹果ROM(从真正的Mac中转储)，你的网卡Mac地址，或任何随机的Mac地址(可以是6个随机字节，在本指南中我们将使用`11223300 0000`。安装后，请参考[修复iServices](https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices.html)页面，了解如何找到你的真实MAC地址)
 
-**Reminder that you need an invalid serial! When inputting your serial number in [Apple's Check Coverage Page](https://checkcoverage.apple.com), you should get a message such as "Unable to check coverage for this serial number."**
+**提醒你需要一个无效的串行!当你在[苹果的检查覆盖页面](https://checkcoverage.apple.com)中输入你的序列号时，你会得到一条信息，比如“无法检查此序列号的覆盖范围”。**
 
-**Automatic**: YES
+**Automatic**: 是
 
-* Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+* 基于Generic节而不是DataHub、NVRAM和SMBIOS节生成platformminfo
 
 :::
 
 ### Generic
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AdviseFeatures**: NO
   * Used for when the EFI partition isn't first on the Windows drive
@@ -666,20 +666,20 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ![UEFI](../images/config/config-universal/aptio-v-uefi.png)
 
-**ConnectDrivers**: YES
+**ConnectDrivers**: 是
 
-* Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
+* 强制.efi驱动程序，更改为NO将自动连接添加的UEFI驱动程序。这可以使引导稍微快一点，但不是所有的驱动程序都连接自己。例如某些文件系统驱动程序不能加载。
 
 ### Drivers
 
-Add your .efi drivers here.
+在这里添加你的.efi驱动程序。
 
-Only drivers present here should be:
+在这里的驱动程序应该只有:
 
 * HfsPlus.efi
 * OpenRuntime.efi
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
@@ -691,16 +691,16 @@ Only drivers present here should be:
 
 ### APFS
 
-By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
-Not setting this can result in OpenCore not finding your macOS partition!
+默认情况下，OpenCore只从macOS Big Sur及更新版本加载APFS驱动程序。如果你启动的是macOS Catalina或更早的版本，你可能需要设置一个新的最低版本/日期。
+不设置这个会导致OpenCore找不到你的macOS分区!
 
-macOS Sierra and earlier use HFS instead of APFS. You can skip this section if booting older versions of macOS.
+macOS Sierra和更早的版本使用HFS而不是APFS。如果启动旧版本的macOS，您可以跳过本节。
 
-::: tip APFS Versions
+::: tip APFS 版本
 
-Both MinVersion and MinDate need to be set if changing the minimum version.
+如果修改最小版本，则需要同时设置MinVersion和MinDate。
 
-| macOS Version | Min Version | Min Date |
+| macOS 版本 | Min Version | Min Date |
 | :------------ | :---------- | :------- |
 | High Sierra (`10.13.6`) | `748077008000000` | `20180621` |
 | Mojave (`10.14.6`) | `945275007000000` | `20190820` |
@@ -711,19 +711,19 @@ Both MinVersion and MinDate need to be set if changing the minimum version.
 
 ### Audio
 
-Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
+对于AudioDxe设置，我们将忽略(保留默认值)。这与macOS中的音频支持无关。
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://sumingyd.github.io/OpenCore-Post-Install/)
+* 要进一步使用AudioDxe和音频部分，请参见安装后页面:[添加主题和启动铃声](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
+与boot.efi键盘直通用于FileVault和热键支持相关，这里保留所有默认设置，因为我们不需要这些怪癖。请参阅这里了解更多细节:[Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 
-Relating to OpenCore's visual output, leave everything here as default as we have no use for these quirks.
+关于OpenCore的视觉输出，将所有内容保留为默认值，因为我们不需要这些怪癖。
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 | Output | Value | Comment |
 | :--- | :--- | :--- |
@@ -733,73 +733,73 @@ Relating to OpenCore's visual output, leave everything here as default as we hav
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
+主要针对虚拟机、传统mac和FileVault用户。更多细节请参阅此处:[Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 
-::: tip Info
-Relating to quirks with the UEFI environment, for us we'll be changing the following:
+::: tip 信息
+关于UEFI环境的怪癖，对于我们来说，我们将改变以下内容:
 
-| Quirk | Enabled | Comment |
+| 怪癖 | 启用 | 注释 |
 | :--- | :--- | :--- |
-| UnblockFsConnect | NO | Needed mainly by HP motherboards |
+| UnblockFsConnect | 否 | 主要由惠普主板使用 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
-* **DisableSecurityPolicy**: NO
-  * Disables platform security policy in firmware, recommended for buggy firmwares where disabling Secure Boot does not allow 3rd party firmware drivers to load.
-  * If running a Microsoft Surface device, recommended to enable this option
+* **DisableSecurityPolicy**: 否
+  * 禁用固件中的平台安全策略，建议用于有bug的固件，其中禁用安全引导不允许第三方固件驱动加载。
+  * 如果运行微软Surface设备，建议启用此选项
 
-* **RequestBootVarRouting**: YES
-  * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC_VENDOR_VARIABLE_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+* **RequestBootVarRouting**: 是
+  * 将AptioMemoryFix从`EFI_GLOBAL_VARIABLE_GUID`重定向到`OC_VENDOR_VARIABLE_GUID`。当固件试图删除启动项时需要启用，建议在所有系统上启用，以确保正确的更新安装，启动磁盘控制面板的功能等。
 
-* **UnblockFsConnect**: NO
-  * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+* **UnblockFsConnect**: 否
+  * 一些固件块分区处理通过驱动模式打开它们，这导致文件系统协议无法安装。主要适用于没有列出驱动器的HP系统
 
 :::
 
 ### ReservedMemory
 
-Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide
+用于免除操作系统对某些内存区域的使用，主要适用于Sandy Bridge igpu或内存故障的系统。在本指南中没有涉及这种怪癖的使用
 
-## Cleaning up
+## 清理
 
-And now you're ready to save and place it into your EFI under EFI/OC.
+现在，您可以保存它，并将其放入EFI/OC下的EFI中。
 
-For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+对于那些有启动问题的人，请务必先阅读[故障排除部分](../troubleshooting/troubleshooting.md)，如果您的问题仍然没有得到解答，我们有大量的资源供您使用:
 
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 * [r/Hackintosh Discord](https://discord.gg/2QYd7ZT)
 
-## Intel BIOS settings
+## Intel BIOS 设置
 
-* Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
+* 注意: 大多数选项可能不会出现在你的固件中，我们建议尽可能匹配，但如果这些选项在你的BIOS中不可用，不要太担心
 
-### Disable
+### 关闭
 
-* Fast Boot
-* Secure Boot
-* Serial/COM Port
-* Parallel Port
-* VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
-* Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)
+* Fast Boot（快速启动）
+* Secure Boot（安全引导）
+* Serial/COM Port（串口/COM端口）
+* Parallel Port（并口）
+* VT-d (如果将`DisableIoMapper`设置为YES，则可以启用)
+* Compatibility Support Module (CSM) （兼容性支持模块）(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**)
+* Thunderbolt （雷电）(用于初始安装，因为如果没有正确安装，Thunderbolt可能会导致问题)
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+* CFG Lock (MSR 0xE2写保护)(**此选项必须关闭，如果你找不到该选项，则在Kernel -> Quirks下启用`AppleXcpmCfgLock`。你的黑苹果将无法在启用CFG-Lock的情况下启动**)
 
-### Enable
+### 启用
 
 * VT-x
-* Above 4G Decoding
-  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
-* Hyper-Threading
-* Execute Disable Bit
-* EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
-* DVMT Pre-Allocated(iGPU Memory): 64MB or higher
-* SATA Mode: AHCI
+* Above 4G Decoding（4G以上解码）
+  * 2020+ BIOS注意事项:当启用4g以上时，Resizable BAR支持可能会在一些Z490和更新的主板上可用。如果启用，请确保Booter -> Quirks -> ResizeAppleGpuBars设置为`0`。
+* Hyper-Threading（超线程）
+* Execute Disable Bit（执行禁用位）
+* EHCI/XHCI Hand-off（EHCI/XHCI切换）
+* 操作系统类型:Windows 8.1/10 UEFI模式(一些主板可能需要”其他操作系统”代替)
+* DVMT Pre-Allocated（DVMT预分配）(iGPU内存): 64MB或更高
+* SATA模式:AHCI
 
-# Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)
+# 完成后，我们需要编辑一些额外的值。访问[苹果安全启动页面](../config.plist/security.md)
