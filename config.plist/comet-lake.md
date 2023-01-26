@@ -21,7 +21,7 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见上一节中如何获取:[config.plist Setup](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图像并不总是最新的，所以请阅读下面的文本，如果没有提到，则保留为默认值。
 
@@ -35,20 +35,20 @@
 
 ::: tip 信息
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这是你将为系统添加ssdt的地方，这些对于**引导macOS**非常重要，并且有许多用途，例如[USB maps](https://sumingyd.github.io/OpenCore-Post-Install/usb/), [禁用不支持的gpu](../extras/spoof.md) 等，而我们的系统**甚至需要启动**。制作指南可以在这里找到:[**ACPI入门**](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 
-For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
+我们需要几个ssdt来恢复Clover提供的功能:
 
-| Required SSDTs | Description |
+| 所需ssdt | 描述 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-AWAC](https://dortania.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for all B460 and Z490 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://dortania.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) page. |
-| **[SSDT-RHUB](https://dortania.github.io/Getting-Started-With-ACPI/)** | Needed to fix Root-device errors on Asus and potentially MSI boards. Gigabyte and AsRock motherboards **do not** need this SSDT |
+| **[SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 在Haswell和更新的版本上允许本地CPU电源管理，请参阅[ACPI入门指南](https://sumingyd.github.io/Getting-Started-With-ACPI/)了解更多细节。 |
+| **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复了嵌入式控制器和USB电源，请参阅[开始与ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/)了解更多细节。 |
+| **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 这是[300系列RTC补丁](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2)，用于所有B460和Z490板，以防止系统引导macOS。另一种选择是[SSDT-rtc0](https://sumingyd.github.io/Getting-Started-With-ACPI/)，当AWAC SSDT由于缺少遗留的RTC时钟而不兼容时，请检查您是否需要它以及使用哪个，请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)页面。 |
+| **[SSDT-RHUB](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 需要修复Asus和MSI板上的根设备错误。Gigabyte和AsRock主板**不需要**这个SSDT |
 
-Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
+注意，你**不应该**在这里添加你生成的`DSDT aml`，它已经在你的固件中了。因此，如果存在，请在你的`config.plist`和EFI/OC/ACPI下删除它的条目。
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+对于那些想要更深入地了解转储您的DSDT、如何制作这些ssdt以及编译它们的人，请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 页面。编译的ssdt有一个 **.aml** 扩展名(组装)，将被放入`EFI/OC/ACPI`文件夹，并且**必须**在你的配置文件`ACPI -> Add`下指定。
 
 :::
 
@@ -76,21 +76,21 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 ### Quirks
 
-::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+::: tip 信息
+与boot.efi补丁和固件修复相关的设置，对我们来说，我们需要更改以下内容:
 
-| Quirk | Enabled | Comment |
+| 怪癖 | 启用 | 注释 |
 | :--- | :--- | :--- |
-| DevirtualiseMmio | YES | |
-| EnableWriteUnprotector | NO | |
-| ProtectUefiServices | YES | |
-| RebuildAppleMemoryMap | YES | |
-| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable BAR Support), set this to `0` |
-| SetupVirtualMap | NO | |
-| SyncRuntimePermissions | YES | |
+| DevirtualiseMmio | 是 | |
+| EnableWriteUnprotector | 否 | |
+| ProtectUefiServices | 是 | |
+| RebuildAppleMemoryMap | 是 | |
+| ResizeAppleGpuBars | -1 | 如果您的固件支持增加GPU Bar大小(如：可调整大小的BAR支持)，请将其设置为`0` |
+| SetupVirtualMap | 否 | |
+| SyncRuntimePermissions | 是 | |
 :::
 
-::: details More in-depth Info
+::: details 更多深入信息
 
 * **AvoidRuntimeDefrag**: YES
   * Fixes UEFI runtime services like date, time, NVRAM, power control, etc.
@@ -128,44 +128,44 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties. **If you have a `-F` series CPU, you can ignore this section as you do not have an iGPU.**
+本节是通过WhateverGreen的[Framebuffer补丁指南](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)建立的，用于设置重要的iGPU属性。**如果你有`-F`系列CPU，你可以忽略这一部分，因为你没有iGPU。**
 
-The config.plist doesn't already have a section for this so you will have to create it manually.
+config.plist还没有这个部分，所以你必须手动创建它。
 
-`AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and two values choose between are as follows:
+`AAPL,ig-platform-id` 是macOS用来确定iGPU驱动程序如何与我们的系统交互的值，两个值之间的选择如下:
 
-| AAPL,ig-platform-id | Comment |
+| AAPL,ig-platform-id | 注释 |
 | :--- | :--- |
-| **`07009B3E`** | Used when the Desktop iGPU is used to drive a display |
-| **`00009B3E`** | Alternative to `07009B3E` if it doesn't work |
-| **`0300C89B`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
+| **`07009B3E`** | 当桌面iGPU用于驱动显示器时使用 |
+| **`00009B3E`** | 如果它不起作用，可以替代`07009B3E` |
+| **`0300C89B`** | 当桌面iGPU仅用于计算任务而不驱动显示时使用 |
 
-* **Note**: With macOS 10.15.5 and newer, there seems to be a lot of issues with black screen using `07009B3E`, if you get similar issues try swapping to `00009B3E`
+* **注意**:在macOS 10.15.5及更新版本中，使用`07009B3E`时黑屏似乎有很多问题，如果你遇到类似的问题，请尝试切换到`00009B3E`
 
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
+我们还添加了另外两个属性，`framebuffer-patch-enable`和`framebuffer-stolenmem`。第一个启用WhateverGreen.kext打补丁，第二个设置最小共享内存为19MB。这通常是不必要的，因为可以在BIOS中配置(推荐64MB)，但在不可用时是必需的。
 
-* **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
+* **注意**:无头帧缓冲区(其中dGPU是显示出来的)不需要`framebuffer-patch-enable`和`framebuffer-stolenmem`
 
-| Key | Type | Value |
+| 键 | 类型 | 值 |
 | :--- | :--- | :--- |
 | AAPL,ig-platform-id | Data | `07009B3E` |
 | framebuffer-patch-enable | Data | `01000000` |
 | framebuffer-stolenmem | Data | `00003001` |
 
-(This is an example for a desktop UHD 630 without a dGPU and no BIOS options for iGPU memory)
+(这是一个桌面UHD 630没有dGPU和iGPU内存没有BIOS选项的例子)
 
 :::
 
 ::: tip PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0,0x0)
 
-This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet Lake boards, what we'll be doing here is tricking Apple's I225LM driver into supporting our I225-V network controller:
+这篇文章与Intel的I225-V 2.5GBe控制器有关，我们在这里要做的是让Apple的I225LM驱动程序支持我们的I225-V网络控制器:
 
-| Key | Type | Value |
+| 键 | 类型 | 值 |
 | :--- | :--- | :--- |
 | device-id | Data | `F2150000` |
 
-* **Note**: If your board didn't ship with the Intel I225 NIC, there's no reason to add this entry.
-* **Note 2**: If you get a kernel panic on the AppleIntelI210Ethernet kext, your Ethernet's path is likely `PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)`
+* **注**:如果你的主板没有附带Intel I225网卡，没有理由添加这个条目。
+* **注2**:如果你在AppleIntelI210Ethernet kext上得到内核崩溃，你的以太网路径可能是 `PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)`
 
 :::
 
@@ -173,10 +173,10 @@ This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet
 
 `layout-id`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持的编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* 你可以直接删除这个属性，因为我们现在还没有使用它
 
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
+对于我们来说，我们将使用引导参数`alcid=xxx`来完成此操作。`alcid`将覆盖所有其他layout- id。更多信息可以在[安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)中找到。
 
 :::
 
@@ -333,7 +333,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 * **SetApfsTrimTimeout**: `-1`
   * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
 * **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
+  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://sumingyd.github.io/OpenCore-Post-Install/usb/) when possible.
   * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
 
 :::
@@ -452,9 +452,9 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+  * `0` allows you to see all drives available, please refer to [Security](https://sumingyd.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
 * **SecureBootModel**: Default
-  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
+  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://sumingyd.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
@@ -504,7 +504,7 @@ OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
 ::: details More in-depth Info
 
 * **rtc-blacklist**: <>
-  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
+  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
   * Most users can ignore this section
 
 :::
@@ -520,7 +520,7 @@ System Integrity Protection bitmask
 | **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
 | **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
 | **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
+| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://sumingyd.github.io/OpenCore-Post-Install/) |
 
 * **Networking-Specific boot-args**:
 | boot-args | Description |
@@ -618,7 +618,7 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
 **Reminder that you need an invalid serial! When inputting your serial number in [Apple's Check Coverage Page](https://checkcoverage.apple.com), you should get a message such as "Unable to check coverage for this serial number."**
 
@@ -713,11 +713,11 @@ Both MinVersion and MinDate need to be set if changing the minimum version.
 
 Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 
@@ -733,7 +733,7 @@ Relating to OpenCore's visual output, leave everything here as default as we hav
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 
