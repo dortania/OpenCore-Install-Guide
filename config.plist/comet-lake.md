@@ -35,7 +35,7 @@
 
 ::: tip 信息
 
-这是你将为系统添加ssdt的地方，这些对于**引导macOS**非常重要，并且有许多用途，例如[USB maps](https://sumingyd.github.io/OpenCore-Post-Install/usb/), [禁用不支持的gpu](../extras/spoof.md) 等，而我们的系统**甚至需要启动**。制作指南可以在这里找到:[**ACPI入门**](https://sumingyd.github.io/Getting-Started-With-ACPI/)
+这是你将为系统添加ssdt的地方，这些对于**引导macOS**非常重要，并且有许多用途，例如[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/), [禁用不支持的gpu](../extras/spoof.md) 等，这对于我们的系统来说是**启动所必须**的。制作指南可以在这里找到:[**ACPI入门**](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 
 我们需要几个ssdt来恢复Clover提供的功能:
 
@@ -504,8 +504,8 @@ OpenCore的NVRAM GUID，主要与RTCMemoryFixup用户相关
 ::: details 更深入的信息
 
 * **rtc-blacklist**: <>
-  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
-  * Most users can ignore this section
+  * 要与RTCMemoryFixup一起使用，请参阅这里了解更多信息:[修复RTC写入问题](https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
+  * 大多数用户可以忽略此部分
 
 :::
 
@@ -513,29 +513,29 @@ OpenCore的NVRAM GUID，主要与RTCMemoryFixup用户相关
 
 系统完整性保护位掩码
 
-* **General Purpose boot-args**:
+* **通用引导参数**:
 
-| boot-args | Description |
+| 引导参数 | 描述 |
 | :--- | :--- |
-| **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
-| **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
-| **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://sumingyd.github.io/OpenCore-Post-Install/) |
+| **-v** | 这将启用详细模式，在你启动时显示所有滚动的幕后文本，而不是苹果logo和进度条。它对任何黑苹果来说都是非常宝贵的，因为它让您了解了引导过程的内部情况，并可以帮助您识别问题、问题kext等。 |
+| **debug=0x100** | 禁用了macOS的watchdog，它有助于防止在内核出现严重错误时重新启动。 这样你就有希望收集到一些有用的信息并按照分层导航的方式来解决问题。 |
+| **keepsyms=1** | 这是debug=0x100的配套设置，它告诉操作系统在内核出现崩溃时也打印这些符号。这可以提供一些更有用的信息，以了解造成崩溃本身的原因。 |
+| **alcid=1** | 用于为AppleALC设置layout-id，请参阅[支持的编解码器](https://github.com/acidanthera/applealc/wiki/supported-codecs)以确定您的特定系统使用哪种布局。更多信息可以在[安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/) 中找到 |
 
-* **Networking-Specific boot-args**:
-| boot-args | Description |
+* **网络特定的引导参数**:
+| 引导参数 | 描述 |
 | :--- | :--- |
-| **e1000=0** | Disables `com.apple.DriverKit-AppleEthernetE1000` (Apple's DEXT driver) from matching to the Intel I225-V Ethernet controller found on higher end Comet Lake boards, causing Apple's I225 kext driver to load instead.<br/>This boot argument is optional on most boards as they are compatible with the DEXT driver. However, it is required on Gigabyte and several other boards, which can only use the kext driver, as the DEXT driver causes hangs.<br/>You don't need this if your board didn't ship with the I225-V NIC.<br/><br/>On macOS 12.2.1 and below, use `dk.e1000=0` instead |
+| **e1000=0** | 禁用`com apple DriverKit-AppleEthernetE1000`(苹果的DEXT驱动程序)与高端Comet Lake板上找到的英特尔I225- v以太网控制器匹配，以加载苹果的I225 kext驱动程序。<br/>这个引导参数在大多数板上是可选的，因为它们与DEXT驱动程序兼容。但在Gigabyte和其他几个主板上是必需的，这些主板只能使用kext驱动程序，因为DEXT驱动程序会导致挂起。<br/>如果你的主板没有附带I225-V网卡，你不需要这个。<br/><br/>在macOS 12.2.1及以下版本，使用`dk.e1000=0` 代替 |
 
-* **GPU-Specific boot-args**:
+* **gpu特定的引导参数**:
 
-| boot-args | Description |
+| 引导参数 | 描述 |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
-| **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
-| **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
-| **unfairgva=1** | Used for fixing hardware DRM support on supported AMD GPUs |
-| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in macOS Sierra and High Sierra |
+| **agdpmod=pikera** | 用于禁用一些Navi gpu (RX 5000 & 6000系列)的board ID检查，如果没有这个，你将得到一个黑屏。**如果你没有Navi请不要使用** (比如： Polaris 和 Vega 卡不应该使用它) |
+| **-radcodec** | 用于允许官方不支持的AMD gpu(欺骗)使用硬件视频编码器 |
+| **radpg=15** | U用于禁用一些电源开关模式，有助于正确初始化基于Verde based的 AMD 显卡 |
+| **unfairgva=1** | 用于在支持的AMD gpu上修复硬件DRM支持 |
+| **nvda_drv_vrl=1** | 用于在macOS Sierra和High Sierra的Maxwell和Pascal卡上启用NVIDIA的Web驱动程序 |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
 
 * **csr-active-config**: `00000000`
