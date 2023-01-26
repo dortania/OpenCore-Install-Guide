@@ -20,17 +20,17 @@ And for more detailed guides on the subject, see here:
 For CPU support, we have the following breakdown:
 
 * Both 32 and 64-bit CPUs are supported
-  * This however requires the OS to support your architecture, see CPU Requirements section below
-* Intel's Desktop CPUs are supported.
+  * This however requires the OS to support your architecture, see CPU Requirements section below.
+* Intel's Desktop CPUs are supported
   * Yonah through Comet Lake are supported by this guide.
-* Intel's High-End Desktops and Server CPUs.
+* Intel's High-End Desktops and Server CPUs
   * Nehalem through Cascade Lake X are supported by this guide.
 * Intel's Core "i" and Xeon series laptop CPUs
   * Arrandale through Ice Lake are supported by this guide.
-  * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported
+  * Note that Mobile Atoms, Celeron and Pentium CPUs are not supported.
 * AMD's Desktop Bulldozer (15h), Jaguar (16h) and Ryzen (17h) CPUs
-  * Laptop CPUs are **not** supported
-  * Note not all features of macOS are supported with AMD, see below
+  * Laptop CPUs are **not** supported.
+  * Note not all features of macOS are supported with AMD, see below.
 
 **For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
 
@@ -139,7 +139,7 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
   * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
   * Special note for MSI Navi users: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
     * This issue is no longer present in macOS 11 (Big Sur).
-* NVIDIA's GPU support is complicated:
+* NVIDIA's GPU support is complicated
   * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
   * [NVIDIA's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
   * [NVIDIA's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
