@@ -1,29 +1,29 @@
-# Desktop Comet Lake
+# 台式 Comet Lake
 
-| Support | Version |
+| 支持 | 版本 |
 | :--- | :--- |
-| Initial macOS Support | macOS 10.15, Catalina |
+| 初始macOS支持 | macOS 10.15, Catalina |
 
-## Starting Point
+## 起点
 
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+制作一个config.plist看起来很难，其实并不难。这只是需要一些时间，但本指南将告诉你如何配置所有的东西，你不会被冷落。这也意味着如果你有问题，检查你的配置设置以确保它们是正确的。OpenCore的主要注意事项:
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **所有属性必须被定义**，没有默认的OpenCore将出错，所以**不要删除节，除非有明确告知你**。如果指南没有提到该选项，请将其保留为默认值。
+* **Sample plist不能按原样使用**，必须配置到您的系统中。
+* **不要使用配置器**，这些配置器很少遵守OpenCore的规则，甚至一些像Mackie的配置器会添加Clover属性和破坏plists!
 
-Now with all that, a quick reminder of the tools we need
+现在，我们来快速地提醒一下我们需要哪些工具
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
+  * 通用plist编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
+  * 用于生成SMBIOS数据
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
+  * 参见上一节中如何获取:[config.plist Setup](../config.plist/README.md)
 
 ::: warning
 
-Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
+在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图像并不总是最新的，所以请阅读下面的文本，如果没有提到，则保留为默认值。
 
 :::
 
@@ -33,7 +33,7 @@ Read this guide more than once before setting up OpenCore and make sure you have
 
 ### Add
 
-::: tip Info
+::: tip 信息
 
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
@@ -54,25 +54,25 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 ### Delete
 
-This blocks certain ACPI tables from loading, for us we can ignore this.
+这将阻止某些ACPI表加载，对于我们来说，我们可以忽略它。
 
 ### Patch
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
+本节允许我们通过OpenCore动态修改ACPI的部分内容(DSDT、SSDT等)。对我们来说，我们的补丁由我们的ssdt处理。这是一个更简洁的解决方案，因为这将允许我们使用OpenCore引导Windows和其他操作系统
 
 ### Quirks
 
-Settings relating to ACPI, leave everything here as default as we have no use for these quirks.
+与ACPI相关的设置，将所有内容保留为默认设置，因为我们不需要这些怪癖。
 
 ## Booter
 
 ![Booter](../images/config/config-universal/hedt-booter.png)
 
-This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
+本节专门讨论使用OpenRuntime (AptioMemoryFix.efi的替代品)进行引导efi补丁的相关问题
 
 ### MmioWhitelist
 
-This section is allowing devices to be passthrough to macOS that are generally ignored, for us we can ignore this section.
+本节允许将通常被忽略的设备直通到macOS，对我们来说，我们可以忽略本节。
 
 ### Quirks
 
@@ -124,7 +124,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 ### Add
 
-Sets device properties from a map.
+从映射设置设备属性。
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
@@ -182,7 +182,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
 
 ### Delete
 
-Removes device properties from the map, for us we can ignore this
+从映射中删除设备属性，我们可以忽略它
 
 ## Kernel
 
@@ -190,7 +190,7 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
+在这里，我们指定要加载哪些kext，以什么特定的顺序加载，以及每个kext适用于什么体系结构。默认情况下，我们建议保留ProperTree所做的操作，但对于32位cpu，请参见以下内容:
 
 ::: details More in-depth Info
 
@@ -247,21 +247,21 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs, thankfully in 10.15.5+ Comet Lake S support was added so no need to spoof here. For those running High Sierra or Mojave, you will need the below to spoof to a supported CPU model(due to stability issues, this guide will not go over such CPUID spoofs)
+需要欺骗不支持的cpu，幸运的是在10.15.5+ Comet Lake中添加了支持，所以不需要在这里欺骗。对于那些运行High Sierra或Mojave的人，您将需要下面的代码来欺骗到一个受支持的CPU模型(由于稳定性问题，本指南将不讨论此类CPUID欺骗)
 
 ### Force
 
-Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+用于从系统卷中加载kext，仅适用于某些kext不存在于缓存中的旧操作系统(例如IONetworkingFamily在10.6)。
 
-For us, we can ignore.
+对我们来说，我们可以忽略。
 
 ### Block
 
-Blocks certain kexts from loading. Not relevant for us.
+阻止某些kext的加载。与我们无关。
 
 ### Patch
 
-Patches both the kernel and kexts.
+对内核和kext进行补丁。
 
 ::: tip Fixing I225-V controllers
 
@@ -340,7 +340,7 @@ Settings relating to the kernel, for us we'll be enabling the following:
 
 ### Scheme
 
-Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip however for those planning to boot legacy OSes you can see below:
+与传统引导(例如10.4-10.6)相关的设置，大多数情况下你可以跳过，但是对于那些计划引导传统操作系统的人，你可以查看以下内容:
 
 ::: details More in-depth Info
 
