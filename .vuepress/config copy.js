@@ -3,6 +3,7 @@ const {
 } = require('../package')
 
 module.exports = {
+    title: 'OpenCore 安装指南',
     head: [
         ['meta', {
             name: 'theme-color',
@@ -21,19 +22,6 @@ module.exports = {
             href: "/styles/website.css"
         },]
     ],
-    locales: {
-        '/': {
-          lang: 'en-US',
-          title: 'VuePress',
-          description: 'Vue-powered Static Site Generator'
-        },
-        '/zh/': {
-          lang: 'zh-CN',
-          title: 'VuePress',
-          description: 'Vue 驱动的静态网站生成器'
-        }
-      },
-
     base: '/OpenCore-Install-Guide/',
 
     watch: {
