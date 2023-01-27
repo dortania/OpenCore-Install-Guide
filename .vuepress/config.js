@@ -3,7 +3,6 @@ const {
 } = require('../package')
 
 module.exports = {
-    locales: {
     title: 'OpenCore 安装指南',
     head: [
         ['meta', {
@@ -53,15 +52,8 @@ module.exports = {
     globalUIComponents: [
         'ThemeManager'
     ],
-},
 
     themeConfig: {
-        locales: {
-            '/': {
-              selectText: 'Languages',
-              label: 'English',
-              ariaLabel: 'Languages',
-      
         lastUpdated: true,
         repo: 'https://github.com/sumingyd/OpenCore-Install-Guide',
         editLinks: true,
@@ -301,8 +293,6 @@ module.exports = {
             ]
         },
         ],
-    }
-}
     },
     plugins: [
         '@vuepress/back-to-top',
