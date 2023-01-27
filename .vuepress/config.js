@@ -4,8 +4,6 @@ const {
 
 module.exports = {
     locales: {
-        '/': {
-            lang: 'en-US', // 将会被设置为 <html> 的 lang 属性
     title: 'OpenCore 安装指南',
     head: [
         ['meta', {
@@ -55,8 +53,15 @@ module.exports = {
     globalUIComponents: [
         'ThemeManager'
     ],
+},
 
     themeConfig: {
+        locales: {
+            '/': {
+              selectText: 'Languages',
+              label: 'English',
+              ariaLabel: 'Languages',
+      
         lastUpdated: true,
         repo: 'https://github.com/sumingyd/OpenCore-Install-Guide',
         editLinks: true,
@@ -296,6 +301,8 @@ module.exports = {
             ]
         },
         ],
+    }
+}
     },
     plugins: [
         '@vuepress/back-to-top',
@@ -309,11 +316,4 @@ module.exports = {
                 }
             }],
     ]
-},
-'/zh/': {
-    lang: 'zh-CN',
-    title: 'VuePress',
-    description: 'Vue 驱动的静态网站生成器'
-  }
-}
 }
