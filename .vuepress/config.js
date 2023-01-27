@@ -23,7 +23,18 @@ module.exports = {
         },]
     ],
     base: '/OpenCore-Install-Guide/',
-
+    locales: {
+        '/': {
+          lang: 'en-US',
+          title: 'VuePress',
+          description: 'Vue-powered Static Site Generator'
+        },
+        '/zh/': {
+          lang: 'zh-CN',
+          title: 'VuePress',
+          description: 'Vue 驱动的静态网站生成器'
+        }
+      },
     watch: {
         $page(newPage, oldPage) {
             if (newPage.key !== oldPage.key) {
@@ -59,6 +70,26 @@ module.exports = {
         editLinks: true,
         editLinkText: '帮助我们改进此页面!',
         logo: '/homepage.png',
+        locales: {
+            '/': {
+              label: 'English',
+              selectText: 'Languages',
+              ariaLabel: 'Select language',
+              editLinkText: 'Edit this page on GitHub',
+              lastUpdated: 'Last Updated',
+              nav: NavItems4EN,
+              sidebar: Sidebar4EN
+            },
+            '/zh/': {
+              label: '简体中文',
+              selectText: '选择语言',
+              ariaLabel: '选择语言',
+              editLinkText: '在 GitHub 上编辑此页',
+              lastUpdated: '上次更新',
+              nav: NavItems4ZH,
+              sidebar: Sidebar4ZH
+            }
+          }
         nav: [{
             text: '指南菜单',
             items: [{
