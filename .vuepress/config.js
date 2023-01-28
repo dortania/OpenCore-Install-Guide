@@ -72,13 +72,6 @@ module.exports = {
         editLinks: true,
         logo: '/homepage.png',
         locales: {
-            '/zh/': {
-              label: 'English',
-              selectText: 'Languages',
-              ariaLabel: 'Select language',
-              editLinkText: 'Edit this page on GitHub',
-              lastUpdated: 'Last Updated',
-            },
             '/': {
               label: '简体中文',
               selectText: '选择语言',
@@ -321,7 +314,13 @@ module.exports = {
             ],
             }
           }
-
+            '/zh/': {
+              label: 'English',
+              selectText: 'Languages',
+              ariaLabel: 'Select language',
+              editLinkText: 'Edit this page on GitHub',
+              lastUpdated: 'Last Updated',
+            },
     },
     plugins: [
         '@vuepress/back-to-top',
