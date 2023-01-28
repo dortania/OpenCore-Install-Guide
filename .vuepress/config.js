@@ -22,16 +22,16 @@ module.exports = {
         },]
     ],
     locales: {
-        '/zh/': {
-          lang: 'en-US',
-          title: 'OpenCore Install Guide',
-          description: 'OpenCore Install Guide'
-        },
         '/': {
           lang: 'zh-CN',
           title: 'OpenCore安装指南',
           description: '中文版OpenCore安装指南'
         }
+        '/zh/': {
+          lang: 'en-US',
+          title: 'OpenCore Install Guide',
+          description: 'OpenCore Install Guide'
+        },
       },
 
     base: '/OpenCore-Install-Guide/',
