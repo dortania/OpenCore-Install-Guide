@@ -312,14 +312,14 @@ module.exports = {
                 ]
             },
             ],
-            }
-            '/zh/': {
+          '/zh/': {
               label: 'English',
               selectText: 'Languages',
               ariaLabel: 'Select language',
               editLinkText: 'Edit this page on GitHub',
               lastUpdated: 'Last Updated',
             },
+            }
           }
 
     },
