@@ -313,7 +313,6 @@ module.exports = {
             },
             ],
             }
-          }
             '/zh/': {
               label: 'English',
               selectText: 'Languages',
@@ -321,6 +320,8 @@ module.exports = {
               editLinkText: 'Edit this page on GitHub',
               lastUpdated: 'Last Updated',
             },
+          }
+
     },
     plugins: [
         '@vuepress/back-to-top',
