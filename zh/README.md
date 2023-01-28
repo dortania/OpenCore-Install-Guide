@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage:../../dortania-logo-clear.png
+heroImage: /dortania-logo-clear.png
 heroText: OpenCore的安装指南
 actionText: 准备开始→
 actionLink: prerequisites.md
