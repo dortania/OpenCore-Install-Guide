@@ -22,12 +22,12 @@ module.exports = {
         },]
     ],
     locales: {
-        '/': {
+        '/zh/': {
           lang: 'en-US',
           title: 'OpenCore Install Guide',
           description: 'OpenCore Install Guide'
         },
-        '/zh/': {
+        '/': {
           lang: 'zh-CN',
           title: 'OpenCore安装指南',
           description: '中文版OpenCore安装指南'
@@ -72,7 +72,7 @@ module.exports = {
         editLinks: true,
         logo: '/homepage.png',
         locales: {
-            '/': {
+            '/zh/': {
               label: 'English',
               selectText: 'Languages',
               ariaLabel: 'Select language',
@@ -313,7 +313,7 @@ module.exports = {
             },
             ],
             },
-            '/zh/': {
+            '/': {
               label: '简体中文',
               selectText: '选择语言',
               ariaLabel: '选择语言',
