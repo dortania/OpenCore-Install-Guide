@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>18A391012</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>CtlnaAHCIPort</string>
+	<key>CFBundleGetInfoString</key>
+	<string>341.0.2, Copyright Apple Inc. 2005-2016</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.driver.CtlnaAHCIPort</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>CtlnaAHCI</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>341.0.2</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>341.0.2</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>11O62d</string>
+	<key>DTPlatformName</key>
+	<string>macosx</string>
+	<key>DTPlatformVersion</key>
+	<string>10.15.4</string>
+	<key>DTSDKBuild</key>
+	<string>19F60x</string>
+	<key>DTSDKName</key>
+	<string>macosx10.15internal</string>
+	<key>DTXcode</key>
+	<string>1140</string>
+	<key>DTXcodeBuild</key>
+	<string>11O62d</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>Intel10SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>10 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,9d03</string>
+				<string>pci8086,a102</string>
+				<string>pci8086,a103</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>3000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel11SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>11 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,a352</string>
+				<string>pci8086,a353</string>
+				<string>pci8086,9dd3</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel12SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>12 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,a182</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel5SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>5 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,3b29</string>
+				<string>pci8086,3b22</string>
+				<string>pci8086,3b2f</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel6SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>6 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,1c02</string>
+				<string>pci8086,1c03</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel7SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>7 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,1e02</string>
+				<string>pci8086,1e03</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel8SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>8 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,8c02</string>
+				<string>pci8086,8c03</string>
+				<string>pci8086,9c03</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel9SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>9 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,9c83</string>
+				<string>pci8086,8c83</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>2000</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>IntelRAIDAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>Intel AHCI RAID</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,282a</string>
+				<string>pci8086,2822</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>900</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+		<key>Intel200SeriesAHCI</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.CtlnaAHCIPort</string>
+			<key>Chipset Name</key>
+			<string>200 Series Chipset</string>
+			<key>IOClass</key>
+			<string>CtlnaIntelPchSeriesAHCI</string>
+			<key>IONameMatch</key>
+			<array>
+				<string>pci8086,a282</string>
+			</array>
+			<key>IOProbeScore</key>
+			<integer>900</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
+			<key>Vendor Name</key>
+			<string>Intel</string>
+		</dict>
+	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.15</string>
+	<key>OSBundleLibraries</key>
+	<dict>
+		<key>com.apple.iokit.IOAHCIFamily</key>
+		<string>1.0.0</string>
+		<key>com.apple.iokit.IOPCIFamily</key>
+		<string>1.0.0</string>
+		<key>com.apple.kpi.bsd</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.mach</key>
+		<string>8.0.0</string>
+	</dict>
+	<key>OSBundleRequired</key>
+	<string>Local-Root</string>
+</dict>
+</plist>
