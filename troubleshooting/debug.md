@@ -1,4 +1,4 @@
-# OpenCore Debugging
+# OpenCore调试
 
 Needing to figure out why you're getting issues or stalling? Well, you've come to the right place:
 

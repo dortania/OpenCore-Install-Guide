@@ -1,4 +1,4 @@
-# Understanding the macOS Boot Process
+# 了解macOS引导过程
 
 So with troubleshooting a hackintosh, it can be a bit difficult to really understand *where* you're getting stuck as the exact keyword you're trying to search for may not match anything on google. While this page won't solve all your issues, it should at least help better understand where in the macOS boot-process you're getting stuck and hopefully give some ideas as to why you're stuck.
 

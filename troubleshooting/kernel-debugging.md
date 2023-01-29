@@ -1,4 +1,4 @@
-# System Debugging: In-depth
+# 系统调试:深入
 
 This section will go a bit deeper into the troubleshooting rabbit hole, specifically focusing on more low level debugging with proper debug output and optional serial setup.
 
