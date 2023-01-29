@@ -124,11 +124,11 @@ module.exports = {
                 ]
             },
             {
-                title: '创建USB引导',
+                title: '制作引导U盘',
                 collapsable: false,
                 sidebarDepth: 2,
                 children: [{
-                    title: '创建USB引导',
+                    title: '制作引导U盘',
                     collapsable: true,
                     path: '/installer-guide/',
                     sidebarDepth: 1,
