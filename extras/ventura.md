@@ -63,7 +63,7 @@ Ventura 删除了如下机型的支持:
 
 * 你可以使用[OpenCore-Legacy-Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/)来添加回删掉的硬件支持
   * 不会为使用OCLP的设备提供支持
-  * 你讲不能进行增量更新 (1-3GB的小更新)
+  * 你将不能进行增量更新 (1-3GB的小更新)
   * 必须将SIP，Apple Secure Boot，和AMFI禁用.
 
 ### AMD 补丁
