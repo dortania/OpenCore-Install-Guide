@@ -17,6 +17,7 @@ macOS Ventura（macOS 13） 删除了对Haswell架构以前的cpu的支持。许
 * 北极星架构的显卡无法在无AVX2指令集的机器上使用
 
 因为以上原因，Dortania团队将不再对Haswell架构以前的cpu提供Ventura（macOS 13）及以上的支持，对应这些cpu的页面将只针对Monterey（macOS 12）系统进行更新。
+
 ### 支持的机型
 
 Ventura 删除了如下机型的支持:
