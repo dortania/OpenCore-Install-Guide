@@ -14,11 +14,6 @@ meta:
 
 如需访问英文原版页面请查阅：[OpenCore-Install-Guide](https://github.com/dortania/OpenCore-Install-Guide)
 
-本指南主要关注以下两点:
-
-* 在基于X86架构的PC上安装macOS
-* 教会你如何进行你的破解
-
 中文翻译由[宿命](https://github.com/sumingyd)提供，由[星座三太子](https://github.com/joe915632)校对，此翻译受限于作者及贡献者的个人喜好及个人理解，并非是dortania官方翻译。
 
 黑果交流QQ群：796661960
