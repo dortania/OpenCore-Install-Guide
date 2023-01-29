@@ -1,4 +1,4 @@
-# Post-Install Issues
+# 安装后的问题
 
 Issues revolving around macOS once properly installed.
 

@@ -1,4 +1,4 @@
-# Kernel Issues
+# 内核空间问题
 
 Issues surrounding from initial booting the macOS installer to right before the install GUI pops up.
 

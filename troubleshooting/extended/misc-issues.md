@@ -1,4 +1,4 @@
-# Miscellaneous Issues
+# 杂项问题
 
 Miscellaneous issues not revolving around macOS itself such as multibooting.
 

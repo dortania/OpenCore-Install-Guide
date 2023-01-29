@@ -1,4 +1,4 @@
-# Userspace Issues
+# 用户空间问题
 
 Issues regarding once you've booted the installer and the GUI has loaded.
 
