@@ -26,7 +26,7 @@ module.exports = {
           lang: 'zh-CN',
           title: 'OpenCore安装指南',
           description: '中文版OpenCore安装指南'
-        }
+        },
         '/zh/': {
           lang: 'en-US',
           title: 'OpenCore Install Guide',
@@ -312,7 +312,7 @@ module.exports = {
                 ]
             },
             ],
-            }
+            },
             '/zh/': {
                 label: 'English',
                 selectText: 'Languages',
