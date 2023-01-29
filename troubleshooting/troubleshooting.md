@@ -4,7 +4,7 @@
 
 **如果没有涉及你的问题，请阅读OpenCore的官方文档:[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**. 本文档涉及更多关于OpenCore如何工作的技术细节，并有更多关于所有支持的怪癖的详细信息。
 
-## Table of Contents
+## 目录
 
 如果您不确定您目前卡在哪里，请参阅这里:[了解macOS引导过程](../troubleshooting/ Boot .md)
 
