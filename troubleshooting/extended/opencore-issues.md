@@ -117,7 +117,7 @@
 * 缺少PS2键盘驱动程序(如果使用USB键盘则忽略):
   * *虽然大多数固件默认包含它，但一些笔记本电脑和旧电脑可能仍然需要[Ps2KeyboardDxe.efi](https://github.com/acidanthera/OpenCorePkg/releases) 才能工作。记得把这个添加到你的config.plist中
 
-## SSDTs not being added
+## 收到 “SSDTs not being added”
 
 使用OpenCore，在ACPI文件周围添加了一些额外的安全检查，特别是表长度头必须等于文件大小。这实际上是iASL在编译文件时的错误。如何找到它的例子:
 
@@ -150,16 +150,16 @@
 
 :::
 
-## OCABC: Incompatible OpenRuntime r4, require r10
+## 收到 “OCABC: Incompatible OpenRuntime r4, require r10”
 
 过时的OpenRuntime.efi，确保BOOTx64.efi, OpenCore.efi和OpenRuntime **都来自相同的构建**。任何不匹配的东西都会破坏启动
 
 * **注意**:0.5.7及以上版本，FwRuntimeServices已重命名为OpenRuntime
 
-## Failed to open OpenCore image - Access Denied
+## 收到 “Failed to open OpenCore image - Access Denied”
 
 在较新的微软Surface设备固件上，即使禁用了安全引导，加载OpenCore也会导致安全违规。要解决这个问题，请在 config.plist 中启用`UEFI -> Quirks -> DisableSecurityPolicy`。查看这里了解更多信息:[Failed to open OpenCore image - Access Denied #1446](https://github.com/acidanthera/bugtracker/issues/1446)
 
-## OC: Failed to find SB model disable halting on critical error
+## 收到 “OC: Failed to find SB model disable halting on critical error”
 
 这是一个拼写错误，请确保在你的 config.plist 中将`Misc -> Security -> SecureBootModel` 设置为禁用 **d**
