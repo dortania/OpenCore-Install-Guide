@@ -2,11 +2,11 @@
 
 本节是针对那些在启动OpenCore、macOS或macOS内部存在问题的人。如果你不知道在macOS引导过程中你被卡在了哪里，阅读[macOS引导过程](../troubleshooting/boot.md)页面可以帮助你弄清楚。
 
-**如果没有涉及你的问题，请阅读OpenCore的官方文档:[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**. 本文档涉及更多关于OpenCore如何工作的技术细节，并有更多关于所有支持的怪癖的详细信息。
+**如果没有涉及你的问题，请阅读OpenCore的官方文档:[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**。本文档涉及更多关于OpenCore如何工作的技术细节，并有更多关于所有支持的怪癖的详细信息。
 
 ## 目录
 
-如果您不确定您目前卡在哪里，请参阅这里:[了解macOS引导过程](../troubleshooting/ Boot .md)
+如果您不确定您目前卡在哪里，请参阅这里:[了解macOS引导过程](../troubleshooting/Boot.md)
 
 * [OpenCore引导问题](./extended/opencore-issues.md)
   * 这一节指的是启动实际的USB和获得OpenCore的选择器。在选择器之后的任何操作，比如启动macOS，都应该在下面看到
