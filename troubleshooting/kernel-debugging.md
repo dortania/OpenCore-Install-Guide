@@ -59,29 +59,29 @@
   * Combination of `DB_PRT` (0x2), `DB_KPRT` (0x8), `DB_SLOG` (0x20), and `DB_LOG_PI_SCRN` (0x100)
   * 最新版本XNU的完整列表可以在这里找到: [debug.h](https://github.com/apple-oss-distributions/xnu/blob/master/osfmk/kern/debug.h)
 * **msgbuf=1048576**
-  * Sets the kernel's message buffer size, this helps with getting proper logs during boot
-  * 1048576 is 1MB(/1024^2), can be larger if required
-  * Note not required with DebugEnhancer.kext, however for early kernel logs it's still required
+  * 设置内核的消息缓冲区大小，这有助于在启动期间获得正确的日志
+  * 1048576 is 1MB(/1024^2), 如果需要可以更大
+  * 注意：DebugEnhancer kext不需要，但是对于早期的内核日志，它仍然是必需的
 
-**Other helpful boot-args**:
+**其他有用的boot-args**:
 
-Depending on what you're debugging, you may also find these boot-args extremely helpful:
+根据你正在调试的内容，你可能还会发现这些boot-args非常有用:
 
 * **-liludbgall**
-  * Enables debugging on Lilu and any other plugins, though note that this requires DEBUG versions of the kexts
+  * 在Lilu和任何其他插件上启用调试，但请注意，这需要调试版本的kext
 * **io=0xff**
-  * Enables IOKit debugging, with greater output. Be aware that the logging-amount of this parameter will be huge and will slow down the system. Especially while booting.
+  * 启用IOKit调试，输出更大。请注意，此参数的日志量将非常大，并将降低系统的速度。尤其是在启动的时候。
 * **igdebug=0xff**
-  * Enables iGPU related debugging, helpful when working with iGPU systems
+  * 开启iGPU相关的调试，在使用iGPU系统时很有用
 * **serial=5**
-  * Redirects output to serial if you [plan to use serial](#serial-setup-optional)
-  * Recommended for early kernel output before PCI Configuration
+  * 将输出重定向到串行如果你[计划使用串行](#serial-setup-optional)
+  * 推荐用于PCI配置之前的早期内核输出
 * **acpi_layer=0x8**
-  * Enables `ACPI_TABLES` debug, see [acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) for more information
-  * `0xFFFFFFFF` alternatively enables all layers
+  * 启用`ACPI_TABLES`调试，参见[acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) 了解更多信息
+  * `0xFFFFFFFF` 也可以启用所有层
 * **acpi_level=0x2**
-  * Sets `ACPI_LV_DEBUG_OBJECT` debug, see [acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) for more information
-  * `0xFFFF5F` alternatively implies `ACPI_ALL_COMPONENTS`
+  * 设置`ACPI_LV_DEBUG_OBJECT`调试，参见 [acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) 了解更多信息
+  * `0xFFFF5F` 也可以表示 `ACPI_ALL_COMPONENTS`
 
 ## Serial Setup(Optional)
 
