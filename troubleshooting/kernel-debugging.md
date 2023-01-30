@@ -1,63 +1,63 @@
 # 系统调试:深入
 
-This section will go a bit deeper into the troubleshooting rabbit hole, specifically focusing on more low level debugging with proper debug output and optional serial setup.
+本节将更深入地讨论故障排除，特别关注具有适当调试输出和可选串行设置的更低级的调试。
 
-**Note**: 99% of users do not need this level of debugging, this is only for the hardcore or extreme edge-cases.
+**注意**:99%的用户不需要这种级别的调试，这只适用于核心或极端情况。
 
 [[toc]]
 
-## EFI Setup
+## EFI 设置
 
-For most part, there's fairly minimal changes required. Main things we recommend are DEBUG version of **OpenCore** and all your **kexts**. This can help ensure you get all the necessary data, see here for more details on OpenCore debugging: [OpenCore debugging](./debug.md)
+在大多数情况下，只需要相当小的更改。我们主要推荐的是DEBUG版本的**OpenCore**和所有的**kext **。这可以帮助您获得所有必要的数据，有关OpenCore调试的更多详细信息，请参阅这里: [OpenCore调试](./debug.md)
 
-Besides just using DEBUG variants of OpenCore and kexts, these tools can also help out greatly:
+除了使用OpenCore和kexts的DEBUG版本，这些工具也可以提供很大的帮助:
 
 * [DebugEnhancer.kext](https://github.com/acidanthera/DebugEnhancer/releases)
-  * Helps greatly with kernel debugging while also patching [kern.msgbuf to 10485760](https://github.com/acidanthera/DebugEnhancer/blob/4495911971011a1a7a0ffe8605d6ca4b341f67d9/DebugEnhancer/kern_dbgenhancer.cpp#L131) and allowing a much larger kernel-log.
-  * Note this kext cannot start with kernel initialization, so early logs are not patched until the kext is loaded right before PCI Configuration Stage
+  * 极大地帮助内核调试，同时还修补了 [kern.msgbuf to 10485760](https://github.com/acidanthera/DebugEnhancer/blob/4495911971011a1a7a0ffe8605d6ca4b341f67d9/DebugEnhancer/kern_dbgenhancer.cpp#L131) ，并允许更大的内核日志。
+  * 注意这个kext不能与内核初始化一起启动，所以早期的日志不会被修补，直到kext在PCI配置阶段之前加载
   
 * [SSDT-DBG](https://gist.github.com/al3xtjames/39ebea4d615c8aed829109a9ea2cd0b5)
-  * Enables debug statements from your ACPI tables, helping for in-OS ACPI event debugging
-  * Note you will need to [compile the SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Manual/compile.html)
+  * 启用ACPI表中的调试语句，帮助操作系统中的ACPI事件调试
+  * 注意你需要[编译SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Manual/compile.html)
   
-## Config.plist Setup
+## Config.plist 设置
 
-For serial setup, OpenCore actually makes this quite straight forward.
+对于串行设置，OpenCore实际上是非常直接的。
 
 ### Misc
 
 #### Serial
 
 * **Init**: YES
-  * Initializes the serial port from OpenCore
-  * Needed for sending OpenCore logging to the serial port
+  * 从 OpenCore 初始化串口
+  * 需要将OpenCore日志发送到串口
 
 #### Debug
 
 * **Target**: `67`
-  * Enables debug output with OpenCore
-  * `Target` = `75` adds the additional serial output flag(`0x08`) if you [plan to use serial](#serial-setup-optional)
-  * You can calculate your own value here: [OpenCore debugging](./debug.md)
+  * 启用OpenCore调试输出
+  * `Target` = `75`添加额外的串行输出标志(`0x08`)，如果你[计划使用串行](#serial-setup-optional)
+  * 你可以在这里计算你自己的值:[OpenCore调试](./debug.md)
   
 ### NVRAM
 
 #### boot-args
 
-Here we get to set some variables that will help us with debug output, for us we'll be using the following boot-args:
+在这里，我们要设置一些变量来帮助我们调试输出，对于我们来说，我们将使用以下的boot-args:
 
 ```
 -v keepsyms=1 debug=0x12a msgbuf=1048576
 ```
 
-Now lets go over what each arg does:
+现在让我们来看看每个arg的作用:
 
 * **-v**
-  * Enables verbose output
+  * 启用详细输出
 * **keepsyms=1**
-  * Ensures symbols are kept during kernel panics, which are greatly helpful for troubleshooting
+  * 确保在内核发生严重故障时保留符号，这对故障排除非常有帮助
 * **debug=0x12a**
   * Combination of `DB_PRT` (0x2), `DB_KPRT` (0x8), `DB_SLOG` (0x20), and `DB_LOG_PI_SCRN` (0x100)
-  * A full list of values for the latest version of XNU can be found here: [debug.h](https://github.com/apple-oss-distributions/xnu/blob/master/osfmk/kern/debug.h)
+  * 最新版本XNU的完整列表可以在这里找到: [debug.h](https://github.com/apple-oss-distributions/xnu/blob/master/osfmk/kern/debug.h)
 * **msgbuf=1048576**
   * Sets the kernel's message buffer size, this helps with getting proper logs during boot
   * 1048576 is 1MB(/1024^2), can be larger if required
