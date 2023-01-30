@@ -1,101 +1,101 @@
 # OpenCore调试
 
-Needing to figure out why you're getting issues or stalling? Well, you've come to the right place:
+需要弄清楚为什么你会遇到问题或停滞不前?嗯，你来对地方了:
 
 [[toc]]
 
-## File Swaps
+## 文件交换
 
-To start, make sure you're using either the `DEBUG` or `NOOPT` versions of OpenCore. This will provide much more info than the `RELEASE` version, the specific files that need to be swapped:
+首先，确保你使用的是`DEBUG`或`NOOPT`版本的OpenCore。这将提供比`RELEASE`版本更多的信息，需要交换的特定文件:
 
 * EFI/BOOT/
   * `BOOTx64.efi`
 * EFI/OC/Drivers/
   * `OpenRuntime.efi`
-  * `OpenCanopy.efi`(if you're using it)
+  * `OpenCanopy.efi`(如果你正在使用它)
 * EFI/OC/
   * `OpenCore.efi`
 
 ![](../images/troubleshooting/debug-md/replace.png)
 
-* **Note**: Generally best to debug systems without OpenCanopy, if required make sure this file is from DEBUG else there will be virtually no debug information.
+* **注意**:通常最好调试没有OpenCanopy的系统，如果需要，确保这个文件来自debug，否则几乎没有调试信息。
 
-## Config Changes
+## 配置更改
 
-Next, head to your config.plist and locate the `Misc` > `Debug` section, we have a couple entries we'll want to play with here:
+接下来，转到你的config plist并找到`Misc` > `Debug`部分，我们有几个条目需要使用:
 
 ### Misc > Debug
 
-Here we'll want to enable the following:
+这里我们需要启用以下功能:
 
-* **AppleDebug**: YES
-  * Provides much more debugging information, specifically relating to boot.efi and will also store the log to disk.
+* **AppleDebug**: 是
+  * 提供更多调试信息，特别是与 boot.efi 相关的信息，并将日志存储到磁盘。
 
-* **ApplePanic**: YES
-  * This will allow kernel panics to be stored to disk, highly recommend keeping `keepsyms=1` in boot-args to preserve as much info as possible.
+* **ApplePanic**: 是
+  * 这将允许内核错误被存储到磁盘，强烈建议在boot-args中保持`keepsyms=1`以尽可能多地保存信息。
 
-* **DisableWatchdog**: YES
-  * Disables the UEFI watchdog, used for when OpenCore is stalling on something non-critical.
+* **DisableWatchdog**: 是
+  * 禁用UEFI看门狗，用于OpenCore在一些非关键的东西上停滞。
 
-* **Target**: `67` (or calculate one below)
-  * Used for enabling different levels of debugging
+* **Target**: `67` (或者在下面计算一个)
+  * 用于开启不同级别的调试
 
-| Value | Comment |
+| 值 | 说明 |
 | :--- | :--- |
-| `0x01` | Enable Logging |
-| `0x02` | Enable Onscreen debug |
-| `0x04` | Enable logging to Data Hub. |
-| `0x08` | Enable serial port logging. |
-| `0x10` | Enable UEFI variable logging. |
-| `0x20` | Enable non-volatile UEFI variable logging. |
-| `0x40` | Enable logging to file. |
+| `0x01` | 启用日志记录 |
+| `0x02` | 启用屏幕调试 |
+| `0x04` | 启用记录到数据中心 |
+| `0x08` | 启用串口日志功能. |
+| `0x10` | 启用UEFI变量日志记录. |
+| `0x20` | 启用非易失性UEFI变量日志记录. |
+| `0x40` | 启用文件记录功能. |
 
-To calculate the target, we can use a hex calculator and then convert it to decimal. For us we want to have our values on stored onto a .txt file for later viewing:
+要计算目标，可以使用十六进制计算器，然后将其转换为小数。对于我们来说，我们希望将我们的值存储到一个.txt文件中，以便以后查看:
 
-* `0x01` — Enable Logging
-* `0x02` — Enable on-screen debug
-  * Note this can heavily increase boot times on firmwares with poor GOP implementations
-* `0x40` — Enable logging to file
+* `0x01` — 启用日志记录
+* `0x02` — 启用屏幕调试
+  * 请注意，对于GOP实现不佳的固件，这可能会严重增加启动时间
+* `0x40` — 将日志写入文件
 
 `0x01` + `0x02` + `0x40` = `0x43`
 
-`0x43` converted to decimal becomes `67`
+`0x43` 转换成小数后变成 `67`
 
-So we can set `Misc` -> `Debug` -> `Target` -> `67`
+我们可以设置 `Misc` -> `Debug` -> `Target` -> `67`
 
-* **DisplayLevel**: `2147483714` (or calculate one below)
-  * Used for setting what is logged
+* **DisplayLevel**: `2147483714` (或者在下面计算一个)
+  * 用于设置记录的内容
 
-| Value | Comment |
+| 值 | 说明 |
 | :--- | :--- |
-| `0x00000002` | DEBUG_WARN in DEBUG, NOOPT, RELEASE. |
-| `0x00000040` | DEBUG_INFO in DEBUG, NOOPT. |
-| `0x00400000` | DEBUG_VERBOSE in custom builds. |
-| `0x80000000` | DEBUG_ERROR in DEBUG, NOOPT, RELEASE. |
+| `0x00000002` | 在DEBUG, NOOPT, RELEASE中发出警告|
+| `0x00000040` | DEBUG, NOOPT 中的调试信息。 |
+| `0x00400000` | 自定义构建中的调试详细信息。 |
+| `0x80000000` | 在DEBUG, NOOPT, RELEASE中出现的错误。 |
 
-  A full list can be found in [DebugLib.h](https://github.com/tianocore/edk2/blob/UDK2018/MdePkg/Include/Library/DebugLib.h).
+  完整的列表可以在 [DebugLib.h](https://github.com/tianocore/edk2/blob/UDK2018/MdePkg/Include/Library/DebugLib.h)中找到。
 
-For us we just want the following:
+对于我们来说，我们只需要以下内容:
 
-* `0x00000002` — DEBUG_WARN in DEBUG, NOOPT, RELEASE.
-* `0x00000040` — DEBUG_INFO in DEBUG, NOOPT.
-* `0x80000000` — DEBUG_ERROR in DEBUG, NOOPT, RELEASE.
+* `0x00000002` — 在DEBUG, NOOPT, RELEASE中发出警告
+* `0x00000040` — DEBUG, NOOPT 中的调试信息。
+* `0x80000000` — 在DEBUG, NOOPT, RELEASE中出现的错误。
 
-Just like with `Target`, we use a hex calculator then convert to decimal:
+就像`Target`一样，我们使用十六进制计算器，然后转换为十进制:
 
-`0x80000042` Converted to decimal becomes `2147483714`
+`0x80000042` 转换为小数变成 `2147483714`
 
 `Misc` -> `Debug` -> `DisplayLevel` -> `2147483714`
 
-Once done, your config.plist should look like this:
+一旦完成，你的config.plist应该是这样的:
 
 ![](../images/troubleshooting/debug-md/debug.png)
 
-## Disabling all logging
+## 禁用所有的日志
 
-To remove all file logging, and debug messages, simply swap out all your OpenCore files for those in RELEASE like we did before in [File Swap](#file-swap) section.
+要删除所有文件日志和调试消息，只需将所有OpenCore文件替换为发布中的文件，就像我们之前在[file swap](#file-swap)部分所做的那样。
 
-Lastly, to remove writing to disk set the following:
+最后，要删除写入磁盘的操作，设置如下:
 
 * AppleDebug = `NO`
 * ApplePanic = `NO`
