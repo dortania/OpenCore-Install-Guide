@@ -1,38 +1,38 @@
 # 内核空间问题
 
-Issues surrounding from initial booting the macOS installer to right before the install GUI pops up.
+从最初启动macOS安装程序到弹出安装GUI之前的问题。
 
 [[toc]]
 
-## Stuck on `[EB|#LOG:EXITBS:START]`
+## 卡在 `[EB|#LOG:EXITBS:START]`
 
-This section will be split into 3 parts, so pay close attention:
+本节将分为3部分，请仔细阅读。
 
-* [Booter Issues](#booter-issues)
-* [Kernel Patch Issues](#kernel-patch-issues)
-* [UEFI Issues](#uefi-issues)
-* [Virtual Machine Issues](#virtual-machine-issues)
+* [启动器问题](#启动器问题)
+* [内核补丁问题](#kernel-patch-issues)
+* [UEFI 问题](#uefi-issues)
+* [虚拟机问题](#virtual-machine-issues)
 
-### Booter Issues
+### 启动器问题
 
-The main culprits to watch for in the Booter section are:
+在Booter部分需要注意的主要问题有:
 
 * **DevirtualiseMmio**
-  * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright. More info here: [Using DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
-  * For TRx40 users, enable this quirk
-  * For X99 users, disable this quirk as it breaks with some firmwares
+  * 某些MMIO空间仍然需要正常工作，所以你需要在 Booter -> MmioWhitelist 中排除这些区域或完全禁用此选项。 更多信息在这里: [Using DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
+  * 对于TRx40用户，启用此功能
+  * 对于X99的用户，禁用这种功能，因为它会被某些固件破坏
 
 * **SetupVirtualMap**
-  * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
-    * Mainly Z390 and older require this quirk enabled
-    * However, certain firmwares(mainly 2020+) do not work with this quirk and so may actually cause this kernel panic:
-      * Intel's Ice Lake series
-      * Intel's Comet Lake series(B460, H470, Z490, etc)
-      * AMD's B550 and A520(Latest BIOS on X570 are also included now)
-        * Many B450 and X470 boards with late 2020 BIOS updates are also included
-      * AMD's TRx40
-      * VMs like QEMU
-      * X299 2020+ BIOS updates(This applies to other X299 boards on the latest BIOS that released either in late 2019 or 2020+)
+  * 大多数固件都需要这个功能，如果没有这个功能，内核崩溃就很常见，所以如果还没有启用它的话就启用它
+    * 主要是Z390和更老的版本需要启用这个功能
+    * 但是，某些固件(主要是2020年以上)不能使用这种特性，因此实际上可能会导致这种内核崩溃:
+      * 英特尔(Intel)的Ice Lake系列
+      * 英特尔Comet Lake系列(B460, H470, Z490等)
+      * 英特尔Comet Lake系列(B460, H470, Z490等)
+        * 许多B450和X470板2020年底BIOS更新也包括在内
+      * AMD的TRx40
+      * QEMU等虚拟机
+      * X299 2020+ BIOS更新(这适用于2019年底或2020+发布的最新BIOS上的其他X299板)
 
 * **EnableWriteUnprotector**
 
