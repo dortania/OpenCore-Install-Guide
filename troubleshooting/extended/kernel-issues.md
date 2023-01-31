@@ -474,35 +474,35 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 * 你有以下ssd:
   * SSDT-UNC(如果没有，请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 创建上述文件)
 
-## Stuck on or near `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
+## 卡在或靠近 `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
 
-This is right before the GPU is properly initialized, verify the following:
+这是在GPU正确初始化之前，验证以下内容:
 
-* GPU is UEFI capable(GTX 7XX/2013+)
-* CSM is off in the BIOS
-  * May need to be enabled on laptops
-* Forcing PCIe 3.0 link speed
-* Double check that ig-platform-id and device-id are valid if running an iGPU.
-  * Desktop UHD 630's may need to use `00009B3E` instead
-* Trying various [WhateverGreen Fixes](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
-  * `-igfxmlr` boot argument. This can also manifest as a "Divide by Zero" error.
-* Coffee Lake iGPU users may also need `igfxonln=1` in 10.15.4 and newer
+* GPU支持UEFI (GTX 7XX/2013+)
+* BIOS中CSM是关闭的
+  * 可能需要在笔记本电脑上启用
+* 强制使用PCIe 3.0链路速度
+* 如果运行iGPU，请仔细检查ig-platform-id和device-id是否有效。
+  * 桌面UHD 630可能需要使用“00009B3E”代替
+* 尝试各种[WhateverGreen修复](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+  * `-igfxmlr` 引导参数。这也可以表现为 "Divide by Zero" 错误。
+* 在10.15.4及更新版本中，Coffee Lake iGPU用户可能还需要`igfxonln=1`
 
-## Scrambled Screen on laptops
+## 笔记本电脑上的乱码屏幕
 
-Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
+在UEFI设置中启用CSM。这可能显示为 "Boot legacy ROMs" 或其他 legacy 设置。
 
-## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
+## 在Navi上 `IOConsoleUsers: gIOScreenLock...`之后出现黑屏
 
-* Add `agdpmod=pikera` to boot args
-* Switch between different display outputs
-* Try running MacPro7,1 SMBIOS with the boot-arg `agdpmod=ignore`
+* 在引导参数中添加 `agdpmod=pikera`
+* 切换不同的显示输出
+* 尝试运行MacPro7,1 SMBIOS引导参数 `agdpmod=ignore`
 
-For MSI Navi users, you'll need to apply the patch mentioned here: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
+对于MSI Navi用户，您需要应用这里提到的补丁:[安装程序不能与5700xt# 901工作](https://github.com/acidanthera/bugtracker/issues/901)
 
-Specifically, add the following entry under `Kernel -> Patch`:
+具体来说，在`Kernel -> Patch`下添加以下条目:
 
-::: details MSI Navi Patch
+::: details MSI Navi 补丁
 
 ```
 Base:
@@ -522,33 +522,33 @@ Skip: 0
 
 :::
 
-Note: macOS 11, Big Sur no longer requires this patch for MSI Navi.
+注意:macOS 11，大苏尔不再需要这个补丁的MSI Navi。
 
-## Kernel Panic `Cannot perform kext summary`
+## 内核崩溃 `Cannot perform kext summary`
 
-Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that:
+通常被认为是围绕着预链接内核的问题，特别是macOS很难解释我们注入的内核。验证:
 
-* Your kexts are in the correct order(master then plugins, Lilu always before the plugins)
-* Kexts with executables have them and plist only kexts don't(ie. USBmap.kext, XHCI-unspported.kext, etc does not contain an executable)
-* Don't include multiple of the same kexts in your config.plist(ie. including multiple copies of VoodooInput from multiple kexts, we recommend choosing the first kext in your config's array and disable the rest)
+* 你的kext顺序是正确的(master然后插件，Lilu总是在插件之前)
+* 带有可执行文件的kext有它们，而plist只有kext没有(即USBmap.kext, XHCI-unspported.kext等不包含可执行文件)
+* 不要在config.plist中包含多个相同的kext。包括来自多个kext的VoodooInput的多个副本，我们建议选择配置数组中的第一个kext，并禁用其他kext)
 
-Note: this error may also look very similar to [Kernel Panic on `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)
+注意:此错误可能看起来也非常类似于 [内核崩溃在 `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)
 
-## Kernel Panic `AppleIntelMCEReporter`
+## 内核崩溃 `AppleIntelMCEReporter`
 
-With macOS Catalina, dual socket support is broken, and a fun fact about AMD firmware is that some boards will actually report multiple socketed CPUs. To fix this, add [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) to both EFI/OC/Kexts and config.plist -> Kernel -> Add
+在macOS Catalina中，双插槽支持被破坏了，关于AMD固件的一个有趣的事实是，一些主板实际上会报告多个插槽的cpu。为了解决这个问题，在EFI/OC/ kext和config中添加 [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) 到EFI/OC/kext 和 config plist -> Kernel -> add
 
-## Kernel Panic `AppleIntelCPUPowerManagement`
+## 内核崩溃 `AppleIntelCPUPowerManagement`
 
-This is likely due to faulty or outright missing NullCPUPowerManagement. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Emulate`
+这可能是由于NullCPUPowerManagement错误或完全缺失。要解决这个问题，请从`Kernel -> Add`和`EFI/OC/ kext `中移除NullCPUPowerManagement，然后在`Kernel -> Emulate`中启用`DummyPowerManagement`。
 
-* **Note**: On older Intel CPUs(ie. Penryn and older), it may be due to IRQ conflicts or the HPET device being disabled. To resolve, you have 2 options:
-  * [SSDTTime's FixHPET Option](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
-  * Forcing the HPET Device on
+* **注**:在旧的英特尔cpu(即。Penryn或更老的版本)，可能是由于IRQ冲突或HPET设备被禁用。要解决这个问题，你有两个选择:
+  * [SSDTTime的修复HPET选项](https://sumingyd.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
+  * 强制启用HPET设备
   
-::: details Forcing the HPET Device on
+::: details 强制启用HPET设备
 
-Under ACPI -> Patch:
+在 ACPI -> Patch:
 
 | Comment | String | Force HPET Online |
 | :--- | :--- | :--- |
@@ -560,112 +560,112 @@ Under ACPI -> Patch:
 
 :::
 
-## Kernel Panic `AppleACPIPlatform` in 10.13
+## 10.13中的内核崩溃 `AppleACPIPlatform`
 
 ![](../../images/troubleshooting/troubleshooting-md/KA5UOGV.png)
 
-On macOS 10.13, High Sierra the OS is much stricter with ACPI tables, [specifically a bug with how headers were handled](https://alextjam.es/debugging-appleacpiplatform/). To resolve, enable `NormalizeHeaders` under ACPI -> Quirks in your config.plist
+在macOS 10.13上，High Sierra操作系统对ACPI表更加严格，[特别是关于头文件如何处理的bug](https://alextjam.es/debugging-appleacpiplatform/). 要解决这个问题，请在config.plist的ACPI -> Quirks下启用 `NormalizeHeaders`
 
-## macOS frozen right before login
+## macOS在登录前就冻结了
 
-This is a common example of screwed up TSC, for most system add [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
+这是一个常见的TSC错误的例子，对于大多数系统添加[CpuTscSync](https://github.com/lvs1974/CpuTscSync)
 
-The most common way to see the TSC issue:
+查看TSC问题的最常见方法:
 
-Case 1    |  Case 2
+案例 1    |  案例 2
 :-------------------------:|:-------------------------:
 ![](../../images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](../../images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
 ## Keyboard works but trackpad does not
 
-Make sure that VoodooInput is listed *before* VoodooPS2 and VoodooI2C kexts in your config.plist.
+确保VoodooInput在config.plist的voodooops2和VoodooI2C kext之前列出。
 
-::: details VoodooI2C Troubleshooting
+::: details VoodooI2C 故障处理
 
-Check the order that your kexts load - make they match what is shown under [Gathering Files](../../ktext.md):
+检查你的kext加载的顺序-使它们与[收集文件](../../ktext.md)下显示的内容相匹配::
 
-1. VoodooGPIO, VoodooInput, and VoodooI2CServices in any order (Found under VoodooI2C.kext/Contents/PlugIns)
+1. VoodooGPIO、VoodooInput和VoodooI2CServices，顺序不限(可以在VoodooI2C.kext/Contents/PlugIns目录下找到)
 2. VoodooI2C
 3. Satellite/Plugin Kext
 
-Make sure you have SSDT-GPIO in EFI/OC/ACPI and in your config.plist under ACPI -> Add in your config.plist. If you are still having issues, reference the [Getting Started With ACPI GPIO page](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html).
+确保在EFI/OC/ACPI中有SSDT-GPIO，并且在ACPI ->的config.plist中添加SSDT-GPIO。如果仍然有问题，请参考[ACPI GPIO入门页面](https://sumingyd.github.io/Getting-Started-With-ACPI/Laptops/trackpad.html).
 
 :::
 
 ## `kextd stall[0]: AppleACPICPU`
 
-This is due to either a missing SMC emulator or broken one, make sure of the following:
+这是由于缺少SMC模拟器或损坏的模拟器造成的，请确保以下内容:
 
-* Lilu and VirtualSMC are both in EFI/OC/kexts and in your config.plist
-* Lilu is before VirtualSMC in the kext list
-* Last resort is to try [FakeSMC](https://github.com/CloverHackyColor/FakeSMC3_with_plugins) instead, **do not have both VirtualSMC and FakeSMC enabled**
+* Lilu和VirtualSMC都在EFI/OC/kext和config.plist中
+* Lilu在kext列表中位于VirtualSMC之前
+* 最后的方法是尝试[FakeSMC](https://github.com/CloverHackyColor/FakeSMC3_with_plugins), **不要同时启用VirtualSMC和FakeSMC **
 
-## Kernel Panic on AppleIntelI210Ethernet
+## 内核崩溃在 AppleIntelI210Ethernet
 
-For those running Comet lake motherboards with the I225-V NIC, you may experience a kernel panic on boot due to the I210 kext. To resolve this, make sure you have the correct PciRoot for your Ethernet. This commonly being either:
+对于那些运行带有I225-V网卡的Comet lake主板，由于I210 kext，您可能会在启动时遇到内核panic。要解决这个问题，请确保您的以太网有正确的PciRoot。这通常是:
 
 * PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
-  * By default, this is what Asus and Gigabyte motherboards use
+  * 默认情况下，这是华硕和Gigabyte主板使用的
 * PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
-  * Some OEMs may use this instead
+  * 一些oem厂商可能会使用这个代替
   
-For those who can to your PciRoot manually, you'll want to install macOS fully and run the following with [gfxutil](https://github.com/acidanthera/gfxutil/releases):
+对于那些可以手动连接到你的PciRoot的人，你需要完全安装macOS并使用[gfxutil](https://github.com/acidanthera/gfxutil/releases):
 
 ```
 /path/to/gfxutil | grep -i "8086:15f3"
 ```
 
-This should spit out something like this:
+这应该会输出如下内容:
 
 ```
 00:1f.6 8086:15f3 /PC00@0/GBE1@1F,6 = PciRoot(0x0)/Pci(0x1F,0x6)
 ```
 
-The ending `PciRoot(0x0)/Pci(0x1F,0x6)` is what you want to add in your config.plist with device-id of `F2150000`
+最后的`PciRoot(0x0)/Pci(0x1F,0x6)`是你要添加到配置plist中的device-id为`F2150000`的内容。
 
-## Kernel panic on "Wrong CD Clock Frequency" with Icelake laptop
+## 用Icelake的用户，内核崩溃在 "Wrong CD Clock Frequency"
 
 ![](../../images/troubleshooting/troubleshooting-md/cd-clock.jpg)
 
-To resolve this kernel panic, ensure you have `-igfxcdc` in your boot-args.
+To 要解决这个内核问题，请确保你的boot-args中有`-igfxcdc`。
 
-## Kernel panic on "cckprng_int_gen"
+## 内核崩溃在 "cckprng_int_gen"
 
-Full panic:
+完整的崩溃信息:
 
 ```
 "cckprng_int_gen: generator has already been sealed"
 ```
 
-This is likely to be 1 of 2 things:
+这可能是以下两种情况之一:
 
-* Missing SMC Emulator(ie. no VirtualSMC in your config.plist or EFI)
-  * Add [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases) to your config.plist and EFI
-* Incorrect SSDT usage with SSDT-CPUR
+* 缺少SMC模拟器(即。没有VirtualSMC在你的 config.plist 或 EFI)
+  * 添加 [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases) 到你的 config.plist 和 EFI 中
+* SSDT-CPUR 的SSDT使用不正确
 
-For the latter, ensure you're only using SSDT-CPUR with **B550 and A520**. Do not use on X570 or older hardware(ie. B450 or A320)
+对于后者，请确保您只使用**B550和A520**的ssdt - cpu。不要在X570或更老的硬件上使用(如B450或A320)
 
-## Stuck at `Forcing CS_RUNTIME for entitlement` in Big Sur
+## 在Big Sur中被卡在 `Forcing CS_RUNTIME for entitlement`
 
 ![Credit to Stompy for image](../../images/extras/big-sur/readme/cs-stuck.jpg)
 
-This is actually the part at where macOS will seal the system volume, and where it may seem that macOS has gotten stuck. **DO NOT RESTART** thinking you're stuck, this will take quite some time to complete.
+这实际上是macOS将封闭系统容量的部分，这可能看起来是macOS卡住了。**不要重启**，并不是你卡住了，而是需要相当长的时间来完成。
 
-## Stuck on `ramrod`(^^^^^^^^^^^^^)
+## 卡在 `ramrod`(^^^^^^^^^^^^^)
 
 ![Credit to Notiflux for image](../../images/extras/big-sur/readme/ramrod.jpg)
 
-If you get stuck around the `ramrod` section (specifically, it boots, hits this error, and reboots again back into this, causing a loop), this hints that your SMC emulator is broken. To fix this, you have 2 options:
+如果您卡在`ramrod`部分(特别是，它启动，出现这个错误，并再次重新启动到这个错误，造成循环)，这暗示您的SMC模拟器是坏的。要解决这个问题，你有两个选择:
 
-* Ensure you're using the latest builds of VirtualSMC and Lilu, with the `vsmcgen=1` boot-arg
-* Switch over to [Rehabman's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/) (you can use the `MinKernel`/`MaxKernel` trick mentioned above to restrict FakeSMC to Big Sur and up
+* 确保你使用的是最新版本的VirtualSMC和Lilu，引导参数为`vsmcgen=1`
+* 切换到[Rehabman的FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/) (你可以使用上面提到的`MinKernel`/`MaxKernel`技巧将 FakeSMC 限制为 Big Sur 及以上）
 
-And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enabled in your config.plist, as this will cause a conflict.
+当切换 kext 时，确保你的 config plist 中没有同时启用 FakeSMC 和 VirtualSMC ，因为这会导致冲突。
 
-## Virtual Machine Issues
+## 虚拟机问题
 
-* VMWare 15 is known to get stuck on `[EB|#LOG:EXITBS:START]`. VMWare 16 resolves the problem.
+* 已知 VMWare 15 会卡在 `[EB|#LOG:EXITBS:START]`。 VMWare 16 解决了这个问题。
 
-## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
+## 重启在 "AppleUSBHostPort::createDevice: failed to create device" 在 macOS 11.3+ 上
 
-This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve this, you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
+这是由于[XhciPortLimit在macOS 11.3及更新版本中崩溃](https://github.com/dortania/bugtracker/issues/162), 要解决此问题，您**必须**在 Kernel -> Quirks禁用XhciPortLimit。在这样做之前，请确保您已经[正确地映射了USB端口](https://dortania.github.io/OpenCore-Post-Install/usb/)。
