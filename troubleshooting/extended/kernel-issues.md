@@ -184,7 +184,7 @@ OCABC: MAT support is 1
 
 注意:“1”表示支持MATs，而“0”表示不支持。
 
-## 启动预引导卷时卡在 `[EB|LD:OFS] Err(0xE)` 
+## 启动预引导卷时卡在 `[EB|LD:OFS] Err(0xE)`
 
 完整的错误:
 
