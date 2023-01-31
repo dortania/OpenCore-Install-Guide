@@ -36,65 +36,65 @@
 
 * **EnableWriteUnprotector**
 
-  * Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
-    * If your firmware supports MATs(2018+ firmwares):
+  * 另一个问题可能是macOS与CR0寄存器的写保护冲突，为了解决这个问题，我们有两个选择:
+    * 如果您的固件支持MATs(2018+固件):
       * EnableWriteUnprotector -> False
       * RebuildAppleMemoryMap -> True
       * SyncRuntimePermissions -> True
-    * For older firmwares:
+    * 对于旧的固件:
       * EnableWriteUnprotector -> True
       * RebuildAppleMemoryMap -> False
       * SyncRuntimePermissions -> False
-    * Note: Some laptops(ex. Dell Inspiron 5370) even with MATs support will halt on boot up, in these cases you'll have two options:
-      * Boot with the old firmware quirk combo(ie. With EnableWriteUnprotector and disable `RebuildAppleMemoryMap` + `SyncRuntimePermissions`)
-      * Enable `DevirtualiseMmio` and follow [MmioWhitelist guide](https://dortania.github.io/OpenCore-Install-Guide/extras/kaslr-fix.html)
+    * 注意:一些笔记本电脑(例如：Dell Inspiron 5370)即使有MATs支持也会在启动时停止，在这种情况下你有两个选择:
+      * 启动与旧固件功能组合(即：使用EnableWriteUnprotector 并禁用 `RebuildAppleMemoryMap` + `SyncRuntimePermissions`)
+      * 启用 `DevirtualiseMmio` 并遵循[MmioWhitelist指南](https://sumingyd.github.io/OpenCore-Install-Guide/extras/kaslr-fix.html)
 
-Regarding MATs support, firmwares built against EDK 2018 will support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has updated the firmware, you can check the OpenCore logs whether yours supports it([See here how to get a log](../debug.html)):
+关于对MATs的支持，针对EDK 2018构建的固件将支持这一点，许多oem甚至已经增加了对Skylake笔记本电脑的支持。问题是它不是总是明显的，如果一个OEM已经更新固件，你可以检查OpenCore日志是否支持它([查看这里如何获取日志](../debug.html)):
 
 ```
 OCABC: MAT support is 1
 ```
 
-* Note: `1` means it supports MATs, while `0` means it does not.
+* 注意:`1`表示支持MATs，而`0`表示不支持。
 
-### Kernel Patch Issues
+### 内核补丁问题
 
-This section will be split between Intel and AMD users:
+本节将分为英特尔和AMD用户两部分:
 
-#### AMD Users
+#### AMD 用户
 
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
-  * Note outdated kernel patches will also have the same effect please ensure you're using the latest patches from AMD OS X
+* 缺少[内核补丁](https://github.com/AMD-OSX/AMD_Vanilla)(only适用于AMD cpu，确保它们是OpenCore补丁而不是Clover。Clover使用“MatchOS”，而OpenCore有 `MinKernel` 和 `Maxkernel`)
+  * 请注意，过时的内核补丁也会有同样的效果，请确保您使用的是AMD OS X的最新补丁
 
-#### Intel Users
+#### Intel 用户
 
-* **AppleXcpmCfgLock** and **AppleCpuPmCfgLock**
-  * Missing CFG or XCPM patches, please enable `AppleXcpmCfgLock` and `AppleCpuPmCfgLock`
-    * Haswell and newer only need AppleXcpmCfgLock
-    * Ivy Bridge and older only need AppleCpuPmCfgLock
-      * Broadwell and older need AppleCpuPmCfgLock if running 10.10 or older
-  * Alternatively you can properly disable CFG-Lock: [Fixing CFG Lock](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)
+* **AppleXcpmCfgLock** 和 **AppleCpuPmCfgLock**
+  * 缺少CFG或XCPM补丁，请启用 `AppleXcpmCfgLock` 和 `AppleCpuPmCfgLock`
+    * Haswell和更新版本只需要AppleXcpmCfgLock
+    * Ivy Bridge和更老的只需要AppleCpuPmCfgLock
+      * 如果运行10.10或更高版本，Broadwell及更老版本需要AppleCpuPmCfgLock
+  * 或者你可以正确地禁用CFG-Lock:[修复CFG锁](https://sumingyd.github.io/OpenCore-Post-Install/misc/msr-lock.html)
 * **AppleXcpmExtraMsrs**
-  * May also be required, this is generally meant for Pentiums, HEDT and other odd systems not natively supported in macOS.
+  * 也可能需要，这通常指的是Pentiums, HEDT和其他macOS原生不支持的特定系统。
 
-#### Legacy Intel users
+#### Intel 老用户
 
-For macOS Big Sur, many firmwares have issues determining the CPU core count and thus will kernel panic too early for screen printing. Via serial, you can see the following panic:
+对于macOS Big Sur，许多固件在确定CPU核心数时都存在问题，因此会过早出现内核崩溃，无法进行啰嗦模式的错误显示。通过serial命令，你会看到如下提示:
 
 ```
 max_cpus_from_firmware not yet initialized
 ```
 
-To resolve:
+解决:
 
-* Enable `AvoidRuntimeDefrag` under Booter -> Quirks
-  * This should work for most firmwares
+* 在Booter -> Quirks下启用 `AvoidRuntimeDefrag`
+  * 这应该适用于大多数固件
 
-However on certain machines like the HP Compaq DC 7900, the firmware will still panic so we need to force a CPU core count value. Only use the below patch if AvoidRuntimeDefrag didn't work:
+然而，在某些机器上，如HP Compaq DC 7900，固件仍然会出现问题，因此我们需要强制设置CPU核心数。只有在AvoidRuntimeDefrag不起作用时，才使用下面的补丁:
 
-::: details Legacy CPU Core patch
+::: details 旧CPU核心补丁
 
-To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 with the amount of CPU threads your hardware supports):
+为此，添加以下补丁(用硬件支持的CPU线程数量替换B8 **04** 00 00 C3中的04):
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -113,76 +113,76 @@ To do this, Add the following patch(replacing the 04 from B8 **04** 00 00 00 C3 
 
 :::
 
-### UEFI Issues
+### UEFI 问题
 
 * **ProvideConsoleGop**
-  * Needed for transitioning to the next screen, this was originally part of AptioMemoryFix but is now within OpenCore as this quirk. Can be found under UEFI -> Output
-  * Note as of 0.5.6, this quirk is enabled by default in the sample.plist
+  * 需要过渡到下一个屏幕，这最初是AptioMemoryFix的一部分，但现在在OpenCore中以这个功能提供。可以在UEFI -> Output下找到
+  * 注意，从0.5.6开始，sample.plist默认启用了这个功能
 * **IgnoreInvalidFlexRatio**
-  * This is needed for Broadwell and older. **Not for AMD and Skylake or newer**
+  * 这是Broadwell和更老的所需要的。**AMD和Skylake或更新版本不支持**
 
-## Stuck on EndRandomSeed
+## 卡在 EndRandomSeed
 
-Same issues above, see here for more details: [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
+与上面相同的问题，请参阅此处了解更多详细信息: [卡在 `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
 
-## Stuck after selecting macOS partition in OpenCore
+## 在OpenCore中选择macOS分区后卡住
 
-Same issues above, see here for more details: [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
+与上面相同的问题，请参阅此处了解更多详细信息: [卡在 `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
 
-* Note: Enabling [DEBUG OpenCore](../debug.html) can help shed some light as well
+* 注意:启用[DEBUG OpenCore](../debug.html) 也可以帮助揭示一些信息
 
-## Getting the error X64 Exception Type... on AMD FX systems
+## Getting the error X64 Exception Type... 有关AMD FX系统
 
-This error can have multiple causes:
+此错误可能有多种原因:
 
-* Compatibility Support Module (CSM) being enabled in your BIOS:
+* 此错误可能有多种原因:
 
-  Might also be called Legacy Boot Support, Load Legacy Option ROMs/OPROMs
+  也可以称为遗留引导支持，加载遗留选项rom /OPROMs
 
-* The ProvideCurrentCpuInfo quirk (required by the unified patches) being incompatible with your firmware:
+* ProvideCurrentCpuInfo功能(统一补丁所需)与您的固件不兼容:
 
-  This means you need to use an [older version of the patches](https://github.com/AMD-OSX/AMD_Vanilla/blob/06a9a7f30d139fa3ae897ed2469222c92e99fcad/15h_16h/patches.plist) and Big Sur or older. After downloading the older patches linked above, merge them into your config.plist (making sure to remove the old patches first).
+  这意味着您需要使用[旧版本的补丁](https://github.com/AMD-OSX/AMD_Vanilla/blob/06a9a7f30d139fa3ae897ed2469222c92e99fcad/15h_16h/patches.plist) 和Big Sur或更早的版本。下载上面链接的旧补丁后，将它们合并到config.plist 中(确保先删除旧补丁)。
 
-An example:
+一个例子:
 
 ![](../../images/troubleshooting/troubleshooting-md/x64exception-amdfx.png)
 
-## Kernel Panic on `Invalid frame pointer`
+## 内核崩溃 `Invalid frame pointer`
 
-So this is due to some issue around the `Booter -> Quirks` you set, main things to check for:
+这是由于您设置的`Booter -> Quirks`的一些问题，主要检查:
 
 * `DevirtualiseMmio`
-  * Certain MMIO spaces are still required to function correctly, so you'll need to either exclude these regions in Booter -> MmioWhitelist or disable this quirk outright
-  * More info here: [Using DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
+  * 某些MMIO空间仍然需要正确运行，因此您需要在Booter -> MmioWhitelist中排除这些区域或完全禁用此功能
+  * 更多信息:[使用 DevirtualiseMmio](../../extras/kaslr-fix.md#using-devirtualisemmio)
 
 * `SetupVirtualMap`
-  * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
-    * However, certain firmwares do not work with this quirk and so may actually cause this kernel panic:
-      * Intel's Ice Lake series
-      * Intel's Comet Lake series
-      * AMD's B550
-      * AMD's A520
-      * AMD's TRx40
-      * VMs like QEMU
+  * 大多数固件都需要这个功能，如果没有这个功能，内核崩溃就很常见，所以如果还没有启用它的话就启用它
+    * 但是，某些固件无法处理这种情况，因此实际上可能会导致这种内核错误:
+      * 英特尔(Intel)的Ice Lake系列
+      * 英特尔的Comet Lake系列
+      * AMD 的 B550
+      * AMD 的 A520
+      * AMD 的 TRx40
+      * QEMU等虚拟机
   
-Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
+另一个问题可能是macOS与CR0寄存器的写保护冲突，要解决这个问题，我们有两个选项:
 
-* If your firmware supports MATs(2018+ firmwares):
+* 如果您的固件支持MATs(2018+固件):
   * EnableWriteUnprotector -> False
   * RebuildAppleMemoryMap -> True
   * SyncRuntimePermissions -> True
-* For older firmwares:
+* 对于旧的固件:
   * EnableWriteUnprotector -> True
   * RebuildAppleMemoryMap -> False
   * SyncRuntimePermissions -> False
 
-Regarding MATs support, firmwares built against EDK 2018 will support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has updated the firmware, you can check the OpenCore logs whether yours supports it:
+关于对MATs的支持，针对EDK 2018构建的固件将支持这一点，许多oem甚至已经增加了对Skylake笔记本电脑的支持。问题是它不是总是明显的，如果一个OEM已经更新了固件，你可以检查OpenCore日志是否你的支持:
 
 ```
 OCABC: MAT support is 1
 ```
 
-Note: `1` means it supports MATs, while `0` means it does not.
+注意:“1”表示支持MATs，而“0”表示不支持。
 
 ## Stuck on `[EB|LD:OFS] Err(0xE)` when booting preboot volume
 
