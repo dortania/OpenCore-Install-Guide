@@ -184,19 +184,19 @@ OCABC: MAT support is 1
 
 注意:“1”表示支持MATs，而“0”表示不支持。
 
-## Stuck on `[EB|LD:OFS] Err(0xE)` when booting preboot volume
+## 启动预引导卷时卡在 `[EB|LD:OFS] Err(0xE)` 
 
-Full error:
+完整的错误:
 
 ```
 [EB|`LD:OFS] Err(0xE) @ OPEN (System\\Library\\PrelinkedKernels\\prelinkedkernel)
 ```
 
-This can happen when the preboot volume isn't properly updated, to fix this you'll need to boot into recovery and repair it:
+当预引导卷没有正确更新时可能会发生这种情况，要修复这个问题，您需要启动到recovery并修复它:
 
-1. Enable JumpstartHotplug under UEFI -> APFS(Recovery may not boot on macOS Big Sur without this option)
-2. Boot into recovery
-3. Open the terminal, and run the following:
+1. 在UEFI -> APFS下启用JumpstartHotplug(没有这个选项，macOS Big Sur恢复可能无法启动)
+2. 启动进入恢复
+3. 打开终端并运行以下命令:
 
 ```bash
 # First, find your Preboot volume
@@ -221,9 +221,9 @@ diskutil mount disk5s2
 diskutil apfs updatePreboot /volume/disk5s2
 ```
 
-Then finally reboot
+最后重启
 
-## Stuck on `OCB: LoadImage failed - Security Violation`
+## 卡在 `OCB: LoadImage failed - Security Violation`
 
 ```
 OCSB: No suitable signature - Security Violation
@@ -231,25 +231,25 @@ OCB: Apple Secure Boot prohibits this boot entry, enforcing!
 OCB: LoadImage failed - Security Violation
 ```
 
-This is due to missing outdated Apple Secure Boot manifests present on your preboot volume resulting is a failure to load if you have SecureBootModel set, reason for these files being missing is actually a bug in macOS.
+这是由于缺少预先引导卷上的过期苹果安全引导清单导致加载失败，如果您设置了SecureBootModel，则这些文件丢失的原因实际上是macOS中的一个bug。
 
-To resolve this you can do one of the following:
+要解决这个问题，你可以采取以下方法之一:
 
-* Disable SecureBootModel
-  * ie. set `Misc -> Security -> SecureBootModel -> Disabled`
-* Reinstall macOS with the latest version
-* Or copy over the Secure Boot manifests from `/usr/standalone/i386` to `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
-  * Note you will most likely need to do this via terminal as the Preboot volume isn't easily editable via the Finder
+* 禁用 SecureBootModel
+  * 设置 `Misc -> Security -> SecureBootModel -> Disabled`
+* 重新安装最新版本的macOS
+* 或将安全启动清单从`/usr/standalone/i386`复制到`/Volumes/Preboot/<UUID>/System/Library/CoreServices`
+  * 注意，你很可能需要通过终端这样做，因为预引导卷不容易通过Finder编辑
   
-To do this via terminal:
+要通过终端来做到这一点:
 
 ```bash
-# First, find your Preboot volume
+# 首先，找到Preboot卷
 diskutil list
 
-# From the below list, we can see our Preboot volume is disk5s2
+# 从下面的列表中，我们可以看到Preboot卷是disk5s2
 /dev/disk5 (synthesized):
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   #:                       类型名称                    大小       标识符
    0:      APFS Container Scheme -                      +255.7 GB   disk5
                                  Physical Store disk4s2
    1:                APFS Volume ⁨Big Sur HD - Data⁩       122.5 GB   disk5s1
@@ -259,56 +259,56 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Now mount the Preboot volume
+# 现在挂载Preboot卷
 diskutil mount disk5s2
 
-# CD into your Preboot volume
-# Note the actual volume is under /System/Volumes/Preboot
+# CD到预引导卷中
+# 注意实际的卷在/System/Volumes/Preboot下面
 cd /System/Volumes/Preboot
 
-# Grab your UUID
+# 获取UUID
 ls
  46923F6E-968E-46E9-AC6D-9E6141DF52FD
  CD844C38-1A25-48D5-9388-5D62AA46CFB8
 
-# If multiple show up(ie. you dual boot multiple versions of macOS), you will
-# need to determine which UUID is correct.
-# Easiest way to determine is printing the value of .disk_label.contentDetails
-# of each volume.
+# 如果显示了多个版本(即双启动多个版本的macOS)，则会显示
+# 需要确定哪个UUID是正确的。
+# 确定最简单的方法是打印.disk_label.contentDetails的值
+# 每个卷的
 cat ./46923F6E-968E-46E9-AC6D-9E6141DF52FD/System/Library/CoreServices/.disk_label.contentDetails
  Big Sur HD%
 
 cat ./CD844C38-1A25-48D5-9388-5D62AA46CFB8/System/Library/CoreServices/.disk_label.contentDetails
  Catalina HD%
 
-# Next lets copy over the secure boot files
-# Replace CD844C38-1A25-48D5-9388-5D62AA46CFB8 with your UUID value
+# 接下来复制安全引导文件
+# 用UUID值替换CD844C38-1A25-48D5-9388-5D62AA46CFB8
 cd ~
 sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-9388-5D62AA46CFB8/System/Library/CoreServices
 ```
 
-## Stuck on `OCABC: Memory pool allocation failure - Not Found`
+## 卡在 `OCABC: Memory pool allocation failure - Not Found`
 
-This is due to incorrect BIOS settings:
+这是由于不正确的BIOS设置:
 
-* Above4GDecoding is Enabled
-* CSM is Disabled(Enabling Windows8.1/10 WHQL Mode can do the same on some boards)
-  * Note on some laptops, CSM must be enabled
-* BIOS is up-to-date(Z390 and HEDT are known for having poorly written firmwares)
+* 4g以上解码是启用的（Above4GDecoding）
+* CSM被禁用(在某些板上启用Windows8.1/10 WHQL模式可以执行相同的操作)
+  * 注意，在某些笔记本电脑上，必须启用CSM
+* BIOS是最新的(众所周知，Z390和HEDT的固件编写得很糟糕)
 
-## Stuck on `Buffer Too Small`
+## 卡在 `Buffer Too Small`
 
-* Enable Above4GDecoding in the BIOS
+* 在BIOS中启用4G以上解码（Above4GDecoding）
 
-## Stuck on `Plist only kext has CFBundleExecutable key`
+## 卡在 `Plist only kext has CFBundleExecutable key`
 
-Missing or incorrect `Executable path` in your config.plist, this should be resolved by re-running ProperTree's snapshot tool(Cmd/Ctrl+R).
+配置列表中缺少或不正确的`可执行路径`，应该通过重新运行ProperTree的快照工具(Cmd/Ctrl+R)来解决。
 
-## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
+## 卡在 `This version of Mac OS X is not supported: Reason Mac...`
 
-This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. For a full list of supported SMBIOS and their OSes, see here: [Choosing the right SMBIOS](../../extras/smbios-support.md)
+当该版本的macOS不再支持SMBIOS时发生此错误，请确保在`PlatformInfo->Generic`中设置了`Automatic`。有关支持的SMBIOS及其操作系统的完整列表，请参见这里:[选择正确的SMBIOS](../../extras/smbios-support.md)
 
-::: details Supported SMBIOS in macOS 10.15, Catalina
+::: details macOS 10.15、Catalina支持的SMBIOS
 
 * iMac13,x+
 * iMacPro1,1
@@ -320,7 +320,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 :::
 
-::: details Supported SMBIOS in macOS 11, Big Sur
+::: details macOS 11, Big Sur支持的SMBIOS
 
 * iMac14,4+
 * iMacPro1,1
@@ -332,7 +332,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 :::
 
-::: details Supported SMBIOS in macOS 12, Monterey
+::: details macOS 12, Monterey支持的SMBIOS
 
 * iMac16,1+
 * iMacPro1,1
@@ -344,7 +344,7 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 :::
 
-::: details Supported SMBIOS in macOS 13, Ventura
+::: details macOS 13、Ventura支持的SMBIOS
 
 * iMac18,x+
 * iMacPro1,1
@@ -356,123 +356,123 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 :::
 
-## `Couldn't allocate runtime area` errors
+## `Couldn't allocate runtime area` 错误
 
-See [Fixing KASLR slide values](../../extras/kaslr-fix.md)
+参见[修正KASLR滑块值](../../extras/kaslr-fix.md)
 
-## Stuck on `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
+## 卡在 `RTC...`, `PCI Configuration Begins`, `Previous Shutdown...`, `HPET`, `HID: Legacy...`
 
-Well this general area is where a lot of PCI devices are first setup and configured, and is where most booting issues will happen. Other names include:
+这个区域是许多PCI设备第一次设置和配置的地方，也是大多数启动问题发生的地方。其他名称包括:
 
 * `apfs_module_start...`,
 * `Waiting for Root device`,
 * `Waiting on...IOResources...`,
 * `previous shutdown cause...`
 
-The main places to check:
+主要检查的地方:
 
-* **Missing EC patch**:
-  * Make sure you have your EC SSDT both in EFI/OC/ACPI and ACPI -> Add, **double check it's enabled.**
-  * If you don't have one, grab it here: [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
-* **IRQ conflict**:
-  * Most common on older laptops and pre-builts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
-* **PCI allocation issue**:
-  * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
-  * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` or `npci=0x3000` (try both one at a time) to boot args.
-    * Some X99 and X299 boards(ie. GA-X299-UD4) may require both npci boot-arg and Above4G enabled
-    * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
-    * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
-  * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
-* **NVMe or SATA issue**:
-  * Sometimes if either a bad SATA controller or an unsupported NVMe drive are used, you can commonly get stuck here. Things you can check:
-    * Not using either a Samsung PM981 or Micron 2200S NVMe SSD
-    * Samsung 970 EVO Plus running the latest firmware(older firmwares were known for instability and stalls, [see here for more info](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
-    * SATA Hot-Plug is disabled in the BIOS(more commonly to cause issues on AMD CPU based systems)
-    * Ensure NVMe drives are set as NVMe mode in BIOS(some BIOS have a bug where you can set NVMe drives as SATA)
-* **NVRAM Failing**:
-  * Common issue HEDT and 300 series motherboards, you have a couple paths to go down:
-    * 300 Series Consumer Intel: See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on making SSDT-PMC.aml
-    * HEDT(ie. X99): See [Emulating NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html) on how to stop NVRAM write, note that for install you do not need to run the script. Just setup the config.plist
+* **缺少 EC 补丁**:
+  * 确保在你的 EFI/OC/ACPI 和 ACPI->Add 中都有 EC SSDT， **再次检查它是否启用**
+  * 如果你还没有ACPI，请点击这里: [开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+* **IRQ 冲突**:
+  * 最常见的是在旧的笔记本电脑和预构建，运行SSDTTime的FixHPET选项，并将产生的SSDT-hpet.aml和ACPI补丁添加到配置中(没有ACPI补丁，SSDT将无法工作)
+* **PCI 分配问题**:
+  * **更新你的BIOS**, 确保它是最新的。大多数oem在旧的固件上的PCI分配非常不稳定，特别是AMD
+  * 确保在BIOS中启用Above4G，如果没有可用选项，则添加`npci=0x2000`或`npci=0x3000`(一次尝试一个)引导参数。
+    * 一些X99和X299板(如GA-X299-UD4)可能需要npci引导参数和Above4G启用
+    * AMD CPU注意:**在引导参数中不要同时启用Above4G设置和npci设置，它们会冲突**
+    * 2020+ BIOS注意:当启用Above4G时，Resizable BAR支持可能成为可用的。如果启用，请确保Booter -> Quirks -> ResizeAppleGpuBars设置为`0`。
+  * 其他重要的BIOS设置:禁用CSM，启用Windows 8.1/10 UEFI模式
+* **NVMe 或 SATA 问题**:
+  * 有时，如果使用了坏的SATA控制器或不支持的NVMe驱动器，你通常会被卡在这里。你可以检查的内容:
+    * 不使用三星PM981或Micron 2200S NVMe SSD
+    * 三星970 EVO Plus运行最新的固件(旧的固件以不稳定和停滞著称，[查看更多信息](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
+    * SATA热插拔在BIOS中被禁用(在基于AMD CPU的系统上通常会导致问题)
+    * 确保NVMe驱动器在BIOS中设置为NVMe模式(一些BIOS有一个bug，你可以将NVMe驱动器设置为SATA)
+* **NVRAM 故障**:
+  * HEDT和300系列主板常见问题，你有几个路径可以走:
+    * 消费者英特尔300系列:看[开始使用 ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)制作SSDT-PMC.aml
+    * HEDT(ie X99):请参阅[模拟NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html)关于如何停止NVRAM写入，注意，安装时您不需要运行脚本。只需设置config.plist
 
-* **RTC Missing**:
-  * Commonly found on Intel's 300+ series(ie. Z370, Z490), caused by the RTC clock being disabled by default. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating an SSDT-AWAC.aml
-  * X99 and X299 have broken RTC devices, so will need to be fixed with SSDT-RTC0-RANGE. See [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating said file
-  * Some drunk firmware writer at HP also disabled the RTC on the HP 250 G6 with no way to actually re-enable it
-    * Known affected models: `HP 15-DA0014dx`, `HP 250 G6`
-    * For users cursed with such hardware you'll need to create a fake RTC clock for macOS to play with. See getting started with ACPI for more details, as well as below image example:
+* **RTC 缺失**:
+  * 通常在Intel的300+系列(即Z370, Z490)上发现，这是由默认禁用RTC时钟引起的。请参阅[开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)创建SSDT-AWAC.aml
+  * X99和X299的RTC设备坏了，所以需要用SSDT-RTC0-RANGE修复。请参阅[开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)创建上述文件
+  * 惠普的一些固件编写人员也禁用了HP 250g6上的RTC，但实际上没有办法重新启用它
+    * 已知受影响型号:`HP 15-DA0014dx`， `HP 250 G6`
+    * 对于被这样的硬件所困扰的用户，你需要创建一个假的RTC时钟供macOS使用。有关更多细节，请参阅开始使用ACPI，以及下面的图像示例:
 
-Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
+一个被禁用且无法启用的RTC是什么样子的示例(注意，没有像`STAS`那样的值来重新启用它):
 
 ![](../../images/troubleshooting/troubleshooting-md/rtc.png)
 
-## Stuck at ACPI table loading on B550
+## 卡在 ACPI table loading on B550
 
 ![](../../images/troubleshooting/troubleshooting-md/OC_catalina.jpg)
 
-If you're getting stuck at or near ACPI table loading with an AMD B550 or A520 motherboard, add the following SSDT:
+如果你在用AMD B550或A520主板加载ACPI表时遇到问题，请添加以下SSDT:
 
 * [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml)
 
-And please remember to add this SSDT to both EFI/OC/ACPI **and** your config.plist under ACPI -> Add(ProperTree's snapshot function can do this for you)
+请记住将此SSDT添加到EFI/OC/ACPI **和** ACPI下的config plist -> add (ProperTree的快照函数可以为您完成此工作)
 
-## "Waiting for Root Device" or Prohibited Sign error
+## "Waiting for Root Device" 或 Prohibited Sign 错误
 
-* Other names: Stop Sign, Scrambled
+* 其他名称: Stop Sign, Scrambled
 
-This is generally seen as a USB or SATA error, couple ways to fix:
+这通常被认为是USB或SATA的错误，有几种方法可以修复:
 
-### USB Issues
+### USB 的问题
 
-This assumes you're only booting the installer USB and not macOS itself.
+这假设你只是引导安装程序USB，而不是macOS本身。
 
-* If you're hitting the 15 port limit, you need to make an [USB Map](https://dortania.github.io/OpenCore-Post-Install/usb/)
+* 如果你达到了15个端口的限制，你需要做一个[USB地图](https://sumingyd.github.io/OpenCore-Post-Install/usb/)
 
-* Another issue can be that certain firmware won't pass USB ownership to macOS
+* 另一个问题可能是，某些固件不会将USB所有权传递给macOS
   * `UEFI -> Quirks -> ReleaseUsbOwnership -> True`
-  * Enabling EHCI/XHCI Handoff in the BIOS can fix this as well
+  * 在BIOS中启用EHCI/XHCI切换也可以修复这个问题
 
-* Sometimes, if the USB is plugged into a 3.x port, plugging it into a 2.0 port can fix this error and vice versa.
+* 有时，如果USB插入3.x端口，将其插入2.0端口可以修复此错误，反之亦然。
 
-* For AMD's 15h and 16h CPUs, you may need to add the following:
+* 对于AMD的15h和16h cpu，您可能需要添加以下内容:
   * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
 
-* If XLNCUSBFix still doesn't work, then try the following alongside XLNCUSBFix:
+* 如果XLNCUSBFix仍然不起作用，那么在XLNCUSBFix旁边尝试以下操作:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
 
-* X299 Users: Enable Above4G Decoding
-  * Odd firmware bug on X299 where USB breaks otherwise
+* X299用户:启用Above4G解码
+  * X299上的奇怪固件bug，否则USB会损坏
 
-* Missing USB ports in ACPI:
-  * For Intel's Coffee Lake and older, we recommend using [USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-  * For Intel's Ice Lake and Comet Lake, we recommend [SSDT-RHUB](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
-    * SSDTTime's `7. USB Reset` option can do the same
-  * For AMD, run SSDTTime's `7. USB Reset` option and add the provided SSDT-RHUB to your EFI and config.plist
+*  ACPI中缺少USB端口:
+  * 对于英特尔的Coffee Lake及更老版本，我们推荐使用[USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
+  * 对于英特尔的 Ice Lake 和 Comet Lake, 我们推荐 [SSDT-RHUB](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
+    * SSDTTime的 `7. USB Reset` USB复位的选项可以做同样的事情
+  * 对于AMD,运行SSDTTime的 `7. USB Reset` 选项，并将提供的SSDT-RHUB添加到您的EFI和config.plist
   
-### SATA Issues
+### SATA 问题
 
-On rare occasions(mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
+在极少数情况下(主要是笔记本电脑)，SATA控制器不受macOS的正式支持。为了解决这个问题，我们需要做以下几件事:
 
-* Set SATA to AHCI mode in the BIOS
-  * macOS doesn't support hardware RAID or IDE mode properly.
-  * Note drives already using Intel Rapid Storage Technology(RST, soft RAID for Windows and Linux) will not be accessible in macOS.
+* 在BIOS中设置“SATA”为“AHCI”模式
+  * macOS不支持硬件RAID或IDE模式。
+  * 注意已经使用英特尔快速存储技术(RST, Windows和Linux软RAID)的驱动器将无法在macOS中访问。
 * [SATA-unsupported.kext](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
-  * Adds support to obscure SATA controllers, commonly being laptops.
-  * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) may be more suitable.
-* [Catalina's patched AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
-  * For users running macOS 11, Big Sur and having issues. This backports the known working Catalina kext, SATA-unsupported is not needed with this kext
+  * 增加对模糊SATA控制器的支持，通常是笔记本电脑。
+  * 对于非常传统的SATA控制器， [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) 可能更合适。
+* [Catalina的补丁 AppleAHCIPort.kext](https://sumingyd.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
+  * 对于运行macOS 11、Big Sur和有问题的用户。这向后移植了已知的工作的Catalina kext，这个kext不需要SATA-unsupported
 
-Note that you will only experience this issue after installing macOS onto the drive, booting the macOS installer will not error out due to SATA issues.
+注意，只有在将macOS安装到驱动器后，你才会遇到这个问题，启动macOS安装程序不会因为SATA问题而出错。
 
-## Kernel panic with IOPCIFamily on X99
+## X99 上的 IOPCIFamily 内核崩溃
 
-For those running the X99 platform from Intel, please go over the following:
+对于那些从英特尔运行X99平台的人，请阅读以下内容:
 
-* The following kernel patches are enabled:
+* 启用以下内核补丁:
   * AppleCpuPmCfgLock
   * AppleXcpmCfgLock
   * AppleXcpmExtraMsrs
-* You have the following SSDTs:
-  * SSDT-UNC(if not, see [Getting started with ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) on creating said file)
+* 你有以下ssd:
+  * SSDT-UNC(如果没有，请参阅[开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) 创建上述文件)
 
 ## Stuck on or near `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
 
