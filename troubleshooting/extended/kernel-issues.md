@@ -540,7 +540,7 @@ Skip: 0
 
 ## 内核崩溃 `AppleIntelCPUPowerManagement`
 
-这可能是由于NullCPUPowerManagement错误或完全缺失。要解决这个问题，请从`Kernel -> Add`和`EFI/OC/ kext `中移除NullCPUPowerManagement，然后在`Kernel -> Emulate`中启用`DummyPowerManagement`。
+这可能是由于 NullCPUPowerManagement 错误或完全缺失。要解决这个问题，请从`Kernel->Add`和`EFI/OC/kext`中移除NullCPUPowerManagement，然后在`Kernel->Emulate`中启用`DummyPowerManagement`。
 
 * **注**:在旧的英特尔cpu(即。Penryn或更老的版本)，可能是由于IRQ冲突或HPET设备被禁用。要解决这个问题，你有两个选择:
   * [SSDTTime的修复HPET选项](https://sumingyd.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
@@ -598,7 +598,7 @@ Skip: 0
 
 * Lilu和VirtualSMC都在EFI/OC/kext和config.plist中
 * Lilu在kext列表中位于VirtualSMC之前
-* 最后的方法是尝试[FakeSMC](https://github.com/CloverHackyColor/FakeSMC3_with_plugins), **不要同时启用VirtualSMC和FakeSMC **
+* 最后的方法是尝试[FakeSMC](https://github.com/CloverHackyColor/FakeSMC3_with_plugins), **不要同时启用 VirtualSMC 和 FakeSMC**
 
 ## 内核崩溃在 AppleIntelI210Ethernet
 
