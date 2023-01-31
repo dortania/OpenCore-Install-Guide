@@ -458,7 +458,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 * [SATA-unsupported.kext](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/SATA-unsupported.kext.zip)
   * 增加对模糊SATA控制器的支持，通常是笔记本电脑。
   * 对于非常传统的SATA控制器， [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) 可能更合适。
-* [Catalina的补丁 AppleAHCIPort.kext](https://sumingyd.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
+* [Catalina的补丁 AppleAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
   * 对于运行macOS 11、Big Sur和有问题的用户。这向后移植了已知的工作的Catalina kext，这个kext不需要SATA-unsupported
 
 注意，只有在将macOS安装到驱动器后，你才会遇到这个问题，启动macOS安装程序不会因为SATA问题而出错。
@@ -472,7 +472,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
   * AppleXcpmCfgLock
   * AppleXcpmExtraMsrs
 * 你有以下ssd:
-  * SSDT-UNC(如果没有，请参阅[开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/) 创建上述文件)
+  * SSDT-UNC(如果没有，请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 创建上述文件)
 
 ## Stuck on or near `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
 
