@@ -442,7 +442,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 * X299用户:启用Above4G解码
   * X299上的奇怪固件bug，否则USB会损坏
 
-*  ACPI中缺少USB端口:
+* ACPI中缺少USB端口:
   * 对于英特尔的Coffee Lake及更老版本，我们推荐使用[USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
   * 对于英特尔的 Ice Lake 和 Comet Lake, 我们推荐 [SSDT-RHUB](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
     * SSDTTime的 `7. USB Reset` USB复位的选项可以做同样的事情
