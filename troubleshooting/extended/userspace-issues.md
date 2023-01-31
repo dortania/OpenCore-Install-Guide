@@ -1,76 +1,76 @@
 # 用户空间问题
 
-Issues regarding once you've booted the installer and the GUI has loaded.
+关于启动安装程序和加载GUI的问题。
 
 [[toc]]
 
-## macOS installer in Russian
+## 俄文的macOS安装程序
 
-Default sample config is in Russian because slavs rule the Hackintosh world, check your `prev-lang:kbd` value under `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`. Set to `656e2d55533a30` for American: en-US:0 and a full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt). For those using with a simple text editor(ie. UEFI Shell, Notepad++, etc), `656e2d55533a30` will become `ZW4tVVM6MA==`
+默认的样例配置是俄语的，因为俄罗斯人统治着黑苹果世界，检查`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82`下的`prev-lang:kbd`值。中文简体: zh-Hans:252，冒号前面的zh-Hans表示：简体中文，而冒号后面的252表示所使用的苹果键盘布局。关于键盘布局的完整列表可以在[AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)中找到。
 
-You may also need to reset NVRAM in the boot picker as well
+您可能还需要在引导选择程序中重置NVRAM
 
-* Note: Thinkpad laptops are known to be semi-bricked after an NVRAM reset in OpenCore, we recommend resetting NVRAM by updating the BIOS on these machines.
+* 注意:众所周知，Thinkpad笔记本电脑在OpenCore重置NVRAM后会出现半砖现象，我们建议通过更新这些机器的BIOS来重置NVRAM。
 
-Still didn't work? Well time for the big guns. We'll force remove that exact property and let OpenCore rebuild it:
+还是不管用?好吧，是时候让大人物上场了。我们将强制删除该属性，并让OpenCore重建它:
 
-`NVRAM -> Delete -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` then set it Type `String` and Value `prev-lang:kbd`
+`NVRAM -> Delete -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> Item 0` 然后设置它的类型为 `String` 和值 `prev-lang:kbd`
 
 ![](../../images/troubleshooting/troubleshooting-md/lang.png)
 
-## macOS Installer being damaged
+## macOS安装程序损坏
 
-If you've download macOS before October 2019, you likely have an expired macOS Installer certificate, there's 2 ways to fix this:
+如果你在2019年10月之前下载了macOS，你可能已经有一个过期的macOS安装程序证书，有两种方法可以解决这个问题:
 
-* Download newest copy of macOS
-* Change date in terminal to when the certificate was valid
+* 下载最新版本的macOS
+* 将终端日期更改为证书有效日期
 
-For the latter:
+对于后者:
 
-* Disconnect all networking devices(Ethernet, disable WiFi)
-* In the recovery terminal set to September 1st, 2019:
+* 断开所有网络设备(以太网，关闭WiFi)
+* 在恢复终端设置为2019年9月1日:
 
 ```
 date 0901000019
 ```
 
-## Stuck on or near `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
+## 卡在或靠近 `IOConsoleUsers: gIOScreenLock...`/`gIOLockState (3...`
 
-This is right before the GPU is properly initialized, verify the following:
+这是在GPU正确初始化之前，请验证以下内容:
 
-* GPU is UEFI capable(GTX 7XX/2013+)
-* CSM is off in the BIOS
-* Forcing PCIe 3.0 link speed
-* Double check that ig-platform-id and device-id are valid if running an iGPU.
-  * Desktop UHD 630's may need to use `00009B3E` instead
-* Trying various [WhateverGreen Fixes](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
-  * `-igfxmlr` boot argument. This can also manifest as a "Divide by Zero" error.
-* Coffee Lake iGPU users may also need `igfxonln=1` in 10.15.4 and newer
+* GPU支持UEFI (GTX 7XX/2013+)
+* BIOS中CSM是关闭的
+* 强制使用PCIe 3.0链路速度
+* 如果运行iGPU，请仔细检查ig-platform-id和device-id是否有效。
+  * 桌面UHD 630可能需要使用 `00009B3E` 代替
+* 尝试各种 [WhateverGreen 修复](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+  * `-igfxmlr` 导参数。这也可以表现为 "Divide by Zero" 错误。
+* 在10.15.4及更新版本中，Coffee Lake iGPU用户可能还需要`igfxonln=1`
 
-## Scrambled Screen on laptops
+## 笔记本电脑上的乱码屏幕
 
-Enable CSM in your UEFI settings. This may appear as "Boot legacy ROMs" or other legacy setting.
+在UEFI设置中启用CSM。这可能显示为 "Boot legacy ROMs" 或其他 legacy 设置.
 
-## Black screen after `IOConsoleUsers: gIOScreenLock...` on laptops and AIOs
+## 笔记本电脑和 AIOs上在 `IOConsoleUsers: gIOScreenLock...` 之后黑屏…
 
-Verify the following:
+验证以下内容:
 
-* SSDT-PNLF is installed(ie. EFI/OC/ACPI as well as config.plist -> ACPI -> Add)
-* iGPU properties were setup correctly under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`
-* Coffee Lake and newer laptops, add `-igfxblr` to your boot-args
-  * Alternatively, add `enable-backlight-registers-fix | Data | 01000000` to `PciRoot(0x0)/Pci(0x2,0x0)`
+* SSDT-PNLF已安装(即 EFI/OC/ACPI 以及配置 config.plist -> ACPI -> Add)
+* iGPU属性在 `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`下正确设置
+* Coffee Lake和较新的笔记本电脑，在启动参数中添加 `-igfxblr`
+  * 或者，添加 `enable-backlight-registers-fix | Data | 01000000` 到 `PciRoot(0x0)/Pci(0x2,0x0)`
 
-Additionally, verify issues mentioned in [Stuck on or near `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
+此外，请验证[卡在或接近 `IOConsoleUsers: gIOScreenLock...`](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)中提到的问题
 
-## Black screen after `IOConsoleUsers: gIOScreenLock...` on Navi
+## 在 Navi 上 `IOConsoleUsers: gIOScreenLock...` 后黑屏
 
-* Add `agdpmod=pikera` to boot args
-* Switch between different display outputs
-* Try running MacPro7,1 SMBIOS with the boot-arg `agdpmod=ignore`
+* 在引导参数中添加 `agdpmod=pikera`
+* 在不同的显示输出之间切换
+* 尝试运行MacPro7,1 SMBIOS 引导参数 `agdpmod=ignore`
 
-For MSI Navi users, you'll need to apply the patch mentioned here: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
+对于MSI Navi用户，您需要应用这里提到的补丁:[安装程序不能与5700xt# 901工作](https://github.com/acidanthera/bugtracker/issues/901)
 
-Specifically, add the following entry under `Kernel -> Patch`:
+具体来说，在`Kernel -> Patch`下添加以下条目:
 
 ```
 Base:
@@ -88,93 +88,93 @@ ReplaceMask:
 Skip: 0
 ```
 
-## Frozen in the macOS installer after 30 seconds
+## 在macOS安装程序中停留在剩余30秒
 
-This is likely due to faulty or outright missing NullCPUPowerManagement, the one hosted on AMD OSX's Vanilla Guide is corrupted. Go yell at Shannee to fix it. To fix the issue, remove NullCPUPowerManagement from `Kernel -> Add` and `EFI/OC/Kexts` then enable `DummyPowerManagement` under `Kernel -> Emulate`
+这可能是由于错误或完全缺少 NullCPUPowerManagement，一个托管在 AMD OSX 的香草指南是损坏的。去喊香妮把它修好。要解决这个问题，请从`Kernel -> Add`和`EFI/OC/ kext`中移除 NullCPUPowerManagement，然后在`Kernel -> Emulate`中启用`DummyPowerManagement`。
 
-## 15h/16h CPU reboot after Data & Privacy screen
+## 数据和隐私屏幕显示后 15h/16h重启CPU
 
-Follow directions here after UPDATE 2: [Fix Data and Privacy reboot](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2658085)
+请遵循更新2后的指示:[修复数据和隐私重启](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2658085)
 
-## macOS frozen right before login
+## macOS在登录前就冻结了
 
-This is a common example of screwed up TSC, for most system add [CpuTscSync](https://github.com/lvs1974/CpuTscSync)
+这是一个常见的TSC错误的例子，对于大多数系统添加[CpuTscSync](https://github.com/lvs1974/CpuTscSync)
 
-For Skylake-X, many firmwares including Asus and EVGA won't write to all cores. So we'll need to reset the TSC on cold boot and wake with [TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset). Compiled version can be found here: [TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip). Note that you **must** open up the kext(ShowPackageContents in finder, `Contents -> Info.plist`) and change the Info.plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber` to the number of CPU threads you have starting from `0`(i9 7980xe 18 core would be `35` as it has 36 threads total)
+对于Skylake-X，包括华硕和EVGA在内的许多固件都不会写入所有内核。所以我们需要在冷启动和唤醒时使用[TSCAdjustReset](https://github.com/interferenc/TSCAdjustReset)重置TSC。编译版本可以在这里找到:[TSCAdjustReset.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/TSCAdjustReset.kext.zip)。请注意，您**必须**打开kext("显示包内容"在finder中，`Contents -> Info.plist`)并更改Info plist -> `IOKitPersonalities -> IOPropertyMatch -> IOCPUNumber`为CPU线程数从`0`开始(i9 7980xe 18核心将是`35`，因为它总共有36个线程)
 
-The most common way to see the TSC issue:
+查看TSC问题的最常见方法:
 
-Case 1    |  Case 2
+方案 1    |  方案 2
 :-------------------------:|:-------------------------:
 ![](../../images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](../../images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
-## MediaKit reports not enough space
+## MediaKit报告空间不足
 
-This error is due to a small EFI, by default Windows will create a 100MB EFI whereas macOS will expect 200MB. To get around this you have 2 way to go:
+这个错误是由于EFI空间太小,默认Windows将创建一个100 mb EFI而macOS希望200 mb。要解决这个问题，你有两种方法:
 
-* Expand the EFI of the drive to 200MB(See Google on how)
-* Format the entire drive instead of just the partition
-  * Note by default Disk Utility only shows partitions, press Cmd/Win+2 to show all devices(Alternatively you can press the view button)
+* 将硬盘的EFI分区扩展到200MB(参见谷歌如何操作)
+* 格式化整个驱动器，而不仅仅是分区
+  * 注意默认磁盘工具只显示分区，按Cmd/Win+2显示所有设备(或者你可以按查看按钮)
 
-Default           |  Show All Devices(Cmd+2)
+默认           |  显示所有设备(Cmd+2)
 :-------------------------:|:-------------------------:
 ![](../../images/troubleshooting/troubleshooting-md/Default.png)  |  ![](../../images/troubleshooting/troubleshooting-md/Showalldevices.png)
 
-## DiskUtility failing to erase
+## 磁盘工具无法擦除数据
 
-This is either 1(or more) of 5 issues:
+这是5个问题中的1个(或多个):
 
-* Formatting partition and not the drive, see [MediaKit reports not enough space](#mediakit-reports-not-enough-space)
-* DiskUtility has an odd bug where it will fail on first erase, try erasing again
-* SATA Hot-plug support in the BIOS is causing issues(try disabling this option)
-* Old firmware, make sure the drive is on the latest firmware
-* And finally, you may just have a bad drive
+* 格式化分区而不是驱动器，参见[MediaKit报告空间不足](#mediakit-reports-not-enough-space)
+* DiskUtility有一个奇怪的bug，它会在第一次擦除时失败，然后尝试再次擦除
+* BIOS中的SATA热插拔支持导致问题(尝试禁用此选项)
+* 旧固件，确保驱动器使用最新的固件
+* 最后，你可能只是硬盘坏了
 
-## SATA Drives Not Shown in DiskUtility
+## 磁盘实用程序中没有显示SATA驱动器
 
-* Make sure SATA Mode is AHCI in bios
-* Certain SATA controllers may not be officially supported by macOS, for these cases you'll want to grab [CtlnaAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
-  * For very legacy SATA controllers, [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) may be more suitable.
+* 确保bios中的SATA模式是AHCI
+* 某些SATA控制器可能没有被macOS官方支持，在这种情况下，你需要获取 [CtlnaAHCIPort.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip)
+  * 对于非常传统的SATA控制器， [AHCIPortInjector.kext](https://www.insanelymac.com/forum/files/file/436-ahciportinjectorkext/) 可能更合适。
 
-## Stuck at 2 minutes remaining
+## 卡在剩余2分钟
 
 ![](../../images/troubleshooting/troubleshooting-md/2-min-remaining.jpeg)
 
-This error is directly related to the stage at which macOS will write certain NVRAM variables for your system to boot next, and so when there's issues revolving around NVRAM it'll stall here.
+此错误与 macOS 为系统下次启动编写特定 NVRAM 变量的阶段直接相关，因此当出现围绕NVRAM的问题时，它将在此处停止。
 
-To resolve, we have a few options:
+为了解决这个问题，我们有几个选择:
 
-* 300 series Intel Fix(ie. Z390):
+* 300系列英特尔修复(即Z390):
   * [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)
-* Others can set the following in their config.plist:
+* 其他人可以在config.plist中设置如下:
   * LegacyEnable -> YES
   * LegacyOverwrite -> YES
   * WriteFlash -> YES
 
-## The recovery server cannot get contacted
+## 无法联系恢复服务器
 
-If you made your installer in Windows or Linux, then this means your USB installer is recovery based. What this means is that only a small portion of the macOS installer is on disk while the rest must be downloaded from Apple servers in the installer. And reason we do not include full installer guides is due to unstable HFS drivers and other utilities that commonly end up with data corruption.
+如果你是在Windows或Linux上安装的，那么这意味着你的USB安装程序是基于恢复的。这意味着只有一小部分macOS安装程序在磁盘上，而其余部分必须通过安装程序从苹果服务器下载。我们没有包含完整安装指南的原因是，不稳定的HFS驱动程序和其他实用程序通常会导致数据损坏。
 
-To resolve the error, you have a few options:
+要解决这个错误，你有几个选项:
 
-* Ensure you have a working Ethernet or WiFi connection
-  * Open `Network Utility` under `Utilties` header in the installer and see if your Network Card shows up
-    * If you network card **doesn't** show up, it's likely you're missing the right Network kext
-      * Please refer here: [Ethernet Kexts](../../ktext.md#ethernet) and [Finding your hardware](../../find-hardware.md)
-    * If the network card **does** show up, next run `ping -c3 www.google.com` in the installer's terminal to ensure your network connection is working
-      * If nothing shows, either your network or kexts are acting up
-        * We recommend trying older variants of kexts in cases where newer builds have weird bugs with your hardware
-      * If it does return something, then the issue is on Apple's end. You'll simply need to try to install again another time unfortunately
+* 确保你有可用的以太网或WiFi连接
+  * 在安装程序的“工具”标题下打开“网络工具”，看看你的网卡是否显示出来
+    * 如果你的网卡**没有**显示，很可能是你使用了不正确的网络kext
+      * 请参考这里: [网卡 Kexts](../../ktext.md#ethernet) 和[查找你的硬件](../../find-hardware.md)
+    * 如果网卡**显示**，接下来在安装程序的终端运行`ping -c3 www.baidu.com`以确保网络连接正常
+      * 如果没有显示，说明你的网络或kext出问题了
+        * 如果新版本的硬件有奇怪的bug，我们建议尝试旧版本的kext
+      * 如果它确实返回了一些东西，那么问题就在苹果这边。不幸的是，您只能换个时间，再次尝试安装。
 
-| Check NIC | Ping |
+| 检查网卡 | Ping |
 | :--- | :--- |
 | ![](../../images/troubleshooting/troubleshooting-md/check-network.png) | ![Ping](../../images/troubleshooting/troubleshooting-md/ping.png) |
 
-## Keyboard and Mouse broken in Big Sur
+## Big Sur上键盘和鼠标坏了
 
-For certain legacy systems(ie. Core2 Duo/2010 and older), you may notice that while the USB ports work your HID-based devices such as the keyboard and mouse may be broken. To resolve this, add the following patch:
+对于某些旧系统(如Core2 Duo/2010及更老版本)，你可能会注意到，当USB端口工作时，基于hid的设备(如键盘和鼠标)可能会坏掉。为了解决这个问题，添加以下补丁:
 
-::: details IOHIDFamily Patch
+::: details IOHIDFamily 补丁
 
 config.plist -> Kernel -> Patch:
 
@@ -197,17 +197,17 @@ config.plist -> Kernel -> Patch:
 
 :::
 
-## Stuck on `Your Mac needs a firmware update in order to install to this volume`
+## 卡在`您的Mac需要更新固件才能安装到此卷`上
 
-If you're being prompted to update your firmware to install with an APFS volume, this likely indicates an outdated SMBIOS table. First, verify the following:
+如果系统提示您更新固件以安装APFS卷，这可能表明是一个过时的SMBIOS表。首先，验证以下几点:
 
-* You have `PlatformInfo -> Automatic` enabled
-* `UpdateSMBIOSMode` is set to `Create`
-  * Make sure `CustomSMBIOSGuid` is disabled
-  * For Dell and VAIO machines, ensure that `CustomSMBIOSGuid` is enabled and `UpdateSMBIOSMode` is set to `Custom` instead
-    * `CustomSMBIOSGuid` and `UpdateSMBIOSMode` should always be in tandem with each other
-* Using a SMBIOS supported in this version of macOS
-  * ie. you're not using `-no_compat_check`
-* You're using the latest version of OpenCore
+* 你已经启用了`PlatformInfo -> Automatic`
+* `UpdateSMBIOSMode` 设置为 `Create`
+  * 确保禁用了`CustomSMBIOSGuid`
+  * 对于Dell和VAIO机器，请确保启用了`CustomSMBIOSGuid`，并将`UpdateSMBIOSMode`设置为`Custom`
+    * `CustomSMBIOSGuid`和`UpdateSMBIOSMode`应该始终相互串联
+* 使用这个版本的macOS支持的SMBIOS
+  * 即：你不使用“不兼容检查”
+* 你正在使用最新版本的OpenCore
 
-If you still receive this error, then there's likely some outdated SMBIOS info in OpenCore itself. We recommend changing to a similar SMBIOS and see if this is resolved. For a full list of SMBIOS, see here: [Choosing the right SMBIOS](../../extras/smbios-support.md)
+如果您仍然收到此错误，那么可能在OpenCore本身中有一些过时的SMBIOS信息。我们建议更改为类似的SMBIOS，看看这个问题是否得到解决。要获得SMBIOS的完整列表，请参阅:[选择正确的SMBIOS](../../extras/smbios-support.md)
