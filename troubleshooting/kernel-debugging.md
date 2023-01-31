@@ -83,77 +83,77 @@
   * 设置`ACPI_LV_DEBUG_OBJECT`调试，参见 [acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) 了解更多信息
   * `0xFFFF5F` 也可以表示 `ACPI_ALL_COMPONENTS`
 
-## Serial Setup(Optional)
+## 串行设置(可选)
 
-* [Hardware Setup](#hardware-setup)
-* [EFI Setup](#efi-setup)
-* [Config.plist Setup](#config-plist-setup)
+* [硬件设置](#hardware-setup)
+* [EFI 设置](#efi-setup)
+* [Config.plist 设置](#config-plist-setup)
 
-While optional, serial can be super helpful in grabbing all the important info flooding your PC. It's also the only way to properly log super early kernel panics(such as things right after `[EB|#LOG:EXITBS:START]`)
+虽然是可选的，但串行仍然对抓取所有的信息超级有帮助。这也是正确记录超早期内核崩溃的唯一方法(例如在`[EB|# log:EXITBS:START]`之后的事情)
 
-For this setup, you'll need a few things:
+对于这个设置，你需要一些东西:
 
-* A serial header/port on the test machine
-* A serial-to-serial or serial-to-USB cable
-* A second machine to receive the serial logging(with either Serial or USB)
-* Software to monitor the serial output
-  * For this guide, we'll use [CoolTerm](https://freeware.the-meiers.org) as it supports macOS, Linux, Windows and even Raspberry Pi's
-  * `screen` and other methods are also supported
+* 测试机上的串行头/端口
+* 串行到串行或串行到usb电缆
+* 第二台机器接收串行日志记录(使用串行或USB)
+* 软件监控串行输出
+  * 在本指南中，我们将使用 [CoolTerm](https://freeware.the-meiers.org) ,因为它支持macOS, Linux, Windows甚至树莓派
+  * `screen` 和其他方法也支持
 
-### Hardware Setup
+### 硬件设置
 
-For this example, we'll be using an Asus X299-E Strix board which does have a serial header. To verify whether your board comes with one, check the owners or service manual and search for the serial/COM port:
+对于这个例子，我们将使用华硕X299-E Strix板，它有一个串行头。要确认您的单板是否自带串口，请查看单板的所有者或服务手册，并搜索串口/COM端口:
 
 ![](../images/troubleshooting/kernel-debugging-md/serial-header.png)
 
-As you can see, we have a COM port on the bottom of our motherboard and even provides us with a diagram for manually hooking up our serial pins if you're not using a 9/10 Pin Serial Header to DB9 adapter.
+正如你所看到的，我们在主板的底部有一个COM端口，如果你不使用9/10引脚串行头到DB9适配器，甚至为我们手动连接我们的串行引脚提供了一个图表。
 
-Alternatively, some machine come with DB9 Serial ports right on the rear IO such as this Dell Optiplex 780 SFF(note that VGA and Serial are **not** the same connector):
+或者，一些机器在后IO上带有DB9串行端口，例如这台Dell Optiplex 780 SFF(注意VGA和串行**不是**同一个连接器):
 
 <img width="508" alt="" src="../images/troubleshooting/kernel-debugging-md/serial-connector.jpg">
 
-For my X299 setup, I'm using a simple [Serial header to DB9](https://www.amazon.ca/gp/product/B001Y1F0HW/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1), then a [DB9 to USB  RS 232 adapter](https://www.amazon.ca/gp/product/B075YGKFC1/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1) which finally terminates at my laptop:
+对于我的X299设置，我使用一个简单的 [串行头到DB9](https://www.amazon.ca/gp/product/B001Y1F0HW/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1), 然后一个 [DB9到USB RS 232适配器](https://www.amazon.ca/gp/product/B075YGKFC1/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1) 最后终止在我的笔记本电脑:
 
 | Serial header to DB9 | DB9 to USB  RS 232 adapter |
 | :--- | :--- |
 | ![](../images/troubleshooting/kernel-debugging-md/817DNdBZDkL._AC_SL1500_.jpg) | ![](../images/troubleshooting/kernel-debugging-md/61yHczOwpTL._AC_SL1001_.jpg) |
 
-The OpenCore manual generally recommends CP21202-based UART devices:
+OpenCore手册通常建议CP21202-based UART设备:
 
-> To obtain the log during boot you can make the use of serial port debugging. Serial port debugging is enabled in Target, e.g. 0xB for onscreen with serial. OpenCore uses 115200 baud rate, 8 data bits, no parity, and 1 stop bit. For macOS your best choice are CP2102-based UART devices. Connect motherboard TX to USB UART RX, and motherboard GND to USB UART GND. Use screen utility to get the output, or download GUI software, such as CoolTerm.
-> Note: On several motherboards (and possibly USB UART dongles) PIN naming may be incorrect. It is very common to have GND swapped with RX, thus you have to connect motherboard “TX” to USB UART GND, and motherboard “GND” to USB UART RX.
+> 要在引导期间获得日志，可以使用串口调试。在目标中打开串口调试，例如0xB表示onscreen with Serial。OpenCore使用115200波特率，8个数据位，无奇偶校验和1个停止位。对于macOS，最好的选择是基于cp2102的UART设备。将主板TX连接到USB UART RX，主板GND连接到USB UART GND。使用屏幕工具获取输出，或者下载GUI软件，比如CoolTerm。
+> 注意:在一些主板(可能是USB UART加密狗)PIN命名可能不正确。GND与RX交换是非常常见的，因此您必须将主板“TX”连接到USB UART GND，并将主板“GND”连接到USB UART RX。
 
-**Important reminder**: Don't forget to also enable the serial port in your BIOS, most motherboards will disable it by default
+**重要提醒**:不要忘记在BIOS中启用串口，大多数主板默认情况下将禁用它
 
-### CoolTerm Setup
+### CoolTerm 设置
 
-Now lets fire up [CoolTerm](https://freeware.the-meiers.org) and set a few options. When you open CoolTerm, you'll likely be greeted with a simple window. Here select the Options entry:
+现在让我们启动[CoolTerm](https://freeware.the-meiers.org)并设置一些选项。当您打开CoolTerm时，您可能会看到一个简单的窗口。在这里选择选项条目:
 
 ![](../images/troubleshooting/kernel-debugging-md/coolterm-first-start.png)
 ![](../images/troubleshooting/kernel-debugging-md/coolterm-settings.png)
 
-Here we're given quite a few options, but the mains ones we care about are:
+这里给出了很多选项，但我们主要关心的是:
 
-* Port: Ensure this matches with your serial controller.
+* Port: 确保与您的串行控制器匹配。
 * Baudrate = 115200
 * Data Bits = 8
-* Parity = none
+* Parity = 无
 * Stop Bit = 1
 
-Next save these settings, and select the Connect entry. This will provide you a live log from serial:
+接下来，保存这些设置，并选择Connect条目。这将为你提供一个来自serial的实时日志:
 
 ![CoolTerm Connect](../images/troubleshooting/kernel-debugging-md/coolterm-connect.png)
 
-To record, simply head to `Connections -> Capture to Text/Binary File -> Start...(Cmd+R)`:
+要记录，只需前往 `Connections -> Capture to Text/Binary File -> Start...(Cmd+R)`:
 
 ![](../images/troubleshooting/kernel-debugging-md/coolterm-record.png)
 
-## Kernel Debug Kits (Optional)
+## 内核调试工具包(可选)
 
 * [KDK on an Installed OS](#kdk-on-an-installed-os)
 * [Uninstalling the KDK](#uninstalling-the-kdk)
 
-Kernel Debug Kits(KDKs) are a great way to get even more logging information from the kernel and core kexts, KDKs specifically are debug versions of macOS's core foundation provided from Apple themselves. They include both more logging as well as ASSERTs allowing you to more directly see issues with your setup. Note however we will not be discussing bridged debugging or `lldb` usage.
+内核调试工具包(kdk)是一种从内核和核心kext获取更多日志信息的好方法，kdk具体来说是苹果自己提供的macOS核心基础的调试版本。它们包括更多的日志记录和断言，允许您更直接地查看设置中的问题。但是请注意，我们不会讨论桥接调试或 `lldb` 的用法。
 
 <span style="color:red"> CAUTION: </span> Installing KDKs on work machines can lead to issues with OS updates as well as bricked installs. Please debug on dedicated macOS installs to avoid data loss
 
