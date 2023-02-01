@@ -264,25 +264,25 @@ SIP 或更恰当地称为系统完整性保护，是一种安全技术，试图�
 **macOS Catalina**
 
 1. [禁用SIP](#disabling-sip)
-2. 挂载驱动器可写 (Run `sudo mount -uw /` in terminal)
+2. 挂载驱动器可写 (在终端运行 `sudo mount -uw /`)
 
 **macOS Big Sur**
 
 1. [禁用SIP](#disabling-sip)
-2. Mount drive as writable (See below link for command)
+2. 将驱动器挂载为可写(参见下面的命令链接)
 
-* Note: Due to how OS updates work in macOS Big Sur and newer, changing the system volume can in fact break OS updates. Please edit with caution
+* *注意:由于操作系统更新在macOS Big Sur和更新的工作方式，更改系统卷实际上会破坏操作系统更新。请谨慎编辑
 
-Commands based off of Apple's KDK documents:
+基于苹果KDK文档的命令:
 
 ```bash
-# First, create a mount point for your drive
+# 首先，为您的驱动器创建一个挂载点
 mkdir ~/livemount
 
-# Next, find your System volume
+# 接下来，找到您的系统卷
 diskutil list
 
-# From the below list, we can see our System volume is disk5s5
+# 从下面的列表中，我们可以看到我们的系统卷是disk5s5
 /dev/disk5 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +255.7 GB   disk5
@@ -294,55 +294,55 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Mount the drive(ie. disk5s5)
+# 挂载驱动器(即：disk5s5)
 sudo mount -o nobrowse -t apfs  /dev/disk5s5 ~/livemount
 
-# Now you can freely make any edits to the System volume
+# 现在您可以自由地对系统卷进行任何编辑
 
-# If you edited either the S*/L*/Kernel, S*/L*/Extensions or L*/Extensions,
-# you will need to rebuild the kernel cache
+# 如果你编辑了 S*/L*/Kernel, S*/L*/Extensions 或 L*/Extensions,
+# 您将需要重建内核缓存
 sudo kmutil install --volume-root ~/livemount --update-all
 
-# Finally, once done editing the system volume we'll want to create a new snapshot
+# 最后，编辑完系统卷之后，我们需要创建一个新的快照
 sudo bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
 ```
 
-## Rolling back APFS Snapshots
+## 回滚APFS快照
 
-With macOS Big Sur, the system volume is now snapshotted allowing you to roll back in case of issues with system updates breaking due to a broken seal. Thanks to new snapshots being created with every OS update, we've got quite a bit to roll back too.
+使用macOS Big Sur，现在对系统卷进行快照，以便在密封损坏导致系统更新中断的情况下进行回滚。由于每次操作系统更新都会创建新的快照，我们也有相当多的数据需要回滚。
 
-To roll back, you'll first need to reboot into Recovery partition then select "Restore From Time Machine Backup":
+要回滚，你首先需要重新启动到恢复分区，然后选择“从时间机器备份恢复”:
 
 ![](./../../images/troubleshooting/troubleshooting-md/snapshots.jpg)
 
 * [Credit to Lifewire for image](https://www.lifewire.com/roll-back-apfs-snapshots-4154969)
 
-## Apple Watch Unlock issues
+## Apple Watch解锁问题
 
-For those with Apple Watch Unlock issues, verify the following:
+对于那些有 Apple Watch 解锁问题的人，请验证以下内容:
 
-* You have a supported Apple Wireless card with Bluetooth Low Energy(4.0+)
-* Your watch and Mac are signed in with the same account
-* iServices working correctly(ie. iMessage)
-* There's an option to Unlock with Apple Watch under Security and Privacy setting in System Preferences
+* 你有一个支持低功耗蓝牙(4.0+)的苹果无线网卡
+* 你的手表和Mac是用同一个账户登录的
+* iServices工作正常(例如:iMessage)
+* 在系统首选项的安全和隐私设置下，有一个用Apple Watch解锁的选项
 
 ![](../../images/troubleshooting/troubleshooting-md/watch-unlock.png)
 
-If the above are met, and you still have unlock issues we recommend running through the below guide:
+如果满足以上条件，并且你仍然有解锁问题，我们建议你查看以下指南:
 
-* [Fixing Auto Unlock](https://forums.macrumors.com/threads/watchos-7-beta-5-unlock-mac-doesnt-work.2250819/page-2?post=28904426#post-28904426)
+* [修复自动解锁](https://forums.macrumors.com/threads/watchos-7-beta-5-unlock-mac-doesnt-work.2250819/page-2?post=28904426#post-28904426)
 
-## 4K iGPU output issues over HDMI
+## HDMI上的4K iGPU输出问题
 
-For machines with HDMI 2.0 capable ports with resolution issues, verify the following:
+对于带有HDMI 2.0接口但存在分辨率问题的机器，请验证以下内容:
 
-* 4k output works correctly in Windows
-* Monitor is set explicitly to HDMI 2.0
-  * If using an HDMI to DisplayPort converter, ensure the monitor is set to DisplayPort 1.2 or higher
-* Ensure enough iGPU memory has been allocated
-  * For Broadwell and newer, 64MB is expected to be allocated
-  * Machines relying on WhateverGreen's `framebuffer-stolenmem` property should know this can cause 4k output issues. Please ensure you can set the iGPU's memory to 64MB allowing you to remove these properties
-* Laptops and many desktop users may need this boot-arg:
+* 4k输出在Windows上可以正常工作
+* 显示器显式设置为HDMI 2.0
+  * 如果使用HDMI到DisplayPort转换器，请确保显示器设置为DisplayPort 1.2或更高
+* 确保已分配足够的iGPU内存
+  * 对于Broadwell及更新版本，预计会分配64MB内存
+  * 依赖于WhateverGreen的`framebuffer-stolenmem`属性的机器应该知道，这可能会导致4k输出问题。请确保您可以将iGPU的内存设置为64MB，以允许您删除这些属性
+* 笔记本电脑和许多台式机用户可能需要这个引导参数:
   * `-cdfon`
 
-For all other troubleshooting, please reference [WhateverGreen's Intel docs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+关于所有其他故障排除，请参考[WhateverGreen的英特尔文档](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
