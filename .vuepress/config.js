@@ -238,28 +238,28 @@ module.exports = {
                 title: '安装后',
                 collapsable: false,
                 children: [
-                    ['https://sumingyd.github.io/OpenCore-Post-Install/', 'Post-Install'],
+                    ['https://sumingyd.github.io/OpenCore-Post-Install/', '安装后'],
                     {
                         title: '通用',
                         collapsable: true,
                         sidebarDepth: 1,
                         children: [
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/security', 'Security and FileVault'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/audio', 'Fixing Audio'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/oc2hdd', 'Booting without USB'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/update', 'Updating OpenCore, kexts and macOS'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/drm', 'Fixing DRM'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices', 'Fixing iServices'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/pm', 'Fixing Power Management'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/sleep', 'Fixing Sleep'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/usb/', 'Fixing USB'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/security', '安全与文件库'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/audio', '修复音频'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/oc2hdd', '无 USB 引导'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/update', '更新 OpenCore、kext 和 macOS'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/drm', '修复 DRM'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices', '修复 iServices'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/pm', '修复电源管理'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/universal/sleep', '修复睡眠'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/usb/', '修复 USB'],
                         ]
                     },
                     {
                         title: '笔记本电脑',
                         collapsable: true,
                         children: [
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/laptop-specific/battery', 'Fixing Battery Read-outs'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/laptop-specific/battery', '修复电池读数'],
     
                         ]
                     },
@@ -267,26 +267,26 @@ module.exports = {
                         title: '美化',
                         collapsable: true,
                         children: [
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/verbose', 'Fixing Resolution and Verbose'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/gui', 'Add GUI and Boot-chime'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/verbose', '修复分辨率和啰嗦模式'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/gui', '添加GUI和开机铃声'],
                         ]
                     },
                     {
                         title: '多引导',
                         collapsable: true,
                         children: [
-                            ['https://sumingyd.github.io/OpenCore-Multiboot/', 'OpenCore Multiboot'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootstrap', 'Setting up LauncherOption'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp', 'Installing BootCamp'],
+                            ['https://sumingyd.github.io/OpenCore-Multiboot/', 'OpenCore多引导'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootstrap', '设置启动选项'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp', '安装Boot Camp'],
                         ]
                     },
                     {
                         title: '其他',
                         collapsable: true,
                         children: [
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc', 'Fixing RTC'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/misc/msr-lock', 'Fixing CFG Lock'],
-                            ['https://sumingyd.github.io/OpenCore-Post-Install/misc/nvram', 'Emulated NVRAM'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc', '修复 RTC'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/misc/msr-lock', '修复 CFG Lock'],
+                            ['https://sumingyd.github.io/OpenCore-Post-Install/misc/nvram', '模拟NVRAM'],
                         ]
                     },
                 ]
@@ -299,7 +299,7 @@ module.exports = {
                     '/extras/kaslr-fix',
                     '/extras/spoof',
                     '/extras/ventura',
-                    ['https://github.com/sumingyd/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
+                    ['https://github.com/sumingyd/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover 的转换'],
                     '/extras/smbios-support.md',
                 ]
             },
