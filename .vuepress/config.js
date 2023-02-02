@@ -85,27 +85,27 @@ module.exports = {
                     link: 'https://sumingyd.github.io/OpenCore-Install-Guide/'
                 },
                 {
-                    text: 'ACPI入门',
+                    text: 'ACPI入门(建设中)',
                     link: 'https://sumingyd.github.io/Getting-Started-With-ACPI/'
                 },
                 {
-                    text: 'OpenCore安装后',
+                    text: 'OpenCore安装后(建设中)',
                     link: 'https://sumingyd.github.io/OpenCore-Post-Install/'
                 },
                 {
-                    text: 'OpenCore多引导',
+                    text: 'OpenCore多引导(建设中)',
                     link: 'https://sumingyd.github.io/OpenCore-Multiboot/'
                 },
                 {
-                    text: '显卡购买指南',
+                    text: '显卡购买指南(建设中)',
                     link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
                 },
                 {
-                    text: '无线购买指南',
+                    text: '无线购买指南(建设中)',
                     link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
                 },
                 {
-                    text: '避免购买指南',
+                    text: '避免购买指南(建设中)',
                     link: 'https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/'
                 },
                 ]
