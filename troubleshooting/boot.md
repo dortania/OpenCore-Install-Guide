@@ -113,7 +113,7 @@
 * [卡在或靠近 `IOConsoleUsers: gIOScreenLock...`](./extended/kernel-issues.md#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3)
 * [`IOConsoleUsers: gIOScreenLock...`后出现黑屏…](./extended/kernel-issues.md#black-screen-after-ioconsoleusers-gioscreenlock-on-navi)
 
-## macOS Handoff
+## macOS切换
 
 ![](../images/troubleshooting/boot-md/11-boot.png)
 
