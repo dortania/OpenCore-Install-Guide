@@ -364,7 +364,7 @@ csrutil enable
 csrutil authenticated-root enable # Big Sur+
 ```
 
-*  config.plist更改(如果之前通过config.plist更改):
+* config.plist更改(如果之前通过config.plist更改):
   * [通过config.plist启用](./extended/post-issues.md#disabling-sip)
   
 #### 4. 清除引导参数
