@@ -65,7 +65,7 @@
 
 [[toc]]
 
-信息来源：[EveryMac] (https://everymac.com)和(OpenCorePkg) (https://github.com/acidanthera/OpenCorePkg)
+信息来源：[EveryMac](https://everymac.com)和(OpenCorePkg)(https://github.com/acidanthera/OpenCorePkg)
 
 **特别注意**:
 
