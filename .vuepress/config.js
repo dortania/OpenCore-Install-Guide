@@ -101,7 +101,7 @@ module.exports = {
                     link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
                 },
                 {
-                    text: '无线网卡购买指南',
+                    text: '无线购买指南',
                     link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
                 },
                 {
@@ -140,7 +140,7 @@ module.exports = {
                 },
                     '/installer-guide/opencore-efi',
                     'ktext',
-                ['https://sumingyd.github.io/Getting-Started-With-ACPI/', 'ACPI入门'],
+                ['https://sumingyd.github.io/Getting-Started-With-ACPI/', 'ACPI入门(建设中)'],
                     '/config.plist/',
                 ]
             },
@@ -235,7 +235,7 @@ module.exports = {
                 ]
             },
             {
-                title: '安装后',
+                title: '安装后(建设中)',
                 collapsable: false,
                 children: [
                     ['https://sumingyd.github.io/OpenCore-Post-Install/', '安装后'],
@@ -299,7 +299,7 @@ module.exports = {
                     '/extras/kaslr-fix',
                     '/extras/spoof',
                     '/extras/ventura',
-                    ['https://github.com/sumingyd/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover 的转换'],
+                    ['https://github.com/sumingyd/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover 的转换（建设中）'],
                     '/extras/smbios-support.md',
                 ]
             },
