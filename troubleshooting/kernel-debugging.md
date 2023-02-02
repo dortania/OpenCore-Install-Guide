@@ -155,82 +155,82 @@ OpenCore手册通常建议CP21202-based UART设备:
 
 内核调试工具包(kdk)是一种从内核和核心kext获取更多日志信息的好方法，kdk具体来说是苹果自己提供的macOS核心基础的调试版本。它们包括更多的日志记录和断言，允许您更直接地查看设置中的问题。但是请注意，我们不会讨论桥接调试或 `lldb` 的用法。
 
-<span style="color:red"> CAUTION: </span> Installing KDKs on work machines can lead to issues with OS updates as well as bricked installs. Please debug on dedicated macOS installs to avoid data loss
+<span style="color:red"> 警告: </span> 在工作机器上安装kdk可能会导致操作系统更新和安装出现问题。请在专用的macOS安装上调试，以避免数据丢失
 
-To start, we'll first need a minimum of a [free developer account](https://developer.apple.com/support/compare-memberships/) from Apple. Once you've signed up for a minimum of a free tier, you can now access KDKs from the [More Downloads page](https://developer.apple.com/download/more/):
+首先，我们至少需要一个来自苹果的[免费开发者帐户](https://developer.apple.com/support/compare-memberships/) 一旦您注册了最低限度的免费层，您现在可以从[更多下载页面](https://developer.apple.com/download/more/):
 
-* Note: Free tiers will be limited to release KDKs, only beta KDKs are provided for [paid developer accounts](https://developer.apple.com/support/compare-memberships/)
-* Note 2: Apple hosts KDKs as far back as OS X 10.5, Leopard so don't worry about your OS not being supported
+* 注:免费等级将仅限于发布kdk，只有测试版kdk提供给[付费开发者帐户](https://developer.apple.com/support/compare-memberships/)
+* 注2:苹果早在OS X 10.5和Leopard时就有kdk了，所以不用担心你的操作系统不受支持
 
 ![](../images/troubleshooting/kernel-debugging-md/more-downloads.png)
 
-To determine which KDK build you need with beta builds, run the following in terminal:
+要确定你需要哪个KDK版本的测试版，在终端中运行以下命令:
 
 ```sh
 sw_vers | grep BuildVersion
 ```
 
-For this, I will be downloading Kernel Debug Kit 11.3 build 20E5186d. Once downloaded, mount the disk image and you'll find the KDK installer. By default, the KDK will only install itself for "Performing Two-Machine Debugging" and will provide zero extra benefit on the host machine for kernel debugging by default.
+为此，我将下载内核调试套件11.3 build 20E5186d。下载完成后，挂载磁盘镜像，就可以找到KDK安装程序了。默认情况下，KDK只会为了“执行双机调试”而安装自己，并且默认情况下不会为主机内核调试提供任何额外的好处。
 
-### KDK on an Installed OS
+### KDK在已安装的操作系统上
 
-To enable debugging on the host machine, you'll need to do the following:
+要在主机上启用调试，您需要执行以下操作:
 
-1. Run the KDK Install pkg
-2. Disable SIP(OS X 10.11+)
-3. Mount root partition as writable(macOS 10.15+)
-4. Install debug kernel and kexts
-5. Update boot-args
-6. Reboot and check your work
+1. 运行 KDK 安装 pkg
+2. 关闭SIP协议(OS X 10.11+)
+3. 以可写方式挂载根分区(macOS 10.15+)
+4. 安装调试内核和kext
+5. 更新boot-args
+6. 重新启动并检查您的工作
 
-#### 1. Run the KDK Install pkg
+#### 1. 运行 KDK 安装 pkg
 
-Simply run the pkg as normal:
+正常运行pkg即可:
 
 ![](../images/troubleshooting/kernel-debugging-md/kdk-install.png)
 
-Once installed, you'll find the KDK components such as the debug kernel located at `/Library/Developer/KDKs`:
+安装完成后，你可以在`/Library/Developer/KDKs`目录下找到KDK组件，例如调试内核:
 
 ![](../images/troubleshooting/kernel-debugging-md/kdk-installed.png)
 
-#### 2. Disabling SIP
+#### 2. 禁用SIP
 
-* Applicable for OS X 10.11, El Capitan and newer
+* 适用于OS X 10.11, El Capitan和更新版本
 
-To disable SIP, users have 2 choices:
+禁用SIP，用户有两种选择:
 
-* Disable via Recovery
+* 通过恢复禁用
 
-* [Disable via config.plist](./extended/post-issues.md#disabling-sip)
+* [通过config.plist禁用](./extended/post-issues.md#disabling-sip)
 
-Generally we highly recommend recovery to easily revert with NVRAM reset, however some users may require SIP to be disabled through NVRAM wipes as well.
+一般情况下，我们强烈建议恢复，以便通过NVRAM复位轻松恢复，但是一些用户可能需要通过NVRAM擦除禁用SIP。
 
-For the former, simply reboot into macOS Recovery, open terminal and run the following:
+对于前者，只需重新启动到macOS恢复，打开终端并运行以下命令:
 
 ```sh
 csrutil disable
 csrutil authenticated-root disable # Big Sur+
 ```
 
-Reboot, and SIP will have been adjusted accordingly. You can run `csrutil status` in terminal to verify it worked.
+重新启动，SIP将进行相应的调整。你可以在终端中运行`csrutil status`来验证它是否工作。
 
-* <span style="color:red"> CAUTION: </span> For users relying on [OpenCore's ApECID feature](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#apecid), please be aware this **must** be disabled to use the KDK.
+* <span style="color:red"> 注意: </span> 对于依赖[OpenCore的ApECID功能](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#apecid)的用户，请注意此 **必须** 被禁用才能使用KDK。
 
-#### 3. Mount root partition as writable
+#### 3. 以可写方式挂载根分区
 
-* Applicable for macOS 10.15, Catalina and newer
+* 适用于macOS 10.15，卡特琳娜及更新版本
 
-Mounting the root volume as writable is easy, however the process is a bit long:
+将根卷挂载为可写卷很容易，但是这个过程有点长:
 
 ```bash
 # Big Sur+
-# First, create a mount point for your drive
+# 首先，为您的驱动器创建一个挂载点
 mkdir ~/livemount
 
-# Next, find your System volume
+# 接下来，找到您的系统卷
 diskutil list
 
-# From the below list, we can see our System volume is disk5s5
+# 从下面的列表中，我们可以看到我们的系统卷是disk5s5
 /dev/disk5 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +255.7 GB   disk5
@@ -242,85 +242,85 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Mount the drive(ie. disk5s5)
+# 安装驱动(即。disk5s5)
 sudo mount -o nobrowse -t apfs  /dev/disk5s5 ~/livemount
 
-# Now you can freely make any edits to the System volume
+# 现在您可以自由地对系统卷进行任何编辑
 ```
 
 ```bash
-# Catalina only
+# 仅限 Catalina
 sudo mount -uw /
 ```
 
-#### 4. Install debug kernel and kexts
+#### 4. 安装调试内核和kext
 
-Now we install our KDK into the system:
+现在我们将KDK安装到系统中:
 
 ```bash
-# Install KDK to System Volume
-# Ensure to replace <KDK Version>
-# For 10.15 and older, swap livemount with /Volumes/<Target Volume>
+# 将KDK安装到系统卷
+# 确保替换<KDK版本>
+# 对于10.15及以上版本，用/Volumes/<Target Volume>交换live挂载
 sudo ditto /Library/Developer/KDKs/<KDK Version>/System ~/livemount/System
 
-# Rebuild Truethe kernel cache(Big Sur and newer)
+# 重建真实的内核缓存(大苏尔及更新版本)
 sudo kmutil install --volume-root ~/livemount --update-all
 
-# Rebuild the kernel cache(Catalina and older)
+# 重建内核缓存(卡特琳娜和更老的版本)
 sudo kextcache -invalidate /Volumes/<Target Volume>
 
-# Finally, once done editing the system volume
-# we'll want to create a new snapshot (Big Sur and newer)
+# 最后，一旦完成系统卷的编辑
+# 我们要创建一个新的快照(大苏尔和更新的)
 sudo bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
 ```
 
-#### 5. Update boot-args
+#### 5. 更新boot-args
 
-Now that you've finished setting up the KDK and installed it, we now need to tell boot.efi which kernel to use. You have 2 options to choose from:
+现在您已经完成了KDK的设置和安装，现在我们需要告诉boot.Efi使用哪个内核。你有两个选择:
 
-* `kcsuffix=debug` (removed with Big Sur)
+* `kcsuffix=debug` (由Big Sur移除)
 * `kcsuffix=development`
 * `kcsuffix=kasan`
 
-`development` arg will set the new default debug kernel in Big Sur, while `kasan` is a much more logging intensive kernel that incorporates [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer).
+`development`参数将在Big Sur中设置新的默认调试内核，而`kasan`是一个更注重日志记录的内核，包含[AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer).
 
-Once you've decided which kernel is ideal for you, add the kcsuffix arg to your boot-args in your config.plist
+一旦你决定了哪个内核最适合你，在config.plist中将kc后缀arg添加到boot-args中
 
-#### 6. Reboot and check your work
+#### 6. 重新启动并检查您的工作
 
-Assuming everything was done correctly, you'll now want to reboot and check that the correct kernel was booted:
+假设一切都正确地完成了，现在要重新启动，检查是否引导了正确的内核:
 
 ```sh
 sysctl kern.osbuildconfig
  kern.osbuildconfig: kasan
 ```
 
-And as we can see, we're successfully booting a KASAN kernel.
+正如我们所看到的，我们成功地启动了KASAN内核。
 
-### Uninstalling the KDK
+### 卸载KDK
 
-Uninstalling the KDK is fairly simple, however can be a bit destructive if not care.
+卸载KDK相当简单，但是如果不小心，可能会有一点破坏性。
 
-1. Mount root partition as writable(macOS 10.15+)
-2. Remove debug kernel and kexts
-3. Re-enable SIP
-4. Clean boot-args
-5. Reboot and check your work
+1. 将根分区挂载为可写(macOS 10.15+)
+2. 删除调试内核和kext
+3. 重新启用SIP
+4. 清除引导参数
+5. 重新启动并检查您的工作
 
-Steps:
+步骤:
 
-#### 1. Mount root partition as writable(macOS 10.15+)
+#### 1. 将根分区挂载为可写(macOS 10.15+)
 
 ```bash
 # Big Sur+
-# First, create a mount point for your drive
-# Skip of still present from mounting volume last time
+# 首先，为您的驱动器创建一个挂载点
+# 上次挂载卷时仍然存在的跳过
 mkdir ~/livemount
 
-# Next, find your System volume
+# 接下来，找到您的系统卷
 diskutil list
 
-# From the below list, we can see our System volume is disk5s5
+# 从下面的列表中，我们可以看到我们的系统卷是disk5s5
 /dev/disk5 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +255.7 GB   disk5
@@ -332,52 +332,52 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Mount the drive (ie. disk5s5)
+# 挂载驱动(即.disk5s5)
 sudo mount -o nobrowse -t apfs  /dev/disk5s5 ~/livemount
 ```
 
 ```bash
-# Catalina only
+# 仅限卡特琳娜
 sudo mount -uw /
 ```
 
-#### 2. Remove debug kernel and kexts
+#### 2. 删除调试内核和kext
 
 ```bash
-# Revert to old snapshot (Big Sur+)
+# 恢复旧快照(Big Sur+)
 sudo bless --mount ~/livemount --bootefi --last-sealed-snapshot
 ```
 
 ```bash
-# Reset kernel cache (Catalina and older)
+# 重置内核缓存(Catalina及更老版本)
 sudo rm /System/Library/Caches/com.apple.kext.caches/Startup/kernelcache.de*
 sudo rm /System/Library/PrelinkedKernels/prelinkedkernel.de*
 sudo kextcache -invalidate /
 ```
 
-#### 3. Re-enable SIP
+#### 3. 重新启用SIP
 
-* Recovery commands(if previously changed via recovery):
+* 恢复命令(如果之前通过恢复更改):
 
 ```sh
 csrutil enable
 csrutil authenticated-root enable # Big Sur+
 ```
 
-* config.plist changes(if previously changed via config.plist):
-  * [Enabling via config.plist](./extended/post-issues.md#disabling-sip)
+*  config.plist更改(如果之前通过config.plist更改):
+  * [通过config.plist启用](./extended/post-issues.md#disabling-sip)
   
-#### 4. Clean boot-args
+#### 4. 清除引导参数
 
-Don't forget to remove `kcsuffix=` in your boot-args
+不要忘记在你的引导参数中删除`kcsuffix=`
 
-#### 5. Reboot and check your work
+#### 5. 重新启动并检查您的工作
 
-Assuming everything was done correctly, you'll now want to reboot and check that the correct kernel was booted:
+假设一切都正确地完成了，现在要重新启动，检查是否引导了正确的内核:
 
 ```sh
 sysctl kern.osbuildconfig
  kern.osbuildconfig: release
 ```
 
-And as we can see, we're successfully booting a KASAN kernel.
+正如我们所看到的，我们成功地引导了一个KASAN内核。
