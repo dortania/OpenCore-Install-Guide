@@ -81,21 +81,21 @@ fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 
 ## iASL警告，只有X未解决
 
-If you try to decompile your DSDT and get an error similar to this:
+如果你尝试反编译你的DSDT并得到一个类似这样的错误:
 
 ```
 iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
 ```
 
-This happens when one ACPI table requires the rest for proper referencing, it does not accept the creation of DSDTs as we're only using it for creating a select few SSDTs. For those who are worried, you can run the following:
+当一个ACPI表需要其他表来进行适当的引用时，就会发生这种情况，它不接受dsdt的创建，因为我们只使用它来创建选定的几个ssdt。对于那些担心的人，你可以运行以下命令:
 
 ```
 iasl * [insert all ACPI files here]
 ```
 
-## Time inconsistency between macOS and Windows
+## macOS和Windows之间的时间不一致
 
-This is due to macOS using Universal Time while Windows relies on Greenwich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
+这是因为macOS使用通用时间，而Windows依赖于格林威治时间，所以你需要强制一个操作系统使用不同的时间测量方式。我们强烈建议修改Windows，因为它的破坏性和痛苦要小得多:
 
-* [Install Bootcamp utilities](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
-* [Modify Windows' registry](https://superuser.com/q/494432)
+* [安装Bootcamp实用程序](https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* [修改Windows注册表](https://superuser.com/q/494432)
