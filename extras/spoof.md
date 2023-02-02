@@ -104,7 +104,7 @@ DevicePath = PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
 * 增加输入延迟。
 * 刷新率上限。
 
-如果你的主板只有一个用于iGPU的HDMI连接器，规格2.1的最大刷新率是[120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). 这假设您的主板和显示器具有相同的规格。这意味着您的144Hz显示器仅看到硬件决定的最大120Hz。如果你的板上有IGPU的DP连接器，这个限制* *不* *适用。
+如果你的主板只有一个用于iGPU的HDMI连接器，规格2.1的最大刷新率是[120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). 这假设您的主板和显示器具有相同的规格。这意味着您的144Hz显示器仅看到硬件决定的最大120Hz。如果你的板上有IGPU的DP连接器，这个限制**不**适用。
 
 如果您有两个以上的gpu (AMD、NVIDIA和Intel)，则此设置将受到限制。显示器连接到AMD GPU意味着Windows将只允许您选择AMD GPU或Intel IGPU。NVIDIA GPU将不显示。在Windows的未来版本中，将删除此[限制](https://pureinfotech.com/windows-10-21h1-new-features/#:~:text=Graphics%20settings).
 
