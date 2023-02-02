@@ -1,39 +1,39 @@
-# Disabling GPU
+# 禁用 GPU
 
-So you need to hide your unsupported GPU? Well with OpenCore things are slightly different, specifically that we need to specify to which exact device we want to spoof. There are 3 ways we can do this:
+所以你需要隐藏你的不支持GPU吗?使用OpenCore，事情略有不同，特别是我们需要指定我们想要欺骗的确切设备。有三种方法可以做到这一点:
 
-* Boot Flag
-  * Disables all GPUs except the iGPU
+* 引导标志
+  * 禁用除iGPU外的所有gpu
 * DeviceProperties
-  * Disables GPU on a per-slot basis
+  * 在每个插槽的基础上禁用GPU
 * SSDT
-  * Disables GPU on a per-slot basis
+  * 在每个插槽的基础上禁用GPU
 
-**CSM must be off in the BIOS for the spoofing to work correctly, especially on AMD CPU based systems.**
+**CSM必须在BIOS中关闭，才能使欺骗正常工作，特别是在基于AMD CPU的系统上。**
 
-### Boot Flag
+### 引导标志
 
-By far the simplest way, all you need to do is add the following boot-arg:
+到目前为止最简单的方法，你所需要做的就是添加以下引导参数:
 
 `-wegnoegpu`
 
-Do note that this will disable all GPUs excluding the iGPU.
+请注意，这将禁用除iGPU之外的所有gpu。
 
-### DeviceProperties Method
+### DeviceProperties 方法
 
-Here is quite simple, find the PCI route with [gfxutil](https://github.com/acidanthera/gfxutil/releases) and then create a new DeviceProperties section with your spoof:
+这里很简单，用[gfxutil](https://github.com/acidanthera/gfxutil/releases) 找到PCI路由，然后用你的spoof创建一个新的DeviceProperties部分:
 
 ```
 path/to/gfxutil -f GFX0
 ```
 
-And the output will result in something similar:
+输出结果类似:
 
 ```
 DevicePath = PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
 ```
 
-With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI route with the following properties:
+导航到`Root -> DeviceProperties -> Add`并使用以下属性添加您的PCI路由:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -41,11 +41,11 @@ With this, navigate towards `Root -> DeviceProperties -> Add` and add your PCI r
 
 ![](../images/extras/spoof-md/config-gpu.png)
 
-### SSDT Method
+### SSDT 方法
 
-There are many ways to find the path but generally, the easiest way is to get into Device Manager under windows and find the PCI path.
+有许多方法可以找到路径，但通常最简单的方法是进入windows下的设备管理器并找到PCI路径。
 
-Example of device path for `\_SB.PCI0.PEG0.PEGP`:
+`\_SB.PCI0.PEG0.PEGP`的设备路径示例:
 
 ```
 
@@ -84,28 +84,28 @@ Example of device path for `\_SB.PCI0.PEG0.PEGP`:
 
 ```
 
-A copy of this SSDT can be found here: [Spoof-SSDT.dsl](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Spoof-SSDT.dsl). You will need [MaciASL](https://github.com/acidanthera/MaciASL/releases) to compile this. Remember that `.aml` is assembled and `.dsl` is source code. You can compile with MaciASL by selecting File -> Save As -> ACPI Machine Language.
+可以在这里找到该SSDT的副本:[Spoof-SSDT.dsl](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Spoof-SSDT.dsl). 你需要[MaciASL](https://github.com/acidanthera/MaciASL/releases) 来编译。记住， `.aml` 是已编译的，而 `.dsl` 是源代码。您可以通过选择File -> Save As -> ACPI Machine Language，使用MaciASL进行编译。
 
-Source: CorpNewt
+来源:CorpNewt
 
-## Windows GPU Selection
+## Windows GPU选择
 
-Depending on your setup, you may find that Windows renders games or applications using an undesired GPU.
+根据你的设置，你可能会发现Windows渲染游戏或应用程序使用了不需要的GPU。
 
-Many users only have two GPUs. NVIDIA and the Intel HD/UHD IGPU. Since NVIDIA no longer works on macOS, they may have the monitor plugged into the motherboards HDMI/DP connection for convenience. As a result, Windows will render all games and applications through the IGPU. You can reroute a specific game or application to a different GPU by going to: Settings > System > Display > Graphics settings
+许多用户只有两个gpu。NVIDIA和Intel HD/UHD IGPU。由于NVIDIA不再在macOS上工作，为了方便，他们可能有显示器插入主板的HDMI/DP连接。因此，Windows将通过IGPU渲染所有的游戏和应用程序。您可以通过以下方式将特定的游戏或应用程序重路由到不同的GPU:设置>系统>显示>图形设置
 
 ![Credit to CorpNewt for image](../images/extras/spoof-md/corp-windows.png)
 
-The rendered game or application will have its buffer copied to the IGPU. Which is then displayed to you. This does come with a few downsides:
+渲染后的游戏或应用程序将其缓冲区复制到IGPU。然后显示给你看。这也有一些缺点:
 
-* GSync will no longer work.
-* NVIDIA settings can no longer be opened. This requires the display to be connected to the GPU
-* Decreased frame rate.
-* Increased input latency.
-* Refresh rate cap.
+* GSync将不再工作。
+* NVIDIA设置不能再打开。这需要显示器与GPU连接
+* 降低帧速率。
+* 增加输入延迟。
+* 刷新率上限。
 
-If your motherboard only has an HDMI connector for the iGPU, the maximum refresh rate for spec 2.1 is [120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). This assumes your board and monitor are of the same spec. This means your 144Hz monitor is only seeing a maximum of 120Hz as determined by the hardware. This limitation *does not* apply if your board has a DP connector for the IGPU.
+如果你的主板只有一个用于iGPU的HDMI连接器，规格2.1的最大刷新率是[120Hz](https://www.hdmi.org/spec21Sub/EightK60_FourK120). 这假设您的主板和显示器具有相同的规格。这意味着您的144Hz显示器仅看到硬件决定的最大120Hz。如果你的板上有IGPU的DP连接器，这个限制* *不* *适用。
 
-If you have more than two GPUs (AMD, NVIDIA and Intel), this setting is limited. A monitor connected to the AMD GPU means Windows will only allow you to select the AMD GPU or the Intel IGPU. The NVIDIA GPU will not show. In a future version of Windows, this [limitation is removed](https://pureinfotech.com/windows-10-21h1-new-features/#:~:text=Graphics%20settings).
+如果您有两个以上的gpu (AMD、NVIDIA和Intel)，则此设置将受到限制。显示器连接到AMD GPU意味着Windows将只允许您选择AMD GPU或Intel IGPU。NVIDIA GPU将不显示。在Windows的未来版本中，将删除此[限制](https://pureinfotech.com/windows-10-21h1-new-features/#:~:text=Graphics%20settings).
 
-As a recommendation, if you use both operating systems equally and prefer no downsides, your best option is an HDMI or DP switch.
+作为建议，如果你使用两种操作系统，并且不希望有任何缺点，你最好的选择是HDMI或DP开关。
