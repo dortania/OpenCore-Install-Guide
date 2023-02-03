@@ -213,7 +213,7 @@ module.exports = {
                 ]
             },
             {
-                title: '故障排除',
+                title: '故障诊断',
                 collapsable: false,
                 children: [
                     '/troubleshooting/troubleshooting',
