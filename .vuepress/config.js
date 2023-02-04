@@ -85,27 +85,27 @@ module.exports = {
                     link: 'https://sumingyd.github.io/OpenCore-Install-Guide/'
                 },
                 {
-                    text: 'ACPI入门(建设中)',
+                    text: 'ACPI入门',
                     link: 'https://sumingyd.github.io/Getting-Started-With-ACPI/'
                 },
                 {
-                    text: 'OpenCore安装后(建设中)',
+                    text: 'OpenCore安装后',
                     link: 'https://sumingyd.github.io/OpenCore-Post-Install/'
                 },
                 {
-                    text: 'OpenCore多引导(建设中)',
+                    text: 'OpenCore多引导',
                     link: 'https://sumingyd.github.io/OpenCore-Multiboot/'
                 },
                 {
-                    text: '显卡购买指南(建设中)',
+                    text: '显卡购买指南',
                     link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
                 },
                 {
-                    text: '无线购买指南(建设中)',
+                    text: '无线购买指南',
                     link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
                 },
                 {
-                    text: '避免购买指南(建设中)',
+                    text: '避免购买指南',
                     link: 'https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/'
                 },
                 ]
@@ -140,7 +140,7 @@ module.exports = {
                 },
                     '/installer-guide/opencore-efi',
                     'ktext',
-                ['https://sumingyd.github.io/Getting-Started-With-ACPI/', 'ACPI入门(建设中)'],
+                ['https://sumingyd.github.io/Getting-Started-With-ACPI/', 'ACPI入门'],
                     '/config.plist/',
                 ]
             },
@@ -235,7 +235,7 @@ module.exports = {
                 ]
             },
             {
-                title: '安装后(建设中)',
+                title: '安装后',
                 collapsable: false,
                 children: [
                     ['https://sumingyd.github.io/OpenCore-Post-Install/', '安装后'],
