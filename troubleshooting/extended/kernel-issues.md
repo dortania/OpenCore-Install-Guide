@@ -176,7 +176,7 @@ max_cpus_from_firmware not yet initialized
   * RebuildAppleMemoryMap -> False
   * SyncRuntimePermissions -> False
 
-关于对MATs的支持，针对EDK 2018构建的固件将支持这一点，许多oem甚至已经增加了对Skylake笔记本电脑的支持。问题是它不是总是明显的，如果一个OEM已经更新了固件，你可以检查OpenCore日志是否你的支持:
+关于对MATs的支持，针对EDK 2018构建的固件将支持这一点，许多oem甚至已经增加了对Skylake笔记本电脑的支持。问题是它不是总是明显的，如果一个OEM已经更新了固件，你可以检查OpenCore日志查看你的是否支持:
 
 ```
 OCABC: MAT support is 1
@@ -199,10 +199,10 @@ OCABC: MAT support is 1
 3. 打开终端并运行以下命令:
 
 ```bash
-# First, find your Preboot volume
+# 首先，找到Preboot卷
 diskutil list
 
-# From the below list, we can see our Preboot volume is disk5s2
+# 从下面的列表中，我们可以看到Preboot卷是disk5s2
 /dev/disk5 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +255.7 GB   disk5
@@ -214,10 +214,10 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Now mount the Preboot volume
+# 现在挂载Preboot卷
 diskutil mount disk5s2
 
-# Next run updatePreboot on the Preboot volume
+# 接下来在Preboot卷上运行update Preboot
 diskutil apfs updatePreboot /volume/disk5s2
 ```
 
@@ -576,7 +576,7 @@ Skip: 0
 :-------------------------:|:-------------------------:
 ![](../../images/troubleshooting/troubleshooting-md/asus-tsc.png)  |  ![](../../images/troubleshooting/troubleshooting-md/asus-tsc-2.png)
 
-## Keyboard works but trackpad does not
+## 键盘可以用，但触控板不行
 
 确保VoodooInput在config.plist的voodooops2和VoodooI2C kext之前列出。
 
