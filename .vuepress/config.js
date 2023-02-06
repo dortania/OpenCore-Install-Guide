@@ -80,34 +80,35 @@ module.exports = {
               lastUpdated: '上次更新',
               nav: [{
                 text: '指南菜单',
-                items: [{
-                    text: '主页面',
-                    link: 'https://sumingyd.github.io/OpenCore-Install-Guide/'
-                },
-                {
-                    text: 'ACPI入门',
-                    link: 'https://sumingyd.github.io/Getting-Started-With-ACPI/'
-                },
-                {
-                    text: 'OpenCore安装后',
-                    link: 'https://sumingyd.github.io/OpenCore-Post-Install/'
-                },
-                {
-                    text: 'OpenCore多引导',
-                    link: 'https://sumingyd.github.io/OpenCore-Multiboot/'
-                },
-                {
-                    text: '显卡购买指南',
-                    link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
-                },
-                {
-                    text: '无线购买指南',
-                    link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
-                },
-                {
-                    text: '避免购买指南',
-                    link: 'https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/'
-                },
+                items: [
+                    {
+                        text: 'OpenCore安装',
+                        link: 'https://sumingyd.github.io/OpenCore-Install-Guide/'
+                    },
+                    {
+                        text: 'OpenCore安装后',
+                        link: 'https://sumingyd.github.io/OpenCore-Post-Install/'
+                    },
+                    {
+                        text: 'OpenCore多重引导',
+                        link: 'https://sumingyd.github.io/OpenCore-Multiboot/'
+                    },
+                    {
+                        text: '开始使用ACPI',
+                        link: 'https://sumingyd.github.io/Getting-Started-With-ACPI/'
+                    },
+                    {
+                        text: '无线购买指南',
+                        link: 'https://sumingyd.github.io/Wireless-Buyers-Guide/'
+                    },
+                    {
+                        text: '显卡购买指南',
+                        link: 'https://sumingyd.github.io/GPU-Buyers-Guide/'
+                    },
+                    {
+                        text: '避免购买指南',
+                        link: 'https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/'
+                    },
                 ]
             },
             ],
