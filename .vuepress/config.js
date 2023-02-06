@@ -325,15 +325,19 @@ module.exports = {
 
     },
     plugins: [
-        '@vuepress/back-to-top',
-        'vuepress-plugin-smooth-scroll',
-        'vuepress-plugin-fulltext-search',
-        ['@vuepress/medium-zoom',
-            {
+        ['@vuepress/back-to-top', true],
+        ['@vuepress/nprogress', true],
+        ['vuepress-plugin-smooth-scroll', true],
+        ['vuepress-plugin-fulltext-search', true],
+        ['@vuepress/medium-zoom',{
                 selector: ".theme-succinct-content :not(a) > img",
                 options: {
                     background: 'var(--bodyBgColor)'
                 }
-            }],
+        }],
+        ['@vuepress/active-header-links', {
+            sidebarLinkSelector: '.sidebar-link',
+            headerAnchorSelector: '.header-anchor'
+        }],
     ]
 }
