@@ -79,7 +79,6 @@ module.exports = {
               editLinkText: '在 GitHub 上编辑此页',
               lastUpdated: '上次更新',
               nav: [
-                { text: 'QQ群', link: 'https://qm.qq.com/cgi-bin/qm/qr?k=rpbw958T9WK6wU03Wxr0d9UXyx3wMwqb&jump_from=webapi&authKey=znX2XCz7Xsiwyy1ZX/JE0TnTnwZg/0JGWtfP20oaitoSLtdxUeSqG9go3smUIOKT' },
                 {
                 text: '指南菜单',
                 items: [
@@ -112,8 +111,9 @@ module.exports = {
                         link: 'https://sumingyd.github.io/Anti-Hackintosh-Buyers-Guide/'
                     },
                 ]
-            },
-            ],
+                },
+                { text: 'QQ群', link: 'https://qm.qq.com/cgi-bin/qm/qr?k=rpbw958T9WK6wU03Wxr0d9UXyx3wMwqb&jump_from=webapi&authKey=znX2XCz7Xsiwyy1ZX/JE0TnTnwZg/0JGWtfP20oaitoSLtdxUeSqG9go3smUIOKT' },
+                    ],
             sidebar: [{
                 title: '介绍',
                 collapsable: false,
@@ -323,7 +323,7 @@ module.exports = {
                 editLinkText: 'Edit this page on GitHub',
                 lastUpdated: 'Last Updated',
               },
-          }
+        }
 
     },
     plugins: [
