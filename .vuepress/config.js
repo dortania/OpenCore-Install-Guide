@@ -32,7 +32,7 @@ module.exports = {
           title: 'OpenCore Install Guide',
           description: 'OpenCore Install Guide'
         },
-      },
+    },
 
     base: '/OpenCore-Install-Guide/',
 
@@ -325,19 +325,21 @@ module.exports = {
 
     },
     plugins: [
-        ['@vuepress/back-to-top', true],
-        ['@vuepress/nprogress', true],
-        ['vuepress-plugin-smooth-scroll', true],
-        ['vuepress-plugin-fulltext-search', true],
+        ['@vuepress/back-to-top', true],//开启右下角返回顶层图标
+        ['@vuepress/nprogress', true],//这个插件将会在你切换页面的时候，在顶部显示进度条。
+        ['vuepress-plugin-smooth-scroll', true],//在你的 VuePress 站点中使用平滑滚动。
+        ['vuepress-plugin-fulltext-search', true],//基于 Headers 的搜索插件
         ['@vuepress/medium-zoom',{
                 selector: ".theme-succinct-content :not(a) > img",
                 options: {
                     background: 'var(--bodyBgColor)'
                 }
-        }],
+            }
+        ],//这个插件将会使你的图片支持点击缩放。
         ['@vuepress/active-header-links', {
             sidebarLinkSelector: '.sidebar-link',
             headerAnchorSelector: '.header-anchor'
-        }],
+            }
+        ],//页面滚动时自动激活侧边栏链接的插件
     ]
 }
