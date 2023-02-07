@@ -47,7 +47,7 @@ date 0901000019
   * `-igfxmlr` 导参数。这也可以表现为 "Divide by Zero" 错误。
 * 在10.15.4及更新版本中，Coffee Lake iGPU用户可能还需要`igfxonln=1`
 
-## 笔记本电脑上的乱码屏幕
+## 笔记本电脑上的花屏屏幕
 
 在UEFI设置中启用CSM。这可能显示为 "Boot legacy ROMs" 或其他 legacy 设置.
 
