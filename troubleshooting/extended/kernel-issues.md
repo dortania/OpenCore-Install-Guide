@@ -121,7 +121,9 @@ max_cpus_from_firmware not yet initialized
 * **IgnoreInvalidFlexRatio**
   * 这是Broadwell和更老的所需要的。**AMD和Skylake或更新版本不支持**
 
-## 卡在 EndRandomSeed
+## 卡在 End RandomSeed
+
+![](../../images/troubleshooting/kernel-debugging-md/endrandomseed.jpg)
 
 与上面相同的问题，请参阅此处了解更多详细信息: [卡在 `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
 
