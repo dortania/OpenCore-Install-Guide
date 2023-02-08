@@ -1,29 +1,29 @@
-# Desktop Kaby Lake
+# 台式 Kaby Lake
 
-| Support | Version |
+| 支持 | 版本 |
 | :--- | :--- |
-| Initial macOS Support | macOS 10.12, Sierra |
+| 初始macOS支持 | macOS 10.12, Sierra |
 
-## Starting Point
+## 起点
 
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+制作一个config.plist看起来很难，其实并不难。这只是需要一些时间，但本指南将告诉你如何配置所有的东西，你不会被冷落。这也意味着如果你有问题，检查你的配置设置以确保它们是正确的。OpenCore的主要注意事项:
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **所有属性必须被定义**，没有默认的OpenCore将出错，所以**不要删除节，除非有明确告知你**。如果指南没有提到该选项，请将其保留为默认值。
+* **Sample plist不能按原样使用**，必须配置到您的系统中。
+* **不要使用配置器**，这些配置器很少遵守OpenCore的规则，甚至一些像Mackie的配置器会添加Clover属性和破坏plists!
 
-Now with all that, a quick reminder of the tools we need
+现在，我们来快速地提醒一下我们需要哪些工具
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
+  * 通用plist编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
+  * 用于生成SMBIOS数据
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
+  * 参见上一节中如何获取:[config.plist Setup](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
-Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
+在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图像并不总是最新的，所以请阅读下面的文本，如果没有提到，则保留为默认值。
 
 :::
 
@@ -33,62 +33,62 @@ Read this guide more than once before setting up OpenCore and make sure you have
 
 ### Add
 
-::: tip Info
+::: tip 信息
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这是你将为系统添加ssdt的地方，这些对于**引导macOS**非常重要，并且有许多用途，例如[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/), [禁用不支持的gpu](../extras/spoof.md) 等，这对于我们的系统来说是**启动所必须**的。制作指南可以在这里找到:[**ACPI入门**](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 
-For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
+我们需要几个ssdt来恢复Clover提供的功能:
 
-| Required SSDTs | Description |
+| 所需ssdt | 描述 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 在Haswell和更新的版本上允许本地CPU电源管理，请参阅[ACPI入门指南](https://sumingyd.github.io/Getting-Started-With-ACPI/)了解更多细节。 |
+| **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复了嵌入式控制器和USB电源，请参阅[开始与ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/)了解更多细节。 |
 
-Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
+注意，你**不应该**在这里添加你生成的`DSDT aml`，它已经在你的固件中了。因此，如果存在，请在你的`config.plist`和EFI/OC/ACPI下删除它的条目。
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+对于那些想要更深入地了解转储您的DSDT、如何制作这些ssdt以及编译它们的人，请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 页面。编译的ssdt有一个 **.aml** 扩展名(组装)，将被放入`EFI/OC/ACPI`文件夹，并且**必须**在你的配置文件`ACPI -> Add`下指定。
 
 :::
 
 ### Delete
 
-This blocks certain ACPI tables from loading, for us we can ignore this.
+这将阻止某些ACPI表加载，对于我们来说，我们可以忽略它。
 
 ### Patch
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
+本节允许我们通过OpenCore动态修改ACPI的部分内容(DSDT、SSDT等)。对我们来说，我们的补丁由我们的ssdt处理。这是一个更简洁的解决方案，因为这将允许我们使用OpenCore引导Windows和其他操作系统
 
 ### Quirks
 
-Settings relating to ACPI, leave everything here as default as we have no use for these quirks.
+与ACPI相关的设置，将所有内容保留为默认设置，因为我们不需要这些怪癖。
 
 ## Booter
 
 ![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
-This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
+本节专门讨论使用OpenRuntime (AptioMemoryFix.efi的替代品)进行boot.efi补丁的相关问题
 
 ### MmioWhitelist
 
-This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+本节允许将通常被忽略的空格传递给macOS，当与`DevirtualiseMmio`配对时很有用。
 
 ### Quirks
 
-::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+::: tip 信息
+有关boot.efi补丁和固件修复的设置，对我们来说，我们将其保留为默认值
 :::
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc.
+  * 修复UEFI运行时服务，如日期、时间、NVRAM、电源控制等。
 * **EnableSafeModeSlide**: YES
-  * Enables slide variables to be used in safe mode.
+  * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+  * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
-  * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性是由 `OCABC: Only N/256 slide values are usable!` 消息所决定的. 如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中, 你可以禁用 `ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics.
+  * 修复了对虚拟地址的SetVirtualAddresses调用，这是Gigabyte主板解决早期内核崩溃问题所需的。
 
 :::
 
@@ -98,24 +98,24 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 ### Add
 
-Sets device properties from a map.
+从映射中设置设备属性。
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+本节是通过WhateverGreen的[Framebuffer补丁指南](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)建立的，用于设置重要的iGPU属性。
 
-The config.plist doesn't already have a section for this so you will have to create it manually.
+config.plist 还没有这个部分，所以你必须手动创建它。
 
-`AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
+`AAPL,ig-platform-id` 是macOS用来确定iGPU驱动程序如何与我们的系统交互的，可以选择的两个值如下:
 
-| AAPL,ig-platform-id | Comment |
+| AAPL,ig-platform-id | 说明 |
 | :--- | :--- |
-| **`00001259`** | Used when the Desktop iGPU is used to drive a display |
-| **`03001259`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
+| **`00001259`** | 使用桌面iGPU驱动显示器时使用 |
+| **`03001259`** | 桌面iGPU仅用于计算任务而不驱动显示器时使用的 |
 
-We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
+我们还添加了另外两个属性， `framebuffer-patch-enable` 和 `framebuffer-stolenmem`. 第一个启用WhateverGreen kext打补丁，第二个设置最小被盗内存为19MB。这通常是不必要的，因为可以在BIOS中配置(推荐64MB)，但在不可用时是必需的。
 
-* **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
+* **注**: Headless framebuffers其中dGPU是显示出来的)不需要`framebuffer-patch-enable` 和 `framebuffer-stolenmem`
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -123,7 +123,7 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 | framebuffer-patch-enable | Data | `01000000` |
 | framebuffer-stolenmem | Data | `00003001` |
 
-(This is an example for a desktop HD 630 without a dGPU and no BIOS options for iGPU memory)
+(这是一个桌面HD 630没有dGPU和BIOS选项中没有iGPU内存设置)
 
 :::
 
@@ -131,18 +131,18 @@ We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stole
 
 `layout-id`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)。
+* 你可以直接删除这个属性，因为目前它还没有被使用
 
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/)
+对于我们来说，我们将使用引导参数`alcid=xxx`来完成此操作。`alcid`将覆盖所有其他布局id。更多信息在[安装后页面](https://dortania.github.io/OpenCore-Post-Install/)
 
 :::
 
 ### Delete
 
-Removes device properties from the map, for us we can ignore this
+从映射中移除设备属性，我们可以忽略这个
 
-Fun Fact: The reason the byte order is swapped is because most modern processors are [Little Endian](https://en.wikipedia.org/wiki/Endianness)
+有趣的事实:字节顺序被交换的原因是因为大多数现代处理器是[小尾数](https://en.wikipedia.org/wiki/Endianness)
 
 ## Kernel
 
@@ -150,42 +150,42 @@ Fun Fact: The reason the byte order is swapped is because most modern processors
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
+在这里，我们指定要加载哪些kext，以什么特定的顺序加载，以及每个kext用于什么体系结构。默认情况下，我们建议保留ProperTree所做的操作，但对于32位cpu，请参见以下内容:
 
-::: details More in-depth Info
+::: 更深入的信息
 
-The main thing you need to keep in mind is:
+你需要记住的主要事情是:
 
-* Load order
-  * Remember that any plugins should load *after* its dependencies
-  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
+* 装载顺序
+  * 记住，任何插件都应该在它的依赖**后面**加载
+  * 这意味着像Lilu这样的kext **必须**出现在VirtualSMC、AppleALC、WhateverGreen等之前
 
-A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+提醒一下[ProperTree](https://github.com/corpnewt/ProperTree)用户可以运行**Cmd/Ctrl + Shift + R**以正确的顺序添加他们所有的kext，而无需手动输入每个kext。
 
 * **Arch**
-  * Architectures supported by this kext
-  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
+  * 该kext支持的架构
+  * 目前支持的值是 `Any`, `i386` (32位), 和 `x86_64` (64-位)
 * **BundlePath**
-  * Name of the kext
-  * ex: `Lilu.kext`
+  * kext的名称
+  * 例如: `Lilu.kext`
 * **Enabled**
-  * Self-explanatory, either enables or disables the kext
+  * 不言自明，启用或禁用kext
 * **ExecutablePath**
-  * Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
-  * ex: `Contents/MacOS/Lilu`
+  * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist不需要填充该属性。
+  * 例如: `Contents/MacOS/Lilu`
 * **MinKernel**
-  * Lowest kernel version your kext will be injected into, see below table for possible values
+  * kext将被注入到的最低内核版本，有关可能的值，请参见下表
   * ex. `12.00.00` for OS X 10.8
 * **MaxKernel**
-  * Highest kernel version your kext will be injected into, see below table for possible values
+  * kext将被注入到的最高内核版本，可能的值见下表
   * ex. `11.99.99` for OS X 10.7
 * **PlistPath**
-  * Path to the `info.plist` hidden within the kext
-  * ex: `Contents/Info.plist`
+  * 隐藏在kext中的`info.plist`的路径
+  * 例如: `Contents/Info.plist`
 
-::: details Kernel Support Table
+::: details 内核支持表
 
-| OS X Version | MinKernel | MaxKernel |
+| OS X 版本 | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
 | 10.4 | 8.0.0 | 8.99.99 |
 | 10.5 | 9.0.0 | 9.99.99 |
@@ -207,43 +207,43 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
+用于仿冒不支持的cpu，如Pentiums和Celerons
 
-* **Cpuid1Mask**: Leave this blank
-* **Cpuid1Data**: Leave this blank
+* **Cpuid1Mask**: 不填写
+* **Cpuid1Data**: 不填写
 
 ### Force
 
-Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+用于从系统卷中加载kext，只适用于某些特定的kext不在缓存中的旧操作系统。(例如：10.6中的 IONetworkingFamily).
 
-For us, we can ignore.
+对我们来说，我们可以忽略。
 
 ### Block
 
-Blocks certain kexts from loading. Not relevant for us.
+阻止某些kext的加载。与我们无关。
 
 ### Patch
 
-Patches both the kernel and kexts.
+为内核和kext打补丁。
 
 ### Quirks
 
-::: tip Info
+::: tip 信息
 
-Settings relating to the kernel, for us we'll be enabling the following:
+与内核相关的设置，对我们来说，我们将启用以下:
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 描述 |
 | :--- | :--- | :--- |
-| AppleXcpmCfgLock | YES | Not needed if `CFG-Lock` is disabled in the BIOS |
-| DisableIoMapper | YES | Not needed if `VT-D` is disabled in the BIOS |
-| LapicKernelPanic | NO | HP Machines will require this quirk |
+| AppleXcpmCfgLock | YES | 如果在BIOS中禁用了`CFG-Lock`，则不需要 |
+| DisableIoMapper | YES | 如果在BIOS中禁用了`VT-D`，则不需要 |
+| LapicKernelPanic | NO | 惠普机器将需要这个选项 |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | Disable if running macOS 11.3+ |
+| XhciPortLimit | YES | 如果运行macOS 11.3+，请禁用 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AppleCpuPmCfgLock**: NO
   * Only needed when CFG-Lock can't be disabled in BIOS
