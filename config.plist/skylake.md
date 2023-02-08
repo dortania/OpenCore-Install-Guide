@@ -1,29 +1,29 @@
-# Desktop Skylake
+# 桌面 Skylake
 
-| Support | Version |
+| 支持 | 版本 |
 | :--- | :--- |
-| Initial macOS Support | OS X 10.11, El Capitan |
+| 初始 macOS 支持 | OS X 10.11, El Capitan |
 
-## Starting Point
+## 起点
 
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+制作 config.plist 可能看起来有些困难，但实际上不是。它只需要一点时间，但本指南会告诉您如何配置所有内容，您不会被抛弃。这也意味着如果您遇到问题，请检查您的 config 设置以确保它们正确。与 OpenCore 相关的主要事项是：
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **所有属性必须定义**, OpenCore 没有默认值，因此 **请勿在未经明确告知的情况下删除部分内容**。如果指南未提到选项，请保留其默认值。
+* **Sample.plist 不能原样使用**, 必须根据您的系统配置
+* **请勿使用配置器**, 这些配置器很少尊重 OpenCore 的配置，甚至像 Mackie 这样的配置器也会添加 Clover 属性并损坏 plist！
 
-Now with all that, a quick reminder of the tools we need
+现在，请记住我们需要的工具：
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
+  * 通用 plist 编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
+  * 用于生成 SMBIOS 数据
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
+  * 请参阅前面的部分如何获得： [config.plist 设置](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
-Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
+在安装 OpenCore 之前，请多读几遍本指南，确保设置正确。请注意，图像不一定是最新的，因此请阅读下面的文字，如果没有提到，则保持默认设置。
 
 :::
 
@@ -33,7 +33,7 @@ Read this guide more than once before setting up OpenCore and make sure you have
 
 ### Add
 
-::: tip Info
+::: tip 信息
 
 This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
 
