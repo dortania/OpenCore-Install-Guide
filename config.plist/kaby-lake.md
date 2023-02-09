@@ -391,7 +391,7 @@ config.plist 还没有这个部分，所以你必须手动创建它。
 * **ExposeSensitiveData**: `6`
   * 显示更多调试信息，需要调试版本的OpenCore
 * **Vault**: `Optional`
-  * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
+  * 我们不会处理这个，所以我们可以忽略，**你不会启动这个设置，因为安全**
   * 这是一个单词，省略此设置是不行的。如果你不把它设置为`Optional`，你会后悔的，注意它是区分大小写的
 * **ScanPolicy**: `0`
   * `0`允许您查看所有可用的驱动器，请参阅[安全](https://sumingyd.github.io/OpenCore-Post-Install/universal/security.html)部分了解更多详细信息。**如果设置为默认，将不会启动USB设备**
