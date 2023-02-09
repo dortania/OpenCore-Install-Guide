@@ -265,41 +265,41 @@ config.plist 还没有这个部分，所以你必须手动创建它。
 * **ExtendBTFeatureFlags** NO
   * 对于那些非apple /非fenvi卡有连续性问题的人很有帮助
 * **LapicKernelPanic**: NO
-  * 在AP核心lapic中断上禁用内核panic，一般HP系统需要。相当于Clover的是Kernel LAPIC
+  * 在AP核心lapic中断上禁用内核崩溃，一般HP系统需要。相当于Clover的是Kernel LAPIC
 * **LegacyCommpage**: NO
-  * Resolves SSSE3 requirement for 64 Bit CPUs in macOS, mainly relevant for 64-Bit Pentium 4 CPUs(ie. Prescott)
+  * 在macOS中解决SSSE3对64位cpu的要求，主要适用于64位Pentium 4 cpu(即Prescott)
 * **PanicNoKextDump**: YES
-  * Allows for reading kernel panics logs when kernel panics occur
+  * 当内核发生崩溃时，允许读取内核崩溃日志
 * **PowerTimeoutKernelPanic**: YES
-  * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
+  * 帮助修复macOS Catalina中与Apple驱动程序有关的电源变化的内核崩溃，最显著的是数字音频。
 * **SetApfsTrimTimeout**: `-1`
-  * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
+  * 为ssd上的APFS文件系统设置以微秒为单位的修剪超时时间，仅适用于macOS 10.14及更新版本的有问题的ssd。
 * **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
-  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
+  * * 这实际上是15端口限制补丁，不要依赖它，因为它不是一个保证修复USB端口的解决方案。如果可能，请创建一个[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)
+  * * macOS 11.3+， [XhciPortLimit可能无法按预期功能。](https://github.com/dortania/bugtracker/issues/162)我们建议用户在升级前禁用此怪癖和映射或[从Windows映射](https://github.com/USBToolBox/tool)。您也可以安装macOS 11.2.3或更老版本。
 
 :::
 
 ### Scheme
 
-Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip however for those planning to boot legacy OSes you can see below:
+与传统系统引导相关的设置(即10.4-10.6)，对于大多数人来说，你可以跳过，但对于那些计划引导传统系统的人，你可以在下面看到:
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **FuzzyMatch**: True
-  * Used for ignoring checksums with kernelcache, instead opting for the latest cache available. Can help improve boot performance on many machines in 10.6
+  * 用于忽略内核缓存的校验和，而是选择可用的最新缓存。在10.6中可以帮助提高许多机器的引导性能
 * **KernelArch**: x86_64
-  * Set the kernel's arch type, you can choose between `Auto`, `i386` (32-bit), and `x86_64` (64-bit).
-  * If you're booting older OSes which require a 32-bit kernel(ie. 10.4 and 10.5) we recommend to set this to `Auto` and let macOS decide based on your SMBIOS. See below table for supported values:
-    * 10.4-10.5 — `x86_64`, `i386` or `i386-user32`
-      * `i386-user32` refers 32-bit userspace, so 32-bit CPUs must use this(or CPUs missing SSSE3)
-      * `x86_64` will still have a 32-bit kernelspace however will ensure 64-bit userspace in 10.4/5
-    * 10.6 — `i386`, `i386-user32`, or `x86_64`
-    * 10.7 — `i386` or `x86_64`
-    * 10.8 or newer — `x86_64`
+  * 设置内核的arch类型，你可以在`Auto`、`i386`(32位)和`x86_64`(64位)之间选择。
+  * 如果你正在启动需要32位内核的旧操作系统(即ie 10.4和10.5)，我们建议将其设置为`Auto`，并让macOS根据你的SMBIOS来决定。支持的值见下表:
+    * 10.4-10.5 - `x86_64`， `i386`或`i386-user32`
+      * `i386-user32`指向32位用户空间，因此32位cpu必须使用它(或缺少SSSE3的cpu)
+      * `x86_64`仍然使用32位内核空间，但是可以确保10.4/5的64位用户空间
+    * 10.6 - `i386`、`i386-user32`或`x86_64`
+    * 10.7—`i386`或`x86_64`
+    * 10.8或更新版本——`x86_64`
 
 * **KernelCache**: Auto
-  * Set kernel cache type, mainly useful for debugging and so we recommend `Auto` for best support
+  * 设置内核缓存类型，主要用于调试，因此我们建议使用`Auto`以获得最佳支持
 
 :::
 
@@ -309,28 +309,28 @@ Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip how
 
 ### Boot
 
-::: tip Info
+::: tip 信息
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
-| HideAuxiliary | YES | Press space to show macOS recovery and other auxiliary entries |
+| HideAuxiliary | YES | 按空格键显示macOS恢复等辅助项 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **HideAuxiliary**: YES
-  * This option will hide supplementary entries, such as macOS recovery and tools, in the picker. Hiding auxiliary entries may increase boot performance on multi-disk systems. You can press space at the picker to show these entries
+  * 此选项将在选择器中隐藏补充条目，例如macOS recovery和tools。隐藏辅助条目可以提高多磁盘系统的启动性能。您可以在选择菜单处按空格键来显示这些条目
 
 :::
 
 ### Debug
 
-::: tip Info
+::: tip 信息
 
-Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `DisplayDelay`):
+有助于调试OpenCore引导问题(除了`DisplayDelay`，我们将更改所有内容):
 
-| Quirk | Enabled |
+| 选项 | 启用 |
 | :--- | :--- |
 | AppleDebug | YES |
 | ApplePanic | YES |
@@ -339,52 +339,52 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AppleDebug**: YES
-  * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
+  * 启用boot.efi日志记录，对调试有用。注意只有10.15.4及更高版本支持这个功能
 * **ApplePanic**: YES
-  * Attempts to log kernel panics to disk
+  * 用于将内核崩溃记录到磁盘
 * **DisableWatchDog**: YES
-  * Disables the UEFI watchdog, can help with early boot issues
+  * 禁用UEFI watchdog，可以帮助解决早期引导问题
 * **DisplayLevel**: `2147483650`
-  * Shows even more debug information, requires debug version of OpenCore
+  * 显示更多的调试信息，需要调试版本的OpenCore
 * **SysReport**: NO
-  * Helpful for debugging such as dumping ACPI tables
-  * Note that this is limited to DEBUG versions of OpenCore
+  * 有助于调试，例如转储ACPI表
+  * 注意，这仅限于调试版本的OpenCore
 * **Target**: `67`
-  * Shows more debug information, requires debug version of OpenCore
+  * 显示更多调试信息，需要OpenCore的调试版本
 
-These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
+这些值是基于那些在[OpenCore调试](../troubleshooting/debug.md)中计算的值。
 
 :::
 
 ### Security
 
-::: tip Info
+::: tip 信息
 
-Security is pretty self-explanatory, **do not skip**. We'll be changing the following:
+安全性是不言自明的，**不要跳过**。我们将修改以下内容:
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default | Leave this as `Default` for OpenCore to automatically set the correct value corresponding to your SMBIOS. The next page goes into more detail about this setting. |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+| SecureBootModel | Default | 将其保留为`默认值`，以便OpenCore自动设置与您的SMBIOS相对应的正确值。下一页将详细介绍这个设置。 |
+| Vault | Optional | 这是一个单词，省略这个设置是不行的。如果您没有将其设置为Optional，您将会后悔，注意它是区分大小写的 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AllowSetDefault**: YES
-  * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+  * 允许按`CTRL+Enter`和`CTRL+Index`在选择器中设置默认启动设备
 * **ApECID**: 0
-  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
+  * 用于网络个性化的安全启动标识符，由于macOS安装程序中的一个bug，目前这种方式是不可靠的，因此我们强烈建议您保留默认设置。
 * **AuthRestart**: NO
-  * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
+  * 启用FileVault 2的认证重启，重启时不需要密码。可以被认为是可选的安全风险吗
 * **BlacklistAppleUpdate**: YES
-  * Used for blocking firmware updates, used as extra level of protection as macOS Big Sur no longer uses `run-efi-updater` variable
+  * 用于阻止固件更新，作为额外的保护级别，因为macOS Big Sur不再使用`run-efi-updater`变量
 
 * **DmgLoading**: Signed
   * Ensures only signed DMGs load
@@ -427,7 +427,7 @@ Used for OpenCore's UI scaling, default will work for us. See in-depth section f
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 Booter Path, mainly used for UI modification
 
@@ -443,7 +443,7 @@ OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **rtc-blacklist**: <>
   * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
@@ -497,7 +497,7 @@ System Integrity Protection bitmask
 
 ### Delete
 
-::: tip Info
+::: tip 信息
 
 Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
 
@@ -507,7 +507,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **LegacySchema**
   * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
@@ -521,7 +521,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ![PlatformInfo](../images/config/config.plist/kaby-lake/smbios.png)
 
-::: tip Info
+::: tip 信息
 
 For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
 
@@ -565,7 +565,7 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 
 ### Generic
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AdviseFeatures**: NO
   * Used for when the EFI partition isn't first on the Windows drive
@@ -614,7 +614,7 @@ Only drivers present here should be:
 * HfsPlus.efi
 * OpenRuntime.efi
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
@@ -658,7 +658,7 @@ Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, 
 
 Relating to OpenCore's visual output, leave everything here as default as we have no use for these quirks.
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 | Output | Value | Comment |
 | :--- | :--- | :--- |
@@ -672,7 +672,7 @@ Mainly relevant for Virtual machines, legacy macs and FileVault users. See here 
 
 ### Quirks
 
-::: tip Info
+::: tip 信息
 Relating to quirks with the UEFI environment, for us we'll be changing the following:
 
 | Quirk | Enabled | Comment |
@@ -681,7 +681,7 @@ Relating to quirks with the UEFI environment, for us we'll be changing the follo
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **DisableSecurityPolicy**: NO
   * Disables platform security policy in firmware, recommended for buggy firmwares where disabling Secure Boot does not allow 3rd party firmware drivers to load.
