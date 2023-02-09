@@ -134,7 +134,7 @@ config.plist 还没有这个部分，所以你必须手动创建它。
 * 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)。
 * 你可以直接删除这个属性，因为目前它还没有被使用
 
-对于我们来说，我们将使用引导参数`alcid=xxx`来完成此操作。`alcid`将覆盖所有其他布局id。更多信息在[安装后页面](https://dortania.github.io/OpenCore-Post-Install/)
+对于我们来说，我们将使用引导参数`alcid=xxx`来完成此操作。`alcid`将覆盖所有其他布局id。更多信息在[安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 :::
 
@@ -387,33 +387,33 @@ config.plist 还没有这个部分，所以你必须手动创建它。
   * 用于阻止固件更新，作为额外的保护级别，因为macOS Big Sur不再使用`run-efi-updater`变量
 
 * **DmgLoading**: Signed
-  * Ensures only signed DMGs load
+  * 确保只加载已签名的dmg
 * **ExposeSensitiveData**: `6`
-  * Shows more debug information, requires debug version of OpenCore
+  * 显示更多调试信息，需要调试版本的OpenCore
 * **Vault**: `Optional`
   * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
-  * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
+  * 这是一个单词，省略此设置是不行的。如果你不把它设置为`Optional`，你会后悔的，注意它是区分大小写的
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+  * `0`允许您查看所有可用的驱动器，请参阅[安全](https://sumingyd.github.io/OpenCore-Post-Install/universal/security.html)部分了解更多详细信息。**如果设置为默认，将不会启动USB设备**
 * **SecureBootModel**: Default
-  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
-  * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
+  * 在macOS中控制Apple的安全启动功能，请参阅[安全](https://sumingyd.github.io/OpenCore-Post-Install/universal/security.html) 部分了解更多细节。
+  * 注意:用户可能会发现在已经安装的系统上升级OpenCore可能会导致早期引导失败。要解决这个问题，请参见这里:[卡在 OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
 
 ### Serial
 
-Used for serial debugging (Leave everything as default).
+用于串行调试(保留所有默认值)。
 
 ### Tools
 
-Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you.
+用于运行OC调试工具，如shell, ProperTree的快照功能将为您添加这些。
 
 ### Entries
 
-Used for specifying irregular boot paths that can't be found naturally with OpenCore.
+用于指定OpenCore无法自然找到的不规则引导路径。
 
-Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+这里不会涉及，请参阅[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)的8.6以获得更多信息
 
 ## NVRAM
 
@@ -423,75 +423,75 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ::: tip 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
 
-Used for OpenCore's UI scaling, default will work for us. See in-depth section for more info
+用于OpenCore的UI缩放，默认就可以工作。更多信息请参见深入部分
 
 :::
 
 ::: details 更深入的信息
 
-Booter Path, mainly used for UI modification
+启动器路径，主要用于UI修改
 
-* **DefaultBackgroundColor**: Background color used by boot.efi
-  * `00000000`: Syrah Black
-  * `BFBFBF00`: Light Gray
+* **DefaultBackgroundColor**: boot.efi使用的背景色
+  * `00000000`: 西拉黑
+  * `BFBFBF00`: 浅灰色
 
 :::
 
 ::: tip 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
 
-OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
+OpenCore的NVRAM GUID，主要与RTCMemoryFixup用户相关
 
 :::
 
 ::: details 更深入的信息
 
 * **rtc-blacklist**: <>
-  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
-  * Most users can ignore this section
+  * 与RTCMemoryFixup一起使用，参见这里了解更多信息:[修复RTC写入问题](https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
+  * 大多数用户可以忽略此部分
 
 :::
 
 ::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
-System Integrity Protection bitmask
+系统完整性保护位掩码
 
-* **General Purpose boot-args**:
+* **通用引导参数**:
 
-| boot-args | Description |
+| 引导参数 | 描述 |
 | :--- | :--- |
-| **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
-| **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
-| **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
+| **-v** | 启用详细模式，在你启动时显示所有滚动的幕后文本，而不是苹果logo和进度条。它对任何黑苹果用户都是无价的，因为它让你了解引导过程的内部情况，并可以帮助你识别问题、问题kext等 |
+| **debug=0x100** | 该命令禁用macOS的watchdog，该watchdog有助于防止在内核出现严重错误时重新启动。这样你就**有希望**收集到一些有用的信息并按照日志信息来解决问题。 |
+| **keepsyms=1** | 这是debug=0x100的配套设置，它告诉操作系统在内核崩溃时也打印符号。这可以对引发崩溃本身的原因提供一些更有帮助的见解。 |
+| **alcid=1** | 用于设置AppleALC的布局-id，请参阅[支持的编解码器](https://github.com/acidanthera/applealc/wiki/supported-codecs) 以确定适用于特定系统的布局。关于这方面的更多信息，请参阅[安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/) |
 
-* **GPU-Specific boot-args**:
+* *特定于gpu的引导参数**:
 
-| boot-args | Description |
+| 引导参数 | 说明 |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
-| **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
-| **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
-| **unfairgva=1** | Used for fixing hardware DRM support on supported AMD GPUs |
-| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in macOS Sierra and High Sierra |
-| **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
+| **agdpmod=pikera** | 用于在一些Navi gpu (RX 5000 & 6000系列)上禁用板ID检查，没有这个你会得到一个黑屏。**如果你没有Navi，请不要使用它**(例如: Polaris 和 Vega 卡不应该使用这个) |
+| **-radcodec** | 用于允许官方不支持的AMD gpu使用硬件视频编码器 |
+| **radpg=15** | 用于禁用某些电源开关模式，有助于正确初始化基于 properly initializing 的AMD gpu |
+| **unfairgva=1** | 用于在支持的AMD gpu上固定硬件DRM支持 |
+| **nvda_drv_vrl=1** | 用于在macOS Sierra和High Sierra的Maxwell和Pascal卡上启用NVIDIA的Web驱动程序 |
+| **-wegnoegpu** | 用于禁用除集成的Intel iGPU之外的所有其他gpu，对于那些想运行新版本的macOS，而他们的dGPU不支持的人很有用 |
 
 * **csr-active-config**: `00000000`
-  * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
-  * csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/extended/post-issues.md#disabling-sip)
+  * “系统完整性保护”(SIP)的设置。通常建议通过恢复分区使用`csrutil`进行更改。
+  * 默认情况下，csr-active-config设置为`00000000`，以启用系统完整性保护。您可以选择许多不同的值，但总的来说，为了最佳安全实践，我们建议启用此选项。更多信息可以在我们的故障排除页面中找到:[禁用SIP](../troubleshooting/extended/post-issues.md#disabling-sip)
 
 * **run-efi-updater**: `No`
-  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
+  * 这用于防止苹果的固件更新包安装和破坏引导顺序;这很重要，因为这些固件更新(意味着mac)将无法工作。
 
 * **prev-lang:kbd**: <>
-  * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
-  * American: `en-US:0`(`656e2d55533a30` in HEX)
-  * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
-  * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
-  * Hint 2: `prev-lang:kbd` can be set to a blank variable (eg. `<>`) which will force the Language Picker to appear instead at first boot up.
+  * 需要`lang-COUNTRY:keyboard`格式的非拉丁键盘，建议保持空白，尽管你可以指定它(**示例配置中默认是俄语**):
+  * 中文: `zh-Hans:252`
+  * 完整列表可在[AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)中找到
+  * 提示:`prevr-lang:kbd`可以被转换成String，所以你可以直接输入`zh-Hans:252`，而不是转换成十六进制
+  * 提示2:`prevr-lang:kbd`可以设置为一个空白变量(例如:' <> ')，这将迫使语言选择器在第一次启动时出现。
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| prev-lang:kbd | String | en-US:0 |
+| prev-lang:kbd | String | zh-Hans:252 |
 
 :::
 
@@ -499,7 +499,7 @@ System Integrity Protection bitmask
 
 ::: tip 信息
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
+强制重写NVRAM变量，请注意，`Add` **不会覆盖** NVRAM中已经存在的值，所以像`boot-args`这样的值应该保持不变。对我们来说，我们将更改以下内容:
 
 | Quirk | Enabled |
 | :--- | :--- |
@@ -510,10 +510,10 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 ::: details 更深入的信息
 
 * **LegacySchema**
-  * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
+  * 用于赋值NVRAM变量，与`OpenVariableRuntimeDxe.efi`一起使用。仅适用于没有原生NVRAM的系统
 
 * **WriteFlash**: YES
-  * Enables writing to flash memory for all added variables.
+  * 允许所有添加的变量写入闪存。
 
 :::
 
@@ -553,7 +553,7 @@ The `Board Serial` part gets copied to Generic -> MLB.
 
 The `SmUUID` part gets copied to Generic -> SystemUUID.
 
-We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
+We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
 **Reminder that you need an invalid serial! When inputting your serial number in [Apple's Check Coverage Page](https://checkcoverage.apple.com), you should get a message such as "Unable to check coverage for this serial number."**
 
@@ -648,11 +648,11 @@ Both MinVersion and MinDate need to be set if changing the minimum version.
 
 Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
+* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 
@@ -668,7 +668,7 @@ Relating to OpenCore's visual output, leave everything here as default as we hav
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 
