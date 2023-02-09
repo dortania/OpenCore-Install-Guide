@@ -35,11 +35,11 @@
 
 ::: tip 信息
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这是你将为系统添加ssdt的地方，这些对于**引导macOS**非常重要，并且有许多用途，例如[USB 映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)，[禁用不支持的gpu](../extras/spoof.md)等。在我们的系统中，**甚至需要这些才可以启动**。制作指南:[**ACPI入门**](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 
-For us we'll need a couple of SSDTs to bring back functionality that Clover provided:
+对于我们来说，我们需要一些ssdt来带回Clover提供的功能:
 
-| Required SSDTs | Description |
+| 需要的SSDTs | 描述 |
 | :--- | :--- |
 | **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
 | **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
@@ -494,14 +494,14 @@ System Integrity Protection bitmask
 
 * **prev-lang:kbd**: <>
   * *需要`lang-COUNTRY:keyboard`格式的非拉丁键盘，建议保持空白，尽管你可以指定它(**示例配置中默认是俄语**):
-  * American: `en-US:0`(`656e2d55533a30` in HEX)
-  * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
-  * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
-  * Hint 2: `prev-lang:kbd` can be set to a blank variable (eg. `<>`) which will force the Language Picker to appear instead at first boot up.
+  * 中文: `zh-Hans:252`(`7A682D48616E733A323532` 这是十六进制)
+  * 完整列表可在这里找到[AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+  * 提示:`prevr-lang:kbd`可以被转换成String，所以你可以直接输入`zh-Hans:252`，而不是转换成十六进制
+  * 提示2:`prevr-lang:kbd`可以设置为一个空白变量(例如:`<>`)，这将强制在首次启动时显示语言选择器。
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| prev-lang:kbd | String | en-US:0 |
+| prev-lang:kbd | String | zh-Hans:252 |
 
 :::
 
@@ -520,10 +520,10 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 ::: details More in-depth Info
 
 * **LegacySchema**
-  * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
+  * 用于赋值NVRAM变量，与`OpenVariableRuntimeDxe.efi`一起使用。仅适用于没有原生NVRAM的系统
 
 * **WriteFlash**: YES
-  * Enables writing to flash memory for all added variables.
+  * 允许所有添加的变量写入闪存。
 
 :::
 
@@ -575,32 +575,32 @@ We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC 
 ::: details More in-depth Info
 
 * **AdviseFeatures**: NO
-  * Used for when the EFI partition isn't first on the Windows drive
+  * 用于当EFI分区不是Windows驱动器上的第一个分区
 
 * **MaxBIOSVersion**: NO
-  * Sets BIOS version to Max to avoid firmware updates in Big Sur+, mainly applicable for genuine Macs.
+  * 设置BIOS版本为Max，以避免在Big Sur+固件更新，主要适用于正版mac。
 
 * **ProcessorType**: `0`
-  * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
+  * 设置为`0`用于自动类型检测，但是如果需要，这个值可以被覆盖。参见[AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) 获取可能的值
 
 * **SpoofVendor**: YES
-  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+  * 将供应商字段替换为Acidanthera，在大多数情况下使用苹果作为供应商通常不安全
 
 * **SystemMemoryStatus**: Auto
-  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
+  * 在SMBIOS信息中设置内存是否焊接，纯粹用于修饰，因此我们建议使用`Auto`
 
 * **UpdateDataHub**: YES
-  * Update Data Hub fields
+  * 更新数据中心字段
 
 * **UpdateNVRAM**: YES
-  * Update NVRAM fields
+  * 更新NVRAM字段
 
 * **UpdateSMBIOS**: YES
-  * Updates SMBIOS fields
+  * 更新SMBIOS字段
 
 * **UpdateSMBIOSMode**: Create
-  * Replace the tables with newly allocated EfiReservedMemoryType, use `Custom` on Dell laptops requiring `CustomSMBIOSGuid` quirk
-  * Setting to `Custom` with `CustomSMBIOSGuid` quirk enabled can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
+  * 用新分配的EfiReservedMemoryType替换表，在需要`CustomSMBIOSGuid`的Dell笔记本电脑上使用`Custom`
+  * 设置为`Custom`并启用`CustomSMBIOSGuid`也可以禁用SMBIOS注入到“非apple”操作系统中，但是我们不支持这种方法，因为它破坏了Bootcamp的兼容性。使用风险自负
 
 :::
 
@@ -623,11 +623,11 @@ Only drivers present here should be:
 
 ::: details More in-depth Info
 
-| Key | Type | Description |
+| Key | Type | 描述|
 | :--- | :--- | :--- |
-| Path | String | Path of the file from `OC/Drivers` directory |
-| LoadEarly | Boolean | Load the driver early before NVRAM setup, should only be enabled for `OpenRuntime.efi` and `OpenVariableRuntimeDxe.efi` if using legacy NVRAM |
-| Arguments | String | Some drivers accept additional arguments which are specified here. |
+| Path | String | 文件在`OC/Drivers`目录中的路径 |
+| LoadEarly | Boolean | 在安装NVRAM之前尽早加载驱动程序，如果使用旧的NVRAM，应该只启用`OpenRuntime.efi`和`OpenVariableRuntimeDxe.efi` |
+| Arguments | String | 有些驱动程序接受这里指定的其他参数。 |
 
 :::
 
@@ -669,7 +669,7 @@ Relating to OpenCore's visual output, leave everything here as default as we hav
 
 | Output | Value | Comment |
 | :--- | :--- | :--- |
-| UIScale | `0` | `0` will automatically set based on resolution<br/>`-1` will leave it unchanged<br/>`1` for 1x scaling, for normal displays<br/>`2` for 2x scaling, for HiDPI displays |
+| UIScale | `0` | `0`将根据分辨率自动设置<br/>`-1`将保持不变<br/>`1`为1x缩放，对于正常显示器<br/>`2`为2倍缩放，对于HiDPI显示器 |
 
 :::
 
