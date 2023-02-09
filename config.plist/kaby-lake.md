@@ -246,26 +246,26 @@ config.plist 还没有这个部分，所以你必须手动创建它。
 ::: details 更深入的信息
 
 * **AppleCpuPmCfgLock**: NO
-  * Only needed when CFG-Lock can't be disabled in BIOS
-  * Only applicable for Ivy Bridge and older
-    * Note: Broadwell and older require this when running 10.10 or older
+  * 仅当BIOS中不能禁用CFG-Lock时需要
+  * 只适用于 Ivy Bridge 和更旧的
+    * 注意:Broadwell及更老版本在运行10.10或更老版本时需要此功能
 * **AppleXcpmCfgLock**: YES
-  * Only needed when CFG-Lock can't be disabled in BIOS
-  * Only applicable for Haswell and newer
-    * Note: Ivy Bridge-E is also included as it's XCPM capable
+  * 仅当BIOS中不能禁用CFG-Lock时需要
+  * 仅适用于Haswell和更新版本
+    * 注:Ivy Bridge-E也包括在内，因为它具有XCPM能力
 * **CustomSMBIOSGuid**: NO
-  * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
-  * Enabling this quirk with UpdateSMBIOSMode Custom mode can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
+  * 为UpdateSMBIOSMode设置为' Custom '时执行GUID补丁。通常与戴尔笔记本电脑有关
+  * 通过UpdateSMBIOSMode自定义模式启用此选项也可以禁用SMBIOS注入到“非苹果”操作系统中，但我们不支持这种方法，因为它破坏了Bootcamp兼容性。使用风险自负
 * **DisableIoMapper**: YES
-  * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+  * 如果在BIOS中无法禁用或其他操作系统需要禁用VT-D，则需要绕过VT-D，这是`dart=0`的更好替代方案，因为SIP可以在Catalina中继续运行
 * **DisableLinkeditJettison**: YES
-  * Allows Lilu and others to have more reliable performance without `keepsyms=1`
+  * 允许Lilu和其他驱动在不需要`keepsyms=1`的情况下拥有更可靠的性能
 * **DisableRtcChecksum**: NO
-  * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
+  * 防止AppleRTC写入主校验和(0x58-0x59)，这对于接收BIOS重置或在重启/关机后进入安全模式的用户是必需的
 * **ExtendBTFeatureFlags** NO
-  * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
+  * 对于那些非apple /非fenvi卡有连续性问题的人很有帮助
 * **LapicKernelPanic**: NO
-  * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
+  * 在AP核心lapic中断上禁用内核panic，一般HP系统需要。相当于Clover的是Kernel LAPIC
 * **LegacyCommpage**: NO
   * Resolves SSSE3 requirement for 64 Bit CPUs in macOS, mainly relevant for 64-Bit Pentium 4 CPUs(ie. Prescott)
 * **PanicNoKextDump**: YES
