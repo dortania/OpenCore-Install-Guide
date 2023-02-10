@@ -86,7 +86,7 @@
 * **EnableWriteUnprotector**: YES
   * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
-  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
   * 修复了SetVirtualAddresses对虚拟地址的调用, 用于Gigabyte主板，以解决早期的内核崩溃.
 

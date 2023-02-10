@@ -45,7 +45,7 @@
 | **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器和USB电源，请参阅[开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多信息 |
 | **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | 创建一个存根以便VoodooI2C可以连接，对于那些有问题的VoodooI2C工作可以尝试 [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) 代替。请注意，英特尔NUCs不需要这个 |
 | **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
-| **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://sumingyd.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) page. |
+| **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 这是[300系列RTC补丁](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2)大多数B360, B365, H310, H370, Z390和一些Z370板需要。另一种选择是[SSDT-RTC0](https://sumingyd.github.io/Getting-Started-With-ACPI/)，当AWAC SSDT由于缺少Legacy的RTC时钟而不兼容时，请检查您是否需要它以及使用哪个，请参阅 [开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 页面. |
 | **[SSDT-RHUB](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Needed to fix Root-device errors on many Icelake laptops |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
@@ -89,7 +89,7 @@
 
 ### MmioWhitelist
 
-This section is allowing devices to be pass-through to macOS that are generally ignored, for us we can ignore this section.
+本节允许将通常被忽略的设备传递到macOS，对我们来说，我们可以忽略本节。
 
 ### Quirks
 
@@ -111,17 +111,17 @@ This section is allowing devices to be pass-through to macOS that are generally 
 * **AvoidRuntimeDefrag**: YES
   * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **DevirtualiseMmio**: YES
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
+  * 减少被盗内存占用，扩展`slide=N`值的选项，并对修复Z390上的内存分配问题非常有帮助。在IceLake 和 Z390 Coffee Lake还需要`ProtectUefiServices`
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: NO
   * 这一选项和RebuildAppleMemoryMap通常会发生冲突，建议在较新的平台上启用后者并禁用此条目。
   * 然而，由于原始设备制造商没有使用最新的EDKII版本，您可能会发现上述组合将导致早期启动失败。这是由于缺少`MEMORY_ATTRIBUTE_TABLE`，因此我们建议禁用RebuildAppleMemoryMap并启用EnableWriteUnprotector。有关此问题的更多信息见[故障排除部分](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
 * **ProtectUefiServices**: YES
-  * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
-  * If on Z390, **enable this quirk**
+  * 保护UEFI服务不被固件覆盖，主要针对VMs，Icelake和Z390系统
+  * 如果在Z390上，**启用此选项**
 * **ProvideCustomSlide**: YES
-  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * 生成与macOS兼容的内存映射，可能在一些笔记本OEM固件上损坏，所以如果您收到早期启动失败禁用此功能
 * **SetupVirtualMap**: NO

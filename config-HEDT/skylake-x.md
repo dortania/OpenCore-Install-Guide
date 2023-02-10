@@ -92,18 +92,18 @@ This section is allowing devices to be passthrough to macOS that are generally i
 * **AvoidRuntimeDefrag**: YES
   * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **DevirtualiseMmio**: YES
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
+  * 减少被盗内存占用，扩展`slide=N`值的选项，并对修复Z390上的内存分配问题非常有帮助。在IceLake 和 Z390 Coffee Lake还需要`ProtectUefiServices`
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: NO
   * 这一选项和RebuildAppleMemoryMap通常会发生冲突，建议在较新的平台上启用后者并禁用此条目。
   * 然而，由于原始设备制造商没有使用最新的EDKII版本，您可能会发现上述组合将导致早期启动失败。这是由于缺少`MEMORY_ATTRIBUTE_TABLE`，因此我们建议禁用RebuildAppleMemoryMap并启用EnableWriteUnprotector。有关此问题的更多信息见[故障排除部分](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
 * **ProvideCustomSlide**: YES
-  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * 生成与macOS兼容的内存映射，可能在一些笔记本OEM固件上损坏，所以如果您收到早期启动失败禁用此功能
 * **SetupVirtualMap**: YES
-  * 修复了SetVirtualAddresses对虚拟地址的调用, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+  * 修复了SetVirtualAddresses对虚拟地址的调用, 在Skylake和更新的地方不需要。一些固件如Gigabyte可能仍然需要它，如果没有它，内核将会崩溃
   * Note newer Asus BIOS(v3006+) will not boot with this quirk enabled
 * **SyncRuntimePermissions**: YES
   * 修复了与MAT表的对齐，以及在引导Windows和Linux时需要使用MAT表，也推荐用于macOS。主要针对重建apple内存映射的用户

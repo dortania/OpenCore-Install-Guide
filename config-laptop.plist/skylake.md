@@ -104,7 +104,7 @@
 * **EnableWriteUnprotector**: YES
   * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
-  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
   * 修复了SetVirtualAddresses对虚拟地址的调用, 用于Gigabyte主板，以解决早期的内核崩溃
   
@@ -162,7 +162,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 | :--- | :--- | :--- |
 | device-id | Data | `16190000` |
 
-* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+* 在某些情况下，你不能在UEFI设置中将这些卡的DVMT-prealloc设置到64MB以上，你可能会遇到内核崩溃。通常它们被配置为32MB的DVMT-prealloc，在这种情况下，这些值被添加到iGPU属性中
 
 | Key | Type | Value |
 | :--- | :--- | :--- |

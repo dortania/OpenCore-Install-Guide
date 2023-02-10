@@ -2,8 +2,8 @@
 
 | 支持 | 版本 |
 | :--- | :--- |
-| Initial macOS Support ([Coffee Lake](https://en.wikipedia.org/wiki/Coffee_Lake)) | macOS 10.13, High Sierra |
-| Initial macOS Support ([Whiskey Lake](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture))) | macOS 10.14.1, Mojave |
+| 初始macOS支持 ([Coffee Lake](https://en.wikipedia.org/wiki/Coffee_Lake)) | macOS 10.13, High Sierra |
+| 初始macOS支持 ([Whiskey Lake](https://en.wikipedia.org/wiki/Whiskey_Lake_(microarchitecture))) | macOS 10.14.1, Mojave |
 
 ## 起点
 
@@ -46,7 +46,7 @@
 | **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器和USB电源，请参阅[开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多信息 |
 | **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | 创建一个存根以便VoodooI2C可以连接，对于那些有问题的VoodooI2C工作可以尝试 [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) 代替。请注意，英特尔NUCs不需要这个 |
 | **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
-| **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://sumingyd.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) page. |
+| **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 这是[300系列RTC补丁](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2)大多数B360, B365, H310, H370, Z390和一些Z370板需要。另一种选择是[SSDT-RTC0](https://sumingyd.github.io/Getting-Started-With-ACPI/)，当AWAC SSDT由于缺少Legacy的RTC时钟而不兼容时，请检查您是否需要它以及使用哪个，请参阅 [开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 页面. |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -113,7 +113,7 @@
   * 这一选项和RebuildAppleMemoryMap通常会发生冲突，建议在较新的平台上启用后者并禁用此条目。
   * 然而，由于原始设备制造商没有使用最新的EDKII版本，您可能会发现上述组合将导致早期启动失败。这是由于缺少`MEMORY_ATTRIBUTE_TABLE`，因此我们建议禁用RebuildAppleMemoryMap并启用EnableWriteUnprotector。有关此问题的更多信息见[故障排除部分](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
 * **ProvideCustomSlide**: YES
-  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * 生成与macOS兼容的内存映射，可能在一些笔记本OEM固件上损坏，所以如果您收到早期启动失败禁用此功能
 * **SetupVirtualMap**: YES
@@ -157,8 +157,8 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 #### Configuration Notes
 
-* For UHD 630 you likely do not need to fake the `device-id` as it is already `0x3E9B`. If it's anything else, you may use `device-id`=`9B3E0000`:
-  * You can check under Device Manager in Windows by bring up the iGPU, opening properties, selecting details, and clicking Hardware IDs.
+* 对于UHD 630来说，你可能不需要伪造`device-id`，因为它已经是`0x3E9B`了。如果是其他值，你可以使用`device-id`=`9B3E0000`:
+  * 你可以在Windows设备管理器下查看iGPU，打开属性，选择详细信息，然后单击硬件id。
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -170,7 +170,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 | :--- | :--- | :--- |
 | device-id | Data | `9B3E0000` |
 
-* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+* 在某些情况下，你不能在UEFI设置中将这些卡的DVMT-prealloc设置到64MB以上，你可能会遇到内核崩溃。通常它们被配置为32MB的DVMT-prealloc，在这种情况下，这些值被添加到iGPU属性中
 
 | Key | Type | Value |
 | :--- | :--- | :--- |

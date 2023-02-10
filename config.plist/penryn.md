@@ -2,7 +2,7 @@
 
 | 支持 | 版本 |
 | :--- | :--- |
-| Initial macOS Support: Penryn | OS X 10.4.10, Tiger |
+| 初始macOS支持: Penryn | OS X 10.4.10, Tiger |
 | Last Supported OS: Penryn | macOS 10.13.6 High Sierra |
 | Note | iGPU support will not be covered in this guide, see here: [GMA Patching](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/)|
 | Note 2 | SSE4 is required to boot macOS 10.12, Sierra and newer, so Conroe and older are unsupported |
@@ -109,7 +109,7 @@
 * **EnableWriteUnprotector**: NO
   * Needed to remove write protection from CR0 register on UEFI platforms.
 * **ProvideCustomSlide**: YES
-  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * 解决10.6及更低版本的早期内存内核崩溃问题。
 * **SetupVirtualMap**: YES

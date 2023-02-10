@@ -1,9 +1,9 @@
-# Laptop Coffee Lake Plus and Comet Lake
+# 笔记本 Coffee Lake Plus 和 Comet Lake
 
 | 支持 | 版本 |
 | :--- | :--- |
-| Initial macOS Support([CFL](https://en.wikipedia.org/wiki/Coffee_Lake)) | macOS 10.13, High Sierra |
-| Initial macOS Support([CML](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor))) | macOS 10.15, Catalina |
+| 初始macOS支持([CFL](https://en.wikipedia.org/wiki/Coffee_Lake)) | macOS 10.13, High Sierra |
+| 初始macOS支持([CML](https://en.wikipedia.org/wiki/Comet_Lake_(microprocessor))) | macOS 10.15, Catalina |
 
 ## 起点
 
@@ -46,8 +46,8 @@
 | **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器和USB电源，请参阅[开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多信息 |
 | **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | 创建一个存根以便VoodooI2C可以连接，对于那些有问题的VoodooI2C工作可以尝试 [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) 代替。请注意，英特尔NUCs不需要这个 |
 | **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
-| **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | This is the [300 series RTC patch](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2), required for most B360, B365, H310, H370, Z390 and some Z370 boards which prevent systems from booting macOS. The alternative is [SSDT-RTC0](https://sumingyd.github.io/Getting-Started-With-ACPI/) for when AWAC SSDT is incompatible due to missing the Legacy RTC clock, to check whether you need it and which to use please see [Getting started with ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) page. |
-| **[SSDT-PMC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | So true 300 series motherboards(non-Z370) don't declare the FW chip as MMIO in ACPI and so XNU ignores the MMIO region declared by the UEFI memory map. This SSDT brings back NVRAM support. **Note that 10th gen CPUs do not need this**. See [Getting Started With ACPI Guide](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 这是[300系列RTC补丁](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2)大多数B360, B365, H310, H370, Z390和一些Z370板需要。另一种选择是[SSDT-RTC0](https://sumingyd.github.io/Getting-Started-With-ACPI/)，当AWAC SSDT由于缺少Legacy的RTC时钟而不兼容时，请检查您是否需要它以及使用哪个，请参阅 [开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 页面. |
+| **[SSDT-PMC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 因此，300系列主板(非z370)在ACPI中不会将FW芯片声明为MMIO，因此XNU忽略了UEFI内存映射中声明的MMIO区域。这个SSDT恢复了对NVRAM的支持。**请注意，第10代cpu不需要这个**。更多细节请参阅[开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -90,7 +90,7 @@
 
 ### MmioWhitelist
 
-This section is allowing devices to be pass-through to macOS that are generally ignored, for us we can ignore this section.
+本节允许将通常被忽略的设备传递到macOS，对我们来说，我们可以忽略本节。
 
 ### Quirks
 
@@ -111,21 +111,21 @@ This section is allowing devices to be pass-through to macOS that are generally 
 * **AvoidRuntimeDefrag**: YES
   * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **DevirtualiseMmio**: YES
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390. Requires `ProtectUefiServices` as well on IceLake and Z390 Coffee Lake
+  * 减少被盗内存占用，扩展`slide=N`值的选项，并对修复Z390上的内存分配问题非常有帮助。在IceLake 和 Z390 Coffee Lake还需要`ProtectUefiServices`
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: NO
   * 这一选项和RebuildAppleMemoryMap通常会发生冲突，建议在较新的平台上启用后者并禁用此条目。
   * 然而，由于原始设备制造商没有使用最新的EDKII版本，您可能会发现上述组合将导致早期启动失败。这是由于缺少`MEMORY_ATTRIBUTE_TABLE`，因此我们建议禁用RebuildAppleMemoryMap并启用EnableWriteUnprotector。有关此问题的更多信息见[故障排除部分](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
 * **ProtectUefiServices**: YES
-  * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
-  * If on Z390, **enable this quirk**
+  * 保护UEFI服务不被固件覆盖，主要针对VMs，Icelake和Z390系统
+  * 如果在Z390上，**启用此选项**
 * **ProvideCustomSlide**: YES
-  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * 生成与macOS兼容的内存映射，可能在一些笔记本OEM固件上损坏，所以如果您收到早期启动失败禁用此功能
 * **SetupVirtualMap**: YES
-  * 修复了SetVirtualAddresses对虚拟地址的调用, shouldn't be needed on Skylake and newer. Some firmware like Gigabyte may still require it, and will kernel panic without this
+  * 修复了SetVirtualAddresses对虚拟地址的调用, 在Skylake和更新的地方不需要。一些固件如Gigabyte可能仍然需要它，如果没有它，内核将会崩溃
 * **SyncRuntimePermissions**: YES
   * 修复了与MAT表的对齐，以及在引导Windows和Linux时需要使用MAT表，也推荐用于macOS。主要针对重建apple内存映射的用户
 
@@ -166,20 +166,20 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 #### Configuration Notes
 
-* For UHD 630 you likely do not need to fake the `device-id` as it is already `0x3E9B`. If it's anything else, you may use `device-id`=`9B3E0000`:
-  * You can check under Device Manager in Windows by bring up the iGPU, opening properties, selecting details, and clicking Hardware IDs.
+* 对于UHD 630来说，你可能不需要伪造`device-id`，因为它已经是`0x3E9B`了。如果是其他值，你可以使用`device-id`=`9B3E0000`:
+  * 你可以在Windows设备管理器下查看iGPU，打开属性，选择详细信息，然后单击硬件id。
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | device-id | Data | `9B3E0000` |
   
-* A UHD 620 in a Comet Lake CPU **requires** `device-id`=`9B3E0000`:
+* Comet Lake CPU中的UHD 620 **需要** `device-id`=`9B3E0000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | device-id | Data | `9B3E0000` |
 
-* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+* 在某些情况下，你不能在UEFI设置中将这些卡的DVMT-prealloc设置到64MB以上，你可能会遇到内核崩溃。通常它们被配置为32MB的DVMT-prealloc，在这种情况下，这些值被添加到iGPU属性中
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -267,30 +267,30 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 ### Emulate
 
-用于欺骗不支持的cpu，如Pentiums和Celerons. For those with Coffee Lake Plus you can skip this section, but for those with Comet Lake CPUs see below
+用于欺骗不支持的cpu，如Pentiums和Celerons. 对于那些使用Coffee Lake Plus的用户，您可以跳过本节，但对于使用Comet Lake cpu的用户，请参见下面的内容
 
 ::: details Comet Lake info
 
-Comet Lake U62 CPUs require a spoof to Comet Lake U42 as macOS does not support these CPUs. You can check Device Manager in Windows to see if you have a Comet Lake U62 CPU:
+Comet Lake U62 cpu需要模仿Comet Lake U42，因为macOS不支持这些cpu。你可以在Windows的设备管理器中查看你是否有Comet Lake U62 CPU:
 
-1. Go to the "Processors" section
-2. Double click on one of the CPUs
-3. Click on the "Details" tab
-4. Click on the "Hardware ID" field
-5. If it says `ACPI\GenuineIntel_-_Intel64_Family_6_Model_166`, you need to spoof:
+1. 转到“处理器”部分
+2. 双击其中一个cpu
+3. 点击“详细信息”选项卡
+4. 点击“硬件ID”字段
+5. 如果上面写的是`ACPI\GenuineIntel_-_Intel64_Family_6_Model_166`，你需要修改一下:
 
 * **Cpuid1Data**: `EC060800000000000000000000000000`
 * **Cpuid1Mask**: `FFFFFFFF000000000000000000000000`
 
-On Linux, you can use `lscpu | grep "Model:"`. If the model is `166`, you need to spoof.
+在Linux上，你可以使用`lscpu | grep "Model:"`。如果模型是`166`，你需要欺骗。
 
-Another way to check is with the OpenCore debug log:
+另一种检查方法是OpenCore调试日志:
 
 > 00:023 00:005 OCCPU: Found Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
 >
 > 00:028 00:005 OCCPU: Signature A0660 Stepping 0 Model **A6** Family 6 Type 0 ExtModel A ExtFamily 0 uCode C6
 
-If the model is `A6`, you need to spoof.
+如果型号是`A6`，你需要欺骗。
 
 :::
 
@@ -592,7 +592,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Coffee Lake Plus example, we'll chose the MacBookPro16,1 SMBIOS - this is done intentionally for compatibility's sake. The breakdown is as follows(note that the below SMBIOS require macOS 10.15, Catalina):
+在这个Coffee Lake Plus的例子中，我们将选择MacBookPro16,1 SMBIOS——这是为了兼容性而故意这么做的。细分如下(注意下面的SMBIOS需要macOS 10.15, Catalina):
 
 | SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -614,7 +614,7 @@ Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 ```
 
-* **Note**: MacSerial currently does not support Linux, so you must grab a Windows or macOS machine to generate the MacBookPro16,2+ values
+* **注意**:MacSerial目前不支持Linux，所以你必须使用Windows或macOS机器来生成MacBookPro16,2+的值
 
 将 `Type` 部分复制到 Generic -> SystemProductName.
 
