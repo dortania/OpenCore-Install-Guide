@@ -1,10 +1,10 @@
-# Laptop Haswell
+# 笔记本 Haswell
 
 | 支持 | 版本 |
 | :--- | :--- |
 | 初始macOS支持 | OS X 10.8, Mountain Lion |
 | 最后支持的操作系统 | macOS 12 Monterey |
-| Note | For Ventura information, see [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
+| 注意 | Ventura 信息请参见 [macOS 13 Ventura注意事项](../extras/ventura.md#dropped-cpu-support) |
 
 ## 起点
 
@@ -139,13 +139,13 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **`0500260A`** | Laptop | To be used usually with HD 5000, HD 5100 and HD 5200 |
-| **`0600260A`** | Laptop | To be used usually with HD 4200, HD 4400 and HD 4600, you **must** use a `device-id`(see below) |
-| **`0300220D`** | NUC | To be used usually with all Haswell NUCs, HD 4200/4400/4600 **must** use a `device-id`(see below) |
+| **`0500260A`** | Laptop | 通常用于HD 5000, HD 5100和HD 5200 |
+| **`0600260A`** | Laptop | 要与HD 4200、HD 4400和HD 4600一起使用，你**必须**使用`device-id`(见下文)。 |
+| **`0300220D`** | NUC | HD 4200/4400/4600 **必须**使用`device-id`(见下文) |
 
 #### Configuration Notes
 
-In addition to the AAPL,ig-platform-id, you'll want to add the cursor byte size patch from 6MB (00006000) to 9MB because of some glitches:
+除了AAPL,ig-platform-id，你还需要将光标字节大小的补丁从6MB(00006000)增加到9MB，原因如下:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -154,7 +154,7 @@ In addition to the AAPL,ig-platform-id, you'll want to add the cursor byte size 
 
 **Special note for HD 4200, HD 4400 and HD 4600**:
 
-You will also require a device-id spoof to be supported:
+你还需要一个设备id欺骗支持:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -544,7 +544,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakdown is as follows:
+对于这个Haswell示例，我们选择MacBookPro11,1 SMBIOS。典型的细分如下:
 
 | SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 |
 | :--- | :--- | :--- | :--- |
@@ -557,9 +557,9 @@ For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakd
 | MacBookPro11,5 | Quad Core 45W | iGPU: Iris Pro 5200 + dGPU: R9 M370X | 15" |
 | Macmini7,1 | NUC Systems | HD 5000/Iris 5100 | N/A |
 
-**Note**: For macOS Monterey, only the following SMBIOS are supported
+**注意**:对于macOS Monterey，仅支持以下SMBIOS
 
-::: details Monterey SMBIOS table
+::: details Monterey SMBIOS 表
 
 | SMBIOS | Hardware |
 | :--- | :--- |

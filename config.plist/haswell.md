@@ -553,7 +553,7 @@ For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is
 
 **Note**: The following SMBIOS are only supported up-to macOS 11, Big Sur. For cases where you must boot Monterey, see below:
 
-::: details Monterey SMBIOS table
+::: details Monterey SMBIOS 表
 
 Note choosing a SMBIOS from the list below for Big Sur or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
 
