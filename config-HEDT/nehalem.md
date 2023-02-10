@@ -43,7 +43,7 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-EC](https://dortania.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
+| **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -112,7 +112,7 @@
 * **RebuildAppleMemoryMap**: YES
   * Resolves early memory kernel panics on 10.6 and below
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses on UEFI boards
+  * 修复了SetVirtualAddresses对虚拟地址的调用 on UEFI boards
 
 :::
 
@@ -126,7 +126,7 @@
 
 默认情况下，Sample.plist已经为音频设置了这个部分，我们将通过在引导参数部分设置布局ID来设置音频，因此建议从`Add`节中删除`PciRoot(0x0)/Pci(0x1b,0x0)`。
 
-TL;DR, delete all the PciRoot's here as we won't be using this section.
+TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ### Delete
 
@@ -642,7 +642,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
+与用于FileVault和热键支持的boot.efi键盘直通相关，将所有内容保留为默认值，因为我们不需要这些选项。更多详细信息:[安全和文件库](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 

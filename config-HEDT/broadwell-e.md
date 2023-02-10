@@ -41,10 +41,10 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://dortania.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-RTC0-RANGE](https://dortania.github.io/Getting-Started-With-ACPI/)** | Required for all Big Sur users to ensure their RTC device is compatible, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-UNC](https://dortania.github.io/Getting-Started-With-ACPI/)** | Required for all Big Sur users to ensure their UNC devices are compatible, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器和USB电源，请参阅[开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多信息 |
+| **[SSDT-RTC0-RANGE](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Required for all Big Sur users to ensure their RTC device is compatible, see [Getting Started With ACPI Guide](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-UNC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Required for all Big Sur users to ensure their UNC devices are compatible, see [Getting Started With ACPI Guide](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -82,7 +82,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 ::: details 更深入的信息
 
 * **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+  * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: YES
@@ -90,7 +90,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics
+  * 修复了SetVirtualAddresses对虚拟地址的调用, required for Gigabyte boards to resolve early kernel panics
 
 :::
 
@@ -104,7 +104,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 默认情况下，Sample.plist已经为音频设置了这个部分，我们将通过在引导参数部分设置布局ID来设置音频，因此建议从`Add`节中删除`PciRoot(0x0)/Pci(0x1b,0x0)`。
 
-TL;DR, delete all the PciRoot's here as we won't be using this section.
+TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ### Delete
 
@@ -193,11 +193,11 @@ Needed for spoofing unsupported CPUs and enabling power management on Haswell-E 
 * **DummyPowerManagement**: No
   * Disables AppleIntelCPUPowerManagement, only required for AMD CPUs
 * **MinKernel**: Leave this blank
-  * Lowest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
-  * ex. `12.00.00` for OS X 10.8
+  * 上面的补丁将被注入到最低的内核版本，如果没有指定值，它将应用于所有版本的macOS。有关可能的值，请参见下表
+  * 例如. `12.00.00` 用于 OS X 10.8
 * **MaxKernel**: Leave this blank
-  * Highest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
-  * ex. `11.99.99` for OS X 10.7
+  * 上述补丁将被注入的最高内核版本，如果没有指定值，它将应用于所有版本的macOS。有关可能的值，请参见下表
+  * 例如. `11.99.99` 用于 OS X 10.7
 
 ::: details 内核支持表
 
@@ -668,7 +668,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
+与用于FileVault和热键支持的boot.efi键盘直通相关，将所有内容保留为默认值，因为我们不需要这些选项。更多详细信息:[安全和文件库](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 

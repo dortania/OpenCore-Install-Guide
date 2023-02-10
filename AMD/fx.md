@@ -44,7 +44,7 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器和USB电源，请参阅[开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多信息 |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -82,7 +82,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 ::: details 更深入的信息
 
 * **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+  * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: YES
@@ -90,7 +90,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics
+  * 修复了SetVirtualAddresses对虚拟地址的调用, required for Gigabyte boards to resolve early kernel panics
 
 :::
 
@@ -104,7 +104,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 默认情况下，Sample.plist已经为音频设置了这个部分，我们将通过在引导参数部分设置布局ID来设置音频，因此建议从`Add`节中删除`PciRoot(0x0)/Pci(0x1b,0x0)`。
 
-TL;DR, delete all the PciRoot's here as we won't be using this section.
+TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ### Delete
 
@@ -192,13 +192,13 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 * **Cpuid1Data**: 不填写
   * Fake CPUID entry
 * **DummyPowerManagement**: YES
-  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management.
+  * NullCPUPowerManagement的新替代方案，对于所有基于AMD CPU的系统都是必需的，因为没有本地电源管理。
 * **MinKernel**: Leave this blank
-  * Lowest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
-  * ex. `12.00.00` for OS X 10.8
+  * 上面的补丁将被注入到最低的内核版本，如果没有指定值，它将应用于所有版本的macOS。有关可能的值，请参见下表
+  * 例如. `12.00.00` 用于 OS X 10.8
 * **MaxKernel**: Leave this blank
-  * Highest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
-  * ex. `11.99.99` for OS X 10.7
+  * 上述补丁将被注入的最高内核版本，如果没有指定值，它将应用于所有版本的macOS。有关可能的值，请参见下表
+  * 例如. `11.99.99` 用于 OS X 10.7
 
 ::: details 内核支持表
 
@@ -234,36 +234,36 @@ TL;DR, delete all the PciRoot's here as we won't be using this section.
 
 ### Patch
 
-This is where the AMD kernel patching magic happens. Please do note that if coming from Clover, `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore. The latest AMD kernel patches can always be found on the [AMD Vanilla GitHub Repository](https://github.com/AMD-OSX/AMD_Vanilla).
+这是AMD内核打补丁魔法发生的地方。请注意，如果来自Clover，则来自Clover的`KernelToPatch`和`MatchOS`在OpenCore中变为`Kernel`和`MinKernel`/ `MaxKernel`。最新的AMD内核补丁可以在[AMD Vanilla GitHub仓库](https://github.com/AMD-OSX/AMD_Vanilla)上找到。
 
 Kernel patches:
 
 * [Bulldozer/Jaguar (15h/16h)](https://github.com/AMD-OSX/AMD_Vanilla) (10.13 - 12.x)
 
-To merge:
+合并：
 
-* Open both files,
-* Delete the `Kernel -> Patch` section from config.plist
-* Copy the `Kernel -> Patch` section from patches.plist
-* Paste into where old patches were in config.plist
+* 打开两个文件，
+* 从config.plist中删除`Kernel -> Patch`部分
+* 从patches.plist中复制`Kernel -> Patch`部分
+* 粘贴到config.plist中旧补丁所在的位置
 
 ![](../images/config/AMD/kernel.gif)
 
-You will also need to modify three patches, all named `algrey - Force cpuid_cores_per_package`. You only need to change the `Replace` value. You should change:
+你还需要修改三个补丁，它们的名字都是`algrey - Force cpuid_cores_per_package`. 你只需要改变`Replace`的值。你应该改变:
 
 * `B8000000 0000` => `B8 <core count> 0000 0000`
 * `BA000000 0000` => `BA <core count> 0000 0000`
 * `BA000000 0090` => `BA <core count> 0000 0090`
 
-Where `<core count>` is replaced with the physical core count of your CPU in hexadecimal. For example, an 8-Core 5800X would have the new Replace value be:
+其中`<core count>`被十六进制的CPU物理核心计数替换。例如，一个8核的5800X处理器的新值是:
 
 * `B8 08 0000 0000`
 * `BA 08 0000 0000`
 * `BA 08 0000 0090`
 
-::: details Core Count => Hexadecimal Table
+::: details 核心计数=>十六进制表
 
-| Core Count | Hexadecimal |
+| 核心数 | 十六进制 |
 | :--------- | :---------- |
 | 2 Core | `02` |
 | 4 Core | `04` |
@@ -295,16 +295,16 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 ::: details 更深入的信息
 
 * **AppleCpuPmCfgLock**: NO
-  * 仅当BIOS中不能禁用CFG-Lock时需要. AMD users can ignore
+  * 仅当BIOS中不能禁用CFG-Lock时需要. AMD用户可以忽略
 * **AppleXcpmCfgLock**: NO
-  * 仅当BIOS中不能禁用CFG-Lock时需要. AMD users can ignore
+  * 仅当BIOS中不能禁用CFG-Lock时需要. AMD用户可以忽略
 * **AppleXcpmExtraMsrs**: NO
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
+  * 禁用不支持的cpu(如pentium和某些xeon)所需的多次MSR访问
 * **CustomSMBIOSGuid**: NO
   * 为UpdateSMBIOSMode设置为`Custom`时执行GUID补丁。通常与戴尔笔记本电脑有关
-  * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom` will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
+  * 与`PlatformInfo -> UpdateSMBIOSMode -> Custom`一起启用此功能将禁用SMBIOS注入“非苹果”操作系统，但我们不支持此方法，因为它破坏了Bootcamp兼容性。使用风险自负。
 * **DisableIoMapper**: NO
-  * AMD doesn't have DMAR or VT-D support so irrelevant
+  * AMD不支持DMAR或VT-D
 * **DisableLinkeditJettison**: YES
   * 允许Lilu和其他kext在不需要`keepsyms=1`的情况下拥有更可靠的性能
 * **DisableRtcChecksum**: NO
@@ -320,7 +320,7 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 * **PowerTimeoutKernelPanic**: YES
   * 帮助修复macOS Catalina中与苹果驱动程序权限变化相关的内核崩溃，尤其是数字音频。
 * **ProvideCurrentCpuInfo**: YES
-  * Provides the kernel with CPU frequency values for AMD.
+  * 为AMD的内核提供CPU频率值。
 * **SetApfsTrimTimeout**: `-1`
   * 为ssd上的APFS文件系统设置以微秒为单位的修剪超时时间，仅适用于macOS 10.14及更新版本的有问题的ssd。
 * **XhciPortLimit**: YES
@@ -377,7 +377,7 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 
 ::: tip 信息
 
-Helpful for debugging OpenCore boot issues:
+有助于调试OpenCore引导问题:
 
 | 选项 | 启用 |
 | :--- | :--- |
@@ -511,7 +511,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 | **-v** | 这将启用详细模式，在你启动时显示所有滚动的幕后文本，而不是苹果logo和进度条。它对任何黑苹果用户来说都是无价的，因为它可以让你深入了解引导过程，并可以帮助你识别问题、问题kext等。 |
 | **debug=0x100** | 这禁用了macOS的watchdog，它有助于防止在内核出现严重错误时重新启动。这样你就**有希望**收集到一些有用的信息并按照提示来解决问题。 |
 | **keepsyms=1** | 这是debug=0x100的配套设置，它告诉操作系统在内核出现故障时也打印这些符号。这可以提供一些更有用的见解，以了解造成崩溃本身的原因。 |
-| **npci=0x3000** | This disables some PCI debugging related to `kIOPCIConfiguratorPFM64` and `gIOPCITunnelledKey`. This is an alternative to having Above 4G Decoding enabled in your BIOS. Do not use this unless you don't have it in your BIOS. Required for when getting stuck on `[PCI configuration begin]` as there are IRQ conflicts relating to your PCI lanes. [Source](https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html) |
+| **npci=0x3000** | 这会禁用一些与`kIOPCIConfiguratorPFM64`和`gIOPCITunnelledKey`相关的PCI调试。这是在你的BIOS中启用4G以上解码的另一种选择。不要使用它，除非你的BIOS中没有它。当在`[PCI configuration begin]` 上卡住时需要，因为有与您的PCI通道相关的IRQ冲突。[来源](https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html) |
 
 * **特定于gpu的引导参数**:
 
@@ -573,15 +573,15 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this example, we'll choose the MacPro7,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
+对于这个例子，我们将选择macpro7,1 SMBIOS，但有些SMBIOS与某些gpu的兼容性更好:
 
-* MacPro7,1: AMD Polaris and newer
-  * Note that MacPro7,1 is exclusive to macOS 10.15, Catalina and newer
-* iMacPro1,1: NVIDIA Maxwell and Pascal or AMD Polaris and newer
-  * Use if you need High Sierra or Mojave, otherwise use MacPro7,1
-* iMac14,2: NVIDIA Maxwell and Pascal
-  * Use if you get black screens on iMacPro1,1 after installing Web Drivers with an NVIDIA GPU
-* MacPro6,1: AMD GCN GPUs (supported HD and R5/R7/R9 series)
+* MacPro7,1: AMD Polaris 和更新的
+  * 请注意，MacPro7,1是macOS 10.15、Catalina和更新版本所独有的
+* imacpro1,1: NVIDIA Maxwell和Pascal或AMD Polaris和更新
+  * 如果你需要High Sierra或Mojave，请使用，否则请使用MacPro7,1
+* iMac14,2: NVIDIA Maxwell和Pascal
+  * 如果你安装了带有NVIDIA GPU的Web驱动程序后，在imacpro1,1上出现黑屏，请使用
+* MacPro6,1: AMD GCN gpu(支持HD和R5/R7/R9系列)
 
 运行GenSMBIOS，选择选项1下载MacSerial，选择选项3下载SMBIOS。这将给我们一个类似于下面的输出:
 
@@ -597,7 +597,7 @@ SmUUID:       535B897C-55F7-4D65-A8F4-40F4B96ED394
 Apple ROM:    001D4F0D5E22
 ```
 
-The order is `Product | Serial | Board Serial (MLB)`
+关注 `Product | Serial | Board Serial (MLB)`
 
 将 `Type` 部分复制到 Generic -> SystemProductName.
 
@@ -607,7 +607,7 @@ The order is `Product | Serial | Board Serial (MLB)`
 
 将 `SmUUID` 部分复制到 Generic -> SystemUUID.
 
-The `Apple ROM` part gets copied to Generic -> ROM.
+将 `Apple ROM` 部分复制到 Generic -> ROM.
 
 我们将Generic -> ROM设置为苹果ROM(从真正的Mac中转储)，你的网卡Mac地址，或任何随机的Mac地址(可以是6个随机字节，在本指南中我们将使用`11223300 0000`。安装后，请跟随[修复iServices](https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices.html)页面了解如何找到您的真实MAC地址)
 
@@ -708,7 +708,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
+与用于FileVault和热键支持的boot.efi键盘直通相关，将所有内容保留为默认值，因为我们不需要这些选项。更多详细信息:[安全和文件库](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 
@@ -779,7 +779,7 @@ Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, 
 
 ### 启用
 
-* 4G以上解码 (**This must be on, if you can't find the option then add `npci=0x3000` to boot-args. Do not have both this option and npci enabled at the same time.**)
+* 4G以上解码 (**这必须是开启的，如果你找不到选项，那么添加`npci=0x3000`到引导参数。不能同时启用此选项和npci。**)
 * EHCI/XHCI Hand-off
 * 操作系统类型:Windows 8.1/10 UEFI模式(一些主板可能需要”其他操作系统”代替)
 * SATA 模式: AHCI

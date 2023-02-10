@@ -175,10 +175,10 @@ config.plist 还没有这个部分，所以你必须手动创建它。
   * 例如: `Contents/MacOS/Lilu`
 * **MinKernel**
   * kext将被注入到的最低内核版本，有关可能的值，请参见下表
-  * ex. `12.00.00` for OS X 10.8
+  * 例如. `12.00.00` 用于 OS X 10.8
 * **MaxKernel**
   * kext将被注入到的最高内核版本，可能的值见下表
-  * ex. `11.99.99` for OS X 10.7
+  * 例如. `11.99.99` 用于 OS X 10.7
 * **PlistPath**
   * 隐藏在kext中的`info.plist`的路径
   * 例如: `Contents/Info.plist`
@@ -652,7 +652,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
+与用于FileVault和热键支持的boot.efi键盘直通相关，将所有内容保留为默认值，因为我们不需要这些选项。更多详细信息:[安全和文件库](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 
