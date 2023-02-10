@@ -45,7 +45,7 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://sumingyd.github.io/OpenCore-Post-Install/). |
+| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | 为了进行正确的CPU电源管理，您需要运行Pike的ssdtPRGen.Sh脚本生成该文件。参见[安装后](https://sumingyd.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
 | **[SSDT-IMEI](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Sandy Bridge CPU with 7 series motherboards |
 

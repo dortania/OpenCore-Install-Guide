@@ -1,4 +1,4 @@
-# Laptop Coffee Lake and Whiskey Lake
+# 笔记本 Coffee Lake 和 Whiskey Lake
 
 | 支持 | 版本 |
 | :--- | :--- |
@@ -561,7 +561,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Coffee Lake example, we'll chose the MacBookPro15,1 SMBIOS - this is done intentionally for compatibility's sake. The breakdown is as follows:
+对于这个Coffee Lake的例子，我们将选择MacBookPro15,1 SMBIOS -这样做是为了兼容性考虑。细分如下:
 
 | SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |

@@ -1,4 +1,4 @@
-# Laptop Kaby Lake
+# 笔记本 Kaby Lake
 
 | 支持 | 版本 |
 | :--- | :--- |
@@ -128,7 +128,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 * **AAPL,ig-platform-id**
   * 这是用于内部设置iGPU
 * **Type**
-  * Whether the entry is recommended for laptops (ie. with built-in displays) or for Intel NUCs (ie. standalone boxes)
+  * 该条目是否推荐用于笔记本电脑(即。内置显示器)或英特尔NUCs(即。独立的盒子)
 
 在设置iGPU属性时，通常遵循以下步骤。如果他们说的有任何不同，请遵循下表的配置说明:
 
@@ -146,7 +146,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 #### Configuration Notes
 
-* In some cases where you cannot set the DVMT-prealloc of these cards to 64MB or higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case add these values to the iGPU properties:
+* 在某些情况下，您无法在UEFI设置中将这些卡的DVMT-prealloc设置为64MB或更高，您可能会遇到内核崩溃。通常它们被配置为32MB的DVMT-prealloc，在这种情况下，将这些值添加到iGPU属性中:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -154,13 +154,13 @@ config.plist还没有这个部分，所以你必须手动创建它。
 | framebuffer-stolenmem | Data | `00003001` |
 | framebuffer-fbmem | Data | `00009000` |
 
-* For all UHD 620 users (Kaby Lake-R), you'll need a device-id spoof:
+* 对于所有UHD 620用户(Kaby Lake-R)，您将需要一个设备id欺骗:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | device-id | Data | `16590000` |
 
-* HD 6xx users (UHD 6xx users are not concerned) may have some issues with output where plugging in a display out would cause a lock up (kernel panic); here are some patches to mitigate that (credit RehabMan). If you're having these lock ups, try the following sets of patches (try both, but only one set at a time):
+* HD 6xx用户(UHD 6xx用户不关心)可能有一些输出问题，其中插入显示器将导致锁定(内核崩溃);这里有一些补丁可以缓解这种情况(来源RehabMan)。如果你有这些锁，试试下面的补丁(两种都试，但一次只能尝试一组):
   * con1 as 105, con2 as 204, both HDMI
 
     | Key | Type | Value |
@@ -205,9 +205,9 @@ Let's take in consideration these 2 usual framebuffers:
   02040A00 00080000 87010000
   ```
 
-Which look similar at first glance, until you see the small details like the Port ID (the first 2 digits of each hex line). Both of the framebuffers are valid, but not all OEMs ship the same port configuration on all laptops (some have eDP for internal display, some have HDMI instead of DP ports, some have VGA and so on...).
+乍一看它们是相似的，直到您看到像Port ID这样的小细节(每个十六进制行的前2位数字)。这两个framebuffer都是有效的，但并不是所有oem在所有笔记本电脑上都提供相同的端口配置(有些有eDP用于内部显示，有些有HDMI而不是DP端口，有些有VGA等)。
 
-For either framebuffer, the first port (port 00) is ConnectorLVDS (meaning the internal display), which is the same on both configurations, that's how you get a display out for macOS. The differences come to the 2 other ports:
+对于任何一个framebuffer，第一个端口(端口00)都是ConnectorLVDS(表示内部显示器)，这在两种配置上是相同的，这就是在macOS获得显示的方式。不同之处在于其他两个端口:
 
 * `00001B59`
 
@@ -238,7 +238,7 @@ The patches above have these effects:
   * Convert second connector of the ports to 0105 with HDMI connector type
   * Convert third connector of the ports to 0306 with DP connector type
 
-Depending on your real hardware setup, you might want to switch things up, but usually for most laptops, one of the two patches **might** be required, in case your outputs work out-of-the-box with no issues or crashes, you do not need these patches then.
+根据你的实际硬件设置，你可能想要改变，但通常对于大多数笔记本电脑，两个补丁中的一个**可能**是必需的，如果你的输出开箱即用，没有问题或崩溃，那么你就不需要这些补丁。
 
 ::: details How to read the BusID
 
@@ -637,7 +637,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Kaby Lake example, we'll chose the MacBookPro14,1 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
+对于这个Kaby Lake的例子，我们将选择macbookpro14,1 SMBIOS -这是为了兼容性而故意这样做的。典型的细分如下:
 
 | SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |

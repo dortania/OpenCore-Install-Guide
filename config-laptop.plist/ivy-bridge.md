@@ -1,4 +1,4 @@
-# Laptop Ivy Bridge
+# 笔记本 Ivy Bridge
 
 | 支持 | 版本 |
 | :--- | :--- |
@@ -42,11 +42,11 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://sumingyd.github.io/OpenCore-Post-Install/). |
+| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | 为了进行正确的CPU电源管理，您需要运行Pike的ssdtPRGen.Sh脚本生成该文件。参见[安装后](https://sumingyd.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
-| **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
+| **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | 使所有特定于Windows的_OSI调用都适用于macOS (Darwin)标识符。这可能有助于启用一些功能，如XHCI等。 |
 | **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
-| **[SSDT-IMEI](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Ivy Bridge CPU with 6 series motherboards, **not needed for 7 series motherboards** |
+| **[SSDT-IMEI](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 在6系列主板需要在Ivy Bridge CPU上添加一个丢失的IMEI设备，**7系列主板不需要** |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -58,7 +58,7 @@
 
 ::: tip 信息
 
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://sumingyd.github.io/OpenCore-Post-Install/) and drop the old tables(Note that this is only temporary until we've made our SSDT-PM, we'll re-enable these tables later):
+这阻止了某些ACPI表的加载，对于我们来说，我们真正关心的是这个。主要原因是苹果的XCPM不太支持IvyBridge，会导致引导时AppleIntelCPUPowerManagement出现问题。为了避免这种情况，我们在[安装后](https://sumingyd.github.io/OpenCore-Post-Install/)中创建我们自己的PM SSDT，并删除旧的表(注意，这只是临时的，直到我们创建了我们的SSDT-PM，我们稍后将重新启用这些表):
 
 Removing CpuPm:
 
@@ -91,7 +91,7 @@ Removing Cpu0Ist:
 本节允许我们通过OpenCore动态修改ACPI的部分内容(DSDT、SSDT等)。对我们来说，我们需要以下内容:
 
 * OSI 重命名
-  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT
+  * 这在使用SSDT-xosi时是必需的，因为我们将所有的OSI调用重定向到这个SSDT
 
 | Comment | String | Change _OSI to XOSI |
 | :--- | :--- | :--- |
@@ -165,26 +165,26 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **`03006601`** | Laptop | To be used with **1366 by 768** displays or lower |
-| **`04006601`** | Laptop | To be used with **1600 by 900** displays or higher, see below for addition patches |
-| **`09006601`** | Laptop | To be used with some devices that have `eDP` connected monitor (contrary to classical LVDS), must be tested with **03006601** and **04006601** first before trying this. |
-| **`0B006601`** | NUC | To be used with Intel NUCs |
+| **`03006601`** | Laptop | 用于**1366 × 768**或更低的显示器 |
+| **`04006601`** | Laptop | 要使用**1600  × 900**或更高的显示器，请参阅下面的附加补丁 |
+| **`09006601`** | Laptop | 要与一些具有`eDP`连接监视器的设备一起使用(与经典LVDS相反)，必须在尝试之前先用**03006601**和**04006601**进行测试。 |
+| **`0B006601`** | NUC | 与英特尔NUCs一起使用 |
 
 #### Configuration Notes
 
-* VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)
+* VGA **不支持**(除非它是通过DP转VGA内部适配器运行的，显然只有极少数设备会将其视为DP而不是VGA，这完全是运气。)
 
-* If you're using `04006601` as your ig-platform-id, you may need to add the following parameters to fix external outputs as otherwise you will only have one output. (Credit to Rehabman)
+* 如果您使用`04006601`作为ig-platform-id，则可能需要添加以下参数来修复外部输出，否则您将只有一个输出。(资料来源:Rehabman)
 
 | Key | Type | Value | Explanation |
 | :--- | :--- | :--- | :--- |
-| `framebuffer-patch-enable` | Number | `1`                                                          | *enabling the semantic patches in principle* (from the WhateverGreen manual) |
-| `framebuffer-memorycount`  | Number | `2`                                                          | Matching FBMemoryCount to the one on `03006601` (1 on `04` vs 2 on `03`) |
-| `framebuffer-pipecount`    | Number | `2`                                                          | Matching PipeCount to the one on `03006601` (3 on `04` vs 2 on `03`) |
-| `framebuffer-portcount`    | Number | `4`                                                          | Matching PortCount to the one on `03006601` (1 on `04` vs 4 on `03`) |
-| `framebuffer-stolenmem`    | Data   | `00000004`                                                   | Matching STOLEN memory to 64MB (0x04000000 from hex to base 10 in Bytes) to the one on `03006601`<br />Check [here](https://www.tonymacx86.com/threads/guide-alternative-to-the-minstolensize-patch-with-32mb-dvmt-prealloc.221506/) for more information. |
-| `framebuffer-con1-enable`  | Number | `1`                                                          | This will enable patching on *connector 1* of the driver. (Which is the second connector after con0, which is the eDP/LVDS one) |
-| `framebuffer-con1-alldata` | Data   | `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000` | When using `all data` with a connector, either you give all information of that connector (port-bused-type-flag) or that port and the ones following it, like in this case.<br />In this case, the ports in `04` are limited to `1`:<br />`05030000 02000000 30020000` (which corresponds to port 5, which is LVDS)<br />However on `03` there are 3 extra ports:<br />`05030000 02000000 30000000` (LVDS, con0, like `04`)<br/>`02050000 00040000 07040000` (DP, con1)<br/>`03040000 00040000 81000000` (DP, con2)<br/>`04060000 00040000 81000000` (DP, con3)<br />Since we changed the number of PortCount to `4` in a platform that has only 1, that means we need to define the 3 others (and we that starting with con1 to the end).<br /> |
+| `framebuffer-patch-enable` | Number | `1`                                                          | *原理上启用语义补丁(来自WhateverGreen手册) |
+| `framebuffer-memorycount`  | Number | `2`                                                          | 将FBMemoryCount匹配到`03006601`上的值(`04`上为1，`03`上为2) |
+| `framebuffer-pipecount`    | Number | `2`                                                          | 将PipeCount匹配到`03006601`上的值(`04`上为3，`03`上为2) |
+| `framebuffer-portcount`    | Number | `4`                                                          | 将PortCount匹配到`03006601`上的端口(`04`上为1，`03`上为4) |
+| `framebuffer-stolenmem`    | Data   | `00000004`                                                   | 将被盗内存匹配到64MB (0x04000000从十六进制到十进制字节)到`03006601`上的内存<br />查看[这里](https://www.tonymacx86.com/threads/guide-alternative-to-the-minstolensize-patch-with-32mb-dvmt-prealloc.221506/)了解更多信息。 |
+| `framebuffer-con1-enable`  | Number | `1`                                                          |这将在驱动程序的*连接器1*上启用补丁。(是con0之后的第二个连接器，是eDP/LVDS连接器) |
+| `framebuffer-con1-alldata` | Data   | `02050000 00040000 07040000 03040000 00040000 81000000 04060000 00040000 81000000` | 当使用连接器的`all data`时，要么提供该连接器的所有信息(端口总线类型标志)，要么提供该端口及其后面的信息，就像本例一样。<br />这种情况下，`04`中的端口被限制为`1`:<br />`05030000 02000000 30020000`(对应端口5，即LVDS)<br />但是在`03`上有3个额外的端口:<br />`05030000 02000000 30000000` (LVDS, con0，类似于`04`)<br/>`02050000 00040000 07040000 07040000` (DP, con1)<br/>`03040000 00040000 81000000` (DP, con2)<br/>`04060000 00040000 81000000` (DP, con3)<br />因为我们在只有1的平台上将PortCount的数量更改为`4`，这意味着我们需要定义其他3个(从con1开始直到结束)。<br /> |
 
 :::
 
@@ -192,10 +192,10 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 **Sandy/IvyBridge Hybrids:**
 
-Some laptops from this era came with a mixed chipset setup, using Ivy Bridge CPUs with Sandy Bridge chipsets which creates issues with macOS since it expects a certain [IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID that it doesn't find and would get stuck at boot(As Apple's iGPU drivers require an [IMEI device](https://en.wikipedia.org/wiki/Intel_Management_Engine)), to fix this we need to fake the IMEI's IDs in these models
+这个时代的一些笔记本电脑带有混合芯片组设置，使用Ivy Bridge cpu和Sandy Bridge芯片组，这在macOS上产生了问题，因为它期望某个[IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID，但它找不到，并且会在引导时卡住(因为苹果的iGPU驱动程序需要[IMEI设备](https://en.wikipedia.org/wiki/Intel_Management_Engine))，为了解决这个问题，我们需要伪造这些型号的IMEI ID
 
-* To know if you're affected check if your CPU is an Intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M) through tools like AIDA64.
-* In your config add a new PciRoot device named `PciRoot(0x0)/Pci(0x16,0x0)`
+* 要了解是否受到影响，请通过AIDA64等工具检查CPU是否为英特尔酷睿ix-3xxx，芯片组是否为Hx6x(例如，使用HM65或HM67的笔记本电脑使用酷睿i3-3110M)。
+* 在配置文件中添加一个新的PciRoot设备，名为`PciRoot(0x0)/Pci(0x16,0x0)`
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -584,7 +584,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
+对于这个Ivy Bridge的例子，我们将选择imac13,2 SMBIOS -这是为了兼容性而故意这样做的。典型的细分如下:
 
 | SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 |
 | :--- | :--- | :--- | :--- |
@@ -595,11 +595,11 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 | Macmini6,1 | Dual Core NUC | iGPU: HD 4000 | N/A |
 | Macmini6,2 | Quad Core NUC | iGPU: HD 4000 | N/A |
 
-**Note**: The following SMBIOS are only supported up-to and including macOS 10.15, Catalina. For cases where you must boot Big Sur, see below:
+**注**:以下SMBIOS仅支持macOS 10.15和Catalina。对于必须引导Big Sur的情况，请参见下面:
 
-::: details Big Sur SMBIOS table
+::: details Big Sur SMBIOS 表
 
-Note choosing a SMBIOS from the list below for Catalina or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+注意，不建议从下面的列表中为Catalina或更老的版本选择一个SMBIOS，因为电源管理等会在使用未优化的SMBIOS时中断。
 
 | SMBIOS | CPU Type | Display Size |
 | :--- | :--- | :--- |
@@ -808,7 +808,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 * 注意:大多数选项可能不会出现在你的固件中，我们建议尽可能匹配，但如果这些选项在你的BIOS中不可用，不要太担心
 
-These are the main options to check for, if you can't find it or an equivalent for it, just skip it.
+这些是你要检查的主要选项，如果你找不到或找不到对应的选项，就跳过它。
 
 ### 禁用
 

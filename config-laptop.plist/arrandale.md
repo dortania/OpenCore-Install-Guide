@@ -44,7 +44,7 @@
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
 | **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
-| **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
+| **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | 使所有特定于Windows的_OSI调用都适用于macOS (Darwin)标识符。这可能有助于启用一些功能，如XHCI等。 |
 | **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
@@ -64,7 +64,7 @@
 本节允许我们通过OpenCore动态修改ACPI的部分内容(DSDT、SSDT等)。对我们来说，我们需要以下内容:
 
 * OSI 重命名
-  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT
+  * 这在使用SSDT-xosi时是必需的，因为我们将所有的OSI调用重定向到这个SSDT
 
 | Comment | String | Change _OSI to XOSI |
 | :--- | :--- | :--- |
@@ -749,7 +749,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 * 注意:大多数选项可能不会出现在你的固件中，我们建议尽可能匹配，但如果这些选项在你的BIOS中不可用，不要太担心
 
-These are the main options to check for, if you can't find it or an equivalent for it, just skip it.
+这些是你要检查的主要选项，如果你找不到或找不到对应的选项，就跳过它。
 
 ### 禁用
 

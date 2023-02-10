@@ -1,4 +1,4 @@
-# Laptop Icelake
+# 笔记本 Icelake
 
 | 支持 | 版本 |
 | :--- | :--- |
@@ -46,7 +46,7 @@
 | **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl)** | 创建一个存根以便VoodooI2C可以连接，对于那些有问题的VoodooI2C工作可以尝试 [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) 代替。请注意，英特尔NUCs不需要这个 |
 | **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
 | **[SSDT-AWAC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 这是[300系列RTC补丁](https://www.hackintosh-forum.de/forum/thread/39846-asrock-z390-taichi-ultimate/?pageNo=2)大多数B360, B365, H310, H370, Z390和一些Z370板需要。另一种选择是[SSDT-RTC0](https://sumingyd.github.io/Getting-Started-With-ACPI/)，当AWAC SSDT由于缺少Legacy的RTC时钟而不兼容时，请检查您是否需要它以及使用哪个，请参阅 [开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/) 页面. |
-| **[SSDT-RHUB](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Needed to fix Root-device errors on many Icelake laptops |
+| **[SSDT-RHUB](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 需要修复许多Icelake笔记本电脑上的根设备错误 |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -125,7 +125,7 @@
 * **RebuildAppleMemoryMap**: YES
   * 生成与macOS兼容的内存映射，可能在一些笔记本OEM固件上损坏，所以如果您收到早期启动失败禁用此功能
 * **SetupVirtualMap**: NO
-  * 修复了SetVirtualAddresses对虚拟地址的调用, can cause early kernel panics on Ice Lake machines
+  * 修复了SetVirtualAddresses对虚拟地址的调用, 可能会在Ice Lake机器上引起早期内核崩溃
 * **SyncRuntimePermissions**: YES
   * 修复了与MAT表的对齐，以及在引导Windows和Linux时需要使用MAT表，也推荐用于macOS。主要针对重建apple内存映射的用户
 
@@ -150,7 +150,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 * **AAPL,ig-platform-id**
   * 这是用于内部设置iGPU
 * **Port Count**
-  * The number of displays supported
+  * 支持的显示数量
 
 在设置iGPU属性时，通常遵循以下步骤。如果他们说的有任何不同，请遵循下表的配置说明:
 
@@ -163,7 +163,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 #### Configuration Notes
 
-* In some cases where you cannot set the DVMT-prealloc of these cards to 256MB higher in your UEFI Setup, you may get a kernel panic. Usually they're configured for 32MB of DVMT-prealloc, in that case these values are added to your iGPU Properties
+* 在某些情况下，你在UEFI设置中无法将这些卡的DVMT-prealloc设置为高于256MB的值，你可能会遇到内核崩溃。通常它们被配置为32MB的DVMT-prealloc，在这种情况下，这些值被添加到iGPU属性中
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -509,8 +509,8 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 | **debug=0x100** | 这禁用了macOS的watchdog，它有助于防止在内核出现严重错误时重新启动。这样你就**有希望**收集到一些有用的信息并按照提示来解决问题。 |
 | **keepsyms=1** | 这是debug=0x100的配套设置，它告诉操作系统在内核出现故障时也打印这些符号。这可以提供一些更有用的见解，以了解造成崩溃本身的原因。 |
 | **alcid=1** | 用于设置AppleALC的布局id，请参阅[支持的编解码器](https://github.com/acidanthera/applealc/wiki/supported-codecs) ，以确定针对特定系统使用哪种布局。更多信息在 [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/) |
-| **-igfxcdc** | Resolves Clock ID based kernel panics on Icelake CPUs, recommended for all users |
-| **-igfxdvmt** | Similar to the above, resolves issue with some firmwares having 60MB reserved for iGPU memory which can cause kernel panics |
+| **-igfxcdc** | 在Icelake cpu上解决基于时钟ID的内核崩溃，推荐所有用户使用 |
+| **-igfxdvmt** | 与上面类似，解决了一些为iGPU内存预留60MB的固件可能导致内核异常的问题 |
 
 * **特定于gpu的引导参数**:
 
@@ -556,7 +556,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this IceLake example, we chose the MacBookAir9,1 SMBIOS - this is done intentionally for compatibility's sake. The breakdown is as follows:
+在这个IceLake的例子中，我们选择了macbookair9,1 SMBIOS——这是为了兼容性而故意这么做的。细分如下:
 
 | SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 | Touch ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -576,7 +576,7 @@ Board Serial: C02839303QXH69FJA
 SmUUID:       DBB364D6-44B2-4A02-B922-AB4396F16DA8
 ```
 
-* **Note**: MacSerial currently does not support Linux, so you must grab a Windows or macOS machine to generate the MacBookPro16,2 values
+* **注意**:MacSerial目前不支持Linux，所以你必须使用Windows或macOS机器来生成macbookpro16,2的值
 
 将 `Type` 部分复制到 Generic -> SystemProductName.
 

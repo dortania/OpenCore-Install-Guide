@@ -44,7 +44,7 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://sumingyd.github.io/OpenCore-Post-Install/). |
+| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | 为了进行正确的CPU电源管理，您需要运行Pike的ssdtPRGen.Sh脚本生成该文件。参见[安装后](https://sumingyd.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
 | **[SSDT-IMEI](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Ivy Bridge CPU with 6 series motherboards |
 
@@ -58,7 +58,7 @@
 
 ::: tip 信息
 
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://sumingyd.github.io/OpenCore-Post-Install/) and drop the old tables(Note that this is only temporary until we've made our SSDT-PM, we'll re-enable these tables later):
+这阻止了某些ACPI表的加载，对于我们来说，我们真正关心的是这个。主要原因是苹果的XCPM不太支持IvyBridge，会导致引导时AppleIntelCPUPowerManagement出现问题。为了避免这种情况，我们在[安装后](https://sumingyd.github.io/OpenCore-Post-Install/)中创建我们自己的PM SSDT，并删除旧的表(注意，这只是临时的，直到我们创建了我们的SSDT-PM，我们稍后将重新启用这些表):
 
 Removing CpuPm:
 
@@ -572,7 +572,7 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 
 ::: details Big Sur/Monterey SMBIOS table
 
-Note choosing a SMBIOS from the list below for Catalina or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+注意，不建议从下面的列表中为Catalina或更老的版本选择一个SMBIOS，因为电源管理等会在使用未优化的SMBIOS时中断。
 
 Big Sur table:
 

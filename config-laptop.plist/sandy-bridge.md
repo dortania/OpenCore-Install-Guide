@@ -43,9 +43,9 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | Needed for proper CPU power management, you will need to run Pike's ssdtPRGen.sh script to generate this file. This will be run in [post install](https://sumingyd.github.io/OpenCore-Post-Install/). |
+| **[SSDT-PM](https://github.com/Piker-Alpha/ssdtPRGen.sh)** | 为了进行正确的CPU电源管理，您需要运行Pike的ssdtPRGen.Sh脚本生成该文件。参见[安装后](https://sumingyd.github.io/OpenCore-Post-Install/). |
 | **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
-| **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | Makes all _OSI calls specific to Windows work for macOS (Darwin) Identifier. This may help enabling some features like XHCI and others. |
+| **[SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml)** | 使所有特定于Windows的_OSI调用都适用于macOS (Darwin)标识符。这可能有助于启用一些功能，如XHCI等。 |
 | **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
 | **[SSDT-IMEI](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Needed to add a missing IMEI device on Sandy Bridge CPU with 7 series motherboards. **This is not needed for 6-series motherboards** |
 
@@ -92,7 +92,7 @@ Removing Cpu0Ist:
 本节允许我们通过OpenCore动态修改ACPI的部分内容(DSDT、SSDT等)。对我们来说，我们需要以下内容:
 
 * OSI 重命名
-  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT
+  * 这在使用SSDT-xosi时是必需的，因为我们将所有的OSI调用重定向到这个SSDT
 
 | Comment | String | Change _OSI to XOSI |
 | :--- | :--- | :--- |
@@ -166,11 +166,11 @@ config.plist还没有这个部分，所以你必须手动创建它。
 | AAPL,snb-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
 | **`00000100`** | Laptop | To be used with laptops |
-| **`10000300`** | NUC | To be used with Intel NUCs |
+| **`10000300`** | NUC | 与英特尔NUCs一起使用 |
 
 #### Configuration Notes
 
-* VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)
+* VGA **不支持**(除非它是通过DP转VGA内部适配器运行的，显然只有极少数设备会将其视为DP而不是VGA，这完全是运气。)
 * HD 2000 series are unsupported as well
 
 :::
@@ -181,8 +181,8 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 Some laptops from this era came with a mixed chipset setup, using Sandy Bridge CPUs with Ivy Bridge chipsets which creates issues with macOS since it expects a certain [IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID that it doesn't find and would get stuck at boot(As Apple's iGPU drivers require an [IMEI device](https://en.wikipedia.org/wiki/Intel_Management_Engine)), to fix this we need to fake the IMEI's IDs in these models
 
-* To know if you're affected check if your CPU is an Intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M) through tools like AIDA64.
-* In your config add a new PciRoot device named `PciRoot(0x0)/Pci(0x16,0x0)`
+* 要了解是否受到影响，请通过AIDA64等工具检查CPU是否为英特尔酷睿ix-3xxx，芯片组是否为Hx6x(例如，使用HM65或HM67的笔记本电脑使用酷睿i3-3110M)。
+* 在配置文件中添加一个新的PciRoot设备，名为`PciRoot(0x0)/Pci(0x16,0x0)`
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -786,7 +786,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 * 注意:大多数选项可能不会出现在你的固件中，我们建议尽可能匹配，但如果这些选项在你的BIOS中不可用，不要太担心
 
-These are the main options to check for, if you can't find it or an equivalent for it, just skip it.
+这些是你要检查的主要选项，如果你找不到或找不到对应的选项，就跳过它。
 
 ### 禁用
 
