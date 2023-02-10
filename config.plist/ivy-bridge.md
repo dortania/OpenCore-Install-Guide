@@ -24,7 +24,7 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见前一节获取方法: [config.plist 设置](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图片并不总是最新的，所以请阅读下面的文字，如果没有提到，那么保持默认。
 
@@ -105,7 +105,7 @@ Removing Cpu0Ist:
 ### Quirks
 
 ::: tip 信息
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+与boot.efi补丁和固件修复相关的设置，我们将其保留为默认设置
 :::
 ::: details 更深入的信息
 
@@ -114,11 +114,11 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 * **EnableSafeModeSlide**: YES
   * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms.
 * **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+  * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
-  * 修复了SetVirtualAddresses对虚拟地址的调用, required for Gigabyte boards to resolve early kernel panics.
+  * 修复了SetVirtualAddresses对虚拟地址的调用, 用于Gigabyte主板，以解决早期的内核崩溃.
 
 :::
 
@@ -132,9 +132,9 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+本节是通过WhateverGreen的[Framebuffer补丁指南](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) 建立的，用于设置重要的iGPU属性。
 
-The config.plist doesn't already have a section for this so you will have to create it manually.
+config.plist还没有这个部分，所以你必须手动创建它。
 
 The `AAPL,ig-platform-id` we use is as follows:
 
@@ -169,8 +169,8 @@ This is needed if you're pairing an Ivy Bridge CPU with a 6 series motherboard(i
 
 `layout-id`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* 你可以直接删除这个属性，因为目前它还没有被我们使用
 
 For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
 
@@ -205,7 +205,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
   * kext的名称
   * 例如: `Lilu.kext`
 * **Enabled**
-  * 不言自明，启用或禁用kext
+  * 这里想必就不用多做解释了，启用或禁用kext
 * **ExecutablePath**
   * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist时不需要填充该属性。
   * 例如: `Contents/MacOS/Lilu`

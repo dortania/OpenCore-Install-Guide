@@ -22,7 +22,7 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见前一节获取方法: [config.plist 设置](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图片并不总是最新的，所以请阅读下面的文字，如果没有提到，那么保持默认。
 
@@ -42,7 +42,7 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 在Haswell和更新的版本上允许本地CPU电源管理，请参阅[ACPI入门指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多细节。 |
 | **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
@@ -76,7 +76,7 @@
 ### Quirks
 
 ::: tip 信息
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+与boot.efi补丁和固件修复相关的设置，我们将其保留为默认设置
 :::
 ::: details 更深入的信息
 
@@ -85,11 +85,11 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 * **EnableSafeModeSlide**: YES
   * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms.
 * **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+  * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
-  * 修复了SetVirtualAddresses对虚拟地址的调用, required for Gigabyte boards to resolve early kernel panics.
+  * 修复了SetVirtualAddresses对虚拟地址的调用, 用于Gigabyte主板，以解决早期的内核崩溃.
 
 :::
 
@@ -103,9 +103,9 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+本节是通过WhateverGreen的[Framebuffer补丁指南](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) 建立的，用于设置重要的iGPU属性。
 
-The config.plist doesn't already have a section for this so you will have to create it manually.
+config.plist还没有这个部分，所以你必须手动创建它。
 
 `AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
 
@@ -150,8 +150,8 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 
 `layout-id`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* 你可以直接删除这个属性，因为目前它还没有被我们使用
 
 For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
 
@@ -186,7 +186,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
   * kext的名称
   * 例如: `Lilu.kext`
 * **Enabled**
-  * 不言自明，启用或禁用kext
+  * 这里想必就不用多做解释了，启用或禁用kext
 * **ExecutablePath**
   * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist时不需要填充该属性。
   * 例如: `Contents/MacOS/Lilu`
@@ -251,7 +251,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
 
 | 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
-| AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
+| AppleCpuPmCfgLock | NO | 如果运行10.10或更高版本，并且不能在BIOS中禁用`CFG-Lock`，则需要 |
 | AppleXcpmCfgLock | YES | 如果在BIOS中禁用了`CFG-Lock`，是不需要的 |
 | DisableIoMapper | YES | 如果在BIOS中禁用了`VT-D`，是不需要的 |
 | LapicKernelPanic | NO | 惠普的机器需要这个选项 |
@@ -763,8 +763,8 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 雷电 Thunderbolt (用于初始安装，因为如果没有正确安装，Thunderbolt可能会导致问题)
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
-  * For 10.10 and older, you'll need to enable AppleCpuPmCfgLock as well
+* CFG Lock (MSR 0xE2写保护)(**必须关闭，如果你找不到选项，那么在Kernel -> Quirks下启用`AppleXcpmCfgLock`。你的hack将无法在启用CFG-Lock的情况下启动**)
+  * 对于10.10和更老版本，你也需要启用AppleCpuPmCfgLock
 
 ### 启用
 
@@ -774,7 +774,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 执行禁止位
 * EHCI/XHCI Hand-off
 * 操作系统类型:Windows 8.1/10 UEFI模式(一些主板可能需要”其他操作系统”代替)
-* DVMT Pre-Allocated(iGPU Memory): 64MB or higher
+* DVMT预分配(iGPU内存):64MB或以上
 * SATA 模式: AHCI
 
 # 完成后，我们需要编辑一些额外的值。访问[苹果安全启动页面](../config.plist/security.md)

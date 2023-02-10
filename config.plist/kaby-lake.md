@@ -21,7 +21,7 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见上一节中如何获取:[config.plist Setup](../config.plist/README.md)
 
-::: warning 注意
+::: warning 注意 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图像并不总是最新的，所以请阅读下面的文本，如果没有提到，则保留为默认值。
 
@@ -169,7 +169,7 @@ config.plist 还没有这个部分，所以你必须手动创建它。
   * kext的名称
   * 例如: `Lilu.kext`
 * **Enabled**
-  * 不言自明，启用或禁用kext
+  * 这里想必就不用多做解释了，启用或禁用kext
 * **ExecutablePath**
   * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist不需要填充该属性。
   * 例如: `Contents/MacOS/Lilu`
@@ -723,7 +723,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 雷电 Thunderbolt (用于初始安装，因为如果没有正确安装，Thunderbolt可能会导致问题)
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
+* CFG Lock (MSR 0xE2写保护)(**必须关闭，如果你找不到选项，那么在Kernel -> Quirks下启用`AppleXcpmCfgLock`。你的hack将无法在启用CFG-Lock的情况下启动**)
 
 ### 启用
 
@@ -733,7 +733,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 执行禁止位
 * EHCI/XHCI Hand-off
 * 操作系统类型:Windows 8.1/10 UEFI模式(一些主板可能需要”其他操作系统”代替)
-* DVMT Pre-Allocated(iGPU Memory): 64MB or higher
+* DVMT预分配(iGPU内存):64MB或以上
 * SATA 模式: AHCI
 
 # 完成后，我们需要编辑一些额外的值。访问[苹果安全启动页面](../config.plist/security.md)

@@ -23,7 +23,7 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见前一节获取方法: [config.plist 设置](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图片并不总是最新的，所以请阅读下面的文字，如果没有提到，那么保持默认。
 
@@ -157,7 +157,7 @@ TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
   * kext的名称
   * 例如: `Lilu.kext`
 * **Enabled**
-  * 不言自明，启用或禁用kext
+  * 这里想必就不用多做解释了，启用或禁用kext
 * **ExecutablePath**
   * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist时不需要填充该属性。
   * 例如: `Contents/MacOS/Lilu`
@@ -267,7 +267,7 @@ Needed for spoofing unsupported CPUs, thankfully Nehalem is officially supported
   * 这是15个端口限制补丁，不要依赖它，因为它不是一个保证修复USB接口的解决方案。如果可能，请创建一个[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)。
   * 在macOS 11.3+中，[XhciPortLimit可能无法正常工作。](https://github.com/dortania/bugtracker/issues/162) 我们建议用户在升级前禁用此功能和 映射或 [从Windows映射](https://github.com/USBToolBox/tool). 你也可以安装macOS 11.2.3或更旧的版本。
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+原因是UsbInjectAll重新实现了内置的macOS功能，而没有适当的当前调优。只在一个plist-only kext中描述端口要简洁得多，这样就不会浪费运行时内存等
 
 :::
 
@@ -714,7 +714,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 并口（Parallel Port）
 * VT-d (如果将`DisableIoMapper`设置为YES，则可以启用)
 * 兼容性支持模块(CSM)(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**)
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
+* 雷电 Thunderbolt(用于初始安装，因为如果安装不正确，Thunderbolt可能会导致问题)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2写保护)(**此选项必须关闭，如果您找不到该选项，则在`Kernel -> Quirks`下启用`AppleCpuPmCfgLock`。你的黑苹果将不会在启用CFG-Lock的情况下启动**))

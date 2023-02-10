@@ -24,7 +24,7 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见前一节获取方法: [config.plist 设置](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图片并不总是最新的，所以请阅读下面的文字，如果没有提到，那么保持默认。
 
@@ -156,7 +156,7 @@
   * kext的名称
   * 例如: `Lilu.kext`
 * **Enabled**
-  * 不言自明，启用或禁用kext
+  * 这里想必就不用多做解释了，启用或禁用kext
 * **ExecutablePath**
   * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist时不需要填充该属性。
   * 例如: `Contents/MacOS/Lilu`

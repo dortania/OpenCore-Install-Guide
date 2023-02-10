@@ -23,7 +23,7 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见前一节获取方法: [config.plist 设置](../config.plist/README.md)
 
-::: warning
+::: warning 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图片并不总是最新的，所以请阅读下面的文字，如果没有提到，那么保持默认。
 
@@ -43,10 +43,10 @@
 
 | 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Allows for native CPU power management on Haswell and newer, see [Getting Started With ACPI Guide](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. |
+| **[SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 在Haswell和更新的版本上允许本地CPU电源管理，请参阅[ACPI入门指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多细节。 |
 | **[SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器，参见 [开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。 |
-| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl.zip)** | Creates a stub so VoodooI2C can connect, for those having troubles getting VoodooI2C working can try [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) instead. Note that Intel NUCs do not need this |
-| **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | Fixes brightness control, see [Getting Started With ACPI Guide](https://sumingyd.github.io/Getting-Started-With-ACPI/) for more details. Note that Intel NUCs do not need this |
+| **[SSDT-GPIO](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/decompiled/SSDT-GPI0.dsl.zip)** | 创建一个存根以便VoodooI2C可以连接，对于那些有问题的VoodooI2C工作可以尝试 [SSDT-XOSI](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-XOSI.aml) 代替。请注意，英特尔NUCs不需要这个 |
+| **[SSDT-PNLF](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复亮度控制，请参阅[ACPI指南入门](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多详细信息。请注意，英特尔NUCs不需要这个 |
 
 请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
@@ -62,10 +62,10 @@
 
 ::: tip 信息
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, we'll need the following:
+本节允许我们通过OpenCore动态修改ACPI的部分内容(DSDT、SSDT等)。对我们来说，我们需要以下内容:
 
-* OSI rename
-  * This is required when using SSDT-XOSI as we redirect all OSI calls to this SSDT, **this is not needed if you're using SSDT-GPIO**
+* OSI 重命名
+  * 这在使用SSDT-xosi时是必需的，因为我们会将所有的OSI调用重定向到这个SSDT，**如果你使用SSDT-gpio则不需要**
 
 | Comment | String | Change _OSI to XOSI |
 | :--- | :--- | :--- |
@@ -89,12 +89,12 @@ This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.
 
 ### MmioWhitelist
 
-This section is allowing spaces to be pass-through to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+本节允许将通常被忽略的空格传递给macOS，当与`DevirtualiseMmio`配对时很有用。
 
 ### Quirks
 
 ::: tip 信息
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+与boot.efi补丁和固件修复相关的设置，我们将其保留为默认设置
 :::
 ::: details 更深入的信息
 
@@ -103,11 +103,11 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+  * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
-  * 修复了SetVirtualAddresses对虚拟地址的调用, required for Gigabyte boards to resolve early kernel panics
+  * 修复了SetVirtualAddresses对虚拟地址的调用, 用于Gigabyte主板，以解决早期的内核崩溃
   
 :::
 
@@ -121,21 +121,21 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 
 ::: tip PciRoot(0x0)/Pci(0x2,0x0)
 
-This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
+本节是通过WhateverGreen的[Framebuffer补丁指南](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) 建立的，用于设置重要的iGPU属性。
 
-The config.plist doesn't already have a section for this so you will have to create it manually.
+config.plist还没有这个部分，所以你必须手动创建它。
 
-When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
+在设置iGPU时，下表应该有助于找到要设置的正确值。下面是一些值的解释:
 
 * **AAPL,ig-platform-id**
-  * This is used internally for setting up the iGPU
+  * 这是用于内部设置iGPU
 * **Type**
-  * Whether the entry is recommended for laptops(ie. with built-in displays) or for Intel NUCs(ie. stand alone boxes)
+  * 该条目是否建议用于笔记本电脑(即。内置显示器)或英特尔NUCs(即。独立盒子)
 
-Generally follow these steps when setting up your iGPU properties. Follow the configuration notes below the table if they say anything different:
+在设置iGPU属性时，通常遵循以下步骤。如果他们说的有任何不同，请遵循下表的配置说明:
 
-1. When initially setting up your config.plist, only set AAPL,ig-platform-id - this is normally enough
-2. If you boot and you get no graphics acceleration (7MB VRAM and solid background for dock), then you likely need to try different `AAPL,ig-platform-id` values, add stolenmem patches, or even add a `device-id` property.
+1. 在最初设置config.plist时，只设置AAPL,ig-platform-id——这通常就足够了
+2. 如果你启动后没有得到图形加速(7MB 显存和不透明的dock背景)，那么你可能需要尝试不同的`AAPL, g-platform-id`值，添加stolenmem补丁，甚至添加`device-id`属性。
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
@@ -166,10 +166,10 @@ You will also require a device-id spoof to be supported:
 
 `layout-id`
 
-* Applies AppleALC audio injection, you'll need to do your own research on which codec your motherboard has and match it with AppleALC's layout. [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
-* You can delete this property outright as it's unused for us at this time
+* 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
+* 你可以直接删除这个属性，因为目前它还没有被我们使用
 
-For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
+对于我们来说，我们将使用引导参数`alcid=xxx`来完成这一点。`alcid`将覆盖所有其他布局id。更多信息在[安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 :::
 
@@ -202,7 +202,7 @@ For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this.
   * kext的名称
   * 例如: `Lilu.kext`
 * **Enabled**
-  * 不言自明，启用或禁用kext
+  * 这里想必就不用多做解释了，启用或禁用kext
 * **ExecutablePath**
   * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist时不需要填充该属性。
   * 例如: `Contents/MacOS/Lilu`
@@ -267,7 +267,7 @@ For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this.
 
 | 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
-| AppleCpuPmCfgLock | NO | Need if running 10.10 or older and cannot disable `CFG-Lock` in the BIOS |
+| AppleCpuPmCfgLock | NO | 如果运行10.10或更高版本，并且不能在BIOS中禁用`CFG-Lock`，则需要 |
 | AppleXcpmCfgLock | YES | 如果在BIOS中禁用了`CFG-Lock`，是不需要的 |
 | DisableIoMapper | YES | 如果在BIOS中禁用了`VT-D`，是不需要的 |
 | LapicKernelPanic | NO | 惠普的机器需要这个选项 |
@@ -312,7 +312,7 @@ For us, we'll be using the boot argument `alcid=xxx` instead to accomplish this.
   * 这是15个端口限制补丁，不要依赖它，因为它不是一个保证修复USB接口的解决方案。如果可能，请创建一个[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)。
   * 在macOS 11.3+中，[XhciPortLimit可能无法正常工作。](https://github.com/dortania/bugtracker/issues/162) 我们建议用户在升级前禁用此功能和 映射或 [从Windows映射](https://github.com/USBToolBox/tool). 你也可以安装macOS 11.2.3或更旧的版本。
 
-The reason being is that UsbInjectAll reimplements builtin macOS functionality without proper current tuning. It is much cleaner to just describe your ports in a single plist-only kext, which will not waste runtime memory and such
+原因是UsbInjectAll重新实现了内置的macOS功能，而没有适当的当前调优。只在一个plist-only kext中描述端口要简洁得多，这样就不会浪费运行时内存等
 
 :::
 
@@ -528,7 +528,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 ### Delete
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
+强制重写NVRAM变量，请注意，`Add` **不会覆盖** NVRAM中已经存在的值，所以像`boot-args`这样的值应该保持不变。
 
 * **LegacySchema**
   * 用于赋值NVRAM变量，与`OpenVariableRuntimeDxe.efi`一起使用。仅适用于没有原生NVRAM的系统
@@ -546,7 +546,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 For this Haswell example, we chose the MacBookPro11,1 SMBIOS. The typical breakdown is as follows:
 
-| SMBIOS | CPU Type | GPU Type | Display Size |
+| SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 |
 | :--- | :--- | :--- | :--- |
 | MacBookAir6,1 | Dual Core 15W | iGPU: HD 5000 | 11" |
 | MacBookAir6,2 | Dual Core 15W | iGPU: HD 5000 | 13" |
@@ -725,7 +725,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * **IgnoreInvalidFlexRatio**: YES
   * 修复了在BIOS中无法禁用MSR_FLEX_RATIO (0x194)的问题，所有基于skylake的系统都需要禁用
 * **ReleaseUsbOwnership**: YES
-  * Releases USB controller from firmware driver, needed for when your firmware doesn't support EHCI/XHCI Handoff. Most laptops have garbage firmwares so we'll need this as well
+  * 从固件驱动中释放USB控制器，当您的固件不支持EHCI/XHCI切换时需要。大多数笔记本电脑都有垃圾的固件，所以我们需要这个
 * **DisableSecurityPolicy**: NO
   * 禁用固件中的平台安全策略，建议用于有bug的固件，其中禁用安全引导不允许加载第三方固件驱动程序。
   * 如果运行Microsoft Surface设备，建议启用此选项
@@ -753,10 +753,10 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 ### Config reminders
 
-**HP Users**:
+**HP 用户**:
 
 * Kernel -> Quirks -> LapicKernelPanic -> True
-  * You will get a kernel panic on LAPIC otherwise
+  * 否则，您将在LAPIC上出现内核崩溃
 * UEFI -> Quirks -> UnblockFsConnect -> True
 
 ## Intel BIOS 设置
@@ -771,11 +771,11 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 并口（Parallel Port）
 * VT-d (如果将`DisableIoMapper`设置为YES，则可以启用)
 * 兼容性支持模块(CSM)(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**)
-* Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
+* 雷电 Thunderbolt(用于初始安装，因为如果安装不正确，Thunderbolt可能会导致问题)
 * Intel SGX
 * Intel Platform Trust
-* CFG Lock (MSR 0xE2 write protection)(**This must be off, if you can't find the option then enable `AppleXcpmCfgLock` under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled**)
-  * For 10.10 and older, you'll need to enable AppleCpuPmCfgLock as well
+* CFG Lock (MSR 0xE2写保护)(**必须关闭，如果你找不到选项，那么在Kernel -> Quirks下启用`AppleXcpmCfgLock`。你的hack将无法在启用CFG-Lock的情况下启动**)
+  * 对于10.10和更老版本，你也需要启用AppleCpuPmCfgLock
 
 ### 启用
 
@@ -785,7 +785,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 执行禁止位
 * EHCI/XHCI Hand-off
 * 操作系统类型:Windows 8.1/10 UEFI模式(一些主板可能需要”其他操作系统”代替)
-* DVMT Pre-Allocated(iGPU Memory): 64MB or higher
+* DVMT预分配(iGPU内存):64MB或以上
 * SATA 模式: AHCI
 
 # 完成后，我们需要编辑一些额外的值。访问[苹果安全启动页面](../config.plist/security.md)

@@ -26,7 +26,7 @@
   * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
   * Supporting AMD Family 15h, 16h, 17h and 19h
 
-::: warning
+::: warning 注意
 
 在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图片并不总是最新的，所以请阅读下面的文字，如果没有提到，那么保持默认。
 
@@ -77,7 +77,7 @@
 ### Quirks
 
 ::: tip 信息
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+与boot.efi补丁和固件修复相关的设置，我们将其保留为默认设置
 :::
 ::: details 更深入的信息
 
@@ -86,11 +86,11 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register.
+  * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
-  * 修复了SetVirtualAddresses对虚拟地址的调用, required for Gigabyte boards to resolve early kernel panics
+  * 修复了SetVirtualAddresses对虚拟地址的调用, 用于Gigabyte主板，以解决早期的内核崩溃
 
 :::
 
@@ -137,7 +137,7 @@ TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
   * kext的名称
   * 例如: `Lilu.kext`
 * **Enabled**
-  * 不言自明，启用或禁用kext
+  * 这里想必就不用多做解释了，启用或禁用kext
 * **ExecutablePath**
   * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist时不需要填充该属性。
   * 例如: `Contents/MacOS/Lilu`
