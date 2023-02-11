@@ -108,7 +108,7 @@
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: NO
-  * Needed to remove write protection from CR0 register.
+  * 需要从CR0寄存器中移除写保护。
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES

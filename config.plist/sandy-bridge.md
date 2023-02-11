@@ -5,8 +5,8 @@
 | 初始macOS支持 | OS X 10.6.7, Snow Leopard |
 | 最后支持的操作系统 | macOS 12 Monterey |
 | 注1 | Ventura信息请参见[macOS 13 Ventura](../extras/Ventura.md#dropped-cpu-support) |
-| Note 2 | Sandy Bridge's iGPU is only officially supported up-to macOS 10.13 |
-| Note 3 | Most Sandy bridge boards do not support UEFI |
+| 注意 2 | Sandy Bridge的iGPU仅在macOS 10.13之前被官方支持 |
+| 注意 3 | 大多数Sandy bridge板不支持UEFI |
 
 ## 起点
 
@@ -59,9 +59,9 @@
 
 ::: tip 信息
 
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support SandyBridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://sumingyd.github.io/OpenCore-Post-Install/) and drop the old tables(Note that this is only temporary until we've made our SSDT-PM, we'll re-enable these tables later):
+这阻止了某些ACPI表的加载，对于我们来说，我们真正关心的是这个。主要原因是苹果的XCPM不太支持SandyBridge，会导致引导时AppleIntelCPUPowerManagement出现崩溃。为了避免这种情况，我们在 [安装后](https://sumingyd.github.io/OpenCore-Post-Install/) 中创建了我们自己的PM SSDT，并删除旧的表(注意，这只是暂时的，直到我们创建了我们的SSDT-PM，我们稍后会重新启用这些表):
 
-Removing CpuPm:
+删除 CpuPm:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -72,7 +72,7 @@ Removing CpuPm:
 | TableLength | Number | 0 |
 | TableSignature | Data | `53534454` |
 
-Removing Cpu0Ist:
+删除 Cpu0Ist:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -113,7 +113,7 @@ Removing Cpu0Ist:
 * **AvoidRuntimeDefrag**: YES
   * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **EnableSafeModeSlide**: YES
-  * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms.
+  * 允许slide变量在安全模式下使用，但是这个怪癖只适用于UEFI平台。
 * **EnableWriteUnprotector**: YES
   * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
@@ -137,40 +137,40 @@ Removing Cpu0Ist:
 
 config.plist还没有这个部分，所以你必须手动创建它。
 
-The `AAPL,snb-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
+macOS使用`AAPL,snb-platform-id`来确定iGPU驱动程序如何与我们的系统交互，可以选择的两个值如下:
 
 | AAPL,snb-platform-id | Comment |
 | :--- | :--- |
-| **`10000300`** | Used when the Desktop iGPU is used to drive a display |
-| **`00000500`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
+| **`10000300`** | 当使用Desktop iGPU驱动显示器时使用 |
+| **`00000500`** | 桌面iGPU仅用于计算任务而不驱动显示器时使用的 |
 
-We also have the issue of requiring a supported device-id, just like with the above table you'll want to match up to your hardware configuration:
+我们还需要一个支持的设备id，就像上面的表一样，你需要匹配你的硬件配置:
 
 | device-id | Comment |
 | :--- | :--- |
-| **`26010000`** | Used when the Desktop iGPU is used to drive a display |
-| **`02010000`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
+| **`26010000`** | 使用桌面iGPU驱动显示器时使用 |
+| **`02010000`** | 桌面iGPU仅用于计算任务而不驱动显示器时使用的 |
 
-And finally, you should have something like this:
+最后，你应该有这样的东西:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | AAPL,snb-platform-id | Data | `00000500` |
 | device-id | Data | `26010000` |
 
-(This is an example for a desktop HD 3000 with a dGPU used as the output)
+(这是一个桌面HD 3000使用dGPU作为输出的例子)
 
 :::
 
 ::: tip PciRoot(0x0)/Pci(0x16,0x0)
 
-This is needed if you're pairing an Sandy Bridge CPU with a 7 series motherboard(ie. B75, Q75, Z75, H77, Q77, Z77), specifically needed to spoof your IMEI device into being supported. Note this property is still required with or without SSDT-IMEI.
+这是需要的，如果你配对Sandy Bridge CPU与7系列主板(即。B75, Q75, Z75, H77, Q77, Z77)，特别需要欺骗你的IMEI设备被支持。无论是否使用SSDT-IMEI，这个属性都是必需的。
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | device-id | Data | `3A1C0000` |
 
-**Note**: This is not needed if you have a 6 series motherboard(ie. H61, B65, Q65, P67, H67, Q67, Z68)
+**注意**:如果你有一个6系列主板(即。H61, b65, q65, p67, h67, q67, z68)是不需要的
 
 :::
 
@@ -181,7 +181,7 @@ This is needed if you're pairing an Sandy Bridge CPU with a 7 series motherboard
 * 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 * 你可以直接删除这个属性，因为目前它还没有被我们使用
 
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
+对于我们来说，我们将使用引导参数`alcid=xxx`来完成此操作。`alcid`将覆盖所有其他布局id。更多信息在[安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 :::
 
@@ -284,7 +284,7 @@ For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alc
 | LapicKernelPanic | NO | 惠普的机器需要这个选项 |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable<br/>如果运行macOS 11.3+，请禁用 |
+| XhciPortLimit | YES | 如果您的电路板没有USB 3.0，您可以禁用<br/>如果运行macOS 11.3+，请禁用 |
 
 :::
 
@@ -570,7 +570,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Sandy Bridge example, we'll chose the iMac12,2 SMBIOS - this is done intentionally for compatibility's sake. There are two main SMBIOS used for Sandy Bridge:
+对于这个Sandy Bridge的例子，我们将选择imac12,2 SMBIOS——这是为了兼容性而故意这样做的。有两个主要的SMBIOS用于Sandy Bridge:
 
 | SMBIOS | Hardware |
 | :--- | :--- |

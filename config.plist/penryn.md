@@ -4,8 +4,8 @@
 | :--- | :--- |
 | 初始macOS支持: Penryn | OS X 10.4.10, Tiger |
 | Last Supported OS: Penryn | macOS 10.13.6 High Sierra |
-| Note | iGPU support will not be covered in this guide, see here: [GMA Patching](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/)|
-| Note 2 | SSE4 is required to boot macOS 10.12, Sierra and newer, so Conroe and older are unsupported |
+| 注意 | iGPU支持将不在本指南中介绍，请参阅这里:[GMA补丁](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/)|
+| 注意 2 | 启动macOS 10.12、Sierra及更新版本需要SSE4，所以不支持Conroe及以上版本 |
 
 ## 起点
 
@@ -107,13 +107,13 @@
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: NO
-  * Needed to remove write protection from CR0 register on UEFI platforms.
+  * 需要从UEFI平台的CR0寄存器中移除写保护。
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
   * 解决10.6及更低版本的早期内存内核崩溃问题。
 * **SetupVirtualMap**: YES
-  * 修复了SetVirtualAddresses对虚拟地址的调用 on UEFI boards.
+  * 在UEFI主板上修复了SetVirtualAddresses对虚拟地址的调用
 
 :::
 
@@ -125,7 +125,7 @@
 
 从映射中设置设备属性。
 
-默认情况下，Sample.plist已经为音频设置了这个部分，我们将通过在引导参数部分设置布局ID来设置音频，因此建议从`Add`节中删除`PciRoot(0x0)/Pci(0x1b,0x0)`。 On other platforms this section is also used for iGPU setup, on Penryn however it is covered in [another guide](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/).
+默认情况下，Sample.plist已经为音频设置了这个部分，我们将通过在引导参数部分设置布局ID来设置音频，因此建议从`Add`节中删除`PciRoot(0x0)/Pci(0x1b,0x0)`。 在其他平台上，本节也用于iGPU设置，但在Penryn上，它在[另一个指南](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/).
 
 ### Delete
 
@@ -223,8 +223,8 @@
 | :--- | :--- | :--- |
 | DisableIoMapper | YES | 如果在BIOS中禁用了`VT-D`，是不需要的 |
 | LapicKernelPanic | NO | 惠普的机器需要这个选项 |
-| PanicNoKextDump | YES | Not required for 10.12 and older |
-| PowerTimeoutKernelPanic | YES | Not required for 10.14 and older |
+| PanicNoKextDump | YES | 10.12和更旧的不需要 |
+| PowerTimeoutKernelPanic | YES | 10.14和更旧的不需要 |
 | XhciPortLimit | YES | 如果运行macOS 11.3+，请禁用 |
 
 :::
@@ -232,9 +232,9 @@
 ::: details 更深入的信息
 
 * **AppleCpuPmCfgLock**: NO
-  * CFG-Lock is not present on Penryn so no need for this quirk
+  * CFG-Lock在Penryn上不存在，所以不需要这个选项
 * **AppleXcpmCfgLock**: NO
-  * CFG-Lock is not present on Penryn so no need for this quirk
+  * CFG-Lock在Penryn上不存在，所以不需要这个选项
 * **CustomSMBIOSGuid**: NO
   * 为UpdateSMBIOSMode设置为`Custom`时执行GUID补丁。通常与戴尔笔记本电脑有关
   * 通过UpdateSMBIOSMode自定义模式启用此怪癖也可以禁用SMBIOS注入到“非苹果”操作系统中，但我们不支持这种方法，因为它破坏了Bootcamp兼容性。使用风险自负
@@ -510,12 +510,12 @@ For this Penryn example, we'll chose the iMac10,1 SMBIOS - this is done intentio
 
 | SMBIOS | Hardware | OS Support |
 | :--- | :--- | :--- |
-| iMac4,1 | Yonah SMBIOS(32-bit) | 10.4 to 10.6.8 |
-| iMac7,1 | Conroe SMBIOS(64-Bit, SSE3) | 10.4 to 10.11.6 |
-| iMac10,1 | Penryn SMBIOS(64-Bit, SSE4) | 10.6 to 10.13.6 |
-| MacPro6,1 | Mojave 和更新的 SMBIOS | 10.9 to current |
+| iMac4,1 | Yonah SMBIOS(32-bit) | 10.4 到 10.6.8 |
+| iMac7,1 | Conroe SMBIOS(64-Bit, SSE3) | 10.4 到 10.11.6 |
+| iMac10,1 | Penryn SMBIOS(64-Bit, SSE4) | 10.6 到 10.13.6 |
+| MacPro6,1 | Mojave 和更新的 SMBIOS | 10.9 到 current |
 
-* If you plan to later run macOS 10.14, Mojave or newer, MacPro6,1 will be the recommended SMBIOS. However please note you will need [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/page-4?post=28447707#post-28447707) to resolve install issues
+* 如果你打算稍后运行macOS 10.14、Mojave或更新版本，那么推荐使用MacPro6、1。但是请注意您将需要[telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/page-4?post=28447707#post-28447707) 来解决安装问题
 
 运行GenSMBIOS，选择选项1下载MacSerial，选择选项3下载SMBIOS。这将给我们一个类似于下面的输出:
 

@@ -3,7 +3,7 @@
 | 支持 | 版本 |
 | :--- | :--- |
 | 初始macOS支持 | OS X 10.8, Mountain Lion |
-| Note 1 | Haswell iGPUs are only supported up-to macOS 12 |
+| 注意 1 | Haswell igpu只支持macOS 12以下 |
 
 ## 起点
 
@@ -83,7 +83,7 @@
 * **AvoidRuntimeDefrag**: YES
   * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **EnableSafeModeSlide**: YES
-  * Enables slide variables to be used in safe mode, however this quirk is only applicable to UEFI platforms.
+  * 允许slide变量在安全模式下使用，但是这个选项只适用于UEFI平台。
 * **EnableWriteUnprotector**: YES
   * 需要从CR0寄存器移除写保护。
 * **ProvideCustomSlide**: YES
@@ -107,23 +107,23 @@
 
 config.plist还没有这个部分，所以你必须手动创建它。
 
-`AAPL,ig-platform-id` is what macOS uses to determine how the iGPU drivers interact with our system, and the two values choose between are as follows:
+`AAPL,ig-platform-id`是macOS用来确定iGPU驱动程序如何与我们的系统交互的，可以选择的两个值如下:
 
 | AAPL,ig-platform-id | Comment |
 | :--- | :--- |
-| **`0300220D`** | Used when the Desktop Haswell iGPU is used to drive a display |
-| **`04001204`** | Used when the Desktop Haswell iGPU is only used for computing tasks and doesn't drive a display |
-| **`07002216`** | Used when the Desktop Broadwell iGPU is used to drive a display |
+| **`0300220D`** | 当桌面使用Haswell iGPU驱动显示器时使用 |
+| **`04001204`** | 当桌面Haswell iGPU仅用于计算任务而不驱动显示时使用|
+| **`07002216`** | 当使用桌面Broadwell iGPU驱动显示器时使用 |
 
-I added another portion as well that shows a `device-id` fake in case you have an HD 4400 which is unsupported in macOS.
+我还添加了另一部分，在macOS不支持HD 4400的情况下显示假的`device-id`。
 
-The device-id fake is set up like so:
+伪造设备id的设置如下:
 
-* `12040000` - this is the device id for HD 4600 which does have support in macOS
+* `12040000` - 这是hd4600的设备id, macOS支持
 
-We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`. The first enables patching via WhateverGreen.kext, the second sets the min stolen memory to 19MB and third sets the framebuffer memory to 9MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
+我们还添加了另外3个属性，`framebuffer-patch-enable`、`framebuffer-stolenmem`和`framebuffer-fbmem`。第一种是通过WhateverGreen.kext打补丁，第二种是将最小被盗内存设置为19MB，第三种是将framebuffer内存设置为9MB。这通常是不必要的，因为可以在BIOS中配置(建议64MB)，但在没有配置时必须配置。
 
-* **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem`
+* **注意:Headless framebuffer (dGPU是显示出来的)不需要`framebuffer-patch-enable`，`framebuffer-stolenmem`和`framebuffer-fbmem`
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -133,7 +133,7 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 | framebuffer-fbmem | Data | `00009000` |
 | device-id | Data | `12040000` |
 
-(This is an example for a desktop HD 4400 without a dGPU and no BIOS options for iGPU memory)
+(这是一个桌面HD 4400的例子，没有dGPU，也没有iGPU内存的BIOS选项)
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -142,7 +142,7 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 | framebuffer-stolenmem | Data | `00003001` |
 | framebuffer-fbmem | Data | `00009000` |
 
-(This is an example for a desktop Iris Pro 6200 and no BIOS options for iGPU memory)
+(这是桌面Iris Pro 6200的例子，iGPU内存没有BIOS选项)
 
 :::
 
@@ -153,7 +153,7 @@ We also add 3 more properties, `framebuffer-patch-enable`, `framebuffer-stolenme
 * 应用AppleALC音频注入，你需要自己研究你的主板有哪个编解码器，并将其与AppleALC的布局匹配。[AppleALC支持编解码器](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs).
 * 你可以直接删除这个属性，因为目前它还没有被我们使用
 
-For us, we'll be using the boot-arg `alcid=xxx` instead to accomplish this. `alcid` will override all other layout-IDs present. More info on this is covered in the [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
+对于我们来说，我们将使用引导参数`alcid=xxx`来完成此操作。`alcid`将覆盖所有其他布局id。更多信息请参见[安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 :::
 
@@ -543,30 +543,30 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Haswell example, we chose the iMac15,1 SMBIOS. The typical breakdown is as follows:
+对于这个Haswell示例，我们选择iMac15,1 SMBIOS。典型的细分如下:
 
 | SMBIOS | Hardware |
 | :--- | :--- |
-| iMac14,4 | Haswell with only iGPU |
-| iMac15,1 | Haswell with dGPU |
+| iMac14,4 | Haswell只有iGPU |
+| iMac15,1 | Haswell与dGPU |
 | iMac16,2 | Broadwell |
 
-**Note**: The following SMBIOS are only supported up-to macOS 11, Big Sur. For cases where you must boot Monterey, see below:
+**注**:以下SMBIOS仅支持至macOS 11, Big Sur。对于必须启动Monterey的情况，请参见下面:
 
 ::: details Monterey SMBIOS 表
 
-Note choosing a SMBIOS from the list below for Big Sur or older is not recommended, as Power Management and such can break when using unoptimized SMBIOS.
+注意，不建议从以下列表中为Big Sur或更老的版本选择SMBIOS，因为电源管理等在使用未优化的SMBIOS时可能会崩溃。
 
 Monterey table:
 
 | SMBIOS | Hardware |
 | :--- | :--- |
-| iMac16,2 | Broadwell with only iGPU |
-| iMac17,1 | Broadwell with dGPU |
+| iMac16,2 | Broadwell，只有iGPU |
+| iMac17,1 | Broadwell与dGPU |
 
 :::
 
-**Note 2**: All of these SMBIOSes were dropped in macOS Ventura. If running macOS Ventura, [use a Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
+**注2**:所有这些SMBIOSes都在macOS Ventura中被丢弃。如果运行macOS Ventura，[使用Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
 
 运行GenSMBIOS，选择选项1下载MacSerial，选择选项3下载SMBIOS。这将给我们一个类似于下面的输出:
 

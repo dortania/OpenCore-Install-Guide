@@ -561,14 +561,14 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done intentionally for compatibility's sake. There are 3 main SMBIOS used for Ivy Bridge:
+对于这个Ivy Bridge的例子，我们将选择imac13,2 SMBIOS -这是为了兼容性而故意这样做的。有3个主要的SMBIOS用于Ivy Bridge:
 
-| SMBIOS | Hardware |
+| SMBIOS | 硬件 |
 | :--- | :--- |
-| iMac13,1 | Used for computers utilizing the iGPU for displaying |
-| iMac13,2 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
+| iMac13,1 | 用于使用iGPU进行显示的计算机 |
+| iMac13,2 | 用于使用dGPU进行显示，iGPU只执行计算任务的计算机 |
 
-**Note**: The following SMBIOS are only supported up-to and including macOS 10.15, Catalina. For cases where you must boot Big Sur or Monterey, see below:
+**注**:以下SMBIOS仅支持macOS 10.15和Catalina。对于必须引导Big Sur或Monterey的情况，请参见下面:
 
 ::: details Big Sur/Monterey SMBIOS table
 
@@ -576,16 +576,16 @@ For this Ivy Bridge example, we'll chose the iMac13,2 SMBIOS - this is done inte
 
 Big Sur table:
 
-| SMBIOS | Hardware |
+| SMBIOS | 硬件 |
 | :--- | :--- |
-| iMac14,4 | Used for computers utilizing the iGPU for displaying |
-| iMac15,1 | Used for computers using a dGPU for displaying, and an iGPU for computing tasks only |
+| iMac14,4 | 用于使用iGPU进行显示的计算机 |
+| iMac15,1 | 用于使用dGPU进行显示，iGPU只执行计算任务的计算机 |
 
 Monterey table:
 
-| SMBIOS | Hardware |
+| SMBIOS | 硬件 |
 | :--- | :--- |
-| MacPro6,1 | As Monterey does not include iGPU drivers, you will want to use MacPro6,1 and a supported dGPU |
+| MacPro6,1 | 由于Monterey不包括iGPU驱动程序，您将需要使用MacPro6,1和受支持的dGPU |
 
 :::
 
