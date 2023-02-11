@@ -2,7 +2,7 @@
 
 本节是针对那些在启动OpenCore、macOS或macOS内部存在问题的人。如果你不知道在macOS引导过程中你被卡在了哪里，阅读[macOS引导过程](../troubleshooting/boot.md)页面可以帮助你弄清楚。
 
-**如果没有涉及你的问题，请阅读OpenCore的官方文档:[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**。本文档涉及更多关于OpenCore如何工作的技术细节，并有更多关于所有支持的怪癖的详细信息。
+**如果没有涉及你的问题，请阅读OpenCore的官方文档:[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**。本文档涉及更多关于OpenCore如何工作的技术细节，并有更多关于所有支持的选项的详细信息。
 
 ## 目录
 

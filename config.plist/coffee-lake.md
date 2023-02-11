@@ -305,7 +305,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
   * 为ssd上的APFS文件系统设置微调超时，以微秒为单位，仅适用于macOS 10.14和更新版本有问题的ssd。
 * **XhciPortLimit**: YES
   * 这实际上是15端口限制补丁，不要依赖它，因为它不是修复USB的保证解决方案。如果可能，请创建一个[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)。
-  * macOS 11.3+， [XhciPortLimit可能无法按预期功能。](https://github.com/dortania/bugtracker/issues/162) 我们建议用户在升级前禁用此怪癖和映射或[从Windows映射](https://github.com/USBToolBox/tool). 您也可以安装macOS 11.2.3或更老版本。
+  * macOS 11.3+， [XhciPortLimit可能无法按预期功能。](https://github.com/dortania/bugtracker/issues/162) 我们建议用户在升级前禁用此选项和映射或[从Windows映射](https://github.com/USBToolBox/tool). 您也可以安装macOS 11.2.3或更老版本。
 
 :::
 

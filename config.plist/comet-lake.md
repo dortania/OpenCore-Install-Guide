@@ -62,7 +62,7 @@
 
 ### Quirks
 
-与ACPI相关的设置，将所有内容保留为默认设置，因为我们不需要这些怪癖。
+与ACPI相关的设置，将所有内容保留为默认设置，因为我们不需要这些选项。
 
 ## Booter
 
@@ -79,7 +79,7 @@
 ::: tip 信息
 与boot.efi补丁和固件修复相关的设置，对我们来说，我们需要更改以下内容:
 
-| 怪癖 | 启用 | 注释 |
+| 选项 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | DevirtualiseMmio | 是 | |
 | EnableWriteUnprotector | 否 | |
@@ -290,11 +290,11 @@ The main thing you need to keep in mind is:
 
 与内核相关的设置，我们将启用以下功能：
 
-| 怪癖 | 启用| 注释 |
+| 选项 | 启用| 注释 |
 | :--- | :--- | :--- |
 | AppleXcpmCfgLock | 是 | 如果在 BIOS 中禁用了 `CFG-Lock`，则不需要 |
 | DisableIoMapper | 是 | 如果在 BIOS 中禁用了 `VT-D` 如果在 BIOS 中禁用了 |
-| LapicKernelPanic | 否 | 惠普机器将需要这个怪癖 |
+| LapicKernelPanic | 否 | 惠普机器将需要这个选项 |
 | PanicNoKextDump | 是 | |
 | PowerTimeoutKernelPanic | 是 | |
 | XhciPortLimit | 是 | 如果运行 macOS 11.3+ 则禁用 |
@@ -313,7 +313,7 @@ The main thing you need to keep in mind is:
     * 注意:Ivy Bridge-E也包括在内，因为它支持XCPM
 * **CustomSMBIOSGuid**: NO
   * 为UpdateSMBIOSMode设置为`Custom`时执行GUID补丁。通常与戴尔笔记本电脑有关
-  * 通过UpdateSMBIOSMode自定义模式启用此怪癖也可以禁用SMBIOS注入到“非苹果”操作系统中，但我们不支持这种方法，因为它破坏了Bootcamp兼容性。使用风险自负
+  * 通过UpdateSMBIOSMode自定义模式启用此选项也可以禁用SMBIOS注入到“非苹果”操作系统中，但我们不支持这种方法，因为它破坏了Bootcamp兼容性。使用风险自负
 * **DisableIoMapper**: YES
   * 如果在BIOS中无法禁用或其他操作系统需要启用VT-D，则需要绕过VT-D，这是`dart=0`的更好替代方案，因为SIP可以在Catalina中继续运行
 * **DisableLinkeditJettison**: YES
@@ -369,7 +369,7 @@ The main thing you need to keep in mind is:
 
 ::: tip 信息
 
-| 怪癖 | 启用 | 注释 |
+| 选项 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | HideAuxiliary | 是 | 按空格键显示 macOS 恢复和其他辅助条目 |
 
@@ -388,7 +388,7 @@ The main thing you need to keep in mind is:
 
 有助于调试 OpenCore 启动问题（我们将更改所有内容 *但* `显示会延迟`）：
 
-| 怪癖 | 启用 |
+| 选项 | 启用 |
 | :--- | :--- |
 | AppleDebug | 是 |
 | ApplePanic | 是 |
@@ -423,7 +423,7 @@ The main thing you need to keep in mind is:
 
 安全性是不言而喻的，**不要跳过**。我们将修改以下内容:
 
-| 怪癖 | 启用 | 注释 |
+| 选项 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | AllowSetDefault | 是 | |
 | BlacklistAppleUpdate | 是 | |
@@ -564,7 +564,7 @@ OpenCore的NVRAM GUID，主要与RTCMemoryFixup用户相关
 
 强制重写NVRAM变量，请注意，`Add` **不会覆盖** NVRAM中已经存在的值，所以像`boot-args`这样的值应该保持不变。对我们来说，我们将更改以下内容:
 
-| 怪癖 | 启用 |
+| 选项 | 启用 |
 | :--- | :--- |
 | WriteFlash | 是 |
 
@@ -717,11 +717,11 @@ macOS Sierra和更早的版本使用HFS而不是APFS。如果启动旧版本的m
 
 ### Input
 
-与boot.efi键盘直通用于FileVault和热键支持相关，这里保留所有默认设置，因为我们不需要这些怪癖。请参阅这里了解更多细节:[Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
+与boot.efi键盘直通用于FileVault和热键支持相关，这里保留所有默认设置，因为我们不需要这些选项。请参阅这里了解更多细节:[Security and FileVault](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 
-关于OpenCore的视觉输出，将所有内容保留为默认值，因为我们不需要这些怪癖。
+关于OpenCore的视觉输出，将所有内容保留为默认值，因为我们不需要这些选项。
 
 ::: details 更深入的信息
 
@@ -738,9 +738,9 @@ macOS Sierra和更早的版本使用HFS而不是APFS。如果启动旧版本的m
 ### Quirks
 
 ::: tip 信息
-关于UEFI环境的怪癖，对于我们来说，我们将改变以下内容:
+关于UEFI环境的选项，对于我们来说，我们将改变以下内容:
 
-| 怪癖 | 启用 | 注释 |
+| 选项 | 启用 | 注释 |
 | :--- | :--- | :--- |
 | UnblockFsConnect | 否 | 主要由惠普主板使用 |
 
@@ -762,7 +762,7 @@ macOS Sierra和更早的版本使用HFS而不是APFS。如果启动旧版本的m
 
 ### ReservedMemory
 
-用于免除操作系统对某些内存区域的使用，主要适用于Sandy Bridge igpu或内存故障的系统。在本指南中没有涉及这种怪癖的使用
+用于免除操作系统对某些内存区域的使用，主要适用于Sandy Bridge igpu或内存故障的系统。在本指南中没有涉及这种选项的使用
 
 ## 清理
 

@@ -86,7 +86,7 @@ OpenCore的版本号并不代表项目的质量。相反，它更多的是一种
 * 避免信息被多次注入的边缘情况，通常在Clover中看到
   * 例如：一旦启动boot.efi，你将如何处理SMBIOS和ACPI数据注入， 但后来被赶出去吗? 因此试图撤消它们可能相当危险。这就是为什么Clover的方法是不被允许的。
 
-然而，在OpenCore中有一些奇怪的地方允许SMBIOS注入受到macOS的限制，这是通过为macOS读取SMBIOS信息的地方打补丁实现的。 将 `CustomSMBIOSMode`设置为`Custom`的`CustomSMIOSGuid`怪癖可能会在未来中断，因此我们只建议在其他操作系统中某些软件中断的情况下使用此选项。为了最好的稳定性，请禁用这些怪癖。
+然而，在OpenCore中有一些奇怪的地方允许SMBIOS注入受到macOS的限制，这是通过为macOS读取SMBIOS信息的地方打补丁实现的。 将 `CustomSMBIOSMode`设置为`Custom`的`CustomSMIOSGuid`选项可能会在未来中断，因此我们只建议在其他操作系统中某些软件中断的情况下使用此选项。为了最好的稳定性，请禁用这些选项。
 
 ### OpenCore需要全新安装吗?
 
