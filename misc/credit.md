@@ -45,7 +45,7 @@
 
 * [r/Hackintosh Vanilla Desktop Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)
 * [All-in-one Vanilla AMD Hackintosh Guide](https://github.com/doesprintfwork/All-in-one-Vanilla-AMD-Hackintosh-Guide)
-* [USB Map Guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
+* [USB Map Guide](https://sumingyd.github.io/OpenCore-Post-Install/usb/)
 * [Intel Framebuffer Patching](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
 * [AppleALC Supported Codecs](https://github.com/acidanthera/AppleALC/wiki/Supported-codecs)
 * [gfxutil](https://github.com/acidanthera/gfxutil/releases)
@@ -74,5 +74,5 @@
   * [rEFInd 手册](https://www.rodsbooks.com/refind/index.html)
 * USB映射指南:
   * [XHCI唤醒问题](https://osy.gitbook.io/hac-mini-guide/details/usb-fix)
-  * [CorpNewt的USB地图指南](https://dortania.github.io/OpenCore-Post-Install/usb/)
+  * [CorpNewt的USB地图指南](https://sumingyd.github.io/OpenCore-Post-Install/usb/)
   * [AppleLife USB地图指南](https://applelife.ru/threads/nastrojka-usb-v-10-11-10-15.627190/)

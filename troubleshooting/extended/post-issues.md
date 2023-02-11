@@ -81,7 +81,7 @@ External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- 重命名
 
 遵循这里列出的指南:
 
-* [修复MacPro7,1内存错误](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
+* [修复MacPro7,1内存错误](https://sumingyd.github.io/OpenCore-Post-Install/universal/memory.html)
 
 对于那些只想禁用通知(而不是错误本身)的人来说，已经足够了。对于这些用户来说,我们建议安装 [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)
 
@@ -231,7 +231,7 @@ AssetCacheManagerUtil[] Failed to activate content caching: Error Domain=ACSMErr
 
 这是由于macOS使用通用时间，而Windows依赖格林威治时间，所以您需要迫使一个操作系统以不同的方式测量时间。我们强烈建议修改Windows，因为它的破坏性和痛苦要小得多:
 
-* [安装Bootcamp实用程序](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* [安装Bootcamp实用程序](https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * [修改Windows注册表](https://superuser.com/q/494432)
 
 ## 禁用 SIP

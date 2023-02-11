@@ -24,7 +24,7 @@
   * 某些SMBIOS会有自己的USB地图，可能会连接到你的硬件，导致USB问题。
     * 参见这里了解更多信息:[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)
   * 还要注意的是，Skylake+ SMBIOS还需要一个[USBX设备](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-EC-USBX.dsl#L54L79) 来修复USB电流输出
-    * 参见这里了解更多信息:[修复USB电源](https://dortania.github.io/OpenCore-Post-Install/usb/misc/power.html)
+    * 参见这里了解更多信息:[修复USB电源](https://sumingyd.github.io/OpenCore-Post-Install/usb/misc/power.html)
 
 ::: details XCPM 支持 SMBIOS
 

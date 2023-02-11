@@ -62,7 +62,7 @@ python3 macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
 
 * **macOS 12及以上版本注意**: 由于最新版本的 macOS 对 USB 栈进行了更改，因此强烈建议您在安装 macOS 之前(使用 USBToolBox )映射USB端口。
   * <span style="color:red"> 注意: </span> 在 macOS 11.3 及更新版本中，[XhciPortLimit被破坏导致启动循环](https://github.com/dortania/bugtracker/issues/162).
-    * 如果你已经[映射了你的USB端口](https://dortania.github.io/OpenCore-Post-Install/usb/) 并且禁用了 `XhciPortLimit` ，那么你可以正常启动 macOS 11.3+。
+    * 如果你已经[映射了你的USB端口](https://sumingyd.github.io/OpenCore-Post-Install/usb/) 并且禁用了 `XhciPortLimit` ，那么你可以正常启动 macOS 11.3+。
 
 这需要一些时间，但是一旦你完成，你应该得到BaseSystem或RecoveryImage文件:
 

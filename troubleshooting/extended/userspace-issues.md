@@ -145,7 +145,7 @@ Skip: 0
 为了解决这个问题，我们有几个选择:
 
 * 300系列英特尔修复(即Z390):
-  * [SSDT-PMC](https://dortania.github.io/Getting-Started-With-ACPI/)
+  * [SSDT-PMC](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 * 其他人可以在config.plist中设置如下:
   * LegacyEnable -> YES
   * LegacyOverwrite -> YES

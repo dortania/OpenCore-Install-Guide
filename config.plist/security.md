@@ -6,7 +6,7 @@ config.plist中的这些设置可以限制OpenCore引导哪些macOS版本。在�
 
 ### Security -> SecureBootModel
 
-OpenCore默认启用 [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) 。
+OpenCore默认启用 [Apple Secure Boot](https://sumingyd.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) 。
 这将支持安全功能，如验证macOS的“boot.efi”，其副作用是限制OpenCore将引导哪些macOS版本。
 
 * Big Sur 及以上 (11.0+): 建议设置为 `Default`.

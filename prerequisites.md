@@ -21,7 +21,7 @@
    * 16GB的U盘，如果你打算使用macOS制作引导优盘
    * 4GB的U盘，如果你打算使用windows或linux来制作引导优盘
 6. <span style="color:red">_**[关键]**_</span> **有线网络连接** (没有WiFi发射器，USB的有线网卡是否能工作取决于macOS的支持) ，并且你必须知道你的网卡的型号。
-   * 你必须有物理网卡端口或者兼容macOS的有线网卡/无线网卡。如果你有 [兼容的无线网卡](https://dortania.github.io/Wireless-Buyers-Guide/), 你也可以使用它。
+   * 你必须有物理网卡端口或者兼容macOS的有线网卡/无线网卡。如果你有 [兼容的无线网卡](https://sumingyd.github.io/Wireless-Buyers-Guide/), 你也可以使用它。
      * 请注意，macOS不支持大多数无线网卡
    * 对于不能使用网络但有Android手机的人来说，你可以将你的Android手机连接到WiFi，然后使用 [HoRNDIS](https://joshuawise.com/horndis#available_versions)功能共享它。
 7. <span style="color:red">_**[关键]**_</span> **正确的操作系统安装方式:**

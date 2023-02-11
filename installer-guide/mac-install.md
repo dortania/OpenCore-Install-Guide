@@ -45,7 +45,7 @@ mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubuse
 
 * **macOS 12及以上版本注意**: 由于最新版本的macOS对USB栈进行了更改，因此强烈建议您在安装macOS之前(使用USBToolBox)映射USB端口。
   * <span style="color:red"> 注意: </span> 在macOS 11.3及更新版本中，[XhciPortLimit被破坏导致启动循环](https://github.com/dortania/bugtracker/issues/162).
-    * 如果你已经[映射了你的USB端口](https://dortania.github.io/OpenCore-Post-Install/usb/) 并且禁用了 `XhciPortLimit`, 那么你可以正常启动macOS 11.3+。
+    * 如果你已经[映射了你的USB端口](https://sumingyd.github.io/OpenCore-Post-Install/usb/) 并且禁用了 `XhciPortLimit`, 那么你可以正常启动macOS 11.3+。
 
 这需要一段时间，因为我们正在下载整个8GB以上的macOS安装程序，所以强烈建议你在等待的时候阅读本指南的其余部分。
 

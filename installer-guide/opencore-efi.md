@@ -47,7 +47,7 @@
   * 当固件中没有内置NVMe驱动程序时，用于Haswell和更早的版本
   * 除非你知道自己在做什么，否则不要使用
 * OpenCanopy.efi
-  * 这是OpenCore的可选GUI，我们将讨论如何在[安装后](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html) 中设置这个，所以现在删除这个
+  * 这是OpenCore的可选GUI，我们将讨论如何在[安装后](https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/gui.html) 中设置这个，所以现在删除这个
 * OpenHfsPlus.efi
   * 开源的HFS Plus驱动程序，相当慢，所以我们建议不要使用，除非你知道你在做什么。
 * OpenPartitionDxe.efi

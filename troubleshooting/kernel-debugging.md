@@ -18,7 +18,7 @@
   
 * [SSDT-DBG](https://gist.github.com/al3xtjames/39ebea4d615c8aed829109a9ea2cd0b5)
   * 启用ACPI表中的调试语句，帮助操作系统中的ACPI事件调试
-  * 注意你需要[编译SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Manual/compile.html)
+  * 注意你需要[编译SSDT](https://sumingyd.github.io/Getting-Started-With-ACPI/Manual/compile.html)
   
 ## Config.plist 设置
 
@@ -214,7 +214,7 @@ csrutil authenticated-root disable # Big Sur+
 
 重新启动，SIP将进行相应的调整。你可以在终端中运行`csrutil status`来验证它是否工作。
 
-* <span style="color:red"> 注意: </span> 对于依赖[OpenCore的ApECID功能](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#apecid)的用户，请注意此 **必须** 被禁用才能使用KDK。
+* <span style="color:red"> 注意: </span> 对于依赖[OpenCore的ApECID功能](https://sumingyd.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#apecid)的用户，请注意此 **必须** 被禁用才能使用KDK。
 
 #### 3. 以可写方式挂载根分区
 

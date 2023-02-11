@@ -135,7 +135,7 @@ The boot-arg for enabling Intel I225-V ethernet controller has changed since mac
 
 ### OTA Updates
 
-Starting with Monterey, updates are not delivered to T2 Macs which don't have Secure Boot enabled, and updates do not install properly if your SecureBootModel does not match your machine (ie. non-T2 SMBIOS using j137 or iMacPro1,1 using j160). Hackintoshes which use a T2 SMBIOS **MUST** have OpenCore 0.7.4+ with SecureBootModel set to `Default`. If your SMBIOS does not have a T2 chip, then either `Default` or `Disabled` is ok. More information is available on the [Apple Secure Boot page](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html).
+Starting with Monterey, updates are not delivered to T2 Macs which don't have Secure Boot enabled, and updates do not install properly if your SecureBootModel does not match your machine (ie. non-T2 SMBIOS using j137 or iMacPro1,1 using j160). Hackintoshes which use a T2 SMBIOS **MUST** have OpenCore 0.7.4+ with SecureBootModel set to `Default`. If your SMBIOS does not have a T2 chip, then either `Default` or `Disabled` is ok. More information is available on the [Apple Secure Boot page](https://sumingyd.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html).
 
 ::: tip T2 SMBIOS List
 

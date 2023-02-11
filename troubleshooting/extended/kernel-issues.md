@@ -375,7 +375,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 
 * **缺少 EC 补丁**:
   * 确保在你的 EFI/OC/ACPI 和 ACPI->Add 中都有 EC SSDT， **再次检查它是否启用**
-  * 如果你还没有ACPI，请点击这里: [开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)
+  * 如果你还没有ACPI，请点击这里: [开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 * **IRQ 冲突**:
   * 最常见的是在旧的笔记本电脑和预构建，运行SSDTTime的FixHPET选项，并将产生的SSDT-hpet.aml和ACPI补丁添加到配置中(没有ACPI补丁，SSDT将无法工作)
 * **PCI 分配问题**:
@@ -393,12 +393,12 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
     * 确保NVMe驱动器在BIOS中设置为NVMe模式(一些BIOS有一个bug，你可以将NVMe驱动器设置为SATA)
 * **NVRAM 故障**:
   * HEDT和300系列主板常见问题，你有几个路径可以走:
-    * 消费者英特尔300系列:看[开始使用 ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)制作SSDT-PMC.aml
-    * HEDT(ie X99):请参阅[模拟NVRAM](https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html)关于如何停止NVRAM写入，注意，安装时您不需要运行脚本。只需设置config.plist
+    * 消费者英特尔300系列:看[开始使用 ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)制作SSDT-PMC.aml
+    * HEDT(ie X99):请参阅[模拟NVRAM](https://sumingyd.github.io/OpenCore-Post-Install/misc/nvram.html)关于如何停止NVRAM写入，注意，安装时您不需要运行脚本。只需设置config.plist
 
 * **RTC 缺失**:
-  * 通常在Intel的300+系列(即Z370, Z490)上发现，这是由默认禁用RTC时钟引起的。请参阅[开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)创建SSDT-AWAC.aml
-  * X99和X299的RTC设备坏了，所以需要用SSDT-RTC0-RANGE修复。请参阅[开始使用ACPI](https://dortania.github.io/Getting-Started-With-ACPI/)创建上述文件
+  * 通常在Intel的300+系列(即Z370, Z490)上发现，这是由默认禁用RTC时钟引起的。请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)创建SSDT-AWAC.aml
+  * X99和X299的RTC设备坏了，所以需要用SSDT-RTC0-RANGE修复。请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)创建上述文件
   * 惠普的一些固件编写人员也禁用了HP 250g6上的RTC，但实际上没有办法重新启用它
     * 已知受影响型号:`HP 15-DA0014dx`， `HP 250 G6`
     * 对于被这样的硬件所困扰的用户，你需要创建一个假的RTC时钟供macOS使用。有关更多细节，请参阅开始使用ACPI，以及下面的图像示例:
@@ -670,4 +670,4 @@ To 要解决这个内核问题，请确保你的boot-args中有`-igfxcdc`。
 
 ## 重启在 "AppleUSBHostPort::createDevice: failed to create device" 在 macOS 11.3+ 上
 
-这是由于[XhciPortLimit在macOS 11.3及更新版本中崩溃](https://github.com/dortania/bugtracker/issues/162), 要解决此问题，您**必须**在 Kernel -> Quirks禁用XhciPortLimit。在这样做之前，请确保您已经[正确地映射了USB端口](https://dortania.github.io/OpenCore-Post-Install/usb/)。
+这是由于[XhciPortLimit在macOS 11.3及更新版本中崩溃](https://github.com/dortania/bugtracker/issues/162), 要解决此问题，您**必须**在 Kernel -> Quirks禁用XhciPortLimit。在这样做之前，请确保您已经[正确地映射了USB端口](https://sumingyd.github.io/OpenCore-Post-Install/usb/)。
