@@ -3,7 +3,7 @@
 | 支持 | 版本 |
 | :--- | :--- |
 | 初始macOS支持 | OS X 10.11, El Capitan |
-| Note | Skylake's iGPU is only officially supported up to macOS 12 |
+| 注意 | Skylake的iGPU官方支持不超过macOS 12 |
 
 ## 起点
 
@@ -150,13 +150,13 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 #### Configuration Notes
 
-* For HD 510 you will need to use a device-id spoof:
+* 对于HD 510，你需要使用一个设备id欺骗:
   
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | device-id | Data | `02190000` |
 
-* For HD 550 and P530 (and potentially all HD P-series iGPUs), you may need to use `device-id`=`16190000`:
+* 对于HD 550和P530(以及所有HD p系列igpu)，你可能需要使用`device-id`=`16190000`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -563,7 +563,7 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 | MacBookPro13,3 | Quad Core 45W | iGPU: HD 530 + dGPU: Radeon Pro 450/455 | 15" | Yes |
 | iMac17,1 | NUC Systems | iGPU: HD 530 + R9 290 |  N/A | No |
 
-**Note 2**: All of these SMBIOSes were dropped in macOS Ventura. If running macOS Ventura, [use a Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
+**注2**:所有这些smbios都是在macOS Ventura中删除的。如果运行macOS Ventura，[使用Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
 
 运行GenSMBIOS，选择选项1下载MacSerial，选择选项3下载SMBIOS。这将给我们一个类似于下面的输出:
 

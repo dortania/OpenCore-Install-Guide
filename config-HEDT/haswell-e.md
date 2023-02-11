@@ -175,7 +175,7 @@ TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ::: tip 信息
 
-Needed for spoofing unsupported CPUs and enabling power management on Haswell-E and Broadwell-E
+需要欺骗不支持的cpu并在Haswell-E和Broadwell-E上启用电源管理
 
 * **Haswell E:**
 
@@ -187,11 +187,11 @@ Needed for spoofing unsupported CPUs and enabling power management on Haswell-E 
 ::: details 更深入的信息
 
 * **Cpuid1Data**: `C3060300 00000000 00000000 00000000`
-  * Fake CPUID entry
+  * 假的CPUID项
 * **Cpuid1Mask**: `FFFFFFFF 00000000 00000000 00000000`
-  * Mask for fake CPUID
+  * 伪造CPUID的掩码
 * **DummyPowerManagement**: No
-  * Disables AppleIntelCPUPowerManagement, only required for AMD CPUs
+  * 禁用AppleIntelCPUPowerManagement，只对AMD cpu需要
 * **MinKernel**: Leave this blank
   * 上面的补丁将被注入到最低的内核版本，如果没有指定值，它将应用于所有版本的macOS。有关可能的值，请参见下表
   * 例如. `12.00.00` 用于 OS X 10.8
@@ -265,7 +265,7 @@ Needed for spoofing unsupported CPUs and enabling power management on Haswell-E 
   * 仅适用于Haswell和更新版本
     * 注意:Ivy Bridge-E也包括在内，因为它支持XCPM
 * **AppleXcpmExtraMsrs**: YES
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower
+  * 禁用不支持的cpu(如奔腾和许多xeon)所需的多个MSR访问。Broadwell-E及以下要求
 * **CustomSMBIOSGuid**: NO
   * 为UpdateSMBIOSMode设置为`Custom`时执行GUID补丁。通常与戴尔笔记本电脑有关
   * 通过UpdateSMBIOSMode自定义模式启用此怪癖也可以禁用SMBIOS注入到“非苹果”操作系统中，但我们不支持这种方法，因为它破坏了Bootcamp兼容性。使用风险自负
@@ -278,7 +278,7 @@ Needed for spoofing unsupported CPUs and enabling power management on Haswell-E 
 * **ExtendBTFeatureFlags** NO
   * 对于那些非apple /非fenvi卡有连续性问题的人很有帮助
 * **IncreasePciBarSize**: NO
-  * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
+  * 将IOPCIFamily中的32位PCI条大小从1 GB增加到4 GB，在BIOS中启用4g以上的解码是一种更干净、更安全的方法。一些X99板可能需要这个，如果需要这个，通常会在IOPCIFamily上遇到内核崩溃。注意，在Mojave及更新版本中不需要这个
 * **LapicKernelPanic**: NO
   * 在AP核心lapic中断上禁用内核崩溃，一般HP系统需要。相当于Clover的`Kernel LAPIC`
 * **LegacyCommpage**: NO
@@ -479,7 +479,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 | **-v** | 这将启用详细模式，在你启动时显示所有滚动的幕后文本，而不是苹果logo和进度条。它对任何黑苹果用户来说都是无价的，因为它可以让你深入了解引导过程，并可以帮助你识别问题、问题kext等。 |
 | **debug=0x100** | 这禁用了macOS的watchdog，它有助于防止在内核出现严重错误时重新启动。这样你就**有希望**收集到一些有用的信息并按照提示来解决问题。 |
 | **keepsyms=1** | 这是debug=0x100的配套设置，它告诉操作系统在内核出现故障时也打印这些符号。这可以提供一些更有用的见解，以了解造成崩溃本身的原因。 |
-| **npci=0x2000** | This disables some PCI debugging related to `kIOPCIConfiguratorPFM64`, alternative is `npci=0x3000` which disables debugging related to `gIOPCITunnelledKey` in addition. Required for when getting stuck on `PCI Start Configuration` as there are IRQ conflicts relating to your PCI lanes. [Source](https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html) |
+| **npci=0x2000** | 这将禁用一些与`kIOPCIConfiguratorPFM64`相关的PCI调试，另一个选项是`npci=0x3000`，它将禁用与`gIOPCITunnelledKey`相关的调试。当卡在 `PCI Start Configuration`时需要，因为有与PCI通道相关的IRQ冲突。[来源](https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html) |
 | **alcid=1** | 用于设置AppleALC的布局id，请参阅[支持的编解码器](https://github.com/acidanthera/applealc/wiki/supported-codecs) ，以确定针对特定系统使用哪种布局。更多信息在 [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/) |
 
 * **特定于gpu的引导参数**:
@@ -516,7 +516,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 ::: tip 信息
 
-强制重写NVRAM变量，请注意，`Add` **不会覆盖** NVRAM中已经存在的值，所以像`boot-args`这样的值应该保持不变。 Due to NVRAM issues on X99, we'll be changing the following:
+强制重写NVRAM变量，请注意，`Add` **不会覆盖** NVRAM中已经存在的值，所以像`boot-args`这样的值应该保持不变。 由于X99上的NVRAM问题，我们将更改以下内容:
 
 | 选项 | 启用 |
 | :--- | :--- |
@@ -528,13 +528,13 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 ::: details 更深入的信息
 
 * **LegacyOverwrite**: YES
-  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM like X99
+  * 允许从nvram.plist覆盖固件变量，仅在没有原生nvram的系统(如X99)中需要
 
 * **LegacySchema**
   * 用于赋值NVRAM变量，与`OpenVariableRuntimeDxe.efi`一起使用。仅适用于没有原生NVRAM的系统
 
 * **WriteFlash**: NO
-  * Enables writing to flash memory for all added variables, not compatible with emulated NVRAM
+  * 允许所有添加的变量写入闪存，不兼容模拟NVRAM
 
 :::
 
@@ -546,7 +546,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Haswell-E example, we'll choose the iMacPro1,1 SMBIOS.
+对于这个Haswell-E示例，我们将选择imacpro1,1 SMBIOS。
 
 运行GenSMBIOS，选择选项1下载MacSerial，选择选项3下载SMBIOS。这将给我们一个类似于下面的输出:
 

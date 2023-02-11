@@ -817,8 +817,8 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 串口/COM端口（Serial/COM Port）
 * 并口（Parallel Port）
 * VT-d (如果将`DisableIoMapper`设置为YES，则可以启用)
-* 兼容性支持模块(CSM)(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**) (or Legacy Support, or Hybrid Boot)
-* Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly, if available)
+* 兼容性支持模块(CSM)(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**) (或传统支持，或混合引导)
+* Thunderbolt(用于初始安装，如果安装不正确，Thunderbolt可能会导致问题)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2写保护)(**此选项必须关闭，如果您找不到该选项，则在`Kernel -> Quirks`下启用`AppleCpuPmCfgLock`。你的黑苹果将不会在启用CFG-Lock的情况下启动**))

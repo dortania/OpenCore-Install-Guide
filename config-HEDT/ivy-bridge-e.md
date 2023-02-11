@@ -106,14 +106,14 @@
 
 ::: tip PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)
 
-This entry relates to Intel's I350 controller found on many Intel and Supermicro server boards, and some Intel Server PCIe adapters. What we'll be doing here is tricking Apple's I210 driver into supporting our I350 network controller:
+这一条目涉及英特尔的I350控制器在许多英特尔和超级微服务器板，以及一些英特尔服务器PCIe适配器。这里我们要做的就是让Apple的I210驱动程序支持我们的I350网络控制器:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
 | device-id | Data | `33150000` |
 
-* **Note**: If your board doesn't have an onboard I350 NIC, there's no reason to add this entry.
-* **Note 2**: If you get a kernel panic on the AppleIntelI210Ethernet kext, or not all of the adapters are showing up, you may need to edit or add additional PciRoot properties for each adapter.
+* **注意**:如果你的主板没有板载I350网卡，则没有理由添加此条目。
+* **注2**:如果appleinteli210以太网kext出现内核故障，或者不是所有的适配器都显示出来，您可能需要为每个适配器编辑或添加额外的PciRoot属性。
 
 :::
 
@@ -184,7 +184,7 @@ This entry relates to Intel's I350 controller found on many Intel and Supermicro
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs, thankfully Sandy and Ivy bridge E are officially supported so no patching necessary.
+需要欺骗不支持的cpu，幸运的是Sandy和Ivy bridge E是官方支持的，所以没有必要打补丁。
 
 ### Force
 
@@ -213,7 +213,7 @@ Needed for spoofing unsupported CPUs, thankfully Sandy and Ivy bridge E are offi
 | LapicKernelPanic | NO | 惠普的机器需要这个选项 |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable<br/>如果运行macOS 11.3+，请禁用 |
+| XhciPortLimit | YES | 如果您的电路板没有USB 3.0，您可以禁用<br/>如果运行macOS 11.3+，请禁用 |
 
 :::
 
@@ -228,7 +228,7 @@ Needed for spoofing unsupported CPUs, thankfully Sandy and Ivy bridge E are offi
   * 仅适用于Haswell和更新版本
     * 注意:Ivy Bridge-E也包括在内，因为它支持XCPM
 * **AppleXcpmExtraMsrs**: YES
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower
+  * 禁用不支持的cpu(如奔腾和许多xeon)所需的多个MSR访问。Broadwell-E及以下要求
 * **CustomSMBIOSGuid**: NO
   * 为UpdateSMBIOSMode设置为`Custom`时执行GUID补丁。通常与戴尔笔记本电脑有关
   * 通过UpdateSMBIOSMode自定义模式启用此怪癖也可以禁用SMBIOS注入到“非苹果”操作系统中，但我们不支持这种方法，因为它破坏了Bootcamp兼容性。使用风险自负
@@ -241,7 +241,7 @@ Needed for spoofing unsupported CPUs, thankfully Sandy and Ivy bridge E are offi
 * **ExtendBTFeatureFlags** NO
   * 对于那些非apple /非fenvi卡有连续性问题的人很有帮助
 * **IncreasePciBarSize**: NO
-  * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
+  * 将IOPCIFamily中的32位PCI条大小从1 GB增加到4 GB，在BIOS中启用4g以上的解码是一种更干净、更安全的方法。一些X99板可能需要这个，如果需要这个，通常会在IOPCIFamily上遇到内核崩溃。注意，在Mojave及更新版本中不需要这个
 * **LapicKernelPanic**: NO
   * 在AP核心lapic中断上禁用内核崩溃，一般HP系统需要。相当于Clover的`Kernel LAPIC`
 * **LegacyCommpage**: NO

@@ -181,9 +181,9 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 ::: details Explanation
 
-Let's take in consideration these 2 usual framebuffers:
+让我们考虑这两个常见的framebuffer:
 
-* `00001B59` which has the following BusID information:
+* `00001B59`包含以下BusID信息:
 
   ```
   [0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
@@ -194,7 +194,7 @@ Let's take in consideration these 2 usual framebuffers:
   03060A00 00040000 87010000
   ```
 
-* and `00001659` which has the following BusID information:
+* `00001659`包含以下BusID信息:
 
   ```
   [0] busId: 0x00, pipe: 8, type: 0x00000002, flags: 0x00000098 - ConnectorLVDS
@@ -232,11 +232,11 @@ Let's take in consideration these 2 usual framebuffers:
 The patches above have these effects:
 
 * Patchset 1:
-  * Convert second connector of the ports to 0105 with HDMI connector type
-  * Convert third connector of the ports to 0204 with HDMI connector type
+  * 将端口的第二个连接器转换为HDMI连接器类型的0105
+  * 将第三个接口转换为0204，使用HDMI连接器类型
 * Patchset 2:
-  * Convert second connector of the ports to 0105 with HDMI connector type
-  * Convert third connector of the ports to 0306 with DP connector type
+  * 将端口的第二个连接器转换为HDMI连接器类型的0105
+  * 将端口的第三个连接器转换为DP连接器类型的0306
 
 根据你的实际硬件设置，你可能想要改变，但通常对于大多数笔记本电脑，两个补丁中的一个**可能**是必需的，如果你的输出开箱即用，没有问题或崩溃，那么你就不需要这些补丁。
 

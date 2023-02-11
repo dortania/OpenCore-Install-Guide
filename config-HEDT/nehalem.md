@@ -106,11 +106,11 @@
 * **EnableSafeModeSlide**: YES
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: YES
-  * Needed to remove write protection from CR0 register on UEFI platforms
+  * 需要删除UEFI平台上CR0寄存器的写保护
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
-  * Resolves early memory kernel panics on 10.6 and below
+  * 解决10.6及更低版本的早期内存内核问题
 * **SetupVirtualMap**: YES
   * 修复了SetVirtualAddresses对虚拟地址的调用 on UEFI boards
 
@@ -195,7 +195,7 @@ TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs, thankfully Nehalem is officially supported so no patching necessary.
+需要欺骗不支持的cpu，幸好Nehalem是官方支持的，所以不需要打补丁。
 
 ### Force
 
@@ -224,7 +224,7 @@ Needed for spoofing unsupported CPUs, thankfully Nehalem is officially supported
 | LapicKernelPanic | NO | 惠普的机器需要这个选项 |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable<br/>如果运行macOS 11.3+，请禁用 |
+| XhciPortLimit | YES | 如果您的电路板没有USB 3.0，您可以禁用<br/>如果运行macOS 11.3+，请禁用 |
 
 :::
 
@@ -239,7 +239,7 @@ Needed for spoofing unsupported CPUs, thankfully Nehalem is officially supported
   * 仅适用于Haswell和更新版本
     * 注意:Ivy Bridge-E也包括在内，因为它支持XCPM
 * **AppleXcpmExtraMsrs**: YES
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and many Xeons. Required for Broadwell-E and lower
+  * 禁用不支持的cpu(如奔腾和许多xeon)所需的多个MSR访问。Broadwell-E及以下要求
 * **CustomSMBIOSGuid**: NO
   * 为UpdateSMBIOSMode设置为`Custom`时执行GUID补丁。通常与戴尔笔记本电脑有关
   * 通过UpdateSMBIOSMode自定义模式启用此怪癖也可以禁用SMBIOS注入到“非苹果”操作系统中，但我们不支持这种方法，因为它破坏了Bootcamp兼容性。使用风险自负
@@ -252,7 +252,7 @@ Needed for spoofing unsupported CPUs, thankfully Nehalem is officially supported
 * **ExtendBTFeatureFlags** NO
   * 对于那些非apple /非fenvi卡有连续性问题的人很有帮助
 * **IncreasePciBarSize**: NO
-  * Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GB, enabling Above4GDecoding in the BIOS is a much cleaner and safer approach. Some X99 boards may require this, you'll generally experience a kernel panic on IOPCIFamily if you need this. Note this shouldn't be needed on Mojave and newer
+  * 将IOPCIFamily中的32位PCI条大小从1 GB增加到4 GB，在BIOS中启用4g以上的解码是一种更干净、更安全的方法。一些X99板可能需要这个，如果需要这个，通常会在IOPCIFamily上遇到内核崩溃。注意，在Mojave及更新版本中不需要这个
 * **LapicKernelPanic**: NO
   * 在AP核心lapic中断上禁用内核崩溃，一般HP系统需要。相当于Clover的`Kernel LAPIC`
 * **LegacyCommpage**: NO

@@ -83,7 +83,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
 | DevirtualiseMmio | YES | |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| SetupVirtualMap | YES | Note newer Asus BIOS(v3006+) will not boot with this quirk enabled |
+| SetupVirtualMap | YES | 注意更新的华硕BIOS(v3006 +)将不会在启用此选项的情况下启动 |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -104,7 +104,7 @@ This section is allowing devices to be passthrough to macOS that are generally i
   * 生成与macOS兼容的内存映射，可能在一些笔记本OEM固件上损坏，所以如果您收到早期启动失败禁用此功能
 * **SetupVirtualMap**: YES
   * 修复了SetVirtualAddresses对虚拟地址的调用, 在Skylake和更新的地方不需要。一些固件如Gigabyte可能仍然需要它，如果没有它，内核将会崩溃
-  * Note newer Asus BIOS(v3006+) will not boot with this quirk enabled
+  * 注意更新的华硕BIOS(v3006 +)将不会在启用此选项的情况下启动
 * **SyncRuntimePermissions**: YES
   * 修复了与MAT表的对齐，以及在引导Windows和Linux时需要使用MAT表，也推荐用于macOS。主要针对重建apple内存映射的用户
 
@@ -189,7 +189,7 @@ TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs, thankfully both Skylake-X and Cascade Lake-X have the same CPU ID as Xeon W chips which ship in the iMac Pro. So here we'll leave it blank
+为了欺骗不支持的CPU，值得庆幸的是Skylake-X和Cascade Lake-X与iMac Pro中搭载的Xeon W芯片具有相同的CPU ID。这里我们留空
 
 ### Force
 

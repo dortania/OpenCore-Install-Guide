@@ -23,8 +23,8 @@
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * 参见前一节获取方法: [config.plist 设置](../config.plist/README.md)
 * [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla)
-  * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
-  * Supporting AMD Family 15h, 16h, 17h and 19h
+  * 在AMD硬件上启动macOS所需要的(把它们留到后面，我们会在下面介绍如何使用它们)
+  * 支持AMD家族15h, 16h, 17h和19h
 
 ::: warning 注意
 
@@ -177,7 +177,7 @@ TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ::: tip 信息
 
-用于欺骗不支持的cpu，如Pentiums和Celerons and to disable CPU power management on unsupported CPUs (such as AMD CPUs)
+用于欺骗不支持的cpu，如Pentiums和Celerons 和在不支持的CPU(如AMD CPU)上禁用CPU电源管理
 
 | 选项 | 启用 |
 | :--- | :--- |
@@ -188,9 +188,9 @@ TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 ::: details 更深入的信息
 
 * **Cpuid1Mask**: 不填写
-  * Mask for fake CPUID
+  * 伪造CPUID的掩码
 * **Cpuid1Data**: 不填写
-  * Fake CPUID entry
+  * 假的CPUID项
 * **DummyPowerManagement**: YES
   * NullCPUPowerManagement的新替代方案，对于所有基于AMD CPU的系统都是必需的，因为没有本地电源管理。
 * **MinKernel**: Leave this blank

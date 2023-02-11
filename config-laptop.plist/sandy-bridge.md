@@ -4,7 +4,7 @@
 | :--- | :--- |
 | 初始macOS支持 | OS X 10.6.7, Snow Leopard |
 | 最后支持的操作系统 | macOS 10.13, High Sierra |
-| Note | Most Sandy bridge boards do not support UEFI |
+| 注意 | 大多数Sandy bridge板不支持UEFI |
 
 ## 起点
 
@@ -59,7 +59,7 @@
 
 ::: tip 信息
 
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support Sandy Bridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://sumingyd.github.io/OpenCore-Post-Install/) and drop the old tables(Note that this is only temporary until we've made our SSDT-PM, we'll re-enable these tables later):
+这阻止了某些ACPI表的加载，对于我们来说，我们真正关心的是这个。主要原因是苹果的XCPM不太支持Sandy Bridge，在引导时可能会导致AppleIntelCPUPowerManagement崩溃。为了避免这种情况，我们在[安装后](https://sumingyd.github.io/OpenCore-Post-Install/)中创建了我们自己的PM SSDT，并删除旧的表(注意，这只是暂时的，直到我们创建了我们的SSDT-PM，我们稍后会重新启用这些表):
 
 Removing CpuPm:
 
@@ -161,7 +161,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 在设置iGPU属性时，通常遵循以下步骤。如果他们说的有任何不同，请遵循下表的配置说明:
 
-1. When initially setting up your config.plist, only set AAPL,snb-platform-id - this is normally enough
+1. 在初始化config.plist时，只设置AAPL,snb-platform-id——这通常就足够了
 
 | AAPL,snb-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
@@ -171,7 +171,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 #### Configuration Notes
 
 * VGA **不支持**(除非它是通过DP转VGA内部适配器运行的，显然只有极少数设备会将其视为DP而不是VGA，这完全是运气。)
-* HD 2000 series are unsupported as well
+* HD 2000系列也不支持
 
 :::
 
@@ -179,7 +179,7 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 **Sandy/IvyBridge Hybrids:**
 
-Some laptops from this era came with a mixed chipset setup, using Sandy Bridge CPUs with Ivy Bridge chipsets which creates issues with macOS since it expects a certain [IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID that it doesn't find and would get stuck at boot(As Apple's iGPU drivers require an [IMEI device](https://en.wikipedia.org/wiki/Intel_Management_Engine)), to fix this we need to fake the IMEI's IDs in these models
+这个时代的一些笔记本电脑带有混合芯片组设置，使用Sandy Bridge cpu和Ivy Bridge芯片组，这在macOS上产生了问题，因为它期望某个[IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine)ID，但它找不到，并且会在引导时卡住(因为苹果的iGPU驱动程序需要[IMEI设备](https://en.wikipedia.org/wiki/Intel_Management_Engine))，为了解决这个问题，我们需要伪造这些型号的IMEI ID
 
 * 要了解是否受到影响，请通过AIDA64等工具检查CPU是否为英特尔酷睿ix-3xxx，芯片组是否为Hx6x(例如，使用HM65或HM67的笔记本电脑使用酷睿i3-3110M)。
 * 在配置文件中添加一个新的PciRoot设备，名为`PciRoot(0x0)/Pci(0x16,0x0)`
@@ -300,7 +300,7 @@ Some laptops from this era came with a mixed chipset setup, using Sandy Bridge C
 | LapicKernelPanic | NO | 惠普的机器需要这个选项 |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
-| XhciPortLimit | YES | If your board does not have USB 3.0, you can disable<br/>如果运行macOS 11.3+，请禁用 |
+| XhciPortLimit | YES | 如果您的电路板没有USB 3.0，您可以禁用<br/>如果运行macOS 11.3+，请禁用 |
 
 :::
 
@@ -571,7 +571,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Sandy Bridge example, we'll chose the MacBookPro8,1 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
+对于这个Sandy Bridge的例子，我们将选择MacBookPro8,1 SMBIOS -这是为了兼容性而故意这样做的。典型的细分如下:
 
 | SMBIOS | CPU 类型 | GPU 类型 | 显示尺寸 |
 | :--- | :--- | :--- | :--- |
@@ -795,8 +795,8 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 * 串口/COM端口（Serial/COM Port）
 * 并口（Parallel Port）
 * VT-d (如果将`DisableIoMapper`设置为YES，则可以启用)
-* 兼容性支持模块(CSM)(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**) (or Legacy Support, or Hybrid Boot)
-* Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly, if available)
+* 兼容性支持模块(CSM)(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**) (或传统支持，或混合引导)
+* Thunderbolt(用于初始安装，如果安装不正确，Thunderbolt可能会导致问题)
 * Intel SGX
 * Intel Platform Trust
 * CFG Lock (MSR 0xE2写保护)(**此选项必须关闭，如果您找不到该选项，则在`Kernel -> Quirks`下启用`AppleCpuPmCfgLock`。你的黑苹果将不会在启用CFG-Lock的情况下启动**))
