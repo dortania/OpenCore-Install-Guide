@@ -87,5 +87,6 @@ Current known translations:
 * [ThrRip](https://github.com/ThrRip/OpenCore-Install-Guide)(Chinese, no longer maintained）
 * [Shijuro](https://github.com/shijuro/OpenCore-Install-Guide)(Russian)
 * [viOpenCore](https://github.com/viOpenCore/OpenCore-Install-Guide)(Vietnamese)
-* [sumingyd](https://github.com/sumingyd/OpenCore-Install-Guide)(chinese，under construction)
+* [sumingyd](https://github.com/sumingyd/OpenCore-Install-Guide)(chinese)
+
 And note that these translations are subject to authors preferences, translation changes and human errors. Please keep this in mind when reading as they're no longer official Dortania guides.
