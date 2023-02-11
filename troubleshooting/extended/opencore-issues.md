@@ -162,4 +162,4 @@
 
 ## 收到 “OC: Failed to find SB model disable halting on critical error”
 
-这是一个拼写错误，请确保在你的 config.plist 中将`Misc -> Security -> SecureBootModel` 设置为禁用 **d**
+这是一个拼写错误，请确保在你的 config.plist 中将`Misc -> Security -> SecureBootModel` 设置为禁用 **disabled**
