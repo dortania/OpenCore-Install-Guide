@@ -246,7 +246,7 @@ SIP 或更恰当地称为系统完整性保护，是一种安全技术，试图�
 * `00000000` - SIP完全启用(0x0)。
 * `03000000` - 禁用kext签名(0x1)和文件系统保护(0x2)。
 * `FF030000` - 禁用所有[macOS High Sierra中的标志](https://opensource.apple.com/source/xnu/xnu-4570.71.2/bsd/sys/csr.h.auto.html) (0x3ff).
-* `FF070000` - 禁用所有 [macOS Mojave中的标志](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) and in [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) 因为苹果公司为可执行策略引入了一个值。
+* `FF070000` - 禁用所有 [macOS Mojave中的标志](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) 和 [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) 因为苹果公司为可执行策略引入了一个值。
 * `FF0F0000` - 禁用macOS Big Sur (0xfff)中的所有标志，该标志具有另一个新的[身份验证root标志](https://eclecticlight.co/2020/06/25/big-surs-signed-system-volume-added-security-protection/).
 
 **注意**:使用OpenCore禁用SIP与Clover有很大不同，特别是NVRAM变量不会被覆盖，除非在 `Delete` 部分明确告知。因此，如果您已经通过OpenCore或macOS设置了一次SIP，则必须覆盖该变量:
