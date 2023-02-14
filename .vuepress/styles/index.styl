@@ -30,8 +30,15 @@ html {
   background-color: unset;
 }
 ::-webkit-scrollbar {
-    width 15px
+    width 10px
     background transparent /* make scrollbar transparent */
+}
+:-webkit-scrollbar-thumb {
+    background: #ccc; // 滑块颜色
+    border-radius: 5px; // 滑块圆角
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #f40; // 鼠标移入滑块变红
 }
 
 tr
