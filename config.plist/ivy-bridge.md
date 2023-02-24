@@ -3,7 +3,9 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.7, Lion |
-| Note 1 | Ivy Bridge iGPUs are only supported up-to macOS 11 |
+| Last Supported OS | macOS 12 Monterey |
+| Note 1 | For Ventura information, see [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
+| Note 2 | Ivy Bridge iGPUs are only supported up-to macOS 11 |
 
 ## Starting Point
 

@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.8, Mountain Lion |
+| Note 1 | Haswell iGPUs are only supported up-to macOS 12 |
 
 ## Starting Point
 
@@ -564,6 +565,8 @@ Monterey table:
 | iMac17,1 | Broadwell with dGPU |
 
 :::
+
+**Note 2**: All of these SMBIOSes were dropped in macOS Ventura. If running macOS Ventura, [use a Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 

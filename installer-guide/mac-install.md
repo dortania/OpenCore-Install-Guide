@@ -138,6 +138,9 @@ You can also replace the `createinstallmedia` path with that of where your insta
 Pulled from Apple's own site: [How to create a bootable installer for macOS](https://support.apple.com/en-us/HT201372)
 
 ```sh
+# Ventura
+sudo /Applications/Install\ macOS\ Ventura.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
+
 # Monterey
 sudo /Applications/Install\ macOS\ Monterey.app/Contents/Resources/createinstallmedia --volume /Volumes/MyVolume
 
