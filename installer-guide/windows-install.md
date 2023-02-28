@@ -9,55 +9,55 @@ To start you'll need the following:
 * For USB larger than 16 GB to format in FAT32 use [Rufus method](#rufus-method)
 
 * [macrecovery.py](https://github.com/acidanthera/OpenCorePkg/releases)
-  * This will require [Python installed](https://www.python.org/downloads/)
+  * This will require [Python 3 installed](https://www.python.org/downloads/)
 
 ## Downloading macOS
 
 To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases) and head to `/Utilities/macrecovery/`. Next, click next to the current folder path and type `cmd` to open a Command Prompt in the current directory:
 
-![](../images/installer-guide/winblows-install-md/open-cmd-current-folder.gif)
+![](../images/installer-guide/windows-install-md/open-cmd-current-folder.gif)
 
-Now run one of the following depending on what version of macOS you want(Note these scripts rely on [Python](https://www.python.org/downloads/) support, please install if you haven't already):
+Now run one of the following depending on what version of macOS you want(Note these scripts rely on [Python 3](https://www.python.org/downloads/) support, please install if you haven't already):
 
 ```sh
 # Lion (10.7):
-python macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
-python macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
+python3 macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
+python3 macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
 
 # Mountain Lion (10.8):
-python macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
+python3 macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
 
 # Mavericks (10.9):
-python macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
+python3 macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
 
 # Yosemite (10.10):
-python macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
+python3 macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
 
 # El Capitan (10.11):
-python macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
+python3 macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
 
 # Sierra (10.12):
-python macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
+python3 macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
 
 # High Sierra (10.13)
-python macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
-python macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
+python3 macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
+python3 macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
 
 # Mojave (10.14)
-python macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
+python3 macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
 # Catalina (10.15)
-python macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
+python3 macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
 # Big Sur (11)
-python macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
+python3 macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
 
 # Monterey (12)
-python ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
+python3 macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000000000 download
 
 # Latest version
 # ie. Ventura (13)
-python ./macrecovery.py -b Mac-B4831CEBD52A0C4C -m 00000000000000000 -os latest download
+python3 macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
 ```
 
 * **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
@@ -66,11 +66,11 @@ python ./macrecovery.py -b Mac-B4831CEBD52A0C4C -m 00000000000000000 -os latest 
 
 This will take some time, however once you're finished you should get either BaseSystem or RecoveryImage files:
 
-![](../images/installer-guide/winblows-install-md/macrecovery-done.png)
+![](../images/installer-guide/windows-install-md/macrecovery-done.png)
 
 | BaseSystem | RecoveryImage |
 | :--- | :--- |
-|![](../images/installer-guide/winblows-install-md/basesystem-example.png) | ![](../images/installer-guide/winblows-install-md/macrecovery-after.jpg) |
+|![](../images/installer-guide/windows-install-md/basesystem-example.png) | ![](../images/installer-guide/windows-install-md/macrecovery-after.jpg) |
 
 Now with our installer downloaded, we'll next want to format our USB.
 
@@ -100,19 +100,19 @@ Simply open up Disk Management, and format your USB as FAT32:
   * Right click the unallocated space and create a new simple volume. Make sure it is FAT32 and at least a gigabyte or two big. Name it "EFI".
 * Otherwise, right click the partition on the USB and click Format and set it to FAT32.
 
-![](../images/installer-guide/winblows-install-md/DiskManagement.jpg)
+![](../images/installer-guide/windows-install-md/DiskManagement.jpg)
 
 Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
 
-![](../images/installer-guide/winblows-install-md/com-recovery.png)
+![](../images/installer-guide/windows-install-md/com-recovery.png)
 
 Now grab OpenCorePkg you downloaded earlier and open it:
 
-![](../images/installer-guide/winblows-install-md/base-oc-folder.png)
+![](../images/installer-guide/windows-install-md/base-oc-folder.png)
 
 Here we see both IA32(32 Bit CPUs) and X64(64 Bit CPUs) folders, choose the one that's most appropriate to your hardware and open it. Next grab the EFI folder inside and place this on the root of the USB drive along side com.apple.recovery.boot. Once done it should look like this:
 
-![](../images/installer-guide/winblows-install-md/com-efi-done.png)
+![](../images/installer-guide/windows-install-md/com-efi-done.png)
 
 ### Rufus method
 
@@ -122,19 +122,19 @@ Here we see both IA32(32 Bit CPUs) and X64(64 Bit CPUs) folders, choose the one 
 4. Click Start
 5. Delete all file autorun in USB Drive partition
 
-![](../images/installer-guide/winblows-install-md/format-usb-rufus.png)
+![](../images/installer-guide/windows-install-md/format-usb-rufus.png)
 
 Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
 
-![](../images/installer-guide/winblows-install-md/com-recovery.png)
+![](../images/installer-guide/windows-install-md/com-recovery.png)
 
 Now grab OpenCorePkg you downloaded earlier and open it:
 
-![](../images/installer-guide/winblows-install-md/base-oc-folder.png)
+![](../images/installer-guide/windows-install-md/base-oc-folder.png)
 
 Here we see both IA32(32 Bit CPUs) and X64(64 Bit CPUs) folders, choose the one that's most appropriate to your hardware and open it. Next grab the EFI folder inside and place this on the root of the USB drive along side com.apple.recovery.boot. Once done it should look like this:
 
-![](../images/installer-guide/winblows-install-md/com-efi-done.png)
+![](../images/installer-guide/windows-install-md/com-efi-done.png)
 
 ### diskpart method
 
@@ -167,15 +167,15 @@ ASSIGN LETTER=E
 
 Next, go to the root of this USB drive and create a folder called `com.apple.recovery.boot`. Then move the downloaded BaseSystem or RecoveryImage files. Please ensure you copy over both the .dmg and .chunklist files to this folder:
 
-![](../images/installer-guide/winblows-install-md/com-recovery.png)
+![](../images/installer-guide/windows-install-md/com-recovery.png)
 
 Now grab OpenCorePkg you downloaded earlier and open it:
 
-![](../images/installer-guide/winblows-install-md/base-oc-folder.png)
+![](../images/installer-guide/windows-install-md/base-oc-folder.png)
 
 Here we see both IA32(32 Bit CPUs) and X64(64 Bit CPUs) folders, choose the one that's most appropriate to your hardware and open it. Next grab the EFI folder inside and place this on the root of the USB drive along side com.apple.recovery.boot. Once done it should look like this:
 
-![](../images/installer-guide/winblows-install-md/com-efi-done.png)
+![](../images/installer-guide/windows-install-md/com-efi-done.png)
 
 ::: details Legacy Install Setup
 
@@ -189,23 +189,23 @@ To start, you'll need the following:
 
 Next, open up BOOTICE and ensure you've selected the right drive.
 
-![](../images/installer-guide/winblows-install-md/bootice.png)
+![](../images/installer-guide/windows-install-md/bootice.png)
 
 Next, enter "Process MBR" then select "Restore MBR" and select the **boot0** file from `Utilities/LegacyBoot/` in OpenCorePkg:
 
 | Restore MBR | Restore boot0 file |
 | :--- | :--- |
-| ![](../images/installer-guide/winblows-install-md/restore-mbr.png) | ![](../images/installer-guide/winblows-install-md/restore-mbr-file.png) |
+| ![](../images/installer-guide/windows-install-md/restore-mbr.png) | ![](../images/installer-guide/windows-install-md/restore-mbr-file.png) |
 
 Then head back to the main screen and select "Process PBR" then "Restore PBR". From here, choose the **boot1f32** file from `Utilities/LegacyBoot/` in OpenCorePkg:
 
 | Restore PBR | Restore boot1f32 file |
 | :--- | :--- |
-| ![](../images/installer-guide/winblows-install-md/restore-pbr.png) | ![](../images/installer-guide/winblows-install-md/restore-pbr-file.png) |
+| ![](../images/installer-guide/windows-install-md/restore-pbr.png) | ![](../images/installer-guide/windows-install-md/restore-pbr-file.png) |
 
 Once this is done, head back to your USB and do 1 final thing. Grab either the **bootx64**(64 Bit CPUs) or **bootia32**(32 Bit CPUs) file from `Utilities/LegacyBoot/` and place it on the root of your drive. **Rename this file to boot** to ensure DuetPkg can properly:
 
-![](../images/installer-guide/winblows-install-md/final-boot-file.png)
+![](../images/installer-guide/windows-install-md/final-boot-file.png)
 
 :::
 

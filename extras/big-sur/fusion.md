@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # VMware Fusion
 
 ## Requirements

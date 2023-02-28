@@ -61,7 +61,6 @@ module.exports = {
         logo: '/homepage.png',
         nav: [{
             text: 'Dortania Guides',
-            ariaLabel: 'Language Menu',
             items: [{
                 text: 'Home Site',
                 link: 'https://dortania.github.io/'
@@ -116,7 +115,7 @@ module.exports = {
                 sidebarDepth: 1,
                 children: [
                     '/installer-guide/mac-install',
-                    '/installer-guide/winblows-install',
+                    '/installer-guide/windows-install',
                     '/installer-guide/linux-install',
                 ],
             },
@@ -280,7 +279,7 @@ module.exports = {
             children: [
                 '/extras/kaslr-fix',
                 '/extras/spoof',
-                '/extras/monterey',
+                '/extras/ventura',
                 ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
                 '/extras/smbios-support.md',
             ]
@@ -296,11 +295,12 @@ module.exports = {
         ],
     },
     plugins: [
-        '@vuepress/plugin-back-to-top',
+        '@vuepress/back-to-top',
         'vuepress-plugin-smooth-scroll',
-        ['vuepress-plugin-medium-zoom',
+        'vuepress-plugin-fulltext-search',
+        ['@vuepress/medium-zoom',
             {
-                selector: "img",
+                selector: ".theme-succinct-content :not(a) > img",
                 options: {
                     background: 'var(--bodyBgColor)'
                 }

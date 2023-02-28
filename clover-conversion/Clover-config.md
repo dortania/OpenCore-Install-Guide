@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # Converting common properties from Clover to OpenCore
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
@@ -457,6 +461,10 @@ For Low end Haswell+ like Celerons, please see here for recommended patches: [Bu
 Issue with AppleRTC, quite a simple fix:
 
 * config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
+
+For some versions of MacOS (e.g. Catalina), boot.efi may write to the RTC. To prevent this, the below needs to be added as well:
+
+* config.plist -> NVRAM -> Add -> 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:rtc-blacklist  = `<58 59>`
 
 **Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329), and [here](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html) for a guide.
 

@@ -165,7 +165,7 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Required for most AMD boards running Intel NICs
   * Requires macOS 12 and above
 * [SmallTreeIntel82576](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
-  * Required for I211 NICs running on macOS versions up to Big Sur, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet))
+  * Required for I211 NICs running on macOS versions up to Big Sur, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet) or above)
   * Required for most AMD boards running Intel NICs
   * Requires OS X 10.9-12(v1.0.6), macOS 10.13-14(v1.2.5), macOS 10.15+(v1.3.0)
 * [AtherosE2200Ethernet](https://github.com/Mieze/AtherosE2200Ethernet/releases)
@@ -381,6 +381,8 @@ However ProperTree will handle this for you, so you need not concern yourself
   * An experimental Lilu plugin that optimizes Alder Lake's heterogeneous core configuration. **Only for Alder Lake CPUs**
 * [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
   * Patch various functions of macOS, see [the README](https://github.com/acidanthera/RestrictEvents#boot-arguments) for more info
+* [EmeraldSDHC](https://github.com/acidanthera/EmeraldSDHC)
+  * macOS kernel extension for eMMC support. Currently only supports eMMC/MMC cards at up to HS200 speeds.  This driver is currently a work in progress and may experience poor performance or be nonfunctional on some devices. SD cards are currently not supported at this time.
 
 ::: details Legacy SATA Kexts
 
