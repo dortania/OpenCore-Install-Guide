@@ -458,7 +458,7 @@ Issue with AppleRTC, quite a simple fix:
 
 * config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
 
-For some versions of MacOS (e.g. Catalina) also the boot.efi might write to the RTC, so you might need to block this as well:
+For some versions of MacOS (e.g. Catalina), boot.efi may write to the RTC. To prevent this, the below needs to be added as well:
 
 * config.plist -> NVRAM -> Add -> 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:rtc-blacklist  = `<58 59>`
 
