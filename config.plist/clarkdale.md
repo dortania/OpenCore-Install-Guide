@@ -3,8 +3,10 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.6.3, Snow Leopard |
-| Note 1 | Apple does not support desktop Iron Lake iGPUs |
-| Note 2 | Most Lynnfield and Clarkdale boards do not support UEFI |
+| Last Supported OS | macOS 12 Monterey |
+| Note 1 | For Ventura information, see [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
+| Note 2 | Apple does not support desktop Iron Lake iGPUs |
+| Note 3 | Most Lynnfield and Clarkdale boards do not support UEFI |
 
 ## Starting Point
 

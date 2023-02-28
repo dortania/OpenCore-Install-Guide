@@ -84,7 +84,8 @@ Current known translations:
 * [InyextcionES](https://github.com/InyextcionES/OpenCore-Install-Guide)(Spanish)
 * [macOS86](https://macos86.gitbook.io/guida-opencore/)(Italian, no longer maintained)
 * [Technopat](https://www.technopat.net/sosyal/konu/opencore-ile-macos-kurulum-rehberi.963661/)(Turkish)
-* [ThrRip](https://github.com/ThrRip/OpenCore-Install-Guide)(Chinese)
+* [ThrRip](https://github.com/ThrRip/OpenCore-Install-Guide)(Chinese, no longer maintained)
+* [sumingyd](https://github.com/sumingyd/OpenCore-Install-Guide)(Chinese)
 * [Shijuro](https://github.com/shijuro/OpenCore-Install-Guide)(Russian)
 * [viOpenCore](https://github.com/viOpenCore/OpenCore-Install-Guide)(Vietnamese)
 

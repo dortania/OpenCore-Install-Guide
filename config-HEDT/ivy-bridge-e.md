@@ -3,7 +3,8 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.9, Mavericks |
-| Notes | Sandy Bridge-E also applies |
+| Last Supported OS | macOS 12 Monterey |
+| Note | For Ventura information, see [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
 
 ## Starting Point
 

@@ -14,7 +14,7 @@ This is likely some error either on your firmware or OpenCore, specifically it's
   * Incorrect USB Folder Structure
     * See [Booting OpenCore reboots to BIOS](#booting-opencore-reboots-to-bios) for more info
   * Firmware does not support UEFI
-    * You'll need to setup DuetPkg, this is covered in both the [macOS](../../installer-guide/mac-install.md) and [Windows](../../installer-guide/winblows-install.md) install pages
+    * You'll need to setup DuetPkg, this is covered in both the [macOS](../../installer-guide/mac-install.md) and [Windows](../../installer-guide/windows-install.md) install pages
 
 **Situations where OpenCore did load**:
 
