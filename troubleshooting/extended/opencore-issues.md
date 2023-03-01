@@ -166,8 +166,8 @@ This is a typo, ensure that in your config.plist `Misc -> Security -> SecureBoot
 
 ## Legacy boot stuck on `BOOT FAIL!`
 
-Double check that you have EFI folder structure is correct.
 This error means that EFI/OC/OpenCore.efi could not be found on any partition.
+Double check that the EFI folder structure is correct.
 
 ::: details Example of folder structure
 
