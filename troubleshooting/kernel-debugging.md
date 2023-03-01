@@ -1,236 +1,236 @@
-# System Debugging: In-depth
+# 系统调试:深入
 
-This section will go a bit deeper into the troubleshooting rabbit hole, specifically focusing on more low level debugging with proper debug output and optional serial setup.
+本节将更深入地讨论故障排除，特别关注具有适当调试输出和可选串行设置的更低级的调试。
 
-**Note**: 99% of users do not need this level of debugging, this is only for the hardcore or extreme edge-cases.
+**注意**:99%的用户不需要这种级别的调试，这只适用于核心或极端情况。
 
 [[toc]]
 
-## EFI Setup
+## EFI 设置
 
-For most part, there's fairly minimal changes required. Main things we recommend are DEBUG version of **OpenCore** and all your **kexts**. This can help ensure you get all the necessary data, see here for more details on OpenCore debugging: [OpenCore debugging](./debug.md)
+在大多数情况下，只需要相当小的更改。我们主要推荐的是DEBUG版本的**OpenCore**和所有的**kext**。这可以帮助您获得所有必要的数据，有关OpenCore调试的更多详细信息，请参阅这里: [OpenCore调试](./debug.md)
 
-Besides just using DEBUG variants of OpenCore and kexts, these tools can also help out greatly:
+除了使用OpenCore和kexts的DEBUG版本，这些工具也可以提供很大的帮助:
 
 * [DebugEnhancer.kext](https://github.com/acidanthera/DebugEnhancer/releases)
-  * Helps greatly with kernel debugging while also patching [kern.msgbuf to 10485760](https://github.com/acidanthera/DebugEnhancer/blob/4495911971011a1a7a0ffe8605d6ca4b341f67d9/DebugEnhancer/kern_dbgenhancer.cpp#L131) and allowing a much larger kernel-log.
-  * Note this kext cannot start with kernel initialization, so early logs are not patched until the kext is loaded right before PCI Configuration Stage
+  * 极大地帮助内核调试，同时还修补了 [kern.msgbuf to 10485760](https://github.com/acidanthera/DebugEnhancer/blob/4495911971011a1a7a0ffe8605d6ca4b341f67d9/DebugEnhancer/kern_dbgenhancer.cpp#L131) ，并允许更大的内核日志。
+  * 注意这个kext不能与内核初始化一起启动，所以早期的日志不会被修补，直到kext在PCI配置阶段之前加载
   
 * [SSDT-DBG](https://gist.github.com/al3xtjames/39ebea4d615c8aed829109a9ea2cd0b5)
-  * Enables debug statements from your ACPI tables, helping for in-OS ACPI event debugging
-  * Note you will need to [compile the SSDT](https://dortania.github.io/Getting-Started-With-ACPI/Manual/compile.html)
+  * 启用ACPI表中的调试语句，帮助操作系统中的ACPI事件调试
+  * 注意你需要[编译SSDT](https://sumingyd.github.io/Getting-Started-With-ACPI/Manual/compile.html)
   
-## Config.plist Setup
+## Config.plist 设置
 
-For serial setup, OpenCore actually makes this quite straight forward.
+对于串行设置，OpenCore实际上是非常直接的。
 
 ### Misc
 
 #### Serial
 
 * **Init**: YES
-  * Initializes the serial port from OpenCore
-  * Needed for sending OpenCore logging to the serial port
+  * 从 OpenCore 初始化串口
+  * 需要将OpenCore日志发送到串口
 
 #### Debug
 
 * **Target**: `67`
-  * Enables debug output with OpenCore
-  * `Target` = `75` adds the additional serial output flag(`0x08`) if you [plan to use serial](#serial-setup-optional)
-  * You can calculate your own value here: [OpenCore debugging](./debug.md)
+  * 启用OpenCore调试输出
+  * `Target` = `75`添加额外的串行输出标志(`0x08`)，如果你[计划使用串行](#serial-setup-optional)
+  * 你可以在这里计算你自己的值:[OpenCore调试](./debug.md)
   
 ### NVRAM
 
 #### boot-args
 
-Here we get to set some variables that will help us with debug output, for us we'll be using the following boot-args:
+在这里，我们要设置一些变量来帮助我们调试输出，对于我们来说，我们将使用以下的boot-args:
 
 ```
 -v keepsyms=1 debug=0x12a msgbuf=1048576
 ```
 
-Now lets go over what each arg does:
+现在让我们来看看每个arg的作用:
 
 * **-v**
-  * Enables verbose output
+  * 启用详细输出
 * **keepsyms=1**
-  * Ensures symbols are kept during kernel panics, which are greatly helpful for troubleshooting
+  * 确保在内核发生严重故障时保留符号，这对故障排除非常有帮助
 * **debug=0x12a**
   * Combination of `DB_PRT` (0x2), `DB_KPRT` (0x8), `DB_SLOG` (0x20), and `DB_LOG_PI_SCRN` (0x100)
-  * A full list of values for the latest version of XNU can be found here: [debug.h](https://github.com/apple-oss-distributions/xnu/blob/master/osfmk/kern/debug.h)
+  * 最新版本XNU的完整列表可以在这里找到: [debug.h](https://github.com/apple-oss-distributions/xnu/blob/master/osfmk/kern/debug.h)
 * **msgbuf=1048576**
-  * Sets the kernel's message buffer size, this helps with getting proper logs during boot
-  * 1048576 is 1MB(/1024^2), can be larger if required
-  * Note not required with DebugEnhancer.kext, however for early kernel logs it's still required
+  * 设置内核的消息缓冲区大小，这有助于在启动期间获得正确的日志
+  * 1048576 is 1MB(/1024^2), 如果需要可以更大
+  * 注意：DebugEnhancer kext不需要，但是对于早期的内核日志，它仍然是必需的
 
-**Other helpful boot-args**:
+**其他有用的boot-args**:
 
-Depending on what you're debugging, you may also find these boot-args extremely helpful:
+根据你正在调试的内容，你可能还会发现这些boot-args非常有用:
 
 * **-liludbgall**
-  * Enables debugging on Lilu and any other plugins, though note that this requires DEBUG versions of the kexts
+  * 在Lilu和任何其他插件上启用调试，但请注意，这需要调试版本的kext
 * **io=0xff**
-  * Enables IOKit debugging, with greater output. Be aware that the logging-amount of this parameter will be huge and will slow down the system. Especially while booting.
+  * 启用IOKit调试，输出更大。请注意，此参数的日志量将非常大，并将降低系统的速度。尤其是在启动的时候。
 * **igdebug=0xff**
-  * Enables iGPU related debugging, helpful when working with iGPU systems
+  * 开启iGPU相关的调试，在使用iGPU系统时很有用
 * **serial=5**
-  * Redirects output to serial if you [plan to use serial](#serial-setup-optional)
-  * Recommended for early kernel output before PCI Configuration
+  * 将输出重定向到串行如果你[计划使用串行](#serial-setup-optional)
+  * 推荐用于PCI配置之前的早期内核输出
 * **acpi_layer=0x8**
-  * Enables `ACPI_TABLES` debug, see [acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) for more information
-  * `0xFFFFFFFF` alternatively enables all layers
+  * 启用`ACPI_TABLES`调试，参见[acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) 了解更多信息
+  * `0xFFFFFFFF` 也可以启用所有层
 * **acpi_level=0x2**
-  * Sets `ACPI_LV_DEBUG_OBJECT` debug, see [acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) for more information
-  * `0xFFFF5F` alternatively implies `ACPI_ALL_COMPONENTS`
+  * 设置`ACPI_LV_DEBUG_OBJECT`调试，参见 [acoutput.h](https://github.com/acpica/acpica/blob/master/source/include/acoutput.h) 了解更多信息
+  * `0xFFFF5F` 也可以表示 `ACPI_ALL_COMPONENTS`
 
-## Serial Setup(Optional)
+## 串行设置(可选)
 
-* [Hardware Setup](#hardware-setup)
-* [EFI Setup](#efi-setup)
-* [Config.plist Setup](#config-plist-setup)
+* [硬件设置](#hardware-setup)
+* [EFI 设置](#efi-setup)
+* [Config.plist 设置](#config-plist-setup)
 
-While optional, serial can be super helpful in grabbing all the important info flooding your PC. It's also the only way to properly log super early kernel panics(such as things right after `[EB|#LOG:EXITBS:START]`)
+虽然是可选的，但串行仍然对抓取所有的信息超级有帮助。这也是正确记录超早期内核崩溃的唯一方法(例如在`[EB|# log:EXITBS:START]`之后的事情)
 
-For this setup, you'll need a few things:
+对于这个设置，你需要一些东西:
 
-* A serial header/port on the test machine
-* A serial-to-serial or serial-to-USB cable
-* A second machine to receive the serial logging(with either Serial or USB)
-* Software to monitor the serial output
-  * For this guide, we'll use [CoolTerm](https://freeware.the-meiers.org) as it supports macOS, Linux, Windows and even Raspberry Pi's
-  * `screen` and other methods are also supported
+* 测试机上的串行头/端口
+* 串行到串行或串行到usb电缆
+* 第二台机器接收串行日志记录(使用串行或USB)
+* 软件监控串行输出
+  * 在本指南中，我们将使用 [CoolTerm](https://freeware.the-meiers.org) ,因为它支持macOS, Linux, Windows甚至树莓派
+  * `screen` 和其他方法也支持
 
-### Hardware Setup
+### 硬件设置
 
-For this example, we'll be using an Asus X299-E Strix board which does have a serial header. To verify whether your board comes with one, check the owners or service manual and search for the serial/COM port:
+对于这个例子，我们将使用华硕X299-E Strix板，它有一个串行头。要确认您的单板是否自带串口，请查看单板的所有者或服务手册，并搜索串口/COM端口:
 
 ![](../images/troubleshooting/kernel-debugging-md/serial-header.png)
 
-As you can see, we have a COM port on the bottom of our motherboard and even provides us with a diagram for manually hooking up our serial pins if you're not using a 9/10 Pin Serial Header to DB9 adapter.
+正如你所看到的，我们在主板的底部有一个COM端口，如果你不使用9/10引脚串行头到DB9适配器，甚至为我们手动连接我们的串行引脚提供了一个图表。
 
-Alternatively, some machine come with DB9 Serial ports right on the rear IO such as this Dell Optiplex 780 SFF(note that VGA and Serial are **not** the same connector):
+或者，一些机器在后IO上带有DB9串行端口，例如这台Dell Optiplex 780 SFF(注意VGA和串行**不是**同一个连接器):
 
 <img width="508" alt="" src="../images/troubleshooting/kernel-debugging-md/serial-connector.jpg">
 
-For my X299 setup, I'm using a simple [Serial header to DB9](https://www.amazon.ca/gp/product/B001Y1F0HW/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1), then a [DB9 to USB  RS 232 adapter](https://www.amazon.ca/gp/product/B075YGKFC1/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1) which finally terminates at my laptop:
+对于我的X299设置，我使用一个简单的 [串行头到DB9](https://www.amazon.ca/gp/product/B001Y1F0HW/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1), 然后一个 [DB9到USB RS 232适配器](https://www.amazon.ca/gp/product/B075YGKFC1/ref=ppx_yo_dt_b_asin_title_o00_s01?ie=UTF8&psc=1) 最后终止在我的笔记本电脑:
 
 | Serial header to DB9 | DB9 to USB  RS 232 adapter |
 | :--- | :--- |
 | ![](../images/troubleshooting/kernel-debugging-md/817DNdBZDkL._AC_SL1500_.jpg) | ![](../images/troubleshooting/kernel-debugging-md/61yHczOwpTL._AC_SL1001_.jpg) |
 
-The OpenCore manual generally recommends CP21202-based UART devices:
+OpenCore手册通常建议CP21202-based UART设备:
 
-> To obtain the log during boot you can make the use of serial port debugging. Serial port debugging is enabled in Target, e.g. 0xB for onscreen with serial. OpenCore uses 115200 baud rate, 8 data bits, no parity, and 1 stop bit. For macOS your best choice are CP2102-based UART devices. Connect motherboard TX to USB UART RX, and motherboard GND to USB UART GND. Use screen utility to get the output, or download GUI software, such as CoolTerm.
-> Note: On several motherboards (and possibly USB UART dongles) PIN naming may be incorrect. It is very common to have GND swapped with RX, thus you have to connect motherboard “TX” to USB UART GND, and motherboard “GND” to USB UART RX.
+> 要在引导期间获得日志，可以使用串口调试。在目标中打开串口调试，例如0xB表示onscreen with Serial。OpenCore使用115200波特率，8个数据位，无奇偶校验和1个停止位。对于macOS，最好的选择是基于cp2102的UART设备。将主板TX连接到USB UART RX，主板GND连接到USB UART GND。使用屏幕工具获取输出，或者下载GUI软件，比如CoolTerm。
+> 注意:在一些主板(可能是USB UART加密狗)PIN命名可能不正确。GND与RX交换是非常常见的，因此您必须将主板“TX”连接到USB UART GND，并将主板“GND”连接到USB UART RX。
 
-**Important reminder**: Don't forget to also enable the serial port in your BIOS, most motherboards will disable it by default
+**重要提醒**:不要忘记在BIOS中启用串口，大多数主板默认情况下将禁用它
 
-### CoolTerm Setup
+### CoolTerm 设置
 
-Now lets fire up [CoolTerm](https://freeware.the-meiers.org) and set a few options. When you open CoolTerm, you'll likely be greeted with a simple window. Here select the Options entry:
+现在让我们启动[CoolTerm](https://freeware.the-meiers.org)并设置一些选项。当您打开CoolTerm时，您可能会看到一个简单的窗口。在这里选择选项条目:
 
 ![](../images/troubleshooting/kernel-debugging-md/coolterm-first-start.png)
 ![](../images/troubleshooting/kernel-debugging-md/coolterm-settings.png)
 
-Here we're given quite a few options, but the mains ones we care about are:
+这里给出了很多选项，但我们主要关心的是:
 
-* Port: Ensure this matches with your serial controller.
+* Port: 确保与您的串行控制器匹配。
 * Baudrate = 115200
 * Data Bits = 8
-* Parity = none
+* Parity = 无
 * Stop Bit = 1
 
-Next save these settings, and select the Connect entry. This will provide you a live log from serial:
+接下来，保存这些设置，并选择Connect条目。这将为你提供一个来自serial的实时日志:
 
 ![CoolTerm Connect](../images/troubleshooting/kernel-debugging-md/coolterm-connect.png)
 
-To record, simply head to `Connections -> Capture to Text/Binary File -> Start...(Cmd+R)`:
+要记录，只需前往 `Connections -> Capture to Text/Binary File -> Start...(Cmd+R)`:
 
 ![](../images/troubleshooting/kernel-debugging-md/coolterm-record.png)
 
-## Kernel Debug Kits (Optional)
+## 内核调试工具包(可选)
 
 * [KDK on an Installed OS](#kdk-on-an-installed-os)
 * [Uninstalling the KDK](#uninstalling-the-kdk)
 
-Kernel Debug Kits(KDKs) are a great way to get even more logging information from the kernel and core kexts, KDKs specifically are debug versions of macOS's core foundation provided from Apple themselves. They include both more logging as well as ASSERTs allowing you to more directly see issues with your setup. Note however we will not be discussing bridged debugging or `lldb` usage.
+内核调试工具包(kdk)是一种从内核和核心kext获取更多日志信息的好方法，kdk具体来说是苹果自己提供的macOS核心基础的调试版本。它们包括更多的日志记录和断言，允许您更直接地查看设置中的问题。但是请注意，我们不会讨论桥接调试或 `lldb` 的用法。
 
-<span style="color:red"> CAUTION: </span> Installing KDKs on work machines can lead to issues with OS updates as well as bricked installs. Please debug on dedicated macOS installs to avoid data loss
+<span style="color:red"> 警告: </span> 在工作机器上安装kdk可能会导致操作系统更新和安装出现问题。请在专用的macOS安装上调试，以避免数据丢失
 
-To start, we'll first need a minimum of a [free developer account](https://developer.apple.com/support/compare-memberships/) from Apple. Once you've signed up for a minimum of a free tier, you can now access KDKs from the [More Downloads page](https://developer.apple.com/download/more/):
+首先，我们至少需要一个来自苹果的[免费开发者帐户](https://developer.apple.com/support/compare-memberships/) 一旦您注册了最低限度的免费层，您现在可以从[更多下载页面](https://developer.apple.com/download/more/):
 
-* Note: Free tiers will be limited to release KDKs, only beta KDKs are provided for [paid developer accounts](https://developer.apple.com/support/compare-memberships/)
-* Note 2: Apple hosts KDKs as far back as OS X 10.5, Leopard so don't worry about your OS not being supported
+* 注:免费等级将仅限于发布kdk，只有测试版kdk提供给[付费开发者帐户](https://developer.apple.com/support/compare-memberships/)
+* 注2:苹果早在OS X 10.5和Leopard时就有kdk了，所以不用担心你的操作系统不受支持
 
 ![](../images/troubleshooting/kernel-debugging-md/more-downloads.png)
 
-To determine which KDK build you need with beta builds, run the following in terminal:
+要确定你需要哪个KDK版本的测试版，在终端中运行以下命令:
 
 ```sh
 sw_vers | grep BuildVersion
 ```
 
-For this, I will be downloading Kernel Debug Kit 11.3 build 20E5186d. Once downloaded, mount the disk image and you'll find the KDK installer. By default, the KDK will only install itself for "Performing Two-Machine Debugging" and will provide zero extra benefit on the host machine for kernel debugging by default.
+为此，我将下载内核调试套件11.3 build 20E5186d。下载完成后，挂载磁盘镜像，就可以找到KDK安装程序了。默认情况下，KDK只会为了“执行双机调试”而安装自己，并且默认情况下不会为主机内核调试提供任何额外的好处。
 
-### KDK on an Installed OS
+### KDK在已安装的操作系统上
 
-To enable debugging on the host machine, you'll need to do the following:
+要在主机上启用调试，您需要执行以下操作:
 
-1. Run the KDK Install pkg
-2. Disable SIP(OS X 10.11+)
-3. Mount root partition as writable(macOS 10.15+)
-4. Install debug kernel and kexts
-5. Update boot-args
-6. Reboot and check your work
+1. 运行 KDK 安装 pkg
+2. 关闭SIP协议(OS X 10.11+)
+3. 以可写方式挂载根分区(macOS 10.15+)
+4. 安装调试内核和kext
+5. 更新boot-args
+6. 重新启动并检查您的工作
 
-#### 1. Run the KDK Install pkg
+#### 1. 运行 KDK 安装 pkg
 
-Simply run the pkg as normal:
+正常运行pkg即可:
 
 ![](../images/troubleshooting/kernel-debugging-md/kdk-install.png)
 
-Once installed, you'll find the KDK components such as the debug kernel located at `/Library/Developer/KDKs`:
+安装完成后，你可以在`/Library/Developer/KDKs`目录下找到KDK组件，例如调试内核:
 
 ![](../images/troubleshooting/kernel-debugging-md/kdk-installed.png)
 
-#### 2. Disabling SIP
+#### 2. 禁用SIP
 
-* Applicable for OS X 10.11, El Capitan and newer
+* 适用于OS X 10.11, El Capitan和更新版本
 
-To disable SIP, users have 2 choices:
+禁用SIP，用户有两种选择:
 
-* Disable via Recovery
+* 通过恢复禁用
 
-* [Disable via config.plist](./extended/post-issues.md#disabling-sip)
+* [通过config.plist禁用](./extended/post-issues.md#disabling-sip)
 
-Generally we highly recommend recovery to easily revert with NVRAM reset, however some users may require SIP to be disabled through NVRAM wipes as well.
+一般情况下，我们强烈建议恢复，以便通过NVRAM复位轻松恢复，但是一些用户可能需要通过NVRAM擦除禁用SIP。
 
-For the former, simply reboot into macOS Recovery, open terminal and run the following:
+对于前者，只需重新启动到macOS恢复，打开终端并运行以下命令:
 
 ```sh
 csrutil disable
 csrutil authenticated-root disable # Big Sur+
 ```
 
-Reboot, and SIP will have been adjusted accordingly. You can run `csrutil status` in terminal to verify it worked.
+重新启动，SIP将进行相应的调整。你可以在终端中运行`csrutil status`来验证它是否工作。
 
-* <span style="color:red"> CAUTION: </span> For users relying on [OpenCore's ApECID feature](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#apecid), please be aware this **must** be disabled to use the KDK.
+* <span style="color:red"> 注意: </span> 对于依赖[OpenCore的ApECID功能](https://sumingyd.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#apecid)的用户，请注意此 **必须** 被禁用才能使用KDK。
 
-#### 3. Mount root partition as writable
+#### 3. 以可写方式挂载根分区
 
-* Applicable for macOS 10.15, Catalina and newer
+* 适用于macOS 10.15，卡特琳娜及更新版本
 
-Mounting the root volume as writable is easy, however the process is a bit long:
+将根卷挂载为可写卷很容易，但是这个过程有点长:
 
 ```bash
 # Big Sur+
-# First, create a mount point for your drive
+# 首先，为您的驱动器创建一个挂载点
 mkdir ~/livemount
 
-# Next, find your System volume
+# 接下来，找到您的系统卷
 diskutil list
 
-# From the below list, we can see our System volume is disk5s5
+# 从下面的列表中，我们可以看到我们的系统卷是disk5s5
 /dev/disk5 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +255.7 GB   disk5
@@ -242,85 +242,85 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Mount the drive(ie. disk5s5)
+# 安装驱动(即。disk5s5)
 sudo mount -o nobrowse -t apfs  /dev/disk5s5 ~/livemount
 
-# Now you can freely make any edits to the System volume
+# 现在您可以自由地对系统卷进行任何编辑
 ```
 
 ```bash
-# Catalina only
+# 仅限 Catalina
 sudo mount -uw /
 ```
 
-#### 4. Install debug kernel and kexts
+#### 4. 安装调试内核和kext
 
-Now we install our KDK into the system:
+现在我们将KDK安装到系统中:
 
 ```bash
-# Install KDK to System Volume
-# Ensure to replace <KDK Version>
-# For 10.15 and older, swap livemount with /Volumes/<Target Volume>
+# 将KDK安装到系统卷
+# 确保替换<KDK版本>
+# 对于10.15及以上版本，用/Volumes/<Target Volume>交换live挂载
 sudo ditto /Library/Developer/KDKs/<KDK Version>/System ~/livemount/System
 
-# Rebuild Truethe kernel cache(Big Sur and newer)
+# 重建真实的内核缓存(大苏尔及更新版本)
 sudo kmutil install --volume-root ~/livemount --update-all
 
-# Rebuild the kernel cache(Catalina and older)
+# 重建内核缓存(卡特琳娜和更老的版本)
 sudo kextcache -invalidate /Volumes/<Target Volume>
 
-# Finally, once done editing the system volume
-# we'll want to create a new snapshot (Big Sur and newer)
+# 最后，一旦完成系统卷的编辑
+# 我们要创建一个新的快照(大苏尔和更新的)
 sudo bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
 ```
 
-#### 5. Update boot-args
+#### 5. 更新boot-args
 
-Now that you've finished setting up the KDK and installed it, we now need to tell boot.efi which kernel to use. You have 2 options to choose from:
+现在您已经完成了KDK的设置和安装，现在我们需要告诉boot.Efi使用哪个内核。你有两个选择:
 
-* `kcsuffix=debug` (removed with Big Sur)
+* `kcsuffix=debug` (由Big Sur移除)
 * `kcsuffix=development`
 * `kcsuffix=kasan`
 
-`development` arg will set the new default debug kernel in Big Sur, while `kasan` is a much more logging intensive kernel that incorporates [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer).
+`development`参数将在Big Sur中设置新的默认调试内核，而`kasan`是一个更注重日志记录的内核，包含[AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer).
 
-Once you've decided which kernel is ideal for you, add the kcsuffix arg to your boot-args in your config.plist
+一旦你决定了哪个内核最适合你，在config.plist中将kc后缀arg添加到boot-args中
 
-#### 6. Reboot and check your work
+#### 6. 重新启动并检查您的工作
 
-Assuming everything was done correctly, you'll now want to reboot and check that the correct kernel was booted:
+假设一切都正确地完成了，现在要重新启动，检查是否引导了正确的内核:
 
 ```sh
 sysctl kern.osbuildconfig
  kern.osbuildconfig: kasan
 ```
 
-And as we can see, we're successfully booting a KASAN kernel.
+正如我们所看到的，我们成功地启动了KASAN内核。
 
-### Uninstalling the KDK
+### 卸载KDK
 
-Uninstalling the KDK is fairly simple, however can be a bit destructive if not care.
+卸载KDK相当简单，但是如果不小心，可能会有一点破坏性。
 
-1. Mount root partition as writable(macOS 10.15+)
-2. Remove debug kernel and kexts
-3. Re-enable SIP
-4. Clean boot-args
-5. Reboot and check your work
+1. 将根分区挂载为可写(macOS 10.15+)
+2. 删除调试内核和kext
+3. 重新启用SIP
+4. 清除引导参数
+5. 重新启动并检查您的工作
 
-Steps:
+步骤:
 
-#### 1. Mount root partition as writable(macOS 10.15+)
+#### 1. 将根分区挂载为可写(macOS 10.15+)
 
 ```bash
 # Big Sur+
-# First, create a mount point for your drive
-# Skip of still present from mounting volume last time
+# 首先，为您的驱动器创建一个挂载点
+# 上次挂载卷时仍然存在的跳过
 mkdir ~/livemount
 
-# Next, find your System volume
+# 接下来，找到您的系统卷
 diskutil list
 
-# From the below list, we can see our System volume is disk5s5
+# 从下面的列表中，我们可以看到我们的系统卷是disk5s5
 /dev/disk5 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +255.7 GB   disk5
@@ -332,52 +332,52 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Mount the drive (ie. disk5s5)
+# 挂载驱动(即.disk5s5)
 sudo mount -o nobrowse -t apfs  /dev/disk5s5 ~/livemount
 ```
 
 ```bash
-# Catalina only
+# 仅限卡特琳娜
 sudo mount -uw /
 ```
 
-#### 2. Remove debug kernel and kexts
+#### 2. 删除调试内核和kext
 
 ```bash
-# Revert to old snapshot (Big Sur+)
+# 恢复旧快照(Big Sur+)
 sudo bless --mount ~/livemount --bootefi --last-sealed-snapshot
 ```
 
 ```bash
-# Reset kernel cache (Catalina and older)
+# 重置内核缓存(Catalina及更老版本)
 sudo rm /System/Library/Caches/com.apple.kext.caches/Startup/kernelcache.de*
 sudo rm /System/Library/PrelinkedKernels/prelinkedkernel.de*
 sudo kextcache -invalidate /
 ```
 
-#### 3. Re-enable SIP
+#### 3. 重新启用SIP
 
-* Recovery commands(if previously changed via recovery):
+* 恢复命令(如果之前通过恢复更改):
 
 ```sh
 csrutil enable
 csrutil authenticated-root enable # Big Sur+
 ```
 
-* config.plist changes(if previously changed via config.plist):
-  * [Enabling via config.plist](./extended/post-issues.md#disabling-sip)
+* config.plist更改(如果之前通过config.plist更改):
+  * [通过config.plist启用](./extended/post-issues.md#disabling-sip)
   
-#### 4. Clean boot-args
+#### 4. 清除引导参数
 
-Don't forget to remove `kcsuffix=` in your boot-args
+不要忘记在你的引导参数中删除`kcsuffix=`
 
-#### 5. Reboot and check your work
+#### 5. 重新启动并检查您的工作
 
-Assuming everything was done correctly, you'll now want to reboot and check that the correct kernel was booted:
+假设一切都正确地完成了，现在要重新启动，检查是否引导了正确的内核:
 
 ```sh
 sysctl kern.osbuildconfig
  kern.osbuildconfig: release
 ```
 
-And as we can see, we're successfully booting a KASAN kernel.
+正如我们所看到的，我们成功地引导了一个KASAN内核。

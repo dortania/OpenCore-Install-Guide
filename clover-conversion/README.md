@@ -77,7 +77,7 @@ And on your initial boot of OpenCore, select `Reset NVRAM` boot option. This wil
 
 By default OpenCore will inject SMBIOS data into all OSes, the reason for this is 2 parts:
 
-* This allows for proper multiboot support like with [BootCamp](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* This allows for proper multiboot support like with [BootCamp](https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
 * Avoids edge cases where info is injected several times, commonly seen with Clover
 
 However, there are quirks in OpenCore that allow for SMBIOS injection to be macOS limited by patching where macOS reads SMBIOS info from. These quirks can break in the future and so we only recommend this option in the event of certain software breaking in other OSes. For best stability, please avoid

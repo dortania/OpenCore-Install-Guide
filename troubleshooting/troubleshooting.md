@@ -1,20 +1,20 @@
-# General Troubleshooting
+# 一般故障处理
 
-This section is for those having issues booting either OpenCore, macOS or having issues inside macOS. If you're confused as to where exactly in the macOS boot process you're stuck, reading the [macOS Boot Process](../troubleshooting/boot.md) page can help clarify things.
+本节是针对那些在启动OpenCore、macOS或macOS内部存在问题的人。如果你不知道在macOS引导过程中你被卡在了哪里，阅读[macOS引导过程](../troubleshooting/boot.md)页面可以帮助你弄清楚。
 
-**And if your issue is not covered, please read the official OpenCore documentation: [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**. This document goes into much more technical detail around how OpenCore works and has much more detailed info on all supported quirks.
+**如果没有涉及你的问题，请阅读OpenCore的官方文档:[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)**。本文档涉及更多关于OpenCore如何工作的技术细节，并有更多关于所有支持的选项的详细信息。
 
-## Table of Contents
+## 目录
 
-If you're unsure where you're currently stuck, please see here: [Understanding the macOS Boot Process](../troubleshooting/boot.md)
+如果您不确定您目前卡在哪里，请参阅这里:[了解macOS引导过程](../troubleshooting/Boot.md)
 
-* [OpenCore Boot Issues](./extended/opencore-issues.md)
-  * This section refers to booting the actual USB and getting to OpenCore's picker. Anything after the picker, like booting macOS, should see below
-* [Kernelspace Issues](./extended/kernel-issues.md)
-  * Covering everything that many occur in early boot from the moment you select macOS in the OpenCore menu, till the point right before the Apple logo and the installer GUI loads
-* [Userspace Issues](./extended/userspace-issues.md)
-  * Covering the process from loading macOS's GUI to installing macOS on the drive
-* [Post-Install Issues](./extended/post-issues.md)
-  * Covering issues once macOS has been installed and is fully booted
-* [Miscellaneous Issues](./extended/misc-issues.md)
-  * Covering issues after macOS's installation or with other OSes
+* [OpenCore引导问题](./extended/opencore-issues.md)
+  * 这一节指的是启动实际的USB和获得OpenCore的选择器。在选择器之后的任何操作，比如启动macOS，都应该在下面看到
+* [内核空间问题](./extended/kernel-issues.md)
+  * 涵盖从你在OpenCore菜单中选择macOS开始，直到苹果logo和安装程序GUI加载之前的所有早期启动中发生的所有事情
+* [用户空间问题](./extended/userspace-issues.md)
+  * 涵盖从加载macOS的GUI到在硬盘上安装macOS的整个过程
+* [安装后的问题](./extended/post-issues.md)
+  * 涵盖macOS安装并完全引导后的问题
+* [杂项问题](./extended/misc-issues.md)
+  * 涵盖macOS安装后或其他操作系统的问题

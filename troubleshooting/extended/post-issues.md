@@ -1,155 +1,155 @@
-# Post-Install Issues
+# 安装后的问题
 
-Issues revolving around macOS once properly installed.
+一旦正确安装，围绕macOS的问题。
 
 [[toc]]
 
-## Broken iMessage and Siri
+## 坏掉的 iMessage 和 Siri
 
-Refer to [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) section
+请参阅[修复iServices](https://sumingyd.github.io/OpenCore-Post-Install/universal/iservices.html) 部分
 
-## No on-board audio
+## 没有板载音频
 
-Refer to [Fixing Audio with AppleALC](https://dortania.github.io/OpenCore-Post-Install/) section
+请参阅[使用AppleALC修复音频](https://sumingyd.github.io/OpenCore-Post-Install/)部分
 
-## BIOS reset or sent into Safemode after reboot/shutdown
+## BIOS重置或在重启/关机后进入安全模式
 
-Refer to [Fixing RTC/CMOS Resets](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html) section
+请参阅[修复RTC/CMOS复位](https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc.html)部分
 
-## Synaptics PS2 based trackpad doesn't work
+## 基于Synaptics PS2的触控板无法工作
 
-You can try to use [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl).
-First, you have to open Device Manager, and head to the following:
+您可以尝试使用 [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl).
+首先，你需要打开设备管理器，进入以下页面:
 
 ```
-Device Manager -> Mice and other pointing devices -> Double click on your trackpad -> Properties -> Details > BIOS device name
+设备管理器->鼠标和其他指向设备->双击触摸板->属性->详细信息> BIOS设备名称
 ```
 
-Then grab [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
-By default, this uses PCI0.LPCB.PS2K for the pathing. you'll want to rename accordingly.
+然后获取 [SSDT-Enable_DynamicEWMode.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-Enable_DynamicEWMode.dsl)
+默认情况下，该路径使用PCI0.LPCB.PS2K。您需要相应地重命名。
 
 ```c
-External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- 重命名
 
-    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package()  <- Rename this
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package()  <- 重命名
 
 ```
 
-Then compile with MaciASL, copy to your OC/ACPI folder, and add it to your config, and you should be good to go.
+然后用MaciASL编译，复制到OC/ACPI文件夹，并将其添加到配置文件中，这样就可以了。
 
-* Note: Although this will work for most cases, the trackpad may be laggy and you may not be able to use the physical buttons ([more details](https://github.com/acidanthera/bugtracker/issues/890)). If you can live without the trackpad, this may be better:
+* 注意:虽然在大多数情况下这是有效的，但触控板可能会滞后，你可能无法使用物理按钮([更多细节](https://github.com/acidanthera/bugtracker/issues/890))。如果你可以不用触控板，这个可能会更好:
 
-Find the ACPI path of your mouse (see above), then grab [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). By default, this uses PCI0.LPCB.PS2K so you have to change that to your ACPI path if necessary:
+找到鼠标的ACPI路径(见上文)，然后获取 [SSDT-DisableTrackpadProbe.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-DisableTrackpadProbe.dsl). 默认情况下，它使用PCI0.LPCB.PS2K，因此您必须在必要时将其更改为ACPI路径:
 
 ```c
-External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- 重命名
 
-    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package() <- Rename this
+    Name(_SB.PCI0.LPCB.PS2K.RMCF, Package() <- 重命名
 ```
 
-## Fix for Dell breakless PS2 keyboard keys
+## 修复戴尔PS2键盘按键不释放的问题
 
-For those with issues surrounding key presses not releasing(ie. pressing infinitely), you'll want to enable VoodooPS2's Dell profile.
+对于那些围绕按键不释放(即无限按)的问题，您将希望启用VoodooPS2的戴尔配置文件。
 
-First of all, you need to find the path to your ACPI keyboard object in the Device Manager:
+首先，你需要在设备管理器中找到你的ACPI键盘对象的路径:
 
 ```
-Device Manager -> Keyboards -> Double click on your keyboard -> Properties -> Details > BIOS device name
+设备管理器->键盘->双击键盘->属性->详细信息> BIOS设备名称
 ```
 
-After this, grab [SSDT-KEY-DELL-WN09.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-KEY-DELL-WN09.dsl) and change the ACPI path to the one found above as needed:
+在此之后，获取 [SSDT-KEY-DELL-WN09.dsl](https://github.com/acidanthera/VoodooPS2/blob/master/Docs/ACPI/SSDT-KEY-DELL-WN09.dsl) ，并根据需要将ACPI路径更改为上面找到的路径:
 
 ```c
-External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- Rename this
+External (_SB_.PCI0.LPCB.PS2K, DeviceObj) <- 重命名
 
-    Method(_SB.PCI0.LPCB.PS2K._DSM, 4) <- Rename this
+    Method(_SB.PCI0.LPCB.PS2K._DSM, 4) <- 重命名
 ```
 
-## macOS GPU acceleration missing on AMD X570
+## AMD X570上缺少macOS GPU加速
 
-Verify the following:
+验证以下内容:
 
-* GPU is UEFI capable(GTX 7XX/2013+)
-* CSM is off in the BIOS
-* Forcing PCIe 3.0 link speed
+* GPU支持UEFI (GTX 7XX/2013+)
+* BIOS中CSM是关闭的
+* 强制使用PCIe 3.0链路速度
 
-## DRM Broken
+## DRM损坏
 
-Refer to [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html) section
+参考[修复DRM](https://sumingyd.github.io/OpenCore-Post-Install/universal/drm.html) 部分
 
-## "Memory Modules Misconfigured" on MacPro7,1
+## MacPro7“内存模块配置错误”
 
-Follow guide listed here:
+遵循这里列出的指南:
 
-* [Fixing MacPro7,1 Memory Errors](https://dortania.github.io/OpenCore-Post-Install/universal/memory.html)
+* [修复MacPro7,1内存错误](https://sumingyd.github.io/OpenCore-Post-Install/universal/memory.html)
 
-For those who simply want to disable the notification(not the error itself) is more than enough. For these users, we recommend installing [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)
+对于那些只想禁用通知(而不是错误本身)的人来说，已经足够了。对于这些用户来说,我们建议安装 [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases)
 
-## Apps crashing on AMD
+## 应用程序在AMD上崩溃
 
-~~Easy fix, buy Intel~~
+~~容易搞定，买英特尔吧~~
 
-So with AMD, whenever Apple calls CPU specific functions the app will either not work or outright crash. Here are some apps and their "fixes":
+所以对于AMD，每当苹果调用CPU的特定函数时，应用程序要么无法工作，要么彻底崩溃。以下是一些应用程序和它们的“修复”:
 
-* Adobe Products don't always work
-  * Some fixes can be found here: [Adobe Fixes](https://adobe.amd-osx.com/)
-  * Do note these fixes just disables functionality, they're not really fixes
-* Virtual Machine running off of AppleHV's framework will not work(ie: Parallels 15, VMware)
-  * VirtualBox works fine as it doesn't use AppleHV
-  * VMware 10 and older can work as well
-  * Parallels 13.1.0 and older are known to work as well
-* Docker broken
-  * Docker toolbox is the only solution as it's based off of VirtualBox, many features are unavailable with this version
-* IDA Pro won't install
-  * There's an Intel specific check in the installer, app itself is likely fine
-* 15/16h CPU web pages crashing
-  * Follow directions here after UPDATE 5: [Fix web pages](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
+* Adobe产品并不总是工作
+  * 一些修复可以在这里找到:[Adobe修复程序](https://adobe.amd-osx.com/)
+  * 请注意，这些修复只是禁用功能，它们并不是真正的修复
+* 运行在AppleHV框架下的虚拟机将无法工作(即:Parallels 15, VMware)
+  * VirtualBox工作良好，因为它不使用AppleHV
+  * VMware 10及以上版本也可以使用
+  * Parallels 13.1.0及更老版本已知也可以工作
+* Docker崩溃
+  * Docker toolbox是唯一的解决方案，因为它基于VirtualBox，许多功能在这个版本中不可用
+* IDA Pro无法安装
+  * 在安装程序中有一个英特尔特定的检查，应用程序本身可能是好的
+* 15/16h CPU 网页崩溃
+  * 请遵循更新5后的指示:[修复网页](https://www.insanelymac.com/forum/topic/335877-amd-mojave-kernel-development-and-testing/?do=findComment&comment=2661857)
 
-## Sleep crashing on AMD
+## AMD的睡眠崩溃
 
-This is generally seen on AMD who use the chipset's USB controller, specifically for the Ryzen series and newer. The main way to tell if you're having issues with this is checking logs after either sleeping or waking:
+这在使用芯片组USB控制器的AMD上很常见，特别是Ryzen系列和更新的产品。判断是否有问题的主要方法是在睡眠或醒来后检查日志:
 
-* In terminal:
+* 在终端中:
   * `log show --last 1d | grep -i "Wake reason"`
 
-Should result in something like this:
+结果应该是这样的:
 
 ```
 Sleep transition timed out after 180 seconds while calling power state change callbacks. Suspected bundle: com.apple.iokit.IOUSBHostFamily.
 ```
 
-You can double check which controller is XHC0 via IOReg and checking the Vendor ID(1022 for AMD chipset). The fix for this sleep issue is either:
+您可以通过IOReg再次检查哪个控制器是XHC0，并检查供应商ID(AMD芯片组为1022)。解决这个睡眠问题的方法是:
 
-* Avoid the chipset USB all together(ideally set `_STA = 0x0` to disable the controller outright with an SSDT)
-* Correct the USBX power properties to what the controller expects
+* 避免使用USB芯片组(理想情况下设置`_STA = 0x0`来禁用SSDT控制器)
+* 将USBX电源属性纠正为控制器期望的值
 
-## AssetCache Content Caching unavailable in virtual machine
+## AssetCache内容缓存在虚拟机中不可用
 
-Errors such as:
+错误如下:
 
 ```bash
 $ sudo AssetCacheManagerUtil activate
 AssetCacheManagerUtil[] Failed to activate content caching: Error Domain=ACSMErrorDomain Code=5 "virtual machine"...
 ```
 
-arise due to `VMM` flag being exposed by sysctl.
+由于sysctl暴露了`VMM`标志而导致。
 
-Apply [VmAssetCacheEnable](https://github.com/ofawx/VmAssetCacheEnable) kernel patch to disguise the flag and allow normal operation.
+应用[VmAssetCacheEnable](https://github.com/ofawx/VmAssetCacheEnable) 内核补丁伪装标志，允许正常操作。
 
-## Coffee Lake systems failing to wake
+## Coffee Lake 系统无法唤醒
 
-In macOS 10.15.4, there were some changes made to AGPM that can cause wake issues on Coffee Lake systems. Specifically displays hooked up to the iGPU would fail to wake. To resolve this:
+在macOS 10.15.4中，AGPM做了一些更改，可能会在Coffee Lake系统上引起唤醒问题。特别是连接到iGPU的显示器将无法唤醒。要解决这个问题:
 
-* Add `igfxonln=1` to boot-args
-* Make sure you're using [WhateverGreen v1.3.8](https://github.com/acidanthera/WhateverGreen/releases) or newer
+* 在引导参数中添加 `igfxonln=1`
+* 确保您使用的是 [WhateverGreen v1.3.8](https://github.com/acidanthera/WhateverGreen/releases) 或更新版本
 
-## No brightness control on Dual GPU laptops
+## 双GPU笔记本电脑上没有亮度控制
 
-In macOS 11.3, there were some changes made to backlight controlling mechanisms that defaults the backlight to be controlled by the dGPU on Dual GPU laptops with MUX enabled. Optimus only laptops, however, are not affected, since you need to disable the dGPU anyways. Specifically, this problem only causes issues if you have a Dual GPU laptop with the internal screen from an iGPU output and external screens from dGPU outputs (`Hybrid Mode` on some Mobile Workstations). To resolve this, you may disable either the iGPU or the dGPU, or do the following:
+在macOS 11.3中，对背光控制机制做了一些更改，默认情况下，在启用MUX的双GPU笔记本电脑上，背光由dGPU控制。不过，Optimus只有笔记本电脑不受影响，因为无论如何你都需要禁用dGPU。具体来说，只有当你有一台双GPU笔记本电脑，内部屏幕来自iGPU输出，外部屏幕来自dGPU输出(在某些移动工作站上为`混合模式`)时，这个问题才会导致问题。要解决这个问题，可以禁用iGPU或dGPU，或者执行以下操作:
 
-* Verify SSDT-PNLF is installed(ie. EFI/OC/ACPI as well as config.plist -> ACPI -> Add)
+* 验证是否安装了 SSDT-PNLF(即： 在 EFI/OC/ACPI 中以及 config.plist -> ACPI -> Add)
 
-* Add below to `PciRoot(0x0)/Pci(0x2,0x0)`:
+* 添加到 `PciRoot(0x0)/Pci(0x2,0x0)`:
 
 `@0,backlight-control | Data | 01000000`
 
@@ -159,7 +159,7 @@ In macOS 11.3, there were some changes made to backlight controlling mechanisms 
 
 `AAPL00,backlight-control | Data | 01000000`
 
-* Add below to your dGPU PCI address:
+* 添加以下内容到您的dGPU PCI地址:
 
 `@0,backlight-control | Data | 00000000`
 
@@ -167,47 +167,47 @@ In macOS 11.3, there were some changes made to backlight controlling mechanisms 
 
 `AAPL,backlight-control | Data | 00000000`
 
-## No temperature/fan sensor output
+## 没有温度/风扇传感器输出
 
-So couple things:
+这里有几点:
 
-* iStat Menus doesn't yet support MacPro7,1 readouts
-* VirtualSMC's bundled sensors do not support AMD
+* iStat Menus 还不能支持MacPro7, 1读数
+* VirtualSMC捆绑的传感器不支持AMD
 
-For iStat, you'll have to wait for an update. For AMD users, you can use either:
+对于iStat，你必须等待更新。对于AMD用户，你可以使用以下两种方式:
 
 * [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor/releases)
-  * Still in early beta but great work has been done, note it's been mainly tested on Ryzen
+  * 仍然处于早期测试阶段，但是已经做了很多工作，注意它主要在Ryzen上测试
 * [FakeSMC3_with_plugins](https://github.com/CloverHackyColor/FakeSMC3_with_plugins/releases)
 
-**Note for AMD with FakeSMC**:
+**AMD使用FakeSMC的注意事项**:
 
-* FileVault support requires more work with FakeSMC
-* Make sure no other SMC kexts are present, specifically those from [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
+* 支持FileVault需要使用FakeSMC进行更多工作
+* 确保没有其他SMC kext存在，特别是那些来自 [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases)
 
-## "You can't change the startup disk to the selected disk" error
+## “您不能将启动磁盘更改为所选磁盘”错误
 
-This is commonly caused by irregular partition setup of the Windows drive, specifically that the EFI is not the first partition. To fix this, we need to enable this quirk:
+这通常是由于Windows驱动器的不规则分区设置造成的，特别是EFI不是第一个分区。要解决这个问题，我们需要启用这个功能:
 
 * `PlatformInfo -> Generic -> AdviseFeatures -> True`
 
 ![](../../images/troubleshooting/troubleshooting-md/error.png)
 
-## Selecting Startup Disk doesn't apply correctly
+## 选择启动盘不正确
 
-If you're having issues with Startup Disk correctly applying your new boot entry, this is most likely caused by a missing `DevicePathsSupported` in your I/O Registry. To resolve this, ensure you are using `PlatformInfo -> Automatic -> True`
+如果您在启动磁盘正确应用新启动项时遇到问题，这很可能是由于I/O注册表中缺少`DevicePathsSupported`造成的。要解决这个问题，请确保您使用的是`PlatformInfo -> Automatic -> True`
 
-Example of missing `DevicePathsSupported`:
+缺少`DevicePathsSupported`的例子:
 
-* [Default DevicePath match failure due to different PciRoot #664](https://github.com/acidanthera/bugtracker/issues/664#issuecomment-663873846)
+* [由于PciRoot不同导致默认DevicePath匹配失败#664](https://github.com/acidanthera/bugtracker/issues/664#issuecomment-663873846)
 
-## macOS waking up with the wrong time
+## macOS在错误的时间醒来
 
-An odd quirk some people may notice is that from wake, macOS will have the incorrect time for a bit before self-correcting with network time check. The root cause of this issue is most likely due to your RTC not ticking, and can be resolved with a new CMOS battery(note that Z270 and newer are quite picky with voltage so choose carefully).
+有些人可能会注意到一个奇怪的现象，macOS在唤醒后会有一段时间显示错误时间，然后通过网络时间检查进行自我纠正。这个问题的根本原因很可能是由于你的RTC不正常，可以通过一个新的CMOS电池解决(注意，Z270和更新的对电压是相当挑剔的，所以仔细选择)。
 
-To verify whether your RTC is working correctly:
+要验证您的RTC是否正常工作:
 
-* Download [VirtualSMC v1.1.5+](https://github.com/acidanthera/virtualsmc/releases) and run the smcread tool:
+* 下载 [VirtualSMC v1.1.5+](https://github.com/acidanthera/virtualsmc/releases) 并运行smcread工具:
 
 ```bash
 /path/to/smcread -s | grep CLKT
@@ -215,74 +215,74 @@ To verify whether your RTC is working correctly:
 
 ![](../../images/extras/big-sur/readme/rtc-1.png)
 
-This should provide you with a hexadecimal value, and once converted it should equal time elapsed from Midnight relative to Cupertino.
+这将为你提供一个十六进制的值，一旦转换，它应该等于从午夜相对于Cupertino经过的时间。
 
-So for this example, we'll grab our value(`00010D13`) then convert it to decimal and finally divide it by 3600. This should result in the approximate time elapsed(in seconds) since midnight relative to Cupertino
+因此，在本例中，我们将获取我们的值(`00010D13`)，然后将其转换为小数，最后除以3600。这将得到从午夜开始相对于Cupertino经过的大约时间(以秒为单位)
 
-* 00010D13 (Convert to HEX)-> 68883 (Divided by 3600 so we get hours)-> 19.13h(so 19:07:48)
+* 00010D13(转换为十六进制)-> 68883(除以3600所以我们得到小时)-> 19.13小时(所以19:07:48)
 
-Next you'll want to put your hack to sleep for a bit and wake it, then check the CLKT value once more to see whether it deviated more or if it has a set difference. If you find it didn't actually tick much of at all from the elapsed time, you'll need to look into buying a new battery(with proper voltage)
+接下来，您需要让您的黑苹果休眠一会儿并唤醒它，然后再次检查CLKT值，看看它是否偏离了更多或是否有一个设置的差异。如果你发现从运行时间来看，它实际上没有发出太多信号，你需要考虑买一个新的电池(电压合适)。
 
-## No Volume/Brightness control on external monitors
+## 外部显示器没有音量/亮度控制
 
-Oddly enough, macOS has locked down digital audio from having control. To bring back some functionality, the app [MonitorControl](https://github.com/the0neyouseek/MonitorControl/releases) has done great work on improving support in macOS
+奇怪的是，macOS已经锁定了数字音频的控制权。为了恢复一些功能，应用程序[MonitorControl](https://github.com/the0neyouseek/MonitorControl/releases)在改进macOS中的支持方面做了很多工作
 
-## Time inconsistency between macOS and Windows
+## macOS 和 Windows 系统时间不一致
 
-This is due to macOS using Universal Time while Windows relies on Greenwich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
+这是由于macOS使用通用时间，而Windows依赖格林威治时间，所以您需要迫使一个操作系统以不同的方式测量时间。我们强烈建议修改Windows，因为它的破坏性和痛苦要小得多:
 
-* [Install Bootcamp utilities](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
-* [Modify Windows' registry](https://superuser.com/q/494432)
+* [安装Bootcamp实用程序](https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* [修改Windows注册表](https://superuser.com/q/494432)
 
-## Disabling SIP
+## 禁用 SIP
 
-SIP or more properly known as System Integrity Protection, is a security technology that attempts to prevent any malicious software and the end user from damaging the OS. First introduced with OS X El Capitan, SIP has grown over time to control more and more things in macOS, including limiting edits to restricted file locations and 3rd party kext loading with `kextload`(OpenCore is unaffected as kexts are injected at boot). To resolve this, Apple has provided numerous configuration options in the NVRAM variable `csr-active-config` which can either be set in the macOS recovery environment or with OpenCore's NVRAM section(The latter will be discussed below).
+SIP 或更恰当地称为系统完整性保护，是一种安全技术，试图防止任何恶意软件和最终用户破坏操作系统。SIP 最初是在 OS X El Capitan 中引入的，随着时间的推移，SIP 已经在 macOS 中控制越来越多的东西，包括将编辑限制在受限的文件位置，以及使用`kextload`加载第三方 kext (OpenCore不受影响，因为kext在启动时注入)。为了解决这个问题，苹果在 NVRAM 变量`csr-active-config`中提供了许多配置选项，可以在 macOS 恢复环境中设置，也可以在 OpenCore 的 NVRAM 部分中设置(后者将在下文讨论)。
 
-* <span style="color:red">WARNING:</span> Disabling SIP can break OS functionality such as software updates in macOS 11, Big Sur and newer. Please be careful to only disable specific SIP values instead of disabling SIP outright to avoid these issues.
-  * Enabling `CSR_ALLOW_UNAUTHENTICATED_ROOT` and `CSR_ALLOW_APPLE_INTERNAL` are common options that can break OS updates for users
+* <span style="color:red">警告:</span> 禁用SIP会破坏操作系统功能，如macOS 11, Big Sur和更新版本的软件更新。请注意，只禁用特定的SIP值，而不是完全禁用SIP，以避免这些问题。
+  * 启用`CSR_ALLOW_UNAUTHENTICATED_ROOT`和`CSR_ALLOW_APPLE_INTERNAL`是常见的选项，这些选项可能会破坏用户的操作系统更新
 
-You can choose different values to enable or disable certain flags of SIP. Some useful tools to help you with these are [BitmaskDecode](https://github.com/corpnewt/BitmaskDecode) and [csrstat](https://github.com/JayBrown/csrstat-NG). Common values are as follows (bytes are pre-hex swapped for you, and note that they go under NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
+您可以选择不同的值来启用或禁用SIP的某些标志。一些有用的工具可以帮助你解决这些问题，[BitmaskDecode](https://github.com/corpnewt/BitmaskDecode) 和 [csrstat](https://github.com/JayBrown/csrstat-NG). 常见值如下(字节为你进行了十六进制交换，注意它们在 NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config):
 
-* `00000000` - SIP completely enabled (0x0).
-* `03000000` - Disable kext signing (0x1) and filesystem protections (0x2).
-* `FF030000` - Disable all [flags in macOS High Sierra](https://opensource.apple.com/source/xnu/xnu-4570.71.2/bsd/sys/csr.h.auto.html) (0x3ff).
-* `FF070000` - Disable all [flags in macOS Mojave](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) and in [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) as Apple introduced a value for executable policy.
-* `FF0F0000` - Disable all flags in macOS Big Sur (0xfff) which has another new [flag for authenticated root](https://eclecticlight.co/2020/06/25/big-surs-signed-system-volume-added-security-protection/).
+* `00000000` - SIP完全启用(0x0)。
+* `03000000` - 禁用kext签名(0x1)和文件系统保护(0x2)。
+* `FF030000` - 禁用所有[macOS High Sierra中的标志](https://opensource.apple.com/source/xnu/xnu-4570.71.2/bsd/sys/csr.h.auto.html) (0x3ff).
+* `FF070000` - 禁用所有 [macOS Mojave中的标志](https://opensource.apple.com/source/xnu/xnu-4903.270.47/bsd/sys/csr.h.auto.html) 和 [macOS Catalina](https://opensource.apple.com/source/xnu/xnu-6153.81.5/bsd/sys/csr.h.auto.html) (0x7ff) 因为苹果公司为可执行策略引入了一个值。
+* `FF0F0000` - 禁用macOS Big Sur (0xfff)中的所有标志，该标志具有另一个新的[身份验证root标志](https://eclecticlight.co/2020/06/25/big-surs-signed-system-volume-added-security-protection/).
 
-**Note**: Disabling SIP with OpenCore is quite a bit different compared to Clover, specifically that NVRAM variables will not be overwritten unless explicitly told so under the `Delete` section. So if you've already set SIP once either via OpenCore or in macOS, you must override the variable:
+**注意**:使用OpenCore禁用SIP与Clover有很大不同，特别是NVRAM变量不会被覆盖，除非在 `Delete` 部分明确告知。因此，如果您已经通过OpenCore或macOS设置了一次SIP，则必须覆盖该变量:
 
 * `NVRAM -> Delete -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config`
   
 ![](../../images/troubleshooting/troubleshooting-md/sip.png)
 
-## Writing to the macOS system partition
+## 写入macOS系统分区
 
-With macOS Catalina and newer, Apple split the OS and user data into 2 volumes where the system volume is read-only by default. To make these drives writable we'll need to do a few things:
+在macOS Catalina及更新版本中，苹果将操作系统和用户数据分成了两个卷，其中系统卷默认是只读的。为了使这些驱动器可写，我们需要做以下几件事:
 
-* Note: Users of `SecureBootModel` may end up in a RecoveryOS boot loop if the system partition has been modified. To resolve this, Reset NVRAM and set `SecureBootModel` to `Disabled`
+*注意:如果系统分区被修改了，使用`SecureBootModel`的用户可能会进入RecoveryOS引导循环。要解决这个问题，请重置NVRAM并将`SecureBootModel`设置为`Disabled`
 
 **macOS Catalina**
 
-1. [Disable SIP](#disabling-sip)
-2. Mount drive as writable (Run `sudo mount -uw /` in terminal)
+1. [禁用SIP](#disabling-sip)
+2. 挂载驱动器可写 (在终端运行 `sudo mount -uw /`)
 
 **macOS Big Sur**
 
-1. [Disable SIP](#disabling-sip)
-2. Mount drive as writable (See below link for command)
+1. [禁用SIP](#disabling-sip)
+2. 将驱动器挂载为可写(参见下面的命令链接)
 
-* Note: Due to how OS updates work in macOS Big Sur and newer, changing the system volume can in fact break OS updates. Please edit with caution
+* *注意:由于操作系统更新在macOS Big Sur和更新的工作方式，更改系统卷实际上会破坏操作系统更新。请谨慎编辑
 
-Commands based off of Apple's KDK documents:
+基于苹果KDK文档的命令:
 
 ```bash
-# First, create a mount point for your drive
+# 首先，为您的驱动器创建一个挂载点
 mkdir ~/livemount
 
-# Next, find your System volume
+# 接下来，找到您的系统卷
 diskutil list
 
-# From the below list, we can see our System volume is disk5s5
+# 从下面的列表中，我们可以看到我们的系统卷是disk5s5
 /dev/disk5 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +255.7 GB   disk5
@@ -294,55 +294,55 @@ diskutil list
    5:                APFS Volume ⁨Big Sur HD⁩              16.2 GB    disk5s5
    6:              APFS Snapshot ⁨com.apple.os.update-...⁩ 16.2 GB    disk5s5s
 
-# Mount the drive(ie. disk5s5)
+# 挂载驱动器(即：disk5s5)
 sudo mount -o nobrowse -t apfs  /dev/disk5s5 ~/livemount
 
-# Now you can freely make any edits to the System volume
+# 现在您可以自由地对系统卷进行任何编辑
 
-# If you edited either the S*/L*/Kernel, S*/L*/Extensions or L*/Extensions,
-# you will need to rebuild the kernel cache
+# 如果你编辑了 S*/L*/Kernel, S*/L*/Extensions 或 L*/Extensions,
+# 您将需要重建内核缓存
 sudo kmutil install --volume-root ~/livemount --update-all
 
-# Finally, once done editing the system volume we'll want to create a new snapshot
+# 最后，编辑完系统卷之后，我们需要创建一个新的快照
 sudo bless --folder ~/livemount/System/Library/CoreServices --bootefi --create-snapshot
 ```
 
-## Rolling back APFS Snapshots
+## 回滚APFS快照
 
-With macOS Big Sur, the system volume is now snapshotted allowing you to roll back in case of issues with system updates breaking due to a broken seal. Thanks to new snapshots being created with every OS update, we've got quite a bit to roll back too.
+使用macOS Big Sur，现在对系统卷进行快照，以便在密封损坏导致系统更新中断的情况下进行回滚。由于每次操作系统更新都会创建新的快照，我们也有相当多的数据需要回滚。
 
-To roll back, you'll first need to reboot into Recovery partition then select "Restore From Time Machine Backup":
+要回滚，你首先需要重新启动到恢复分区，然后选择“从时间机器备份恢复”:
 
 ![](./../../images/troubleshooting/troubleshooting-md/snapshots.jpg)
 
 * [Credit to Lifewire for image](https://www.lifewire.com/roll-back-apfs-snapshots-4154969)
 
-## Apple Watch Unlock issues
+## Apple Watch解锁问题
 
-For those with Apple Watch Unlock issues, verify the following:
+对于那些有 Apple Watch 解锁问题的人，请验证以下内容:
 
-* You have a supported Apple Wireless card with Bluetooth Low Energy(4.0+)
-* Your watch and Mac are signed in with the same account
-* iServices working correctly(ie. iMessage)
-* There's an option to Unlock with Apple Watch under Security and Privacy setting in System Preferences
+* 你有一个支持低功耗蓝牙(4.0+)的苹果无线网卡
+* 你的手表和Mac是用同一个账户登录的
+* iServices工作正常(例如:iMessage)
+* 在系统首选项的安全和隐私设置下，有一个用Apple Watch解锁的选项
 
 ![](../../images/troubleshooting/troubleshooting-md/watch-unlock.png)
 
-If the above are met, and you still have unlock issues we recommend running through the below guide:
+如果满足以上条件，并且你仍然有解锁问题，我们建议你查看以下指南:
 
-* [Fixing Auto Unlock](https://forums.macrumors.com/threads/watchos-7-beta-5-unlock-mac-doesnt-work.2250819/page-2?post=28904426#post-28904426)
+* [修复自动解锁](https://forums.macrumors.com/threads/watchos-7-beta-5-unlock-mac-doesnt-work.2250819/page-2?post=28904426#post-28904426)
 
-## 4K iGPU output issues over HDMI
+## HDMI上的4K iGPU输出问题
 
-For machines with HDMI 2.0 capable ports with resolution issues, verify the following:
+对于带有HDMI 2.0接口但存在分辨率问题的机器，请验证以下内容:
 
-* 4k output works correctly in Windows
-* Monitor is set explicitly to HDMI 2.0
-  * If using an HDMI to DisplayPort converter, ensure the monitor is set to DisplayPort 1.2 or higher
-* Ensure enough iGPU memory has been allocated
-  * For Broadwell and newer, 64MB is expected to be allocated
-  * Machines relying on WhateverGreen's `framebuffer-stolenmem` property should know this can cause 4k output issues. Please ensure you can set the iGPU's memory to 64MB allowing you to remove these properties
-* Laptops and many desktop users may need this boot-arg:
+* 4k输出在Windows上可以正常工作
+* 显示器显式设置为HDMI 2.0
+  * 如果使用HDMI到DisplayPort转换器，请确保显示器设置为DisplayPort 1.2或更高
+* 确保已分配足够的iGPU内存
+  * 对于Broadwell及更新版本，预计会分配64MB内存
+  * 依赖于WhateverGreen的`framebuffer-stolenmem`属性的机器应该知道，这可能会导致4k输出问题。请确保您可以将iGPU的内存设置为64MB，以允许您删除这些属性
+* 笔记本电脑和许多台式机用户可能需要这个引导参数:
   * `-cdfon`
 
-For all other troubleshooting, please reference [WhateverGreen's Intel docs](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)
+关于所有其他故障排除，请参考[WhateverGreen的英特尔文档](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md)

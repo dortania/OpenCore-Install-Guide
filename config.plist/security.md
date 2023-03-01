@@ -1,27 +1,27 @@
-# Apple Secure Boot
+# 苹果安全引导
 
-These settings in your config.plist can restrict which macOS versions OpenCore will boot. You will want to check these really quick before booting your USB.
+config.plist中的这些设置可以限制OpenCore引导哪些macOS版本。在启动USB之前，你需要快速检查这些。
 
 ## Misc
 
 ### Security -> SecureBootModel
 
-OpenCore by default has [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) enabled.
-This enables security features such as the verification of macOS' `boot.efi`, with the side effect of restricting which macOS versions OpenCore will boot.
+OpenCore默认启用 [Apple Secure Boot](https://sumingyd.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) 。
+这将支持安全功能，如验证macOS的“boot.efi”，其副作用是限制OpenCore将引导哪些macOS版本。
 
-* Big Sur and Above (11.0+): The recommended value is `Default`.
+* Big Sur 及以上 (11.0+): 建议设置为 `Default`.
 * High Sierra-Catalina (10.13-10.15):
-  * If your model is not listed below, set to `Disabled`.
-  * If running NVIDIA Web Drivers, set to `Disabled`.
-  * If your model is listed, compare the minimum version with the version your installing. Disable if your installer is below the minimum version listed for your SMBIOS.
-* Sierra and Below (10.4-10.12): This setting has no effect.
-* If booting multiple versions, you may need to set the value to `Disabled`.
-  * For example, a non-T2 SMBIOS booting High Sierra and Big Sur would need this disabled.
-  * A T2 SMBIOS would be limited by the minimum version listed below.
+  * 如果你的型号没有在下面列出，设置为`Disabled`
+  * 如果运行 NVIDIA Web Drivers, 请将其设置为 `Disabled`.
+  * 如果列出了你的型号，将最小版本与你正在安装的版本进行比较。如果您的安装程序低于为您的SMBIOS列出的最低版本，则 Disable 。
+* Sierra 及以下 (10.4-10.12): 此设置没有影响。
+* 如果引导多个版本，你可能需要将值设置为`Disabled`。
+  * 例如，引导High Sierra和Big Sur的非t2 SMBIOS需要禁用此功能。
+  * T2 SMBIOS会受到下面列出的最低版本的限制。
 
-::: details T2 Mac Models
+::: details T2 Mac 型号
 
-| SMBIOS                                              | Minimum macOS Version |
+| SMBIOS                                              | macOS 最低版本 |
 | :---                                                | :---                  |
 | iMacPro1,1 (December 2017)                          | 10.13.2 (17C2111)     |
 | MacBookPro15,1 (July 2018)                          | 10.13.6 (17G2112)     |
@@ -42,4 +42,4 @@ This enables security features such as the verification of macOS' `boot.efi`, wi
 
 :::
 
-# Now with all this done, head to the [Installation Page](../installation/installation-process.md)
+# 现在所有这些都完成了，转到[安装页面](../installation/installation-process.md)

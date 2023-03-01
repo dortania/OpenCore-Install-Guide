@@ -1,15 +1,15 @@
-# Making the installer in Linux
+# 在 Linux 中制作安装程序
 
-While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
+虽然你不需要重新安装macOS来使用OpenCore，但一些用户更喜欢使用全新的引导管理器升级。
 
-To start you'll need the following:
+开始之前，你需要准备以下内容:
 
-* 4GB USB Stick
+* 4GB U盘
 * [macrecovery.py](https://github.com/acidanthera/OpenCorePkg/releases)
   
-## Downloading macOS
+## 下载macOS
 
-Now to start, first cd into [macrecovery's folder](https://github.com/acidanthera/OpenCorePkg/releases) and run one of the following commands:
+现在开始，首先 cd 到[macrecovery 的文件夹](https://github.com/acidanthera/OpenCorePkg/releases) 并运行以下命令之一:
 
 ![](../images/installer-guide/legacy-mac-install-md/macrecovery.png)
 
@@ -18,7 +18,7 @@ Now to start, first cd into [macrecovery's folder](https://github.com/acidanther
 cd ~/Downloads/OpenCore-0/Utilities/macrecovery/
 ```
 
-Next, run one of the following commands depending on the OS you'd like to boot:
+接下来，根据要启动的操作系统运行以下命令之一:
 
 ```sh
 # Lion (10.7):
@@ -61,95 +61,95 @@ python3 ./macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000000000 download
 python3 ./macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
 ```
 
-From here, run one of those commands in terminal and once finished you'll get an output similar to this:
+现在，在终端中运行其中一个命令，完成后你将得到类似于下面的输出:
 
 ![](../images/installer-guide/legacy-mac-install-md/download-done.png)
 
-* **Note**: Depending on the OS, you'll either get BaseSystem or RecoveryImage files. They both act in the same manner so when we reference BaseSystem the same info applies to RecoveryImage
+* **注意**: 根据操作系统的不同，您将获得 BaseSystem 或 RecoveryImage 文件。它们以相同的方式工作，所以当我们引用 BaseSystem 时，相同的信息适用于 RecoveryImage
 
-* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
-    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
+* **macOS 12及以上版本注意**: 由于最新macOS版本引入了USB堆栈的更改，在安装macOS之前，强烈建议您映射USB端口(使用USBToolBox)。
+  * <span style="color:red"> 注意: </span> 在macOS 11.3及更新版本中，[XhciPortLimit被破坏导致启动循环](https://github.com/dortania/bugtracker/issues/162).
+    * 如果你已经[映射了你的USB端口](https://sumingyd.github.io/OpenCore-Post-Install/usb/) 并且禁用了 `XhciPortLimit` ，那么你可以正常启动macOS 11.3+。
 
-## Making the installer
+## 制作安装程序
 
-This section will target making the necessary partitions in the USB device. You can use your favorite program be it `gdisk` `fdisk` `parted` `gparted` or `gnome-disks`. This guide will focus on `gdisk` as it's nice and can change the partition type later on, as we need it so that macOS Recovery HD can boot. (the distro used here is Ubuntu 18.04, other versions or distros may work)
+本节的目标是在USB设备中创建必要的分区。你可以使用你最喜欢的程序，比如`gdisk` `fdisk` `parted` `gparted` 或 `gnome-disks`。本指南将重点介绍 `gdisk` ，因为它很好，可以在稍后更改分区类型，因为我们需要它来引导 macOS Recovery HD。(这里使用的发行版是Ubuntu 18.04，其他版本或发行版也可以)
 
-Credit to [midi1996](https://github.com/midi1996) for his work on the [Internet Install Guide](https://midi1996.github.io/hackintosh-internet-install-gitbook/) guide which this is based off of.
+感谢 [midi1996](https://github.com/midi1996) 为 [Internet安装指南](https://midi1996.github.io/hackintosh-internet-install-gitbook/) 所做的工作。
 
-### Method 1
+### 方法 1
 
-In terminal:
+在终端:
 
-1. run `lsblk` and determine your USB device block
+1. 运行 `lsblk` 并确定你的USB设备块
   ![lsblk](../images/installer-guide/linux-install-md/unknown-5.png)
-2. run `sudo gdisk /dev/<your USB block>`
-   1. if you're asked what partition table to use, select GPT.
+2. 运行 `sudo gdisk /dev/<你的USB块>`
+   1. 如果您被问及使用什么分区表，选择GPT。
       ![Select GPT](../images/installer-guide/linux-install-md/unknown-6.png)
-   2. send `p` to print your block's partitions \(and verify it's the one needed\)
+   2. 发送 `p` 来打印你的区块的分区\(并验证它是否是需要的分区\)
       ![](../images/installer-guide/linux-install-md/unknown-13.png)
-   3. send `o` to clear the partition table and make a new GPT one (if not empty)
-      1. confirm with `y`
+   3. 发送 `o` 来清除分区表，并创建一个新的GPT表(如果不是空的)
+      1. 用 `y` 确认
          ![](../images/installer-guide/linux-install-md/unknown-8.png)
-   4. send `n`
-      1. `partition number`: keep blank for default
-      2. `first sector`: keep blank for default
-      3. `last sector`: keep blank for whole disk
-      4. `Hex code or GUID`: `0700` for Microsoft basic data partition type
-   5. send `w`
-      * Confirm with `y`
+   4. 发送 `n`
+      1. `partition number`: 默认为空
+      2. `first sector`: 默认为空
+      3. `last sector`: 整个磁盘保持空白
+      4. `Hex code or GUID`: `0700` 用于Microsoft基本数据分区类型
+   5. 发送 `w`
+      * 用 `y` 确认
       ![](../images/installer-guide/linux-install-md/unknown-9.png)
-      * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
-   6. Close `gdisk` by sending `q` (normally it should quit on its own)
-3. Use `lsblk` to determine your partition's identifiers
-4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your USB partition block>` to format your USB to FAT32 and named OPENCORE
-5. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-   1. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your USB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your USB partition block> /where/your/mount/stuff`, sudo is required)
-   2. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
-   3. now `cp` or `rsync` both `BaseSystem.dmg` and `BaseSystem.chunklist` into `com.apple.recovery.boot` folder.
+      * 在某些情况下需要重启电脑，但如果你想确定的话，很少会重启电脑。你也可以尝试重新插入你的u盘。
+   6. 通过发送 `q` 来关闭 `gdisk` (通常它应该自己退出)
+3. 使用 `lsblk` 来确定分区的标识符
+4. 运行 `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<你的USB分区块>` 格式化USB到FAT32并命名为OPENCORE
+5. 然后 `cd` 到 `/OpenCore/Utilities/macrecovery/` 你应该得到一个 `.dmg` 和 `.chunklist` 文件
+   1. 挂载您的USB分区 `udisksctl` (`udisksctl mount -b /dev/<你的USB分区块>`, 在大多数情况下不需要sudo) 或者 `mount` (`sudo mount /dev/<你的USB分区块> /where/your/mount/stuff`, sudo是必需的)
+   2. `cd` 到你的USB驱动器和 `mkdir com.apple.recovery.boot` 在FAT32 USB分区的根目录下
+   3. 现在 `cp` 或者 `rsync` 将 `BaseSystem.dmg` 和 `BaseSystem.chunklist` 放入 `com.apple.recovery.boot` 文件夹.
 
-### Method 2 (in case 1 didn't work)
+### 方法 2 (在情况1无效的情况下)
 
-In terminal:
+在终端:
 
-1. run `lsblk` and determine your USB device block
+1. 运行 `lsblk` 并确定您的USB设备块
    ![](../images/installer-guide/linux-install-md/unknown-11.png)
-2. run `sudo gdisk /dev/<your USB block>`
-   1. if you're asked what partition table to use, select GPT.
+2. 运行 `sudo gdisk /dev/<你的USB块>`
+   1. 如果询问使用什么分区表，选择GPT。
       ![](../images/installer-guide/linux-install-md/unknown-12.png)
-   2. send `p` to print your block's partitions \(and verify it's the one needed\)
+   2. 发送 `p` 来打印你的区块的分区\(并验证它是否是需要的分区\)
       ![](../images/installer-guide/linux-install-md/unknown-13.png)
-   3. send `o` to clear the partition table and make a new GPT one (if not empty)
-      1. confirm with `y`
+   3. 发送 `o` 来清除分区表，并创建一个新的GPT表(如果不是空的)
+      1. 用 `y` 确认
          ![](../images/installer-guide/linux-install-md/unknown-14.png)
-   4. send `n`
-      1. partition number: keep blank for default
-      2. first sector: keep blank for default
-      3. last sector: `+200M` to create a 200MB partition that will be named later on OPENCORE
-      4. Hex code or GUID: `0700` for Microsoft basic data partition type
+   4. 发送 `n`
+      1. partition number: 默认为空
+      2. first sector: 默认为空
+      3. last sector:`+200M`来创建一个200MB的分区，稍后将在OPENCORE上命名
+      4. Hex code or GUID: `0700` 用于Microsoft基本数据分区类型
       ![](../images/installer-guide/linux-install-md/unknown-15.png)
-   5. send `n`
-      1. partition number: keep blank for default
-      2. first sector: keep blank for default
-      3. last sector: keep black for default \(or you can make it `+3G` if you want to partition further the rest of the USB\)
-      4. Hex code or GUID: `af00` for Apple HFS/HFS+ partition type
+   5. 发送 `n`
+      1. partition number: 默认为空
+      2. first sector: 默认为空
+      3. last sector: 保持默认 \(或者如果你想进一步划分USB的其余部分，可以将其设为“+3G”\)
+      4. Hex code or GUID: `af00` 为苹果HFS/HFS+分区类型
       ![](../images/installer-guide/linux-install-md/unknown-16.png)
-   6. send `w`
-      * Confirm with `y`
+   6. 发送 `w`
+      * 用 `y` 确认
       ![](../images/installer-guide/linux-install-md/unknown-17.png)
-      * In some cases a reboot is needed, but rarely, if you want to be sure, reboot your computer. You can also try re-plugging your USB key.
-   7. Close `gdisk` by sending `q` (normally it should quit on its own)
-3. Use `lsblk` again to determine the 200MB drive and the other partition
+      * 在某些情况下需要重启电脑，但如果你想确定的话，很少会重启电脑。你也可以尝试重新插入你的u盘。
+   7. 通过发送 `q` 来关闭 `gdisk` (通常它应该自己退出)
+3. 再次使用 `lsblk` 来确定200MB驱动器和其他分区
    ![](../images/installer-guide/linux-install-md/unknown-18.png)
-4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your 200MB partition block>` to format the 200MB partition to FAT32, named OPENCORE
-5. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-   1. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your 200MB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your 200MB partition block> /where/your/mount/stuff`, sudo is required)
-   2. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
-   3. download `dmg2img` (available on most distros)
-   4. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
+4. 运行 `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<你的 200MB 分区块>` 将200MB分区格式化为FAT32，命名为OPENCORE
+5. 然后 `cd` 到 `/OpenCore/Utilities/macrecovery/` 你应该得到一个 `.dmg` 和 `.chunklist` 文件
+   1. 挂载你的USB分区 `udisksctl` (`udisksctl mount -b /dev/<你的 200MB 分区块>`, 大多数情况下不需要sudo) 或用 `mount` (`sudo mount /dev/<你的 200MB 分区块> /where/your/mount/stuff`, sudo是必需的)
+   2. `cd` 到你的U盘和 `mkdir com.apple.recovery.boot` 在你的FAT32 USB分区根
+   3. 下载 `dmg2img` (在大多数发行版上可用)
+   4. 运行 `dmg2img -l BaseSystem.dmg` 并确定哪个分区具有 `disk image` 属性
       ![](../images/installer-guide/linux-install-md/unknown-20.png)
-   5. run `sudo dmg2img -p <the partition number> BaseSystem.dmg /dev/<your 3GB+ partition block>` to extract and write the recovery image to the partition disk
-      * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
+   5. 运行 `sudo dmg2img -p <the partition number> BaseSystem.dmg /dev/<你的 3GB+ 分区块>` 来提取恢复映像并将其写入分区磁盘
+      * 这需要一些时间。如果你用的是速度较慢的USB(我用一个速度较快的USB2.0驱动器只花了不到5分钟)。
       ![](../images/installer-guide/linux-install-md/unknown-21.png)
 
-## Now with all this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
+## 现在所有这些都完成了，前往[设置EFI](./opencore-efi.md) 来完成你的工作

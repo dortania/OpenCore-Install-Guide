@@ -1,32 +1,32 @@
-# Ryzen and Threadripper(17h and 19h)
+# Ryzen 和 Threadripper(17h and 19h)
 
-| Support | Version |
+| 支持 | 版本 |
 | :--- | :--- |
-| Initial macOS Support | macOS 10.13, High Sierra |
+| 初始macOS支持 | macOS 10.13, High Sierra |
 
-## Starting Point
+## 起点
 
-So making a config.plist may seem hard, it's not. It just takes some time but this guide will tell you how to configure everything, you won't be left in the cold. This also means if you have issues, review your config settings to make sure they're correct. Main things to note with OpenCore:
+做一个config.Plist可能看起来很难，其实不然。这只是需要一些时间，本指南将告诉您如何配置所有内容，您不会被冷落。这也意味着如果你有问题，检查你的配置设置以确保它们是正确的。使用OpenCore需要注意的主要事项:
 
-* **All properties must be defined**, there are no default OpenCore will fall back on so **do not delete sections unless told explicitly so**. If the guide doesn't mention the option, leave it at default.
-* **The Sample.plist cannot be used As-Is**, you must configure it to your system
-* **DO NOT USE CONFIGURATORS**, these rarely respect OpenCore's configuration and even some like Mackie's will add Clover properties and corrupt plists!
+* **所有的属性必须定义**, 没有默认的OpenCore将出错，所以**不要删除任何节，除非明确地告诉你可以删除**。如果指南没有提到该选项，请将其保留为默认值。
+* **Sample.plist不能按原样使用**, 你必须根据自己的系统进行配置
+* **不要使用配置器**, 这些配置器很少遵守OpenCore的配置，甚至一些像Mackie的配置器还会添加Clover属性和破坏plists!
 
-Now with all that, a quick reminder of the tools we need
+现在，我们来快速回顾一下我们需要的工具
 
 * [ProperTree](https://github.com/corpnewt/ProperTree)
-  * Universal plist editor
+  * 通用plist编辑器
 * [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  * For generating our SMBIOS data
+  * 用于生成SMBIOS数据
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
-  * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
+  * 参见前一节获取方法: [config.plist 设置](../config.plist/README.md)
 * [AMD Kernel Patches](https://github.com/AMD-OSX/AMD_Vanilla)
-  * Needed for booting macOS on AMD hardware(save these for later, we'll go over how to use them below)
-  * Supporting AMD Family 15h, 16h, 17h and 19h
+  * 在AMD硬件上启动macOS所需要的(把它们留到后面，我们会在下面介绍如何使用它们)
+  * 支持AMD家族15h, 16h, 17h和19h
 
 ::: warning
 
-Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
+在设置OpenCore之前，请多次阅读本指南，并确保设置正确。请注意，图片并不总是最新的，所以请阅读下面的文字，如果没有提到，那么保持默认。
 
 :::
 
@@ -36,80 +36,80 @@ Read this guide more than once before setting up OpenCore and make sure you have
 
 ### Add
 
-::: tip Info
+::: tip 信息
 
-This is where you'll add SSDTs for your system, these are very important to **booting macOS** and have many uses like [USB maps](https://dortania.github.io/OpenCore-Post-Install/usb/), [disabling unsupported GPUs](../extras/spoof.md) and such. And with our system, **it's even required to boot**. Guide on making them found here: [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/)
+这是你将为系统添加ssdt的地方，这些对于**引导macOS**非常重要，并且有许多用途，例如[USB 映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)，[禁用不支持的gpu](../extras/spoof.md)等。在我们的系统中，**甚至需要这些才可以启动**。制作指南:[**ACPI入门**](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 
-| Required SSDTs | Description |
+| 需要的SSDTs | 描述 |
 | :--- | :--- |
-| **[SSDT-EC-USBX](https://dortania.github.io/Getting-Started-With-ACPI/)** | Fixes both the embedded controller and USB power, see [Getting Started With ACPI Guide](https://dortania.github.io/Getting-Started-With-ACPI/) for more details. |
-| **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | Fixes CPU definitions with B550 and A520 motherboards, **do not use** if you don't have an AMD B550 or A520 system. You can find a prebuilt here: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
+| **[SSDT-EC-USBX](https://sumingyd.github.io/Getting-Started-With-ACPI/)** | 修复嵌入式控制器和USB电源，请参阅[开始使用ACPI指南](https://sumingyd.github.io/Getting-Started-With-ACPI/) 了解更多信息 |
+| **[SSDT-CPUR](https://github.com/naveenkrdy/Misc/blob/master/SSDTs/SSDT-CPUR.dsl)** | 修复了B550和A520主板的CPU定义，如果你没有AMD B550或A520系统，**不要使用**。你可以在这里找到一个预构建的: [SSDT-CPUR.aml](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) |
 
-Note that you **should not** add your generated `DSDT.aml` here, it is already in your firmware. So if present, remove the entry for it in your `config.plist` and under EFI/OC/ACPI.
+请注意，您**不应该**在这里添加您生成的`DSDT.aml`，它已经在您的固件中了。因此，如果存在，请删除`config plist`和EFI/OC/ACPI下的条目。
 
-For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs, and compiling them, please see the [**Getting started with ACPI**](https://dortania.github.io/Getting-Started-With-ACPI/) **page.** Compiled SSDTs have a **.aml** extension(Assembled) and will go into the `EFI/OC/ACPI` folder and **must** be specified in your config under `ACPI -> Add` as well.
+对于那些想要更深入地转储您的DSDT、如何制作这些ssdt以及编译它们的人，请参阅[**开始使用ACPI**](https://sumingyd.github.io/Getting-Started-With-ACPI/) **页面** 编译后的ssdt有一个**.aml**扩展名(已编译)，将被放入`EFI/OC/ACPI`文件夹，并且**必须**在你的配置文件`ACPI -> Add`下指定。
 
 :::
 
 ### Delete
 
-This blocks certain ACPI tables from loading, for us we can ignore this.
+这将阻止某些ACPI表加载，对于我们来说，我们可以忽略它。
 
 ### Patch
 
-This section allows us to dynamically modify parts of the ACPI (DSDT, SSDT, etc.) via OpenCore. For us, our patches are handled by our SSDTs. This is a much cleaner solution as this will allow us to boot Windows and other OSes with OpenCore
+本节允许我们通过OpenCore动态修改ACPI的部分内容(DSDT、SSDT等)。对我们来说，我们的补丁由我们的ssdt处理。这是一个更简洁的解决方案，因为这将允许我们使用OpenCore引导Windows和其他操作系统
 
 ### Quirks
 
-Settings relating to ACPI, leave everything here as default as we have no use for these quirks.
+与ACPI相关的设置，将所有内容保留为默认设置，因为我们不需要这些选项。
 
 ## Booter
 
 ![Booter](../images/config/config-universal/amd-zen-booter.png)
 
-This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
+本节专门讨论与使用OpenRuntime (AptioMemoryFix.efi的替代品)进行boot.efi补丁相关的问题
 
 ### MmioWhitelist
 
-This section is allowing spaces to be passthrough to macOS that are generally ignored, useful when paired with `DevirtualiseMmio`
+本节允许将通常被忽略的空格传递给macOS，当与`DevirtualiseMmio`配对时很有用。
 
 ### Quirks
 
-::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
+::: tip 信息
+与boot.efi补丁和固件修复相关的设置，对我们来说，我们需要更改以下内容:
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
-| DevirtualiseMmio | NO | If you have a TRx40 system, enable this and follow the instructions here: <https://dortania.github.io/OpenCore-Install-Guide/extras/kaslr-fix.html> |
+| DevirtualiseMmio | NO | 如果您使用的是TRx40系统，请启用此选项并遵循以下说明:<https://sumingyd.github.io/OpenCore-Install-Guide/extras/kaslr-fix.html> |
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
-| ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable BAR Support), set this to `0` |
-| SetupVirtualMap | YES | - Note X570, B550, A520 and TRx40 boards might need this disabled<br/>- X470 and B450 with late 2020 BIOS updates might also require this disabled |
+| ResizeAppleGpuBars | -1 | 如果您的固件支持增加GPU Bar大小(即.可调整大小的BAR支持)，请将其设置为`0` |
+| SetupVirtualMap | YES | - 注意X570, B550, A520和TRx40板可能需要禁用<br/>- X470和B450 2020年底的BIOS更新也可能需要禁用此功能 |
 | SyncRuntimePermissions | YES | |
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+  * 修复UEFI运行时服务，如日期，时间，NVRAM，电源控制等
 * **EnableSafeModeSlide**: YES
-  * Enables slide variables to be used in safe mode.
+  * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: NO
-  * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
-  * However, due to issues with OEMs not using the latest EDKII builds you may find that the above combo will result in early boot failures. This is due to missing the `MEMORY_ATTRIBUTE_TABLE` and such we recommend disabling RebuildAppleMemoryMap and enabling EnableWriteUnprotector. More info on this is covered in the [troubleshooting section](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
+  * 这一选项和RebuildAppleMemoryMap通常会发生冲突，建议在较新的平台上启用后者并禁用此条目。
+  * 然而，由于原始设备制造商没有使用最新的EDKII版本，您可能会发现上述组合将导致早期启动失败。这是由于缺少`MEMORY_ATTRIBUTE_TABLE`，因此我们建议禁用RebuildAppleMemoryMap并启用EnableWriteUnprotector。有关此问题的更多信息见[故障排除部分](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
 * **ProvideCustomSlide**: YES
-  * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
+  * 用于Slide变量计算。然而，这种怪异的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this
+  * 生成与macOS兼容的内存映射，可能在一些笔记本OEM固件上损坏，所以如果您收到早期启动失败禁用此功能
 * **ResizeAppleGpuBars**: -1
-  * Will reduce the size of GPU PCI Bars if set to `0` when booting macOS, set to `-1` to disable
-  * Setting other PCI Bar values is possible with this quirk, though can cause instabilities
-  * This quirk being set to zero is only necessary if Resizable BAR Support is enabled in your firmware.
+  * 启动macOS时，如果设置为`0`，将减少GPU PCI Bars的大小，设置为`-1`则禁用
+  * 使用此选项可以设置其他PCI Bar值，但可能导致不稳定
+  * 只有在固件中启用了对Resizable BAR的支持时，才需要将此属性设置为0。
 * **SetupVirtualMap**: YES
-  * Fixes SetVirtualAddresses calls to virtual addresses
-  * B550, A520 and TRx40 boards should disable this quirk
+  * 修复了SetVirtualAddresses对虚拟地址的调用
+  * B550, A520和TRx40主板应该禁用这个选项
 * **SyncRuntimePermissions**: YES
-  * Fixes alignment with MAT tables and required to boot Windows and Linux with MAT tables, also recommended for macOS. Mainly relevant for RebuildAppleMemoryMap users
+  * 修复了与MAT表的对齐，以及在引导Windows和Linux时需要使用MAT表，也推荐用于macOS。主要针对重建apple内存映射的用户
 :::
 
 ## DeviceProperties
@@ -118,15 +118,15 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 ### Add
 
-Sets device properties from a map.
+从映射中设置设备属性。
 
-By default, the Sample.plist has this section set for audio which we'll be setting up by setting the layout ID in the boot-args section, so removal of `PciRoot(0x0)/Pci(0x1b,0x0)` is also recommended from the `Add` section.
+默认情况下，Sample.plist已经为音频设置了这个部分，我们将通过在引导参数部分设置布局ID来设置音频，因此建议从`Add`节中删除`PciRoot(0x0)/Pci(0x1b,0x0)`。
 
-TL;DR, delete all the PciRoot's here as we won't be using this section.
+TL;DR，删除这里所有的PciRoot，因为我们不会使用这一节。
 
 ### Delete
 
-Removes device properties from the map, for us we can ignore this
+从映射中删除设备属性，我们可以忽略它
 
 ## Kernel
 
@@ -136,42 +136,42 @@ Removes device properties from the map, for us we can ignore this
 
 ### Add
 
-Here's where we specify which kexts to load, in what specific order to load, and what architectures each kext is meant for. By default we recommend leaving what ProperTree has done, however for 32-bit CPUs please see below:
+在这里，我们指定要加载哪些kext，以什么特定的顺序加载，以及每个kext适用于什么体系结构。默认情况下，我们建议保留ProperTree所做的操作，但对于32位cpu，请参见以下内容:
 
-::: details More in-depth Info
+::: details 更深入的信息
 
-The main thing you need to keep in mind is:
+你需要记住的主要事情是:
 
-* Load order
-  * Remember that any plugins should load *after* its dependencies
-  * This means kexts like Lilu **must** come before VirtualSMC, AppleALC, WhateverGreen, etc
+* 装载顺序
+  * 记住，任何插件都应该在它的依赖**后面**加载
+  * 这意味着像Lilu这样的kext **必须**出现在VirtualSMC、AppleALC、WhateverGreen等之前
 
-A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can run **Cmd/Ctrl + Shift + R** to add all their kexts in the correct order without manually typing each kext out.
+提醒一下 [ProperTree](https://github.com/corpnewt/ProperTree) 用户可以运行 **Cmd/Ctrl + Shift + R** 以正确的顺序添加他们所有的kext，而无需手动输入每个kext。
 
 * **Arch**
-  * Architectures supported by this kext
-  * Currently supported values are `Any`, `i386` (32-bit), and `x86_64` (64-bit)
+  * 这个kext支持的架构
+  * 目前支持的值是 `Any`, `i386` (32位), 和`x86_64` (64位)
 * **BundlePath**
-  * Name of the kext
-  * ex: `Lilu.kext`
+  * kext的名称
+  * 例如: `Lilu.kext`
 * **Enabled**
-  * Self-explanatory, either enables or disables the kext
+  * 不言自明，启用或禁用kext
 * **ExecutablePath**
-  * Path to the actual executable is hidden within the kext, you can see what path your kext has by right-clicking and selecting `Show Package Contents`. Generally, they'll be `Contents/MacOS/Kext` but some have kexts hidden within under `Plugin` folder. Do note that plist only kexts do not need this filled in.
-  * ex: `Contents/MacOS/Lilu`
+  * 实际可执行文件的路径隐藏在kext中，您可以通过右键单击并选择`显示包内容`来查看kext的路径。一般来说，它们将是`Contents/MacOS/Kext`，但有些将Kext隐藏在`Plugin`文件夹下。请注意，kext中仅plist时不需要填充该属性。
+  * 例如: `Contents/MacOS/Lilu`
 * **MinKernel**
-  * Lowest kernel version your kext will be injected into, see below table for possible values
-  * ex. `12.00.00` for OS X 10.8
+  * kext将被注入到的最低内核版本，有关可能的值，请参见下表
+  * 例如. `12.00.00` 用于 OS X 10.8
 * **MaxKernel**
-  * Highest kernel version your kext will be injected into, see below table for possible values
-  * ex. `11.99.99` for OS X 10.7
+  * kext将被注入到的最高内核版本，可能的值见下表
+  * 例如. `11.99.99` 用于 OS X 10.7
 * **PlistPath**
-  * Path to the `info.plist` hidden within the kext
-  * ex: `Contents/Info.plist`
+  * 隐藏在kext中的info.plist的路径
+  * 例如: `Contents/Info.plist`
 
-::: details Kernel Support Table
+::: details 内核支持表
 
-| OS X Version | MinKernel | MaxKernel |
+| OS X 版本 | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
 | 10.4 | 8.0.0 | 8.99.99 |
 | 10.5 | 9.0.0 | 9.99.99 |
@@ -193,34 +193,34 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-::: tip Info
+::: tip 信息
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable CPU power management on unsupported CPUs (such as AMD CPUs)
+用于欺骗不支持的cpu，如Pentiums和Celerons 和在不支持的CPU(如AMD CPU)上禁用CPU电源管理
 
-| Quirk | Enabled |
+| 选项 | 启用 |
 | :--- | :--- |
 | DummyPowerManagement | YES |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
-* **Cpuid1Mask**: Leave this blank
-  * Mask for fake CPUID
-* **Cpuid1Data**: Leave this blank
-  * Fake CPUID entry
+* **Cpuid1Mask**: 不填写
+  * 伪造CPUID的掩码
+* **Cpuid1Data**: 不填写
+  * 假的CPUID项
 * **DummyPowerManagement**: YES
-  * New alternative to NullCPUPowerManagement, required for all AMD CPU based systems as there's no native power management.
+  * NullCPUPowerManagement的新替代方案，对于所有基于AMD CPU的系统都是必需的，因为没有本地电源管理。
 * **MinKernel**: Leave this blank
-  * Lowest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
-  * ex. `12.00.00` for OS X 10.8
+  * 上面的补丁将被注入到最低的内核版本，如果没有指定值，它将应用于所有版本的macOS。有关可能的值，请参见下表
+  * 例如. `12.00.00` 用于 OS X 10.8
 * **MaxKernel**: Leave this blank
-  * Highest kernel version the above patches will be injected into, if no value specified it'll be applied to all versions of macOS. See below table for possible values
-  * ex. `11.99.99` for OS X 10.7
+  * 上述补丁将被注入的最高内核版本，如果没有指定值，它将应用于所有版本的macOS。有关可能的值，请参见下表
+  * 例如. `11.99.99` 用于 OS X 10.7
 
-::: details Kernel Support Table
+::: details 内核支持表
 
-| OS X Version | MinKernel | MaxKernel |
+| OS X 版本 | MinKernel | MaxKernel |
 | :--- | :--- | :--- |
 | 10.4 | 8.0.0 | 8.99.99 |
 | 10.5 | 9.0.0 | 9.99.99 |
@@ -242,46 +242,46 @@ Needed for spoofing unsupported CPUs like Pentiums and Celerons and to disable C
 
 ### Force
 
-Used for loading kexts off system volume, only relevant for older operating systems where certain kexts are not present in the cache(ie. IONetworkingFamily in 10.6).
+用于从系统卷中加载kext，仅适用于某些kext不存在于缓存中的旧操作系统(例如10.16中的IONetworkingFamily)。
 
-For us, we can ignore.
+对我们来说，我们可以忽略。
 
 ### Block
 
-Blocks certain kexts from loading. Not relevant for us.
+阻止某些kext的加载。与我们无关。
 
 ### Patch
 
-This is where the AMD kernel patching magic happens. Please do note that if coming from Clover, `KernelToPatch` and `MatchOS` from Clover becomes `Kernel` and `MinKernel`/ `MaxKernel` in OpenCore. The latest AMD kernel patches can always be found on the [AMD Vanilla GitHub Repository](https://github.com/AMD-OSX/AMD_Vanilla).
+这是AMD内核打补丁魔法发生的地方。请注意，如果来自Clover，则来自Clover的`KernelToPatch`和`MatchOS`在OpenCore中变为`Kernel`和`MinKernel`/ `MaxKernel`。最新的AMD内核补丁可以在[AMD Vanilla GitHub仓库](https://github.com/AMD-OSX/AMD_Vanilla)上找到。
 
 Kernel patches:
 
 * [Ryzen/Threadripper (17h/19h)](https://github.com/AMD-OSX/AMD_Vanilla) (10.13 - 12.x)
 
-To merge:
+合并：
 
-* Open both files,
-* Delete the `Kernel -> Patch` section from config.plist
-* Copy the `Kernel -> Patch` section from patches.plist
-* Paste into where old patches were in config.plist
+* 打开两个文件，
+* 从config.plist中删除`Kernel -> Patch`部分
+* 从patches.plist中复制`Kernel -> Patch`部分
+* 粘贴到config.plist中旧补丁所在的位置
 
 ![](../images/config/AMD/kernel.gif)
 
-You will also need to modify three patches, all named `algrey - Force cpuid_cores_per_package`. You only need to change the `Replace` value. You should change:
+你还需要修改三个补丁，它们的名字都是`algrey - Force cpuid_cores_per_package`. 你只需要改变`Replace`的值。你应该改变:
 
 * `B8000000 0000` => `B8 <core count> 0000 0000`
 * `BA000000 0000` => `BA <core count> 0000 0000`
 * `BA000000 0090` => `BA <core count> 0000 0090`
 
-Where `<core count>` is replaced with the physical core count of your CPU in hexadecimal. For example, an 8-Core 5800X would have the new Replace value be:
+其中`<core count>`被十六进制的CPU物理核心计数替换。例如，一个8核的5800X处理器的新值是:
 
 * `B8 08 0000 0000`
 * `BA 08 0000 0000`
 * `BA 08 0000 0090`
 
-::: details Core Count => Hexadecimal Table
+::: details 核心计数=>十六进制表
 
-| Core Count | Hexadecimal |
+| 核心数 | 十六进制 |
 | :--------- | :---------- |
 | 2 Core | `02` |
 | 4 Core | `04` |
@@ -297,76 +297,76 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 
 ### Quirks
 
-::: tip Info
+::: tip 信息
 
-Settings relating to the kernel, for us we'll be enabling the following:
+与内核相关的设置，我们将启用以下功能:
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
 | PanicNoKextDump | YES | |
 | PowerTimeoutKernelPanic | YES | |
 | ProvideCurrentCpuInfo | YES | |
-| XhciPortLimit | YES | Disable if running macOS 11.3+ |
+| XhciPortLimit | YES | 如果运行macOS 11.3+，请禁用 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AppleCpuPmCfgLock**: NO
-  * Only needed when CFG-Lock can't be disabled in BIOS. AMD users can ignore
+  * 仅当BIOS中不能禁用CFG-Lock时需要. AMD用户可以忽略
 * **AppleXcpmCfgLock**: NO
-  * Only needed when CFG-Lock can't be disabled in BIOS. AMD users can ignore
+  * 仅当BIOS中不能禁用CFG-Lock时需要. AMD用户可以忽略
 * **AppleXcpmExtraMsrs**: NO
-  * Disables multiple MSR access needed for unsupported CPUs like Pentiums and certain Xeons
+  * 禁用不支持的cpu(如pentium和某些xeon)所需的多次MSR访问
 * **CustomSMBIOSGuid**: NO
-  * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
-  * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom` will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
+  * 为UpdateSMBIOSMode设置为`Custom`时执行GUID补丁。通常与戴尔笔记本电脑有关
+  * 与`PlatformInfo -> UpdateSMBIOSMode -> Custom`一起启用此功能将禁用SMBIOS注入“非苹果”操作系统，但我们不支持此方法，因为它破坏了Bootcamp兼容性。使用风险自负。
 * **DisableIoMapper**: NO
-  * AMD doesn't have DMAR or VT-D support so irrelevant
+  * AMD不支持DMAR或VT-D
 * **DisableLinkeditJettison**: YES
-  * Allows Lilu and others to have more reliable performance without `keepsyms=1`
+  * 允许Lilu和其他kext在不需要`keepsyms=1`的情况下拥有更可靠的性能
 * **DisableRtcChecksum**: NO
-  * Prevents AppleRTC from writing to primary checksum (0x58-0x59), required for users who either receive BIOS reset or are sent into Safe mode after reboot/shutdown
+  * 防止AppleRTC写入主校验和(0x58-0x59)，这对于接收BIOS重置或在重启/关机后进入安全模式的用户是必需的
 * **ExtendBTFeatureFlags** NO
-  * Helpful for those having continuity issues with non-Apple/non-Fenvi cards
+  * 对于那些非apple /非fenvi卡有连续性问题的人很有帮助
 * **LapicKernelPanic**: NO
-  * Disables kernel panic on AP core lapic interrupt, generally needed for HP systems. Clover equivalent is `Kernel LAPIC`
+  * 在AP核心lapic中断上禁用内核崩溃，一般HP系统需要。相当于Clover的`Kernel LAPIC`
 * **LegacyCommpage**: NO
-  * Resolves SSSE3 requirement for 64 Bit CPUs in macOS, mainly relevant for 64-Bit Pentium 4 CPUs(ie. Prescott)
+  * 解决了macOS中64位cpu的SSSE3要求，主要适用于64位Pentium 4 cpu (即Prescott)
 * **PanicNoKextDump**: YES
-  * Allows for reading kernel panics logs when kernel panics occur
+  * 允许在发生内核严重故障时读取内核严重故障日志
 * **PowerTimeoutKernelPanic**: YES
-  * Helps fix kernel panics relating to power changes with Apple drivers in macOS Catalina, most notably with digital audio.
+  * 帮助修复macOS Catalina中与苹果驱动程序权限变化相关的内核崩溃，尤其是数字音频。
 * **ProvideCurrentCpuInfo**: YES
-  * Provides the kernel with CPU frequency values for AMD.
+  * 为AMD的内核提供CPU频率值。
 * **SetApfsTrimTimeout**: `-1`
-  * Sets trim timeout in microseconds for APFS filesystems on SSDs, only applicable for macOS 10.14 and newer with problematic SSDs.
+  * 为ssd上的APFS文件系统设置以微秒为单位的修剪超时时间，仅适用于macOS 10.14及更新版本的有问题的ssd。
 * **XhciPortLimit**: YES
-  * This is actually the 15 port limit patch, don't rely on it as it's not a guaranteed solution for fixing USB. Please create a [USB map](https://dortania.github.io/OpenCore-Post-Install/usb/) when possible.
-  * With macOS 11.3+, [XhciPortLimit may not function as intended.](https://github.com/dortania/bugtracker/issues/162) We recommend users either disable this quirk and map before upgrading or [map from Windows](https://github.com/USBToolBox/tool). You may also install macOS 11.2.3 or older.
+  * 这是15个端口限制补丁，不要依赖它，因为它不是一个保证修复USB接口的解决方案。如果可能，请创建一个[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)。
+  * 在macOS 11.3+中，[XhciPortLimit可能无法正常工作。](https://github.com/dortania/bugtracker/issues/162) 我们建议用户在升级前禁用此功能和 映射或 [从Windows映射](https://github.com/USBToolBox/tool). 你也可以安装macOS 11.2.3或更旧的版本。
 
 :::
 
 ### Scheme
 
-Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip however for those planning to boot legacy OSes you can see below:
+与传统引导相关的设置(例如:10.4-10.6)，大多数情况下你可以跳过，但是对于那些计划启动旧操作系统的人，你可以查看以下内容:
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **FuzzyMatch**: True
-  * Used for ignoring checksums with kernelcache, instead opting for the latest cache available. Can help improve boot performance on many machines in 10.6
+  * 用于忽略内核缓存的校验和，而不是选择可用的最新缓存。可以帮助提高10.6中许多机器的启动性能
 * **KernelArch**: x86_64
-  * Set the kernel's arch type, you can choose between `Auto`, `i386` (32-bit), and `x86_64` (64-bit).
-  * If you're booting older OSes which require a 32-bit kernel(ie. 10.4 and 10.5) we recommend to set this to `Auto` and let macOS decide based on your SMBIOS. See below table for supported values:
-    * 10.4-10.5 — `x86_64`, `i386` or `i386-user32`
-      * `i386-user32` refers 32-bit userspace, so 32-bit CPUs must use this(or CPUs missing SSSE3)
-      * `x86_64` will still have a 32-bit kernelspace however will ensure 64-bit userspace in 10.4/5
-    * 10.6 — `i386`, `i386-user32`, or `x86_64`
-    * 10.7 — `i386` or `x86_64`
-    * 10.8 or newer — `x86_64`
+  * 设置内核的arch类型，你可以在`Auto`、`i386`(32位)和`x86_64`(64位)之间选择。
+  * 如果你正在启动需要32位内核的旧操作系统(例如:10.4和10.5)我们建议将其设置为`Auto`，并让macOS根据您的SMBIOS决定。支持的值见下表:
+    * 10.4-10.5 — `x86_64`, `i386` 或 `i386-user32`
+      * `i386-user32` 是32位的用户空间，所以32位的cpu必须使用这个(或cpu缺少SSSE3)
+      * `x86_64` 仍然有一个32位的内核空间，但是在10.4/5中将确保64位的用户空间
+    * 10.6 — `i386`, `i386-user32`, 或 `x86_64`
+    * 10.7 — `i386` 或 `x86_64`
+    * 10.8 或更新的 — `x86_64`
 
 * **KernelCache**: Auto
-  * Set kernel cache type, mainly useful for debugging and so we recommend `Auto` for best support
+  * 设置内核缓存类型，主要用于调试，因此我们建议使用`Auto`以获得最佳支持
 
 :::
 
@@ -376,28 +376,28 @@ Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip how
 
 ### Boot
 
-::: tip Info
+::: tip 信息
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
-| HideAuxiliary | YES | Press space to show macOS recovery and other auxiliary entries |
+| HideAuxiliary | YES | 按空格键显示macOS recovery和其他辅助条目 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **HideAuxiliary**: YES
-  * This option will hide supplementary entries, such as macOS recovery and tools, in the picker. Hiding auxiliary entries may increase boot performance on multi-disk systems. You can press space at the picker to show these entries
+  * 此选项将在选择器中隐藏补充条目，例如macOS恢复和工具。隐藏辅助条目可以提高多磁盘系统的启动性能。您可以在选择器处按空格键来显示这些条目
 
 :::
 
 ### Debug
 
-::: tip Info
+::: tip 信息
 
-Helpful for debugging OpenCore boot issues:
+有助于调试OpenCore引导问题:
 
-| Quirk | Enabled |
+| 选项 | 启用 |
 | :--- | :--- |
 | AppleDebug | YES |
 | ApplePanic | YES |
@@ -406,81 +406,81 @@ Helpful for debugging OpenCore boot issues:
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AppleDebug**: YES
-  * Enables boot.efi logging, useful for debugging. Note this is only supported on 10.15.4 and newer
+  * 启用boot.efi的日志记录，用于调试。注意只有10.15.4及更高版本支持这个功能
 * **ApplePanic**: YES
-  * Attempts to log kernel panics to disk
+  * 尝试将内核崩溃记录到磁盘
 * **DisableWatchDog**: YES
-  * Disables the UEFI watchdog, can help with early boot issues
+  * 禁用UEFI watchdog，可以帮助解决早期引导问题
 * **DisplayLevel**: `2147483650`
-  * Shows even more debug information, requires debug version of OpenCore
+  * 显示更多的调试信息，需要调试版本的OpenCore
 * **SysReport**: NO
-  * Helpful for debugging such as dumping ACPI tables
-  * Note that this is limited to DEBUG versions of OpenCore
+  * 有助于调试，例如转储ACPI表
+  * 注意，这仅限于调试版本的OpenCore
 * **Target**: `67`
-  * Shows more debug information, requires debug version of OpenCore
+  * 显示更多的调试信息，需要OpenCore的调试版本
 
-These values are based of those calculated in [OpenCore debugging](../troubleshooting/debug.md)
+这些值是基于 [OpenCore 调试](../troubleshooting/debug.md)中计算的值。
 
 :::
 
 ### Security
 
-::: tip Info
+::: tip 信息
 
-Security is pretty self-explanatory, **do not skip**. We'll be changing the following:
+安全性不用多说了吧，**不要跳过**。我们将修改以下内容:
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default | Leave this as `Default` for OpenCore to automatically set the correct value corresponding to your SMBIOS. The next page goes into more detail about this setting. |
-| Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
+| SecureBootModel | Default | 将此设置为`Default`，以便OpenCore自动设置与您的SMBIOS对应的正确值。下一页将详细介绍这个设置。 |
+| Vault | Optional | 如果你不把它设置为Optional，你会后悔的，注意它是区分大小写的 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AllowSetDefault**: YES
-  * Allow `CTRL+Enter` and `CTRL+Index` to set default boot device in the picker
+  * 允许按 `CTRL+Enter` 和`CTRL+Index` 在选择器中设置默认启动条目
 * **ApECID**: 0
-  * Used for netting personalized secure-boot identifiers, currently this quirk is unreliable due to a bug in the macOS installer so we highly encourage you to leave this as default.
+  * 用于网络个性化的安全启动标识符，由于macOS安装程序中的一个bug，目前这种方式是不可靠的，因此我们强烈建议您保留默认设置。
 * **AuthRestart**: NO
-  * Enables Authenticated restart for FileVault 2 so password is not required on reboot. Can be considered a security risk so optional
+  * 为FileVault 2启用身份认证重启，因此在重启时不需要密码。可以被认为是一个可选的安全风险
 * **BlacklistAppleUpdate**: YES
-  * Used for blocking firmware updates, used as extra level of protection as macOS Big Sur no longer uses `run-efi-updater` variable
+  * 用于阻止固件更新，作为额外的保护级别，因为macOS Big Sur不再使用`run-efi-updater`变量
 
 * **DmgLoading**: Signed
-  * Ensures only signed DMGs load
+  * 确保只加载经过签名的dmg
 * **ExposeSensitiveData**: `6`
-  * Shows more debug information, requires debug version of OpenCore
+  * 显示更多的调试信息，需要OpenCore的调试版本
 * **Vault**: `Optional`
-  * We won't be dealing vaulting so we can ignore, **you won't boot with this set to Secure**
-  * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
+  * 我们不会处理这个，所以我们可以忽略，**你不会启动这个设置，因为安全**
+  * 这是一个单词，省略此设置是不可以的。如果你不把它设置为`Optional`，你会后悔的，注意它是区分大小写的
 * **ScanPolicy**: `0`
-  * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
+  * `0`允许您查看所有可用的驱动器，请参阅[安全](https://sumingyd.github.io/OpenCore-Post-Install/universal/security.html)部分了解更多详细信息。**如果设置为默认，将不会启动USB设备**
 * **SecureBootModel**: Default
-  * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
-  * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
+  * 在macOS中控制Apple的安全启动功能，请参阅[安全](https://sumingyd.github.io/OpenCore-Post-Install/universal/security.html) 部分了解更多细节。
+  * 注意:用户可能会发现在已经安装的系统上升级OpenCore可能会导致早期引导失败。要解决这个问题，请参见这里:[卡在 OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
 
 ### Serial
 
-Used for serial debugging (Leave everything as default).
+用于串行调试(保持默认值)。
 
 ### Tools
 
-Used for running OC debugging tools like the shell, ProperTree's snapshot function will add these for you.
+用于运行OC调试工具，如shell, ProperTree的快照功能将为您添加这些。
 
 ### Entries
 
-Used for specifying irregular boot paths that can't be found naturally with OpenCore.
+用于指定当OpenCore无法自然找到的不规则的引导路径。
 
-Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+这里不会介绍，更多信息请参见 8.6的[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
 
 ## NVRAM
 
@@ -490,97 +490,97 @@ Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidant
 
 ::: tip 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14
 
-Used for OpenCore's UI scaling, default will work for us. See in-depth section for more info
+用于OpenCore的UI缩放，默认就可以很好的工作。有关更多信息，请参阅深入部分
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
-Booter Path, mainly used for UI modification
+引导路径，主要用于修改UI
 
-* **DefaultBackgroundColor**: Background color used by boot.efi
-  * `00000000`: Syrah Black
-  * `BFBFBF00`: Light Gray
+* **DefaultBackgroundColor**: boot.efi使用的背景色
+  * `00000000`: 西拉黑
+  * `BFBFBF00`: 浅灰色
 
 :::
 
 ::: tip 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102
 
-OpenCore's NVRAM GUID, mainly relevant for RTCMemoryFixup users
+OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **rtc-blacklist**: <>
-  * To be used in conjunction with RTCMemoryFixup, see here for more info: [Fixing RTC write issues](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
-  * Most users can ignore this section
+  * 要与RTCMemoryFixup一起使用，请参阅这里以获取更多信息:[修复RTC写入问题](https://sumingyd.github.io/OpenCore-Post-Install/misc/rtc.html#finding-our-bad-rtc-region)
+  * 大多数用户可以忽略这一节
 
 :::
 
 ::: tip 7C436110-AB2A-4BBB-A880-FE41995C9F82
 
-System Integrity Protection bitmask
+系统完整性保护位掩码
 
-* **General Purpose boot-args**:
+* **通用引导参数**:
 
-| boot-args | Description |
+| 引导参数 | 说明 |
 | :--- | :--- |
-| **-v** | This enables verbose mode, which shows all the behind-the-scenes text that scrolls by as you're booting instead of the Apple logo and progress bar. It's invaluable to any Hackintosher, as it gives you an inside look at the boot process, and can help you identify issues, problem kexts, etc. |
-| **debug=0x100** | This disables macOS's watchdog which helps prevents a reboot on a kernel panic. That way you can *hopefully* glean some useful info and follow the breadcrumbs to get past the issues. |
-| **keepsyms=1** | This is a companion setting to debug=0x100 that tells the OS to also print the symbols on a kernel panic. That can give some more helpful insight as to what's causing the panic itself. |
-| **npci=0x3000** | This disables some PCI debugging related to `kIOPCIConfiguratorPFM64` and `gIOPCITunnelledKey`. This is an alternative to having Above 4G Decoding enabled in your BIOS. Do not use this unless you don't have it in your BIOS. Required for when getting stuck on `[PCI configuration begin]` as there are IRQ conflicts relating to your PCI lanes. [Source](https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html) |
-| **alcid=1** | Used for setting layout-id for AppleALC, see [supported codecs](https://github.com/acidanthera/applealc/wiki/supported-codecs) to figure out which layout to use for your specific system. More info on this is covered in the [Post-Install Page](https://dortania.github.io/OpenCore-Post-Install/) |
+| **-v** | 这将启用详细模式，在你启动时显示所有滚动的幕后文本，而不是苹果logo和进度条。它对任何黑苹果用户来说都是无价的，因为它可以让你深入了解引导过程，并可以帮助你识别问题、问题kext等。 |
+| **debug=0x100** | 这禁用了macOS的watchdog，它有助于防止在内核出现严重错误时重新启动。这样你就**有希望**收集到一些有用的信息并按照提示来解决问题。 |
+| **keepsyms=1** | 这是debug=0x100的配套设置，它告诉操作系统在内核出现故障时也打印这些符号。这可以提供一些更有用的见解，以了解造成崩溃本身的原因。 |
+| **npci=0x3000** | 这会禁用一些与`kIOPCIConfiguratorPFM64`和`gIOPCITunnelledKey`相关的PCI调试。这是在你的BIOS中启用4G以上解码的另一种选择。不要使用它，除非你的BIOS中没有它。当在`[PCI configuration begin]` 上卡住时需要，因为有与您的PCI通道相关的IRQ冲突。[来源](https://opensource.apple.com/source/IOPCIFamily/IOPCIFamily-370.0.2/IOPCIBridge.cpp.auto.html) |
+| **alcid=1** | 用于设置AppleALC的布局id，请参阅[支持的编解码器](https://github.com/acidanthera/applealc/wiki/supported-codecs) ，以确定针对特定系统使用哪种布局。更多信息在 [安装后页面](https://sumingyd.github.io/OpenCore-Post-Install/) |
 
-* **GPU-Specific boot-args**:
+* **特定于gpu的引导参数**:
 
-| boot-args | Description |
+| 引导参数 | 说明 |
 | :--- | :--- |
-| **agdpmod=pikera** | Used for disabling board ID checks on some Navi GPUs (RX 5000 & 6000 series), without this you'll get a black screen. **Don't use if you don't have Navi** (ie. Polaris and Vega cards shouldn't use this) |
-| **-radcodec** | Used for allowing officially unsupported AMD GPUs (spoofed) to use the Hardware Video Encoder |
-| **radpg=15** | Used for disabling some power-gating modes, helpful for properly initializing AMD Cape Verde based GPUs |
-| **unfairgva=1** | Used for fixing hardware DRM support on supported AMD GPUs |
-| **nvda_drv_vrl=1** | Used for enabling NVIDIA's Web Drivers on Maxwell and Pascal cards in macOS Sierra and High Sierra |
+| **agdpmod=pikera** | 用于在一些Navi gpu (RX 5000 & 6000系列)上禁用板号检查，否则你将会出现黑屏。**如果你没有Navi，请不要使用它**(例如:Polaris 和 Vega cards 不应该使用这个) |
+| **-radcodec** | 用于允许官方不支持的AMD gpu(欺骗)使用硬件视频编码器 |
+| **radpg=15** | 用于禁用一些电源开关模式，有助于正确初始化基于Cape Verde based的AMD gpu |
+| **unfairgva=1** | 用于在支持的AMD gpu上修复硬件DRM支持 |
+| **nvda_drv_vrl=1** | 用于在macOS Sierra和High Sierra的Maxwell和Pascal卡上启用NVIDIA的Web驱动程序 |
 
 * **csr-active-config**: `00000000`
-  * Settings for 'System Integrity Protection' (SIP).
-  * csr-active-config by default is set to `00000000` which enables System Integrity Protection. You can choose a number of different values but overall we recommend keeping this enabled for best security practices. More info can be found in our troubleshooting page: [Disabling SIP](../troubleshooting/extended/post-issues.md#disabling-sip)
+  * “系统完整性保护”(SIP)的设置。
+  * 默认情况下，csr-active-config设置为`00000000`，以启用系统完整性保护。您可以选择许多不同的值，但总的来说，为了最佳安全实践，我们建议启用此选项。更多信息可以在我们的故障排除页面中找到:[禁用SIP](../troubleshooting/extended/post-issues.md#disabling-sip)
 
 * **run-efi-updater**: `No`
-  * This is used to prevent Apple's firmware update packages from installing and breaking boot order; this is important as these firmware updates (meant for Macs) will not work.
+  * 这用于防止苹果的固件更新包安装的时候破坏引导顺序;这很重要，因为这些固件更新(意味着mac)将无法工作。
 
 * **prev-lang:kbd**: <>
-  * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
-  * American: `en-US:0`(`656e2d55533a30` in HEX)
-  * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
-  * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
-  * Hint 2: `prev-lang:kbd` can be set to a blank variable (eg. `<>`) which will force the Language Picker to appear instead at first boot up.
+  * *需要`lang-COUNTRY:keyboard`格式的非拉丁键盘，建议保持空白，尽管你可以指定它(**示例配置中默认是俄语**):
+  * 中文: `zh-Hans:252`(`7A682D48616E733A323532` 这是十六进制)
+  * 完整列表可在这里找到[AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+  * 提示:`prevr-lang:kbd`可以被转换成String，所以你可以直接输入`zh-Hans:252`，而不是转换成十六进制
+  * 提示2:`prevr-lang:kbd`可以设置为一个空白变量(例如:`<>`)，这将强制在首次启动时显示语言选择器。
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| prev-lang:kbd | String | en-US:0 |
+| prev-lang:kbd | String | zh-Hans:252 |
 
 :::
 
 ### Delete
 
-::: tip Info
+::: tip 信息
 
-Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
+强制重写NVRAM变量，请注意，`Add` **不会覆盖** NVRAM中已经存在的值，所以像`boot-args`这样的值应该保持不变。对我们来说，我们将改变以下内容:
 
-| Quirk | Enabled |
+| 选项 | 启用 |
 | :--- | :--- |
 | WriteFlash | YES |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **LegacySchema**
-  * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
+  * 用于赋值NVRAM变量，与`OpenVariableRuntimeDxe.efi`一起使用。仅适用于没有原生NVRAM的系统
 
 * **WriteFlash**: YES
-  * Enables writing to flash memory for all added variables.
+  * 允许所有添加的变量写入闪存。
 
 :::
 
@@ -588,21 +588,21 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 
 ![PlatformInfo](../images/config/config-universal/iMacPro-smbios.png)
 
-::: tip Info
+::: tip 信息
 
-For setting up the SMBIOS info, we'll use CorpNewt's [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) application.
+为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this example, we'll choose the MacPro7,1 SMBIOS but some SMBIOS play with certain GPUs better than others:
+对于这个例子，我们将选择macpro7,1 SMBIOS，但有些SMBIOS与某些gpu的兼容性更好:
 
-* MacPro7,1: AMD Polaris and newer
-  * Note that MacPro7,1 is exclusive to macOS 10.15, Catalina and newer
-* iMacPro1,1: NVIDIA Maxwell and Pascal or AMD Polaris and newer
-  * Use if you need High Sierra or Mojave, otherwise use MacPro7,1
-* iMac14,2: NVIDIA Maxwell and Pascal
-  * Use if you get black screens on iMacPro1,1 after installing Web Drivers with an NVIDIA GPU
-* MacPro6,1: AMD GCN GPUs (supported HD and R5/R7/R9 series)
+* MacPro7,1: AMD Polaris 和更新的
+  * 请注意，MacPro7,1是macOS 10.15、Catalina和更新版本所独有的
+* imacpro1,1: NVIDIA Maxwell和Pascal或AMD Polaris和更新
+  * 如果你需要High Sierra或Mojave，请使用，否则请使用MacPro7,1
+* iMac14,2: NVIDIA Maxwell和Pascal
+  * 如果你安装了带有NVIDIA GPU的Web驱动程序后，在imacpro1,1上出现黑屏，请使用
+* MacPro6,1: AMD GCN gpu(支持HD和R5/R7/R9系列)
 
-Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
+运行GenSMBIOS，选择选项1下载MacSerial，选择选项3下载SMBIOS。这将给我们一个类似于下面的输出:
 
 ```sh
   #######################################################
@@ -616,57 +616,57 @@ SmUUID:       535B897C-55F7-4D65-A8F4-40F4B96ED394
 Apple ROM:    001D4F0D5E22
 ```
 
-The order is `Product | Serial | Board Serial (MLB)`
+关注 `Product | Serial | Board Serial (MLB)`
 
-The `Type` part gets copied to Generic -> SystemProductName.
+将 `Type` 部分复制到 Generic -> SystemProductName.
 
-The `Serial` part gets copied to Generic -> SystemSerialNumber.
+将 `Serial` 部分复制到 Generic -> SystemSerialNumber.
 
-The `Board Serial` part gets copied to Generic -> MLB.
+将 `Board Serial` 部分复制到 Generic -> MLB.
 
-The `SmUUID` part gets copied to Generic -> SystemUUID.
+将 `SmUUID` 部分复制到 Generic -> SystemUUID.
 
-The `Apple ROM` part gets copied to Generic -> ROM.
+将 `Apple ROM` 部分复制到 Generic -> ROM.
 
-**Reminder that you need an invalid serial! When inputting your serial number in [Apple's Check Coverage Page](https://checkcoverage.apple.com), you should get a message such as "Unable to check coverage for this serial number."**
+**提醒你需要一个无效的序列号!当你在[苹果的检查覆盖页面](https://checkcoverage.apple.com)中输入你的序列号时，你会得到一条信息，比如“无法检查此序列号的覆盖范围”。**
 
 **Automatic**: YES
 
-* Generates PlatformInfo based on Generic section instead of DataHub, NVRAM, and SMBIOS sections
+* 基于Generic节而不是DataHub、NVRAM和SMBIOS节生成platformminfo
 
 :::
 
 ### Generic
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **AdviseFeatures**: NO
-  * Used for when the EFI partition isn't first on the Windows drive
+  * 用于当EFI分区不是Windows驱动器上的第一个分区
 
 * **MaxBIOSVersion**: NO
-  * Sets BIOS version to Max to avoid firmware updates in Big Sur+, mainly applicable for genuine Macs.
+  * 设置BIOS版本为Max，以避免在Big Sur+固件更新，主要适用于正版mac。
 
 * **ProcessorType**: `0`
-  * Set to `0` for automatic type detection, however this value can be overridden if desired. See [AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) for possible values
+  * 设置为`0`用于自动类型检测，但是如果需要，这个值可以被覆盖。参见[AppleSmBios.h](https://github.com/acidanthera/OpenCorePkg/blob/master/Include/Apple/IndustryStandard/AppleSmBios.h) 获取可能的值
 
 * **SpoofVendor**: YES
-  * Swaps vendor field for Acidanthera, generally not safe to use Apple as a vendor in most case
+  * 将供应商字段替换为Acidanthera，在大多数情况下使用苹果作为供应商通常不安全
 
 * **SystemMemoryStatus**: Auto
-  * Sets whether memory is soldered or not in SMBIOS info, purely cosmetic and so we recommend `Auto`
+  * 在SMBIOS信息中设置内存是否焊接，纯粹用于修饰，因此我们建议使用`Auto`
 
 * **UpdateDataHub**: YES
-  * Update Data Hub fields
+  * 更新数据中心字段
 
 * **UpdateNVRAM**: YES
-  * Update NVRAM fields
+  * 更新NVRAM字段
 
 * **UpdateSMBIOS**: YES
-  * Updates SMBIOS fields
+  * 更新SMBIOS字段
 
 * **UpdateSMBIOSMode**: Create
-  * Replace the tables with newly allocated EfiReservedMemoryType, use `Custom` on Dell laptops requiring `CustomSMBIOSGuid` quirk
-  * Setting to `Custom` with `CustomSMBIOSGuid` quirk enabled can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
+  * 用新分配的EfiReservedMemoryType替换表，在需要`CustomSMBIOSGuid`的Dell笔记本电脑上使用`Custom`
+  * 设置为`Custom`并启用`CustomSMBIOSGuid`也可以禁用SMBIOS注入到“非apple”操作系统中，但是我们不支持这种方法，因为它破坏了Bootcamp的兼容性。使用风险自负
 
 :::
 
@@ -676,133 +676,133 @@ The `Apple ROM` part gets copied to Generic -> ROM.
 
 **ConnectDrivers**: YES
 
-* Forces .efi drivers, change to NO will automatically connect added UEFI drivers. This can make booting slightly faster, but not all drivers connect themselves. E.g. certain file system drivers may not load.
+* 强制 .efi 驱动，更改为NO将自动连接添加的UEFI驱动。这可以使引导稍微快一点，但不是所有驱动程序都连接自己。例如某些文件系统驱动程序不能加载。
 
 ### Drivers
 
-Add your .efi drivers here.
+在这里添加你的.efi驱动程序。
 
-Only drivers present here should be:
+下面列出的是必须在这里的
 
 * HfsPlus.efi
 * OpenRuntime.efi
 
-::: details More in-depth Info
+::: details 更深入的信息
 
-| Key | Type | Description |
+| Key | Type | 描述|
 | :--- | :--- | :--- |
-| Path | String | Path of the file from `OC/Drivers` directory |
-| LoadEarly | Boolean | Load the driver early before NVRAM setup, should only be enabled for `OpenRuntime.efi` and `OpenVariableRuntimeDxe.efi` if using legacy NVRAM |
-| Arguments | String | Some drivers accept additional arguments which are specified here. |
+| Path | String | 文件在`OC/Drivers`目录中的路径 |
+| LoadEarly | Boolean | 在安装NVRAM之前尽早加载驱动程序，如果使用旧的NVRAM，应该只启用`OpenRuntime.efi`和`OpenVariableRuntimeDxe.efi` |
+| Arguments | String | 有些驱动程序接受这里指定的其他参数。 |
 
 :::
 
 ### APFS
 
-By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
-Not setting this can result in OpenCore not finding your macOS partition!
+默认情况下，OpenCore只从macOS Big Sur及更新版本加载APFS驱动程序。如果引导macOS Catalina或更早版本，可能需要设置新的最低版本/日期。
+不设置此选项会导致OpenCore找不到您的macOS分区!
 
-macOS Sierra and earlier use HFS instead of APFS. You can skip this section if booting older versions of macOS.
+macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macOS，可以跳过本节。
 
-::: tip APFS Versions
+::: tip APFS 版本
 
-Both MinVersion and MinDate need to be set if changing the minimum version.
+如果修改最小版本，需要同时设置MinVersion和MinDate。
 
-| macOS Version | Min Version | Min Date |
+| macOS 版本 | Min Version | Min Date |
 | :------------ | :---------- | :------- |
 | High Sierra (`10.13.6`) | `748077008000000` | `20180621` |
 | Mojave (`10.14.6`) | `945275007000000` | `20190820` |
 | Catalina (`10.15.4`) | `1412101001000000` | `20200306` |
-| No restriction | `-1` | `-1` |
+| 没有限制 | `-1` | `-1` |
 
 :::
 
 ### Audio
 
-Related to AudioDxe settings, for us we'll be ignoring(leave as default). This is unrelated to audio support in macOS.
+对于AudioDxe设置，我们将忽略(保留默认值)。这与mac系统中的音频支持无关。
 
-* For further use of AudioDxe and the Audio section, please see the Post Install page: [Add GUI and Boot-chime](https://dortania.github.io/OpenCore-Post-Install/)
+* 有关AudioDxe和音频部分的进一步使用，请参见安装后页面:[添加GUI和启动铃声](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Input
 
-Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, leave everything here as default as we have no use for these quirks. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+与用于FileVault和热键支持的boot.efi键盘直通相关，将所有内容保留为默认值，因为我们不需要这些选项。更多详细信息:[安全和文件库](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Output
 
-Relating to OpenCore's visual output, leave everything here as default as we have no use for these quirks.
+关于OpenCore的视觉输出，将所有内容保留为默认值，因为我们暂时不使用这些选项。
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 | Output | Value | Comment |
 | :--- | :--- | :--- |
-| UIScale | `0` | `0` will automatically set based on resolution<br/>`-1` will leave it unchanged<br/>`1` for 1x scaling, for normal displays<br/>`2` for 2x scaling, for HiDPI displays |
+| UIScale | `0` | `0`将根据分辨率自动设置<br/>`-1`将保持不变<br/>`1`为1x缩放，对于正常显示器<br/>`2`为2倍缩放，对于HiDPI显示器 |
 
 :::
 
 ### ProtocolOverrides
 
-Mainly relevant for Virtual machines, legacy macs and FileVault users. See here for more details: [Security and FileVault](https://dortania.github.io/OpenCore-Post-Install/)
+主要适用于虚拟机，旧mac和FileVault用户。更多详细信息:[安全和文件库](https://sumingyd.github.io/OpenCore-Post-Install/)
 
 ### Quirks
 
-::: tip Info
-Relating to quirks with the UEFI environment, for us we'll be changing the following:
+::: tip 信息
+关于UEFI环境的选项，我们将做以下更改:
 
-| Quirk | Enabled | Comment |
+| 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
-| UnblockFsConnect | NO | Needed mainly by HP motherboards |
+| UnblockFsConnect | NO | 主要用于惠普主板 |
 
 :::
 
-::: details More in-depth Info
+::: details 更深入的信息
 
 * **DisableSecurityPolicy**: NO
-  * Disables platform security policy in firmware, recommended for buggy firmwares where disabling Secure Boot does not allow 3rd party firmware drivers to load.
-  * If running a Microsoft Surface device, recommended to enable this option
+  * 禁用固件中的平台安全策略，建议用于有bug的固件，其中禁用安全引导不允许加载第三方固件驱动程序。
+  * 如果运行Microsoft Surface设备，建议启用此选项
 
 * **RequestBootVarRouting**: YES
-  * Redirects AptioMemoryFix from `EFI_GLOBAL_VARIABLE_GUID` to `OC_VENDOR_VARIABLE_GUID`. Needed for when firmware tries to delete boot entries and is recommended to be enabled on all systems for correct update installation, Startup Disk control panel functioning, etc.
+  * 将AptioMemoryFix从`EFI_GLOBAL_VARIABLE_GUID`重定向到`OC_VENDOR_VARIABLE_GUID`。当固件试图删除启动项时需要启用，建议在所有系统上启用，以确保正确的更新安装，启动磁盘控制面板的功能等。
 
 * **UnblockFsConnect**: NO
-  * Some firmware block partition handles by opening them in By Driver mode, which results in File System protocols being unable to install. Mainly relevant for HP systems when no drives are listed
+  * 某些固件通过按驱动程序模式打开来阻塞分区句柄，这将导致无法安装文件系统协议。主要适用于没有列出驱动器的HP系统
 
 :::
 
 ### ReservedMemory
 
-Used for exempting certain memory regions from OSes to use, mainly relevant for Sandy Bridge iGPUs or systems with faulty memory. Use of this quirk is not covered in this guide
+用于将某些内存区域从操作系统中免除使用，主要与Sandy Bridge igpu或具有错误内存的系统相关。在本指南中没有涉及这个选项的用法
 
-## Cleaning up
+## 清理
 
-And now you're ready to save and place it into your EFI under EFI/OC.
+现在你可以保存它，并将它放入EFI/OC下的EFI文件中。
 
-For those having booting issues, please make sure to read the [Troubleshooting section](../troubleshooting/troubleshooting.md) first and if your questions are still unanswered we have plenty of resources at your disposal:
+对于那些有启动问题的人，请务必先阅读[故障排除部分](../troubleshooting/troubleshooting.md)，如果您的问题仍然没有得到解答，我们有大量的资源供您使用:
 
 * [AMD OS X Discord](https://discord.gg/EfCYAJW)
 * [r/Hackintosh Subreddit](https://www.reddit.com/r/hackintosh/)
 
 ## AMD BIOS Settings
 
-* Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
+* 注意:大多数选项可能不会出现在你的固件中，我们建议尽可能匹配，但如果这些选项在你的BIOS中不可用，不要太担心
 
-### Disable
+### 禁用
 
-* Fast Boot
-* Secure Boot
-* Serial/COM Port
-* Parallel Port
-* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
+* 快速启动（Fast Boot）
+* 安全引导（Secure Boot）
+* 串口/COM端口（Serial/COM Port）
+* 并口（Parallel Port）
+* 兼容性支持模块(CSM)(**在大多数情况下必须关闭，当该选项启用时，像`gIO`这样的GPU错误/停顿很常见**)
 * IOMMU
 
-**Special note for 3990X users**: macOS currently does not support more than 64 threads in the kernel, and so will kernel panic if it sees more. The 3990X CPU has 128 threads total and so requires half of that disabled. We recommend disabling hyper threading in the BIOS for these situations.
+**3990X用户特别注意**:macOS内核目前不支持超过64个线程，因此如果内核看到更多线程，将出现崩溃。3990X CPU总共有128个线程，因此需要禁用其中的一半。我们建议针对这些情况在BIOS中禁用超线程。
 
-### Enable
+### 启用
 
-* Above 4G Decoding (**This must be on, if you can't find the option then add `npci=0x3000` to boot-args. Do not have both this option and npci enabled at the same time.**)
-  * If you are on a Gigabyte/Aorus or an AsRock motherboard, enabling this option may break certain drivers(ie. Ethernet) and/or boot failures on other OSes, if it does happen then disable this option and opt for npci instead
-  * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some X570 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
+* 4G以上解码 (**这必须是开启的，如果你找不到选项，那么添加`npci=0x3000`到引导参数。不能同时启用此选项和npci。**)
+  * 如果你使用的是Gigabyte/Aorus或AsRock主板，启用此选项可能会破坏某些驱动程序(例如。以太网)和/或在其他操作系统上启动失败，如果发生，那么禁用该选项并选择npci代替
+  * 2020+ BIOS注意:当启用Above4G时，一些X570和更新的主板上可能会提供可调整的BAR支持。如果启用，请确保Booter -> Quirks -> ResizeAppleGpuBars设置为`0`。
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
-* SATA Mode: AHCI
+* 操作系统类型:Windows 8.1/10 UEFI模式(一些主板可能需要”其他操作系统”代替)
+* SATA 模式: AHCI
 
-# Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)
+# 完成后，我们需要编辑一些额外的值。访问[苹果安全启动页面](../config.plist/security.md)

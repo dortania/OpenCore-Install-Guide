@@ -2,10 +2,10 @@
 search: false
 ---
 
-# AMD USB Map
+# AMD USB 映射
 
-For those looking for the AMD USB map guide, it has been moved here:
+对于那些寻找AMD USB地图指南的人，它已经移动到这里:
 
-* [USB Map guide](https://dortania.github.io/OpenCore-Post-Install/usb/)
+* [USB映射指南](https://sumingyd.github.io/OpenCore-Post-Install/usb/)
 
-For a more user-friendly guide, see Aleksander's post: [Why you need to care about USB mapping](https://aplus.rs/2020/usb-mapping-why/)
+要获得更用户友好的指南，请参阅Aleksander的帖子:[为什么你需要关心USB映射](https://aplus.rs/2020/usb-mapping-why/)

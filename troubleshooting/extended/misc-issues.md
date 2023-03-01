@@ -1,101 +1,101 @@
-# Miscellaneous Issues
+# 杂项问题
 
-Miscellaneous issues not revolving around macOS itself such as multibooting.
+与macOS本身无关的杂项问题，例如多引导。
 
 [[toc]]
 
-## Can't run `acpidump.efi`
+## 无法运行`acpidump.efi`
 
-Call upon OpenCore shell:
+调用OpenCore shell:
 
 ```
-shell> fs0: //replace with proper drive
+shell> fs0: //替换正确的驱动器
 
-fs0:\> dir //to verify this is the right directory
+fs0:\> dir //验证这是正确的目录
 
   Directory of fs0:\
 
    01/01/01 3:30p  EFI
-fs0:\> cd EFI\OC\Tools //note that its with forward slashes
+fs0:\> cd EFI\OC\Tools //注意它带有正向斜杠
 
 fs0:\EFI\OC\Tools> acpidump.efi -b -n DSDT -z
 ```
 
-## Fixing SSDTTime: `Could not locate or download iasl!`
+## 修复SSDTTime: `无法定位或下载iasl`
 
-This is usually due to an outdated version of Python, try either updating Python or add iasl to the scripts folder for SSDTTime:
+这通常是由于过时的Python版本，请尝试更新Python或将iasl添加到SSDTTime的scripts文件夹:
 
-* [iasl macOS version](https://bitbucket.org/RehabMan/acpica/downloads/iasl.zip)
-* [iasl Windows version](https://acpica.org/downloads/binary-tools)
-* [iasl Linux version](http://amdosx.kellynet.nl/iasl.zip)
+* [iasl macOS 版本](https://bitbucket.org/RehabMan/acpica/downloads/iasl.zip)
+* [iasl Windows 版本](https://acpica.org/downloads/binary-tools)
+* [iasl Linux 版本](http://amdosx.kellynet.nl/iasl.zip)
 
-## Fix Python: `Python is not installed or not found on PATH`
+## 修复Python: `Python未安装或在路径中未找到`
 
-Easy fix, download and install the latest python:
+简单修复，下载并安装最新的python:
 
-* [macOS link](https://www.python.org/downloads/macos)
-* [Windows link](https://www.python.org/downloads/windows/)
-* [Linux link](https://www.python.org/downloads/source/)
+* [macOS 链接](https://www.python.org/downloads/macos)
+* [Windows 链接](https://www.python.org/downloads/windows/)
+* [Linux 链接](https://www.python.org/downloads/source/)
 
-Make sure `Add Python to PATH`
+确保 `将Python添加到PATH`
 
 ![](../../images/troubleshooting/troubleshooting-md/python-path.png)
 
-## Windows Startup Disk can't see APFS drives
+## Windows启动盘看不到APFS驱动器
 
-* Outdated BootCamp drivers(generally ver 6.0 will come with brigadier, BootCamp Utility in macOS provides newer version like ver 6.1). CorpNewt has also forked brigadier fixing these issues as well: [CorpNewt's brigadier](https://github.com/corpnewt/brigadier)
+* 过时的BootCamp驱动程序(通常6.0版本将附带brigadier, macOS中的BootCamp Utility提供较新的版本，如6.1版本)。 CorpNewt 的分支 brigadier 修复了这个问题: [CorpNewt 的 brigadier分支](https://github.com/corpnewt/brigadier)
 
-## Incorrect resolution with OpenCore
+## OpenCore分辨率不正确
 
-* Follow [Fixing Resolution and Verbose](https://dortania.github.io/OpenCore-Post-Install/cosmetic/verbose.html) for correct setup, set `UIScale` to `2` for HiDPI
-* Users also have noticed that setting `ConsoleMode` to Max will sometimes fail, leaving it empty can help
+* 按照[修复分辨率和详细](https://sumingyd.github.io/OpenCore-Post-Install/cosmetic/verbose.html)的正确设置，设置 `UIScale` 为 `2` 的HiDPI
+* 用户还注意到，将`ConsoleMode`设置为Max有时会失败，让它为空可能会有所帮助
 
-## Can't find Windows/BootCamp drive in picker
+## 在选择器中找不到Windows/BootCamp驱动器
 
-So with OpenCore, we have to note that legacy Windows installs are not supported, only UEFI. Most installs now are UEFI based but those made by BootCamp Assistant are legacy based, so you'll have to find other means to make an installer(Google's your friend). This also means MasterBootRecord/Hybrid partitions are also broken so you'll need to format the drive you want to install onto with DiskUtility. See the [Multiboot Guide](https://dortania.github.io/OpenCore-Multiboot/) on best practices
+因此，有了OpenCore，我们必须注意，不支持传统的Windows安装，只支持UEFI。现在大多数安装都是基于UEFI的，但是BootCamp Assistant制作的是基于传统的，所以你必须找到其他方法来制作安装程序(谷歌是你的朋友)。这也意味着MasterBootRecord/Hybrid分区也被破坏了，所以你需要格式化你想安装到DiskUtility的驱动器。有关最佳实践，请参阅[多引导指南](https://sumingyd.github.io/OpenCore-Multiboot/) on best practices
 
-Now to get onto troubleshooting:
+现在开始进行故障排除:
 
-* Make sure `Misc -> Security -> ScanPolicy` is set to `0` to show all drives
-* Enable `Misc -> Boot -> Hideself` when Windows bootloader is located on the same drive
+* 确保将`Misc -> Security -> ScanPolicy`设置为`0`以显示所有驱动器
+* 当Windows引导装载程序位于同一驱动器上时，启用`Misc -> Boot -> Hideself`
 
-## Selecting Startup Disk doesn't apply correctly
+## 没有正确地选择启动磁盘
 
-If you're having issues with Startup Disk correctly applying your new boot entry, this is most likely caused by a missing `DevicePathsSupported` in your I/O Registry. To resolve this, ensure you are using `PlatformInfo -> Automatic -> True`
+如果您在启动磁盘正确应用新启动项时遇到问题，这很可能是由于I/O注册表中缺少`DevicePathsSupported`造成的。要解决这个问题，请确保您使用的是`PlatformInfo -> Automatic -> True`
 
-Example of missing `DevicePathsSupported`:
+缺少`DevicePathsSupported`的例子:
 
-* [Default DevicePath match failure due to different PciRoot #664](https://github.com/acidanthera/bugtracker/issues/664#issuecomment-663873846)
+* [由于PciRoot不同导致默认DevicePath匹配失败#664](https://github.com/acidanthera/bugtracker/issues/664#issuecomment-663873846)
 
-## Booting Windows results in BlueScreen or Linux crashes
+## 启动Windows会导致蓝屏或Linux崩溃
 
-This is due to alignment issues, make sure `SyncRuntimePermissions` is enabled on firmwares supporting MATs. Check your logs whether your firmware supports Memory Attribute Tables(generally seen on 2018 firmwares and newer)
+这是由于对齐问题，请确保在支持MATs的固件上启用了`SyncRuntimePermissions`。检查你的日志，你的固件是否支持内存属性表(通常在2018年或更新的固件上看到)
 
-Common Windows error code:
+常见的Windows错误代码:
 
 * `0xc000000d`
 
-## Booting Windows error: `OCB: StartImage failed - Already started`
+## 启动Windows错误: `OCB: StartImage failed - Already started`
 
-This is due to OpenCore getting confused when trying to boot Windows and accidentally thinking it's booting OpenCore. This can be avoided by either move Windows to it's own drive *or* adding a custom drive path under BlessOverride. See [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more details.
+这是由于OpenCore在尝试引导Windows时感到困惑，并意外地认为它正在引导OpenCore。这可以通过移动Windows到它自己的驱动器*或*在BlessOverride下添加一个自定义驱动器路径来避免。更多细节请参阅[Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf)
 
-## iASL warning, only X unresolved
+## iASL警告，只有X未解决
 
-If you try to decompile your DSDT and get an error similar to this:
+如果你尝试反编译你的DSDT并得到一个类似这样的错误:
 
 ```
 iASL Warning: There were 19 external control methods found during disassembly, but only 0 were resolved (19 unresolved)
 ```
 
-This happens when one ACPI table requires the rest for proper referencing, it does not accept the creation of DSDTs as we're only using it for creating a select few SSDTs. For those who are worried, you can run the following:
+当一个ACPI表需要其他表来进行适当的引用时，就会发生这种情况，它不接受dsdt的创建，因为我们只使用它来创建选定的几个ssdt。对于那些担心的人，你可以运行以下命令:
 
 ```
 iasl * [insert all ACPI files here]
 ```
 
-## Time inconsistency between macOS and Windows
+## macOS和Windows之间的时间不一致
 
-This is due to macOS using Universal Time while Windows relies on Greenwich time, so you'll need to force one OS to a different way of measuring time. We highly recommend modifying Windows instead as it's far less destructive and painful:
+这是因为macOS使用通用时间，而Windows依赖于格林威治时间，所以你需要强制一个操作系统使用不同的时间测量方式。我们强烈建议修改Windows，因为它的破坏性和痛苦要小得多:
 
-* [Install Bootcamp utilities](https://dortania.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
-* [Modify Windows' registry](https://superuser.com/q/494432)
+* [安装Bootcamp实用程序](https://sumingyd.github.io/OpenCore-Post-Install/multiboot/bootcamp.html)
+* [修改Windows注册表](https://superuser.com/q/494432)

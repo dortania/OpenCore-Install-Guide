@@ -1,32 +1,32 @@
-# Choosing the right SMBIOS
+# 选择正确的SMBIOS
 
-When choosing the right SMBIOS for your machine, you've gotta understand that it's more than just simple CPU match up. Many things can affect how your machine works as your SMBIOS determines CPU Power management, GPU profiles, USB maps and much more.
+在为您的机器选择正确的SMBIOS时，您必须了解这不仅仅是简单的CPU匹配。很多事情会影响你的机器的工作方式，因为你的SMBIOS决定了CPU电源管理、GPU配置文件、USB映射等等。
 
-The main things to consider when selecting your SMBIOS:
+选择SMBIOS时要考虑的主要事情:
 
-* CPU Type
-  * Specifically mobile vs desktop vs server, as this can greatly affect sleep and overall system stability
-  * This also determines whether or not you can use Apple's XCPM and what profiles you get
-    * These 2 are mostly resolved with CPUFriend: [Fixing Power management](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html)
-  * Note: AMD CPUs do not need to concern about this
-* GPU Type
-  * Many things are affected here, like GPU power management (AGPM), display out support (AGDP), sleep (AGDC) and much more.
-    * This is especially relevant when we look to the [Mac Mini](#mac-mini) SMBIOS that only uses mobile hardware, which doesn't match well with desktop hardware. This is the reason we highly discourage them unless used for [Intel's NUC series](https://www.intel.ca/content/www/ca/en/products/boards-kits/nuc.html) and such which are based off mobile hardware.
-    * Laptops should also pay very close attention, as Apple always assumes that when a dGPU is present for the SMBIOS, all display outs will be routed through it. This can become an issue when an Optimus laptop has its external displays wired through the iGPU instead, causing black screen issues which would require more patching.
-  * CPUs without an iGPU need to pay very close attention, as features like Quick Look and such will be broken if the SMBIOS expects an iGPU (ie. Every single iMac SMBIOS)
-    * For these situations, look closely at the iMac Pro and Mac Pro SMBIOS
-  * DRM is also tied in here as well however this is mostly resolved here: [Fixing DRM](https://dortania.github.io/OpenCore-Post-Install/universal/drm.html)
+* CPU 类型
+  * 特别是移动端vs桌面端vs服务器端，因为这会极大地影响睡眠和整个系统的稳定性
+  * 这也决定了你是否可以使用苹果的XCPM以及你会得到什么配置文件
+    * 这2个主要通过CPUFriend解决:[修复电源管理](https://sumingyd.github.io/OpenCore-Post-Install/universal/pm.html)
+  * 注意:AMD cpu不需要关心这个
+* GPU 类型
+  * 这里会影响很多东西，比如GPU电源管理(AGPM)，显示支持(AGDP)，睡眠(AGDC)等等。
+    * 当我们着眼于只使用移动硬件的 [Mac Mini](#mac-mini) SMBIOS时，这一点尤其重要，因为它与桌面硬件并不匹配。这就是我们不鼓励使用它们的原因，除非它们被用于[英特尔的NUC系列](https://www.intel.ca/content/www/ca/en/products/boards-kits/nuc.html) 等基于移动硬件的产品。
+    * 笔记本电脑也应该密切关注，因为苹果公司总是假设，当SMBIOS存在dGPU时，所有的显示输出都将通过它路由。当Optimus笔记本电脑的外部显示器通过iGPU连接时，这可能会成为一个问题，导致黑屏问题，需要更多的补丁。
+  * 没有iGPU的cpu需要密切关注，因为如果SMBIOS期望iGPU(即每一个iMac SMBIOS)，像快速查看这样的功能将被破坏。
+    * F对于这些情况，请仔细查看iMac Pro和Mac Pro的SMBIOS
+  * DRM也被捆绑在这里，但这主要是在这里解决:[修复DRM](https://sumingyd.github.io/OpenCore-Post-Install/universal/drm.html)
   
-* OS Support
-  * Mainly relevant for older hardware, as macOS may still have support for the CPU however no longer supports SMBIOS from that era
-    * Arrandale CPUs are a great example, as they still have OS support even in Big Sur (however no iGPU support past 10.13.6)
-* USB Devices
-  * Certain SMBIOS will have their own USB map which may attach to your hardware causing USB issues.
-    * See here for more info: [USB Mapping](https://dortania.github.io/OpenCore-Post-Install/usb/)
-  * Also to note, Skylake+ SMBIOS will also require a [USBX device](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-EC-USBX.dsl#L54L79) to fix USB current output
-    * See here for more info: [Fixing USB Power](https://dortania.github.io/OpenCore-Post-Install/usb/misc/power.html)
+* 操作系统支持
+  * 主要与旧的硬件相关，因为macOS可能仍然支持CPU，但不再支持那个时代的SMBIOS
+    * Arrandale cpu是一个很好的例子，因为即使在Big Sur它们仍然支持操作系统(但是在10.13.6之后没有iGPU支持)
+* USB 设备
+  * 某些SMBIOS会有自己的USB地图，可能会连接到你的硬件，导致USB问题。
+    * 参见这里了解更多信息:[USB映射](https://sumingyd.github.io/OpenCore-Post-Install/usb/)
+  * 还要注意的是，Skylake+ SMBIOS还需要一个[USBX设备](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs/AcpiSamples/Source/SSDT-EC-USBX.dsl#L54L79) 来修复USB电流输出
+    * 参见这里了解更多信息:[修复USB电源](https://sumingyd.github.io/OpenCore-Post-Install/usb/misc/power.html)
 
-::: details XCPM Supported SMBIOS
+::: details XCPM 支持 SMBIOS
 
 | SMBIOS |
 | :--- |
@@ -40,48 +40,48 @@ The main things to consider when selecting your SMBIOS:
 
 :::
 
-## How to decide
+## 如何决定
 
-Generally our recommendations with SMBIOS is as follows:
+通常我们对SMBIOS的建议如下:
 
-1. Find the right CPU Generation and tier as closely as possible
-2. Then match up with either iGPU only or dGPU SMBIOS
-3. Finally decide on misc things (like exact GPU and CPU)
+1. 尽可能地找到正确的CPU代数和架构
+2. 然后只匹配iGPU或dGPU SMBIOS
+3. 最终决定杂项内容(如精确的GPU和CPU)
 
-And there's also some special notes with SMBIOS:
+还有一些关于SMBIOS的特别注意事项:
 
-* iMacPro1,1 and MacPro7,1 are the only 2 SMBIOS that will allow for dGPU to handle all the workload including background rendering and other tasks that the iGPU would handle
-  * We only recommend this SMBIOS if you require this, however you'll likely need to fix power management as sleep may break if your hardware isn't of this class (ie. HEDT/Server/AMD): [Fixing Power management](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html)
-  * Note that this requires a Polaris, Vega or Navi GPU to work properly.
-* iMac20,2 is a custom SMBIOS meant only for Apple's custom i9-10910 CPU, so unless you have an i9-10900K we recommend using iMac20,1
-* Mac Mini SMBIOS should be avoided unless you're running mobile hardware without a built-in display
-  * Intel NUCs are the ideal hardware for this SMBIOS
-* iGPU-less CPUs **MUST** pay very close attention when selecting a SMBIOS, as Apple always assumes the iGPU is present on the iMac SMBIOS, so you will need to find a SMBIOS without this requirement like iMac Pro or Mac Pro.
-  * This also applies to AMD CPUs
+* iMacPro1,1和MacPro7,1是唯一允许dGPU处理所有工作负载的2个SMBIOS，包括后台渲染和其他iGPU将处理的任务
+  * 如果你需要，我们只推荐这个SMBIOS，但是你可能需要修复电源管理，因为如果你的硬件不是这个类(如HEDT/Server/AMD)，睡眠可能会中断:[修复电源管理](https://sumingyd.github.io/OpenCore-Post-Install/universal/pm.html)
+  * 请注意，这需要Polaris, Vega或Navi GPU才能正常工作。
+* iMac20,2是一个定制的SMBIOS，只适用于苹果定制的i9-10910 CPU，所以除非你有i9-10900K，我们建议使用iMac20,1
+* 应该避免使用Mac Mini SMBIOS，除非你运行的是没有内置显示器的移动硬件
+  * Intel NUCs是这种SMBIOS的理想硬件
+* 不支持iGPU的cpu在选择SMBIOS时**必须**非常注意，因为苹果公司总是假设iMac SMBIOS上存在iGPU，所以你需要找一个没有这个要求的SMBIOS，比如iMac Pro或Mac Pro。
+  * 这也适用于AMD cpu
 
-## macOS SMBIOS list
+## macOS SMBIOS列表
 
-This is a full list of all of the SMBIOS Apple has ever supported in macOS with extra information like CPU and GPU types.
+这是苹果在macOS中支持的所有SMBIOS的完整列表，包括CPU和GPU类型等额外信息。
 
 [[toc]]
 
-Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
+信息来源：[EveryMac](https://everymac.com)和[OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
 
-**Special Note**:
+**特别注意**:
 
-* The letter beside each CPU Family is the tier of CPU, see below table for more info:
+* 每个CPU家族旁边的字母是CPU的级别，详见下表:
 
-| Letter | Type |
+| 字母 | 类型 |
 | :--- | :--- |
-| Y | Mobile (Low end) |
-| U, M | Mobile (Mid tier) |
-| H, QM, HQ | Mobile (High End) |
-| S | Desktop |
-| EP, SP, W, X | HEDT/Server |
+| Y | 移动(低端) |
+| U, M | 移动(中端) |
+| H, QM, HQ | 移动(高端) |
+| S | 桌面 |
+| EP, SP, W, X | HEDT/服务器 |
 
 ### MacBook
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | MacBook1,1     | Yonah(M)        | GMA 950                       | Mac-F4208CC8       | 10.4.6 (8I2025) | 10.6.8 |
 | MacBook2,1     | Merom(M)        | GMA 950                       | Mac-F4208CA9   | 10.4.8 (8N1108) | 10.7.5 |
@@ -97,7 +97,7 @@ Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https:/
 
 ### MacBook Air
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | MacBookAir1,1  | Merom(M)        | GMA X3100     (11")                | Mac-F42C8CC8 | 10.5.1 (9B2324) | 10.7.5 |
 | MacBookAir2,1  | Penryn(M)       | GeForce 9400M (13")                | Mac-F42D88C8 | 10.5.5 | 10.11.6 |
@@ -117,7 +117,7 @@ Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https:/
 
 ### MacBook Pro
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | MacBookPro1,1  | Yonah(M)        | Radeon X1600 (15")                 | Mac-F425BEC8 | 10.4.5 (8G1453) | 10.6.8 |
 | MacBookPro1,2  | Yonah(M)        | Radeon X1600 (17")                 | Mac-F42DBEC8 | 10.4.6 (8I2032) | ^^ |
@@ -163,7 +163,7 @@ Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https:/
 
 ### Mac Mini
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Macmini1,1     | Yonah(M)        | GMA 950                       | Mac-F4208EC8           | 10.4.5 (8H1619) | 10.6.8 |
 | Macmini2,1     | Merom(M)        | GMA 950                       | Mac-F4208EAA           | 10.4.10 (8R3014) | 10.7.5 |
@@ -179,7 +179,7 @@ Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https:/
 
 ### iMac
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | iMac4,1        | Yonah(M)        | Radeon X1600                  | Mac-F42786C8   | 10.4.4 (8G1165)      | 10.6.8 |
 | iMac4,2        | Yonah(M)        | GMA 950                       | Mac-F4218EC8   | 10.4.7 (8I2057)      | ^^ |
@@ -218,13 +218,13 @@ Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https:/
 
 ### iMac Pro
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | iMacPro1,1     | Skylake-W    | Vega 56                       | Mac-7BA5B2D9E42DDD94       | 10.13.2 (17C2111) | Current |
 
 ### Mac Pro
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | MacPro1,1      | Woodcrest     | GeForce 7300 GT               | Mac-F4208DC8           | 10.4.7 (8K1079) | 10.7.5 |
 | MacPro2,1      | Clovertown    | ^^                            | Mac-F4208DA9           | 10.4.9 (8P4037) | ^^ |
@@ -237,19 +237,19 @@ Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https:/
 
 ### Xserve
 
-| SMBIOS | CPU Family | GPU | board-id | Initial Support | Last Supported Version |
+| SMBIOS | CPU家族 | GPU | board-id | 最初支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Xserve1,1      | Woodcrest    | Radeon X1300                  | Mac-F4208AC8           | Server 10.4.8 (8N1215) | Server 10.7.5 |
 | Xserve2,1      | Harpertown   | ^^                            | Mac-F42289C8           | Server 10.5 (9B2117) | ^^ |
 | Xserve3,1      | Nehalem EP   | GeForce GT 120                | Mac-F223BEC8           | Server 10.5.6 | 10.11.6 |
 
-### Miscellaneous SMBIOS
+### 其他SMBIOS
 
-All models listed below are not supported by OpenCore however are documented here for ease of reference.
+OpenCore不支持下面列出的所有型号，但为了方便参考，这里列出了文档。
 
-* Apple Development Platforms
+* 苹果开发平台
   * [Developer Transition Kit](#developer-transition-kit)
-* Apple Silicon
+* 苹果芯片
   * [Mac Mini](#mac-mini-apple-silicon)
   * [MacBook Air](#macbook-air-apple-silicon)
   * [MacBook Pro](#macbook-pro-apple-silicon)
@@ -264,39 +264,39 @@ All models listed below are not supported by OpenCore however are documented her
   * [Mac Mini](#mac-mini-powerpc)
   * [Xserve](#xserve-powerpc)
   
-::: details Apple Silicon Notes
+::: details 苹果芯片笔记本
 
-Extra information regarding Apple's CPUs:
+关于苹果cpu的额外信息:
 
-* They do not rely on ACPI or UEFI
-* They do not include DeviceProperties in their firmware
-* They use iPad8,6 for iOS/iPadOS applications
-* board-id is only applicable with Intel Macs, PowerPC and ARM do not have this entry
+* 它们不依赖ACPI或UEFI
+* 他们的固件中不包含DeviceProperties
+* 他们使用iPad8,6 iOS/iPadOS应用程序
+* board-id仅适用于Intel mac, PowerPC和ARM没有这个条目
 
 :::
 
 #### Developer Transition Kit
 
-| SMBIOS | Year | CPU Family | Product Identifier | Initial Support |
+| SMBIOS | 年代 | CPU家族 | 产品标识 | 初始支持 |
 | :--- | :--- | :--- | :--- | :--- |
 | ADP2,1 | Mid 2005 | Intel Prescott | N/A | 10.4.1 (8B1025) |
 | ADP3,2 | Mid 2020 | Apple A12Z | J273 | 11.0.0 (20A5299w) |
 
 #### Mac Mini - Apple Silicon
 
-| SMBIOS | Year | CPU Family | Product Identifier | Initial Support |
+| SMBIOS | 年代 | CPU家族 | 产品标识 | 初始支持 |
 | :--- | :--- | :--- | :--- | :--- |
 | Macmini9,1 | Late 2020 |  Apple M1 | J274 | 11.0.0 (20A2411) |
 
 #### MacBook Air - Apple Silicon
 
-| SMBIOS | Year | CPU Family | Product Identifier | Initial Support |
+| SMBIOS | 年代 | CPU家族 | 产品标识 | 初始支持 |
 | :--- | :--- | :--- | :--- | :--- |
 | MacBookAir10,1 | Late 2020 |  Apple M1 | J313 | 11.0.0 (20A2411) |
 
 #### MacBook Pro - Apple Silicon
 
-| SMBIOS | Year | CPU Family | Product Identifier | Initial Support |
+| SMBIOS | 年代 | CPU家族 | 产品标识 | 初始支持 |
 | :--- | :--- | :--- | :--- | :--- |
 | MacBookPro17,1 | Late 2020 | Apple M1 | J293 | 11.0.0 (20A2411) |
 
@@ -306,7 +306,7 @@ Extra information regarding Apple's CPUs:
 
 #### iMac - Apple Silicon
 
-| SMBIOS | Year | CPU Family | Product Identifier | Initial Support |
+| SMBIOS | 年代 | CPU家族 | 产品标识 | 初始支持 |
 | :--- | :--- | :--- | :--- | :--- |
 | iMac21,1 | Mid 2021 | Apple M1 | J256 | 11.3 (20E232?) |
 | iMac21,2 | Mid 2021 | Apple M1 | J257 | 11.3 (20E232?) |
@@ -317,7 +317,7 @@ Extra information regarding Apple's CPUs:
 
 #### PowerBook - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | PowerBook1,1 | Mid-1999 | PowerPC 750 (G3) | 8.6 | 10.3.9 |
 | PowerBook3,1 | Early 2000 | ^^ | 9.0.2 | 10.4.11 |
@@ -341,7 +341,7 @@ Extra information regarding Apple's CPUs:
 
 #### iBook - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | PowerBook2,1 | Mid-1999 | PowerPC 750 (G3) | 8.6 | 10.3.9 |
 | PowerBook2,2 | Late 20000 | PowerPC 750cx (G3) | 9.0.4 | 10.4.11 |
@@ -354,7 +354,7 @@ Extra information regarding Apple's CPUs:
 
 #### PowerMac - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | PowerMac1,1 | Early 1999 | PowerPC 750 (G3) | 8.5.1 | 10.4.11 |
 | PowerMac1,2 | Mid 1999 | PowerPC 7400 (G4) | 8.6 | ^^ |
@@ -371,7 +371,7 @@ Extra information regarding Apple's CPUs:
 
 #### iMac - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | iMac,1 | Mid 1998 | PowerPC 750 (G3) | 8.1 | 10.3.9 |
 | PowerMac2,1 | Late 1999 | ^^ | 8.6 | 10.4.11 |
@@ -387,28 +387,28 @@ Extra information regarding Apple's CPUs:
 
 #### eMac - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | PowerMac4,4 | Mid-2003 | PowerPC 7445 (G4 | 9.2.2 | 10.5.8 |
 | PowerMac6,4 | Early 2004 | PowerPC 7447a (G4) | 10.3.3 | ^^ |
 
 #### Cube - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | PowerMac5,1 | Mid-2000 | PowerPC 7400 (G4) | 9.0.4 | 10.4.11 |
 | PowerMac5,2 | ^^ | ^^ | ^^ | ^^ |
 
 #### Mac Mini - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | PowerMac10,1 | Early 2005 | PowerPC 7447a (G4) | 10.3.7 (7T11) | 10.5.8 |
 | PowerMac10,2 | Late 2005 | ^^ | 10.4.2 (8D40) | ^^ |
 
 #### Xserve - PowerPC
 
-| SMBIOS | Year | CPU Family | Initial Support | Last Supported Version |
+| SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | RackMac1,1 | Mid-2002 | PowerPC 7455 (G4) | 10.1.5 (6C115) | Server 10.5.8 |
 | RackMac1,2 | Early 2003 | ^^ | 10.2.4 (6I34) | ^^ |

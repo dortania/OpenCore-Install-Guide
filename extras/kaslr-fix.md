@@ -1,92 +1,92 @@
-# Fixing KASLR slide values
+# 修复KASLR滑动值
 
-This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299.
+本节面向希望理解和修复 "Couldn't allocate runtime area" 错误的用户。这在Z390、X99和X299中最常见。
 
-* Note: OpenCore is required, Clover is no longer supported in this guide
+* 注意:OpenCore是必需的，在本指南中不再支持Clover
 
-## So what is KASLR
+## 那么什么是KASLR呢
 
-Well KASLR stands for Kernel address space layout randomization, what it's used for is security purposes. Specifically, this makes it much harder for attackers to figure out where the important objects are in memory as it's always random both between machines and between boots. [More in-depth explainer on KASLR](https://lwn.net/Articles/569635/)
+KASLR代表内核地址空间布局随机化，它的用途是为了安全。具体来说，这使得攻击者很难弄清楚重要对象在内存中的位置，因为在机器和引导之间总是随机的。[更多关于KASLR的深入讲解](https://lwn.net/Articles/569635/)
 
-Where this becomes an issue is when you introduce devices with either small memory maps or just way too many devices present. There likely is space for the kernel to operate but there's also free space where the kernel won't fit entirely. This is where `slide=xxx` fits in. Instead of letting macOS choose a random area to operate in each boot, we'll constrain it to somewhere that we know will work.
+当您引入内存映射较小或存在太多设备的设备时，这就成为一个问题。可能有内核运行的空间，但也有内核不能完全容纳的空闲空间。这就是`slide=xxx`的作用。我们不是让macOS在每次启动时随机选择一个区域进行操作，而是将其限制在我们知道可以工作的地方。
 
-## And who is this info for
+## 这些信息是给谁的
 
-Well as I mentioned earlier, this is for users who don't have enough space for the kernel or moves to a place that is too small. You'll generally experience an error similar to this when booting:
+正如我前面提到的，这是针对那些没有足够的内核空间或者移动到一个太小的地方的用户。在引导时，你通常会遇到类似的错误:
 
 ```
 Error allocating 0x1197b pages at 0x0000000017a80000 alloc type 2
 Couldn't allocate runtime area
 ```
 
-With some variation:
+随着一些变化:
 
 ```
 Only 244/256 slide values are usable!
 ```
 
-Or even crashes while running macOS:
+甚至在运行macOS时崩溃:
 
 ```
 panic(cpu 6 caller 0xffffff801fc057ba): a freed zone element has been modified in zone kalloc.4096: expected 0x3f00116dbe8a46f6 but found 0x3f00116d00000000
 ```
 
-The best part about these errors is that they can be random, also the reason why power cycling your PC 20 times also can fix the issue but only temporarily.
+关于这些错误最好的部分是，它们可以是随机的，这也是为什么循环你的电脑20次也可以解决这个问题，但只是暂时的。
 
-Fun Fact: It takes around 31 ms to find an area to operate in, manually setting a slide value can on average can reduce boot times by 0.207%!!!
+有趣的事实:查找一个区域需要大约31毫秒，手动设置滑动值平均可以减少0.207%的启动时间!!
 
-## So how do I fix this
+## 那么我怎么解决这个问题呢
 
-The real fix to this is quite simple actually. What you'll need:
+真正的解决办法其实很简单。你需要:
 
-* **OpenCore users**:
+* **OpenCore 用户**:
   * [OpenRuntime](https://github.com/acidanthera/OpenCorePkg/releases)
-  * [OpenShell](https://github.com/acidanthera/OpenCorePkg/releases)(Don't forget to enable this under `Root -> Misc -> Tools`)
+  * [OpenShell](https://github.com/acidanthera/OpenCorePkg/releases)(别忘了启用这个 `Root -> Misc -> Tools`)
 
-And we'll also need to configure our config.plist -> Booter:
+我们还需要配置我们的 config.plist -> Booter:
 
 * **AvoidRuntimeDefrag**: YES
-  * Fixes UEFI runtime services like date, time, NVRAM, power control, etc
+  * 修复UEFI运行时服务，如日期、时间、NVRAM、电源控制等
 * **DevirtualiseMmio**: YES
-  * Reduces Stolen Memory Footprint, expands options for `slide=N` values and very helpful with fixing Memory Allocation issues on Z390.
+  * 减少被盗内存占用，扩展`slide=N`值的选项，并对修复Z390上的内存分配问题非常有帮助。
 * **EnableSafeModeSlide**: YES
-  * Allows for slide values to be used in Safe mode
+  * 允许在安全模式下使用slide值
 * **ProtectUefiServices**: NO
-  * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, 300 series and newer systems like Ice Lake and Comet Lake
+  * 保护UEFI服务不被固件覆盖，主要适用于VMs、300系列和较新的系统，如Ice Lake和Comet Lake
 * **ProvideCustomSlide**: YES
-  * This makes sure the kernel will only choose good regions and avoid those that may result in boot failures. It's still random but omits those bad regions in its randomization
+  * 这可以确保内核只选择好的区域，避免那些可能导致引导失败的区域。它仍然是随机的，但在随机化中省略了那些不好的区域
 * **RebuildAppleMemoryMap**: YES
-  * Generates Memory Map compatible with macOS, can break on some laptop OEM firmwares so if you receive early boot failures disable this, this makes sure our memory map will fit to what the kernel expects
+  * 生成与macOS兼容的内存映射，可能在一些笔记本电脑的OEM固件上损坏，所以如果您收到早期启动失败禁用此功能，这可以确保我们的内存映射将符合内核期望
 
-## Prepping the BIOS
+## 准备BIOS
 
-The reason we need to reset the memory map is we want it to be more deterministic, what I mean by this is that there will be less variation on each boot so we have fewer edge cases(Memory Maps are not always consistent on boots). To prep:
+我们需要重置内存映射的原因是我们希望它更确定，我的意思是每次启动都会有更少的变化，所以我们有更少的边缘情况(内存映射在启动上并不总是一致的)。准备好:
 
-* Update BIOS(extremely important as early BIOS's shipped are known to have memory map issues, especially with Z390)
-* Clear CMOS
-* Enable much needed BIOS settings:
-  * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on some X99, X299 so recommended to test with and without.
-    * Note: On BIOS supporting Resizable BAR Support, enabling Above4G will unlock this option. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
-  * `Boot Options -> Windows8.1/10 mode`: This will make sure no old legacy garbage is loaded. Fun fact, `other OS` is only designed for booting older versions of Windows and not for other OS.
-* Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:
-  * `CSM`: For legacy support, adds a bunch of garbage we don't want. This also can break the shell so you can't boot into it.
-  * `Intel SGX`: Software Guard Extensions, takes up a lot of space and does nothing in macOS.
-  * `Parallel Port`: macOS can't even see parallel.
-  * `Serial Port`: I'd like to know how many of you are debugging the kernel...
-  * `iGPU`: Not ideal but some systems have such bloated maps that the iGPU just can't fit.
-  * `Thunderbolt`: Many hacks don't have thunderbolt working, boards that don't have thunderbolt but have this option just waste more space.
-  * `LED lighting`: Sorry mate, time to go.
-  * `Legacy USB`: More Legacy Crap.
+* 更新BIOS(非常重要，因为早期的BIOS已知有内存映射问题，特别是Z390)
+* 清除CMOS
+* 启用需要的BIOS设置:
+  * `Above4GDecoding`: 这允许设备使用4GB以上的内存区域，这意味着macOS将有更多的空间来容纳，在一些X99, X299上可能会有问题，因此建议使用或不使用测试。
+    * 注意:在BIOS支持可调整大小的BAR支持，启用Above4G将解锁此选项。如果启用，请确保 Booter -> Quirks -> ResizeAppleGpuBars 设置为 `0`
+  * `Boot Options -> Windows8.1/10 mode`: 这将确保没有加载旧的遗留垃圾。有趣的事实是，`其他操作系统`只用于引导旧版本的Windows，而不是其他操作系统。
+* 在BIOS中禁用尽可能多的不需要的设备(这意味着每次引导时map的变化更小，因此引导失败的机会更少)。常见的设置:
+  * `CSM`: 对于遗留支持，添加了一堆我们不想要的垃圾。这也会破坏shell，让你无法启动它。
+  * `Intel SGX`: 软件保护扩展，占用大量空间，在macOS中不起任何作用。
+  * `Parallel Port`: macOS甚至看不到并口。
+  * `Serial Port`: 我想知道有多少人正在调试内核…
+  * `iGPU`: 并不理想，但有些系统的映射过于臃肿，iGPU无法容纳。
+  * `Thunderbolt`: 许多使用黑苹果的人没有使用Thunderbolt，没有Thunderbolt但有这个选项的主板只会浪费更多的空间。
+  * `LED lighting`: 对不起，伙计，该走了。
+  * `Legacy USB`: 更多的传统垃圾。
 
-## Test boot
+## 测试启动
 
-With our adjusted EFI, config.plist and BIOS settings, it's time we try out our new setup. If you still have issues, well it looks like we'll need to do a deep dive and calculate our slide value
+在调整了EFI、config plist和BIOS设置后，是时候试试我们的新设置了。如果你仍然有问题，那么看起来我们需要深入研究并计算我们的slide值
 
-## Finding the Slide value
+## 查找 Slide 值
 
-Now what you'll want to do is open the EFI shell in your boot manager of choice and run `memmap`. This will give you a list of all pages and their sizes. This is where the fun begins.
+现在你要做的是在你选择的引导管理器中打开EFI shell并运行`memmap`。这将给你所有页面的列表和他们的大小。这是有趣的地方。
 
-Example of what you'll see:
+你将会看到的例子:
 
 | Type | Start | End | \# Pages | Attributes |
 | :--- | :--- | :--- | :--- | :--- |
@@ -106,44 +106,44 @@ Example of what you'll see:
 | BS_Data | `000000006B526000` | `000000006B625FFF` | `0000000000000100` | `000000000000000F` |
 | Available | `000000006B626000` | `000000006B634FFF` | `000000000000000F` | `000000000000000F` |
 
-Now you may be wondering how the hell we convert this to a slide value, well it's quite simple. What we're interested in is the largest available value within the `Start` column. In this example we see that `000000006B626000` is our largest, do note that these are in HEX so if there are multiple values close to each other you may need to convert them to decimal. To the calculate slide value(macOS's built-in calculator has a programming function by pressing ⌘+3):
+现在你可能想知道我们怎么把它转换成slide值，其实很简单。我们感兴趣的是`Start`列中最大的可用值。在这个例子中，我们看到`000000006B626000`是最大的，请注意，这些值是十六进制的，因此如果有多个值彼此接近，你可能需要将它们转换为十进制。转换为计算slide值(macOS内置的计算器有一个编程功能，可以按⌘+3):
 
 `000000006B626000` = `0x6B626000`
 
 (`0x6B626000` - `0x100000`)/`0x200000` = `0x35A`
 
-And to verify that this is correct:
+为了验证这是正确的:
 
 `0x100000` + (`0x35A` * `0x200000`) = `0x6B500000`
 
-Whenever the returned value is **not** the original(`0x6B500000` vs `0x6B626000`), just add +1 to your final slide value. This is due to rounding. So for example `0x35A` converted to decimal becomes `858` and then +1 will give you `slide=859`.
+当返回值**不是**原始值(`0x6B500000` vs `0x6B626000`)时，只需在最终的slide值上加1。这是由于四舍五入。例如，`0x35A`转换成十进制后会变成`858`，然后+1会得到`slide=859`。
 
-> But wait for just a second, this is higher than 256!
+> 但是稍等一下，它比256高!
 
-That is correct, this is caused by memory maps that include `Above4GDecoding` sectors which cannot be used. So you will need to keep going down the list until you find a small enough value(for us that would be `0000000000100000`).
+这是正确的，这是由于内存映射中包含无法使用的`Above4GDecoding`扇区导致的。因此，你需要一直往下看，直到找到一个足够小的值(对我们来说是`0000000000100000`)。
 
-And just to make it a bit clearer on the formula:
+为了让公式更清楚一点
 
-(HEX - `0x100000`)/`0x200000` = Slide Value in HEX
+(十六进制 - `0x100000`)/`0x200000` = 十六进制的 Slide 值
 
-`0x100000` + (Slide Value in HEX * `0x200000`) = Your original HEX value(if not then add +1 to your slide value)
+`0x100000` +( 十六进制的Slide值 * `0x200000`) = 原始的十六进制值(如果不是，则给 Slide 值加1)
 
-With this formula in mind, the highest Start value you would be able to use to give you a low enough slide value would be 0x20100000.
+记住这个公式，要获得足够低的滑动值，可以使用的最高起始值是0x20100000。
 
-Now navigate into your config.plist and add your slide value with the rest of your boot arguments(for us it would be `slide=0` when using `0x100000`). If this value still gives you errors then you may proceed to the second-largest `Start` value and so on.
+现在导航到 config.plist 并添加 slide 值和其他启动参数(对我们来说，当使用`0x100000`时，它是`slide=0`)。如果这个值仍然给你错误，那么你可以继续使用第二大的`Start`值，以此类推。
 
-Sometimes you may find that when you calculate slide that you receive super small values like `slide=-0.379150390625`, when this happens round this to `slide=0`.
+有时你可能会发现，当你计算slide时，你会收到非常小的值，如`slide=-0.379150390625`，当这种情况发生时，将其舍入为`slide=0`。
 
-And for users who are having issues finding their slide value can also type `$slide [insert largest #Pages value]` in the #Sandbox channel on the [r/Hackintosh Discord](https://discord.gg/u8V7N5C)
+对于有问题的用户，也可以在[r/Hackintosh Discord](https://discord.gg/u8V7N5C)上的#Sandbox频道输入`$slide [insert largest #Pages value]`。
 
-> But this is soooooo hard
+> 但是这太难了
 
-Well fret not, for there is a simple solution. After running `memmap` in the shell, run:
+别担心，有一个简单的解决办法。在shell中运行`memmap`后，运行:
 
 ```
-shell> fs0: //replace with your USB
+shell> fs0: //替换为您的USB
 
-fs0:\> dir //to verify this is the right directory, if not try fs1 and so on
+fs0:\> dir //验证这是正确的目录，如果不是，尝试fs1，以此类推
 
 Directory of fs0:\
 01/01/01 3:30p   EFI
@@ -151,15 +151,15 @@ Directory of fs0:\
 fs0:\> memmap > memmap.txt
 ```
 
-This will add a `memmap.txt` file to the root of your EFI, you can then proceed to drop it into the r/Hackintosh discord in the #Sandbox channel and type `$slide [insert a link to memmap.txt]`
+这将添加一个`memmap.txt`文件到你的EFI的根目录，然后你可以继续把它放到 r/Hackintosh discord 的 #Sandbox 通道，并键入`$slide[插入一个链接到memmap.txt]`
 
-## Using DevirtualiseMmio
+## 使用 DevirtualiseMmio
 
-DevirtualiseMmio is quite an interesting quirk, specifically in that it gets around a huge hurdle with many PCI device systems like some Z390 boards and virtually all HEDT boards like X99 and X299. How it does this is it takes MMIO regions and removes runtime attributes allowing them to be used as space for the kernel to sit comfortably, pair this with `ProvideCustomSlide` quirk means we can keep the security feature of slide while also getting a bootable machine.
+DevirtualiseMmio 是一个非常有趣的功能，特别是它克服了许多PCI设备系统(如一些Z390板)和几乎所有HEDT板(如X99和X299板)的巨大障碍。它是如何做到这一点的，它使用 MMIO 区域并删除运行时属性，允许它们作为内核舒适放置的空间，再加上`ProvideCustomSlide`的特殊之处，这意味着我们可以在保持 slide 的安全特性的同时获得一个可引导的机器。
 
-For extremely problematic systems like Threadripper TRX40 19h, we need to find specific regions that aren't required for proper operation. This is where `MmioWhitelist` comes into play. Note that whitelisting isn't required for most systems
+对于像Threadripper TRX40 19h这样问题严重的系统，我们需要找到不需要正确操作的特定区域。这就是`MmioWhitelist`发挥作用的地方。请注意，大多数系统都不需要白名单
 
-If you run the debug version of OpenCore with DevirtualiseMmio, you'll notice this in your logs:
+如果您使用DevirtualiseMmio运行调试版本的OpenCore，您将在日志中看到以下内容:
 
 ```
 21:495 00:009 OCABC: MMIO devirt start
@@ -172,11 +172,11 @@ If you run the debug version of OpenCore with DevirtualiseMmio, you'll notice th
 21:520 00:003 OCABC: MMIO devirt end, saved 278608 KB
 ```
 
-* Note: See [OpenCore Debugging](../troubleshooting/debug.md) on how to enable logging to file
+* 注意:关于如何打开日志文件，请参见[OpenCore Debugging](../troubleshooting/debug.md)
 
-So we have 6 regions we need to go through and see which are bad, best idea is to block all MMIO sections *except* one and try each region to get a list of good regions.
+所以我们需要浏览6个区域，看看哪些是坏的，最好的主意是屏蔽所有MMIO区域**除了**一个，并尝试每个区域以获得一个好区域的列表。
 
-Now lets take the above example and create our own MmioWhitelist, we'll need to first convert the address from hexadecimal to decimal:
+现在让我们看看上面的例子并创建我们自己的MmioWhitelist，我们首先需要将地址从十六进制转换为十进制:
 
 * MMIO devirt 0x60000000 -> 1610612736
 * MMIO devirt 0xFE000000 -> 4261412864
@@ -185,6 +185,6 @@ Now lets take the above example and create our own MmioWhitelist, we'll need to 
 * MMIO devirt 0xFEE00000 -> 4276092928
 * MMIO devirt 0xFF000000 -> 4278190080
 
-Should look something like this when done:
+完成后应该是这样的:
 
 ![](../images/extras/kaslr-fix-md/mmio-white.png)

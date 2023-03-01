@@ -22,7 +22,7 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
         with:
