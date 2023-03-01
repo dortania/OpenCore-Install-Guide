@@ -381,13 +381,18 @@ However ProperTree will handle this for you, so you need not concern yourself
   * An experimental Lilu plugin that optimizes Alder Lake's heterogeneous core configuration. **Only for Alder Lake CPUs**
 * [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
   * Patch various functions of macOS, see [the README](https://github.com/acidanthera/RestrictEvents#boot-arguments) for more info
+* [EmeraldSDHC](https://github.com/acidanthera/EmeraldSDHC)
+  * macOS kernel extension for eMMC support. Currently only supports eMMC/MMC cards at up to HS200 speeds.  This driver is currently a work in progress and may experience poor performance or be nonfunctional on some devices. SD cards are currently not supported at this time.
 
 ::: details Legacy SATA Kexts
 
+* [AppleIntelPIIXATA.kext](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/d20d9975c144728da7ae2543d65422f53dabaa2d/payloads/Kexts/Misc/AppleIntelPIIXATA-v1.0.0.zip)
+  * Legacy IDE and ATA kext for older Core 2 Duo/Quad and Pentium 4 systems. Needed for macOS 11 (Big Sur) and newer as this kext was dropped in macOS 10.15 (Catalina)
 * [AHCIPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/AHCIPortInjector.kext.zip)
   * Legacy SATA/AHCI injector, mainly relevant for older machines of the Penryn era
 * [ATAPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/ATAPortInjector.kext.zip)
-  * Legacy ATA injector, mainly relevant for IDE and ATA devices(ie. when no AHCI option is present in the BIOS)
+  * Legacy ATA injector, mainly relevant for IDE and ATA devices (ie. when no AHCI option is present in the BIOS)
+  * Is dependent on AppleIntelPIIXATA.kext, which needs to be included when using macOS 11 (Big Sur) and newer
   
 :::
 

@@ -7,11 +7,40 @@ To start we'll want to grab ourselves a copy of macOS. You can skip this and hea
 
 ## Downloading macOS: Modern OS
 
-* This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os)
+This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os).
+
+* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
+  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
+    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
+
+From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store:
+
+* [Using App Store](#using-app-store)
+
+For machines that need a specific OS release or can't download from the App Store:
+
+* [Command Line Software Update Utility,](#command-line-software-update-utility)
+* [Munki's InstallInstallMacOS utility](#munkis-installinstallmacos-utility)
+
+## Using App Store
 
 From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store and download the desired OS release and continue to [**Setting up the installer**](#setting-up-the-installer).
 
-For machines that need a specific OS release or can't download from the App Store, you can use the Munki's InstallInstallMacOS utility.
+## Command Line Software Update Utility
+
+Open a terminal window then copy and paste the below command:
+
+```sh
+softwareupdate --list-full-installers;echo;echo "Please enter version number you wish to download:";read;$(if [ -n "$REPLY" ]; then; echo "softwareupdate --fetch-full-installer --full-installer-version "$REPLY; fi);
+```
+
+![](../images/installer-guide/mac-install-md/commandlinesoftwareupdateutility.png)
+
+This gives you a list of available releases you can choose from.
+Once downloaded it will be saved in your Applications folder.
+You can continue to [**Setting up the installer**](#setting-up-the-installer).
+
+## Munki's InstallInstallMacOS utility
 
 ::: details Note for users running macOS Monterey 12.3 or above
 
@@ -43,10 +72,6 @@ As you can see, we get a nice list of macOS installers. If you need a particular
 
 ![](../images/installer-guide/mac-install-md/munki-process.png)
 
-* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
-    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
-
 This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
 
 Once finished, you'll find in your `~/macOS-Installer/` folder a DMG containing the macOS Installer, called `Install_macOS_11.1-20C69.dmg` for example. Mount it and you'll find the installer application.
@@ -75,8 +100,9 @@ From here, jump to [Setting up the installer](#setting-up-the-installer) to fini
 
 Now we'll be formatting the USB to prep for both the macOS installer and OpenCore. We'll want to use macOS Extended (HFS+) with a GUID partition map. This will create two partitions: the main `MyVolume` and a second called `EFI` which is used as a boot partition where your firmware will check for boot files.
 
-* Note: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
-* Note 2: Users following "Legacy macOS: Online Method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencore-s-efi-environment)
+* Note 1: The `EFI` partition created by formatting the USB is hidden until you mount it. This will be mounted later when [Setting up OpenCore's EFI environment](#setting-up-opencores-efi-environment)
+* Note 2: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
+* Note 3: Users following "Legacy macOS: Online Method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencores-efi-environment)
 
 ![Formatting the USB](../images/installer-guide/mac-install-md/format-usb.png)
 
