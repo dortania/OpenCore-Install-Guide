@@ -181,7 +181,6 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
     | framebuffer-con1-alldata | Data | `01050A00 00080000 87010000` |
     | framebuffer-con2-enable | Data | `01000000` |
     | framebuffer-con2-alldata | Data | `03060A00 00040000 87010000` |
- 
 
 ::: details Explanation
 
