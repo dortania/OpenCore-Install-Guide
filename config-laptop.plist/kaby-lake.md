@@ -111,7 +111,7 @@ Settings relating to boot.efi patching and firmware fixes. For most users, leave
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics
 * **ProtectMemoryReigons**: YES
-  * Patches the CSM/MIMO regions to better support coreboot. Necessary for all Chromebooks that utilize coreboot UEFI firmware.
+  * Patches memory region types for incorrectly mapped CSM/MMIO regions. Necessary for all Chromebooks that utilize coreboot UEFI firmware.
 
 :::
 
