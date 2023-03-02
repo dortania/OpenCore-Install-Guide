@@ -170,7 +170,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 #### Laptops with High-End HD Screens
 
-For laptop displays that have a resolution of 1600x900 or greater, it is advised to add an extra entry which will enable the DualLink connector for the display.
+For laptop displays that have a resolution of 1600x900 or greater, it is necessary to add an extra entry which will let macOS know that we are using a DualLink display.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
