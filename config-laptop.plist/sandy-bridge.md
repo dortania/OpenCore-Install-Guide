@@ -162,6 +162,14 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | **`00000100`** | Laptop | To be used with laptops |
 | **`10000300`** | NUC | To be used with Intel NUCs |
 
+#### Laptops with 1080p Screens
+
+For laptops with 1080p screens (1600x900), it is advised to add an extra entry which will enable DualLink processing for the display connection
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| AAPL00,DualLink | Data | `01000000` |
+
 #### Configuration Notes
 
 * VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)
