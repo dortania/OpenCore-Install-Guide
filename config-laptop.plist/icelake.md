@@ -96,16 +96,18 @@ This section is allowing devices to be pass-through to macOS that are generally 
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
-| Quirk | Enabled |
-| :--- | :--- |
+| Quirk | Enabled | Notes |
+| :--- | :--- | :--- |
 | DevirtualiseMmio | YES |
 | EnableWriteUnprotector | NO |
+| ProtectMemoryRegions | YES | Chromebooks only, fixes kernel panics triggered by shutdown/restart. |
 | ProtectUefiServices | YES |
 | RebuildAppleMemoryMap | YES |
 | SetupVirtualMap | NO |
-| SyncRuntimePermissions | YES |
-:::
+| SyncRuntimePermissions | YES | 
 
+
+:::
 ::: details More in-depth Info
 
 * **AvoidRuntimeDefrag**: YES
@@ -117,6 +119,8 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 * **EnableWriteUnprotector**: NO
   * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
   * However, due to issues with OEMs not using the latest EDKII builds you may find that the above combo will result in early boot failures. This is due to missing the `MEMORY_ATTRIBUTE_TABLE` and such we recommend disabling RebuildAppleMemoryMap and enabling EnableWriteUnprotector. More info on this is covered in the [troubleshooting section](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
+* **ProtectMemoryRegions**: YES
+  * Patches memory region types for incorrectly mapped CSM/MMIO regions. Necessary for all Chromebooks that utilize coreboot UEFI firmware.
 * **ProtectUefiServices**: YES
   * Protects UEFI services from being overridden by the firmware, mainly relevant for VMs, Icelake and Z390 systems'
   * If on Z390, **enable this quirk**
@@ -517,6 +521,7 @@ System Integrity Protection bitmask
 | boot-args | Description |
 | :--- | :--- |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
+|**-igfxnotelemetryload** | Prevents iGPU telemetry from loading. iGPU telemetry may cause a freeze during startup on certain laptops such as Chromebooks on macOS 10.15 and higher, see [here](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics) for more information. |
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
