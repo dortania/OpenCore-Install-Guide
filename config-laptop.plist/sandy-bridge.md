@@ -170,7 +170,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 #### Laptops with 1080p Screens
 
-For laptops with 1080p screens (1600x900), it is advised to add an extra entry which will enable DualLink processing for the display connection
+For laptop displays that have a resolution of 1600x900 or greater, it is advised to add an extra entry which will enable DualLink processing for the display connection
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
