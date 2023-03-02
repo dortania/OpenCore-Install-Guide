@@ -168,6 +168,14 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | **`00000100`** | Laptop | To be used with laptops |
 | **`10000300`** | NUC | To be used with Intel NUCs |
 
+#### Laptops with High-End HD Screens
+
+For laptop displays that have a resolution of 1600x900 or greater, it is necessary to add an extra entry which will let macOS know that we are using a DualLink display.
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| AAPL00,DualLink | Data | `01000000` |
+
 #### Configuration Notes
 
 * VGA is *not* supported (unless it's running through a DP to VGA internal adapter, which apparently only rare devices will see it as DP and not VGA, it's all about luck.)

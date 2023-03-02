@@ -146,7 +146,7 @@ Best way to actually fix this is to grab a newer copy of iASL or Acidanthera's c
 
 ::: details Example of folder structure
 
-![Directory Structure from OpenCore's DOC](../../images/troubleshooting/troubleshooting-md/oc-structure.png)
+![Directory Structure from OpenCore's Documentation](../../images/troubleshooting/troubleshooting-md/oc-structure.png)
 
 :::
 
@@ -163,3 +163,14 @@ On newer Microsoft Surface device firmwares, loading OpenCore will now result in
 ## OC: Failed to find SB model disable halting on critical error
 
 This is a typo, ensure that in your config.plist `Misc -> Security -> SecureBootModel` is set to Disable**d**
+
+## Legacy boot stuck on `BOOT FAIL!`
+
+This error means that EFI/OC/OpenCore.efi could not be found on any partition.
+Double check that the EFI folder structure is correct.
+
+::: details Example of folder structure
+
+![Directory Structure from OpenCore's Documentation](../../images/troubleshooting/troubleshooting-md/oc-structure.png)
+
+:::
