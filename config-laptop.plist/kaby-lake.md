@@ -92,7 +92,7 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for most users, leave it as default.
+Settings relating to boot.efi patching and firmware fixes. For most users, leave it as default.
 
 * **ProtectMemoryReigons**: YES
   * Fixes shutdown/restart on some Chromebooks that would otherwise result in a `AppleEFINVRAM` kernel panic.
