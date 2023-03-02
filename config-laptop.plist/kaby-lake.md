@@ -83,10 +83,7 @@ Settings relating to ACPI, leave everything here as default as we have no use fo
 
 ![Booter](../images/config/config-universal/aptio-iv-booter.png)
 
-### Quirks
-
-* **ProtectMemoryReigons**: YES
-  * Fixes shutdown/restart on some Chromebook models that would otherwise result in a `AppleEFINVRAM` kernel panic.
+This section is dedicated to quirks relating to boot.efi patching with OpenRuntime, the replacement for AptioMemoryFix.efi
 
 ### MmioWhitelist
 
@@ -95,7 +92,11 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 ### Quirks
 
 ::: tip Info
-Settings relating to boot.efi patching and firmware fixes, for us, we leave it as default
+Settings relating to boot.efi patching and firmware fixes, for most users, leave it as default.
+
+* **ProtectMemoryReigons**: YES
+  * Fixes shutdown/restart on some Chromebooks that would otherwise result in a `AppleEFINVRAM` kernel panic.
+
 :::
 ::: details More in-depth Info
 
@@ -109,7 +110,9 @@ Settings relating to boot.efi patching and firmware fixes, for us, we leave it a
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
   * Fixes SetVirtualAddresses calls to virtual addresses, required for Gigabyte boards to resolve early kernel panics
-  
+* **ProtectMemoryReigons**: YES
+  * Patches the CSM/MIMO regions to better support coreboot. Necessary for all Chromebooks that utilize coreboot UEFI firmware.
+
 :::
 
 ## DeviceProperties
