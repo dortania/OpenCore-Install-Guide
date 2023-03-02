@@ -168,9 +168,9 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | **`00000100`** | Laptop | To be used with laptops |
 | **`10000300`** | NUC | To be used with Intel NUCs |
 
-#### Laptops with 1080p Screens
+#### Laptops with High-End HD Screens
 
-For laptop displays that have a resolution of 1600x900 or greater, it is advised to add an extra entry which will enable DualLink processing for the display connection
+For laptop displays that have a resolution of 1600x900 or greater, it is advised to add an extra entry which will enable the DualLink connector for the display.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
