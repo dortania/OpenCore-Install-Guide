@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # Converting from Clover to OpenCore
 
 So you see the new fancy OpenCore bootloader and just dying to try it out, well you've come to the right place! Many things in Clover have feature parity with OpenCore but many do not, here we'll be going over what you can bring over and what you cannot.

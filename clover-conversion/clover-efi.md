@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # Clover Kexts and Firmware driver conversion(.kext, .efi)
 
 Main thing to note is that you must specify your kexts and firmware drivers in your config.plist, or else they will not load. All kexts that are currently supported on Clover will work on OpenCore, however many have been deprecated with better variants being integrated into OpenCore. Firmware drivers are a bit different as they can in-fact break booting.
@@ -20,8 +24,8 @@ For the most part, all kexts are supported in OpenCore. However there are a few 
 
 **Supported ones:**
 
-* AudioDxe.efi(Make sure this is from [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) and **not** Goldfish64's or Clover's repo)
-* CsmVideoDxe.efi(Note that [BiosVideo.efi](https://github.com/acidanthera/DuetPkg) may be preferred)
+* AudioDxe.efi (Make sure this is from [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg) and **not** Goldfish64's or Clover's repo)
+* CsmVideoDxe.efi (Note that [BiosVideo.efi](https://github.com/acidanthera/DuetPkg) may be preferred)
 * EnhancedFatDxe.efi
 * ExFatDxeLegacy.efi
 * ExFatDxe.efi

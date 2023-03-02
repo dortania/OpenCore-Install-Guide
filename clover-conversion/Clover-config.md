@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # Converting common properties from Clover to OpenCore
 
 So this little(well not so little as I reread this...) page is for users who are having issues migrating from Clover to OpenCore as some of their legacy quirks are required or the Configuration.pdf isn't well suited for laptop users.  
@@ -172,9 +176,11 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 
 **UIScale**:
 
-* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14 -> UIScale | Data | <>`
-  * 1 -> `<01>`
-  * 2 -> `<02>`
+* `UEFI -> Quirks -> UIScale | Integer |`
+  * `1` —> 1x scaling, corresponds to normal displays.
+  * `2` —> 2x scaling, corresponds to HiDPI displays.
+  * `-1` —> leaves the current variable unchanged.
+  * `0` —> automatically chooses scaling based on the current resolution.
 
 # CPU
 
@@ -194,6 +200,7 @@ So with the transition from Clover to OpenCore we should start removing unneeded
 **USB**:
 
 * FixOwnership: `UEFI -> Quirk -> ReleaseUsbOwnership`
+  * You should also enable `XHCI Hand-off` in your BIOS
 * ClockID: `DeviceProperties -> Add -> PciRoot... -> AAPL,clock-id`
 * HighCurrent: `DeviceProperties -> Add -> PciRoot... -> AAPL, HighCurrent`
   * Irrelevant for OS X 10.11 and newer
@@ -303,9 +310,9 @@ HDMI                    <00 08 00 00>
 DUMMY                   <01 00 00 00>
 ```
 
-**InjectNvidia**:
+**InjectNVIDIA**:
 
-* [Nvidia Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* [NVIDIA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 
 **FakeIntel**:
 
@@ -339,12 +346,12 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **NVCAP**
 
-* [Nvidia Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
+* [NVIDIA Patching](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/)
 
 **display-cfg**:
 
 * `DeviceProperties -> Add -> PciRoot... -> @0,display-cfg`
-* See fassl's post on the matter: [Nvidia injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
+* See fassl's post on the matter: [NVIDIA injection](https://www.insanelymac.com/forum/topic/215236-nvidia-injection/)
 
 **LoadVBios**:
 
@@ -352,13 +359,13 @@ For others like InjectAti, see the [Sample.dsl](https://github.com/acidanthera/W
 
 **PatchVBios**: See LoadVBIOS
 
-**NvidiaGeneric**:
+**NVIDIAGeneric**:
 
 * `DeviceProperties -> Add -> PciRoot... -> model | string | Add the GPU name`
 
-**NvidiaSingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/)
+**NVIDIASingle**: See [disabling unsupported GPUs](https://dortania.github.io/OpenCore-Post-Install/)
 
-**NvidiaNoEFI**:
+**NVIDIANoEFI**:
 
 * `DeviceProperties -> Add -> PciRoot... -> NVDA,noEFI | Boolean | True`
 * See FredWst' comment for more info: [GT 640 scramble](https://www.insanelymac.com/forum/topic/306156-clover-problems-and-solutions/?do=findComment&comment=2443062)
@@ -455,15 +462,11 @@ Issue with AppleRTC, quite a simple fix:
 
 * config.plist -> Kernel -> Quirks -> DisableRtcChecksum -> true
 
-**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329)
+For some versions of MacOS (e.g. Catalina), boot.efi may write to the RTC. To prevent this, the below needs to be added as well:
 
-The following boot-arg should handle 99% of cases(pair this with RTCMemoryFixup):
+* config.plist -> NVRAM -> Add -> 4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102:rtc-blacklist  = `<58 59>`
 
-```
-rtcfx_exclude=00-FF
-```
-
-If this works, slowly shorten the excluded area until you find the part macOS is getting fussy on
+**Note**: If you still have issues, you'll need to use [RTCMemoryFixup](https://github.com/acidanthera/RTCMemoryFixup/releases) and exclude ranges. See [here for more info](https://github.com/acidanthera/bugtracker/issues/788#issuecomment-604608329), and [here](https://dortania.github.io/OpenCore-Post-Install/misc/rtc.html) for a guide.
 
 **FakeCPUID**:
 
@@ -488,10 +491,11 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 
 **BooterConfig**:
 
-* `NVRAM -> Add -> 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14-> UIScale`:
-
-  * 0x28: `Data | <01>`
-  * 0x2A: `Data | <02>`
+* `UEFI -> Quirks -> UIScale | Integer |`
+  * `1` —> 1x scaling, corresponds to normal displays.
+  * `2` —> 2x scaling, corresponds to HiDPI displays.
+  * `-1` —> leaves the current variable unchanged.
+  * `0` —> automatically chooses scaling based on the current resolution.
 
 **CsrActiveConfig**:
 
@@ -560,7 +564,7 @@ Note: Finding CPUID's for Intel can be a bit harder than looking at Intel ARK, e
 * Just add your SMBIOS properties under `PlatformInfo`
 * Confusing quirk tbh, it's not even mentioned in more recent versions of the Clover docs on AppleLife
 
-**NvidiaWeb**:
+**NVIDIAWeb**:
 
 * What this does is apply ```sudo nvram nvda_drv=1``` on every boot. To get a similar effect you can find it under the following path:
 * `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> nvda_drv: <31>`

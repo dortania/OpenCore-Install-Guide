@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # OpenCore and macOS 11: Big Sur
 
 It's that time of year again and with it, and a new macOS beta has been dropped. Here's all the info you need to get started.
@@ -53,7 +57,7 @@ For those wanting a simple translation for their Machines:
 * iMac13,1 should transition over to using iMac14,4
 * iMac13,2 should transition over to using iMac15,1
 * iMac14,2 and iMac14,3 should transition over to using iMac15,1
-  * Note: AMD CPU users with Nvidia GPUs may find MacPro7,1 more suitable
+  * Note: AMD CPU users with NVIDIA GPUs may find MacPro7,1 more suitable
 * iMac14,1 should transition over to iMac14,4
 
 ### Supported hardware
@@ -148,7 +152,7 @@ And while not an issue, SIP has now gained a new bit so to properly disable SIP 
 Guides have been updated to accommodate Big Sur, see the applicable OS environment for you:
 
 * [macOS users](../../installer-guide/mac-install.md)
-* [Windows users](../../installer-guide/winblows-install.md)
+* [Windows users](../../installer-guide/windows-install.md)
 * [Linux users](../../installer-guide/linux-install.md)
 
 ## Troubleshooting

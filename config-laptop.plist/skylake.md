@@ -3,6 +3,7 @@
 | Support | Version |
 | :--- | :--- |
 | Initial macOS Support | OS X 10.11, El Capitan |
+| Note | Skylake's iGPU is only officially supported up to macOS 12 |
 
 ## Starting Point
 
@@ -21,7 +22,11 @@ Now with all that, a quick reminder of the tools we need
 * [Sample/config.plist](https://github.com/acidanthera/OpenCorePkg/releases)
   * See previous section on how to obtain: [config.plist Setup](../config.plist/README.md)
 
-**And read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.**
+::: warning
+
+Read this guide more than once before setting up OpenCore and make sure you have it set up correctly. Do note that images will not always be the most up-to-date so please read the text below them, if nothing's mentioned then leave as default.
+
+:::
 
 ## ACPI
 
@@ -117,6 +122,8 @@ Sets device properties from a map.
 
 This section is set up via WhateverGreen's [Framebuffer Patching Guide](https://github.com/acidanthera/WhateverGreen/blob/master/Manual/FAQ.IntelHD.en.md) and is used for setting important iGPU properties.
 
+The config.plist doesn't already have a section for this so you will have to create it manually.
+
 When setting up your iGPU, the table below should help with finding the right values to set. Here is an explanation of some values:
 
 * **AAPL,ig-platform-id**
@@ -138,6 +145,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | **`02001619`** | NUC | Recommended for HD 520/530 |
 | **`02002619`** | NUC | Recommended for HD 540/550 |
 | **`05003B19`** | NUC | Recommended for HD 580 |
+
+**Note**: If booting macOS Ventura, you need to [spoof your iGPU](../extras/ventura.md#supported-hardware) as the closest Kaby Lake model.
 
 #### Configuration Notes
 
@@ -235,6 +244,7 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 10.15 | 19.0.0 | 19.99.99 |
 | 11 | 20.0.0 | 20.99.99 |
 | 12 | 21.0.0 | 21.99.99 |
+| 13 | 22.0.0 | 22.99.99 |
 
 :::
 
@@ -344,7 +354,20 @@ Settings related to legacy booting(ie. 10.4-10.6), for majority you can skip how
 
 ### Boot
 
-Settings for boot screen (Leave everything as default).
+::: tip Info
+
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| HideAuxiliary | YES | Press space to show macOS recovery and other auxiliary entries |
+
+:::
+
+::: details More in-depth Info
+
+* **HideAuxiliary**: YES
+  * This option will hide supplementary entries, such as macOS recovery and tools, in the picker. Hiding auxiliary entries may increase boot performance on multi-disk systems. You can press space at the picker to show these entries
+
+:::
 
 ### Debug
 
@@ -371,8 +394,6 @@ Helpful for debugging OpenCore boot issues(We'll be changing everything *but* `D
   * Disables the UEFI watchdog, can help with early boot issues
 * **DisplayLevel**: `2147483650`
   * Shows even more debug information, requires debug version of OpenCore
-* **SerialInit**: NO
-  * Needed for setting up serial output with OpenCore
 * **SysReport**: NO
   * Helpful for debugging such as dumping ACPI tables
   * Note that this is limited to DEBUG versions of OpenCore
@@ -394,7 +415,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default | Leave this as `Default` if running macOS Big Sur or newer. The next page goes into more detail about this setting. |
+| SecureBootModel | Default | Leave this as `Default` for OpenCore to automatically set the correct value corresponding to your SMBIOS. The next page goes into more detail about this setting. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
@@ -419,11 +440,15 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
   * This is a word, it is not optional to omit this setting. You will regret it if you don't set it to `Optional`, note that it is case-sensitive
 * **ScanPolicy**: `0`
   * `0` allows you to see all drives available, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details. **Will not boot USB devices with this set to default**
-* **SecureBootModel**: Disabled
+* **SecureBootModel**: Default
   * Controls Apple's secure boot functionality in macOS, please refer to [Security](https://dortania.github.io/OpenCore-Post-Install/universal/security.html) section for further details.
   * Note: Users may find upgrading OpenCore on an already installed system can result in early boot failures. To resolve this, see here: [Stuck on OCB: LoadImage failed - Security Violation](/troubleshooting/extended/kernel-issues.md#stuck-on-ocb-loadimage-failed-security-violation)
 
 :::
+
+### Serial
+
+Used for serial debugging (Leave everything as default).
 
 ### Tools
 
@@ -449,11 +474,7 @@ Used for OpenCore's UI scaling, default will work for us. See in-depth section f
 
 ::: details More in-depth Info
 
-Booter Path, mainly used for UI Scaling
-
-* **UIScale**:
-  * `01`: Standard resolution
-  * `02`: HiDPI (generally required for FileVault to function correctly on smaller displays)
+Booter Path, mainly used for UI modifications
 
 * **DefaultBackgroundColor**: Background color used by boot.efi
   * `00000000`: Syrah Black
@@ -506,6 +527,7 @@ System Integrity Protection bitmask
   * American: `en-US:0`(`656e2d55533a30` in HEX)
   * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
   * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
+  * Hint 2: `prev-lang:kbd` can be set to a blank variable (eg. `<>`) which will force the Language Picker to appear instead at first boot up.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
@@ -517,14 +539,8 @@ System Integrity Protection bitmask
 
 Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone.
 
-* **LegacyEnable**: NO
-  * Allows for NVRAM to be stored on nvram.plist, needed for systems without native NVRAM
-
-* **LegacyOverwrite**: NO
-  * Permits overwriting firmware variables from nvram.plist, only needed for systems without native NVRAM
-
 * **LegacySchema**
-  * Used for assigning NVRAM variables, used with LegacyEnable set to YES
+  * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
 
 * **WriteFlash**: YES
   * Enables writing to flash memory for all added variables.
@@ -546,6 +562,8 @@ For this Skylake example, we'll choose the MacBookPro13,1 SMBIOS. The typical br
 | MacBookPro13,2 | Dual Core 15W(High End) | iGPU: Iris 550 | 13" | Yes |
 | MacBookPro13,3 | Quad Core 45W | iGPU: HD 530 + dGPU: Radeon Pro 450/455 | 15" | Yes |
 | iMac17,1 | NUC Systems | iGPU: HD 530 + R9 290 |  N/A | No |
+
+**Note 2**: All of these SMBIOSes were dropped in macOS Ventura. If running macOS Ventura, [use a Kaby Lake SMBIOS](../extras/ventura.md#supported-smbios).
 
 Run GenSMBIOS, pick option 1 for downloading MacSerial and Option 3 for selecting out SMBIOS.  This will give us an output similar to the following:
 
@@ -570,9 +588,7 @@ The `SmUUID` part gets copied to Generic -> SystemUUID.
 
 We set Generic -> ROM to either an Apple ROM (dumped from a real Mac), your NIC MAC address, or any random MAC address (could be just 6 random bytes, for this guide we'll use `11223300 0000`. After install follow the [Fixing iServices](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) page on how to find your real MAC Address)
 
-**Reminder that you want either an invalid serial or valid serial numbers but those not in use, you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"**
-
-[Apple Check Coverage page](https://checkcoverage.apple.com)
+**Reminder that you need an invalid serial! When inputting your serial number in [Apple's Check Coverage Page](https://checkcoverage.apple.com), you should get a message such as "Unable to check coverage for this serial number."**
 
 **Automatic**: YES
 
@@ -631,6 +647,16 @@ Only drivers present here should be:
 * HfsPlus.efi
 * OpenRuntime.efi
 
+::: details More in-depth Info
+
+| Key | Type | Description |
+| :--- | :--- | :--- |
+| Path | String | Path of the file from `OC/Drivers` directory |
+| LoadEarly | Boolean | Load the driver early before NVRAM setup, should only be enabled for `OpenRuntime.efi` and `OpenVariableRuntimeDxe.efi` if using legacy NVRAM |
+| Arguments | String | Some drivers accept additional arguments which are specified here. |
+
+:::
+
 ### APFS
 
 By default, OpenCore only loads APFS drivers from macOS Big Sur and newer. If you are booting macOS Catalina or earlier, you may need to set a new minimum version/date.
@@ -663,7 +689,15 @@ Related to boot.efi keyboard passthrough used for FileVault and Hotkey support, 
 
 ### Output
 
-Relating to OpenCore's visual output,  leave everything here as default as we have no use for these quirks.
+Relating to OpenCore's visual output, leave everything here as default as we have no use for these quirks.
+
+::: details More in-depth Info
+
+| Output | Value | Comment |
+| :--- | :--- | :--- |
+| UIScale | `0` | `0` will automatically set based on resolution<br/>`-1` will leave it unchanged<br/>`1` for 1x scaling, for normal displays<br/>`2` for 2x scaling, for HiDPI displays |
+
+:::
 
 ### ProtocolOverrides
 
@@ -736,7 +770,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 * Serial/COM Port
 * Parallel Port
 * VT-d (can be enabled if you set `DisableIoMapper` to YES)
-* CSM
+* Compatibility Support Module (CSM) (**Must be off in most cases, GPU errors/stalls like `gIO` are common when this option is enabled**)
 * Thunderbolt(For initial install, as Thunderbolt can cause issues if not setup correctly)
 * Intel SGX
 * Intel Platform Trust
@@ -745,12 +779,12 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 ### Enable
 
 * VT-x
-* Above 4G decoding
+* Above 4G Decoding
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
-* OS type: Windows 8.1/10 UEFI Mode
-* DVMT Pre-Allocated(iGPU Memory): 64MB
+* OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)
+* DVMT Pre-Allocated(iGPU Memory): 64MB or higher
 * SATA Mode: AHCI
 
 # Once done here, we need to edit a couple extra values. Head to the [Apple Secure Boot Page](../config.plist/security.md)

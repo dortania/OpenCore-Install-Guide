@@ -63,7 +63,7 @@ This section will be split between Intel and AMD users:
 
 #### AMD Users
 
-* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla/tree/opencore)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
+* Missing [kernel patches](https://github.com/AMD-OSX/AMD_Vanilla)(only applies for AMD CPUs, make sure they're OpenCore patches and not Clover. Clover uses `MatchOS` while OpenCore has `MinKernel` and `Maxkernel`)
   * Note outdated kernel patches will also have the same effect please ensure you're using the latest patches from AMD OS X
 
 #### Intel Users
@@ -130,6 +130,22 @@ Same issues above, see here for more details: [Stuck on `[EB|#LOG:EXITBS:START]`
 Same issues above, see here for more details: [Stuck on `[EB|#LOG:EXITBS:START]`](#stuck-on-eb-log-exitbs-start)
 
 * Note: Enabling [DEBUG OpenCore](../debug.html) can help shed some light as well
+
+## Getting the error X64 Exception Type... on AMD FX systems
+
+This error can have multiple causes:
+
+* Compatibility Support Module (CSM) being enabled in your BIOS:
+
+  Might also be called Legacy Boot Support, Load Legacy Option ROMs/OPROMs
+
+* The ProvideCurrentCpuInfo quirk (required by the unified patches) being incompatible with your firmware:
+
+  This means you need to use an [older version of the patches](https://github.com/AMD-OSX/AMD_Vanilla/blob/06a9a7f30d139fa3ae897ed2469222c92e99fcad/15h_16h/patches.plist) and Big Sur or older. After downloading the older patches linked above, merge them into your config.plist (making sure to remove the old patches first).
+
+An example:
+
+![](../../images/troubleshooting/troubleshooting-md/x64exception-amdfx.png)
 
 ## Kernel Panic on `Invalid frame pointer`
 
@@ -328,6 +344,18 @@ This error happens when SMBIOS is one no longer supported by that version of mac
 
 :::
 
+::: details Supported SMBIOS in macOS 13, Ventura
+
+* iMac18,x+
+* iMacPro1,1
+* MacPro7,1
+* Macmini8,1
+* MacBook10,1
+* MacBookAir8,1+
+* MacBookPro14,x+
+
+:::
+
 ## `Couldn't allocate runtime area` errors
 
 See [Fixing KASLR slide values](../../extras/kaslr-fix.md)
@@ -350,7 +378,7 @@ The main places to check:
   * Most common on older laptops and pre-builts, run SSDTTime's FixHPET option and add the resulting SSDT-HPET.aml and ACPI patches to your config( the SSDT will not work without the ACPI patches)
 * **PCI allocation issue**:
   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
-  * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` to boot args.
+  * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` or `npci=0x3000` (try both one at a time) to boot args.
     * Some X99 and X299 boards(ie. GA-X299-UD4) may require both npci boot-arg and Above4G enabled
     * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
     * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
@@ -397,19 +425,18 @@ This is generally seen as a USB or SATA error, couple ways to fix:
 
 This assumes you're only booting the installer USB and not macOS itself.
 
-* If you're hitting the 15 port limit, you can temporarily get around this with `XhciPortLimit` but for long term use, we recommend making a [USBmap](https://dortania.github.io/OpenCore-Post-Install/usb/)
-  * `Kernel -> Quirks -> XhciPortLimit -> True`
+* If you're hitting the 15 port limit, you need to make an [USB Map](https://dortania.github.io/OpenCore-Post-Install/usb/)
 
 * Another issue can be that certain firmware won't pass USB ownership to macOS
   * `UEFI -> Quirks -> ReleaseUsbOwnership -> True`
-  * Enabling XHCI Handoff in the BIOS can fix this as well
+  * Enabling EHCI/XHCI Handoff in the BIOS can fix this as well
 
-* Sometimes, if the USB is plugged into a 3.x port, plugging it into a 2.0 port can fix this error.
+* Sometimes, if the USB is plugged into a 3.x port, plugging it into a 2.0 port can fix this error and vice versa.
 
 * For AMD's 15h and 16h CPUs, you may need to add the following:
   * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
 
-* If XLNCUSBFix still doesn't work, then try the following:
+* If XLNCUSBFix still doesn't work, then try the following alongside XLNCUSBFix:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
 
 * X299 Users: Enable Above4G Decoding
@@ -571,7 +598,7 @@ This is due to either a missing SMC emulator or broken one, make sure of the fol
 
 * Lilu and VirtualSMC are both in EFI/OC/kexts and in your config.plist
 * Lilu is before VirtualSMC in the kext list
-* Last resort is to try FakeSMC instead, **do not have both VirtualSMC and FakeSMC enabled**
+* Last resort is to try [FakeSMC](https://github.com/CloverHackyColor/FakeSMC3_with_plugins) instead, **do not have both VirtualSMC and FakeSMC enabled**
 
 ## Kernel Panic on AppleIntelI210Ethernet
 
@@ -641,8 +668,4 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 
 ## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
 
-This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
-
-* Alternatively, you can boot macOS 11.2.3 or older to resolve
-  * For educational purposes, we've provided some images:
-    * [macOS 11.2.3 InstallAssistant(macOS)](https://archive.org/details/install-mac-os-11.2.3-20-d-91)
+This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve this, you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.

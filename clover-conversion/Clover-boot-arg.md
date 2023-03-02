@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # Clover Boot Arg Conversion
 
 This section is mainly used for explaining what boot-args are no longer relevant, it's quite common for users to be still carrying legacy args which have little to no real affect in newer versions of macOS or have little use in OpenCore
@@ -20,7 +24,7 @@ This list is based of memory and an annoyed self with seeing these flags keep po
 
 ## Kexts flags
 
-**nvda_drv=1**: Used for enabling Nvidia's Web Drivers, no longer works in macOS 10.12
+**nvda_drv=1**: Used for enabling NVIDIA's Web Drivers, no longer works in macOS 10.12
 
 * This flag was actually turned into `nvda_drv_vrl=1` for Sierra and High Sierra
 
@@ -34,7 +38,7 @@ For some reason people kept using these flags into Clover which had no effect, a
 
 **GraphicsEnabler=Yes/No**
 
-* InjectAMD/Nvidia was the Clover equivalent but no feature parity in OpenCore besides running [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
+* InjectAMD/NVIDIA was the Clover equivalent but no feature parity in OpenCore besides running [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
 
 **IGPEnabler=Yes/No**
 

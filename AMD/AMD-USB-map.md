@@ -1,3 +1,7 @@
+---
+search: false
+---
+
 # AMD USB Map
 
 For those looking for the AMD USB map guide, it has been moved here:
