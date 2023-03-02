@@ -92,6 +92,7 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 ### Quirks
 
 ::: tip Info
+
 Settings relating to boot.efi patching and firmware fixes. For most users, leave it as default.
 
 * **ProtectMemoryRegions**: YES
