@@ -1,4 +1,4 @@
-# 笔记本 Kaby Lake
+# 笔记本 Kaby Lake & Amber Lake Y
 
 | 支持 | 版本 |
 | :--- | :--- |
@@ -91,8 +91,12 @@
 
 ### Quirks
 
-::: tip 信息
-与boot.efi补丁和固件修复相关的设置，我们将其保留为默认设置
+::: tip Info
+Settings relating to boot.efi patching and firmware fixes. For most users, leave it as default.
+
+* **ProtectMemoryRegions**: YES
+  * Fixes shutdown/restart on some Chromebooks that would otherwise result in a `AppleEFINVRAM` kernel panic.
+
 :::
 ::: details 更深入的信息
 
@@ -102,11 +106,13 @@
   * 允许slide变量在安全模式下使用。
 * **EnableWriteUnprotector**: YES
   * 需要从CR0寄存器移除写保护。
+* **ProtectMemoryRegions**: YES
+  * Patches memory region types for incorrectly mapped CSM/MMIO regions. Necessary for all Chromebooks that utilize coreboot UEFI firmware.
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **SetupVirtualMap**: YES
   * 修复了SetVirtualAddresses对虚拟地址的调用, 用于Gigabyte主板，以解决早期的内核崩溃
-  
+
 :::
 
 ## DeviceProperties
@@ -598,6 +604,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 | 引导参数 | 说明 |
 | :--- | :--- |
 | **-wegnoegpu** | 用于禁用除集成的Intel iGPU之外的所有其他gpu，对于那些想运行新版本的macOS，而他们的dGPU不支持的人很有用 |
+|**-igfxnotelemetryload** | Prevents iGPU telemetry from loading. iGPU telemetry may cause a freeze during startup on certain laptops such as Chromebooks on macOS 10.15 and higher, see [here](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics) for more information.
 
 * **csr-active-config**: `00000000`
   * '系统完整性保护' (SIP)的设置。通常建议通过恢复分区使用`csrutil`进行更改。

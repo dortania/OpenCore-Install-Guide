@@ -320,7 +320,7 @@ The main thing you need to keep in mind is:
   * 允许Lilu和其他kext在不需要`keepsyms=1`的情况下拥有更可靠的性能
 * **DisableRtcChecksum**: NO
   * 防止AppleRTC写入主校验和(0x58-0x59)，这对于接收BIOS重置或在重启/关机后进入安全模式的用户是必需的
-* **ExtendBTFeatureFlags** NO
+* **ExtendBTFeatureFlags**: NO
   * 对于那些非apple /非fenvi卡有连续性问题的人很有帮助
 * **LapicKernelPanic**: NO
   * 在AP核心lapic中断上禁用内核崩溃，一般HP系统需要。相当于Clover的`Kernel LAPIC`

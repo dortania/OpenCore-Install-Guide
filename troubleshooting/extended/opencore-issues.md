@@ -146,7 +146,7 @@
 
 ::: details 文件夹结构示例
 
-![Directory Structure from OpenCore's DOC](../../images/troubleshooting/troubleshooting-md/oc-structure.png)
+![Directory Structure from OpenCore's Documentation](../../images/troubleshooting/troubleshooting-md/oc-structure.png)
 
 :::
 
@@ -162,4 +162,15 @@
 
 ## 收到 “OC: Failed to find SB model disable halting on critical error”
 
-这是一个拼写错误，请确保在你的 config.plist 中将`Misc -> Security -> SecureBootModel` 设置为 **disabled**
+This is a typo, ensure that in your config.plist `Misc -> Security -> SecureBootModel` is set to Disable**d**
+
+## Legacy boot stuck on `BOOT FAIL!`
+
+This error means that EFI/OC/OpenCore.efi could not be found on any partition.
+Double check that the EFI folder structure is correct.
+
+::: details Example of folder structure
+
+![Directory Structure from OpenCore's Documentation](../../images/troubleshooting/troubleshooting-md/oc-structure.png)
+
+:::

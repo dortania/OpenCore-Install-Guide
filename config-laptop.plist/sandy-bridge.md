@@ -168,6 +168,14 @@ config.plist还没有这个部分，所以你必须手动创建它。
 | **`00000100`** | Laptop | To be used with laptops |
 | **`10000300`** | NUC | 与英特尔NUCs一起使用 |
 
+#### Laptops with High-End HD Screens
+
+For laptop displays that have a resolution of 1600x900 or greater, it is necessary to add an extra entry which will let macOS know that we are using a DualLink display.
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| AAPL00,DualLink | Data | `01000000` |
+
 #### Configuration Notes
 
 * VGA **不支持**(除非它是通过DP转VGA内部适配器运行的，显然只有极少数设备会将其视为DP而不是VGA，这完全是运气。)
