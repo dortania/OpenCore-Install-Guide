@@ -7,36 +7,27 @@
 
 ## 下载macOS:现代OS
 
-This method allows you to download macOS 10.13 and newer, for 10.12 and older see [Downloading macOS: Legacy OS](#downloading-macos-legacy-os).
+此方法允许您下载macOS 10.13及更新版本，10.12及更早版本请参见 [下载 macOS: Legacy OS](#downloading-macos-legacy-os).
 
-* **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
-  * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
-    * If you've already [mapped your USB ports](https://dortania.github.io/OpenCore-Post-Install/usb/) and disabled `XhciPortLimit`, you can boot macOS 11.3+ without issues.
+* **macOS 12及以上版本注**:由于最新macOS版本对USB堆栈进行了更改，因此在安装macOS之前，强烈建议您映射USB端口(使用USBToolBox)。
+  * <span style="color:red"> 注意: </span> 在macOS 11.3及更新版本中，[XhciPortLimit被打破，导致引导循环](https://github.com/dortania/bugtracker/issues/162)。
+    * 如果你已经[映射了你的USB端口](https://sumingyd.github.io/OpenCore-Post-Install/usb/)并且禁用了`XhciPortLimit`，你可以正常启动macOS 11.3+。
 
-From a macOS machine that meets the requirements of the OS version you want to install, go directly to the App Store:
+在符合你想要安装的OS版本要求的macOS机器上，直接进入App Store:
 
-* [Using App Store](#using-app-store)
+* [使用 App Store](#using-app-store)
 
-For machines that need a specific OS release or can't download from the App Store:
+对于需要特定操作系统版本或无法从App Store下载的机器:
 
-- [在macOS中制作安装程序](#在macos中制作安装程序)
-  - [下载macOS:现代OS](#下载macos现代os)
-  - [Using App Store](#using-app-store)
-  - [Command Line Software Update Utility](#command-line-software-update-utility)
-  - [Munki's InstallInstallMacOS utility](#munkis-installinstallmacos-utility)
-  - [下载macOS:传统OS](#下载macos传统os)
-  - [设置安装程序](#设置安装程序)
-  - [传统设置](#传统设置)
-  - [设置OpenCore的EFI环境](#设置opencore的efi环境)
-  - [现在所有这些都完成了，前往设置EFI 来完成你的工作](#现在所有这些都完成了前往设置efi-来完成你的工作)
+[[toc]]
 
-## Using App Store
+## 使用 App Store
 
 在符合你想要安装的操作系统版本要求的macOS机器上，直接进入App Store下载所需的操作系统版本，然后继续 [**设置安装程序**](#setting-up-the-installer).
 
-## Command Line Software Update Utility
+## 命令行软件更新实用程序
 
-Open a terminal window then copy and paste the below command:
+开一个终端窗口，然后复制并粘贴下面的命令:
 
 ```sh
 softwareupdate --list-full-installers;echo;echo "Please enter version number you wish to download:";read;$(if [ -n "$REPLY" ]; then; echo "softwareupdate --fetch-full-installer --full-installer-version "$REPLY; fi);
@@ -44,11 +35,11 @@ softwareupdate --list-full-installers;echo;echo "Please enter version number you
 
 ![](../images/installer-guide/mac-install-md/commandlinesoftwareupdateutility.png)
 
-This gives you a list of available releases you can choose from.
-Once downloaded it will be saved in your Applications folder.
-You can continue to [**Setting up the installer**](#setting-up-the-installer).
+这将为您提供一个可供选择的可用版本列表。
+一旦下载，它将保存在您的应用程序文件夹。
+您可以继续[**设置安装程序**](#setting-up-the-installer).
 
-## Munki's InstallInstallMacOS utility
+## Munki的InstallInstallMacOS实用程序
 
 ::: details 运行macOS Monterey 12.3或以上版本的用户请注意
 
@@ -80,7 +71,7 @@ mkdir -p ~/macOS-installer && cd ~/macOS-installer && curl https://raw.githubuse
 
 ![](../images/installer-guide/mac-install-md/munki-process.png)
 
-This is going to take a while as we're downloading the entire 8GB+ macOS installer, so it's highly recommended to read the rest of the guide while you wait.
+这将需要一段时间，因为我们正在下载整个8GB以上的macOS安装程序，所以强烈建议您在等待的同时阅读指南的其余部分。
 
 完成后，你会发现在你的`~/macOS-Installer/`文件夹中有一个包含macOS安装程序的DMG，名为`Install_macOS_11.1-20C69.Dmg`。挂载它，你就会找到安装程序。
 
@@ -108,9 +99,9 @@ This is going to take a while as we're downloading the entire 8GB+ macOS install
 
 现在我们将格式化USB为macOS安装程序和OpenCore做准备。我们希望使用带有GUID分区映射的macOS Extended (HFS+)。这将创建两个分区:主分区`MyVolume`和第二个名为`EFI`的分区，它用作引导分区，固件将在其中检查引导文件。
 
-* Note 1: The `EFI` partition created by formatting the USB is hidden until you mount it. This will be mounted later when [Setting up OpenCore's EFI environment](#setting-up-opencores-efi-environment)
-* Note 2: By default, Disk Utility only shows partitions – press Cmd/Win+2 to show all devices (alternatively you can press the View button)
-* Note 3: Users following "Legacy macOS: Online Method" section can skip to [Setting up OpenCore's EFI environment](#setting-up-opencores-efi-environment)
+* 注意1:通过格式化USB创建的`EFI`分区是隐藏的，直到你挂载它。稍后将在[设置OpenCore的EFI环境](#setting-up-opencores-efi-environment)时挂载
+* 注2:默认情况下，磁盘实用程序只显示分区-按Cmd/Win+2显示所有设备(或者你可以按查看按钮)
+* 注3:“Legacy macOS: 在线方法”部分的用户可以跳转到[设置OpenCore的EFI环境](#setting-up-opencores-efi-environment)
 
 ![格式化USB](../images/installer-guide/mac-install-md/format-usb.png)
 
