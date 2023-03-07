@@ -87,7 +87,7 @@ kext是**k**ernel**ext**ension,你可以把它想象成macOS的驱动程序，�
 
 以下插件不需要引导,仅仅添加额外的硬件监控等系统功能。除非另有说明，这些插件都是随VirtualSMC附带的
 
-::: tip
+::: tip 提示
 
 虽然VirtualSMC支持10.4，但插件可能需要更新的版本。
 
@@ -379,14 +379,14 @@ BlueToolFixup可以在Lilu之后的任何地方使用。
 * [CPUTopologyRebuild](https://github.com/b00t0x/CpuTopologyRebuild)
   * 一个实验性的Lilu插件，用于优化Alder Lake的异构核心配置。 **只适用于Alder Lake cpu**
 * [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
-  * Patch various functions of macOS, see [the README](https://github.com/acidanthera/RestrictEvents#boot-arguments) for more info
+  * macOS各种功能的补丁，详见[README](https://github.com/acidanthera/RestrictEvents#boot-arguments)
 * [EmeraldSDHC](https://github.com/acidanthera/EmeraldSDHC)
-  * macOS kernel extension for eMMC support. Currently only supports eMMC/MMC cards at up to HS200 speeds.  This driver is currently a work in progress and may experience poor performance or be nonfunctional on some devices. SD cards are currently not supported at this time.
+  * macOS内核扩展的eMMC支持。目前仅支持eMMC/MMC卡，最高速度为HS200。此驱动程序目前正在进行中，在某些设备上可能会出现性能不佳或无法使用的情况。目前不支持SD卡。
 
 ::: details 传统SATA kext
 
 * [AppleIntelPIIXATA.kext](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/d20d9975c144728da7ae2543d65422f53dabaa2d/payloads/Kexts/Misc/AppleIntelPIIXATA-v1.0.0.zip)
-  * Legacy IDE and ATA kext for older Core 2 Duo/Quad and Pentium 4 systems. Needed for macOS 11 (Big Sur) and newer as this kext was dropped in macOS 10.15 (Catalina)
+  * Legacy IDE和ATA kext适用于老Core 2 Duo/Quad和Pentium 4系统。macOS 11(大苏尔)和更新的kext需要在macOS 10.15(卡特琳娜)中删除
 * [AHCIPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/AHCIPortInjector.kext.zip)
   * 传统的SATA/AHCI注入器，主要适用于Penryn时代的老旧机器
 * [ATAPortInjector](https://github.com/khronokernel/Legacy-Kexts/blob/master/Injectors/Zip/ATAPortInjector.kext.zip)
