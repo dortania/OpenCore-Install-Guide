@@ -344,7 +344,7 @@ OpenCore不支持下面列出的所有型号，但为了方便参考，这里列
 | SMBIOS | 年代 | CPU家族 | 初始支持 | 最后支持版本 |
 | :--- | :--- | :--- | :--- | :--- |
 | PowerBook2,1 | Mid-1999 | PowerPC 750 (G3) | 8.6 | 10.3.9 |
-| PowerBook2,2 | Late 20000 | PowerPC 750cx (G3) | 9.0.4 | 10.4.11 |
+| PowerBook2,2 | Late 2000 | PowerPC 750cx (G3) | 9.0.4 | 10.4.11 |
 | PowerBook4,1 | Late 2002 | PowerPC 7455 (G4) | 9.2.2 | 10.5.8 |
 | PowerBook4,2 | Early 2002 | PowerPC 750cx (G3) | 9.2.1 | 10.4.11 |
 | PowerBook4,3 | Mid-2002 | PowerPC 750fx (G3) | 9.2.2 | ^^ |
