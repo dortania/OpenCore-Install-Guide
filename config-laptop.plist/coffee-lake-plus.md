@@ -101,7 +101,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | :--- | :--- | :--- |
 | DevirtualiseMmio | YES |
 | EnableWriteUnprotector | NO |
-| ProtectMemoryRegions| YES | Only for Chromebooks, leave default otherwise. |
+| ProtectMemoryRegions| YES | Only for Chromebooks, leave disabled otherwise. |
 | ProtectUefiServices | YES | 
 | RebuildAppleMemoryMap | YES |
 | SyncRuntimePermissions | YES |
