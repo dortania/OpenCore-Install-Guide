@@ -162,14 +162,14 @@
 
 ## 收到 “OC: Failed to find SB model disable halting on critical error”
 
-This is a typo, ensure that in your config.plist `Misc -> Security -> SecureBootModel` is set to Disable**d**
+这是一个输入错误，请确保您的配置列表中的`Misc -> Security -> SecureBootModel`被设置为**禁用**
 
-## Legacy boot stuck on `BOOT FAIL!`
+## Legacy 引导卡在 `BOOT FAIL!`
 
-This error means that EFI/OC/OpenCore.efi could not be found on any partition.
-Double check that the EFI folder structure is correct.
+此错误意味着在任何分区上都找不到EFI/OC/OpenCore.EFI。
+再次检查EFI文件夹结构是否正确。
 
-::: details Example of folder structure
+::: details 文件夹结构示例
 
 ![Directory Structure from OpenCore's Documentation](../../images/troubleshooting/troubleshooting-md/oc-structure.png)
 
