@@ -84,7 +84,7 @@
 * [InyextcionES](https://github.com/InyextcionES/OpenCore-Install-Guide)(西班牙语)
 * [macOS86](https://macos86.gitbook.io/guida-opencore/)(Italian, 不再维护)
 * [Technopat](https://www.technopat.net/sosyal/konu/opencore-ile-macos-kurulum-rehberi.963661/)(土耳其)
-* [ThrRip](https://github.com/ThrRip/OpenCore-Install-Guide)(Chinese, 不再维护)
+* [ThrRip](https://github.com/ThrRip/OpenCore-Install-Guide)(中文, 不再维护)
 * [sumingyd](https://github.com/sumingyd/OpenCore-Install-Guide)(中文)
 * [Shijuro](https://github.com/shijuro/OpenCore-Install-Guide)(俄罗斯)
 * [viOpenCore](https://github.com/viOpenCore/OpenCore-Install-Guide)(越南)
