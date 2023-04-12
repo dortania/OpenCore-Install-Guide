@@ -267,17 +267,19 @@ To merge:
 
 ![](../images/config/AMD/kernel.gif)
 
-You will also need to modify three patches, all named `algrey - Force cpuid_cores_per_package`. You only need to change the `Replace` value. You should change:
+You will also need to modify four patches, all named `algrey - Force cpuid_cores_per_package`. You only need to change the `Replace` value. You should change:
 
 * `B8000000 0000` => `B8 <core count> 0000 0000`
 * `BA000000 0000` => `BA <core count> 0000 0000`
 * `BA000000 0090` => `BA <core count> 0000 0090`
+* `BA000000 00` => `BA <core count> 0000 00`
 
 Where `<core count>` is replaced with the physical core count of your CPU in hexadecimal. For example, an 8-Core 5800X would have the new Replace value be:
 
 * `B8 08 0000 0000`
 * `BA 08 0000 0000`
 * `BA 08 0000 0090`
+* `BA 08 0000 00`
 
 ::: details Core Count => Hexadecimal Table
 
