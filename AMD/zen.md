@@ -267,17 +267,19 @@ Kernel patches:
 
 ![](../images/config/AMD/kernel.gif)
 
-你还需要修改三个补丁，它们的名字都是`algrey - Force cpuid_cores_per_package`. 你只需要改变`Replace`的值。你应该改变:
+你还需要修改四个补丁，它们都被命名为`algrey - Force cpuid_cores_per_package`。你只需要改变`Replace`的值。你应该改变:
 
 * `B8000000 0000` => `B8 <core count> 0000 0000`
 * `BA000000 0000` => `BA <core count> 0000 0000`
 * `BA000000 0090` => `BA <core count> 0000 0090`
+* `BA000000 00` => `BA <core count> 0000 00`
 
 其中`<core count>`被十六进制的CPU物理核心计数替换。例如，一个8核的5800X处理器的新值是:
 
 * `B8 08 0000 0000`
 * `BA 08 0000 0000`
 * `BA 08 0000 0090`
+* `BA 08 0000 00`
 
 ::: details 核心计数=>十六进制表
 
