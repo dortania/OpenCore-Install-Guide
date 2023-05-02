@@ -164,7 +164,7 @@ So this is due to some issue around the `Booter -> Quirks` you set, main things 
       * AMD's A520
       * AMD's TRx40
       * VMs like QEMU
-  
+
 Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
 
 * If your firmware supports MATs(2018+ firmwares):
@@ -240,7 +240,7 @@ To resolve this you can do one of the following:
 * Reinstall macOS with the latest version
 * Or copy over the Secure Boot manifests from `/usr/standalone/i386` to `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
   * Note you will most likely need to do this via terminal as the Preboot volume isn't easily editable via the Finder
-  
+
 To do this via terminal:
 
 ```bash
@@ -380,7 +380,7 @@ The main places to check:
   * **UPDATE YOUR BIOS**, make sure it's on the latest. Most OEMs have very broken PCI allocation on older firmwares, especially AMD
   * Make sure either Above4G is enabled in the BIOS, if no option available then add `npci=0x2000` or `npci=0x3000` (try both one at a time) to boot args.
     * Some X99 and X299 boards(ie. GA-X299-UD4) may require both npci boot-arg and Above4G enabled
-    * AMD CPU Note: **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
+    * **Do not have both the Above4G setting enabled and npci in boot args, they will conflict**
     * 2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
   * Other BIOS settings that are important: CSM disabled, Windows 8.1/10 UEFI Mode enabled
 * **NVMe or SATA issue**:
@@ -439,7 +439,7 @@ This assumes you're only booting the installer USB and not macOS itself.
 * If XLNCUSBFix still doesn't work, then try the following alongside XLNCUSBFix:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
 
-* X299 Users: Enable Above4G Decoding
+* X299 Users: Enable Above4G Decoding (make sure BIOS `MMIOHBase` is set to `12T` or lower if it doesn't work, this is due to macOS only supporting 44-bit physical addressing)
   * Odd firmware bug on X299 where USB breaks otherwise
 
 * Missing USB ports in ACPI:
@@ -447,7 +447,7 @@ This assumes you're only booting the installer USB and not macOS itself.
   * For Intel's Ice Lake and Comet Lake, we recommend [SSDT-RHUB](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
     * SSDTTime's `7. USB Reset` option can do the same
   * For AMD, run SSDTTime's `7. USB Reset` option and add the provided SSDT-RHUB to your EFI and config.plist
-  
+
 ### SATA Issues
 
 On rare occasions(mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
@@ -545,7 +545,7 @@ This is likely due to faulty or outright missing NullCPUPowerManagement. To fix 
 * **Note**: On older Intel CPUs(ie. Penryn and older), it may be due to IRQ conflicts or the HPET device being disabled. To resolve, you have 2 options:
   * [SSDTTime's FixHPET Option](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
   * Forcing the HPET Device on
-  
+
 ::: details Forcing the HPET Device on
 
 Under ACPI -> Patch:
@@ -608,7 +608,7 @@ For those running Comet lake motherboards with the I225-V NIC, you may experienc
   * By default, this is what Asus and Gigabyte motherboards use
 * PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
   * Some OEMs may use this instead
-  
+
 For those who can to your PciRoot manually, you'll want to install macOS fully and run the following with [gfxutil](https://github.com/acidanthera/gfxutil/releases):
 
 ```

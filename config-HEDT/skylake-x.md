@@ -703,7 +703,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 ### Enable
 
 * VT-x
-* Above 4G Decoding
+* Above 4G Decoding (make sure BIOS `MMIOHBase` is set to `12T` or lower if it doesn't work, this is due to macOS only supporting 44-bit physical addressing)
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
