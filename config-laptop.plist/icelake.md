@@ -105,8 +105,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | ProtectUefiServices | YES |
 | RebuildAppleMemoryMap | YES |
 | SetupVirtualMap | NO |
-| SyncRuntimePermissions | YES | 
-
+| SyncRuntimePermissions | YES |
 
 :::
 ::: details More in-depth Info
