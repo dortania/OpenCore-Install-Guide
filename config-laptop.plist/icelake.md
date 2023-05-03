@@ -106,7 +106,6 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | RebuildAppleMemoryMap | YES |
 | SetupVirtualMap | NO |
 | SyncRuntimePermissions | YES |
-
 :::
 ::: details More in-depth Info
 
