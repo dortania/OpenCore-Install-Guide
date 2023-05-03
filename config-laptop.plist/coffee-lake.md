@@ -96,11 +96,13 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 ::: tip Info
 Settings relating to boot.efi patching and firmware fixes, for us, we need to change the following:
 
-| Quirk | Enabled |
-| :--- | :--- |
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
 | EnableWriteUnprotector | NO |
+| ProtectMemoryRegions| YES | Only for Chromebooks, leave disabled otherwise. |
 | RebuildAppleMemoryMap | YES |
 | SyncRuntimePermissions | YES |
+
 :::
 
 ::: details More in-depth Info
@@ -112,6 +114,8 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 * **EnableWriteUnprotector**: NO
   * This quirk and RebuildAppleMemoryMap can commonly conflict, recommended to enable the latter on newer platforms and disable this entry.
   * However, due to issues with OEMs not using the latest EDKII builds you may find that the above combo will result in early boot failures. This is due to missing the `MEMORY_ATTRIBUTE_TABLE` and such we recommend disabling RebuildAppleMemoryMap and enabling EnableWriteUnprotector. More info on this is covered in the [troubleshooting section](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
+* **ProtectMemoryRegions**: YES
+  * Patches memory region types for incorrectly mapped CSM/MMIO regions. Necessary for all Chromebooks that utilize coreboot UEFI firmware.
 * **ProvideCustomSlide**: YES
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
@@ -522,6 +526,7 @@ System Integrity Protection bitmask
 | boot-args | Description |
 | :--- | :--- |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
+| **-igfxnotelemetryload** | Prevents iGPU telemetry from loading. iGPU telemetry may cause a freeze during startup on certain laptops such as Chromebooks on macOS 10.15 and higher, see [here](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics) for more information.
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
