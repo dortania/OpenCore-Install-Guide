@@ -96,11 +96,13 @@
 ::: tip 信息
 与boot.efi补丁和固件修复相关的设置，对我们来说，我们需要更改以下内容:
 
-| 选项 | 启用 |
-| :--- | :--- |
+| 选项 | 启用 | 注释 |
+| :--- | :--- | :--- |
 | EnableWriteUnprotector | NO |
+| ProtectMemoryRegions| YES | 仅适用于chromebook，否则请保持禁用状态。 |
 | RebuildAppleMemoryMap | YES |
 | SyncRuntimePermissions | YES |
+
 :::
 
 ::: details 更深入的信息
@@ -112,6 +114,8 @@
 * **EnableWriteUnprotector**: NO
   * 这一选项和RebuildAppleMemoryMap通常会发生冲突，建议在较新的平台上启用后者并禁用此条目。
   * 然而，由于原始设备制造商没有使用最新的EDKII版本，您可能会发现上述组合将导致早期启动失败。这是由于缺少`MEMORY_ATTRIBUTE_TABLE`，因此我们建议禁用RebuildAppleMemoryMap并启用EnableWriteUnprotector。有关此问题的更多信息见[故障排除部分](/troubleshooting/extended/kernel-issues.md#stuck-on-eb-log-exitbs-start)
+* **ProtectMemoryRegions**: YES
+  * 为不正确映射的CSM/MMIO区域修补内存区域类型。所有使用coreboot UEFI固件的chromebook都必须使用。
 * **ProvideCustomSlide**: YES
   * 用于Slide变量计算。然而，这个选项的必要性取决于 `OCABC: Only N/256 slide values are usable!` 调试日志中的消息。如果显示 `OCABC: All slides are usable! You can disable ProvideCustomSlide!` 在你的日志中，你可以禁用`ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
@@ -522,6 +526,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 | 引导参数 | 说明 |
 | :--- | :--- |
 | **-wegnoegpu** | 用于禁用除集成的Intel iGPU之外的所有其他gpu，对于那些想运行新版本的macOS，而他们的dGPU不支持的人很有用 |
+| **-igfxnotelemetryload** | 阻止iGPU遥测加载。iGPU遥测可能会导致某些笔记本电脑在启动时冻结，例如macOS 10.15或更高版本的chromebook，参见[这里](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics)了解更多信息。
 
 * **csr-active-config**: `00000000`
   * '系统完整性保护' (SIP)的设置。通常建议通过恢复分区使用`csrutil`进行更改。

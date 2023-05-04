@@ -92,6 +92,7 @@
 ### Quirks
 
 ::: tip Info
+
 Settings relating to boot.efi patching and firmware fixes. For most users, leave it as default.
 
 * **ProtectMemoryRegions**: YES
@@ -604,7 +605,7 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 | 引导参数 | 说明 |
 | :--- | :--- |
 | **-wegnoegpu** | 用于禁用除集成的Intel iGPU之外的所有其他gpu，对于那些想运行新版本的macOS，而他们的dGPU不支持的人很有用 |
-|**-igfxnotelemetryload** | Prevents iGPU telemetry from loading. iGPU telemetry may cause a freeze during startup on certain laptops such as Chromebooks on macOS 10.15 and higher, see [here](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics) for more information.
+| **-igfxnotelemetryload** | 阻止iGPU遥测加载。iGPU遥测可能会导致某些笔记本电脑(如macOS 10.15及更高版本的chromebook)在启动时冻结，请参阅[这里](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics)了解更多信息。
 
 * **csr-active-config**: `00000000`
   * '系统完整性保护' (SIP)的设置。通常建议通过恢复分区使用`csrutil`进行更改。
