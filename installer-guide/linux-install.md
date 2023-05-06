@@ -95,7 +95,7 @@ In terminal:
       1. `partition number`: keep blank for default
       2. `first sector`: keep blank for default
       3. `last sector`: keep blank for whole disk
-      4. `Hex code or GUID`: `0700` for Microsoft basic data partition type
+      4. `Hex code or GUID`: `EF00` for EFI system partition type
    5. send `w`
       * Confirm with `y`
       ![](../images/installer-guide/linux-install-md/unknown-9.png)
@@ -126,7 +126,7 @@ In terminal:
       1. partition number: keep blank for default
       2. first sector: keep blank for default
       3. last sector: `+200M` to create a 200MB partition that will be named later on OPENCORE
-      4. Hex code or GUID: `0700` for Microsoft basic data partition type
+      4. Hex code or GUID: `EFI` system partition type
       ![](../images/installer-guide/linux-install-md/unknown-15.png)
    5. send `n`
       1. partition number: keep blank for default
