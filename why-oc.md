@@ -100,7 +100,7 @@ OpenCore的版本号并不代表项目的质量。相反，它更多的是一种
 
 从OpenCore 0.6.2开始，你现在可以启动每个Intel版本的macOS，一直到OS X 10.4!正确的支持取决于您的硬件，所以请自行验证:[硬件限制](macos-limits.md)
 
-::: macOS安装库的详细信息
+::: tip macOS安装库的详细信息
 
 Acidanthera测试了很多版本的OS X，我自己也在我的旧HP DC 7900 (Core2 Quad Q8300)上运行过很多版本的OS X。以下是我测试过的一小部分:
 

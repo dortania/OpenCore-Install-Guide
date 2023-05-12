@@ -171,7 +171,7 @@ lshw -class disk -class storage
 * [预编译二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)
 * 手动克隆 [存储库](https://github.com/KernelWanderers/OCSysInfo)
 
-::: TIP
+:::tip
 我们建议您下载[二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)，因为这是最简单的方法。
 
 如果您想了解关于手动克隆存储库的更多信息，可以查看OCSysInfo[迷你指南](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide).
