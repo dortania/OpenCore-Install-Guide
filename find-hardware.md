@@ -171,7 +171,7 @@ lshw -class disk -class storage
 * [预编译二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)
 * 手动克隆 [存储库](https://github.com/KernelWanderers/OCSysInfo)
 
-:::TIP
+::: TIP
 我们建议您下载[二进制文件](https://github.com/KernelWanderers/OCSysInfo/releases)，因为这是最简单的方法。
 
 如果您想了解关于手动克隆存储库的更多信息，可以查看OCSysInfo[迷你指南](https://github.com/KernelWanderers/OCSysInfo/tree/main/mini-guide).
@@ -179,7 +179,7 @@ lshw -class disk -class storage
 
 ### 发现硬件
 
-:::WARING
+::: WARING
 笔记本电脑用户:在我们开始之前，我们建议您断开任何外部USB设备，因为这可能会导致收集的模棱两可或不必要的信息，可能会使您感到困惑。
 :::
 
