@@ -1,14 +1,6 @@
 # Gathering files
 
-This section is for gathering miscellaneous files for booting macOS, we do expect you to know your hardware well before starting and hopefully made a Hackintosh before as we won't be deep diving in here.
-
-> What's the best way to figure out if my hardware is supported?
-
-See the [**Hardware Limitations page**](macos-limits.md) for some better insight into what macOS requires to boot, hardware support between Clover and OpenCore are quite similar.
-
-> What are some ways to figure out what hardware I have?
-
-See the page before: [Finding your hardware](./find-hardware.md)
+BIG FAT TODO
 
 [[toc]]
 
