@@ -4,7 +4,7 @@
 | :--- | :--- |
 | 初始macOS支持 | OS X 10.10, Yosemite |
 | 最后支持的操作系统 | macOS 12 Monterey |
-| Note | For Ventura information, see [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
+| 注意 | 有关Ventura的信息，请参阅 [macOS 13 Ventura](../extras/ventura.md#dropped-cpu-support) |
 
 ## 起点
 
