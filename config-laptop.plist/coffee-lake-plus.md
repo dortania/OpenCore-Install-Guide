@@ -101,7 +101,7 @@
 | :--- | :--- | :--- |
 | DevirtualiseMmio | YES |
 | EnableWriteUnprotector | NO |
-| ProtectMemoryRegions| YES | Only for Chromebooks, leave disabled otherwise. |
+| ProtectMemoryRegions| YES | 仅适用于chromebook，否则请保持禁用状态。 |
 | ProtectUefiServices | YES |
 | RebuildAppleMemoryMap | YES |
 | SyncRuntimePermissions | YES |
@@ -162,10 +162,10 @@ config.plist还没有这个部分，所以你必须手动创建它。
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **`0900A53E`** | Laptop | Recommended value for UHD 630 |
-| **`00009B3E`** | Laptop | Recommended value for UHD 620 |
-| **`07009B3E`** | NUC | Recommended value for UHD 620/630 |
-| **`0000A53E`** | NUC | Recommended value for UHD 655 |
+| **`0900A53E`** | Laptop | UHD 630的推荐值 |
+| **`00009B3E`** | Laptop | UHD 620的推荐值 |
+| **`07009B3E`** | NUC | UHD 620/630的推荐值 |
+| **`0000A53E`** | NUC | UHD 655的推荐值 |
 
 #### Configuration Notes
 
