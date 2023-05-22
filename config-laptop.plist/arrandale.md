@@ -4,7 +4,7 @@
 | :--- | :--- |
 | 初始macOS支持 | OS X 10.6.3, Snow Leopard |
 | 最后支持的操作系统 | macOS 10.13, High Sierra |
-| Note | Most Clarksfield and Arrandale boards do not support UEFI |
+| 注意 | 大多数Clarksfield和Arrandale板不支持UEFI |
 
 ## 起点
 
@@ -147,14 +147,14 @@
 
 config.plist还没有这个部分，所以你必须手动创建它。
 
-When setting up your iGPU, simply add the values below to the `PciRoot(0x0)/Pci(0x2,0x0)` entry:
+设置iGPU时，只需将以下值添加到`PciRoot(0x0)/Pci(0x2,0x0)`条目:
 
 | Property | Type | Value |
 | :--- | :--- | :--- |
 | framebuffer-patch-enable | Data | `01000000` |
 | framebuffer-singlelink | Data | `01000000` |
 
-* **Note**: Apple's Iron Lake drivers only support LVDS displays and **not** eDP
+* **注意**:苹果的Iron Lake驱动程序只支持LVDS显示，**不支持** eDP
 
 :::
 
@@ -539,9 +539,9 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Arrandale example, we'll chose the MacBookPro6,1 SMBIOS - this is done intentionally for compatibility's sake. The typical breakdown is as follows:
+在这个随机示例中，我们将选择MacBookPro6,1 SMBIOS——这样做是为了兼容性。典型的分类如下:
 
-| SMBIOS | CPU Type | Display Size |
+| SMBIOS | CPU 类型 | 显示尺寸 |
 | :--- | :--- | :--- | :--- |
 | MacBookPro6,1 | Quad Core 45W(High End) | 17" |
 | MacBookPro6,2 | Quad Core 45W(Low End) | 15" |
