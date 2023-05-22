@@ -73,7 +73,7 @@
 
 * 翻译必须是一个专用的分支，不会被合并到Dortania的指南中
 * Forks 必须表明它们是Dortania的翻译，不是官方的
-* Forks 必须遵守我们的[License](License .md)
+* Forks 必须遵守我们的[License](License.md)
 
 如果满足上述条件，您就可以毫无疑问地托管您的翻译!Dortania的网站是用[VuePress](https://vuepress.vuejs.org)使用[GitHub Actions](https://github.com/features/actions)建立的，最后托管在[GitHub Pages](https://pages.github.com)上，所以托管你自己的翻译是没有成本的。
 
