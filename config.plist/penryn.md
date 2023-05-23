@@ -3,7 +3,7 @@
 | 支持 | 版本 |
 | :--- | :--- |
 | 初始macOS支持: Penryn | OS X 10.4.10, Tiger |
-| Last Supported OS: Penryn | macOS 10.13.6 High Sierra |
+| 最后支持的操作系统: Penryn | macOS 10.13.6 High Sierra |
 | 注意 | iGPU支持将不在本指南中介绍，请参阅这里:[GMA补丁](https://sumingyd.github.io/OpenCore-Post-Install/gpu-patching/)|
 | 注意 2 | 启动macOS 10.12、Sierra及更新版本需要SSE4，所以不支持Conroe及以上版本 |
 
@@ -506,9 +506,9 @@ OpenCore的NVRAM GUID，主要针对RTC内存修复用户
 
 为了设置SMBIOS信息，我们将使用CorpNewt的[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)应用程序。
 
-For this Penryn example, we'll chose the iMac10,1 SMBIOS - this is done intentionally for compatibility's sake. There are 4 main SMBIOS used for legacy hardware:
+在这个Penryn示例中，我们选择iMac10,1 SMBIOS——这样做是为了兼容性。有4个主要的SMBIOS用于传统硬件:
 
-| SMBIOS | Hardware | OS Support |
+| SMBIOS | 硬件 | OS 支持 |
 | :--- | :--- | :--- |
 | iMac4,1 | Yonah SMBIOS(32-bit) | 10.4 到 10.6.8 |
 | iMac7,1 | Conroe SMBIOS(64-Bit, SSE3) | 10.4 到 10.11.6 |
@@ -671,7 +671,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 | 选项 | 启用 | 说明 |
 | :--- | :--- | :--- |
-| IgnoreInvalidFlexRatio | NO | Enable this if you have a UEFI BIOS |
+| IgnoreInvalidFlexRatio | NO | 如果您的BIOS是UEFI模式，请开启此选项 |
 | UnblockFsConnect | NO | 主要用于惠普主板 |
 
 :::

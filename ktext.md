@@ -468,7 +468,7 @@ A quick TL;DR of needed SSDTs(这是源代码，你必须将它们编译到.aml�
 | :-------: | :-----: | :----: | :------: | :-------: | :-----: |
 | Penryn | N/A | [SSDT-EC](https://sumingyd.github.io/Getting-Started-With-ACPI/Universal/ec-fix.html) | N/A | N/A | N/A |
 | Lynnfield and Clarkdale | ^^ | ^^ | ^^ | ^^ | ^^ |
-| SandyBridge | [CPU-PM](https://sumingyd.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (Run in Post-Install) | ^^ | ^^ | ^^ | ^^ |
+| SandyBridge | [CPU-PM](https://sumingyd.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) (安装后运行) | ^^ | ^^ | ^^ | ^^ |
 | Ivy Bridge | ^^ | ^^ | ^^ | ^^ | ^^ |
 | Haswell | [SSDT-PLUG](https://sumingyd.github.io/Getting-Started-With-ACPI/Universal/plug.html) | ^^ | ^^ | ^^ | ^^ |
 | Broadwell | ^^ | ^^ | ^^ | ^^ | ^^ |
