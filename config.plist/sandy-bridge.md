@@ -531,12 +531,12 @@ System Integrity Protection bitmask
   * Needed for non-latin keyboards in the format of `lang-COUNTRY:keyboard`, recommended to keep blank though you can specify it(**Default in Sample config is Russian**):
   * American: `en-US:0`(`656e2d55533a30` in HEX)
   * Full list can be found in [AppleKeyboardLayouts.txt](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
-  * Hint: `prev-lang:kbd` can be changed into a String so you can input `en-US:0` directly instead of converting to HEX
+  * Hint: `prev-lang:kbd` must use HEX, if changed into a String, you will get a gray screen and cursor when booting to install macOS Big Sur and newer
   * Hint 2: `prev-lang:kbd` can be set to a blank variable (eg. `<>`) which will force the Language Picker to appear instead at first boot up.
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
-| prev-lang:kbd | String | en-US:0 |
+| prev-lang:kbd | Data | `656e2d55533a30` |
 
 :::
 
