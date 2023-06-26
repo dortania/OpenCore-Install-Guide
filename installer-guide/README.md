@@ -11,7 +11,7 @@ Requirements:
 Offline installers have a complete copy of macOS, while online installers are only a recovery image (~500MB) which then download macOS from Apple servers once booted.
 
 * Offline
-  * Can only be made in macOS or possibly Linux (with ![linux-apfs-rw](https://github.com/linux-apfs/linux-apfs-rw). Note that this Linux driver is considered unstable, and thus its usage is possible, but not recommendeded and will not be covered in this guide.)
+  * Can only be made in macOS or possibly Linux (with [linux-apfs-rw](https://github.com/linux-apfs/linux-apfs-rw). Note that this Linux driver is considered unstable, and thus its usage is possible, but not recommendeded and will not be covered in this guide.)
   * Windows does not have the APFS/HFS drivers needed to assemble a full installer
 * Online
   * Can be made in macOS/Linux/Windows
