@@ -23,6 +23,7 @@ Before we can jump head first into making an OpenCore based system, we need to g
 6. <span style="color:red">_**[CRUCIAL]**_</span> An **Ethernet connection** (no WiFi dongles, Ethernet USB adapter may work depending on macOS support) and you must know your LAN card's model
    * You must either have a physical Ethernet port, or a compatible macOS Ethernet dongle/adapter. In case you have a [compatible WiFi card](https://dortania.github.io/Wireless-Buyers-Guide/), you can also use that.
      * Note the majority of WiFi cards are not supported by macOS
+     * You can also use USB tethering (5G newtork preferred)
    * For people who can't use ethernet but have an Android phone, you can connect your Android phone to WiFi and then tether it using USB with [HoRNDIS](https://joshuawise.com/horndis#available_versions).
 7. <span style="color:red">_**[CRUCIAL]**_</span> **Proper OS Installation:**
    * Be it:
