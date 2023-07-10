@@ -439,7 +439,7 @@ This assumes you're only booting the installer USB and not macOS itself.
 * If XLNCUSBFix still doesn't work, then try the following alongside XLNCUSBFix:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
 
-* X299 Users: Enable Above4G Decoding (make sure BIOS `MMIOHBase` is set to `12T` or lower if it doesn't work, this is due to macOS only supporting 44-bit physical addressing)
+* X299 Users: Enable "Above 4G Decoding"
   * Odd firmware bug on X299 where USB breaks otherwise
 
 * Missing USB ports in ACPI:
