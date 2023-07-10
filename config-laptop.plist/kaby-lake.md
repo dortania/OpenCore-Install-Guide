@@ -92,6 +92,7 @@ This section is allowing spaces to be pass-through to macOS that are generally i
 ### Quirks
 
 ::: tip Info
+
 Settings relating to boot.efi patching and firmware fixes. For most users, leave it as default.
 
 * **ProtectMemoryRegions**: YES
@@ -604,7 +605,7 @@ System Integrity Protection bitmask
 | boot-args | Description |
 | :--- | :--- |
 | **-wegnoegpu** | Used for disabling all other GPUs than the integrated Intel iGPU, useful for those wanting to run newer versions of macOS where their dGPU isn't supported |
-|**-igfxnotelemetryload** | Prevents iGPU telemetry from loading. iGPU telemetry may cause a freeze during startup on certain laptops such as Chromebooks on macOS 10.15 and higher, see [here](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics) for more information.
+| **-igfxnotelemetryload** | Prevents iGPU telemetry from loading. iGPU telemetry may cause a freeze during startup on certain laptops such as Chromebooks on macOS 10.15 and higher, see [here](https://github.com/acidanthera/WhateverGreen#intel-hd-graphics) for more information.
 
 * **csr-active-config**: `00000000`
   * Settings for 'System Integrity Protection' (SIP). It is generally recommended to change this with `csrutil` via the recovery partition.
