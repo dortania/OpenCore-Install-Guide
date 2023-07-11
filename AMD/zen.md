@@ -301,7 +301,7 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 
 ::: tip Info
 
-Settings relating to the kernel, for us we'll be enabling the following:
+Settings relating to the kernel, for us we'll be changing the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
