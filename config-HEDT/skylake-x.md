@@ -704,7 +704,8 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * VT-x
 * Above 4G Decoding
-* Hyper-Threading
+  * If experiencing issues, ensure "MMIOH Base" is set to 12 TB or lower
+  * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
 * OS type: Windows 8.1/10 UEFI Mode (some motherboards may require "Other OS" instead)

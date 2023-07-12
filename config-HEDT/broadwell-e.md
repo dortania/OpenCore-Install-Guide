@@ -750,6 +750,7 @@ For those having booting issues, please make sure to read the [Troubleshooting s
 
 * VT-x
 * Above 4G Decoding
+  * If experiencing issues, ensure "MMIOH Base" is set to 12 TB or lower
 * Hyper-Threading
 * Execute Disable Bit
 * EHCI/XHCI Hand-off
