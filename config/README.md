@@ -43,11 +43,11 @@ After the config is opened, press **Cmd/Ctrl + Shift + R** and point it at your 
 
 Once done, you'll see your SSDTs, Kexts and firmware drivers populated in the config.plist:
 
-![](../images/config/config-universal/after-snapshot.png)
+![](/images/config/config-universal/after-snapshot.png)
 
 * **Note:** If you get a pop up "Disable the following kexts with Duplicate CFBundleIdentifiers?", press "Yes". This is to ensure you don't have duplicate kexts being injected, as some kexts may have some of the same plugins(ie. VoodooInput is in both VoodooPS2 and VoodooI2C's plugin folder)
 
-![](../images/config/config-universal/duplicate.png)
+![](/images/config/config-universal/duplicate.png)
 
 If you wish to clean up the file a bit, you can remove the `#WARNING` entries. Though they cause no issues staying there, so up to personal preference.
 
@@ -56,8 +56,3 @@ The config.plist **must** match the contents of the EFI folder. If you delete a 
 
 If you make any modifications, you can use the OC snapshot tool (**Cmd/Ctrl + R**) in ProperTree to update the config.plist.
 :::
-
-## Device Properties
-
-## NVRAM
-

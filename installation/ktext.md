@@ -304,7 +304,7 @@ To enable AirportItlwm support with OpenCore, you'll need to either:
 * If you cannot enable SecureBootModel, you can still force inject IO80211Family (**highly discouraged**)
   * Set the following under `Kernel -> Force` in your config.plist (discussed later in this guide):
   
-![](./images/ktext-md/force-io80211.png)
+![](../images/ktext-md/force-io80211.png)
 
 :::
 

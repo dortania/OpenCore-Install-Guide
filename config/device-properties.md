@@ -1,0 +1,4 @@
+
+# Device Properties
+
+## NVRAM

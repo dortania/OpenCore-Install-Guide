@@ -17,6 +17,10 @@ Due to the easier to use GUI, we recommend downloading AIDA64 and running this a
 
 ### CPU Model
 
+::: warning TODO
+We should probably include something about identifying what platform you have. Zen/FX/etc are not immediately obvious
+:::
+
 | AIDA64                                                 | Device Manager                                                |
 |:-------------------------------------------------------|:--------------------------------------------------------------|
 | ![](./images/finding-hardware-md/cpu-model-aida64.png) | ![](./images/finding-hardware-md/cpu-model-devicemanager.png) |
