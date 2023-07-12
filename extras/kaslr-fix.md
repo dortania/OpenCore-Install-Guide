@@ -65,8 +65,9 @@ The reason we need to reset the memory map is we want it to be more deterministi
 * Update BIOS(extremely important as early BIOS's shipped are known to have memory map issues, especially with Z390)
 * Clear CMOS
 * Enable much needed BIOS settings:
-  * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, can be problematic on some X99, X299 so recommended to test with and without.
-    * Note: On BIOS supporting Resizable BAR Support, enabling Above4G will unlock this option. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
+  * `Above4GDecoding`: This allows devices to use memory regions above 4GB meaning macOS will have more room to fit, but can be problematic on some X99/X299 boasrds.
+    * If experiencing issues, ensure "MMIOH Base" is set to 12 TB or lower, as macOS only supports 44-bit physical addressing.
+    * Note: On BIOS supporting Resizable BAR Support, enabling Above 4G will unlock this option. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to `0` if this is enabled.
   * `Boot Options -> Windows8.1/10 mode`: This will make sure no old legacy garbage is loaded. Fun fact, `other OS` is only designed for booting older versions of Windows and not for other OS.
 * Disable as many unneeded devices in the BIOS(this means there is less variation in the map on each boot, so fewer chances of boot failure). Common settings:
   * `CSM`: For legacy support, adds a bunch of garbage we don't want. This also can break the shell so you can't boot into it.
