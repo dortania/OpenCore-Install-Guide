@@ -18,6 +18,38 @@ VGA is not supported on Intel iGPUs HD5x00 and older.
 
 ## Sandy Bridge
 
+::: tip
+
+The Sandy Bridge drivers use the property name `AAPL,snb-platform-id` instead of `AAPL,ig-platform-id`. Make sure your config.plist reflects this.
+
+:::
+
+| AAPL,snb-platform-id | Type | Comment |
+| ------------------- | ---- | ------- |
+| **`00000100`** | Laptop | To be used with laptops |
+| **`10000300`** | NUC | To be used with Intel NUCs |
+| **`10000300`** | Desktop | |
+
+::: details Laptop Displays with resolution 1600x900+
+
+For laptop displays that have a resolution of 1600x900 or greater, it is necessary to add an extra entry which will let macOS know that we are using a DualLink display.
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| AAPL00,DualLink | Data | `01000000` |
+
+:::
+
+::: tip Sandy/Ivy Bridge Hybrids
+
+Some laptops from this era came with a mixed chipset setup, using Sandy Bridge CPUs with Ivy Bridge chipsets which creates issues with macOS since it expects a certain [IMEI](https://en.wikipedia.org/wiki/Intel_Management_Engine) ID that it doesn't find and would get stuck at boot(As Apple's iGPU drivers require an [IMEI device](https://en.wikipedia.org/wiki/Intel_Management_Engine)), to fix this we need to fake the IMEI's IDs in these models. Create a new dictionary under `Device Properties->Add` for the PCI device `PciRoot(0x0)/Pci(0x16,0x0)`, and add the below device id.
+
+* To know if you're affected check if your CPU is an Intel Core ix-3xxx and your chipset is Hx6x (for example a laptop with HM65 or HM67 with a Core i3-3110M) through tools like AIDA64.
+
+| Key | Type | Value |
+| :--- | :--- | :--- |
+| device-id | Data | `3A1C0000` |
+
 ## Ivy Bridge (HD 4000/2000)
 
 | AAPL,ig-platform-id | Type | Comment |
