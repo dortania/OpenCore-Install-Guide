@@ -179,7 +179,9 @@ Here we're going to assume you know what ethernet card your system has, reminder
 * [LucyRTL8125Ethernet](https://www.insanelymac.com/forum/files/file/1004-lucyrtl8125ethernet/)
   * For Realtek's 2.5Gb Ethernet
   * Requires macOS 10.15 or newer
-* For Intel's I225-V NICs, patches are mentioned in the desktop [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) section. No kext is required.
+* For Intel's I225-V NICs, patches are mentioned in the desktop [Comet Lake DeviceProperties](config.plist/comet-lake.md#deviceproperties) section.
+  * For macOS 13 and above, the kext supporting I225-V NICs was dropped and replaced with a DriverKit DEXT instead. This DEXT requires working VT-d, so we recommended reusing the older kext: [AppleIntelI210Ethernet](extra-files/AppleIntelI210Ethernet.kext.zip)
+    * Monterey and older need not concern
   * Requires macOS 10.15 or newer
 * For Intel's I350 NICs, patches are mentioned in the HEDT [Sandy and Ivy Bridge-E DeviceProperties](config-HEDT/ivy-bridge-e.md#deviceproperties) section. No kext is required.
   * Requires OS X 10.10 or newer
@@ -231,7 +233,7 @@ pci8086,1096 = Intel 80003ES2LAN
 pci8086,100f = Intel 82545EM
 pci8086,105e = Intel 82571EB/82571GB
 
-# AppleIntelI210Ethernet.kext
+# AppleIntelI210Ethernet.kext ()
 pci8086,1533 = Intel I210
 pci8086,15f2 = Intel I225LM (Added in macOS 10.15)
 
