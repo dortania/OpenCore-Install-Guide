@@ -76,9 +76,11 @@ Verify the following:
 ## Spoofed Polaris dGPUs have none or only partial acceleration
 
 As of when this section was edited, recent versions of WhateverGreen do not spoof Polaris GPUs properly without using no-gfx-spoof. A solution that may be worth a try is to add the no-gfx-spoof property to either your DeviceProperties under your dGPU, or under the SSDT you created for your dGPU. Find the dGPU PCI path using gfxutil, then create a new section under DeviceProperties - Add
+
 ```
 /path/to/gfxutil -f GFX0
 ```
+
 The section under DeviceProperties should be the same as the output of gfxutil, such as "PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)"
 
 Add the no-gfx-spoof property under the PCI path:
