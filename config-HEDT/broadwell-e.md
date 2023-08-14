@@ -750,6 +750,7 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 
 * VT-x
 * 4G以上解码
+  * 如果遇到问题，请确保“MMIOH Base”设置为12 TB或更低
 * 超线程
 * 执行禁止位
 * EHCI/XHCI Hand-off

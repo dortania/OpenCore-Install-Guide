@@ -166,7 +166,7 @@ max_cpus_from_firmware not yet initialized
       * AMD 的 A520
       * AMD 的 TRx40
       * QEMU等虚拟机
-  
+
 另一个问题可能是macOS与CR0寄存器的写保护冲突，要解决这个问题，我们有两个选项:
 
 * 如果您的固件支持MATs(2018+固件):
@@ -242,7 +242,7 @@ OCB: LoadImage failed - Security Violation
 * 重新安装最新版本的macOS
 * 或将安全启动清单从`/usr/standalone/i386`复制到`/Volumes/Preboot/<UUID>/System/Library/CoreServices`
   * 注意，你很可能需要通过终端这样做，因为预引导卷不容易通过Finder编辑
-  
+
 要通过终端来做到这一点:
 
 ```bash
@@ -382,7 +382,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
   * **更新你的BIOS**, 确保它是最新的。大多数oem在旧的固件上的PCI分配非常不稳定，特别是AMD
   * 确保在BIOS中启用Above4G，如果没有可用选项，则添加`npci=0x2000`或`npci=0x3000`(一次尝试一个)引导参数。
     * 一些X99和X299板(如GA-X299-UD4)可能需要npci引导参数和Above4G启用
-    * AMD CPU注意:**在引导参数中不要同时启用Above4G设置和npci设置，它们会冲突**
+    * **不要在启动参数中同时启用Above4G设置和npci，它们会冲突**
     * 2020+ BIOS注意:当启用Above4G时，Resizable BAR支持可能成为可用的。如果启用，请确保Booter -> Quirks -> ResizeAppleGpuBars设置为`0`。
   * 其他重要的BIOS设置:禁用CSM，启用Windows 8.1/10 UEFI模式
 * **NVMe 或 SATA 问题**:
@@ -441,7 +441,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 * 如果XLNCUSBFix仍然不起作用，那么在XLNCUSBFix旁边尝试以下操作:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
 
-* X299用户:启用Above4G解码
+* X299用户:启用"Above 4G解码"
   * X299上的奇怪固件bug，否则USB会损坏
 
 * ACPI中缺少USB端口:
@@ -449,7 +449,7 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
   * 对于英特尔的 Ice Lake 和 Comet Lake, 我们推荐 [SSDT-RHUB](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
     * SSDTTime的 `7. USB Reset` USB复位的选项可以做同样的事情
   * 对于AMD,运行SSDTTime的 `7. USB Reset` 选项，并将提供的SSDT-RHUB添加到您的EFI和config.plist
-  
+
 ### SATA 问题
 
 在极少数情况下(主要是笔记本电脑)，SATA控制器不受macOS的正式支持。为了解决这个问题，我们需要做以下几件事:
@@ -547,7 +547,7 @@ Skip: 0
 * **注**:在旧的英特尔cpu(即。Penryn或更老的版本)，可能是由于IRQ冲突或HPET设备被禁用。要解决这个问题，你有两个选择:
   * [SSDTTime的修复HPET选项](https://sumingyd.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
   * 强制启用HPET设备
-  
+
 ::: details 强制启用HPET设备
 
 在 ACPI -> Patch:
@@ -610,7 +610,7 @@ Skip: 0
   * 默认情况下，这是华硕和Gigabyte主板使用的
 * PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
   * 一些oem厂商可能会使用这个代替
-  
+
 对于那些可以手动连接到你的PciRoot的人，你需要完全安装macOS并使用[gfxutil](https://github.com/acidanthera/gfxutil/releases):
 
 ```

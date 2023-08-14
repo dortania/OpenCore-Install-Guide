@@ -66,6 +66,7 @@ panic(cpu 6 caller 0xffffff801fc057ba): a freed zone element has been modified i
 * 清除CMOS
 * 启用需要的BIOS设置:
   * `Above4GDecoding`: 这允许设备使用4GB以上的内存区域，这意味着macOS将有更多的空间来容纳，在一些X99, X299上可能会有问题，因此建议使用或不使用测试。
+    * 如果遇到问题，请确保“MMIOH基础”设置为12 TB或更低，因为macOS只支持44位物理寻址。.
     * 注意:在BIOS支持可调整大小的BAR支持，启用Above4G将解锁此选项。如果启用，请确保 Booter -> Quirks -> ResizeAppleGpuBars 设置为 `0`
   * `Boot Options -> Windows8.1/10 mode`: 这将确保没有加载旧的遗留垃圾。有趣的事实是，`其他操作系统`只用于引导旧版本的Windows，而不是其他操作系统。
 * 在BIOS中禁用尽可能多的不需要的设备(这意味着每次引导时map的变化更小，因此引导失败的机会更少)。常见的设置:
