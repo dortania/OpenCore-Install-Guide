@@ -159,12 +159,12 @@ max_cpus_from_firmware not yet initialized
 
 * `SetupVirtualMap`
   * 大多数固件都需要这个功能，如果没有这个功能，内核崩溃就很常见，所以如果还没有启用它的话就启用它
-    * 但是，某些固件无法处理这种情况，因此实际上可能会导致这种内核错误:
-      * 英特尔(Intel)的Ice Lake系列
-      * 英特尔的Comet Lake系列
-      * AMD 的 B550
-      * AMD 的 A520
-      * AMD 的 TRx40
+    * 然而，某些固件无法处理这种情况，所以可能会导致内核崩溃:
+      * Intel的 Ice Lake 系列
+      * Intel的 Comet Lake 系列
+      * AMD的 B550
+      * AMD的 A520
+      * AMD的 TRx40
       * QEMU等虚拟机
 
 另一个问题可能是macOS与CR0寄存器的写保护冲突，要解决这个问题，我们有两个选项:
@@ -239,8 +239,8 @@ OCB: LoadImage failed - Security Violation
 
 * 禁用 SecureBootModel
   * 设置 `Misc -> Security -> SecureBootModel -> Disabled`
-* 重新安装最新版本的macOS
-* 或将安全启动清单从`/usr/standalone/i386`复制到`/Volumes/Preboot/<UUID>/System/Library/CoreServices`
+* 使用最新版本重新安装macOS
+* 或将安全启动清单从 `/usr/standalone/i386` 复制到 `/Volumes/Preboot/<UUID>/System/Library/CoreServices`
   * 注意，你很可能需要通过终端这样做，因为预引导卷不容易通过Finder编辑
 
 要通过终端来做到这一点:
@@ -374,27 +374,27 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 主要检查的地方:
 
 * **缺少 EC 补丁**:
-  * 确保在你的 EFI/OC/ACPI 和 ACPI->Add 中都有 EC SSDT， **再次检查它是否启用**
+  * 确保在EFI/OC/ACPI和ACPI -> Add中都有EC SSDT, **再次检查它是否已启用.**
   * 如果你还没有ACPI，请点击这里: [开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)
 * **IRQ 冲突**:
   * 最常见的是在旧的笔记本电脑和预构建，运行SSDTTime的FixHPET选项，并将产生的SSDT-hpet.aml和ACPI补丁添加到配置中(没有ACPI补丁，SSDT将无法工作)
 * **PCI 分配问题**:
-  * **更新你的BIOS**, 确保它是最新的。大多数oem在旧的固件上的PCI分配非常不稳定，特别是AMD
-  * 确保在BIOS中启用Above4G，如果没有可用选项，则添加`npci=0x2000`或`npci=0x3000`(一次尝试一个)引导参数。
-    * 一些X99和X299板(如GA-X299-UD4)可能需要npci引导参数和Above4G启用
+  * **更新你的BIOS**, 确保它是最新的。大多数原始设备制造商在旧固件上的PCI分配都很糟糕，尤其是AMD
+  * 确保在BIOS中启用Above4G，如果没有可用的选项，则添加`npci=0x2000`或`npci=0x3000`(一次尝试一个)引导参数。
+    * 一些X99和X299主板(如GA-X299-UD4)可能需要npci引导参数或启用Above4G
     * **不要在启动参数中同时启用Above4G设置和npci，它们会冲突**
-    * 2020+ BIOS注意:当启用Above4G时，Resizable BAR支持可能成为可用的。如果启用，请确保Booter -> Quirks -> ResizeAppleGpuBars设置为`0`。
+    * 2020+ BIOS注意:当启用Above4G时，Resizable BAR支持可能成为可用。如果启用，请确保Booter -> Quirks -> ResizeAppleGpuBars设置为`0`。
   * 其他重要的BIOS设置:禁用CSM，启用Windows 8.1/10 UEFI模式
 * **NVMe 或 SATA 问题**:
-  * 有时，如果使用了坏的SATA控制器或不支持的NVMe驱动器，你通常会被卡在这里。你可以检查的内容:
+  * 有时如果使用了坏的SATA控制器或不支持的NVMe驱动器，你通常会在这里卡住。你可以检查的内容:
     * 不使用三星PM981或Micron 2200S NVMe SSD
     * 三星970 EVO Plus运行最新的固件(旧的固件以不稳定和停滞著称，[查看更多信息](https://www.samsung.com/semiconductor/minisite/ssd/download/tools/))
     * SATA热插拔在BIOS中被禁用(在基于AMD CPU的系统上通常会导致问题)
-    * 确保NVMe驱动器在BIOS中设置为NVMe模式(一些BIOS有一个bug，你可以将NVMe驱动器设置为SATA)
+    * 确保NVMe驱动器在BIOS中设置为NVMe模式(某些BIOS有一个错误，您可以将NVMe驱动器设置为SATA)
 * **NVRAM 故障**:
-  * HEDT和300系列主板常见问题，你有几个路径可以走:
-    * 消费者英特尔300系列:看[开始使用 ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)制作SSDT-PMC.aml
-    * HEDT(ie X99):请参阅[模拟NVRAM](https://sumingyd.github.io/OpenCore-Post-Install/misc/nvram.html)关于如何停止NVRAM写入，注意，安装时您不需要运行脚本。只需设置config.plist
+  * 问题常见于HEDT和300系列主板，你有几个方式可以尝试:
+    * 英特尔300系列消费者:参见[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)制作SSDT-PMC.aml
+    * HEDT(如 X99): 见 [模拟 NVRAM](https://sumingyd.github.io/OpenCore-Post-Install/misc/nvram.html) 了解如何停止NVRAM写入，请注意，安装时不需要运行脚本。只需设置config.plist
 
 * **RTC 缺失**:
   * 通常在Intel的300+系列(即Z370, Z490)上发现，这是由默认禁用RTC时钟引起的。请参阅[开始使用ACPI](https://sumingyd.github.io/Getting-Started-With-ACPI/)创建SSDT-AWAC.aml
@@ -441,18 +441,18 @@ sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-938
 * 如果XLNCUSBFix仍然不起作用，那么在XLNCUSBFix旁边尝试以下操作:
   * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
 
-* X299用户:启用"Above 4G解码"
+* X299用户:启用""Above  4G解码""
   * X299上的奇怪固件bug，否则USB会损坏
 
-* ACPI中缺少USB端口:
-  * 对于英特尔的Coffee Lake及更老版本，我们推荐使用[USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
-  * 对于英特尔的 Ice Lake 和 Comet Lake, 我们推荐 [SSDT-RHUB](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
-    * SSDTTime的 `7. USB Reset` USB复位的选项可以做同样的事情
-  * 对于AMD,运行SSDTTime的 `7. USB Reset` 选项，并将提供的SSDT-RHUB添加到您的EFI和config.plist
+* ACPI缺少USB接口:
+  * 对于英特尔的Coffee Lake和更老的版本，我们推荐使用[USBInjectAll](https://bitbucket.org/RehabMan/os-x-usb-inject-all/downloads/)
+  * 对于英特尔的 Ice Lake 和 Comet Lake, 我们推荐 [SSDT-RHUB](https://github.com/sumingyd/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-RHUB.aml)
+    * SSDTTime的 `7. USB Reset` 选项可以做同样的事情
+  * 对于AMD，运行SSDTTime的 `7. USB Reset` 选项，并将提供的SSDT-RHUB添加到您的EFI和config.plist中
 
 ### SATA 问题
 
-在极少数情况下(主要是笔记本电脑)，SATA控制器不受macOS的正式支持。为了解决这个问题，我们需要做以下几件事:
+在极少数情况下(主要是笔记本电脑)，SATA控制器不被macOS官方支持。为了解决这个问题，我们需要做以下几件事:
 
 * 在BIOS中设置“SATA”为“AHCI”模式
   * macOS不支持硬件RAID或IDE模式。
@@ -544,13 +544,13 @@ Skip: 0
 
 这可能是由于 NullCPUPowerManagement 错误或完全缺失。要解决这个问题，请从`Kernel->Add`和`EFI/OC/kext`中移除NullCPUPowerManagement，然后在`Kernel->Emulate`中启用`DummyPowerManagement`。
 
-* **注**:在旧的英特尔cpu(即。Penryn或更老的版本)，可能是由于IRQ冲突或HPET设备被禁用。要解决这个问题，你有两个选择:
-  * [SSDTTime的修复HPET选项](https://sumingyd.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
-  * 强制启用HPET设备
+* **注意**: 在旧的Intel cpu上(例如:Penryn和更老的)，这可能是由于IRQ冲突或HPET设备被禁用。要解决这个问题，你有两个选择:
+  * [SSDTTime的 FixHPET 选项](https://sumingyd.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html)
+  * 强制开启HPET设备
 
-::: details 强制启用HPET设备
+::: details Forcing the HPET Device on
 
-在 ACPI -> Patch:
+在 ACPI -> Patch 下:
 
 | Comment | String | Force HPET Online |
 | :--- | :--- | :--- |
@@ -609,7 +609,7 @@ Skip: 0
 * PciRoot(0x0)/Pci(0x1C,0x1)/Pci(0x0, 0x0)
   * 默认情况下，这是华硕和Gigabyte主板使用的
 * PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)
-  * 一些oem厂商可能会使用这个代替
+  * 一些原始设备制造商可能会使用这个
 
 对于那些可以手动连接到你的PciRoot的人，你需要完全安装macOS并使用[gfxutil](https://github.com/acidanthera/gfxutil/releases):
 

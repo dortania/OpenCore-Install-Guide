@@ -703,10 +703,10 @@ macOS Sierra和更早的版本使用HFS代替APFS。如果引导旧版本的macO
 ### 启用
 
 * VT-x
-* 4G以上解码
+* Above 4G Decoding
   * 如果遇到问题，请确保“MMIOH Base”设置为12 TB或更低
   * 超线程
-* 执行禁止位
+* Execute Disable Bit
 * EHCI/XHCI Hand-off
 * 操作系统类型:Windows 8.1/10 UEFI模式(一些主板可能需要”其他操作系统”代替)
 * SATA 模式: AHCI
