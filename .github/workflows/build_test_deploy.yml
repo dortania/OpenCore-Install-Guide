@@ -23,13 +23,13 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           folder: .vuepress/dist/
           clean: true
-          
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
