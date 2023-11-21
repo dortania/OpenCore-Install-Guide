@@ -26,7 +26,7 @@ All files in the Kexts folder end in .kext | Includes source code and folders
 config.plist found under EFI/OC | Neither renamed or placed the .plist in right location
 Only uses kexts that are needed | Downloaded every kext listed
 
-# Recovery Environment Steps (Don't worry about these unless you followed the alternate method!)
+# Recovery Environment Steps (Don't worry about these unless you followed the alternate method)
 
     Open Disk Utility
 
@@ -52,7 +52,7 @@ Only uses kexts that are needed | Downloaded every kext listed
 
     ◦ If that does not work - you can type bash UnPlugged.command
 
-# UnPlugged.command Steps (Don't worry about these unless you followed the alternate method!)
+# UnPlugged.command Steps (Don't worry about these unless you followed the alternate method)
 
     The script will list any detected Install macOS [version].app directories - select the one that matches the intended OS version to install (in most cases there will only be one detected)
     The script should auto-detect the required files - but if it does not, it will prompt for the path to them here
