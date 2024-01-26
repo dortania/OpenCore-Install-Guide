@@ -1,6 +1,6 @@
 # Making the installer in Linux (Alternate)
 
-While you don't need a fresh install of macOS to use OpenCore, some users prefer having a fresh slate with their boot manager upgrades.
+While you don't need a fresh install of macOS to use OpenCore, some users prefer having a full installer.
 
 To start you'll need the following:
 
@@ -23,14 +23,9 @@ From here, you'll want to launch gibMacOS.
 ```sh
 python py gibMacOS.py
 ```
-As of 13 November 2023, the options for the latest stable builds of each version of macOS are as follows
-After you launch gibMacOS, it will scan for versions of macOS to download. You will need to look for the **latest build** avaliable. macOS Sonoma 14.1.1 will be used as an example.
+Now, based off of the image below, select the version you want.
 
-23B81
-
-23 - the last 2 years of when the *major version* was released.
-B - counts down the alphabet, denotes minor version (In this case 23Bxx references all builds of Sonoma 14.1.x, though not all versions are like this)
-81 - denotes subminor version, in this builds case being 14.1.*1*.
+![](../images/installer-guide/windows-install-md/gibMacOS-selection.png)
 
 * **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
   * <span style="color:red"> CAUTION: </span> With macOS 11.3 and newer, [XhciPortLimit is broken resulting in boot loops](https://github.com/dortania/bugtracker/issues/162).
