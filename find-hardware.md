@@ -1,6 +1,6 @@
 # Finding your hardware
 
-This section is mostly a mini-guide on how to find what hardware you're currently running; this is mainly relevant for laptop and prebuilt users as hardware specs are a bit more difficult to obtain. You can skip this page and head to [Creating the USB](./installer-guide/) if you already know what hardware you have.
+This is a mini-guide to help find the hardware in your system. This is mainly relevant for laptop and prebuilt users as hardware specifications can be more difficult to obtain. You can skip this page and [check for hardware compatibility](./macos-limits.md) if you already know what hardware you have.
 
 For this, we'll assume you have Windows or Linux installed:
 
@@ -16,6 +16,10 @@ For this we mainly have 2 options:
 Due to the easier to use GUI, we recommend downloading AIDA64 and running this as it's much easier to grab specs. However we'll show you both methods for obtaining hardware specs.
 
 ### CPU Model
+
+::: warning TODO
+We should probably include something about identifying what platform you have. Zen/FX/etc are not immediately obvious
+:::
 
 | AIDA64                                                 | Device Manager                                                |
 |:-------------------------------------------------------|:--------------------------------------------------------------|

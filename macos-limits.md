@@ -17,10 +17,10 @@ And for more detailed guides on the subject, see here:
 
 ## CPU Support
 
-For CPU support, we have the following breakdown:
+Most modern CPUs are supported in macOS. For laptops, be aware that the iGPU may unsupported even if the CPU is.
 
 * Both 32 and 64-bit CPUs are supported
-  * This however requires the OS to support your architecture, see CPU Requirements section below
+  * Double check supported macOS versions below. 32-bit CPUs are only supported in early versions of macOS.
 * Intel's Desktop CPUs are supported.
   * Yonah through Comet Lake are supported by this guide.
 * Intel's High-End Desktops and Server CPUs.
@@ -32,15 +32,13 @@ For CPU support, we have the following breakdown:
   * Laptop CPUs are **not** supported
   * Note not all features of macOS are supported with AMD, see below
 
-**For more in-depth information, see here: [Anti-Hardware Buyers Guide](https://dortania.github.io/Anti-Hackintosh-Buyers-Guide/)**
-
 ::: details CPU Requirements
 
 Architecture Requirements
 
 * 32-bit CPUs are supported from 10.4.1 to 10.6.8
   * Note that 10.7.x requires 64-bit userspace, limiting 32-bit CPUs to 10.6
-* 64-bit CPUs are supported from 10.4.1 to current
+* 64-bit CPUs are supported from 10.4.1 to the latest macOS version
 
 SSE Requirements:
 
@@ -74,8 +72,6 @@ Core/Thread Count Limits:
 
 Special Notes:
 
-* Lilu and plugins require 10.8 or newer to operate
-  * We recommend running FakeSMC for older versions of OS X
 * OS X 10.6 and older require RebuildAppleMemoryMap enabled
   * This is to resolve an early kernel
 
@@ -163,7 +159,7 @@ And an important note for **Laptops with discrete GPUs**:
 | :--- | :--- | :--- | :--- |
 | [3rd Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Third_generation) | 10.4.1 | 10.7.5 | [Requires 32-bit kernel and patches](https://dortania.github.io/OpenCore-Post-Install/gpu-patching/legacy-intel/) |
 | [4th Gen GMA](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen4) | 10.5.0 | ^^ | ^^ |
-| [Arrandale(HD Graphics)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen5) | 10.6.4 | 10.13.6 | Only LVDS is supported, eDP and external outputs are not |
+| [Arrandale(HD Graphics)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen5) | 10.6.4 | 10.13.6 | Only LVDS displays are supported. eDP and external outputs are not. |
 | [Sandy Bridge(HD 3000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen6) | 10.6.7 | ^^ | N/A |
 | [Ivy Bridge(HD 4000)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen7) | 10.7.3 | 11.7.x | ^^ |
 | [Haswell(HD 4XXX, 5XXX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen7) | 10.8.5 | 12.6.x | ^^ |
@@ -216,18 +212,7 @@ And an important note for **Laptops with discrete GPUs**:
 
 ## Motherboard Support
 
-For the most part, all motherboards are supported as long as the CPU is.
-
-::: details MSI 500-series AMD motherboards note
-
-~~The exception is MSI 500-series AMD motherboards (A520, B550, and X570). These motherboards have issues with macOS Monterey and above:~~
-
-* ~~PCIe devices are not always enumerated properly~~
-* ~~The BIOS update for Zen 3 support breaks boot~~
-
-~~macOS Big Sur or earlier is recommended for these motherboards.~~
-
-Thanks to CaseySJ, this has been fixed in the latest version of the AMD vanilla patches!
+All motherboards are supported as long as the CPU is.
 
 :::
 
