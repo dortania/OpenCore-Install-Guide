@@ -288,7 +288,7 @@ This entry relates to Intel's I225-V 2.5GBe controller found on higher end Comet
 
 ::: tip Info
 
-Settings relating to the kernel, for us we'll be enabling the following:
+Settings relating to the kernel, for us we'll be changing the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
