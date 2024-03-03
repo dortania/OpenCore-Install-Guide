@@ -139,8 +139,8 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 | AAPL,ig-platform-id | Type | Comment |
 | ------------------- | ---- | ------- |
-| **`0500260A`** | Laptop | To be used usually with HD 5000, HD 5100 and HD 5200 |
-| **`0600260A`** | Laptop | To be used usually with HD 4200, HD 4400 and HD 4600, you **must** use a `device-id`(see below) |
+| **`0500620A`** | Laptop | To be used usually with HD 5000, HD 5100 and HD 5200 |
+| **`0600620A`** | Laptop | To be used usually with HD 4200, HD 4400 and HD 4600, you **must** use a `device-id`(see below) |
 | **`0300220D`** | NUC | To be used usually with all Haswell NUCs, HD 4200/4400/4600 **must** use a `device-id`(see below) |
 
 #### Configuration Notes
