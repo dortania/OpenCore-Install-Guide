@@ -163,6 +163,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 | AAPL,ig-platform-id | Port Count | Comment |
 | ------------------- | ---------- | ------- |
 | **`0000528A`** | 6 | Recommended G4/G7 value |
+|**`0200518A`** | 6 | Use if you encounter display issues after waking from sleep. |
 
 #### Configuration Notes
 
