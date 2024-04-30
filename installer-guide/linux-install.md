@@ -56,9 +56,12 @@ python3 ./macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
 # Monterey (12)
 python3 ./macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000000000 download
 
-# Latest version
-# ie. Ventura (13)
+# Ventura (13)
 python3 ./macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
+
+# Latest version
+# ie. Sonoma (14)
+python3 ./macrecovery.py -b Mac-937A206F2EE63C01 -m 00000000000000000 download
 ```
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:
