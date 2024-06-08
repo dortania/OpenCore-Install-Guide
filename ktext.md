@@ -233,7 +233,7 @@ pci8086,1096 = Intel 80003ES2LAN
 pci8086,100f = Intel 82545EM
 pci8086,105e = Intel 82571EB/82571GB
 
-# AppleIntelI210Ethernet.kext ()
+# AppleIntelI210Ethernet.kext
 pci8086,1533 = Intel I210
 pci8086,15f2 = Intel I225LM (Added in macOS 10.15)
 
