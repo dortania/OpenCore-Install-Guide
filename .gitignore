@@ -4,5 +4,5 @@ node_modules/
 .DS_Store
 .vuepress/dist
 .vuepress/.config.js.swp
-yarn.lock
+package-lock.json
 yarn-error.log
