@@ -52,13 +52,13 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'yarn'
           cache-dependency-path: ./yarn.lock
-      - name: Checkout Repository
-        uses: actions/checkout@v4
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Lint
