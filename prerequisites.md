@@ -1,37 +1,67 @@
-# Getting started with OpenCore
+# Getting started
 
-Before we can jump head first into making an OpenCore based system, we need to go over a few things.
+The central piece of software that allows macOS to run is the bootloader OpenCore.
+It has a few major features that will help us run macOS on our systems:
+
+1. ACPI Patching
+
+   * ACPI is software provided by the firmware of your system. This often needs to be patched to play nice with macOS.
+   * ACPI is important as it lists the devices within a computer and provides controls for doing power management.
+
+2. Kernel Patching
+
+   * OpenCore is able to inject drivers called "Kexts" into macOS during boot, allowing protections such as [SIP] to remain enabled while adding support for your hardware.
+   * OpenCore is also able to patch macOS itself to better support your hardware.
+
+3. UEFI Patching
+
+* OpenCore is used to patch system information to make your system look like a mac!
+* OpenCore is also able to load UEFI drivers. An example where this is useful is for adding support for booting from NVMe Storage in older systems.
+
+::: tip
+
+OpenCore lives in the UEFI environment, which is what your computer starts up in before loading Windows or Linux. Because of this, there can be some confusion between UEFI drivers and Kexts:
+
+* UEFI drivers are drivers that OpenCore and your firmware can use. These are often only relevant very early in the boot process, as macOS does not use these UEFI drivers.
+* Kexts are a shorthand for "Kernel Extensions". These are drivers that macOS use, and are relevant once you have started booting into macOS.
+
+:::
 
 ## Prerequisites
 
-1. <span style="color:red">_**[CRUCIAL]**_</span> Time and patience.
-   * Don't start working on this if you have deadlines or important work. Hackintoshes are not something you should be relying on as a work machine.
-2. <span style="color:red">_**[CRUCIAL]**_</span> **KNOW YOUR HARDWARE**
-   * Your CPU name and its generation
-   * Your GPUs
-   * Your storage devices (HDD/SSD, NVMe/AHCI/RAID/IDE configuration)
-   * Your laptop/desktop model if from an OEM
-   * Your **Ethernet chipset**
-   * Your WLAN/Bluetooth chipset
-3. <span style="color:red">_**[CRUCIAL]**_</span> **A BASIC KNOWLEDGE OF COMMAND LINES AND HOW TO USE A TERMINAL/COMMAND PROMPT**
-   * This is not just [CRUCIAL], this is the basis of this whole guide. We can't help you if you don't know how to `cd` to a directory or delete a file.
-4. <span style="color:red">_**[CRUCIAL]**_</span> A machine that is compatible as seen in the _**Compatibility**_ section.
-   * [Hardware Limitations page](macos-limits.md)
-5. <span style="color:red">_**[CRUCIAL]**_</span> A minimum of:
-   * 16GB USB if you're going to use macOS to create the USB
-   * 4GB USB if you're going to use Windows or Linux for USB creation
-6. <span style="color:red">_**[CRUCIAL]**_</span> An **Ethernet connection** (no WiFi dongles, Ethernet USB adapter may work depending on macOS support) and you must know your LAN card's model
-   * You must either have a physical Ethernet port, or a compatible macOS Ethernet dongle/adapter. In case you have a [compatible WiFi card](https://dortania.github.io/Wireless-Buyers-Guide/), you can also use that.
-     * Note the majority of WiFi cards are not supported by macOS
-   * For people who can't use ethernet but have an Android phone, you can connect your Android phone to WiFi and then tether it using USB with [HoRNDIS](https://joshuawise.com/horndis#available_versions).
-7. <span style="color:red">_**[CRUCIAL]**_</span> **Proper OS Installation:**
-   * Be it:
-     * macOS (a fairly recent one would be better)
-     * Windows (Windows 10, 1703 or newer)
-     * Linux (Clean and properly functioning, with Python 2.7 or later)
-   * For Windows or Linux users, **15GB** of free space on the drive you're working on. On Windows, your OS disk (C:) must have at least **15GB** of free space.
-   * For macOS users, **30GB** of free space on the system's drive.
-   * Most tools used in this guide will also require [Python installed](https://www.python.org/downloads/)
-8. <span style="color:red">_**[CRUCIAL]**_</span> **Latest BIOS installed**
-   * In most cases, updating your BIOS will provide the best support for macOS
-   * The exception to this are MSI 500-series AMD motherboards, read more at [Motherboard Support](macos-limits.md#motherboard-support)
+1. Know your hardware for the target system!
+
+* The most important information to know is the CPU model and GPU.
+  * Not every CPU and GPU is supported, so it is important to know for compatibilty reasons!
+* Other important hardware:
+  * Storage Devices (HDD/SSD)
+  * Ethernet Chipset
+  * Wireless Card and Bluetooth
+  * Trackpad on Laptops
+* The next page will help you gather this information.
+
+1. A USB Drive to put the macOS installer on
+
+* 16GB USB when using macOS to create the USB.
+* 4GB USB when using Windows or Linux for USB creation.
+
+1. Already installed OS (or another system) to create the USB
+
+* Many of the tools **require Python 3**
+  * Make sure "Add Python to environment" is enabled when installing Python 3 in Windows.
+* In Windows and Linux, expect **1-2GB** of free space to be needed for downloads.
+* In macOS, expect **30GB** of free space to be needed to download macOS.
+
+1. Latest BIOS installed on the target system
+
+::: Warning Notes on making the installer in Windows and Linux
+
+An **Ethernet Connection** or **Supported** Wifi Adapter is needed!
+When making the installer in Windows or Linux, a smaller recovery image is used.
+This image will **download** macOS from Apple servers when booted!
+
+Many USB Wifi Adapters and Ethernet dongles do not work in macOS, so should not be relied upon for installation.
+
+An alternative is to use [HoRNDIS](https://joshuawise.com/horndis#available_versions) for USB tethering with an Android phone.
+
+:::
