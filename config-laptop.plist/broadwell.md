@@ -144,7 +144,7 @@ Generally follow these steps when setting up your iGPU properties. Follow the co
 
 #### Configuration Notes
 
-* For HD 5600 you need `device-id` faked to `26160000`:
+* For HD 5600 you need `device-id` faked to `26160000`. Some CPUs with HD 5500 such as i3 5005U may also require this to avoid getting stuck at `Scheduler Throttle Cap = 100ms`:
 
 | Key | Type | Value |
 | :--- | :--- | :--- |
