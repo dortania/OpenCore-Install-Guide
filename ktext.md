@@ -378,7 +378,7 @@ However ProperTree will handle this for you, so you need not concern yourself
   * Big Sur+ Note: [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) will need to be used instead due to numerous controllers being dropped from the binary itself
     * Catalina and older need not concern
 * [CPUTopologyRebuild](https://github.com/b00t0x/CpuTopologyRebuild)
-  * An experimental Lilu plugin that optimizes Alder Lake's heterogeneous core configuration. **Only for Alder Lake CPUs**
+  * An experimental Lilu plugin that optimizes Alder Lake / Raptor Lake's heterogeneous core configuration. **Only for Alder / Raptor Lake CPUs**
 * [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
   * Patch various functions of macOS, see [the README](https://github.com/acidanthera/RestrictEvents#boot-arguments) for more info
 * [EmeraldSDHC](https://github.com/acidanthera/EmeraldSDHC)
