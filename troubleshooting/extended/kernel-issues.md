@@ -524,6 +524,17 @@ Skip: 0
 
 Note: macOS 11, Big Sur no longer requires this patch for MSI Navi.
 
+## Black screen or no video output, but computer stays on
+
+This is generally seen as an issue with your graphics configuration. If you see a good amount of verbose output when you try to boot into macOS installation and your screen suddenly goes black or your monitor stops detecting output, you might have to tweak your value for `AAPL, ig-platform-id` in your `DeviceProperties` settings. To do this:
+
+* Find `AAPL,ig-platform-id` in your config.plist under `DeviceProperties -> PciRoot(0x0)/Pci(0x2,0x0)`.
+* Ensure that you entered the correct value from this section in your [config.plist Setup](../../config.plist/#selecting-your-platform)
+* If that value is correct and you're still facing the issue, the [GPU Buyer's Guide](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/amd-gpu.html) has a list of every compatible GPU and some of the alternate values you can try for `AAPL,ig-platform-id`.
+* The [GPU Buyer's Guide](https://dortania.github.io/GPU-Buyers-Guide/modern-gpus/amd-gpu.html) also provides other solutions that may work for your specific graphics card/iGPU (boot flags, extra kexts, etc.)
+
+This also happens commonly with [this error](#stuck-on-or-near-ioconsoleusers-gioscreenlock-giolockstate-3), since this is right before the GPU gets properly initialized. Try these fixes as well if the above suggestions didn't work.
+
 ## Kernel Panic `Cannot perform kext summary`
 
 Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that:
