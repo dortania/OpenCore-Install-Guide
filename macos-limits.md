@@ -143,6 +143,7 @@ GPU support becomes much more complicated due to the near-infinite amount of GPU
   * [Maxwell(9XX)](https://en.wikipedia.org/wiki/GeForce_900_series) and [Pascal(10XX)](https://en.wikipedia.org/wiki/GeForce_10_series) GPUs are limited to macOS 10.13: High Sierra
   * [NVIDIA's Turing(20XX,](https://en.wikipedia.org/wiki/GeForce_20_series)[16XX)](https://en.wikipedia.org/wiki/GeForce_16_series) GPUs are **not supported in any version of macOS**
   * [NVIDIA's Ampere(30XX)](https://en.wikipedia.org/wiki/GeForce_30_series) GPUs are **not supported in any version of macOS**
+  * [NVIDIA's Ada Lovelace(40XX)](https://en.wikipedia.org/wiki/GeForce_40_series) GPUs are **not supported in any version of macOS**
   * [NVIDIA's Kepler(6XX,](https://en.wikipedia.org/wiki/GeForce_600_series)[7XX)](https://en.wikipedia.org/wiki/GeForce_700_series) GPUs are supported up to macOS 11: Big Sur
 * Intel's [GT2+ tier](https://en.wikipedia.org/wiki/Intel_Graphics_Technology) series iGPUs
   * Ivy Bridge through Ice Lake iGPU support is covered in this guide
@@ -174,7 +175,12 @@ And an important note for **Laptops with discrete GPUs**:
 | [Comet Lake(UHD 6XX)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen9) | 10.15.4 | ^^ | ^^ |
 | [Ice Lake(Gx)](https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#Gen11) | 10.15.4 | ^^ | Requires `-igfxcdc` and `-igfxdvmt` in boot-args |
 | [Tiger Lake(Xe)](https://en.wikipedia.org/wiki/Intel_Xe) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
-| [Rocket Lake](https://en.wikipedia.org/wiki/Rocket_Lake) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
+| [Rocket Lake(Xe)](https://en.wikipedia.org/wiki/Rocket_Lake) | ^^ | ^^ | ^^ |
+| [Alder Lake(Xe)](https://en.wikipedia.org/wiki/Alder_Lake) | ^^ | ^^ | ^^ |
+| [Raptor Lake(Xe)](https://en.wikipedia.org/wiki/Raptor_Lake) | ^^ | ^^ | ^^ |
+| [Meteor Lake(Xe)](https://en.wikipedia.org/wiki/Meteor_Lake) | ^^ | ^^ | ^^ |
+| [Alchemist(Xe Intel Arc)](https://en.wikipedia.org/wiki/Intel_Arc) | ^^ | ^^ | ^^ |
+
 
 :::
 
@@ -192,7 +198,8 @@ And an important note for **Laptops with discrete GPUs**:
 | [Vega 10](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.12.6 | ^^ | ^^ |
 | [Vega 20](https://en.wikipedia.org/wiki/Radeon_RX_Vega_series) | 10.14.5 | ^^ | ^^ |
 | [Navi 10](https://en.wikipedia.org/wiki/Radeon_RX_5000_series) | 10.15.1 | ^^ | Requires `agdpmod=pikera` in boot-args |
-| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | <span style="color:yellow"> Currently only some Navi 21 models are working </span> |
+| [Navi 20](https://en.wikipedia.org/wiki/Radeon_RX_6000_series) | 11.4 | ^^ | <span style="color:yellow"> Currently only some Navi 21 and Navi 23 models are working </span> |
+| [Navi 30](https://en.wikipedia.org/wiki/Radeon_RX_7000_series) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
 
 :::
 
@@ -211,6 +218,7 @@ And an important note for **Laptops with discrete GPUs**:
 | [Pascal](https://en.wikipedia.org/wiki/Pascal_(microarchitecture)) | 10.12.4 | ^^ | ^^ |
 | [Turing](https://en.wikipedia.org/wiki/Turing_(microarchitecture)) | <span style="color:red"> N/A </span> | <span style="color:red"> N/A </span> | <span style="color:red"> No drivers available </span> |
 | [Ampere](https://en.wikipedia.org/wiki/Ampere_(microarchitecture)) | ^^ | ^^ | ^^ |
+| [Ada Lovelace](https://en.wikipedia.org/wiki/Ada_Lovelace_(microarchitecture)) | ^^ | ^^ | ^^ |
 
 :::
 
