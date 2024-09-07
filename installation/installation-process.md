@@ -55,6 +55,11 @@ So you've finally got the installer booted, got through the verbose and hit the 
   * By default, macOS will setup freshly formatted drives with 200MB
   * See the [Multiboot Guide](https://dortania.github.io/OpenCore-Multiboot/) for more info on partitioning a Windows Drive
 
+Mac OS 14 Sonoma Notice:
+* For certain hardware configurations, it may be required to set Security -> SecureBootModel to "Disabled" after the installer reboots for the first time, otherwise your "macOS installer" could stuck in boot loop.
+  * When you see OpenCore boot selection menu, DO NOT select "macOS" installer, instead shutdown your hackintosh, take out the USB stick that holds OpenCore, change SecureBootModel value and then boot again. 
+  * You can safely change SecureBootModel back to "Default" after macOS is fully setup.
+
 Once you start the installation, you will want to wait until the system restarts. You will once again want to boot into OpenCore, but rather than selecting your USB installer/recovery - you will want to select the macOS installer on the hard drive to continue installation. You should get an apple logo, and after a few minutes you should get a timer at the bottom saying "x minutes remaining". This may be a good time to get a drink or snack as this will take a while. It may restart a couple more times, but if all goes well, it should finally plop you at the "Setup your Mac screen"
 
 You're in! 🎉
