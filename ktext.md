@@ -103,10 +103,9 @@ While VirtualSMC supports 10.4, plugins may require newer versions.
   * **Under active development, potentially unstable**
   * Requires AMDRyzenCPUPowerManagement (see [AMD CPU Specific Kexts](ktext.md#amd-cpu-specific-kexts))
   * Requires macOS 10.13 or newer
-* [SMCRadeonGPU](https://github.com/aluveitie/RadeonSensor)
+* [SMCRadeonSensors](https://github.com/ChefKissInc/SMCRadeonSensors)
   * Used for monitoring GPU temperature on AMD GPU systems
-  * Requires RadeonSensor from the same repository
-  * Requires macOS 11 or newer
+  * Requires macOS 10.14 or newer
 * SMCSuperIO.kext
   * Used for monitoring fan speed
   * Not for AMD CPU based systems
