@@ -21,6 +21,7 @@ Now run one of the following depending on what version of macOS you want(Note th
 
 ```sh
 # If you got Python from Microsoft store or other place that installs it as python3 and not py, you need to run this first.
+# You can confirm it by running "which py". If it returns "which py: not found", you need to run this.
 alias py="python3"
 
 # Lion (10.7):
