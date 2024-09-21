@@ -20,6 +20,9 @@ To grab legacy installers is super easy, first grab a copy of [OpenCorePkg](http
 Now run one of the following depending on what version of macOS you want(Note these scripts rely on [Python 3](https://www.python.org/downloads/) support, please install if you haven't already):
 
 ```sh
+# If you got Python from Microsoft store or other place that installs it as python3 and not py, you need to run this first.
+alias py="python3"
+
 # Lion (10.7):
 py macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
 py macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
