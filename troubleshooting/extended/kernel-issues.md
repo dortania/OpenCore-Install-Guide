@@ -434,10 +434,10 @@ This assumes you're only booting the installer USB and not macOS itself.
 * Sometimes, if the USB is plugged into a 3.x port, plugging it into a 2.0 port can fix this error and vice versa.
 
 * For AMD's 15h and 16h CPUs, you may need to add the following:
-  * [XLNCUSBFix.kext](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
+  * [XLNCUSBFix.kext](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/XLNCUSBFix.kext.zip)
 
 * If XLNCUSBFix still doesn't work, then try the following alongside XLNCUSBFix:
-  * [AMD StopSign-fixv5](https://cdn.discordapp.com/attachments/249992304503291905/355235241645965312/StopSign-fixv5.zip)
+  * [AMD StopSign-fixv5](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/StopSign-fixv5.zip)
 
 * X299 Users: Enable "Above 4G Decoding"
   * Odd firmware bug on X299 where USB breaks otherwise
