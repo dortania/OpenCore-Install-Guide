@@ -525,9 +525,9 @@ System Integrity Protection bitmask
 
 Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** values already present in NVRAM so values like `boot-args` should be left alone. For us, we'll be changing the following:
 
-| Quirk | Enabled |
+| Quirk | Value |
 | :--- | :--- |
-| WriteFlash | YES |
+| WriteFlash | True |
 
 :::
 
@@ -536,7 +536,7 @@ Forcibly rewrites NVRAM variables, do note that `Add` **will not overwrite** val
 * **LegacySchema**
   * Used for assigning NVRAM variables, used with `OpenVariableRuntimeDxe.efi`. Only needed for systems without native NVRAM
 
-* **WriteFlash**: YES
+* **WriteFlash**: True
   * Enables writing to flash memory for all added variables.
 
 :::
