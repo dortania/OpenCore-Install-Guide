@@ -65,7 +65,7 @@ This is a full list of all of the SMBIOS Apple has ever supported in macOS with 
 
 [[toc]]
 
-Info pulled from both [EveryMac](https://everymac.com) and [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
+Info pulled from [AppleDB](https://appledb.dev), [EveryMac](https://everymac.com) and [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
 
 **Special Note**:
 
