@@ -436,6 +436,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 
 **Note for macOS Sonoma 14 and above**: 
 Due to macOS polling for more information from the Mac's T2 chip (of which we don't physically have) during the second install phase (i.e after the reboot into macOS installer from the local disk), you'll need to set SecureBootModel to `Disabled` for the duration of the install, after successfully booting into the desktop you can set SecureBootModel back to `Default`, this also applies to updating the OS to a minor release (i.e 14.6 -> 14.7) or a major release (i.e 14.7 -> 15.0)
+
 :::
 
 ::: details More in-depth Info
