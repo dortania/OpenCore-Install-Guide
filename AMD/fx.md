@@ -283,7 +283,7 @@ Where `<core count>` is replaced with the physical core count of your CPU in hex
 
 ::: tip Info
 
-Settings relating to the kernel, for us we'll be enabling the following:
+Settings relating to the kernel, for us we'll be changing the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
@@ -306,6 +306,8 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Performs GUID patching for UpdateSMBIOSMode set to `Custom`. Usually relevant for Dell laptops
   * Enabling this quirk in tandem with `PlatformInfo -> UpdateSMBIOSMode -> Custom` will disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk.
 * **DisableIoMapper**: NO
+  * AMD doesn't have DMAR or VT-D support so irrelevant
+* **DisableIoMapperMapping**: NO
   * AMD doesn't have DMAR or VT-D support so irrelevant
 * **DisableLinkeditJettison**: YES
   * Allows Lilu and others to have more reliable performance without `keepsyms=1`
