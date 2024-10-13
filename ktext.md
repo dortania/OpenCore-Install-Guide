@@ -346,7 +346,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 
 ### AMD CPU Specific kexts
 
-* [XLNCUSBFIX](https://cdn.discordapp.com/attachments/566705665616117760/566728101292408877/XLNCUSBFix.kext.zip)
+* [XLNCUSBFIX](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/XLNCUSBFix.kext.zip)
   * USB fix for AMD FX systems, not recommended for Ryzen
   * Requires macOS 10.13 or newer
 * [VoodooHDA](https://sourceforge.net/projects/voodoohda/)
