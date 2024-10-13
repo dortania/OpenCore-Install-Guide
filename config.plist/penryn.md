@@ -112,9 +112,6 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 * **FixupAppleEfiImages**: YES
   * Fixes errors in macOS's boot.efi, needed for machines using DuetPkg
   * Not needed when booting macOS 10.13+ with SecureBootModel enabled
-* **FixupAppleEfiImages**: YES
-  * Fixes errors in macOS's boot.efi, needed for machines using DuetPkg
-  * Not needed when booting macOS 10.13+ with SecureBootModel enabled
 * **ProvideCustomSlide**: YES
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
