@@ -26,6 +26,40 @@ All files in the Kexts folder end in .kext | Includes source code and folders
 config.plist found under EFI/OC | Neither renamed or placed the .plist in right location
 Only uses kexts that are needed | Downloaded every kext listed
 
+# Recovery Environment Steps (Don't worry about these unless you followed the alternate method)
+
+    Open Disk Utility
+
+    Enable View -> Show All Devices
+
+    Format the target device (not the volume) for your macOS version
+
+    ◦ Sierra and prior should be macOS Extended (Journaled) with a GUID Partition Map
+
+    ◦ High Sierra and newer should be APFS with a GUID Parititon Map
+
+    Quit Disk Utility
+
+    Open Terminal
+
+    Type cd /Volumes/[your ExFAT volume name]/macOS
+
+    ◦ You can get a list of all volumes with ls /Volumes
+
+    ◦ Make sure to replace macOS with the name of the folder containing the gibMacOS files and UnPlugged.command
+
+    Type ./UnPlugged.command to launch the script
+
+    ◦ If that does not work - you can type bash UnPlugged.command
+
+# UnPlugged.command Steps (Don't worry about these unless you followed the alternate method)
+
+    The script will list any detected Install macOS [version].app directories - select the one that matches the intended OS version to install (in most cases there will only be one detected)
+    The script should auto-detect the required files - but if it does not, it will prompt for the path to them here
+    The script will then prompt asking for the target volume - this is the volume that you just created in Disk Utility. The one where you intend to install macOS
+    Then you'll be presented with a task list - and asked if you want to continue - type y and enter
+    The script will build the full install app and launch it from the Terminal for you - continue the rest of the install as normal
+
 ## Booting the OpenCore USB
 
 So you're now ready to finally put the USB stick into your computer and boot off of it. Remember that most laptops and some desktops will still default to the internal drive with Windows, and you'll need to manually select OpenCore in the BIOS boot options. You'll need to check in the user manual or use a bit of google to find out what Fn key accesses the BIOS and boot menu(ie. Esc, F2, F10 or F12)
