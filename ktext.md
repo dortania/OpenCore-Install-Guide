@@ -383,8 +383,7 @@ However ProperTree will handle this for you, so you need not concern yourself
 * [RestrictEvents](https://github.com/acidanthera/RestrictEvents)
   * Patch various functions of macOS, see [the README](https://github.com/acidanthera/RestrictEvents#boot-arguments) for more info
 * [EmeraldSDHC](https://github.com/acidanthera/EmeraldSDHC)
-  * macOS kernel extension for eMMC support. Currently only supports eMMC/MMC cards at up to HS200 speeds.  This driver is currently a work in progress and may experience poor performance or be nonfunctional on some devices. SD cards are currently not supported at this time.
-
+  * macOS kernel extension for eMMC drive support. Driver is currently in a work in progress and may not work across all systems.
 ::: details Legacy SATA Kexts
 
 * [AppleIntelPIIXATA.kext](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/d20d9975c144728da7ae2543d65422f53dabaa2d/payloads/Kexts/Misc/AppleIntelPIIXATA-v1.0.0.zip)
@@ -415,6 +414,8 @@ Most laptop keyboards are PS2! You will want to grab VoodooPS2 even if you have 
 * [RehabMan's VoodooPS2](https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller/downloads/)
   * For older systems with PS2 keyboards, mice, and trackpads, or when you don't want to use VoodooInput
   * Supports macOS 10.6+
+* [ChromebookPS2](https://github.com/meghan06/ChromebookPS2)
+   * For Chromebooks only. Remaps the top row keys to their intended purpose.
 
 #### SMBus Trackpads
 
