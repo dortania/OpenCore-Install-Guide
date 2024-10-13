@@ -434,6 +434,8 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | SecureBootModel | Default | Leave this as `Default` for OpenCore to automatically set the correct value corresponding to your SMBIOS. The next page goes into more detail about this setting. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
+**Note for macOS Sonoma 14 and above**: 
+Due to macOS polling for more information from the Mac's T2 chip (of which we don't physically have) during the second install phase (i.e after the reboot into macOS installer from the local disk), you'll need to set SecureBootModel to `Disabled` for the duration of the install, after successfully booting into the desktop you can set SecureBootModel back to `Default`, this also applies to updating the OS to a minor release (i.e 14.6 -> 14.7) or a major release (i.e 14.7 -> 15.0)
 :::
 
 ::: details More in-depth Info
