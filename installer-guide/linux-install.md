@@ -148,13 +148,12 @@ In terminal:
 3. Use `lsblk` again to determine the 200MB drive and the other partition
    ![](../images/installer-guide/linux-install-md/unknown-18.png)
 4. run `sudo mkfs.vfat -F 32 -n "OPENCORE" /dev/<your 200MB partition block>` to format the 200MB partition to FAT32, named OPENCORE
-5. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
-   1. mount your USB partition with `udisksctl` (`udisksctl mount -b /dev/<your 200MB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your 200MB partition block> /where/your/mount/stuff`, sudo is required)
-   2. `cd` to your USB drive and `mkdir com.apple.recovery.boot` in the root of your FAT32 USB partition
-   3. download `dmg2img` (available on most distros)
-   4. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
+5. you will mount your USB partition with either `udisksctl` (`udisksctl mount -b /dev/<your 200MB partition block>`, no sudo required in most cases) or with `mount` (`sudo mount /dev/<your 200MB partition block> /where/your/mount/stuff`, sudo is required), for the rest of the guide
+6. then `cd` to `/OpenCore/Utilities/macrecovery/` and you should get to a `.dmg` and `.chunklist` files
+   1. download `dmg2img` (available on most distros)
+   2. run `dmg2img -l BaseSystem.dmg` and determine which partition has `disk image` property
       ![](../images/installer-guide/linux-install-md/unknown-20.png)
-   5. run `sudo dmg2img -p <the partition number> BaseSystem.dmg /dev/<your 3GB+ partition block>` to extract and write the recovery image to the partition disk
+   3. run `sudo dmg2img -p <the partition number> BaseSystem.dmg /dev/<your 3GB+ partition block>` to extract and write the recovery image to the partition disk
       * It will take some time. A LOT if you're using a slow USB (took me about less than 5 minutes with a fast USB2.0 drive).
       ![](../images/installer-guide/linux-install-md/unknown-21.png)
 
