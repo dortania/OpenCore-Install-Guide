@@ -88,6 +88,7 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
 | AvoidRuntimeDefrag | No | Big Sur may require this quirk enabled |
 | EnableSafeModeSlide | No | |
 | EnableWriteUnprotector | No | |
+| FixupAppleEfiImages | Yes | This is required to boot OS X 10.4 through 10.12 |
 | ProvideCustomSlide | No | |
 | RebuildAppleMemoryMap | Yes | This is required to boot OS X 10.4 through 10.6 |
 | SetupVirtualMap | No | |
@@ -108,6 +109,9 @@ Settings relating to boot.efi patching and firmware fixes, depending where your 
   * Enables slide variables to be used in safe mode.
 * **EnableWriteUnprotector**: NO
   * Needed to remove write protection from CR0 register on UEFI platforms.
+* **FixupAppleEfiImages**: YES
+  * Fixes errors in macOS's boot.efi, needed for machines using DuetPkg
+  * Not needed when booting macOS 10.13+ with SecureBootModel enabled
 * **ProvideCustomSlide**: YES
   * Used for Slide variable calculation. However the necessity of this quirk is determined by `OCABC: Only N/256 slide values are usable!` message in the debug log. If the message `OCABC: All slides are usable! You can disable ProvideCustomSlide!` is present in your log, you can disable `ProvideCustomSlide`.
 * **RebuildAppleMemoryMap**: YES
@@ -217,7 +221,7 @@ Patches both the kernel and kexts.
 
 ::: tip Info
 
-Settings relating to the kernel, for us we'll be enabling the following:
+Settings relating to the kernel, for us we'll be changing the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
@@ -240,6 +244,10 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Enabling this quirk with UpdateSMBIOSMode Custom mode can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DisableIoMapperMapping**: NO
+  * Needed if you are experiencing issues with Wi-Fi/Ethernet/Thunderbolt with VT-D enabled and more than 16GB of memory installed. This quirk requires a [patched DMAR table](https://dortania.github.io/Getting-Started-With-ACPI/Universal/dmar.html) with Reserved Memory Regions removed
+  * We recommend disabling VT-D, so we don't need this enabled
+  * Not needed for 13.2.1 and lower
 * **DisableLinkeditJettison**: YES
   * Allows Lilu and others to have more reliable performance without `keepsyms=1`
 * **DisableRtcChecksum**: NO
