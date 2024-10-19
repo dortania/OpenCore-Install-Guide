@@ -9,6 +9,7 @@ These settings in your config.plist can restrict which macOS versions OpenCore w
 OpenCore by default has [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) enabled.
 This enables security features such as the verification of macOS' `boot.efi`, with the side effect of restricting which macOS versions OpenCore will boot.
 
+* Sonoma 14.4 and Above (14.4+): `Disabled` is required for installation, as the second stage will boot loop.
 * Big Sur and Above (11.0+): The recommended value is `Default`.
 * High Sierra-Catalina (10.13-10.15):
   * If your model is not listed below, set to `Disabled`.
