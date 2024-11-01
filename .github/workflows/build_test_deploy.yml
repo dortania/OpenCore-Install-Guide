@@ -9,10 +9,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     name: Build
@@ -38,6 +34,9 @@ jobs:
           path: .vuepress/dist/
   deploy:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    concurrency: 
+      group: "pages"
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
