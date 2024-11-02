@@ -82,7 +82,7 @@ Now with our installer downloaded, we'll next want to format our USB.
 
 ## Making the installer
 
-Here we'll be formatting our USB and adding macOS onto it, we have 2 options:
+Here we'll be formatting our USB and adding macOS onto it, we have 3 options:
 
 * [Disk Management method](#disk-management-method)
   * GUI Based, simplest way
