@@ -21,46 +21,49 @@ Now run one of the following depending on what version of macOS you want(Note th
 
 ```sh
 # Lion (10.7):
-python3 macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
-python3 macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
+py macrecovery.py -b Mac-2E6FAB96566FE58C -m 00000000000F25Y00 download
+py macrecovery.py -b Mac-C3EC7CD22292981F -m 00000000000F0HM00 download
 
 # Mountain Lion (10.8):
-python3 macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
+py macrecovery.py -b Mac-7DF2A3B5E5D671ED -m 00000000000F65100 download
 
 # Mavericks (10.9):
-python3 macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
+py macrecovery.py -b Mac-F60DEB81FF30ACF6 -m 00000000000FNN100 download
 
 # Yosemite (10.10):
-python3 macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
+py macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000GDVW00 download
 
 # El Capitan (10.11):
-python3 macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
+py macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000GQRX00 download
 
 # Sierra (10.12):
-python3 macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
+py macrecovery.py -b Mac-77F17D7DA9285301 -m 00000000000J0DX00 download
 
 # High Sierra (10.13)
-python3 macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
-python3 macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
+py macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000J80300 download
+py macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
 
 # Mojave (10.14)
-python3 macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
+py macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
 # Catalina (10.15)
-python3 macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
+py macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
 # Big Sur (11)
-python3 macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
+py macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
 
 # Monterey (12)
-python3 macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000000000 download
+py macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000000000 download
 
 # Ventura (13)
-python3 macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
+py macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
+
+# Sonoma (14)
+py macrecovery.py -b Mac-226CB3C6A851A671 -m 00000000000000000 download
 
 # Latest version
-# ie. Sonoma (14)
-python3 macrecovery.py -b Mac-937A206F2EE63C01 -m 00000000000000000 download
+# ie. Sequoia (15)
+py macrecovery.py -b Mac-937A206F2EE63C01 -m 00000000000000000 download
 ```
 
 * **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
