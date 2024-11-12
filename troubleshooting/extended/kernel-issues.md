@@ -287,6 +287,22 @@ cd ~
 sudo cp -a /usr/standalone/i386/. /System/Volumes/Preboot/CD844C38-1A25-48D5-9388-5D62AA46CFB8/System/Library/CoreServices
 ```
 
+## Stuck on `OCB: LoadImage failed - Unsupported`
+
+```
+OCB: LoadImage failed - Unsupported
+OCB: System has no boot entries
+OC: Failed to show boot menu!
+Halting on critical error
+```
+
+This series of errors is most likely one of the following:
+
+* Missing HfsPlus driver:
+ * Either missing entirely, or not properly executing.  Switch to Debug Logs to verify.
+* Corrupted BaseSystem.dmg file, and its Hash code does not match the one from .chunklist.
+* File System corruption or invalid partition table.
+
 ## Stuck on `OCABC: Memory pool allocation failure - Not Found`
 
 This is due to incorrect BIOS settings:
