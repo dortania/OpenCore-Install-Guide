@@ -235,6 +235,8 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 | 11 | 20.0.0 | 20.99.99 |
 | 12 | 21.0.0 | 21.99.99 |
 | 13 | 22.0.0 | 22.99.99 |
+| 14 | 23.0.0 | 23.99.99 |
+| 15 | 24.0.0 | 24.99.99 |
 
 :::
 
@@ -263,7 +265,7 @@ Patches both the kernel and kexts.
 
 ::: tip Info
 
-Settings relating to the kernel, for us we'll be enabling the following:
+Settings relating to the kernel, for us we'll be changing the following:
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
@@ -292,6 +294,10 @@ Settings relating to the kernel, for us we'll be enabling the following:
   * Enabling this quirk with UpdateSMBIOSMode Custom mode can also disable SMBIOS injection into "non-Apple" OSes however we do not endorse this method as it breaks Bootcamp compatibility. Use at your own risk
 * **DisableIoMapper**: YES
   * Needed to get around VT-D if either unable to disable in BIOS or needed for other operating systems, much better alternative to `dart=0` as SIP can stay on in Catalina
+* **DisableIoMapperMapping**: NO
+  * Needed if you are experiencing issues with Wi-Fi/Ethernet/Thunderbolt with VT-D enabled and more than 16GB of memory installed. This quirk requires a [patched DMAR table](https://dortania.github.io/Getting-Started-With-ACPI/Universal/dmar.html) with Reserved Memory Regions removed
+  * We recommend disabling VT-D, so we don't need this enabled
+  * Not needed for 13.2.1 and lower
 * **DisableLinkeditJettison**: YES
   * Allows Lilu and others to have more reliable performance without `keepsyms=1`
 * **DisableRtcChecksum**: NO

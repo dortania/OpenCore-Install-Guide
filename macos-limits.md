@@ -115,9 +115,8 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 Unfortunately many features in macOS are outright unsupported with AMD and many others being partially broken. These include:
 
 * Virtual Machines relying on AppleHV
-  * This includes VMWare, Parallels, Docker, Android Studio, etc
-  * VirtualBox is the sole exception as they have their own hypervisor
-  * VMware 10 and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
+  * This includes VirtualBox, VMWare, Parallels, Docker, Android Studio, etc
+  * VirtualBox 6, VMware 10, and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
 * Adobe Support
   * Most of Adobe's suite relies on Intel's Memfast instruction set, resulting in crashes with AMD CPUs
   * You can disable functionality like RAW support to avoid the crashing: [Adobe Fixes](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
@@ -249,12 +248,12 @@ For the most part, all SATA based drives are supported and the majority of NVMe 
 
 Virtually all wired network adapters have some form of support in macOS, either by the built-in drivers or community made kexts. The main exceptions:
 
-* Intel I225 2.5Gb NIC
+* Intel I225-V 2.5Gb NIC
   * Found on high-end Desktop Comet Lake boards
-  * Workarounds are possible: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](config.plist/comet-lake.md#deviceproperties)
+  * Requires device properties: [Source](https://www.hackintosh-forum.de/forum/thread/48568-i9-10900k-gigabyte-z490-vision-d-er-läuft/?postID=606059#post606059) and [Example](config.plist/comet-lake.md#deviceproperties)
 * Intel I350 1Gb server NIC
   * Normally found on Intel and Supermicro server boards of various generations
-  * [Workaround](config-HEDT/ivy-bridge-e.md#deviceproperties)
+  * [Requires device properties](config-HEDT/ivy-bridge-e.md#deviceproperties)
 * Intel 10Gb server NICs
   * Workarounds are possible for [X520 and X540 chipsets](https://www.tonymacx86.com/threads/how-to-build-your-own-imac-pro-successful-build-extended-guide.229353/)
 * Mellanox and Qlogic server NICs

@@ -62,8 +62,11 @@ py macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000000000 download
 # Ventura (13)
 py macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
 
+# Sonoma (14)
+py macrecovery.py -b Mac-226CB3C6A851A671 -m 00000000000000000 download
+
 # Latest version
-# ie. Sonoma (14)
+# ie. Sequoia (15)
 py macrecovery.py -b Mac-937A206F2EE63C01 -m 00000000000000000 download
 ```
 
@@ -83,7 +86,7 @@ Now with our installer downloaded, we'll next want to format our USB.
 
 ## Making the installer
 
-Here we'll be formatting our USB and adding macOS onto it, we have 2 options:
+Here we'll be formatting our USB and adding macOS onto it, we have 3 options:
 
 * [Disk Management method](#disk-management-method)
   * GUI Based, simplest way
