@@ -113,6 +113,13 @@ The config.plist doesn't already have a section for this so you will have to cre
 | **`00001259`** | Used when the Desktop iGPU is used to drive a display |
 | **`03001259`** | Used when the Desktop iGPU is only used for computing tasks and doesn't drive a display |
 
+If you run into a black screen or no video output when you try to boot to the macOS installer, try one of the values below. These can also help if you notice sluggish performance or choppy graphics after you install macOS.
+
+| AAPL,ig-platform-id | Comment |
+| :--- | :--- |
+| **`00001659`** | Alternative value that helps with GPU acceleration |
+| **`00009B3E`** | Alternative value that helps when getting no video output or a black screen |
+
 We also add 2 more properties, `framebuffer-patch-enable` and `framebuffer-stolenmem`. The first enables patching via WhateverGreen.kext, and the second sets the min stolen memory to 19MB. This is usually unnecessary, as this can be configured in BIOS(64MB recommended) but required when not available.
 
 * **Note**: Headless framebuffers(where the dGPU is the display out) do not need `framebuffer-patch-enable` and `framebuffer-stolenmem`
