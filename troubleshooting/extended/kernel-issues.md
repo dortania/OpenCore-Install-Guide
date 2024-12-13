@@ -299,7 +299,7 @@ Halting on critical error
 This series of errors is most likely one of the following:
 
 * Missing HfsPlus driver:
- * Either missing entirely, not properly defined in config.plost, or not properly executing.  Switch to Debug Logs to verify.
+ * Either missing entirely, not properly defined in config.plist, or not properly executing.  Switch to Debug Logs to verify.
 * Corrupted BaseSystem.dmg file, and its Hash code does not match the one from .chunklist.
 * File System corruption or invalid partition table.
 
