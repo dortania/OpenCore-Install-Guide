@@ -59,7 +59,7 @@ For those wanting a deeper dive into dumping your DSDT, how to make these SSDTs,
 
 ::: tip Info
 
-This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support Sandy Bridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://dortania.github.io/OpenCore-Post-Install/) and drop the old tables(Note that this is only temporary until we've made our SSDT-PM, we'll re-enable these tables later):
+This blocks certain ACPI tables from loading, for us we really care about this. Main reason is that Apple's XCPM does not support IvyBridge all too well and can cause AppleIntelCPUPowerManagement panics on boot. To avoid this we make our own PM SSDT in [Post-Install](https://dortania.github.io/OpenCore-Post-Install/) and drop the old tables. If you have an Acer system, do not add anything from this section.(Note that this is only temporary until we've made our SSDT-PM, we'll re-enable these tables later):
 
 Removing CpuPm:
 
@@ -278,10 +278,11 @@ A reminder that [ProperTree](https://github.com/corpnewt/ProperTree) users can r
 
 ### Emulate
 
-Needed for spoofing unsupported CPUs like Pentiums and Celerons
+Needed for spoofing unsupported CPUs like Pentiums and Celerons, and in rare cases may be required to boot on other CPUs.
 
-* **Cpuid1Mask**: Leave this blank
-* **Cpuid1Data**: Leave this blank
+| Quirk | Enabled | Comment |
+| :--- | :--- | :--- |
+| DummyPowerManagement | NO | Enable if you have an Acer system |
 
 ### Force
 
@@ -796,6 +797,11 @@ For those having booting issues, please make sure to read the [Troubleshooting s
   * You will get a kernel panic on LAPIC otherwise
 * UEFI -> Quirks -> UnblockFsConnect -> True
 
+**Acer users**:
+* Disable both patches in ACPI -> Delete
+* Kernel -> Emulate -> DummyPowerManagement -> True
+  * This is required as the ACPI -> Delete patches don't work on Acer motherboards.
+  
 ## Intel BIOS settings
 
 * Note: Most of these options may not be present in your firmware, we recommend matching up as closely as possible but don't be too concerned if many of these options are not available in your BIOS
