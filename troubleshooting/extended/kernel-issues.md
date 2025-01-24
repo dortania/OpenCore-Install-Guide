@@ -669,3 +669,7 @@ And when switching kexts, ensure you don't have both FakeSMC and VirtualSMC enab
 ## Reboot on "AppleUSBHostPort::createDevice: failed to create device" on macOS 11.3+
 
 This is due to [XhciPortLimit breaking with macOS 11.3 and newer](https://github.com/dortania/bugtracker/issues/162), to resolve this, you **must** disable XhciPortLimit under Kernel -> Quirks. Please ensure you've [mapped your USB ports correctly](https://dortania.github.io/OpenCore-Post-Install/usb/) before doing so.
+
+## Kernel panic on "Non-monotonic time: invoke at 0xxxxxxxxxxx, runnable...."
+This could happen if your CPU TSC is not in sync. To fix this you need to use [CpuTscSync.kext](https://github.com/acidanthera/CpuTscSync)
+If after adding this kext you still get the same panic, you can try to add TSC_sync_margin=0 into your boot-args. See [CpuTscSync Monterey kernel panic on wake up #1900](https://github.com/acidanthera/bugtracker/issues/1900) for more details.
