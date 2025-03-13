@@ -133,7 +133,7 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
 
 GPU support becomes much more complicated due to the near-infinite amount of GPUs on the market, but the general breakdown is as follows:
 
-* AMD's GCN based GPUs are supported in the latest versions of macOS
+* AMD's GCN based GPUs are supported up to MacOS 12.6.x | Polaris, Vega and Navi are supported in the latest version of MacOS
   * AMD APUs are not supported however
   * AMD's [Lexa based cores](https://www.techpowerup.com/gpu-specs/amd-lexa.g806) from the Polaris series are also not supported
   * Special note for MSI Navi users: [Installer not working with 5700XT #901](https://github.com/acidanthera/bugtracker/issues/901)
