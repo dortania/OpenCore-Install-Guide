@@ -115,9 +115,8 @@ Support based off of Vanilla Kernels (i.e. no modifications):
 Unfortunately many features in macOS are outright unsupported with AMD and many others being partially broken. These include:
 
 * Virtual Machines relying on AppleHV
-  * This includes VMWare, Parallels, Docker, Android Studio, etc
-  * VirtualBox is the sole exception as they have their own hypervisor
-  * VMware 10 and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
+  * This includes VirtualBox, VMWare, Parallels, Docker, Android Studio, etc
+  * VirtualBox 6, VMware 10, and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
 * Adobe Support
   * Most of Adobe's suite relies on Intel's Memfast instruction set, resulting in crashes with AMD CPUs
   * You can disable functionality like RAW support to avoid the crashing: [Adobe Fixes](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
