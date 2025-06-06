@@ -380,4 +380,4 @@ sysctl kern.osbuildconfig
  kern.osbuildconfig: release
 ```
 
-And as we can see, we're successfully booting a KASAN kernel.
+And as we can see, we're successfully booting a release kernel.
