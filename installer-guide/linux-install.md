@@ -67,7 +67,7 @@ python3 ./macrecovery.py -b Mac-937A206F2EE63C01 -m 00000000000000000 download
 
 # Latest version
 # Tahoe (26)
-./macrecovery.py -b Mac-CFF7D910A743CAAF -m 00000000000000000 -os latest download
+python3 ./macrecovery.py -b Mac-CFF7D910A743CAAF -m 00000000000000000 -os latest download
 ```
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:
