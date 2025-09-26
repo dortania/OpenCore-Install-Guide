@@ -50,9 +50,12 @@ python3 ./macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
 # Sonoma (14)
 python3 ./macrecovery.py -b Mac-226CB3C6A851A671 -m 00000000000000000 download
 
-# Latest version
-# ie. Sequoia (15)
+# Sequoia (15)
 python3 ./macrecovery.py -b Mac-937A206F2EE63C01 -m 00000000000000000 download
+
+# Latest version
+# Tahoe (26)
+python3 ./macrecovery.py -b Mac-CFF7D910A743CAAF -m 00000000000000000 -os latest download
 ```
 
 * **macOS 12 and above note**: As recent macOS versions introduce changes to the USB stack, it is highly advisable that you map your USB ports (with USBToolBox) before installing macOS.
