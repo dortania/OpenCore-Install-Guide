@@ -21,7 +21,7 @@ SMBIOS dropped in Tahoe:
 * MacBookPro15,x
 * MacBookPro16,3
 
-If your SMBIOS was supported in Monterey and is not included above, you're good to go!
+If your SMBIOS was supported in Sequoia and is not included above, you're good to go!
 
 ::: details Supported SMBIOS
 
