@@ -21,7 +21,7 @@ This enables security features such as the verification of macOS' `boot.efi`, wi
  
 ::: warning
 
-macOS 14 Sonoma changed how system updates work. From now on, when you update (or install) macOS, SecureBootModel must be set to `Disabled`, otherwise it'll bootloop. Remember to change it back to another value listed down here when you finish updating macOS, as it can lead to a security breach.
+macOS 14 Sonoma changed how system updates work. From now on, when you update (or install) macOS, SecureBootModel must be set to `Disabled`, otherwise it'll bootloop. Remember to change it back to another value listed down here when you finish updating macOS, as otherwise it can lead to a security breach.
 
 :::
 
