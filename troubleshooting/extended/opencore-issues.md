@@ -57,21 +57,9 @@ Main things to check:
     * **MinDate**: `-1`
     * **MinVersion**: `-1`
 
-## Stuck on `OCB: OcScanForBootEntries failure - Not Found`
+## Stuck on `OCB: OcScanForBootEntries failure - Not Found`, `OCB: failed to match a default boot option` or `OCB: System has no boot entries`
 
 This is due to OpenCore being unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
-
-* `Misc -> Security -> ScanPolicy -> 0`
-
-## Stuck on `OCB: failed to match a default boot option`
-
-Same fix as `OCB: OcScanForBootEntries failure - Not Found`, OpenCore is unable to find any drives with the current ScanPolicy, setting to `0` will allow all boot options to be shown
-
-* `Misc -> Security -> ScanPolicy -> 0`
-
-## Stuck on `OCB: System has no boot entries`
-
-Same fix as the above 2:
 
 * `Misc -> Security -> ScanPolicy -> 0`
 
