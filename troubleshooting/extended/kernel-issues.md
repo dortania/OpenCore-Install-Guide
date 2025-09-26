@@ -304,7 +304,7 @@ This is due to incorrect BIOS settings:
 
 Missing or incorrect `Executable path` in your config.plist, this should be resolved by re-running ProperTree's snapshot tool(Cmd/Ctrl+R).
 
-## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
+## Stuck on `This version of Mac OS X is not supported: Reason Mac...` or Prohibited Sign
 
 This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. For a full list of supported SMBIOS and their OSes, see here: [Choosing the right SMBIOS](../../extras/smbios-support.md)
 
@@ -404,6 +404,12 @@ The main places to check:
 Example of what a disabled RTC with no way to enable looks like(note that there is no value to re-enable it like `STAS`):
 
 ![](../../images/troubleshooting/troubleshooting-md/rtc.png)
+
+## Random bootlooping when updating or installing macOS in Sonoma or later
+
+This occurs because since macOS Sonoma 14.4 Apple changed how system updates worked, making Secure Boot disable when updating or installing the system. If not, the system would start bootlooping. 
+To fix this, disable Secure Boot via config.plist
+* ie. set `Misc -> Security -> SecureBootModel -> Disabled`
 
 ## Stuck at ACPI table loading on B550
 
