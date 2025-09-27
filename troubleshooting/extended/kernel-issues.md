@@ -304,7 +304,7 @@ This is due to incorrect BIOS settings:
 
 Missing or incorrect `Executable path` in your config.plist, this should be resolved by re-running ProperTree's snapshot tool(Cmd/Ctrl+R).
 
-## Stuck on `This version of Mac OS X is not supported: Reason Mac...` or Prohibited Sign
+## Stuck on `This version of Mac OS X is not supported: Reason Mac...`
 
 This error happens when SMBIOS is one no longer supported by that version of macOS, make sure values are set in `PlatformInfo->Generic` with `Automatic` enabled. For a full list of supported SMBIOS and their OSes, see here: [Choosing the right SMBIOS](../../extras/smbios-support.md)
 
