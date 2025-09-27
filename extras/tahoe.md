@@ -66,7 +66,7 @@ Make sure:
 
 ## Audio Support
 
-Tahoe remove AppleHDA.kext, as in the supported SMBIOS, the T2 chip manages the audio. So, as it "isn't necesarry", Apple removed it in Tahoe Beta 2. But let's be real: We can't emulate a dedicated ARM chip. That's why AppleALC won't work.
+Tahoe remove AppleHDA.kext, as in the supported macs, the T2 chip manages the audio. So, as it "isn't necesarry", Apple removed it in Tahoe Beta 2. But let's be real: We can't emulate a dedicated ARM chip. That's why AppleALC won't work.
 
 ### Solutions
 
