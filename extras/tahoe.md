@@ -6,10 +6,6 @@
 
 ## Prerequisites
 
-### Dropped CPU Support
-
-**Work in Progress**, if you know please help with [Pull Requests](https://github.com/dortania/OpenCore-Multiboot/pulls)
-
 ### Supported SMBIOS
 
 SMBIOS dropped in Tahoe:
@@ -33,17 +29,9 @@ If your SMBIOS was supported in Sequoia and is not included above, you're good t
 
 :::
 
-For those on architectures no longer supported by Tahoe:
-
-**Work in Progress**, if you know please help with [Pull Requests](https://github.com/dortania/OpenCore-Multiboot/pulls)
-
-### Supported hardware
-
-**Work in Progress**, if you know please help with [Pull Requests](https://github.com/dortania/OpenCore-Multiboot/pulls)
-
 ### AMD Patches
 
-**Work in Progress**, if you know please help with [Pull Requests](https://github.com/dortania/OpenCore-Multiboot/pulls)
+Same as Sequoia, just update them to the [Beta Branch](https://github.com/AMD-OSX/AMD_Vanilla/tree/beta)
 
 ## Update from Sequoia
 
