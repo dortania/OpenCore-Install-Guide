@@ -405,10 +405,10 @@ Example of what a disabled RTC with no way to enable looks like(note that there 
 
 ![](../../images/troubleshooting/troubleshooting-md/rtc.png)
 
-## Random bootlooping when updating or installing macOS in Sonoma or later
+## Bootlooping when updating or installing macOS in Sonoma or later
 
-This occurs because since macOS Sonoma 14.4, Apple changed how system updates worked, adding extra verifications to Secure Boot, thing OpenCore's Secure Boot struggles to verify and calls panic() because it can't verify it correctly.
-To fix this, disable Secure Boot temporally via config.plist
+This occurs because since macOS Sonoma 14.4, Apple changed how system updates worked, adding extra verifications to Apple Secure Boot, thing OpenCore's Secure Boot struggles to verify and calls panic() because it can't verify it correctly.
+To fix this, disable Apple Secure Boot temporally via config.plist
 * ie. set `Misc -> Security -> SecureBootModel -> Disabled`
 
 ::: warning
