@@ -1,7 +1,3 @@
----
-search: false
----
-
 # macOS 13: Ventura
 
 ## Table of Contents
