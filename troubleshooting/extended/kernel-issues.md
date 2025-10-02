@@ -25,7 +25,7 @@ The main culprits to watch for in the Booter section are:
 * **SetupVirtualMap**
   * This quirk is required for the majority of firmwares and without it it's very common to kernel panic here, so enable it if not already
     * Mainly Z390 and older require this quirk enabled
-    * However, certain firmwares(mainly 2020+) do not work with this quirk and so may actually cause this kernel panic:
+    * However, certain firmwares (mainly 2020+) do not work with this quirk and so may actually cause this kernel panic:
       * Intel's Ice Lake series
       * Intel's Comet Lake series(B460, H470, Z490, etc)
       * AMD's B550 and A520(Latest BIOS on X570 are also included now)
@@ -37,7 +37,7 @@ The main culprits to watch for in the Booter section are:
 * **EnableWriteUnprotector**
 
   * Another issue may be that macOS is conflicting with the write protection from CR0 register, to resolve this we have 2 options:
-    * If your firmware supports MATs(2018+ firmwares):
+    * If your firmware supports MATs (2018+ firmwares):
       * EnableWriteUnprotector -> False
       * RebuildAppleMemoryMap -> True
       * SyncRuntimePermissions -> True
@@ -45,8 +45,8 @@ The main culprits to watch for in the Booter section are:
       * EnableWriteUnprotector -> True
       * RebuildAppleMemoryMap -> False
       * SyncRuntimePermissions -> False
-    * Note: Some laptops(ex. Dell Inspiron 5370) even with MATs support will halt on boot up, in these cases you'll have two options:
-      * Boot with the old firmware quirk combo(ie. With EnableWriteUnprotector and disable `RebuildAppleMemoryMap` + `SyncRuntimePermissions`)
+    * Note: Some laptops (ex. Dell Inspiron 5370) even with MATs support will halt on boot up, in these cases you'll have two options:
+      * Boot with the old firmware quirk combo (ie. With EnableWriteUnprotector and disable `RebuildAppleMemoryMap` + `SyncRuntimePermissions`)
       * Enable `DevirtualiseMmio` and follow [MmioWhitelist guide](https://dortania.github.io/OpenCore-Install-Guide/extras/kaslr-fix.html)
 
 Regarding MATs support, firmwares built against EDK 2018 will support this and many OEMs have even added support all the way back to Skylake laptops. Issue is it's not always obvious if an OEM has updated the firmware, you can check the OpenCore logs whether yours supports it([See here how to get a log](../debug.html)):
@@ -405,6 +405,18 @@ Example of what a disabled RTC with no way to enable looks like(note that there 
 
 ![](../../images/troubleshooting/troubleshooting-md/rtc.png)
 
+## Bootlooping when updating or installing macOS in Sonoma or later
+
+This occurs because since macOS Sonoma 14.4, Apple changed how system updates worked, adding extra verifications to Apple Secure Boot, thing OpenCore's Secure Boot struggles to verify and calls panic() because it can't verify it correctly.
+To fix this, disable Apple Secure Boot temporarily via config.plist
+* ie. set `Misc -> Security -> SecureBootModel -> Disabled`
+
+::: warning
+
+Remember to enable it again when the installation/update process is done, since it can lead to a security breach in the system.
+
+:::
+
 ## Stuck at ACPI table loading on B550
 
 ![](../../images/troubleshooting/troubleshooting-md/OC_catalina.jpg)
@@ -450,7 +462,7 @@ This assumes you're only booting the installer USB and not macOS itself.
 
 ### SATA Issues
 
-On rare occasions(mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
+On rare occasions (mainly laptops), the SATA controller isn't officially supported by macOS. To resolve this, we'll want to do a few things:
 
 * Set SATA to AHCI mode in the BIOS
   * macOS doesn't support hardware RAID or IDE mode properly.
@@ -529,7 +541,7 @@ Note: macOS 11, Big Sur no longer requires this patch for MSI Navi.
 Generally seen as an issue surrounding the prelinked kernel, specifically that macOS is having a hard time interpreting the ones we injected. Verify that:
 
 * Your kexts are in the correct order(master then plugins, Lilu always before the plugins)
-* Kexts with executables have them and plist only kexts don't(ie. USBmap.kext, XHCI-unspported.kext, etc does not contain an executable)
+* Kexts with executables have them and plist only kexts don't(ie. USBmap.kext, XHCI-unsupported.kext, etc does not contain an executable)
 * Don't include multiple of the same kexts in your config.plist(ie. including multiple copies of VoodooInput from multiple kexts, we recommend choosing the first kext in your config's array and disable the rest)
 
 Note: this error may also look very similar to [Kernel Panic on `Invalid frame pointer`](#kernel-panic-on-invalid-frame-pointer)

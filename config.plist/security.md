@@ -18,6 +18,12 @@ This enables security features such as the verification of macOS' `boot.efi`, wi
 * If booting multiple versions, you may need to set the value to `Disabled`.
   * For example, a non-T2 SMBIOS booting High Sierra and Big Sur would need this disabled.
   * A T2 SMBIOS would be limited by the minimum version listed below.
+ 
+::: warning
+
+macOS 14 Sonoma changed how system updates work. From now on, when you update (or install) macOS, `SecureBootModel` must be set to `Disabled`, otherwise it'll bootloop. Remember to change it back to another value listed down here when you finish updating macOS, as otherwise it can lead to a security breach.
+
+:::
 
 ::: details T2 Mac Models
 
