@@ -36,7 +36,7 @@ Note that VT-d must be enabled to use this kext.
 
 ### Intel Bluetooth
 
-On macOS 26, use this [fork](https://github.com/lshbluesky/IntelBluetoothFirmware/releases) of IntelBluetoothFirmware.kext. If it does not work, verify that your Intel Bluetooth works on macOS 15.
+On macOS 26, use the `-ibtcompatbeta` boot argument to use Intel Bluetooth.
 
 ### OTA Updates
 
@@ -44,7 +44,4 @@ On macOS 14.4 and above, OTA updates are only possible by using [RestrictEvents]
 
 ### WhateverGreen
 
-WhateverGreen has AMD connector patching issues on macOS 26. If you have a kernel panic related to WhateverGreen or AMD GPU kexts, this is likely your problem. There are two workarounds to this:
-
-1. Use this [custom build of WhateverGreen](https://github.com/Carnations-Botanica/WhateverGreen/actions/runs/17772496735) which prevents the connectors from being patched. This may not work for your machine.
-2. Remove WhateverGreen.kext entirely. If you require `agdpmod=pikera` to boot, manually apply this [patch](https://pikeralpha.wordpress.com/2015/11/23/patching-applegraphicsdevicepolicy-kext/) to your configuration. Note that kext patches like this need to go under `Kernel -> Patch` in your config.plist.
+WhateverGreen has AMD connector patching issues on macOS 26. If you have a kernel panic related to WhateverGreen or AMD GPU kexts, this is likely your problem. As there is no workaround available yet, your only option is to remove WhateverGreen.kext entirely. If you require `agdpmod=pikera` to boot, manually apply this [patch](https://pikeralpha.wordpress.com/2015/11/23/patching-applegraphicsdevicepolicy-kext/) to your configuration. Note that kext patches like this need to go under `Kernel -> Patch` in your config.plist.
