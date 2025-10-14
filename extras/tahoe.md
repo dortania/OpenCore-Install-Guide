@@ -7,12 +7,13 @@
 ## Prerequisites
 
 ### Analog Audio
+
 AppleHDA.kext is no longer present in macOS 26, resulting in AppleALC not working. This means that analog sound through Realtek, Conexant, and similar sound chips will not work through built-in speakers and headphone jacks.
 
-If you were previously using audio through a digital source (like HDMI, DP, or a USB adapter), then they will continue to work. No changes need to be made to your configuration. 
+If you were previously using audio through a digital source (like HDMI, DP, or a USB adapter), then they will continue to work. No changes need to be made to your configuration.
 
 Getting analog audio working again requires the injection of kexts which rely on lowered SIP restrictions.
-There are methods to reinject AppleHDA (such as OCLP-Mod), although they follow the same caveats that traditional OCLP use on Hackintoshes has. You may also use [VoodooHDA](https://github.com/CloverHackyColor/VoodooHDA/releases), which may have reduced audio quality compared to AppleHDA.
+There are methods not endorsed by Dortania to reinject AppleHDA (such as OCLP-Mod), although they follow the same caveats that standard OCLP use on Hackintoshes has. You can also use [VoodooHDA](https://github.com/CloverHackyColor/VoodooHDA/releases), which may have reduced audio quality compared to AppleHDA.
 
 #### Installing VoodooHDA
 
@@ -27,15 +28,23 @@ Set `csr-active-config` in your config.plist to `03000000`. Then, copy VoodooHDA
 
 [Click here](./smbios-support.md) for more details on supported SMBIOS models to pick the best one for your machine.
 
+### Broadcom WiFi
+
+As Broadcom support has been removed since macOS Sonoma, root patches were required to bring it back. However, [AppleBCMWLANCompanion](https://github.com/0xFireWolf/AppleBCMWLANCompanion) brings back support for macOS 15 and 26 without needing root patching. It is not fully stable yet, so use it at your own discretion. A support thread is available [here](https://www.insanelymac.com/forum/topic/361710-broadcom-fullmac-wi-fi-support-on-macos-sonoma-sequoia-and-tahoe-without-root-patches/).
+
+Note that VT-d must be enabled to use this kext.
+
 ### Intel Bluetooth
 
-On macOS 26, use this [fork](https://github.com/lshbluesky/IntelBluetoothFirmware/releases) of IntelBluetoothFirmware.kext. If it does not work, verify that Intel Bluetooth works in macOS 15.
+On macOS 26, use this [fork](https://github.com/lshbluesky/IntelBluetoothFirmware/releases) of IntelBluetoothFirmware.kext. If it does not work, verify that your Intel Bluetooth works on macOS 15.
 
 ### OTA Updates
+
 On macOS 14.4 and above, OTA updates are only possible by using [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases) along with the boot argument `revpatch=sbvmm`. Additionally, `SecureBootModel` must be set to `Disabled` in your config.plist. If you want to keep secure boot enabled, add [iBridged](https://github.com/Carnations-Botanica/iBridged) to your kexts.
 
 ### WhateverGreen
+
 WhateverGreen has AMD connector patching issues on macOS 26. If you have a kernel panic related to WhateverGreen or AMD GPU kexts, this is likely your problem. There are two workarounds to this:
 
 1. Use this [custom build of WhateverGreen](https://github.com/Carnations-Botanica/WhateverGreen/actions/runs/17772496735) which prevents the connectors from being patched. This may not work for your machine.
-2. Remove WhateverGreen.kext entirely. If you require `agdpmod=pikera` to boot, manually apply this [patch](https://pikeralpha.wordpress.com/2015/11/23/patching-applegraphicsdevicepolicy-kext/) to your configuration. Note that kext patches like this need to go under `Kernel -> Patch` in your config.plist. 
+2. Remove WhateverGreen.kext entirely. If you require `agdpmod=pikera` to boot, manually apply this [patch](https://pikeralpha.wordpress.com/2015/11/23/patching-applegraphicsdevicepolicy-kext/) to your configuration. Note that kext patches like this need to go under `Kernel -> Patch` in your config.plist.

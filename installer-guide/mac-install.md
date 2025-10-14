@@ -216,4 +216,4 @@ You'll notice that once we open the EFI partition, it's empty. This is where the
 
 ![Empty EFI partition](../images/installer-guide/mac-install-md/base-efi.png)
 
-## Now with all of this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
+Now with all of this done, head to [Setting up the EFI](./opencore-efi.md) to finish up your work
