@@ -288,7 +288,6 @@ module.exports = {
             title: 'OS Specific',
             collapsable: false,
             children: [
-                '/extras/ventura',
                 '/extras/tahoe',
             ]
         },
