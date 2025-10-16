@@ -13,7 +13,7 @@ AppleHDA.kext is no longer present in macOS 26, resulting in AppleALC not workin
 If you were previously using audio through a digital source (like HDMI, DP, or a USB adapter), then they will continue to work. No changes need to be made to your configuration.
 
 Getting analog audio working again requires the injection of kexts which rely on lowered SIP restrictions.
-There are methods not endorsed by Dortania to reinject AppleHDA (such as OCLP-Mod), although they follow the same caveats that standard OCLP use on Hackintoshes has. You can also use [VoodooHDA](https://github.com/CloverHackyColor/VoodooHDA/releases), which may have reduced audio quality compared to AppleHDA.
+It is possible to modify the root volume to reinject AppleHDA, but it has the same caveats that OCLP use on Hackintoshes has. You can also use [VoodooHDA](https://github.com/CloverHackyColor/VoodooHDA/releases), which may have reduced audio quality compared to AppleHDA.
 
 #### Installing VoodooHDA
 
@@ -30,7 +30,7 @@ Set `csr-active-config` in your config.plist to `03000000`. Then, copy VoodooHDA
 
 ### Broadcom WiFi
 
-As Broadcom support has been removed since macOS Sonoma, root patches were required to bring it back. However, [AppleBCMWLANCompanion](https://github.com/0xFireWolf/AppleBCMWLANCompanion) brings back support for macOS 15 and 26 without needing root patching. It is not fully stable yet, so use it at your own discretion. A support thread is available [here](https://www.insanelymac.com/forum/topic/361710-broadcom-fullmac-wi-fi-support-on-macos-sonoma-sequoia-and-tahoe-without-root-patches/).
+As Broadcom support has been removed since macOS Sonoma, root patches were required to bring it back. However, [AppleBCMWLANCompanion](https://github.com/0xFireWolf/AppleBCMWLANCompanion) brings back support for macOS 15 and 26 without needing root patching. It is not fully stable nor feature-complete yet, so use it at your own discretion. A support thread is available [here](https://www.insanelymac.com/forum/topic/361710-broadcom-fullmac-wi-fi-support-on-macos-sonoma-sequoia-and-tahoe-without-root-patches/).
 
 Note that VT-d must be enabled to use this kext.
 
