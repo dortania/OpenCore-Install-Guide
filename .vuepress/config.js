@@ -279,9 +279,16 @@ module.exports = {
             children: [
                 '/extras/kaslr-fix',
                 '/extras/spoof',
-                '/extras/ventura',
                 ['https://github.com/dortania/OpenCore-Install-Guide/tree/master/clover-conversion', 'Clover Conversion'],
                 '/extras/smbios-support.md',
+                
+            ]
+        },
+        {
+            title: 'OS Specific',
+            collapsable: false,
+            children: [
+                '/extras/tahoe',
             ]
         },
         {

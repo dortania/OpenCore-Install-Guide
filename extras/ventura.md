@@ -16,7 +16,7 @@ Apple has left a dyld cache that does not use AVX2 instructions in Ventura to su
 * Delta updates (small 1-3GB updates) will no longer be available and you must install the full update (12GB), as delta updates only contain the non-AVX2 cache on Apple Silicon machines
 * Polaris GPUs remain unsupported on machines without AVX2
 
-Because of these caveats, Dortania will no longer be supporting pre-Haswell CPUs for Ventura and above. The pages for these CPUs will remain updated for Monterey.
+Because of these caveats, the Dortania guide will no longer be supporting pre-Haswell CPUs for Ventura and above. The pages for these CPUs will remain updated for Monterey.
 
 ### Supported SMBIOS
 

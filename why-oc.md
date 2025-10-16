@@ -8,7 +8,7 @@ This section contains a brief rundown as to why the community has been transitio
 
 * More OS Support!
   * OpenCore now supports more versions of OS X and macOS natively without painful hacks Clover and Chameleon had to implement
-  * This includes OSes as far back as 10.4, Tiger, and even the latest builds of 13, Ventura!
+  * This includes support for OS X 10.4 until 26!
 * On average, OpenCore systems boot faster than those using Clover as less unnecessary patching is done
 * Better overall stability as patches can be much more precise:
   * [macOS 10.15.4 update](https://www.reddit.com/r/hackintosh/comments/fo9bfv/macos_10154_update/)
@@ -56,26 +56,6 @@ The majority of Clover's functionality is actually supported in OpenCore in the 
 * Does not support macOS-only ACPI patching
 
 ## Common Myths
-
-### Is OpenCore unstable as it's a beta?
-
-Short Answer: No
-
-Long Answer: No
-
-OpenCore's version number does not represent the quality of the project. Instead, it's more of a way to see the stepping stones of the project. Acidanthera still has much they'd like to do with the project including overall refinement and more feature support.
-
-For example, OpenCore goes through proper security audits to ensure it complies with UEFI Secure Boot, and is the only Hackintosh bootloader to undergo these rigorous reviews and have such support.
-
-Version 0.6.1 was originally designed to be the official release of OpenCore as it would have proper UEFI/Apple Secure Boot, and would be the 1 year anniversary of OpenCore's release as a public tool. However, due to circumstances around macOS Big Sur and the rewriting of OpenCore's prelinker to support it, it was decided to push off 1.0.0 for another year.
-
-Current road map:
-
-* 2019: Year of Beta
-* 2020: Year of Secure Boot
-* 2021: Year of Refinement
-
-So please do not see the version number as a hindrance, instead as something to look forward to.
 
 ### Does OpenCore always inject SMBIOS and ACPI data into other OSes?
 

@@ -1,6 +1,6 @@
 # Fixing KASLR slide values
 
-This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with either Z390, X99 and X299.
+This section is for users who wish to understand and fix "Couldn't allocate runtime area" errors. This is most common with Z390, X99 and X299.
 
 * Note: OpenCore is required, Clover is no longer supported in this guide
 

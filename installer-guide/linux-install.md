@@ -48,23 +48,26 @@ python3 ./macrecovery.py -b Mac-BE088AF8C5EB4FA2 -m 00000000000J80300 download
 python3 ./macrecovery.py -b Mac-7BA5B2DFE22DDD8C -m 00000000000KXPG00 download
 
 # Catalina (10.15)
+python3 ./macrecovery.py -b Mac-CFF7D910A743CAAF -m 00000000000PHCD00 download
 python3 ./macrecovery.py -b Mac-00BE6ED71E35EB86 -m 00000000000000000 download
 
 # Big Sur (11)
-python3 ./macrecovery.py -b Mac-42FD25EABCABB274 -m 00000000000000000 download
+python3 ./macrecovery.py -b Mac-2BD1B31983FE1663 -m 00000000000000000 download
 
 # Monterey (12)
-python3 ./macrecovery.py -b Mac-FFE5EF870D7BA81A -m 00000000000000000 download
+python3 ./macrecovery.py -b Mac-E43C1C25D4880AD6 -m 00000000000000000 download
 
 # Ventura (13)
-python3 ./macrecovery.py -b Mac-4B682C642B45593E -m 00000000000000000 download
+python3 ./macrecovery.py -b Mac-B4831CEBD52A0C4C -m 00000000000000000 download
 
 # Sonoma (14)
-python3 ./macrecovery.py -b Mac-226CB3C6A851A671 -m 00000000000000000 download
+python3 ./macrecovery.py -b Mac-827FAC58A8FDFA22 -m 00000000000000000 download
 
-# Latest version
-# ie. Sequoia (15)
-python3 ./macrecovery.py -b Mac-937A206F2EE63C01 -m 00000000000000000 download
+# Sequoia (15)
+python3 ./macrecovery.py -b Mac-7BA5B2D9E42DDD94 -m 00000000000000000 download
+
+# Latest (Tahoe, 26)
+python3 ./macrecovery.py -b Mac-CFF7D910A743CAAF -m 00000000000000000 -os latest download
 ```
 
 From here, run one of those commands in terminal and once finished you'll get an output similar to this:

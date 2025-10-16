@@ -11855,7 +11855,7 @@ vuepress-theme-succinct@^1.7.2:
     vuepress-plugin-container "^2.1.5"
     vuepress-plugin-smooth-scroll "^0.0.10"
 
-vuepress@^1.9.9:
+vuepress@^1.9.10:
   version "1.9.10"
   resolved "https://registry.yarnpkg.com/vuepress/-/vuepress-1.9.10.tgz#14700fccd85bc56c810cf367ecc797fcbecc7c0f"
   integrity sha512-UnGm9vjQvG918SZVNvgiUlNimLqawdYPq0aPRXDpEB1VksvqegVFy/GKdA8ShXJaEpOMPSt7YD4uK21jaMs3kA==

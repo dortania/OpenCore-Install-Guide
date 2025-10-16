@@ -9,7 +9,8 @@ These settings in your config.plist can restrict which macOS versions OpenCore w
 OpenCore by default has [Apple Secure Boot](https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#what-is-apple-secure-boot) enabled.
 This enables security features such as the verification of macOS' `boot.efi`, with the side effect of restricting which macOS versions OpenCore will boot.
 
-* Big Sur and Above (11.0+): The recommended value is `Default`.
+* Sonoma to Tahoe (14.4 - 26.x): To be able to update, set to `Disabled`. For more information, check the `OTA Updates` section of [Tahoe](../extras/tahoe.md).
+* Big Sur to Sonoma (11.0 - 14.3): The recommended value is `Default`.
 * High Sierra-Catalina (10.13-10.15):
   * If your model is not listed below, set to `Disabled`.
   * If running NVIDIA Web Drivers, set to `Disabled`.

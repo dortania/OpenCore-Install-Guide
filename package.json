@@ -1,6 +1,6 @@
 {
     "name": "OpenCore-Install-Guide",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "description": "Guide to put macOS on unsupported devices",
     "main": "",
     "author": {
@@ -41,7 +41,7 @@
         "npm-check-updates": "^16.10.15",
         "run-script-os": "^1.1.6",
         "spellchecker-cli": "^6.1.1",
-        "vuepress": "^1.9.9",
+        "vuepress": "^1.9.10",
         "vuepress-plugin-fulltext-search": "^2.2.1",
         "vuepress-theme-succinct": "^1.7.2"
     },
