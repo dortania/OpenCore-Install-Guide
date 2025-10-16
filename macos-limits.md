@@ -133,7 +133,11 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
 
 ## GPU Support
 
-**For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/).**
+::: tip Info
+
+For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/).
+
+:::
 
 ## Motherboard Support
 
