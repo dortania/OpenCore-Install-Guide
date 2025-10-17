@@ -32,7 +32,7 @@ Set `csr-active-config` in your config.plist to `03000000`. Then, copy VoodooHDA
 
 As Broadcom support has been removed since macOS Sonoma, root patches were required to bring it back. However, [AppleBCMWLANCompanion](https://github.com/0xFireWolf/AppleBCMWLANCompanion) brings back support for macOS 15 and 26 without needing root patching. It is not fully stable nor feature-complete yet, so use it at your own discretion. A support thread is available [here](https://www.insanelymac.com/forum/topic/361710-broadcom-fullmac-wi-fi-support-on-macos-sonoma-sequoia-and-tahoe-without-root-patches/).
 
-Note that VT-d must be enabled to use this kext.
+Note that VT-d must be enabled to use this kext, so AMD machines cannot use this kext.
 
 ### Intel Bluetooth
 
