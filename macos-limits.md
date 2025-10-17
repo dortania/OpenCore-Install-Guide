@@ -202,7 +202,7 @@ Note: Intel WiFi is unofficially (3rd party driver) supported on macOS, check [W
 * **Intel Smart Sound Technology**
   * Laptops with Intel SST will not have anything connected through them (usually internal mic) work, as it is not supported. You can check with Device Manager on Windows.
 * **Headphone Jack Combo**
-  * Some laptops with a combo headphone jack may not get audio input through them and will have to either use the built-in microphone or an external audio input device through USB.
+  * Some laptops with a combo headphone jack may not get audio input through them and will have to either use the built-in microphone or an external audio input device through USB. This behavior may depend on your Audio Codec device and layout-id. For example, laptops with an ALC256 codec and a combo 3.5mm jack have been observed to work on ASUS and DELL laptops using `AppleALC.kext` with `layout-id` set to `56` or `66`, enabling both internal audio input and output functionality.
 * **Thunderbolt USB-C ports**
   * (Hackintosh) Thunderbolt support is currently still iffy in macOS, even more so with Alpine Ridge controllers, which most current laptops have. There have been attempts to keep the controller powered on, which allows Thunderbolt and USB-C hotplug to work, but it comes at the cost of kernel panics and/or USB-C breaking after sleep. If you want to use the USB-C side of the port and be able to sleep, you must plug it in at boot and keep it plugged in.
   * Note: This does not apply to USB-C only ports - only Thunderbolt 3 and USB-C combined ports.
