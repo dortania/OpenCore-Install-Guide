@@ -52,7 +52,20 @@ SSE Requirements:
   * SSE4.1 CPUs are supported with [telemetrap.kext](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/post-28447707)
   * Newer AMD drivers also require SSE4.2 for Metal support. To resolve this, see here: [MouSSE: SSE4.2 emulation](https://forums.macrumors.com/threads/mp3-1-others-sse-4-2-emulation-to-enable-amd-metal-driver.2206682/)
 * AVX2 is required for macOS 13 and newer
-  * Use [CryptexFixup](https://github.com/acidanthera/CryptexFixup) to install on older hardware which meets the requirements for 10.14 and up.
+
+::: details macOS Ventura and AVX2 Details
+
+macOS Ventura drops support for pre-Haswell CPUs. Much of userspace now requires AVX2 support, along with AMD Polaris GPU drivers and some instances of AVX2 instructions in some kexts. Although the kexts can be [patched](https://forums.macrumors.com/threads/monterand-probably-the-start-of-an-ongoing-saga.2320479/post-31125212) or [downgraded](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/92ff4244ae78de715977d9f8d054cdf9bdce4011/payloads/Kexts/Misc/NoAVXFSCompressionTypeZlib-AVXpel-v12.6.zip), the Polaris GPU drivers and most of userspace rely on AVX2 too much to be able to be patched.
+
+Apple has left a dyld cache that does not use AVX2 instructions in Ventura to support Rosetta on Apple Silicon machines, but this cache is not installed by default. You can use [CryptexFixup](https://github.com/acidanthera/CryptexFixup) to force this dyld cache to be installed, but:
+
+* Apple may remove this cache at any time in the future if they add AVX2 support to Rosetta
+* Delta updates (small 1-3GB updates) will no longer be available and you must install the full update (12GB), as delta updates only contain the non-AVX2 cache on Apple Silicon machines
+* Polaris GPUs remain unsupported on machines without AVX2
+
+Because of these caveats, the Dortania guide will no longer be supporting pre-Haswell CPUs for Ventura and above. The pages for these CPUs will remain updated for Monterey.
+
+:::
 
 Firmware Requirements:
 
@@ -76,8 +89,6 @@ Core/Thread Count Limits:
 
 Special Notes:
 
-* Lilu and plugins require 10.8 or newer to operate
-  * We recommend running FakeSMC for older versions of OS X
 * OS X 10.6 and older require RebuildAppleMemoryMap enabled
   * This is to resolve an early kernel
 
@@ -119,9 +130,10 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
 * Virtual Machines relying on AppleHV
   * This includes VirtualBox, VMWare, Parallels, Docker, Android Studio, etc
   * VirtualBox 6, VMware 10, and Parallels 13.1.0 do support their own hypervisor, however using such outdated VM software poses a large security threat
-* Adobe Support
+* Adobe and Intel MKL/OneAPI Library Support
   * Most of Adobe's suite relies on Intel's Memfast instruction set, resulting in crashes with AMD CPUs
-  * You can disable functionality like RAW support to avoid the crashing: [Adobe Fixes](https://gist.github.com/naveenkrdy/26760ac5135deed6d0bb8902f6ceb6bd)
+  * Other apps make use of Intel's MKL/OneAPI library, which does not work properly with AMD as they assume macOS exclusively runs on Intel CPUs
+  * You can use patchers such as [AMDFriend](https://github.com/NyaomiDEV/AMDFriend) to work around this
 * 32-Bit support
   * For those still relying on 32-Bit software in Mojave and below, note that the Vanilla patches do not support 32-bit instructions
   * A work-around is to install a [custom kernel](https://files.amd-osx.com/?dir=Kernels), however you lose iMessage support and no support is provided for these kernels
@@ -133,11 +145,17 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
 
 ## GPU Support
 
-::: tip Info
+::: tip
 
-For a full list of supported GPUs, see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/).
+Please see the [GPU Buyers Guide](https://dortania.github.io/GPU-Buyers-Guide/) for information about compatible GPUs.
 
 :::
+
+And an important note for **Laptops with discrete GPUs**:
+
+* 90% of discrete GPUs will not work because they are wired in a configuration that macOS doesn't support (switchable graphics). With NVIDIA discrete GPUs, this is usually called Optimus. It is not possible to utilize these discrete GPUs for the internal display, so it is generally advised to disable them and power them off (will be covered later in this guide).
+* However, in some cases, the discrete GPU powers any external outputs (HDMI, mini DisplayPort, etc.), which may or may not work; in the case that it will work, you will have to keep the card on and running.
+* However, there are some laptops that rarely do not have switchable graphics, so the discrete card can be used (if supported by macOS), but the wiring and setup usually cause issues.
 
 ## Motherboard Support
 
