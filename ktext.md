@@ -158,11 +158,12 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Required for the majority of Intel NICs, chipsets that are based off of I211 will need the SmallTreeIntel82576 kext
   * Intel's 82578, 82579, I217, I218 and I219 NICs are officially supported
   * Requires OS X 10.9 or newer, 10.6-10.8 users can use IntelSnowMausi instead for older OSes
-* [AppleIGB](https://github.com/donatengit/AppleIGB/releases)
+* [AppleIGB](https://github.com/donatengit/AppleIGB/issues/19#issuecomment-2227514964)
   * Required for I211 NICs running on macOS Monterey and above
   * Might have instability issues on some NICs, recommended to stay on Big Sur and use SmallTree
   * Required for most AMD boards running Intel NICs
   * Requires macOS 12 and above
+  * As a fallback, use donatengit's [AppleIGB](https://github.com/donatengit/AppleIGB/releases)
 * [SmallTreeIntel82576](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
   * Required for I211 NICs running on macOS versions up to Big Sur, based off of the SmallTree kext but patched to support I211 (doesn't work on macOS 12 [Monterey](./extras/monterey.md#ethernet) or above)
   * Required for most AMD boards running Intel NICs
