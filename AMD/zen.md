@@ -84,7 +84,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 | EnableWriteUnprotector | NO | |
 | RebuildAppleMemoryMap | YES | |
 | ResizeAppleGpuBars | -1 | If your firmware supports increasing GPU Bar sizes (ie Resizable BAR Support), set this to `0` |
-| SetupVirtualMap | YES | - Note X570, B550, A520 and TRx40 boards might need this disabled<br/>- X470 and B450 with late 2020 BIOS updates might also require this disabled |
+| SetupVirtualMap | YES | - Note X570, B550, A520 and TRx40 boards might need this disabledunless they are running the latest firmware (BIOS) version<br/>- X470 and B450 with late 2020 BIOS updates might also require this disabled |
 | SyncRuntimePermissions | YES | |
 :::
 
@@ -443,7 +443,7 @@ Security is pretty self-explanatory, **do not skip**. We'll be changing the foll
 | AllowSetDefault | YES | |
 | BlacklistAppleUpdate | YES | |
 | ScanPolicy | 0 | |
-| SecureBootModel | Default | Leave this as `Default` for OpenCore to automatically set the correct value corresponding to your SMBIOS. The next page goes into more detail about this setting. |
+| SecureBootModel | Default | - Leave this as Default for OpenCore to automatically set the correct value corresponding to your SMBIOS.<br/>- Note: For Sonoma 14.4 and later, temporarily set this to Disabled, then change it back to Default after installation is complete. |
 | Vault | Optional | This is a word, it is not optional to omit this setting. You will regret it if you don't set it to Optional, note that it is case-sensitive |
 
 :::
