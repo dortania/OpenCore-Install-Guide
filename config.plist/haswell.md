@@ -437,7 +437,7 @@ Used for running OC debugging tools like the shell, ProperTree's snapshot functi
 
 Used for specifying irregular boot paths that can't be found naturally with OpenCore.
 
-Won't be covered here, see 8.6 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
+Won't be covered here, see 8.5 of [Configuration.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for more info
 
 ## NVRAM
 
