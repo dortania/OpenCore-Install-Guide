@@ -99,7 +99,7 @@ Settings relating to boot.efi patching and firmware fixes, for us, we need to ch
 
 | Quirk | Enabled | Comment |
 | :--- | :--- | :--- |
-| DevirtualiseMmio | YES |
+| DevirtualiseMmio | YES | **Do not enable on Chromebooks.**|
 | EnableWriteUnprotector | NO |
 | ProtectMemoryRegions| YES | Only for Chromebooks, leave disabled otherwise. |
 | ProtectUefiServices | YES |
