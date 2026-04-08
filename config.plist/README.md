@@ -29,7 +29,7 @@ Next, let's open ProperTree and edit our config.plist:
 
 * `ProperTree.command`
   * For macOS
-  * Pro tip: there's a `buildapp.command` utility in the `Scripts` folder that lets you turn ProperTree into a dedicated app in macOS
+  * Pro tip: there's a `buildapp-select.command` utility in the `Scripts` folder that lets you turn ProperTree into a dedicated app in macOS
 * `ProperTree.bat`
   * For Windows
 
