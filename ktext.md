@@ -159,9 +159,9 @@ Here we're going to assume you know what ethernet card your system has, reminder
   * Intel's 82578, 82579, I217, I218 and I219 NICs are officially supported
   * Requires OS X 10.9 or newer, 10.6-10.8 users can use IntelSnowMausi instead for older OSes
   * VT-d users and Rocket Lake+ boards running I219 NICs can use [Mieze's fork](https://github.com/Mieze/IntelMausiEthernet/releases)
-* [AppleIGB](https://github.com/donatengit/AppleIGB/releases)
-  * Required for I211 NICs running on macOS Monterey and above
-  * Might have instability issues on some NICs, recommended to stay on Big Sur and use SmallTree
+* [AppleIGB](https://github.com/ayushere/AppleIGB/releases)
+  * Required for I210/I211 NICs running on macOS Monterey and above
+  * Use the [ayushere fork](https://github.com/ayushere/AppleIGB) (v5.11.5+) for macOS Tahoe 26.x — fixes kernel panics caused by mbuf out-of-bounds bugs in the original that are caught by Probabilistic GZAlloc introduced in Tahoe
   * Required for most AMD boards running Intel NICs
   * Requires macOS 12 and above
 * [SmallTreeIntel82576](https://github.com/khronokernel/SmallTree-I211-AT-patch/releases)
