@@ -133,7 +133,7 @@ Unfortunately many features in macOS are outright unsupported with AMD and many 
 * Adobe and Intel MKL/OneAPI Library Support
   * Most of Adobe's suite relies on Intel's Memfast instruction set, resulting in crashes with AMD CPUs
   * Other apps make use of Intel's MKL/OneAPI library, which does not work properly with AMD as they assume macOS exclusively runs on Intel CPUs
-  * You can use patchers such as [AMDFriend](https://github.com/NyaomiDEV/AMDFriend) to work around this
+  * You can use patchers such as [AMDFriend](https://github.com/SimonLuoshiping/AMDFriend) to work around this
 * 32-Bit support
   * For those still relying on 32-Bit software in Mojave and below, note that the Vanilla patches do not support 32-bit instructions
   * A work-around is to install a [custom kernel](https://files.amd-osx.com/?dir=Kernels), however you lose iMessage support and no support is provided for these kernels
